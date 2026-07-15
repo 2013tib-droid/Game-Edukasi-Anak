@@ -102,6 +102,16 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 - Commit kecil dan sering, pesan commit deskriptif.
 - Jangan tambah library berat tanpa alasan kuat (target device low-end).
 
+## Deploy Web (PENTING)
+
+- **GitHub Pages menyajikan situs dari branch `claude/web-demo-html-wa4dr9`** (folder root), BUKAN dari branch default. Perubahan apa pun yang harus tampil di web WAJIB di-merge dan di-push ke branch itu — push ke branch lain tidak memicu build Pages.
+- `index.html` adalah redirect ke `petualangan-pintar.html` (satu-satunya file game; jangan buat salinan duplikat).
+- URL live: `https://2013tib-droid.github.io/Game-Edukasi-Anak/`. Setelah push, build Pages butuh ±1–2 menit; browser HP sering menyimpan cache versi lama.
+
+## Aturan Desain Soal (dari pemilik proyek)
+
+- **Soal tidak boleh monoton satu jenis item.** Contoh: soal "ketuk N buah" harus selalu mencampur buah target dengan 2–3 jenis buah pengecoh, dan jumlah buah target dilebihkan dari yang diminta — anak harus mengenali item yang benar DAN berhenti menghitung di angka yang diminta. Terapkan prinsip campuran/pengecoh yang sama saat membuat tipe soal baru agar tetap menantang.
+
 ## File Sumber yang Tersedia dari Pemilik Proyek
 
 - `petualangan-pintar.html` — game standalone yang sudah jadi (vanilla JS, localStorage): sumber untuk Fase 3.
