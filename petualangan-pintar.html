@@ -77,25 +77,44 @@ const CONF={B:["b","d","p"],D:["d","b","p"],M:["m","n","w"],P:["p","q","b"],A:["
 const SHAPES=[{id:"lingkaran",label:"Lingkaran"},{id:"kotak",label:"Kotak"},{id:"segitiga",label:"Segitiga"},{id:"bintang",label:"Bintang"},{id:"hati",label:"Hati"},{id:"oval",label:"Oval"},{id:"ketupat",label:"Belah Ketupat"}];
 const COLORS=[{id:"merah",label:"Merah",hex:"#EF5350"},{id:"biru",label:"Biru",hex:"#42A5F5"},{id:"kuning",label:"Kuning",hex:"#FFC93C"},{id:"hijau",label:"Hijau",hex:"#66BB6A"},{id:"ungu",label:"Ungu",hex:"#AB47BC"},{id:"oranye",label:"Oranye",hex:"#FFA726"},{id:"pink",label:"Merah Muda",hex:"#F48FB1"},{id:"coklat",label:"Coklat",hex:"#8D6E63"}];
 const MASCOTS=[{min:0,emoji:"🥚",name:"Telur Ajaib"},{min:10,emoji:"🐣",name:"Si Menetas"},{min:25,emoji:"🐥",name:"Anak Ayam Ceria"},{min:45,emoji:"🦉",name:"Burung Hantu Pintar"},{min:70,emoji:"🦄",name:"Unicorn Ajaib"},{min:100,emoji:"🐲",name:"Naga Jenius"}];
+const FRUITS=[
+ {id:"apel",name:"Apel",e:"🍎",color:"merah"},
+ {id:"stroberi",name:"Stroberi",e:"🍓",color:"merah"},
+ {id:"ceri",name:"Ceri",e:"🍒",color:"merah"},
+ {id:"semangka",name:"Semangka",e:"🍉",color:"merah"},
+ {id:"pisang",name:"Pisang",e:"🍌",color:"kuning"},
+ {id:"nanas",name:"Nanas",e:"🍍",color:"kuning"},
+ {id:"lemon",name:"Lemon",e:"🍋",color:"kuning"},
+ {id:"jeruk",name:"Jeruk",e:"🍊",color:"oranye"},
+ {id:"mangga",name:"Mangga",e:"🥭",color:"oranye"},
+ {id:"pir",name:"Pir",e:"🍐",color:"hijau"},
+ {id:"melon",name:"Melon",e:"🍈",color:"hijau"},
+ {id:"kiwi",name:"Kiwi",e:"🥝",color:"hijau"},
+ {id:"anggur",name:"Anggur",e:"🍇",color:"ungu"},
+ {id:"kelapa",name:"Kelapa",e:"🥥",color:"coklat"}];
 const WORLDS=[
  {id:"forest",name:"Hutan Hewan",subtitle:"Ayo Berhitung!",emoji:"🦁",bg:"linear-gradient(160deg,#A8E063,#56AB2F)",accent:"#2E7D32",light:"#E8F5E9"},
  {id:"space",name:"Luar Angkasa",subtitle:"Kenali Huruf!",emoji:"🚀",bg:"linear-gradient(160deg,#7F7FD5,#4A3F9F)",accent:"#3F3D8F",light:"#EDEAFB"},
- {id:"ocean",name:"Bawah Laut",subtitle:"Warna & Bentuk!",emoji:"🐠",bg:"linear-gradient(160deg,#4DD0E1,#0083B0)",accent:"#00697F",light:"#E0F7FA"}];
+ {id:"ocean",name:"Bawah Laut",subtitle:"Warna & Bentuk!",emoji:"🐠",bg:"linear-gradient(160deg,#4DD0E1,#0083B0)",accent:"#00697F",light:"#E0F7FA"},
+ {id:"fruit",name:"Pasar Buah",subtitle:"Kenali Buah-buahan!",emoji:"🍉",bg:"linear-gradient(160deg,#FFC06B,#F25C2A)",accent:"#B33F12",light:"#FFF3E0",levels:4,
+  levelNames:["Beli Buah","Tebak Buah","Keranjang Warna","Kartu Buah"]}];
 const HOME_BG="linear-gradient(180deg,#FFE9A8 0%,#FFD1DC 60%,#C9F0FF 100%)";
 const PER_LEVEL=5;
 
 /* ============ STATE ============ */
-let S={stars:0,progress:{forest:0,space:0,ocean:0},sound:true};
+let S={stars:0,progress:{forest:0,space:0,ocean:0,fruit:0},sound:true};
 try{const raw=localStorage.getItem("pp-save");if(raw)S=Object.assign(S,JSON.parse(raw));}catch(e){}
+S.progress=Object.assign({forest:0,space:0,ocean:0,fruit:0},S.progress);
 const save=()=>{try{localStorage.setItem("pp-save",JSON.stringify(S));}catch(e){}};
 
-let screen="home",worldId=null,level=1,qIndex=0,question=null,picked=null,earned=0,correctCount=0;
+let screen="home",worldId=null,level=1,qIndex=0,question=null,picked=null,earned=0,correctCount=0,totalRounds=PER_LEVEL;
 
 /* ============ UTIL ============ */
 const rand=n=>Math.floor(Math.random()*n);
 const pick=a=>a[rand(a.length)];
 const shuffle=a=>[...a].sort(()=>Math.random()-.5);
 const W=()=>WORLDS.find(w=>w.id===worldId);
+function roundsFor(w,lv){if(w==="fruit"){if(lv===3)return 3;if(lv===4)return 2;}return PER_LEVEL;}
 function mascot(){let m=MASCOTS[0];MASCOTS.forEach(x=>{if(S.stars>=x.min)m=x;});const i=MASCOTS.indexOf(m);return{...m,level:i+1,next:MASCOTS[i+1]||null};}
 
 /* ============ SUARA (Web Audio, tanpa library) ============ */
@@ -189,6 +208,46 @@ function makeQuestion(w,lv){
         <div style="font-size:38px;font-weight:700;letter-spacing:4px;color:${acc}">_${word.w.slice(1)}</div></div>`,
       answer:first,options:shuffle([...o])};
   }
+  if(w==="fruit"){
+    if(lv===1){ // Beli Buah — hitung & ketuk
+      if(Math.random()<.55){
+        const f=pick(FRUITS),need=2+rand(4),total=need+2+rand(3);
+        return{type:"tapcount",prompt:`Ketuk ${need} ${f.name.toLowerCase()}!`,
+          speak:`Ibu mau beli ${need} ${f.name}.|Ayo ketuk ${need} ${f.name}!`,
+          items:Array(total).fill(f),need,sel:new Set()};
+      }
+      const f=pick(FRUITS),others=shuffle(FRUITS.filter(x=>x.id!==f.id)).slice(0,3);
+      const items=shuffle([...Array(2+rand(3)).fill(f),...Array(3+rand(3)).fill(0).map(()=>pick(others))]);
+      return{type:"tapall",prompt:`Ketuk semua ${f.name.toLowerCase()}!`,
+        speak:`Cari semua ${f.name}.|Ayo ketuk semuanya!`,
+        items,target:f.id,need:items.filter(x=>x.id===f.id).length,sel:new Set()};
+    }
+    if(lv===2){ // Tebak Buah — pilih gambar / tebak bayangan
+      const f=pick(FRUITS);
+      if(Math.random()<.5){
+        const others=shuffle(FRUITS.filter(x=>x.id!==f.id)).slice(0,3);
+        return{type:"mc",prompt:`Sentuh ${f.name.toLowerCase()}!`,speak:`Mana ${f.name}?|Ayo sentuh!`,html:"",
+          answer:f.id,options:shuffle([f,...others]).map(x=>({key:x.id,e:x.e}))};
+      }
+      const others=shuffle(FRUITS.filter(x=>x.id!==f.id)).slice(0,2);
+      return{type:"mc",prompt:"Bayangan buah apa ini?",speak:"Lihat bayangan ini.|Buah apa ya?|Sentuh buah yang sama!",
+        html:`<div style="font-size:84px;margin-top:10px;filter:brightness(0);opacity:.8">${f.e}</div>`,
+        answer:f.id,options:shuffle([f,...others]).map(x=>({key:x.id,e:x.e}))};
+    }
+    if(lv===3){ // Keranjang Warna — kelompokkan buah
+      const sortable=COLORS.filter(c=>FRUITS.filter(f=>f.color===c.id).length>=2);
+      const baskets=shuffle(sortable).slice(0,qIndex>=2?3:2);
+      const fruits=shuffle(baskets.flatMap(b=>shuffle(FRUITS.filter(f=>f.color===b.id)).slice(0,2)));
+      return{type:"sort",prompt:"Masukkan buah ke keranjang warnanya!",
+        speak:"Sentuh buah,|lalu sentuh keranjang yang warnanya sama!",
+        baskets,fruits,done:[],selFruit:null};
+    }
+    // lv 4: Kartu Buah — memory
+    const fs=shuffle(FRUITS).slice(0,qIndex===0?3:4);
+    return{type:"memory",prompt:"Temukan pasangan buah yang sama!",
+      speak:"Balik kartunya.|Cari dua buah yang sama!",
+      cards:shuffle([...fs,...fs]),open:[],matched:new Set(),lock:false};
+  }
   if(lv===1){
     const t=pick(SHAPES),c=pick(COLORS),others=shuffle(SHAPES.filter(s=>s.id!==t.id)).slice(0,3);
     return{type:"shape",prompt:`Sentuh bentuk ${t.label}!`,speak:`Mana bentuk ${t.label}?|Ayo sentuh!`,html:"",
@@ -208,11 +267,12 @@ function makeQuestion(w,lv){
 /* ============ ALUR ============ */
 function startLevel(w,lv){
   worldId=w;level=lv;qIndex=0;earned=0;correctCount=0;picked=null;
+  totalRounds=roundsFor(w,lv);
   question=makeQuestion(w,lv);screen="game";render();
   setTimeout(()=>speak(question.speak),450);
 }
 function nextQuestion(){
-  if(qIndex+1>=PER_LEVEL){
+  if(qIndex+1>=totalRounds){
     sWin();
     S.progress[worldId]=Math.max(S.progress[worldId],level);save();
     screen="done";render();
@@ -222,19 +282,22 @@ function nextQuestion(){
   qIndex++;picked=null;question=makeQuestion(worldId,level);render();
   setTimeout(()=>speak(question.speak),300);
 }
+function winRound(star=1){
+  sCorrect();S.stars+=star;earned+=star;correctCount++;save();
+  speak(pick(PRAISE));render();
+  setTimeout(nextQuestion,1150);
+}
 function answer(val){
   if(picked!==null)return;
   picked=val;
-  const ok=String(val)===String(question.answer);
-  if(ok){
-    sCorrect();S.stars++;earned++;correctCount++;save();
-    speak(pick(PRAISE));render();
-    setTimeout(nextQuestion,1150);
+  if(String(val)===String(question.answer)){
+    winRound();
   }else{
     sWrong();speak(pick(OOPS));render();
     setTimeout(()=>{picked=null;render();},900);
   }
 }
+function shakeBtn(b){b.classList.remove("shake");void b.offsetWidth;b.classList.add("shake");}
 
 /* ============ RENDER ============ */
 const app=document.getElementById("app");
@@ -279,7 +342,7 @@ function renderHome(){
      <button class="btn world-btn" data-world="${w.id}">
        <div class="world-emoji" style="background:${w.bg}">${w.emoji}</div>
        <div style="flex:1"><div class="title">${w.name}</div><div class="sub">${w.subtitle}</div></div>
-       <div style="display:flex;gap:4px;font-size:18px">${[1,2,3].map(l=>S.progress[w.id]>=l?"⭐":"▫️").join("")}</div>
+       <div style="display:flex;gap:4px;font-size:18px">${Array.from({length:w.levels||3},(_,i)=>S.progress[w.id]>=i+1?"⭐":"▫️").join("")}</div>
      </button>`).join("")}
    <div style="text-align:center;font-size:13px;opacity:.6;margin-top:6px">Untuk anak usia 5–7 tahun • Progres tersimpan otomatis</div>`;
   app.querySelectorAll("[data-world]").forEach(b=>b.onclick=()=>{worldId=b.dataset.world;screen="world";render();});
@@ -293,41 +356,166 @@ function renderWorld(){
      <h1 style="font-size:28px">${w.name}</h1>
      <div class="sub" style="font-size:17px">${w.subtitle}</div>
    </div>
-   ${[1,2,3].map(lv=>{
+   ${Array.from({length:w.levels||3},(_,idx)=>{
+     const lv=idx+1;
      const unlocked=lv===1||S.progress[w.id]>=lv-1, done=S.progress[w.id]>=lv;
+     const name=w.levelNames?w.levelNames[lv-1]:`Level ${lv}`;
+     const unit=w.id==="fruit"?"ronde":"soal";
      return `<button class="btn" data-lv="${lv}" ${unlocked?"":"disabled"}
        style="padding:16px;display:flex;align-items:center;gap:14px;background:${unlocked?w.light:"#DDD"}">
        <div style="font-size:32px">${done?"⭐":unlocked?"🎯":"🔒"}</div>
        <div style="text-align:left;flex:1">
-         <div class="title" style="color:${w.accent}">Level ${lv}</div>
-         <div class="sub" style="font-size:14px">${done?"Sudah selesai — main lagi yuk!":unlocked?"5 soal seru menantimu":"Selesaikan level sebelumnya dulu"}</div>
+         <div class="title" style="color:${w.accent}">${name}</div>
+         <div class="sub" style="font-size:14px">${done?"Sudah selesai — main lagi yuk!":unlocked?`${roundsFor(w.id,lv)} ${unit} seru menantimu`:"Selesaikan level sebelumnya dulu"}</div>
        </div></button>`;}).join("")}`;
   app.querySelectorAll("[data-lv]").forEach(b=>b.onclick=()=>startLevel(w.id,+b.dataset.lv));
 }
 
-function renderGame(){
-  const w=W(),q=question,cols=q.options.length===4?"1fr 1fr":"repeat(3,1fr)";
-  app.innerHTML=`
-   <div class="dots">${Array.from({length:PER_LEVEL},(_,i)=>
-     `<div class="dot ${i<qIndex?"done":i===qIndex?"now":""}"></div>`).join("")}</div>
-   <div class="card pop" style="text-align:center">
+function dotsHTML(){
+  return `<div class="dots">${Array.from({length:totalRounds},(_,i)=>
+    `<div class="dot ${i<qIndex?"done":i===qIndex?"now":""}"></div>`).join("")}</div>`;
+}
+function promptCard(extra=""){
+  const w=W(),q=question;
+  return `<div class="card pop" style="text-align:center">
      <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap">
        <div class="prompt" style="color:${w.accent}">${q.prompt}</div>
        <button class="btn" id="repeat" style="background:#FFC93C;padding:6px 12px;font-size:18px">🔊</button>
      </div>
-     ${q.html}
-   </div>
+     ${q.html||""}${extra}
+   </div>`;
+}
+function renderGame(){
+  const q=question;
+  if(q.type==="tapcount"||q.type==="tapall")return renderTapGame();
+  if(q.type==="sort")return renderSortGame();
+  if(q.type==="memory")return renderMemoryGame();
+  renderChoiceGame();
+}
+function renderChoiceGame(){
+  const q=question,cols=q.options.length===4?"1fr 1fr":"repeat(3,1fr)";
+  app.innerHTML=`
+   ${dotsHTML()}
+   ${promptCard()}
    <div class="opts" style="grid-template-columns:${cols}">
-     ${q.options.map((o,i)=>{
-       const isShape=typeof o==="object", val=isShape?o.key:o;
+     ${q.options.map(o=>{
+       const isObj=typeof o==="object", val=isObj?o.key:o;
        const sel=picked!==null&&String(picked)===String(val);
        const ok=String(val)===String(question.answer);
        const cls=sel?(ok?"good pop":"bad shake"):"";
-       return `<button class="btn opt ${cls}" data-val="${val}">${isShape?shapeSVG(o.shape,o.color):val}</button>`;
+       const face=isObj?(o.shape?shapeSVG(o.shape,o.color):`<span style="font-size:50px">${o.e}</span>`):val;
+       return `<button class="btn opt ${cls}" data-val="${val}">${face}</button>`;
      }).join("")}
    </div>`;
   document.getElementById("repeat").onclick=()=>speak(q.speak);
   app.querySelectorAll("[data-val]").forEach(b=>b.onclick=()=>answer(b.dataset.val));
+}
+/* Level "Beli Buah": ketuk sejumlah buah (tapcount) atau semua buah target (tapall) */
+function renderTapGame(){
+  const q=question;
+  app.innerHTML=`
+   ${dotsHTML()}
+   ${promptCard(`<div id="basketCount" style="font-size:22px;font-weight:700;margin-top:10px">🧺 ${q.sel.size} / ${q.need}</div>`)}
+   <div class="opts" style="grid-template-columns:repeat(3,1fr)">
+     ${q.items.map((f,i)=>`<button class="btn opt ${q.sel.has(i)?"good":""}" data-i="${i}"
+        style="font-size:46px;${q.sel.has(i)?"opacity:.6":""}">${f.e}</button>`).join("")}
+   </div>`;
+  document.getElementById("repeat").onclick=()=>speak(q.speak);
+  const counter=document.getElementById("basketCount");
+  app.querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{
+    if(q.finished)return;
+    const i=+b.dataset.i;
+    if(q.sel.has(i))return;
+    if(q.type==="tapall"&&q.items[i].id!==q.target){shakeBtn(b);sWrong();speak(pick(OOPS));return;}
+    q.sel.add(i);
+    b.classList.add("good");b.style.opacity=".6";
+    b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop");
+    tone(440+q.sel.size*70,0,.15);
+    counter.textContent=`🧺 ${q.sel.size} / ${q.need}`;
+    if(q.sel.size>=q.need){q.finished=true;setTimeout(()=>winRound(),350);}
+  });
+}
+/* Level "Keranjang Warna": sentuh buah lalu sentuh keranjang warna yang cocok */
+function renderSortGame(){
+  const q=question,acc=W().accent;
+  app.innerHTML=`
+   ${dotsHTML()}
+   ${promptCard()}
+   <div style="display:flex;gap:12px">
+     ${q.baskets.map(b=>`
+      <button class="btn" data-basket="${b.id}" style="flex:1;padding:10px 6px;border:4px solid ${b.hex};background:${b.hex}26;border-radius:22px">
+        <div style="font-size:36px">🧺</div>
+        <div style="font-weight:700;font-size:15px;color:${b.hex}">${b.label}</div>
+        <div id="bin-${b.id}" style="font-size:26px;min-height:34px;margin-top:4px">${q.done.map(i=>q.fruits[i]).filter(f=>f.color===b.id).map(f=>f.e).join("")}</div>
+      </button>`).join("")}
+   </div>
+   <div class="opts" style="grid-template-columns:repeat(${Math.min(q.fruits.length,4)},1fr)">
+     ${q.fruits.map((f,i)=>`<button class="btn opt" data-f="${i}"
+        style="font-size:42px;${q.done.includes(i)?"visibility:hidden;":""}${q.selFruit===i?`outline:5px solid ${acc};`:""}">${f.e}</button>`).join("")}
+   </div>`;
+  document.getElementById("repeat").onclick=()=>speak(q.speak);
+  app.querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.f;
+    if(q.done.includes(i)||q.finished)return;
+    q.selFruit=i;
+    app.querySelectorAll("[data-f]").forEach(x=>x.style.outline="");
+    b.style.outline=`5px solid ${acc}`;
+    tone(520,0,.1);
+  });
+  app.querySelectorAll("[data-basket]").forEach(b=>b.onclick=()=>{
+    if(q.finished)return;
+    if(q.selFruit===null){speak("Sentuh buahnya dulu ya!");return;}
+    const f=q.fruits[q.selFruit];
+    if(f.color===b.dataset.basket){
+      q.done.push(q.selFruit);
+      const fb=app.querySelector(`[data-f="${q.selFruit}"]`);
+      fb.style.visibility="hidden";fb.style.outline="";
+      document.getElementById("bin-"+b.dataset.basket).textContent+=f.e;
+      q.selFruit=null;
+      tone(660,0,.12);tone(880,.09,.15);
+      if(q.done.length===q.fruits.length){q.finished=true;setTimeout(()=>winRound(2),400);}
+    }else{
+      shakeBtn(b);sWrong();speak(pick(OOPS));
+    }
+  });
+}
+/* Level "Kartu Buah": memory mencocokkan pasangan kartu */
+function renderMemoryGame(){
+  const q=question,cols=q.cards.length<=6?3:4;
+  app.innerHTML=`
+   ${dotsHTML()}
+   ${promptCard()}
+   <div class="opts" style="grid-template-columns:repeat(${cols},1fr)">
+     ${q.cards.map((c,i)=>{
+       const up=q.matched.has(i)||q.open.includes(i);
+       return `<button class="btn opt ${q.matched.has(i)?"good":""}" data-c="${i}" style="font-size:44px">${up?c.e:"❓"}</button>`;
+     }).join("")}
+   </div>`;
+  document.getElementById("repeat").onclick=()=>speak(q.speak);
+  app.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.c;
+    if(q.lock||q.finished||q.matched.has(i)||q.open.includes(i))return;
+    q.open.push(i);
+    b.textContent=q.cards[i].e;
+    b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop");
+    tone(600,0,.1);
+    if(q.open.length<2)return;
+    const [a,c2]=q.open;
+    const btnA=app.querySelector(`[data-c="${a}"]`),btnB=app.querySelector(`[data-c="${c2}"]`);
+    if(q.cards[a].id===q.cards[c2].id){
+      q.matched.add(a);q.matched.add(c2);q.open=[];
+      btnA.classList.add("good");btnB.classList.add("good");
+      sCorrect();
+      if(q.matched.size===q.cards.length){q.finished=true;setTimeout(()=>winRound(q.cards.length/2),500);}
+    }else{
+      q.lock=true;tone(240,0,.2,.1);
+      setTimeout(()=>{
+        btnA.textContent="❓";btnB.textContent="❓";
+        btnA.classList.remove("pop");btnB.classList.remove("pop");
+        q.open=[];q.lock=false;
+      },850);
+    }
+  });
 }
 
 function renderDone(){
@@ -342,10 +530,10 @@ function renderDone(){
    <div class="card pop" style="text-align:center;padding:26px;margin-top:16px">
      <div class="bounce" style="font-size:76px">${m.emoji}</div>
      <h1 style="font-size:29px;color:${w.accent}">Hebat Sekali! 🎉</h1>
-     <div style="font-size:20px;margin-bottom:4px">Kamu dapat <b>${earned} ⭐</b> di Level ${level}!</div>
-     <div class="sub" style="margin-bottom:18px">${correctCount} dari ${PER_LEVEL} soal langsung benar</div>
+     <div style="font-size:20px;margin-bottom:4px">Kamu dapat <b>${earned} ⭐</b> di ${w.levelNames?w.levelNames[level-1]:`Level ${level}`}!</div>
+     <div class="sub" style="margin-bottom:18px">${["tapcount","tapall","sort","memory"].includes(question.type)?`Semua ${totalRounds} ronde selesai — keren!`:`${correctCount} dari ${totalRounds} soal langsung benar`}</div>
      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-       ${level<3?`<button class="btn" id="next" style="background:#FFC93C;padding:14px 20px;font-size:18px;font-weight:700">Level Berikutnya ➡️</button>`:""}
+       ${level<(w.levels||3)?`<button class="btn" id="next" style="background:#FFC93C;padding:14px 20px;font-size:18px;font-weight:700">Level Berikutnya ➡️</button>`:""}
        <button class="btn" id="again" style="padding:14px 20px;font-size:18px;font-weight:700">Main Lagi 🔄</button>
        <button class="btn" id="home" style="padding:14px 20px;font-size:18px;font-weight:700">Beranda 🏠</button>
      </div>
