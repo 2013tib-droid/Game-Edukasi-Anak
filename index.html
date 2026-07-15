@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFD1DC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Petualangan Pintar">
+<title>🌈 Petualangan Pintar — Game Edukasi Anak Pra-SD</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>">
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Fredoka','Baloo 2','Segoe UI',system-ui,sans-serif;
+    color:#3A2E20; min-height:100vh;
+    background:linear-gradient(180deg,#FFE9A8 0%,#FFD1DC 60%,#C9F0FF 100%);
+    background-attachment:fixed;
+    transition:background .5s;
+    display:flex; flex-direction:column; align-items:center;
+    padding:14px 14px 40px; overflow-x:hidden;
+    user-select:none;
+  }
+  .wrap{width:100%;max-width:560px;display:flex;flex-direction:column;gap:14px}
+  .topbar{width:100%;max-width:560px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .btn{
+    background:#fff;border:none;border-radius:22px;box-shadow:0 6px 0 rgba(0,0,0,.22);
+    cursor:pointer;font-family:inherit;color:#3A2E20;
+    transition:transform .1s,box-shadow .1s;
+  }
+  .btn:active:not(:disabled){transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.22)}
+  .btn:disabled{cursor:default;opacity:.6}
+  .btn:focus-visible{outline:4px solid #3A2E20;outline-offset:2px}
+  .icon-btn{padding:8px 15px;font-size:20px;font-weight:700}
+  .stars{background:rgba(255,255,255,.85);border-radius:999px;padding:8px 18px;font-weight:700;font-size:20px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
+  h1{text-align:center;font-size:32px;margin:2px 0;text-shadow:0 2px 0 #fff}
+  .card{background:rgba(255,255,255,.94);border-radius:26px;padding:18px;box-shadow:0 6px 0 rgba(0,0,0,.12)}
+  .world-btn{display:flex;align-items:center;gap:14px;padding:14px;text-align:left;width:100%}
+  .world-emoji{font-size:44px;border-radius:18px;width:70px;height:70px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .title{font-weight:700;font-size:21px}
+  .sub{font-size:15px;opacity:.7}
+  .bar{background:#eee;border-radius:999px;height:14px;margin-top:6px;overflow:hidden}
+  .bar>div{background:linear-gradient(90deg,#FFC93C,#FF8A5C);height:100%;transition:width .4s}
+  .dots{display:flex;justify-content:center;gap:8px}
+  .dot{width:16px;height:16px;border-radius:999px;background:rgba(255,255,255,.4);box-shadow:0 2px 0 rgba(0,0,0,.15)}
+  .dot.done{background:#FFC93C}.dot.now{background:#fff}
+  .opts{display:grid;gap:12px}
+  .opt{font-size:40px;font-weight:700;padding:20px 8px;display:flex;align-items:center;justify-content:center;min-height:88px}
+  .prompt{font-weight:700;font-size:22px}
+  .good{background:#B9F6CA!important}.bad{background:#FFCDD2!important}
+  @keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @keyframes fall{to{transform:translateY(120vh) rotate(360deg)}}
+  .pop{animation:pop .35s ease}.shake{animation:shake .4s}.bounce{animation:bounce 2.2s ease-in-out infinite}
+  .confetti{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:5}
+  .confetti span{position:absolute;top:-10%;animation:fall linear infinite}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <button class="btn icon-btn" id="back" style="visibility:hidden">⬅️</button>
+  <div class="stars" id="starCount">⭐ 0</div>
+  <button class="btn icon-btn" id="sound">🔊</button>
+</div>
+
+<div class="wrap" id="app"></div>
+
+<script>
+/* ============ DATA ============ */
+const ANIMALS=["🦁","🐰","🐸","🦊","🐼","🐵","🦒","🐘","🐯","🦆","🐢","🐝","🦋","🐞","🦜","🐿️"];
+const EASY=[{w:"Roket",e:"🚀"},{w:"Bulan",e:"🌙"},{w:"Bintang",e:"⭐"},{w:"Matahari",e:"☀️"},{w:"Planet",e:"🪐"},{w:"Alien",e:"👽"},{w:"Bumi",e:"🌍"},{w:"Awan",e:"☁️"},{w:"Petir",e:"⚡"}];
+const HARD=[{w:"Komet",e:"☄️"},{w:"Teleskop",e:"🔭"},{w:"Galaksi",e:"🌌"},{w:"Satelit",e:"🛰️"},{w:"Astronot",e:"🧑‍🚀"},{w:"Meteor",e:"💫"},{w:"Pelangi",e:"🌈"},{w:"Gerhana",e:"🌘"},{w:"Piring Terbang",e:"🛸"}];
+const CONF={B:["b","d","p"],D:["d","b","p"],M:["m","n","w"],P:["p","q","b"],A:["a","e","o"],S:["s","z","c"],K:["k","h","t"],R:["r","n","m"],G:["g","q","p"],T:["t","f","l"],E:["e","a","o"],N:["n","m","u"]};
+const SHAPES=[{id:"lingkaran",label:"Lingkaran"},{id:"kotak",label:"Kotak"},{id:"segitiga",label:"Segitiga"},{id:"bintang",label:"Bintang"},{id:"hati",label:"Hati"},{id:"oval",label:"Oval"},{id:"ketupat",label:"Belah Ketupat"}];
+const COLORS=[{id:"merah",label:"Merah",hex:"#EF5350"},{id:"biru",label:"Biru",hex:"#42A5F5"},{id:"kuning",label:"Kuning",hex:"#FFC93C"},{id:"hijau",label:"Hijau",hex:"#66BB6A"},{id:"ungu",label:"Ungu",hex:"#AB47BC"},{id:"oranye",label:"Oranye",hex:"#FFA726"},{id:"pink",label:"Merah Muda",hex:"#F48FB1"},{id:"coklat",label:"Coklat",hex:"#8D6E63"}];
+const MASCOTS=[{min:0,emoji:"🥚",name:"Telur Ajaib"},{min:10,emoji:"🐣",name:"Si Menetas"},{min:25,emoji:"🐥",name:"Anak Ayam Ceria"},{min:45,emoji:"🦉",name:"Burung Hantu Pintar"},{min:70,emoji:"🦄",name:"Unicorn Ajaib"},{min:100,emoji:"🐲",name:"Naga Jenius"}];
+const WORLDS=[
+ {id:"forest",name:"Hutan Hewan",subtitle:"Ayo Berhitung!",emoji:"🦁",bg:"linear-gradient(160deg,#A8E063,#56AB2F)",accent:"#2E7D32",light:"#E8F5E9"},
+ {id:"space",name:"Luar Angkasa",subtitle:"Kenali Huruf!",emoji:"🚀",bg:"linear-gradient(160deg,#7F7FD5,#4A3F9F)",accent:"#3F3D8F",light:"#EDEAFB"},
+ {id:"ocean",name:"Bawah Laut",subtitle:"Warna & Bentuk!",emoji:"🐠",bg:"linear-gradient(160deg,#4DD0E1,#0083B0)",accent:"#00697F",light:"#E0F7FA"}];
+const HOME_BG="linear-gradient(180deg,#FFE9A8 0%,#FFD1DC 60%,#C9F0FF 100%)";
+const PER_LEVEL=5;
+
+/* ============ STATE ============ */
+let S={stars:0,progress:{forest:0,space:0,ocean:0},sound:true};
+try{const raw=localStorage.getItem("pp-save");if(raw)S=Object.assign(S,JSON.parse(raw));}catch(e){}
+const save=()=>{try{localStorage.setItem("pp-save",JSON.stringify(S));}catch(e){}};
+
+let screen="home",worldId=null,level=1,qIndex=0,question=null,picked=null,earned=0,correctCount=0;
+
+/* ============ UTIL ============ */
+const rand=n=>Math.floor(Math.random()*n);
+const pick=a=>a[rand(a.length)];
+const shuffle=a=>[...a].sort(()=>Math.random()-.5);
+const W=()=>WORLDS.find(w=>w.id===worldId);
+function mascot(){let m=MASCOTS[0];MASCOTS.forEach(x=>{if(S.stars>=x.min)m=x;});const i=MASCOTS.indexOf(m);return{...m,level:i+1,next:MASCOTS[i+1]||null};}
+
+/* ============ SUARA (Web Audio, tanpa library) ============ */
+let AC=null;
+function tone(freq,start,dur,vol=.18){
+  if(!S.sound)return;
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    if(AC.state==="suspended")AC.resume();
+    const o=AC.createOscillator(),g=AC.createGain();
+    o.type="triangle";o.frequency.value=freq;
+    const t=AC.currentTime+start;
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(vol,t+.02);
+    g.gain.exponentialRampToValueAtTime(.001,t+dur);
+    o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+dur+.05);
+  }catch(e){}
+}
+const sCorrect=()=>{tone(523,0,.15);tone(659,.1,.15);tone(784,.2,.3);};
+const sWrong=()=>{tone(196,0,.25,.14);};
+const sWin=()=>{[523,659,784,1047,784,1047].forEach((f,i)=>tone(f,i*.12,.25));};
+function bestVoice(){
+  const vs=speechSynthesis.getVoices().filter(v=>v.lang&&v.lang.toLowerCase().replace("_","-").startsWith("id"));
+  return vs.find(v=>/google/i.test(v.name))     // suara Google (Android) paling jernih
+      || vs.find(v=>/enhanced|premium|siri/i.test(v.name))
+      || vs[0] || null;
+}
+function speak(t){
+  if(!S.sound||!window.speechSynthesis)return;
+  try{
+    speechSynthesis.cancel();
+    // satu ucapan utuh; tanda "|" jadi koma agar jedanya alami dan tidak patah-patah
+    const u=new SpeechSynthesisUtterance(t.split("|").map(p=>p.trim()).filter(Boolean).join(", "));
+    u.lang="id-ID";u.rate=.88;u.pitch=1.08;u.volume=1;
+    const v=bestVoice();if(v)u.voice=v;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+if(window.speechSynthesis){
+  speechSynthesis.getVoices();
+  speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();
+}
+const PRAISE=["Benar!|Kamu pintar!","Hore!|Hebat sekali!","Wah, betul!|Pintar!","Yes!|Jawabanmu benar!"];
+const OOPS=["Belum tepat.|Ayo coba lagi!","Hampir!|Coba sekali lagi ya!","Tidak apa-apa.|Ayo coba lagi!"];
+
+/* ============ SVG BENTUK ============ */
+function shapeSVG(shape,color,size=70){
+  const p=`fill="${color}" stroke="rgba(0,0,0,.15)" stroke-width="3"`;
+  const body={
+    lingkaran:`<circle cx="50" cy="50" r="42" ${p}/>`,
+    kotak:`<rect x="12" y="12" width="76" height="76" rx="10" ${p}/>`,
+    segitiga:`<polygon points="50,10 92,88 8,88" ${p}/>`,
+    bintang:`<polygon points="50,6 61,38 95,38 68,58 78,92 50,71 22,92 32,58 5,38 39,38" ${p}/>`,
+    hati:`<path d="M50 88 C20 62 8 44 14 28 C20 12 42 12 50 30 C58 12 80 12 86 28 C92 44 80 62 50 88 Z" ${p}/>`,
+    oval:`<ellipse cx="50" cy="50" rx="44" ry="30" ${p}/>`,
+    ketupat:`<polygon points="50,8 92,50 50,92 8,50" ${p}/>`
+  }[shape];
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100">${body}</svg>`;
+}
+
+/* ============ SOAL ============ */
+function makeQuestion(w,lv){
+  if(w==="forest"){
+    if(lv<3){
+      const max=lv===1?5:9,count=1+rand(max),a=pick(ANIMALS);
+      const o=new Set([count]);while(o.size<3)o.add(Math.max(1,count+rand(5)-2));
+      return{type:"count",prompt:"Ada berapa hewan ini?",speak:"Ayo hitung!|Ada berapa hewan ini?",
+        html:`<div style="font-size:44px;line-height:1.4;margin-top:14px;word-spacing:8px">${Array(count).fill(a).join(" ")}</div>`,
+        answer:count,options:shuffle([...o])};
+    }
+    const a=1+rand(4),b=1+rand(4),an=pick(ANIMALS),acc=W().accent;
+    const o=new Set([a+b]);while(o.size<3)o.add(Math.max(1,a+b+rand(5)-2));
+    return{type:"add",prompt:"Berapa jumlah semuanya?",speak:`Ayo hitung!|${a}|tambah|${b}|jadi berapa semuanya?`,
+      html:`<div style="font-size:36px;margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px">
+        <span>${Array(a).fill(an).join("")}</span><span style="font-weight:700;color:${acc}">+</span>
+        <span>${Array(b).fill(an).join("")}</span><span style="font-weight:700;color:${acc}">= ?</span></div>`,
+      answer:a+b,options:shuffle([...o])};
+  }
+  if(w==="space"){
+    const acc=W().accent;
+    if(lv===2){
+      const big=pick(Object.keys(CONF)),o=CONF[big];
+      return{type:"low",prompt:`Mana huruf kecil dari "${big}"?`,speak:`Ini huruf ${big} besar.|Mana huruf ${big} yang kecil?`,
+        html:`<div style="font-size:84px;font-weight:700;margin-top:8px;color:${acc}">${big}</div>`,
+        answer:o[0],options:shuffle([...o])};
+    }
+    const word=pick(lv===1?EASY:HARD),first=word.w[0].toUpperCase();
+    const o=new Set([first]);while(o.size<3)o.add(String.fromCharCode(65+rand(26)));
+    return{type:"letter",prompt:"Huruf apa yang hilang?",speak:`Lihat gambarnya.|Ini ${word.w}.|${word.w}.|Huruf apa yang pertama?`,
+      html:`<div style="margin-top:12px"><div style="font-size:64px">${word.e}</div>
+        <div style="font-size:38px;font-weight:700;letter-spacing:4px;color:${acc}">_${word.w.slice(1)}</div></div>`,
+      answer:first,options:shuffle([...o])};
+  }
+  if(lv===1){
+    const t=pick(SHAPES),c=pick(COLORS),others=shuffle(SHAPES.filter(s=>s.id!==t.id)).slice(0,3);
+    return{type:"shape",prompt:`Sentuh bentuk ${t.label}!`,speak:`Mana bentuk ${t.label}?|Ayo sentuh!`,html:"",
+      answer:t.id,options:shuffle([t,...others]).map(s=>({key:s.id,shape:s.id,color:c.hex}))};
+  }
+  if(lv===2){
+    const t=pick(COLORS),s=pick(SHAPES),others=shuffle(COLORS.filter(c=>c.id!==t.id)).slice(0,3);
+    return{type:"color",prompt:`Sentuh warna ${t.label}!`,speak:`Mana warna ${t.label}?|Ayo sentuh!`,html:"",
+      answer:t.id,options:shuffle([t,...others]).map(c=>({key:c.id,shape:s.id,color:c.hex}))};
+  }
+  const ts=pick(SHAPES),tc=pick(COLORS),opts=[{key:"benar",shape:ts.id,color:tc.hex}];
+  while(opts.length<4){const s=pick(SHAPES),c=pick(COLORS);if(s.id===ts.id&&c.id===tc.id)continue;opts.push({key:s.id+c.id+opts.length,shape:s.id,color:c.hex});}
+  return{type:"combo",prompt:`Sentuh ${ts.label} ${tc.label}!`,speak:`Cari ${ts.label}.|Yang berwarna ${tc.label}.|Ayo sentuh!`,html:"",
+    answer:"benar",options:shuffle(opts)};
+}
+
+/* ============ ALUR ============ */
+function startLevel(w,lv){
+  worldId=w;level=lv;qIndex=0;earned=0;correctCount=0;picked=null;
+  question=makeQuestion(w,lv);screen="game";render();
+  setTimeout(()=>speak(question.speak),450);
+}
+function nextQuestion(){
+  if(qIndex+1>=PER_LEVEL){
+    sWin();
+    S.progress[worldId]=Math.max(S.progress[worldId],level);save();
+    screen="done";render();
+    setTimeout(()=>speak(`Hore!|Kamu dapat ${earned} bintang!|Hebat sekali!`),500);
+    return;
+  }
+  qIndex++;picked=null;question=makeQuestion(worldId,level);render();
+  setTimeout(()=>speak(question.speak),300);
+}
+function answer(val){
+  if(picked!==null)return;
+  picked=val;
+  const ok=String(val)===String(question.answer);
+  if(ok){
+    sCorrect();S.stars++;earned++;correctCount++;save();
+    speak(pick(PRAISE));render();
+    setTimeout(nextQuestion,1150);
+  }else{
+    sWrong();speak(pick(OOPS));render();
+    setTimeout(()=>{picked=null;render();},900);
+  }
+}
+
+/* ============ RENDER ============ */
+const app=document.getElementById("app");
+const backBtn=document.getElementById("back");
+const soundBtn=document.getElementById("sound");
+const starEl=document.getElementById("starCount");
+
+backBtn.onclick=()=>{if(window.speechSynthesis)speechSynthesis.cancel();
+  screen=(screen==="game"||screen==="done")?"world":"home";render();};
+soundBtn.onclick=()=>{S.sound=!S.sound;save();if(!S.sound&&window.speechSynthesis)speechSynthesis.cancel();render();};
+
+function render(){
+  document.body.style.background=(screen==="game"||screen==="done")?W().bg:HOME_BG;
+  document.body.style.backgroundAttachment="fixed";
+  starEl.textContent="⭐ "+S.stars;
+  soundBtn.textContent=S.sound?"🔊":"🔇";
+  backBtn.style.visibility=screen==="home"?"hidden":"visible";
+  document.querySelectorAll(".confetti").forEach(c=>c.remove());
+
+  if(screen==="home")return renderHome();
+  if(screen==="world")return renderWorld();
+  if(screen==="game")return renderGame();
+  if(screen==="done")return renderDone();
+}
+
+function renderHome(){
+  const m=mascot();
+  const prog=m.next?Math.min(100,((S.stars-m.min)/(m.next.min-m.min))*100):100;
+  app.innerHTML=`
+   <h1>🌈 Petualangan Pintar</h1>
+   <div class="card" style="display:flex;align-items:center;gap:16px">
+     <div class="bounce" style="font-size:60px">${m.emoji}</div>
+     <div style="flex:1">
+       <div class="title">${m.name}</div>
+       <div class="sub">Level ${m.level}</div>
+       ${m.next?`<div class="bar"><div style="width:${prog}%"></div></div>
+         <div style="font-size:13px;margin-top:4px;opacity:.7">${m.next.min-S.stars} ⭐ lagi jadi ${m.next.emoji}</div>`
+        :`<div style="font-size:14px;margin-top:4px">🏆 Level tertinggi!</div>`}
+     </div>
+   </div>
+   ${WORLDS.map(w=>`
+     <button class="btn world-btn" data-world="${w.id}">
+       <div class="world-emoji" style="background:${w.bg}">${w.emoji}</div>
+       <div style="flex:1"><div class="title">${w.name}</div><div class="sub">${w.subtitle}</div></div>
+       <div style="display:flex;gap:4px;font-size:18px">${[1,2,3].map(l=>S.progress[w.id]>=l?"⭐":"▫️").join("")}</div>
+     </button>`).join("")}
+   <div style="text-align:center;font-size:13px;opacity:.6;margin-top:6px">Untuk anak usia 5–7 tahun • Progres tersimpan otomatis</div>`;
+  app.querySelectorAll("[data-world]").forEach(b=>b.onclick=()=>{worldId=b.dataset.world;screen="world";render();});
+}
+
+function renderWorld(){
+  const w=W();
+  app.innerHTML=`
+   <div style="text-align:center">
+     <div style="font-size:70px">${w.emoji}</div>
+     <h1 style="font-size:28px">${w.name}</h1>
+     <div class="sub" style="font-size:17px">${w.subtitle}</div>
+   </div>
+   ${[1,2,3].map(lv=>{
+     const unlocked=lv===1||S.progress[w.id]>=lv-1, done=S.progress[w.id]>=lv;
+     return `<button class="btn" data-lv="${lv}" ${unlocked?"":"disabled"}
+       style="padding:16px;display:flex;align-items:center;gap:14px;background:${unlocked?w.light:"#DDD"}">
+       <div style="font-size:32px">${done?"⭐":unlocked?"🎯":"🔒"}</div>
+       <div style="text-align:left;flex:1">
+         <div class="title" style="color:${w.accent}">Level ${lv}</div>
+         <div class="sub" style="font-size:14px">${done?"Sudah selesai — main lagi yuk!":unlocked?"5 soal seru menantimu":"Selesaikan level sebelumnya dulu"}</div>
+       </div></button>`;}).join("")}`;
+  app.querySelectorAll("[data-lv]").forEach(b=>b.onclick=()=>startLevel(w.id,+b.dataset.lv));
+}
+
+function renderGame(){
+  const w=W(),q=question,cols=q.options.length===4?"1fr 1fr":"repeat(3,1fr)";
+  app.innerHTML=`
+   <div class="dots">${Array.from({length:PER_LEVEL},(_,i)=>
+     `<div class="dot ${i<qIndex?"done":i===qIndex?"now":""}"></div>`).join("")}</div>
+   <div class="card pop" style="text-align:center">
+     <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap">
+       <div class="prompt" style="color:${w.accent}">${q.prompt}</div>
+       <button class="btn" id="repeat" style="background:#FFC93C;padding:6px 12px;font-size:18px">🔊</button>
+     </div>
+     ${q.html}
+   </div>
+   <div class="opts" style="grid-template-columns:${cols}">
+     ${q.options.map((o,i)=>{
+       const isShape=typeof o==="object", val=isShape?o.key:o;
+       const sel=picked!==null&&String(picked)===String(val);
+       const ok=String(val)===String(question.answer);
+       const cls=sel?(ok?"good pop":"bad shake"):"";
+       return `<button class="btn opt ${cls}" data-val="${val}">${isShape?shapeSVG(o.shape,o.color):val}</button>`;
+     }).join("")}
+   </div>`;
+  document.getElementById("repeat").onclick=()=>speak(q.speak);
+  app.querySelectorAll("[data-val]").forEach(b=>b.onclick=()=>answer(b.dataset.val));
+}
+
+function renderDone(){
+  const w=W(),m=mascot();
+  const c=document.createElement("div");c.className="confetti";
+  const items=["🎉","⭐","🎊","✨","🌟","🎈"];
+  c.innerHTML=Array.from({length:18},(_,i)=>
+    `<span style="left:${(i*53)%100}%;font-size:${22+(i%4)*8}px;animation-duration:${2.2+(i%5)*.5}s;animation-delay:${i*.15}s">${items[i%6]}</span>`).join("");
+  document.body.appendChild(c);
+
+  app.innerHTML=`
+   <div class="card pop" style="text-align:center;padding:26px;margin-top:16px">
+     <div class="bounce" style="font-size:76px">${m.emoji}</div>
+     <h1 style="font-size:29px;color:${w.accent}">Hebat Sekali! 🎉</h1>
+     <div style="font-size:20px;margin-bottom:4px">Kamu dapat <b>${earned} ⭐</b> di Level ${level}!</div>
+     <div class="sub" style="margin-bottom:18px">${correctCount} dari ${PER_LEVEL} soal langsung benar</div>
+     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+       ${level<3?`<button class="btn" id="next" style="background:#FFC93C;padding:14px 20px;font-size:18px;font-weight:700">Level Berikutnya ➡️</button>`:""}
+       <button class="btn" id="again" style="padding:14px 20px;font-size:18px;font-weight:700">Main Lagi 🔄</button>
+       <button class="btn" id="home" style="padding:14px 20px;font-size:18px;font-weight:700">Beranda 🏠</button>
+     </div>
+   </div>`;
+  const n=document.getElementById("next");if(n)n.onclick=()=>startLevel(worldId,level+1);
+  document.getElementById("again").onclick=()=>startLevel(worldId,level);
+  document.getElementById("home").onclick=()=>{screen="home";render();};
+}
+
+render();
+</script>
+</body>
+</html>
