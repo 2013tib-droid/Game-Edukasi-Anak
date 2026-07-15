@@ -123,20 +123,70 @@ function bestVoice(){
       || vs.find(v=>/enhanced|premium|siri/i.test(v.name))
       || vs[0] || null;
 }
-function speak(t){
-  if(!S.sound||!window.speechSynthesis)return;
-  try{
-    speechSynthesis.cancel();
-    // satu ucapan utuh; tanda "|" jadi koma agar jedanya alami dan tidak patah-patah
-    const u=new SpeechSynthesisUtterance(t.split("|").map(p=>p.trim()).filter(Boolean).join(", "));
-    u.lang="id-ID";u.rate=.88;u.pitch=1.08;u.volume=1;
-    const v=bestVoice();if(v)u.voice=v;
-    speechSynthesis.speak(u);
-  }catch(e){}
-}
 if(window.speechSynthesis){
   speechSynthesis.getVoices();
   speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();
+}
+
+/* ============ NARASI: audio pra-generate + fallback live TTS ============
+   Rencana jangka panjang (CLAUDE.md): narasi dipakai dari file audio yang
+   sudah digenerate sekali (bukan speechSynthesis live) supaya bebas dari
+   lag engine TTS di HP anak. AUDIO_MANIFEST dipetakan per-frasa: kalau
+   frasa itu belum punya file, otomatis jatuh ke speechSynthesis seperti
+   sekarang — jadi bisa diisi bertahap tanpa merusak yang sudah jalan.
+   Nanti blok ini yang diangkat jadi engine/audio/ di Fase 2. */
+const AUDIO_BASE="assets/audio/id/";
+const AUDIO_MANIFEST={
+  // "Ayo hitung!":"ayo-hitung.mp3",  // contoh: isi setelah aset digenerate
+};
+
+const audioCache=new Map();
+let currentAudio=null,speakToken=0;
+
+function loadAudio(src){
+  let el=audioCache.get(src);
+  if(!el){el=new Audio(src);el.preload="auto";audioCache.set(src,el);}
+  return el;
+}
+function playAudioSegment(src){
+  return new Promise(resolve=>{
+    const el=loadAudio(src);
+    currentAudio=el;
+    const done=ok=>{el.removeEventListener("ended",onEnd);el.removeEventListener("error",onErr);resolve(ok);};
+    const onEnd=()=>done(true),onErr=()=>done(false);
+    el.addEventListener("ended",onEnd);el.addEventListener("error",onErr);
+    try{el.currentTime=0;el.play().catch(()=>done(false));}catch(e){done(false);}
+  });
+}
+function speakSegmentLive(text){
+  return new Promise(resolve=>{
+    if(!window.speechSynthesis)return resolve(false);
+    try{
+      const u=new SpeechSynthesisUtterance(text);
+      u.lang="id-ID";u.rate=.88;u.pitch=1.08;u.volume=1;
+      const v=bestVoice();if(v)u.voice=v;
+      u.onend=()=>resolve(true);u.onerror=()=>resolve(true);
+      speechSynthesis.speak(u);
+    }catch(e){resolve(false);}
+  });
+}
+function stopSpeak(){
+  speakToken++;
+  if(window.speechSynthesis)speechSynthesis.cancel();
+  if(currentAudio){currentAudio.pause();currentAudio=null;}
+}
+async function speak(t){
+  if(!S.sound)return;
+  stopSpeak();
+  const myToken=speakToken;
+  const parts=t.split("|").map(p=>p.trim()).filter(Boolean);
+  for(const part of parts){
+    if(myToken!==speakToken)return; // dibatalkan speak() yang lebih baru
+    const file=AUDIO_MANIFEST[part];
+    const played=file?await playAudioSegment(AUDIO_BASE+file):false;
+    if(myToken!==speakToken)return;
+    if(!played)await speakSegmentLive(part);
+  }
 }
 const PRAISE=["Benar!|Kamu pintar!","Hore!|Hebat sekali!","Wah, betul!|Pintar!","Yes!|Jawabanmu benar!"];
 const OOPS=["Belum tepat.|Ayo coba lagi!","Hampir!|Coba sekali lagi ya!","Tidak apa-apa.|Ayo coba lagi!"];
@@ -242,9 +292,9 @@ const backBtn=document.getElementById("back");
 const soundBtn=document.getElementById("sound");
 const starEl=document.getElementById("starCount");
 
-backBtn.onclick=()=>{if(window.speechSynthesis)speechSynthesis.cancel();
+backBtn.onclick=()=>{stopSpeak();
   screen=(screen==="game"||screen==="done")?"world":"home";render();};
-soundBtn.onclick=()=>{S.sound=!S.sound;save();if(!S.sound&&window.speechSynthesis)speechSynthesis.cancel();render();};
+soundBtn.onclick=()=>{S.sound=!S.sound;save();if(!S.sound)stopSpeak();render();};
 
 function render(){
   document.body.style.background=(screen==="game"||screen==="done")?W().bg:HOME_BG;
