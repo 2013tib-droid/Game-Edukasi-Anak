@@ -14,7 +14,7 @@ Platform web berbayar berisi kumpulan mini-game edukasi untuk anak Indonesia, di
 | Jumlah game | 10–15 mini-game per kelompok (kualitas premium) |
 | Platform | Web app: **React (Vite) + Firebase** (Auth, Firestore, Hosting) |
 | Perangkat target | HP Android & tablet — mobile-first, touch-first |
-| Demo gratis | 1–2 game gratis PENUH per kelompok (tanpa login) |
+| Demo gratis | **1 game demo per kelompok** (tanpa login): level 1 gratis dengan soal diperbanyak, level 2+ butuh pembelian. Game lain terkunci penuh. Detail: `docs/skema-akun-demo.md` |
 | Aset | Gambar AI-generated + narasi TTS Bahasa Indonesia |
 | Harga | Naik per jenjang: TK ± Rp29rb, SD Awal ± Rp39rb (selalu < Rp50rb) |
 | Update | Beli sekali = bugfix gratis; konten besar baru = ekspansi berbayar |
@@ -72,7 +72,7 @@ Buat engine sehingga **menambah game baru = menulis file config JSON + aset**, b
 5. **Hitung & ketuk** (counting objek)
 6. **Cerita interaktif** (narasi + pilihan)
 
-Setiap game dideklarasikan lewat config: `{ id, group, title, template, freeDemo (bool), levels[], assets{} }`.
+Setiap game dideklarasikan lewat config: `{ id, group, title, template, demo (jumlah level gratis: 1 untuk game demo, 0 untuk game lain), levels[], assets{} }`.
 
 ## Standar UX Anak (WAJIB)
 
@@ -89,7 +89,7 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, freeDemo
 1. **Fase 1 — Fondasi:** setup Vite + React + Firebase, routing, Auth, halaman portal dasar, Firestore rules.
 2. **Fase 2 — Engine:** core engine + 6 template game + sistem audio/narasi + progress bintang.
 3. **Fase 3 — Migrasi:** porting game "Petualangan Pintar" (HTML standalone yang sudah ada) ke format engine sebagai game pertama kelompok TK.
-4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Tandai 1–2 game per kelompok sebagai `freeDemo: true`.
+4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Tandai 1 game per kelompok sebagai game demo (`demo: 1`) dengan level 1 berisi soal diperbanyak; game lain `demo: 0`.
 5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi.
 6. **Fase 6 — Rilis:** deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli.
 
