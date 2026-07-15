@@ -1,0 +1,60 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function hasGroupAccess(group) {
+      let profile = get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+      return signedIn()
+        && ('access' in profile)
+        && (group in profile.access);
+    }
+
+    // User profile: owner-only. The `access` field is written exclusively by
+    // Cloud Functions (Admin SDK bypasses these rules), never by clients.
+    match /users/{uid} {
+      allow read: if isOwner(uid);
+      allow create: if isOwner(uid)
+        && !request.resource.data.keys().hasAny(['access']);
+      allow update: if isOwner(uid)
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['access']);
+      allow delete: if false;
+
+      // Device fingerprints (max 3 devices, enforced in Cloud Function on Phase 5).
+      match /devices/{deviceId} {
+        allow read, write: if isOwner(uid);
+      }
+
+      // Star progress per game.
+      match /progress/{gameId} {
+        allow read, write: if isOwner(uid);
+      }
+    }
+
+    // Activation codes: clients never touch them; redemption goes through
+    // the Cloud Function only.
+    match /activation_codes/{codeId} {
+      allow read, write: if false;
+    }
+
+    // Premium level content (level 2+). Path carries the group id:
+    // premium_levels/{group}/games/{gameId}/levels/{levelId}
+    match /premium_levels/{group}/games/{gameId}/levels/{levelId} {
+      allow read: if hasGroupAccess(group);
+      allow write: if false;
+    }
+
+    // Everything else is denied.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

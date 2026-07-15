@@ -1,0 +1,48 @@
+[
+  {
+    "id": "petualangan-pintar",
+    "group": "tk",
+    "title": "Petualangan Pintar",
+    "emoji": "🦊",
+    "template": "campuran",
+    "demo": 1,
+    "status": "live",
+    "url": "/petualangan-pintar.html"
+  },
+  {
+    "id": "tebak-huruf",
+    "group": "tk",
+    "title": "Tebak Huruf",
+    "emoji": "🔤",
+    "template": "tap-jawab",
+    "demo": 0,
+    "status": "soon"
+  },
+  {
+    "id": "pasang-bentuk",
+    "group": "tk",
+    "title": "Pasang Bentuk",
+    "emoji": "🧩",
+    "template": "drag-drop",
+    "demo": 0,
+    "status": "soon"
+  },
+  {
+    "id": "berhitung-cepat",
+    "group": "sd1",
+    "title": "Berhitung Cepat",
+    "emoji": "➕",
+    "template": "tap-jawab",
+    "demo": 1,
+    "status": "soon"
+  },
+  {
+    "id": "baca-kata",
+    "group": "sd1",
+    "title": "Baca Kata",
+    "emoji": "📖",
+    "template": "tap-jawab",
+    "demo": 0,
+    "status": "soon"
+  }
+]
