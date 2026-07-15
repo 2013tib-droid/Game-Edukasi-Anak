@@ -234,7 +234,7 @@ function makeQuestion(w,lv){
     }
     const word=pick(lv===1?EASY:HARD),first=word.w[0].toUpperCase();
     const o=new Set([first]);while(o.size<3)o.add(String.fromCharCode(65+rand(26)));
-    return{type:"letter",prompt:"Huruf apa yang hilang?",speak:`Lihat gambarnya.|Ini ${word.w}.|${word.w}.|Huruf apa yang pertama?`,
+    return{type:"letter",prompt:"Huruf apa yang hilang?",speak:`Lihat gambarnya.|Ini ${word.w}.|Huruf apa yang pertama?`,
       html:`<div style="margin-top:12px"><div style="font-size:64px">${word.e}</div>
         <div style="font-size:38px;font-weight:700;letter-spacing:4px;color:${acc}">_${word.w.slice(1)}</div></div>`,
       answer:first,options:shuffle([...o])};
