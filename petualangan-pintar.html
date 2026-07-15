@@ -445,9 +445,12 @@ function renderSortGame(){
    ${promptCard()}
    <div style="display:flex;gap:12px">
      ${q.baskets.map(b=>`
-      <button class="btn" data-basket="${b.id}" style="flex:1;padding:10px 6px;border:4px solid ${b.hex};background:${b.hex}26;border-radius:22px">
+      <button class="btn" data-basket="${b.id}" style="flex:1;padding:10px 6px;border:5px solid ${b.hex};background:#fff;border-radius:22px">
         <div style="font-size:36px">🧺</div>
-        <div style="font-weight:700;font-size:15px;color:${b.hex}">${b.label}</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:2px">
+          <span style="width:18px;height:18px;border-radius:999px;background:${b.hex};border:2px solid rgba(0,0,0,.15);flex-shrink:0"></span>
+          <span style="font-weight:700;font-size:15px">${b.label}</span>
+        </div>
         <div id="bin-${b.id}" style="font-size:26px;min-height:34px;margin-top:4px">${q.done.map(i=>q.fruits[i]).filter(f=>f.color===b.id).map(f=>f.e).join("")}</div>
       </button>`).join("")}
    </div>
