@@ -90,6 +90,7 @@ try{const raw=localStorage.getItem("pp-save");if(raw)S=Object.assign(S,JSON.pars
 const save=()=>{try{localStorage.setItem("pp-save",JSON.stringify(S));}catch(e){}};
 
 let screen="home",worldId=null,level=1,qIndex=0,question=null,picked=null,earned=0,correctCount=0;
+let usedKeys=new Set(); // soal yang sudah keluar di level berjalan, biar tidak berulang
 
 /* ============ UTIL ============ */
 const rand=n=>Math.floor(Math.random()*n);
@@ -207,18 +208,18 @@ function shapeSVG(shape,color,size=70){
 }
 
 /* ============ SOAL ============ */
-function makeQuestion(w,lv){
+function buildQuestion(w,lv){
   if(w==="forest"){
     if(lv<3){
       const max=lv===1?5:9,count=1+rand(max),a=pick(ANIMALS);
       const o=new Set([count]);while(o.size<3)o.add(Math.max(1,count+rand(5)-2));
-      return{type:"count",prompt:"Ada berapa hewan ini?",speak:"Ayo hitung!|Ada berapa hewan ini?",
+      return{type:"count",qkey:"count-"+count,prompt:"Ada berapa hewan ini?",speak:"Ayo hitung!|Ada berapa hewan ini?",
         html:`<div style="font-size:44px;line-height:1.4;margin-top:14px;word-spacing:8px">${Array(count).fill(a).join(" ")}</div>`,
         answer:count,options:shuffle([...o])};
     }
     const a=1+rand(4),b=1+rand(4),an=pick(ANIMALS),acc=W().accent;
     const o=new Set([a+b]);while(o.size<3)o.add(Math.max(1,a+b+rand(5)-2));
-    return{type:"add",prompt:"Berapa jumlah semuanya?",speak:`Ayo hitung!|${a}|tambah|${b}|jadi berapa semuanya?`,
+    return{type:"add",qkey:"add-"+a+"-"+b,prompt:"Berapa jumlah semuanya?",speak:`Ayo hitung!|${a}|tambah|${b}|jadi berapa semuanya?`,
       html:`<div style="font-size:36px;margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px">
         <span>${Array(a).fill(an).join("")}</span><span style="font-weight:700;color:${acc}">+</span>
         <span>${Array(b).fill(an).join("")}</span><span style="font-weight:700;color:${acc}">= ?</span></div>`,
@@ -228,36 +229,43 @@ function makeQuestion(w,lv){
     const acc=W().accent;
     if(lv===2){
       const big=pick(Object.keys(CONF)),o=CONF[big];
-      return{type:"low",prompt:`Mana huruf kecil dari "${big}"?`,speak:`Ini huruf ${big} besar.|Mana huruf ${big} yang kecil?`,
+      return{type:"low",qkey:"low-"+big,prompt:`Mana huruf kecil dari "${big}"?`,speak:`Ini huruf ${big} besar.|Mana huruf ${big} yang kecil?`,
         html:`<div style="font-size:84px;font-weight:700;margin-top:8px;color:${acc}">${big}</div>`,
         answer:o[0],options:shuffle([...o])};
     }
     const word=pick(lv===1?EASY:HARD),first=word.w[0].toUpperCase();
     const o=new Set([first]);while(o.size<3)o.add(String.fromCharCode(65+rand(26)));
-    return{type:"letter",prompt:"Huruf apa yang hilang?",speak:`Lihat gambarnya.|Ini ${word.w}.|Huruf apa yang pertama?`,
+    return{type:"letter",qkey:"letter-"+word.w,prompt:"Huruf apa yang hilang?",speak:`Lihat gambarnya.|Ini ${word.w}.|Huruf apa yang pertama?`,
       html:`<div style="margin-top:12px"><div style="font-size:64px">${word.e}</div>
         <div style="font-size:38px;font-weight:700;letter-spacing:4px;color:${acc}">_${word.w.slice(1)}</div></div>`,
       answer:first,options:shuffle([...o])};
   }
   if(lv===1){
     const t=pick(SHAPES),c=pick(COLORS),others=shuffle(SHAPES.filter(s=>s.id!==t.id)).slice(0,3);
-    return{type:"shape",prompt:`Sentuh bentuk ${t.label}!`,speak:`Mana bentuk ${t.label}?|Ayo sentuh!`,html:"",
+    return{type:"shape",qkey:"shape-"+t.id,prompt:`Sentuh bentuk ${t.label}!`,speak:`Mana bentuk ${t.label}?|Ayo sentuh!`,html:"",
       answer:t.id,options:shuffle([t,...others]).map(s=>({key:s.id,shape:s.id,color:c.hex}))};
   }
   if(lv===2){
     const t=pick(COLORS),s=pick(SHAPES),others=shuffle(COLORS.filter(c=>c.id!==t.id)).slice(0,3);
-    return{type:"color",prompt:`Sentuh warna ${t.label}!`,speak:`Mana warna ${t.label}?|Ayo sentuh!`,html:"",
+    return{type:"color",qkey:"color-"+t.id,prompt:`Sentuh warna ${t.label}!`,speak:`Mana warna ${t.label}?|Ayo sentuh!`,html:"",
       answer:t.id,options:shuffle([t,...others]).map(c=>({key:c.id,shape:s.id,color:c.hex}))};
   }
   const ts=pick(SHAPES),tc=pick(COLORS),opts=[{key:"benar",shape:ts.id,color:tc.hex}];
   while(opts.length<4){const s=pick(SHAPES),c=pick(COLORS);if(s.id===ts.id&&c.id===tc.id)continue;opts.push({key:s.id+c.id+opts.length,shape:s.id,color:c.hex});}
-  return{type:"combo",prompt:`Sentuh ${ts.label} ${tc.label}!`,speak:`Cari ${ts.label}.|Yang berwarna ${tc.label}.|Ayo sentuh!`,html:"",
+  return{type:"combo",qkey:"combo-"+ts.id+"-"+tc.id,prompt:`Sentuh ${ts.label} ${tc.label}!`,speak:`Cari ${ts.label}.|Yang berwarna ${tc.label}.|Ayo sentuh!`,html:"",
     answer:"benar",options:shuffle(opts)};
+}
+// Bungkus buildQuestion supaya tidak keluar soal yang sama dalam satu level (5 soal).
+function makeQuestion(w,lv){
+  let q,tries=0;
+  do{q=buildQuestion(w,lv);tries++;}while(usedKeys.has(q.qkey)&&tries<40);
+  usedKeys.add(q.qkey);
+  return q;
 }
 
 /* ============ ALUR ============ */
 function startLevel(w,lv){
-  worldId=w;level=lv;qIndex=0;earned=0;correctCount=0;picked=null;
+  worldId=w;level=lv;qIndex=0;earned=0;correctCount=0;picked=null;usedKeys=new Set();
   question=makeQuestion(w,lv);screen="game";render();
   setTimeout(()=>speak(question.speak),450);
 }
