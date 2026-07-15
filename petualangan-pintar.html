@@ -211,10 +211,12 @@ function makeQuestion(w,lv){
   if(w==="fruit"){
     if(lv===1){ // Beli Buah — hitung & ketuk
       if(Math.random()<.55){
-        const f=pick(FRUITS),need=2+rand(4),total=need+2+rand(3);
+        const f=pick(FRUITS),need=2+rand(4);
+        const others=shuffle(FRUITS.filter(x=>x.id!==f.id)).slice(0,3);
+        const items=shuffle([...Array(need+1+rand(2)).fill(f),...Array(3+rand(2)).fill(0).map(()=>pick(others))]);
         return{type:"tapcount",prompt:`Ketuk ${need} ${f.name.toLowerCase()}!`,
           speak:`Ibu mau beli ${need} ${f.name}.|Ayo ketuk ${need} ${f.name}!`,
-          items:Array(total).fill(f),need,sel:new Set()};
+          items,target:f.id,need,sel:new Set()};
       }
       const f=pick(FRUITS),others=shuffle(FRUITS.filter(x=>x.id!==f.id)).slice(0,3);
       const items=shuffle([...Array(2+rand(3)).fill(f),...Array(3+rand(3)).fill(0).map(()=>pick(others))]);
@@ -426,7 +428,7 @@ function renderTapGame(){
     if(q.finished)return;
     const i=+b.dataset.i;
     if(q.sel.has(i))return;
-    if(q.type==="tapall"&&q.items[i].id!==q.target){shakeBtn(b);sWrong();speak(pick(OOPS));return;}
+    if(q.items[i].id!==q.target){shakeBtn(b);sWrong();speak(pick(OOPS));return;}
     q.sel.add(i);
     b.classList.add("good");b.style.opacity=".6";
     b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop");
