@@ -157,6 +157,66 @@ body {
   padding: 0 16px;
 }
 
+/* Mascot card (home) */
+.mascot-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.mascot-emoji {
+  font-size: 3.5rem;
+  animation: mascot-idle 2.2s ease-in-out infinite;
+}
+
+@keyframes mascot-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.mascot-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mascot-name {
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+
+.mascot-level {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.mascot-progress {
+  height: 12px;
+}
+
+.mascot-next {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.progress-track {
+  background: #ede9fe;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--purple);
+  border-radius: 999px;
+  transition: width 0.4s;
+}
+
 /* Group cards (home) */
 .group-grid {
   display: grid;

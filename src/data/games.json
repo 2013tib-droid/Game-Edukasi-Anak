@@ -28,24 +28,40 @@
       "description": "Enam permainan seru: tebak, hitung, kartu, seret, tulis, dan cerita!"
     },
     {
-      "id": "petualangan-pintar",
+      "id": "hutan-hewan",
       "group": "tk",
-      "title": "Petualangan Pintar",
-      "emoji": "🌈",
-      "template": "legacy",
+      "title": "Hutan Hewan",
+      "emoji": "🦁",
       "freeDemo": true,
-      "status": "planned",
-      "description": "Belajar huruf, angka, dan warna bersama maskot lucu."
+      "status": "ready",
+      "description": "Ayo berhitung bersama hewan-hewan hutan!"
+    },
+    {
+      "id": "luar-angkasa",
+      "group": "tk",
+      "title": "Luar Angkasa",
+      "emoji": "🚀",
+      "freeDemo": false,
+      "status": "ready",
+      "description": "Kenali huruf sambil menjelajah antariksa!"
+    },
+    {
+      "id": "bawah-laut",
+      "group": "tk",
+      "title": "Bawah Laut",
+      "emoji": "🐠",
+      "freeDemo": false,
+      "status": "ready",
+      "description": "Kenali warna dan bentuk di dasar laut!"
     },
     {
       "id": "pasar-buah",
       "group": "tk",
       "title": "Pasar Buah",
       "emoji": "🍉",
-      "template": "counting",
       "freeDemo": false,
-      "status": "planned",
-      "description": "Hitung dan beli buah di pasar yang ramai."
+      "status": "ready",
+      "description": "Hitung, tebak, dan kelompokkan buah di pasar yang ramai!"
     },
     {
       "id": "baca-kata",

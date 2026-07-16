@@ -42,7 +42,7 @@ export default function Memory({ level, onCorrect, onWrong, onComplete }) {
 
   return (
     <div className="template">
-      <PromptBar text={level.prompt ?? 'Temukan pasangan kartu yang sama!'} audioSrc={level.audioSrc} />
+      <PromptBar text={level.prompt ?? 'Temukan pasangan kartu yang sama!'} speak={level.speak} audioSrc={level.audioSrc} />
       <div className="memory-grid">
         {cards.map((card) => {
           const faceUp = open.includes(card.id) || matched.has(card.id);

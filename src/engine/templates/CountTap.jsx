@@ -54,7 +54,7 @@ export default function CountTap({ level, onCorrect, onWrong, onComplete }) {
 
   return (
     <div className="template">
-      <PromptBar text={round.prompt} audioSrc={round.audioSrc} />
+      <PromptBar text={round.prompt} speak={round.speak} audioSrc={round.audioSrc} />
       <div className="count-board">
         {items.map((item) => (
           <button

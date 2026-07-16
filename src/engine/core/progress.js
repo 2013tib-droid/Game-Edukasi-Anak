@@ -5,6 +5,22 @@ import { getFirebase, isFirebaseConfigured } from '../../app/firebase.js';
 
 const KEY_PREFIX = 'progress:';
 
+// Total stars across ALL games on this device — drives the evolving mascot.
+export function totalStars() {
+  let total = 0;
+  for (let i = 0; i < localStorage.length; i += 1) {
+    const key = localStorage.key(i);
+    if (!key?.startsWith(KEY_PREFIX)) continue;
+    try {
+      const { stars } = JSON.parse(localStorage.getItem(key)) ?? {};
+      total += Object.values(stars ?? {}).reduce((a, b) => a + b, 0);
+    } catch {
+      // ignore corrupt entries
+    }
+  }
+  return total;
+}
+
 export function loadProgress(gameId) {
   try {
     return JSON.parse(localStorage.getItem(KEY_PREFIX + gameId)) ?? { stars: {} };

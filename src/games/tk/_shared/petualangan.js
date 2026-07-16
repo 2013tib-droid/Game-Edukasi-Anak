@@ -1,0 +1,88 @@
+// Shared data + question generators ported from the legacy
+// petualangan-pintar.html (Phase 3 migration source).
+import { shuffle } from '../../../engine/core/utils.js';
+
+export const rand = (n) => Math.floor(Math.random() * n);
+export const pick = (arr) => arr[rand(arr.length)];
+export { shuffle };
+
+export const ANIMALS = ['🦁', '🐰', '🐸', '🦊', '🐼', '🐵', '🦒', '🐘', '🐯', '🦆', '🐢', '🐝', '🦋', '🐞', '🦜', '🐿️'];
+
+export const EASY_WORDS = [
+  { w: 'Roket', e: '🚀' }, { w: 'Bulan', e: '🌙' }, { w: 'Bintang', e: '⭐' },
+  { w: 'Matahari', e: '☀️' }, { w: 'Planet', e: '🪐' }, { w: 'Alien', e: '👽' },
+  { w: 'Bumi', e: '🌍' }, { w: 'Awan', e: '☁️' }, { w: 'Petir', e: '⚡' },
+];
+
+export const HARD_WORDS = [
+  { w: 'Komet', e: '☄️' }, { w: 'Teleskop', e: '🔭' }, { w: 'Galaksi', e: '🌌' },
+  { w: 'Satelit', e: '🛰️' }, { w: 'Astronot', e: '🧑‍🚀' }, { w: 'Meteor', e: '💫' },
+  { w: 'Pelangi', e: '🌈' }, { w: 'Gerhana', e: '🌘' }, { w: 'Piring Terbang', e: '🛸' },
+];
+
+// Uppercase letter -> visually confusable lowercase options (correct first)
+export const LOWERCASE_CONFUSABLES = {
+  B: ['b', 'd', 'p'], D: ['d', 'b', 'p'], M: ['m', 'n', 'w'], P: ['p', 'q', 'b'],
+  A: ['a', 'e', 'o'], S: ['s', 'z', 'c'], K: ['k', 'h', 't'], R: ['r', 'n', 'm'],
+  G: ['g', 'q', 'p'], T: ['t', 'f', 'l'], E: ['e', 'a', 'o'], N: ['n', 'm', 'u'],
+};
+
+export const SHAPES = [
+  { id: 'lingkaran', label: 'Lingkaran' }, { id: 'kotak', label: 'Kotak' },
+  { id: 'segitiga', label: 'Segitiga' }, { id: 'bintang', label: 'Bintang' },
+  { id: 'hati', label: 'Hati' }, { id: 'oval', label: 'Oval' },
+  { id: 'ketupat', label: 'Belah Ketupat' },
+];
+
+export const COLORS = [
+  { id: 'merah', label: 'Merah', hex: '#EF5350' },
+  { id: 'biru', label: 'Biru', hex: '#42A5F5' },
+  { id: 'kuning', label: 'Kuning', hex: '#FFC93C' },
+  { id: 'hijau', label: 'Hijau', hex: '#66BB6A' },
+  { id: 'ungu', label: 'Ungu', hex: '#AB47BC' },
+  { id: 'oranye', label: 'Oranye', hex: '#FFA726' },
+  { id: 'pink', label: 'Merah Muda', hex: '#F48FB1' },
+  { id: 'coklat', label: 'Coklat', hex: '#8D6E63' },
+];
+
+export const FRUITS = [
+  { id: 'apel', name: 'Apel', e: '🍎', color: 'merah' },
+  { id: 'stroberi', name: 'Stroberi', e: '🍓', color: 'merah' },
+  { id: 'ceri', name: 'Ceri', e: '🍒', color: 'merah' },
+  { id: 'semangka', name: 'Semangka', e: '🍉', color: 'merah' },
+  { id: 'pisang', name: 'Pisang', e: '🍌', color: 'kuning' },
+  { id: 'nanas', name: 'Nanas', e: '🍍', color: 'kuning' },
+  { id: 'lemon', name: 'Lemon', e: '🍋', color: 'kuning' },
+  { id: 'jeruk', name: 'Jeruk', e: '🍊', color: 'oranye' },
+  { id: 'mangga', name: 'Mangga', e: '🥭', color: 'oranye' },
+  { id: 'pir', name: 'Pir', e: '🍐', color: 'hijau' },
+  { id: 'melon', name: 'Melon', e: '🍈', color: 'hijau' },
+  { id: 'kiwi', name: 'Kiwi', e: '🥝', color: 'hijau' },
+  { id: 'anggur', name: 'Anggur', e: '🍇', color: 'ungu' },
+  { id: 'kelapa', name: 'Kelapa', e: '🥥', color: 'coklat' },
+];
+
+export function shapeSVG(shape, color, size = 70) {
+  const p = `fill="${color}" stroke="rgba(0,0,0,.15)" stroke-width="3"`;
+  const body = {
+    lingkaran: `<circle cx="50" cy="50" r="42" ${p}/>`,
+    kotak: `<rect x="12" y="12" width="76" height="76" rx="10" ${p}/>`,
+    segitiga: `<polygon points="50,10 92,88 8,88" ${p}/>`,
+    bintang: `<polygon points="50,6 61,38 95,38 68,58 78,92 50,71 22,92 32,58 5,38 39,38" ${p}/>`,
+    hati: `<path d="M50 88 C20 62 8 44 14 28 C20 12 42 12 50 30 C58 12 80 12 86 28 C92 44 80 62 50 88 Z" ${p}/>`,
+    oval: `<ellipse cx="50" cy="50" rx="44" ry="30" ${p}/>`,
+    ketupat: `<polygon points="50,8 92,50 50,92 8,50" ${p}/>`,
+  }[shape];
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" aria-hidden="true">${body}</svg>`;
+}
+
+// 3 numeric options around the answer (legacy behavior), correct included.
+export function numberOptions(answer) {
+  const set = new Set([answer]);
+  while (set.size < 3) set.add(Math.max(1, answer + rand(5) - 2));
+  return [...set].map((n) => ({ label: String(n), correct: n === answer }));
+}
+
+export function repeatEmoji(emoji, count) {
+  return Array(count).fill(emoji).join(' ');
+}

@@ -8,13 +8,49 @@ Diupdate setiap sesi pengerjaan.
 | Fase | Status |
 |---|---|
 | 1 — Fondasi (Vite + React + Firebase, Auth, portal, rules) | ✅ Selesai (menunggu pemilik isi `.env` Firebase) |
-| 2 — Engine + 6 template game | ✅ Selesai (maskot berkembang menyusul di Fase 3) |
-| 3 — Migrasi Petualangan Pintar | ⬜ Belum |
+| 2 — Engine + 6 template game | ✅ Selesai |
+| 3 — Migrasi Petualangan Pintar | ✅ Selesai (4 dunia → 4 game TK + maskot berkembang) |
 | 4 — Konten 10–15 game/kelompok | ⬜ Belum |
 | 5 — Monetisasi (QRIS gateway, kode referral/aktivasi, device limit) | ⬜ Belum (rencana: `docs/rencana-kode-referral.md`) |
 | 6 — Rilis | ⬜ Belum |
 
 ## Log
+
+### 2026-07-16 — Fase 3: migrasi Petualangan Pintar
+
+4 dunia dari `petualangan-pintar.html` menjadi 4 game TK di portal
+(file HTML asli tetap utuh untuk branch GitHub Pages):
+
+- [x] **Hutan Hewan** 🦁 (GRATIS): hitung 1–5, hitung 1–9, tambah-tambahan.
+- [x] **Luar Angkasa** 🚀 (premium): huruf pertama kata, huruf besar→kecil
+      (opsi pengecoh mirip: b/d/p), kata antariksa.
+- [x] **Bawah Laut** 🐠 (premium): bentuk (SVG), warna, kombinasi
+      bentuk+warna.
+- [x] **Pasar Buah** 🍉 (premium): Beli Buah (hitung & ketuk + varian "ketuk
+      semua"), Tebak Buah (gambar + tebak bayangan), Keranjang Warna
+      (drag & drop ke keranjang berwarna), Kartu Buah (memory).
+
+Fitur engine baru yang dibutuhkan migrasi:
+- [x] **Peta level** di GameShell: level terkunci berurutan (selesaikan dulu
+      level sebelumnya), tampil rekor bintang per level.
+- [x] **Soal dinamis**: level config boleh punya `generate()` — soal diacak
+      ulang setiap kali dimainkan, persis perilaku game asli.
+- [x] **Maskot berkembang** (🥚→🐣→🐥→🦉→🦄→🐲 berdasar TOTAL bintang semua
+      game): kartu maskot di beranda portal + muncul di layar tamat game.
+- [x] TapAnswer: area stimulus (barisan hewan, kata rumpang, bayangan buah)
+      + opsi SVG; DragDrop: zona berwarna (keranjang).
+
+Demo gratis TK kini 2 game (sesuai keputusan produk): Latihan Seru +
+Hutan Hewan. Luar Angkasa, Bawah Laut, Pasar Buah terkunci (premium).
+
+Pengujian:
+- [x] Playwright (viewport HP): maskot tampil, 3 game premium terkunci,
+      layar kunci muncul tanpa login, peta level mengunci level 2–3,
+      main 5 soal berhitung → 3 bintang, level 2 terbuka, total bintang
+      di beranda ter-update, tanpa error JS.
+- [x] Fuzz 50 iterasi per level: semua generator menghasilkan struktur
+      valid (1 jawaban benar per soal, target > yang diminta di Beli Buah,
+      ≥2 jenis pengecoh, pasangan memory unik).
 
 ### 2026-07-16 — Fase 2: engine game + 6 template
 

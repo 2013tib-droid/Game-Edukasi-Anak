@@ -5,7 +5,8 @@ import { shuffle } from '../core/utils.js';
 // Template "drag & drop": drag each item onto its matching zone (pairing,
 // grouping and sorting all use the same mechanic). Pointer events only —
 // works with fingers, no drag library.
-// level: { prompt, audioSrc?, zones: [{ id, label }], items: [{ id, label, zone }] }
+// level: { prompt, speak?, audioSrc?,
+//          zones: [{ id, label, color? }], items: [{ id, label, zone }] }
 export default function DragDrop({ level, onCorrect, onWrong, onComplete }) {
   const items = useMemo(() => shuffle(level.items), [level]);
   const [placed, setPlaced] = useState({}); // itemId -> zoneId
@@ -56,14 +57,15 @@ export default function DragDrop({ level, onCorrect, onWrong, onComplete }) {
 
   return (
     <div className="template" ref={boardRef}>
-      <PromptBar text={level.prompt} audioSrc={level.audioSrc} />
+      <PromptBar text={level.prompt} speak={level.speak} audioSrc={level.audioSrc} />
 
       <div className="dd-zones">
         {level.zones.map((zone) => (
           <div
             key={zone.id}
             ref={(el) => { zoneRefs.current[zone.id] = el; }}
-            className="dd-zone"
+            className={`dd-zone ${zone.color ? 'dd-zone-colored' : ''}`}
+            style={zone.color ? { background: zone.color, borderColor: zone.color } : undefined}
           >
             <span className="dd-zone-label">{zone.label}</span>
             <div className="dd-zone-items">

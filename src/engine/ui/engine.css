@@ -176,6 +176,106 @@
   color: var(--muted);
 }
 
+/* Level map */
+.level-map {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.level-map .overlay-title {
+  text-align: center;
+  margin: 8px 0;
+}
+
+.level-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 84px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+
+.level-btn:disabled {
+  background: #e5e7eb;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.level-btn-icon {
+  font-size: 2rem;
+}
+
+.level-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.level-btn-title {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--text);
+}
+
+.level-btn-sub {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.mascot-big {
+  font-size: 5rem;
+  animation: mascot-bounce 2.2s ease-in-out infinite;
+}
+
+@keyframes mascot-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Stimulus area (tap-answer rich content) */
+.stimulus {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 18px;
+  max-width: 560px;
+  width: 100%;
+  text-align: center;
+}
+
+.stimulus-emoji {
+  font-size: 2.6rem;
+  line-height: 1.4;
+  word-spacing: 8px;
+}
+
+.stimulus-shadow {
+  filter: brightness(0);
+  opacity: 0.8;
+}
+
+.stimulus-letter {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: var(--purple);
+}
+
+.stimulus-word {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: var(--purple);
+}
+
 /* Tap-answer */
 .option-grid {
   display: grid;
@@ -198,6 +298,15 @@
 
 .option-card:active {
   transform: scale(0.96);
+}
+
+.option-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.option-grid-3 .option-card {
+  min-height: 96px;
+  font-size: 2.2rem;
 }
 
 /* Count & tap */
@@ -277,6 +386,23 @@
 .dd-zone-label {
   font-weight: 800;
   font-size: 1.05rem;
+}
+
+.dd-zone-colored {
+  border-style: solid;
+}
+
+.dd-zone-colored .dd-zone-label {
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
+.dd-zone-colored .dd-zone-items {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 12px;
+  min-height: 44px;
+  min-width: 60px;
+  padding: 4px;
 }
 
 .dd-zone-items {
