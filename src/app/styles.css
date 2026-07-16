@@ -1,0 +1,381 @@
+/* Mobile-first, touch-first — kids UX: big targets (min 64px), no tiny text */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --purple: #7c3aed;
+  --purple-dark: #6d28d9;
+  --bg: #faf5ff;
+  --card: #ffffff;
+  --text: #3b2d55;
+  --muted: #7a6f94;
+  --radius: 20px;
+  --shadow: 0 4px 14px rgba(124, 58, 237, 0.15);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.app-shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  padding-top: max(12px, env(safe-area-inset-top));
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--purple);
+  font-weight: 800;
+  font-size: 1.15rem;
+  min-height: 64px;
+}
+
+.brand-emoji {
+  font-size: 1.8rem;
+}
+
+.demo-banner {
+  background: #fef3c7;
+  color: #92400e;
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 0.95rem;
+  border-radius: 12px;
+  margin: 0 16px;
+}
+
+.app-main {
+  flex: 1;
+  padding: 16px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.page-title {
+  font-size: 1.6rem;
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  margin: 8px 0 0;
+}
+
+.page-text {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+}
+
+.page-text a {
+  color: var(--purple);
+  font-weight: 700;
+}
+
+.placeholder-note {
+  background: #ede9fe;
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--purple-dark);
+}
+
+/* Buttons — min 64px touch target */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+  padding: 0 28px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1.15rem;
+  font-weight: 800;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--purple);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.btn-primary:disabled {
+  background: #c4b5fd;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--purple);
+  border: 2px solid #ddd6fe;
+}
+
+.parent-link {
+  min-height: 52px;
+  font-size: 0.95rem;
+  padding: 0 16px;
+}
+
+/* Group cards (home) */
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.group-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: var(--card);
+  border-radius: var(--radius);
+  border-bottom: 8px solid var(--card-color, var(--purple));
+  box-shadow: var(--shadow);
+  padding: 28px 16px;
+  text-decoration: none;
+  color: var(--text);
+  min-height: 160px;
+}
+
+.group-card:active {
+  transform: scale(0.98);
+}
+
+.group-emoji {
+  font-size: 3.5rem;
+}
+
+.group-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.group-subtitle {
+  color: var(--muted);
+}
+
+/* Game cards (group page) */
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.game-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 12px;
+  text-decoration: none;
+  color: var(--text);
+  min-height: 140px;
+  text-align: center;
+}
+
+.game-card-locked {
+  opacity: 0.65;
+}
+
+.game-emoji {
+  font-size: 2.8rem;
+}
+
+.game-title {
+  font-weight: 800;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.badge-free {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-lock {
+  background: #fee2e2;
+}
+
+.buy-hint {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  text-align: center;
+}
+
+.buy-hint p {
+  margin: 0;
+}
+
+/* Forms */
+.auth-form,
+.gate-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.input {
+  min-height: 60px;
+  border-radius: 14px;
+  border: 2px solid #ddd6fe;
+  padding: 0 16px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  background: var(--card);
+  color: var(--text);
+}
+
+.input:focus {
+  outline: 3px solid var(--purple);
+  border-color: transparent;
+}
+
+.form-error {
+  margin: 0;
+  color: #b91c1c;
+  font-weight: 700;
+  text-align: center;
+}
+
+.gate-page {
+  align-items: center;
+}
+
+.gate-question {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.gate-input {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Parent area */
+.parent-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.package-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.package-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.package-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.package-title {
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.package-price {
+  color: var(--muted);
+}
+
+/* Landscape phones: tighter vertical rhythm */
+@media (orientation: landscape) and (max-height: 480px) {
+  .app-header {
+    padding-top: 8px;
+    padding-bottom: 4px;
+  }
+
+  .page-title {
+    font-size: 1.3rem;
+  }
+
+  .group-card {
+    min-height: 120px;
+    padding: 16px;
+  }
+}

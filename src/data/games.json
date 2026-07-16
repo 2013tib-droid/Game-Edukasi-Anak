@@ -1,0 +1,52 @@
+{
+  "groups": [
+    {
+      "id": "tk",
+      "title": "TK",
+      "subtitle": "Usia 5–7 tahun",
+      "emoji": "🧸",
+      "price": 29000,
+      "color": "#f59e0b"
+    },
+    {
+      "id": "sd1",
+      "title": "SD Awal",
+      "subtitle": "Kelas 1–2",
+      "emoji": "🎒",
+      "price": 39000,
+      "color": "#3b82f6"
+    }
+  ],
+  "games": [
+    {
+      "id": "petualangan-pintar",
+      "group": "tk",
+      "title": "Petualangan Pintar",
+      "emoji": "🌈",
+      "template": "legacy",
+      "freeDemo": true,
+      "status": "planned",
+      "description": "Belajar huruf, angka, dan warna bersama maskot lucu."
+    },
+    {
+      "id": "pasar-buah",
+      "group": "tk",
+      "title": "Pasar Buah",
+      "emoji": "🍉",
+      "template": "counting",
+      "freeDemo": false,
+      "status": "planned",
+      "description": "Hitung dan beli buah di pasar yang ramai."
+    },
+    {
+      "id": "baca-kata",
+      "group": "sd1",
+      "title": "Baca Kata",
+      "emoji": "📖",
+      "template": "tap-answer",
+      "freeDemo": true,
+      "status": "planned",
+      "description": "Cocokkan kata dengan gambar yang benar."
+    }
+  ]
+}
