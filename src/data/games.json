@@ -19,6 +19,15 @@
   ],
   "games": [
     {
+      "id": "latihan-seru",
+      "group": "tk",
+      "title": "Latihan Seru",
+      "emoji": "🎪",
+      "freeDemo": true,
+      "status": "ready",
+      "description": "Enam permainan seru: tebak, hitung, kartu, seret, tulis, dan cerita!"
+    },
+    {
       "id": "petualangan-pintar",
       "group": "tk",
       "title": "Petualangan Pintar",

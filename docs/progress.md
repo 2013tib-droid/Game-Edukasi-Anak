@@ -7,14 +7,45 @@ Diupdate setiap sesi pengerjaan.
 
 | Fase | Status |
 |---|---|
-| 1 — Fondasi (Vite + React + Firebase, Auth, portal, rules) | 🔨 Dikerjakan |
-| 2 — Engine + 6 template game | ⬜ Belum |
+| 1 — Fondasi (Vite + React + Firebase, Auth, portal, rules) | ✅ Selesai (menunggu pemilik isi `.env` Firebase) |
+| 2 — Engine + 6 template game | ✅ Selesai (maskot berkembang menyusul di Fase 3) |
 | 3 — Migrasi Petualangan Pintar | ⬜ Belum |
 | 4 — Konten 10–15 game/kelompok | ⬜ Belum |
 | 5 — Monetisasi (QRIS gateway, kode referral/aktivasi, device limit) | ⬜ Belum (rencana: `docs/rencana-kode-referral.md`) |
 | 6 — Rilis | ⬜ Belum |
 
 ## Log
+
+### 2026-07-16 — Fase 2: engine game + 6 template
+
+Selesai:
+- [x] `GameShell` (core): alur intro level → main → popup bintang → level
+      berikutnya → layar tamat; hitung kesalahan → bintang 1–3
+      (0 salah = ⭐⭐⭐, ≤2 = ⭐⭐, sisanya = ⭐).
+- [x] 6 template (masing-masing lazy-loaded, 0,4–2,4 kB):
+      `tap-answer`, `count-tap` (sesuai aturan pengecoh pemilik: target
+      dilebihkan + item pengecoh), `memory`, `drag-drop` (pointer events,
+      tanpa library), `tracing` (canvas, deteksi cakupan glyph ≥60%),
+      `story` (cerita interaktif dengan pilihan).
+- [x] Audio: narasi Bahasa Indonesia via aset TTS (`audioSrc`) dengan
+      fallback speechSynthesis id-ID selama aset belum ada; SFX WebAudio
+      (benar/salah/menang) tanpa file; tombol 🔊 ulang instruksi di tiap
+      soal. Salah selalu dijawab "Coba lagi, kamu pasti bisa!".
+- [x] Progres bintang: localStorage (jalan offline/demo) + mirror ke
+      `users/{uid}/progress/{gameId}` saat login.
+- [x] Config game dimuat dynamic-import per game (`import.meta.glob`) —
+      konten premium TIDAK ter-bundle di JS publik.
+- [x] Game contoh gratis `latihan-seru` (TK) memakai keenam template —
+      sekaligus referensi cara menulis config game untuk Fase 4.
+- [x] Uji otomatis Playwright di ukuran layar HP Android: jawab salah →
+      feedback positif, jawab benar → lanjut soal, popup 2 bintang setelah
+      1 kesalahan, papan hitung berisi 5 apel (diminta 3) + pengecoh,
+      progres tersimpan, tanpa error JS.
+
+Belum (bagian Fase 3–4):
+- [ ] Maskot yang berkembang (konsep dari Petualangan Pintar) — digarap
+      bersama migrasi Fase 3.
+- [ ] Aset gambar AI + audio TTS asli (sementara emoji + speechSynthesis).
 
 ### 2026-07-16 — Fase 1: fondasi portal
 
