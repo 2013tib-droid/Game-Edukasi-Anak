@@ -18,21 +18,25 @@ Platform web berbayar berisi kumpulan mini-game edukasi untuk anak Indonesia, di
 | Aset | Gambar AI-generated + narasi TTS Bahasa Indonesia |
 | Harga | Naik per jenjang: TK ± Rp29rb, SD Awal ± Rp39rb (selalu < Rp50rb) |
 | Update | Beli sekali = bugfix gratis; konten besar baru = ekspansi berbayar |
-| Penjualan | Lynk.id / Mayar.id (QRIS, e-wallet) + itch.io untuk showcase demo |
+| Penjualan | **Pembayaran langsung di portal via payment gateway QRIS dinamis** (Tripay/Duitku — biaya ~0,7–1%, webhook otomatis; keputusan pemilik 2026-07, menggantikan Lynk.id/Mayar.id yang potongannya 3–5%) + itch.io untuk showcase demo |
 | Promosi | TikTok/Reels organik |
 
 ## Sistem Akses (Anti-Pembajakan)
 
 Prinsip: **jual AKSES, bukan file.** Game hanya bisa dimainkan setelah login dan validasi online.
 
-Alur pembeli:
-1. Beli kelompok di Lynk.id/Mayar.id → menerima **kode aktivasi unik** (dikirim otomatis oleh platform penjualan sebagai "produk digital" berupa kode).
-2. Buka portal → daftar/login dengan **Firebase Auth (email + password)**.
-3. Masukkan kode aktivasi → Cloud Function memvalidasi kode di Firestore → tandai kode terpakai → set klaim akses kelompok di dokumen user.
-4. Game kelompok itu terbuka untuk akun tersebut.
+Alur pembeli (jalur utama — otomatis penuh):
+1. Daftar/login di portal dengan **Firebase Auth (email + password)**.
+2. Di area orang tua: pilih kelompok → tombol Beli → Cloud Function membuat invoice **QRIS dinamis** di payment gateway (nominal terkunci; kode referral 50% dipotong di sini).
+3. Pembeli scan & bayar dari aplikasi apa pun → gateway mengirim **webhook** → Cloud Function memverifikasi signature → set klaim akses kelompok di dokumen user + catat transaksi di koleksi `purchases`.
+4. Game kelompok itu terbuka otomatis untuk akun tersebut — tanpa kode, tanpa konfirmasi manual.
+
+Jalur sekunder — kode aktivasi: tetap ada untuk kode referral full-gratis, hadiah/giveaway, dan penjualan manual di luar portal. Redeem di halaman aktivasi → Cloud Function memvalidasi → tandai terpakai → set akses.
 
 Aturan teknis:
+- Webhook pembayaran wajib verifikasi signature/callback token dari gateway; jangan pernah set akses berdasarkan redirect halaman "sukses" di client.
 - Kode aktivasi: sekali pakai, disimpan di koleksi `activation_codes` (field: `code`, `group`, `used`, `usedBy`, `usedAt`). Generate batch kode via script.
+- Kode referral (lihat `docs/rencana-kode-referral.md`): koleksi `referral_codes`, 2 jenis — `full` (akses langsung) dan `half` (diskon 50% di checkout), sekali pakai, dilacak per referrer.
 - **Batas perangkat: maksimal 3 device** per akun (simpan device fingerprint sederhana di `users/{uid}/devices`).
 - Validasi akses dilakukan **saat game diluncurkan** (online check), bukan hanya saat login.
 - Konten game premium TIDAK boleh ter-bundle di JS publik. Lazy-load per game, dan gate di level route + Firestore security rules.
@@ -90,7 +94,7 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, freeDemo
 2. **Fase 2 — Engine:** core engine + 6 template game + sistem audio/narasi + progress bintang.
 3. **Fase 3 — Migrasi:** porting game "Petualangan Pintar" (HTML standalone yang sudah ada) ke format engine sebagai game pertama kelompok TK.
 4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Tandai 1–2 game per kelompok sebagai `freeDemo: true`.
-5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi.
+5. **Fase 5 — Monetisasi:** integrasi payment gateway QRIS dinamis (Cloud Function buat invoice + webhook), kode referral, Cloud Function validasi kode aktivasi, script generator kode, device limit, halaman aktivasi.
 6. **Fase 6 — Rilis:** deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli.
 
 Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyakan konfirmasi sebelum keputusan arsitektur besar di luar dokumen ini.

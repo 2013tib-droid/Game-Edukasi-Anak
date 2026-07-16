@@ -1,94 +1,88 @@
 # Rencana Fitur: Kode Referral
 
-Status: RENCANA — menunggu konfirmasi pemilik proyek sebelum implementasi.
+Status: DISETUJUI pemilik (2026-07) — pembayaran memakai **payment gateway
+QRIS dinamis** (Tripay/Duitku), bukan Lynk.id/Mayar.id dan bukan QRIS statis
+manual. Implementasi menunggu fondasi Fase 1 (Firebase) tersedia.
 
 ## Ringkasan
 
-Sistem kode referral untuk promosi, menumpang pada infrastruktur kode aktivasi
-(CLAUDE.md, bagian "Sistem Akses"). Ada 2 jenis kode:
+Sistem kode referral untuk promosi, menumpang pada sistem akses di CLAUDE.md.
+Ada 2 jenis kode:
 
 | Jenis | Efek | Cara kerja |
 |---|---|---|
-| **Full gratis (100%)** | Akses kelompok langsung terbuka tanpa bayar | Sama seperti kode aktivasi: redeem di portal → akses di-set di dokumen user |
-| **Diskon 50%** | Bayar setengah harga | Redeem di portal → portal menampilkan link checkout khusus harga 50% di Lynk.id/Mayar.id → setelah bayar, pembeli menerima kode aktivasi normal |
+| **Full gratis (100%)** | Akses kelompok langsung terbuka tanpa bayar | Redeem di halaman aktivasi → Cloud Function set akses di dokumen user |
+| **Diskon 50%** | Bayar setengah harga | Kode dimasukkan di halaman checkout portal → nominal QRIS dinamis otomatis dipotong 50% → bayar → webhook membuka akses |
 
 Sifat kode:
-- **Dinamis / banyak**: kode di-generate batch via script, tiap kode unik.
-  Setiap batch bisa ditandai sumber referensinya (`referrer`) — misal tiap
-  teman/influencer/kampanye TikTok punya batch kodenya sendiri, sehingga bisa
-  dilacak kode siapa yang paling banyak dipakai.
-- **Sekali pakai**: begitu kode terpakai, ditandai `used: true` secara atomik
-  (transaksi Firestore di Cloud Function). Input ulang kode yang sama ditolak
-  dengan pesan "Kode sudah terpakai".
+- **Dinamis / banyak**: di-generate batch via script, tiap kode unik, tiap
+  batch ditandai sumbernya (`referrer`) — misal tiap teman/influencer/
+  kampanye TikTok punya batch sendiri, sehingga terlihat kode siapa yang
+  paling banyak dipakai.
+- **Sekali pakai**: begitu terpakai, ditandai `used` secara atomik
+  (transaksi Firestore). Input ulang ditolak: "Kode sudah terpakai".
 
-## Keputusan yang perlu dikonfirmasi
+## Alur Pembayaran (konteks — jalur utama portal)
 
-1. **Mekanisme diskon 50%.** Karena pembayaran lewat Lynk.id/Mayar.id
-   (eksternal), diskon tidak bisa dipotong di dalam aplikasi. Usulan:
-   buat **produk terpisah berharga 50%** di Lynk.id/Mayar.id yang link
-   checkout-nya TIDAK dipublikasikan. Link hanya ditampilkan setelah kode
-   referral 50% tervalidasi (dan kode langsung ditandai terpakai).
-   Alternatif: pakai fitur voucher bawaan Lynk.id/Mayar.id — tapi status
-   "terpakai" jadi dikelola platform mereka, tidak bisa kita lacak/batasi
-   sendiri.
-2. **Cakupan kode**: satu kode berlaku untuk 1 kelompok (TK atau SD Awal)
-   saja, atau boleh ada kode "semua kelompok"? Usulan: per kelompok, sama
-   seperti kode aktivasi.
-3. **Batas per akun**: maksimal 1 redeem kode referral per akun per kelompok
-   (mencegah orang menimbun kode gratis). Usulan: ya, dibatasi.
-4. Cloud Functions butuh Firebase **Blaze plan** (pay-as-you-go; praktis
-   Rp0 pada volume kecil, tapi perlu kartu). Ini juga sudah jadi kebutuhan
-   Fase 5 (validasi kode aktivasi), bukan tambahan baru.
+1. Orang tua login → area orang tua → pilih kelompok → Beli.
+2. Cloud Function `createPayment` membuat invoice QRIS dinamis di gateway
+   (nominal terkunci di server, bukan dari client).
+3. Pembeli scan & bayar dari aplikasi apa pun.
+4. Gateway kirim webhook → Cloud Function `paymentWebhook` verifikasi
+   signature → set `users/{uid}.access.<group> = true` + catat di
+   `purchases`. Tidak ada langkah manual.
 
 ## Model Data (Firestore)
 
-Koleksi baru `referral_codes` (dipisah dari `activation_codes` agar laporan
-dan aturan berbeda tidak bercampur):
+Koleksi `referral_codes` (terpisah dari `activation_codes`):
 
 ```
 referral_codes/{code}
   code:        "REF-TK-F-7K3M9Q"       // juga jadi doc ID
-  type:        "full" | "half"          // full gratis | diskon 50%
+  type:        "full" | "half"
   group:       "tk" | "sd1"
-  referrer:    "tiktok-jan26" | "budi"  // sumber/batch, bebas diisi saat generate
+  referrer:    "tiktok-jan26" | "budi"  // sumber/batch, diisi saat generate
   batchId:     "2026-07-16-001"
-  used:        false
-  usedBy:      null                      // uid setelah terpakai
-  usedAt:      null
+  status:      "available" | "reserved" | "used"
+  reservedBy:  null | uid               // half: saat invoice dibuat
+  reservedAt:  null | <timestamp>       // reservasi kedaluwarsa 24 jam
+  usedBy:      null | uid
+  usedAt:      null | <timestamp>
   createdAt:   <timestamp>
 ```
 
-Format kode: `REF-<GROUP>-<F|H>-<6 char acak>` (huruf/angka tanpa karakter
-membingungkan seperti 0/O, 1/I). 6 karakter dari 31 simbol ≈ 887 juta
-kombinasi — cukup aman dari tebak-tebakan, tetap mudah diketik di HP.
+Format kode: `REF-<GROUP>-<F|H>-<6 char acak>` (tanpa karakter membingungkan
+seperti 0/O, 1/I). 6 karakter dari 31 simbol ≈ 887 juta kombinasi — aman dari
+tebak-tebakan, tetap mudah diketik di HP.
 
-Tambahan di dokumen user:
+Di dokumen user: `referralRedeemed: { tk: "REF-...", sd1: null }` untuk
+membatasi 1 redeem referral per akun per kelompok.
 
-```
-users/{uid}
-  access: { tk: true, ... }             // sudah ada di desain aktivasi
-  referralRedeemed: { tk: "REF-...", sd1: null }   // untuk batas 1x per kelompok
-```
+## Alur Redeem
 
-## Alur Redeem (Cloud Function `redeemReferralCode`)
+**Kode full (100%)** — Cloud Function `redeemReferralCode`, wajib login,
+satu transaksi Firestore:
+1. Kode tidak ada → "Kode tidak ditemukan".
+2. `status != "available"` → "Kode sudah terpakai".
+3. User sudah pernah redeem kelompok itu → tolak.
+4. Set `status: "used"`, `usedBy`, `usedAt` + `access.<group> = true`.
 
-Callable function, wajib login. Dalam **satu transaksi Firestore**:
-
-1. Ambil dokumen kode. Tidak ada → tolak: "Kode tidak ditemukan".
-2. `used == true` → tolak: "Kode sudah terpakai".
-3. User sudah pernah redeem untuk kelompok itu → tolak.
-4. Tandai `used: true, usedBy, usedAt` + catat di `users/{uid}.referralRedeemed`.
-5. Efek sesuai jenis:
-   - `full` → set `users/{uid}.access.<group> = true` → game langsung terbuka.
-   - `half` → kembalikan URL checkout produk 50% (disimpan di config server,
-     bukan di bundle JS publik) → portal menampilkan tombol "Bayar Rp X (50%)".
+**Kode half (50%)** — menempel di alur checkout:
+1. Di halaman checkout ada kolom "Punya kode referral?". Kode divalidasi
+   oleh `createPayment`: harus `available` (atau `reserved` oleh user yang
+   sama & belum kedaluwarsa — supaya bisa coba bayar ulang).
+2. `createPayment` membuat invoice dengan nominal 50% dan set kode ke
+   `reserved` (bukan langsung `used` — kalau tidak jadi bayar, kode tidak
+   hangus; reservasi kedaluwarsa otomatis 24 jam lalu kembali `available`).
+3. Webhook pembayaran sukses → kode jadi `used` + akses terbuka, dalam
+   transaksi yang sama dengan pencatatan `purchases`.
 
 Anti-abuse:
-- **Rate limit**: maksimal ±5 percobaan kode gagal per akun per jam
-  (counter di `users/{uid}/private/rateLimit`), supaya kode tidak bisa
-  di-brute-force.
-- **Security rules**: koleksi `referral_codes` sama sekali tidak bisa
-  dibaca/ditulis client — hanya lewat Cloud Function.
+- Rate limit ±5 percobaan kode gagal per akun per jam (anti brute force).
+- Koleksi `referral_codes` tidak bisa dibaca/ditulis client sama sekali —
+  hanya lewat Cloud Function.
+- Nominal invoice selalu dihitung di server dari harga kelompok + status
+  kode; client tidak pernah mengirim angka harga.
 
 ## Generator Kode
 
@@ -99,32 +93,34 @@ node scripts/generate-referral-codes.js --type=half --group=tk \
   --count=50 --referrer=tiktok-jan26
 ```
 
-- Menulis N kode unik ke Firestore + ekspor CSV (untuk dibagikan/dikirim
-  ke referrer).
-- Bisa dijalankan kapan saja → inilah sifat "dinamis": stok kode tidak
-  terbatas, tinggal generate batch baru per kampanye/orang.
+Menulis N kode unik ke Firestore + ekspor CSV untuk dibagikan. Bisa
+dijalankan kapan saja → stok kode tidak terbatas, batch baru per kampanye.
 
-## UI (halaman aktivasi, area orang tua)
+## UI (area orang tua)
 
-- Satu kolom input kode di halaman aktivasi menerima **kode aktivasi maupun
-  kode referral** (dibedakan dari prefiks `REF-`), jadi orang tua tidak
-  bingung memilih form.
-- Sukses full → popup "Selamat! Paket TK terbuka 🎉".
-- Sukses 50% → tampilkan harga coret + tombol menuju checkout diskon.
+- **Halaman aktivasi**: satu kolom input menerima kode aktivasi maupun kode
+  referral full (dibedakan dari prefiks `REF-`). Sukses → "Selamat! Paket
+  TK terbuka 🎉".
+- **Halaman checkout**: kolom opsional kode referral 50% → harga coret
+  Rp29.000 → Rp14.500 → tampil QRIS dinamis.
 - Gagal → pesan jelas: kode salah / sudah terpakai / sudah pernah pakai.
-- Tetap di balik gerbang orang tua, tidak tersentuh area anak.
+- Semua di balik gerbang orang tua, tidak tersentuh area anak.
 
-## Ketergantungan & Urutan Kerja
+## Prasyarat & Urutan Kerja
 
-Fitur ini butuh fondasi yang belum ada di repo (masih HTML standalone):
-Firebase Auth + Firestore + portal (Fase 1) dan Cloud Functions (Fase 5).
-Urutan implementasi saat dikerjakan:
+Butuh fondasi yang belum ada di repo (masih HTML standalone): Firebase Auth
++ Firestore + portal (Fase 1), Cloud Functions (Blaze plan — perlu kartu,
+praktis Rp0 di volume kecil), dan akun payment gateway (Tripay/Duitku,
+pendaftaran perorangan cukup KTP).
 
-1. Fondasi Fase 1 minimal (kalau belum ada): project Firebase, Auth, portal.
-2. Koleksi `referral_codes` + security rules.
-3. Cloud Function `redeemReferralCode` (transaksi + rate limit).
-4. Script generator + ekspor CSV.
-5. UI halaman aktivasi (input kode gabungan).
-6. Produk 50% di Lynk.id/Mayar.id + simpan URL-nya di config Functions.
-7. Uji: kode valid, kode terpakai 2x, kode salah berulang (rate limit),
+1. Fondasi Fase 1: project Firebase, Auth, portal dasar.
+2. Daftar akun gateway → dapatkan API key + merchant code (simpan di
+   secret/config Functions, JANGAN di repo).
+3. `createPayment` + `paymentWebhook` (jalur beli normal, tanpa referral).
+4. Koleksi `referral_codes` + security rules + `redeemReferralCode` (full).
+5. Dukungan kode half di `createPayment`/`paymentWebhook` (reserve → used).
+6. Script generator + ekspor CSV.
+7. UI aktivasi & checkout.
+8. Uji end-to-end di sandbox gateway: bayar normal, bayar dengan kode 50%,
+   kode dipakai 2x, reservasi kedaluwarsa, brute force (rate limit),
    redeem kedua di akun sama.
