@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mengalihkan…</title>
+<script>
+// GitHub Pages SPA fallback: refresh/deep-link inside the portal app lands
+// here; send it back to the portal home. Anything else goes to the game.
+var p = location.pathname;
+if (p.indexOf('/Game-Edukasi-Anak/portal/') === 0) {
+  location.replace('/Game-Edukasi-Anak/portal/');
+} else {
+  location.replace('/Game-Edukasi-Anak/');
+}
+</script>
+</head>
+<body>
+<p>Mengalihkan… <a href="/Game-Edukasi-Anak/">klik di sini</a> jika tidak berpindah otomatis.</p>
+</body>
+</html>
