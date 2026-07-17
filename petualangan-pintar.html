@@ -72,11 +72,11 @@
 <script>
 /* ============ DATA ============ */
 const ANIMALS=["🦁","🐰","🐸","🦊","🐼","🐵","🦒","🐘","🐯","🦆","🐢","🐝","🦋","🐞","🦜","🐿️"];
-const EASY=[{w:"Roket",e:"🚀"},{w:"Bulan",e:"🌙"},{w:"Bintang",e:"⭐"},{w:"Matahari",e:"☀️"},{w:"Planet",e:"🪐"},{w:"Robot",e:"🤖"},{w:"Bumi",e:"🌍"},{w:"Awan",e:"☁️"},{w:"Petir",e:"⚡"},{w:"Balon",e:"🎈"},{w:"Pesawat",e:"✈️"},{w:"Burung",e:"🐦"},{w:"Layangan",e:"🪁"},{w:"Hujan",e:"🌧️"},{w:"Salju",e:"❄️"}];
-const HARD=[{w:"Komet",e:"☄️"},{w:"Teleskop",e:"🔭"},{w:"Galaksi",e:"🌌"},{w:"Satelit",e:"🛰️"},{w:"Astronot",e:"🧑‍🚀"},{w:"Meteor",e:"💫"},{w:"Pelangi",e:"🌈"},{w:"Gerhana",e:"🌘"},{w:"Piring Terbang",e:"🛸"},{w:"Kembang Api",e:"🎆"},{w:"Helikopter",e:"🚁"},{w:"Parasut",e:"🪂"},{w:"Bintang Jatuh",e:"🌠"},{w:"Bulan Purnama",e:"🌕"}];
-const SPELL_WORDS=[{w:"BUMI",e:"🌍"},{w:"AWAN",e:"☁️"},{w:"BULAN",e:"🌙"},{w:"ROKET",e:"🚀"},{w:"ROBOT",e:"🤖"},{w:"KOMET",e:"☄️"},{w:"PETIR",e:"⚡"},{w:"BALON",e:"🎈"},{w:"SALJU",e:"❄️"},{w:"HUJAN",e:"🌧️"},{w:"PLANET",e:"🪐"},{w:"LANGIT",e:"🌤️"}];
+const EASY=[{w:"Roket",e:"🚀"},{w:"Bulan",e:"🌙"},{w:"Bintang",e:"⭐"},{w:"Matahari",e:"☀️"},{w:"Planet",e:"🪐"},{w:"Robot",e:"🤖"},{w:"Bumi",e:"🌍"},{w:"Awan",e:"☁️"},{w:"Petir",e:"⚡"},{w:"Balon",e:"🎈"},{w:"Pesawat",e:"✈️"},{w:"Burung",e:"🐦"},{w:"Layangan",e:"🪁"},{w:"Hujan",e:"🌧️"},{w:"Salju",e:"❄️"},{w:"Rumah",e:"🏠"},{w:"Pohon",e:"🌳"},{w:"Bunga",e:"🌸"},{w:"Bola",e:"⚽"},{w:"Buku",e:"📖"},{w:"Topi",e:"👒"},{w:"Sepatu",e:"👟"},{w:"Payung",e:"☂️"},{w:"Mobil",e:"🚗"},{w:"Kursi",e:"🪑"}];
+const HARD=[{w:"Komet",e:"☄️"},{w:"Teleskop",e:"🔭"},{w:"Galaksi",e:"🌌"},{w:"Satelit",e:"🛰️"},{w:"Astronot",e:"🧑‍🚀"},{w:"Meteor",e:"💫"},{w:"Pelangi",e:"🌈"},{w:"Gerhana",e:"🌘"},{w:"Kelelawar",e:"🦇"},{w:"Kembang Api",e:"🎆"},{w:"Helikopter",e:"🚁"},{w:"Parasut",e:"🪂"},{w:"Bintang Jatuh",e:"🌠"},{w:"Bulan Purnama",e:"🌕"},{w:"Kacamata",e:"👓"},{w:"Gunting",e:"✂️"},{w:"Jendela",e:"🪟"},{w:"Telepon",e:"📱"},{w:"Komputer",e:"💻"},{w:"Lampu",e:"💡"},{w:"Kunci",e:"🔑"},{w:"Sepeda",e:"🚲"},{w:"Kereta Api",e:"🚂"}];
+const SPELL_WORDS=[{w:"BUMI",e:"🌍"},{w:"AWAN",e:"☁️"},{w:"BULAN",e:"🌙"},{w:"ROKET",e:"🚀"},{w:"ROBOT",e:"🤖"},{w:"KOMET",e:"☄️"},{w:"PETIR",e:"⚡"},{w:"BALON",e:"🎈"},{w:"SALJU",e:"❄️"},{w:"HUJAN",e:"🌧️"},{w:"PLANET",e:"🪐"},{w:"LANGIT",e:"🌤️"},{w:"BOLA",e:"⚽"},{w:"BUKU",e:"📖"},{w:"RUMAH",e:"🏠"},{w:"POHON",e:"🌳"},{w:"MOBIL",e:"🚗"},{w:"IKAN",e:"🐟"},{w:"BUNGA",e:"🌸"}];
 let spellOrder=[];
-const CONF={B:["b","d","p"],D:["d","b","p"],M:["m","n","w"],P:["p","q","b"],A:["a","e","o"],S:["s","z","c"],K:["k","h","t"],R:["r","n","m"],G:["g","q","p"],T:["t","f","l"],E:["e","a","o"],N:["n","m","u"],L:["l","i","t"],U:["u","v","n"],H:["h","n","b"],J:["j","i","g"],C:["c","e","o"],F:["f","t","r"],I:["i","l","j"],Y:["y","v","w"]};
+const CONF={B:["b","d","p"],D:["d","b","p"],M:["m","n","w"],P:["p","q","b"],A:["a","e","o"],S:["s","z","c"],K:["k","h","t"],R:["r","n","m"],G:["g","q","p"],T:["t","f","l"],E:["e","a","o"],N:["n","m","u"],L:["l","i","t"],U:["u","v","n"],H:["h","n","b"],J:["j","i","g"],C:["c","e","o"],F:["f","t","r"],I:["i","l","j"],Y:["y","v","w"],O:["o","a","c"],V:["v","u","w"],W:["w","m","v"],Z:["z","s","x"]};
 const SHAPES=[{id:"lingkaran",label:"Lingkaran"},{id:"kotak",label:"Kotak"},{id:"segitiga",label:"Segitiga"},{id:"bintang",label:"Bintang"},{id:"hati",label:"Hati"},{id:"oval",label:"Oval"},{id:"ketupat",label:"Belah Ketupat"}];
 const COLORS=[{id:"merah",label:"Merah",hex:"#EF5350"},{id:"biru",label:"Biru",hex:"#42A5F5"},{id:"kuning",label:"Kuning",hex:"#FFC93C"},{id:"hijau",label:"Hijau",hex:"#66BB6A"},{id:"ungu",label:"Ungu",hex:"#AB47BC"},{id:"oranye",label:"Oranye",hex:"#FFA726"},{id:"pink",label:"Merah Muda",hex:"#F48FB1"},{id:"coklat",label:"Coklat",hex:"#8D6E63"}];
 const MASCOTS=[{min:0,emoji:"🥚",name:"Telur Ajaib"},{min:10,emoji:"🐣",name:"Si Menetas"},{min:25,emoji:"🐥",name:"Anak Ayam Ceria"},{min:45,emoji:"🦉",name:"Burung Hantu Pintar"},{min:70,emoji:"🦄",name:"Unicorn Ajaib"},{min:100,emoji:"🐲",name:"Naga Jenius"}];
@@ -105,7 +105,7 @@ const WORLDS=[
  {id:"fruit",name:"Pasar Buah",subtitle:"Kenali Buah-buahan!",emoji:"🍉",bg:"linear-gradient(160deg,#FFC06B,#F25C2A)",accent:"#B33F12",light:"#FFF3E0",levels:4,
   levelNames:["Beli Buah","Tebak Buah","Keranjang Warna","Kartu Buah"]}];
 const HOME_BG="linear-gradient(180deg,#FFE9A8 0%,#FFD1DC 60%,#C9F0FF 100%)";
-const PER_LEVEL=5;
+const PER_LEVEL=7;
 /* Demo build: only level 1 of each world is playable; higher levels ship in the paid version.
    Owner testing: open with ?akses=penuh2026 to unlock everything. */
 const DEMO_MODE=new URLSearchParams(location.search).get("akses")!=="penuh2026";
