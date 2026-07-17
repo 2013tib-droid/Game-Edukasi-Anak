@@ -119,22 +119,6 @@
   .ribbon.soon{background:#FFE082}
   .countdown{font-size:14px;font-weight:700;opacity:.75;text-align:center}
 
-  /* ---------- steps ---------- */
-  .steps{display:grid;grid-template-columns:1fr;gap:14px;max-width:680px;margin:0 auto}
-  @media(min-width:640px){.steps{grid-template-columns:repeat(3,1fr)}}
-  .step{
-    background:rgba(255,255,255,.94);border-radius:24px;padding:20px 16px;text-align:center;
-    box-shadow:0 6px 0 rgba(0,0,0,.12);
-  }
-  .step .num{
-    width:44px;height:44px;border-radius:999px;margin:0 auto 10px;
-    background:linear-gradient(135deg,#FFC93C,#FF8A5C);color:#3A2E20;
-    display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;
-    box-shadow:0 3px 0 rgba(179,63,18,.4);
-  }
-  .step b{display:block;font-size:17px;margin-bottom:6px}
-  .step p{margin:0;font-size:14px;opacity:.75;line-height:1.45}
-
   /* ---------- FAQ ---------- */
   .faq{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
   details{
@@ -146,9 +130,6 @@
   summary::before{content:"➕";font-size:14px;flex-shrink:0}
   details[open] summary::before{content:"➖"}
   details p{margin:10px 0 0;font-size:15px;line-height:1.55;opacity:.85}
-
-  /* ---------- bottom CTA ---------- */
-  .bottom-cta{text-align:center;padding:44px 0 30px}
 
   footer{
     text-align:center;padding:22px 16px 34px;font-size:13px;opacity:.6;font-weight:700;
@@ -198,7 +179,6 @@
     <div class="mascots" aria-hidden="true">
       <span>🥚</span><span>🐣</span><span>🐥</span><span>🦉</span><span>🦄</span><span>🐲</span>
     </div>
-    <p class="mascot-note">Kumpulkan bintang ⭐ dan lihat maskotmu tumbuh dari telur sampai jadi naga jenius!</p>
   </div>
 
   <!-- ============ TRUST CHIPS ============ -->
@@ -211,8 +191,8 @@
 
   <!-- ============ WORLDS ============ -->
   <section class="container" id="dunia">
-    <h2>Ada Apa di Dalamnya? 🗺️</h2>
-    <p class="section-sub">Jelajahi 4 dunia belajar — coba semuanya di demo gratis!</p>
+    <h2>Ada Apa di Dalamnya?</h2>
+    <p class="section-sub">Empat dunia belajar dalam satu petualangan.</p>
     <div class="worlds">
       <div class="world w-forest"><span class="we">🦁</span><div class="wn">Hutan Hewan</div><div class="ws">Ayo Berhitung!</div></div>
       <div class="world w-space"><span class="we">🚀</span><div class="wn">Luar Angkasa</div><div class="ws">Kenali Huruf!</div></div>
@@ -223,7 +203,7 @@
 
   <!-- ============ PRICING ============ -->
   <section class="container" id="paket">
-    <h2>Pilih Paket Sesuai Usia Anak 🎒</h2>
+    <h2>Pilih Paket Sesuai Usia Anak</h2>
     <p class="section-sub">Beli sekali, mainkan selamanya — perbaikan &amp; penyempurnaan gratis.</p>
     <div class="plans">
 
@@ -239,7 +219,6 @@
           <li>Bisa dipakai di 3 perangkat</li>
         </ul>
         <div class="actions">
-          <a class="btn btn-ghost" href="./petualangan-pintar.html">🎮 Coba Demo Dulu</a>
           <button class="btn btn-primary btn-buy" data-paket="TK">🛒 Beli Paket TK</button>
         </div>
       </div>
@@ -264,33 +243,9 @@
     </div>
   </section>
 
-  <!-- ============ HOW IT WORKS ============ -->
-  <section class="container" id="cara">
-    <h2>Cara Membuka Versi Lengkap 🔑</h2>
-    <p class="section-sub">Tiga langkah mudah, langsung dari HP.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="num">1</div>
-        <b>🛒 Beli Paket</b>
-        <p>Bayar pakai QRIS atau e-wallet. Kode aktivasi unik langsung dikirim otomatis.</p>
-      </div>
-      <div class="step">
-        <div class="num">2</div>
-        <b>👤 Buat Akun</b>
-        <p>Daftar dengan email &amp; kata sandi — sekali saja, gratis.</p>
-      </div>
-      <div class="step">
-        <div class="num">3</div>
-        <b>🔓 Masukkan Kode</b>
-        <p>Semua game di paket langsung terbuka di akunmu, sampai 3 perangkat.</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ FAQ ============ -->
   <section class="container" id="faq">
-    <h2>Pertanyaan Orang Tua 💬</h2>
-    <p class="section-sub">Yang paling sering ditanyakan sebelum membeli.</p>
+    <h2>Pertanyaan Orang Tua</h2>
     <div class="faq">
       <details>
         <summary>Aman nggak buat anak?</summary>
@@ -305,6 +260,10 @@
         <p>Game gratis biasanya penuh iklan yang tidak aman untuk anak. Di sini bayar sekali (di bawah Rp50 ribu), tanpa iklan selamanya, konten dirancang khusus kurikulum anak Indonesia, dan narasi Bahasa Indonesia.</p>
       </details>
       <details>
+        <summary>Bagaimana cara membuka semua game?</summary>
+        <p>Beli paket (bayar pakai QRIS/e-wallet), kode aktivasi dikirim otomatis. Buat akun gratis, masukkan kodenya — semua game di paket langsung terbuka.</p>
+      </details>
+      <details>
         <summary>Satu akun bisa dipakai berapa HP?</summary>
         <p>Sampai 3 perangkat per akun — cukup untuk HP ayah, HP ibu, dan tablet anak.</p>
       </details>
@@ -314,13 +273,6 @@
       </details>
     </div>
   </section>
-
-  <!-- ============ BOTTOM CTA ============ -->
-  <div class="container bottom-cta">
-    <h2>Siap Berpetualang? 🌟</h2>
-    <p class="section-sub">Coba dulu gratis — kalau si kecil suka, baru beli.</p>
-    <a class="btn btn-primary" href="./petualangan-pintar.html">🎮 Mainkan Demo Gratis</a>
-  </div>
 
 </main>
 
