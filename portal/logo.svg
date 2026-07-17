@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Logo Petualangan Pintar">
+  <title>Petualangan Pintar</title>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#BDEBFF"/>
+      <stop offset="1" stop-color="#E9FAFF"/>
+    </linearGradient>
+    <clipPath id="badge">
+      <circle cx="256" cy="256" r="240"/>
+    </clipPath>
+  </defs>
+
+  <!-- badge -->
+  <circle cx="256" cy="256" r="244" fill="#FFFFFF"/>
+  <circle cx="256" cy="256" r="240" fill="url(#sky)"/>
+
+  <g clip-path="url(#badge)">
+    <!-- rainbow -->
+    <g fill="none" stroke-linecap="butt">
+      <path d="M 86 392 A 170 170 0 0 1 426 392" stroke="#FF8A5C" stroke-width="27"/>
+      <path d="M 112 392 A 144 144 0 0 1 400 392" stroke="#FFC93C" stroke-width="27"/>
+      <path d="M 138 392 A 118 118 0 0 1 374 392" stroke="#A8E063" stroke-width="27"/>
+      <path d="M 164 392 A 92 92 0 0 1 348 392" stroke="#4DD0E1" stroke-width="27"/>
+      <path d="M 190 392 A 66 66 0 0 1 322 392" stroke="#9B8CE8" stroke-width="27"/>
+    </g>
+
+    <!-- clouds at rainbow ends -->
+    <g fill="#FFFFFF">
+      <circle cx="72" cy="392" r="34"/><circle cx="112" cy="380" r="30"/><circle cx="148" cy="396" r="26"/>
+      <circle cx="440" cy="392" r="34"/><circle cx="400" cy="380" r="30"/><circle cx="364" cy="396" r="26"/>
+      <rect x="38" y="392" width="146" height="60" rx="24"/>
+      <rect x="330" y="392" width="146" height="60" rx="24"/>
+    </g>
+
+    <!-- chick mascot -->
+    <g>
+      <ellipse cx="256" cy="368" rx="92" ry="96" fill="#FFD84D"/>
+      <!-- wings -->
+      <ellipse cx="176" cy="382" rx="24" ry="40" fill="#F7C33B" transform="rotate(18 176 382)"/>
+      <ellipse cx="336" cy="382" rx="24" ry="40" fill="#F7C33B" transform="rotate(-18 336 382)"/>
+      <!-- belly -->
+      <ellipse cx="256" cy="418" rx="56" ry="42" fill="#FFE58A"/>
+      <!-- tuft -->
+      <g fill="none" stroke="#F0A830" stroke-width="9" stroke-linecap="round">
+        <path d="M 248 278 q -2 -22 -14 -30"/>
+        <path d="M 258 276 q 2 -22 12 -30"/>
+      </g>
+      <!-- eyes -->
+      <circle cx="224" cy="352" r="11" fill="#3A2E20"/>
+      <circle cx="288" cy="352" r="11" fill="#3A2E20"/>
+      <circle cx="228" cy="348" r="3.5" fill="#FFFFFF"/>
+      <circle cx="292" cy="348" r="3.5" fill="#FFFFFF"/>
+      <!-- blush -->
+      <ellipse cx="204" cy="378" rx="12" ry="8" fill="#FFB3C0" opacity=".85"/>
+      <ellipse cx="308" cy="378" rx="12" ry="8" fill="#FFB3C0" opacity=".85"/>
+      <!-- beak -->
+      <path d="M 256 366 l 18 12 l -18 14 l -18 -14 z" fill="#FF9838"/>
+    </g>
+
+    <!-- star & sparkles -->
+    <g transform="translate(256 122)" fill="#FFC93C" stroke="#FFFFFF" stroke-width="10" stroke-linejoin="round" paint-order="stroke">
+      <path d="M 0 -42 L 10 -13.8 L 39.9 -13 L 16.2 5.3 L 24.7 34 L 0 17 L -24.7 34 L -16.2 5.3 L -39.9 -13 L -10 -13.8 Z"/>
+    </g>
+    <g fill="#FFFFFF">
+      <path d="M 138 168 l 6 16 l 16 6 l -16 6 l -6 16 l -6 -16 l -16 -6 l 16 -6 z"/>
+      <path d="M 380 152 l 5 13 l 13 5 l -13 5 l -5 13 l -5 -13 l -13 -5 l 13 -5 z"/>
+    </g>
+  </g>
+</svg>
