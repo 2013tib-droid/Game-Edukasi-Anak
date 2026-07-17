@@ -72,11 +72,11 @@
 <script>
 /* ============ DATA ============ */
 const ANIMALS=["🦁","🐰","🐸","🦊","🐼","🐵","🦒","🐘","🐯","🦆","🐢","🐝","🦋","🐞","🦜","🐿️"];
-const EASY=[{w:"Roket",e:"🚀"},{w:"Bulan",e:"🌙"},{w:"Bintang",e:"⭐"},{w:"Matahari",e:"☀️"},{w:"Planet",e:"🪐"},{w:"Robot",e:"🤖"},{w:"Bumi",e:"🌍"},{w:"Awan",e:"☁️"},{w:"Petir",e:"⚡"}];
-const HARD=[{w:"Komet",e:"☄️"},{w:"Teleskop",e:"🔭"},{w:"Galaksi",e:"🌌"},{w:"Satelit",e:"🛰️"},{w:"Astronot",e:"🧑‍🚀"},{w:"Meteor",e:"💫"},{w:"Pelangi",e:"🌈"},{w:"Gerhana",e:"🌘"},{w:"Piring Terbang",e:"🛸"}];
-const SPELL_WORDS=[{w:"BUMI",e:"🌍"},{w:"AWAN",e:"☁️"},{w:"BULAN",e:"🌙"},{w:"ROKET",e:"🚀"},{w:"ROBOT",e:"🤖"},{w:"KOMET",e:"☄️"},{w:"PETIR",e:"⚡"}];
+const EASY=[{w:"Roket",e:"🚀"},{w:"Bulan",e:"🌙"},{w:"Bintang",e:"⭐"},{w:"Matahari",e:"☀️"},{w:"Planet",e:"🪐"},{w:"Robot",e:"🤖"},{w:"Bumi",e:"🌍"},{w:"Awan",e:"☁️"},{w:"Petir",e:"⚡"},{w:"Balon",e:"🎈"},{w:"Pesawat",e:"✈️"},{w:"Burung",e:"🐦"},{w:"Layangan",e:"🪁"},{w:"Hujan",e:"🌧️"},{w:"Salju",e:"❄️"}];
+const HARD=[{w:"Komet",e:"☄️"},{w:"Teleskop",e:"🔭"},{w:"Galaksi",e:"🌌"},{w:"Satelit",e:"🛰️"},{w:"Astronot",e:"🧑‍🚀"},{w:"Meteor",e:"💫"},{w:"Pelangi",e:"🌈"},{w:"Gerhana",e:"🌘"},{w:"Piring Terbang",e:"🛸"},{w:"Kembang Api",e:"🎆"},{w:"Helikopter",e:"🚁"},{w:"Parasut",e:"🪂"},{w:"Bintang Jatuh",e:"🌠"},{w:"Bulan Purnama",e:"🌕"}];
+const SPELL_WORDS=[{w:"BUMI",e:"🌍"},{w:"AWAN",e:"☁️"},{w:"BULAN",e:"🌙"},{w:"ROKET",e:"🚀"},{w:"ROBOT",e:"🤖"},{w:"KOMET",e:"☄️"},{w:"PETIR",e:"⚡"},{w:"BALON",e:"🎈"},{w:"SALJU",e:"❄️"},{w:"HUJAN",e:"🌧️"},{w:"PLANET",e:"🪐"},{w:"LANGIT",e:"🌤️"}];
 let spellOrder=[];
-const CONF={B:["b","d","p"],D:["d","b","p"],M:["m","n","w"],P:["p","q","b"],A:["a","e","o"],S:["s","z","c"],K:["k","h","t"],R:["r","n","m"],G:["g","q","p"],T:["t","f","l"],E:["e","a","o"],N:["n","m","u"]};
+const CONF={B:["b","d","p"],D:["d","b","p"],M:["m","n","w"],P:["p","q","b"],A:["a","e","o"],S:["s","z","c"],K:["k","h","t"],R:["r","n","m"],G:["g","q","p"],T:["t","f","l"],E:["e","a","o"],N:["n","m","u"],L:["l","i","t"],U:["u","v","n"],H:["h","n","b"],J:["j","i","g"],C:["c","e","o"],F:["f","t","r"],I:["i","l","j"],Y:["y","v","w"]};
 const SHAPES=[{id:"lingkaran",label:"Lingkaran"},{id:"kotak",label:"Kotak"},{id:"segitiga",label:"Segitiga"},{id:"bintang",label:"Bintang"},{id:"hati",label:"Hati"},{id:"oval",label:"Oval"},{id:"ketupat",label:"Belah Ketupat"}];
 const COLORS=[{id:"merah",label:"Merah",hex:"#EF5350"},{id:"biru",label:"Biru",hex:"#42A5F5"},{id:"kuning",label:"Kuning",hex:"#FFC93C"},{id:"hijau",label:"Hijau",hex:"#66BB6A"},{id:"ungu",label:"Ungu",hex:"#AB47BC"},{id:"oranye",label:"Oranye",hex:"#FFA726"},{id:"pink",label:"Merah Muda",hex:"#F48FB1"},{id:"coklat",label:"Coklat",hex:"#8D6E63"}];
 const MASCOTS=[{min:0,emoji:"🥚",name:"Telur Ajaib"},{min:10,emoji:"🐣",name:"Si Menetas"},{min:25,emoji:"🐥",name:"Anak Ayam Ceria"},{min:45,emoji:"🦉",name:"Burung Hantu Pintar"},{min:70,emoji:"🦄",name:"Unicorn Ajaib"},{min:100,emoji:"🐲",name:"Naga Jenius"}];
@@ -125,6 +125,17 @@ const pick=a=>a[rand(a.length)];
 const shuffle=a=>[...a].sort(()=>Math.random()-.5);
 const W=()=>WORLDS.find(w=>w.id===worldId);
 function roundsFor(w,lv){if(w==="fruit"){if(lv===3)return 3;if(lv===4)return 2;}if(w==="space"&&lv===4)return 3;return PER_LEVEL;}
+/* Shuffled-deck picker: every item appears once before any repeats, never twice in a row. */
+const drawState={};
+function draw(key,list){
+  const s=drawState[key]||(drawState[key]={deck:[],last:null});
+  if(!s.deck.length){
+    s.deck=shuffle(list);
+    if(s.deck[s.deck.length-1]===s.last&&s.deck.length>1)s.deck.unshift(s.deck.pop());
+  }
+  s.last=s.deck.pop();
+  return s.last;
+}
 function mascot(){let m=MASCOTS[0];MASCOTS.forEach(x=>{if(S.stars>=x.min)m=x;});const i=MASCOTS.indexOf(m);return{...m,level:i+1,next:MASCOTS[i+1]||null};}
 
 /* ============ SUARA (Web Audio, tanpa library) ============ */
@@ -218,7 +229,7 @@ function makeQuestion(w,lv){
   if(w==="space"){
     const acc=W().accent;
     if(lv===2){
-      const big=pick(Object.keys(CONF)),o=CONF[big];
+      const big=draw("spaceConf",Object.keys(CONF)),o=CONF[big];
       return{type:"low",prompt:`Mana huruf kecil dari "${big}"?`,speak:`Ini huruf ${big} besar.|Mana huruf ${big} yang kecil?`,
         html:`<div style="font-size:84px;font-weight:700;margin-top:8px;color:${acc}">${big}</div>`,
         answer:o[0],options:shuffle([...o])};
@@ -232,7 +243,7 @@ function makeQuestion(w,lv){
         speak:`Ini ${sw.w.toLowerCase()}.|Ayo susun hurufnya satu per satu!|${sw.w.split("").join("|")}`,
         word:sw.w,e:sw.e,letters:shuffle([...sw.w,...extra]),filled:0,used:new Set()};
     }
-    const word=pick(lv===1?EASY:HARD),first=word.w[0].toUpperCase();
+    const word=draw("spaceWord"+lv,lv===1?EASY:HARD),first=word.w[0].toUpperCase();
     const o=new Set([first]);while(o.size<3)o.add(String.fromCharCode(65+rand(26)));
     return{type:"letter",prompt:"Huruf apa yang hilang?",speak:`Lihat gambarnya.|Ini ${word.w}.|${word.w}.|Huruf apa yang pertama?`,
       html:`<div style="margin-top:12px"><div style="font-size:64px">${word.e}</div>
@@ -586,8 +597,9 @@ function renderMemoryGame(){
 /* Level "Susun Kata": tap letters in order to spell the word */
 function renderSpellGame(){
   const q=question,w=W();
+  const z=q.word.length>5?{w:34,h:46,lh:42,f:24,m:2}:{w:44,h:56,lh:52,f:32,m:3};
   const slots=q.word.split("").map((ch,i)=>
-    `<span style="display:inline-block;width:44px;height:56px;line-height:52px;margin:2px 3px;border-radius:12px;font-size:32px;font-weight:700;
+    `<span style="display:inline-block;width:${z.w}px;height:${z.h}px;line-height:${z.lh}px;margin:2px ${z.m}px;border-radius:12px;font-size:${z.f}px;font-weight:700;
       background:${i<q.filled?w.light:"#fff"};border:3px ${i<q.filled?"solid":"dashed"} ${w.accent};color:${w.accent}">${i<q.filled?ch:""}</span>`).join("");
   app.innerHTML=`
    ${dotsHTML()}
