@@ -160,7 +160,7 @@
 <header>
   <div class="nav">
     <a class="brand" href="#"><img class="logo" src="./assets/logo.svg" alt=""> Petualangan Pintar</a>
-    <button class="btn btn-ghost" id="loginBtn">👤 Masuk</button>
+    <a class="btn btn-ghost" href="./portal/masuk">👤 Masuk</a>
   </div>
 </header>
 
@@ -299,10 +299,6 @@ function openModal(emoji,title,text){
 document.getElementById("modalClose").addEventListener("click",()=>overlay.classList.remove("open"));
 overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.classList.remove("open")});
 
-document.getElementById("loginBtn").addEventListener("click",()=>{
-  openModal("👤","Login Segera Hadir!",
-    "Fitur akun & kode aktivasi sedang disiapkan bersama rilis versi lengkap. Sementara itu, semua orang bisa mainkan demo gratis tanpa login.");
-});
 document.querySelectorAll(".btn-buy").forEach(b=>{
   b.addEventListener("click",()=>{
     openModal("🛒","Pembelian Segera Dibuka!",
