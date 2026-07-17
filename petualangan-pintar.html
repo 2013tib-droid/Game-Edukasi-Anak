@@ -105,6 +105,9 @@ const WORLDS=[
   levelNames:["Beli Buah","Tebak Buah","Keranjang Warna","Kartu Buah"]}];
 const HOME_BG="linear-gradient(180deg,#FFE9A8 0%,#FFD1DC 60%,#C9F0FF 100%)";
 const PER_LEVEL=5;
+/* Demo build: only level 1 of each world is playable; higher levels ship in the paid version. */
+const DEMO_MODE=true;
+const demoLocked=lv=>DEMO_MODE&&lv>1;
 
 /* ============ STATE ============ */
 let S={stars:0,progress:{forest:0,space:0,ocean:0,fruit:0},sound:true};
@@ -312,6 +315,7 @@ function makeQuestion(w,lv){
 
 /* ============ ALUR ============ */
 function startLevel(w,lv){
+  if(demoLocked(lv))return;
   worldId=w;level=lv;qIndex=0;earned=0;correctCount=0;picked=null;
   totalRounds=roundsFor(w,lv);
   question=makeQuestion(w,lv);screen="game";render();
@@ -390,7 +394,7 @@ function renderHome(){
        <div style="flex:1"><div class="title">${w.name}</div><div class="sub">${w.subtitle}</div></div>
        <div style="display:flex;gap:4px;font-size:18px">${Array.from({length:w.levels||3},(_,i)=>S.progress[w.id]>=i+1?"⭐":"▫️").join("")}</div>
      </button>`).join("")}
-   <div style="text-align:center;font-size:13px;opacity:.6;margin-top:6px">Untuk anak usia 5–7 tahun • Progres tersimpan otomatis</div>`;
+   <div style="text-align:center;font-size:13px;opacity:.6;margin-top:6px">Untuk anak usia 5–7 tahun • Progres tersimpan otomatis${DEMO_MODE?" • Versi demo: level pertama tiap dunia":""}</div>`;
   app.querySelectorAll("[data-world]").forEach(b=>b.onclick=()=>{worldId=b.dataset.world;screen="world";render();});
 }
 
@@ -404,7 +408,7 @@ function renderWorld(){
    </div>
    ${Array.from({length:w.levels||3},(_,idx)=>{
      const lv=idx+1;
-     const unlocked=lv===1||S.progress[w.id]>=lv-1, done=S.progress[w.id]>=lv;
+     const unlocked=(lv===1||S.progress[w.id]>=lv-1)&&!demoLocked(lv), done=S.progress[w.id]>=lv;
      const name=w.levelNames?w.levelNames[lv-1]:`Level ${lv}`;
      const unit=w.id==="fruit"?"ronde":(w.id==="space"&&lv===4?"kata":"soal");
      return `<button class="btn" data-lv="${lv}" ${unlocked?"":"disabled"}
@@ -412,7 +416,7 @@ function renderWorld(){
        <div style="font-size:32px">${done?"⭐":unlocked?"🎯":"🔒"}</div>
        <div style="text-align:left;flex:1">
          <div class="title" style="color:${w.accent}">${name}</div>
-         <div class="sub" style="font-size:14px">${done?"Sudah selesai — main lagi yuk!":unlocked?`${roundsFor(w.id,lv)} ${unit} seru menantimu`:"Selesaikan level sebelumnya dulu"}</div>
+         <div class="sub" style="font-size:14px">${done?"Sudah selesai — main lagi yuk!":unlocked?`${roundsFor(w.id,lv)} ${unit} seru menantimu`:demoLocked(lv)?"Ada di versi lengkap 🎁":"Selesaikan level sebelumnya dulu"}</div>
        </div></button>`;}).join("")}`;
   app.querySelectorAll("[data-lv]").forEach(b=>b.onclick=()=>startLevel(w.id,+b.dataset.lv));
 }
@@ -607,8 +611,9 @@ function renderDone(){
      <h1 style="font-size:29px;color:${w.accent}">Hebat Sekali! 🎉</h1>
      <div style="font-size:20px;margin-bottom:4px">Kamu dapat <b>${earned} ⭐</b> di ${w.levelNames?w.levelNames[level-1]:`Level ${level}`}!</div>
      <div class="sub" style="margin-bottom:18px">${["tapcount","tapall","sort","memory","spell"].includes(question.type)?`Semua ${totalRounds} ronde selesai — keren!`:`${correctCount} dari ${totalRounds} soal langsung benar`}</div>
+     ${level<(w.levels||3)&&demoLocked(level+1)?`<div class="sub" style="margin-bottom:14px">Level berikutnya ada di versi lengkap 🎁 Coba dunia lain dulu, yuk!</div>`:""}
      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-       ${level<(w.levels||3)?`<button class="btn" id="next" style="background:#FFC93C;padding:14px 20px;font-size:18px;font-weight:700">Level Berikutnya ➡️</button>`:""}
+       ${level<(w.levels||3)&&!demoLocked(level+1)?`<button class="btn" id="next" style="background:#FFC93C;padding:14px 20px;font-size:18px;font-weight:700">Level Berikutnya ➡️</button>`:""}
        <button class="btn" id="again" style="padding:14px 20px;font-size:18px;font-weight:700">Main Lagi 🔄</button>
        <button class="btn" id="home" style="padding:14px 20px;font-size:18px;font-weight:700">Beranda 🏠</button>
      </div>
