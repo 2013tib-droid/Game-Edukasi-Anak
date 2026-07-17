@@ -378,7 +378,11 @@ function renderHome(){
   const m=mascot();
   const prog=m.next?Math.min(100,((S.stars-m.min)/(m.next.min-m.min))*100):100;
   app.innerHTML=`
-   <h1>🌈 Petualangan Pintar</h1>
+   <div style="text-align:center">
+     <img src="./assets/logo.svg" alt="" style="width:92px;height:92px">
+     <h1 style="margin-top:2px;line-height:1.1">Petualangan Pintar<br>
+       <span style="font-size:22px;color:#F25C2A">✨ Si Kecil ✨</span></h1>
+   </div>
    <div class="card" style="display:flex;align-items:center;gap:16px">
      <div class="bounce" style="font-size:60px">${m.emoji}</div>
      <div style="flex:1">
@@ -395,7 +399,6 @@ function renderHome(){
        <div style="flex:1"><div class="title">${w.name}</div><div class="sub">${w.subtitle}</div></div>
        <div style="display:flex;gap:4px;font-size:18px">${Array.from({length:w.levels||3},(_,i)=>S.progress[w.id]>=i+1?"⭐":"▫️").join("")}</div>
      </button>`).join("")}
-   <div style="text-align:center;font-size:13px;opacity:.6;margin-top:6px">Untuk anak usia 5–7 tahun • Progres tersimpan otomatis${DEMO_MODE?" • Versi demo: level pertama tiap dunia":""}</div>
    ${DEMO_MODE?`<div class="card" style="text-align:center;padding:16px">
      <div class="title" style="font-size:17px">Untuk Ayah &amp; Bunda 👨‍👩‍👧</div>
      <div class="sub" style="margin:4px 0 12px">Suka demonya? Versi lengkap membuka semua level.</div>
