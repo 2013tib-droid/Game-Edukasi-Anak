@@ -31,6 +31,7 @@
   .btn:active:not(:disabled){transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.22)}
   .btn:disabled{cursor:default;opacity:.6}
   .btn:focus-visible{outline:4px solid #3A2E20;outline-offset:2px}
+  a.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
   .icon-btn{padding:8px 15px;font-size:20px;font-weight:700}
   .stars{background:rgba(255,255,255,.85);border-radius:999px;padding:8px 18px;font-weight:700;font-size:20px;box-shadow:0 3px 0 rgba(0,0,0,.12)}
   h1{text-align:center;font-size:32px;margin:2px 0;text-shadow:0 2px 0 #fff}
@@ -61,7 +62,7 @@
 <body>
 
 <div class="topbar">
-  <button class="btn icon-btn" id="back" style="visibility:hidden">⬅️</button>
+  <button class="btn icon-btn" id="back">⬅️</button>
   <div class="stars" id="starCount">⭐ 0</div>
   <button class="btn icon-btn" id="sound">🔊</button>
 </div>
@@ -357,6 +358,7 @@ const soundBtn=document.getElementById("sound");
 const starEl=document.getElementById("starCount");
 
 backBtn.onclick=()=>{if(window.speechSynthesis)speechSynthesis.cancel();
+  if(screen==="home"){location.href="./";return;}
   screen=(screen==="game"||screen==="done")?"world":"home";render();};
 soundBtn.onclick=()=>{S.sound=!S.sound;save();if(!S.sound&&window.speechSynthesis)speechSynthesis.cancel();render();};
 
@@ -365,7 +367,6 @@ function render(){
   document.body.style.backgroundAttachment="fixed";
   starEl.textContent="⭐ "+S.stars;
   soundBtn.textContent=S.sound?"🔊":"🔇";
-  backBtn.style.visibility=screen==="home"?"hidden":"visible";
   document.querySelectorAll(".confetti").forEach(c=>c.remove());
 
   if(screen==="home")return renderHome();
@@ -378,7 +379,11 @@ function renderHome(){
   const m=mascot();
   const prog=m.next?Math.min(100,((S.stars-m.min)/(m.next.min-m.min))*100):100;
   app.innerHTML=`
-   <h1>🌈 Petualangan Pintar</h1>
+   <div style="text-align:center">
+     <img src="./assets/logo.svg" alt="" style="width:92px;height:92px">
+     <h1 style="margin-top:2px;line-height:1.1">Petualangan Pintar<br>
+       <span style="font-size:22px;color:#F25C2A">✨ Si Kecil ✨</span></h1>
+   </div>
    <div class="card" style="display:flex;align-items:center;gap:16px">
      <div class="bounce" style="font-size:60px">${m.emoji}</div>
      <div style="flex:1">
@@ -395,7 +400,14 @@ function renderHome(){
        <div style="flex:1"><div class="title">${w.name}</div><div class="sub">${w.subtitle}</div></div>
        <div style="display:flex;gap:4px;font-size:18px">${Array.from({length:w.levels||3},(_,i)=>S.progress[w.id]>=i+1?"⭐":"▫️").join("")}</div>
      </button>`).join("")}
-   <div style="text-align:center;font-size:13px;opacity:.6;margin-top:6px">Untuk anak usia 5–7 tahun • Progres tersimpan otomatis${DEMO_MODE?" • Versi demo: level pertama tiap dunia":""}</div>`;
+   ${DEMO_MODE?`<div class="card" style="text-align:center;padding:16px">
+     <div class="title" style="font-size:17px">Untuk Ayah &amp; Bunda 👨‍👩‍👧</div>
+     <div class="sub" style="margin:4px 0 12px">Suka demonya? Versi lengkap membuka semua level.</div>
+     <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+       <a class="btn" href="./portal/masuk" style="padding:12px 18px;font-size:16px;font-weight:700;background:#FFC93C">👤 Masuk Akun</a>
+       <a class="btn" href="./" style="padding:12px 18px;font-size:16px;font-weight:700">🏠 Halaman Utama</a>
+     </div>
+   </div>`:""}`;
   app.querySelectorAll("[data-world]").forEach(b=>b.onclick=()=>{worldId=b.dataset.world;screen="world";render();});
 }
 
