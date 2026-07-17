@@ -105,8 +105,9 @@ const WORLDS=[
   levelNames:["Beli Buah","Tebak Buah","Keranjang Warna","Kartu Buah"]}];
 const HOME_BG="linear-gradient(180deg,#FFE9A8 0%,#FFD1DC 60%,#C9F0FF 100%)";
 const PER_LEVEL=5;
-/* Demo build: only level 1 of each world is playable; higher levels ship in the paid version. */
-const DEMO_MODE=true;
+/* Demo build: only level 1 of each world is playable; higher levels ship in the paid version.
+   Owner testing: open with ?akses=penuh2026 to unlock everything. */
+const DEMO_MODE=new URLSearchParams(location.search).get("akses")!=="penuh2026";
 const demoLocked=lv=>DEMO_MODE&&lv>1;
 
 /* ============ STATE ============ */
