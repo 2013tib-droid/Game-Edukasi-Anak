@@ -6,10 +6,13 @@
 <title>Mengalihkan…</title>
 <script>
 // GitHub Pages SPA fallback: refresh/deep-link inside the portal app lands
-// here; send it back to the portal home. Anything else goes to the game.
+// here. Pass the deep path along as ?p= so portal/index.html can restore
+// the route before React Router mounts. Anything else goes to the landing.
+var base = '/Game-Edukasi-Anak/portal';
 var p = location.pathname;
-if (p.indexOf('/Game-Edukasi-Anak/portal/') === 0) {
-  location.replace('/Game-Edukasi-Anak/portal/');
+if (p.indexOf(base + '/') === 0) {
+  var deep = p.slice(base.length) + location.search + location.hash;
+  location.replace(base + '/?p=' + encodeURIComponent(deep));
 } else {
   location.replace('/Game-Edukasi-Anak/');
 }

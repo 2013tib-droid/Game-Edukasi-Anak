@@ -81,6 +81,7 @@
   /* ---------- sections ---------- */
   section{padding:34px 0}
   #paket{padding-top:72px}
+  #faq{padding-top:64px}
   h2{text-align:center;font-size:clamp(24px,5vw,32px);margin:0 0 6px;text-shadow:0 2px 0 #fff}
   .section-sub{text-align:center;opacity:.75;margin:0 0 24px;font-size:16px;font-weight:700}
 
@@ -95,7 +96,7 @@
   .world .wn{font-weight:700;font-size:17px;text-shadow:0 1px 3px rgba(0,0,0,.3)}
   .world .ws{font-size:13px;opacity:.95;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.3)}
   .w-forest{background:linear-gradient(160deg,#A8E063,#56AB2F)}
-  .w-space{background:linear-gradient(160deg,#7F7FD5,#4A3F9F)}
+  .w-space{background:linear-gradient(160deg,#C79BE0,#7E57C2)}
   .w-ocean{background:linear-gradient(160deg,#4DD0E1,#0083B0)}
   .w-fruit{background:linear-gradient(160deg,#FFC06B,#F25C2A)}
 
@@ -160,7 +161,7 @@
 <header>
   <div class="nav">
     <a class="brand" href="#"><img class="logo" src="./assets/logo.svg" alt=""> Petualangan Pintar</a>
-    <button class="btn btn-ghost" id="loginBtn">👤 Masuk</button>
+    <a class="btn btn-ghost" href="./portal/masuk">👤 Masuk</a>
   </div>
 </header>
 
@@ -168,7 +169,7 @@
 
   <!-- ============ HERO ============ -->
   <div class="container hero">
-    <span class="badge">✨ Game Edukasi Anak Indonesia · Usia 5–8 Tahun</span>
+    <span class="badge">✨ Game Edukasi Anak Indonesia · Usia 4–8 Tahun</span>
     <h1>Belajar Jadi Petualangan yang Seru! 🚀</h1>
     <p class="lead">
       Kumpulan mini-game berhitung, mengenal huruf, warna &amp; bentuk — semua instruksi
@@ -196,7 +197,7 @@
     <p class="section-sub">Empat dunia belajar dalam satu petualangan.</p>
     <div class="worlds">
       <div class="world w-forest"><span class="we">🦁</span><div class="wn">Hutan Hewan</div><div class="ws">Ayo Berhitung!</div></div>
-      <div class="world w-space"><span class="we">🚀</span><div class="wn">Luar Angkasa</div><div class="ws">Kenali Huruf!</div></div>
+      <div class="world w-space"><span class="we">🏕️</span><div class="wn">Taman Huruf</div><div class="ws">Kenali Huruf!</div></div>
       <div class="world w-ocean"><span class="we">🐠</span><div class="wn">Bawah Laut</div><div class="ws">Warna &amp; Bentuk!</div></div>
       <div class="world w-fruit"><span class="we">🍉</span><div class="wn">Pasar Buah</div><div class="ws">Kenali Buah!</div></div>
     </div>
@@ -204,14 +205,14 @@
 
   <!-- ============ PRICING ============ -->
   <section class="container" id="paket">
-    <h2>Pilih Paket Sesuai Usia Anak</h2>
+    <h2>Pilih Dunia Sesuai Usia Anak</h2>
     <p class="section-sub">Beli sekali, mainkan selamanya — perbaikan &amp; penyempurnaan gratis.</p>
     <div class="plans">
 
       <div class="plan">
         <span class="ribbon">🎁 Demo Gratis Tersedia</span>
         <span class="pe">🐥</span>
-        <h3>Paket TK <small>(5–7 tahun)</small></h3>
+        <h3>Dunia Ceria <small>(4–6 tahun)</small></h3>
         <div class="price">Rp19.000 <small>sekali bayar</small></div>
         <ul>
           <li>10–15 mini-game premium</li>
@@ -220,14 +221,14 @@
           <li>Bisa dipakai di 3 perangkat</li>
         </ul>
         <div class="actions">
-          <button class="btn btn-primary btn-buy" data-paket="TK">🛒 Beli Paket TK</button>
+          <button class="btn btn-primary btn-buy" data-paket="Dunia Ceria">🛒 Beli Dunia Ceria</button>
         </div>
       </div>
 
       <div class="plan">
         <span class="ribbon soon">🚀 Segera Hadir</span>
         <span class="pe">🦉</span>
-        <h3>Paket SD Awal <small>(kelas 1–2)</small></h3>
+        <h3>Dunia Eksplorasi <small>(6–8 tahun)</small></h3>
         <div class="price">Rp39.000 <small>sekali bayar</small></div>
         <ul>
           <li>10–15 mini-game premium</li>
@@ -262,7 +263,7 @@
       </details>
       <details>
         <summary>Kalau ada game baru, bayar lagi?</summary>
-        <p>Perbaikan dan penyempurnaan game di paket yang sudah dibeli selalu gratis. Paket jenjang baru (misal SD kelas 3–4) adalah produk terpisah.</p>
+        <p>Perbaikan dan penyempurnaan game di dunia yang sudah dibeli selalu gratis. Dunia baru untuk jenjang berikutnya (misal SD kelas 3–4) adalah produk terpisah.</p>
       </details>
     </div>
   </section>
@@ -299,14 +300,10 @@ function openModal(emoji,title,text){
 document.getElementById("modalClose").addEventListener("click",()=>overlay.classList.remove("open"));
 overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.classList.remove("open")});
 
-document.getElementById("loginBtn").addEventListener("click",()=>{
-  openModal("👤","Login Segera Hadir!",
-    "Fitur akun & kode aktivasi sedang disiapkan bersama rilis versi lengkap. Sementara itu, semua orang bisa mainkan demo gratis tanpa login.");
-});
 document.querySelectorAll(".btn-buy").forEach(b=>{
   b.addEventListener("click",()=>{
     openModal("🛒","Pembelian Segera Dibuka!",
-      "Paket "+b.dataset.paket+" akan segera bisa dibeli lewat QRIS & e-wallet. Ikuti terus — sekarang coba dulu demo gratisnya, ya!");
+      b.dataset.paket+" akan segera bisa dibeli lewat QRIS & e-wallet. Ikuti terus — sekarang coba dulu demo gratisnya, ya!");
   });
 });
 
