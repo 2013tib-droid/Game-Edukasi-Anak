@@ -98,8 +98,8 @@ const FRUITS=[
 const WORLDS=[
  {id:"forest",name:"Hutan Hewan",subtitle:"Ayo Berhitung!",emoji:"🦁",bg:"linear-gradient(160deg,#A8E063,#56AB2F)",accent:"#2E7D32",light:"#E8F5E9",levels:4,
   levelNames:["Hitung Hewan","Hitung Banyak","Tambah-Tambahan","Hewan Pulang"]},
- {id:"space",name:"Luar Angkasa",subtitle:"Kenali Huruf!",emoji:"🚀",bg:"linear-gradient(160deg,#7F7FD5,#4A3F9F)",accent:"#3F3D8F",light:"#EDEAFB",levels:4,
-  levelNames:["Huruf Pertama","Huruf Kecil","Kata Antariksa","Susun Kata"]},
+ {id:"space",name:"Negeri Huruf",subtitle:"Kenali Huruf!",emoji:"🔤",bg:"linear-gradient(160deg,#7F7FD5,#4A3F9F)",accent:"#3F3D8F",light:"#EDEAFB",levels:4,
+  levelNames:["Huruf Pertama","Huruf Kecil","Kata Panjang","Susun Kata"]},
  {id:"ocean",name:"Bawah Laut",subtitle:"Warna & Bentuk!",emoji:"🐠",bg:"linear-gradient(160deg,#4DD0E1,#0083B0)",accent:"#00697F",light:"#E0F7FA",levels:4,
   levelNames:["Cari Bentuk","Cari Warna","Bentuk & Warna","Pola Ajaib"]},
  {id:"fruit",name:"Pasar Buah",subtitle:"Kenali Buah-buahan!",emoji:"🍉",bg:"linear-gradient(160deg,#FFC06B,#F25C2A)",accent:"#B33F12",light:"#FFF3E0",levels:4,
@@ -234,7 +234,7 @@ function makeQuestion(w,lv){
         html:`<div style="font-size:84px;font-weight:700;margin-top:8px;color:${acc}">${big}</div>`,
         answer:o[0],options:shuffle([...o])};
     }
-    if(lv===4){ // Susun Kata — arrange letters to spell a space word (with decoy letters)
+    if(lv===4){ // Susun Kata — arrange letters to spell a word (with decoy letters)
       if(qIndex===0)spellOrder=shuffle(SPELL_WORDS);
       const sw=spellOrder[qIndex%SPELL_WORDS.length];
       const extra=new Set();
