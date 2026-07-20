@@ -12,7 +12,8 @@ Platform web berbayar berisi kumpulan mini-game edukasi untuk anak Indonesia, di
 |---|---|
 | Scope rilis pertama | 2 kelompok: **TK (5–7 th)** dan **SD Awal (kelas 1–2)** |
 | Jumlah game | 10–15 mini-game per kelompok (kualitas premium) |
-| Platform | Web app: **React (Vite) + Firebase** (Auth, Firestore, Hosting) |
+| Platform | Web app: **React (Vite) + TypeScript + Firebase** (Auth, Firestore, Hosting) |
+| Bahasa pemrograman | **TypeScript strict** untuk seluruh app & engine — config game type-safe (typo field ketahuan saat build, bukan saat anak main). Game lama `petualangan-pintar.html` tetap vanilla JS sampai Fase 3 |
 | Perangkat target | HP Android & tablet — mobile-first, touch-first |
 | Demo gratis | 1–2 game gratis PENUH per kelompok (tanpa login) |
 | Aset | Gambar AI-generated + narasi TTS Bahasa Indonesia |
@@ -86,7 +87,7 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, freeDemo
 
 ## Fase Pengerjaan
 
-1. **Fase 1 — Fondasi:** setup Vite + React + Firebase, routing, Auth, halaman portal dasar, Firestore rules.
+1. **Fase 1 — Fondasi:** setup Vite + React + TS + Firebase, routing, Auth, halaman portal dasar, Firestore rules. ✅ **SELESAI** (lihat "Status Pengerjaan" di bawah)
 2. **Fase 2 — Engine:** core engine + 6 template game + sistem audio/narasi + progress bintang.
 3. **Fase 3 — Migrasi:** porting game "Petualangan Pintar" (HTML standalone yang sudah ada) ke format engine sebagai game pertama kelompok TK.
 4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Tandai 1–2 game per kelompok sebagai `freeDemo: true`.
@@ -94,6 +95,18 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, freeDemo
 6. **Fase 6 — Rilis:** deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli.
 
 Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyakan konfirmasi sebelum keputusan arsitektur besar di luar dokumen ini.
+
+## Status Pengerjaan
+
+- **Fase 1 (Fondasi) — SELESAI** di branch `claude/mini-game-programming-language-vlle4b` (2026-07-20):
+  - Vite + React 18 + TypeScript strict; alias import `@/` → `src/`.
+  - Routing (react-router): `/` beranda, `/kelompok/:groupId`, `/masuk`, `/daftar`, `/aktivasi` (protected). Semua halaman lazy-load.
+  - Firebase **lazy-load via `getFirebase()`** (`src/auth/firebase.ts`) — SDK tidak ikut bundle awal (entry ±56 kB gzip). App tetap jalan tanpa `.env` (tampilkan notice "belum dikonfigurasi"); isi kunci dari `.env.example` saat project Firebase dibuat.
+  - `firestore.rules` ketat: `activation_codes` tertutup dari client; field `users/{uid}.groups` hanya bisa diubah Cloud Function; default deny.
+  - Kontrak config game type-safe di `src/engine/core/types.ts` (`GameConfig`, `TemplateId`, dst.) — fondasi Fase 2.
+  - `functions/` & `scripts/` masih README placeholder (diimplementasi Fase 5).
+  - Perintah: `npm run dev` / `npm run build` / `npm run typecheck`.
+- **Fase 2 (Engine) — BELUM**; berikutnya.
 
 ## Konvensi
 
@@ -105,7 +118,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 ## Deploy Web (PENTING)
 
 - **GitHub Pages menyajikan situs dari branch `claude/web-demo-html-wa4dr9`** (folder root), BUKAN dari branch default. Perubahan apa pun yang harus tampil di web WAJIB di-merge dan di-push ke branch itu — push ke branch lain tidak memicu build Pages.
-- `index.html` adalah redirect ke `petualangan-pintar.html` (satu-satunya file game; jangan buat salinan duplikat).
+- Di branch Pages itu, `index.html` adalah landing page statis yang menaut ke `petualangan-pintar.html` (satu-satunya file game; jangan buat salinan duplikat). Di branch pengembangan app, `index.html` root adalah entry Vite — dua hal berbeda, jangan saling menimpa saat merge.
 - URL live: `https://2013tib-droid.github.io/Game-Edukasi-Anak/`. Setelah push, build Pages butuh ±1–2 menit; browser HP sering menyimpan cache versi lama.
 
 ## Aturan Desain Soal (dari pemilik proyek)
