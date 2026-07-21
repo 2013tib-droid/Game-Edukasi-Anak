@@ -1,19 +1,103 @@
-import type { GameConfig } from '@/engine/core/types';
+import type { GameConfig, GameLevel, LevelSlot, TapChoice } from '@/engine/core/types';
 
 /**
  * "Hutan Hewan" — ported from the Petualangan Pintar forest world (Ayo
  * Berhitung). Progresses like the source levels: count small → count bigger
- * → addition → subtraction. Every question is a tap-answer over numbers,
- * with a visual board of animals to count and near-miss decoy answers
- * (design rule: the wrong options sit close to the right number so the
- * child must actually count, not guess).
+ * → addition → subtraction.
  *
- * Animals are kid-favourites (puppy, kitten, bunny, panda, penguin, chick…)
- * and vary level to level so the board stays fun to look at. In the equation
- * boards each operator is glued to its group with a non-breaking space
- * ( ) and only one normal space is left between the two halves, so a
- * wrap breaks cleanly between them — it never orphans a lone "= ?".
+ * Each of the 7 slots holds a POOL of interchangeable variants (different
+ * animals & numbers). The engine picks one variant per slot every play and
+ * on "Main Lagi", so the game never feels repetitive — while every variant
+ * stays plain typed data. Animals are kid-favourites (horse, penguin, panda,
+ * koala…) and no two adjacent counting boards use the same one.
+ *
+ * Design rule: wrong answer options sit close to the right number, so the
+ * child must actually count, not guess. Equation boards glue each operator
+ * to its group with a non-breaking space so a wrap only breaks between the
+ * two halves — never orphaning a lone "= ?".
  */
+
+const NBSP = ' ';
+
+interface Animal {
+  e: string;
+  n: string;
+}
+
+// No dog (per owner). Kept to emoji that render as clear, countable animals.
+const A = {
+  kuda: { e: '🐴', n: 'kuda' },
+  pinguin: { e: '🐧', n: 'pinguin' },
+  kelinci: { e: '🐰', n: 'kelinci' },
+  kucing: { e: '🐱', n: 'kucing' },
+  panda: { e: '🐼', n: 'panda' },
+  koala: { e: '🐨', n: 'koala' },
+  sapi: { e: '🐮', n: 'sapi' },
+  babi: { e: '🐷', n: 'babi' },
+  katak: { e: '🐸', n: 'katak' },
+  monyet: { e: '🐵', n: 'monyet' },
+  bebek: { e: '🦆', n: 'bebek' },
+  ayam: { e: '🐥', n: 'anak ayam' },
+  singa: { e: '🦁', n: 'singa' },
+  harimau: { e: '🐯', n: 'harimau' },
+  beruang: { e: '🐻', n: 'beruang' },
+  rubah: { e: '🦊', n: 'rubah' },
+  gajah: { e: '🐘', n: 'gajah' },
+  jerapah: { e: '🦒', n: 'jerapah' },
+} satisfies Record<string, Animal>;
+
+const WORDS = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan'];
+const say = (n: number) => WORDS[n] ?? String(n);
+
+/** Correct number + two near-miss decoys (≥1). */
+function numChoices(correct: number): TapChoice[] {
+  const opts = new Set<number>([correct]);
+  for (const d of [correct + 1, correct - 1, correct + 2, correct - 2]) {
+    if (opts.size >= 3) break;
+    if (d >= 1) opts.add(d);
+  }
+  return [...opts].map((n, i) => ({ id: `o${i}`, text: String(n), correct: n === correct }));
+}
+
+// Variant builders (id filled in by slot()).
+function count(a: Animal, n: number): GameLevel<'tap-answer'> {
+  return {
+    id: '',
+    narration: `Ayo hitung! Ada berapa ${a.n}?`,
+    data: { board: a.e.repeat(n), choices: numChoices(n) },
+  };
+}
+
+function add(a: Animal, x: number, y: number): GameLevel<'tap-answer'> {
+  return {
+    id: '',
+    narration: `Ayo tambahkan! ${say(x)} ${a.n} ditambah ${say(y)} ${a.n}, jadi berapa semuanya?`,
+    data: {
+      board: `${a.e.repeat(x)}${NBSP}➕ ${a.e.repeat(y)}${NBSP}=${NBSP}❓`,
+      choices: numChoices(x + y),
+    },
+  };
+}
+
+function sub(a: Animal, total: number, leave: number): GameLevel<'tap-answer'> {
+  return {
+    id: '',
+    narration: `Ada ${total} ${a.n}. ${say(leave)} ${a.n} pulang ke rumah. Berapa yang masih tinggal?`,
+    data: {
+      board: `${a.e.repeat(total)} ➡️${NBSP}${'🏠'.repeat(leave)}`,
+      choices: numChoices(total - leave),
+    },
+  };
+}
+
+/** Give every variant in a slot the same stable id (star is per-slot). */
+function slot(
+  id: string,
+  ...variants: GameLevel<'tap-answer'>[]
+): LevelSlot<'tap-answer'> {
+  return variants.map((v) => ({ ...v, id }));
+}
+
 const config: GameConfig<'tap-answer'> = {
   id: 'hutan-hewan',
   group: 'tk',
@@ -22,90 +106,76 @@ const config: GameConfig<'tap-answer'> = {
   freeDemo: true,
   template: 'tap-answer',
   levels: [
-    {
-      id: 'l1',
-      narration: 'Ayo hitung! Ada berapa anjing?',
-      data: {
-        board: '🐶🐶🐶',
-        choices: [
-          { id: 'a', text: '2' },
-          { id: 'b', text: '3', correct: true },
-          { id: 'c', text: '4' },
-        ],
-      },
-    },
-    {
-      id: 'l2',
-      narration: 'Ada berapa kucing?',
-      data: {
-        board: '🐱🐱🐱🐱',
-        choices: [
-          { id: 'a', text: '3' },
-          { id: 'b', text: '4', correct: true },
-          { id: 'c', text: '5' },
-        ],
-      },
-    },
-    {
-      id: 'l3',
-      narration: 'Hitung baik-baik. Ada berapa pinguin?',
-      data: {
-        board: '🐧🐧🐧🐧🐧🐧',
-        choices: [
-          { id: 'a', text: '5' },
-          { id: 'b', text: '6', correct: true },
-          { id: 'c', text: '7' },
-        ],
-      },
-    },
-    {
-      id: 'l4',
-      narration: 'Ayo tambahkan! Dua kelinci, ditambah tiga kelinci, jadi berapa semuanya?',
-      data: {
-        board: '🐰🐰 ➕ 🐰🐰🐰 = ❓',
-        choices: [
-          { id: 'a', text: '4' },
-          { id: 'b', text: '5', correct: true },
-          { id: 'c', text: '6' },
-        ],
-      },
-    },
-    {
-      id: 'l5',
-      narration: 'Tiga panda, ditambah tiga panda, ada berapa semuanya?',
-      data: {
-        board: '🐼🐼🐼 ➕ 🐼🐼🐼 = ❓',
-        choices: [
-          { id: 'a', text: '5' },
-          { id: 'b', text: '6', correct: true },
-          { id: 'c', text: '7' },
-        ],
-      },
-    },
-    {
-      id: 'l6',
-      narration: 'Ada lima anak ayam. Dua anak ayam pulang ke rumah. Berapa yang masih tinggal?',
-      data: {
-        board: '🐥🐥🐥🐥🐥 ➡️ 🏠🏠',
-        choices: [
-          { id: 'a', text: '2' },
-          { id: 'b', text: '3', correct: true },
-          { id: 'c', text: '4' },
-        ],
-      },
-    },
-    {
-      id: 'l7',
-      narration: 'Ada tujuh bebek. Tiga bebek berenang pulang. Berapa yang masih tinggal?',
-      data: {
-        board: '🦆🦆🦆🦆🦆🦆🦆 ➡️ 🏠🏠🏠',
-        choices: [
-          { id: 'a', text: '3' },
-          { id: 'b', text: '4', correct: true },
-          { id: 'c', text: '5' },
-        ],
-      },
-    },
+    // Slot 1 — count small (2–4)
+    slot(
+      'l1',
+      count(A.kuda, 3),
+      count(A.pinguin, 2),
+      count(A.kelinci, 4),
+      count(A.kucing, 3),
+      count(A.ayam, 2),
+      count(A.katak, 4),
+    ),
+    // Slot 2 — count small-med (3–5)
+    slot(
+      'l2',
+      count(A.panda, 4),
+      count(A.koala, 5),
+      count(A.bebek, 3),
+      count(A.monyet, 5),
+      count(A.sapi, 4),
+      count(A.babi, 3),
+    ),
+    // Slot 3 — count bigger (5–7)
+    slot(
+      'l3',
+      count(A.pinguin, 6),
+      count(A.singa, 5),
+      count(A.harimau, 7),
+      count(A.beruang, 6),
+      count(A.rubah, 5),
+      count(A.ayam, 7),
+    ),
+    // Slot 4 — addition (sum 4–6)
+    slot(
+      'l4',
+      add(A.kelinci, 2, 3),
+      add(A.panda, 3, 3),
+      add(A.kucing, 2, 2),
+      add(A.bebek, 4, 2),
+      add(A.monyet, 3, 2),
+      add(A.koala, 1, 4),
+    ),
+    // Slot 5 — addition (sum 5–8)
+    slot(
+      'l5',
+      add(A.beruang, 4, 3),
+      add(A.gajah, 3, 4),
+      add(A.jerapah, 5, 3),
+      add(A.kuda, 4, 4),
+      add(A.singa, 2, 5),
+      add(A.harimau, 3, 5),
+    ),
+    // Slot 6 — subtraction (remain 2–4)
+    slot(
+      'l6',
+      sub(A.ayam, 5, 2),
+      sub(A.bebek, 4, 1),
+      sub(A.katak, 6, 2),
+      sub(A.kelinci, 5, 1),
+      sub(A.kucing, 5, 3),
+      sub(A.babi, 4, 2),
+    ),
+    // Slot 7 — subtraction (remain 3–5)
+    slot(
+      'l7',
+      sub(A.bebek, 7, 3),
+      sub(A.pinguin, 6, 2),
+      sub(A.monyet, 8, 3),
+      sub(A.sapi, 7, 2),
+      sub(A.panda, 6, 3),
+      sub(A.kuda, 8, 4),
+    ),
   ],
 };
 

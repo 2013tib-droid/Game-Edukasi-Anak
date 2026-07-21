@@ -121,6 +121,8 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Dukungan game "mixed"**: `MixedGameConfig`/`MixedLevel` di `types.ts` — satu game bisa punya template berbeda per level (dibutuhkan karena tiap dunia sumber mencampur tipe soal). `GameShell` memilih template per-level; homogen tetap pakai `GameConfig<T>`. Backward-compatible.
   - **TapAnswer** kini punya field opsional `picture` + `board` (papan visual: hewan yang dihitung, papan penjumlahan, atau kata berhuruf hilang) — dipakai porting soal berhitung/huruf.
   - **2 dunia baru (kelompok TK)**: `hutan-hewan` (tap-answer: hitung → tambah → kurang, 7 level) & `taman-huruf` (mixed: huruf pertama, huruf kecil, lalu susun kata/spell, 7 level). Config = data typed di `src/games/tk/`. Keduanya `freeDemo: true` untuk testing.
+  - **Variasi soal anti-bosan (fitur engine)**: `LevelSlot`/`MixedSlot` di `types.ts` — tiap "slot" boleh berisi POOL varian; `GameShell` mengacak 1 varian per slot tiap main & tiap "Main Lagi" (`resolveSlots` + `playNonce`). Semua varian tetap data typed. Bintang disimpan per-slot (semua varian 1 slot berbagi `id`) supaya ekonomi bintang tak membengkak. hutan-hewan & taman-huruf kini punya ±6 varian/slot (hewan/kata/huruf berbeda; TANPA anjing).
+  - **Pilihan jawaban tap-answer diperbesar**: teks huruf/angka tanpa emoji jadi besar (`.choice-text--main`, clamp 48–68px) + warna teks kartu diset eksplisit (dulu ikut biru default UA).
   - **Sisa dunia (Bawah Laut warna/bentuk, Pasar Buah) — BELUM**; berikutnya (Pasar Buah butuh game mixed count-tap + tap-answer + drag-drop + memory).
 
 ## Konvensi
