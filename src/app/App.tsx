@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from '@/auth/AuthContext';
 import ProtectedRoute from '@/auth/ProtectedRoute';
 import Layout from '@/app/Layout';
@@ -11,16 +11,22 @@ const GroupPage = lazy(() => import('@/portal/GroupPage'));
 const LoginPage = lazy(() => import('@/auth/LoginPage'));
 const RegisterPage = lazy(() => import('@/auth/RegisterPage'));
 const ActivationPage = lazy(() => import('@/auth/ActivationPage'));
+const GamePage = lazy(() => import('@/portal/GamePage'));
+
+// HashRouter for static hosts without SPA rewrites (GitHub Pages testing);
+// BrowserRouter everywhere else (Firebase Hosting has rewrites).
+const Router = import.meta.env.VITE_USE_HASH_ROUTER === '1' ? HashRouter : BrowserRouter;
 
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <Router>
         <Suspense fallback={<SplashScreen />}>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/kelompok/:groupId" element={<GroupPage />} />
+              <Route path="/game/:gameId" element={<GamePage />} />
               <Route path="/masuk" element={<LoginPage />} />
               <Route path="/daftar" element={<RegisterPage />} />
               <Route
@@ -34,7 +40,7 @@ export default function App() {
             </Route>
           </Routes>
         </Suspense>
-      </BrowserRouter>
+      </Router>
     </AuthProvider>
   );
 }

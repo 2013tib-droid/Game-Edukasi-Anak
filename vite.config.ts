@@ -4,6 +4,9 @@ import { fileURLToPath, URL } from 'node:url';
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Overridable for static hosting under a subpath (GitHub Pages testing);
+  // production Firebase Hosting uses the default '/'.
+  base: process.env.DEPLOY_BASE ?? '/',
   plugins: [react()],
   resolve: {
     alias: {
