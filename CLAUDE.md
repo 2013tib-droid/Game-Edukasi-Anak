@@ -127,6 +127,9 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 ## Deploy Web (PENTING)
 
 - **GitHub Pages menyajikan situs dari branch `claude/web-demo-html-wa4dr9`** (folder root), BUKAN dari branch default. Perubahan apa pun yang harus tampil di web WAJIB di-merge dan di-push ke branch itu — push ke branch lain tidak memicu build Pages.
+- **Repo WAJIB public agar Pages jalan** (akun GitHub gratis). Kejadian 2026-07-21: repo sempat di-set private → GitHub langsung mematikan seluruh situs (404 "There isn't a GitHub Pages site here") DAN menghapus konfigurasi Pages. Set public kembali TIDAK otomatis menyalakan Pages — harus diaktifkan ulang manual: **Settings → Pages → Source: Deploy from a branch → `claude/web-demo-html-wa4dr9` + `/ (root)` → Save**. Verifikasi lewat tab Actions: harus muncul run "pages build and deployment" sukses. Konten premium TIDAK dilindungi dengan mem-private repo, tapi lewat sistem akses online (Fase 5).
+- **URL testing app portal: `https://2013tib-droid.github.io/Game-Edukasi-Anak/app/`** — build Vite dari branch dev, di-copy ke folder `app/` di branch Pages (base `/Game-Edukasi-Anak/app/` + HashRouter via env `DEPLOY_BASE` & `VITE_USE_HASH_ROUTER=1`). Cara redeploy: build lalu ganti isi folder `app/` di branch Pages.
+- Kalau halaman menampilkan 404 padahal build sukses: kemungkinan besar cache Safari/Chrome HP — tes di tab private/incognito dulu sebelum menyimpulkan error.
 - Di branch Pages itu, `index.html` adalah landing page statis yang menaut ke `petualangan-pintar.html` (satu-satunya file game; jangan buat salinan duplikat). Di branch pengembangan app, `index.html` root adalah entry Vite — dua hal berbeda, jangan saling menimpa saat merge.
 - URL live: `https://2013tib-droid.github.io/Game-Edukasi-Anak/`. Setelah push, build Pages butuh ±1–2 menit; browser HP sering menyimpan cache versi lama.
 
