@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ComponentType, LazyExoticComponent } from 'react';
 import type { AnyGameConfig, GameLevel, MixedLevel, Stars, TemplateId } from '@/engine/core/types';
 import { getTotalStars, saveLevelStars } from '@/engine/core/progress';
@@ -51,6 +51,20 @@ function starsForMistakes(wrong: number): Stars {
   return 1;
 }
 
+type ConcreteLevel = GameLevel | MixedLevel;
+
+/**
+ * Turn the config's slots into a concrete level list for one playthrough:
+ * a slot that is an array of variants collapses to one randomly-chosen
+ * variant. Re-run per play (and on "Main Lagi") so questions vary.
+ */
+function resolveSlots(config: AnyGameConfig): ConcreteLevel[] {
+  const slots = config.levels as Array<ConcreteLevel | ConcreteLevel[]>;
+  return slots.map((slot) =>
+    Array.isArray(slot) ? slot[Math.floor(Math.random() * slot.length)]! : slot,
+  );
+}
+
 type Screen = 'intro' | 'playing' | 'done';
 
 export default function GameShell({
@@ -67,21 +81,29 @@ export default function GameShell({
   const wrongCount = useRef(0);
   // Remount the template on retry/advance so its internal state resets.
   const [attemptKey, setAttemptKey] = useState(0);
+  // Bumped on each play/replay so variant slots re-roll fresh questions.
+  const [playNonce, setPlayNonce] = useState(0);
 
-  const level = config.levels[levelIndex];
+  const levels = useMemo(() => resolveSlots(config), [config, playNonce]);
+  const level = levels[levelIndex];
   const Template = TEMPLATES[templateFor(config, level)] as ComponentType<TemplateProps>;
 
   useEffect(() => () => stopSpeaking(), []);
 
-  const startLevel = useCallback((text: string) => {
+  // Narrate the instruction whenever a new level is shown (covers first
+  // level, advancing, and freshly re-rolled variants after a replay).
+  useEffect(() => {
+    if (screen !== 'playing') return;
     wrongCount.current = 0;
-    speak(text);
-  }, []);
+    const lv = levels[levelIndex];
+    if (lv) speak(lv.narration);
+  }, [screen, levelIndex, levels]);
 
   function handleStart() {
     sfx('tap');
+    setPlayNonce((n) => n + 1); // re-roll variants for this play
+    setLevelIndex(0);
     setScreen('playing');
-    if (level) startLevel(level.narration);
   }
 
   const handleCorrect = useCallback(() => {
@@ -95,18 +117,17 @@ export default function GameShell({
     window.setTimeout(() => {
       setFeedback(null);
       const next = levelIndex + 1;
-      if (next >= config.levels.length) {
+      if (next >= levels.length) {
         sfx('win');
         speak('Selamat! Kamu hebat sekali!');
         setScreen('done');
       } else {
         setLevelIndex(next);
         setAttemptKey((k) => k + 1);
-        const nextLevel = config.levels[next];
-        if (nextLevel) startLevel(nextLevel.narration);
+        // narration handled by the level-change effect
       }
     }, 1400);
-  }, [config, level, levelIndex, startLevel]);
+  }, [config, level, levelIndex, levels]);
 
   const handleWrong = useCallback((silent?: boolean) => {
     wrongCount.current += 1;
@@ -144,19 +165,18 @@ export default function GameShell({
         <h1>Selamat!</h1>
         <StarsRow stars={starsForMistakes(0)} />
         <p style={{ fontSize: 22 }}>
-          Kamu dapat <strong>{total}</strong> dari {config.levels.length * 3} bintang!
+          Kamu dapat <strong>{total}</strong> dari {levels.length * 3} bintang!
         </p>
         <MascotCard totalStars={getTotalStars()} />
         <button
           className="btn btn--primary"
           style={{ fontSize: 24 }}
           onClick={() => {
-            setLevelIndex(0);
             setEarned([]);
             setAttemptKey((k) => k + 1);
+            setPlayNonce((n) => n + 1); // fresh variants on replay
+            setLevelIndex(0);
             setScreen('playing');
-            const first = config.levels[0];
-            if (first) startLevel(first.narration);
           }}
         >
           🔁 Main Lagi
@@ -176,7 +196,7 @@ export default function GameShell({
         <button className="btn" onClick={onExit} aria-label="Kembali">
           ⬅️
         </button>
-        <LevelDots total={config.levels.length} current={levelIndex} />
+        <LevelDots total={levels.length} current={levelIndex} />
         <SpeakButton onSpeak={() => speak(level.narration)} />
       </div>
       <Suspense fallback={<div className="game-center">⏳</div>}>
