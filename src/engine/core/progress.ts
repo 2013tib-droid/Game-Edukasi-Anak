@@ -28,6 +28,15 @@ export function getGameStars(gameId: string): number {
   return Object.values(game).reduce<number>((sum, s) => sum + s, 0);
 }
 
+/** Total stars across every game — drives the mascot's growth. */
+export function getTotalStars(): number {
+  const store = load();
+  return Object.values(store).reduce<number>(
+    (sum, game) => sum + Object.values(game).reduce<number>((s, v) => s + v, 0),
+    0,
+  );
+}
+
 export function saveLevelStars(gameId: string, levelId: string, stars: Stars): void {
   const store = load();
   const game = store[gameId] ?? {};
