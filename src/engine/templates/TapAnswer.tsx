@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import { sfx } from '@/engine/audio/sound';
+import Shape from '@/engine/ui/Shape';
 
 /** Pick the one correct answer out of 2–4 big cards. */
 export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'tap-answer'>) {
@@ -31,8 +32,26 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
       <div className="game-prompt">{level.narration}</div>
       <div className="game-area">
         {level.data.picture && (
-          <div className="ta-picture" aria-hidden>
+          <div
+            className={'ta-picture' + (level.data.silhouette ? ' ta-picture--silhouette' : '')}
+            aria-hidden
+          >
             {level.data.picture}
+          </div>
+        )}
+        {level.data.sequence && (
+          <div className="ta-sequence" aria-hidden>
+            {level.data.sequence.map((u, i) =>
+              u ? (
+                <div key={i} className="ta-seq-cell">
+                  <Shape kind={u.kind} color={u.color} size={52} />
+                </div>
+              ) : (
+                <div key={i} className="ta-seq-cell ta-seq-cell--q">
+                  ?
+                </div>
+              ),
+            )}
           </div>
         )}
         {level.data.board && (
@@ -56,6 +75,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
               className={'choice-card' + (shakeId === c.id ? ' choice-card--shake' : '')}
               onClick={() => handleTap(c.id, c.correct)}
             >
+              {c.shape && <Shape kind={c.shape.kind} color={c.shape.color} size={64} />}
               {c.emoji && <span aria-hidden>{c.emoji}</span>}
               {c.text && <span className="choice-text">{c.text}</span>}
             </button>

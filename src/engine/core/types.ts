@@ -18,11 +18,34 @@ export type TemplateId =
 
 /* ---------- Per-template level payloads ---------- */
 
+/**
+ * Geometric shape ids (ported from SHAPES in petualangan-pintar.html). Used
+ * by the Bawah Laut world, where cards are colored geometric shapes rendered
+ * as SVG — emoji can't cover every shape×color combination.
+ */
+export type ShapeId =
+  | 'lingkaran'
+  | 'kotak'
+  | 'segitiga'
+  | 'bintang'
+  | 'hati'
+  | 'oval'
+  | 'ketupat';
+
+/** A single colored shape: which shape + its fill color (hex). */
+export interface ShapeSpec {
+  kind: ShapeId;
+  /** Fill color as hex, e.g. "#EF5350". */
+  color: string;
+}
+
 export interface TapChoice {
   id: string;
   /** Big visual — emoji for now, later an image asset path. */
   emoji?: string;
   text?: string;
+  /** Colored geometric shape drawn as SVG (Bawah Laut). */
+  shape?: ShapeSpec;
   correct?: boolean;
 }
 
@@ -33,11 +56,22 @@ export interface TapAnswerData {
    */
   picture?: string;
   /**
+   * Render `picture` as a dark silhouette (Pasar Buah "guess the shadow").
+   * The child sees only the outline and taps the matching fruit below.
+   */
+  silhouette?: boolean;
+  /**
    * Optional visual board shown above the choices, e.g. the animals to
    * count ("🦁🦁🦁"), an addition board ("🐰🐰 ➕ 🐰🐰🐰"), or a word with a
    * blank ("_OKET"). Plain text/emoji — the config author composes it.
    */
   board?: string;
+  /**
+   * Optional shape pattern shown above the choices (Bawah Laut "Pola
+   * Ajaib"): a repeating ABAB / ABC-ABC sequence where `null` is the empty
+   * "?" box the child must fill by picking the next shape.
+   */
+  sequence?: (ShapeSpec | null)[];
   choices: TapChoice[]; // 2–4, exactly one with correct: true
 }
 
