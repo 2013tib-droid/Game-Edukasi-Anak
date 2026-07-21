@@ -126,6 +126,95 @@
   }
 }
 
+/* Tap-answer visual cues */
+.ta-picture {
+  font-size: clamp(56px, 18vw, 96px);
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.ta-board {
+  text-align: center;
+  font-size: clamp(30px, 8vw, 44px);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 2px;
+  word-spacing: 6px;
+  margin: 4px 0 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Spell (susun kata) */
+.spell-picture {
+  font-size: clamp(52px, 16vw, 88px);
+  text-align: center;
+  line-height: 1;
+}
+
+.spell-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin: 14px 0 20px;
+}
+
+.spell-slot {
+  width: clamp(40px, 12vw, 52px);
+  height: clamp(52px, 15vw, 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(26px, 8vw, 34px);
+  font-weight: 800;
+  border-radius: 14px;
+  border: 3px dashed rgba(0, 0, 0, 0.28);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.spell-slot--filled {
+  border-style: solid;
+  border-color: #58c65c;
+  background: #eaffea;
+}
+
+.spell-tray {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.spell-letter {
+  min-height: 72px;
+  border: none;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.18);
+  font-family: inherit;
+  font-size: 34px;
+  font-weight: 800;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.1s;
+}
+
+.spell-letter:active {
+  transform: scale(0.95);
+}
+
+.spell-letter--used {
+  visibility: hidden;
+}
+
+.spell-letter--shake {
+  animation: shake 0.4s;
+}
+
 /* Feedback overlay */
 .feedback-overlay {
   position: fixed;

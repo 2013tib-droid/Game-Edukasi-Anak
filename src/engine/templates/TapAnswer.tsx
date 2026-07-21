@@ -30,6 +30,16 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
     <>
       <div className="game-prompt">{level.narration}</div>
       <div className="game-area">
+        {level.data.picture && (
+          <div className="ta-picture" aria-hidden>
+            {level.data.picture}
+          </div>
+        )}
+        {level.data.board && (
+          <div className="ta-board" aria-hidden>
+            {level.data.board}
+          </div>
+        )}
         <div className="choice-grid">
           {choices.map((c) => (
             <button
