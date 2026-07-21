@@ -135,18 +135,22 @@
 }
 
 .ta-board {
-  text-align: center;
-  font-size: clamp(30px, 8vw, 44px);
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: 2px;
-  word-spacing: 6px;
-  margin: 4px 0 18px;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 10px;
   justify-content: center;
   align-items: center;
+  gap: 4px 12px;
+  font-size: clamp(32px, 8.5vw, 46px);
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 4px auto 18px;
+  max-width: 100%;
+}
+
+/* Each token (an operand group or an operator) stays on one line; the board
+   wraps only between tokens, so equation halves never split mid-group. */
+.ta-board__tok {
+  white-space: nowrap;
 }
 
 /* Spell (susun kata) */

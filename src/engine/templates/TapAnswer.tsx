@@ -37,7 +37,15 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
         )}
         {level.data.board && (
           <div className="ta-board" aria-hidden>
-            {level.data.board}
+            {/* Split on normal spaces into atomic tokens; operators are glued
+                to their group with non-breaking spaces in the config, so each
+                token stays whole and a wrap breaks only between equation
+                halves — never mid-group. */}
+            {level.data.board.split(' ').map((token, i) => (
+              <span key={i} className="ta-board__tok">
+                {token}
+              </span>
+            ))}
           </div>
         )}
         <div className="choice-grid">
