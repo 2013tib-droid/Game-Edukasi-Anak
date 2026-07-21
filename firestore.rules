@@ -1,0 +1,43 @@
+rules_version = '2';
+
+// Prinsip: user hanya bisa baca data miliknya sendiri.
+// Kode aktivasi TIDAK bisa dibaca/ditulis dari client sama sekali —
+// hanya Cloud Function (Admin SDK, melewati rules) yang memprosesnya.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Profil user: baca milik sendiri; field akses kelompok (groups)
+    // hanya boleh diubah oleh Cloud Function, jadi client tak boleh menulisnya.
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null
+        && request.auth.uid == uid
+        && !('groups' in request.resource.data);
+      allow update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.groups == resource.data.groups;
+      allow delete: if false;
+
+      // Device fingerprint (batas 3 device divalidasi di Cloud Function /
+      // saat peluncuran game; rules membatasi kepemilikan saja).
+      match /devices/{deviceId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
+
+      // Progress bintang per anak.
+      match /progress/{gameId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+      }
+    }
+
+    // Kode aktivasi: tertutup total dari client.
+    match /activation_codes/{code} {
+      allow read, write: if false;
+    }
+
+    // Default: tolak semua yang tidak dicocokkan di atas.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
