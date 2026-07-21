@@ -115,7 +115,13 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Config game = file `.ts` typed** (`src/games/tk/*.ts`, `src/games/sd1/*.ts`) dengan `GameConfig<T>` — sengaja .ts, bukan JSON, karena JSON tidak bisa dicek TypeScript secara literal. Ini pemenuhan niat "konten di file data terpisah": tetap data murni, tapi typo ketahuan saat build.
   - 7 game contoh: TK = hitung-buah (count-tap), kenal-huruf (tap-answer), tulis-angka (tracing), kartu-kembar (memory, 🔒 premium); SD1 = pasang-kata (drag-drop), cerita-kancil (story-choice), tambah-tangkas (tap-answer, 🔒 premium). CATATAN: flag `freeDemo` saat ini untuk keperluan testing; batas final 1–2 demo/kelompok ditetapkan di Fase 4.
 - **Deploy testing:** build ter-deploy ke branch Pages folder `app/` → `https://2013tib-droid.github.io/Game-Edukasi-Anak/app/` (HashRouter + base via env `DEPLOY_BASE` & `VITE_USE_HASH_ROUTER`; produksi nanti Firebase Hosting pakai default).
-- **Fase 3 (Migrasi Petualangan Pintar) — BELUM**; berikutnya.
+- **Fase 3 (Migrasi Petualangan Pintar) — SEBAGIAN** (2026-07-21), 2 dunia pertama ter-porting & teruji headless (viewport HP, sampai tamat termasuk jalur salah):
+  - **Sistem maskot jadi fitur engine** (`src/engine/core/mascot.ts` + `src/engine/ui/Mascot.tsx`): evolusi 🥚→🐣→🐥→🦉→🦄→🐲 dari **TOTAL bintang semua game** (`getTotalStars()` di `progress.ts`). Kartu maskot + progress bar tampil di beranda portal (`HomePage`) dan layar selesai (`GameShell`).
+  - **Template baru `spell`** (`src/engine/templates/Spell.tsx`): susun kata dengan ketuk huruf berurutan; nampan huruf dicampur huruf pengecoh (Aturan Desain Soal). Lazy-load per chunk.
+  - **Dukungan game "mixed"**: `MixedGameConfig`/`MixedLevel` di `types.ts` — satu game bisa punya template berbeda per level (dibutuhkan karena tiap dunia sumber mencampur tipe soal). `GameShell` memilih template per-level; homogen tetap pakai `GameConfig<T>`. Backward-compatible.
+  - **TapAnswer** kini punya field opsional `picture` + `board` (papan visual: hewan yang dihitung, papan penjumlahan, atau kata berhuruf hilang) — dipakai porting soal berhitung/huruf.
+  - **2 dunia baru (kelompok TK)**: `hutan-hewan` (tap-answer: hitung → tambah → kurang, 7 level) & `taman-huruf` (mixed: huruf pertama, huruf kecil, lalu susun kata/spell, 7 level). Config = data typed di `src/games/tk/`. Keduanya `freeDemo: true` untuk testing.
+  - **Sisa dunia (Bawah Laut warna/bentuk, Pasar Buah) — BELUM**; berikutnya (Pasar Buah butuh game mixed count-tap + tap-answer + drag-drop + memory).
 
 ## Konvensi
 
