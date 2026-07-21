@@ -1,4 +1,4 @@
-import type { GameConfig, GroupId, TemplateId } from '@/engine/core/types';
+import type { AnyGameConfig, GroupId, TemplateId } from '@/engine/core/types';
 
 /**
  * Portal-facing game catalog. Metadata lives here (small, in the main
@@ -10,12 +10,32 @@ export interface GameMeta {
   group: GroupId;
   title: string;
   emoji: string;
-  template: TemplateId;
+  /** Portal card badge; "mixed" games change question type per level. */
+  template: TemplateId | 'mixed';
   freeDemo: boolean;
-  load: () => Promise<{ default: GameConfig }>;
+  load: () => Promise<{ default: AnyGameConfig }>;
 }
 
 export const games: GameMeta[] = [
+  // --- TK: dunia Petualangan Pintar (Fase 3) ---
+  {
+    id: 'hutan-hewan',
+    group: 'tk',
+    title: 'Hutan Hewan',
+    emoji: '🦁',
+    template: 'tap-answer',
+    freeDemo: true,
+    load: () => import('@/games/tk/hutan-hewan'),
+  },
+  {
+    id: 'taman-huruf',
+    group: 'tk',
+    title: 'Taman Huruf',
+    emoji: '🏕️',
+    template: 'mixed',
+    freeDemo: true,
+    load: () => import('@/games/tk/taman-huruf'),
+  },
   // --- TK ---
   {
     id: 'hitung-buah',

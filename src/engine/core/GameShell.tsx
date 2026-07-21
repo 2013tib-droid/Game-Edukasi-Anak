@@ -1,9 +1,10 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import type { ComponentType, LazyExoticComponent } from 'react';
-import type { GameConfig, GameLevel, Stars, TemplateId } from '@/engine/core/types';
-import { saveLevelStars } from '@/engine/core/progress';
+import type { AnyGameConfig, GameLevel, MixedLevel, Stars, TemplateId } from '@/engine/core/types';
+import { getTotalStars, saveLevelStars } from '@/engine/core/progress';
 import { sfx, speak, stopSpeaking } from '@/engine/audio/sound';
 import { FeedbackOverlay, LevelDots, SpeakButton, StarsRow } from '@/engine/ui/Feedback';
+import MascotCard from '@/engine/ui/Mascot';
 import '@/engine/ui/engine.css';
 
 /**
@@ -29,7 +30,20 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   memory: lazy(() => import('@/engine/templates/Memory')),
   'count-tap': lazy(() => import('@/engine/templates/CountTap')),
   'story-choice': lazy(() => import('@/engine/templates/StoryChoice')),
+  spell: lazy(() => import('@/engine/templates/Spell')),
 };
+
+/**
+ * Resolve which template renders a level. Homogeneous games use the game's
+ * `template`; "mixed" games carry the template on each level.
+ */
+function templateFor(
+  config: AnyGameConfig,
+  level: GameLevel | MixedLevel | undefined,
+): TemplateId {
+  if (level && 'template' in level && level.template) return level.template;
+  return config.template as TemplateId;
+}
 
 function starsForMistakes(wrong: number): Stars {
   if (wrong === 0) return 3;
@@ -43,7 +57,7 @@ export default function GameShell({
   config,
   onExit,
 }: {
-  config: GameConfig;
+  config: AnyGameConfig;
   onExit: () => void;
 }) {
   const [screen, setScreen] = useState<Screen>('intro');
@@ -55,7 +69,7 @@ export default function GameShell({
   const [attemptKey, setAttemptKey] = useState(0);
 
   const level = config.levels[levelIndex];
-  const Template = TEMPLATES[config.template] as ComponentType<TemplateProps>;
+  const Template = TEMPLATES[templateFor(config, level)] as ComponentType<TemplateProps>;
 
   useEffect(() => () => stopSpeaking(), []);
 
@@ -132,6 +146,7 @@ export default function GameShell({
         <p style={{ fontSize: 22 }}>
           Kamu dapat <strong>{total}</strong> dari {config.levels.length * 3} bintang!
         </p>
+        <MascotCard totalStars={getTotalStars()} />
         <button
           className="btn btn--primary"
           style={{ fontSize: 24 }}

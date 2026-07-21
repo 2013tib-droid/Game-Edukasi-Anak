@@ -13,7 +13,8 @@ export type TemplateId =
   | 'tracing' // menulis huruf/angka dengan jari
   | 'memory' // mencocokkan kartu
   | 'count-tap' // hitung & ketuk (wajib ada pengecoh — lihat CLAUDE.md)
-  | 'story-choice'; // cerita interaktif
+  | 'story-choice' // cerita interaktif
+  | 'spell'; // eja/susun huruf jadi kata (dari game Petualangan Pintar)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -26,6 +27,17 @@ export interface TapChoice {
 }
 
 export interface TapAnswerData {
+  /**
+   * Optional big picture cue shown above the choices — e.g. "🚀" for a
+   * "which first letter?" question. Emoji for now, later an image path.
+   */
+  picture?: string;
+  /**
+   * Optional visual board shown above the choices, e.g. the animals to
+   * count ("🦁🦁🦁"), an addition board ("🐰🐰 ➕ 🐰🐰🐰"), or a word with a
+   * blank ("_OKET"). Plain text/emoji — the config author composes it.
+   */
+  board?: string;
   choices: TapChoice[]; // 2–4, exactly one with correct: true
 }
 
@@ -86,6 +98,19 @@ export interface StoryChoiceData {
   pages: StoryPage[];
 }
 
+export interface SpellData {
+  /** Target word in UPPERCASE, e.g. "ROKET". Child taps letters in order. */
+  word: string;
+  /** Picture cue for the word, e.g. "🚀". */
+  emoji: string;
+  /**
+   * Decoy letters mixed into the tray (design rule: never monotone — the
+   * child must pick the right letters, not just tap everything in sight).
+   * Should NOT already appear in `word`.
+   */
+  decoys: string[];
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -93,6 +118,7 @@ export interface LevelDataMap {
   memory: MemoryData;
   'count-tap': CountTapData;
   'story-choice': StoryChoiceData;
+  spell: SpellData;
 }
 
 /* ---------- Game config ---------- */
@@ -115,6 +141,39 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
   freeDemo: boolean;
   levels: GameLevel<T>[];
 }
+
+/**
+ * A level that carries its own template — used by "mixed" games where the
+ * question type changes level to level (ported worlds from Petualangan
+ * Pintar mix counting, letters, spelling, etc. inside one game). The
+ * discriminated union keeps `data` type-safe against the level's `template`.
+ */
+export type MixedLevel = {
+  [T in TemplateId]: {
+    id: string;
+    narration: string;
+    template: T;
+    data: LevelDataMap[T];
+  };
+}[TemplateId];
+
+/**
+ * Game whose levels each declare their own template. `template: 'mixed'`
+ * flags the portal/shell to resolve the template per level instead of once
+ * per game. Homogeneous games keep using the simpler `GameConfig<T>`.
+ */
+export interface MixedGameConfig {
+  id: string;
+  group: GroupId;
+  title: string;
+  emoji: string;
+  template: 'mixed';
+  freeDemo: boolean;
+  levels: MixedLevel[];
+}
+
+/** Either kind of game — what the shell, registry, and pages accept. */
+export type AnyGameConfig = GameConfig | MixedGameConfig;
 
 /** Star progress per level, stored per device (Firestore sync in Fase 5). */
 export type Stars = 0 | 1 | 2 | 3;

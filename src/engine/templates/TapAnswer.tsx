@@ -30,6 +30,24 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
     <>
       <div className="game-prompt">{level.narration}</div>
       <div className="game-area">
+        {level.data.picture && (
+          <div className="ta-picture" aria-hidden>
+            {level.data.picture}
+          </div>
+        )}
+        {level.data.board && (
+          <div className="ta-board" aria-hidden>
+            {/* Split on normal spaces into atomic tokens; operators are glued
+                to their group with non-breaking spaces in the config, so each
+                token stays whole and a wrap breaks only between equation
+                halves — never mid-group. */}
+            {level.data.board.split(' ').map((token, i) => (
+              <span key={i} className="ta-board__tok">
+                {token}
+              </span>
+            ))}
+          </div>
+        )}
         <div className="choice-grid">
           {choices.map((c) => (
             <button

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import type { GameConfig } from '@/engine/core/types';
+import type { AnyGameConfig } from '@/engine/core/types';
 import GameShell from '@/engine/core/GameShell';
 import SplashScreen from '@/app/SplashScreen';
 import { findGame } from '@/games/registry';
@@ -16,7 +16,7 @@ export default function GamePage() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const meta = gameId ? findGame(gameId) : undefined;
-  const [config, setConfig] = useState<GameConfig | null>(null);
+  const [config, setConfig] = useState<AnyGameConfig | null>(null);
 
   // TODO(fase-5): read users/{uid}.groups from Firestore at launch time.
   const hasAccess = Boolean(meta?.freeDemo);

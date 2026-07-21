@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/auth/AuthContext';
 import groupsData from '@/data/groups.json';
+import { getTotalStars } from '@/engine/core/progress';
+import MascotCard from '@/engine/ui/Mascot';
 
 // Portal home: pick a group. Kid-facing, so only big friendly buttons —
 // account actions stay small and lead to the parent area.
@@ -11,6 +13,10 @@ export default function HomePage() {
     <div className="page" style={{ textAlign: 'center' }}>
       <h1 style={{ fontSize: 36 }}>🌈 Petualangan Pintar</h1>
       <p style={{ fontSize: 20 }}>Pilih kelompok belajarmu!</p>
+
+      <div style={{ marginTop: 16 }}>
+        <MascotCard totalStars={getTotalStars()} />
+      </div>
 
       <div style={{ display: 'grid', gap: 20, marginTop: 24 }}>
         {groupsData.groups.map((group) => (
