@@ -78,13 +78,14 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
-  min-height: 96px;
+  min-height: 112px;
   border: none;
   border-radius: 20px;
   background: #fff;
   box-shadow: 0 5px 0 rgba(0, 0, 0, 0.18);
   font-family: inherit;
   font-size: 44px;
+  color: #3a2e20; /* buttons don't inherit body color — set it so text isn't UA-blue */
   cursor: pointer;
   transition: transform 0.1s;
   touch-action: manipulation;
@@ -108,9 +109,18 @@
   pointer-events: none;
 }
 
+/* Caption under an emoji answer. */
 .choice-card .choice-text {
   font-size: 20px;
   font-weight: 700;
+}
+
+/* A letter/number answer with no emoji — big and bold so it's easy for a
+   young child to read from arm's length. */
+.choice-card .choice-text--main {
+  font-size: clamp(48px, 15vw, 68px);
+  font-weight: 800;
+  line-height: 1;
 }
 
 @keyframes shake {
