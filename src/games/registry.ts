@@ -36,6 +36,24 @@ export const games: GameMeta[] = [
     freeDemo: true,
     load: () => import('@/games/tk/taman-huruf'),
   },
+  {
+    id: 'bawah-laut',
+    group: 'tk',
+    title: 'Bawah Laut',
+    emoji: '🐠',
+    template: 'tap-answer',
+    freeDemo: true,
+    load: () => import('@/games/tk/bawah-laut'),
+  },
+  {
+    id: 'pasar-buah',
+    group: 'tk',
+    title: 'Pasar Buah',
+    emoji: '🍉',
+    template: 'mixed',
+    freeDemo: true,
+    load: () => import('@/games/tk/pasar-buah'),
+  },
   // --- TK ---
   {
     id: 'hitung-buah',

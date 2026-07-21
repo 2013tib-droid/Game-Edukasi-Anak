@@ -134,6 +134,39 @@
   margin-bottom: 4px;
 }
 
+/* Fruit "guess the shadow": show the picture as a dark silhouette. */
+.ta-picture--silhouette {
+  filter: brightness(0);
+  opacity: 0.8;
+}
+
+/* Bawah Laut "Pola Ajaib": the repeating shape sequence above the choices. */
+.ta-sequence {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 8px auto 18px;
+  max-width: 100%;
+}
+
+.ta-seq-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ta-seq-cell--q {
+  width: 52px;
+  height: 52px;
+  border: 3px dashed #00697f;
+  border-radius: 12px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #00697f;
+}
+
 .ta-board {
   display: flex;
   flex-wrap: wrap;
