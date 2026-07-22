@@ -33,16 +33,6 @@ export default function LandingPage() {
         🎮 Main Sekarang
       </Link>
 
-      <div className="pricecard">
-        <span className="pc-tag">🎉 Harga Perkenalan</span>
-        <div className="pc-row">
-          <span className="pc-was">Rp39.000</span>
-          <span className="pc-now">Rp15.000</span>
-          <span className="pc-off">−60%</span>
-        </div>
-        <span className="pc-sub">Buka semua game TK · sekali bayar, main selamanya</span>
-      </div>
-
       <div className="worlds" aria-hidden="true">
         {worlds.map((w) => (
           <div key={w.name} className={`chip ${w.cls}`}>
@@ -50,6 +40,28 @@ export default function LandingPage() {
             <span className="cn">{w.name}</span>
           </div>
         ))}
+      </div>
+
+      <div className="prices">
+        <div className="pcard">
+          <span className="pc-badge">🎉 Harga Perkenalan</span>
+          <div className="pc-name">Kelompok TK · 5–7 tahun</div>
+          <div className="pc-row">
+            <span className="pc-was">Rp39.000</span>
+            <span className="pc-now">Rp19.000</span>
+            <span className="pc-off">−50%</span>
+          </div>
+          <div className="pc-sub">Buka semua game TK · sekali bayar, main selamanya</div>
+        </div>
+
+        <div className="pcard pcard--soon">
+          <span className="pc-badge pc-badge--soon">🚀 Segera Hadir</span>
+          <div className="pc-name">Kelompok SD Awal · Kelas 1–2</div>
+          <div className="pc-row">
+            <span className="pc-now pc-now--soon">Rp39.000</span>
+          </div>
+          <div className="pc-sub">Soal lebih menantang — menyusul!</div>
+        </div>
       </div>
 
       <footer>Tanpa iklan · Aman untuk anak</footer>
