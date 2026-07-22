@@ -33,6 +33,16 @@ export default function LandingPage() {
         🎮 Main Sekarang
       </Link>
 
+      <div className="pricecard">
+        <span className="pc-tag">🎉 Harga Perkenalan</span>
+        <div className="pc-row">
+          <span className="pc-was">Rp39.000</span>
+          <span className="pc-now">Rp15.000</span>
+          <span className="pc-off">−60%</span>
+        </div>
+        <span className="pc-sub">Buka semua game TK · sekali bayar, main selamanya</span>
+      </div>
+
       <div className="worlds" aria-hidden="true">
         {worlds.map((w) => (
           <div key={w.name} className={`chip ${w.cls}`}>
