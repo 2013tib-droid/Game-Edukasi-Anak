@@ -59,18 +59,6 @@
   box-shadow: 0 2px 0 rgba(179, 63, 18, 0.55);
 }
 
-.landing .login {
-  margin-top: 16px;
-  font-size: 15px;
-  font-weight: 700;
-  color: #3a2e20;
-  opacity: 0.7;
-  text-decoration: none;
-}
-.landing .login:active {
-  opacity: 1;
-}
-
 /* a light peek at the four worlds — visual, almost no text */
 .landing .worlds {
   display: flex;

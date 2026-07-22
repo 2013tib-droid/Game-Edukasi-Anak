@@ -80,6 +80,42 @@ button {
   border-color: #ffb703;
 }
 
+/* Parent-area entry — floating pill, top-right. Prominent but out of the
+   kid's main flow (the big "Main"/group buttons stay center-stage). */
+.parent-btn {
+  position: fixed;
+  top: calc(12px + env(safe-area-inset-top));
+  right: calc(12px + env(safe-area-inset-right));
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 46px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #fff;
+  color: #3a2e20;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.18);
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
+}
+.parent-btn .parent-btn__ic {
+  font-size: 18px;
+}
+.parent-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+}
+.parent-btn:focus-visible {
+  outline: 3px solid #3a2e20;
+  outline-offset: 2px;
+}
+
 /* Simple centered page container */
 .page {
   max-width: 860px;

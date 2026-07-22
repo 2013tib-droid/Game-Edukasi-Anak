@@ -18,15 +18,19 @@ const worlds = [
 export default function LandingPage() {
   return (
     <div className="landing">
+      <Link className="parent-btn" to="/masuk">
+        <span className="parent-btn__ic" aria-hidden>
+          👤
+        </span>
+        Orang Tua
+      </Link>
+
       <img className="logo" src={logo} alt="" width={112} height={112} />
       <h1>Petualangan Pintar</h1>
       <p className="tag">Main sambil belajar — dipandu suara Bahasa Indonesia 🎈</p>
 
       <Link className="cta" to="/portal">
         🎮 Main Sekarang
-      </Link>
-      <Link className="login" to="/masuk">
-        👤 Masuk akun orang tua
       </Link>
 
       <div className="worlds" aria-hidden="true">

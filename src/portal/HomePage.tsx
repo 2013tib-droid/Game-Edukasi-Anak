@@ -11,6 +11,13 @@ export default function HomePage() {
 
   return (
     <div className="page" style={{ textAlign: 'center' }}>
+      <Link className="parent-btn" to={user ? '/aktivasi' : '/masuk'}>
+        <span className="parent-btn__ic" aria-hidden>
+          {user ? '🔑' : '👤'}
+        </span>
+        {user ? 'Aktivasi' : 'Orang Tua'}
+      </Link>
+
       {/* Same logo badge as the landing page (public/assets/logo.svg). */}
       <img
         src={`${import.meta.env.BASE_URL}assets/logo.svg`}
@@ -43,13 +50,6 @@ export default function HomePage() {
         ))}
       </div>
 
-      <p style={{ marginTop: 32 }}>
-        {user ? (
-          <Link to="/aktivasi">Punya kode aktivasi?</Link>
-        ) : (
-          <Link to="/masuk">Masuk akun orang tua</Link>
-        )}
-      </p>
     </div>
   );
 }
