@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/auth/AuthContext';
+import { ArrowLeftIcon } from '@/app/icons';
 
 export default function RegisterPage() {
   const { register, configured } = useAuth();
@@ -32,7 +33,7 @@ export default function RegisterPage() {
   return (
     <div className="page" style={{ maxWidth: 420 }}>
       <Link className="back-link" to="/">
-        <span aria-hidden>⬅️</span> Beranda
+        <ArrowLeftIcon /> Beranda
       </Link>
       <h1>Daftar Akun Orang Tua</h1>
       {!configured && (

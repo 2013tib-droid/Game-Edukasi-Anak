@@ -3,6 +3,7 @@ import { useAuth } from '@/auth/AuthContext';
 import groupsData from '@/data/groups.json';
 import { getTotalStars } from '@/engine/core/progress';
 import MascotCard from '@/engine/ui/Mascot';
+import TopBar from '@/portal/TopBar';
 
 // Portal home: pick a group. Kid-facing, so only big friendly buttons —
 // account actions stay small and lead to the parent area.
@@ -10,17 +11,13 @@ export default function HomePage() {
   const { user } = useAuth();
 
   return (
-    <div className="page" style={{ textAlign: 'center' }}>
-      <Link className="home-btn" to="/">
-        <span aria-hidden>⬅️</span> Beranda
-      </Link>
-      <Link className="parent-btn" to={user ? '/aktivasi' : '/masuk'}>
-        <span className="parent-btn__ic" aria-hidden>
-          {user ? '🔑' : '👤'}
-        </span>
-        {user ? 'Aktivasi' : 'Orang Tua'}
-      </Link>
-
+    <>
+      <TopBar
+        back
+        accountTo={user ? '/aktivasi' : '/masuk'}
+        accountLabel={user ? 'Aktivasi' : 'Orang Tua'}
+      />
+      <div className="page" style={{ textAlign: 'center' }}>
       {/* Same logo badge as the landing page (public/assets/logo.svg). */}
       <img
         src={`${import.meta.env.BASE_URL}assets/logo.svg`}
@@ -52,7 +49,7 @@ export default function HomePage() {
           </Link>
         ))}
       </div>
-
-    </div>
+      </div>
+    </>
   );
 }

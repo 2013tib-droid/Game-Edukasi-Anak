@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowLeftIcon } from '@/app/icons';
 
 // Phase 5 will wire this to the `redeemActivationCode` Cloud Function.
 // For now it is a working form with the final UX copy.
@@ -16,7 +17,7 @@ export default function ActivationPage() {
   return (
     <div className="page" style={{ maxWidth: 420 }}>
       <Link className="back-link" to="/portal">
-        <span aria-hidden>⬅️</span> Kembali
+        <ArrowLeftIcon /> Kembali
       </Link>
       <h1>Masukkan Kode Aktivasi</h1>
       <p>Kode dikirim setelah pembelian di Lynk.id / Mayar.id.</p>

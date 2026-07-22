@@ -80,95 +80,94 @@ button {
   border-color: #ffb703;
 }
 
-/* Parent-area entry — floating pill, top-right. Prominent but out of the
-   kid's main flow (the big "Main"/group buttons stay center-stage). */
-.parent-btn {
-  position: fixed;
-  top: calc(12px + env(safe-area-inset-top));
-  right: calc(12px + env(safe-area-inset-right));
-  z-index: 30;
+/* App header — one frosted bar; back (home) on the left, account on the
+   right. Calm and professional: thin border, soft shadow, SVG icons. */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  padding-top: calc(10px + env(safe-area-inset-top));
+  background: rgba(255, 251, 240, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(58, 46, 32, 0.08);
+}
+.topbar__side {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.topbar__side--right {
+  margin-left: auto;
+}
+.topbar__btn {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  min-height: 46px;
-  padding: 10px 18px;
-  border-radius: 999px;
+  height: 42px;
+  padding: 0 15px;
+  border-radius: 12px;
   background: #fff;
+  border: 1px solid rgba(58, 46, 32, 0.1);
   color: #3a2e20;
   font-family: inherit;
-  font-weight: 700;
-  font-size: 15px;
+  font-weight: 600;
+  font-size: 14.5px;
   text-decoration: none;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.18);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   transition:
-    transform 0.1s,
-    box-shadow 0.1s;
+    background 0.12s,
+    box-shadow 0.12s,
+    transform 0.05s;
 }
-.parent-btn .parent-btn__ic {
-  font-size: 18px;
+.topbar__btn:hover {
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.09);
 }
-.parent-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+.topbar__btn:active {
+  transform: translateY(1px);
 }
-.parent-btn:focus-visible {
-  outline: 3px solid #3a2e20;
+.topbar__btn:focus-visible {
+  outline: 2px solid #3a2e20;
   outline-offset: 2px;
 }
-
-/* Back-to-landing — floating pill, top-left (mirrors .parent-btn). Used on
-   the portal so there is always a way back to the front page. */
-.home-btn {
-  position: fixed;
-  top: calc(12px + env(safe-area-inset-top));
-  left: calc(12px + env(safe-area-inset-left));
-  z-index: 30;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 46px;
-  padding: 10px 18px 10px 15px;
-  border-radius: 999px;
-  background: #fff;
-  color: #3a2e20;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 15px;
-  text-decoration: none;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.18);
-  transition:
-    transform 0.1s,
-    box-shadow 0.1s;
+.topbar__btn svg {
+  opacity: 0.85;
+  flex-shrink: 0;
 }
-.home-btn:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
-}
-.home-btn:focus-visible {
-  outline: 3px solid #3a2e20;
-  outline-offset: 2px;
+.topbar__btn--account svg {
+  color: #b3541a;
+  opacity: 1;
 }
 
-/* In-flow back link — for top-aligned form pages (auth), placed above the
-   title so it never overlaps content. */
+/* In-flow back link — same visual language as the header buttons, for
+   top-aligned form pages (auth). Placed above the title. */
 .back-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 16px;
-  padding: 8px 15px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.9);
+  gap: 7px;
+  height: 40px;
+  padding: 0 15px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(58, 46, 32, 0.1);
   color: #3a2e20;
   font-family: inherit;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
   text-decoration: none;
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.14);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.back-link svg {
+  opacity: 0.85;
 }
 .back-link:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.14);
+  transform: translateY(1px);
 }
 
 /* Simple centered page container */

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import TopBar from '@/portal/TopBar';
 import './landing.css';
 
 const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
@@ -17,15 +18,10 @@ const worlds = [
  */
 export default function LandingPage() {
   return (
-    <div className="landing">
-      <Link className="parent-btn" to="/masuk">
-        <span className="parent-btn__ic" aria-hidden>
-          👤
-        </span>
-        Orang Tua
-      </Link>
-
-      <img className="logo" src={logo} alt="" width={112} height={112} />
+    <>
+      <TopBar accountTo="/masuk" accountLabel="Orang Tua" />
+      <div className="landing">
+        <img className="logo" src={logo} alt="" width={112} height={112} />
       <h1>Petualangan Pintar</h1>
       <p className="tag">Main sambil belajar — dipandu suara Bahasa Indonesia 🎈</p>
 
@@ -65,6 +61,7 @@ export default function LandingPage() {
       </div>
 
       <footer>Tanpa iklan · Aman untuk anak</footer>
-    </div>
+      </div>
+    </>
   );
 }
