@@ -92,7 +92,7 @@ export default function LandingPage() {
       <header className="lp-header">
         <div className="lp-nav">
           <Link className="lp-brand" to="/">
-            <img className="lp-logo" src="/assets/logo.svg" alt="" />
+            <img className="lp-logo" src={`${import.meta.env.BASE_URL}assets/logo.svg`} alt="" />
             Petualangan Pintar
           </Link>
           <Link className="lp-btn lp-btn--ghost" to="/masuk">
