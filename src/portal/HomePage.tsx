@@ -11,7 +11,15 @@ export default function HomePage() {
 
   return (
     <div className="page" style={{ textAlign: 'center' }}>
-      <h1 style={{ fontSize: 36 }}>🌈 Petualangan Pintar</h1>
+      {/* Same logo badge as the landing page (public/assets/logo.svg). */}
+      <img
+        src={`${import.meta.env.BASE_URL}assets/logo.svg`}
+        alt=""
+        width={104}
+        height={104}
+        style={{ display: 'block', margin: '0 auto 4px' }}
+      />
+      <h1 style={{ fontSize: 32, margin: 0 }}>Petualangan Pintar</h1>
       <p style={{ fontSize: 20 }}>Pilih kelompok belajarmu!</p>
 
       <div style={{ marginTop: 16 }}>
