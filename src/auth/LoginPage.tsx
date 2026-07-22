@@ -18,7 +18,7 @@ export default function LoginPage() {
     setBusy(true);
     try {
       await login(email, password);
-      const from = (location.state as { from?: string } | null)?.from ?? '/';
+      const from = (location.state as { from?: string } | null)?.from ?? '/portal';
       navigate(from, { replace: true });
     } catch {
       setError('Email atau kata sandi salah. Coba lagi ya.');
