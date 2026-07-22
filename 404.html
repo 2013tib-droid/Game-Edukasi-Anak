@@ -4,21 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mengalihkan…</title>
-<script>
-// GitHub Pages SPA fallback: refresh/deep-link inside the portal app lands
-// here. Pass the deep path along as ?p= so portal/index.html can restore
-// the route before React Router mounts. Anything else goes to the landing.
-var base = '/Game-Edukasi-Anak/portal';
-var p = location.pathname;
-if (p.indexOf(base + '/') === 0) {
-  var deep = p.slice(base.length) + location.search + location.hash;
-  location.replace(base + '/?p=' + encodeURIComponent(deep));
-} else {
-  location.replace('/Game-Edukasi-Anak/');
-}
-</script>
+<!-- The portal app uses hash routing, so in-app deep links never hit this
+     fallback. Any unknown path just goes to the app entry. -->
+<script>location.replace('/Game-Edukasi-Anak/app/');</script>
 </head>
 <body>
-<p>Mengalihkan… <a href="/Game-Edukasi-Anak/">klik di sini</a> jika tidak berpindah otomatis.</p>
+<p>Mengalihkan… <a href="/Game-Edukasi-Anak/app/">klik di sini</a> jika tidak berpindah otomatis.</p>
 </body>
 </html>
