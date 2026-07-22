@@ -11,6 +11,9 @@ export default function HomePage() {
 
   return (
     <div className="page" style={{ textAlign: 'center' }}>
+      <Link className="home-btn" to="/">
+        <span aria-hidden>⬅️</span> Beranda
+      </Link>
       <Link className="parent-btn" to={user ? '/aktivasi' : '/masuk'}>
         <span className="parent-btn__ic" aria-hidden>
           {user ? '🔑' : '👤'}

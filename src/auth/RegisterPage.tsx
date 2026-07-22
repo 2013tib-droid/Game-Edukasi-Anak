@@ -31,6 +31,9 @@ export default function RegisterPage() {
 
   return (
     <div className="page" style={{ maxWidth: 420 }}>
+      <Link className="back-link" to="/">
+        <span aria-hidden>⬅️</span> Beranda
+      </Link>
       <h1>Daftar Akun Orang Tua</h1>
       {!configured && (
         <p style={{ background: '#fff3cd', padding: 12, borderRadius: 12 }}>
