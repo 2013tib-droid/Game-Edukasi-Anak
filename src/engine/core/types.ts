@@ -164,6 +164,18 @@ export interface GameLevel<T extends TemplateId = TemplateId> {
   data: LevelDataMap[T];
 }
 
+/**
+ * A level "slot": either a single fixed level, or an array of interchangeable
+ * variants. When it's an array the shell picks one variant at random each
+ * time the game is played (and on "Main Lagi") — so replays stay fresh and
+ * the questions don't feel repetitive, without any per-question logic living
+ * in the engine. All variants are still plain typed data.
+ */
+export type LevelSlot<T extends TemplateId = TemplateId> = GameLevel<T> | GameLevel<T>[];
+
+/** Mixed-game equivalent of LevelSlot. */
+export type MixedSlot = MixedLevel | MixedLevel[];
+
 export interface GameConfig<T extends TemplateId = TemplateId> {
   id: string;
   group: GroupId;
@@ -173,7 +185,8 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
   template: T;
   /** Free demo games are fully playable without login. */
   freeDemo: boolean;
-  levels: GameLevel<T>[];
+  /** Ordered slots; a slot may be one level or a pool of random variants. */
+  levels: LevelSlot<T>[];
 }
 
 /**
@@ -203,7 +216,8 @@ export interface MixedGameConfig {
   emoji: string;
   template: 'mixed';
   freeDemo: boolean;
-  levels: MixedLevel[];
+  /** Ordered slots; a slot may be one level or a pool of random variants. */
+  levels: MixedSlot[];
 }
 
 /** Either kind of game — what the shell, registry, and pages accept. */

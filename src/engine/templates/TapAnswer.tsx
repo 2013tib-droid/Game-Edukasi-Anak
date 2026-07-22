@@ -77,7 +77,13 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
             >
               {c.shape && <Shape kind={c.shape.kind} color={c.shape.color} size={64} />}
               {c.emoji && <span aria-hidden>{c.emoji}</span>}
-              {c.text && <span className="choice-text">{c.text}</span>}
+              {c.text && (
+                // A text answer with no emoji (a letter/number) is the main
+                // visual — render it big. With an emoji it's just a caption.
+                <span className={c.emoji ? 'choice-text' : 'choice-text choice-text--main'}>
+                  {c.text}
+                </span>
+              )}
             </button>
           ))}
         </div>
