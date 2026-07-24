@@ -9,10 +9,12 @@ import type { GameConfig } from '@/engine/core/types';
  * child must actually count, not guess).
  *
  * Animals are kid-favourites (puppy, kitten, bunny, panda, penguin, chick…)
- * and vary level to level so the board stays fun to look at. In the equation
- * boards each operator is glued to its group with a non-breaking space
- * ( ) and only one normal space is left between the two halves, so a
- * wrap breaks cleanly between them — it never orphans a lone "= ?".
+ * and vary level to level so the board stays fun to look at. The board uses
+ * `boardItems` — real picture assets (flat SVG in public/assets/items/)
+ * instead of the device emoji font — so a panda looks the same on every
+ * phone. Each token is either a group of identical animals ({ item, count })
+ * or an operator ({ op }); the template lays out equation boards as
+ * "rabbit ×2  +  rabbit ×3  =  ?".
  */
 const config: GameConfig<'tap-answer'> = {
   id: 'hutan-hewan',
@@ -26,7 +28,7 @@ const config: GameConfig<'tap-answer'> = {
       id: 'l1',
       narration: 'Ayo hitung! Ada berapa anjing?',
       data: {
-        board: '🐶🐶🐶',
+        boardItems: [{ item: 'dog', count: 3 }],
         choices: [
           { id: 'a', text: '2' },
           { id: 'b', text: '3', correct: true },
@@ -38,7 +40,7 @@ const config: GameConfig<'tap-answer'> = {
       id: 'l2',
       narration: 'Ada berapa kucing?',
       data: {
-        board: '🐱🐱🐱🐱',
+        boardItems: [{ item: 'cat', count: 4 }],
         choices: [
           { id: 'a', text: '3' },
           { id: 'b', text: '4', correct: true },
@@ -50,7 +52,7 @@ const config: GameConfig<'tap-answer'> = {
       id: 'l3',
       narration: 'Hitung baik-baik. Ada berapa pinguin?',
       data: {
-        board: '🐧🐧🐧🐧🐧🐧',
+        boardItems: [{ item: 'penguin', count: 6 }],
         choices: [
           { id: 'a', text: '5' },
           { id: 'b', text: '6', correct: true },
@@ -62,7 +64,13 @@ const config: GameConfig<'tap-answer'> = {
       id: 'l4',
       narration: 'Ayo tambahkan! Dua kelinci, ditambah tiga kelinci, jadi berapa semuanya?',
       data: {
-        board: '🐰🐰 ➕ 🐰🐰🐰 = ❓',
+        boardItems: [
+          { item: 'rabbit', count: 2 },
+          { op: 'plus' },
+          { item: 'rabbit', count: 3 },
+          { op: 'equals' },
+          { op: 'question' },
+        ],
         choices: [
           { id: 'a', text: '4' },
           { id: 'b', text: '5', correct: true },
@@ -74,7 +82,13 @@ const config: GameConfig<'tap-answer'> = {
       id: 'l5',
       narration: 'Tiga panda, ditambah tiga panda, ada berapa semuanya?',
       data: {
-        board: '🐼🐼🐼 ➕ 🐼🐼🐼 = ❓',
+        boardItems: [
+          { item: 'panda', count: 3 },
+          { op: 'plus' },
+          { item: 'panda', count: 3 },
+          { op: 'equals' },
+          { op: 'question' },
+        ],
         choices: [
           { id: 'a', text: '5' },
           { id: 'b', text: '6', correct: true },
@@ -86,7 +100,11 @@ const config: GameConfig<'tap-answer'> = {
       id: 'l6',
       narration: 'Ada lima anak ayam. Dua anak ayam pulang ke rumah. Berapa yang masih tinggal?',
       data: {
-        board: '🐥🐥🐥🐥🐥 ➡️ 🏠🏠',
+        boardItems: [
+          { item: 'chick', count: 5 },
+          { op: 'arrow' },
+          { item: 'house', count: 2 },
+        ],
         choices: [
           { id: 'a', text: '2' },
           { id: 'b', text: '3', correct: true },
@@ -98,7 +116,11 @@ const config: GameConfig<'tap-answer'> = {
       id: 'l7',
       narration: 'Ada tujuh bebek. Tiga bebek berenang pulang. Berapa yang masih tinggal?',
       data: {
-        board: '🦆🦆🦆🦆🦆🦆🦆 ➡️ 🏠🏠🏠',
+        boardItems: [
+          { item: 'duck', count: 7 },
+          { op: 'arrow' },
+          { item: 'house', count: 3 },
+        ],
         choices: [
           { id: 'a', text: '3' },
           { id: 'b', text: '4', correct: true },
