@@ -52,6 +52,19 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
     [level],
   );
 
+  // Total picture count on the board (animals + props like houses, ignoring
+  // operators). Busy boards (subtraction: "7 ducks → 3 houses" = 10 items)
+  // shrink the pictures a notch so everything fits without scrolling.
+  const boardItemCount = useMemo(
+    () =>
+      (level.data.boardItems ?? []).reduce(
+        (n, tok) => ('op' in tok ? n : n + tok.count),
+        0,
+      ),
+    [level],
+  );
+  const denseBoard = boardItemCount > 6;
+
   function handleTap(id: string, correct: boolean | undefined) {
     if (solved) return;
     if (correct) {
@@ -93,7 +106,10 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
           </div>
         )}
         {level.data.boardItems && (
-          <div className="ta-board ta-board--pics" aria-hidden>
+          <div
+            className={'ta-board ta-board--pics' + (denseBoard ? ' ta-board--dense' : '')}
+            aria-hidden
+          >
             {level.data.boardItems.map((tok, i) =>
               'op' in tok ? (
                 <span key={i} className="ta-board__op">
