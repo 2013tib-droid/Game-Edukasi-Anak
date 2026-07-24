@@ -24,7 +24,7 @@ export interface ItemDef {
 export const ITEMS: Record<string, ItemDef> = {
   dog: { emoji: '🐶', label: 'anjing' },
   cat: { emoji: '🐱', label: 'kucing' },
-  penguin: { emoji: '🐧', label: 'pinguin' },
+  penguin: { emoji: '🐧', label: 'pinguin', ext: 'webp' },
   rabbit: { emoji: '🐰', label: 'kelinci' },
   panda: { emoji: '🐼', label: 'panda' },
   chick: { emoji: '🐥', label: 'anak ayam' },
