@@ -36,6 +36,13 @@ tertutup itu dengan putih (flood dari tepi menandai latar asli, sisanya =
 lubang → putih). Ini yang dipakai untuk panda karena latarnya hitam dan tubuh
 panda juga hitam (tak mungkin dipisah dari warna).
 
+**Kasus khusus — latar checkerboard (JPEG).** Bila kiriman JPEG dengan latar
+kotak-kotak transparansi (ter-flatten), latar itu abu-abu **saturasi rendah**
+di semua tingkat kecerahan. Buang dengan flood dari tepi memakai gerbang
+saturasi saja (`sat < ~20`), lalu ambil **blob terbesar** untuk membuang
+coretan garis-gerak / teks ("MEOW!") / daun jatuh, dan isi lubang di dalam
+subjek. Dipakai untuk bebek, kura-kura, kelinci, beruang, kucing.
+
 ## Registrasi
 
 Setiap aset baru harus didaftarkan di `src/engine/ui/items.ts`:
@@ -57,15 +64,18 @@ elephant: { emoji: '🐘', label: 'gajah', ext: 'webp' },
 | elephant | gajah | 🐘 | ✅ diterima (dipakai Hutan Hewan l2) | `public/assets/items/elephant.webp` |
 | lion | singa | 🦁 | ✅ diterima (dipakai Hutan Hewan l3) | `public/assets/items/lion.webp` |
 | panda | panda | 🐼 | ✅ diterima (dipakai Hutan Hewan l5) | `public/assets/items/panda.webp` |
+| rabbit | kelinci | 🐰 | ✅ diterima (dipakai Hutan Hewan l4) | `public/assets/items/rabbit.webp` |
+| duck | bebek | 🦆 | ✅ diterima (dipakai Hutan Hewan l7) | `public/assets/items/duck.webp` |
+| cat | kucing | 🐱 | ✅ diterima | `public/assets/items/cat.webp` |
+| bear | beruang | 🐻 | ✅ diterima (belum dipakai di level) | `public/assets/items/bear.webp` |
+| turtle | kura-kura | 🐢 | ✅ diterima (belum dipakai di level) | `public/assets/items/turtle.webp` |
 | dog | anjing | 🐶 | ⏳ placeholder SVG | `dog.svg` |
-| cat | kucing | 🐱 | ⏳ placeholder SVG | `cat.svg` |
-| rabbit | kelinci | 🐰 | ⏳ placeholder SVG (Hutan Hewan l4) | `rabbit.svg` |
 | penguin | pinguin | 🐧 | ⏳ placeholder SVG | `penguin.svg` |
 | chick | anak ayam | 🐥 | ⏳ placeholder SVG (Hutan Hewan l6) | `chick.svg` |
-| duck | bebek | 🦆 | ⏳ placeholder SVG (Hutan Hewan l7) | `duck.svg` |
 
 > "⏳ placeholder SVG" = flat art sementara dari Fase 3; akan diganti art kartun
 > premium bergaya sama begitu pemilik mengirim ("sisa hewannya menyusul").
+> Sisa: **anjing, pinguin, anak ayam**.
 
 ## Prompt per Hewan
 
@@ -82,13 +92,14 @@ Template prompt (isi `<HEWAN>`):
 | elephant | badan abu-abu kebiruan, telinga besar merah muda di dalam, melambai. **✅ sesuai referensi.** |
 | lion | surai coklat, tubuh emas, ekspresi ceria/mengaum ramah. **✅ sesuai referensi.** |
 | panda | hitam-putih, mata besar, pipi pink, memeluk bambu hijau. Latar hitam + tubuh hitam → pakai alpha PNG + isi lubang putih (lihat "Kasus khusus"). **✅ sesuai referensi.** |
+| rabbit | putih/krem, telinga panjang, memeluk wortel, bandana biru. **✅ sesuai referensi.** |
+| duck | bebek kuning, paruh oranye, bandana biru. **✅ sesuai referensi.** |
+| cat | oranye-putih, mata biru, bandana biru. **✅ sesuai referensi.** |
+| bear | beruang coklat, perut krem, bandana biru, melambai. **✅ sesuai referensi.** |
+| turtle | kura-kura, tempurung hijau, wajah krem, bandana biru. **✅ sesuai referensi.** |
 | dog | anak anjing, telinga jatuh, lidah kecil |
-| cat | anak kucing, telinga runcing |
-| rabbit | kelinci, telinga panjang tegak |
-| panda | panda, hitam-putih, mata besar |
 | penguin | pinguin, perut putih |
 | chick | anak ayam kuning, paruh oranye |
-| duck | bebek kuning, paruh oranye lebar |
 
 Saat menambah hewan baru di luar daftar ini, ikuti gaya target di atas dan
 daftarkan idnya di `items.ts` sebelum dipakai di config game.

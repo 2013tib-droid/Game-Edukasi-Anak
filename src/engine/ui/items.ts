@@ -23,18 +23,20 @@ export interface ItemDef {
 
 export const ITEMS: Record<string, ItemDef> = {
   dog: { emoji: '🐶', label: 'anjing' },
-  cat: { emoji: '🐱', label: 'kucing' },
   penguin: { emoji: '🐧', label: 'pinguin' },
-  rabbit: { emoji: '🐰', label: 'kelinci' },
-  panda: { emoji: '🐼', label: 'panda', ext: 'webp' },
   chick: { emoji: '🐥', label: 'anak ayam' },
-  duck: { emoji: '🦆', label: 'bebek' },
   house: { emoji: '🏠', label: 'rumah' },
   // Premium AI-generated art (cute cartoon style). Delivered as transparent
   // WebP by the project owner — see docs/asset-generation-prompts.md.
   elephant: { emoji: '🐘', label: 'gajah', ext: 'webp' },
   lion: { emoji: '🦁', label: 'singa', ext: 'webp' },
   giraffe: { emoji: '🦒', label: 'jerapah', ext: 'webp' },
+  panda: { emoji: '🐼', label: 'panda', ext: 'webp' },
+  rabbit: { emoji: '🐰', label: 'kelinci', ext: 'webp' },
+  duck: { emoji: '🦆', label: 'bebek', ext: 'webp' },
+  cat: { emoji: '🐱', label: 'kucing', ext: 'webp' },
+  bear: { emoji: '🐻', label: 'beruang', ext: 'webp' },
+  turtle: { emoji: '🐢', label: 'kura-kura', ext: 'webp' },
 };
 
 /** Public URL of an item's picture, respecting the Vite base path. */
