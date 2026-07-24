@@ -34,6 +34,11 @@ export const ITEMS: Record<string, ItemDef> = {
   cat: { emoji: '🐱', label: 'kucing', ext: 'webp' },
   bear: { emoji: '🐻', label: 'beruang', ext: 'webp' },
   turtle: { emoji: '🐢', label: 'kura-kura', ext: 'webp' },
+  penguin: { emoji: '🐧', label: 'pinguin', ext: 'webp' },
+  horse: { emoji: '🐴', label: 'kuda', ext: 'webp' },
+  chicken: { emoji: '🐔', label: 'ayam', ext: 'webp' },
+  zebra: { emoji: '🦓', label: 'zebra', ext: 'webp' },
+  goat: { emoji: '🐐', label: 'kambing', ext: 'webp' },
 };
 
 /** Public URL of an item's picture, respecting the Vite base path. */
