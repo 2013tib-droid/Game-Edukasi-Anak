@@ -225,6 +225,23 @@
   filter: none;
 }
 
+/* Busy boards (>6 pictures, e.g. subtraction) shrink a notch and tighten the
+   gaps so the whole board + answer cards fit without scrolling. */
+.ta-board--dense {
+  gap: 6px 12px;
+}
+.ta-board--dense .ta-board__group {
+  gap: 6px;
+}
+.ta-board--dense .ta-board__img,
+.ta-board--dense .ta-board__emoji {
+  width: clamp(60px, 16vw, 96px);
+  height: clamp(60px, 16vw, 96px);
+}
+.ta-board--dense .ta-board__emoji {
+  font-size: clamp(46px, 12vw, 74px);
+}
+
 /* Equation operators (+ = → ?) between the picture groups. */
 .ta-board__op {
   font-size: clamp(28px, 7.5vw, 40px);
