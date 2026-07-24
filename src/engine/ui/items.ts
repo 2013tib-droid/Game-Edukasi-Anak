@@ -22,9 +22,6 @@ export interface ItemDef {
 }
 
 export const ITEMS: Record<string, ItemDef> = {
-  dog: { emoji: '🐶', label: 'anjing' },
-  penguin: { emoji: '🐧', label: 'pinguin' },
-  chick: { emoji: '🐥', label: 'anak ayam' },
   house: { emoji: '🏠', label: 'rumah' },
   // Premium AI-generated art (cute cartoon style). Delivered as transparent
   // WebP by the project owner — see docs/asset-generation-prompts.md.

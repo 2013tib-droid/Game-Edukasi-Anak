@@ -67,15 +67,14 @@ elephant: { emoji: '🐘', label: 'gajah', ext: 'webp' },
 | rabbit | kelinci | 🐰 | ✅ diterima (dipakai Hutan Hewan l4) | `public/assets/items/rabbit.webp` |
 | duck | bebek | 🦆 | ✅ diterima (dipakai Hutan Hewan l7) | `public/assets/items/duck.webp` |
 | cat | kucing | 🐱 | ✅ diterima | `public/assets/items/cat.webp` |
-| bear | beruang | 🐻 | ✅ diterima (belum dipakai di level) | `public/assets/items/bear.webp` |
-| turtle | kura-kura | 🐢 | ✅ diterima (belum dipakai di level) | `public/assets/items/turtle.webp` |
-| dog | anjing | 🐶 | ⏳ placeholder SVG | `dog.svg` |
-| penguin | pinguin | 🐧 | ⏳ placeholder SVG | `penguin.svg` |
-| chick | anak ayam | 🐥 | ⏳ placeholder SVG (Hutan Hewan l6) | `chick.svg` |
+| bear | beruang | 🐻 | ✅ diterima (dipakai Hutan Hewan l6, ganti anak ayam) | `public/assets/items/bear.webp` |
+| turtle | kura-kura | 🐢 | ✅ diterima (siap dipakai, belum ada slot level) | `public/assets/items/turtle.webp` |
 
-> "⏳ placeholder SVG" = flat art sementara dari Fase 3; akan diganti art kartun
-> premium bergaya sama begitu pemilik mengirim ("sisa hewannya menyusul").
-> Sisa: **anjing, pinguin, anak ayam**.
+> **Semua aset hewan kini premium WebP** — tidak ada placeholder SVG hewan lagi.
+> Hanya `house.svg` (properti "rumah", bukan hewan) yang masih SVG.
+> `dog`/`anjing`, `penguin`/`pinguin`, `chick`/`anak ayam` **dihapus** dari
+> registry atas permintaan pemilik: anjing tidak dipakai; anak ayam & pinguin
+> digantikan hewan premium (beruang di l6; kura-kura menyusul di slot berikutnya).
 
 ## Prompt per Hewan
 
@@ -97,9 +96,6 @@ Template prompt (isi `<HEWAN>`):
 | cat | oranye-putih, mata biru, bandana biru. **✅ sesuai referensi.** |
 | bear | beruang coklat, perut krem, bandana biru, melambai. **✅ sesuai referensi.** |
 | turtle | kura-kura, tempurung hijau, wajah krem, bandana biru. **✅ sesuai referensi.** |
-| dog | anak anjing, telinga jatuh, lidah kecil |
-| penguin | pinguin, perut putih |
-| chick | anak ayam kuning, paruh oranye |
 
 Saat menambah hewan baru di luar daftar ini, ikuti gaya target di atas dan
 daftarkan idnya di `items.ts` sebelum dipakai di config game.

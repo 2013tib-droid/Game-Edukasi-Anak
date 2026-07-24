@@ -8,7 +8,7 @@ import type { GameConfig } from '@/engine/core/types';
  * (design rule: the wrong options sit close to the right number so the
  * child must actually count, not guess).
  *
- * Animals are kid-favourites (giraffe, elephant, lion, bunny, panda, chick…)
+ * Animals are kid-favourites (giraffe, elephant, lion, bunny, panda, bear…)
  * and vary level to level so the board stays fun to look at. The board uses
  * `boardItems` — real picture assets in public/assets/items/ (premium
  * AI-generated WebP where delivered, e.g. giraffe/elephant/lion; flat SVG
@@ -100,10 +100,10 @@ const config: GameConfig<'tap-answer'> = {
     },
     {
       id: 'l6',
-      narration: 'Ada lima anak ayam. Dua anak ayam pulang ke rumah. Berapa yang masih tinggal?',
+      narration: 'Ada lima beruang. Dua beruang pulang ke rumah. Berapa yang masih tinggal?',
       data: {
         boardItems: [
-          { item: 'chick', count: 5 },
+          { item: 'bear', count: 5 },
           { op: 'arrow' },
           { item: 'house', count: 2 },
         ],
