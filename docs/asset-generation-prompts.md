@@ -28,6 +28,14 @@ Ditetapkan dari dua aset pertama yang dikirim pemilik (gajah & singa):
 Skrip referensi: `scripts/` (lihat `process.py` pada handoff) — parameter
 saturasi/brightness disetel per gambar karena warna latar berbeda.
 
+**Kasus khusus — PNG sudah ber-alpha / latar gelap.** Bila kiriman berupa PNG
+yang sudah punya kanal alpha (mis. panda: siluet sudah terpotong), JANGAN
+key-out warna — pakai al-nya langsung. Kadang bagian putih subjek (wajah/perut
+panda) ikut transparan karena dirancang untuk halaman putih; isi lubang
+tertutup itu dengan putih (flood dari tepi menandai latar asli, sisanya =
+lubang → putih). Ini yang dipakai untuk panda karena latarnya hitam dan tubuh
+panda juga hitam (tak mungkin dipisah dari warna).
+
 ## Registrasi
 
 Setiap aset baru harus didaftarkan di `src/engine/ui/items.ts`:
@@ -48,10 +56,10 @@ elephant: { emoji: '🐘', label: 'gajah', ext: 'webp' },
 | giraffe | jerapah | 🦒 | ✅ diterima (dipakai Hutan Hewan l1) | `public/assets/items/giraffe.webp` |
 | elephant | gajah | 🐘 | ✅ diterima (dipakai Hutan Hewan l2) | `public/assets/items/elephant.webp` |
 | lion | singa | 🦁 | ✅ diterima (dipakai Hutan Hewan l3) | `public/assets/items/lion.webp` |
+| panda | panda | 🐼 | ✅ diterima (dipakai Hutan Hewan l5) | `public/assets/items/panda.webp` |
 | dog | anjing | 🐶 | ⏳ placeholder SVG | `dog.svg` |
 | cat | kucing | 🐱 | ⏳ placeholder SVG | `cat.svg` |
 | rabbit | kelinci | 🐰 | ⏳ placeholder SVG (Hutan Hewan l4) | `rabbit.svg` |
-| panda | panda | 🐼 | ⏳ placeholder SVG (Hutan Hewan l5) | `panda.svg` |
 | penguin | pinguin | 🐧 | ⏳ placeholder SVG | `penguin.svg` |
 | chick | anak ayam | 🐥 | ⏳ placeholder SVG (Hutan Hewan l6) | `chick.svg` |
 | duck | bebek | 🦆 | ⏳ placeholder SVG (Hutan Hewan l7) | `duck.svg` |
@@ -73,6 +81,7 @@ Template prompt (isi `<HEWAN>`):
 | giraffe | tubuh oranye-tan dengan bercak coklat, perut krem, tanduk (ossicone) kecil, melambai dua tangan. **✅ sesuai referensi.** |
 | elephant | badan abu-abu kebiruan, telinga besar merah muda di dalam, melambai. **✅ sesuai referensi.** |
 | lion | surai coklat, tubuh emas, ekspresi ceria/mengaum ramah. **✅ sesuai referensi.** |
+| panda | hitam-putih, mata besar, pipi pink, memeluk bambu hijau. Latar hitam + tubuh hitam → pakai alpha PNG + isi lubang putih (lihat "Kasus khusus"). **✅ sesuai referensi.** |
 | dog | anak anjing, telinga jatuh, lidah kecil |
 | cat | anak kucing, telinga runcing |
 | rabbit | kelinci, telinga panjang tegak |

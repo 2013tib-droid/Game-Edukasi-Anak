@@ -26,7 +26,7 @@ export const ITEMS: Record<string, ItemDef> = {
   cat: { emoji: '🐱', label: 'kucing' },
   penguin: { emoji: '🐧', label: 'pinguin' },
   rabbit: { emoji: '🐰', label: 'kelinci' },
-  panda: { emoji: '🐼', label: 'panda' },
+  panda: { emoji: '🐼', label: 'panda', ext: 'webp' },
   chick: { emoji: '🐥', label: 'anak ayam' },
   duck: { emoji: '🦆', label: 'bebek' },
   house: { emoji: '🏠', label: 'rumah' },
