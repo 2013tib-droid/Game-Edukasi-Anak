@@ -5,11 +5,17 @@ import type { GameConfig, GameLevel, LevelSlot, TapChoice } from '@/engine/core/
  * Berhitung). Progresses like the source levels: count small → count bigger
  * → addition → subtraction.
  *
- * Each of the 7 slots holds a POOL of interchangeable variants (different
+ * Each of the 8 slots holds a POOL of interchangeable variants (different
  * animals & numbers). The engine picks one variant per slot every play and
  * on "Main Lagi", so the game never feels repetitive — while every variant
  * stays plain typed data. Animals are kid-favourites (horse, penguin, panda,
  * koala…) and no two adjacent counting boards use the same one.
+ *
+ * Rendering: animals with premium AI art (see `src/engine/ui/items.ts`, e.g.
+ * lion/elephant/giraffe/panda/rabbit/duck/cat/bear/turtle) render as real
+ * WebP pictures via `boardItems` so they look identical on every phone; the
+ * rest degrade to a clear emoji board. `boardItems` also falls back to the
+ * item's emoji if its image is missing, so nothing ever renders blank.
  *
  * Design rule: wrong answer options sit close to the right number, so the
  * child must actually count, not guess. Equation boards glue each operator
@@ -17,33 +23,39 @@ import type { GameConfig, GameLevel, LevelSlot, TapChoice } from '@/engine/core/
  * two halves — never orphaning a lone "= ?".
  */
 
-const NBSP = ' ';
+const NBSP = ' ';
 
 interface Animal {
+  /** Emoji shown when the animal has no picture asset (or as image fallback). */
   e: string;
+  /** Indonesian name, used in the spoken narration. */
   n: string;
+  /** Item id in the registry (`items.ts`) when premium WebP art exists. */
+  item?: string;
 }
 
-// No dog (per owner). Kept to emoji that render as clear, countable animals.
+// No dog (per owner). Animals with `item` render as premium pictures; the
+// rest render as clear, countable emoji.
 const A = {
   kuda: { e: '🐴', n: 'kuda' },
   pinguin: { e: '🐧', n: 'pinguin' },
-  kelinci: { e: '🐰', n: 'kelinci' },
-  kucing: { e: '🐱', n: 'kucing' },
-  panda: { e: '🐼', n: 'panda' },
+  kelinci: { e: '🐰', n: 'kelinci', item: 'rabbit' },
+  kucing: { e: '🐱', n: 'kucing', item: 'cat' },
+  panda: { e: '🐼', n: 'panda', item: 'panda' },
   koala: { e: '🐨', n: 'koala' },
   sapi: { e: '🐮', n: 'sapi' },
   babi: { e: '🐷', n: 'babi' },
   katak: { e: '🐸', n: 'katak' },
   monyet: { e: '🐵', n: 'monyet' },
-  bebek: { e: '🦆', n: 'bebek' },
+  bebek: { e: '🦆', n: 'bebek', item: 'duck' },
   ayam: { e: '🐥', n: 'anak ayam' },
-  singa: { e: '🦁', n: 'singa' },
+  singa: { e: '🦁', n: 'singa', item: 'lion' },
   harimau: { e: '🐯', n: 'harimau' },
-  beruang: { e: '🐻', n: 'beruang' },
+  beruang: { e: '🐻', n: 'beruang', item: 'bear' },
   rubah: { e: '🦊', n: 'rubah' },
-  gajah: { e: '🐘', n: 'gajah' },
-  jerapah: { e: '🦒', n: 'jerapah' },
+  gajah: { e: '🐘', n: 'gajah', item: 'elephant' },
+  jerapah: { e: '🦒', n: 'jerapah', item: 'giraffe' },
+  kurakura: { e: '🐢', n: 'kura-kura', item: 'turtle' },
 } satisfies Record<string, Animal>;
 
 const WORDS = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan'];
@@ -59,12 +71,16 @@ function numChoices(correct: number): TapChoice[] {
   return [...opts].map((n, i) => ({ id: `o${i}`, text: String(n), correct: n === correct }));
 }
 
-// Variant builders (id filled in by slot()).
+// Variant builders (id filled in by slot()). Each emits a premium picture
+// board (`boardItems`) when the animal has art, else an emoji `board`.
 function count(a: Animal, n: number): GameLevel<'tap-answer'> {
   return {
     id: '',
     narration: `Ayo hitung! Ada berapa ${a.n}?`,
-    data: { board: a.e.repeat(n), choices: numChoices(n) },
+    data: {
+      ...(a.item ? { boardItems: [{ item: a.item, count: n }] } : { board: a.e.repeat(n) }),
+      choices: numChoices(n),
+    },
   };
 }
 
@@ -73,7 +89,17 @@ function add(a: Animal, x: number, y: number): GameLevel<'tap-answer'> {
     id: '',
     narration: `Ayo tambahkan! ${say(x)} ${a.n} ditambah ${say(y)} ${a.n}, jadi berapa semuanya?`,
     data: {
-      board: `${a.e.repeat(x)}${NBSP}➕ ${a.e.repeat(y)}${NBSP}=${NBSP}❓`,
+      ...(a.item
+        ? {
+            boardItems: [
+              { item: a.item, count: x },
+              { op: 'plus' },
+              { item: a.item, count: y },
+              { op: 'equals' },
+              { op: 'question' },
+            ],
+          }
+        : { board: `${a.e.repeat(x)}${NBSP}➕ ${a.e.repeat(y)}${NBSP}=${NBSP}❓` }),
       choices: numChoices(x + y),
     },
   };
@@ -84,17 +110,22 @@ function sub(a: Animal, total: number, leave: number): GameLevel<'tap-answer'> {
     id: '',
     narration: `Ada ${total} ${a.n}. ${say(leave)} ${a.n} pulang ke rumah. Berapa yang masih tinggal?`,
     data: {
-      board: `${a.e.repeat(total)} ➡️${NBSP}${'🏠'.repeat(leave)}`,
+      ...(a.item
+        ? {
+            boardItems: [
+              { item: a.item, count: total },
+              { op: 'arrow' },
+              { item: 'house', count: leave },
+            ],
+          }
+        : { board: `${a.e.repeat(total)} ➡️${NBSP}${'🏠'.repeat(leave)}` }),
       choices: numChoices(total - leave),
     },
   };
 }
 
 /** Give every variant in a slot the same stable id (star is per-slot). */
-function slot(
-  id: string,
-  ...variants: GameLevel<'tap-answer'>[]
-): LevelSlot<'tap-answer'> {
+function slot(id: string, ...variants: GameLevel<'tap-answer'>[]): LevelSlot<'tap-answer'> {
   return variants.map((v) => ({ ...v, id }));
 }
 
@@ -175,6 +206,16 @@ const config: GameConfig<'tap-answer'> = {
       sub(A.sapi, 7, 2),
       sub(A.panda, 6, 3),
       sub(A.kuda, 8, 4),
+    ),
+    // Slot 8 — subtraction, walk/swim home (remain 3–5)
+    slot(
+      'l8',
+      sub(A.kurakura, 6, 2),
+      sub(A.bebek, 8, 3),
+      sub(A.beruang, 7, 2),
+      sub(A.gajah, 7, 3),
+      sub(A.jerapah, 8, 4),
+      sub(A.singa, 6, 2),
     ),
   ],
 };

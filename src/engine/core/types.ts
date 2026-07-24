@@ -49,6 +49,17 @@ export interface TapChoice {
   correct?: boolean;
 }
 
+/** Operator symbols usable between item groups on a picture board. */
+export type BoardOp = 'plus' | 'minus' | 'equals' | 'arrow' | 'question';
+
+/**
+ * One token of a picture board (`TapAnswerData.boardItems`): either a run of
+ * `count` copies of the same item picture, or a single operator symbol.
+ */
+export type BoardItemToken =
+  | { item: string; count: number }
+  | { op: BoardOp };
+
 export interface TapAnswerData {
   /**
    * Optional big picture cue shown above the choices — e.g. "🚀" for a
@@ -61,11 +72,22 @@ export interface TapAnswerData {
    */
   silhouette?: boolean;
   /**
-   * Optional visual board shown above the choices, e.g. the animals to
-   * count ("🦁🦁🦁"), an addition board ("🐰🐰 ➕ 🐰🐰🐰"), or a word with a
+   * Optional visual board shown above the choices, e.g. a word with a
    * blank ("_OKET"). Plain text/emoji — the config author composes it.
+   * For a board of countable *pictures* (animals, fruit…) prefer
+   * `boardItems` below, which renders real image assets instead of the
+   * device emoji font.
    */
   board?: string;
+  /**
+   * Structured picture board: each token is either a group of `count`
+   * identical item pictures (looked up by `item` id in the item registry,
+   * `src/engine/ui/items.ts`, and rendered from `public/assets/items/`) or
+   * an `op` symbol for equation boards ("panda ×3  +  panda ×3  =  ?").
+   * When present it is rendered instead of `board`. Falls back to the
+   * item's emoji if its image is missing, so configs work before art ships.
+   */
+  boardItems?: BoardItemToken[];
   /**
    * Optional shape pattern shown above the choices (Bawah Laut "Pola
    * Ajaib"): a repeating ABAB / ABC-ABC sequence where `null` is the empty

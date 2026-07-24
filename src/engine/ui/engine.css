@@ -196,6 +196,70 @@
   white-space: nowrap;
 }
 
+/* Picture board (`boardItems`): real image assets instead of the emoji font. */
+.ta-board--pics {
+  gap: 10px 18px;
+}
+
+/* A run of identical animals stays together and wraps as a unit. Kids need
+   the animals BIG and legible, so a group wraps into a grid rather than
+   shrinking the pictures to fit one line. */
+.ta-board__group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.ta-board__img,
+.ta-board__emoji {
+  /* Large, TK-friendly: fills the roomy board area, wraps when the count is
+     high instead of turning into tiny icons. Sized generously because every
+     animal canvas is portrait, so this is effectively the render height —
+     narrower animals (lion, giraffe) need it big to carry visual weight. */
+  width: clamp(104px, 28vw, 164px);
+  height: clamp(104px, 28vw, 164px);
+  object-fit: contain;
+  /* soft drop shadow so pale animals (panda, rabbit) read on the pink bg */
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.14));
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.ta-board__emoji {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(80px, 22vw, 130px);
+  filter: none;
+}
+
+/* Busy boards (>6 pictures, e.g. subtraction) shrink a notch and tighten the
+   gaps so the whole board + answer cards fit without scrolling. */
+.ta-board--dense {
+  gap: 6px 12px;
+}
+.ta-board--dense .ta-board__group {
+  gap: 6px;
+}
+.ta-board--dense .ta-board__img,
+.ta-board--dense .ta-board__emoji {
+  width: clamp(60px, 16vw, 96px);
+  height: clamp(60px, 16vw, 96px);
+}
+.ta-board--dense .ta-board__emoji {
+  font-size: clamp(46px, 12vw, 74px);
+}
+
+/* Equation operators (+ = → ?) between the picture groups. */
+.ta-board__op {
+  font-size: clamp(28px, 7.5vw, 40px);
+  font-weight: 800;
+  color: #6b5b73;
+  padding: 0 2px;
+}
+
 /* Spell (susun kata) */
 .spell-picture {
   font-size: clamp(52px, 16vw, 88px);
