@@ -30,6 +30,10 @@ export const ITEMS: Record<string, ItemDef> = {
   chick: { emoji: '🐥', label: 'anak ayam' },
   duck: { emoji: '🦆', label: 'bebek' },
   house: { emoji: '🏠', label: 'rumah' },
+  // Premium AI-generated art (cute cartoon style). Delivered as transparent
+  // WebP by the project owner — see docs/asset-generation-prompts.md.
+  elephant: { emoji: '🐘', label: 'gajah', ext: 'webp' },
+  lion: { emoji: '🦁', label: 'singa', ext: 'webp' },
 };
 
 /** Public URL of an item's picture, respecting the Vite base path. */
