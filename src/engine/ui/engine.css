@@ -186,9 +186,16 @@
   white-space: nowrap;
 }
 
-/* Picture board (`boardItems`): real image assets instead of the emoji font. */
+/* Picture board (`boardItems`): real image assets instead of the emoji font.
+   The board grows to fill the empty space above the answer cards and centers
+   its pictures there, so the animals are big and easy to recognize instead of
+   floating tiny in the middle. */
 .ta-board--pics {
-  gap: 6px 14px;
+  flex: 1 1 auto;
+  align-content: center;
+  gap: 12px 18px;
+  margin: 8px auto 12px;
+  min-height: 0;
 }
 
 /* A run of identical animals stays together and wraps as a unit. */
@@ -197,16 +204,16 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 8px 10px;
 }
 
 .ta-board__img,
 .ta-board__emoji {
-  width: clamp(40px, 11vw, 60px);
-  height: clamp(40px, 11vw, 60px);
+  width: clamp(72px, 22vw, 124px);
+  height: clamp(72px, 22vw, 124px);
   object-fit: contain;
   /* soft drop shadow so pale animals (panda, rabbit) read on the pink bg */
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.12));
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
   -webkit-user-select: none;
   user-select: none;
 }
@@ -215,16 +222,16 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(34px, 9vw, 50px);
+  font-size: clamp(60px, 19vw, 108px);
   filter: none;
 }
 
 /* Equation operators (+ = → ?) between the picture groups. */
 .ta-board__op {
-  font-size: clamp(28px, 7.5vw, 40px);
+  font-size: clamp(40px, 11vw, 60px);
   font-weight: 800;
   color: #6b5b73;
-  padding: 0 2px;
+  padding: 0 4px;
 }
 
 /* Spell (susun kata) */
