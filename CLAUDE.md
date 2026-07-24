@@ -100,7 +100,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 - **Fase 1 (Fondasi) — SELESAI** di branch `claude/mini-game-programming-language-vlle4b` (2026-07-20):
   - Vite + React 18 + TypeScript strict; alias import `@/` → `src/`.
-  - Routing (react-router): `/` beranda, `/kelompok/:groupId`, `/masuk`, `/daftar`, `/aktivasi` (protected). Semua halaman lazy-load.
+  - Routing (react-router): `/` landing page orang tua, `/portal` beranda/pemilih kelompok anak, `/kelompok/:groupId`, `/masuk`, `/daftar`, `/aktivasi` (protected). Semua halaman lazy-load. (Lihat "Landing Page & Logo".)
   - Firebase **lazy-load via `getFirebase()`** (`src/auth/firebase.ts`) — SDK tidak ikut bundle awal (entry ±56 kB gzip). App tetap jalan tanpa `.env` (tampilkan notice "belum dikonfigurasi"); isi kunci dari `.env.example` saat project Firebase dibuat.
   - `firestore.rules` ketat: `activation_codes` tertutup dari client; field `users/{uid}.groups` hanya bisa diubah Cloud Function; default deny.
   - Kontrak config game type-safe di `src/engine/core/types.ts` (`GameConfig`, `TemplateId`, dst.) — fondasi Fase 2.
@@ -122,23 +122,49 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **TapAnswer** punya field opsional `picture` + `board` (papan visual: hewan dihitung, papan penjumlahan, kata berhuruf hilang), plus dari dunia Bawah Laut: `shape` (bentuk geometris berwarna via `src/engine/ui/Shape.tsx` — porting `shapeSVG()`), `sequence` (deret pola "Pola Ajaib" dengan kotak "?"), dan `silhouette` (render `picture` sebagai bayangan gelap untuk Pasar Buah "tebak bayangan"). `ShapeId`/`ShapeSpec` di `types.ts`. Teks jawaban huruf/angka tanpa emoji dibesarkan (`.choice-text--main`, clamp 48–68px; warna kartu diset eksplisit, dulu ikut biru default UA).
   - **Variasi soal anti-bosan (fitur engine)**: `LevelSlot`/`MixedSlot` di `types.ts` — tiap "slot" boleh berisi POOL varian; `GameShell` mengacak 1 varian per slot tiap main & tiap "Main Lagi" (`resolveSlots` + `playNonce`). Semua varian tetap data typed. Bintang per-slot (varian dalam slot berbagi `id`) supaya total bintang/maskot tak membengkak.
   - **4 dunia (kelompok TK)** — semua `freeDemo: true` untuk testing, config = data typed di `src/games/tk/`:
-    - `hutan-hewan` (tap-answer: hitung → tambah → kurang, 7 slot × ~6 varian hewan favorit — kuda/pinguin/panda/koala dll, TANPA anjing).
+    - `hutan-hewan` (tap-answer: hitung → tambah → kurang, **8 slot** × ~6 varian hewan favorit — kuda/pinguin/panda/koala dll, TANPA anjing). Hewan dengan seni AI premium (singa, gajah, jerapah, panda, kelinci, bebek, kucing, beruang, kura-kura) dirender sebagai **gambar WebP** lewat `boardItems` + registry `src/engine/ui/items.ts` (sama di semua HP, tak bergantung font emoji); sisanya fallback emoji. Slot 8 = pengurangan "pulang ke rumah" (termasuk kura-kura).
     - `taman-huruf` (mixed: huruf pertama, huruf kecil, susun kata/spell, 7 slot × ~6 varian kata/huruf).
     - `bawah-laut` (tap-answer + Shape SVG: cari bentuk → cari warna → bentuk&warna → pola ajaib, 7 level). Pengecoh sengaja mirip (kotak/ketupat, merah/oranye/pink).
     - `pasar-buah` (mixed: count-tap "beli buah" → tap-answer "tebak buah"/"tebak bayangan" → drag-drop "keranjang warna" → memory "kartu buah", 7 level). Keranjang warna 1:1 (template drag-drop = satu item per target).
+- **Konsolidasi ke trunk `main` — SELESAI** (2026-07-24), typecheck + build + render teruji (`vite preview`):
+  - Menyatukan dua jalur yang tadinya terpisah & saling menimpa saat deploy: **landing page baru + engine variant-slots** (dari `petualangan-pintar-fase-3`) dan **seni hewan WebP premium + l8 kura-kura** (dari `asset-generation-prompts`).
+  - Engine hasil merge = superset: `board` (emoji) + `boardItems` (gambar) + Shape/sequence/silhouette + variant-slots, semua hidup berdampingan. Hutan Hewan direkonsiliasi: pool varian (anti-bosan) yang merender WebP untuk hewan ber-seni, emoji untuk sisanya.
+  - Landing lama (278 baris, dari `landing-page-review`) DIGANTI landing baru (`TopBar` + hero simpel + harga perkenalan). Branch-branch lama ditinggalkan; lihat "Branch & Alur Kerja".
+
+## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
+
+> Riwayat proyek ini kacau karena tiap sesi bikin branch `claude/xxx` baru, kerja di situ, lalu tak pernah digabung — akibatnya landing page & fitur berulang kali "hilang" dan deploy saling menimpa. Aturan di bawah menghentikan itu. **Ada SATU trunk: `main`.**
+
+- **`main` = satu-satunya sumber kebenaran.** Semua fitur yang sudah jadi ADA di `main`: landing page baru, engine (6 template + variant-slots anti-bosan + papan gambar `boardItems`), 4 dunia TK, seni hewan WebP. `main` dibentuk (2026-07-24) dari konsolidasi branch `petualangan-pintar-fase-3` (landing baru + variant engine) + `asset-generation-prompts` (seni hewan WebP + l8).
+- **Mulai kerjaan baru = cabang PENDEK dari `main`** (`git checkout main && git pull && git checkout -b claude/<fitur>`), kerjakan satu hal, lalu **merge balik ke `main`** dan hapus branch-nya. Jangan biarkan branch fitur hidup lama & menyimpang.
+- **Sebelum mulai, selalu `git checkout main` dulu** — jangan mencabang dari branch `claude/xxx` lama yang mungkin ketinggalan fitur. Kalau ragu apakah `main` punya fitur X, cek dulu, jangan asal bikin ulang.
+- Branch lama (`landing-page-*`, `asset-generation-prompts`, `add-level-4-worlds`, `audio-smoothness-lag`, dll.) sudah **usang/terkonsolidasi** — jangan lanjutkan kerja di sana. (`audio-smoothness-lag` = fork lama tak kompatibel; ide-nya — audio queue player, cegah narasi berulang — di-reimplement ulang di engine `main` kalau dibutuhkan, bukan di-merge.)
 
 ## Konvensi
 
 - Bahasa UI & narasi: Indonesia. Nama variabel/komentar kode: Inggris.
-- Semua konten soal/level di file JSON `src/data/` — jangan hardcode di komponen.
+- Semua konten soal/level di file `.ts` typed `src/games/**` (bukan hardcode di komponen).
 - Commit kecil dan sering, pesan commit deskriptif.
 - Jangan tambah library berat tanpa alasan kuat (target device low-end).
 
+## Landing Page & Logo (FITUR TETAP — JANGAN SAMPAI HILANG)
+
+> Landing page berkali-kali "hilang" karena dikerjakan di branch yang tak pernah ter-merge. **Landing page & logo adalah fitur permanen app — bukan eksperimen.** Jangan hapus, bypass route-nya, atau ganti tanpa konfirmasi pemilik.
+
+- **Landing page = route `/`** → `src/portal/LandingPage.tsx` (+ `src/portal/landing.css`). Halaman marketing menghadap orang tua: hero "Petualangan Pintar" + logo, tombol **🎮 Main Sekarang**, chip 4 dunia, kartu harga perkenalan (TK Rp19.000 coret Rp39.000, SD "Segera Hadir"), akses orang tua lewat **`TopBar`** (`src/portal/TopBar.tsx`, tombol "Orang Tua" → `/masuk`). Pemilih kelompok anak pindah ke **`/portal`** (`src/portal/HomePage.tsx`).
+  - Cek cepat masih utuh: `src/app/App.tsx` punya `<Route path="/" element={<LandingPage />} />` dan `<Route path="/portal" element={<HomePage />} />`. Kalau `/` menunjuk `HomePage` atau `LandingPage.tsx` hilang → **pulihkan dari `main` dulu**.
+- **Logo = satu aset kanonik `public/assets/logo.svg`** (anak ayam + pelangi + bintang). Dipakai di **semua** tempat lewat file itu — jangan bikin salinan/varian inline:
+  - Favicon di `index.html` (`<link rel="icon" href="/assets/logo.svg">`; Vite tambah `base` saat build).
+  - Logo header landing (`LandingPage.tsx`, via `${import.meta.env.BASE_URL}assets/logo.svg`).
+  - **Kalau logo diganti, ganti aset `public/assets/logo.svg` itu saja — otomatis ikut di landing + favicon.** Jangan biarkan logo landing beda dari favicon.
+
 ## Deploy Web (PENTING)
 
-- **GitHub Pages menyajikan situs dari branch `claude/web-demo-html-wa4dr9`** (folder root), BUKAN dari branch default. Perubahan apa pun yang harus tampil di web WAJIB di-merge dan di-push ke branch itu — push ke branch lain tidak memicu build Pages.
-- Di branch Pages itu, `index.html` adalah landing page statis yang menaut ke `petualangan-pintar.html` (satu-satunya file game; jangan buat salinan duplikat). Di branch pengembangan app, `index.html` root adalah entry Vite — dua hal berbeda, jangan saling menimpa saat merge.
-- URL live: `https://2013tib-droid.github.io/Game-Edukasi-Anak/`. Setelah push, build Pages butuh ±1–2 menit; browser HP sering menyimpan cache versi lama.
+- **GitHub Pages menyajikan situs dari branch `claude/web-demo-html-wa4dr9`** (folder root), BUKAN dari branch default. Yang harus tampil di web WAJIB di-build lalu di-push ke branch itu — push ke branch lain tidak memicu build Pages.
+- **Deploy HANYA dari `main`.** Build `app/` selalu dari `main` (yang pasti punya landing page + semua fitur). JANGAN pernah deploy `app/` dari branch fitur yang belum punya landing page — itulah penyebab landing page berulang ketimpa. Cek cepat landing (di atas) sebelum build.
+- **Struktur branch Pages:** app React (landing di route `/`) disajikan di subfolder **`app/`**. Root `index.html` = **redirect ke `./app/`** (bukan landing statis; satu landing kanonik). `404.html` juga redirect ke `app/` (app pakai HashRouter). `petualangan-pintar.html` tetap ada sebagai sumber standalone, tak ditaut dari root.
+- **Cara deploy:** `DEPLOY_BASE=/Game-Edukasi-Anak/app/ VITE_USE_HASH_ROUTER=1 npm run build`, lalu ganti isi folder `app/` di branch Pages dengan hasil `dist/` (termasuk `dist/assets/logo.svg` & `dist/assets/items/*.webp`). Produksi nanti (Firebase Hosting) pakai `base` default `/` + BrowserRouter.
+- URL live: `https://2013tib-droid.github.io/Game-Edukasi-Anak/` (redirect ke `/app/`). Setelah push, build Pages butuh ±1–2 menit; browser HP sering menyimpan cache versi lama (hard-refresh).
 
 ## Aturan Desain Soal (dari pemilik proyek)
 
