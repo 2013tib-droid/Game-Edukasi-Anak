@@ -130,6 +130,22 @@ const config: GameConfig<'tap-answer'> = {
         ],
       },
     },
+    {
+      id: 'l8',
+      narration: 'Ada enam kura-kura. Dua kura-kura berenang pulang. Berapa yang masih tinggal?',
+      data: {
+        boardItems: [
+          { item: 'turtle', count: 6 },
+          { op: 'arrow' },
+          { item: 'house', count: 2 },
+        ],
+        choices: [
+          { id: 'a', text: '3' },
+          { id: 'b', text: '4', correct: true },
+          { id: 'c', text: '5' },
+        ],
+      },
+    },
   ],
 };
 
