@@ -8,11 +8,13 @@ import type { GameConfig } from '@/engine/core/types';
  * (design rule: the wrong options sit close to the right number so the
  * child must actually count, not guess).
  *
- * Animals are kid-favourites (puppy, kitten, bunny, panda, penguin, chick…)
+ * Animals are kid-favourites (giraffe, elephant, lion, bunny, panda, chick…)
  * and vary level to level so the board stays fun to look at. The board uses
- * `boardItems` — real picture assets (flat SVG in public/assets/items/)
- * instead of the device emoji font — so a panda looks the same on every
- * phone. Each token is either a group of identical animals ({ item, count })
+ * `boardItems` — real picture assets in public/assets/items/ (premium
+ * AI-generated WebP where delivered, e.g. giraffe/elephant/lion; flat SVG
+ * placeholders otherwise) instead of the device emoji font — so an animal
+ * looks the same on every phone. Each token is either a group of identical
+ * animals ({ item, count })
  * or an operator ({ op }); the template lays out equation boards as
  * "rabbit ×2  +  rabbit ×3  =  ?".
  */
@@ -26,9 +28,9 @@ const config: GameConfig<'tap-answer'> = {
   levels: [
     {
       id: 'l1',
-      narration: 'Ayo hitung! Ada berapa anjing?',
+      narration: 'Ayo hitung! Ada berapa jerapah?',
       data: {
-        boardItems: [{ item: 'dog', count: 3 }],
+        boardItems: [{ item: 'giraffe', count: 3 }],
         choices: [
           { id: 'a', text: '2' },
           { id: 'b', text: '3', correct: true },
@@ -38,9 +40,9 @@ const config: GameConfig<'tap-answer'> = {
     },
     {
       id: 'l2',
-      narration: 'Ada berapa kucing?',
+      narration: 'Ada berapa gajah?',
       data: {
-        boardItems: [{ item: 'cat', count: 4 }],
+        boardItems: [{ item: 'elephant', count: 4 }],
         choices: [
           { id: 'a', text: '3' },
           { id: 'b', text: '4', correct: true },
@@ -50,9 +52,9 @@ const config: GameConfig<'tap-answer'> = {
     },
     {
       id: 'l3',
-      narration: 'Hitung baik-baik. Ada berapa pinguin?',
+      narration: 'Hitung baik-baik. Ada berapa singa?',
       data: {
-        boardItems: [{ item: 'penguin', count: 6 }],
+        boardItems: [{ item: 'lion', count: 6 }],
         choices: [
           { id: 'a', text: '5' },
           { id: 'b', text: '6', correct: true },

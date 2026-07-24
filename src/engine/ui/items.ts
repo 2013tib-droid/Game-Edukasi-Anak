@@ -34,6 +34,7 @@ export const ITEMS: Record<string, ItemDef> = {
   // WebP by the project owner — see docs/asset-generation-prompts.md.
   elephant: { emoji: '🐘', label: 'gajah', ext: 'webp' },
   lion: { emoji: '🦁', label: 'singa', ext: 'webp' },
+  giraffe: { emoji: '🦒', label: 'jerapah', ext: 'webp' },
 };
 
 /** Public URL of an item's picture, respecting the Vite base path. */

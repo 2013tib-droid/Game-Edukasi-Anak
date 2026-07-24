@@ -45,15 +45,16 @@ elephant: { emoji: '🐘', label: 'gajah', ext: 'webp' },
 
 | id | Hewan (ID) | Emoji | Status | File |
 |---|---|---|---|---|
-| elephant | gajah | 🐘 | ✅ diterima | `public/assets/items/elephant.webp` |
-| lion | singa | 🦁 | ✅ diterima | `public/assets/items/lion.webp` |
+| giraffe | jerapah | 🦒 | ✅ diterima (dipakai Hutan Hewan l1) | `public/assets/items/giraffe.webp` |
+| elephant | gajah | 🐘 | ✅ diterima (dipakai Hutan Hewan l2) | `public/assets/items/elephant.webp` |
+| lion | singa | 🦁 | ✅ diterima (dipakai Hutan Hewan l3) | `public/assets/items/lion.webp` |
 | dog | anjing | 🐶 | ⏳ placeholder SVG | `dog.svg` |
 | cat | kucing | 🐱 | ⏳ placeholder SVG | `cat.svg` |
-| rabbit | kelinci | 🐰 | ⏳ placeholder SVG | `rabbit.svg` |
-| panda | panda | 🐼 | ⏳ placeholder SVG | `panda.svg` |
+| rabbit | kelinci | 🐰 | ⏳ placeholder SVG (Hutan Hewan l4) | `rabbit.svg` |
+| panda | panda | 🐼 | ⏳ placeholder SVG (Hutan Hewan l5) | `panda.svg` |
 | penguin | pinguin | 🐧 | ⏳ placeholder SVG | `penguin.svg` |
-| chick | anak ayam | 🐥 | ⏳ placeholder SVG | `chick.svg` |
-| duck | bebek | 🦆 | ⏳ placeholder SVG | `duck.svg` |
+| chick | anak ayam | 🐥 | ⏳ placeholder SVG (Hutan Hewan l6) | `chick.svg` |
+| duck | bebek | 🦆 | ⏳ placeholder SVG (Hutan Hewan l7) | `duck.svg` |
 
 > "⏳ placeholder SVG" = flat art sementara dari Fase 3; akan diganti art kartun
 > premium bergaya sama begitu pemilik mengirim ("sisa hewannya menyusul").
@@ -69,6 +70,7 @@ Template prompt (isi `<HEWAN>`):
 
 | id | Catatan prompt spesifik |
 |---|---|
+| giraffe | tubuh oranye-tan dengan bercak coklat, perut krem, tanduk (ossicone) kecil, melambai dua tangan. **✅ sesuai referensi.** |
 | elephant | badan abu-abu kebiruan, telinga besar merah muda di dalam, melambai. **✅ sesuai referensi.** |
 | lion | surai coklat, tubuh emas, ekspresi ceria/mengaum ramah. **✅ sesuai referensi.** |
 | dog | anak anjing, telinga jatuh, lidah kecil |
