@@ -205,9 +205,11 @@
 .ta-board__img,
 .ta-board__emoji {
   /* Large, TK-friendly: fills the roomy board area, wraps when the count is
-     high instead of turning into tiny icons. */
-  width: clamp(84px, 23vw, 140px);
-  height: clamp(84px, 23vw, 140px);
+     high instead of turning into tiny icons. Sized generously because every
+     animal canvas is portrait, so this is effectively the render height —
+     narrower animals (lion, giraffe) need it big to carry visual weight. */
+  width: clamp(104px, 28vw, 164px);
+  height: clamp(104px, 28vw, 164px);
   object-fit: contain;
   /* soft drop shadow so pale animals (panda, rabbit) read on the pink bg */
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.14));
@@ -219,7 +221,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: clamp(64px, 18vw, 112px);
+  font-size: clamp(80px, 22vw, 130px);
   filter: none;
 }
 
