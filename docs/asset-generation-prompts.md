@@ -68,13 +68,17 @@ elephant: { emoji: '🐘', label: 'gajah', ext: 'webp' },
 | duck | bebek | 🦆 | ✅ diterima (dipakai Hutan Hewan l7) | `public/assets/items/duck.webp` |
 | cat | kucing | 🐱 | ✅ diterima | `public/assets/items/cat.webp` |
 | bear | beruang | 🐻 | ✅ diterima (dipakai Hutan Hewan l6, ganti anak ayam) | `public/assets/items/bear.webp` |
-| turtle | kura-kura | 🐢 | ✅ diterima (siap dipakai, belum ada slot level) | `public/assets/items/turtle.webp` |
+| turtle | kura-kura | 🐢 | ✅ diterima (dipakai Hutan Hewan l8, level baru) | `public/assets/items/turtle.webp` |
 
 > **Semua aset hewan kini premium WebP** — tidak ada placeholder SVG hewan lagi.
 > Hanya `house.svg` (properti "rumah", bukan hewan) yang masih SVG.
 > `dog`/`anjing`, `penguin`/`pinguin`, `chick`/`anak ayam` **dihapus** dari
 > registry atas permintaan pemilik: anjing tidak dipakai; anak ayam & pinguin
-> digantikan hewan premium (beruang di l6; kura-kura menyusul di slot berikutnya).
+> digantikan hewan premium (beruang di l6; kura-kura di l8, level baru).
+>
+> **Pola menambah hewan baru:** tambah level baru di `hutan-hewan.ts` (hitung /
+> tambah / kurang) memakai id hewan yang sudah didaftarkan di `items.ts`. Hewan
+> berikutnya yang menyusul mengikuti pola ini.
 
 ## Prompt per Hewan
 
