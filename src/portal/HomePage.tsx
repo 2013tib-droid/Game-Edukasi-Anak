@@ -42,6 +42,9 @@ export default function HomePage() {
           <Link to="/masuk">Masuk akun orang tua</Link>
         )}
       </p>
+      <p style={{ marginTop: 8 }}>
+        <Link to="/">🏠 Beranda</Link>
+      </p>
     </div>
   );
 }

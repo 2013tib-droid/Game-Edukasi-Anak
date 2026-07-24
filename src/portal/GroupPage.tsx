@@ -14,7 +14,7 @@ export default function GroupPage() {
     return (
       <div className="page" style={{ textAlign: 'center' }}>
         <p style={{ fontSize: 22 }}>Kelompok tidak ditemukan.</p>
-        <Link to="/" className="btn">
+        <Link to="/portal" className="btn">
           ⬅️ Kembali
         </Link>
       </div>
@@ -62,7 +62,7 @@ export default function GroupPage() {
         })}
       </div>
       <p style={{ marginTop: 28 }}>
-        <Link to="/" className="btn">
+        <Link to="/portal" className="btn">
           ⬅️ Kembali
         </Link>
       </p>

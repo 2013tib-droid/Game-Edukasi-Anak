@@ -36,7 +36,7 @@ export default function GamePage() {
     return (
       <div className="game-center">
         <p style={{ fontSize: 22 }}>Game tidak ditemukan.</p>
-        <Link to="/" className="btn">
+        <Link to="/portal" className="btn">
           ⬅️ Kembali
         </Link>
       </div>

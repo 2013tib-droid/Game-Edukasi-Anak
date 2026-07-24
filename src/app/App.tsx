@@ -6,6 +6,7 @@ import Layout from '@/app/Layout';
 import SplashScreen from '@/app/SplashScreen';
 
 // Lazy-load every page so the initial bundle stays small on low-end devices.
+const LandingPage = lazy(() => import('@/portal/LandingPage'));
 const HomePage = lazy(() => import('@/portal/HomePage'));
 const GroupPage = lazy(() => import('@/portal/GroupPage'));
 const LoginPage = lazy(() => import('@/auth/LoginPage'));
@@ -24,7 +25,8 @@ export default function App() {
         <Suspense fallback={<SplashScreen />}>
           <Routes>
             <Route element={<Layout />}>
-              <Route path="/" element={<HomePage />} />
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/portal" element={<HomePage />} />
               <Route path="/kelompok/:groupId" element={<GroupPage />} />
               <Route path="/game/:gameId" element={<GamePage />} />
               <Route path="/masuk" element={<LoginPage />} />

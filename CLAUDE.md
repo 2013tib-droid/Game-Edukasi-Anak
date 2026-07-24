@@ -100,7 +100,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 - **Fase 1 (Fondasi) — SELESAI** di branch `claude/mini-game-programming-language-vlle4b` (2026-07-20):
   - Vite + React 18 + TypeScript strict; alias import `@/` → `src/`.
-  - Routing (react-router): `/` beranda, `/kelompok/:groupId`, `/masuk`, `/daftar`, `/aktivasi` (protected). Semua halaman lazy-load.
+  - Routing (react-router): `/` landing page (orang tua), `/portal` beranda/pemilih kelompok (anak), `/kelompok/:groupId`, `/masuk`, `/daftar`, `/aktivasi` (protected). Semua halaman lazy-load. (CATATAN: route `/` awalnya beranda; sejak landing page ditambahkan, beranda pindah ke `/portal` — lihat bagian "Landing Page & Logo".)
   - Firebase **lazy-load via `getFirebase()`** (`src/auth/firebase.ts`) — SDK tidak ikut bundle awal (entry ±56 kB gzip). App tetap jalan tanpa `.env` (tampilkan notice "belum dikonfigurasi"); isi kunci dari `.env.example` saat project Firebase dibuat.
   - `firestore.rules` ketat: `activation_codes` tertutup dari client; field `users/{uid}.groups` hanya bisa diubah Cloud Function; default deny.
   - Kontrak config game type-safe di `src/engine/core/types.ts` (`GameConfig`, `TemplateId`, dst.) — fondasi Fase 2.
@@ -125,6 +125,11 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
     - `taman-huruf` (mixed: huruf pertama, huruf kecil, susun kata/spell, 7 level).
     - `bawah-laut` (tap-answer + Shape SVG: cari bentuk → cari warna → bentuk&warna → pola ajaib, 7 level). Pengecoh sengaja mirip (kotak/ketupat, merah/oranye/pink).
     - `pasar-buah` (mixed: count-tap "beli buah" → tap-answer "tebak buah"/"tebak bayangan" → drag-drop "keranjang warna" → memory "kartu buah", 7 level). Keranjang warna 1:1 (template drag-drop = satu item per target).
+- **Landing page (route `/`) — SELESAI & DIPULIHKAN** (2026-07-24, branch `claude/landing-page-logo-restore-yda7k4`), build + typecheck lolos, render + aset (logo & chunk) teruji lewat `vite preview`:
+  - Halaman marketing menghadap orang tua di `src/portal/LandingPage.tsx` + `src/portal/landing.css`: hero + value prop, deret 6 maskot, trust points, showcase 4 dunia (dari game registry, tak bisa "drift" dari yang benar-benar rilis), kartu harga per kelompok (`priceLabel` dari `src/data/groups.json`) + modal beli placeholder, FAQ, footer. Countdown rilis opsional (`LAUNCH_DATE`, default off).
+  - Beranda/pemilih kelompok menghadap anak pindah ke `/portal` (`HomePage`); link balik internal (GamePage/GroupPage "Kembali") menunjuk `/portal`.
+  - Logo brand di header memakai aset kanonik `public/assets/logo.svg` yang sama dengan favicon (lihat bagian "Landing Page & Logo (FITUR TETAP)").
+  - Penyebab hilang sebelumnya: landing dikerjakan di branch `claude/landing-page-review-uxdplg` yang tak ter-merge ke mainline, jadi setiap branch baru kehilangan file-nya. Sekarang didokumentasikan sebagai fitur tetap agar tak terulang.
 
 ## Konvensi
 
@@ -133,11 +138,25 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 - Commit kecil dan sering, pesan commit deskriptif.
 - Jangan tambah library berat tanpa alasan kuat (target device low-end).
 
+## Landing Page & Logo (FITUR TETAP — JANGAN SAMPAI HILANG)
+
+> Landing page berkali-kali "hilang" karena dikerjakan di branch yang tak pernah ter-merge, lalu branch baru dicabang dari mainline yang belum punya file-nya. Bagian ini dibuat agar tidak terulang. **Landing page & logo adalah fitur permanen app — bukan eksperimen.** Jangan pernah menghapus, mem-bypass route-nya, atau mengganti dengan halaman lain tanpa konfirmasi pemilik proyek.
+
+- **Landing page = route `/`** di app React → `src/portal/LandingPage.tsx` (+ styling `src/portal/landing.css`). Ini halaman marketing menghadap orang tua (value prop, dunia yang bisa dimainkan, harga, FAQ, tombol "Coba Demo Gratis"). Group picker menghadap anak pindah ke route **`/portal`** (`src/portal/HomePage.tsx`).
+  - Kalau memulai kerjaan baru dari mainline dan file `LandingPage.tsx`/`landing.css` **tidak ada**, atau route `/` di `src/app/App.tsx` menunjuk ke `HomePage` bukan `LandingPage` → berarti landing page hilang lagi: **pulihkan dulu** sebelum lanjut. Referensi terakhir yang teruji ada di branch `claude/landing-page-logo-restore-yda7k4`.
+  - Cek cepat masih utuh: `src/app/App.tsx` punya `const LandingPage = lazy(...)` dan `<Route path="/" element={<LandingPage />} />`, `<Route path="/portal" element={<HomePage />} />`.
+- **Logo = satu aset kanonik `public/assets/logo.svg`** (anak ayam + pelangi + bintang). Dipakai di **semua** tempat lewat satu file itu — jangan bikin salinan/varian:
+  - Favicon di `index.html` (`<link rel="icon" href="/assets/logo.svg">`; Vite otomatis menambah `base` saat build).
+  - Logo brand di header landing (`LandingPage.tsx`, di-resolve via `${import.meta.env.BASE_URL}assets/logo.svg` supaya benar di deploy subpath).
+  - **Aturan pemilik: kalau logo diganti, ganti aset `public/assets/logo.svg` itu saja — otomatis ikut ganti di landing page, favicon, dan semua turunannya.** Jangan pernah biarkan logo landing beda dari favicon. Kalau menambah tempat baru yang butuh logo, tetap tunjuk ke `public/assets/logo.svg`, jangan hardcode SVG inline.
+
 ## Deploy Web (PENTING)
 
-- **GitHub Pages menyajikan situs dari branch `claude/web-demo-html-wa4dr9`** (folder root), BUKAN dari branch default. Perubahan apa pun yang harus tampil di web WAJIB di-merge dan di-push ke branch itu — push ke branch lain tidak memicu build Pages.
-- Di branch Pages itu, `index.html` adalah landing page statis yang menaut ke `petualangan-pintar.html` (satu-satunya file game; jangan buat salinan duplikat). Di branch pengembangan app, `index.html` root adalah entry Vite — dua hal berbeda, jangan saling menimpa saat merge.
-- URL live: `https://2013tib-droid.github.io/Game-Edukasi-Anak/`. Setelah push, build Pages butuh ±1–2 menit; browser HP sering menyimpan cache versi lama.
+- **GitHub Pages menyajikan situs dari branch `claude/web-demo-html-wa4dr9`** (folder root), BUKAN dari branch default. Perubahan apa pun yang harus tampil di web WAJIB di-build lalu di-push ke branch itu — push ke branch lain tidak memicu build Pages.
+- **Struktur branch Pages (per 2026-07-24):** landing page adalah bagian dari app React di route `/` dan disajikan di subfolder **`app/`**. Root `index.html` bukan landing statis, melainkan **redirect ke `./app/`** — satu landing kanonik, tidak dobel. `404.html` juga redirect ke `app/` (app pakai HashRouter jadi tak butuh SPA path-restore). Di branch pengembangan app, `index.html` root tetap entry Vite — jangan saling menimpa saat merge.
+- **Cara deploy app ke Pages:** build dengan `DEPLOY_BASE=/Game-Edukasi-Anak/app/ VITE_USE_HASH_ROUTER=1 npm run build`, lalu ganti isi folder `app/` di branch Pages dengan hasil `dist/` (termasuk `dist/assets/logo.svg`). Produksi nanti (Firebase Hosting) pakai `base` default `/` + BrowserRouter.
+- `petualangan-pintar.html` tetap ada sebagai game standalone/sumber (Fase 3), tapi tidak lagi ditaut dari root sejak landing pindah ke app.
+- URL live: `https://2013tib-droid.github.io/Game-Edukasi-Anak/` (redirect ke `/app/`). Setelah push, build Pages butuh ±1–2 menit; browser HP sering menyimpan cache versi lama.
 
 ## Aturan Desain Soal (dari pemilik proyek)
 
