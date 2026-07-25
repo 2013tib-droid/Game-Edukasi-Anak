@@ -17,7 +17,7 @@ Platform web berbayar berisi kumpulan mini-game edukasi untuk anak Indonesia, di
 | Perangkat target | HP Android & tablet — mobile-first, touch-first |
 | Demo gratis | 1–2 game gratis PENUH per kelompok (tanpa login) |
 | Aset | Gambar AI-generated + narasi TTS Bahasa Indonesia |
-| Harga | Naik per jenjang: TK ± Rp29rb, SD Awal ± Rp39rb (selalu < Rp50rb) |
+| Harga | Naik per jenjang: TK Rp39rb (perkenalan Rp19rb), SD Awal Rp49rb (selalu < Rp50rb) |
 | Update | Beli sekali = bugfix gratis; konten besar baru = ekspansi berbayar |
 | Penjualan | Lynk.id / Mayar.id (QRIS, e-wallet) + itch.io untuk showcase demo |
 | Promosi | TikTok/Reels organik |
