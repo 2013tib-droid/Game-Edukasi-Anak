@@ -84,7 +84,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
             {level.data.sequence.map((u, i) =>
               u ? (
                 <div key={i} className="ta-seq-cell">
-                  <Shape kind={u.kind} color={u.color} size={52} />
+                  <Shape kind={u.kind} color={u.color} size={52} className="ta-seq-shape" />
                 </div>
               ) : (
                 <div key={i} className="ta-seq-cell ta-seq-cell--q">
@@ -140,7 +140,14 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
               className={'choice-card' + (shakeId === c.id ? ' choice-card--shake' : '')}
               onClick={() => handleTap(c.id, c.correct)}
             >
-              {c.shape && <Shape kind={c.shape.kind} color={c.shape.color} size={64} />}
+              {c.shape && (
+                <Shape
+                  kind={c.shape.kind}
+                  color={c.shape.color}
+                  size={64}
+                  className="choice-shape"
+                />
+              )}
               {c.emoji && <span aria-hidden>{c.emoji}</span>}
               {c.text && (
                 // A text answer with no emoji (a letter/number) is the main
