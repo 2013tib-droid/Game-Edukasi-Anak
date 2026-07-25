@@ -14,10 +14,6 @@ const worlds = [
 /** Parent-facing questions, ordered by what a first-time visitor asks first. */
 const faqs = [
   {
-    q: 'Anak saya belum bisa membaca, bisa main sendiri?',
-    a: 'Bisa. Semua perintah dan petunjuk dinarasikan dengan suara Bahasa Indonesia, dan tombolnya besar-besar. Teks hanya pendamping, bukan syarat untuk bisa main.',
-  },
-  {
     q: 'Bisa dicoba dulu sebelum bayar?',
     a: 'Bisa. Ketuk "Main Sekarang" — ada beberapa game yang gratis dimainkan penuh tanpa perlu daftar atau login.',
   },
@@ -30,16 +26,8 @@ const faqs = [
     a: 'Keduanya. Dibuka lewat browser di HP Android atau tablet — tidak perlu instal aplikasi, tidak makan memori HP. Tampilannya menyesuaikan posisi tegak maupun mendatar.',
   },
   {
-    q: 'Perlu internet untuk main?',
-    a: 'Ya, perlu koneksi saat membuka game karena akses akun dicek secara online. Datanya ringan dan dirancang tetap lancar di HP Android kelas menengah ke bawah.',
-  },
-  {
     q: 'Satu akun bisa dipakai di berapa perangkat?',
-    a: 'Sampai 3 perangkat — cukup untuk HP ayah, HP ibu, dan tablet anak di rumah.',
-  },
-  {
-    q: 'Ada iklan atau pembelian di dalam game?',
-    a: 'Tidak ada sama sekali. Tidak ada iklan, tidak ada tombol belanja, dan tidak ada tautan keluar di area anak. Urusan akun dan pembelian dipisah di area orang tua.',
+    a: 'Sampai 3 perangkat. Cukup masuk dengan akun yang sama di perangkat lain, jadi anak bisa main bergantian di perangkat mana pun di rumah tanpa perlu beli ulang.',
   },
   {
     q: 'Setelah bayar, bagaimana cara membukanya?',
@@ -96,7 +84,7 @@ export default function LandingPage() {
           <span className="pc-badge pc-badge--soon">🚀 Segera Hadir</span>
           <div className="pc-name">Kelompok SD Awal · Kelas 1–2</div>
           <div className="pc-row">
-            <span className="pc-now pc-now--soon">Rp39.000</span>
+            <span className="pc-now pc-now--soon">Rp49.000</span>
           </div>
           <div className="pc-sub">Soal lebih menantang — menyusul!</div>
         </div>
