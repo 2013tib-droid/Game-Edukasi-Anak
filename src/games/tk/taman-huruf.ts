@@ -59,14 +59,24 @@ function letterChoices(correct: string, lower = false): TapChoice[] {
 }
 
 // Variant builders (id filled in by mslot()).
-function firstLetter(word: string, emoji: string): MixedLevel {
+/**
+ * `item` (optional) is an id in the item registry (`src/engine/ui/items.ts`):
+ * when given, the cue is drawn from real premium art instead of the device
+ * emoji font, with `emoji` kept as the fallback.
+ */
+function firstLetter(word: string, emoji: string, item?: string): MixedLevel {
   const w = word.toUpperCase();
   const rest = w.slice(1).split('').join(' ');
   return {
     id: '',
     template: 'tap-answer',
     narration: `Lihat gambarnya. Ini ${cap(word)}. Huruf apa yang pertama?`,
-    data: { picture: emoji, board: `_ ${rest}`, choices: letterChoices(w.charAt(0)) },
+    data: {
+      picture: emoji,
+      ...(item ? { pictureItem: item } : {}),
+      board: `_ ${rest}`,
+      choices: letterChoices(w.charAt(0)),
+    },
   };
 }
 
@@ -80,13 +90,13 @@ function lowerMatch(letter: string): MixedLevel {
   };
 }
 
-function spellWord(word: string, emoji: string, decoys: string[]): MixedLevel {
+function spellWord(word: string, emoji: string, decoys: string[], item?: string): MixedLevel {
   const w = word.toUpperCase();
   return {
     id: '',
     template: 'spell',
     narration: `Ini ${word.toLowerCase()}. Ayo susun hurufnya: ${w.split('').join(', ')}.`,
-    data: { word: w, emoji, decoys },
+    data: { word: w, emoji, decoys, ...(item ? { item } : {}) },
   };
 }
 
@@ -109,7 +119,7 @@ const config: MixedGameConfig = {
       firstLetter('Roket', '🚀'),
       firstLetter('Bola', '⚽'),
       firstLetter('Ikan', '🐟'),
-      firstLetter('Topi', '👒'),
+      firstLetter('Topi', '🧢', 'cap'),
       firstLetter('Apel', '🍎'),
       firstLetter('Mobil', '🚗'),
     ),
@@ -146,12 +156,14 @@ const config: MixedGameConfig = {
     // Slot 5 — first letter (longer words)
     mslot(
       'l5',
-      firstLetter('Teleskop', '🔭'),
+      // "Teleskop" was too far from a TK child's world — swapped for a toy
+      // every kid knows.
+      firstLetter('Boneka', '🧸'),
       firstLetter('Payung', '☂️'),
       firstLetter('Sepeda', '🚲'),
-      firstLetter('Gajah', '🐘'),
-      firstLetter('Jerapah', '🦒'),
-      firstLetter('Matahari', '☀️'),
+      firstLetter('Gajah', '🐘', 'elephant'),
+      firstLetter('Jerapah', '🦒', 'giraffe'),
+      firstLetter('Matahari', '☀️', 'sun'),
     ),
     // Slot 6 — spell a short word (4 letters)
     mslot(
@@ -160,8 +172,8 @@ const config: MixedGameConfig = {
       spellWord('IKAN', '🐟', ['O', 'R']),
       spellWord('BOLA', '⚽', ['E', 'M']),
       spellWord('BUKU', '📖', ['A', 'T']),
-      spellWord('KUDA', '🐴', ['I', 'P']),
-      spellWord('SAPI', '🐮', ['E', 'L']),
+      spellWord('KUDA', '🐴', ['I', 'P'], 'horse'),
+      spellWord('SAPI', '🐮', ['E', 'L'], 'cow'),
     ),
     // Slot 7 — spell a longer word (5 letters)
     mslot(
@@ -170,8 +182,8 @@ const config: MixedGameConfig = {
       spellWord('RUMAH', '🏠', ['I', 'S']),
       spellWord('BUNGA', '🌸', ['E', 'T']),
       spellWord('MOBIL', '🚗', ['A', 'K']),
-      spellWord('BEBEK', '🦆', ['O', 'R']),
-      spellWord('PANDA', '🐼', ['I', 'U']),
+      spellWord('BEBEK', '🦆', ['O', 'R'], 'duck'),
+      spellWord('PANDA', '🐼', ['I', 'U'], 'panda'),
     ),
   ],
 };

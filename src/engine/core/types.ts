@@ -67,6 +67,12 @@ export interface TapAnswerData {
    */
   picture?: string;
   /**
+   * Item id (registry `src/engine/ui/items.ts`) drawn as the big picture cue
+   * instead of `picture` — real premium art rather than the device emoji
+   * font. Falls back to the item's emoji if the image is missing.
+   */
+  pictureItem?: string;
+  /**
    * Render `picture` as a dark silhouette (Pasar Buah "guess the shadow").
    * The child sees only the outline and taps the matching fruit below.
    */
@@ -159,6 +165,11 @@ export interface SpellData {
   word: string;
   /** Picture cue for the word, e.g. "🚀". */
   emoji: string;
+  /**
+   * Item id (registry `src/engine/ui/items.ts`) drawn as the picture cue
+   * instead of `emoji` — real art instead of the device emoji font.
+   */
+  item?: string;
   /**
    * Decoy letters mixed into the tray (design rule: never monotone — the
    * child must pick the right letters, not just tap everything in sight).

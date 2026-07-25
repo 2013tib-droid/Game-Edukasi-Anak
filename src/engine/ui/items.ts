@@ -44,6 +44,9 @@ export const ITEMS: Record<string, ItemDef> = {
   tiger: { emoji: '🐯', label: 'harimau', ext: 'webp' },
   monkey: { emoji: '🐵', label: 'monyet', ext: 'webp' },
   frog: { emoji: '🐸', label: 'katak', ext: 'webp' },
+  // Everyday objects (Taman Huruf letter cues).
+  sun: { emoji: '☀️', label: 'matahari', ext: 'webp' },
+  cap: { emoji: '🧢', label: 'topi', ext: 'webp' },
 };
 
 /** Public URL of an item's picture, respecting the Vite base path. */

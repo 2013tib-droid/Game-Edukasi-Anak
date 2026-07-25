@@ -137,11 +137,35 @@
 }
 
 /* Tap-answer visual cues */
+/* The big cue above the answers. Kids engage with the picture, not the text,
+   so it gets the room: it is the largest thing on screen after the prompt. */
 .ta-picture {
-  font-size: clamp(56px, 18vw, 96px);
+  font-size: clamp(110px, 44vw, 210px);
   text-align: center;
   line-height: 1.1;
   margin-bottom: 4px;
+}
+
+/* Real item art (`pictureItem`) instead of the device emoji font. */
+.ta-picture--img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ta-picture__img {
+  width: clamp(190px, 64vw, 320px);
+  height: clamp(190px, 64vw, 320px);
+  object-fit: contain;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Emoji fallback when an item's image is missing — match the art's weight. */
+.ta-picture__emoji {
+  font-size: clamp(160px, 56vw, 280px);
+  line-height: 1;
 }
 
 /* Fruit "guess the shadow": show the picture as a dark silhouette. */
@@ -262,8 +286,29 @@
 
 /* Spell (susun kata) */
 .spell-picture {
-  font-size: clamp(52px, 16vw, 88px);
+  font-size: clamp(100px, 38vw, 190px);
   text-align: center;
+  line-height: 1;
+}
+
+/* Real item art (`item`) instead of the device emoji font. */
+.spell-picture--img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spell-picture__img {
+  width: clamp(170px, 56vw, 290px);
+  height: clamp(170px, 56vw, 290px);
+  object-fit: contain;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.spell-picture__emoji {
+  font-size: clamp(145px, 50vw, 250px);
   line-height: 1;
 }
 
