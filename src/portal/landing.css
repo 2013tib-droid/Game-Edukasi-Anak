@@ -209,6 +209,72 @@
   text-align: center;
 }
 
+/* FAQ — native <details> accordions, no JS. Soft cards so the section reads
+   as calm reference text, not another row of actions. */
+.landing .faq {
+  margin-top: 36px;
+  width: 100%;
+  max-width: 360px;
+  text-align: left;
+}
+.landing .faq-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0 0 14px;
+  text-align: center;
+}
+.landing .faq-item {
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 18px;
+  margin-bottom: 9px;
+  overflow: hidden;
+}
+.landing .faq-item summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  min-height: 52px;
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+/* hide the default disclosure triangle (WebKit needs its own selector) */
+.landing .faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.landing .faq-q {
+  flex: 1;
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+/* chevron drawn in CSS — no icon asset, rotates when the item opens */
+.landing .faq-mark {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  margin-right: 3px;
+  border-right: 2.5px solid #b33f12;
+  border-bottom: 2.5px solid #b33f12;
+  border-radius: 2px;
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 0.18s ease;
+}
+.landing .faq-item[open] .faq-mark {
+  transform: rotate(225deg) translate(-2px, -2px);
+}
+.landing .faq-a {
+  margin: 0;
+  padding: 0 16px 16px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  opacity: 0.78;
+}
+
 .landing footer {
   margin-top: 30px;
   font-size: 13px;
