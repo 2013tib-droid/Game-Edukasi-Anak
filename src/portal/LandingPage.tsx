@@ -7,7 +7,7 @@ const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
 const worlds = [
   { cls: 'w-forest', emoji: '🦁', name: 'Hutan Hewan' },
   { cls: 'w-space', emoji: '🏕️', name: 'Taman Huruf' },
-  { cls: 'w-ocean', emoji: '🐠', name: 'Bawah Laut' },
+  { cls: 'w-color', emoji: '🎨', name: 'Labirin Warna' },
   { cls: 'w-fruit', emoji: '🍉', name: 'Pasar Buah' },
 ];
 

@@ -126,8 +126,8 @@
 .landing .w-space {
   background: linear-gradient(160deg, #ecdff7, #cdb4e6);
 }
-.landing .w-ocean {
-  background: linear-gradient(160deg, #d4f2f7, #a6dfea);
+.landing .w-color {
+  background: linear-gradient(160deg, #ffe1ec, #cfe3ff);
 }
 .landing .w-fruit {
   background: linear-gradient(160deg, #ffe4c2, #ffc79a);

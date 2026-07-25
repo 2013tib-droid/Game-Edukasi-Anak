@@ -37,13 +37,13 @@ export const games: GameMeta[] = [
     load: () => import('@/games/tk/taman-huruf'),
   },
   {
-    id: 'bawah-laut',
+    id: 'labirin-warna',
     group: 'tk',
-    title: 'Bawah Laut',
-    emoji: '🐠',
+    title: 'Labirin Warna',
+    emoji: '🎨',
     template: 'tap-answer',
     freeDemo: true,
-    load: () => import('@/games/tk/bawah-laut'),
+    load: () => import('@/games/tk/labirin-warna'),
   },
   {
     id: 'pasar-buah',

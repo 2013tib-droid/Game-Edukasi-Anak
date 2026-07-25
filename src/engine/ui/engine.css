@@ -27,12 +27,16 @@
   display: flex;
   gap: 8px;
   flex: 1;
+  min-width: 0;
   justify-content: center;
 }
 
+/* Full size when the row has room; a long game (10 levels on a 360px phone)
+   shrinks the dots instead of shoving the speaker button off-screen. */
 .level-dot {
-  width: 16px;
-  height: 16px;
+  flex: 0 1 16px;
+  min-width: 8px;
+  aspect-ratio: 1;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.15);
 }
@@ -109,6 +113,14 @@
   pointer-events: none;
 }
 
+/* A geometric-shape answer (Labirin Warna) is the whole point of the card —
+   let it fill the box instead of floating in the middle at a fixed 64px. */
+.choice-card .choice-shape {
+  width: 92%;
+  height: auto;
+  max-width: 148px;
+}
+
 /* Caption under an emoji answer. */
 .choice-card .choice-text {
   font-size: 20px;
@@ -174,13 +186,13 @@
   opacity: 0.8;
 }
 
-/* Bawah Laut "Pola Ajaib": the repeating shape sequence above the choices. */
+/* Labirin Warna "Pola Ajaib": the repeating shape sequence above the choices. */
 .ta-sequence {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin: 8px auto 18px;
   max-width: 100%;
 }
@@ -191,9 +203,16 @@
   justify-content: center;
 }
 
+/* A six-cell pattern must read as ONE line — the "?" belongs at the end of the
+   row, not wrapped underneath — so the cells scale with the screen width. */
+.ta-seq-shape,
 .ta-seq-cell--q {
-  width: 52px;
-  height: 52px;
+  width: clamp(34px, 12.5vw, 52px);
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.ta-seq-cell--q {
   border: 3px dashed #00697f;
   border-radius: 12px;
   font-size: 26px;
