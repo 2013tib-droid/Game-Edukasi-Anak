@@ -11,11 +11,10 @@ import type { GameConfig, GameLevel, LevelSlot, TapChoice } from '@/engine/core/
  * stays plain typed data. Animals are kid-favourites (horse, penguin, panda,
  * koala…) and no two adjacent counting boards use the same one.
  *
- * Rendering: animals with premium AI art (see `src/engine/ui/items.ts`, e.g.
- * lion/elephant/giraffe/panda/rabbit/duck/cat/bear/turtle) render as real
- * WebP pictures via `boardItems` so they look identical on every phone; the
- * rest degrade to a clear emoji board. `boardItems` also falls back to the
- * item's emoji if its image is missing, so nothing ever renders blank.
+ * Rendering: every animal has premium AI art (see `src/engine/ui/items.ts`)
+ * and renders as a real WebP picture via `boardItems`, so it looks identical
+ * on every phone. `boardItems` falls back to the item's emoji only if its
+ * image fails to load, so nothing ever renders blank.
  *
  * Design rule: wrong answer options sit close to the right number, so the
  * child must actually count, not guess. Equation boards glue each operator
@@ -34,8 +33,8 @@ interface Animal {
   item?: string;
 }
 
-// No dog (per owner). Animals with `item` render as premium pictures; the
-// rest render as clear, countable emoji.
+// No dog (per owner). Every animal now has premium WebP art (`item`); the
+// emoji `e` is kept only as a load-failure fallback in BoardItemPic.
 const A = {
   kuda: { e: '🐴', n: 'kuda', item: 'horse' },
   pinguin: { e: '🐧', n: 'pinguin', item: 'penguin' },
@@ -44,13 +43,13 @@ const A = {
   panda: { e: '🐼', n: 'panda', item: 'panda' },
   koala: { e: '🐨', n: 'koala', item: 'koala' },
   sapi: { e: '🐮', n: 'sapi', item: 'cow' },
-  babi: { e: '🐷', n: 'babi' },
+  katak: { e: '🐸', n: 'katak', item: 'frog' },
   zebra: { e: '🦓', n: 'zebra', item: 'zebra' },
-  monyet: { e: '🐵', n: 'monyet' },
+  monyet: { e: '🐵', n: 'monyet', item: 'monkey' },
   bebek: { e: '🦆', n: 'bebek', item: 'duck' },
   ayam: { e: '🐔', n: 'ayam', item: 'chicken' },
   singa: { e: '🦁', n: 'singa', item: 'lion' },
-  harimau: { e: '🐯', n: 'harimau' },
+  harimau: { e: '🐯', n: 'harimau', item: 'tiger' },
   beruang: { e: '🐻', n: 'beruang', item: 'bear' },
   kambing: { e: '🐐', n: 'kambing', item: 'goat' },
   gajah: { e: '🐘', n: 'gajah', item: 'elephant' },
@@ -155,7 +154,7 @@ const config: GameConfig<'tap-answer'> = {
       count(A.bebek, 3),
       count(A.monyet, 5),
       count(A.sapi, 4),
-      count(A.babi, 3),
+      count(A.katak, 3),
     ),
     // Slot 3 — count bigger (5–7)
     slot(
@@ -195,7 +194,7 @@ const config: GameConfig<'tap-answer'> = {
       sub(A.zebra, 6, 2),
       sub(A.kelinci, 5, 1),
       sub(A.kucing, 5, 3),
-      sub(A.babi, 4, 2),
+      sub(A.katak, 4, 2),
     ),
     // Slot 7 — subtraction (remain 3–5)
     slot(
