@@ -130,6 +130,11 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Menyatukan dua jalur yang tadinya terpisah & saling menimpa saat deploy: **landing page baru + engine variant-slots** (dari `petualangan-pintar-fase-3`) dan **seni hewan WebP premium + l8 kura-kura** (dari `asset-generation-prompts`).
   - Engine hasil merge = superset: `board` (emoji) + `boardItems` (gambar) + Shape/sequence/silhouette + variant-slots, semua hidup berdampingan. Hutan Hewan direkonsiliasi: pool varian (anti-bosan) yang merender WebP untuk hewan ber-seni, emoji untuk sisanya.
   - Landing lama (278 baris, dari `landing-page-review`) DIGANTI landing baru (`TopBar` + hero simpel + harga perkenalan). Branch-branch lama ditinggalkan; lihat "Branch & Alur Kerja".
+- **Gambar soal jadi besar + seni premium untuk cue tunggal** (2026-07-25), teruji headless 380×800 & 360×640 (tanpa scroll, tanpa error console):
+  - Komponen `ItemPic` (`src/engine/ui/ItemPic.tsx`) = satu-satunya perender gambar item (registry `items.ts` + fallback emoji). Dipakai papan tap-answer (`boardItems`), cue tunggal, dan Spell.
+  - Field baru: `TapAnswerData.pictureItem` & `SpellData.item` — id item registry untuk cue besar (gambar WebP, bukan font emoji HP). `picture`/`emoji` tetap jadi fallback.
+  - Ukuran cue dinaikkan ±2× (`.ta-picture`, `.spell-picture` + varian `--img`) agar anak tertarik; berlaku untuk semua soal ber-cue (Taman Huruf, Pasar Buah).
+  - Aset baru `public/assets/items/sun.webp` & `cap.webp` (dari pemilik proyek). Taman Huruf: Topi & Matahari pakai gambar itu; Gajah/Jerapah/Kuda/Sapi/Bebek/Panda pakai seni hewan yang sudah ada; soal "Teleskop" (asing untuk anak TK) diganti "Boneka".
 
 ## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
 

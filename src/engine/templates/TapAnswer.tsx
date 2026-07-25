@@ -3,7 +3,7 @@ import type { TemplateProps } from '@/engine/core/GameShell';
 import type { BoardOp } from '@/engine/core/types';
 import { sfx } from '@/engine/audio/sound';
 import Shape from '@/engine/ui/Shape';
-import { ITEMS, itemImageUrl } from '@/engine/ui/items';
+import ItemPic from '@/engine/ui/ItemPic';
 
 /** Human-readable operator glyphs for equation picture boards. */
 const OP_GLYPH: Record<BoardOp, string> = {
@@ -13,33 +13,6 @@ const OP_GLYPH: Record<BoardOp, string> = {
   arrow: '→',
   question: '?',
 };
-
-/**
- * One item picture on a board. Renders the image asset; if it is missing
- * (e.g. art not shipped yet) it degrades to the item's emoji so the board is
- * never blank.
- */
-function BoardItemPic({ id }: { id: string }) {
-  const [failed, setFailed] = useState(false);
-  const def = ITEMS[id];
-  if (failed || !def) {
-    return (
-      <span className="ta-board__emoji" aria-hidden>
-        {def?.emoji ?? '❓'}
-      </span>
-    );
-  }
-  return (
-    <img
-      className="ta-board__img"
-      src={itemImageUrl(id)}
-      alt=""
-      aria-hidden
-      draggable={false}
-      onError={() => setFailed(true)}
-    />
-  );
-}
 
 /** Pick the one correct answer out of 2–4 big cards. */
 export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'tap-answer'>) {
@@ -82,13 +55,29 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
     <>
       <div className="game-prompt">{level.narration}</div>
       <div className="game-area">
-        {level.data.picture && (
+        {level.data.pictureItem ? (
           <div
-            className={'ta-picture' + (level.data.silhouette ? ' ta-picture--silhouette' : '')}
+            className={
+              'ta-picture ta-picture--img' +
+              (level.data.silhouette ? ' ta-picture--silhouette' : '')
+            }
             aria-hidden
           >
-            {level.data.picture}
+            <ItemPic
+              id={level.data.pictureItem}
+              className="ta-picture__img"
+              fallbackClassName="ta-picture__emoji"
+            />
           </div>
+        ) : (
+          level.data.picture && (
+            <div
+              className={'ta-picture' + (level.data.silhouette ? ' ta-picture--silhouette' : '')}
+              aria-hidden
+            >
+              {level.data.picture}
+            </div>
+          )
         )}
         {level.data.sequence && (
           <div className="ta-sequence" aria-hidden>
@@ -118,7 +107,12 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
               ) : (
                 <span key={i} className="ta-board__group">
                   {Array.from({ length: tok.count }, (_, n) => (
-                    <BoardItemPic key={n} id={tok.item} />
+                    <ItemPic
+                      key={n}
+                      id={tok.item}
+                      className="ta-board__img"
+                      fallbackClassName="ta-board__emoji"
+                    />
                   ))}
                 </span>
               ),
