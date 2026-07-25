@@ -29,14 +29,19 @@ export default function LandingPage() {
         🎮 Main Sekarang
       </Link>
 
-      <div className="worlds" aria-hidden="true">
-        {worlds.map((w) => (
-          <div key={w.name} className={`chip ${w.cls}`}>
-            <span className="ce">{w.emoji}</span>
-            <span className="cn">{w.name}</span>
-          </div>
-        ))}
-      </div>
+      <section className="worlds">
+        <h2 className="worlds-title">4 dunia seru menanti</h2>
+        <ul className="world-list">
+          {worlds.map((w) => (
+            <li key={w.name} className="world">
+              <span className={`world-disc ${w.cls}`} aria-hidden="true">
+                {w.emoji}
+              </span>
+              <span className="world-name">{w.name}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <div className="prices">
         <div className="pcard">
