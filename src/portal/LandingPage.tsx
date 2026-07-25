@@ -11,10 +11,46 @@ const worlds = [
   { cls: 'w-fruit', emoji: '🍉', name: 'Pasar Buah' },
 ];
 
+/** Parent-facing questions, ordered by what a first-time visitor asks first. */
+const faqs = [
+  {
+    q: 'Anak saya belum bisa membaca, bisa main sendiri?',
+    a: 'Bisa. Semua perintah dan petunjuk dinarasikan dengan suara Bahasa Indonesia, dan tombolnya besar-besar. Teks hanya pendamping, bukan syarat untuk bisa main.',
+  },
+  {
+    q: 'Bisa dicoba dulu sebelum bayar?',
+    a: 'Bisa. Ketuk "Main Sekarang" — ada beberapa game yang gratis dimainkan penuh tanpa perlu daftar atau login.',
+  },
+  {
+    q: 'Bayarnya sekali atau langganan?',
+    a: 'Sekali bayar untuk satu kelompok, lalu bisa dimainkan selamanya. Tidak ada tagihan bulanan. Perbaikan bug selalu gratis; kalau nanti ada paket konten besar yang baru, itu ekspansi terpisah dan sifatnya opsional.',
+  },
+  {
+    q: 'Main di HP atau tablet?',
+    a: 'Keduanya. Dibuka lewat browser di HP Android atau tablet — tidak perlu instal aplikasi, tidak makan memori HP. Tampilannya menyesuaikan posisi tegak maupun mendatar.',
+  },
+  {
+    q: 'Perlu internet untuk main?',
+    a: 'Ya, perlu koneksi saat membuka game karena akses akun dicek secara online. Datanya ringan dan dirancang tetap lancar di HP Android kelas menengah ke bawah.',
+  },
+  {
+    q: 'Satu akun bisa dipakai di berapa perangkat?',
+    a: 'Sampai 3 perangkat — cukup untuk HP ayah, HP ibu, dan tablet anak di rumah.',
+  },
+  {
+    q: 'Ada iklan atau pembelian di dalam game?',
+    a: 'Tidak ada sama sekali. Tidak ada iklan, tidak ada tombol belanja, dan tidak ada tautan keluar di area anak. Urusan akun dan pembelian dipisah di area orang tua.',
+  },
+  {
+    q: 'Setelah bayar, bagaimana cara membukanya?',
+    a: 'Anda menerima kode aktivasi dari halaman pembelian. Daftar akun di portal, masukkan kode itu sekali, dan semua game kelompok tersebut langsung terbuka untuk akun Anda.',
+  },
+];
+
 /**
  * Front door — kept intentionally simple: one clean hero with a single main
- * action. The playable portal (group picker + games) and the parent login
- * live one tap away. No walls of text.
+ * action, then the reassurance parents ask for (worlds, price, FAQ). The
+ * playable portal and the parent login live one tap away.
  */
 export default function LandingPage() {
   return (
@@ -30,7 +66,7 @@ export default function LandingPage() {
       </Link>
 
       <section className="worlds">
-        <h2 className="worlds-title">4 dunia seru menanti</h2>
+        <h2 className="worlds-title">Petualangan seru menanti</h2>
         <ul className="world-list">
           {worlds.map((w) => (
             <li key={w.name} className="world">
@@ -45,14 +81,15 @@ export default function LandingPage() {
 
       <div className="prices">
         <div className="pcard">
-          <span className="pc-badge">🎉 Harga Perkenalan</span>
-          <div className="pc-name">Kelompok TK · 5–7 tahun</div>
+          <div className="pc-name">Kelompok Playgroup dan TK</div>
           <div className="pc-row">
             <span className="pc-was">Rp39.000</span>
             <span className="pc-now">Rp19.000</span>
             <span className="pc-off">−50%</span>
           </div>
-          <div className="pc-sub">Buka semua game TK · sekali bayar, main selamanya</div>
+          <div className="pc-sub">
+            Buka semua game Playgroup &amp; TK · sekali bayar, main selamanya
+          </div>
         </div>
 
         <div className="pcard pcard--soon">
@@ -64,6 +101,19 @@ export default function LandingPage() {
           <div className="pc-sub">Soal lebih menantang — menyusul!</div>
         </div>
       </div>
+
+      <section className="faq">
+        <h2 className="faq-title">Pertanyaan yang sering ditanya</h2>
+        {faqs.map((f) => (
+          <details key={f.q} className="faq-item">
+            <summary>
+              <span className="faq-q">{f.q}</span>
+              <span className="faq-mark" aria-hidden="true" />
+            </summary>
+            <p className="faq-a">{f.a}</p>
+          </details>
+        ))}
+      </section>
 
       <footer>Tanpa iklan · Aman untuk anak</footer>
       </div>
