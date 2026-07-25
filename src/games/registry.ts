@@ -37,13 +37,13 @@ export const games: GameMeta[] = [
     load: () => import('@/games/tk/taman-huruf'),
   },
   {
-    id: 'istana-pelangi',
+    id: 'labirin-warna',
     group: 'tk',
-    title: 'Istana Pelangi',
-    emoji: '🌈',
+    title: 'Labirin Warna',
+    emoji: '🎨',
     template: 'tap-answer',
     freeDemo: true,
-    load: () => import('@/games/tk/istana-pelangi'),
+    load: () => import('@/games/tk/labirin-warna'),
   },
   {
     id: 'pasar-buah',

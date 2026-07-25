@@ -1,20 +1,24 @@
 import type { GameConfig, GameLevel, ShapeId, ShapeSpec } from '@/engine/core/types';
 
 /**
- * "Istana Pelangi" — the colors & shapes world (ported from the Petualangan
+ * "Labirin Warna" — the colors & shapes world (ported from the Petualangan
  * Pintar ocean world, renamed because the content is about bangun datar and
  * warna, not the sea). Every level is a "pick one card" question
  * (tap-answer) whose cards are colored geometric shapes drawn as SVG (see
  * engine/ui/Shape).
  *
- * Nine slots, each a POOL of interchangeable variants — the shell rolls one
+ * Ten slots, each a POOL of interchangeable variants — the shell rolls one
  * variant per slot on every play and every "Main Lagi", so the world stays
  * fresh instead of asking the same seven questions forever:
- *   1–2  Cari Bentuk      (warna sama, pilih bentuk yang disebut)
- *   3–4  Cari Warna       (bentuk sama, pilih warna yang disebut)
- *   5    Yang Beda Sendiri (tiga sama, satu berbeda)
- *   6–7  Bentuk & Warna   (harus cocok DUA ciri sekaligus)
- *   8–9  Pola Ajaib       (lanjutkan deret AB / AAB / ABC)
+ *   1–2   Cari Bentuk      (warna sama, pilih bentuk yang disebut)
+ *   3–4   Cari Warna       (bentuk sama, pilih warna yang disebut)
+ *   5     Yang Beda Sendiri (tiga sama, satu berbeda)
+ *   6–7   Bentuk & Warna   (harus cocok DUA ciri sekaligus)
+ *   8–10  Pola Ajaib       (tiga level pola: AB, lalu AAB/ABB, lalu ABC)
+ *
+ * Patterns get three of the ten slots (25 variants) because they are the
+ * world's real thinking exercise. Every pattern is exactly six cells long so
+ * the row — and the "?" box at its end — stays on one line on a small phone.
  *
  * Design rules:
  * - Decoys are deliberate look-alikes in SHAPE (kotak/ketupat,
@@ -359,7 +363,7 @@ const duaCiriB: Level[] = [
   ]),
 ];
 
-// Slot 8 — Pola Ajaib AB AB AB ?
+// Slot 8 — Pola Ajaib AB AB AB ?: the easiest rhythm, two alternating cards.
 const polaAB: Level[] = [
   pola('l8', [sh('lingkaran', MERAH), sh('bintang', KUNING)], 3, [
     sh('lingkaran', MERAH),
@@ -391,42 +395,118 @@ const polaAB: Level[] = [
     sh('lingkaran', MERAH),
     sh('bintang', KUNING),
   ]),
+  pola('l8', [sh('hati', MERAH), sh('kotak', BIRU)], 3, [
+    sh('hati', MERAH),
+    sh('kotak', HIJAU),
+    sh('ketupat', BIRU),
+  ]),
+  pola('l8', [sh('oval', UNGU), sh('bintang', KUNING)], 3, [
+    sh('oval', UNGU),
+    sh('bintang', BIRU),
+    sh('hati', KUNING),
+  ]),
+  pola('l8', [sh('ketupat', HIJAU), sh('segitiga', PINK)], 3, [
+    sh('ketupat', HIJAU),
+    sh('segitiga', BIRU),
+    sh('kotak', PINK),
+  ]),
 ];
 
-// Slot 9 — Pola Ajaib yang lebih panjang: AAB AAB ? dan ABC ABC ?
-const polaPanjang: Level[] = [
-  pola('l9', [sh('lingkaran', MERAH), sh('kotak', BIRU), sh('bintang', KUNING)], 2, [
-    sh('lingkaran', MERAH),
-    sh('kotak', BIRU),
-    sh('bintang', HIJAU),
-  ]),
+// Slot 9 — Pola Ajaib AAB / ABB: one card repeats, so the child can't just
+// alternate — they have to hear the rhythm.
+const polaGanda: Level[] = [
   pola('l9', [sh('hati', PINK), sh('hati', PINK), sh('bintang', UNGU)], 2, [
     sh('hati', PINK),
     sh('bintang', KUNING),
     sh('kotak', UNGU),
-  ]),
-  pola('l9', [sh('segitiga', HIJAU), sh('oval', BIRU), sh('ketupat', MERAH)], 2, [
-    sh('segitiga', HIJAU),
-    sh('oval', BIRU),
-    sh('ketupat', KUNING),
   ]),
   pola('l9', [sh('kotak', KUNING), sh('kotak', KUNING), sh('lingkaran', HIJAU)], 2, [
     sh('kotak', KUNING),
     sh('lingkaran', MERAH),
     sh('oval', HIJAU),
   ]),
-  pola('l9', [sh('bintang', KUNING), sh('hati', MERAH), sh('kotak', BIRU)], 2, [
+  pola('l9', [sh('segitiga', BIRU), sh('segitiga', BIRU), sh('hati', MERAH)], 2, [
+    sh('segitiga', BIRU),
+    sh('hati', HIJAU),
+    sh('bintang', MERAH),
+  ]),
+  pola('l9', [sh('bintang', KUNING), sh('bintang', KUNING), sh('ketupat', COKLAT)], 2, [
+    sh('bintang', KUNING),
+    sh('ketupat', BIRU),
+    sh('kotak', COKLAT),
+  ]),
+  pola('l9', [sh('oval', PINK), sh('oval', PINK), sh('kotak', BIRU)], 2, [
+    sh('oval', PINK),
+    sh('kotak', KUNING),
+    sh('ketupat', BIRU),
+  ]),
+  pola('l9', [sh('lingkaran', MERAH), sh('kotak', BIRU), sh('kotak', BIRU)], 2, [
+    sh('lingkaran', MERAH),
+    sh('kotak', HIJAU),
+    sh('ketupat', BIRU),
+  ]),
+  pola('l9', [sh('bintang', HIJAU), sh('oval', UNGU), sh('oval', UNGU)], 2, [
+    sh('bintang', HIJAU),
+    sh('oval', KUNING),
+    sh('lingkaran', UNGU),
+  ]),
+  pola('l9', [sh('hati', MERAH), sh('segitiga', KUNING), sh('segitiga', KUNING)], 2, [
+    sh('hati', MERAH),
+    sh('segitiga', BIRU),
+    sh('ketupat', KUNING),
+  ]),
+];
+
+// Slot 10 — Pola Ajaib ABC: three different cards before the pattern repeats,
+// the hardest rhythm in the world.
+const polaTiga: Level[] = [
+  pola('l10', [sh('lingkaran', MERAH), sh('kotak', BIRU), sh('bintang', KUNING)], 2, [
+    sh('lingkaran', MERAH),
+    sh('kotak', BIRU),
+    sh('bintang', HIJAU),
+  ]),
+  pola('l10', [sh('segitiga', HIJAU), sh('oval', BIRU), sh('ketupat', MERAH)], 2, [
+    sh('segitiga', HIJAU),
+    sh('oval', BIRU),
+    sh('ketupat', KUNING),
+  ]),
+  pola('l10', [sh('bintang', KUNING), sh('hati', MERAH), sh('kotak', BIRU)], 2, [
     sh('bintang', KUNING),
     sh('hati', MERAH),
     sh('kotak', HIJAU),
   ]),
+  pola('l10', [sh('hati', PINK), sh('lingkaran', HIJAU), sh('segitiga', UNGU)], 2, [
+    sh('hati', PINK),
+    sh('lingkaran', HIJAU),
+    sh('segitiga', KUNING),
+  ]),
+  pola('l10', [sh('kotak', COKLAT), sh('bintang', KUNING), sh('oval', BIRU)], 2, [
+    sh('kotak', COKLAT),
+    sh('bintang', KUNING),
+    sh('oval', MERAH),
+  ]),
+  pola('l10', [sh('ketupat', UNGU), sh('segitiga', KUNING), sh('hati', MERAH)], 2, [
+    sh('ketupat', UNGU),
+    sh('segitiga', KUNING),
+    sh('hati', BIRU),
+  ]),
+  pola('l10', [sh('oval', HIJAU), sh('kotak', MERAH), sh('bintang', BIRU)], 2, [
+    sh('oval', HIJAU),
+    sh('kotak', MERAH),
+    sh('bintang', KUNING),
+  ]),
+  pola('l10', [sh('lingkaran', BIRU), sh('hati', KUNING), sh('ketupat', HIJAU)], 2, [
+    sh('lingkaran', BIRU),
+    sh('hati', KUNING),
+    sh('ketupat', PINK),
+  ]),
 ];
 
 const config: GameConfig<'tap-answer'> = {
-  id: 'istana-pelangi',
+  id: 'labirin-warna',
   group: 'tk',
-  title: 'Istana Pelangi',
-  emoji: '🌈',
+  title: 'Labirin Warna',
+  emoji: '🎨',
   freeDemo: true,
   template: 'tap-answer',
   levels: [
@@ -438,7 +518,8 @@ const config: GameConfig<'tap-answer'> = {
     duaCiriA,
     duaCiriB,
     polaAB,
-    polaPanjang,
+    polaGanda,
+    polaTiga,
   ],
 };
 

@@ -20,7 +20,7 @@ export type TemplateId =
 
 /**
  * Geometric shape ids (ported from SHAPES in petualangan-pintar.html). Used
- * by the Bawah Laut world, where cards are colored geometric shapes rendered
+ * by the Labirin Warna world, where cards are colored geometric shapes rendered
  * as SVG — emoji can't cover every shape×color combination.
  */
 export type ShapeId =
@@ -44,7 +44,7 @@ export interface TapChoice {
   /** Big visual — emoji for now, later an image asset path. */
   emoji?: string;
   text?: string;
-  /** Colored geometric shape drawn as SVG (Bawah Laut). */
+  /** Colored geometric shape drawn as SVG (Labirin Warna). */
   shape?: ShapeSpec;
   correct?: boolean;
 }
@@ -95,7 +95,7 @@ export interface TapAnswerData {
    */
   boardItems?: BoardItemToken[];
   /**
-   * Optional shape pattern shown above the choices (Bawah Laut "Pola
+   * Optional shape pattern shown above the choices (Labirin Warna "Pola
    * Ajaib"): a repeating ABAB / ABC-ABC sequence where `null` is the empty
    * "?" box the child must fill by picking the next shape.
    */

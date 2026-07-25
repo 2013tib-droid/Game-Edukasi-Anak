@@ -27,12 +27,16 @@
   display: flex;
   gap: 8px;
   flex: 1;
+  min-width: 0;
   justify-content: center;
 }
 
+/* Full size when the row has room; a long game (10 levels on a 360px phone)
+   shrinks the dots instead of shoving the speaker button off-screen. */
 .level-dot {
-  width: 16px;
-  height: 16px;
+  flex: 0 1 16px;
+  min-width: 8px;
+  aspect-ratio: 1;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.15);
 }
@@ -109,7 +113,7 @@
   pointer-events: none;
 }
 
-/* A geometric-shape answer (Istana Pelangi) is the whole point of the card —
+/* A geometric-shape answer (Labirin Warna) is the whole point of the card —
    let it fill the box instead of floating in the middle at a fixed 64px. */
 .choice-card .choice-shape {
   width: 92%;
@@ -182,7 +186,7 @@
   opacity: 0.8;
 }
 
-/* Istana Pelangi "Pola Ajaib": the repeating shape sequence above the choices. */
+/* Labirin Warna "Pola Ajaib": the repeating shape sequence above the choices. */
 .ta-sequence {
   display: flex;
   flex-wrap: wrap;

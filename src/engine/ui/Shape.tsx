@@ -2,7 +2,7 @@ import type { ShapeId } from '@/engine/core/types';
 
 /**
  * A geometric shape drawn as inline SVG in a given fill color. Ported from
- * shapeSVG() in petualangan-pintar.html — the Bawah Laut world needs every
+ * shapeSVG() in petualangan-pintar.html — the Labirin Warna world needs every
  * shape×color combination and emoji simply don't cover them.
  */
 export default function Shape({
