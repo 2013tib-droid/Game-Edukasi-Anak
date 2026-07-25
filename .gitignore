@@ -1,0 +1,20 @@
+# Deploy branch: only the served files (app/, index.html, 404.html,
+# petualangan-pintar.html, assets/) belong here. Build scratch does not —
+# `app/` IS the published build.
+
+# Dependencies
+node_modules/
+
+# Build output (copied into app/ when deploying, never committed as dist/)
+dist/
+*.tsbuildinfo
+
+# Env — real Firebase keys live here, never commit
+.env
+.env.local
+.env.*.local
+
+# Editor/OS
+.DS_Store
+.idea/
+.vscode/
