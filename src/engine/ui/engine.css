@@ -295,12 +295,22 @@
   font-size: clamp(46px, 12vw, 74px);
 }
 
-/* Equation operators (+ = → ?) between the picture groups. */
+/* Equation operators (+ = → ?) between the picture groups. Sized big and
+   dark: next to 100px+ animal pictures a small glyph disappears, and a young
+   child needs to notice "is this add or take away?" before counting. */
 .ta-board__op {
-  font-size: clamp(28px, 7.5vw, 40px);
-  font-weight: 800;
-  color: #6b5b73;
-  padding: 0 2px;
+  font-size: clamp(56px, 15vw, 82px);
+  font-weight: 900;
+  line-height: 1;
+  color: #4a3550;
+  padding: 0 6px;
+}
+
+/* Busy boards shrink the pictures; keep the operator proportionally large so
+   it still reads as the loudest symbol on the board. */
+.ta-board--dense .ta-board__op {
+  font-size: clamp(40px, 11vw, 60px);
+  padding: 0 4px;
 }
 
 /* Spell (susun kata) */
