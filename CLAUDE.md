@@ -135,6 +135,10 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Field baru: `TapAnswerData.pictureItem` & `SpellData.item` — id item registry untuk cue besar (gambar WebP, bukan font emoji HP). `picture`/`emoji` tetap jadi fallback.
   - Ukuran cue dinaikkan ±2× (`.ta-picture`, `.spell-picture` + varian `--img`) agar anak tertarik; berlaku untuk semua soal ber-cue (Taman Huruf, Pasar Buah).
   - Aset baru `public/assets/items/sun.webp` & `cap.webp` (dari pemilik proyek). Taman Huruf: Topi & Matahari pakai gambar itu; Gajah/Jerapah/Kuda/Sapi/Bebek/Panda pakai seni hewan yang sudah ada; soal "Teleskop" (asing untuk anak TK) diganti "Boneka".
+- **Tulis Angka 1–20 acak, 7 soal per sesi** (2026-07-26), teruji headless 380×800 (tanpa error console):
+  - Fitur engine baru `sessionLevels` (opsional, di `GameConfig`/`MixedGameConfig`): kolam soal boleh besar, tapi tiap sesi main hanya mengambil N slot **acak tanpa pengulangan & urutan acak** (`resolveSlots` di `GameShell` — shuffle + slice, di-roll ulang tiap "Main Lagi"). Game tanpa field ini tetap main semua slot berurutan seperti dulu.
+  - `tulis-angka` kini punya 20 level (angka 1–20, narasi "satu"…"dua puluh"), `sessionLevels: 7`. Id level tetap `l1`…`l20` supaya bintang lama tidak hilang.
+  - `Tracing` mengecilkan font panduan untuk glyph 2 digit (`glyphFont()`, 0.75→0.5 × kanvas) supaya angka 10–20 muat penuh di kanvas HP.
 
 ## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
 

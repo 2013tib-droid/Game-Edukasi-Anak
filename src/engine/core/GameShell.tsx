@@ -53,13 +53,27 @@ function starsForMistakes(wrong: number): Stars {
 
 type ConcreteLevel = GameLevel | MixedLevel;
 
+/** Fisher-Yates shuffle on a copy. */
+function shuffled<T>(list: T[]): T[] {
+  const out = [...list];
+  for (let i = out.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j]!, out[i]!];
+  }
+  return out;
+}
+
 /**
  * Turn the config's slots into a concrete level list for one playthrough:
  * a slot that is an array of variants collapses to one randomly-chosen
- * variant. Re-run per play (and on "Main Lagi") so questions vary.
+ * variant. When the game sets `sessionLevels`, only that many slots are
+ * drawn (no repeats, random order) — a big pool, a short session.
+ * Re-run per play (and on "Main Lagi") so questions vary.
  */
 function resolveSlots(config: AnyGameConfig): ConcreteLevel[] {
-  const slots = config.levels as Array<ConcreteLevel | ConcreteLevel[]>;
+  let slots = config.levels as Array<ConcreteLevel | ConcreteLevel[]>;
+  const take = config.sessionLevels;
+  if (take && take > 0 && take < slots.length) slots = shuffled(slots).slice(0, take);
   return slots.map((slot) =>
     Array.isArray(slot) ? slot[Math.floor(Math.random() * slot.length)]! : slot,
   );

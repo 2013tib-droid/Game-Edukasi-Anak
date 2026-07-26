@@ -220,6 +220,12 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
   freeDemo: boolean;
   /** Ordered slots; a slot may be one level or a pool of random variants. */
   levels: LevelSlot<T>[];
+  /**
+   * Play only this many slots per session, drawn at random (no repeats) and
+   * in random order — e.g. a game holding all numbers 1–20 but asking 7 of
+   * them each play. Omit (or >= levels.length) to play every slot in order.
+   */
+  sessionLevels?: number;
 }
 
 /**
@@ -251,6 +257,8 @@ export interface MixedGameConfig {
   freeDemo: boolean;
   /** Ordered slots; a slot may be one level or a pool of random variants. */
   levels: MixedSlot[];
+  /** See `GameConfig.sessionLevels`. */
+  sessionLevels?: number;
 }
 
 /** Either kind of game — what the shell, registry, and pages accept. */

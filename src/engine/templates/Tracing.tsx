@@ -10,6 +10,15 @@ const COVER_RADIUS = 20; // how close a stroke must pass to cover a sample
 const PASS_COVERAGE = 0.55; // fraction of glyph that must be traced
 const MAX_OFF_RATIO = 0.55; // fraction of stroke allowed outside the glyph
 
+/**
+ * Guide font for a glyph. Two-digit numbers (10–20) get a smaller size so
+ * the whole glyph still fits inside the square canvas on a phone.
+ */
+function glyphFont(glyph: string): string {
+  const scale = glyph.length > 1 ? 0.5 : 0.75;
+  return `bold ${SIZE * scale}px 'Fredoka', 'Baloo 2', sans-serif`;
+}
+
 interface Sample {
   x: number;
   y: number;
@@ -30,7 +39,7 @@ export default function Tracing({ level, onCorrect, onWrong }: TemplateProps<'tr
   function drawGuide(ctx: CanvasRenderingContext2D) {
     ctx.clearRect(0, 0, SIZE, SIZE);
     ctx.fillStyle = '#e8e0d0';
-    ctx.font = `bold ${SIZE * 0.75}px 'Fredoka', 'Baloo 2', sans-serif`;
+    ctx.font = glyphFont(level.data.glyph);
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(level.data.glyph, SIZE / 2, SIZE / 2 + SIZE * 0.04);
@@ -53,7 +62,7 @@ export default function Tracing({ level, onCorrect, onWrong }: TemplateProps<'tr
     off.height = SIZE;
     const octx = off.getContext('2d', { willReadFrequently: true })!;
     octx.fillStyle = '#000';
-    octx.font = `bold ${SIZE * 0.75}px 'Fredoka', 'Baloo 2', sans-serif`;
+    octx.font = glyphFont(level.data.glyph);
     octx.textAlign = 'center';
     octx.textBaseline = 'middle';
     octx.fillText(level.data.glyph, SIZE / 2, SIZE / 2 + SIZE * 0.04);
