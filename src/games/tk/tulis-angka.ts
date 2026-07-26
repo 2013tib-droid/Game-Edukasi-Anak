@@ -1,4 +1,35 @@
-import type { GameConfig } from '@/engine/core/types';
+import type { GameConfig, LevelSlot } from '@/engine/core/types';
+
+/** Number names 1–20 for the narrated instruction. */
+const NAMES = [
+  'satu',
+  'dua',
+  'tiga',
+  'empat',
+  'lima',
+  'enam',
+  'tujuh',
+  'delapan',
+  'sembilan',
+  'sepuluh',
+  'sebelas',
+  'dua belas',
+  'tiga belas',
+  'empat belas',
+  'lima belas',
+  'enam belas',
+  'tujuh belas',
+  'delapan belas',
+  'sembilan belas',
+  'dua puluh',
+];
+
+// Pool of all numbers 1–20 (ids kept as l1… so existing star progress stays).
+const levels: LevelSlot<'tracing'>[] = NAMES.map((name, i) => ({
+  id: `l${i + 1}`,
+  narration: `Tulis angka ${name} dengan jarimu!`,
+  data: { glyph: String(i + 1) },
+}));
 
 const config: GameConfig<'tracing'> = {
   id: 'tulis-angka',
@@ -7,13 +38,9 @@ const config: GameConfig<'tracing'> = {
   emoji: '✏️',
   template: 'tracing',
   freeDemo: true,
-  levels: [
-    { id: 'l1', narration: 'Tulis angka satu dengan jarimu!', data: { glyph: '1' } },
-    { id: 'l2', narration: 'Tulis angka dua dengan jarimu!', data: { glyph: '2' } },
-    { id: 'l3', narration: 'Tulis angka tiga dengan jarimu!', data: { glyph: '3' } },
-    { id: 'l4', narration: 'Tulis angka empat dengan jarimu!', data: { glyph: '4' } },
-    { id: 'l5', narration: 'Tulis angka lima dengan jarimu!', data: { glyph: '5' } },
-  ],
+  // 20 angka di kolam soal; tiap sesi main mengambil 7 angka acak.
+  sessionLevels: 7,
+  levels,
 };
 
 export default config;
