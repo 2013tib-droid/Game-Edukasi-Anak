@@ -1,0 +1,129 @@
+/*
+ * Mascot panel — a STATUS display, never a button.
+ *
+ * It used to copy `.btn` exactly (white card + lifted bottom shadow), so on
+ * the portal home it looked tappable like the group buttons under it. Now it
+ * reads as a soft "info card": warm tint, dashed frame, inset shadow (pressed
+ * into the page instead of raised off it) and no press feedback.
+ */
+.mascot-panel {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 13px 16px;
+  text-align: left;
+  border: 2px dashed rgba(179, 84, 26, 0.3);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255, 250, 238, 0.96), rgba(255, 234, 209, 0.92));
+  box-shadow: inset 0 2px 7px rgba(179, 84, 26, 0.1);
+  cursor: default;
+}
+
+/* Round "nest" holding the creature, so the emoji reads as a portrait. */
+.mascot-panel__avatar {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, #fff 45%, #ffedd0 100%);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.9),
+    0 2px 6px rgba(179, 84, 26, 0.14);
+  font-size: 42px;
+  line-height: 1;
+}
+
+.mascot-panel__info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Small caption: says what this box IS, so nobody waits for it to do
+   something. The star total rides at the end of the same line. */
+.mascot-panel__eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #b3541a;
+  opacity: 0.85;
+}
+
+.mascot-panel__stars {
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.mascot-panel__name {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 1px;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.mascot-panel__level {
+  padding: 1px 9px;
+  border-radius: 999px;
+  background: rgba(179, 84, 26, 0.12);
+  color: #8c4416;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.mascot-panel__bar {
+  height: 11px;
+  margin-top: 7px;
+  border-radius: 999px;
+  background: rgba(179, 84, 26, 0.16);
+  overflow: hidden;
+}
+
+.mascot-panel__fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ffc93c, #ff8a5c);
+  transition: width 0.4s;
+}
+
+.mascot-panel__hint {
+  margin-top: 5px;
+  font-size: 13.5px;
+  color: #6b5641;
+}
+
+.mascot-panel__hint strong {
+  color: #3a2e20;
+}
+
+/* Small phones: keep the creature big but give the text more room. */
+@media (max-width: 380px) {
+  .mascot-panel {
+    gap: 11px;
+    padding: 12px 13px;
+  }
+  .mascot-panel__avatar {
+    width: 64px;
+    height: 64px;
+    font-size: 37px;
+  }
+  .mascot-panel__name {
+    font-size: 18px;
+  }
+  .mascot-panel__hint {
+    font-size: 13px;
+  }
+}
