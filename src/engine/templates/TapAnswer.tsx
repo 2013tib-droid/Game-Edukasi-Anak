@@ -105,24 +105,25 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
                   {OP_GLYPH[tok.op]}
                 </span>
               ) : (
-                <span key={i} className="ta-board__operand">
-                  <span className="ta-board__group">
-                    {Array.from({ length: tok.count }, (_, n) => (
-                      <ItemPic
-                        key={n}
-                        id={tok.item}
-                        className="ta-board__img"
-                        fallbackClassName="ta-board__emoji"
-                      />
-                    ))}
-                  </span>
-                  {/* Numeral under the group: links "this many pictures" to the
-                      written number. Only on equation boards — on a plain
-                      counting board it would give the answer away. */}
-                  {level.data.showCounts && <span className="ta-board__count">{tok.count}</span>}
+                <span key={i} className="ta-board__group">
+                  {Array.from({ length: tok.count }, (_, n) => (
+                    <ItemPic
+                      key={n}
+                      id={tok.item}
+                      className="ta-board__img"
+                      fallbackClassName="ta-board__emoji"
+                    />
+                  ))}
                 </span>
               ),
             )}
+          </div>
+        )}
+        {/* The same sum written in numbers, under the pictures the child just
+            counted — the bridge from "this many" to "3 + 3 = ?". */}
+        {level.data.equation && (
+          <div className={'ta-equation' + (denseBoard ? ' ta-equation--dense' : '')} aria-hidden>
+            {level.data.equation}
           </div>
         )}
         {level.data.board && !level.data.boardItems && (
