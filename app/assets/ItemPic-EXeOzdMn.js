@@ -1,0 +1,1 @@
+import{r as n,j as a}from"./index-DG6t_G-F.js";import{I as m,i as d}from"./items-y0Ekzviy.js";function u({id:r,className:e,fallbackClassName:s}){const[i,o]=n.useState(!1),t=m[r];return i||!t?a.jsx("span",{className:s??e,"aria-hidden":!0,children:t?.emoji??"❓"}):a.jsx("img",{className:e,src:d(r),alt:"","aria-hidden":!0,draggable:!1,onError:()=>o(!0)})}export{u as I};
