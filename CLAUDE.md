@@ -161,6 +161,10 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **`ShapeId` bertambah 7 bangun datar**: `persegi-panjang`, `trapesium`, `segilima`, `segienam`, `layang-layang`, `bulan` (bulan sabit), `awan` — total 14 bentuk, SVG-nya di `src/engine/ui/Shape.tsx`. Alasannya referensi bentuk terasa itu-itu saja.
   - Pool varian Labirin Warna diperbanyak memakai bentuk baru itu (±110 varian di 10 slot; id slot `l1`–`l10` tidak berubah, jadi bintang lama aman). Pasangan pengecoh mirip yang baru: kotak/persegi panjang, ketupat/layang-layang, segilima/segienam, bulan/awan.
 
+- **Angka tertulis di bawah tiap kelompok gambar (penjumlahan & pengurangan)** (2026-07-27), teruji headless 380×800 (5 soal matematika Hutan Hewan, tanpa scroll & tanpa error console):
+  - Field engine baru `TapAnswerData.showCounts` (opsional): mencetak jumlah tiap grup `boardItems` sebagai **angka di bawah gambarnya** ("3 + 3", "7 → 3"), supaya anak menghubungkan "sebanyak ini" dengan lambang bilangannya. Render: `.ta-board__operand` (kolom gambar + angka, ikut wrap sebagai satu unit) di `TapAnswer.tsx` + `engine.css`.
+  - **Hanya untuk papan persamaan** (`add()`/`sub()` di `hutan-hewan.ts`). JANGAN pasang di soal "ayo hitung" biasa — angkanya jadi jawaban soal itu sendiri.
+
 ## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
 
 > Riwayat proyek ini kacau karena tiap sesi bikin branch `claude/xxx` baru, kerja di situ, lalu tak pernah digabung — akibatnya landing page & fitur berulang kali "hilang" dan deploy saling menimpa. Aturan di bawah menghentikan itu. **Ada SATU trunk: `main`.**

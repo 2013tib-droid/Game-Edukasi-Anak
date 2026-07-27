@@ -103,6 +103,13 @@ export interface TapAnswerData {
    */
   boardItems?: BoardItemToken[];
   /**
+   * Print the group size as a numeral under each `boardItems` group ("3 + 2").
+   * Use it on EQUATION boards (addition/subtraction) so the child links the
+   * pictures to the written number — never on a plain "count these" board,
+   * where the numeral would simply be the answer.
+   */
+  showCounts?: boolean;
+  /**
    * Optional shape pattern shown above the choices (Labirin Warna "Pola
    * Ajaib"): a repeating ABAB / ABC-ABC sequence where `null` is the empty
    * "?" box the child must fill by picking the next shape.

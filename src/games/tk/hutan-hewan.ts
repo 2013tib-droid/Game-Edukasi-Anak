@@ -97,6 +97,9 @@ function add(a: Animal, x: number, y: number): GameLevel<'tap-answer'> {
               { op: 'equals' },
               { op: 'question' },
             ],
+            // Numerals under each group ("3 + 2"): the child counts the
+            // pictures and meets the written sum at the same time.
+            showCounts: true,
           }
         : { board: `${a.e.repeat(x)}${NBSP}➕ ${a.e.repeat(y)}${NBSP}=${NBSP}❓` }),
       choices: numChoices(x + y),
@@ -116,6 +119,8 @@ function sub(a: Animal, total: number, leave: number): GameLevel<'tap-answer'> {
               { op: 'arrow' },
               { item: 'house', count: leave },
             ],
+            // "7 → 3": how many there were, and how many went home.
+            showCounts: true,
           }
         : { board: `${a.e.repeat(total)} ➡️${NBSP}${'🏠'.repeat(leave)}` }),
       choices: numChoices(total - leave),
