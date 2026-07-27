@@ -24,18 +24,36 @@ export default function Memory({ level, onCorrect, onWrong }: TemplateProps<'mem
   const [open, setOpen] = useState<number[]>([]);
   const [matched, setMatched] = useState<Set<string>>(new Set());
   const busy = useRef(false);
+  /**
+   * Refs mirror `open`/`matched` and are THE source of truth inside `flip`.
+   * React state lags one render behind, and on a slow phone a tap can land in
+   * the gap between the flip-back timer clearing `busy` and React committing
+   * the new state. Reading the state there let a third card open — and with
+   * three cards up the "two are open" comparison never ran again, freezing
+   * the board mid-level. Refs update synchronously, so that gap is gone.
+   */
+  const openRef = useRef<number[]>([]);
+  const matchedRef = useRef<Set<string>>(new Set());
+
+  function closeAll() {
+    openRef.current = [];
+    setOpen([]);
+  }
 
   function flip(card: Card) {
-    if (busy.current || open.includes(card.key) || matched.has(card.pairId)) return;
+    if (busy.current || openRef.current.length >= 2) return;
+    if (openRef.current.includes(card.key) || matchedRef.current.has(card.pairId)) return;
     sfx('tap');
-    const nowOpen = [...open, card.key];
+    const nowOpen = [...openRef.current, card.key];
+    openRef.current = nowOpen;
     setOpen(nowOpen);
     if (nowOpen.length === 2) {
       const [a, b] = nowOpen.map((k) => cards.find((c) => c.key === k)!);
       if (a.pairId === b.pairId) {
-        const nextMatched = new Set(matched).add(a.pairId);
+        const nextMatched = new Set(matchedRef.current).add(a.pairId);
+        matchedRef.current = nextMatched;
         setMatched(nextMatched);
-        setOpen([]);
+        closeAll();
         sfx('correct');
         if (nextMatched.size === level.data.pairs.length) {
           window.setTimeout(onCorrect, 350);
@@ -44,7 +62,7 @@ export default function Memory({ level, onCorrect, onWrong }: TemplateProps<'mem
         busy.current = true;
         onWrong(true); // silent: misses shouldn't trigger the retry overlay
         window.setTimeout(() => {
-          setOpen([]);
+          closeAll();
           busy.current = false;
         }, 850);
       }
