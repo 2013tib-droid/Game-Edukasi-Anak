@@ -139,6 +139,10 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Fitur engine baru `sessionLevels` (opsional, di `GameConfig`/`MixedGameConfig`): kolam soal boleh besar, tapi tiap sesi main hanya mengambil N slot **acak tanpa pengulangan & urutan acak** (`resolveSlots` di `GameShell` — shuffle + slice, di-roll ulang tiap "Main Lagi"). Game tanpa field ini tetap main semua slot berurutan seperti dulu.
   - `tulis-angka` kini punya 20 level (angka 1–20, narasi "satu"…"dua puluh"), `sessionLevels: 7`. Id level tetap `l1`…`l20` supaya bintang lama tidak hilang.
   - `Tracing` mengecilkan font panduan untuk glyph 2 digit (`glyphFont()`, 0.75→0.5 × kanvas) supaya angka 10–20 muat penuh di kanvas HP.
+- **Pembagian tugas Kenal Huruf vs Taman Huruf** (2026-07-27), teruji headless 380×800 (tiap game dimainkan sampai tamat, tanpa error console & tanpa scroll horizontal):
+  - **Kenal Huruf = soal huruf murni**, 26 slot (A–Z) × 3 tipe varian: "Mana huruf A?" (4 kartu), besar→kecil, kecil→besar. `sessionLevels: 8` → 8 huruf acak per sesi, tanpa pengulangan huruf. Id slot `h{L}`, kecuali A/B/M/S/E memakai id lama `l1`–`l5` supaya bintang lama tetap terpakai.
+  - **Taman Huruf = soal benda saja** (lihat gambar → huruf pertama, lalu susun kata). Slot "cocokkan huruf besar/kecil" DIPINDAH ke Kenal Huruf. 7 slot: benda sehari-hari, hewan, makanan & buah, alam & rumah, kendaraan & mainan, susun kata 4 huruf, susun kata 5 huruf — masing-masing 8–12 varian.
+  - Tabel huruf mirip (`LOOK`) + `letterChoices()` + `cap()` pindah ke modul bersama `src/games/tk/letters.ts` (dipakai kedua game). `letterChoices(L, { lower, count })` — `count: 4` untuk soal tanpa gambar.
 
 ## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
 
