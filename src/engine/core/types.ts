@@ -130,6 +130,12 @@ export interface TracingData {
 export interface MemoryPair {
   id: string;
   emoji: string;
+  /**
+   * Item id from the picture registry (`src/engine/ui/items.ts`). When set the
+   * card face shows the real art (WebP) instead of the device emoji font;
+   * `emoji` stays as the fallback if the asset is missing.
+   */
+  item?: string;
 }
 
 export interface MemoryData {

@@ -536,6 +536,22 @@
   border-radius: 16px;
 }
 
+/* Real item art on a card face: fill the card, keep a little breathing room. */
+.memory-face__img {
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.14));
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Emoji fallback when an item's image is missing — match the art's weight. */
+.memory-face__emoji {
+  font-size: clamp(36px, 9vw, 56px);
+  line-height: 1;
+}
+
 .memory-face--down {
   background: linear-gradient(135deg, #7ec8e3, #58a4d4);
   color: #fff;

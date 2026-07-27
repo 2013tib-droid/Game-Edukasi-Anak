@@ -1,19 +1,22 @@
 import { useMemo, useRef, useState } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import { sfx } from '@/engine/audio/sound';
+import ItemPic from '@/engine/ui/ItemPic';
 
 interface Card {
   key: number;
   pairId: string;
   emoji: string;
+  /** Registry item id — when present the face is real art, not emoji. */
+  item?: string;
 }
 
 /** Classic pair-matching. Misses count silently (part of normal play). */
 export default function Memory({ level, onCorrect, onWrong }: TemplateProps<'memory'>) {
   const cards = useMemo<Card[]>(() => {
     const doubled = level.data.pairs.flatMap((p, i) => [
-      { key: i * 2, pairId: p.id, emoji: p.emoji },
-      { key: i * 2 + 1, pairId: p.id, emoji: p.emoji },
+      { key: i * 2, pairId: p.id, emoji: p.emoji, item: p.item },
+      { key: i * 2 + 1, pairId: p.id, emoji: p.emoji, item: p.item },
     ]);
     return doubled.sort(() => Math.random() - 0.5);
   }, [level]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -72,7 +75,15 @@ export default function Memory({ level, onCorrect, onWrong }: TemplateProps<'mem
                     }
                     aria-hidden
                   >
-                    {card.emoji}
+                    {card.item ? (
+                      <ItemPic
+                        id={card.item}
+                        className="memory-face__img"
+                        fallbackClassName="memory-face__emoji"
+                      />
+                    ) : (
+                      card.emoji
+                    )}
                   </span>
                 ) : (
                   <span className="memory-face memory-face--down" aria-hidden>
