@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import { sfx } from '@/engine/audio/sound';
+import ItemPic from '@/engine/ui/ItemPic';
 
 interface Tile {
   key: number;
@@ -15,7 +16,7 @@ interface Tile {
  * letter fills the slot; a wrong letter shakes and counts as a miss.
  */
 export default function Spell({ level, onCorrect, onWrong }: TemplateProps<'spell'>) {
-  const { word, emoji, decoys } = level.data;
+  const { word, emoji, decoys, item } = level.data;
   const letters = word.split('');
 
   // Build the tray once per attempt: word letters + decoys, shuffled.
@@ -54,9 +55,19 @@ export default function Spell({ level, onCorrect, onWrong }: TemplateProps<'spel
     <>
       <div className="game-prompt">{level.narration}</div>
       <div className="game-area">
-        <div className="spell-picture" aria-hidden>
-          {emoji}
-        </div>
+        {item ? (
+          <div className="spell-picture spell-picture--img" aria-hidden>
+            <ItemPic
+              id={item}
+              className="spell-picture__img"
+              fallbackClassName="spell-picture__emoji"
+            />
+          </div>
+        ) : (
+          <div className="spell-picture" aria-hidden>
+            {emoji}
+          </div>
+        )}
         <div className="spell-slots" aria-label={`Kata ${word}`}>
           {letters.map((ch, i) => (
             <span

@@ -1,35 +1,36 @@
-import type { GameConfig } from '@/engine/core/types';
+import type { GameConfig, MemoryPair } from '@/engine/core/types';
+import { ITEMS } from '@/engine/ui/items';
 
-// freeDemo: false — contoh game premium untuk menguji gerbang akses.
+/**
+ * Card face from the picture registry: real AI art (WebP), same on every
+ * phone. The registry's emoji stays as fallback if an asset is missing.
+ */
+function pair(item: keyof typeof ITEMS): MemoryPair {
+  return { id: item, item, emoji: ITEMS[item].emoji };
+}
+
+// freeDemo: true — masa pra-rilis: semua game dibuka supaya bisa dicoba
+// bebas. Saat launching hanya "Hutan Hewan" yang gratis (lihat CLAUDE.md).
 const config: GameConfig<'memory'> = {
   id: 'kartu-kembar',
   group: 'tk',
   title: 'Kartu Kembar',
   emoji: '🃏',
   template: 'memory',
-  freeDemo: false,
+  freeDemo: true,
   levels: [
     {
       id: 'l1',
       narration: 'Temukan pasangan hewan yang sama!',
       data: {
-        pairs: [
-          { id: 'kucing', emoji: '🐱' },
-          { id: 'anjing', emoji: '🐶' },
-          { id: 'kelinci', emoji: '🐰' },
-        ],
+        pairs: [pair('cat'), pair('rabbit'), pair('duck')],
       },
     },
     {
       id: 'l2',
       narration: 'Sekarang lebih banyak! Temukan semua pasangannya!',
       data: {
-        pairs: [
-          { id: 'gajah', emoji: '🐘' },
-          { id: 'singa', emoji: '🦁' },
-          { id: 'monyet', emoji: '🐵' },
-          { id: 'panda', emoji: '🐼' },
-        ],
+        pairs: [pair('elephant'), pair('lion'), pair('monkey'), pair('panda')],
       },
     },
     {
@@ -37,12 +38,12 @@ const config: GameConfig<'memory'> = {
       narration: 'Level terakhir! Kamu pasti bisa!',
       data: {
         pairs: [
-          { id: 'ikan', emoji: '🐠' },
-          { id: 'kura', emoji: '🐢' },
-          { id: 'gurita', emoji: '🐙' },
-          { id: 'kepiting', emoji: '🦀' },
-          { id: 'lumba', emoji: '🐬' },
-          { id: 'paus', emoji: '🐳' },
+          pair('turtle'),
+          pair('penguin'),
+          pair('horse'),
+          pair('koala'),
+          pair('tiger'),
+          pair('frog'),
         ],
       },
     },

@@ -27,12 +27,16 @@
   display: flex;
   gap: 8px;
   flex: 1;
+  min-width: 0;
   justify-content: center;
 }
 
+/* Full size when the row has room; a long game (10 levels on a 360px phone)
+   shrinks the dots instead of shoving the speaker button off-screen. */
 .level-dot {
-  width: 16px;
-  height: 16px;
+  flex: 0 1 16px;
+  min-width: 8px;
+  aspect-ratio: 1;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.15);
 }
@@ -109,6 +113,14 @@
   pointer-events: none;
 }
 
+/* A geometric-shape answer (Labirin Warna) is the whole point of the card —
+   let it fill the box instead of floating in the middle at a fixed 64px. */
+.choice-card .choice-shape {
+  width: 92%;
+  height: auto;
+  max-width: 148px;
+}
+
 /* Caption under an emoji answer. */
 .choice-card .choice-text {
   font-size: 20px;
@@ -137,11 +149,35 @@
 }
 
 /* Tap-answer visual cues */
+/* The big cue above the answers. Kids engage with the picture, not the text,
+   so it gets the room: it is the largest thing on screen after the prompt. */
 .ta-picture {
-  font-size: clamp(56px, 18vw, 96px);
+  font-size: clamp(110px, 44vw, 210px);
   text-align: center;
   line-height: 1.1;
   margin-bottom: 4px;
+}
+
+/* Real item art (`pictureItem`) instead of the device emoji font. */
+.ta-picture--img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ta-picture__img {
+  width: clamp(190px, 64vw, 320px);
+  height: clamp(190px, 64vw, 320px);
+  object-fit: contain;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Emoji fallback when an item's image is missing — match the art's weight. */
+.ta-picture__emoji {
+  font-size: clamp(160px, 56vw, 280px);
+  line-height: 1;
 }
 
 /* Fruit "guess the shadow": show the picture as a dark silhouette. */
@@ -150,13 +186,13 @@
   opacity: 0.8;
 }
 
-/* Bawah Laut "Pola Ajaib": the repeating shape sequence above the choices. */
+/* Labirin Warna "Pola Ajaib": the repeating shape sequence above the choices. */
 .ta-sequence {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   margin: 8px auto 18px;
   max-width: 100%;
 }
@@ -167,9 +203,16 @@
   justify-content: center;
 }
 
+/* A six-cell pattern must read as ONE line — the "?" belongs at the end of the
+   row, not wrapped underneath — so the cells scale with the screen width. */
+.ta-seq-shape,
 .ta-seq-cell--q {
-  width: 52px;
-  height: 52px;
+  width: clamp(34px, 12.5vw, 52px);
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.ta-seq-cell--q {
   border: 3px dashed #00697f;
   border-radius: 12px;
   font-size: 26px;
@@ -252,18 +295,49 @@
   font-size: clamp(46px, 12vw, 74px);
 }
 
-/* Equation operators (+ = → ?) between the picture groups. */
+/* Equation operators (+ = → ?) between the picture groups. Sized big and
+   dark: next to 100px+ animal pictures a small glyph disappears, and a young
+   child needs to notice "is this add or take away?" before counting. */
 .ta-board__op {
-  font-size: clamp(28px, 7.5vw, 40px);
-  font-weight: 800;
-  color: #6b5b73;
-  padding: 0 2px;
+  font-size: clamp(56px, 15vw, 82px);
+  font-weight: 900;
+  line-height: 1;
+  color: #4a3550;
+  padding: 0 6px;
+}
+
+/* Busy boards shrink the pictures; keep the operator proportionally large so
+   it still reads as the loudest symbol on the board. */
+.ta-board--dense .ta-board__op {
+  font-size: clamp(40px, 11vw, 60px);
+  padding: 0 4px;
 }
 
 /* Spell (susun kata) */
 .spell-picture {
-  font-size: clamp(52px, 16vw, 88px);
+  font-size: clamp(100px, 38vw, 190px);
   text-align: center;
+  line-height: 1;
+}
+
+/* Real item art (`item`) instead of the device emoji font. */
+.spell-picture--img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spell-picture__img {
+  width: clamp(170px, 56vw, 290px);
+  height: clamp(170px, 56vw, 290px);
+  object-fit: contain;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.spell-picture__emoji {
+  font-size: clamp(145px, 50vw, 250px);
   line-height: 1;
 }
 
@@ -460,6 +534,22 @@
   width: 100%;
   height: 100%;
   border-radius: 16px;
+}
+
+/* Real item art on a card face: fill the card, keep a little breathing room. */
+.memory-face__img {
+  width: 88%;
+  height: 88%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.14));
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Emoji fallback when an item's image is missing — match the art's weight. */
+.memory-face__emoji {
+  font-size: clamp(36px, 9vw, 56px);
+  line-height: 1;
 }
 
 .memory-face--down {

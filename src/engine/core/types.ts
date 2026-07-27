@@ -20,7 +20,7 @@ export type TemplateId =
 
 /**
  * Geometric shape ids (ported from SHAPES in petualangan-pintar.html). Used
- * by the Bawah Laut world, where cards are colored geometric shapes rendered
+ * by the Labirin Warna world, where cards are colored geometric shapes rendered
  * as SVG — emoji can't cover every shape×color combination.
  */
 export type ShapeId =
@@ -30,7 +30,15 @@ export type ShapeId =
   | 'bintang'
   | 'hati'
   | 'oval'
-  | 'ketupat';
+  | 'ketupat'
+  // Extra bangun datar so the world doesn't keep asking about the same seven.
+  | 'persegi-panjang'
+  | 'trapesium'
+  | 'segilima'
+  | 'segienam'
+  | 'layang-layang'
+  | 'bulan'
+  | 'awan';
 
 /** A single colored shape: which shape + its fill color (hex). */
 export interface ShapeSpec {
@@ -44,7 +52,7 @@ export interface TapChoice {
   /** Big visual — emoji for now, later an image asset path. */
   emoji?: string;
   text?: string;
-  /** Colored geometric shape drawn as SVG (Bawah Laut). */
+  /** Colored geometric shape drawn as SVG (Labirin Warna). */
   shape?: ShapeSpec;
   correct?: boolean;
 }
@@ -66,6 +74,12 @@ export interface TapAnswerData {
    * "which first letter?" question. Emoji for now, later an image path.
    */
   picture?: string;
+  /**
+   * Item id (registry `src/engine/ui/items.ts`) drawn as the big picture cue
+   * instead of `picture` — real premium art rather than the device emoji
+   * font. Falls back to the item's emoji if the image is missing.
+   */
+  pictureItem?: string;
   /**
    * Render `picture` as a dark silhouette (Pasar Buah "guess the shadow").
    * The child sees only the outline and taps the matching fruit below.
@@ -89,7 +103,7 @@ export interface TapAnswerData {
    */
   boardItems?: BoardItemToken[];
   /**
-   * Optional shape pattern shown above the choices (Bawah Laut "Pola
+   * Optional shape pattern shown above the choices (Labirin Warna "Pola
    * Ajaib"): a repeating ABAB / ABC-ABC sequence where `null` is the empty
    * "?" box the child must fill by picking the next shape.
    */
@@ -124,6 +138,12 @@ export interface TracingData {
 export interface MemoryPair {
   id: string;
   emoji: string;
+  /**
+   * Item id from the picture registry (`src/engine/ui/items.ts`). When set the
+   * card face shows the real art (WebP) instead of the device emoji font;
+   * `emoji` stays as the fallback if the asset is missing.
+   */
+  item?: string;
 }
 
 export interface MemoryData {
@@ -159,6 +179,11 @@ export interface SpellData {
   word: string;
   /** Picture cue for the word, e.g. "🚀". */
   emoji: string;
+  /**
+   * Item id (registry `src/engine/ui/items.ts`) drawn as the picture cue
+   * instead of `emoji` — real art instead of the device emoji font.
+   */
+  item?: string;
   /**
    * Decoy letters mixed into the tray (design rule: never monotone — the
    * child must pick the right letters, not just tap everything in sight).
@@ -209,6 +234,12 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
   freeDemo: boolean;
   /** Ordered slots; a slot may be one level or a pool of random variants. */
   levels: LevelSlot<T>[];
+  /**
+   * Play only this many slots per session, drawn at random (no repeats) and
+   * in random order — e.g. a game holding all numbers 1–20 but asking 7 of
+   * them each play. Omit (or >= levels.length) to play every slot in order.
+   */
+  sessionLevels?: number;
 }
 
 /**
@@ -240,6 +271,8 @@ export interface MixedGameConfig {
   freeDemo: boolean;
   /** Ordered slots; a slot may be one level or a pool of random variants. */
   levels: MixedSlot[];
+  /** See `GameConfig.sessionLevels`. */
+  sessionLevels?: number;
 }
 
 /** Either kind of game — what the shell, registry, and pages accept. */

@@ -1,64 +1,43 @@
 import { mascotFor } from '@/engine/core/mascot';
+import '@/engine/ui/mascot.css';
 
 /**
- * Mascot companion card — shows the current creature, its level, and a bar
+ * Mascot companion panel — shows the current creature, its level, and a bar
  * toward the next evolution. Used on the portal home and game finish screens.
- * Self-contained inline styles so it drops into any page without CSS wiring.
+ *
+ * It is a STATUS display, not a control: styled as a soft dashed info card
+ * (see mascot.css) so it can't be mistaken for the big tappable buttons that
+ * sit next to it.
  */
 export default function MascotCard({ totalStars }: { totalStars: number }) {
   const m = mascotFor(totalStars);
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 16,
-        background: 'rgba(255,255,255,0.9)',
-        borderRadius: 24,
-        padding: 16,
-        boxShadow: '0 5px 0 rgba(0,0,0,0.12)',
-        maxWidth: 420,
-        width: '100%',
-        margin: '0 auto',
-        textAlign: 'left',
-      }}
-    >
-      <div style={{ fontSize: 56, lineHeight: 1 }} aria-hidden>
+    <section className="mascot-panel" aria-label="Perkembangan maskot">
+      <div className="mascot-panel__avatar" aria-hidden>
         {m.stage.emoji}
       </div>
-      <div style={{ flex: 1 }}>
-        <div style={{ fontWeight: 700, fontSize: 20 }}>{m.stage.name}</div>
-        <div style={{ fontSize: 15, opacity: 0.7 }}>
-          Level {m.level} · ⭐ {totalStars}
+      <div className="mascot-panel__info">
+        <div className="mascot-panel__eyebrow">
+          <span>Teman belajarmu</span>
+          <span className="mascot-panel__stars">⭐ {totalStars}</span>
+        </div>
+        <div className="mascot-panel__name">
+          {m.stage.name}
+          <span className="mascot-panel__level">Level {m.level}</span>
         </div>
         {m.next ? (
           <>
-            <div
-              style={{
-                background: '#eee',
-                borderRadius: 999,
-                height: 12,
-                marginTop: 6,
-                overflow: 'hidden',
-              }}
-            >
-              <div
-                style={{
-                  width: `${m.progressPct}%`,
-                  height: '100%',
-                  background: 'linear-gradient(90deg,#ffc93c,#ff8a5c)',
-                  transition: 'width .4s',
-                }}
-              />
+            <div className="mascot-panel__bar">
+              <span className="mascot-panel__fill" style={{ width: `${m.progressPct}%` }} />
             </div>
-            <div style={{ fontSize: 13, marginTop: 4, opacity: 0.7 }}>
-              {m.toNext} ⭐ lagi jadi {m.next.emoji} {m.next.name}
+            <div className="mascot-panel__hint">
+              <strong>{m.toNext} ⭐</strong> lagi jadi {m.next.emoji} {m.next.name}
             </div>
           </>
         ) : (
-          <div style={{ fontSize: 14, marginTop: 4 }}>🏆 Level tertinggi!</div>
+          <div className="mascot-panel__hint">🏆 Sudah level tertinggi!</div>
         )}
       </div>
-    </div>
+    </section>
   );
 }
