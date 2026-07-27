@@ -30,7 +30,15 @@ export type ShapeId =
   | 'bintang'
   | 'hati'
   | 'oval'
-  | 'ketupat';
+  | 'ketupat'
+  // Extra bangun datar so the world doesn't keep asking about the same seven.
+  | 'persegi-panjang'
+  | 'trapesium'
+  | 'segilima'
+  | 'segienam'
+  | 'layang-layang'
+  | 'bulan'
+  | 'awan';
 
 /** A single colored shape: which shape + its fill color (hex). */
 export interface ShapeSpec {
