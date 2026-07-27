@@ -1,64 +1,17 @@
-import type { MixedGameConfig, MixedLevel, MixedSlot, TapChoice } from '@/engine/core/types';
+import type { MixedGameConfig, MixedLevel, MixedSlot } from '@/engine/core/types';
+import { cap, letterChoices } from '@/games/tk/letters';
 
 /**
- * "Taman Huruf" — ported from the Petualangan Pintar letter world (Kenali
- * Huruf). A mixed game that walks the source level types: first letter of a
- * word → matching a capital to its lowercase → first letter of a longer word
- * → spelling whole words.
+ * "Taman Huruf" — ported from the Petualangan Pintar letter world, now
+ * strictly about OBJECTS: look at a thing, find the letter its name starts
+ * with, then spell the whole word. Pure letter drills (find a letter,
+ * capital ↔ lowercase) live in Kenal Huruf.
  *
- * Like Hutan Hewan, each of the 7 slots holds a pool of variants (different
- * words/letters) that the engine re-rolls every play, so it stays fresh.
- * Decoys are deliberate look-alikes (b/d/p, a/e/o) so the child must really
- * recognize the letter, per the design rule.
+ * Each of the 7 slots holds a pool of variants (different objects) that the
+ * engine re-rolls every play, so it stays fresh. Letter decoys are
+ * deliberate look-alikes, per the design rule.
  */
 
-// Uppercase look-alike decoys — the tricky pairs kids confuse.
-const LOOK: Record<string, string[]> = {
-  A: ['E', 'O'],
-  B: ['D', 'P'],
-  C: ['O', 'G'],
-  D: ['B', 'P'],
-  E: ['F', 'B'],
-  F: ['E', 'T'],
-  G: ['C', 'Q'],
-  H: ['N', 'K'],
-  I: ['L', 'J'],
-  J: ['I', 'L'],
-  K: ['H', 'X'],
-  L: ['I', 'T'],
-  M: ['N', 'W'],
-  N: ['M', 'H'],
-  O: ['Q', 'C'],
-  P: ['B', 'R'],
-  Q: ['O', 'G'],
-  R: ['P', 'B'],
-  S: ['Z', 'C'],
-  T: ['F', 'L'],
-  U: ['V', 'N'],
-  V: ['U', 'W'],
-  W: ['M', 'V'],
-  X: ['K', 'Y'],
-  Y: ['V', 'X'],
-  Z: ['S', 'N'],
-};
-
-const cap = (w: string) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
-
-/** Correct letter + two look-alike decoys, rendered upper- or lowercase. */
-function letterChoices(correct: string, lower = false): TapChoice[] {
-  const picked = [correct, ...(LOOK[correct] ?? []).slice(0, 2)];
-  while (picked.length < 3) {
-    const r = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-    if (!picked.includes(r)) picked.push(r);
-  }
-  return picked.map((L, i) => ({
-    id: `o${i}`,
-    text: lower ? L.toLowerCase() : L,
-    correct: L === correct,
-  }));
-}
-
-// Variant builders (id filled in by mslot()).
 /**
  * `item` (optional) is an id in the item registry (`src/engine/ui/items.ts`):
  * when given, the cue is drawn from real premium art instead of the device
@@ -77,16 +30,6 @@ function firstLetter(word: string, emoji: string, item?: string): MixedLevel {
       board: `_ ${rest}`,
       choices: letterChoices(w.charAt(0)),
     },
-  };
-}
-
-function lowerMatch(letter: string): MixedLevel {
-  const U = letter.toUpperCase();
-  return {
-    id: '',
-    template: 'tap-answer',
-    narration: `Ini huruf ${U} besar. Mana huruf ${U.toLowerCase()} kecil?`,
-    data: { picture: U, choices: letterChoices(U, true) },
   };
 }
 
@@ -113,77 +56,97 @@ const config: MixedGameConfig = {
   template: 'mixed',
   freeDemo: true,
   levels: [
-    // Slot 1 — first letter (short words)
+    // Slot 1 — huruf pertama: benda sehari-hari
     mslot(
       'l1',
-      firstLetter('Roket', '🚀'),
       firstLetter('Bola', '⚽'),
-      firstLetter('Ikan', '🐟'),
-      firstLetter('Topi', '🧢', 'cap'),
-      firstLetter('Apel', '🍎'),
-      firstLetter('Mobil', '🚗'),
-    ),
-    // Slot 2 — first letter (more short words)
-    mslot(
-      'l2',
-      firstLetter('Bulan', '🌙'),
-      firstLetter('Rumah', '🏠'),
       firstLetter('Buku', '📖'),
-      firstLetter('Bunga', '🌸'),
+      firstLetter('Topi', '🧢', 'cap'),
       firstLetter('Kunci', '🔑'),
       firstLetter('Sepatu', '👟'),
+      firstLetter('Balon', '🎈'),
+      firstLetter('Roti', '🍞'),
+      firstLetter('Jam', '⏰'),
     ),
-    // Slot 3 — match capital to lowercase (look-alikes)
+    // Slot 2 — huruf pertama: hewan (seni premium bila tersedia)
     mslot(
-      'l3',
-      lowerMatch('A'),
-      lowerMatch('B'),
-      lowerMatch('D'),
-      lowerMatch('E'),
-      lowerMatch('M'),
-      lowerMatch('R'),
-    ),
-    // Slot 4 — match capital to lowercase (more)
-    mslot(
-      'l4',
-      lowerMatch('P'),
-      lowerMatch('N'),
-      lowerMatch('U'),
-      lowerMatch('S'),
-      lowerMatch('L'),
-      lowerMatch('C'),
-    ),
-    // Slot 5 — first letter (longer words)
-    mslot(
-      'l5',
-      // "Teleskop" was too far from a TK child's world — swapped for a toy
-      // every kid knows.
-      firstLetter('Boneka', '🧸'),
-      firstLetter('Payung', '☂️'),
-      firstLetter('Sepeda', '🚲'),
+      'l2',
       firstLetter('Gajah', '🐘', 'elephant'),
       firstLetter('Jerapah', '🦒', 'giraffe'),
-      firstLetter('Matahari', '☀️', 'sun'),
+      firstLetter('Kuda', '🐴', 'horse'),
+      firstLetter('Sapi', '🐮', 'cow'),
+      firstLetter('Bebek', '🦆', 'duck'),
+      firstLetter('Panda', '🐼', 'panda'),
+      firstLetter('Singa', '🦁', 'lion'),
+      firstLetter('Zebra', '🦓', 'zebra'),
+      firstLetter('Katak', '🐸', 'frog'),
+      firstLetter('Ayam', '🐔', 'chicken'),
     ),
-    // Slot 6 — spell a short word (4 letters)
+    // Slot 3 — huruf pertama: makanan & buah
+    mslot(
+      'l3',
+      firstLetter('Apel', '🍎'),
+      firstLetter('Pisang', '🍌'),
+      firstLetter('Jeruk', '🍊'),
+      firstLetter('Semangka', '🍉'),
+      firstLetter('Nanas', '🍍'),
+      firstLetter('Wortel', '🥕'),
+      firstLetter('Susu', '🥛'),
+      firstLetter('Kue', '🎂'),
+    ),
+    // Slot 4 — huruf pertama: alam & rumah
+    mslot(
+      'l4',
+      firstLetter('Rumah', '🏠'),
+      firstLetter('Bulan', '🌙'),
+      firstLetter('Matahari', '☀️', 'sun'),
+      firstLetter('Bunga', '🌸'),
+      firstLetter('Pohon', '🌳'),
+      firstLetter('Awan', '☁️'),
+      firstLetter('Daun', '🍃'),
+      firstLetter('Payung', '☂️'),
+    ),
+    // Slot 5 — huruf pertama: kendaraan & mainan
+    mslot(
+      'l5',
+      firstLetter('Mobil', '🚗'),
+      firstLetter('Sepeda', '🚲'),
+      firstLetter('Roket', '🚀'),
+      firstLetter('Boneka', '🧸'),
+      firstLetter('Kapal', '🚢'),
+      firstLetter('Kereta', '🚂'),
+      firstLetter('Pesawat', '✈️'),
+      firstLetter('Bus', '🚌'),
+    ),
+    // Slot 6 — susun kata pendek (4 huruf)
     mslot(
       'l6',
-      spellWord('BUMI', '🌍', ['A', 'S']),
-      spellWord('IKAN', '🐟', ['O', 'R']),
       spellWord('BOLA', '⚽', ['E', 'M']),
       spellWord('BUKU', '📖', ['A', 'T']),
+      spellWord('IKAN', '🐟', ['O', 'R']),
+      spellWord('BUMI', '🌍', ['A', 'S']),
+      spellWord('TOPI', '🧢', ['E', 'R'], 'cap'),
+      spellWord('ROTI', '🍞', ['A', 'M']),
+      spellWord('DAUN', '🍃', ['I', 'K']),
       spellWord('KUDA', '🐴', ['I', 'P'], 'horse'),
       spellWord('SAPI', '🐮', ['E', 'L'], 'cow'),
+      spellWord('AYAM', '🐔', ['I', 'B'], 'chicken'),
     ),
-    // Slot 7 — spell a longer word (5 letters)
+    // Slot 7 — susun kata panjang (5 huruf)
     mslot(
       'l7',
       spellWord('ROKET', '🚀', ['B', 'L']),
       spellWord('RUMAH', '🏠', ['I', 'S']),
       spellWord('BUNGA', '🌸', ['E', 'T']),
       spellWord('MOBIL', '🚗', ['A', 'K']),
+      spellWord('KAPAL', '🚢', ['I', 'R']),
+      spellWord('POHON', '🌳', ['A', 'M']),
+      spellWord('BALON', '🎈', ['I', 'S']),
+      spellWord('KUNCI', '🔑', ['A', 'T']),
       spellWord('BEBEK', '🦆', ['O', 'R'], 'duck'),
       spellWord('PANDA', '🐼', ['I', 'U'], 'panda'),
+      spellWord('SINGA', '🦁', ['E', 'O'], 'lion'),
+      spellWord('ZEBRA', '🦓', ['I', 'O'], 'zebra'),
     ),
   ],
 };
