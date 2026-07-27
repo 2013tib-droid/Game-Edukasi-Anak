@@ -1,13 +1,14 @@
 import type { GameConfig } from '@/engine/core/types';
 
-// freeDemo: false — contoh game premium untuk menguji gerbang akses.
+// freeDemo: true — masa pra-rilis: semua game dibuka supaya bisa dicoba
+// bebas. Saat launching hanya "Hutan Hewan" yang gratis (lihat CLAUDE.md).
 const config: GameConfig<'memory'> = {
   id: 'kartu-kembar',
   group: 'tk',
   title: 'Kartu Kembar',
   emoji: '🃏',
   template: 'memory',
-  freeDemo: false,
+  freeDemo: true,
   levels: [
     {
       id: 'l1',

@@ -12,6 +12,13 @@ export interface GameMeta {
   emoji: string;
   /** Portal card badge; "mixed" games change question type per level. */
   template: TemplateId | 'mixed';
+  /**
+   * Playable without login. Pra-rilis: SEMUA game `true` supaya bisa dicoba
+   * bebas. Saat launching hanya `hutan-hewan` tetap `true`; sisanya jadi
+   * `false` (wajib login + kode aktivasi) — lihat CLAUDE.md "Rencana Akses
+   * Saat Launching". Nilai di sini harus sama dengan `freeDemo` di config
+   * game-nya.
+   */
   freeDemo: boolean;
   load: () => Promise<{ default: AnyGameConfig }>;
 }
@@ -55,15 +62,9 @@ export const games: GameMeta[] = [
     load: () => import('@/games/tk/pasar-buah'),
   },
   // --- TK ---
-  {
-    id: 'hitung-buah',
-    group: 'tk',
-    title: 'Hitung Buah',
-    emoji: '🍎',
-    template: 'count-tap',
-    freeDemo: true,
-    load: () => import('@/games/tk/hitung-buah'),
-  },
+  // "Hitung Buah" dilebur ke Pasar Buah (2026-07-26): soal hitung buah-nya
+  // jadi varian slot count-tap di sana, jadi satu dunia buah, referensi lebih
+  // banyak.
   {
     id: 'kenal-huruf',
     group: 'tk',
@@ -88,7 +89,7 @@ export const games: GameMeta[] = [
     title: 'Kartu Kembar',
     emoji: '🃏',
     template: 'memory',
-    freeDemo: false,
+    freeDemo: true,
     load: () => import('@/games/tk/kartu-kembar'),
   },
   // --- SD Awal ---
@@ -116,7 +117,7 @@ export const games: GameMeta[] = [
     title: 'Tambah Tangkas',
     emoji: '➕',
     template: 'tap-answer',
-    freeDemo: false,
+    freeDemo: true,
     load: () => import('@/games/sd1/tambah-tangkas'),
   },
 ];
