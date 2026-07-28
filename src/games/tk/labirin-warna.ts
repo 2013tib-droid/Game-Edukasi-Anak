@@ -21,13 +21,17 @@ import type { GameConfig, GameLevel, ShapeId, ShapeSpec } from '@/engine/core/ty
  * the "?" box at its end — stays on one line on a small phone.
  *
  * Design rules:
- * - FOURTEEN shapes are in play (lingkaran, kotak, persegi panjang, segitiga,
- *   trapesium, segilima, segienam, ketupat, layang-layang, oval, bintang,
- *   hati, bulan sabit, awan) so the child keeps meeting new bangun datar
- *   instead of the same handful every session.
+ * - TEN shapes are in play, all of them ones a TK child already meets in daily
+ *   life: lingkaran, oval, kotak, persegi panjang, segitiga, bintang, hati,
+ *   bulan sabit, awan, layang-layang.
  * - Decoys are deliberate look-alikes in SHAPE (kotak/persegi panjang,
- *   ketupat/layang-layang, segilima/segienam, lingkaran/oval, bintang/hati)
- *   so the child must really discriminate.
+ *   lingkaran/oval, bintang/hati, bulan/awan, segitiga/layang-layang) so the
+ *   child must really discriminate.
+ * - `ketupat`, `trapesium`, `segilima` and `segienam` are deliberately NOT USED
+ *   (owner's call, 2026-07-28): those names belong to SD, not TK, and ketupat
+ *   next to layang-layang is indistinguishable without comparing side lengths.
+ *   Do not reintroduce them in new variants — the ShapeIds still exist in the
+ *   engine, unused by this world.
  * - COLORS, however, must never be ambiguous: orange was dropped entirely
  *   because kuning vs oranye is unreadable on a phone, and merah/pink are
  *   never used against each other in a color-naming question. The palette
@@ -125,7 +129,7 @@ const cariBentukA: Level[] = [
   pilih('l1', bentukQ('segitiga'), [
     sh('segitiga', BIRU),
     sh('kotak', BIRU),
-    sh('ketupat', BIRU),
+    sh('hati', BIRU),
     sh('lingkaran', BIRU),
   ]),
   pilih('l1', bentukQ('bintang'), [
@@ -137,13 +141,13 @@ const cariBentukA: Level[] = [
   pilih('l1', bentukQ('lingkaran'), [
     sh('lingkaran', HIJAU),
     sh('oval', HIJAU),
-    sh('ketupat', HIJAU),
+    sh('bintang', HIJAU),
     sh('kotak', HIJAU),
   ]),
   pilih('l1', bentukQ('kotak'), [
     sh('kotak', UNGU),
     sh('persegi-panjang', UNGU),
-    sh('ketupat', UNGU),
+    sh('segitiga', UNGU),
     sh('oval', UNGU),
   ]),
   pilih('l1', bentukQ('hati'), [
@@ -152,16 +156,16 @@ const cariBentukA: Level[] = [
     sh('lingkaran', PINK),
     sh('segitiga', PINK),
   ]),
-  pilih('l1', bentukQ('ketupat'), [
-    sh('ketupat', KUNING),
-    sh('layang-layang', KUNING),
+  pilih('l1', bentukQ('oval'), [
+    sh('oval', KUNING),
+    sh('lingkaran', KUNING),
     sh('kotak', KUNING),
     sh('bintang', KUNING),
   ]),
   pilih('l1', bentukQ('persegi panjang'), [
     sh('persegi-panjang', HIJAU),
     sh('kotak', HIJAU),
-    sh('trapesium', HIJAU),
+    sh('segitiga', HIJAU),
     sh('oval', HIJAU),
   ]),
   pilih('l1', bentukQ('bulan sabit'), [
@@ -176,9 +180,9 @@ const cariBentukA: Level[] = [
     sh('lingkaran', UNGU),
     sh('bulan', UNGU),
   ]),
-  pilih('l1', bentukQ('segienam'), [
-    sh('segienam', MERAH),
-    sh('segilima', MERAH),
+  pilih('l1', bentukQ('layang-layang'), [
+    sh('layang-layang', MERAH),
+    sh('segitiga', MERAH),
     sh('lingkaran', MERAH),
     sh('kotak', MERAH),
   ]),
@@ -193,19 +197,19 @@ const cariBentukB: Level[] = [
   ]),
   pilih('l2', bentukQ('kotak'), [
     sh('kotak', HIJAU),
-    sh('ketupat', HIJAU),
+    sh('segitiga', HIJAU),
     sh('persegi-panjang', HIJAU),
     sh('bintang', HIJAU),
   ]),
   pilih('l2', bentukQ('bintang'), [
     sh('bintang', UNGU),
     sh('hati', UNGU),
-    sh('ketupat', UNGU),
+    sh('lingkaran', UNGU),
     sh('kotak', UNGU),
   ]),
   pilih('l2', bentukQ('segitiga'), [
     sh('segitiga', MERAH),
-    sh('trapesium', MERAH),
+    sh('layang-layang', MERAH),
     sh('bintang', MERAH),
     sh('oval', MERAH),
   ]),
@@ -218,31 +222,31 @@ const cariBentukB: Level[] = [
   pilih('l2', bentukQ('lingkaran'), [
     sh('lingkaran', COKLAT),
     sh('oval', COKLAT),
-    sh('segienam', COKLAT),
+    sh('kotak', COKLAT),
     sh('hati', COKLAT),
   ]),
-  pilih('l2', bentukQ('trapesium'), [
-    sh('trapesium', BIRU),
-    sh('segitiga', BIRU),
+  pilih('l2', bentukQ('bulan sabit'), [
+    sh('bulan', BIRU),
+    sh('awan', BIRU),
     sh('persegi-panjang', BIRU),
-    sh('ketupat', BIRU),
+    sh('lingkaran', BIRU),
   ]),
   pilih('l2', bentukQ('layang-layang'), [
     sh('layang-layang', PINK),
-    sh('ketupat', PINK),
-    sh('segitiga', PINK),
+    sh('lingkaran', PINK),
+    sh('persegi-panjang', PINK),
     sh('bintang', PINK),
   ]),
-  pilih('l2', bentukQ('segilima'), [
-    sh('segilima', KUNING),
-    sh('segienam', KUNING),
+  pilih('l2', bentukQ('persegi panjang'), [
+    sh('persegi-panjang', KUNING),
+    sh('kotak', KUNING),
     sh('segitiga', KUNING),
     sh('lingkaran', KUNING),
   ]),
   pilih('l2', bentukQ('awan'), [
     sh('awan', HIJAU),
     sh('lingkaran', HIJAU),
-    sh('trapesium', HIJAU),
+    sh('bulan', HIJAU),
     sh('oval', HIJAU),
   ]),
 ];
@@ -274,11 +278,11 @@ const cariWarnaA: Level[] = [
     sh('kotak', KUNING),
     sh('kotak', UNGU),
   ]),
-  pilih('l3', warnaQ('ketupat', 'ungu'), [
-    sh('ketupat', UNGU),
-    sh('ketupat', BIRU),
-    sh('ketupat', COKLAT),
-    sh('ketupat', KUNING),
+  pilih('l3', warnaQ('segitiga', 'ungu'), [
+    sh('segitiga', UNGU),
+    sh('segitiga', BIRU),
+    sh('segitiga', COKLAT),
+    sh('segitiga', KUNING),
   ]),
   pilih('l3', warnaQ('oval', 'merah muda'), [
     sh('oval', PINK),
@@ -292,11 +296,11 @@ const cariWarnaA: Level[] = [
     sh('awan', KUNING),
     sh('awan', HIJAU),
   ]),
-  pilih('l3', warnaQ('segienam', 'merah'), [
-    sh('segienam', MERAH),
-    sh('segienam', HIJAU),
-    sh('segienam', BIRU),
-    sh('segienam', KUNING),
+  pilih('l3', warnaQ('bulan sabit', 'merah'), [
+    sh('bulan', MERAH),
+    sh('bulan', HIJAU),
+    sh('bulan', BIRU),
+    sh('bulan', KUNING),
   ]),
   pilih('l3', warnaQ('persegi panjang', 'coklat'), [
     sh('persegi-panjang', COKLAT),
@@ -331,11 +335,11 @@ const cariWarnaB: Level[] = [
     sh('kotak', MERAH),
     sh('kotak', COKLAT),
   ]),
-  pilih('l4', warnaQ('ketupat', 'kuning'), [
-    sh('ketupat', KUNING),
-    sh('ketupat', MERAH),
-    sh('ketupat', HIJAU),
-    sh('ketupat', UNGU),
+  pilih('l4', warnaQ('persegi panjang', 'kuning'), [
+    sh('persegi-panjang', KUNING),
+    sh('persegi-panjang', MERAH),
+    sh('persegi-panjang', HIJAU),
+    sh('persegi-panjang', UNGU),
   ]),
   pilih('l4', warnaQ('hati', 'ungu'), [
     sh('hati', UNGU),
@@ -355,17 +359,17 @@ const cariWarnaB: Level[] = [
     sh('bulan', HIJAU),
     sh('bulan', BIRU),
   ]),
-  pilih('l4', warnaQ('trapesium', 'merah'), [
-    sh('trapesium', MERAH),
-    sh('trapesium', KUNING),
-    sh('trapesium', BIRU),
-    sh('trapesium', HIJAU),
+  pilih('l4', warnaQ('awan', 'merah'), [
+    sh('awan', MERAH),
+    sh('awan', KUNING),
+    sh('awan', BIRU),
+    sh('awan', HIJAU),
   ]),
-  pilih('l4', warnaQ('segilima', 'ungu'), [
-    sh('segilima', UNGU),
-    sh('segilima', KUNING),
-    sh('segilima', HIJAU),
-    sh('segilima', COKLAT),
+  pilih('l4', warnaQ('layang-layang', 'ungu'), [
+    sh('layang-layang', UNGU),
+    sh('layang-layang', KUNING),
+    sh('layang-layang', HIJAU),
+    sh('layang-layang', COKLAT),
   ]),
   pilih('l4', warnaQ('oval', 'hijau'), [
     sh('oval', HIJAU),
@@ -381,21 +385,21 @@ const BEDA_BENTUK = 'Tiga bentuknya sama, satu berbeda. Sentuh yang berbeda!';
 const BEDA_WARNA = 'Tiga warnanya sama, satu berbeda. Sentuh yang berbeda!';
 
 const bedaSendiri: Level[] = [
-  beda('l5', BEDA_BENTUK, sh('ketupat', MERAH), sh('kotak', MERAH)),
+  beda('l5', BEDA_BENTUK, sh('bintang', MERAH), sh('segitiga', MERAH)),
   beda('l5', BEDA_BENTUK, sh('oval', BIRU), sh('lingkaran', BIRU)),
   beda('l5', BEDA_BENTUK, sh('hati', KUNING), sh('bintang', KUNING)),
-  beda('l5', BEDA_BENTUK, sh('segitiga', HIJAU), sh('trapesium', HIJAU)),
+  beda('l5', BEDA_BENTUK, sh('segitiga', HIJAU), sh('persegi-panjang', HIJAU)),
   beda('l5', BEDA_BENTUK, sh('persegi-panjang', UNGU), sh('kotak', UNGU)),
-  beda('l5', BEDA_BENTUK, sh('layang-layang', PINK), sh('ketupat', PINK)),
-  beda('l5', BEDA_BENTUK, sh('segienam', COKLAT), sh('segilima', COKLAT)),
+  beda('l5', BEDA_BENTUK, sh('layang-layang', PINK), sh('lingkaran', PINK)),
+  beda('l5', BEDA_BENTUK, sh('awan', COKLAT), sh('lingkaran', COKLAT)),
   beda('l5', BEDA_BENTUK, sh('bulan', BIRU), sh('awan', BIRU)),
   beda('l5', BEDA_WARNA, sh('bintang', MERAH), sh('bintang', BIRU)),
   beda('l5', BEDA_WARNA, sh('kotak', KUNING), sh('kotak', UNGU)),
   beda('l5', BEDA_WARNA, sh('lingkaran', HIJAU), sh('lingkaran', COKLAT)),
   beda('l5', BEDA_WARNA, sh('hati', BIRU), sh('hati', PINK)),
   beda('l5', BEDA_WARNA, sh('awan', UNGU), sh('awan', HIJAU)),
-  beda('l5', BEDA_WARNA, sh('segienam', MERAH), sh('segienam', KUNING)),
-  beda('l5', BEDA_WARNA, sh('trapesium', BIRU), sh('trapesium', MERAH)),
+  beda('l5', BEDA_WARNA, sh('oval', MERAH), sh('oval', KUNING)),
+  beda('l5', BEDA_WARNA, sh('layang-layang', BIRU), sh('layang-layang', MERAH)),
   beda('l5', BEDA_WARNA, sh('bulan', KUNING), sh('bulan', UNGU)),
 ];
 
@@ -410,7 +414,7 @@ const duaCiriA: Level[] = [
   pilih('l6', duaQ('kotak', 'kuning'), [
     sh('kotak', KUNING),
     sh('kotak', HIJAU),
-    sh('ketupat', KUNING),
+    sh('lingkaran', KUNING),
     sh('segitiga', BIRU),
   ]),
   pilih('l6', duaQ('bintang', 'biru'), [
@@ -423,7 +427,7 @@ const duaCiriA: Level[] = [
     sh('lingkaran', HIJAU),
     sh('lingkaran', KUNING),
     sh('oval', HIJAU),
-    sh('ketupat', MERAH),
+    sh('kotak', MERAH),
   ]),
   pilih('l6', duaQ('segitiga', 'ungu'), [
     sh('segitiga', UNGU),
@@ -431,11 +435,11 @@ const duaCiriA: Level[] = [
     sh('bintang', UNGU),
     sh('kotak', KUNING),
   ]),
-  pilih('l6', duaQ('ketupat', 'merah muda'), [
-    sh('ketupat', PINK),
-    sh('ketupat', BIRU),
-    sh('kotak', PINK),
-    sh('lingkaran', HIJAU),
+  pilih('l6', duaQ('oval', 'merah muda'), [
+    sh('oval', PINK),
+    sh('oval', BIRU),
+    sh('lingkaran', PINK),
+    sh('kotak', HIJAU),
   ]),
   pilih('l6', duaQ('awan', 'biru'), [
     sh('awan', BIRU),
@@ -447,12 +451,12 @@ const duaCiriA: Level[] = [
     sh('persegi-panjang', HIJAU),
     sh('persegi-panjang', UNGU),
     sh('kotak', HIJAU),
-    sh('trapesium', MERAH),
+    sh('segitiga', MERAH),
   ]),
-  pilih('l6', duaQ('segienam', 'kuning'), [
-    sh('segienam', KUNING),
-    sh('segienam', BIRU),
-    sh('segilima', KUNING),
+  pilih('l6', duaQ('layang-layang', 'ungu'), [
+    sh('layang-layang', UNGU),
+    sh('layang-layang', BIRU),
+    sh('segitiga', UNGU),
     sh('lingkaran', HIJAU),
   ]),
 ];
@@ -473,7 +477,7 @@ const duaCiriB: Level[] = [
   pilih('l7', duaQ('kotak', 'merah'), [
     sh('kotak', MERAH),
     sh('kotak', BIRU),
-    sh('ketupat', MERAH),
+    sh('persegi-panjang', MERAH),
     sh('bintang', HIJAU),
   ]),
   pilih('l7', duaQ('bintang', 'hijau'), [
@@ -491,7 +495,7 @@ const duaCiriB: Level[] = [
   pilih('l7', duaQ('segitiga', 'coklat'), [
     sh('segitiga', COKLAT),
     sh('segitiga', HIJAU),
-    sh('ketupat', COKLAT),
+    sh('layang-layang', COKLAT),
     sh('hati', BIRU),
   ]),
   pilih('l7', duaQ('bulan sabit', 'kuning'), [
@@ -503,13 +507,13 @@ const duaCiriB: Level[] = [
   pilih('l7', duaQ('layang-layang', 'merah'), [
     sh('layang-layang', MERAH),
     sh('layang-layang', HIJAU),
-    sh('ketupat', MERAH),
+    sh('lingkaran', MERAH),
     sh('segitiga', BIRU),
   ]),
-  pilih('l7', duaQ('trapesium', 'ungu'), [
-    sh('trapesium', UNGU),
-    sh('trapesium', KUNING),
-    sh('segitiga', UNGU),
+  pilih('l7', duaQ('awan', 'ungu'), [
+    sh('awan', UNGU),
+    sh('awan', KUNING),
+    sh('bulan', UNGU),
     sh('persegi-panjang', HIJAU),
   ]),
 ];
@@ -524,16 +528,16 @@ const polaAB: Level[] = [
   pola('l8', [sh('kotak', BIRU), sh('segitiga', HIJAU)], 3, [
     sh('kotak', BIRU),
     sh('segitiga', KUNING),
-    sh('ketupat', HIJAU),
+    sh('lingkaran', HIJAU),
   ]),
   pola('l8', [sh('hati', PINK), sh('lingkaran', UNGU)], 3, [
     sh('hati', PINK),
     sh('lingkaran', HIJAU),
     sh('oval', UNGU),
   ]),
-  pola('l8', [sh('bintang', KUNING), sh('ketupat', BIRU)], 3, [
+  pola('l8', [sh('bintang', KUNING), sh('hati', BIRU)], 3, [
     sh('bintang', KUNING),
-    sh('ketupat', MERAH),
+    sh('hati', MERAH),
     sh('kotak', BIRU),
   ]),
   pola('l8', [sh('segitiga', MERAH), sh('oval', HIJAU)], 3, [
@@ -549,15 +553,15 @@ const polaAB: Level[] = [
   pola('l8', [sh('hati', MERAH), sh('kotak', BIRU)], 3, [
     sh('hati', MERAH),
     sh('kotak', HIJAU),
-    sh('ketupat', BIRU),
+    sh('persegi-panjang', BIRU),
   ]),
   pola('l8', [sh('oval', UNGU), sh('bintang', KUNING)], 3, [
     sh('oval', UNGU),
     sh('bintang', BIRU),
     sh('hati', KUNING),
   ]),
-  pola('l8', [sh('ketupat', HIJAU), sh('segitiga', PINK)], 3, [
-    sh('ketupat', HIJAU),
+  pola('l8', [sh('oval', HIJAU), sh('segitiga', PINK)], 3, [
+    sh('oval', HIJAU),
     sh('segitiga', BIRU),
     sh('kotak', PINK),
   ]),
@@ -566,15 +570,15 @@ const polaAB: Level[] = [
     sh('bulan', HIJAU),
     sh('lingkaran', KUNING),
   ]),
-  pola('l8', [sh('persegi-panjang', HIJAU), sh('segienam', MERAH)], 3, [
+  pola('l8', [sh('persegi-panjang', HIJAU), sh('bulan', MERAH)], 3, [
     sh('persegi-panjang', HIJAU),
-    sh('segienam', BIRU),
+    sh('bulan', BIRU),
     sh('kotak', MERAH),
   ]),
-  pola('l8', [sh('layang-layang', UNGU), sh('trapesium', KUNING)], 3, [
+  pola('l8', [sh('layang-layang', UNGU), sh('awan', KUNING)], 3, [
     sh('layang-layang', UNGU),
-    sh('trapesium', MERAH),
-    sh('ketupat', KUNING),
+    sh('awan', MERAH),
+    sh('kotak', KUNING),
   ]),
 ];
 
@@ -596,20 +600,20 @@ const polaGanda: Level[] = [
     sh('hati', HIJAU),
     sh('bintang', MERAH),
   ]),
-  pola('l9', [sh('bintang', KUNING), sh('bintang', KUNING), sh('ketupat', COKLAT)], 2, [
+  pola('l9', [sh('bintang', KUNING), sh('bintang', KUNING), sh('bulan', COKLAT)], 2, [
     sh('bintang', KUNING),
-    sh('ketupat', BIRU),
+    sh('bulan', BIRU),
     sh('kotak', COKLAT),
   ]),
   pola('l9', [sh('oval', PINK), sh('oval', PINK), sh('kotak', BIRU)], 2, [
     sh('oval', PINK),
     sh('kotak', KUNING),
-    sh('ketupat', BIRU),
+    sh('persegi-panjang', BIRU),
   ]),
   pola('l9', [sh('lingkaran', MERAH), sh('kotak', BIRU), sh('kotak', BIRU)], 2, [
     sh('lingkaran', MERAH),
     sh('kotak', HIJAU),
-    sh('ketupat', BIRU),
+    sh('segitiga', BIRU),
   ]),
   pola('l9', [sh('bintang', HIJAU), sh('oval', UNGU), sh('oval', UNGU)], 2, [
     sh('bintang', HIJAU),
@@ -619,27 +623,27 @@ const polaGanda: Level[] = [
   pola('l9', [sh('hati', MERAH), sh('segitiga', KUNING), sh('segitiga', KUNING)], 2, [
     sh('hati', MERAH),
     sh('segitiga', BIRU),
-    sh('ketupat', KUNING),
+    sh('layang-layang', KUNING),
   ]),
   pola('l9', [sh('awan', BIRU), sh('awan', BIRU), sh('bulan', KUNING)], 2, [
     sh('awan', BIRU),
     sh('bulan', HIJAU),
     sh('lingkaran', KUNING),
   ]),
-  pola('l9', [sh('segienam', HIJAU), sh('segienam', HIJAU), sh('layang-layang', MERAH)], 2, [
-    sh('segienam', HIJAU),
+  pola('l9', [sh('kotak', HIJAU), sh('kotak', HIJAU), sh('layang-layang', MERAH)], 2, [
+    sh('kotak', HIJAU),
     sh('layang-layang', BIRU),
-    sh('ketupat', MERAH),
+    sh('lingkaran', MERAH),
   ]),
-  pola('l9', [sh('trapesium', UNGU), sh('persegi-panjang', KUNING), sh('persegi-panjang', KUNING)], 2, [
-    sh('trapesium', UNGU),
+  pola('l9', [sh('bintang', UNGU), sh('persegi-panjang', KUNING), sh('persegi-panjang', KUNING)], 2, [
+    sh('bintang', UNGU),
     sh('persegi-panjang', MERAH),
     sh('kotak', KUNING),
   ]),
-  pola('l9', [sh('bulan', UNGU), sh('segilima', HIJAU), sh('segilima', HIJAU)], 2, [
+  pola('l9', [sh('bulan', UNGU), sh('oval', HIJAU), sh('oval', HIJAU)], 2, [
     sh('bulan', UNGU),
-    sh('segilima', BIRU),
-    sh('segienam', HIJAU),
+    sh('oval', BIRU),
+    sh('lingkaran', HIJAU),
   ]),
 ];
 
@@ -651,10 +655,10 @@ const polaTiga: Level[] = [
     sh('kotak', BIRU),
     sh('bintang', HIJAU),
   ]),
-  pola('l10', [sh('segitiga', HIJAU), sh('oval', BIRU), sh('ketupat', MERAH)], 2, [
+  pola('l10', [sh('segitiga', HIJAU), sh('oval', BIRU), sh('hati', MERAH)], 2, [
     sh('segitiga', HIJAU),
     sh('oval', BIRU),
-    sh('ketupat', KUNING),
+    sh('hati', KUNING),
   ]),
   pola('l10', [sh('bintang', KUNING), sh('hati', MERAH), sh('kotak', BIRU)], 2, [
     sh('bintang', KUNING),
@@ -671,8 +675,8 @@ const polaTiga: Level[] = [
     sh('bintang', KUNING),
     sh('oval', MERAH),
   ]),
-  pola('l10', [sh('ketupat', UNGU), sh('segitiga', KUNING), sh('hati', MERAH)], 2, [
-    sh('ketupat', UNGU),
+  pola('l10', [sh('bulan', UNGU), sh('segitiga', KUNING), sh('hati', MERAH)], 2, [
+    sh('bulan', UNGU),
     sh('segitiga', KUNING),
     sh('hati', BIRU),
   ]),
@@ -681,25 +685,25 @@ const polaTiga: Level[] = [
     sh('kotak', MERAH),
     sh('bintang', KUNING),
   ]),
-  pola('l10', [sh('lingkaran', BIRU), sh('hati', KUNING), sh('ketupat', HIJAU)], 2, [
+  pola('l10', [sh('lingkaran', BIRU), sh('hati', KUNING), sh('segitiga', HIJAU)], 2, [
     sh('lingkaran', BIRU),
     sh('hati', KUNING),
-    sh('ketupat', PINK),
+    sh('segitiga', PINK),
   ]),
   pola('l10', [sh('awan', BIRU), sh('bulan', KUNING), sh('bintang', MERAH)], 2, [
     sh('awan', BIRU),
     sh('bulan', KUNING),
     sh('bintang', HIJAU),
   ]),
-  pola('l10', [sh('segienam', HIJAU), sh('trapesium', MERAH), sh('lingkaran', BIRU)], 2, [
-    sh('segienam', HIJAU),
-    sh('trapesium', MERAH),
+  pola('l10', [sh('awan', HIJAU), sh('bulan', MERAH), sh('lingkaran', BIRU)], 2, [
+    sh('awan', HIJAU),
+    sh('bulan', MERAH),
     sh('lingkaran', KUNING),
   ]),
-  pola('l10', [sh('persegi-panjang', UNGU), sh('layang-layang', KUNING), sh('segilima', HIJAU)], 2, [
+  pola('l10', [sh('persegi-panjang', UNGU), sh('layang-layang', KUNING), sh('oval', HIJAU)], 2, [
     sh('persegi-panjang', UNGU),
     sh('layang-layang', KUNING),
-    sh('segilima', MERAH),
+    sh('oval', MERAH),
   ]),
 ];
 
