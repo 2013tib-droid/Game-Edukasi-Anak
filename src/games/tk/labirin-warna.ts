@@ -26,8 +26,12 @@ import type { GameConfig, GameLevel, ShapeId, ShapeSpec } from '@/engine/core/ty
  *   hati, bulan sabit, awan) so the child keeps meeting new bangun datar
  *   instead of the same handful every session.
  * - Decoys are deliberate look-alikes in SHAPE (kotak/persegi panjang,
- *   ketupat/layang-layang, segilima/segienam, lingkaran/oval, bintang/hati)
- *   so the child must really discriminate.
+ *   segilima/segienam, lingkaran/oval, bintang/hati) so the child must really
+ *   discriminate.
+ * - EXCEPTION: ketupat and layang-layang must NEVER appear in the same
+ *   question (owner's call, 2026-07-28). Both are four-sided diamonds; telling
+ *   them apart needs measuring side lengths, which is beyond a TK child. Each
+ *   one still appears on its own, but always against clearly different shapes.
  * - COLORS, however, must never be ambiguous: orange was dropped entirely
  *   because kuning vs oranye is unreadable on a phone, and merah/pink are
  *   never used against each other in a color-naming question. The palette
@@ -154,7 +158,7 @@ const cariBentukA: Level[] = [
   ]),
   pilih('l1', bentukQ('ketupat'), [
     sh('ketupat', KUNING),
-    sh('layang-layang', KUNING),
+    sh('trapesium', KUNING),
     sh('kotak', KUNING),
     sh('bintang', KUNING),
   ]),
@@ -229,8 +233,8 @@ const cariBentukB: Level[] = [
   ]),
   pilih('l2', bentukQ('layang-layang'), [
     sh('layang-layang', PINK),
-    sh('ketupat', PINK),
-    sh('segitiga', PINK),
+    sh('lingkaran', PINK),
+    sh('persegi-panjang', PINK),
     sh('bintang', PINK),
   ]),
   pilih('l2', bentukQ('segilima'), [
@@ -386,7 +390,7 @@ const bedaSendiri: Level[] = [
   beda('l5', BEDA_BENTUK, sh('hati', KUNING), sh('bintang', KUNING)),
   beda('l5', BEDA_BENTUK, sh('segitiga', HIJAU), sh('trapesium', HIJAU)),
   beda('l5', BEDA_BENTUK, sh('persegi-panjang', UNGU), sh('kotak', UNGU)),
-  beda('l5', BEDA_BENTUK, sh('layang-layang', PINK), sh('ketupat', PINK)),
+  beda('l5', BEDA_BENTUK, sh('layang-layang', PINK), sh('lingkaran', PINK)),
   beda('l5', BEDA_BENTUK, sh('segienam', COKLAT), sh('segilima', COKLAT)),
   beda('l5', BEDA_BENTUK, sh('bulan', BIRU), sh('awan', BIRU)),
   beda('l5', BEDA_WARNA, sh('bintang', MERAH), sh('bintang', BIRU)),
@@ -503,7 +507,7 @@ const duaCiriB: Level[] = [
   pilih('l7', duaQ('layang-layang', 'merah'), [
     sh('layang-layang', MERAH),
     sh('layang-layang', HIJAU),
-    sh('ketupat', MERAH),
+    sh('lingkaran', MERAH),
     sh('segitiga', BIRU),
   ]),
   pilih('l7', duaQ('trapesium', 'ungu'), [
@@ -574,7 +578,7 @@ const polaAB: Level[] = [
   pola('l8', [sh('layang-layang', UNGU), sh('trapesium', KUNING)], 3, [
     sh('layang-layang', UNGU),
     sh('trapesium', MERAH),
-    sh('ketupat', KUNING),
+    sh('kotak', KUNING),
   ]),
 ];
 
@@ -629,7 +633,7 @@ const polaGanda: Level[] = [
   pola('l9', [sh('segienam', HIJAU), sh('segienam', HIJAU), sh('layang-layang', MERAH)], 2, [
     sh('segienam', HIJAU),
     sh('layang-layang', BIRU),
-    sh('ketupat', MERAH),
+    sh('lingkaran', MERAH),
   ]),
   pola('l9', [sh('trapesium', UNGU), sh('persegi-panjang', KUNING), sh('persegi-panjang', KUNING)], 2, [
     sh('trapesium', UNGU),
