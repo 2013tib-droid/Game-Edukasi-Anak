@@ -178,6 +178,14 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Gerakan digerakkan rAF, BUKAN state React** (perbaikan 2026-07-28 "kurang smooth"): pointer event hanya mencatat posisi jari; satu loop `requestAnimationFrame` meng-ease posisi + arah kendaraan lalu menulis `transform` & `stroke-dashoffset` langsung ke DOM. Tidak ada render ulang React selama jari menempel. JANGAN kembalikan posisi kendaraan ke `useState` dan jangan pasang `transition` di `.road-done` — dua hal itu sumber tersendatnya. Terukur 60fps stabil (median frame 16,7 ms) di Chromium dengan CPU di-throttle 4×.
   - Kolam perjalanan **±50 kombinasi kendaraan+tujuan** dalam 6 tema (`KOTA`, `PENOLONG`, `DESA`, `MAIN`, `KERETA`, `PETUALANG`); tema berbeda dipasang di slot berbeda supaya satu sesi tidak mengulang kendaraan yang sama. Terukur: 5× main = 22 perjalanan berbeda dari 30 level.
 
+- **Lanjutkan permainan (save state per game)** (2026-07-28), teruji headless 380×800 (Hutan Hewan & Kenal Huruf: main 3 level → keluar → buka lagi → lanjut level 4 dengan soal yang sama persis, lalu tamat, tanpa error console):
+  - Dulu tiap masuk game selalu mulai dari level 1. Sekarang posisi main tersimpan: `src/engine/core/session.ts` (localStorage `pp_session_v1`, per gameId) menyimpan **picks** (`{s: indeks slot, v: indeks varian}`) + `index` level berjalan + bintang yang sudah didapat.
+  - Yang disimpan hanya indeks, BUKAN objek level — jadi kalau config game diubah, sesi lama divalidasi (`getSession` mengecek indeks masih dalam jangkauan) dan otomatis dibuang kalau tak cocok, bukan menampilkan soal basi.
+  - Karena picks ikut tersimpan, anak melanjutkan dengan **soal yang sama** (varian & — untuk game ber-`sessionLevels` — subset acak yang sama), bukan soal baru.
+  - Layar intro: kalau ada sesi tersimpan tampil **"▶️ Lanjut Level N"** (utama) + **"🔄 Mulai dari Awal"**; kalau tidak ada, tetap satu tombol "▶️ Mulai Main".
+  - Sesi disimpan tiap kali naik level, dan DIHAPUS saat game tamat atau saat pilih "Mulai dari Awal"/"Main Lagi" (main lagi selalu roll varian baru dari level 1).
+  - Bintang tetap terpisah di `progress.ts` (nilai terbaik per level) — sesi hanya soal "sampai mana", tidak menurunkan bintang.
+
 ## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
 
 > Riwayat proyek ini kacau karena tiap sesi bikin branch `claude/xxx` baru, kerja di situ, lalu tak pernah digabung — akibatnya landing page & fitur berulang kali "hilang" dan deploy saling menimpa. Aturan di bawah menghentikan itu. **Ada SATU trunk: `main`.**
