@@ -175,6 +175,8 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Geometri jalan ada di ENGINE (`roadPath()`), config cuma menyebut namanya: `RoadKind` = `lurus`, `bukit`, `gelombang`, `zigzag`, `tangga`, `lengkung` (U), `ess` (S) + `steps` (jumlah kelokan). Data level: `PathTraceData { road, vehicle, vehicleItem?, goal? }`.
   - `src/games/tk/jalan-kendaraan.ts` — 10 slot × kolam varian (kendaraan + tujuan berbeda: mobil→rumah, ambulans→rumah sakit, traktor→sawah, dll.), `sessionLevels: 6` jadi tiap main 6 jalan acak. Urutan sulit: lurus → bukit → gelombang → zigzag → tangga → lengkung → S → zigzag panjang.
   - Pakai **kendaraan darat** saja di config (emoji menghadap samping); pesawat/helikopter/roket terlihat aneh saat diputar mengikuti jalan.
+  - **Gerakan digerakkan rAF, BUKAN state React** (perbaikan 2026-07-28 "kurang smooth"): pointer event hanya mencatat posisi jari; satu loop `requestAnimationFrame` meng-ease posisi + arah kendaraan lalu menulis `transform` & `stroke-dashoffset` langsung ke DOM. Tidak ada render ulang React selama jari menempel. JANGAN kembalikan posisi kendaraan ke `useState` dan jangan pasang `transition` di `.road-done` — dua hal itu sumber tersendatnya. Terukur 60fps stabil (median frame 16,7 ms) di Chromium dengan CPU di-throttle 4×.
+  - Kolam perjalanan **±50 kombinasi kendaraan+tujuan** dalam 6 tema (`KOTA`, `PENOLONG`, `DESA`, `MAIN`, `KERETA`, `PETUALANG`); tema berbeda dipasang di slot berbeda supaya satu sesi tidak mengulang kendaraan yang sama. Terukur: 5× main = 22 perjalanan berbeda dari 30 level.
 
 ## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
 
