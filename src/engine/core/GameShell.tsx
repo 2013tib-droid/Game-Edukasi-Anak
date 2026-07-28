@@ -2,6 +2,8 @@ import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } fro
 import type { ComponentType, LazyExoticComponent } from 'react';
 import type { AnyGameConfig, GameLevel, MixedLevel, Stars, TemplateId } from '@/engine/core/types';
 import { getTotalStars, saveLevelStars } from '@/engine/core/progress';
+import { clearSession, getSession, saveSession } from '@/engine/core/session';
+import type { LevelPick } from '@/engine/core/session';
 import { sfx, speak, stopSpeaking } from '@/engine/audio/sound';
 import { FeedbackOverlay, LevelDots, SpeakButton, StarsRow } from '@/engine/ui/Feedback';
 import MascotCard from '@/engine/ui/Mascot';
@@ -65,19 +67,33 @@ function shuffled<T>(list: T[]): T[] {
 }
 
 /**
- * Turn the config's slots into a concrete level list for one playthrough:
- * a slot that is an array of variants collapses to one randomly-chosen
+ * Draw the level list for one playthrough as *picks* (slot index + variant
+ * index): a slot that is an array of variants collapses to one randomly-chosen
  * variant. When the game sets `sessionLevels`, only that many slots are
  * drawn (no repeats, random order) — a big pool, a short session.
  * Re-run per play (and on "Main Lagi") so questions vary.
+ *
+ * Picks rather than level objects so an interrupted play can be stored (see
+ * `session.ts`) and rebuilt later at exactly the same questions.
  */
-function resolveSlots(config: AnyGameConfig): ConcreteLevel[] {
-  let slots = config.levels as Array<ConcreteLevel | ConcreteLevel[]>;
+function rollPicks(config: AnyGameConfig): LevelPick[] {
+  const slots = config.levels as Array<ConcreteLevel | ConcreteLevel[]>;
+  let order = slots.map((_, i) => i);
   const take = config.sessionLevels;
-  if (take && take > 0 && take < slots.length) slots = shuffled(slots).slice(0, take);
-  return slots.map((slot) =>
-    Array.isArray(slot) ? slot[Math.floor(Math.random() * slot.length)]! : slot,
-  );
+  if (take && take > 0 && take < order.length) order = shuffled(order).slice(0, take);
+  return order.map((s) => {
+    const slot = slots[s]!;
+    return { s, v: Array.isArray(slot) ? Math.floor(Math.random() * slot.length) : 0 };
+  });
+}
+
+/** Rebuild the concrete levels a pick list points at. */
+function levelsFromPicks(config: AnyGameConfig, picks: LevelPick[]): ConcreteLevel[] {
+  const slots = config.levels as Array<ConcreteLevel | ConcreteLevel[]>;
+  return picks.map((p) => {
+    const slot = slots[p.s]!;
+    return Array.isArray(slot) ? slot[p.v]! : slot;
+  });
 }
 
 type Screen = 'intro' | 'playing' | 'done';
@@ -96,10 +112,14 @@ export default function GameShell({
   const wrongCount = useRef(0);
   // Remount the template on retry/advance so its internal state resets.
   const [attemptKey, setAttemptKey] = useState(0);
-  // Bumped on each play/replay so variant slots re-roll fresh questions.
-  const [playNonce, setPlayNonce] = useState(0);
+  // Level list of the current play, re-rolled on each play/replay so variant
+  // slots serve fresh questions.
+  const [picks, setPicks] = useState<LevelPick[]>(() => rollPicks(config));
+  // Interrupted play from a previous visit, if any — read once on mount so
+  // the intro can offer "Lanjut Main" at the level the child stopped at.
+  const [saved, setSaved] = useState(() => getSession(config));
 
-  const levels = useMemo(() => resolveSlots(config), [config, playNonce]);
+  const levels = useMemo(() => levelsFromPicks(config, picks), [config, picks]);
   const level = levels[levelIndex];
   const Template = TEMPLATES[templateFor(config, level)] as ComponentType<TemplateProps>;
 
@@ -114,10 +134,24 @@ export default function GameShell({
     if (lv) speak(lv.narration);
   }, [screen, levelIndex, levels]);
 
+  /** Start over from level 1 with freshly drawn questions. */
   function handleStart() {
     sfx('tap');
-    setPlayNonce((n) => n + 1); // re-roll variants for this play
+    setPicks(rollPicks(config)); // re-roll variants for this play
+    setEarned([]);
     setLevelIndex(0);
+    clearSession(config.id);
+    setSaved(null);
+    setScreen('playing');
+  }
+
+  /** Pick up the interrupted play at the level the child stopped at. */
+  function handleResume() {
+    if (!saved) return;
+    sfx('tap');
+    setPicks(saved.picks);
+    setEarned(saved.earned);
+    setLevelIndex(saved.index);
     setScreen('playing');
   }
 
@@ -125,7 +159,8 @@ export default function GameShell({
     if (!level) return;
     const stars = starsForMistakes(wrongCount.current);
     saveLevelStars(config.id, level.id, stars);
-    setEarned((prev) => [...prev, stars]);
+    const earnedNow = [...earned, stars];
+    setEarned(earnedNow);
     sfx('correct');
     speak('Hebat! Kamu benar!');
     setFeedback('correct');
@@ -133,16 +168,21 @@ export default function GameShell({
       setFeedback(null);
       const next = levelIndex + 1;
       if (next >= levels.length) {
+        // Finished: nothing left to resume.
+        clearSession(config.id);
+        setSaved(null);
         sfx('win');
         speak('Selamat! Kamu hebat sekali!');
         setScreen('done');
       } else {
+        // Remember where we are, so leaving now resumes here next time.
+        saveSession(config.id, { picks, index: next, earned: earnedNow });
         setLevelIndex(next);
         setAttemptKey((k) => k + 1);
         // narration handled by the level-change effect
       }
     }, 1400);
-  }, [config, level, levelIndex, levels]);
+  }, [config, earned, level, levelIndex, levels, picks]);
 
   const handleWrong = useCallback((silent?: boolean) => {
     wrongCount.current += 1;
@@ -160,9 +200,22 @@ export default function GameShell({
           {config.emoji}
         </div>
         <h1>{config.title}</h1>
-        <button className="btn btn--primary" style={{ fontSize: 26 }} onClick={handleStart}>
-          ▶️ Mulai Main
-        </button>
+        {saved ? (
+          <>
+            {/* Coming back after stopping mid-game: continue where the child
+                left off, with the same questions, instead of level 1 again. */}
+            <button className="btn btn--primary" style={{ fontSize: 26 }} onClick={handleResume}>
+              ▶️ Lanjut Level {saved.index + 1}
+            </button>
+            <button className="btn" style={{ fontSize: 22 }} onClick={handleStart}>
+              🔄 Mulai dari Awal
+            </button>
+          </>
+        ) : (
+          <button className="btn btn--primary" style={{ fontSize: 26 }} onClick={handleStart}>
+            ▶️ Mulai Main
+          </button>
+        )}
         <button className="btn" onClick={onExit}>
           ⬅️ Kembali
         </button>
@@ -187,11 +240,8 @@ export default function GameShell({
           className="btn btn--primary"
           style={{ fontSize: 24 }}
           onClick={() => {
-            setEarned([]);
             setAttemptKey((k) => k + 1);
-            setPlayNonce((n) => n + 1); // fresh variants on replay
-            setLevelIndex(0);
-            setScreen('playing');
+            handleStart(); // fresh variants, from level 1
           }}
         >
           🔁 Main Lagi
