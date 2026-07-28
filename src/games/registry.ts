@@ -84,6 +84,15 @@ export const games: GameMeta[] = [
     load: () => import('@/games/tk/tulis-angka'),
   },
   {
+    id: 'jalan-kendaraan',
+    group: 'tk',
+    title: 'Jalan Kendaraan',
+    emoji: '🚗',
+    template: 'path-trace',
+    freeDemo: true,
+    load: () => import('@/games/tk/jalan-kendaraan'),
+  },
+  {
     id: 'kartu-kembar',
     group: 'tk',
     title: 'Kartu Kembar',

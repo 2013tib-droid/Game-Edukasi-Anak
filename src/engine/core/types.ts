@@ -14,7 +14,8 @@ export type TemplateId =
   | 'memory' // mencocokkan kartu
   | 'count-tap' // hitung & ketuk (wajib ada pengecoh — lihat CLAUDE.md)
   | 'story-choice' // cerita interaktif
-  | 'spell'; // eja/susun huruf jadi kata (dari game Petualangan Pintar)
+  | 'spell' // eja/susun huruf jadi kata (dari game Petualangan Pintar)
+  | 'path-trace'; // susuri jalan dengan jari (antar kendaraan ke tujuan)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -199,6 +200,42 @@ export interface SpellData {
   decoys: string[];
 }
 
+/**
+ * Road shapes the `path-trace` template can draw. The geometry lives in the
+ * engine (`src/engine/templates/PathTrace.tsx`); a config only names the shape
+ * so level data stays plain data.
+ */
+export type RoadKind =
+  | 'lurus' // garis lurus (paling mudah)
+  | 'bukit' // bukit-bukit melengkung
+  | 'gelombang' // ombak naik-turun
+  | 'zigzag' // patah-patah tajam
+  | 'tangga' // anak tangga (belok siku)
+  | 'lengkung' // huruf U
+  | 'ess'; // huruf S
+
+export interface RoadSpec {
+  kind: RoadKind;
+  /**
+   * How many repeats for shapes that repeat (bukit, gelombang, zigzag,
+   * tangga) — more repeats = jalan lebih panjang & sulit. Default 3.
+   */
+  steps?: number;
+}
+
+export interface PathTraceData {
+  road: RoadSpec;
+  /** Vehicle emoji driven along the road, e.g. "🚗". */
+  vehicle: string;
+  /**
+   * Item id (registry `src/engine/ui/items.ts`) drawn as the vehicle instead
+   * of the emoji — real art when the assets ship. Falls back to `vehicle`.
+   */
+  vehicleItem?: string;
+  /** Emoji at the end of the road (rumah, sekolah, garis finis…). */
+  goal?: string;
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -207,6 +244,7 @@ export interface LevelDataMap {
   'count-tap': CountTapData;
   'story-choice': StoryChoiceData;
   spell: SpellData;
+  'path-trace': PathTraceData;
 }
 
 /* ---------- Game config ---------- */

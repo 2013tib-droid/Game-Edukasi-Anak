@@ -78,6 +78,8 @@ Buat engine sehingga **menambah game baru = menulis file config JSON + aset**, b
 4. **Memory/mencocokkan kartu**
 5. **Hitung & ketuk** (counting objek)
 6. **Cerita interaktif** (narasi + pilihan)
+7. **Spell** (susun kata dengan mengetuk huruf berurutan)
+8. **Path-trace** (susuri jalan dengan jari — antar kendaraan ke tujuan)
 
 Setiap game dideklarasikan lewat config: `{ id, group, title, template, freeDemo (bool), levels[], assets{} }`.
 
@@ -166,6 +168,13 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Bentuknya **persamaan utuh, bukan angka kecil di bawah tiap kelompok** (keputusan pemilik 2026-07-27 — percobaan pertama pakai angka per-kelompok, ditolak).
   - Papan gambar penjumlahan sekarang cukup `gambar + gambar` (op `equals`/`question` dilepas) karena baris persamaan sudah membawa "= ?"; papan pengurangan tetap `hewan → rumah`.
   - **Hanya untuk soal persamaan** (`add()`/`sub()` di `hutan-hewan.ts`). JANGAN pasang di soal "ayo hitung" biasa — angkanya jadi jawaban soal itu sendiri.
+
+- **Template baru `path-trace` + game "Jalan Kendaraan" (TK)** (2026-07-28), teruji headless 360×640, 380×800 & 820×1180 (6 level sampai tamat + "Main Lagi", 8 bentuk jalan tercek, tanpa scroll & tanpa error console):
+  - `src/engine/templates/PathTrace.tsx` — anak menyusuri **jalan raya** dengan satu jari sambil mengantar kendaraan ke tujuan (latihan motorik/pra-menulis, saudara dari template `tracing` tapi mengikuti jalan, bukan huruf). Jalan digambar SVG: pinggir oranye + aspal abu + garis putus-putus putih; bagian yang sudah dilewati jadi **kuning**; kendaraan berputar mengikuti arah jalan (emoji di-`scaleX(-1)` dulu karena emoji kendaraan menghadap kiri).
+  - Aturan ramah anak: kemajuan **hanya maju** (lepas jari tidak mengulang dari awal), goyang sedikit di pinggir jalan tidak dihitung salah; **keluar jauh dari jalan** = satu kali salah → kendaraan balik ke start + "Coba lagi, kamu pasti bisa!". Sentuhan harus dimulai di kendaraannya.
+  - Geometri jalan ada di ENGINE (`roadPath()`), config cuma menyebut namanya: `RoadKind` = `lurus`, `bukit`, `gelombang`, `zigzag`, `tangga`, `lengkung` (U), `ess` (S) + `steps` (jumlah kelokan). Data level: `PathTraceData { road, vehicle, vehicleItem?, goal? }`.
+  - `src/games/tk/jalan-kendaraan.ts` — 10 slot × kolam varian (kendaraan + tujuan berbeda: mobil→rumah, ambulans→rumah sakit, traktor→sawah, dll.), `sessionLevels: 6` jadi tiap main 6 jalan acak. Urutan sulit: lurus → bukit → gelombang → zigzag → tangga → lengkung → S → zigzag panjang.
+  - Pakai **kendaraan darat** saja di config (emoji menghadap samping); pesawat/helikopter/roket terlihat aneh saat diputar mengikuti jalan.
 
 ## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
 
