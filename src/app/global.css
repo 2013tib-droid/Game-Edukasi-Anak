@@ -100,6 +100,7 @@ button {
 .topbar__side {
   display: flex;
   align-items: center;
+  gap: 8px;
   min-width: 0;
 }
 .topbar__side--right {

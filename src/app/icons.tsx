@@ -34,6 +34,15 @@ export function UserIcon() {
   );
 }
 
+export function BellIcon() {
+  return (
+    <svg {...base}>
+      <path d="M18 16.5V11a6 6 0 1 0-12 0v5.5L4.5 19h15z" />
+      <path d="M10 21.5a2.4 2.4 0 0 0 4 0" />
+    </svg>
+  );
+}
+
 export function ArrowLeftIcon() {
   return (
     <svg {...base}>
