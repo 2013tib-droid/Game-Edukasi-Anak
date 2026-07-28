@@ -186,6 +186,14 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Sesi disimpan tiap kali naik level, dan DIHAPUS saat game tamat atau saat pilih "Mulai dari Awal"/"Main Lagi" (main lagi selalu roll varian baru dari level 1).
   - Bintang tetap terpisah di `progress.ts` (nilai terbaik per level) — sesi hanya soal "sampai mana", tidak menurunkan bintang.
 
+- **Lonceng notifikasi (pengumuman & update)** (2026-07-28), teruji headless 380×800, 360×640 & 820×1180 (buka/tutup, badge, persist setelah reload, tanpa scroll horizontal & tanpa error console):
+  - Lonceng ada di **`TopBar`**, jadi otomatis muncul di **landing (`/`) dan portal (`/portal`)** — dua tempat yang dilihat orang tua. Prop `bell` (default `true`) untuk mematikannya di layar khusus anak nanti.
+  - Isi pengumuman = data typed di **`src/data/announcements.ts`** (`{ id, date, tag, title, body }`, terbaru di atas). Menambah kabar = menambah satu entri di file itu, tidak menyentuh komponen. 4 tag berwarna: `baru` (hijau), `update` (biru), `info` (ungu), `promo` (oranye).
+  - **`id` wajib unik & TIDAK boleh diubah** — status sudah-dibaca disimpan per id (`localStorage` `pp_notif_read_v1`, helper di `src/portal/notifications.ts`). Ganti id = pengumuman lama muncul lagi sebagai baru.
+  - UI (`src/portal/NotificationBell.tsx` + `notifications.css`): tombol lonceng 42px senada `.topbar__btn`, badge merah berisi jumlah belum dibaca (`9+` kalau lebih), lonceng bergoyang halus 2× saat ada kabar baru (dimatikan oleh `prefers-reduced-motion`). Panel ala dropdown: header "Pengumuman", daftar bisa di-scroll, item baru bertanda rel oranye + latar krem. Membuka panel = semua ditandai terbaca (badge hilang), tapi sorotan item baru tetap tampil selama panel terbuka.
+  - Tutup: tombol ✕, tombol Escape, atau ketuk di luar panel. **JANGAN pakai elemen backdrop `position: fixed`** — `.topbar` punya `backdrop-filter`, jadi elemen fixed di dalamnya hanya menutupi header, bukan layar; karena itu pakai listener `pointerdown` di document.
+  - **Panel di-anchor ke `.topbar` (yang `sticky`), bukan ke tombol loncengnya** (`.notif` sengaja `position: static`). Kalau di-anchor ke lonceng, panel selebar 360px terdorong keluar layar kiri di HP karena lonceng bukan elemen paling kanan.
+
 ## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
 
 > Riwayat proyek ini kacau karena tiap sesi bikin branch `claude/xxx` baru, kerja di situ, lalu tak pernah digabung — akibatnya landing page & fitur berulang kali "hilang" dan deploy saling menimpa. Aturan di bawah menghentikan itu. **Ada SATU trunk: `main`.**
