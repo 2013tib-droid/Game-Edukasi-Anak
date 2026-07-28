@@ -31,6 +31,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'count-tap': lazy(() => import('@/engine/templates/CountTap')),
   'story-choice': lazy(() => import('@/engine/templates/StoryChoice')),
   spell: lazy(() => import('@/engine/templates/Spell')),
+  'path-trace': lazy(() => import('@/engine/templates/PathTrace')),
 };
 
 /**

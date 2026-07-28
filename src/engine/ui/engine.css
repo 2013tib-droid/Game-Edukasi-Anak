@@ -633,3 +633,100 @@
   margin: 0;
   font-size: 34px;
 }
+
+/* Path trace (susuri jalan) — jalan raya yang diikuti jari anak */
+.road-stage {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  border-radius: 24px;
+  background: linear-gradient(#eaf7ff, #e8f8e2);
+  box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.road-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+}
+
+.road-edge,
+.road-fill,
+.road-dash,
+.road-done {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.road-edge {
+  stroke: #ef6c4a;
+  stroke-width: 15;
+}
+
+.road-fill {
+  stroke: #b9b6c4;
+  stroke-width: 11.5;
+}
+
+.road-dash {
+  stroke: #fff;
+  stroke-width: 1.6;
+  stroke-dasharray: 3 4;
+}
+
+/* Bagian jalan yang sudah dilewati */
+.road-done {
+  stroke: #ffc93c;
+  stroke-width: 11.5;
+  transition: stroke-dashoffset 0.08s linear;
+}
+
+.road-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: clamp(26px, 8vw, 42px);
+  line-height: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+
+.road-vehicle {
+  position: absolute;
+  pointer-events: none;
+  line-height: 1;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.25));
+}
+
+.road-vehicle--done {
+  animation: road-arrive 0.5s ease;
+}
+
+.road-vehicle-emoji {
+  font-size: clamp(34px, 11vw, 54px);
+  display: block;
+}
+
+.road-vehicle-img {
+  width: clamp(40px, 13vw, 64px);
+  height: auto;
+  display: block;
+}
+
+@keyframes road-arrive {
+  50% {
+    scale: 1.35;
+  }
+}
+
+.road-hint {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #6b6b7b;
+  margin: 14px 0 0;
+}
