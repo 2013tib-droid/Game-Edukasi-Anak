@@ -99,7 +99,7 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, freeDemo
 2. **Fase 2 — Engine:** core engine + 6 template game + sistem audio/narasi + progress bintang. ✅ **SELESAI**
 3. **Fase 3 — Migrasi:** porting game "Petualangan Pintar" (HTML standalone yang sudah ada) ke format engine sebagai game pertama kelompok TK.
 4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Saat rilis hanya `hutan-hewan` yang `freeDemo: true` (lihat "Rencana Akses Saat Launching").
-5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi.
+5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi. Rencana teknis & prasyarat koneksi Mayar ada di **`docs/monetisasi-mayar.md`**. Generator kode sudah jadi (lihat Status Pengerjaan).
 6. **Fase 6 — Rilis:** deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli.
 
 Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyakan konfirmasi sebelum keputusan arsitektur besar di luar dokumen ini.
@@ -112,8 +112,8 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Firebase **lazy-load via `getFirebase()`** (`src/auth/firebase.ts`) — SDK tidak ikut bundle awal (entry ±56 kB gzip). App tetap jalan tanpa `.env` (tampilkan notice "belum dikonfigurasi"); isi kunci dari `.env.example` saat project Firebase dibuat.
   - `firestore.rules` ketat: `activation_codes` tertutup dari client; field `users/{uid}.groups` hanya bisa diubah Cloud Function; default deny.
   - Kontrak config game type-safe di `src/engine/core/types.ts` (`GameConfig`, `TemplateId`, dst.) — fondasi Fase 2.
-  - `functions/` & `scripts/` masih README placeholder (diimplementasi Fase 5).
-  - Perintah: `npm run dev` / `npm run build` / `npm run typecheck`.
+  - `functions/` masih README placeholder (diimplementasi Fase 5); `scripts/` kini berisi generator kode aktivasi (lihat entri 2026-07-28 di bawah).
+  - Perintah: `npm run dev` / `npm run build` / `npm run typecheck` / `npm run gen:codes`.
 - **Fase 2 (Engine) — SELESAI** (2026-07-21), teruji headless-browser semua template:
   - `GameShell` (`src/engine/core/GameShell.tsx`): intro → level → selesai; feedback positif ("Coba lagi, kamu pasti bisa!"), bintang per level (0 salah = 3⭐), remount template per attempt.
   - **6 template** di `src/engine/templates/`: TapAnswer, DragDrop (pointer events, bukan HTML5 DnD — HTML5 DnD rusak di mobile), Tracing (canvas + cek coverage glyph), Memory, CountTap (pengecoh + target dilebihkan sesuai Aturan Desain Soal), StoryChoice. Semua lazy-load per chunk.
@@ -177,6 +177,15 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Pakai **kendaraan darat** saja di config (emoji menghadap samping); pesawat/helikopter/roket terlihat aneh saat diputar mengikuti jalan.
   - **Gerakan digerakkan rAF, BUKAN state React** (perbaikan 2026-07-28 "kurang smooth"): pointer event hanya mencatat posisi jari; satu loop `requestAnimationFrame` meng-ease posisi + arah kendaraan lalu menulis `transform` & `stroke-dashoffset` langsung ke DOM. Tidak ada render ulang React selama jari menempel. JANGAN kembalikan posisi kendaraan ke `useState` dan jangan pasang `transition` di `.road-done` — dua hal itu sumber tersendatnya. Terukur 60fps stabil (median frame 16,7 ms) di Chromium dengan CPU di-throttle 4×.
   - Kolam perjalanan **±50 kombinasi kendaraan+tujuan** dalam 6 tema (`KOTA`, `PENOLONG`, `DESA`, `MAIN`, `KERETA`, `PETUALANG`); tema berbeda dipasang di slot berbeda supaya satu sesi tidak mengulang kendaraan yang sama. Terukur: 5× main = 22 perjalanan berbeda dari 30 level.
+
+- **Fase 5 dimulai: generator kode aktivasi (`scripts/generate-codes.mjs`)** (2026-07-28), teruji 3500 kode (verifikasi, deteksi typo, dedup lintas batch, semua jalur error CLI):
+  - **Domain sendiri TIDAK diperlukan** untuk konek ke Mayar (keputusan/temuan 2026-07-28). Mayar memberi subdomain gratis `namatoko.myr.id`; kita cuma butuh URL HTTPS publik yang sudah ada gratis dari GitHub Pages / Firebase Hosting / Cloud Functions. Beli domain = keputusan marketing, bukan syarat teknis. Prasyarat yang sesungguhnya (KYC Mayar, project Firebase, Blaze) + rencana lengkap ada di **`docs/monetisasi-mayar.md`** — baca itu sebelum melanjutkan Fase 5.
+  - **Jalur rilis pertama = "jalur A" (voucher pre-generated)**: kode dibuat batch → di-upload ke Mayar sebagai stok voucher produk digital → Mayar kirim otomatis ke pembeli. Tidak butuh webhook & tidak butuh Blaze untuk mulai menjual. Webhook otomatis ("jalur B") menyusul setelah penjualan stabil.
+  - Script **zero-dependency Node ESM** (bukan `.ts`) — sengaja, supaya bisa jalan sebelum project Firebase ada dan tanpa build step. Perintah: `npm run gen:codes -- -g tk -n 100`. Detail opsi & keluaran di `scripts/README.md`.
+  - Format kode `TK-XXXX-XXXX` / `SD1-XXXX-XXXX`: 7 karakter acak + 1 checksum, alfabet 25 karakter **tanpa karakter ambigu** (`O/0`, `I/1/L`, `S/5`, `Z/2`, `B/8` dibuang) karena orang tua membacanya dari layar HP. Checksum menangkap 99,0% typo satu karakter & 98,9% transposisi — gunanya menolak salah ketik tanpa query Firestore, **bukan** keamanan (yang mengamankan = kolam 25⁷ ≈ 6,1 miliar per kelompok).
+  - Keunikan dijamin dengan membaca semua `.txt` di folder keluaran sebelum membuat batch baru. **Jangan hapus/pindahkan file `.txt` lama dari `codes/`** — itu satu-satunya catatan kode yang pernah dibuat sampai Firestore aktif.
+  - **`codes/` masuk `.gitignore`** — kode aktivasi adalah rahasia bearer; bocor = game jadi gratis. Jangan pernah di-commit.
+  - Script meng-export `generateCode` / `verifyCode` / `checksumChar`. Cloud Function `redeemActivationCode` nanti **memanggil `verifyCode`**, jangan menyalin ulang algoritmanya (dua salinan pasti menyimpang).
 
 ## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
 

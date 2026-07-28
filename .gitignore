@@ -10,6 +10,10 @@ dist/
 firebase-debug.log
 *-debug.log
 
+# Kode aktivasi hasil generate — ini rahasia (siapa pun yang memegangnya bisa
+# membuka game). Simpan di luar repo / password manager, jangan pernah commit.
+codes/
+
 # Env — real Firebase keys live here, never commit
 .env
 .env.local
