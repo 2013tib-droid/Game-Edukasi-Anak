@@ -539,12 +539,24 @@
   font-size: 20px;
 }
 
-/* Memory cards */
+/* Memory cards — a tighter gap than the answer grid so four cards across a
+ * phone stay as wide (and the fruit as big) as possible. */
+.memory-grid {
+  gap: 9px;
+}
+
 .memory-card {
   aspect-ratio: 3 / 4;
   min-height: 0;
   perspective: 400px;
-  font-size: clamp(36px, 9vw, 56px);
+  /*
+   * The fruit must FILL the card — a fixed px size left a big card with a tiny
+   * fruit in the middle. `cqw` ties the glyph to the card's own width, so it
+   * scales with the column count (3 or 4) and with the screen. The clamp is the
+   * fallback for browsers without container queries.
+   */
+  container-type: inline-size;
+  font-size: clamp(44px, 14vw, 92px);
 }
 
 .memory-face {
@@ -554,6 +566,15 @@
   width: 100%;
   height: 100%;
   border-radius: 16px;
+  line-height: 1;
+}
+
+/* `cqw` must live on the card's CONTENT: on the card itself it would resolve
+ * against an ancestor container, not the card. */
+@supports (container-type: inline-size) {
+  .memory-face {
+    font-size: 88cqw;
+  }
 }
 
 /* Real item art on a card face: fill the card, keep a little breathing room. */
@@ -568,14 +589,20 @@
 
 /* Emoji fallback when an item's image is missing — match the art's weight. */
 .memory-face__emoji {
-  font-size: clamp(36px, 9vw, 56px);
+  font-size: inherit; /* inherits the card-sized glyph above */
   line-height: 1;
 }
 
 .memory-face--down {
   background: linear-gradient(135deg, #7ec8e3, #58a4d4);
   color: #fff;
-  font-size: 32px;
+  font-size: clamp(28px, 8vw, 52px);
+}
+
+@supports (container-type: inline-size) {
+  .memory-face--down {
+    font-size: 44cqw;
+  }
 }
 
 .memory-face--matched {

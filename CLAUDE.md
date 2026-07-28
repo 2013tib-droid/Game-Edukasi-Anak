@@ -169,6 +169,13 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Pasangan pengecoh mirip yang dipakai sekarang: kotak/persegi panjang, lingkaran/oval, bintang/hati, segitiga/trapesium, segilima/segienam, bulan/awan.
   - `Shape.tsx` kini menandai tiap SVG dengan `data-shape="<kind>"` supaya tes headless bisa memeriksa bentuk yang tampil di layar.
 
+- **Gambar di kartu memory mengisi kartu** (2026-07-28), teruji headless 380×800, 360×640 & 820×1180 (Pasar Buah "kartu buah" + Kartu Kembar, tanpa scroll & tanpa error console):
+  - Dulu emoji buah dipatok `clamp(36px, 9vw, 56px)` — kartunya besar tapi buahnya kecil di tengah (keluhan pemilik). Sekarang `.memory-card` jadi **container** (`container-type: inline-size`) dan isinya diukur dengan `cqw`: `.memory-face` = `88cqw`, punggung kartu `44cqw`. Ukuran ikut lebar kartu, jadi otomatis pas di 3 kolom (6 kartu) maupun 4 kolom (8 kartu) dan di HP maupun tablet. Terukur di HP 380px: 36px → **60px**; tablet: → 135px.
+  - **`cqw` harus dipasang di ISI kartu, bukan di `.memory-card` sendiri** — pada elemen container-nya sendiri `cqw` mengacu ke container ancestor (viewport), percobaan pertama menghasilkan font 296px dan layar melebar.
+  - Ada fallback `clamp()` di luar `@supports (container-type: inline-size)` untuk browser Android lawas tanpa container query.
+  - Grid memory pakai kelas sendiri `.memory-grid` (gap 9px, lebih rapat dari `.choice-grid` 14px) supaya 4 kartu sebaris di HP jadi selebar mungkin.
+  - Kartu ber-seni WebP (`memory-face__img`, mis. Kartu Kembar) tidak berubah — sudah 88% kartu sejak awal.
+
 - **Persamaan angka di bawah papan gambar (penjumlahan & pengurangan)** (2026-07-27), teruji headless 380×800 (5 soal matematika Hutan Hewan, tanpa scroll & tanpa error console):
   - Field engine baru `TapAnswerData.equation` (opsional, string): satu baris persamaan **"1 + 4 = ?"** / **"7 − 3 = ?"** di bawah papan gambar, supaya anak menghubungkan "sebanyak ini" dengan lambang bilangannya. Render `.ta-equation` di `TapAnswer.tsx` + `engine.css` (varian `--dense` untuk papan padat).
   - Bentuknya **persamaan utuh, bukan angka kecil di bawah tiap kelompok** (keputusan pemilik 2026-07-27 — percobaan pertama pakai angka per-kelompok, ditolak).
