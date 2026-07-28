@@ -678,27 +678,32 @@
   stroke-dasharray: 3 4;
 }
 
-/* Bagian jalan yang sudah dilewati */
+/* Bagian jalan yang sudah dilewati. Dashoffset-nya digerakkan per frame oleh
+   PathTrace (rAF) — jangan tambah transition, nanti malah tersendat. */
 .road-done {
   stroke: #ffc93c;
   stroke-width: 11.5;
-  transition: stroke-dashoffset 0.08s linear;
 }
 
+/* Posisi marker & kendaraan ditulis PathTrace lewat `transform` (translate3d),
+   jadi keduanya cukup ditempel di pojok kiri-atas panggung. */
 .road-marker {
   position: absolute;
-  transform: translate(-50%, -50%);
+  left: 0;
+  top: 0;
   font-size: clamp(26px, 8vw, 42px);
   line-height: 1;
   pointer-events: none;
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
 }
 
-
 .road-vehicle {
   position: absolute;
+  left: 0;
+  top: 0;
   pointer-events: none;
   line-height: 1;
+  will-change: transform;
   filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.25));
 }
 
