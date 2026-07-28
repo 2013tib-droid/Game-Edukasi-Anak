@@ -7,19 +7,40 @@ import { findGame } from '@/games/registry';
 import { useAuth } from '@/auth/AuthContext';
 
 /**
- * Access gate + config loader. Premium games require group access on the
- * account (validated online — full check wired to Firestore in Fase 5).
- * Free demos are always playable, no login needed.
+ * Access gate + config loader.
+ *
+ * Free demos load immediately, no login. Premium games re-check access
+ * online at launch (CLAUDE.md: validasi saat game diluncurkan, bukan hanya
+ * saat login) — that call also registers the device against the 3-device
+ * limit. The premium config chunk is only imported after access is granted,
+ * so paid level data never reaches an unentitled browser.
  */
 export default function GamePage() {
   const { gameId } = useParams<{ gameId: string }>();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, loading, configured, groups, accessError, refreshAccess } = useAuth();
   const meta = gameId ? findGame(gameId) : undefined;
   const [config, setConfig] = useState<AnyGameConfig | null>(null);
+  const [checking, setChecking] = useState(false);
 
-  // TODO(fase-5): read users/{uid}.groups from Firestore at launch time.
-  const hasAccess = Boolean(meta?.freeDemo);
+  const isFree = Boolean(meta?.freeDemo);
+  const hasGroup = Boolean(meta && groups.includes(meta.group));
+  const hasAccess = isFree || hasGroup;
+
+  // Launch-time online re-check for premium games.
+  useEffect(() => {
+    if (!meta || isFree || !user || !configured) return;
+    let cancelled = false;
+    setChecking(true);
+    void refreshAccess()
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setChecking(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [meta, isFree, user, configured, refreshAccess]);
 
   useEffect(() => {
     if (!meta || !hasAccess) return;
@@ -43,6 +64,9 @@ export default function GamePage() {
     );
   }
 
+  // Don't flash the locked screen at an owner while auth/access resolve.
+  if (!hasAccess && (loading || checking)) return <SplashScreen />;
+
   if (!hasAccess) {
     return (
       <div className="game-center">
@@ -53,6 +77,11 @@ export default function GamePage() {
         <p style={{ fontSize: 20, maxWidth: 420 }}>
           Game ini bagian dari versi lengkap. Minta bantuan Ayah/Bunda untuk membukanya ya!
         </p>
+        {user && accessError && (
+          <p role="alert" style={{ fontSize: 17, maxWidth: 420, color: '#c0392b' }}>
+            {accessError}
+          </p>
+        )}
         {user ? (
           <Link to="/aktivasi" className="btn btn--primary">
             🔑 Masukkan Kode Aktivasi

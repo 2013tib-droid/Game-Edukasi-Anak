@@ -3,11 +3,13 @@ import groupsData from '@/data/groups.json';
 import { gamesForGroup } from '@/games/registry';
 import { getGameStars } from '@/engine/core/progress';
 import type { GroupId } from '@/engine/core/types';
+import { useAuth } from '@/auth/AuthContext';
 
 // Game list per group. Free demos open directly; premium games show a lock
 // until the account has group access (gate enforced again in GamePage).
 export default function GroupPage() {
   const { groupId } = useParams<{ groupId: string }>();
+  const { groups } = useAuth();
   const group = groupsData.groups.find((g) => g.id === groupId);
 
   if (!group) {
@@ -22,6 +24,8 @@ export default function GroupPage() {
   }
 
   const games = gamesForGroup(group.id as GroupId);
+  // Bought this group? Then nothing in it is locked.
+  const unlocked = groups.includes(group.id as GroupId);
 
   return (
     <div className="page" style={{ textAlign: 'center' }}>
@@ -45,7 +49,7 @@ export default function GroupPage() {
               className="btn"
               style={{ flexDirection: 'column', padding: 20, position: 'relative' }}
             >
-              {!game.freeDemo && (
+              {!game.freeDemo && !unlocked && (
                 <span style={{ position: 'absolute', top: 10, right: 12, fontSize: 22 }}>
                   🔒
                 </span>

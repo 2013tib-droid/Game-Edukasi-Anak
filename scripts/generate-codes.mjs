@@ -24,73 +24,18 @@ import { join, resolve } from 'node:path';
 import { argv } from 'node:process';
 import { fileURLToPath } from 'node:url';
 
-/**
- * Ambiguous characters are excluded so a parent reading a code off a phone
- * screen cannot confuse them: no O/0, I/1/L, S/5, Z/2, B/8.
- */
-const ALPHABET = 'ACDEFGHJKMNPQRTUVWXY34679';
+// Format, alphabet and checksum live with the Cloud Function that has to
+// accept these codes — one implementation, so the two can never drift.
+// Node strips the types on import; no build step needed.
+import { PREFIX, generateCode as mintCode, verifyCode } from '../functions/src/activation-code.ts';
 
-/** Body length excluding the trailing checksum character. */
-const BODY_LEN = 7;
-
-/** Group id (matches `GroupId` in src/engine/core/types.ts) → code prefix. */
-const PREFIX = {
-  tk: 'TK',
-  sd1: 'SD1',
-};
+export { checksumChar, verifyCode } from '../functions/src/activation-code.ts';
 
 const DEFAULT_OUT = 'codes';
 
-/**
- * Checksum character appended to every code. This exists to catch typing
- * mistakes, NOT to make codes unguessable — the randomness does that. The
- * Cloud Function can reject a malformed code before spending a Firestore
- * read. If we ever mirror this check client-side, mirror this function
- * exactly.
- */
-export function checksumChar(prefix, body) {
-  const input = `${prefix}-${body}`;
-  let sum = 0;
-  for (let i = 0; i < input.length; i++) {
-    sum = (sum * 33 + input.charCodeAt(i)) % ALPHABET.length;
-  }
-  return ALPHABET[sum];
-}
-
-/** `TK` + `ACDEFGH` + checksum → `TK-ACDE-FGH4`. */
-function formatCode(prefix, body, check) {
-  const full = body + check;
-  return `${prefix}-${full.slice(0, 4)}-${full.slice(4)}`;
-}
-
+/** Mints one code using Node's rejection-sampled RNG (no modulo bias). */
 export function generateCode(prefix) {
-  let body = '';
-  // randomInt is rejection-sampled by Node, so no modulo bias.
-  for (let i = 0; i < BODY_LEN; i++) body += ALPHABET[randomInt(0, ALPHABET.length)];
-  return formatCode(prefix, body, checksumChar(prefix, body));
-}
-
-/**
- * Returns the group id when `code` is well-formed and its checksum matches,
- * otherwise a string explaining why it is rejected.
- */
-export function verifyCode(raw) {
-  const code = String(raw).trim().toUpperCase();
-  const match = /^(TK|SD1)-([A-Z0-9]{4})-([A-Z0-9]{4})$/.exec(code);
-  if (!match) return { ok: false, reason: 'format salah (harus TK-XXXX-XXXX / SD1-XXXX-XXXX)' };
-
-  const [, prefix, a, b] = match;
-  const chars = a + b;
-  for (const ch of chars) {
-    if (!ALPHABET.includes(ch)) return { ok: false, reason: `karakter "${ch}" tidak dipakai di kode` };
-  }
-
-  const body = chars.slice(0, BODY_LEN);
-  const check = chars.slice(BODY_LEN);
-  if (checksumChar(prefix, body) !== check) return { ok: false, reason: 'checksum tidak cocok (kemungkinan salah ketik)' };
-
-  const group = Object.keys(PREFIX).find((g) => PREFIX[g] === prefix);
-  return { ok: true, group, code };
+  return mintCode(prefix, randomInt);
 }
 
 /**

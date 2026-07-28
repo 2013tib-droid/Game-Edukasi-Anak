@@ -21,13 +21,23 @@ ditambahkan kapan saja tanpa mengubah kode.
 
 | # | Prasyarat | Status | Siapa |
 |---|---|---|---|
-| 1 | Akun Mayar terverifikasi (KYC: KTP + rekening bank) | ⬜ belum | pemilik |
-| 2 | Project Firebase dibuat, `.env` diisi | ⬜ belum | pemilik |
-| 3 | Firebase paket **Blaze** (Cloud Functions butuh billing) | ⬜ belum | pemilik — **hanya untuk jalur B** |
+| 1 | Akun Mayar terverifikasi (KYC: KTP + rekening bank) | ⬜ belum | **pemilik** |
+| 2 | Project Firebase dibuat, `.env` diisi | ⬜ belum | **pemilik** |
+| 3 | Firebase paket **Blaze** (Cloud Functions butuh billing) | ⬜ belum | **pemilik** |
 | 4 | Generator kode aktivasi | ✅ selesai | `scripts/generate-codes.mjs` |
-| 5 | Cloud Function `redeemActivationCode` | ⬜ belum | Fase 5 |
-| 6 | Halaman aktivasi tersambung ke function | ⬜ belum | `src/auth/ActivationPage.tsx` masih stub |
-| 7 | Batas 3 device per akun | ⬜ belum | Fase 5 |
+| 5 | Cloud Function `redeemActivationCode` | ✅ selesai | `functions/src/index.ts` |
+| 6 | Halaman aktivasi tersambung ke function | ✅ selesai | `src/auth/ActivationPage.tsx` |
+| 7 | Batas 3 device per akun | ✅ selesai | `verifyAccess` + `src/auth/device.ts` |
+| 8 | Gerbang akses online saat game diluncurkan | ✅ selesai | `src/portal/GamePage.tsx` |
+
+Semua kode Fase 5 sudah jadi dan teruji lawan Firebase Emulator (42
+assertion, `npm run test:emulator`). **Yang tersisa murni pekerjaan akun
+pemilik** — begitu `.env` diisi dan Blaze aktif, tinggal `firebase deploy`.
+
+> Catatan Blaze: sekarang dibutuhkan juga untuk jalur A, karena validasi kode
+> berjalan di Cloud Function. Praktiknya tetap gratis di skala kita — kuota
+> gratis Blaze jauh di atas beberapa ribu pemanggilan per bulan — tapi kartu
+> kredit/debit tetap harus terpasang.
 
 ## Dua jalur koneksi
 
@@ -38,11 +48,19 @@ ditambahkan kapan saja tanpa mengubah kode.
 3. Mayar mengirim satu kode otomatis ke tiap pembeli setelah bayar.
 4. Portal memvalidasi kode lewat `redeemActivationCode`.
 
-**Kelebihan:** tidak butuh webhook, tidak butuh Blaze untuk menjual, bisa
-jalan segera. **Kekurangan:** stok kode di Mayar harus di-isi ulang manual
-saat menipis — pantau, jangan sampai pembeli dapat "stok habis".
+**Kelebihan:** tidak butuh webhook, tidak butuh integrasi API Mayar sama
+sekali, dan tidak ada kode yang dibuat otomatis saat pembayaran — jadi tidak
+ada yang bisa rusak di jam ramai. **Kekurangan:** stok kode di Mayar harus
+di-isi ulang manual saat menipis — pantau, jangan sampai pembeli dapat "stok
+habis".
 
 Cocok untuk 100–200 pembeli pertama.
+
+> **Koreksi (2026-07-28):** perkiraan awal "jalur A tidak butuh Blaze" TIDAK
+> berlaku lagi. Penukaran kode divalidasi Cloud Function (satu-satunya cara
+> menjaga `activation_codes` tetap tertutup dari browser), dan Cloud
+> Functions mensyaratkan Blaze. Biayanya tetap praktis nol di skala kita,
+> tapi kartu harus terpasang sebelum bisa menjual.
 
 ### Jalur B — webhook (tujuan akhir, nanti)
 
