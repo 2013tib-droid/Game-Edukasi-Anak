@@ -163,9 +163,10 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **`ShapeId` bertambah 7 bangun datar**: `persegi-panjang`, `trapesium`, `segilima`, `segienam`, `layang-layang`, `bulan` (bulan sabit), `awan` — total 14 bentuk, SVG-nya di `src/engine/ui/Shape.tsx`. Alasannya referensi bentuk terasa itu-itu saja.
   - Pool varian Labirin Warna diperbanyak memakai bentuk baru itu (±110 varian di 10 slot; id slot `l1`–`l10` tidak berubah, jadi bintang lama aman). Pasangan pengecoh mirip yang baru: kotak/persegi panjang, segilima/segienam, bulan/awan. (Pasangan ketupat/layang-layang dibatalkan — lihat catatan 2026-07-28 di bawah.)
 
-- **Ketupat & layang-layang TIDAK BOLEH satu soal** (2026-07-28, keputusan pemilik), teruji headless 380×800 (6× main = 60 soal, nol bentrok, tanpa scroll horizontal & tanpa error console):
-  - Dua-duanya "belah ketupat" bagi mata anak TK; membedakannya butuh mengukur panjang sisi — terlalu sulit, anak menebak. Keempat soal yang mengadu keduanya diganti pengecoh yang jelas beda bentuknya (ketupat↔trapesium, layang-layang↔lingkaran/persegi panjang/bintang), termasuk soal "yang beda sendiri", "bentuk & warna", dan kartu pengecoh di Pola Ajaib.
-  - Keduanya TETAP diajarkan, hanya tidak pernah muncul bersamaan. Aturan ini ditulis juga di komentar kepala `src/games/tk/labirin-warna.ts` — patuhi saat menambah varian baru.
+- **Belah ketupat DIHAPUS dari Labirin Warna** (2026-07-28, keputusan pemilik), teruji headless 380×800 (6× main = 60 soal, nol ketupat, tanpa scroll horizontal & tanpa error console):
+  - Alasan: (1) di samping layang-layang dua bentuk itu tak terbedakan tanpa mengukur panjang sisi, (2) belah ketupat sendiri **kurang familiar untuk anak TK**. Semua ±20 varian yang memakainya diganti bentuk yang lebih dikenal anak (lingkaran, kotak, segitiga, bintang, hati, oval, persegi panjang, bulan sabit, awan) — termasuk dua soal warna, satu soal "cari bentuk", soal "yang beda sendiri", "bentuk & warna", dan kartu pengecoh Pola Ajaib.
+  - Sekarang **13 bentuk** yang dipakai. `ShapeId 'ketupat'` tetap ada di engine (`types.ts` + `Shape.tsx`) tapi tak dipakai game mana pun — **jangan dipakai lagi di varian baru**; aturan ini juga ditulis di komentar kepala `src/games/tk/labirin-warna.ts`.
+  - Pasangan pengecoh mirip yang dipakai sekarang: kotak/persegi panjang, lingkaran/oval, bintang/hati, segitiga/trapesium, segilima/segienam, bulan/awan.
   - `Shape.tsx` kini menandai tiap SVG dengan `data-shape="<kind>"` supaya tes headless bisa memeriksa bentuk yang tampil di layar.
 
 - **Persamaan angka di bawah papan gambar (penjumlahan & pengurangan)** (2026-07-27), teruji headless 380×800 (5 soal matematika Hutan Hewan, tanpa scroll & tanpa error console):
