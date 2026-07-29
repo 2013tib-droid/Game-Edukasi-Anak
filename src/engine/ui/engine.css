@@ -77,6 +77,13 @@
 }
 
 .choice-card {
+  /* Container for the emoji inside it (see `.choice-emoji`): the picture is
+     measured against the CARD's width, so it stays big in a 3-column
+     tap-answer row and in a 4-column counting board alike. */
+  container-type: inline-size;
+  /* Buttons carry UA padding (1px 6px) — the container query measures the
+     CONTENT box, so leaving it there quietly shrank every picture. */
+  padding: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -119,6 +126,53 @@
   width: 92%;
   height: auto;
   max-width: 148px;
+}
+
+/* An emoji answer (fruit, object) is the whole point of the card, so it fills
+   the card the way memory-card art does — a fixed 44px left the picture
+   floating small inside a roomy card. `cqw` MUST sit on the child, not on
+   `.choice-card` itself: on the container element it would resolve against
+   the ancestor container (the viewport) and blow the layout up. */
+.choice-card .choice-emoji {
+  font-size: clamp(44px, 15vw, 84px); /* fallback: old Android without container queries */
+  line-height: 1.05;
+}
+
+@supports (container-type: inline-size) {
+  .choice-card .choice-emoji {
+    font-size: 72cqw;
+  }
+  /* A card that also carries a caption leaves room for the words. */
+  .choice-card:has(.choice-text) .choice-emoji {
+    font-size: 56cqw;
+  }
+}
+
+/* A row of picture answers (fruit, objects) uses WIDE cards: the screen has
+   height to spare below the cue, and card width is what sets the picture
+   size. Two big cards across a phone beat three or four small ones. */
+.choice-grid--pics {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+/* Counting board ("Beli Buah"): four fixed columns with a tighter gap than
+   the answer grid, so each cell — and the fruit in it — is as wide as the
+   phone allows. Cells are square-ish rather than tall-and-empty. */
+.count-grid {
+  gap: 8px;
+}
+
+.count-cell {
+  min-height: 0;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  padding: 2px; /* nothing but the fruit in here — give it the whole cell */
+}
+
+@supports (container-type: inline-size) {
+  .count-cell .choice-emoji {
+    font-size: 84cqw;
+  }
 }
 
 /* Caption under an emoji answer. */
@@ -471,6 +525,8 @@
 }
 
 .dd-target {
+  /* Kept at 110: a four-basket level plus a wrapped row of fruit chips has to
+     fit a 360×640 phone without scrolling. */
   min-height: 110px;
   border: 4px dashed rgba(0, 0, 0, 0.25);
   border-radius: 20px;
@@ -507,8 +563,8 @@
 }
 
 .dd-item {
-  min-width: 88px;
-  min-height: 88px;
+  min-width: clamp(92px, 25vw, 128px);
+  min-height: clamp(92px, 25vw, 128px);
   border-radius: 20px;
   background: #fff;
   box-shadow: 0 5px 0 rgba(0, 0, 0, 0.18);
@@ -537,6 +593,19 @@
 
 .dd-item .dd-text {
   font-size: 20px;
+}
+
+/* The fruit being dragged — and the fruit resting in a basket — is what the
+   child looks at, so it scales with the screen instead of sitting at 40px. */
+.dd-emoji {
+  font-size: clamp(62px, 18vw, 88px);
+  line-height: 1.05;
+}
+
+/* The colored dot on an empty basket is a label, not the subject: it stays
+   small so the basket's name still fits underneath. */
+.dd-emoji--target {
+  font-size: clamp(40px, 11vw, 54px);
 }
 
 /* Memory cards — a tighter gap than the answer grid so four cards across a

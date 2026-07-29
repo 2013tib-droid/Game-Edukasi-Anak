@@ -38,6 +38,11 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
   );
   const denseBoard = boardItemCount > 6;
 
+  // Answers that are pure pictures (fruit, objects — no letter, caption or
+  // shape) get the wide two-across grid: the picture IS the answer, so card
+  // width is what matters. Letter/number/shape answers keep the tight grid.
+  const pictureChoices = choices.every((c) => c.emoji && !c.text && !c.shape);
+
   function handleTap(id: string, correct: boolean | undefined) {
     if (solved) return;
     if (correct) {
@@ -139,7 +144,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
             ))}
           </div>
         )}
-        <div className="choice-grid">
+        <div className={'choice-grid' + (pictureChoices ? ' choice-grid--pics' : '')}>
           {choices.map((c) => (
             <button
               key={c.id}
@@ -155,7 +160,11 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
                   className="choice-shape"
                 />
               )}
-              {c.emoji && <span aria-hidden>{c.emoji}</span>}
+              {c.emoji && (
+                <span className="choice-emoji" aria-hidden>
+                  {c.emoji}
+                </span>
+              )}
               {c.text && (
                 // A text answer with no emoji (a letter/number) is the main
                 // visual — render it big. With an emoji it's just a caption.
