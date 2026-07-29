@@ -137,7 +137,6 @@ const config: GameConfig<'tap-answer'> = {
   group: 'tk',
   title: 'Hutan Hewan',
   emoji: '🦁',
-  freeDemo: true,
   template: 'tap-answer',
   levels: [
     // Slot 1 — count small (2–4)

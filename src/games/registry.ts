@@ -4,6 +4,10 @@ import type { AnyGameConfig, GroupId, TemplateId } from '@/engine/core/types';
  * Portal-facing game catalog. Metadata lives here (small, in the main
  * bundle); full configs are lazy-loaded chunks so premium content and big
  * level data never sit in the initial JS.
+ *
+ * CATATAN: status gratis/terkunci TIDAK ada di sini. Sumbernya satu tempat:
+ * `src/data/access.ts` (`FREE_GAME_IDS` + mode kunci). Dulu nilainya ditulis
+ * dua kali (registry + config game) dan gampang tidak sinkron.
  */
 export interface GameMeta {
   id: string;
@@ -12,14 +16,6 @@ export interface GameMeta {
   emoji: string;
   /** Portal card badge; "mixed" games change question type per level. */
   template: TemplateId | 'mixed';
-  /**
-   * Playable without login. Pra-rilis: SEMUA game `true` supaya bisa dicoba
-   * bebas. Saat launching hanya `hutan-hewan` tetap `true`; sisanya jadi
-   * `false` (wajib login + kode aktivasi) — lihat CLAUDE.md "Rencana Akses
-   * Saat Launching". Nilai di sini harus sama dengan `freeDemo` di config
-   * game-nya.
-   */
-  freeDemo: boolean;
   load: () => Promise<{ default: AnyGameConfig }>;
 }
 
@@ -31,7 +27,6 @@ export const games: GameMeta[] = [
     title: 'Hutan Hewan',
     emoji: '🦁',
     template: 'tap-answer',
-    freeDemo: true,
     load: () => import('@/games/tk/hutan-hewan'),
   },
   {
@@ -40,7 +35,6 @@ export const games: GameMeta[] = [
     title: 'Taman Huruf',
     emoji: '🏕️',
     template: 'mixed',
-    freeDemo: true,
     load: () => import('@/games/tk/taman-huruf'),
   },
   {
@@ -49,7 +43,6 @@ export const games: GameMeta[] = [
     title: 'Labirin Warna',
     emoji: '🎨',
     template: 'tap-answer',
-    freeDemo: true,
     load: () => import('@/games/tk/labirin-warna'),
   },
   {
@@ -58,7 +51,6 @@ export const games: GameMeta[] = [
     title: 'Pasar Buah',
     emoji: '🍉',
     template: 'mixed',
-    freeDemo: true,
     load: () => import('@/games/tk/pasar-buah'),
   },
   // --- TK ---
@@ -71,7 +63,6 @@ export const games: GameMeta[] = [
     title: 'Kenal Huruf',
     emoji: '🔤',
     template: 'tap-answer',
-    freeDemo: true,
     load: () => import('@/games/tk/kenal-huruf'),
   },
   {
@@ -80,7 +71,6 @@ export const games: GameMeta[] = [
     title: 'Tulis Angka',
     emoji: '✏️',
     template: 'tracing',
-    freeDemo: true,
     load: () => import('@/games/tk/tulis-angka'),
   },
   {
@@ -89,7 +79,6 @@ export const games: GameMeta[] = [
     title: 'Jalan Kendaraan',
     emoji: '🚗',
     template: 'path-trace',
-    freeDemo: true,
     load: () => import('@/games/tk/jalan-kendaraan'),
   },
   {
@@ -98,7 +87,6 @@ export const games: GameMeta[] = [
     title: 'Kartu Kembar',
     emoji: '🃏',
     template: 'memory',
-    freeDemo: true,
     load: () => import('@/games/tk/kartu-kembar'),
   },
   // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
@@ -108,7 +96,6 @@ export const games: GameMeta[] = [
     title: 'Pasang Kata',
     emoji: '🧩',
     template: 'drag-drop',
-    freeDemo: true,
     load: () => import('@/games/sd1/pasang-kata'),
   },
   {
@@ -117,7 +104,6 @@ export const games: GameMeta[] = [
     title: 'Cerita Si Kancil',
     emoji: '🦌',
     template: 'story-choice',
-    freeDemo: true,
     load: () => import('@/games/sd1/cerita-kancil'),
   },
   {
@@ -126,7 +112,6 @@ export const games: GameMeta[] = [
     title: 'Tambah Tangkas',
     emoji: '➕',
     template: 'tap-answer',
-    freeDemo: true,
     load: () => import('@/games/sd1/tambah-tangkas'),
   },
 ];

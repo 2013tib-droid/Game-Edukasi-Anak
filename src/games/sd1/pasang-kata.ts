@@ -7,7 +7,6 @@ const config: GameConfig<'drag-drop'> = {
   title: 'Pasang Kata',
   emoji: '🧩',
   template: 'drag-drop',
-  freeDemo: true,
   levels: [
     {
       id: 'l1',

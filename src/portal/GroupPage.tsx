@@ -3,12 +3,18 @@ import groupsData from '@/data/groups.json';
 import { gamesForGroup } from '@/games/registry';
 import { getGameStars } from '@/engine/core/progress';
 import type { GroupId } from '@/engine/core/types';
+import { isGameUnlocked } from '@/data/access';
+import { useLockMode } from '@/portal/useAccess';
+import LockToggle from '@/portal/LockToggle';
 
-// Game list per group. Free demos open directly; premium games show a lock
-// until the account has group access (gate enforced again in GamePage).
+// Game list per group. Unlocked games open directly; locked ones show a
+// padlock until the account has group access (gate enforced again in
+// GamePage). Lock status comes from `src/data/access.ts`.
 export default function GroupPage() {
   const { groupId } = useParams<{ groupId: string }>();
   const group = groupsData.groups.find((g) => g.id === groupId);
+  // Re-render when the tester flips the lock switch.
+  useLockMode();
 
   if (!group) {
     return (
@@ -38,6 +44,7 @@ export default function GroupPage() {
       >
         {games.map((game) => {
           const stars = getGameStars(game.id);
+          const unlocked = isGameUnlocked(game.id);
           return (
             <Link
               key={game.id}
@@ -45,7 +52,7 @@ export default function GroupPage() {
               className="btn"
               style={{ flexDirection: 'column', padding: 20, position: 'relative' }}
             >
-              {!game.freeDemo && (
+              {!unlocked && (
                 <span style={{ position: 'absolute', top: 10, right: 12, fontSize: 22 }}>
                   🔒
                 </span>
@@ -55,7 +62,7 @@ export default function GroupPage() {
               </span>
               <span style={{ fontSize: 20 }}>{game.title}</span>
               <span style={{ fontSize: 16 }} aria-label={`${stars} bintang`}>
-                {stars > 0 ? `⭐ ${stars}` : game.freeDemo ? 'GRATIS' : ''}
+                {stars > 0 ? `⭐ ${stars}` : unlocked ? 'GRATIS' : ''}
               </span>
             </Link>
           );
@@ -66,6 +73,10 @@ export default function GroupPage() {
           ⬅️ Kembali
         </Link>
       </p>
+      {/* Alat penguji: hanya tampil di mode penguji (?test=1). */}
+      <div style={{ marginTop: 18 }}>
+        <LockToggle />
+      </div>
     </div>
   );
 }

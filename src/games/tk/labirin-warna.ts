@@ -712,7 +712,6 @@ const config: GameConfig<'tap-answer'> = {
   group: 'tk',
   title: 'Labirin Warna',
   emoji: '🎨',
-  freeDemo: true,
   template: 'tap-answer',
   levels: [
     cariBentukA,

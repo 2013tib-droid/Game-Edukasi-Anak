@@ -55,7 +55,6 @@ const config: GameConfig<'tap-answer'> = {
   title: 'Kenal Huruf',
   emoji: '🔤',
   template: 'tap-answer',
-  freeDemo: true,
   // 26 huruf di kolam soal; tiap sesi main mengambil 8 huruf acak.
   sessionLevels: 8,
   levels,

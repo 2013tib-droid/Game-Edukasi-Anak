@@ -155,7 +155,6 @@ const config: MixedGameConfig = {
   title: 'Pasar Buah',
   emoji: '🍉',
   template: 'mixed',
-  freeDemo: true,
   levels: [
     // --- Beli Buah (count-tap), easy → hard ---
     // Slot 1 — tap 2–3
