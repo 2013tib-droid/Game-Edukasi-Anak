@@ -1,58 +1,68 @@
-/* Feedback channel (kritik & saran). Own stylesheet so the section can be
-   reused on any parent-facing page, not just the landing. */
+/* Contact section ("Hubungi Kami"). Own stylesheet so it can be reused on any
+   parent-facing page, not just the landing.
+
+   Deliberately quiet: this is a footer-level utility, not a call to action —
+   it must never compete with the "Main Sekarang" button above it. Hence small
+   chip-style links rather than big filled buttons. */
 
 .feedback {
   width: 100%;
   max-width: 460px;
-  margin: 34px auto 0;
-  padding: 22px 20px 20px;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(58, 46, 32, 0.09);
-  box-shadow: 0 4px 16px rgba(58, 46, 32, 0.07);
+  margin: 30px auto 0;
+  padding: 18px 20px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(58, 46, 32, 0.08);
   text-align: center;
 }
 
 .fb-title {
-  margin: 0 0 6px;
-  font-size: 19px;
+  margin: 0 0 4px;
+  font-size: 17px;
   font-weight: 700;
   color: #3a2e20;
 }
 
 .fb-lead {
-  margin: 0 0 16px;
-  font-size: 14px;
-  line-height: 1.6;
+  margin: 0 0 13px;
+  font-size: 13.5px;
+  line-height: 1.55;
   color: #6b5b45;
 }
 
 .fb-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 9px;
   justify-content: center;
 }
 
+/* Compact chips — sized by their label, not stretched across the card. */
 .fb-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  flex: 1 1 190px;
-  min-height: 54px;
-  padding: 0 20px;
-  border-radius: 16px;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(58, 46, 32, 0.14);
+  color: #3a2e20;
   font-family: inherit;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 14.5px;
+  font-weight: 600;
   text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   transition:
-    transform 0.1s,
-    box-shadow 0.1s;
+    box-shadow 0.12s,
+    transform 0.05s;
+}
+.fb-btn:hover {
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.09);
 }
 .fb-btn:active {
-  transform: translateY(3px);
+  transform: translateY(1px);
 }
 .fb-btn:focus-visible {
   outline: 2px solid #3a2e20;
@@ -62,33 +72,19 @@
   flex-shrink: 0;
 }
 
-/* WhatsApp leads — its own brand green so it is recognisable at a glance. */
-.fb-btn--wa {
-  background: #25d366;
-  color: #06331a;
-  box-shadow: 0 4px 0 rgba(6, 88, 44, 0.45);
-}
-.fb-btn--wa:active {
-  box-shadow: 0 1px 0 rgba(6, 88, 44, 0.45);
-}
-
-.fb-btn--mail {
-  background: #fff;
-  color: #3a2e20;
-  border: 1px solid rgba(58, 46, 32, 0.14);
-  box-shadow: 0 4px 0 rgba(58, 46, 32, 0.16);
-}
-.fb-btn--mail:active {
-  box-shadow: 0 1px 0 rgba(58, 46, 32, 0.16);
+/* Colour lives in the icons only — enough to recognise the channel at a
+   glance without turning the row into a banner. */
+.fb-btn--wa svg {
+  color: #1fa855;
 }
 .fb-btn--mail svg {
   color: #b3541a;
 }
 
 .fb-note {
-  margin: 13px 0 0;
-  font-size: 12.5px;
-  color: #8a7a63;
+  margin: 11px 0 0;
+  font-size: 12px;
+  color: #9c8b73;
 }
 
 @media (prefers-reduced-motion: reduce) {
