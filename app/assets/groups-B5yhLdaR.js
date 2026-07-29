@@ -1,1 +1,0 @@
-const e=[{id:"tk",title:"TK (5–7 tahun)",emoji:"🧸",description:"Berhitung, mengenal huruf, warna & bentuk",priceLabel:"Rp29.000"},{id:"sd1",title:"SD Awal (kelas 1–2)",emoji:"🎒",description:"Membaca, berhitung lanjut, logika sederhana",priceLabel:"Rp39.000"}],a={groups:e};export{a as g};
