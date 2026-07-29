@@ -10,17 +10,30 @@ Platform web berbayar berisi kumpulan mini-game edukasi untuk anak Indonesia, di
 
 | Aspek | Keputusan |
 |---|---|
-| Scope rilis pertama | 2 kelompok: **TK (5–7 th)** dan **SD Awal (kelas 1–2)** |
+| Scope rilis pertama | 2 kelompok: **Playgroup dan TK (4–7 th)** dan **SD Kelas 1 & 2** (lihat "Penamaan Kelompok") |
 | Jumlah game | 10–15 mini-game per kelompok (kualitas premium) |
 | Platform | Web app: **React (Vite) + TypeScript + Firebase** (Auth, Firestore, Hosting) |
 | Bahasa pemrograman | **TypeScript strict** untuk seluruh app & engine — config game type-safe (typo field ketahuan saat build, bukan saat anak main). Game lama `petualangan-pintar.html` tetap vanilla JS sampai Fase 3 |
 | Perangkat target | HP Android & tablet — mobile-first, touch-first |
 | Demo gratis | Saat launching: **hanya "Hutan Hewan" (TK) yang gratis**, sisanya wajib login (lihat "Rencana Akses Saat Launching") |
 | Aset | Gambar AI-generated + narasi TTS Bahasa Indonesia |
-| Harga | Naik per jenjang: TK Rp39rb (perkenalan Rp19rb), SD Awal Rp49rb (selalu < Rp50rb) |
+| Harga | Naik per jenjang: Playgroup & TK Rp39rb (perkenalan Rp19rb), SD Kelas 1 & 2 Rp49rb (selalu < Rp50rb) |
 | Update | Beli sekali = bugfix gratis; konten besar baru = ekspansi berbayar |
 | Penjualan | Lynk.id / Mayar.id (QRIS, e-wallet) + itch.io untuk showcase demo |
 | Promosi | TikTok/Reels organik |
+
+## Penamaan Kelompok (KEPUTUSAN PEMILIK — 2026-07-29)
+
+Judul kelompok menyebut **jenjang sekolah**, umur/kelas pindah ke awal deskripsi. Data ada di `src/data/groups.json` (dipakai `HomePage` & `GroupPage`); label harga di landing (`LandingPage.tsx`) harus ikut sama.
+
+| id | title | description |
+|---|---|---|
+| `tk` | Playgroup dan TK | Usia 4–7 tahun · Berhitung, mengenal huruf, warna & bentuk |
+| `sd1` | SD Kelas 1 & 2 | Usia 6–8 tahun · Membaca, berhitung lanjut, logika sederhana |
+
+- **"SD Awal" DIPENSIUNKAN.** SD akan punya 3 tahap, dan "SD Awal/Tengah/Akhir" bukan istilah yang dipakai orang tua Indonesia. Pola resminya: **"SD Kelas 1 & 2" → "SD Kelas 3 & 4" → "SD Kelas 5 & 6"** — orang tua tahu persis anaknya kelas berapa, tanpa perlu menerjemahkan istilah.
+- **Id kelompok TIDAK ikut berubah** (`tk`, `sd1`) supaya route `/kelompok/:groupId`, registry game, dan progress lama tetap jalan. Tahap SD berikutnya nanti pakai id baru (`sd2`, `sd3`), bukan mengubah `sd1`.
+- Judul jangan memuat umur/kelas lagi (dulu "TK (5–7 tahun)"): umur selalu jadi bagian PERTAMA deskripsi, dipisah "·".
 
 ## Sistem Akses (Anti-Pembajakan)
 

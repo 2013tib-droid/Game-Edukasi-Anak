@@ -101,7 +101,7 @@ export const games: GameMeta[] = [
     freeDemo: true,
     load: () => import('@/games/tk/kartu-kembar'),
   },
-  // --- SD Awal ---
+  // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
   {
     id: 'pasang-kata',
     group: 'sd1',
