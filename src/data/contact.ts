@@ -14,15 +14,14 @@ export const contact = {
   email: '2013.tib@gmail.com',
 };
 
-/** Pre-filled first message, so the parent does not face an empty chat box. */
-const WA_TEXT =
-  'Halo! Saya mau memberi masukan untuk Petualangan Pintar.\n\nMasukan saya:';
+/**
+ * Pre-filled opening line — one short sentence, so the parent has something to
+ * send but is not handed a form to fill in.
+ */
+const WA_TEXT = 'Halo, saya mau bertanya tentang Petualangan Pintar.';
 
-const MAIL_SUBJECT = 'Kritik & saran — Petualangan Pintar';
-const MAIL_BODY =
-  'Halo!\n\nMasukan saya:\n\n\n' +
-  '(Kalau ada tampilan yang aneh, lampirkan screenshot ya — sangat membantu.)\n\n' +
-  'Merek/tipe HP:\nBrowser:';
+const MAIL_SUBJECT = 'Pertanyaan — Petualangan Pintar';
+const MAIL_BODY = 'Halo, saya mau bertanya tentang Petualangan Pintar.\n\n';
 
 /** Chat link, or null when no number is configured. */
 export function whatsappUrl(): string | null {
