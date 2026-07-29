@@ -5,11 +5,12 @@ import GameShell from '@/engine/core/GameShell';
 import SplashScreen from '@/app/SplashScreen';
 import { findGame } from '@/games/registry';
 import { useAuth } from '@/auth/AuthContext';
+import { useGameUnlocked } from '@/portal/useAccess';
 
 /**
- * Access gate + config loader. Premium games require group access on the
+ * Access gate + config loader. Locked games require group access on the
  * account (validated online — full check wired to Firestore in Fase 5).
- * Free demos are always playable, no login needed.
+ * Which games are locked lives in `src/data/access.ts`.
  */
 export default function GamePage() {
   const { gameId } = useParams<{ gameId: string }>();
@@ -19,7 +20,7 @@ export default function GamePage() {
   const [config, setConfig] = useState<AnyGameConfig | null>(null);
 
   // TODO(fase-5): read users/{uid}.groups from Firestore at launch time.
-  const hasAccess = Boolean(meta?.freeDemo);
+  const hasAccess = useGameUnlocked(meta?.id);
 
   useEffect(() => {
     if (!meta || !hasAccess) return;

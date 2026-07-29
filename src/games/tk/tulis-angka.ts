@@ -37,7 +37,6 @@ const config: GameConfig<'tracing'> = {
   title: 'Tulis Angka',
   emoji: '✏️',
   template: 'tracing',
-  freeDemo: true,
   // 20 angka di kolam soal; tiap sesi main mengambil 7 angka acak.
   sessionLevels: 7,
   levels,

@@ -54,9 +54,25 @@ Aturan teknis:
 
 ## Rencana Akses Saat Launching (KEPUTUSAN PEMILIK — 2026-07-26)
 
-- **Sekarang (pra-rilis): SEMUA game dibuka** (`freeDemo: true` di semua config + `src/games/registry.ts`) supaya pemilik & penguji bisa mencoba semuanya tanpa login. Ini kondisi SEMENTARA, bukan keputusan produk.
-- **Saat launching: hanya `hutan-hewan` (Hutan Hewan, TK) yang GRATIS.** Semua game lain — TK maupun SD Awal — wajib **login + kode aktivasi** (`freeDemo: false`).
-- Cara mengeksekusi nanti (satu langkah, jangan lupa dua tempat): set `freeDemo: false` di **config game** `src/games/**` DAN di entri game yang sama di **`src/games/registry.ts`**; hanya `hutan-hewan` yang tetap `true`. Verifikasi: buka `/kelompok/tk` & `/kelompok/sd1` — hanya Hutan Hewan yang berlabel "GRATIS", game lain menampilkan layar terkunci + ajakan aktivasi.
+- **Sekarang (pra-rilis): SEMUA game dibuka** supaya pemilik & penguji bisa mencoba semuanya tanpa login. Ini kondisi SEMENTARA, bukan keputusan produk.
+- **Saat launching: hanya `hutan-hewan` (Hutan Hewan, TK) yang GRATIS.** Semua game lain — TK maupun SD Kelas 1 & 2 — wajib **login + kode aktivasi**.
+- Cara mengeksekusinya sekarang **satu baris saja** — lihat "Sistem Kunci Game" di bawah (dulu harus mengubah `freeDemo` di 11 config + registry; field itu sudah DIHAPUS).
+
+## Sistem Kunci Game (SAKLAR BUKA/TUTUP — 2026-07-29)
+
+> Dulu status gratis/berbayar ditulis dua kali per game (`freeDemo` di config + di `registry.ts`) — 22 tempat yang gampang tidak sinkron. Sekarang **satu sumber**: `src/data/access.ts`.
+
+- **`src/data/access.ts` = satu-satunya sumber kebenaran.**
+  - `FREE_GAME_IDS = ['hutan-hewan']` — daftar game yang tetap gratis saat terkunci.
+  - `DEFAULT_LOCK_MODE` — `'buka'` (semua game terbuka, kondisi pra-rilis) atau `'kunci'` (hanya `FREE_GAME_IDS` yang terbuka).
+  - `isGameUnlocked(id)` dipakai `GroupPage` (gembok + label GRATIS) dan `GamePage` (gerbang akses). **Jangan menaruh keputusan akses di tempat lain.**
+  - Field `freeDemo` sudah dihapus dari `GameConfig`/`MixedGameConfig` dan dari `GameMeta` — jangan dihidupkan lagi.
+- **Tiga cara mengubah mode** (prioritas dari atas):
+  1. **Saklar di layar (untuk testing)** — tombol 🔓 Terbuka / 🔒 Terkunci di `TopBar` (landing & portal) dan di bawah daftar game (`/kelompok/:id`). Sekali ketuk, langsung berubah tanpa reload & tanpa build ulang; tersimpan di `localStorage` (`pp_lock_mode_v1`) per perangkat.
+  2. **Env saat build**: `VITE_LOCK_MODE=kunci npm run build`.
+  3. **Kode**: ubah `DEFAULT_LOCK_MODE` di `access.ts` — **inilah yang dilakukan saat launching**.
+- **Saklar hanya tampil di mode penguji**, supaya orang tua pembeli tak pernah melihatnya: aktif di dev server, atau setelah membuka URL berakhiran **`?test=1`** (di build HashRouter: `.../app/#/portal?test=1`). Matikan lagi dengan `?test=0`. Statusnya tersimpan di `localStorage` (`pp_test_mode_v1`).
+- Verifikasi cepat: buka `/kelompok/tk` & `/kelompok/sd1` saat mode `kunci` — hanya Hutan Hewan tanpa gembok & berlabel "GRATIS"; game lain menampilkan layar 🔒 + ajakan aktivasi. Sudah teruji headless 380×800 (buka↔kunci, persist setelah reload, TK & SD, layar gembok, Hutan Hewan tetap bisa dimainkan, nol error console).
 
 ## Arsitektur & Struktur Folder
 
@@ -94,7 +110,7 @@ Buat engine sehingga **menambah game baru = menulis file config JSON + aset**, b
 7. **Spell** (susun kata dengan mengetuk huruf berurutan)
 8. **Path-trace** (susuri jalan dengan jari — antar kendaraan ke tujuan)
 
-Setiap game dideklarasikan lewat config: `{ id, group, title, template, freeDemo (bool), levels[], assets{} }`.
+Setiap game dideklarasikan lewat config: `{ id, group, title, template, levels[], assets{} }`. Status gratis/terkunci TIDAK di sini — lihat "Sistem Kunci Game".
 
 ## Standar UX Anak (WAJIB)
 
@@ -111,7 +127,7 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, freeDemo
 1. **Fase 1 — Fondasi:** setup Vite + React + TS + Firebase, routing, Auth, halaman portal dasar, Firestore rules. ✅ **SELESAI** (lihat "Status Pengerjaan" di bawah)
 2. **Fase 2 — Engine:** core engine + 6 template game + sistem audio/narasi + progress bintang. ✅ **SELESAI**
 3. **Fase 3 — Migrasi:** porting game "Petualangan Pintar" (HTML standalone yang sudah ada) ke format engine sebagai game pertama kelompok TK.
-4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Saat rilis hanya `hutan-hewan` yang `freeDemo: true` (lihat "Rencana Akses Saat Launching").
+4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Saat rilis hanya `hutan-hewan` yang gratis (lihat "Sistem Kunci Game").
 5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi.
 6. **Fase 6 — Rilis:** deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli.
 
@@ -134,7 +150,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Progress bintang: localStorage (`src/engine/core/progress.ts`); sinkron Firestore menyusul Fase 5.
   - Registry game (`src/games/registry.ts`) + route `/game/:gameId` dengan gerbang akses (premium → layar terkunci + ajakan aktivasi).
   - **Config game = file `.ts` typed** (`src/games/tk/*.ts`, `src/games/sd1/*.ts`) dengan `GameConfig<T>` — sengaja .ts, bukan JSON, karena JSON tidak bisa dicek TypeScript secara literal. Ini pemenuhan niat "konten di file data terpisah": tetap data murni, tapi typo ketahuan saat build.
-  - 7 game contoh: TK = hitung-buah (count-tap; **sudah dilebur ke Pasar Buah, 2026-07-26**), kenal-huruf (tap-answer), tulis-angka (tracing), kartu-kembar (memory); SD1 = pasang-kata (drag-drop), cerita-kancil (story-choice), tambah-tangkas (tap-answer). CATATAN: flag `freeDemo` saat ini semua `true` untuk pengujian; komposisi gratis/berbayar saat rilis ada di "Rencana Akses Saat Launching".
+  - 7 game contoh: TK = hitung-buah (count-tap; **sudah dilebur ke Pasar Buah, 2026-07-26**), kenal-huruf (tap-answer), tulis-angka (tracing), kartu-kembar (memory); SD1 = pasang-kata (drag-drop), cerita-kancil (story-choice), tambah-tangkas (tap-answer). CATATAN: status gratis/terkunci sekarang diatur terpusat di `src/data/access.ts` (lihat "Sistem Kunci Game").
 - **Deploy testing:** build ter-deploy ke branch Pages folder `app/` → `https://2013tib-droid.github.io/Game-Edukasi-Anak/app/` (HashRouter + base via env `DEPLOY_BASE` & `VITE_USE_HASH_ROUTER`; produksi nanti Firebase Hosting pakai default).
 - **Fase 3 (Migrasi Petualangan Pintar) — SELESAI** (2026-07-21), 4 dunia ter-porting & teruji headless (viewport HP 380px, tiap game sampai tamat termasuk jalur salah, tanpa error console):
   - **Sistem maskot jadi fitur engine** (`src/engine/core/mascot.ts` + `src/engine/ui/Mascot.tsx`): evolusi 🥚→🐣→🐥→🦉→🦄→🐲 dari **TOTAL bintang semua game** (`getTotalStars()` di `progress.ts`). Kartu maskot + progress bar tampil di beranda portal (`HomePage`) dan layar selesai (`GameShell`).
@@ -142,7 +158,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Dukungan game "mixed"**: `MixedGameConfig`/`MixedLevel` di `types.ts` — satu game bisa punya template berbeda per level (dibutuhkan karena tiap dunia sumber mencampur tipe soal). `GameShell` memilih template per-level; homogen tetap pakai `GameConfig<T>`. Backward-compatible.
   - **TapAnswer** punya field opsional `picture` + `board` (papan visual: hewan dihitung, papan penjumlahan, kata berhuruf hilang), plus dari dunia Labirin Warna (dulu "Bawah Laut"): `shape` (bentuk geometris berwarna via `src/engine/ui/Shape.tsx` — porting `shapeSVG()`), `sequence` (deret pola "Pola Ajaib" dengan kotak "?"), dan `silhouette` (render `picture` sebagai bayangan gelap untuk Pasar Buah "tebak bayangan"). `ShapeId`/`ShapeSpec` di `types.ts`. Teks jawaban huruf/angka tanpa emoji dibesarkan (`.choice-text--main`, clamp 48–68px; warna kartu diset eksplisit, dulu ikut biru default UA).
   - **Variasi soal anti-bosan (fitur engine)**: `LevelSlot`/`MixedSlot` di `types.ts` — tiap "slot" boleh berisi POOL varian; `GameShell` mengacak 1 varian per slot tiap main & tiap "Main Lagi" (`resolveSlots` + `playNonce`). Semua varian tetap data typed. Bintang per-slot (varian dalam slot berbagi `id`) supaya total bintang/maskot tak membengkak.
-  - **4 dunia (kelompok TK)** — semua `freeDemo: true` untuk testing, config = data typed di `src/games/tk/`:
+  - **4 dunia (kelompok TK)** — config = data typed di `src/games/tk/`:
     - `hutan-hewan` (tap-answer: hitung → tambah → kurang, **8 slot** × ~6 varian hewan favorit — kuda/pinguin/panda/koala dll, TANPA anjing). Hewan dengan seni AI premium (singa, gajah, jerapah, panda, kelinci, bebek, kucing, beruang, kura-kura) dirender sebagai **gambar WebP** lewat `boardItems` + registry `src/engine/ui/items.ts` (sama di semua HP, tak bergantung font emoji); sisanya fallback emoji. Slot 8 = pengurangan "pulang ke rumah" (termasuk kura-kura).
     - `taman-huruf` (mixed: huruf pertama, huruf kecil, susun kata/spell, 7 slot × ~6 varian kata/huruf).
     - `labirin-warna` (tap-answer + Shape SVG; **dulu bernama "Bawah Laut"**, diganti karena isinya bangun datar & warna, bukan laut). 10 slot × pool varian (~70 soal): cari bentuk → cari warna → **yang beda sendiri** → bentuk&warna → **tiga level pola ajaib** (AB, lalu AAB/ABB, lalu ABC — 25 varian; deret selalu 6 sel supaya muat satu baris di HP kecil). Pengecoh BENTUK sengaja mirip (kotak/ketupat, lingkaran/oval, bintang/hati); pengecoh WARNA justru harus kontras — **oranye dihapus dari palet** (kuning vs oranye tak terbaca di HP) dan merah/pink tak pernah diadu dalam soal warna. Bentuk di kartu jawaban mengisi kotak (`.choice-shape`, 92% lebar kartu).
@@ -161,7 +177,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - `tulis-angka` kini punya 20 level (angka 1–20, narasi "satu"…"dua puluh"), `sessionLevels: 7`. Id level tetap `l1`…`l20` supaya bintang lama tidak hilang.
   - `Tracing` mengecilkan font panduan untuk glyph 2 digit (`glyphFont()`, 0.75→0.5 × kanvas) supaya angka 10–20 muat penuh di kanvas HP.
 - **Semua game dibuka (pra-rilis) + Pasar Buah & Hitung Buah dilebur** (2026-07-26), teruji headless 380×800 & 360×640 (4× tamat + "Main Lagi", tanpa scroll horizontal/vertikal, tanpa error console):
-  - **Semua game `freeDemo: true`** (config + `registry.ts`) supaya bisa dicoba bebas tanpa login. Komposisi gratis/berbayar saat rilis: lihat "Rencana Akses Saat Launching" — hanya Hutan Hewan yang gratis.
+  - **Semua game dibuka** supaya bisa dicoba bebas tanpa login (sejak 2026-07-29 lewat mode kunci `'buka'` di `src/data/access.ts`). Komposisi gratis/berbayar saat rilis: lihat "Sistem Kunci Game" — hanya Hutan Hewan yang gratis.
   - **`hitung-buah` DIHAPUS, dilebur ke `pasar-buah`.** Soal hitung buahnya jadi varian slot count-tap di Pasar Buah, jadi satu dunia buah dengan referensi jauh lebih banyak. Route lama `/game/hitung-buah` otomatis menampilkan "Game tidak ditemukan" (bukan error).
   - `pasar-buah` kini **8 slot × pool varian** (14 jenis buah, ±40 varian), semua slot bertipe pool ala Hutan Hewan: 3 slot count-tap "beli buah" (ketuk 2–3 → 4 → 5–6) → tap-answer "tebak buah" → tap-answer "tebak bayangan" → 2 slot drag-drop "keranjang warna" (3 lalu 4 keranjang) → memory "kartu buah". Slot hitung ketiga memakai id `l8` (di luar urutan) supaya bintang lama di `l1`–`l7` tidak hilang.
   - Config pakai builder typed (`buy`/`guess`/`shadow`/`baskets`/`cards` + `slot()`), tetap data murni. Aturan warna: keranjang kuning & oranye tak pernah muncul di level yang sama (di HP kecil dua warna itu terbaca sama).

@@ -6,7 +6,6 @@ const config: GameConfig<'story-choice'> = {
   title: 'Cerita Si Kancil',
   emoji: '🦌',
   template: 'story-choice',
-  freeDemo: true,
   levels: [
     {
       id: 'l1',

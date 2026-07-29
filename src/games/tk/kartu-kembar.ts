@@ -9,15 +9,12 @@ function pair(item: keyof typeof ITEMS): MemoryPair {
   return { id: item, item, emoji: ITEMS[item].emoji };
 }
 
-// freeDemo: true — masa pra-rilis: semua game dibuka supaya bisa dicoba
-// bebas. Saat launching hanya "Hutan Hewan" yang gratis (lihat CLAUDE.md).
 const config: GameConfig<'memory'> = {
   id: 'kartu-kembar',
   group: 'tk',
   title: 'Kartu Kembar',
   emoji: '🃏',
   template: 'memory',
-  freeDemo: true,
   levels: [
     {
       id: 'l1',

@@ -1,0 +1,49 @@
+/* Saklar penguji di TopBar. Bahasa visual sama dengan .topbar__btn, tapi
+   diberi garis putus-putus supaya jelas ini alat penguji, bukan tombol
+   produk yang dilihat orang tua pembeli. */
+.lock-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px dashed rgba(58, 46, 32, 0.35);
+  color: #3a2e20;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 13.5px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition:
+    background 0.12s,
+    box-shadow 0.12s,
+    transform 0.05s;
+}
+.lock-toggle:active {
+  transform: translateY(1px);
+}
+.lock-toggle:focus-visible {
+  outline: 2px solid #3a2e20;
+  outline-offset: 2px;
+}
+.lock-toggle--locked {
+  background: #fff1e6;
+  border-color: rgba(179, 84, 26, 0.5);
+  color: #b3541a;
+}
+.lock-toggle__icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+/* Di HP kecil cukup gemboknya saja supaya header tidak sesak. */
+@media (max-width: 420px) {
+  .lock-toggle__text {
+    display: none;
+  }
+  .lock-toggle {
+    padding: 0 10px;
+  }
+}

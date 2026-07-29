@@ -1,14 +1,11 @@
 import type { GameConfig } from '@/engine/core/types';
 
-// freeDemo: true — masa pra-rilis: semua game dibuka supaya bisa dicoba
-// bebas. Saat launching hanya "Hutan Hewan" yang gratis (lihat CLAUDE.md).
 const config: GameConfig<'tap-answer'> = {
   id: 'tambah-tangkas',
   group: 'sd1',
   title: 'Tambah Tangkas',
   emoji: '➕',
   template: 'tap-answer',
-  freeDemo: true,
   levels: [
     {
       id: 'l1',
