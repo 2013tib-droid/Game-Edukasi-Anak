@@ -85,12 +85,20 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
               >
                 {filledBy ? (
                   <>
-                    {filledBy.emoji && <span aria-hidden>{filledBy.emoji}</span>}
+                    {filledBy.emoji && (
+                      <span className="dd-emoji" aria-hidden>
+                        {filledBy.emoji}
+                      </span>
+                    )}
                     {filledBy.text && <span className="dd-label">{filledBy.text}</span>}
                   </>
                 ) : (
                   <>
-                    {t.emoji && <span aria-hidden>{t.emoji}</span>}
+                    {t.emoji && (
+                      <span className="dd-emoji dd-emoji--target" aria-hidden>
+                        {t.emoji}
+                      </span>
+                    )}
                     <span className="dd-label">{t.label}</span>
                   </>
                 )}
@@ -112,7 +120,11 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
               }
               onPointerDown={(e) => handleDown(e, item.id)}
             >
-              {item.emoji && <span aria-hidden>{item.emoji}</span>}
+              {item.emoji && (
+                <span className="dd-emoji" aria-hidden>
+                  {item.emoji}
+                </span>
+              )}
               {item.text && <span className="dd-text">{item.text}</span>}
             </div>
           ))}

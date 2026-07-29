@@ -63,15 +63,26 @@ export default function CountTap({ level, onCorrect, onWrong }: TemplateProps<'c
         Ketuk {ask} {target.label}!
       </div>
       <div className="game-area">
-        <div className="choice-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+        {/* Fewer columns whenever the board allows it: the screen has height
+            to spare, and a cell's WIDTH is what sets how big the fruit looks.
+            Three columns for a short board, four only when it would otherwise
+            grow too tall. */}
+        <div
+          className="choice-grid count-grid"
+          style={{ gridTemplateColumns: `repeat(${cells.length <= 9 ? 3 : 4}, 1fr)` }}
+        >
           {cells.map((c) => (
             <button
               key={c.key}
               type="button"
-              className={'choice-card' + (picked.has(c.key) ? ' choice-card--selected' : '')}
+              className={
+                'choice-card count-cell' + (picked.has(c.key) ? ' choice-card--selected' : '')
+              }
               onClick={() => toggle(c.key)}
             >
-              <span aria-hidden>{c.emoji}</span>
+              <span className="choice-emoji" aria-hidden>
+                {c.emoji}
+              </span>
             </button>
           ))}
         </div>

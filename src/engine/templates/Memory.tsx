@@ -69,7 +69,10 @@ export default function Memory({ level, onCorrect, onWrong }: TemplateProps<'mem
     }
   }
 
-  const cols = cards.length <= 6 ? 3 : 4;
+  // Three columns for as long as the rows still fit the screen: a wider card
+  // means a bigger picture, and eight cards read better as 3+3+2 than as two
+  // cramped rows of four.
+  const cols = cards.length <= 9 ? 3 : 4;
 
   return (
     <>
