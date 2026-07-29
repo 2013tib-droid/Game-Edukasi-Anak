@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import FeedbackSection from '@/portal/FeedbackSection';
 import TopBar from '@/portal/TopBar';
 import './landing.css';
 
@@ -102,6 +103,8 @@ export default function LandingPage() {
           </details>
         ))}
       </section>
+
+      <FeedbackSection />
 
       <footer>Tanpa iklan · Aman untuk anak</footer>
       </div>
