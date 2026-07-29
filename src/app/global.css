@@ -140,6 +140,27 @@ button {
   opacity: 0.85;
   flex-shrink: 0;
 }
+
+/* Narrow phones: with the tester's lock toggle present the bar holds four
+   controls, which used to overlap and wrap "Orang Tua" onto two lines.
+   Tighten the padding instead of dropping labels. */
+.topbar__btn {
+  white-space: nowrap;
+}
+@media (max-width: 400px) {
+  .topbar {
+    gap: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .topbar__side {
+    gap: 6px;
+  }
+  .topbar__btn {
+    padding: 0 11px;
+    font-size: 14px;
+  }
+}
 .topbar__btn--account svg {
   color: #b3541a;
   opacity: 1;
