@@ -1,17 +1,17 @@
 /**
  * Owner contact details for the feedback channel (kritik & saran).
  *
- * FILL THESE IN before launch. Anything left as an empty string is simply
- * hidden in the UI, so shipping with blanks is safe — the feedback section
- * disappears rather than rendering a dead link.
+ * Anything left as an empty string is simply hidden in the UI, so a build can
+ * never show a dead link — the feedback section disappears instead.
  *
- * Use a WhatsApp Business number, not a personal one: this link is public.
+ * Both values are PUBLIC once deployed: the number and address sit in the
+ * shipped JS and anyone can read them.
  */
 export const contact = {
   /** WhatsApp number in international format, digits only: 62 + number without the leading 0. */
-  whatsapp: '',
-  /** Support inbox, e.g. 'halo@petualanganpintar.id'. */
-  email: '',
+  whatsapp: '6285117378557',
+  /** Support inbox. Temporary owner address — swap for a dedicated one later. */
+  email: '2013.tib@gmail.com',
 };
 
 /** Pre-filled first message, so the parent does not face an empty chat box. */
