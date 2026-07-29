@@ -75,7 +75,10 @@ export default function Memory({ level, onCorrect, onWrong }: TemplateProps<'mem
     <>
       <div className="game-prompt">{level.narration}</div>
       <div className="game-area">
-        <div className="choice-grid" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
+        <div
+          className="choice-grid memory-grid"
+          style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}
+        >
           {cards.map((card) => {
             const isUp = open.includes(card.key) || matched.has(card.pairId);
             return (

@@ -19,7 +19,14 @@ export default function Shape({
 }) {
   const p = { fill: color, stroke: 'rgba(0,0,0,.15)', strokeWidth: 3 };
   return (
-    <svg className={className} width={size} height={size} viewBox="0 0 100 100" aria-hidden>
+    <svg
+      className={className}
+      data-shape={kind}
+      width={size}
+      height={size}
+      viewBox="0 0 100 100"
+      aria-hidden
+    >
       {kind === 'lingkaran' && <circle cx="50" cy="50" r="42" {...p} />}
       {kind === 'kotak' && <rect x="12" y="12" width="76" height="76" rx="10" {...p} />}
       {kind === 'segitiga' && <polygon points="50,10 92,88 8,88" {...p} />}
