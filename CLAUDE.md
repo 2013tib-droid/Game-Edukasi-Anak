@@ -221,6 +221,15 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Tutup: tombol ✕, tombol Escape, atau ketuk di luar panel. **JANGAN pakai elemen backdrop `position: fixed`** — `.topbar` punya `backdrop-filter`, jadi elemen fixed di dalamnya hanya menutupi header, bukan layar; karena itu pakai listener `pointerdown` di document.
   - **Panel di-anchor ke `.topbar` (yang `sticky`), bukan ke tombol loncengnya** (`.notif` sengaja `position: static`). Kalau di-anchor ke lonceng, panel selebar 360px terdorong keluar layar kiri di HP karena lonceng bukan elemen paling kanan.
 
+## Saluran Kritik & Saran (KEPUTUSAN PEMILIK — 2026-07-29)
+
+- **WhatsApp = saluran utama, email = cadangan.** Orang tua Indonesia sudah hidup di WA (hambatan paling kecil); email tetap ada untuk keluhan panjang + lampiran screenshot dan untuk yang enggan chat langsung. Keduanya cuma link — tanpa backend, tanpa data yang disimpan, tanpa moderasi. (Form dalam app ditolak: butuh Cloud Function + rules + anti-spam, dan pemilik tak bisa membalas.)
+- **Kontak diisi di satu file: `src/data/contact.ts`** (`contact.whatsapp` = format internasional digit saja mis. `62812…`, `contact.email`). `whatsappUrl()`/`emailUrl()` menyusun link + pesan yang sudah terisi otomatis.
+- **Nilai kosong = bagian kritik/saran TIDAK dirender** (`FeedbackSection` mengembalikan `null`). Jadi aman ter-deploy sebelum kontak diisi — tak pernah ada tombol mati. Isi keduanya sebelum rilis.
+- Pakai **nomor WhatsApp Business, jangan nomor pribadi** — link-nya publik.
+- Komponen: `src/portal/FeedbackSection.tsx` + `feedback.css` (stylesheet sendiri supaya bisa dipakai ulang di halaman orang tua lain). Tampil di **landing (`/`) saja**, setelah FAQ.
+- **JANGAN pasang di area anak** (`/portal`, `/kelompok/*`, `/game/*`): standar UX anak melarang link keluar dari area anak.
+
 ## Branch & Alur Kerja (WAJIB — biar fitur tak "hilang" lagi)
 
 > Riwayat proyek ini kacau karena tiap sesi bikin branch `claude/xxx` baru, kerja di situ, lalu tak pernah digabung — akibatnya landing page & fitur berulang kali "hilang" dan deploy saling menimpa. Aturan di bawah menghentikan itu. **Ada SATU trunk: `main`.**

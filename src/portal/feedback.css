@@ -1,0 +1,98 @@
+/* Feedback channel (kritik & saran). Own stylesheet so the section can be
+   reused on any parent-facing page, not just the landing. */
+
+.feedback {
+  width: 100%;
+  max-width: 460px;
+  margin: 34px auto 0;
+  padding: 22px 20px 20px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(58, 46, 32, 0.09);
+  box-shadow: 0 4px 16px rgba(58, 46, 32, 0.07);
+  text-align: center;
+}
+
+.fb-title {
+  margin: 0 0 6px;
+  font-size: 19px;
+  font-weight: 700;
+  color: #3a2e20;
+}
+
+.fb-lead {
+  margin: 0 0 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6b5b45;
+}
+
+.fb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.fb-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  flex: 1 1 190px;
+  min-height: 54px;
+  padding: 0 20px;
+  border-radius: 16px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
+}
+.fb-btn:active {
+  transform: translateY(3px);
+}
+.fb-btn:focus-visible {
+  outline: 2px solid #3a2e20;
+  outline-offset: 2px;
+}
+.fb-btn svg {
+  flex-shrink: 0;
+}
+
+/* WhatsApp leads — its own brand green so it is recognisable at a glance. */
+.fb-btn--wa {
+  background: #25d366;
+  color: #06331a;
+  box-shadow: 0 4px 0 rgba(6, 88, 44, 0.45);
+}
+.fb-btn--wa:active {
+  box-shadow: 0 1px 0 rgba(6, 88, 44, 0.45);
+}
+
+.fb-btn--mail {
+  background: #fff;
+  color: #3a2e20;
+  border: 1px solid rgba(58, 46, 32, 0.14);
+  box-shadow: 0 4px 0 rgba(58, 46, 32, 0.16);
+}
+.fb-btn--mail:active {
+  box-shadow: 0 1px 0 rgba(58, 46, 32, 0.16);
+}
+.fb-btn--mail svg {
+  color: #b3541a;
+}
+
+.fb-note {
+  margin: 13px 0 0;
+  font-size: 12.5px;
+  color: #8a7a63;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fb-btn {
+    transition: none;
+  }
+}
