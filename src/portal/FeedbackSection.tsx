@@ -51,8 +51,6 @@ export default function FeedbackSection() {
           </a>
         )}
       </div>
-
-      <p className="fb-note">Balasan biasanya dalam 1–2 hari kerja.</p>
     </section>
   );
 }
