@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { BellIcon } from '@/app/icons';
-import { announcements, TAG_LABEL } from '@/data/announcements';
+import { announcementsFor, TAG_LABEL } from '@/data/announcements';
+import { useAuth } from '@/auth/AuthContext';
 import { formatDate, getUnreadIds, markAllRead } from '@/portal/notifications';
 import './notifications.css';
 
@@ -10,17 +11,27 @@ import './notifications.css';
  * Opening the panel marks everything read (badge clears), but the items that
  * were new stay highlighted while the panel is open so the parent can see
  * what changed instead of hunting for it.
+ *
+ * Buyers-only entries are filtered out for signed-out visitors, badge
+ * included. Signing in reveals them as unread, because marking never touches
+ * an entry the reader could not see.
  */
 export default function NotificationBell() {
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
   const [unread, setUnread] = useState<string[]>([]);
   const [highlight, setHighlight] = useState<string[]>([]);
   const closeRef = useRef<HTMLButtonElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
+  // Signed in stands in for "has bought" until activation codes exist (Fase 5).
+  const isBuyer = user !== null;
+  const visible = useMemo(() => announcementsFor(isBuyer), [isBuyer]);
+
   // localStorage is read after mount so the first render stays identical
   // for every visitor (and never touches storage during SSR/prerender).
-  useEffect(() => setUnread(getUnreadIds()), []);
+  // Re-runs when auth resolves, so items unlocked by signing in show up.
+  useEffect(() => setUnread(getUnreadIds(visible)), [visible]);
 
   useEffect(() => {
     if (!open) return;
@@ -47,7 +58,7 @@ export default function NotificationBell() {
       return;
     }
     setHighlight(unread);
-    markAllRead();
+    markAllRead(visible);
     setUnread([]);
     setOpen(true);
     // Move focus into the panel for keyboard/screen-reader users.
@@ -95,14 +106,14 @@ export default function NotificationBell() {
               </button>
             </div>
 
-            {announcements.length === 0 ? (
+            {visible.length === 0 ? (
               <div className="notif__empty">
                 <span aria-hidden="true">🔔</span>
                 <p>Belum ada pengumuman baru.</p>
               </div>
             ) : (
               <ul className="notif__list">
-                {announcements.map((a) => (
+                {visible.map((a) => (
                   <li
                     key={a.id}
                     className={`notif__item${isNew(a.id) ? ' notif__item--new' : ''}`}

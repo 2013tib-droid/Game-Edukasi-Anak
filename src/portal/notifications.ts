@@ -4,8 +4,13 @@
  *
  * We store the ids that have been READ rather than "last seen date", so an
  * older entry added later still shows up as unread.
+ *
+ * Every function takes the list the reader may actually SEE (see
+ * `announcementsFor`). Marking must never touch an entry that was hidden,
+ * otherwise a buyers-only item would be silently marked read while logged out
+ * and would never appear as new after signing in.
  */
-import { announcements } from '@/data/announcements';
+import { announcements, type Announcement } from '@/data/announcements';
 
 const KEY = 'pp_notif_read_v1';
 
@@ -27,22 +32,20 @@ export function getReadIds(): string[] {
   }
 }
 
-/** Ids that exist in the current announcement list and are still unread. */
-export function getUnreadIds(): string[] {
+/** Ids in `visible` that are still unread. */
+export function getUnreadIds(visible: Announcement[]): string[] {
   const read = new Set(getReadIds());
-  return announcements.filter((a) => !read.has(a.id)).map((a) => a.id);
+  return visible.filter((a) => !read.has(a.id)).map((a) => a.id);
 }
 
-export function getUnreadCount(): number {
-  return getUnreadIds().length;
-}
-
-/** Marks every current announcement as read (called when the panel opens). */
-export function markAllRead(): void {
+/** Marks the visible announcements as read, leaving hidden ones untouched. */
+export function markAllRead(visible: Announcement[]): void {
   try {
-    // Keep only ids that still exist, so the key does not grow forever.
-    const ids = announcements.map((a) => a.id);
-    localStorage.setItem(KEY, JSON.stringify(ids));
+    const read = new Set(getReadIds());
+    for (const a of visible) read.add(a.id);
+    // Drop ids that no longer exist at all, so the key cannot grow forever.
+    const known = new Set(announcements.map((a) => a.id));
+    localStorage.setItem(KEY, JSON.stringify([...read].filter((id) => known.has(id))));
   } catch {
     /* private mode / storage full — badge simply reappears next visit */
   }

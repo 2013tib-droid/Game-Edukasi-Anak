@@ -7,6 +7,17 @@
  */
 export type AnnouncementTag = 'baru' | 'update' | 'info' | 'promo';
 
+/**
+ * Who sees an entry:
+ *   'semua'   — everyone, including visitors who never signed in (default).
+ *   'pembeli' — buyers only; hidden from visitors and never counted in the badge.
+ *
+ * News that should pull people back to the site (new games, promos) belongs to
+ * 'semua': the people who most need to hear it are the ones who have not bought
+ * yet. Reserve 'pembeli' for things a visitor cannot act on.
+ */
+export type Audience = 'semua' | 'pembeli';
+
 export interface Announcement {
   id: string;
   /** ISO date (YYYY-MM-DD) — shown as "28 Jul 2026". */
@@ -14,6 +25,8 @@ export interface Announcement {
   tag: AnnouncementTag;
   title: string;
   body: string;
+  /** Defaults to 'semua' when omitted. */
+  audience?: Audience;
 }
 
 /** Label + colour class per tag (colours live in notifications.css). */
@@ -24,7 +37,23 @@ export const TAG_LABEL: Record<AnnouncementTag, string> = {
   promo: 'Promo',
 };
 
-/** Newest first — the panel renders them in this order. */
+/**
+ * The entries a given reader may see, newest first.
+ *
+ * `isBuyer` is currently "signed in", because purchases do not exist yet
+ * (Fase 5). When activation codes land, pass real group ownership instead —
+ * this function does not need to change.
+ */
+export function announcementsFor(isBuyer: boolean): Announcement[] {
+  return announcements.filter((a) => (a.audience ?? 'semua') === 'semua' || isBuyer);
+}
+
+/**
+ * Newest first — the panel renders them in this order.
+ *
+ * Leave `audience` off for ordinary news; add `audience: 'pembeli'` only for
+ * entries that would frustrate someone who has not bought yet.
+ */
 export const announcements: Announcement[] = [
   {
     id: 'a-2026-07-28-jalan-kendaraan',
