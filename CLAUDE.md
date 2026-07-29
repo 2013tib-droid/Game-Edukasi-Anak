@@ -229,24 +229,34 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Sesi disimpan tiap kali naik level, dan DIHAPUS saat game tamat atau saat pilih "Mulai dari Awal"/"Main Lagi" (main lagi selalu roll varian baru dari level 1).
   - Bintang tetap terpisah di `progress.ts` (nilai terbaik per level) — sesi hanya soal "sampai mana", tidak menurunkan bintang.
 
-- **Lonceng notifikasi (pengumuman & update)** (2026-07-28), teruji headless 380×800, 360×640 & 820×1180 (buka/tutup, badge, persist setelah reload, tanpa scroll horizontal & tanpa error console):
+- **Lonceng notifikasi (pengumuman & update)** (2026-07-28, dua sasaran pembaca ditambahkan 2026-07-29), teruji headless 380×800, 360×640 & 820×1180 (buka/tutup, badge, persist setelah reload, filter pengunjung vs pembeli, tanpa scroll horizontal & tanpa error console):
+
+  **Tempat & isi**
   - Lonceng ada di **`TopBar`**, jadi otomatis muncul di **landing (`/`) dan portal (`/portal`)** — dua tempat yang dilihat orang tua. Prop `bell` (default `true`) untuk mematikannya di layar khusus anak nanti.
-  - Isi pengumuman = data typed di **`src/data/announcements.ts`** (`{ id, date, tag, title, body }`, terbaru di atas). Menambah kabar = menambah satu entri di file itu, tidak menyentuh komponen. 4 tag berwarna: `baru` (hijau), `update` (biru), `info` (ungu), `promo` (oranye).
+  - Isi pengumuman = data typed di **`src/data/announcements.ts`** (`{ id, date, tag, title, body, audience? }`, terbaru di atas). Menambah kabar = menambah satu entri di file itu, tidak menyentuh komponen. 4 tag berwarna: `baru` (hijau), `update` (biru), `info` (ungu), `promo` (oranye).
   - **`id` wajib unik & TIDAK boleh diubah** — status sudah-dibaca disimpan per id (`localStorage` `pp_notif_read_v1`, helper di `src/portal/notifications.ts`). Ganti id = pengumuman lama muncul lagi sebagai baru.
-  - UI (`src/portal/NotificationBell.tsx` + `notifications.css`): tombol lonceng 42px senada `.topbar__btn`, badge merah berisi jumlah belum dibaca (`9+` kalau lebih), lonceng bergoyang halus 2× saat ada kabar baru (dimatikan oleh `prefers-reduced-motion`). Panel ala dropdown: header "Pengumuman", daftar bisa di-scroll, item baru bertanda rel oranye + latar krem. Membuka panel = semua ditandai terbaca (badge hilang), tapi sorotan item baru tetap tampil selama panel terbuka.
-  - Tutup: tombol ✕, tombol Escape, atau ketuk di luar panel. **JANGAN pakai elemen backdrop `position: fixed`** — `.topbar` punya `backdrop-filter`, jadi elemen fixed di dalamnya hanya menutupi header, bukan layar; karena itu pakai listener `pointerdown` di document.
-  - **Dua sasaran pembaca (2026-07-29):** field opsional `audience` di tiap pengumuman — `'semua'` (bawaan, kalau field-nya tidak ditulis) dan `'pembeli'`. Pengumuman `'pembeli'` disembunyikan dari pengunjung yang belum login, termasuk tidak dihitung di badge. Filter-nya di `announcementsFor(isBuyer)`.
-  - Kabar yang menarik orang kembali (game baru, promo) HARUS `'semua'` — yang paling perlu mendengarnya justru yang belum beli. `'pembeli'` hanya untuk hal yang tak bisa ditindaklanjuti pengunjung.
+
+  **Siapa yang melihat (KEPUTUSAN PEMILIK 2026-07-29)**
+  - Field opsional `audience`: **`'semua'`** (bawaan kalau tidak ditulis) dan **`'pembeli'`**. Yang `'pembeli'` disembunyikan dari pengunjung yang belum login, **termasuk tidak dihitung di badge**. Filternya satu tempat: `announcementsFor(isBuyer)`.
+  - Bahasa pemilik saat minta pengumuman baru: *"ada update baru: …"* = untuk semua; *"ada update **khusus pembeli**: …"* = `audience: 'pembeli'`. Kalau tidak disebut, anggap **semua**.
+  - Kabar yang menarik orang kembali (game baru, promo) HARUS `'semua'` — yang paling perlu mendengarnya justru yang belum beli. `'pembeli'` hanya untuk hal yang tak bisa ditindaklanjuti pengunjung. Kalau pemilik menandai kabar promosi sebagai khusus pembeli, konfirmasi dulu.
   - **Sementara `isBuyer` = "sudah login"** (`user !== null` di `NotificationBell`), karena status pembelian baru ada di Fase 5. Saat kode aktivasi jadi, ganti argumen itu dengan kepemilikan kelompok yang sebenarnya — `announcementsFor` tak perlu diubah.
-  - **`markAllRead` HANYA menandai pengumuman yang terlihat** (`markAllRead(visible)`), tidak pernah seluruh daftar. Kalau tidak, pengumuman khusus pembeli akan ikut ditandai terbaca saat panel dibuka pengunjung, lalu tidak pernah muncul sebagai baru setelah orang tua login. Teruji: pengunjung buka panel (badge 0) → login → badge kembali 1 hanya untuk item khusus.
+  - **`markAllRead` HANYA menandai pengumuman yang TERLIHAT** (`markAllRead(visible)`), tidak pernah seluruh daftar. Kalau menandai semua, pengumuman khusus pembeli ikut tertandai terbaca saat panel dibuka pengunjung, lalu **tidak pernah muncul sebagai baru** setelah orang tua login — kabarnya hilang diam-diam. Teruji: pengunjung buka panel (badge 0) → login → badge kembali 1 hanya untuk item khusus.
+
+  **UI & jebakan CSS**
+  - `src/portal/NotificationBell.tsx` + `notifications.css`: tombol lonceng 42px senada `.topbar__btn`, badge merah berisi jumlah belum dibaca (`9+` kalau lebih), lonceng bergoyang halus 2× saat ada kabar baru (dimatikan oleh `prefers-reduced-motion`). Panel ala dropdown: header "Pengumuman", daftar bisa di-scroll, item baru bertanda rel oranye + latar krem. Membuka panel = yang terlihat ditandai terbaca (badge hilang), tapi sorotan item baru tetap tampil selama panel terbuka.
+  - Tutup: tombol ✕, tombol Escape, atau ketuk di luar panel. **JANGAN pakai elemen backdrop `position: fixed`** — `.topbar` punya `backdrop-filter`, jadi elemen fixed di dalamnya hanya menutupi header, bukan layar; karena itu pakai listener `pointerdown` di document.
   - **Panel di-anchor ke `.topbar` (yang `sticky`), bukan ke tombol loncengnya** (`.notif` sengaja `position: static`). Kalau di-anchor ke lonceng, panel selebar 360px terdorong keluar layar kiri di HP karena lonceng bukan elemen paling kanan.
+  - Header sempit: sejak ada `LockToggle` (mode penguji) isinya bisa 4 tombol. `.topbar__btn` `white-space: nowrap` + padding/gap dirapatkan di `@media (max-width: 400px)` supaya tidak saling tabrak di HP 360px.
 
-## Saluran Kritik & Saran (KEPUTUSAN PEMILIK — 2026-07-29)
+## Saluran Kontak "Hubungi Kami" (KEPUTUSAN PEMILIK — 2026-07-29)
 
-- **WhatsApp = saluran utama, email = cadangan.** Orang tua Indonesia sudah hidup di WA (hambatan paling kecil); email tetap ada untuk keluhan panjang + lampiran screenshot dan untuk yang enggan chat langsung. Keduanya cuma link — tanpa backend, tanpa data yang disimpan, tanpa moderasi. (Form dalam app ditolak: butuh Cloud Function + rules + anti-spam, dan pemilik tak bisa membalas.)
-- **Kontak diisi di satu file: `src/data/contact.ts`** (`contact.whatsapp` = format internasional digit saja mis. `62812…`, `contact.email`). `whatsappUrl()`/`emailUrl()` menyusun link + pesan yang sudah terisi otomatis.
-- **Nilai kosong = bagian kritik/saran TIDAK dirender** (`FeedbackSection` mengembalikan `null`). Jadi aman ter-deploy sebelum kontak diisi — tak pernah ada tombol mati. Isi keduanya sebelum rilis.
-- Pakai **nomor WhatsApp Business, jangan nomor pribadi** — link-nya publik.
+- **WhatsApp = saluran utama, email = cadangan.** Orang tua Indonesia sudah hidup di WA (hambatan paling kecil); email tetap ada untuk pesan panjang + lampiran dan untuk yang enggan chat langsung. Keduanya cuma link — tanpa backend, tanpa data yang disimpan, tanpa moderasi. (Form dalam app ditolak: butuh Cloud Function + rules + anti-spam, dan pemilik tak bisa membalas.)
+- **Kontak diisi di satu file: `src/data/contact.ts`** (`contact.whatsapp` = format internasional digit saja mis. `62812…`, `contact.email`). `whatsappUrl()`/`emailUrl()` menyusun link + pesan pembuka. Email sekarang masih alamat pribadi pemilik (`2013.tib@gmail.com`), ditandai `Temporary` di komentar.
+- **Nilai kosong = seluruh bagian TIDAK dirender** (`FeedbackSection` mengembalikan `null`). Jadi aman ter-deploy sebelum kontak diisi — tak pernah ada tombol mati.
+- Nomor & email itu **PUBLIK** begitu ter-deploy (ada di JS yang dikirim ke browser). Sebaiknya nomor WhatsApp Business, bukan pribadi.
+- **Nada bicara (revisi pemilik 2026-07-29):** judul **"Hubungi Kami"** (bukan "Ada kritik atau saran?"), pengantar satu baris *"Ada pertanyaan lebih lanjut? Silakan hubungi lewat:"*. Pesan otomatis WA/email cukup **satu kalimat** — *"Halo, saya mau bertanya tentang Petualangan Pintar."* JANGAN kembalikan format laporan masukan (kolom "Masukan saya", merek HP, browser) — sudah ditolak. JANGAN menjanjikan waktu balasan.
+- **Tombolnya sengaja kecil**: dua chip 40px selebar tulisannya ("WhatsApp", "Email"), putih + bingkai tipis, warna merek hanya di ikon. Ini pelengkap di kaki halaman, tidak boleh bersaing dengan tombol "Main Sekarang". Percobaan pertama (blok penuh 54px hijau solid) ditolak pemilik karena terlalu menonjol.
 - Komponen: `src/portal/FeedbackSection.tsx` + `feedback.css` (stylesheet sendiri supaya bisa dipakai ulang di halaman orang tua lain). Tampil di **landing (`/`) saja**, setelah FAQ.
 - **JANGAN pasang di area anak** (`/portal`, `/kelompok/*`, `/game/*`): standar UX anak melarang link keluar dari area anak.
 
