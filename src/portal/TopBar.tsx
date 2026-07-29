@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { HomeIcon, UserIcon } from '@/app/icons';
 import NotificationBell from '@/portal/NotificationBell';
+import LockToggle from '@/portal/LockToggle';
 
 /**
  * App header — one cohesive frosted bar shared by the landing and portal, so
@@ -30,6 +31,7 @@ export default function TopBar({
         )}
       </div>
       <div className="topbar__side topbar__side--right">
+        <LockToggle />
         {bell && <NotificationBell />}
         {accountTo && accountLabel && (
           <Link className="topbar__btn topbar__btn--account" to={accountTo}>

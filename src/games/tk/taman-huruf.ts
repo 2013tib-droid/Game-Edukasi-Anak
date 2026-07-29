@@ -54,7 +54,6 @@ const config: MixedGameConfig = {
   title: 'Taman Huruf',
   emoji: '🏕️',
   template: 'mixed',
-  freeDemo: true,
   levels: [
     // Slot 1 — huruf pertama: benda sehari-hari
     mslot(

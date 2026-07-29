@@ -275,9 +275,13 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
   /** Icon shown on portal cards. */
   emoji: string;
   template: T;
-  /** Free demo games are fully playable without login. */
-  freeDemo: boolean;
-  /** Ordered slots; a slot may be one level or a pool of random variants. */
+  /**
+   * Ordered slots; a slot may be one level or a pool of random variants.
+   *
+   * NOTE: free/locked status is NOT declared per game any more — it lives in
+   * `src/data/access.ts` (`FREE_GAME_IDS` + lock mode) so there is one place
+   * to flip. See CLAUDE.md "Sistem Kunci Game".
+   */
   levels: LevelSlot<T>[];
   /**
    * Play only this many slots per session, drawn at random (no repeats) and
@@ -313,8 +317,7 @@ export interface MixedGameConfig {
   title: string;
   emoji: string;
   template: 'mixed';
-  freeDemo: boolean;
-  /** Ordered slots; a slot may be one level or a pool of random variants. */
+  /** Free/locked status: see `src/data/access.ts` (not declared per game). */
   levels: MixedSlot[];
   /** See `GameConfig.sessionLevels`. */
   sessionLevels?: number;

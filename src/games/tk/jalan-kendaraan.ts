@@ -119,7 +119,6 @@ const config: GameConfig<'path-trace'> = {
   template: 'path-trace',
   // Pra-rilis semua game dibuka; saat launching game ini jadi false
   // (lihat CLAUDE.md "Rencana Akses Saat Launching").
-  freeDemo: true,
   sessionLevels: 6,
   levels: [
     slot('l1', { kind: 'lurus' }, KOTA),

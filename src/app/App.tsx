@@ -4,6 +4,11 @@ import { AuthProvider } from '@/auth/AuthContext';
 import ProtectedRoute from '@/auth/ProtectedRoute';
 import Layout from '@/app/Layout';
 import SplashScreen from '@/app/SplashScreen';
+import { syncTestModeFromUrl } from '@/data/access';
+
+// `?test=1` in the URL turns on tester mode (shows the lock switch) and is
+// remembered on the device; `?test=0` turns it off again.
+syncTestModeFromUrl();
 
 // Lazy-load every page so the initial bundle stays small on low-end devices.
 const LandingPage = lazy(() => import('@/portal/LandingPage'));
