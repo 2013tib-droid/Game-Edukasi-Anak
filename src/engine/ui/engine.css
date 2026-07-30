@@ -187,6 +187,20 @@
   font-size: clamp(48px, 15vw, 68px);
   font-weight: 800;
   line-height: 1;
+  /* A long answer without spaces (a syllable, "Rp15.000") must never push the
+     card wider than the grid column — that widens the whole page. */
+  overflow-wrap: anywhere;
+}
+
+/* Step the type down as the answer gets longer (see mainTextClass in
+   TapAnswer.tsx): 4–6 characters — suku kata "SANG", bilangan ratusan. */
+.choice-card .choice-text--md {
+  font-size: clamp(30px, 9vw, 44px);
+}
+
+/* 7+ characters — nilai uang "Rp15.000", jam "07.30 pagi". */
+.choice-card .choice-text--sm {
+  font-size: clamp(20px, 6vw, 28px);
 }
 
 @keyframes shake {

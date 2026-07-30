@@ -258,6 +258,41 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Panel di-anchor ke `.topbar` (yang `sticky`), bukan ke tombol loncengnya** (`.notif` sengaja `position: static`). Kalau di-anchor ke lonceng, panel selebar 360px terdorong keluar layar kiri di HP karena lonceng bukan elemen paling kanan.
   - Header sempit: sejak ada `LockToggle` (mode penguji) isinya bisa 4 tombol. `.topbar__btn` `white-space: nowrap` + padding/gap dirapatkan di `@media (max-width: 400px)` supaya tidak saling tabrak di HP 360px.
 
+- **Isi kelompok SD Kelas 1 & 2: 7 game baru** (2026-07-30), teruji headless 380×800 & 360×640 (tiap game dimainkan sampai layar "Selamat!", tanpa scroll & tanpa error console) + skrip validasi config (306 varian: jumlah pilihan, jawaban benar tepat satu, kartu kembar tak sengaja, pengecoh, pasangan drag-drop 1:1):
+
+  **Kapan dirilis (KEPUTUSAN PEMILIK 2026-07-30)**
+  - SD **baru dirilis setelah Playgroup & TK sukses launching.** Sekarang statusnya bahan uji coba: dibuat lengkap supaya bisa dicoba & direvisi lebih dulu, bukan untuk dijual dulu.
+  - **Tidak ada yang perlu diubah di `src/data/access.ts`**: tak satu pun game SD masuk `FREE_GAME_IDS`, jadi begitu mode `'kunci'` dinyalakan saat launching TK, semua game SD otomatis terkunci. Landing page juga sudah menandai kelompok SD **"🚀 Segera Hadir"**.
+
+  **Daftar game (semua di `src/games/sd1/`, terdaftar di `registry.ts`)**
+  | id | template | isi | slot × varian |
+  |---|---|---|---|
+  | `hitung-hebat` | mixed | tambah/kurang bergambar → bilangan dua digit → hitung benda → membandingkan → bilangan hilang → perkalian → uang rupiah | 10 × 70 |
+  | `suku-kata` | tap-answer | melengkapi suku kata yang hilang (BU-__), menghitung suku kata, memilih tulisan yang benar | 8 × 56 |
+  | `ejaan-jitu` | spell | menyusun kata 3–6 huruf dari 8 tema | 8 × 50 |
+  | `pasangan-pintar` | mixed | profesi↔alat, hewan↔rumah, lawan kata, soal↔hasil, benda↔tempat + kartu ingatan | 7 × 24 |
+  | `jam-pintar` | tap-answer | jam tepat, setengah jam, sebutan "setengah ...", arah jarum, jam kegiatan | 8 × 48 |
+  | `tulis-huruf` | tracing | menulis A–Z, tiap huruf punya varian besar & kecil | 26 × 52 |
+  | `cerita-nusantara` | story-choice | 6 cerita rakyat/fabel, masing-masing 2 titik pilihan | 3 × 6 |
+
+  **Yang membedakannya dari game TK (jangan disamakan lagi)**
+  - **Hitung Hebat vs Hutan Hewan**: di TK gambar yang dihitung; di SD **lambang bilangan** yang jadi soal — gambar cuma jembatan di dua slot pertama.
+  - **Suku Kata vs Taman Huruf**: TK mencari HURUF pertama, SD membaca POTONGAN KATA.
+  - **Ejaan Jitu vs slot "susun kata" Taman Huruf**: narasi TK mengejakan hurufnya satu-satu ("R, O, K, E, T"); di SD narasi **hanya menyebut bendanya** — anak sendiri yang harus tahu ejaannya. Skrip validasi menolak narasi yang mengejakan huruf.
+  - **Pasangan Pintar vs Pasang Kata**: Pasang Kata memasangkan kata dengan gambar bendanya; Pasangan Pintar mencari HUBUNGAN (profesi–alat, hewan–rumah, lawan kata).
+
+  **Jebakan yang sudah kena & sudah diperbaiki — jangan diulang**
+  - **Jawaban teks panjang melebarkan layar.** `.choice-text--main` (clamp 48–68px) dirancang untuk SATU huruf/angka. Jawaban seperti "Rp15.000" atau suku kata "SANG" tidak punya spasi, jadi tidak bisa turun baris dan mendorong kartu melebihi kolom grid. Sekarang `mainTextClass()` di `TapAnswer.tsx` menurunkan ukuran bertahap: ≤3 huruf tetap besar, 4–6 huruf `--md` (30–44px), 7+ huruf `--sm` (20–28px), plus `overflow-wrap: anywhere`. **Kalau menambah jawaban teks panjang, jangan menambal dengan CSS baru — ukurannya sudah otomatis.**
+  - **Papan teks `board` dipecah di SPASI BIASA.** Persamaan "8 + 7 = ?" harus direkatkan pakai NBSP per ruas (lihat `equationBoard()` di `hitung-hebat.ts`) supaya barisnya tidak patah di tengah bilangan dan tandanya. Deret bilangan (soal "bilangan yang hilang") justru sengaja pakai spasi biasa supaya boleh turun baris di HP kecil.
+  - **Drag & drop menampilkan kartu dalam urutan config**, jadi kalau kartu ditulis sejajar dengan targetnya anak bisa menebak dari POSISI tanpa membaca. `match()` di `pasangan-pintar.ts` sengaja menggeser urutan kartu satu posisi; validasi ikut memeriksanya.
+  - **Soal "arah jarum jam" hanya untuk jam tepat.** Pada pukul setengah, jarum pendek ada di ANTARA dua angka — kalimat "jarum pendek di angka 2" akan mengajarkan hal yang keliru. Sebutan "setengah" ala Indonesia (07.30 = "setengah **delapan**", setengah jalan MENUJU jam berikutnya) ada di `halfToward()`.
+  - **Emoji isyarat tidak boleh dipakai dua arti.** Sempat ada 🪑 untuk "meja" sekaligus "kursi" dan 🥛 untuk "susu" sekaligus "gelas" — membingungkan anak yang harus menebak bendanya.
+  - **Pengecoh tidak boleh sama dengan jawaban.** Sempat ada soal KUR-SI dengan pengecoh "KUR" (= jawabannya sendiri). Validasi sekarang menolak kartu kembar di satu soal.
+
+  **Bonus: satu bug LAMA ikut ketahuan & diperbaiki**
+  - Papan gambar berisi **tepat 6 gambar + baris `equation`** membuat layar HP 360×640 scroll — terukur **+112px di Hutan Hewan (TK)**, jadi ini bug engine yang sudah ada sejak fitur `equation` (2026-07-27), bukan bawaan game SD. Penyebabnya `denseBoard` di `TapAnswer.tsx` hanya melihat jumlah gambar (`> 6`) dan tidak menghitung baris persamaan yang memakan satu baris tambahan.
+  - Sekarang: `boardItemCount > 6 || (equation && boardItemCount > 5)`. Ambangnya digeser **hanya untuk papan berpersamaan** — papan 6 gambar TANPA persamaan (mis. soal "ayo hitung" di Hutan Hewan) tetap tampil besar seperti dulu. Teruji ulang: seluruh papan Hutan Hewan (2–11 gambar) muat di 360×640.
+
 ## Saluran Kontak "Hubungi Kami" (KEPUTUSAN PEMILIK — 2026-07-29)
 
 - **WhatsApp = saluran utama, email = cadangan.** Orang tua Indonesia sudah hidup di WA (hambatan paling kecil); email tetap ada untuk pesan panjang + lampiran dan untuk yang enggan chat langsung. Keduanya cuma link — tanpa backend, tanpa data yang disimpan, tanpa moderasi. (Form dalam app ditolak: butuh Cloud Function + rules + anti-spam, dan pemilik tak bisa membalas.)
