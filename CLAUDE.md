@@ -308,6 +308,12 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Anjing di level "hewan & makanannya" diganti **kambing → rumput**: tak ada seni anjing, dan proyek ini memang tidak memakai anjing (lihat Hutan Hewan).
   - Kartu kata dapat `padding: 4px 10px`: kata panjang ("matahari", "kambing") dulu persis selebar kartu sehingga hurufnya menempel di tepi putih.
 
+- **Pasang Kata diperbanyak: 3 level tetap → 9 slot × kolam varian, 6 soal per sesi** (2026-08-01), teruji headless 360×640, 380×800 & 820×1180 (10 sesi × 6 level = 60 level dimainkan sampai "Selamat!", 32 kombinasi soal berbeda, semua WebP termuat, tanpa scroll & tanpa error console):
+  - 9 tema: hewan berkaki empat (seni WebP) · benda di sekitar rumah · hewan & makanannya · hewan air & unggas (seni WebP) · buah · kendaraan · benda sekolah · makanan & minuman · alat musik & mainan. **36 varian**, `sessionLevels: 6`. Id slot `l1`–`l3` dipertahankan supaya bintang lama tidak hilang.
+  - **Kartu kata sengaja DIGESER satu posisi dari kotaknya** (`words()`/`food()` di config): kalau kata ke-i selalu sejajar dengan gambar ke-i, anak bisa menebak dari POSISI tanpa membaca — pelajaran yang sama seperti `match()` di Pasangan Pintar.
+  - **Identitas game dijaga**: Pasang Kata = kata ↔ gambar bendanya (latihan membaca). Slot "hewan & makanannya" tetap boleh karena kartunya masih kata hewan yang harus dibaca. Soal HUBUNGAN lain (profesi–alat, lawan kata) tetap milik Pasangan Pintar — jangan dipindah ke sini.
+  - Emoji tak boleh dipakai dengan dua arti berbeda (aturan lama): percobaan pertama sempat memberi label "seruling" pada 🎺 (terompet) dan "papan tulis" pada 📋 — keduanya sudah diganti.
+
 ## Saluran Kontak "Hubungi Kami" (KEPUTUSAN PEMILIK — 2026-07-29)
 
 - **WhatsApp = saluran utama, email = cadangan.** Orang tua Indonesia sudah hidup di WA (hambatan paling kecil); email tetap ada untuk pesan panjang + lampiran dan untuk yang enggan chat langsung. Keduanya cuma link — tanpa backend, tanpa data yang disimpan, tanpa moderasi. (Form dalam app ditolak: butuh Cloud Function + rules + anti-spam, dan pemilik tak bisa membalas.)

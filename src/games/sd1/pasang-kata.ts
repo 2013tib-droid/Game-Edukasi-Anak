@@ -1,82 +1,208 @@
-import type { GameConfig } from '@/engine/core/types';
+import type { GameConfig, GameLevel, LevelSlot } from '@/engine/core/types';
 
 /**
  * "Pasang Kata" (SD Kelas 1 & 2) — membaca kata lalu menarikannya ke gambar
  * yang cocok.
  *
+ * Bedanya dengan Pasangan Pintar: di sini yang dicocokkan adalah KATA dengan
+ * gambar bendanya (latihan membaca); Pasangan Pintar mencari HUBUNGAN antar
+ * benda (profesi–alat, lawan kata). Satu slot di sini memang soal hubungan —
+ * hewan & makanannya — karena kartunya tetap kata hewan yang harus dibaca.
+ *
+ * Tiap slot = kolam varian (lihat `LevelSlot` di engine/core/types.ts): satu
+ * varian diacak tiap main & tiap "Main Lagi". `sessionLevels: 6` membuat satu
+ * sesi mengambil 6 dari 9 slot, jadi dua sesi berturut-turut tidak sama.
+ *
  * Aturan gambar (keputusan pemilik 2026-08-01):
  *   - **Kalau bendanya HEWAN, pakai seni yang sudah diimpor** lewat id item
  *     registry (`src/engine/ui/items.ts` → `public/assets/items/*.webp`),
- *     bukan emoji. Emoji hewan berbeda-beda bentuknya di tiap HP; seni WebP
- *     sama di semua perangkat. Benda yang belum punya seni (bola, buku, mobil)
- *     tetap emoji — cukup isi `item` begitu asetnya masuk.
+ *     bukan emoji. Emoji hewan berbeda bentuknya di tiap HP; seni WebP sama di
+ *     semua perangkat. Benda yang belum punya seni tetap emoji — cukup isi
+ *     `item` begitu asetnya masuk.
  *   - `pictureTargets: true` supaya gambarnya besar: di game ini gambar itu
- *     SOALNYA, bukan sekadar label (sebelumnya kekecilan di HP).
+ *     SOALNYA, bukan sekadar label.
+ *   - Tidak memakai anjing (lihat Hutan Hewan di CLAUDE.md).
  */
+
+/** Satu pasangan gambar + kata yang harus ditarik ke gambar itu. */
+interface Pair {
+  word: string;
+  /** Id item registry (seni WebP). Dipakai lebih dulu daripada `emoji`. */
+  item?: string;
+  emoji?: string;
+}
+
+/**
+ * Soal "tarik kata ke gambarnya".
+ *
+ * Kartu sengaja DIGESER satu posisi dari kotaknya: kalau kata ke-i selalu
+ * sejajar dengan gambar ke-i, anak bisa menebak dari posisi tanpa membaca
+ * (pelajaran dari Pasangan Pintar).
+ */
+function words(...pairs: Pair[]): GameLevel<'drag-drop'> {
+  const n = pairs.length;
+  return {
+    id: '',
+    narration: 'Tarik kata ke gambar yang cocok!',
+    data: {
+      pictureTargets: true,
+      targets: pairs.map((p, i) => ({ id: `t${i}`, item: p.item, emoji: p.emoji, label: '?' })),
+      items: pairs.map((_, i) => {
+        const at = (i + 1) % n;
+        return { id: `i${i}`, text: pairs[at]!.word, targetId: `t${at}` };
+      }),
+    },
+  };
+}
+
+/** Hewan (kartu bergambar + kata) ditarik ke makanannya. */
+function food(...pairs: { animal: string; word: string; food: string; label: string }[]): GameLevel<'drag-drop'> {
+  const n = pairs.length;
+  return {
+    id: '',
+    narration: 'Pasangkan hewan dengan makanannya!',
+    data: {
+      pictureTargets: true,
+      targets: pairs.map((p) => ({ id: p.label, emoji: p.food, label: p.label })),
+      items: pairs.map((_, i) => {
+        const at = (i + 1) % n;
+        const p = pairs[at]!;
+        return { id: `i${i}`, item: p.animal, text: p.word, targetId: p.label };
+      }),
+    },
+  };
+}
+
+/** Semua varian dalam satu slot berbagi id — bintangnya per slot. */
+function slot(id: string, ...variants: GameLevel<'drag-drop'>[]): LevelSlot<'drag-drop'> {
+  return variants.map((v) => ({ ...v, id }));
+}
+
+/** Hewan ber-seni: id registry + katanya. */
+const A = {
+  kucing: { word: 'kucing', item: 'cat' },
+  kelinci: { word: 'kelinci', item: 'rabbit' },
+  kambing: { word: 'kambing', item: 'goat' },
+  panda: { word: 'panda', item: 'panda' },
+  harimau: { word: 'harimau', item: 'tiger' },
+  gajah: { word: 'gajah', item: 'elephant' },
+  kuda: { word: 'kuda', item: 'horse' },
+  sapi: { word: 'sapi', item: 'cow' },
+  ayam: { word: 'ayam', item: 'chicken' },
+  beruang: { word: 'beruang', item: 'bear' },
+  monyet: { word: 'monyet', item: 'monkey' },
+  zebra: { word: 'zebra', item: 'zebra' },
+  jerapah: { word: 'jerapah', item: 'giraffe' },
+  singa: { word: 'singa', item: 'lion' },
+  koala: { word: 'koala', item: 'koala' },
+  bebek: { word: 'bebek', item: 'duck' },
+  katak: { word: 'katak', item: 'frog' },
+  kura: { word: 'kura-kura', item: 'turtle' },
+  pinguin: { word: 'pinguin', item: 'penguin' },
+} satisfies Record<string, Pair>;
+
 const config: GameConfig<'drag-drop'> = {
   id: 'pasang-kata',
   group: 'sd1',
   title: 'Pasang Kata',
   emoji: '🧩',
   template: 'drag-drop',
+  // 6 soal per sesi, diambil acak dari 9 slot di bawah.
+  sessionLevels: 6,
   levels: [
-    {
-      id: 'l1',
-      narration: 'Tarik kata ke gambar yang cocok!',
-      data: {
-        pictureTargets: true,
-        targets: [
-          { id: 'kucing', item: 'cat', label: '?' },
-          { id: 'bola', emoji: '⚽', label: '?' },
-          { id: 'buku', emoji: '📖', label: '?' },
-        ],
-        items: [
-          { id: 'i1', text: 'kucing', targetId: 'kucing' },
-          { id: 'i2', text: 'bola', targetId: 'bola' },
-          { id: 'i3', text: 'buku', targetId: 'buku' },
-        ],
-      },
-    },
-    {
-      id: 'l2',
-      narration: 'Tarik kata ke gambar yang cocok!',
-      data: {
-        pictureTargets: true,
-        targets: [
-          { id: 'rumah', item: 'house', label: '?' },
-          { id: 'mobil', emoji: '🚗', label: '?' },
-          { id: 'pohon', emoji: '🌳', label: '?' },
-          { id: 'matahari', item: 'sun', label: '?' },
-        ],
-        items: [
-          { id: 'i1', text: 'rumah', targetId: 'rumah' },
-          { id: 'i2', text: 'mobil', targetId: 'mobil' },
-          { id: 'i3', text: 'pohon', targetId: 'pohon' },
-          { id: 'i4', text: 'matahari', targetId: 'matahari' },
-        ],
-      },
-    },
-    {
-      // Hewan ditarik ke makanannya — di sini hewannya yang jadi kartu, jadi
-      // seni WebP-nya muncul di kartu, bukan di kotak tujuan.
-      // Anjing diganti kambing: tak ada seni anjing, dan proyek ini memang
-      // tidak memakai anjing (lihat Hutan Hewan di CLAUDE.md).
-      id: 'l3',
-      narration: 'Pasangkan hewan dengan makanannya!',
-      data: {
-        pictureTargets: true,
-        targets: [
-          { id: 'wortel', emoji: '🥕', label: 'wortel' },
-          { id: 'pisang', emoji: '🍌', label: 'pisang' },
-          { id: 'rumput', emoji: '🌿', label: 'rumput' },
-        ],
-        items: [
-          { id: 'i1', item: 'rabbit', text: 'kelinci', targetId: 'wortel' },
-          { id: 'i2', item: 'monkey', text: 'monyet', targetId: 'pisang' },
-          { id: 'i3', item: 'goat', text: 'kambing', targetId: 'rumput' },
-        ],
-      },
-    },
+    // --- 1. Hewan berkaki empat (seni WebP) ---
+    slot(
+      'l1',
+      words(A.kucing, { word: 'bola', emoji: '⚽' }, { word: 'buku', emoji: '📖' }),
+      words(A.kelinci, A.kambing, A.kucing),
+      words(A.panda, A.harimau, A.gajah),
+      words(A.kuda, A.sapi, A.kambing),
+      words(A.beruang, A.monyet, A.zebra),
+      words(A.jerapah, A.singa, A.koala),
+    ),
+    // --- 2. Benda di sekitar rumah ---
+    slot(
+      'l2',
+      words(
+        { word: 'rumah', item: 'house' },
+        { word: 'mobil', emoji: '🚗' },
+        { word: 'pohon', emoji: '🌳' },
+        { word: 'matahari', item: 'sun' },
+      ),
+      words({ word: 'topi', item: 'cap' }, { word: 'sepatu', emoji: '👟' }, { word: 'payung', emoji: '☂️' }),
+      words({ word: 'kursi', emoji: '🪑' }, { word: 'lampu', emoji: '💡' }, { word: 'pintu', emoji: '🚪' }),
+      words({ word: 'bunga', emoji: '🌸' }, { word: 'awan', emoji: '☁️' }, { word: 'bintang', emoji: '⭐' }),
+      words({ word: 'kunci', emoji: '🔑' }, { word: 'jam', emoji: '⏰' }, { word: 'sapu', emoji: '🧹' }),
+    ),
+    // --- 3. Hewan & makanannya ---
+    slot(
+      'l3',
+      food(
+        { animal: 'rabbit', word: 'kelinci', food: '🥕', label: 'wortel' },
+        { animal: 'monkey', word: 'monyet', food: '🍌', label: 'pisang' },
+        { animal: 'goat', word: 'kambing', food: '🌿', label: 'rumput' },
+      ),
+      food(
+        { animal: 'chicken', word: 'ayam', food: '🌽', label: 'jagung' },
+        { animal: 'panda', word: 'panda', food: '🎋', label: 'bambu' },
+        { animal: 'rabbit', word: 'kelinci', food: '🥕', label: 'wortel' },
+      ),
+      food(
+        { animal: 'bear', word: 'beruang', food: '🍯', label: 'madu' },
+        { animal: 'cat', word: 'kucing', food: '🐟', label: 'ikan' },
+        { animal: 'cow', word: 'sapi', food: '🌿', label: 'rumput' },
+      ),
+      food(
+        { animal: 'monkey', word: 'monyet', food: '🍌', label: 'pisang' },
+        { animal: 'penguin', word: 'pinguin', food: '🐟', label: 'ikan' },
+        { animal: 'horse', word: 'kuda', food: '🌾', label: 'jerami' },
+      ),
+    ),
+    // --- 4. Hewan air & unggas (seni WebP) ---
+    slot(
+      'l4',
+      words(A.bebek, A.katak, A.kura),
+      words(A.pinguin, A.bebek, A.ayam),
+      words(A.katak, A.kura, A.pinguin),
+      words(A.bebek, A.ayam, A.kura, A.katak),
+    ),
+    // --- 5. Buah ---
+    slot(
+      'l5',
+      words({ word: 'apel', emoji: '🍎' }, { word: 'pisang', emoji: '🍌' }, { word: 'jeruk', emoji: '🍊' }),
+      words({ word: 'semangka', emoji: '🍉' }, { word: 'anggur', emoji: '🍇' }, { word: 'nanas', emoji: '🍍' }),
+      words({ word: 'mangga', emoji: '🥭' }, { word: 'melon', emoji: '🍈' }, { word: 'stroberi', emoji: '🍓' }),
+      words({ word: 'pir', emoji: '🍐' }, { word: 'ceri', emoji: '🍒' }, { word: 'kelapa', emoji: '🥥' }),
+    ),
+    // --- 6. Kendaraan ---
+    slot(
+      'l6',
+      words({ word: 'mobil', emoji: '🚗' }, { word: 'bus', emoji: '🚌' }, { word: 'sepeda', emoji: '🚲' }),
+      words({ word: 'kereta', emoji: '🚂' }, { word: 'kapal', emoji: '🚢' }, { word: 'pesawat', emoji: '✈️' }),
+      words({ word: 'motor', emoji: '🏍️' }, { word: 'truk', emoji: '🚚' }, { word: 'ambulans', emoji: '🚑' }),
+      words({ word: 'perahu', emoji: '⛵' }, { word: 'helikopter', emoji: '🚁' }, { word: 'traktor', emoji: '🚜' }),
+    ),
+    // --- 7. Benda sekolah ---
+    slot(
+      'l7',
+      words({ word: 'buku', emoji: '📖' }, { word: 'pensil', emoji: '✏️' }, { word: 'tas', emoji: '🎒' }),
+      words({ word: 'penggaris', emoji: '📏' }, { word: 'krayon', emoji: '🖍️' }, { word: 'gunting', emoji: '✂️' }),
+      words({ word: 'globe', emoji: '🌍' }, { word: 'sempoa', emoji: '🧮' }, { word: 'kuas', emoji: '🖌️' }),
+    ),
+    // --- 8. Makanan & minuman ---
+    slot(
+      'l8',
+      words({ word: 'nasi', emoji: '🍚' }, { word: 'roti', emoji: '🍞' }, { word: 'telur', emoji: '🥚' }),
+      words({ word: 'susu', emoji: '🥛' }, { word: 'kue', emoji: '🍪' }, { word: 'es krim', emoji: '🍦' }),
+      words({ word: 'mie', emoji: '🍜' }, { word: 'keju', emoji: '🧀' }, { word: 'madu', emoji: '🍯' }),
+    ),
+    // --- 9. Alat musik & mainan ---
+    slot(
+      'l9',
+      words({ word: 'gitar', emoji: '🎸' }, { word: 'drum', emoji: '🥁' }, { word: 'terompet', emoji: '🎺' }),
+      words({ word: 'balon', emoji: '🎈' }, { word: 'layang-layang', emoji: '🪁' }, { word: 'boneka', emoji: '🧸' }),
+      words({ word: 'bola', emoji: '⚽' }, { word: 'raket', emoji: '🏸' }, { word: 'sepeda', emoji: '🚲' }),
+    ),
   ],
 };
 
