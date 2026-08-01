@@ -122,6 +122,11 @@ export interface TapAnswerData {
 export interface DragItem {
   id: string;
   emoji?: string;
+  /**
+   * Item id from the picture registry (`src/engine/ui/items.ts`) — real art
+   * (WebP) instead of the device emoji font. `emoji` stays as the fallback.
+   */
+  item?: string;
   text?: string;
   /** id of the target this item belongs to */
   targetId: string;
@@ -130,12 +135,22 @@ export interface DragItem {
 export interface DragTarget {
   id: string;
   emoji?: string;
+  /** Item id from the picture registry — see `DragItem.item`. */
+  item?: string;
   label: string;
 }
 
 export interface DragDropData {
   targets: DragTarget[];
   items: DragItem[];
+  /**
+   * The picture inside each target IS the question — "which word belongs to
+   * this cat?" (Pasang Kata) — so it is drawn big, like a tap-answer cue.
+   * Leave it off when the target picture is only a label the child reads past,
+   * e.g. the colored dot on a Pasar Buah basket: enlarging those would crowd
+   * out the basket's name and push a four-basket level off a small phone.
+   */
+  pictureTargets?: boolean;
 }
 
 export interface TracingData {

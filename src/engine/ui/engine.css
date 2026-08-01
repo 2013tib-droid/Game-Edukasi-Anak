@@ -590,6 +590,10 @@
 .dd-item {
   min-width: clamp(92px, 25vw, 128px);
   min-height: clamp(92px, 25vw, 128px);
+  /* Kata panjang ("matahari", "kambing") persis selebar kartu tanpa ini, jadi
+     hurufnya menempel di tepi putih dan terlihat meluber. */
+  padding: 4px 10px;
+  box-sizing: border-box;
   border-radius: 20px;
   background: #fff;
   box-shadow: 0 5px 0 rgba(0, 0, 0, 0.18);
@@ -631,6 +635,61 @@
    small so the basket's name still fits underneath. */
 .dd-emoji--target {
   font-size: clamp(40px, 11vw, 54px);
+}
+
+/* Registry art (WebP) inside a chip or a filled target — matched to the emoji
+   sizes above so a level can mix drawn animals with plain emoji objects. */
+.dd-img {
+  width: clamp(62px, 18vw, 88px);
+  height: clamp(62px, 18vw, 88px);
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.18));
+}
+
+.dd-img--target {
+  width: clamp(40px, 11vw, 54px);
+  height: clamp(40px, 11vw, 54px);
+}
+
+/* Pasang Kata: the picture in the target IS the question, so it gets the room
+   a tap-answer cue would get. Only levels that set `pictureTargets` — the
+   Pasar Buah color baskets keep the compact layout above, where a taller box
+   would push a four-basket level off a 360×640 phone. */
+.dd-target--pic {
+  /* Muat 4 kotak (2 baris) + sebaris kartu kata di HP 360×640 tanpa scroll. */
+  min-height: clamp(116px, 31vw, 176px);
+  gap: 2px;
+}
+
+/* Jarak ke kartu kata dirapatkan: tinggi yang dihemat dipakai gambarnya.
+   Kelasnya dipasang dari React (bukan `:has()`) supaya Android lawas ikut. */
+.dd-targets--pic {
+  margin-bottom: 8px;
+}
+
+/* The answer already dropped in: still the subject, still big. URUTAN PENTING:
+   aturan cue di bawah memakai kelas `--target` dengan specificity yang SAMA,
+   jadi ia harus datang SESUDAH blok ini — kalau dibalik, aturan umum ini yang
+   menang dan gambar di kotak kosong justru mengecil. */
+.dd-target--pic .dd-emoji {
+  font-size: clamp(52px, 15vw, 72px);
+}
+
+.dd-target--pic .dd-img {
+  width: clamp(52px, 15vw, 72px);
+  height: clamp(52px, 15vw, 72px);
+}
+
+/* Kotak yang masih kosong: gambarnya = soal, jadi sebesar cue tap-answer.
+   Batas atasnya ditahan oleh level 4-kotak di HP 360×640 — dua baris kotak
+   plus sebaris kartu kata harus tetap muat tanpa scroll. */
+.dd-target--pic .dd-emoji--target {
+  font-size: clamp(66px, 19vw, 100px);
+}
+
+.dd-target--pic .dd-img--target {
+  width: clamp(76px, 21vw, 112px);
+  height: clamp(76px, 21vw, 112px);
 }
 
 /* Memory cards — a tighter gap than the answer grid so four cards across a
