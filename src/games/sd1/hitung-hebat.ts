@@ -19,6 +19,10 @@ import type {
  * satu sesi hanya mengambil 8 dari 10 slot, diacak.
  *
  * Aturan yang dipatuhi (CLAUDE.md):
+ *   - **BATAS BILANGAN 30** (keputusan pemilik 2026-08-01): bilangan maupun
+ *     hasil hitungan tidak pernah lebih dari 30. Satu-satunya pengecualian
+ *     adalah slot UANG — nominal rupiah asli (Rp1.000–Rp15.000) tidak bisa
+ *     dipaksa ke skala itu.
  *   - `equation` HANYA di papan persamaan (tambah/kurang/kali), tidak pernah
  *     di soal "ayo hitung" — di sana angkanya jadi jawaban soal itu sendiri.
  *   - Papan count-tap selalu mencampur 2–3 pengecoh DAN melebihkan jumlah
@@ -279,17 +283,17 @@ const config: MixedGameConfig = {
       minus(13, 4, [8, 10]),
       minus(19, 7, [11, 13]),
     ),
-    // --- 5. Bilangan dua digit (kelas 2) ---
+    // --- 5. Bilangan dua digit (masih dalam batas 30) ---
     slot(
       'l5',
-      sum(23, 14, [36, 38]),
-      sum(35, 20, [45, 65]),
-      sum(42, 16, [56, 60]),
-      minus(46, 15, [21, 41]),
-      minus(58, 24, [24, 44]),
-      minus(70, 30, [30, 50]),
-      sum(27, 13, [30, 50]),
-      minus(64, 22, [32, 52]),
+      sum(13, 14, [26, 28]),
+      sum(15, 12, [26, 28]),
+      sum(21, 8, [28, 30]),
+      minus(26, 15, [10, 12]),
+      minus(28, 14, [12, 16]),
+      minus(30, 10, [15, 25]),
+      sum(17, 13, [28, 29]),
+      minus(24, 12, [10, 14]),
     ),
     // --- 6. Hitung benda (count-tap) ---
     slot(
@@ -322,26 +326,26 @@ const config: MixedGameConfig = {
     // --- 7. Membandingkan bilangan ---
     slot(
       'l7',
-      compare('besar', [46, 64, 39]),
-      compare('kecil', [72, 27, 45]),
-      compare('besar', [88, 78, 87]),
-      compare('kecil', [31, 13, 30]),
-      compare('besar', [55, 45, 54]),
-      compare('kecil', [66, 60, 16]),
-      compare('besar', [19, 91, 90]),
-      compare('kecil', [24, 42, 40]),
+      compare('besar', [16, 24, 19]),
+      compare('kecil', [27, 12, 25]),
+      compare('besar', [28, 18, 27]),
+      compare('kecil', [21, 13, 20]),
+      compare('besar', [25, 15, 24]),
+      compare('kecil', [26, 20, 16]),
+      compare('besar', [19, 21, 20]),
+      compare('kecil', [24, 12, 14]),
     ),
     // --- 8. Bilangan yang hilang ---
     slot(
       'l8',
-      missing([11, 12], 13, [14], [15, 31]),
+      missing([11, 12], 13, [14], [15, 21]),
       missing([25, 26], 27, [28], [24, 29]),
-      missing([40, 45], 50, [55], [46, 60]),
+      missing([14, 15], 16, [17], [13, 18]),
       missing([2, 4], 6, [8], [5, 7]),
-      missing([10, 20], 30, [40], [25, 35]),
-      missing([67, 68], 69, [70], [66, 71]),
+      missing([10, 15], 20, [25], [18, 22]),
+      missing([27, 28], 29, [30], [26, 24]),
       missing([5, 10], 15, [20], [12, 16]),
-      missing([98, 99], 100, [101], [90, 110]),
+      missing([6, 9], 12, [15], [11, 13]),
     ),
     // --- 9. Perkalian sederhana = penjumlahan berulang (kelas 2) ---
     slot(
