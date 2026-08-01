@@ -5,6 +5,9 @@ node_modules/
 dist/
 *.tsbuildinfo
 
+# Vite dependency pre-bundle cache (dibuat dev server / build, bukan sumber)
+.vite/
+
 # Firebase
 .firebase/
 firebase-debug.log
