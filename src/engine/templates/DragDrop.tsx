@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import type { PointerEvent as ReactPointerEvent } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import { sfx } from '@/engine/audio/sound';
+import ItemPic from '@/engine/ui/ItemPic';
 
 interface DragState {
   itemId: string;
@@ -10,11 +11,29 @@ interface DragState {
 }
 
 /**
+ * One picture inside a chip or a target: registry art when the config names an
+ * `item`, otherwise the plain emoji. `target` marks the cue drawn on an empty
+ * target, which is sized separately from the thing being dragged.
+ */
+function Pic({ item, emoji, target }: { item?: string; emoji?: string; target?: boolean }) {
+  const cls = 'dd-emoji' + (target ? ' dd-emoji--target' : '');
+  if (item) {
+    return <ItemPic id={item} className={`dd-img${target ? ' dd-img--target' : ''}`} fallbackClassName={cls} />;
+  }
+  if (!emoji) return null;
+  return (
+    <span className={cls} aria-hidden>
+      {emoji}
+    </span>
+  );
+}
+
+/**
  * Drag each item onto its matching target. Uses pointer events (not HTML5
  * drag-and-drop, which is broken on mobile browsers).
  */
 export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'drag-drop'>) {
-  const { targets, items } = level.data;
+  const { targets, items, pictureTargets } = level.data;
   const [placed, setPlaced] = useState<Map<string, string>>(new Map()); // itemId -> targetId
   const [drag, setDrag] = useState<DragState | null>(null);
   const [overTarget, setOverTarget] = useState<string | null>(null);
@@ -67,7 +86,7 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
     <div onPointerMove={handleMove} onPointerUp={handleUp} style={{ flex: 1 }}>
       <div className="game-prompt">{level.narration}</div>
       <div className="game-area">
-        <div className="dd-targets">
+        <div className={'dd-targets' + (pictureTargets ? ' dd-targets--pic' : '')}>
           {targets.map((t) => {
             const filledBy = items.find((i) => placed.get(i.id) === t.id);
             return (
@@ -79,26 +98,19 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
                 }}
                 className={
                   'dd-target' +
+                  (pictureTargets ? ' dd-target--pic' : '') +
                   (overTarget === t.id ? ' dd-target--over' : '') +
                   (filledBy ? ' dd-target--filled' : '')
                 }
               >
                 {filledBy ? (
                   <>
-                    {filledBy.emoji && (
-                      <span className="dd-emoji" aria-hidden>
-                        {filledBy.emoji}
-                      </span>
-                    )}
+                    <Pic item={filledBy.item} emoji={filledBy.emoji} />
                     {filledBy.text && <span className="dd-label">{filledBy.text}</span>}
                   </>
                 ) : (
                   <>
-                    {t.emoji && (
-                      <span className="dd-emoji dd-emoji--target" aria-hidden>
-                        {t.emoji}
-                      </span>
-                    )}
+                    <Pic item={t.item} emoji={t.emoji} target />
                     <span className="dd-label">{t.label}</span>
                   </>
                 )}
@@ -120,11 +132,7 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
               }
               onPointerDown={(e) => handleDown(e, item.id)}
             >
-              {item.emoji && (
-                <span className="dd-emoji" aria-hidden>
-                  {item.emoji}
-                </span>
-              )}
+              <Pic item={item.item} emoji={item.emoji} />
               {item.text && <span className="dd-text">{item.text}</span>}
             </div>
           ))}

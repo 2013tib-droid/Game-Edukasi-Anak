@@ -1,6 +1,18 @@
 import type { GameConfig } from '@/engine/core/types';
 
-// SD kelas 1–2: membaca kata → pasangkan ke gambarnya.
+/**
+ * "Pasang Kata" (SD Kelas 1 & 2) — membaca kata lalu menarikannya ke gambar
+ * yang cocok.
+ *
+ * Aturan gambar (keputusan pemilik 2026-08-01):
+ *   - **Kalau bendanya HEWAN, pakai seni yang sudah diimpor** lewat id item
+ *     registry (`src/engine/ui/items.ts` → `public/assets/items/*.webp`),
+ *     bukan emoji. Emoji hewan berbeda-beda bentuknya di tiap HP; seni WebP
+ *     sama di semua perangkat. Benda yang belum punya seni (bola, buku, mobil)
+ *     tetap emoji — cukup isi `item` begitu asetnya masuk.
+ *   - `pictureTargets: true` supaya gambarnya besar: di game ini gambar itu
+ *     SOALNYA, bukan sekadar label (sebelumnya kekecilan di HP).
+ */
 const config: GameConfig<'drag-drop'> = {
   id: 'pasang-kata',
   group: 'sd1',
@@ -12,8 +24,9 @@ const config: GameConfig<'drag-drop'> = {
       id: 'l1',
       narration: 'Tarik kata ke gambar yang cocok!',
       data: {
+        pictureTargets: true,
         targets: [
-          { id: 'kucing', emoji: '🐱', label: '?' },
+          { id: 'kucing', item: 'cat', label: '?' },
           { id: 'bola', emoji: '⚽', label: '?' },
           { id: 'buku', emoji: '📖', label: '?' },
         ],
@@ -28,11 +41,12 @@ const config: GameConfig<'drag-drop'> = {
       id: 'l2',
       narration: 'Tarik kata ke gambar yang cocok!',
       data: {
+        pictureTargets: true,
         targets: [
-          { id: 'rumah', emoji: '🏠', label: '?' },
+          { id: 'rumah', item: 'house', label: '?' },
           { id: 'mobil', emoji: '🚗', label: '?' },
           { id: 'pohon', emoji: '🌳', label: '?' },
-          { id: 'matahari', emoji: '☀️', label: '?' },
+          { id: 'matahari', item: 'sun', label: '?' },
         ],
         items: [
           { id: 'i1', text: 'rumah', targetId: 'rumah' },
@@ -43,18 +57,23 @@ const config: GameConfig<'drag-drop'> = {
       },
     },
     {
+      // Hewan ditarik ke makanannya — di sini hewannya yang jadi kartu, jadi
+      // seni WebP-nya muncul di kartu, bukan di kotak tujuan.
+      // Anjing diganti kambing: tak ada seni anjing, dan proyek ini memang
+      // tidak memakai anjing (lihat Hutan Hewan di CLAUDE.md).
       id: 'l3',
       narration: 'Pasangkan hewan dengan makanannya!',
       data: {
+        pictureTargets: true,
         targets: [
           { id: 'wortel', emoji: '🥕', label: 'wortel' },
           { id: 'pisang', emoji: '🍌', label: 'pisang' },
-          { id: 'tulang', emoji: '🦴', label: 'tulang' },
+          { id: 'rumput', emoji: '🌿', label: 'rumput' },
         ],
         items: [
-          { id: 'i1', emoji: '🐰', text: 'kelinci', targetId: 'wortel' },
-          { id: 'i2', emoji: '🐵', text: 'monyet', targetId: 'pisang' },
-          { id: 'i3', emoji: '🐶', text: 'anjing', targetId: 'tulang' },
+          { id: 'i1', item: 'rabbit', text: 'kelinci', targetId: 'wortel' },
+          { id: 'i2', item: 'monkey', text: 'monyet', targetId: 'pisang' },
+          { id: 'i3', item: 'goat', text: 'kambing', targetId: 'rumput' },
         ],
       },
     },
