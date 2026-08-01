@@ -308,6 +308,15 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Anjing di level "hewan & makanannya" diganti **kambing → rumput**: tak ada seni anjing, dan proyek ini memang tidak memakai anjing (lihat Hutan Hewan).
   - Kartu kata dapat `padding: 4px 10px`: kata panjang ("matahari", "kambing") dulu persis selebar kartu sehingga hurufnya menempel di tepi putih.
 
+- **Jam Pintar: muka jam digambar sendiri, LENGKAP DENGAN ANGKA 1–12** (2026-08-01, keluhan pemilik dari tangkapan layar "jamnya gaada angkanya"), teruji headless 360×640, 380×800 & 820×1180 (8 slot dimainkan sampai "Selamat!", tanpa scroll & tanpa error console):
+  - Dulu jam dirender pakai **emoji muka jam** (🕐–🕧). Emoji itu **tidak punya angka sama sekali** — anak cuma bisa membandingkan sudut jarum, bukan membaca jam — dan di sebagian HP jarumnya nyaris tak terlihat (lihat tangkapan layar pemilik). **JANGAN dipakai lagi.**
+  - Sekarang ada komponen engine **`src/engine/ui/Clock.tsx`**: muka jam SVG dengan **angka 1–12**, titik penanda jam, dan dua jarum yang sengaja dibedakan — **jarum pendek gemuk biru tua** vs **jarum panjang tipis merah**, supaya "jarum pendek/panjang" jelas di layar HP. Tampilannya sama persis di semua perangkat (tidak bergantung font emoji), pola yang sama dengan `Shape.tsx`.
+  - Jarum pendek **ikut bergeser mengikuti menit** (`hourDeg = jam*30 + menit*0.5`), jadi pukul setengah benar-benar terlihat di ANTARA dua angka — inilah yang membuat soal "setengah" bisa dibaca.
+  - Field data baru: **`TapAnswerData.clock`** (jam besar sebagai cue soal) dan **`TapChoice.clock`** (jam di kartu jawaban), keduanya `ClockSpec { h: 1–12, m?: 0–59 }` di `types.ts`. Config cukup menyebut waktunya; bentuk jamnya urusan engine.
+  - Kartu jawaban berisi jam ikut memakai **grid lebar 2 kolom** (`choice-grid--pics`) — angka di muka jam baru terbaca kalau kartunya lebar. Terukur: kartu 153px di HP 380px, cue 213px; tablet 820px cue 260px.
+  - **`.choice-text--md` diturunkan ke `clamp(26px, 7.6vw, 44px)`**: jawaban jam "10.30" (5 karakter tanpa spasi) dulu patah dua baris jadi "10.3 / 0" di kartu 3 kolom HP 380px. Ini melengkapi `mainTextClass()` — ukurannya tetap otomatis, jangan menambal dengan CSS baru.
+  - `Clock.tsx` menandai tiap SVG dengan `data-clock="H:MM"` supaya tes headless bisa memeriksa jam yang benar-benar tampil.
+
 ## Saluran Kontak "Hubungi Kami" (KEPUTUSAN PEMILIK — 2026-07-29)
 
 - **WhatsApp = saluran utama, email = cadangan.** Orang tua Indonesia sudah hidup di WA (hambatan paling kecil); email tetap ada untuk pesan panjang + lampiran dan untuk yang enggan chat langsung. Keduanya cuma link — tanpa backend, tanpa data yang disimpan, tanpa moderasi. (Form dalam app ditolak: butuh Cloud Function + rules + anti-spam, dan pemilik tak bisa membalas.)

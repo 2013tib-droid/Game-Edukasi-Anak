@@ -3,6 +3,7 @@ import type { TemplateProps } from '@/engine/core/GameShell';
 import type { BoardOp } from '@/engine/core/types';
 import { sfx } from '@/engine/audio/sound';
 import Shape from '@/engine/ui/Shape';
+import Clock from '@/engine/ui/Clock';
 import ItemPic from '@/engine/ui/ItemPic';
 
 /** Human-readable operator glyphs for equation picture boards. */
@@ -67,10 +68,12 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
   // hanya untuk papan berpersamaan.
   const denseBoard = boardItemCount > 6 || (!!level.data.equation && boardItemCount > 5);
 
-  // Answers that are pure pictures (fruit, objects — no letter, caption or
-  // shape) get the wide two-across grid: the picture IS the answer, so card
-  // width is what matters. Letter/number/shape answers keep the tight grid.
-  const pictureChoices = choices.every((c) => c.emoji && !c.text && !c.shape);
+  // Answers that are pure pictures (fruit, objects, clock faces — no letter,
+  // caption or shape) get the wide two-across grid: the picture IS the answer,
+  // so card width is what matters. Letter/number/shape answers keep the tight
+  // grid. Clocks belong here too — their numerals only stay legible on a phone
+  // if the card is wide.
+  const pictureChoices = choices.every((c) => (c.emoji || c.clock) && !c.text && !c.shape);
 
   function handleTap(id: string, correct: boolean | undefined) {
     if (solved) return;
@@ -112,6 +115,11 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
               {level.data.picture}
             </div>
           )
+        )}
+        {level.data.clock && (
+          <div className="ta-clock" aria-hidden>
+            <Clock time={level.data.clock} className="ta-clock__face" />
+          </div>
         )}
         {level.data.sequence && (
           <div className="ta-sequence" aria-hidden>
@@ -189,6 +197,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
                   className="choice-shape"
                 />
               )}
+              {c.clock && <Clock time={c.clock} className="choice-clock" />}
               {c.emoji && (
                 <span className="choice-emoji" aria-hidden>
                   {c.emoji}
