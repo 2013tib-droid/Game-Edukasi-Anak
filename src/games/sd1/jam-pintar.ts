@@ -1,23 +1,21 @@
-import type { GameConfig, GameLevel, TapChoice } from '@/engine/core/types';
+import type { ClockSpec, GameConfig, GameLevel, TapChoice } from '@/engine/core/types';
 
 /**
  * "Jam Pintar" (SD Kelas 1 & 2) — membaca jam: jam tepat, setengah jam,
  * arah jarum, dan jam kegiatan sehari-hari.
  *
- * Jam digambar memakai emoji muka jam (🕐–🕧) yang tersedia lengkap untuk
- * setiap jam tepat DAN setiap setengah jam, jadi tidak perlu aset gambar
- * baru. Kalau nanti ada seni jam sendiri, tinggal daftarkan di item registry
- * dan ganti `picture` jadi `pictureItem` — datanya tak berubah.
+ * Jam digambar oleh engine sebagai SVG BERANGKA 1–12 (`src/engine/ui/Clock.tsx`),
+ * jadi anak benar-benar membaca jam, bukan sekadar membandingkan sudut jarum.
+ *
+ * JANGAN kembali memakai emoji muka jam (🕐–🕧): mukanya polos tanpa angka
+ * sama sekali (keputusan pemilik 2026-08-01 setelah melihatnya di HP), dan di
+ * sebagian HP jarumnya nyaris tak terlihat. Data levelnya cukup menyebut
+ * waktunya (`{ h, m }`) — bentuk jamnya urusan engine.
  *
  * Aturan yang dipatuhi (CLAUDE.md): narasi soal "jam berapa ini?" tidak
  * pernah menyebut jawabannya. Soal kebalikannya (dengar waktunya → cari
  * jamnya) memang menyebut waktu, karena di situ yang dicari GAMBAR jamnya.
  */
-
-/** Muka jam tepat, indeks 1–12. */
-const OCLOCK = ['', '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗', '🕘', '🕙', '🕚', '🕛'];
-/** Muka jam setengah (X.30), indeks 1–12. */
-const HALF = ['', '🕜', '🕝', '🕞', '🕟', '🕠', '🕡', '🕢', '🕣', '🕤', '🕥', '🕦', '🕧'];
 
 const NAMES = [
   '',
@@ -43,7 +41,8 @@ interface Time {
 
 const t = (h: number, half = false): Time => ({ h, half });
 
-const face = (x: Time) => (x.half ? HALF[x.h]! : OCLOCK[x.h]!);
+/** Waktu itu sebagai muka jam untuk engine. */
+const face = (x: Time): ClockSpec => ({ h: x.h, m: x.half ? 30 : 0 });
 /** Tulisan digital, format Indonesia: "07.00", "07.30". */
 const digits = (x: Time) => `${String(x.h).padStart(2, '0')}.${x.half ? '30' : '00'}`;
 /** Bunyi waktunya dalam kata. */
@@ -67,7 +66,7 @@ function readClock(answer: Time, ...decoys: Time[]): GameLevel<'tap-answer'> {
   return {
     id: '',
     narration: 'Lihat jam ini. Pukul berapa sekarang?',
-    data: { picture: face(answer), choices },
+    data: { clock: face(answer), choices },
   };
 }
 
@@ -78,8 +77,8 @@ function findClock(answer: Time, ...decoys: Time[]): GameLevel<'tap-answer'> {
     narration: `Sentuh jam yang menunjukkan ${spoken(answer)}!`,
     data: {
       choices: [
-        { id: 'a', emoji: face(answer), correct: true },
-        ...decoys.map((d, i) => ({ id: `d${i}`, emoji: face(d) })),
+        { id: 'a', clock: face(answer), correct: true },
+        ...decoys.map((d, i) => ({ id: `d${i}`, clock: face(d) })),
       ],
     },
   };
@@ -92,8 +91,8 @@ function findHalf(answer: Time, ...decoys: Time[]): GameLevel<'tap-answer'> {
     narration: `Sentuh jam yang menunjukkan pukul ${halfToward(answer)}!`,
     data: {
       choices: [
-        { id: 'a', emoji: face(answer), correct: true },
-        ...decoys.map((d, i) => ({ id: `d${i}`, emoji: face(d) })),
+        { id: 'a', clock: face(answer), correct: true },
+        ...decoys.map((d, i) => ({ id: `d${i}`, clock: face(d) })),
       ],
     },
   };
@@ -125,8 +124,8 @@ function daily(story: string, answer: Time, ...decoys: Time[]): GameLevel<'tap-a
     narration: `${story} Sentuh jamnya!`,
     data: {
       choices: [
-        { id: 'a', emoji: face(answer), correct: true },
-        ...decoys.map((d, i) => ({ id: `d${i}`, emoji: face(d) })),
+        { id: 'a', clock: face(answer), correct: true },
+        ...decoys.map((d, i) => ({ id: `d${i}`, clock: face(d) })),
       ],
     },
   };
