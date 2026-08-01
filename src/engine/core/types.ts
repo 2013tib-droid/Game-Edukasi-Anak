@@ -48,6 +48,17 @@ export interface ShapeSpec {
   color: string;
 }
 
+/**
+ * A time on an analog clock face, drawn as SVG by `src/engine/ui/Clock.tsx`.
+ * `h` is 1–12 (12-hour face), `m` is 0–59 (only 0 and 30 are used today).
+ * The clock-face emoji (🕐–🕧) are NOT an option: they carry no numerals, so
+ * a child can't actually read them.
+ */
+export interface ClockSpec {
+  h: number;
+  m?: number;
+}
+
 export interface TapChoice {
   id: string;
   /** Big visual — emoji for now, later an image asset path. */
@@ -55,6 +66,8 @@ export interface TapChoice {
   text?: string;
   /** Colored geometric shape drawn as SVG (Labirin Warna). */
   shape?: ShapeSpec;
+  /** Analog clock face with numerals drawn as SVG (Jam Pintar). */
+  clock?: ClockSpec;
   correct?: boolean;
 }
 
@@ -116,6 +129,11 @@ export interface TapAnswerData {
    * "?" box the child must fill by picking the next shape.
    */
   sequence?: (ShapeSpec | null)[];
+  /**
+   * Big analog clock cue shown above the choices (Jam Pintar "pukul berapa
+   * ini?"). Drawn with numerals by `Clock.tsx` — see `ClockSpec`.
+   */
+  clock?: ClockSpec;
   choices: TapChoice[]; // 2–4, exactly one with correct: true
 }
 
