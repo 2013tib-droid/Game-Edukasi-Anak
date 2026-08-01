@@ -14,6 +14,17 @@ const OP_GLYPH: Record<BoardOp, string> = {
   question: '?',
 };
 
+/**
+ * Size class for a text-only answer. A single letter or number is the whole
+ * visual and gets the huge type; longer answers (suku kata "SANG", uang
+ * "Rp15.000") step down so they still fit inside the card — a card is only
+ * ~110px wide on a phone, and text with no spaces cannot wrap on its own.
+ */
+function mainTextClass(text: string): string {
+  const size = text.length <= 3 ? '' : text.length <= 6 ? ' choice-text--md' : ' choice-text--sm';
+  return `choice-text choice-text--main${size}`;
+}
+
 /** Pick the one correct answer out of 2–4 big cards. */
 export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'tap-answer'>) {
   const [shakeId, setShakeId] = useState<string | null>(null);
@@ -36,7 +47,12 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
       ),
     [level],
   );
-  const denseBoard = boardItemCount > 6;
+  // A board that also carries an `equation` line has one extra row to fit, so
+  // it runs out of height a notch earlier. Terukur di HP 360×640: 6 gambar +
+  // "4 − 2 = ?" membuat layar scroll 112px (Hutan Hewan maupun Hitung Hebat),
+  // sedangkan 6 gambar tanpa persamaan masih muat — jadi ambangnya digeser
+  // hanya untuk papan berpersamaan.
+  const denseBoard = boardItemCount > 6 || (!!level.data.equation && boardItemCount > 5);
 
   // Answers that are pure pictures (fruit, objects — no letter, caption or
   // shape) get the wide two-across grid: the picture IS the answer, so card
@@ -168,7 +184,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
               {c.text && (
                 // A text answer with no emoji (a letter/number) is the main
                 // visual — render it big. With an emoji it's just a caption.
-                <span className={c.emoji ? 'choice-text' : 'choice-text choice-text--main'}>
+                <span className={c.emoji ? 'choice-text' : mainTextClass(c.text)}>
                   {c.text}
                 </span>
               )}
