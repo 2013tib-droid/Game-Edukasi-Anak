@@ -343,6 +343,17 @@
   margin-bottom: 12px;
 }
 
+/* Long equations ("10 + 5 + 3 = ?", "45 + 30 = ?") step down instead of
+   wrapping: a sum broken across two lines stops looking like one sentence.
+   Terukur: tanpa ini soal tiga bilangan MELEBARKAN layar HP 360–380px. */
+.ta-equation--long {
+  font-size: clamp(30px, 8vw, 46px);
+}
+
+.ta-equation--xlong {
+  font-size: clamp(24px, 6.4vw, 38px);
+}
+
 .ta-board__img,
 .ta-board__emoji {
   /* Large, TK-friendly: fills the roomy board area, wraps when the count is

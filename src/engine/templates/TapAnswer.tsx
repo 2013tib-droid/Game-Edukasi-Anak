@@ -25,6 +25,19 @@ function mainTextClass(text: string): string {
   return `choice-text choice-text--main${size}`;
 }
 
+/**
+ * Size class for the written equation. It is `white-space: nowrap` on purpose
+ * (a sum split across two lines stops reading as one sentence), so a long one
+ * — three addends, two-digit numbers — has to step DOWN in size or it widens
+ * the phone screen. Thresholds measured at 360px: "4 + 4 = ?" fits at the big
+ * size, "2 + 3 + 4 = ?" does not.
+ */
+function equationClass(eq: string, dense: boolean): string {
+  if (dense) return 'ta-equation ta-equation--dense';
+  const size = eq.length <= 11 ? '' : eq.length <= 15 ? ' ta-equation--long' : ' ta-equation--xlong';
+  return `ta-equation${size}`;
+}
+
 /** Pick the one correct answer out of 2–4 big cards. */
 export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'tap-answer'>) {
   const [shakeId, setShakeId] = useState<string | null>(null);
@@ -143,7 +156,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
         {/* The same sum written in numbers, under the pictures the child just
             counted — the bridge from "this many" to "3 + 3 = ?". */}
         {level.data.equation && (
-          <div className={'ta-equation' + (denseBoard ? ' ta-equation--dense' : '')} aria-hidden>
+          <div className={equationClass(level.data.equation, denseBoard)} aria-hidden>
             {level.data.equation}
           </div>
         )}
