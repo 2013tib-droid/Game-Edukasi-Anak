@@ -20,6 +20,9 @@ import type { GameConfig, GameLevel, LevelSlot, TapChoice } from '@/engine/core/
  * mencari suku yang hilang.
  *
  * Aturan yang dipatuhi (CLAUDE.md):
+ *   - **BATAS BILANGAN 30** (keputusan pemilik 2026-08-01): tak ada bilangan
+ *     maupun HASIL yang lebih dari 30 — anak kelas 1–2 baru sampai situ.
+ *     Jangan menambah varian seperti "48 + 6" atau "50 + 50" lagi.
  *   - Narasi tidak pernah memuat jawabannya.
  *   - Pengecoh selalu dekat dengan jawaban (beda 1–2, atau hasil salah hitung
  *     yang lazim) supaya anak benar-benar menjumlahkan, bukan menebak.
@@ -139,19 +142,20 @@ const config: GameConfig<'tap-answer'> = {
       sum(9, 9, [16, 19]),
       sum(10, 10, [18, 21]),
       sum(12, 12, [22, 26]),
-      sum(15, 15, [25, 35]),
+      sum(13, 13, [24, 28]),
+      sum(15, 15, [25, 29]),
     ),
-    // --- 4. Menambah 10 dan puluhan bulat ---
+    // --- 4. Menambah 10 dan 20 (nilai tempat) ---
     slot(
       'l4',
       sum(10, 3, [12, 14]),
       sum(10, 7, [16, 18]),
       sum(10, 9, [18, 20]),
-      sum(20, 5, [15, 35]),
-      sum(30, 6, [26, 46]),
-      sum(40, 8, [38, 58]),
-      sum(50, 4, [45, 64]),
-      sum(60, 7, [57, 76]),
+      sum(10, 5, [14, 16]),
+      sum(20, 5, [15, 26]),
+      sum(20, 8, [18, 29]),
+      sum(20, 3, [13, 24]),
+      sum(20, 6, [16, 27]),
     ),
     // --- 5. Melewati sepuluh (menyimpan) ---
     slot(
@@ -167,31 +171,31 @@ const config: GameConfig<'tap-answer'> = {
       sum(8, 7, [14, 16]),
       sum(5, 9, [13, 15]),
     ),
-    // --- 6. Puluhan bulat + puluhan bulat ---
+    // --- 6. Bilangan bulat lima & puluhan (sampai 30) ---
     slot(
       'l6',
-      sum(10, 20, [20, 40]),
-      sum(20, 30, [40, 60]),
-      sum(30, 30, [50, 70]),
-      sum(40, 20, [50, 70]),
-      sum(25, 25, [40, 60]),
-      sum(35, 15, [40, 60]),
-      sum(45, 30, [65, 85]),
-      sum(50, 50, [90, 110]),
+      sum(10, 20, [20, 25]),
+      sum(20, 10, [25, 29]),
+      sum(15, 5, [15, 25]),
+      sum(5, 15, [10, 25]),
+      sum(15, 10, [20, 30]),
+      sum(10, 15, [20, 30]),
+      sum(25, 5, [20, 29]),
+      sum(5, 25, [26, 20]),
     ),
     // --- 7. Dua digit + satu digit ---
     slot(
       'l7',
       sum(13, 4, [16, 18]),
       sum(21, 5, [25, 27]),
-      sum(34, 3, [36, 38]),
-      sum(42, 6, [47, 49]),
-      sum(56, 2, [57, 59]),
-      sum(27, 4, [30, 32]),
-      sum(38, 5, [42, 44]),
-      sum(65, 3, [67, 69]),
-      sum(19, 7, [25, 27]),
-      sum(48, 6, [53, 55]),
+      sum(12, 6, [17, 19]),
+      sum(24, 3, [26, 28]),
+      sum(18, 2, [19, 21]),
+      sum(22, 7, [28, 30]),
+      sum(16, 3, [18, 20]),
+      sum(27, 2, [28, 30]),
+      sum(19, 4, [22, 24]),
+      sum(25, 4, [28, 30]),
     ),
     // --- 8. Tiga bilangan sekaligus ---
     slot(
@@ -221,28 +225,13 @@ const config: GameConfig<'tap-answer'> = {
     // --- 10. Soal cerita sehari-hari ---
     slot(
       'l10',
-      story('Rani punya 6 kelereng, lalu diberi 5 lagi. Berapa kelerengnya sekarang?', 6, 5, [
-        10,
-        12,
-      ]),
-      story('Di kandang ada 8 ayam, lalu datang 4 ayam lagi. Berapa ayam semuanya?', 8, 4, [
-        11,
-        13,
-      ]),
+      story('Rani punya 6 kelereng, lalu diberi 5 lagi. Berapa kelerengnya?', 6, 5, [10, 12]),
+      story('Di kandang ada 8 ayam, lalu datang 4 lagi. Berapa ayam semuanya?', 8, 4, [11, 13]),
       story('Ibu membeli 12 telur, lalu membeli 6 lagi. Berapa telur Ibu?', 12, 6, [16, 20]),
-      story('Budi menabung 15 rupiah koin, lalu menabung 10 lagi. Berapa koinnya?', 15, 10, [
-        20,
-        30,
-      ]),
+      story('Budi punya 15 koin, lalu menabung 10 koin lagi. Berapa koin Budi?', 15, 10, [20, 30]),
       story('Di rak ada 9 buku, Kakak menaruh 7 buku lagi. Berapa buku di rak?', 9, 7, [15, 17]),
-      story('Ada 20 anak di lapangan, datang 12 anak lagi. Berapa anak semuanya?', 20, 12, [
-        30,
-        34,
-      ]),
-      story('Andi memetik 14 mangga, Adik memetik 5 mangga. Berapa mangga mereka?', 14, 5, [
-        18,
-        20,
-      ]),
+      story('Ada 18 anak di lapangan, datang 7 anak lagi. Berapa anak semuanya?', 18, 7, [23, 27]),
+      story('Andi memetik 14 mangga, Adik memetik 5 mangga. Berapa mangga mereka?', 14, 5, [18, 20]),
       story('Di kolam ada 11 ikan, Ayah menambah 8 ikan. Berapa ikan di kolam?', 11, 8, [18, 20]),
     ),
   ],
