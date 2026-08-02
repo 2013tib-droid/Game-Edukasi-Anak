@@ -832,6 +832,14 @@
   font-size: 110px;
 }
 
+/* Intro icon drawn as a real clock face (Jam Pintar) — same visual weight as
+   the 110px emoji it replaces. */
+.game-center .game-big-clock {
+  width: 132px;
+  height: 132px;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
+}
+
 .game-center h1 {
   margin: 0;
   font-size: 34px;

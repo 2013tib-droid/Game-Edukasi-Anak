@@ -72,5 +72,11 @@ export default function GamePage() {
 
   if (!config) return <SplashScreen />;
 
-  return <GameShell config={config} onExit={() => navigate(`/kelompok/${meta.group}`)} />;
+  return (
+    <GameShell
+      config={config}
+      iconClock={meta.iconClock}
+      onExit={() => navigate(`/kelompok/${meta.group}`)}
+    />
+  );
 }

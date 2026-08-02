@@ -1,4 +1,4 @@
-import type { AnyGameConfig, GroupId, TemplateId } from '@/engine/core/types';
+import type { AnyGameConfig, ClockSpec, GroupId, TemplateId } from '@/engine/core/types';
 
 /**
  * Portal-facing game catalog. Metadata lives here (small, in the main
@@ -14,6 +14,15 @@ export interface GameMeta {
   group: GroupId;
   title: string;
   emoji: string;
+  /**
+   * Draw the game's icon as our own SVG clock face (`src/engine/ui/Clock.tsx`)
+   * instead of `emoji`. The clock-face emoji has no numerals and looks like a
+   * flat grey disc on a phone — see the Jam Pintar note in CLAUDE.md. `emoji`
+   * stays as the fallback and as the game's spoken/alt identity.
+   * This is the ONLY place a game's icon is declared: `GamePage` hands it to
+   * `GameShell` for the intro screen, so card and intro never drift apart.
+   */
+  iconClock?: ClockSpec;
   /** Portal card badge; "mixed" games change question type per level. */
   template: TemplateId | 'mixed';
   load: () => Promise<{ default: AnyGameConfig }>;
@@ -142,7 +151,10 @@ export const games: GameMeta[] = [
     id: 'pasangan-pintar',
     group: 'sd1',
     title: 'Pasangan Pintar',
-    emoji: '🧠',
+    // Bukan 🧠: otak mentah bukan gambar yang ramah untuk anak, dan tak ada
+    // hubungannya dengan isi game. 🤝 = "berpasangan", sesuai isinya
+    // (profesi↔alat, hewan↔rumah, lawan kata).
+    emoji: '🤝',
     template: 'mixed',
     load: () => import('@/games/sd1/pasangan-pintar'),
   },
@@ -151,6 +163,10 @@ export const games: GameMeta[] = [
     group: 'sd1',
     title: 'Jam Pintar',
     emoji: '🕒',
+    // Muka jam sungguhan (berangka) sebagai ikon, bukan emoji 🕒 yang di HP
+    // tampil seperti piringan abu-abu polos. 10.10 = posisi jarum paling
+    // seimbang, jadi ikonnya langsung terbaca "jam".
+    iconClock: { h: 10, m: 10 },
     template: 'tap-answer',
     load: () => import('@/games/sd1/jam-pintar'),
   },
