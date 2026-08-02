@@ -322,6 +322,8 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Kartu jawaban berisi jam ikut memakai **grid lebar 2 kolom** (`choice-grid--pics`) — angka di muka jam baru terbaca kalau kartunya lebar. Terukur: kartu 153px di HP 380px, cue 213px; tablet 820px cue 260px.
   - **`.choice-text--md` diturunkan ke `clamp(26px, 7.6vw, 44px)`**: jawaban jam "10.30" (5 karakter tanpa spasi) dulu patah dua baris jadi "10.3 / 0" di kartu 3 kolom HP 380px. Ini melengkapi `mainTextClass()` — ukurannya tetap otomatis, jangan menambal dengan CSS baru.
   - `Clock.tsx` menandai tiap SVG dengan `data-clock="H:MM"` supaya tes headless bisa memeriksa jam yang benar-benar tampil.
+  - **Ikon kartu game ikut diganti** (2026-08-02, keluhan pemilik dari tangkapan layar daftar game SD): kartu Jam Pintar dulu memakai emoji 🕒 yang di HP tampil seperti piringan abu-abu polos tanpa angka. Sekarang kartunya memakai muka jam SVG yang sama pada **pukul 10.10** (posisi jarum paling seimbang, langsung terbaca "jam"). **Ikon dideklarasikan di SATU tempat: `GameMeta.iconClock` di `src/games/registry.ts`** — `GamePage` meneruskannya ke `GameShell` untuk layar intro, jadi kartu portal & layar intro tak pernah berbeda. Jangan menyalin nilai ikon ke config game.
+  - **Pasangan Pintar: 🧠 → 🤝** (keputusan pemilik di sesi yang sama). Otak mentah bukan gambar yang ramah untuk anak dan tak menggambarkan isi game; jabat tangan = "berpasangan", sesuai isinya (profesi↔alat, hewan↔rumah, lawan kata).
 
 ## Saluran Kontak "Hubungi Kami" (KEPUTUSAN PEMILIK — 2026-07-29)
 
