@@ -6,6 +6,7 @@ import type { GroupId } from '@/engine/core/types';
 import { isGameUnlocked } from '@/data/access';
 import { useLockMode } from '@/portal/useAccess';
 import LockToggle from '@/portal/LockToggle';
+import Clock from '@/engine/ui/Clock';
 
 // Game list per group. Unlocked games open directly; locked ones show a
 // padlock until the account has group access (gate enforced again in
@@ -57,9 +58,13 @@ export default function GroupPage() {
                   🔒
                 </span>
               )}
-              <span style={{ fontSize: 52 }} aria-hidden>
-                {game.emoji}
-              </span>
+              {game.iconClock ? (
+                <Clock time={game.iconClock} size={58} />
+              ) : (
+                <span style={{ fontSize: 52 }} aria-hidden>
+                  {game.emoji}
+                </span>
+              )}
               <span style={{ fontSize: 20 }}>{game.title}</span>
               <span style={{ fontSize: 16 }} aria-label={`${stars} bintang`}>
                 {stars > 0 ? `⭐ ${stars}` : unlocked ? 'GRATIS' : ''}

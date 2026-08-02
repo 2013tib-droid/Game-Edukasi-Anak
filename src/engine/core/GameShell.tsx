@@ -1,12 +1,20 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ComponentType, LazyExoticComponent } from 'react';
-import type { AnyGameConfig, GameLevel, MixedLevel, Stars, TemplateId } from '@/engine/core/types';
+import type {
+  AnyGameConfig,
+  ClockSpec,
+  GameLevel,
+  MixedLevel,
+  Stars,
+  TemplateId,
+} from '@/engine/core/types';
 import { getTotalStars, saveLevelStars } from '@/engine/core/progress';
 import { clearSession, getSession, saveSession } from '@/engine/core/session';
 import type { LevelPick } from '@/engine/core/session';
 import { sfx, speak, stopSpeaking } from '@/engine/audio/sound';
 import { FeedbackOverlay, LevelDots, SpeakButton, StarsRow } from '@/engine/ui/Feedback';
 import MascotCard from '@/engine/ui/Mascot';
+import Clock from '@/engine/ui/Clock';
 import '@/engine/ui/engine.css';
 
 /**
@@ -101,9 +109,17 @@ type Screen = 'intro' | 'playing' | 'done';
 export default function GameShell({
   config,
   onExit,
+  iconClock,
 }: {
   config: AnyGameConfig;
   onExit: () => void;
+  /**
+   * Draw the intro screen's big icon as a real clock face instead of
+   * `config.emoji`. Declared once in the game registry (`GameMeta.iconClock`)
+   * and passed down by `GamePage`, so the portal card and this screen always
+   * show the same icon.
+   */
+  iconClock?: ClockSpec;
 }) {
   const [screen, setScreen] = useState<Screen>('intro');
   const [levelIndex, setLevelIndex] = useState(0);
@@ -196,9 +212,13 @@ export default function GameShell({
   if (screen === 'intro') {
     return (
       <div className="game-center">
-        <div className="game-big-emoji" aria-hidden>
-          {config.emoji}
-        </div>
+        {iconClock ? (
+          <Clock time={iconClock} className="game-big-clock" />
+        ) : (
+          <div className="game-big-emoji" aria-hidden>
+            {config.emoji}
+          </div>
+        )}
         <h1>{config.title}</h1>
         {saved ? (
           <>
