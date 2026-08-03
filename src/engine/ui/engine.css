@@ -855,6 +855,58 @@
   gap: 12px;
 }
 
+/* One option = letter badge (A/B/C) + text + its own 🔊 replay button.
+   Anak kelas 1–2 belum lancar membaca: hurufnya jadi pegangan ("pilih B")
+   dan tombol suara membacakan pilihan itu saja. */
+.story-choice {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 20px;
+}
+
+.story-choice__letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffb703;
+  color: #3a2e20;
+  font-size: 24px;
+  font-weight: 800;
+  flex: none;
+}
+
+.story-choice__text {
+  min-width: 0;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+/* Not a <button>: this lives inside the option button, and nested buttons are
+   invalid HTML. Touch target still 44px. */
+.story-choice__speak {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f3ece0;
+  font-size: 22px;
+  flex: none;
+}
+
+.story-choice__speak:active {
+  background: #e3d8c4;
+}
+
 /* Intro / results */
 .game-center {
   min-height: 100dvh;

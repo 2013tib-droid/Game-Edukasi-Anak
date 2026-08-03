@@ -32,17 +32,32 @@ if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
   });
 }
 
-/** Narrate instruction text in Indonesian. Cancels any ongoing narration. */
-export function speak(text: string): void {
-  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
+function utterance(text: string): SpeechSynthesisUtterance {
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = 'id-ID';
   const voice = indonesianVoice();
   if (voice) utter.voice = voice;
   utter.rate = 0.92; // slightly slow for young kids
   utter.pitch = 1.1;
-  window.speechSynthesis.speak(utter);
+  return utter;
+}
+
+/** Narrate instruction text in Indonesian. Cancels any ongoing narration. */
+export function speak(text: string): void {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(utterance(text));
+}
+
+/**
+ * Narrate text AFTER whatever is already being said (no cancel) — used when a
+ * screen has several things to read in order, e.g. the story page followed by
+ * "Pilihan A…", "Pilihan B…". Children who can't read yet must hear every
+ * option, so these lines have to queue instead of cutting each other off.
+ */
+export function speakNext(...texts: string[]): void {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
+  for (const text of texts) window.speechSynthesis.speak(utterance(text));
 }
 
 export function stopSpeaking(): void {
