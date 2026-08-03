@@ -8,19 +8,32 @@
 export interface MascotStage {
   /** Minimum total stars to reach this stage. */
   min: number;
+  /**
+   * Picture asset id — `public/assets/mascot/<pic>.webp`. Premium AI art from
+   * the project owner: one character growing through all six stages, so the
+   * mascot looks the same on every phone (emoji 🦄/🐲 differ wildly, and are
+   * missing entirely on older Android).
+   */
+  pic: string;
+  /** Fallback shown if the picture fails to load or ships late. */
   emoji: string;
   name: string;
 }
 
 /** Evolution ladder: 🥚 → 🐣 → 🐥 → 🦉 → 🦄 → 🐲 (from the source game). */
 export const MASCOTS: MascotStage[] = [
-  { min: 0, emoji: '🥚', name: 'Telur Ajaib' },
-  { min: 10, emoji: '🐣', name: 'Si Menetas' },
-  { min: 25, emoji: '🐥', name: 'Anak Ayam Ceria' },
-  { min: 45, emoji: '🦉', name: 'Burung Hantu Pintar' },
-  { min: 70, emoji: '🦄', name: 'Unicorn Ajaib' },
-  { min: 100, emoji: '🐲', name: 'Naga Jenius' },
+  { min: 0, pic: 'mascot-1', emoji: '🥚', name: 'Telur Ajaib' },
+  { min: 10, pic: 'mascot-2', emoji: '🐣', name: 'Si Menetas' },
+  { min: 25, pic: 'mascot-3', emoji: '🐥', name: 'Anak Ayam Ceria' },
+  { min: 45, pic: 'mascot-4', emoji: '🦉', name: 'Burung Hantu Pintar' },
+  { min: 70, pic: 'mascot-5', emoji: '🦄', name: 'Unicorn Ajaib' },
+  { min: 100, pic: 'mascot-6', emoji: '🐲', name: 'Naga Jenius' },
 ];
+
+/** Public URL of a stage's picture, respecting the Vite base path. */
+export function mascotImageUrl(stage: MascotStage): string {
+  return `${import.meta.env.BASE_URL}assets/mascot/${stage.pic}.webp`;
+}
 
 export interface MascotState {
   stage: MascotStage;

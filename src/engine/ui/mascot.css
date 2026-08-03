@@ -43,6 +43,24 @@
     0 2px 6px rgba(179, 84, 26, 0.14);
   font-size: 42px;
   line-height: 1;
+  /* The art has no built-in padding, so let it fill the nest edge to edge. */
+  overflow: hidden;
+}
+
+/* Premium mascot art. `contain` keeps the wide owl and the tall egg both
+   whole; without it the owl's wingtips would be clipped by the round nest. */
+.mascot-panel__img {
+  width: 92%;
+  height: 92%;
+  object-fit: contain;
+}
+
+/* Tiny preview of the NEXT stage, inline in the hint line. */
+.mascot-panel__next-img {
+  width: 1.45em;
+  height: 1.45em;
+  object-fit: contain;
+  vertical-align: -0.42em;
 }
 
 .mascot-panel__info {
