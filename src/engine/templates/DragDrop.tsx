@@ -29,6 +29,18 @@ function Pic({ item, emoji, target }: { item?: string; emoji?: string; target?: 
 }
 
 /**
+ * Size class for a word chip. A child in kelas 1–2 still reads letter by
+ * letter, so the word is the whole point of the card and gets big type; a long
+ * word ("matahari") steps down so the chip doesn't grow wide enough to push the
+ * row onto an extra line. Same idea as `mainTextClass()` in TapAnswer — the
+ * size is automatic, so a new long word never needs new CSS.
+ */
+function wordClass(text: string): string {
+  const size = text.length <= 6 ? '' : text.length <= 8 ? ' dd-word--md' : ' dd-word--sm';
+  return `dd-word${size}`;
+}
+
+/**
  * Drag each item onto its matching target. Uses pointer events (not HTML5
  * drag-and-drop, which is broken on mobile browsers).
  */
@@ -106,7 +118,20 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
                 {filledBy ? (
                   <>
                     <Pic item={filledBy.item} emoji={filledBy.emoji} />
-                    {filledBy.text && <span className="dd-label">{filledBy.text}</span>}
+                    {filledBy.text && (
+                      // A word that arrived on its own keeps the big type it
+                      // had on the chip — it just moved, it didn't become a
+                      // caption. With a picture it labels that picture.
+                      <span
+                        className={
+                          filledBy.item || filledBy.emoji
+                            ? 'dd-label'
+                            : wordClass(filledBy.text)
+                        }
+                      >
+                        {filledBy.text}
+                      </span>
+                    )}
                   </>
                 ) : (
                   <>
@@ -133,7 +158,13 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
               onPointerDown={(e) => handleDown(e, item.id)}
             >
               <Pic item={item.item} emoji={item.emoji} />
-              {item.text && <span className="dd-text">{item.text}</span>}
+              {item.text && (
+                // A chip that also carries a picture uses the caption size;
+                // a word-only chip IS the question, so it gets the big type.
+                <span className={item.emoji || item.item ? 'dd-text' : wordClass(item.text)}>
+                  {item.text}
+                </span>
+              )}
             </div>
           ))}
         </div>

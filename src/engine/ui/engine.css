@@ -569,7 +569,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 12px;
-  margin-bottom: 24px;
+  /* 16, bukan 24: tinggi yang dihemat dipakai kartu kata yang sekarang
+     bertulisan besar. Terukur di HP 360×640 (Pasangan Pintar, 3 kartu
+     bergambar + nama): 24px membuat layar scroll 5px, 16px pas. */
+  margin-bottom: 16px;
 }
 
 .dd-target {
@@ -598,9 +601,13 @@
   background: #eaffea;
 }
 
+/* Nama di kotak tujuan — juga nama kata yang SUDAH ditaruh anak, jadi jangan
+   lebih kecil dari yang nyaman dibaca kelas 1–2. */
 .dd-target .dd-label {
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
 }
 
 .dd-items {
@@ -643,8 +650,40 @@
   visibility: hidden;
 }
 
+/* Word under a picture on a chip (hewan + namanya, profesi + namanya). The
+   picture leads, but the child still has to READ the word, so it sits just
+   below the word-only size rather than at caption size. */
 .dd-item .dd-text {
-  font-size: 20px;
+  font-size: clamp(22px, 6.2vw, 27px);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+/* A word-only card (Pasang Kata, Pasangan Pintar): the WORD is what the child
+   has to read, so it gets type as big as the card allows. Stepped down by word
+   length in `wordClass()` (DragDrop.tsx) — don't patch this with new CSS when
+   adding a long word, the size is already automatic. Used on the chip AND on
+   the target it lands in, so the word doesn't shrink once it's placed. */
+.dd-word,
+.dd-word--md,
+.dd-word--sm {
+  font-weight: 700;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.dd-word {
+  font-size: clamp(27px, 7.6vw, 34px);
+}
+
+/* 7–8 huruf: "matahari", "kandang". */
+.dd-word--md {
+  font-size: clamp(23px, 6.4vw, 30px);
+}
+
+/* 9+ huruf: kata majemuk seperti "papan tulis". */
+.dd-word--sm {
+  font-size: clamp(20px, 5.6vw, 26px);
 }
 
 /* The fruit being dragged — and the fruit resting in a basket — is what the
