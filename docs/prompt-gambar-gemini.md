@@ -172,7 +172,7 @@ diputar** mengikuti belokan jalan — di sinilah emoji paling ketahuan kasar.
 > dikirim menghadap KIRI. Untuk permintaan baru pakai tabel di bawah, yang
 > sudah diperbaiki.
 
-### Kendaraan yang MASIH KURANG (4 gambar) · giliran berikutnya
+### Kendaraan yang tadinya kurang (4 gambar) — ✅ SELESAI (2026-08-04)
 
 Keempatnya paling sering muncul di kolam perjalanan `jalan-kendaraan` dan
 masih memakai emoji. **Warnanya sengaja dipilih yang belum terpakai** di 12
@@ -181,6 +181,10 @@ aset yang sudah ada, supaya anak tidak tertukar saat gambarnya cuma setinggi
 
 | id (nama file) | Objek | Baris prompt untuk dikirim |
 |---|---|---|
+> ✅ **Keempatnya sudah diterima & terpasang** pada percobaan KEDUA, setelah
+> lembar acuan gaya dilampirkan. Prompt di bawah adalah versi yang berhasil —
+> pakai polanya untuk batch kendaraan berikutnya.
+>
 > **WAJIB: lampirkan `docs/acuan-gaya-kendaraan.png`** ke chat Gemini sebelum
 > meminta keempatnya, dengan kalimat: *"Ikuti gaya persis seperti gambar
 > acuan ini — bodi gemuk membulat, kilau lembut, warna cerah, detail sedikit.

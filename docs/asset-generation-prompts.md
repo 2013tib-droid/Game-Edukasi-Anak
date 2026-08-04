@@ -113,7 +113,7 @@ Status pengiriman:
 |---|---|
 | Maskot 6 tahap | ✅ diterima (2026-08-04) → `public/assets/mascot/mascot-1..6.webp` |
 | Buah (14) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
-| Kendaraan (12 dari 16) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp`. Kurang: jip, taksi, motor, mobil balap |
+| Kendaraan (16) | ✅ LENGKAP (2026-08-04) → `public/assets/items/*.webp` |
 | Tujuan/bangunan (8) | ⏳ belum |
 | Benda sehari-hari (20) | ⏳ belum |
 
@@ -162,4 +162,17 @@ Status pengiriman:
   di `path-trace` kendaraan tampil maksimal 64px. Dua belas aset = 189 kB.
 - **Teks di dalam gambar harus Bahasa Indonesia.** Bus batch pertama
   bertuliskan "SCHOOL BUS" dan harus digambar ulang jadi "BUS SEKOLAH".
-  Lebih aman: minta tanpa tulisan sama sekali.
+  Lebih aman: minta tanpa tulisan sama sekali — walau model tetap suka
+  menambahkannya (taksi tetap keluar bertuliskan "TAXI" dua kali berturut-turut
+  meski prompt melarangnya).
+- **Tulisan pada papan/plakat berwarna rata bisa dihapus tanpa menggambar
+  ulang.** Kenali papannya (satu blok warna), ambil lubang di dalamnya
+  (`binary_fill_holes` dikurangi papan aslinya) sebagai topeng tulisan,
+  lebarkan 2px supaya tepi antialias ikut terangkat, lalu isi tiap baris
+  dengan warna papan yang bersih di baris itu (papannya bergradasi vertikal,
+  jadi jangan pakai satu warna rata). Dipakai untuk menghapus "TAXI".
+- **Prompt teks saja TIDAK cukup mengunci gaya.** Percobaan pertama jip/taksi/
+  motor/mobil balap keluar sebagai clipart vektor realistis walau promptnya
+  sudah benar. Yang menyelesaikannya: melampirkan `docs/acuan-gaya-kendaraan.png`
+  (6 aset yang sudah diterima) + kalimat "ikuti gaya persis seperti acuan ini".
+  Percobaan kedua langsung sepadan. Lakukan ini untuk SEMUA batch berikutnya.
