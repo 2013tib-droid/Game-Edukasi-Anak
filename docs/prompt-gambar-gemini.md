@@ -181,16 +181,26 @@ aset yang sudah ada, supaya anak tidak tertukar saat gambarnya cuma setinggi
 
 | id (nama file) | Objek | Baris prompt untuk dikirim |
 |---|---|---|
-| `jeep` | jip | Buatkan: mobil jip petualang warna cokelat khaki, bodi kotak tegak dengan atap keras, ban hitam besar bergerigi, ban serep menempel di pintu belakang, gril depan bergaris tegak, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan, imut. |
-| `taxi` | taksi | Buatkan: mobil taksi sedan warna biru dengan kotak lampu kecil polos di atap, jendela biru muda, roda hitam, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan dan tanpa angka, imut. |
-| `motorcycle` | motor | Buatkan: sepeda motor sport warna merah dengan mesin terlihat di tengah, dua roda hitam tebal, setang di depan dan jok memanjang, tanpa pengendara, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan, imut. |
-| `racecar` | mobil balap | Buatkan: mobil balap formula warna ungu, bodi sangat rendah dan panjang, sayap spoiler di belakang, ban hitam lebar, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan dan tanpa angka, imut. |
+> **WAJIB: lampirkan `docs/acuan-gaya-kendaraan.png`** ke chat Gemini sebelum
+> meminta keempatnya, dengan kalimat: *"Ikuti gaya persis seperti gambar
+> acuan ini — bodi gemuk membulat, kilau lembut, warna cerah, detail sedikit.
+> Jangan pakai gaya vektor datar yang realistis."* Percobaan pertama
+> (2026-08-04) gagal justru karena ini: promptnya benar, tapi tanpa acuan
+> Gemini mengeluarkan clipart vektor realistis yang tak sepadan dengan 12
+> aset yang sudah ada. Kata "imut" saja TIDAK cukup.
+
+| id (nama file) | Objek | Baris prompt untuk dikirim |
+|---|---|---|
+| `jeep` | jip | Buatkan: mobil jip petualang warna cokelat muda cerah, bodi gemuk membulat dengan atap keras, ban hitam besar polos tanpa jeruji, ban serep menempel di pintu belakang, jendela biru muda, kilau lembut, detail sedikit, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan, gaya mainan anak. |
+| `taxi` | taksi | Buatkan: mobil taksi sedan warna biru cerah, bodi gemuk membulat, kotak lampu kecil POLOS TANPA TULISAN di atap, jendela biru muda, roda hitam polos, kilau lembut, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan dan tanpa angka apa pun, gaya mainan anak. |
+| `motorcycle` | motor | Buatkan: sepeda motor warna merah cerah bergaya mainan anak, bentuk SEDERHANA tanpa detail mesin yang rumit, dua roda hitam polos tanpa jeruji, setang di depan dan jok memanjang, tanpa pengendara, kilau lembut, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan. |
+| `racecar` | mobil balap | Buatkan: mobil balap mainan warna ungu cerah, bodi gemuk dan PENDEK (bukan mobil formula yang panjang rendah), sayap spoiler kecil di belakang, ban hitam polos, kilau lembut, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan dan tanpa angka, gaya mainan anak. |
 
 **Kenapa warna & bentuknya begitu — jangan diubah tanpa alasan:**
 
 | Aset baru | Harus jelas beda dari | Pembedanya |
 |---|---|---|
-| `jeep` cokelat | `pickup` hijau, `car` merah | Cokelat khaki belum dipakai; bodi kotak tegak + ban serep. Hijau sudah dipakai pikap DAN traktor. |
+| `jeep` cokelat muda | `pickup` hijau, `car` merah | Cokelat belum dipakai; ban serep di belakang jadi penanda. Hijau sudah dipakai pikap DAN traktor. **Harus cokelat MUDA CERAH** — percobaan pertama memakai khaki gelap dan di layar 50px jadi blok gelap yang tak terbaca. |
 | `taxi` biru | `truck`/`train` biru, `car` merah | Sama-sama biru tapi siluetnya sedan rendah, bukan truk/lokomotif. Kotak lampu di atap jadi penanda taksi tanpa perlu tulisan. |
 | `motorcycle` merah | `scooter` merah muda, `bicycle` biru | Motor sport: mesin terlihat, roda tebal, bodi condong. Skuter: rangka rendah tempat kaki. Merah aman — tak ada kendaraan roda dua lain yang merah. |
 | `racecar` ungu | `car` merah, `firetruck` merah | Ungu sama sekali belum dipakai di set ini. Mobil balap merah akan tertukar dengan sedan merah pada ukuran kecil. |
@@ -199,6 +209,31 @@ aset yang sudah ada, supaya anak tidak tertukar saat gambarnya cuma setinggi
 Indonesia langsung mengenalinya. Taksi kuning kotak-kotak ala Amerika akan
 bertabrakan dengan bus kuning, dan pola kotak-kotaknya terbaca seperti tulisan
 pada ukuran kecil.
+
+#### Percobaan pertama DITOLAK (2026-08-04) — jangan ulangi
+
+Kiriman pertama keempat kendaraan ini ditolak. Arah hadapnya sudah benar
+(kiri), tapi:
+
+1. **Gaya tidak sepadan.** Hasilnya clipart vektor datar berproporsi
+   realistis (jip Wrangler, motor cruiser, mobil F1) — garis tipis, tanpa
+   kilau, detail banyak. Set yang ada bergaya mainan: bodi gemuk, kilau
+   lembut, detail sedikit. → **Solusi: lampirkan lembar acuan gaya.**
+2. **Detail halus jadi bubur di 50px.** Jeruji roda, sirip mesin motor, dan
+   gril jip semuanya hilang. Minta ban POLOS dan bentuk SEDERHANA.
+3. **Warna gelap tidak terbaca.** Khaki gelap dan ungu tua jadi blok gelap.
+   Selalu minta versi CERAH.
+4. **Masih ada tulisan "TAXI"** walau prompt sudah minta tanpa tulisan —
+   model suka menambahkan label pada kendaraan yang "butuh" identitas. Tegaskan
+   dua kali: *"kotak lampu POLOS TANPA TULISAN"* dan *"tanpa tulisan dan tanpa
+   angka apa pun"*.
+5. **Mobil balap terlalu panjang** (rasio 3,1:1; kendaraan lain ±1,8:1).
+   Mobil formula realistis terlihat pipih di jalan dan janggal saat diputar
+   mengikuti tikungan. Minta mobil balap MAINAN yang pendek dan gemuk.
+6. **PNG tanpa kanal alpha.** Filenya PNG tapi pola kotak-kotak transparansi
+   tergambar sebagai piksel biasa. Masih bisa dibuang (netral & saturasi
+   rendah — lihat "Kasus khusus latar checkerboard" di
+   `asset-generation-prompts.md`), tapi PNG ber-alpha asli lebih aman.
 
 Bangunan & tempat tujuan di ujung jalan (dan dipakai juga di soal huruf).
 **Tampak depan**, seluruh bangunan masuk, tanpa jalan dan tanpa latar langit:
