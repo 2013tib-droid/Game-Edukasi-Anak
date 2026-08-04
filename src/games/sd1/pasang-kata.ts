@@ -56,14 +56,23 @@ function words(...pairs: Pair[]): GameLevel<'drag-drop'> {
 }
 
 /** Hewan (kartu bergambar + kata) ditarik ke makanannya. */
-function food(...pairs: { animal: string; word: string; food: string; label: string }[]): GameLevel<'drag-drop'> {
+function food(
+  ...pairs: {
+    animal: string;
+    word: string;
+    food: string;
+    /** Id item registry untuk makanannya (seni WebP), kalau ada. */
+    foodItem?: string;
+    label: string;
+  }[]
+): GameLevel<'drag-drop'> {
   const n = pairs.length;
   return {
     id: '',
     narration: 'Pasangkan hewan dengan makanannya!',
     data: {
       pictureTargets: true,
-      targets: pairs.map((p) => ({ id: p.label, emoji: p.food, label: p.label })),
+      targets: pairs.map((p) => ({ id: p.label, emoji: p.food, item: p.foodItem, label: p.label })),
       items: pairs.map((_, i) => {
         const at = (i + 1) % n;
         const p = pairs[at]!;
@@ -139,7 +148,7 @@ const config: GameConfig<'drag-drop'> = {
       'l3',
       food(
         { animal: 'rabbit', word: 'kelinci', food: '🥕', label: 'wortel' },
-        { animal: 'monkey', word: 'monyet', food: '🍌', label: 'pisang' },
+        { animal: 'monkey', word: 'monyet', food: '🍌', foodItem: 'banana', label: 'pisang' },
         { animal: 'goat', word: 'kambing', food: '🌿', label: 'rumput' },
       ),
       food(
@@ -153,7 +162,7 @@ const config: GameConfig<'drag-drop'> = {
         { animal: 'cow', word: 'sapi', food: '🌿', label: 'rumput' },
       ),
       food(
-        { animal: 'monkey', word: 'monyet', food: '🍌', label: 'pisang' },
+        { animal: 'monkey', word: 'monyet', food: '🍌', foodItem: 'banana', label: 'pisang' },
         { animal: 'penguin', word: 'pinguin', food: '🐟', label: 'ikan' },
         { animal: 'horse', word: 'kuda', food: '🌾', label: 'jerami' },
       ),
@@ -169,10 +178,10 @@ const config: GameConfig<'drag-drop'> = {
     // --- 5. Buah ---
     slot(
       'l5',
-      words({ word: 'apel', emoji: '🍎' }, { word: 'pisang', emoji: '🍌' }, { word: 'jeruk', emoji: '🍊' }),
-      words({ word: 'semangka', emoji: '🍉' }, { word: 'anggur', emoji: '🍇' }, { word: 'nanas', emoji: '🍍' }),
-      words({ word: 'mangga', emoji: '🥭' }, { word: 'melon', emoji: '🍈' }, { word: 'stroberi', emoji: '🍓' }),
-      words({ word: 'pir', emoji: '🍐' }, { word: 'ceri', emoji: '🍒' }, { word: 'kelapa', emoji: '🥥' }),
+      words({ word: 'apel', emoji: '🍎', item: 'apple' }, { word: 'pisang', emoji: '🍌', item: 'banana' }, { word: 'jeruk', emoji: '🍊', item: 'orange' }),
+      words({ word: 'semangka', emoji: '🍉', item: 'watermelon' }, { word: 'anggur', emoji: '🍇', item: 'grapes' }, { word: 'nanas', emoji: '🍍', item: 'pineapple' }),
+      words({ word: 'mangga', emoji: '🥭', item: 'mango' }, { word: 'melon', emoji: '🍈', item: 'melon' }, { word: 'stroberi', emoji: '🍓', item: 'strawberry' }),
+      words({ word: 'pir', emoji: '🍐', item: 'pear' }, { word: 'ceri', emoji: '🍒', item: 'cherry' }, { word: 'kelapa', emoji: '🥥' }),
     ),
     // --- 6. Kendaraan ---
     slot(

@@ -47,6 +47,23 @@ export const ITEMS: Record<string, ItemDef> = {
   // Everyday objects (Taman Huruf letter cues).
   sun: { emoji: '☀️', label: 'matahari', ext: 'webp' },
   cap: { emoji: '🧢', label: 'topi', ext: 'webp' },
+  // Fruit (Pasar Buah, plus letter/spelling cues in other games). The colours
+  // are load-bearing: Pasar Buah sorts these into colour baskets, so art for a
+  // new fruit must keep the colour its config sorts it by.
+  apple: { emoji: '🍎', label: 'apel', ext: 'webp' },
+  banana: { emoji: '🍌', label: 'pisang', ext: 'webp' },
+  orange: { emoji: '🍊', label: 'jeruk', ext: 'webp' },
+  grapes: { emoji: '🍇', label: 'anggur', ext: 'webp' },
+  strawberry: { emoji: '🍓', label: 'stroberi', ext: 'webp' },
+  watermelon: { emoji: '🍉', label: 'semangka', ext: 'webp' },
+  mango: { emoji: '🥭', label: 'mangga', ext: 'webp' },
+  pineapple: { emoji: '🍍', label: 'nanas', ext: 'webp' },
+  pear: { emoji: '🍐', label: 'pir', ext: 'webp' },
+  kiwi: { emoji: '🥝', label: 'kiwi', ext: 'webp' },
+  melon: { emoji: '🍈', label: 'melon', ext: 'webp' },
+  cherry: { emoji: '🍒', label: 'ceri', ext: 'webp' },
+  lemon: { emoji: '🍋', label: 'lemon', ext: 'webp' },
+  avocado: { emoji: '🥑', label: 'alpukat', ext: 'webp' },
 };
 
 /** Public URL of an item's picture, respecting the Vite base path. */
