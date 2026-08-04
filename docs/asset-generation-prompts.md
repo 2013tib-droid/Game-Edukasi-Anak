@@ -71,7 +71,9 @@ elephant: { emoji: '🐘', label: 'gajah', ext: 'webp' },
 | turtle | kura-kura | 🐢 | ✅ diterima (dipakai Hutan Hewan l8, level baru) | `public/assets/items/turtle.webp` |
 
 > **Semua aset hewan kini premium WebP** — tidak ada placeholder SVG hewan lagi.
-> Hanya `house.svg` (properti "rumah", bukan hewan) yang masih SVG.
+> Sejak 2026-08-04 `house` pun premium (`house.webp`), bersama 7 bangunan &
+> tempat tujuan lain (sekolah, rumah sakit, toko, pom bensin, sawah, pohon,
+> taman) — placeholder `house.svg` sudah dihapus.
 > `dog`/`anjing`, `penguin`/`pinguin`, `chick`/`anak ayam` **dihapus** dari
 > registry atas permintaan pemilik: anjing tidak dipakai; anak ayam & pinguin
 > digantikan hewan premium (beruang di l6; kura-kura di l8, level baru).

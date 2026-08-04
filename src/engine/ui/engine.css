@@ -1038,10 +1038,24 @@
   position: absolute;
   left: 0;
   top: 0;
-  font-size: clamp(26px, 8vw, 42px);
   line-height: 1;
   pointer-events: none;
   filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+.road-marker-emoji {
+  font-size: clamp(26px, 8vw, 42px);
+  display: block;
+}
+
+/* Destination art. Boxed SQUARE (width = height + contain) so a wide picture
+   — sawah, taman — takes the same room as the emoji it replaces instead of
+   pushing the road stage sideways. */
+.road-marker-img {
+  width: clamp(48px, 15vw, 76px);
+  height: clamp(48px, 15vw, 76px);
+  object-fit: contain;
+  display: block;
 }
 
 .road-vehicle {

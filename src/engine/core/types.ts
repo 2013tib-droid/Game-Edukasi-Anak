@@ -274,6 +274,12 @@ export interface PathTraceData {
   vehicleItem?: string;
   /** Emoji at the end of the road (rumah, sekolah, garis finis…). */
   goal?: string;
+  /**
+   * Item id (registry `src/engine/ui/items.ts`) drawn as the destination
+   * instead of the emoji — real art (rumah, sekolah, rumah sakit…). Falls
+   * back to `goal`.
+   */
+  goalItem?: string;
 }
 
 export interface LevelDataMap {

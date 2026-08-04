@@ -22,7 +22,16 @@ export interface ItemDef {
 }
 
 export const ITEMS: Record<string, ItemDef> = {
-  house: { emoji: '🏠', label: 'rumah' },
+  // Buildings & places (tujuan di Jalan Kendaraan, rumah di Hutan Hewan /
+  // Pasang Kata / Hitung Hebat). Premium art, gaya kartun yang sama.
+  house: { emoji: '🏠', label: 'rumah', ext: 'webp' },
+  school: { emoji: '🏫', label: 'sekolah', ext: 'webp' },
+  hospital: { emoji: '🏥', label: 'rumah sakit', ext: 'webp' },
+  shop: { emoji: '🏪', label: 'toko', ext: 'webp' },
+  'gas-station': { emoji: '⛽', label: 'pom bensin', ext: 'webp' },
+  field: { emoji: '🌾', label: 'sawah', ext: 'webp' },
+  tree: { emoji: '🌳', label: 'pohon', ext: 'webp' },
+  park: { emoji: '🏞️', label: 'taman', ext: 'webp' },
   // Premium AI-generated art (cute cartoon style). Delivered as transparent
   // WebP by the project owner — see docs/asset-generation-prompts.md.
   elephant: { emoji: '🐘', label: 'gajah', ext: 'webp' },
