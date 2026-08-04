@@ -122,7 +122,7 @@ const config: GameConfig<'drag-drop'> = {
     // --- 1. Hewan berkaki empat (seni WebP) ---
     slot(
       'l1',
-      words(A.kucing, { word: 'bola', emoji: '⚽' }, { word: 'buku', emoji: '📖' }),
+      words(A.kucing, { word: 'bola', emoji: '⚽', item: 'ball' }, { word: 'buku', emoji: '📖', item: 'book' }),
       words(A.kelinci, A.kambing, A.kucing),
       words(A.panda, A.harimau, A.gajah),
       words(A.kuda, A.sapi, A.kambing),
@@ -134,27 +134,27 @@ const config: GameConfig<'drag-drop'> = {
       'l2',
       words(
         { word: 'rumah', item: 'house' },
-        { word: 'mobil', emoji: '🚗' },
-        { word: 'pohon', emoji: '🌳' },
+        { word: 'mobil', emoji: '🚗', item: 'car' },
+        { word: 'pohon', emoji: '🌳', item: 'tree' },
         { word: 'matahari', item: 'sun' },
       ),
-      words({ word: 'topi', item: 'cap' }, { word: 'sepatu', emoji: '👟' }, { word: 'payung', emoji: '☂️' }),
-      words({ word: 'kursi', emoji: '🪑' }, { word: 'lampu', emoji: '💡' }, { word: 'pintu', emoji: '🚪' }),
-      words({ word: 'bunga', emoji: '🌸' }, { word: 'awan', emoji: '☁️' }, { word: 'bintang', emoji: '⭐' }),
-      words({ word: 'kunci', emoji: '🔑' }, { word: 'jam', emoji: '⏰' }, { word: 'sapu', emoji: '🧹' }),
+      words({ word: 'topi', item: 'cap' }, { word: 'sepatu', emoji: '👟', item: 'shoe' }, { word: 'payung', emoji: '☂️', item: 'umbrella' }),
+      words({ word: 'kursi', emoji: '🪑', item: 'chair' }, { word: 'lampu', emoji: '💡' }, { word: 'pintu', emoji: '🚪', item: 'door' }),
+      words({ word: 'bunga', emoji: '🌸', item: 'flower' }, { word: 'awan', emoji: '☁️', item: 'cloud' }, { word: 'bintang', emoji: '⭐' }),
+      words({ word: 'kunci', emoji: '🔑', item: 'key' }, { word: 'jam', emoji: '⏰' }, { word: 'sapu', emoji: '🧹' }),
     ),
     // --- 3. Hewan & makanannya ---
     slot(
       'l3',
       food(
-        { animal: 'rabbit', word: 'kelinci', food: '🥕', label: 'wortel' },
+        { animal: 'rabbit', word: 'kelinci', food: '🥕', foodItem: 'carrot', label: 'wortel' },
         { animal: 'monkey', word: 'monyet', food: '🍌', foodItem: 'banana', label: 'pisang' },
         { animal: 'goat', word: 'kambing', food: '🌿', label: 'rumput' },
       ),
       food(
-        { animal: 'chicken', word: 'ayam', food: '🌽', label: 'jagung' },
+        { animal: 'chicken', word: 'ayam', food: '🌽', foodItem: 'corn', label: 'jagung' },
         { animal: 'panda', word: 'panda', food: '🎋', label: 'bambu' },
-        { animal: 'rabbit', word: 'kelinci', food: '🥕', label: 'wortel' },
+        { animal: 'rabbit', word: 'kelinci', food: '🥕', foodItem: 'carrot', label: 'wortel' },
       ),
       food(
         { animal: 'bear', word: 'beruang', food: '🍯', label: 'madu' },
@@ -186,31 +186,31 @@ const config: GameConfig<'drag-drop'> = {
     // --- 6. Kendaraan ---
     slot(
       'l6',
-      words({ word: 'mobil', emoji: '🚗' }, { word: 'bus', emoji: '🚌' }, { word: 'sepeda', emoji: '🚲' }),
-      words({ word: 'kereta', emoji: '🚂' }, { word: 'kapal', emoji: '🚢' }, { word: 'pesawat', emoji: '✈️' }),
-      words({ word: 'motor', emoji: '🏍️' }, { word: 'truk', emoji: '🚚' }, { word: 'ambulans', emoji: '🚑' }),
-      words({ word: 'perahu', emoji: '⛵' }, { word: 'helikopter', emoji: '🚁' }, { word: 'traktor', emoji: '🚜' }),
+      words({ word: 'mobil', emoji: '🚗', item: 'car' }, { word: 'bus', emoji: '🚌', item: 'bus' }, { word: 'sepeda', emoji: '🚲', item: 'bicycle' }),
+      words({ word: 'kereta', emoji: '🚂', item: 'train' }, { word: 'kapal', emoji: '🚢' }, { word: 'pesawat', emoji: '✈️' }),
+      words({ word: 'motor', emoji: '🏍️' }, { word: 'truk', emoji: '🚚', item: 'truck' }, { word: 'ambulans', emoji: '🚑', item: 'ambulance' }),
+      words({ word: 'perahu', emoji: '⛵' }, { word: 'helikopter', emoji: '🚁' }, { word: 'traktor', emoji: '🚜', item: 'tractor' }),
     ),
     // --- 7. Benda sekolah ---
     slot(
       'l7',
-      words({ word: 'buku', emoji: '📖' }, { word: 'pensil', emoji: '✏️' }, { word: 'tas', emoji: '🎒' }),
+      words({ word: 'buku', emoji: '📖', item: 'book' }, { word: 'pensil', emoji: '✏️', item: 'pencil' }, { word: 'tas', emoji: '🎒', item: 'backpack' }),
       words({ word: 'penggaris', emoji: '📏' }, { word: 'krayon', emoji: '🖍️' }, { word: 'gunting', emoji: '✂️' }),
       words({ word: 'globe', emoji: '🌍' }, { word: 'sempoa', emoji: '🧮' }, { word: 'kuas', emoji: '🖌️' }),
     ),
     // --- 8. Makanan & minuman ---
     slot(
       'l8',
-      words({ word: 'nasi', emoji: '🍚' }, { word: 'roti', emoji: '🍞' }, { word: 'telur', emoji: '🥚' }),
-      words({ word: 'susu', emoji: '🥛' }, { word: 'kue', emoji: '🍪' }, { word: 'es krim', emoji: '🍦' }),
+      words({ word: 'nasi', emoji: '🍚', item: 'rice' }, { word: 'roti', emoji: '🍞', item: 'bread' }, { word: 'telur', emoji: '🥚', item: 'egg' }),
+      words({ word: 'susu', emoji: '🥛', item: 'milk' }, { word: 'kue', emoji: '🍪' }, { word: 'es krim', emoji: '🍦' }),
       words({ word: 'mie', emoji: '🍜' }, { word: 'keju', emoji: '🧀' }, { word: 'madu', emoji: '🍯' }),
     ),
     // --- 9. Alat musik & mainan ---
     slot(
       'l9',
       words({ word: 'gitar', emoji: '🎸' }, { word: 'drum', emoji: '🥁' }, { word: 'terompet', emoji: '🎺' }),
-      words({ word: 'balon', emoji: '🎈' }, { word: 'layang-layang', emoji: '🪁' }, { word: 'boneka', emoji: '🧸' }),
-      words({ word: 'bola', emoji: '⚽' }, { word: 'raket', emoji: '🏸' }, { word: 'sepeda', emoji: '🚲' }),
+      words({ word: 'balon', emoji: '🎈', item: 'balloon' }, { word: 'layang-layang', emoji: '🪁' }, { word: 'boneka', emoji: '🧸', item: 'teddy' }),
+      words({ word: 'bola', emoji: '⚽', item: 'ball' }, { word: 'raket', emoji: '🏸' }, { word: 'sepeda', emoji: '🚲', item: 'bicycle' }),
     ),
   ],
 };

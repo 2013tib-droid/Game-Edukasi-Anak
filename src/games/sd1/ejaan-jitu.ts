@@ -13,17 +13,24 @@ import type { GameConfig, GameLevel } from '@/engine/core/types';
  * di kata itu, jadi anak tidak bisa asal mengetuk semua huruf.
  */
 
-/** Satu kata: tulisan, gambar isyarat, dan huruf pengecoh di nampan. */
+/**
+ * Satu kata: tulisan, gambar isyarat, dan huruf pengecoh di nampan.
+ *
+ * `item` (opsional) = id item registry (`src/engine/ui/items.ts`): kalau diisi,
+ * isyaratnya digambar dari seni WebP, bukan font emoji HP. `emoji` tetap jadi
+ * cadangan kalau asetnya belum ada.
+ */
 function word(
   text: string,
   emoji: string,
   label: string,
   decoys: string[],
+  item?: string,
 ): GameLevel<'spell'> {
   return {
     id: '',
     narration: `Ini ${label}. Ayo susun hurufnya jadi satu kata!`,
-    data: { word: text, emoji, decoys },
+    data: { word: text, emoji, decoys, ...(item ? { item } : {}) },
   };
 }
 
@@ -43,60 +50,60 @@ const config: GameConfig<'spell'> = {
     // --- 1. Benda sekolah ---
     slot(
       'l1',
-      word('BUKU', '📕', 'buku', ['R', 'M']),
+      word('BUKU', '📕', 'buku', ['R', 'M'], 'book'),
       word('PENA', '🖊️', 'pena', ['S', 'K']),
       word('KRAYON', '🖍️', 'krayon', ['S', 'T']),
-      word('PENSIL', '✏️', 'pensil', ['A', 'R']),
-      word('TAS', '🎒', 'tas', ['P', 'U', 'M']),
+      word('PENSIL', '✏️', 'pensil', ['A', 'R'], 'pencil'),
+      word('TAS', '🎒', 'tas', ['P', 'U', 'M'], 'backpack'),
     ),
     // --- 2. Hewan ---
     slot(
       'l2',
-      word('SAPI', '🐮', 'sapi', ['R', 'O']),
-      word('KUDA', '🐴', 'kuda', ['M', 'I']),
-      word('BEBEK', '🦆', 'bebek', ['R', 'O']),
-      word('KUCING', '🐱', 'kucing', ['A', 'R']),
-      word('GAJAH', '🐘', 'gajah', ['R', 'U']),
-      word('KATAK', '🐸', 'katak', ['R', 'O']),
-      word('AYAM', '🐔', 'ayam', ['R', 'O']),
+      word('SAPI', '🐮', 'sapi', ['R', 'O'], 'cow'),
+      word('KUDA', '🐴', 'kuda', ['M', 'I'], 'horse'),
+      word('BEBEK', '🦆', 'bebek', ['R', 'O'], 'duck'),
+      word('KUCING', '🐱', 'kucing', ['A', 'R'], 'cat'),
+      word('GAJAH', '🐘', 'gajah', ['R', 'U'], 'elephant'),
+      word('KATAK', '🐸', 'katak', ['R', 'O'], 'frog'),
+      word('AYAM', '🐔', 'ayam', ['R', 'O'], 'chicken'),
     ),
     // --- 3. Makanan & minuman ---
     slot(
       'l3',
-      word('NASI', '🍚', 'nasi', ['R', 'K']),
-      word('ROTI', '🍞', 'roti', ['B', 'A']),
-      word('SUSU', '🥛', 'susu', ['R', 'A']),
-      word('TELUR', '🥚', 'telur', ['A', 'K']),
-      word('JERUK', '🍊', 'jeruk', ['A', 'M']),
-      word('PISANG', '🍌', 'pisang', ['R', 'O']),
+      word('NASI', '🍚', 'nasi', ['R', 'K'], 'rice'),
+      word('ROTI', '🍞', 'roti', ['B', 'A'], 'bread'),
+      word('SUSU', '🥛', 'susu', ['R', 'A'], 'milk'),
+      word('TELUR', '🥚', 'telur', ['A', 'K'], 'egg'),
+      word('JERUK', '🍊', 'jeruk', ['A', 'M'], 'orange'),
+      word('PISANG', '🍌', 'pisang', ['R', 'O'], 'banana'),
       word('MADU', '🍯', 'madu', ['R', 'I']),
     ),
     // --- 4. Alam ---
     slot(
       'l4',
-      word('BULAN', '🌙', 'bulan', ['R', 'I']),
+      word('BULAN', '🌙', 'bulan', ['R', 'I'], 'moon'),
       word('HUJAN', '🌧️', 'hujan', ['R', 'O']),
       word('DAUN', '🍃', 'daun', ['R', 'M']),
-      word('AWAN', '☁️', 'awan', ['R', 'U']),
+      word('AWAN', '☁️', 'awan', ['R', 'U'], 'cloud'),
       word('LAUT', '🌊', 'laut', ['R', 'M']),
-      word('BUNGA', '🌸', 'bunga', ['R', 'I']),
+      word('BUNGA', '🌸', 'bunga', ['R', 'I'], 'flower'),
       word('PANTAI', '🏖️', 'pantai', ['R', 'U']),
     ),
     // --- 5. Kendaraan ---
     slot(
       'l5',
-      word('MOBIL', '🚗', 'mobil', ['A', 'R']),
+      word('MOBIL', '🚗', 'mobil', ['A', 'R'], 'car'),
       word('KAPAL', '🚢', 'kapal', ['R', 'U']),
-      word('SEPEDA', '🚲', 'sepeda', ['R', 'U']),
-      word('KERETA', '🚂', 'kereta', ['U', 'M']),
-      word('TRUK', '🚚', 'truk', ['A', 'M']),
+      word('SEPEDA', '🚲', 'sepeda', ['R', 'U'], 'bicycle'),
+      word('KERETA', '🚂', 'kereta', ['U', 'M'], 'train'),
+      word('TRUK', '🚚', 'truk', ['A', 'M'], 'truck'),
       word('BECAK', '🛺', 'becak', ['R', 'U']),
     ),
     // --- 6. Barang di rumah ---
     slot(
       'l6',
-      word('PINTU', '🚪', 'pintu', ['R', 'A']),
-      word('KURSI', '🪑', 'kursi', ['A', 'M']),
+      word('PINTU', '🚪', 'pintu', ['R', 'A'], 'door'),
+      word('KURSI', '🪑', 'kursi', ['A', 'M'], 'chair'),
       word('GELAS', '🥤', 'gelas', ['R', 'U']),
       word('SENDOK', '🥄', 'sendok', ['A', 'R']),
       word('PIRING', '🍽️', 'piring', ['A', 'U']),
@@ -106,8 +113,8 @@ const config: GameConfig<'spell'> = {
     slot(
       'l7',
       word('BAJU', '👕', 'baju', ['R', 'M']),
-      word('TOPI', '🧢', 'topi', ['R', 'A']),
-      word('SEPATU', '👟', 'sepatu', ['R', 'M']),
+      word('TOPI', '🧢', 'topi', ['R', 'A'], 'cap'),
+      word('SEPATU', '👟', 'sepatu', ['R', 'M'], 'shoe'),
       word('TANGAN', '✋', 'tangan', ['R', 'O']),
       word('MATA', '👁️', 'mata', ['R', 'O']),
       word('CELANA', '👖', 'celana', ['R', 'U']),
@@ -115,12 +122,12 @@ const config: GameConfig<'spell'> = {
     // --- 8. Tempat ---
     slot(
       'l8',
-      word('PASAR', '🏪', 'pasar', ['U', 'M']),
-      word('KEBUN', '🌳', 'kebun', ['A', 'R']),
-      word('SAWAH', '🌾', 'sawah', ['R', 'U']),
+      word('PASAR', '🏪', 'pasar', ['U', 'M'], 'shop'),
+      word('KEBUN', '🌳', 'kebun', ['A', 'R'], 'tree'),
+      word('SAWAH', '🌾', 'sawah', ['R', 'U'], 'field'),
       word('DESA', '🏡', 'desa', ['R', 'U']),
       word('KOTA', '🏙️', 'kota', ['R', 'I']),
-      word('RUMAH', '🏠', 'rumah', ['I', 'T']),
+      word('RUMAH', '🏠', 'rumah', ['I', 'T'], 'house'),
     ),
   ],
 };

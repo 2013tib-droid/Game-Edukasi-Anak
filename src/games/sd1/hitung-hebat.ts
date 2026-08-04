@@ -157,7 +157,8 @@ function times(pic: Pic, groups: number, per: number, decoys: number[]): MixedLe
 
 /** Hitung benda di papan (count-tap) — pengecoh wajib, target dilebihkan. */
 function count(
-  target: { emoji: string; label: string },
+  /** `item` = id item registry (seni WebP); `emoji` tetap jadi cadangan. */
+  target: { emoji: string; label: string; item?: string },
   ask: number,
   extra: number,
   decoys: [string, number][],
@@ -298,11 +299,11 @@ const config: MixedGameConfig = {
     // --- 6. Hitung benda (count-tap) ---
     slot(
       'l6',
-      count({ emoji: '⚽', label: 'bola' }, 6, 2, [
+      count({ emoji: '⚽', label: 'bola', item: 'ball' }, 6, 2, [
         ['🏀', 3],
         ['🎾', 2],
       ]),
-      count({ emoji: '✏️', label: 'pensil' }, 7, 2, [
+      count({ emoji: '✏️', label: 'pensil', item: 'pencil' }, 7, 2, [
         ['📕', 2],
         ['📏', 3],
       ]),
