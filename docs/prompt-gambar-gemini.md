@@ -127,11 +127,29 @@ Gambar tahap 1 (telur) dulu, karena warnanya menentukan lima gambar sisanya.
 Untuk `jalan-kendaraan`, yang seluruh isinya kendaraan dan **diperbesar serta
 diputar** mengikuti belokan jalan — di sinilah emoji paling ketahuan kasar.
 
-**Aturan khusus kendaraan (WAJIB):** semua kendaraan digambar **tampak samping
-penuh (side view), menghadap ke KANAN**, roda menempel di garis bawah yang
-tidak digambar, tanpa jalan, tanpa latar, tanpa bayangan. Ini penting karena
-engine memutar gambarnya mengikuti arah jalan — kalau sudutnya serong,
-kendaraannya akan terlihat miring aneh saat menanjak.
+**Aturan khusus kendaraan (WAJIB):**
+
+- **Tampak samping penuh (side view), MENGHADAP KE KIRI.** Roda menempel di
+  garis bawah yang tidak digambar, tanpa jalan, tanpa latar, tanpa bayangan.
+  Sudut serong dilarang — engine memutar gambar mengikuti arah jalan, jadi
+  kendaraan yang digambar serong akan terlihat miring aneh saat menanjak.
+- **KIRI, bukan kanan** (dikoreksi 2026-08-04). `PathTrace` memasang
+  `scaleX(-1)` sebelum memutar — aturan itu lahir dari emoji kendaraan yang
+  menghadap kiri di hampir semua font. Jadi sumber yang menghadap kiri akan
+  tampil menghadap kanan di layar dan berjalan maju; sumber yang menghadap
+  kanan akan berjalan MUNDUR. Ke-12 aset yang sudah diterima semuanya
+  menghadap kiri.
+- **TANPA WAJAH.** Kendaraan yang sudah dikirim tidak bermata dan tidak
+  bermulut — hanya bodi kartun berkilau. Ini beda dari aturan buah (yang
+  memakai "simple happy face"); kendaraan bermata akan terlihat asing di
+  antara set yang ada.
+- **Bentuk kanvas boleh melebar (16:9), bukan wajib persegi.** Kendaraan itu
+  objek lebar; di kanvas persegi separuh gambar jadi ruang kosong dan
+  kendaraannya keluar dengan resolusi lebih kecil.
+- **PNG transparan lebih baik daripada JPEG.** Kalau terpaksa JPEG, pastikan
+  benar-benar **tanpa bayangan lembut di bawah roda** — bayangan itu tidak
+  ikut terbuang saat latar putih dihapus dan tertinggal jadi noda putih di
+  atas aspal (kejadian di bus sekolah, 2026-08-04).
 
 | id (nama file) | Objek | Baris prompt untuk dikirim |
 |---|---|---|
@@ -144,9 +162,43 @@ kendaraannya akan terlihat miring aneh saat menanjak.
 | `scooter` | motor/skuter | Buatkan: sepeda motor skuter warna merah muda, tampak samping penuh menghadap ke kanan, imut. |
 | `ambulance` | ambulans | Buatkan: mobil ambulans putih dengan garis merah dan lampu sirene merah di atap, tampak samping penuh menghadap ke kanan, tanpa tulisan apa pun, imut. |
 | `firetruck` | mobil pemadam | Buatkan: mobil pemadam kebakaran warna merah dengan tangga di atapnya, tampak samping penuh menghadap ke kanan, tanpa tulisan, imut. |
-| `police-car` | mobil polisi | Buatkan: mobil polisi warna putih-biru dengan lampu sirene biru di atap, tampak samping penuh menghadap ke kanan, tanpa tulisan, imut. |
+| `police` | mobil polisi | Buatkan: mobil polisi warna putih-biru dengan lampu sirene biru di atap, tampak samping penuh menghadap ke kanan, tanpa tulisan, imut. |
 | `train` | kereta | Buatkan: lokomotif kereta api warna biru dengan cerobong asap, tampak samping penuh menghadap ke kanan, imut. |
 | `bajaj` | bajaj | Buatkan: bajaj beroda tiga khas Indonesia warna oranye dengan atap tertutup, tampak samping penuh menghadap ke kanan, imut. |
+
+> ✅ **Ke-12 baris di atas SUDAH diterima & terpasang** (2026-08-04). Baris
+> promptnya sengaja dibiarkan apa adanya sebagai arsip — perhatikan bahwa
+> semuanya tertulis "menghadap ke kanan", padahal aset yang benar-benar
+> dikirim menghadap KIRI. Untuk permintaan baru pakai tabel di bawah, yang
+> sudah diperbaiki.
+
+### Kendaraan yang MASIH KURANG (4 gambar) · giliran berikutnya
+
+Keempatnya paling sering muncul di kolam perjalanan `jalan-kendaraan` dan
+masih memakai emoji. **Warnanya sengaja dipilih yang belum terpakai** di 12
+aset yang sudah ada, supaya anak tidak tertukar saat gambarnya cuma setinggi
+±50px di layar HP.
+
+| id (nama file) | Objek | Baris prompt untuk dikirim |
+|---|---|---|
+| `jeep` | jip | Buatkan: mobil jip petualang warna cokelat khaki, bodi kotak tegak dengan atap keras, ban hitam besar bergerigi, ban serep menempel di pintu belakang, gril depan bergaris tegak, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan, imut. |
+| `taxi` | taksi | Buatkan: mobil taksi sedan warna biru dengan kotak lampu kecil polos di atap, jendela biru muda, roda hitam, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan dan tanpa angka, imut. |
+| `motorcycle` | motor | Buatkan: sepeda motor sport warna merah dengan mesin terlihat di tengah, dua roda hitam tebal, setang di depan dan jok memanjang, tanpa pengendara, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan, imut. |
+| `racecar` | mobil balap | Buatkan: mobil balap formula warna ungu, bodi sangat rendah dan panjang, sayap spoiler di belakang, ban hitam lebar, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan dan tanpa angka, imut. |
+
+**Kenapa warna & bentuknya begitu — jangan diubah tanpa alasan:**
+
+| Aset baru | Harus jelas beda dari | Pembedanya |
+|---|---|---|
+| `jeep` cokelat | `pickup` hijau, `car` merah | Cokelat khaki belum dipakai; bodi kotak tegak + ban serep. Hijau sudah dipakai pikap DAN traktor. |
+| `taxi` biru | `truck`/`train` biru, `car` merah | Sama-sama biru tapi siluetnya sedan rendah, bukan truk/lokomotif. Kotak lampu di atap jadi penanda taksi tanpa perlu tulisan. |
+| `motorcycle` merah | `scooter` merah muda, `bicycle` biru | Motor sport: mesin terlihat, roda tebal, bodi condong. Skuter: rangka rendah tempat kaki. Merah aman — tak ada kendaraan roda dua lain yang merah. |
+| `racecar` ungu | `car` merah, `firetruck` merah | Ungu sama sekali belum dipakai di set ini. Mobil balap merah akan tertukar dengan sedan merah pada ukuran kecil. |
+
+**Taksi biru itu disengaja** — taksi di Indonesia identik biru, jadi anak
+Indonesia langsung mengenalinya. Taksi kuning kotak-kotak ala Amerika akan
+bertabrakan dengan bus kuning, dan pola kotak-kotaknya terbaca seperti tulisan
+pada ukuran kecil.
 
 Bangunan & tempat tujuan di ujung jalan (dan dipakai juga di soal huruf).
 **Tampak depan**, seluruh bangunan masuk, tanpa jalan dan tanpa latar langit:

@@ -113,7 +113,8 @@ Status pengiriman:
 |---|---|
 | Maskot 6 tahap | ✅ diterima (2026-08-04) → `public/assets/mascot/mascot-1..6.webp` |
 | Buah (14) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
-| Kendaraan & tujuan (20) | ⏳ belum |
+| Kendaraan (12 dari 16) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp`. Kurang: jip, taksi, motor, mobil balap |
+| Tujuan/bangunan (8) | ⏳ belum |
 | Benda sehari-hari (20) | ⏳ belum |
 
 ### Pelajaran dari dua batch pertama (BACA sebelum minta batch baru)
@@ -136,3 +137,29 @@ Status pengiriman:
 - **Warna buah tidak boleh diubah semaunya**: Pasar Buah menyortir buah ke
   keranjang warna, jadi seni yang warnanya menyimpang membuat jawaban benar
   jadi terlihat salah.
+
+### Pelajaran dari batch kendaraan (2026-08-04)
+
+- **Arah hadap kendaraan: KIRI, bukan kanan.** `PathTrace` memasang
+  `scaleX(-1)` sebelum memutar gambar (aturan warisan dari emoji kendaraan
+  yang menghadap kiri). Sumber menghadap kanan akan berjalan MUNDUR di jalan.
+  Prompt lama di `prompt-gambar-gemini.md` sempat salah menulis "kanan" —
+  sudah diperbaiki di sana.
+- **Kendaraan TANPA WAJAH.** Set yang dikirim tidak bermata/bermulut, beda
+  dari aturan buah & hewan. Jangan campur dua gaya dalam satu game.
+- **JPEG boleh, asal tanpa bayangan lantai.** Bus sekolah dikirim JPEG
+  berlatar putih dengan bayangan lembut di bawah roda; bayangan itu netral
+  dan terang sehingga lolos dari penghapusan latar biasa dan tertinggal jadi
+  noda putih memanjang di atas aspal. Cara benarnya: kenali isi objek dari
+  **saturasi tinggi ATAU kegelapan** (bodi berwarna, garis tepi & roda
+  hitam), lalu isi lubang supaya sorotan putih di kaca tetap ada.
+- **Lembar berisi banyak kendaraan sekaligus TERNYATA aman** untuk kasus ini
+  — beda dari pelajaran batch buah. Ke-12 kendaraan datang dalam satu lembar
+  4×3 dan komponennya terpisah bersih, jadi bisa dipotong otomatis. Yang
+  membuatnya berhasil: latar transparan + jarak antar objek longgar. Tetap
+  saja satu file per objek lebih tajam kalau resolusinya jadi pertimbangan.
+- **Ukuran aset kendaraan cukup 240px lebar** (bukan 512px seperti hewan):
+  di `path-trace` kendaraan tampil maksimal 64px. Dua belas aset = 189 kB.
+- **Teks di dalam gambar harus Bahasa Indonesia.** Bus batch pertama
+  bertuliskan "SCHOOL BUS" dan harus digambar ulang jadi "BUS SEKOLAH".
+  Lebih aman: minta tanpa tulisan sama sekali.
