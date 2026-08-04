@@ -98,7 +98,7 @@ interface Pt {
 
 
 export default function PathTrace({ level, onCorrect, onWrong }: TemplateProps<'path-trace'>) {
-  const { road, vehicle, vehicleItem, goal } = level.data;
+  const { road, vehicle, vehicleItem, goal, goalItem } = level.data;
   const d = useMemo(() => roadPath(road), [road]);
 
   const svgRef = useRef<SVGSVGElement>(null);
@@ -324,7 +324,13 @@ export default function PathTrace({ level, onCorrect, onWrong }: TemplateProps<'
           </svg>
 
           <div ref={goalRef} className="road-marker">
-            {goal ?? '🏁'}
+            {goalItem ? (
+              <ItemPic id={goalItem} className="road-marker-img" fallbackClassName="road-marker-emoji" />
+            ) : (
+              <span className="road-marker-emoji" aria-hidden>
+                {goal ?? '🏁'}
+              </span>
+            )}
           </div>
           <div ref={carRef} className={`road-vehicle${done ? ' road-vehicle--done' : ''}`}>
             {vehicleItem ? (

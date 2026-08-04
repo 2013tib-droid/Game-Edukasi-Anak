@@ -19,6 +19,10 @@ import type { GameConfig, GameLevel, RoadSpec } from '@/engine/core/types';
  * asetnya gagal dimuat. Yang belum ada seninya (taksi, jip, motor, mobil balap,
  * otoped, trem/monorel) sementara masih emoji — tinggal isi argumen itu begitu
  * asetnya dibuat. Satu seni JANGAN dipakai untuk dua nama kendaraan berbeda.
+ *
+ * Hal yang sama berlaku untuk TUJUAN di ujung jalan (argumen keenam,
+ * `goalItem`): rumah, sekolah, rumah sakit, toko, pom bensin, sawah, pohon &
+ * taman sudah punya seni; tujuan lain (halte, pabrik, istana…) masih emoji.
  */
 
 interface Trip {
@@ -30,8 +34,10 @@ interface Trip {
   goal: string;
   /** Indonesian name of the goal. */
   goalName: string;
-  /** Item id (registry `items.ts`) — seni WebP, dipakai kalau ada. */
+  /** Item id (registry `items.ts`) — seni WebP kendaraan, dipakai kalau ada. */
   item?: string;
+  /** Item id registry — seni bangunan/tempat tujuan, kalau ada. */
+  goalItem?: string;
 }
 
 const trip = (
@@ -40,12 +46,14 @@ const trip = (
   goal: string,
   goalName: string,
   item?: string,
+  goalItem?: string,
 ): Trip => ({
   vehicle,
   name,
   goal,
   goalName,
   item,
+  goalItem,
 });
 
 /** One slot: same road shape, many kendaraan/tujuan (varian anti-bosan). */
@@ -53,7 +61,7 @@ function slot(id: string, road: RoadSpec, trips: Trip[]): GameLevel<'path-trace'
   return trips.map((t) => ({
     id,
     narration: `Antar ${t.name} ke ${t.goalName}. Ikuti jalannya dengan jarimu!`,
-    data: { road, vehicle: t.vehicle, vehicleItem: t.item, goal: t.goal },
+    data: { road, vehicle: t.vehicle, vehicleItem: t.item, goal: t.goal, goalItem: t.goalItem },
   }));
 }
 
@@ -61,42 +69,42 @@ function slot(id: string, road: RoadSpec, trips: Trip[]): GameLevel<'path-trace'
    level dalam satu sesi tidak memakai kendaraan yang sama. --- */
 
 const KOTA: Trip[] = [
-  trip('🚗', 'mobil', '🏠', 'rumah', 'car'),
-  trip('🚕', 'taksi', '🏬', 'toko'),
-  trip('🚙', 'jip', '🌳', 'taman'),
-  trip('🚌', 'bus', '🏫', 'sekolah', 'bus'),
-  trip('🛵', 'skuter', '🏪', 'warung', 'scooter'),
-  trip('🚐', 'mobil antar-jemput', '🏫', 'sekolah'),
+  trip('🚗', 'mobil', '🏠', 'rumah', 'car', 'house'),
+  trip('🚕', 'taksi', '🏬', 'toko', undefined, 'shop'),
+  trip('🚙', 'jip', '🌳', 'taman', undefined, 'park'),
+  trip('🚌', 'bus', '🏫', 'sekolah', 'bus', 'school'),
+  trip('🛵', 'skuter', '🏪', 'warung', 'scooter', 'shop'),
+  trip('🚐', 'mobil antar-jemput', '🏫', 'sekolah', undefined, 'school'),
   trip('🛺', 'bajaj', '🏘️', 'perumahan', 'bajaj'),
   trip('🚎', 'bus listrik', '🚏', 'halte'),
-  trip('🚗', 'mobil', '⛽', 'pom bensin', 'car'),
+  trip('🚗', 'mobil', '⛽', 'pom bensin', 'car', 'gas-station'),
 ];
 
 const PENOLONG: Trip[] = [
-  trip('🚑', 'ambulans', '🏥', 'rumah sakit', 'ambulance'),
+  trip('🚑', 'ambulans', '🏥', 'rumah sakit', 'ambulance', 'hospital'),
   trip('🚒', 'mobil pemadam', '🔥', 'api', 'firetruck'),
   trip('🚓', 'mobil polisi', '🚧', 'jalan yang rusak', 'police'),
   trip('🚔', 'mobil polisi', '🏢', 'kantor', 'police'),
   trip('🛻', 'mobil bak', '🏗️', 'tempat bangunan', 'pickup'),
   trip('🚚', 'truk', '🏭', 'pabrik', 'truck'),
-  trip('🚛', 'truk besar', '🏬', 'toko besar'),
-  trip('🚑', 'ambulans', '🏫', 'sekolah', 'ambulance'),
+  trip('🚛', 'truk besar', '🏬', 'toko besar', undefined, 'shop'),
+  trip('🚑', 'ambulans', '🏫', 'sekolah', 'ambulance', 'school'),
 ];
 
 const DESA: Trip[] = [
-  trip('🚜', 'traktor', '🌾', 'sawah', 'tractor'),
-  trip('🛻', 'mobil bak', '🌽', 'ladang jagung', 'pickup'),
+  trip('🚜', 'traktor', '🌾', 'sawah', 'tractor', 'field'),
+  trip('🛻', 'mobil bak', '🌽', 'ladang jagung', 'pickup', 'field'),
   trip('🚚', 'truk susu', '🐄', 'peternakan', 'truck'),
-  trip('🚲', 'sepeda', '🏡', 'rumah nenek', 'bicycle'),
-  trip('🚙', 'jip', '🌳', 'padang rumput'),
+  trip('🚲', 'sepeda', '🏡', 'rumah nenek', 'bicycle', 'house'),
+  trip('🚙', 'jip', '🌳', 'pohon besar', undefined, 'tree'),
   trip('🚜', 'traktor', '🏚️', 'gudang', 'tractor'),
-  trip('🛵', 'skuter', '🌻', 'kebun bunga', 'scooter'),
+  trip('🛵', 'skuter', '🌻', 'kebun bunga', 'scooter', 'field'),
 ];
 
 const MAIN: Trip[] = [
-  trip('🚲', 'sepeda', '🌳', 'taman', 'bicycle'),
+  trip('🚲', 'sepeda', '🌳', 'taman', 'bicycle', 'park'),
   trip('🛴', 'otoped', '🏞️', 'lapangan'),
-  trip('🏍️', 'motor', '⛽', 'pom bensin'),
+  trip('🏍️', 'motor', '⛽', 'pom bensin', undefined, 'gas-station'),
   trip('🏎️', 'mobil balap', '🏁', 'garis finis'),
   trip('🚗', 'mobil', '🏖️', 'pantai', 'car'),
   trip('🚌', 'bus', '🎪', 'pasar malam', 'bus'),
