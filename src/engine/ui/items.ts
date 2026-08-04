@@ -53,9 +53,34 @@ export const ITEMS: Record<string, ItemDef> = {
   tiger: { emoji: '🐯', label: 'harimau', ext: 'webp' },
   monkey: { emoji: '🐵', label: 'monyet', ext: 'webp' },
   frog: { emoji: '🐸', label: 'katak', ext: 'webp' },
-  // Everyday objects (Taman Huruf letter cues).
+  // Everyday objects — the things that show up again and again in letter,
+  // syllable and spelling questions (Taman Huruf, Pasang Kata, Suku Kata,
+  // Ejaan Jitu, Pasangan Pintar).
   sun: { emoji: '☀️', label: 'matahari', ext: 'webp' },
   cap: { emoji: '🧢', label: 'topi', ext: 'webp' },
+  ball: { emoji: '⚽', label: 'bola', ext: 'webp' },
+  book: { emoji: '📖', label: 'buku', ext: 'webp' },
+  pencil: { emoji: '✏️', label: 'pensil', ext: 'webp' },
+  backpack: { emoji: '🎒', label: 'tas', ext: 'webp' },
+  key: { emoji: '🔑', label: 'kunci', ext: 'webp' },
+  umbrella: { emoji: '☂️', label: 'payung', ext: 'webp' },
+  shoe: { emoji: '👟', label: 'sepatu', ext: 'webp' },
+  chair: { emoji: '🪑', label: 'kursi', ext: 'webp' },
+  door: { emoji: '🚪', label: 'pintu', ext: 'webp' },
+  balloon: { emoji: '🎈', label: 'balon', ext: 'webp' },
+  // `teddy` is the toy — deliberately NOT `bear`, which is the real animal in
+  // Hutan Hewan. Never let the two stand in for each other in a question.
+  teddy: { emoji: '🧸', label: 'boneka', ext: 'webp' },
+  flower: { emoji: '🌸', label: 'bunga', ext: 'webp' },
+  moon: { emoji: '🌙', label: 'bulan', ext: 'webp' },
+  cloud: { emoji: '☁️', label: 'awan', ext: 'webp' },
+  // Food & drink (everyday objects, not the Pasar Buah fruit below).
+  milk: { emoji: '🥛', label: 'susu', ext: 'webp' },
+  egg: { emoji: '🥚', label: 'telur', ext: 'webp' },
+  bread: { emoji: '🍞', label: 'roti', ext: 'webp' },
+  rice: { emoji: '🍚', label: 'nasi', ext: 'webp' },
+  carrot: { emoji: '🥕', label: 'wortel', ext: 'webp' },
+  corn: { emoji: '🌽', label: 'jagung', ext: 'webp' },
   // Fruit (Pasar Buah, plus letter/spelling cues in other games). The colours
   // are load-bearing: Pasar Buah sorts these into colour baskets, so art for a
   // new fruit must keep the colour its config sorts it by.

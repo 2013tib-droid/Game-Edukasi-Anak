@@ -24,31 +24,35 @@ interface Word {
   /** Suku kata dalam HURUF BESAR, mis. ['SE', 'PE', 'DA']. */
   syl: string[];
   emoji: string;
+  /** Id item registry (seni WebP) — dipakai lebih dulu daripada `emoji`. */
+  item?: string;
 }
 
 const w = (emoji: string, ...syl: string[]): Word => ({ syl, emoji });
+/** Sama seperti `w`, tapi gambarnya seni WebP (emoji tinggal cadangan). */
+const wi = (emoji: string, item: string, ...syl: string[]): Word => ({ syl, emoji, item });
 
 /* --- Kolam kata, dikelompokkan supaya slot yang berbeda memakai tema yang
    berbeda (satu sesi tidak mengulang benda yang sama). --- */
 
 const BENDA: Word[] = [
-  w('📕', 'BU', 'KU'),
-  w('⚽', 'BO', 'LA'),
-  w('🧢', 'TO', 'PI'),
+  wi('📕', 'book', 'BU', 'KU'),
+  wi('⚽', 'ball', 'BO', 'LA'),
+  wi('🧢', 'cap', 'TO', 'PI'),
   w('👕', 'BA', 'JU'),
-  w('☂️', 'PA', 'YUNG'),
-  w('🚪', 'PIN', 'TU'),
-  w('🪑', 'KUR', 'SI'),
-  w('🚗', 'MO', 'BIL'),
+  wi('☂️', 'umbrella', 'PA', 'YUNG'),
+  wi('🚪', 'door', 'PIN', 'TU'),
+  wi('🪑', 'chair', 'KUR', 'SI'),
+  wi('🚗', 'car', 'MO', 'BIL'),
   w('🚢', 'KA', 'PAL'),
   w('🔥', 'A', 'PI'),
 ];
 
 const ALAM: Word[] = [
-  w('🌙', 'BU', 'LAN'),
+  wi('🌙', 'moon', 'BU', 'LAN'),
   w('⭐', 'BIN', 'TANG'),
   w('🍃', 'DA', 'UN'),
-  w('🌸', 'BU', 'NGA'),
+  wi('🌸', 'flower', 'BU', 'NGA'),
   w('💧', 'A', 'IR'),
   w('⛰️', 'GU', 'NUNG'),
   w('🌧️', 'HU', 'JAN'),
@@ -56,38 +60,38 @@ const ALAM: Word[] = [
 ];
 
 const HEWAN: Word[] = [
-  w('🐮', 'SA', 'PI'),
-  w('🐴', 'KU', 'DA'),
-  w('🦆', 'BE', 'BEK'),
-  w('🐱', 'KU', 'CING'),
-  w('🐘', 'GA', 'JAH'),
+  wi('🐮', 'cow', 'SA', 'PI'),
+  wi('🐴', 'horse', 'KU', 'DA'),
+  wi('🦆', 'duck', 'BE', 'BEK'),
+  wi('🐱', 'cat', 'KU', 'CING'),
+  wi('🐘', 'elephant', 'GA', 'JAH'),
   w('🐟', 'I', 'KAN'),
-  w('🐔', 'A', 'YAM'),
-  w('🐐', 'KAM', 'BING'),
-  w('🐒', 'MO', 'NYET'),
+  wi('🐔', 'chicken', 'A', 'YAM'),
+  wi('🐐', 'goat', 'KAM', 'BING'),
+  wi('🐒', 'monkey', 'MO', 'NYET'),
 ];
 
 const MAKANAN: Word[] = [
-  w('🍚', 'NA', 'SI'),
-  w('🍞', 'RO', 'TI'),
-  w('🥛', 'SU', 'SU'),
-  w('🥚', 'TE', 'LUR'),
-  w('🍌', 'PI', 'SANG'),
-  w('🍊', 'JE', 'RUK'),
-  w('🍇', 'ANG', 'GUR'),
-  w('🍍', 'NA', 'NAS'),
-  w('🍎', 'A', 'PEL'),
-  w('🍉', 'SE', 'MANG', 'KA'),
+  wi('🍚', 'rice', 'NA', 'SI'),
+  wi('🍞', 'bread', 'RO', 'TI'),
+  wi('🥛', 'milk', 'SU', 'SU'),
+  wi('🥚', 'egg', 'TE', 'LUR'),
+  wi('🍌', 'banana', 'PI', 'SANG'),
+  wi('🍊', 'orange', 'JE', 'RUK'),
+  wi('🍇', 'grapes', 'ANG', 'GUR'),
+  wi('🍍', 'pineapple', 'NA', 'NAS'),
+  wi('🍎', 'apple', 'A', 'PEL'),
+  wi('🍉', 'watermelon', 'SE', 'MANG', 'KA'),
 ];
 
 const PANJANG: Word[] = [
-  w('🚲', 'SE', 'PE', 'DA'),
-  w('🐰', 'KE', 'LIN', 'CI'),
-  w('🧸', 'BO', 'NE', 'KA'),
-  w('🚂', 'KE', 'RE', 'TA'),
+  wi('🚲', 'bicycle', 'SE', 'PE', 'DA'),
+  wi('🐰', 'rabbit', 'KE', 'LIN', 'CI'),
+  wi('🧸', 'teddy', 'BO', 'NE', 'KA'),
+  wi('🚂', 'train', 'KE', 'RE', 'TA'),
   w('👖', 'CE', 'LA', 'NA'),
-  w('🏫', 'SE', 'KO', 'LAH'),
-  w('🐯', 'HA', 'RI', 'MAU'),
+  wi('🏫', 'school', 'SE', 'KO', 'LAH'),
+  wi('🐯', 'tiger', 'HA', 'RI', 'MAU'),
   w('🐊', 'BU', 'A', 'YA'),
   w('🥒', 'MEN', 'TI', 'MUN'),
   w('🪟', 'JEN', 'DE', 'LA'),
@@ -113,7 +117,7 @@ function gap(word: Word, blank: number, decoys: [string, string]): GameLevel<'ta
   return {
     id: '',
     narration: 'Lihat gambarnya, lalu baca tulisannya. Suku kata mana yang hilang?',
-    data: { picture: word.emoji, board, choices },
+    data: { picture: word.emoji, pictureItem: word.item, board, choices },
   };
 }
 
@@ -126,6 +130,7 @@ function howMany(word: Word): GameLevel<'tap-answer'> {
     narration: 'Baca kata ini pelan-pelan. Ada berapa suku katanya?',
     data: {
       picture: word.emoji,
+      pictureItem: word.item,
       board: word.syl.join('-'),
       choices: [
         { id: 'a', text: String(n), correct: true },
@@ -145,6 +150,7 @@ function spelling(word: Word, ...wrong: string[]): GameLevel<'tap-answer'> {
     narration: 'Lihat gambarnya. Tulisan mana yang benar?',
     data: {
       picture: word.emoji,
+      pictureItem: word.item,
       choices: [
         { id: 'a', text: word.syl.join(''), correct: true },
         ...wrong.map((s, i) => ({ id: `w${i}`, text: s })),

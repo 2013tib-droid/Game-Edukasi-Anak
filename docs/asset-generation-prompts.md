@@ -115,8 +115,8 @@ Status pengiriman:
 |---|---|
 | Maskot 6 tahap | ✅ diterima (2026-08-04) → `public/assets/mascot/mascot-1..6.webp` |
 | Buah (14) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
-| Kendaraan & tujuan (20) | ⏳ belum |
-| Benda sehari-hari (20) | ⏳ belum |
+| Kendaraan & tujuan (20) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
+| Benda sehari-hari (20) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
 
 ### Pelajaran dari dua batch pertama (BACA sebelum minta batch baru)
 
@@ -138,3 +138,20 @@ Status pengiriman:
 - **Warna buah tidak boleh diubah semaunya**: Pasar Buah menyortir buah ke
   keranjang warna, jadi seni yang warnanya menyimpang membuat jawaban benar
   jadi terlihat salah.
+
+### Tambahan dari batch benda sehari-hari (2026-08-04)
+
+- Lembar 20 benda ini **berhasil dipotong otomatis** oleh
+  `scripts/cut-item-sheet.py` karena latarnya putih polos dan tiap objek
+  ber-outline — bukti bahwa permintaan "latar putih polos" di atas memang
+  yang menentukan. Ukurannya tetap kecil (±200px, sesuai keberatan "satu
+  gambar per file" di atas); cukup untuk kartu jawaban, tapi kalau nanti ada
+  yang dipakai sebagai cue besar, minta versi satuannya.
+- **Benda putih perlu perhatian khusus**: telur, awan, nasi, dan susu nyaris
+  sewarna kertas. Toleransi flood-fill harus kecil (8) supaya badan benda
+  tidak ikut terhapus.
+- **Latar yang terkurung** (celah kursi, lubang kepala kunci) tidak terjangkau
+  flood-fill dari tepi dan harus ditembus per item — tidak bisa
+  diotomatiskan, karena bercak putih bola sepak terlihat sama persis.
+- **Jangan memberi nama yang bentrok dengan hewan asli**: boneka beruang jadi
+  `teddy`, bukan `bear`.

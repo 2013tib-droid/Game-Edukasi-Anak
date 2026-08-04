@@ -20,10 +20,14 @@ interface Pair {
   target: string;
   /** Emoji target (boleh kosong untuk target yang berupa tulisan saja). */
   targetEmoji?: string;
+  /** Id item registry untuk target (seni WebP); `targetEmoji` jadi cadangan. */
+  targetItem?: string;
   /** Tulisan pada kartu yang ditarik. */
   item: string;
   /** Emoji pada kartu yang ditarik. */
   itemEmoji?: string;
+  /** Id item registry untuk kartu (seni WebP); `itemEmoji` jadi cadangan. */
+  itemItem?: string;
 }
 
 /* ---------- Pembangun varian (id diisi oleh slot()) ---------- */
@@ -41,6 +45,7 @@ function match(narration: string, ...pairs: Pair[]): MixedLevel {
       targets: pairs.map((p, i) => ({
         id: `t${i}`,
         ...(p.targetEmoji ? { emoji: p.targetEmoji } : {}),
+        ...(p.targetItem ? { item: p.targetItem } : {}),
         label: p.target,
       })),
       items: order.map((src) => {
@@ -48,6 +53,7 @@ function match(narration: string, ...pairs: Pair[]): MixedLevel {
         return {
           id: `i${src}`,
           ...(p.itemEmoji ? { emoji: p.itemEmoji } : {}),
+          ...(p.itemItem ? { item: p.itemItem } : {}),
           text: p.item,
           targetId: `t${src}`,
         };
@@ -57,19 +63,35 @@ function match(narration: string, ...pairs: Pair[]): MixedLevel {
 }
 
 /** Profesi ↔ alat kerjanya. */
-const job = (tool: string, toolName: string, person: string, personEmoji: string): Pair => ({
+const job = (
+  tool: string,
+  toolName: string,
+  person: string,
+  personEmoji: string,
+  toolItem?: string,
+): Pair => ({
   target: toolName,
   targetEmoji: tool,
+  targetItem: toolItem,
   item: person,
   itemEmoji: personEmoji,
 });
 
 /** Hewan ↔ tempat tinggalnya. */
-const home = (place: string, placeName: string, animal: string, animalEmoji: string): Pair => ({
+const home = (
+  place: string,
+  placeName: string,
+  animal: string,
+  animalEmoji: string,
+  animalItem?: string,
+  placeItem?: string,
+): Pair => ({
   target: placeName,
   targetEmoji: place,
+  targetItem: placeItem,
   item: animal,
   itemEmoji: animalEmoji,
+  itemItem: animalItem,
 });
 
 /** Lawan kata: target tulisan saja, kartunya juga tulisan saja. */
@@ -82,7 +104,7 @@ const solve = (question: string, answer: number): Pair => ({
 });
 
 /** Kartu ingatan: cari dua gambar yang sama. */
-function cards(...pairs: { id: string; emoji: string }[]): MixedLevel {
+function cards(...pairs: { id: string; emoji: string; item?: string }[]): MixedLevel {
   return {
     id: '',
     template: 'memory',
@@ -91,7 +113,7 @@ function cards(...pairs: { id: string; emoji: string }[]): MixedLevel {
   };
 }
 
-const card = (id: string, emoji: string) => ({ id, emoji });
+const card = (id: string, emoji: string, item?: string) => ({ id, emoji, ...(item ? { item } : {}) });
 
 /** Semua varian dalam satu slot berbagi id — bintangnya per slot. */
 function slot(id: string, ...variants: MixedLevel[]): MixedSlot {
@@ -118,21 +140,21 @@ const config: MixedGameConfig = {
       match(
         ASK_JOB,
         job('🩺', 'stetoskop', 'dokter', '👩‍⚕️'),
-        job('🚒', 'mobil pemadam', 'pemadam', '👨‍🚒'),
-        job('🌾', 'sawah', 'petani', '👨‍🌾'),
+        job('🚒', 'mobil pemadam', 'pemadam', '👨‍🚒', 'firetruck'),
+        job('🌾', 'sawah', 'petani', '👨‍🌾', 'field'),
       ),
       match(
         ASK_JOB,
         job('✂️', 'gunting', 'penata rambut', '💇'),
         job('🍳', 'wajan', 'koki', '👨‍🍳'),
-        job('📚', 'buku', 'guru', '👩‍🏫'),
+        job('📚', 'buku', 'guru', '👩‍🏫', 'book'),
       ),
       match(
         ASK_JOB,
         job('🎨', 'kuas', 'pelukis', '👩‍🎨'),
-        job('🚌', 'bus', 'sopir', '🧑‍✈️'),
-        job('🔧', 'kunci', 'montir', '🧑‍🔧'),
-        job('🚓', 'mobil polisi', 'polisi', '👮'),
+        job('🚌', 'bus', 'sopir', '🧑‍✈️', 'bus'),
+        job('🔧', 'kunci', 'montir', '🧑‍🔧', 'key'),
+        job('🚓', 'mobil polisi', 'polisi', '👮', 'police'),
       ),
     ),
     // --- 2. Hewan & tempat tinggalnya ---
@@ -142,11 +164,11 @@ const config: MixedGameConfig = {
         ASK_HOME,
         home('🌊', 'laut', 'ikan', '🐟'),
         home('🪹', 'sarang', 'burung', '🐦'),
-        home('🏡', 'kandang', 'ayam', '🐔'),
+        home('🏡', 'kandang', 'ayam', '🐔', 'chicken', 'house'),
       ),
       match(
         ASK_HOME,
-        home('🌳', 'pohon', 'monyet', '🐒'),
+        home('🌳', 'pohon', 'monyet', '🐒', 'monkey', 'tree'),
         home('🕸️', 'jaring', 'laba-laba', '🕷️'),
         home('🏞️', 'sungai', 'buaya', '🐊'),
       ),
@@ -154,8 +176,8 @@ const config: MixedGameConfig = {
         ASK_HOME,
         home('🌊', 'laut', 'gurita', '🐙'),
         home('🌵', 'gurun', 'unta', '🐫'),
-        home('❄️', 'kutub', 'pinguin', '🐧'),
-        home('🌳', 'hutan', 'harimau', '🐯'),
+        home('❄️', 'kutub', 'pinguin', '🐧', 'penguin'),
+        home('🌳', 'hutan', 'harimau', '🐯', 'tiger', 'tree'),
       ),
     ),
     // --- 3. Lawan kata ---
@@ -205,47 +227,47 @@ const config: MixedGameConfig = {
       'l5',
       match(
         ASK_USE,
-        { target: 'rak buku', targetEmoji: '📚', item: 'buku', itemEmoji: '📕' },
-        { target: 'kulkas', targetEmoji: '🧊', item: 'susu', itemEmoji: '🥛' },
+        { target: 'rak buku', targetEmoji: '📚', item: 'buku', itemEmoji: '📕', itemItem: 'book' },
+        { target: 'kulkas', targetEmoji: '🧊', item: 'susu', itemEmoji: '🥛', itemItem: 'milk' },
         { target: 'tempat sampah', targetEmoji: '🗑️', item: 'sampah', itemEmoji: '🍌' },
       ),
       match(
         ASK_USE,
         { target: 'lemari', targetEmoji: '🗄️', item: 'baju', itemEmoji: '👕' },
-        { target: 'jalan raya', targetEmoji: '🛣️', item: 'mobil', itemEmoji: '🚗' },
+        { target: 'jalan raya', targetEmoji: '🛣️', item: 'mobil', itemEmoji: '🚗', itemItem: 'car' },
         { target: 'kolam', targetEmoji: '💧', item: 'ikan', itemEmoji: '🐠' },
       ),
       match(
         ASK_USE,
-        { target: 'saat hujan', targetEmoji: '🌧️', item: 'payung', itemEmoji: '☂️' },
-        { target: 'saat panas', targetEmoji: '☀️', item: 'topi', itemEmoji: '🧢' },
+        { target: 'saat hujan', targetEmoji: '🌧️', item: 'payung', itemEmoji: '☂️', itemItem: 'umbrella' },
+        { target: 'saat panas', targetEmoji: '☀️', targetItem: 'sun', item: 'topi', itemEmoji: '🧢', itemItem: 'cap' },
         { target: 'saat dingin', targetEmoji: '❄️', item: 'jaket', itemEmoji: '🧥' },
       ),
     ),
     // --- 6. Kartu ingatan, 4 pasang ---
     slot(
       'l6',
-      cards(card('buku', '📕'), card('pensil', '✏️'), card('tas', '🎒'), card('bola', '⚽')),
-      cards(card('kucing', '🐱'), card('kuda', '🐴'), card('bebek', '🦆'), card('katak', '🐸')),
-      cards(card('mobil', '🚗'), card('kapal', '🚢'), card('sepeda', '🚲'), card('kereta', '🚂')),
-      cards(card('bulan', '🌙'), card('awan', '☁️'), card('daun', '🍃'), card('bunga', '🌸')),
+      cards(card('buku', '📕', 'book'), card('pensil', '✏️', 'pencil'), card('tas', '🎒', 'backpack'), card('bola', '⚽', 'ball')),
+      cards(card('kucing', '🐱', 'cat'), card('kuda', '🐴', 'horse'), card('bebek', '🦆', 'duck'), card('katak', '🐸', 'frog')),
+      cards(card('mobil', '🚗', 'car'), card('kapal', '🚢'), card('sepeda', '🚲', 'bicycle'), card('kereta', '🚂', 'train')),
+      cards(card('bulan', '🌙', 'moon'), card('awan', '☁️', 'cloud'), card('daun', '🍃'), card('bunga', '🌸', 'flower')),
     ),
     // --- 7. Kartu ingatan, 5 pasang (lebih menantang dari kelompok TK) ---
     slot(
       'l7',
       cards(
-        card('nasi', '🍚'),
-        card('roti', '🍞'),
-        card('susu', '🥛'),
-        card('telur', '🥚'),
+        card('nasi', '🍚', 'rice'),
+        card('roti', '🍞', 'bread'),
+        card('susu', '🥛', 'milk'),
+        card('telur', '🥚', 'egg'),
         card('madu', '🍯'),
       ),
       cards(
-        card('gajah', '🐘'),
-        card('jerapah', '🦒'),
-        card('singa', '🦁'),
-        card('zebra', '🦓'),
-        card('monyet', '🐒'),
+        card('gajah', '🐘', 'elephant'),
+        card('jerapah', '🦒', 'giraffe'),
+        card('singa', '🦁', 'lion'),
+        card('zebra', '🦓', 'zebra'),
+        card('monyet', '🐒', 'monkey'),
       ),
       cards(
         card('gitar', '🎸'),
