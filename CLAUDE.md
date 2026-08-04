@@ -360,6 +360,14 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Field engine baru **`PathTraceData.goalItem`** (id item registry) untuk tujuan di ujung jalan; `goal` emoji tetap jadi cadangan. Trip di `jalan-kendaraan.ts` yang tujuannya punya seni (rumah, sekolah, rumah sakit, toko/warung, pom bensin, sawah/ladang/kebun bunga, taman, pohon) sekarang menyebut `goalItem`; sisanya (halte, pabrik, istana…) tetap emoji sampai asetnya ada.
   - **`.road-marker-img` dikotakkan PERSEGI** (`width` = `height` + `object-fit: contain`, clamp 48–76px): sawah & taman gambarnya lebar (rasio 2–2,3), kalau tingginya `auto` mereka melebar keluar panggung jalan. Aturan yang sama dengan `.choice-img` — jangan pakai `height: auto` untuk gambar pengganti emoji.
   - Sumbernya satu lembar gambar dari pemilik; latarnya dipotong dengan flood-fill dari tepi (tetangga-toleransi), bukan ambang kecerahan — glow latarnya lebih terang dari garis luar ikonnya.
+  - Aset diekspor dari lembar itu ke ±256 px sisi terpanjang (bukan 512 seperti seni hewan): tujuan tampil ±57 px di HP, jadi 256 px sudah cukup tajam untuk layar 2–3×. Ukuran akhir gambar dijaga PERSEGI oleh CSS, bukan oleh file.
+
+- **12 kendaraan Jalan Kendaraan jadi seni premium** (2026-08-04, PR terpisah dari pemilik yang belum tercatat di sini):
+  - Aset `public/assets/items/{car,bus,truck,pickup,tractor,bicycle,scooter,ambulance,firetruck,police,train,bajaj}.webp`, terdaftar di `items.ts`; dipakai lewat `PathTraceData.vehicleItem`.
+  - **Seni kendaraan WAJIB MENGHADAP KIRI**, sama seperti emoji kendaraan: `PathTrace` mencerminkan gambar dengan `scaleX(-1)` sebelum memutarnya mengikuti arah jalan. Tampak samping saja — kendaraan udara terlihat aneh saat diputar.
+  - **Satu seni jangan dipakai untuk dua nama kendaraan berbeda** (anak menghafal bentuknya). Yang belum ada seninya (taksi, jip, motor, mobil balap, otoped, trem/monorel) sementara masih emoji — tinggal isi argumennya begitu aset dibuat.
+
+- **`trip()` di `jalan-kendaraan.ts` punya DUA slot seni** (hasil penggabungan dua pekerjaan di atas, 2026-08-04): `trip(vehicle, name, goal, goalName, item?, goalItem?)` — argumen kelima = seni **kendaraan**, keenam = seni **tujuan**. Keduanya opsional dan emoji selalu jadi cadangan, jadi trip yang cuma punya salah satunya mengisi `undefined` di slot yang lain. Kalau menambah aset baru, isi argumennya di config — JANGAN menambah field baru di engine.
 
 ## Saluran Kontak "Hubungi Kami" (KEPUTUSAN PEMILIK — 2026-07-29)
 

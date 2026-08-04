@@ -115,7 +115,10 @@ Status pengiriman:
 |---|---|
 | Maskot 6 tahap | ✅ diterima (2026-08-04) → `public/assets/mascot/mascot-1..6.webp` |
 | Buah (14) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
-| Kendaraan & tujuan (20) | ⏳ belum |
+| Kendaraan (12) | ✅ diterima (2026-08-04) → `car, bus, truck, pickup, tractor, bicycle, scooter, ambulance, firetruck, police, train, bajaj` |
+| Bangunan & tempat tujuan (8) | ✅ diterima (2026-08-04) → `house, school, hospital, shop, gas-station, field, tree, park` |
+| Kendaraan yang belum ada | ⏳ taksi, jip, motor, mobil balap, otoped, trem/monorel |
+| Tujuan yang belum ada | ⏳ halte, pabrik, kantor, stasiun, istana, jembatan, pantai |
 | Benda sehari-hari (20) | ⏳ belum |
 
 ### Pelajaran dari dua batch pertama (BACA sebelum minta batch baru)
@@ -135,6 +138,11 @@ Status pengiriman:
 - **Bentuk harus benar, bukan cuma cantik.** Mangga percobaan pertama digambar
   bulat oranye — nyaris kembar dengan jeruk, dan ini game pengenalan buah.
   Versi kedua (lonjong melengkung, hijau-kekuningan) baru dipakai.
+- **Lembar bangunan (2026-08-04) kena dua hal yang sama**: latarnya gelap
+  bercahaya lagi, dan 8 objek dalam satu lembar → tiap ikon cuma ±256px. Kali
+  ini pemotongan selamat karena cahaya latarnya HALUS (gradasi) sementara garis
+  luar ikonnya tajam, jadi flood-fill berhenti di tepi. Itu keberuntungan, bukan
+  aturan — permintaan tetap: **latar putih polos, satu objek per file.**
 - **Warna buah tidak boleh diubah semaunya**: Pasar Buah menyortir buah ke
   keranjang warna, jadi seni yang warnanya menyimpang membuat jawaban benar
   jadi terlihat salah.
