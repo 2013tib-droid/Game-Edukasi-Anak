@@ -13,10 +13,16 @@ import type { GameConfig, GameLevel, RoadSpec } from '@/engine/core/types';
  * CATATAN emoji: pakai kendaraan DARAT (menghadap samping) — engine memutar
  * gambar mengikuti arah jalan, jadi pesawat/helikopter/roket yang menghadap
  * serong akan terlihat aneh.
+ *
+ * Kendaraan yang sudah punya SENI (WebP di registry `items.ts`) menyebutkannya
+ * lewat argumen kelima `trip(...)`; emoji tetap ditulis sebagai cadangan kalau
+ * asetnya gagal dimuat. Yang belum ada seninya (taksi, jip, motor, mobil balap,
+ * otoped, trem/monorel) sementara masih emoji — tinggal isi argumen itu begitu
+ * asetnya dibuat. Satu seni JANGAN dipakai untuk dua nama kendaraan berbeda.
  */
 
 interface Trip {
-  /** Vehicle emoji (kendaraan darat, menghadap samping). */
+  /** Vehicle emoji (kendaraan darat, menghadap samping) — cadangan. */
   vehicle: string;
   /** Indonesian name, dipakai di narasi. */
   name: string;
@@ -24,13 +30,22 @@ interface Trip {
   goal: string;
   /** Indonesian name of the goal. */
   goalName: string;
+  /** Item id (registry `items.ts`) — seni WebP, dipakai kalau ada. */
+  item?: string;
 }
 
-const trip = (vehicle: string, name: string, goal: string, goalName: string): Trip => ({
+const trip = (
+  vehicle: string,
+  name: string,
+  goal: string,
+  goalName: string,
+  item?: string,
+): Trip => ({
   vehicle,
   name,
   goal,
   goalName,
+  item,
 });
 
 /** One slot: same road shape, many kendaraan/tujuan (varian anti-bosan). */
@@ -38,7 +53,7 @@ function slot(id: string, road: RoadSpec, trips: Trip[]): GameLevel<'path-trace'
   return trips.map((t) => ({
     id,
     narration: `Antar ${t.name} ke ${t.goalName}. Ikuti jalannya dengan jarimu!`,
-    data: { road, vehicle: t.vehicle, goal: t.goal },
+    data: { road, vehicle: t.vehicle, vehicleItem: t.item, goal: t.goal },
   }));
 }
 
@@ -46,52 +61,52 @@ function slot(id: string, road: RoadSpec, trips: Trip[]): GameLevel<'path-trace'
    level dalam satu sesi tidak memakai kendaraan yang sama. --- */
 
 const KOTA: Trip[] = [
-  trip('🚗', 'mobil', '🏠', 'rumah'),
+  trip('🚗', 'mobil', '🏠', 'rumah', 'car'),
   trip('🚕', 'taksi', '🏬', 'toko'),
   trip('🚙', 'jip', '🌳', 'taman'),
-  trip('🚌', 'bus', '🏫', 'sekolah'),
-  trip('🛵', 'skuter', '🏪', 'warung'),
+  trip('🚌', 'bus', '🏫', 'sekolah', 'bus'),
+  trip('🛵', 'skuter', '🏪', 'warung', 'scooter'),
   trip('🚐', 'mobil antar-jemput', '🏫', 'sekolah'),
-  trip('🛺', 'bajaj', '🏘️', 'perumahan'),
+  trip('🛺', 'bajaj', '🏘️', 'perumahan', 'bajaj'),
   trip('🚎', 'bus listrik', '🚏', 'halte'),
-  trip('🚗', 'mobil', '⛽', 'pom bensin'),
+  trip('🚗', 'mobil', '⛽', 'pom bensin', 'car'),
 ];
 
 const PENOLONG: Trip[] = [
-  trip('🚑', 'ambulans', '🏥', 'rumah sakit'),
-  trip('🚒', 'mobil pemadam', '🔥', 'api'),
-  trip('🚓', 'mobil polisi', '🚧', 'jalan yang rusak'),
-  trip('🚔', 'mobil polisi', '🏢', 'kantor'),
-  trip('🛻', 'mobil bak', '🏗️', 'tempat bangunan'),
-  trip('🚚', 'truk', '🏭', 'pabrik'),
+  trip('🚑', 'ambulans', '🏥', 'rumah sakit', 'ambulance'),
+  trip('🚒', 'mobil pemadam', '🔥', 'api', 'firetruck'),
+  trip('🚓', 'mobil polisi', '🚧', 'jalan yang rusak', 'police'),
+  trip('🚔', 'mobil polisi', '🏢', 'kantor', 'police'),
+  trip('🛻', 'mobil bak', '🏗️', 'tempat bangunan', 'pickup'),
+  trip('🚚', 'truk', '🏭', 'pabrik', 'truck'),
   trip('🚛', 'truk besar', '🏬', 'toko besar'),
-  trip('🚑', 'ambulans', '🏫', 'sekolah'),
+  trip('🚑', 'ambulans', '🏫', 'sekolah', 'ambulance'),
 ];
 
 const DESA: Trip[] = [
-  trip('🚜', 'traktor', '🌾', 'sawah'),
-  trip('🛻', 'mobil bak', '🌽', 'ladang jagung'),
-  trip('🚚', 'truk susu', '🐄', 'peternakan'),
-  trip('🚲', 'sepeda', '🏡', 'rumah nenek'),
+  trip('🚜', 'traktor', '🌾', 'sawah', 'tractor'),
+  trip('🛻', 'mobil bak', '🌽', 'ladang jagung', 'pickup'),
+  trip('🚚', 'truk susu', '🐄', 'peternakan', 'truck'),
+  trip('🚲', 'sepeda', '🏡', 'rumah nenek', 'bicycle'),
   trip('🚙', 'jip', '🌳', 'padang rumput'),
-  trip('🚜', 'traktor', '🏚️', 'gudang'),
-  trip('🛵', 'skuter', '🌻', 'kebun bunga'),
+  trip('🚜', 'traktor', '🏚️', 'gudang', 'tractor'),
+  trip('🛵', 'skuter', '🌻', 'kebun bunga', 'scooter'),
 ];
 
 const MAIN: Trip[] = [
-  trip('🚲', 'sepeda', '🌳', 'taman'),
+  trip('🚲', 'sepeda', '🌳', 'taman', 'bicycle'),
   trip('🛴', 'otoped', '🏞️', 'lapangan'),
   trip('🏍️', 'motor', '⛽', 'pom bensin'),
   trip('🏎️', 'mobil balap', '🏁', 'garis finis'),
-  trip('🚗', 'mobil', '🏖️', 'pantai'),
-  trip('🚌', 'bus', '🎪', 'pasar malam'),
+  trip('🚗', 'mobil', '🏖️', 'pantai', 'car'),
+  trip('🚌', 'bus', '🎪', 'pasar malam', 'bus'),
   trip('🚙', 'jip', '🎢', 'taman bermain'),
-  trip('🛵', 'skuter', '🏟️', 'stadion'),
+  trip('🛵', 'skuter', '🏟️', 'stadion', 'scooter'),
   trip('🛹', 'papan luncur', '🛝', 'perosotan'),
 ];
 
 const KERETA: Trip[] = [
-  trip('🚂', 'kereta', '🚉', 'stasiun'),
+  trip('🚂', 'kereta', '🚉', 'stasiun', 'train'),
   trip('🚞', 'kereta gunung', '⛰️', 'gunung'),
   trip('🚄', 'kereta cepat', '🏙️', 'kota'),
   trip('🚋', 'trem', '🏛️', 'museum'),
@@ -102,13 +117,13 @@ const KERETA: Trip[] = [
 
 const PETUALANG: Trip[] = [
   trip('🚙', 'jip', '⛰️', 'gunung'),
-  trip('🚌', 'bus', '🏕️', 'tempat berkemah'),
-  trip('🛻', 'mobil bak', '🏜️', 'padang pasir'),
+  trip('🚌', 'bus', '🏕️', 'tempat berkemah', 'bus'),
+  trip('🛻', 'mobil bak', '🏜️', 'padang pasir', 'pickup'),
   trip('🏍️', 'motor', '🌋', 'gunung besar'),
-  trip('🚚', 'truk', '🏰', 'istana'),
-  trip('🚗', 'mobil', '🗼', 'menara'),
-  trip('🚜', 'traktor', '🌲', 'hutan pinus'),
-  trip('🚲', 'sepeda', '🌉', 'jembatan'),
+  trip('🚚', 'truk', '🏰', 'istana', 'truck'),
+  trip('🚗', 'mobil', '🗼', 'menara', 'car'),
+  trip('🚜', 'traktor', '🌲', 'hutan pinus', 'tractor'),
+  trip('🚲', 'sepeda', '🌉', 'jembatan', 'bicycle'),
 ];
 
 const config: GameConfig<'path-trace'> = {
