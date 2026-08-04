@@ -73,6 +73,22 @@ export const ITEMS: Record<string, ItemDef> = {
   cherry: { emoji: '🍒', label: 'ceri', ext: 'webp' },
   lemon: { emoji: '🍋', label: 'lemon', ext: 'webp' },
   avocado: { emoji: '🥑', label: 'alpukat', ext: 'webp' },
+  // Kendaraan darat (Jalan Kendaraan). Semuanya MENGHADAP KIRI, sama seperti
+  // emoji kendaraan — `PathTrace` mencerminkan gambar dengan `scaleX(-1)`
+  // sebelum memutarnya mengikuti arah jalan, jadi seni baru WAJIB menghadap
+  // kiri juga. Tampak samping saja (kendaraan udara terlihat aneh saat diputar).
+  car: { emoji: '🚗', label: 'mobil', ext: 'webp' },
+  bus: { emoji: '🚌', label: 'bus', ext: 'webp' },
+  truck: { emoji: '🚚', label: 'truk', ext: 'webp' },
+  pickup: { emoji: '🛻', label: 'mobil bak', ext: 'webp' },
+  tractor: { emoji: '🚜', label: 'traktor', ext: 'webp' },
+  bicycle: { emoji: '🚲', label: 'sepeda', ext: 'webp' },
+  scooter: { emoji: '🛵', label: 'skuter', ext: 'webp' },
+  ambulance: { emoji: '🚑', label: 'ambulans', ext: 'webp' },
+  firetruck: { emoji: '🚒', label: 'mobil pemadam', ext: 'webp' },
+  police: { emoji: '🚓', label: 'mobil polisi', ext: 'webp' },
+  train: { emoji: '🚂', label: 'kereta', ext: 'webp' },
+  bajaj: { emoji: '🛺', label: 'bajaj', ext: 'webp' },
 };
 
 /** Public URL of an item's picture, respecting the Vite base path. */
