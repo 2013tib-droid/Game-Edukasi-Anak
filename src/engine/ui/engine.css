@@ -146,6 +146,20 @@
   line-height: 1.05;
 }
 
+/* Real art (WebP) in place of the emoji — same footprint, so a board mixing
+   pictured and un-pictured items keeps one rhythm.
+   The box is deliberately SQUARE, like an emoji's em box, and the art is
+   fitted inside with `contain`. Letting the height run free instead (`height:
+   auto`) is what pushed the 360×640 "tebak bayangan" screen into scrolling:
+   a tall fruit such as grapes (aspect 0.8) rendered 25% taller than the
+   emoji it replaced. `contain` also stops a banana being stretched square. */
+.choice-card .choice-img {
+  /* fallback: old Android without container queries */
+  width: clamp(44px, 15vw, 84px);
+  height: clamp(44px, 15vw, 84px);
+  object-fit: contain;
+}
+
 @supports (container-type: inline-size) {
   .choice-card .choice-emoji {
     font-size: 72cqw;
@@ -153,6 +167,19 @@
   /* A card that also carries a caption leaves room for the words. */
   .choice-card:has(.choice-text) .choice-emoji {
     font-size: 56cqw;
+  }
+  .choice-card .choice-img {
+    width: 78cqw;
+    height: 78cqw;
+  }
+  .choice-card:has(.choice-text) .choice-img {
+    width: 60cqw;
+    height: 60cqw;
+  }
+  /* Counting board: the cell holds nothing but the fruit (see `.count-cell`). */
+  .count-cell .choice-img {
+    width: 88cqw;
+    height: 88cqw;
   }
 }
 
@@ -256,6 +283,24 @@
 .ta-picture__emoji {
   font-size: clamp(160px, 56vw, 280px);
   line-height: 1;
+}
+
+/* A cue sitting above PICTURE answer cards has to share the screen with them:
+   those cards are wide (two across), so three of them take two tall rows.
+   The full-size cue above is sized for letter/number answers, which are short
+   — keeping it here overflowed a 360×640 phone by 57px on Pasar Buah's "tebak
+   bayangan". Applied by `TapAnswer` whenever every answer is a picture. */
+.ta-picture--compact {
+  font-size: clamp(96px, 34vw, 150px);
+}
+
+.ta-picture--compact .ta-picture__img {
+  width: clamp(150px, 48vw, 260px);
+  height: clamp(150px, 48vw, 260px);
+}
+
+.ta-picture--compact .ta-picture__emoji {
+  font-size: clamp(130px, 44vw, 220px);
 }
 
 /* Fruit "guess the shadow": show the picture as a dark silhouette. */

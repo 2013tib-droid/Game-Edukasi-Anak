@@ -1,10 +1,13 @@
 import { useMemo, useState } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import { sfx } from '@/engine/audio/sound';
+import ItemPic from '@/engine/ui/ItemPic';
 
 interface Cell {
   key: number;
   emoji: string;
+  /** Picture-registry id; when set the cell shows real art, not the emoji. */
+  item?: string;
   isTarget: boolean;
 }
 
@@ -23,11 +26,11 @@ export default function CountTap({ level, onCorrect, onWrong }: TemplateProps<'c
     const list: Cell[] = [];
     let key = 0;
     for (let i = 0; i < targetCount; i++) {
-      list.push({ key: key++, emoji: target.emoji, isTarget: true });
+      list.push({ key: key++, emoji: target.emoji, item: target.item, isTarget: true });
     }
     for (const d of decoys) {
       for (let i = 0; i < d.count; i++) {
-        list.push({ key: key++, emoji: d.emoji, isTarget: false });
+        list.push({ key: key++, emoji: d.emoji, item: d.item, isTarget: false });
       }
     }
     return list.sort(() => Math.random() - 0.5);
@@ -80,9 +83,13 @@ export default function CountTap({ level, onCorrect, onWrong }: TemplateProps<'c
               }
               onClick={() => toggle(c.key)}
             >
-              <span className="choice-emoji" aria-hidden>
-                {c.emoji}
-              </span>
+              {c.item ? (
+                <ItemPic id={c.item} className="choice-img" fallbackClassName="choice-emoji" />
+              ) : (
+                <span className="choice-emoji" aria-hidden>
+                  {c.emoji}
+                </span>
+              )}
             </button>
           ))}
         </div>

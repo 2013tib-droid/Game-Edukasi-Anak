@@ -63,6 +63,12 @@ export interface TapChoice {
   id: string;
   /** Big visual — emoji for now, later an image asset path. */
   emoji?: string;
+  /**
+   * Item id from the picture registry (`src/engine/ui/items.ts`) — real art
+   * (WebP) on the answer card instead of the device emoji font. `emoji` stays
+   * as the fallback if the asset is missing.
+   */
+  item?: string;
   text?: string;
   /** Colored geometric shape drawn as SVG (Labirin Warna). */
   shape?: ShapeSpec;
@@ -194,14 +200,15 @@ export interface MemoryData {
 export interface CountTapData {
   /** How many the child must tap ("Ketuk 4 apel"). */
   ask: number;
-  target: { emoji: string; label: string };
+  /** `item` = picture-registry id (real art); `emoji` is the fallback. */
+  target: { emoji: string; label: string; item?: string };
   /**
    * How many target items to show — MUST be greater than `ask` so the
    * child has to stop counting at the asked number (design rule).
    */
   targetCount: number;
   /** 2–3 decoy item kinds mixed in (design rule: never monotone). */
-  decoys: { emoji: string; count: number }[];
+  decoys: { emoji: string; count: number; item?: string }[];
 }
 
 export interface StoryPage {

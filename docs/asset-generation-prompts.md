@@ -103,3 +103,36 @@ Template prompt (isi `<HEWAN>`):
 
 Saat menambah hewan baru di luar daftar ini, ikuti gaya target di atas dan
 daftarkan idnya di `items.ts` sebelum dipakai di config game.
+
+## Batch Berikutnya (buah, maskot, kendaraan, benda)
+
+Prompt siap tempel untuk Gemini ada di **`docs/prompt-gambar-gemini.md`**.
+Status pengiriman:
+
+| Batch | Status |
+|---|---|
+| Maskot 6 tahap | ✅ diterima (2026-08-04) → `public/assets/mascot/mascot-1..6.webp` |
+| Buah (14) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
+| Kendaraan & tujuan (20) | ⏳ belum |
+| Benda sehari-hari (20) | ⏳ belum |
+
+### Pelajaran dari dua batch pertama (BACA sebelum minta batch baru)
+
+- **Minta LATAR PUTIH POLOS.** Latar biru maskot masih bisa dipotong; latar
+  **gelap dengan cahaya berwarna** hampir tidak bisa — cahaya di belakang tiap
+  buah meniru warna buah yang ada di depannya, jadi flood-fill menembus masuk
+  ke dalam subjeknya. Lemon batch pertama hancur total (tersisa cincin kuning
+  berlubang) dan harus digambar ulang; kiwi & alpukat baru selamat setelah
+  toleransi diperketat ke 3.
+- **Satu gambar per file.** Kiriman berupa "papan" berisi 6–14 objek memaksa
+  pemotongan manual, dan tiap objek cuma ±190–250px — di bawah kebutuhan
+  (kartu jawaban tampil 114px, HP 2× DPI butuh ±230px). Mangga & lemon yang
+  dikirim satu-satu keluar 518×715 dan 637×966: jauh lebih tajam.
+- **Periksa bingkai tepi.** File mangga punya garis gelap tipis 1–3px di tepi
+  gambar; flood dari tepi mati di situ. Pipeline sekarang memotong 6px dulu.
+- **Bentuk harus benar, bukan cuma cantik.** Mangga percobaan pertama digambar
+  bulat oranye — nyaris kembar dengan jeruk, dan ini game pengenalan buah.
+  Versi kedua (lonjong melengkung, hijau-kekuningan) baru dipakai.
+- **Warna buah tidak boleh diubah semaunya**: Pasar Buah menyortir buah ke
+  keranjang warna, jadi seni yang warnanya menyimpang membuat jawaban benar
+  jadi terlihat salah.

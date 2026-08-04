@@ -84,11 +84,11 @@ const config: MixedGameConfig = {
     // Slot 3 — huruf pertama: makanan & buah
     mslot(
       'l3',
-      firstLetter('Apel', '🍎'),
-      firstLetter('Pisang', '🍌'),
-      firstLetter('Jeruk', '🍊'),
-      firstLetter('Semangka', '🍉'),
-      firstLetter('Nanas', '🍍'),
+      firstLetter('Apel', '🍎', 'apple'),
+      firstLetter('Pisang', '🍌', 'banana'),
+      firstLetter('Jeruk', '🍊', 'orange'),
+      firstLetter('Semangka', '🍉', 'watermelon'),
+      firstLetter('Nanas', '🍍', 'pineapple'),
       firstLetter('Wortel', '🥕'),
       firstLetter('Susu', '🥛'),
       firstLetter('Kue', '🎂'),

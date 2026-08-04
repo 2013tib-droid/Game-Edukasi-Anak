@@ -57,7 +57,12 @@ tanpa blok gaya di awal):
 
 ---
 
-## BATCH 1 — Buah (14 gambar) · PRIORITAS TERTINGGI
+## BATCH 1 — Buah (14 gambar) — ✅ SELESAI (2026-08-04)
+
+> Sudah terpasang di `public/assets/items/`. Catatan hasilnya ada di
+> `asset-generation-prompts.md` → "Pelajaran dari dua batch pertama".
+> Ringkasnya: **satu gambar per file, latar putih polos** — papan berisi
+> banyak objek dengan latar gelap bercahaya nyaris tidak bisa dipotong.
 
 Dipakai `pasar-buah` di **5 tipe soal** sekaligus (beli buah, tebak buah, tebak
 bayangan, keranjang warna, kartu buah), plus Pasang Kata, Taman Huruf, Suku
@@ -90,7 +95,9 @@ menyortir buah ke keranjang berdasarkan warna.
 
 ---
 
-## BATCH 2 — Maskot 6 tahap (6 gambar) · PALING SEDIKIT, DAMPAK IDENTITAS
+## BATCH 2 — Maskot 6 tahap (6 gambar) — ✅ SELESAI (2026-08-04)
+
+> Sudah terpasang di `public/assets/mascot/`.
 
 Maskot muncul **setiap kali anak membuka portal dan setiap kali menamatkan
 game** — ini satu-satunya wajah tetap produkmu. Sekarang masih emoji, dan 🦄/🐲
@@ -115,7 +122,7 @@ Gambar tahap 1 (telur) dulu, karena warnanya menentukan lima gambar sisanya.
 
 ---
 
-## BATCH 3 — Kendaraan & Tujuan (20 gambar)
+## BATCH 3 — Kendaraan & Tujuan (20 gambar) · BERIKUTNYA
 
 Untuk `jalan-kendaraan`, yang seluruh isinya kendaraan dan **diperbesar serta
 diputar** mengikuti belokan jalan — di sinilah emoji paling ketahuan kasar.

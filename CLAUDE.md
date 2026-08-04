@@ -339,6 +339,22 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Urutan pilihan diacak di engine.** `ask()` di config selalu menulis jawaban yang baik paling depan, jadi begitu hurufnya tampil anak bisa menang dengan selalu menekan A tanpa mendengarkan. `StoryChoice` mengacak sekali per halaman (`useMemo`), jadi acakannya tetap sama selama anak masih mencoba di halaman itu. **Jangan mengandalkan urutan config saat menulis cerita baru** — dan jangan menulis pilihan yang menyebut posisinya ("pilihan pertama").
   - Narasi ulang di-jaga `narratedPage` (useRef): StrictMode menjalankan efek dua kali di dev, dan baris yang mengantre akan menumpuk (bukan saling memotong seperti `speak`).
 
+- **Maskot 6 tahap jadi seni premium** (2026-08-04), teruji headless 380×800 keenam tahap (semua WebP termuat, tanpa scroll horizontal, nol error console):
+  - `MASCOTS` di `src/engine/core/mascot.ts` dapat field `pic` + helper `mascotImageUrl()`; aset di `public/assets/mascot/mascot-1..6.webp` (transparan, total 62 kB). `emoji` TETAP ada sebagai cadangan — `MascotPic` di `Mascot.tsx` jatuh ke emoji lewat `onError`, kontrak sama dengan `ItemPic`.
+  - Dipakai untuk avatar besar DAN pratinjau tahap berikutnya di baris petunjuk ("25 ⭐ lagi jadi 🐲 Naga Jenius").
+  - `.mascot-panel__img` WAJIB `object-fit: contain` — tanpa itu ujung sayap burung hantu (gambar paling lebar) terpotong lingkaran avatar.
+  - Aset **sengaja tidak di-upscale**: avatar tampil 72px, jadi ukuran asli (±250px) sudah cukup dan file tetap ringan.
+
+- **14 buah Pasar Buah jadi seni premium** (2026-08-04), teruji headless 380×800, 360×640 & 820×1180 (8 slot dimainkan, keempat tipe soal — beli buah, tebak buah, tebak bayangan, keranjang warna — tanpa scroll & nol error console; keempat belas WebP terlihat tampil):
+  - Aset `public/assets/items/{apple,banana,orange,grapes,strawberry,watermelon,mango,pineapple,pear,kiwi,melon,cherry,lemon,avocado}.webp`, terdaftar di `items.ts`.
+  - **Warna buah itu load-bearing**: Pasar Buah menyortir buah ke keranjang warna, jadi seni buah baru WAJIB mempertahankan warna yang dipakai config-nya. Sudah diverifikasi ke-13 pasangan warna cocok.
+  - `Fruit` di `pasar-buah.ts` dapat field `i` (id registry) yang diteruskan kelima builder (`buy`/`guess`/`shadow`/`baskets`/`cards`). Emoji `e` tetap jadi cadangan.
+  - **Bayangan (`shadow`) harus memakai `pictureItem`, bukan cuma `picture`** — anak mencocokkan garis luar bayangan dengan kartu jawaban, jadi keduanya harus gambar yang SAMA. Kalau bayangannya emoji dan jawabannya seni, bentuknya beda dan soalnya jadi menyesatkan.
+  - Field engine baru supaya ini mungkin: `TapChoice.item` (kartu jawaban) dan `CountTapData.target.item` / `decoys[].item` (papan hitung). Dirender `ItemPic` di `TapAnswer.tsx` & `CountTap.tsx`.
+  - **JEBAKAN 1: `<img>` pengganti emoji harus dikotakkan PERSEGI.** Percobaan pertama memakai `height: auto` — buah lonjong (anggur, rasio 0,8) jadi 25% lebih tinggi dari emoji yang digantikannya, dan layar 360×640 di soal "tebak bayangan" ikut scroll 79px. Sekarang `.choice-img` `width` = `height` (78cqw, 60cqw kalau berteks, 88cqw di `.count-cell`) + `object-fit: contain` — persis meniru kotak em milik emoji, sekaligus mencegah pisang tergencet jadi persegi.
+  - **JEBAKAN 2: cue besar hanya boleh di atas kartu jawaban KECIL.** Sisa 57px scroll di layar yang sama datang dari cue `pictureItem` (64vw = 230px di HP 360) — ukuran itu dirancang untuk soal Taman Huruf yang kartunya cuma huruf. Di soal bayangan kartunya kartu bergambar lebar (2 kolom), jadi tiga kartu memakan dua baris tinggi. Sekarang `TapAnswer` memasang `.ta-picture--compact` (48vw) **otomatis kalau SEMUA jawabannya gambar** — aturan engine, bukan tambalan khusus Pasar Buah. Kalau nanti menambah soal ber-cue besar, jangan menambal dengan CSS baru; ukurannya sudah menyesuaikan.
+  - Taman Huruf (cue huruf pertama) & Pasang Kata (slot buah + pisang di "hewan & makanannya") ikut memakai seni yang sama — jangan biarkan apel emoji berdampingan dengan apel bergambar. Sisa emoji buah di Suku Kata & Ejaan Jitu (SD) menyusul.
+
 ## Saluran Kontak "Hubungi Kami" (KEPUTUSAN PEMILIK — 2026-07-29)
 
 - **WhatsApp = saluran utama, email = cadangan.** Orang tua Indonesia sudah hidup di WA (hambatan paling kecil); email tetap ada untuk pesan panjang + lampiran dan untuk yang enggan chat langsung. Keduanya cuma link — tanpa backend, tanpa data yang disimpan, tanpa moderasi. (Form dalam app ditolak: butuh Cloud Function + rules + anti-spam, dan pemilik tak bisa membalas.)

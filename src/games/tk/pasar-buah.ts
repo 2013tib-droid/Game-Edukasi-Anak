@@ -26,29 +26,35 @@ import type { MixedGameConfig, MixedLevel, MixedSlot } from '@/engine/core/types
  */
 
 interface Fruit {
-  /** Emoji shown on boards and cards. */
+  /** Emoji — the fallback if the picture asset is missing. */
   e: string;
   /** Indonesian name, used in the spoken narration. */
   n: string;
+  /**
+   * Picture-registry id (`src/engine/ui/items.ts` → `public/assets/items`).
+   * Premium art, so a fruit looks the same on every phone instead of riding
+   * the device emoji font. Every builder below passes it through.
+   */
+  i: string;
 }
 
 // Basket colors deliberately never pit yellow against orange in one level —
 // on a small phone screen those two read as the same color.
 const F = {
-  apel: { e: '🍎', n: 'apel' },
-  pisang: { e: '🍌', n: 'pisang' },
-  jeruk: { e: '🍊', n: 'jeruk' },
-  anggur: { e: '🍇', n: 'anggur' },
-  stroberi: { e: '🍓', n: 'stroberi' },
-  semangka: { e: '🍉', n: 'semangka' },
-  mangga: { e: '🥭', n: 'mangga' },
-  nanas: { e: '🍍', n: 'nanas' },
-  pir: { e: '🍐', n: 'pir' },
-  kiwi: { e: '🥝', n: 'kiwi' },
-  melon: { e: '🍈', n: 'melon' },
-  ceri: { e: '🍒', n: 'ceri' },
-  lemon: { e: '🍋', n: 'lemon' },
-  alpukat: { e: '🥑', n: 'alpukat' },
+  apel: { e: '🍎', n: 'apel', i: 'apple' },
+  pisang: { e: '🍌', n: 'pisang', i: 'banana' },
+  jeruk: { e: '🍊', n: 'jeruk', i: 'orange' },
+  anggur: { e: '🍇', n: 'anggur', i: 'grapes' },
+  stroberi: { e: '🍓', n: 'stroberi', i: 'strawberry' },
+  semangka: { e: '🍉', n: 'semangka', i: 'watermelon' },
+  mangga: { e: '🥭', n: 'mangga', i: 'mango' },
+  nanas: { e: '🍍', n: 'nanas', i: 'pineapple' },
+  pir: { e: '🍐', n: 'pir', i: 'pear' },
+  kiwi: { e: '🥝', n: 'kiwi', i: 'kiwi' },
+  melon: { e: '🍈', n: 'melon', i: 'melon' },
+  ceri: { e: '🍒', n: 'ceri', i: 'cherry' },
+  lemon: { e: '🍋', n: 'lemon', i: 'lemon' },
+  alpukat: { e: '🥑', n: 'alpukat', i: 'avocado' },
 } satisfies Record<string, Fruit>;
 
 const WORDS = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan'];
@@ -64,9 +70,9 @@ function buy(target: Fruit, ask: number, extra: number, decoys: [Fruit, number][
     narration: `Ibu mau beli ${say(ask)} ${target.n}. Ketuk ${say(ask)} ${target.n}!`,
     data: {
       ask,
-      target: { emoji: target.e, label: target.n },
+      target: { emoji: target.e, label: target.n, item: target.i },
       targetCount: ask + extra,
-      decoys: decoys.map(([f, count]) => ({ emoji: f.e, count })),
+      decoys: decoys.map(([f, count]) => ({ emoji: f.e, count, item: f.i })),
     },
   };
 }
@@ -79,8 +85,8 @@ function guess(target: Fruit, ...decoys: Fruit[]): MixedLevel {
     narration: `Mana ${target.n}? Ayo sentuh!`,
     data: {
       choices: [
-        { id: 'a', emoji: target.e, correct: true },
-        ...decoys.map((f, i) => ({ id: `d${i}`, emoji: f.e })),
+        { id: 'a', emoji: target.e, item: target.i, correct: true },
+        ...decoys.map((f, i) => ({ id: `d${i}`, emoji: f.e, item: f.i })),
       ],
     },
   };
@@ -93,11 +99,15 @@ function shadow(target: Fruit, ...decoys: Fruit[]): MixedLevel {
     template: 'tap-answer',
     narration: 'Lihat bayangan ini. Buah apa ya? Sentuh yang sama!',
     data: {
+      // The silhouette must come from the ART, not the emoji: the child
+      // matches the shadow's outline against the answer cards, so both have
+      // to be the same drawing.
       picture: target.e,
+      pictureItem: target.i,
       silhouette: true,
       choices: [
-        { id: 'a', emoji: target.e, correct: true },
-        ...decoys.map((f, i) => ({ id: `d${i}`, emoji: f.e })),
+        { id: 'a', emoji: target.e, item: target.i, correct: true },
+        ...decoys.map((f, i) => ({ id: `d${i}`, emoji: f.e, item: f.i })),
       ],
     },
   };
@@ -129,7 +139,7 @@ function baskets(...pairs: [ColorId, Fruit][]): MixedLevel {
         emoji: COLORS[c],
         label: c[0]!.toUpperCase() + c.slice(1),
       })),
-      items: pairs.map(([c, f], i) => ({ id: `i${i}`, emoji: f.e, targetId: c })),
+      items: pairs.map(([c, f], i) => ({ id: `i${i}`, emoji: f.e, item: f.i, targetId: c })),
     },
   };
 }
@@ -140,7 +150,7 @@ function cards(...fruits: Fruit[]): MixedLevel {
     id: '',
     template: 'memory',
     narration: 'Balik kartunya. Cari dua buah yang sama!',
-    data: { pairs: fruits.map((f) => ({ id: f.n, emoji: f.e })) },
+    data: { pairs: fruits.map((f) => ({ id: f.n, emoji: f.e, item: f.i })) },
   };
 }
 

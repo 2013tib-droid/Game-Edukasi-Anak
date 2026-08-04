@@ -73,7 +73,9 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
   // so card width is what matters. Letter/number/shape answers keep the tight
   // grid. Clocks belong here too — their numerals only stay legible on a phone
   // if the card is wide.
-  const pictureChoices = choices.every((c) => (c.emoji || c.clock) && !c.text && !c.shape);
+  const pictureChoices = choices.every(
+    (c) => (c.emoji || c.item || c.clock) && !c.text && !c.shape,
+  );
 
   function handleTap(id: string, correct: boolean | undefined) {
     if (solved) return;
@@ -96,6 +98,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
           <div
             className={
               'ta-picture ta-picture--img' +
+              (pictureChoices ? ' ta-picture--compact' : '') +
               (level.data.silhouette ? ' ta-picture--silhouette' : '')
             }
             aria-hidden
@@ -109,7 +112,11 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
         ) : (
           level.data.picture && (
             <div
-              className={'ta-picture' + (level.data.silhouette ? ' ta-picture--silhouette' : '')}
+              className={
+                'ta-picture' +
+                (pictureChoices ? ' ta-picture--compact' : '') +
+                (level.data.silhouette ? ' ta-picture--silhouette' : '')
+              }
               aria-hidden
             >
               {level.data.picture}
@@ -198,10 +205,14 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
                 />
               )}
               {c.clock && <Clock time={c.clock} className="choice-clock" />}
-              {c.emoji && (
-                <span className="choice-emoji" aria-hidden>
-                  {c.emoji}
-                </span>
+              {c.item ? (
+                <ItemPic id={c.item} className="choice-img" fallbackClassName="choice-emoji" />
+              ) : (
+                c.emoji && (
+                  <span className="choice-emoji" aria-hidden>
+                    {c.emoji}
+                  </span>
+                )
               )}
               {c.text && (
                 // A text answer with no emoji (a letter/number) is the main
