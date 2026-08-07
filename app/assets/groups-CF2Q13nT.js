@@ -1,0 +1,1 @@
+const a=[{id:"tk",title:"Playgroup dan TK",emoji:"🧸",description:"Usia 4–7 tahun · Berhitung, mengenal huruf, warna & bentuk",priceLabel:"Rp29.000"},{id:"sd1",title:"SD Kelas 1 & 2",emoji:"🎒",description:"Usia 6–8 tahun · Membaca, berhitung lanjut, logika sederhana",priceLabel:"Rp29.000"}],e={groups:a};export{e as g};
