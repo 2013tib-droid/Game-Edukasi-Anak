@@ -1,4 +1,5 @@
 import type { ClockSpec, GameConfig, GameLevel, TapChoice } from '@/engine/core/types';
+import { terbilang } from '@/games/numbers';
 
 /**
  * "Jam Pintar" (SD Kelas 1 & 2) — membaca jam: jam tepat, setengah jam,
@@ -107,7 +108,7 @@ function hands(hour: number, ...decoys: Time[]): GameLevel<'tap-answer'> {
   const answer = t(hour);
   return {
     id: '',
-    narration: `Jarum pendek di angka ${hour}, jarum panjang di angka 12. Pukul berapa itu?`,
+    narration: `Jarum pendek di angka ${terbilang(hour)}, jarum panjang di angka dua belas. Pukul berapa itu?`,
     data: {
       choices: [
         { id: 'a', text: digits(answer), correct: true },

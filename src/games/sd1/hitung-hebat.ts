@@ -5,6 +5,7 @@ import type {
   MixedSlot,
   TapChoice,
 } from '@/engine/core/types';
+import { rupiahWords, terbilang } from '@/games/numbers';
 
 /**
  * "Hitung Hebat" (SD Kelas 1 & 2) — dunia berhitung: dari penjumlahan
@@ -88,7 +89,7 @@ function addPic(pic: Pic, a: number, b: number, decoys: number[]): MixedLevel {
   return {
     id: '',
     template: 'tap-answer',
-    narration: `Ada ${a} ${pic.n}, datang lagi ${b} ${pic.n}. Berapa semuanya?`,
+    narration: `Ada ${terbilang(a)} ${pic.n}, datang lagi ${terbilang(b)} ${pic.n}. Berapa semuanya?`,
     data: {
       boardItems: [{ item: pic.id, count: a }, { op: 'plus' }, { item: pic.id, count: b }],
       equation: `${a} + ${b} = ?`,
@@ -102,7 +103,7 @@ function subPic(pic: Pic, a: number, b: number, decoys: number[]): MixedLevel {
   return {
     id: '',
     template: 'tap-answer',
-    narration: `Ada ${a} ${pic.n}, lalu ${b} pulang ke rumah. Berapa yang tersisa?`,
+    narration: `Ada ${terbilang(a)} ${pic.n}, lalu ${terbilang(b)} pulang ke rumah. Berapa yang tersisa?`,
     data: {
       boardItems: [{ item: pic.id, count: a }, { op: 'arrow' }, { item: HOUSE, count: b }],
       equation: `${a} − ${b} = ?`,
@@ -116,7 +117,7 @@ function sum(a: number, b: number, decoys: number[]): MixedLevel {
   return {
     id: '',
     template: 'tap-answer',
-    narration: `Berapa ${a} tambah ${b}?`,
+    narration: `Berapa ${terbilang(a)} tambah ${terbilang(b)}?`,
     data: {
       board: equationBoard(a, '+', b),
       choices: numberChoices(a + b, decoys),
@@ -128,7 +129,7 @@ function minus(a: number, b: number, decoys: number[]): MixedLevel {
   return {
     id: '',
     template: 'tap-answer',
-    narration: `Berapa ${a} dikurangi ${b}?`,
+    narration: `Berapa ${terbilang(a)} dikurangi ${terbilang(b)}?`,
     data: {
       board: equationBoard(a, '−', b),
       choices: numberChoices(a - b, decoys),
@@ -146,7 +147,7 @@ function times(pic: Pic, groups: number, per: number, decoys: number[]): MixedLe
   return {
     id: '',
     template: 'tap-answer',
-    narration: `Ada ${groups} kelompok ${pic.n}, tiap kelompok isinya ${per}. Berapa semuanya?`,
+    narration: `Ada ${terbilang(groups)} kelompok ${pic.n}, tiap kelompok isinya ${terbilang(per)}. Berapa semuanya?`,
     data: {
       boardItems: board,
       equation: `${groups} × ${per} = ?`,
@@ -166,7 +167,7 @@ function count(
   return {
     id: '',
     template: 'count-tap',
-    narration: `Ketuk ${ask} ${target.label}. Hitung pelan-pelan ya!`,
+    narration: `Ketuk ${terbilang(ask)} ${target.label}. Hitung pelan-pelan ya!`,
     data: {
       ask,
       target,
@@ -209,14 +210,19 @@ function missing(before: number[], answer: number, after: number[], decoys: numb
   };
 }
 
-/** Uang rupiah (kelas 2): jumlahkan dua lembar/keping uang. */
+/**
+ * Uang rupiah (kelas 2): jumlahkan dua lembar/keping uang. `rp()` = tulisan
+ * di papan & kartu jawaban (notasi yang sedang dipelajari anak);
+ * `rupiahWords()` = bunyinya dalam narasi, karena angka di narasi dibaca
+ * dalam bahasa mesin suaranya.
+ */
 const rp = (n: number) => `Rp${n.toLocaleString('id-ID')}`;
 
 function money(a: number, b: number, decoys: number[]): MixedLevel {
   return {
     id: '',
     template: 'tap-answer',
-    narration: `Ibu punya ${rp(a)} dan ${rp(b)}. Berapa uang Ibu semuanya?`,
+    narration: `Ibu punya ${rupiahWords(a)} dan ${rupiahWords(b)}. Berapa uang Ibu semuanya?`,
     data: {
       board: equationBoard(rp(a), '+', rp(b)),
       choices: [

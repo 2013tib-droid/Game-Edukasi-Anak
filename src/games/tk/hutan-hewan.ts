@@ -1,4 +1,5 @@
 import type { GameConfig, GameLevel, LevelSlot, TapChoice } from '@/engine/core/types';
+import { capitalize, terbilang } from '@/games/numbers';
 
 /**
  * "Hutan Hewan" — ported from the Petualangan Pintar forest world (Ayo
@@ -57,8 +58,10 @@ const A = {
   kurakura: { e: '🐢', n: 'kura-kura', item: 'turtle' },
 } satisfies Record<string, Animal>;
 
-const WORDS = ['nol', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan'];
-const say = (n: number) => WORDS[n] ?? String(n);
+// Numbers are SPELLED OUT in narration (see `src/games/numbers.ts`): a digit
+// there is read in the voice engine's own language — "Ada 6 singa" came back
+// from Azure as "Ada SIX singa". The numerals still show on the `equation`.
+const say = terbilang;
 
 /** Correct number + two near-miss decoys (≥1). */
 function numChoices(correct: number): TapChoice[] {
@@ -108,7 +111,7 @@ function add(a: Animal, x: number, y: number): GameLevel<'tap-answer'> {
 function sub(a: Animal, total: number, leave: number): GameLevel<'tap-answer'> {
   return {
     id: '',
-    narration: `Ada ${total} ${a.n}. ${say(leave)} ${a.n} pulang ke rumah. Berapa yang masih tinggal?`,
+    narration: `Ada ${say(total)} ${a.n}. ${capitalize(say(leave))} ${a.n} pulang ke rumah. Berapa yang masih tinggal?`,
     data: {
       ...(a.item
         ? {

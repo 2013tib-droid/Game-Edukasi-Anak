@@ -147,6 +147,30 @@ const entries = [...lines.entries()]
 
 const chars = entries.reduce((sum, e) => sum + e.text.length, 0);
 
+/*
+ * GUARD: no digits in narration.
+ *
+ * A narration line is printed on screen AND handed to the voice engine, and a
+ * digit is the one thing every engine reads in its OWN language: the rendered
+ * Azure line "Ada 6 singa" came back as "Ada SIX singa" (owner's report,
+ * 2026-08-07), and a phone falling back to `speechSynthesis` without an
+ * Indonesian voice does the same. Spell it out with `terbilang()` from
+ * `src/games/numbers.ts`; the numerals belong on the BOARD (`equation`, number
+ * cards, the money board), where the child sees the symbol while hearing the
+ * word. Failing here — before anything is written or rendered — stops a bad
+ * line from ever becoming an audio file.
+ */
+const withDigits = entries.filter((e) => /[0-9]/.test(e.text));
+if (withDigits.length > 0) {
+  console.error(`\nAngka di narasi (${withDigits.length} baris) — akan terdengar salah:\n`);
+  for (const e of withDigits) console.error(`  [${e.scope}] ${e.text}`);
+  console.error(
+    '\nTulis bilangannya dengan kata: terbilang() di src/games/numbers.ts.\n' +
+      'Angkanya tetap tampil di papan (equation / kartu angka), bukan di narasi.',
+  );
+  process.exit(1);
+}
+
 writeFileSync(
   OUT_FILE,
   `${JSON.stringify({ generated: new Date().toISOString().slice(0, 10), count: entries.length, chars, lines: entries }, null, 2)}\n`,
