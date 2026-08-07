@@ -17,7 +17,7 @@ Platform web berbayar berisi kumpulan mini-game edukasi untuk anak Indonesia, di
 | Perangkat target | HP Android & tablet — mobile-first, touch-first |
 | Demo gratis | Saat launching: **hanya "Hutan Hewan" (TK) yang gratis**, sisanya wajib login (lihat "Rencana Akses Saat Launching") |
 | Aset | Gambar AI-generated + narasi TTS Bahasa Indonesia |
-| Harga | Naik per jenjang: Playgroup & TK Rp39rb (perkenalan Rp19rb), SD Kelas 1 & 2 Rp49rb (selalu < Rp50rb) |
+| Harga | Naik per jenjang: Playgroup & TK Rp39rb (perkenalan Rp19rb), SD Kelas 1 & 2 Rp49rb (perkenalan Rp29rb) — selalu < Rp50rb |
 | Update | Beli sekali = bugfix gratis; konten besar baru = ekspansi berbayar |
 | Penjualan | Lynk.id / Mayar.id (QRIS, e-wallet) + itch.io untuk showcase demo |
 | Promosi | TikTok/Reels organik |
@@ -400,7 +400,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 > Landing page berkali-kali "hilang" karena dikerjakan di branch yang tak pernah ter-merge. **Landing page & logo adalah fitur permanen app — bukan eksperimen.** Jangan hapus, bypass route-nya, atau ganti tanpa konfirmasi pemilik.
 
-- **Landing page = route `/`** → `src/portal/LandingPage.tsx` (+ `src/portal/landing.css`). Halaman marketing menghadap orang tua: hero "Petualangan Pintar" + logo, tombol **🎮 Main Sekarang**, chip 4 dunia, kartu harga perkenalan (TK Rp19.000 coret Rp39.000, SD "Segera Hadir"), akses orang tua lewat **`TopBar`** (`src/portal/TopBar.tsx`, tombol "Orang Tua" → `/masuk`). Pemilih kelompok anak pindah ke **`/portal`** (`src/portal/HomePage.tsx`).
+- **Landing page = route `/`** → `src/portal/LandingPage.tsx` (+ `src/portal/landing.css`). Halaman marketing menghadap orang tua: hero "Petualangan Pintar" + logo, tombol **🎮 Main Sekarang**, chip 4 dunia, kartu harga perkenalan (TK Rp19.000 coret Rp39.000, SD Rp29.000 coret Rp49.000 + badge "Segera Hadir"), akses orang tua lewat **`TopBar`** (`src/portal/TopBar.tsx`, tombol "Orang Tua" → `/masuk`). Pemilih kelompok anak pindah ke **`/portal`** (`src/portal/HomePage.tsx`).
   - Cek cepat masih utuh: `src/app/App.tsx` punya `<Route path="/" element={<LandingPage />} />` dan `<Route path="/portal" element={<HomePage />} />`. Kalau `/` menunjuk `HomePage` atau `LandingPage.tsx` hilang → **pulihkan dari `main` dulu**.
 - **Logo = satu aset kanonik `public/assets/logo.svg`** (anak ayam + pelangi + bintang). Dipakai di **semua** tempat lewat file itu — jangan bikin salinan/varian inline:
   - Favicon di `index.html` (`<link rel="icon" href="/assets/logo.svg">`; Vite tambah `base` saat build).
