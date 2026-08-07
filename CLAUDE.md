@@ -395,6 +395,36 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Chip "Petualangan seru menanti" TIDAK ditambah** untuk kedua jenjang ini: satu pun game-nya belum ada, dan aturan yang dipakai saat SD Kelas 1 & 2 mulai dijual (2026-08-07) adalah memajang dunia yang benar-benar bisa dimainkan. Chip baru menyusul kalau gamenya sudah jadi.
   - Tak ada yang berubah di `src/data/groups.json`, `registry.ts`, maupun `access.ts` — ini murni halaman jualan, belum ada kelompok baru yang bisa dibuka.
 
+- **Tracing: angka 9 tidak lagi diterima sebagai angka 6** (2026-08-07, laporan pemilik lewat tangkapan layar Tulis Angka), teruji headless:
+
+  **Kenapa dulu lolos**
+  - Penilaian lama cuma menghitung **luas**: berapa persen area glyph yang tersentuh jari + berapa persen coretan yang keluar glyph. 6 dan 9 itu bentuk yang sama diputar 180°, jadi 9 yang digambar di atas panduan 6 menyapu hampir semua piksel yang sama → lolos. **Persentase total tidak akan pernah bisa membedakan keduanya** — jangan coba memperbaikinya dengan menaikkan ambang persen.
+
+  **Cara barunya (`src/engine/templates/traceScore.ts`, dipisah dari `Tracing.tsx` supaya bisa diuji headless)**
+  1. Glyph dikuliti jadi **GARIS TENGAH** (skeleton Zhang-Suen), lalu yang dinilai: bagian garis mana yang diikuti jari. Mengukur ke area terisi salah di dua arah — jari anak yang melenceng ke satu sisi coretan tebal meninggalkan separuh area tak tersentuh, sementara angka yang salah tapi kebetulan bertumpuk dapat area gratis.
+  2. Yang menentukan lulus adalah **potongan garis TERPUTUS TERPANJANG yang terlewat**, bukan totalnya. Jari yang goyang meninggalkan lubang-lubang kecil tersebar; glyph yang salah meninggalkan **satu anggota badan utuh** tak tersentuh (9 di atas 6 tak pernah mendekati sisi kiri lingkaran bawah). Total yang terlewat justru lebih besar pada coretan benar-tapi-goyang — makanya persentase total menyesatkan.
+  3. Aturan ketiga yang longgar (jari harus tetap di sekitar tinta) menolak coretan asal-asalan yang cuma melintasi glyph.
+  - **Toleransi diukur dalam SATUAN TEBAL CORETAN, bukan piksel** (`coverK` × setengah tebal coretan glyph itu sendiri, diukur lewat distance transform) + lantai piksel `coverFloor`. Alasannya: app meminta font `Fredoka` tapi **tak pernah memuatnya**, jadi HP merender panduan dengan font sistemnya sendiri (Roboto di Android) — tebal coretannya beda-beda. Lantai pikselnya perlu karena tangan anak goyang sejauh jarak nyata, bukan sepersekian tebal coretan.
+
+  **Angka kalibrasi (jangan diubah tanpa mengukur ulang)**
+  - Coretan BENAR (jari goyang ±14px, cuma 85–90% garis digambar): celah terbesar **≤ 0,022** dan cakupan ≥ 0,96.
+  - Glyph SALAH di atas panduan: celah **≥ 0,06** — 9 di atas 6 = **0,090** (Fredoka) / **0,116** (Roboto Bold).
+  - `maxGap: 0.05` duduk di antara keduanya dengan ruang di kedua sisi.
+  - Diuji di **dua font sungguhan**: Fredoka (yang diminta config) dan Roboto Bold (yang benar-benar dirender HP Android). 2592 percobaan coretan benar × 72 glyph (angka 1–20, A–Z, a–z): **2591 diterima** (satu-satunya yang ditolak: "14" dengan goyangan maksimal DAN cuma 90% digambar). 1680 pasangan glyph-salah diuji.
+
+  **JEBAKAN yang sudah kena — jangan diulang**
+  - **JANGAN kalibrasi lewat font bawaan container/CI.** Percobaan pertama "berhasil" padahal font fallback-nya merender 6 dan 9 nyaris sebagai bentuk yang sama (100% garis 6 berjarak <30px dari garis 9) — hasil kalibrasinya sama sekali tidak berlaku di font sungguhan. Pasang dulu Fredoka & Roboto Bold ke `~/.fonts` sebelum mengukur apa pun.
+  - **Model "jari goyang" harus goyangan LAMBAT (tangan mengembara), bukan derau per-titik.** Derau per-titik menggemukkan coretan jadi pita lebar sehingga bentuk salah apa pun ikut lulus — kalibrasi jadi terlalu longgar.
+  - **Ambang cakupan total & keluar-glyph nyaris tak berpengaruh**; yang menentukan cuma aturan celah. Keduanya tetap dipasang sebagai jaring pengaman, bukan alat pembeda.
+  - Loop thinning **tidak boleh mengalokasi** (dulu bikin array 8 tetangga per piksel): 48ms untuk huruf "W" di desktop = tersendat saat level dibuka di HP murah. Versi tanpa alokasi: 19ms desktop, **54–120ms di CPU yang di-throttle 6×** — sekali per level, terjadi saat transisi level yang memang sudah 1,3 detik.
+
+  **BATAS YANG DISADARI (jangan "diperbaiki" dengan mengetatkan angka)**
+  - Kalau glyph yang digambar melewati **SELURUH** garis panduan — 8 di atas 3, 6 di atas 5, "16" di atas "10" — tak ada aturan di sini yang bisa protes, karena panduannya memang benar-benar tertelusuri. Membedakannya butuh bentuk coretan anak dicocokkan balik ke bentuk panduan; itu perubahan yang jauh lebih besar dari yang diminta bug ini. Mengetatkan ambang demi kasus-kasus itu akan mulai menolak coretan yang BENAR — dan anak yang jawabannya benar lalu disuruh mengulang jauh lebih merugikan daripada angka salah yang lolos.
+
+  **Ikut terangkat**
+  - Jalur jari sekarang **diambil ulang tiap 4px** (`pathStep`), jadi penilaian tak lagi bergantung pada seberapa sering HP mengirim event pointer — dulu coretan cepat mendaftarkan sedikit titik dan bisa melompati bagian glyph.
+  - `up()` mengabaikan pointer-up yang tak diawali pointer-down di kanvas (dulu `onPointerLeave` mengosongkan titik terakhir meski anak tak sedang menggambar).
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
