@@ -76,11 +76,21 @@ jobs:
       - name: Kumpulkan kalimat narasi
         run: npm run narasi
 
+      # Baris "only: <bagian>" di file pemicu membatasi render ke satu game —
+      # cara mencoba beberapa kalimat dulu sebelum render penuh. Sengaja dibatasi
+      # huruf/angka/strip: isi file ini masuk ke baris perintah.
+      - name: Baca permintaan render
+        id: req
+        run: |
+          SCOPE=$(grep -oE '^only: *[a-z0-9_-]+' .github/render-request.txt | head -1 | sed 's/^only: *//' || true)
+          echo "Bagian yang diminta: ${SCOPE:-semua}"
+          echo "only=$SCOPE" >> "$GITHUB_OUTPUT"
+
       - name: Render suara
         env:
           AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
           AZURE_SPEECH_REGION: ${{ vars.AZURE_SPEECH_REGION || 'southeastasia' }}
-          ONLY: ${{ inputs.only }}
+          ONLY: ${{ inputs.only || steps.req.outputs.only }}
           RPM: ${{ inputs.rpm || '20' }}
           PRUNE: ${{ inputs.prune && '--prune' || '' }}
         run: |

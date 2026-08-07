@@ -1,4 +1,8 @@
-Ubah angka di bawah lalu push untuk menjalankan workflow "Render narasi".
-Ini cuma pemicu — isinya tidak dibaca skrip render.
+Ubah file ini lalu push untuk menjalankan workflow "Render narasi".
 
-render #0
+Baris "only:" membatasi render ke satu bagian saja (id game, _shared, atau
+_engine) — hapus/kosongkan untuk merender semuanya.
+
+only: cerita-kancil
+
+render #1
