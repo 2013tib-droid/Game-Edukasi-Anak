@@ -3,6 +3,6 @@ Ubah file ini lalu push untuk menjalankan workflow "Render narasi".
 Baris "only:" membatasi render ke satu bagian saja (id game, _shared, atau
 _engine) — hapus/kosongkan untuk merender semuanya.
 
-only: cerita-kancil
+only: hutan-hewan
 
-render #1
+render #2
