@@ -24,18 +24,16 @@ const worlds = [
 /**
  * Groups still in production. Listed WITHOUT a price on purpose — nothing here
  * is for sale yet, so a number (even struck through) would read as an offer.
- * Naming follows the official pattern: "SD Kelas 1 & 2" → "3 & 4" → "5 & 6",
- * with the age at the start of the description.
+ *
+ * Owner's call (2026-08-07): the name reads "Kelompok SD Kelas 3 & 4", matching
+ * the price cards above, and the description carries the subjects ONLY — no age
+ * and no per-card "Segera Hadir" badge, since the section heading already says
+ * it. This is deliberately different from `groups.json`, where the age does lead
+ * the description.
  */
 const soonGroups = [
-  {
-    name: 'SD Kelas 3 & 4',
-    desc: 'Usia 8–10 tahun · Perkalian, pembagian, membaca cerita',
-  },
-  {
-    name: 'SD Kelas 5 & 6',
-    desc: 'Usia 10–12 tahun · Pecahan, bangun ruang, soal cerita',
-  },
+  { name: 'Kelompok SD Kelas 3 & 4', desc: 'Perkalian, pembagian, membaca cerita' },
+  { name: 'Kelompok SD Kelas 5 & 6', desc: 'Pecahan, bangun ruang, soal cerita' },
 ];
 
 /** Parent-facing questions, ordered by what a first-time visitor asks first. */
@@ -125,10 +123,7 @@ export default function LandingPage() {
         <ul className="soon-list">
           {soonGroups.map((g) => (
             <li key={g.name} className="soon-item">
-              <span className="soon-head">
-                <span className="soon-name">{g.name}</span>
-                <span className="soon-badge">Segera Hadir</span>
-              </span>
+              <span className="soon-name">{g.name}</span>
               <span className="soon-desc">{g.desc}</span>
             </li>
           ))}

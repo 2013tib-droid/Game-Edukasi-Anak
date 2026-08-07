@@ -254,24 +254,12 @@
   padding: 12px 15px;
   text-align: left;
 }
-.landing .soon-head {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+/* No per-card "Segera Hadir" badge on purpose — the section heading above
+   already says it, so a badge on every card just repeats itself. */
 .landing .soon-name {
+  display: block;
   font-weight: 800;
   font-size: 15px;
-}
-.landing .soon-badge {
-  background: #e1d5f5;
-  color: #5e35b1;
-  font-weight: 800;
-  font-size: 11px;
-  padding: 3px 10px;
-  border-radius: 999px;
-  white-space: nowrap;
 }
 .landing .soon-desc {
   display: block;
