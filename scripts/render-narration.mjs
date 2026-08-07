@@ -30,17 +30,20 @@ const OUT_DIR = 'public/assets/voice';
  * Owner's decision (2026-08-07): storyteller voice for the interactive
  * stories, the neutral teacher voice for everything else. Which line gets
  * which is decided in `extract-narration.mjs`, not here.
+ *
+ * Every voice is slowed down — the app used to ask `speechSynthesis` for rate
+ * 0.92 for the same reason: young children need a beat to follow. The amounts
+ * differ because the two models have very different default speeds:
+ *
+ * - `gadis` uses the HD model (owner found the standard neural voice shrill).
+ *   It speaks about twice as briskly as the standard one, so it needs a much
+ *   deeper cut to land at the pace the owner approved.
+ * - `ardi` stays on the standard neural model, approved as-is at -8%.
  */
 const VOICES = {
-  gadis: 'id-ID-GadisNeural',
-  ardi: 'id-ID-ArdiNeural',
+  gadis: { name: 'id-ID-Gadis:DragonHDLatestNeural', rate: '-30%' },
+  ardi: { name: 'id-ID-ArdiNeural', rate: '-8%' },
 };
-
-/**
- * Slightly slower than default — the app used to ask `speechSynthesis` for
- * rate 0.92 for the same reason: young children need a beat to follow.
- */
-const RATE = '-8%';
 
 /** 24 kHz / 48 kbps mono MP3: plays everywhere, ~6 kB per spoken second. */
 const FORMAT = 'audio-24khz-48kbitrate-mono-mp3';
@@ -121,7 +124,7 @@ function ssml(line) {
   const text = line.text.replace(/[<>&'"]/g, (c) => `&#${c.charCodeAt(0)};`);
   return (
     `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="id-ID">` +
-    `<voice name="${voice}"><prosody rate="${RATE}">${text}</prosody></voice></speak>`
+    `<voice name="${voice.name}"><prosody rate="${voice.rate}">${text}</prosody></voice></speak>`
   );
 }
 

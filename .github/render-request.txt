@@ -1,8 +1,3 @@
-Ubah file ini lalu push untuk menjalankan workflow "Render narasi".
+Render penuh semua narasi.
 
-Baris "only:" membatasi render ke satu bagian saja (id game, _shared, atau
-_engine) — hapus/kosongkan untuk merender semuanya.
-
-only: hutan-hewan
-
-render #2
+render #3 — Gadis HD -30% (soal) + Ardi -8% (cerita)
