@@ -385,7 +385,12 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
    - **Kalimat pilihan cerita dirender untuk SEMUA huruf yang mungkin** (A, B, dan C). `StoryChoice` mengacak urutan pilihan tiap halaman — kalau cuma "Pilihan A" yang ada, cerita yang teracak jatuh balik ke suara robot di tengah jalan.
    - `key` tiap baris = hash isi kalimatnya. **Kalimat yang tidak diubah tidak perlu dirender ulang**; mengubah satu kata = key baru = satu file baru.
    - `scope` menentukan folder audionya supaya tiap game cuma mengunduh suaranya sendiri: id game · `_shared` (dipakai beberapa game) · `_engine` (kalimat shell di semua game).
-2. **Render** → skrip Azure (belum ada, menunggu kunci API pemilik) menulis `public/assets/voice/<scope>/<key>.mp3` + `manifest.json`.
+2. **`npm run suara`** (`scripts/render-narration.mjs`) merender tiap baris lewat Azure Speech ke `public/assets/voice/<scope>/<key>.mp3` lalu menulis `manifest.json`. Kunci dari `.env` (`AZURE_SPEECH_KEY`, `AZURE_SPEECH_REGION`) — **tanpa awalan `VITE_`**, karena env ber-awalan itu ikut ter-bundle ke JS publik.
+   - **File yang sudah ada dilewati**, jadi skrip aman diulang kalau koneksi putus dan tidak memakan kuota dua kali. Ubah satu kalimat = key baru = hanya satu file yang dirender ulang.
+   - **Bawaannya 20 permintaan/menit** karena itu batas tier gratis F0; skripnya mengatur jeda sendiri supaya tidak kena 429 sama sekali (kalau tetap kena, ia menunggu sesuai `Retry-After`). Tier bayar: `-- --rpm=100`.
+   - **Kunci salah (401) / SSML salah (400) TIDAK diulang** — cuma membuang kuota. Yang diulang hanya 429 & 5xx.
+   - **Manifest disusun dari file yang BENAR-BENAR ada di disk**, bukan dari daftar yang niatnya dirender: entri yang menunjuk file tak ada bikin app memuat 404 lalu jatuh ke suara HP (tetap terdengar, tapi console jadi kotor).
+   - Coba satu game dulu (`-- --only=hutan-hewan`) dan **dengarkan** sebelum merender semuanya.
 3. **Putar** → `src/engine/audio/voice.ts` + antrean di `sound.ts`. **Call site tidak berubah**: `speak()`/`speakNext()` tetap sama di GameShell & StoryChoice.
 
 **Aturan & jebakan pemutar (`voice.ts` + `sound.ts`)**
