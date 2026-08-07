@@ -1,1 +1,0 @@
-import{r,d as t,e as s,g as o,i as n}from"./index-CWCUb9W1.js";function a(){return r.useSyncExternalStore(t,o,()=>o())}function u(e){return a(),e?n(e):!1}function i(){return r.useSyncExternalStore(t,s,()=>s())}export{i as a,u as b,a as u};
