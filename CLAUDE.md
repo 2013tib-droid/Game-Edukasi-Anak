@@ -373,7 +373,9 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
 
-**Penyedia: Azure Speech `id-ID-GadisNeural` (KEPUTUSAN PEMILIK 2026-08-07)**
+**Penyedia: Azure Speech (KEPUTUSAN PEMILIK 2026-08-07)**
+- **Dua suara**: `id-ID-GadisNeural` untuk semua narasi soal (24.324 karakter), `id-ID-ArdiNeural` khusus **cerita interaktif** — Cerita Kancil & Cerita Nusantara (124 baris, 6.611 karakter), supaya cerita terasa dibacakan pendongeng, bukan guru soal.
+- Pembagiannya otomatis di skrip ekstraksi: level bertemplate `story-choice` → Ardi, sisanya Gadis. **Satu baris = satu file audio**, jadi kalimat yang dipakai cerita DAN game lain terpaksa memakai suara netral (Gadis) — sekarang tidak ada kasus begitu, tapi jangan kaget kalau muncul nanti.
 - **Bayar sekali pakai, bukan langganan** — Azure itu pay-as-you-go. Free tier F0 = 500rb karakter/bulan; seluruh narasi app **30.935 karakter (723 baris unik)** = 6,2% kuota, jadi **Rp0** dan masih muat ±16× render ulang untuk revisi. Kalau kuota jebol pun cuma ±Rp19.000 ($15/1 juta karakter).
 - ElevenLabs sengaja TIDAK dipakai untuk narasi umum: lisensi komersialnya nempel di langganan aktif $22/bulan. Boleh dipertimbangkan khusus 6 cerita nanti (di situ ekspresi berbayar), bukan untuk soal.
 - `edge-tts` (suara Gadis yang sama, gratis tanpa kunci) hanya untuk render coba-coba di komputer pemilik — endpoint tak resmi, jangan dipakai untuk produk berbayar.

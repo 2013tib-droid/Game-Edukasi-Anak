@@ -81,14 +81,23 @@ function keyOf(text) {
   return createHash('sha1').update(text).digest('hex').slice(0, 12);
 }
 
-/** text → Set of game ids that speak it. */
+/**
+ * Which voice renders a line (owner's decision, 2026-08-07): the storyteller
+ * voice `ardi` for the interactive stories, `gadis` for everything else.
+ */
+const STORY_VOICE = 'ardi';
+const DEFAULT_VOICE = 'gadis';
+
+/** text → { games: Set, voices: Set } */
 const lines = new Map();
 
-function add(text, gameId) {
+function add(text, gameId, voice = DEFAULT_VOICE) {
   const clean = spoken(text ?? '');
   if (!clean) return;
-  if (!lines.has(clean)) lines.set(clean, new Set());
-  lines.get(clean).add(gameId);
+  if (!lines.has(clean)) lines.set(clean, { games: new Set(), voices: new Set() });
+  const row = lines.get(clean);
+  row.games.add(gameId);
+  row.voices.add(voice);
 }
 
 /** Every variant of every slot, flattened. */
@@ -98,22 +107,25 @@ function levelsOf(config) {
 
 for (const config of mod.configs) {
   for (const level of levelsOf(config)) {
-    add(level.narration, config.id);
+    // Mixed games declare the template per level; homogeneous ones once.
+    const isStory = (level.template ?? config.template) === 'story-choice';
+    const voice = isStory ? STORY_VOICE : DEFAULT_VOICE;
+    add(level.narration, config.id, voice);
 
     // Story pages carry their own spoken text, on top of the level narration.
     const pages = level.data?.pages;
     if (!Array.isArray(pages)) continue;
     for (const page of pages) {
-      add(page.text, config.id);
+      add(page.text, config.id, voice);
       if (!page.choices) continue;
       for (let i = 0; i < page.choices.length; i++) {
         const choice = page.choices[i];
         // Any option can land on any letter once shuffled (see LETTERS above).
         for (let slot = 0; slot < page.choices.length; slot++) {
-          add(`Pilihan ${LETTERS[slot] ?? slot + 1}. ${choice.text}`, config.id);
+          add(`Pilihan ${LETTERS[slot] ?? slot + 1}. ${choice.text}`, config.id, voice);
         }
         // Gentle nudge after a less-good choice.
-        add(choice.feedback, config.id);
+        add(choice.feedback, config.id, voice);
       }
     }
   }
@@ -124,9 +136,12 @@ for (const text of ENGINE_LINES) add(text, '_engine');
 /* ---------- Write + report ---------- */
 
 const entries = [...lines.entries()]
-  .map(([text, games]) => {
+  .map(([text, { games, voices }]) => {
     const scope = games.has('_engine') ? '_engine' : games.size > 1 ? '_shared' : [...games][0];
-    return { key: keyOf(text), text, scope, games: [...games].sort() };
+    // One line = one audio file, so a line a story shares with a non-story
+    // game can't be in two voices — the neutral one wins.
+    const voice = voices.size === 1 ? [...voices][0] : DEFAULT_VOICE;
+    return { key: keyOf(text), text, scope, voice, games: [...games].sort() };
   })
   .sort((a, b) => a.scope.localeCompare(b.scope) || a.text.localeCompare(b.text));
 
@@ -148,7 +163,15 @@ for (const e of entries) {
   perScope.set(e.scope, row);
 }
 
-console.log(`Narasi unik: ${entries.length} baris, ${chars.toLocaleString('id-ID')} karakter\n`);
+const perVoice = new Map();
+for (const e of entries) perVoice.set(e.voice, (perVoice.get(e.voice) ?? 0) + e.text.length);
+
+console.log(`Narasi unik: ${entries.length} baris, ${chars.toLocaleString('id-ID')} karakter`);
+console.log(
+  `Suara: ${[...perVoice]
+    .map(([v, c]) => `${v} ${c.toLocaleString('id-ID')} karakter`)
+    .join(', ')}\n`,
+);
 console.log('  baris   karakter  bagian');
 for (const [scope, row] of [...perScope].sort((a, b) => b[1].chars - a[1].chars)) {
   console.log(`  ${String(row.count).padStart(5)}  ${String(row.chars).padStart(9)}  ${scope}`);
