@@ -1,4 +1,5 @@
 import type { GameConfig, GameLevel, LevelSlot, TapChoice } from '@/engine/core/types';
+import { capitalize, terbilang } from '@/games/numbers';
 
 /**
  * "Tambah Tangkas" (SD Kelas 1 & 2) — dunia penjumlahan.
@@ -42,7 +43,7 @@ function numberChoices(answer: number, decoys: number[]): TapChoice[] {
 function sum(a: number, b: number, decoys: number[]): GameLevel<'tap-answer'> {
   return {
     id: '',
-    narration: `Berapa ${a} tambah ${b}?`,
+    narration: `Berapa ${terbilang(a)} tambah ${terbilang(b)}?`,
     data: {
       equation: `${a} + ${b} = ?`,
       choices: numberChoices(a + b, decoys),
@@ -54,7 +55,7 @@ function sum(a: number, b: number, decoys: number[]): GameLevel<'tap-answer'> {
 function sum3(a: number, b: number, c: number, decoys: number[]): GameLevel<'tap-answer'> {
   return {
     id: '',
-    narration: `Berapa ${a} tambah ${b} tambah ${c}?`,
+    narration: `Berapa ${terbilang(a)} tambah ${terbilang(b)} tambah ${terbilang(c)}?`,
     data: {
       equation: `${a} + ${b} + ${c} = ?`,
       choices: numberChoices(a + b + c, decoys),
@@ -69,7 +70,7 @@ function sum3(a: number, b: number, c: number, decoys: number[]): GameLevel<'tap
 function missing(a: number, total: number, decoys: number[]): GameLevel<'tap-answer'> {
   return {
     id: '',
-    narration: `${a} tambah berapa supaya jadi ${total}?`,
+    narration: `${capitalize(terbilang(a))} tambah berapa supaya jadi ${terbilang(total)}?`,
     data: {
       equation: `${a} + ? = ${total}`,
       choices: numberChoices(total - a, decoys),
@@ -225,14 +226,17 @@ const config: GameConfig<'tap-answer'> = {
     // --- 10. Soal cerita sehari-hari ---
     slot(
       'l10',
-      story('Rani punya 6 kelereng, lalu diberi 5 lagi. Berapa kelerengnya?', 6, 5, [10, 12]),
-      story('Di kandang ada 8 ayam, lalu datang 4 lagi. Berapa ayam semuanya?', 8, 4, [11, 13]),
-      story('Ibu membeli 12 telur, lalu membeli 6 lagi. Berapa telur Ibu?', 12, 6, [16, 20]),
-      story('Budi punya 15 koin, lalu menabung 10 koin lagi. Berapa koin Budi?', 15, 10, [20, 30]),
-      story('Di rak ada 9 buku, Kakak menaruh 7 buku lagi. Berapa buku di rak?', 9, 7, [15, 17]),
-      story('Ada 18 anak di lapangan, datang 7 anak lagi. Berapa anak semuanya?', 18, 7, [23, 27]),
-      story('Andi memetik 14 mangga, Adik memetik 5 mangga. Berapa mangga mereka?', 14, 5, [18, 20]),
-      story('Di kolam ada 11 ikan, Ayah menambah 8 ikan. Berapa ikan di kolam?', 11, 8, [18, 20]),
+      // Bilangannya ditulis dengan KATA: kalimat ini dibacakan, dan angka
+      // di narasi terbaca dalam bahasa mesin suaranya. Persamaannya tetap
+      // tampil berangka di papan.
+      story('Rani punya enam kelereng, lalu diberi lima lagi. Berapa kelerengnya?', 6, 5, [10, 12]),
+      story('Di kandang ada delapan ayam, lalu datang empat lagi. Berapa ayam semuanya?', 8, 4, [11, 13]),
+      story('Ibu membeli dua belas telur, lalu membeli enam lagi. Berapa telur Ibu?', 12, 6, [16, 20]),
+      story('Budi punya lima belas koin, lalu menabung sepuluh koin lagi. Berapa koin Budi?', 15, 10, [20, 30]),
+      story('Di rak ada sembilan buku, Kakak menaruh tujuh buku lagi. Berapa buku di rak?', 9, 7, [15, 17]),
+      story('Ada delapan belas anak di lapangan, datang tujuh anak lagi. Berapa anak semuanya?', 18, 7, [23, 27]),
+      story('Andi memetik empat belas mangga, Adik memetik lima mangga. Berapa mangga mereka?', 14, 5, [18, 20]),
+      story('Di kolam ada sebelas ikan, Ayah menambah delapan ikan. Berapa ikan di kolam?', 11, 8, [18, 20]),
     ),
   ],
 };
