@@ -369,6 +369,12 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Wortel & jagung sengaja TIDAK masuk Pasar Buah**: itu sayur, dan di sana warna itu load-bearing (keranjang kuning & oranye tak boleh satu level).
   - Pemotongannya (`scripts/cut-item-sheet.py`): flood-fill dari tepi, gate "terang & tak berwarna" + toleransi tetangga **8** (percobaan pertama pakai 14 dan memakan badan TELUR yang memang nyaris putih — batas telur ke latar cuma beda 14). Latar yang TERKURUNG (celah antara sandaran & dudukan kursi, lubang kepala kunci) tak terjangkau flood-fill, jadi ditembus terpisah lewat daftar `HOLES` — **sengaja per item, jangan diotomatiskan**: bercak putih bola sepak terbaca persis sama oleh aturan otomatis apa pun.
 
+- **Harga perkenalan SD Kelas 1 & 2 dipasang: Rp29.000 dari Rp49.000** (2026-08-07, keputusan pemilik), teruji headless 360×640 & 380×800 (kedua kartu harga terbaca utuh, tanpa scroll horizontal & nol error console):
+  - Kartu SD di landing dulu cuma menampilkan satu angka abu-abu redup (`pc-now--soon` Rp49.000) karena kelompoknya belum dijual. Sekarang formatnya **sama persis dengan kartu TK**: harga lama dicoret (`pc-was`) + harga perkenalan merah besar (`pc-now`) + chip diskon (`pc-off`). Badge **🚀 Segera Hadir** TETAP — harga sudah diumumkan, produknya belum dibuka.
+  - **Chip tertulis −40%, padahal potongan aslinya 40,8%** (49→29). Sengaja **dibulatkan KE BAWAH**: potongan yang diterima pembeli tak boleh kurang dari yang tertulis di landing. Terapkan aturan yang sama kalau nanti mengubah harga — jangan bulatkan ke atas.
+  - `priceLabel` `sd1` di `src/data/groups.json` ikut jadi `Rp29.000`. Field itu belum dipakai komponen mana pun, tapi jangan biarkan dua angka harga berbeda hidup di repo — yang berikutnya membaca file itu akan memakai angka yang salah.
+  - Kelas `.pc-now--soon` (abu-abu redup) di `landing.css` jadi tak terpakai; dibiarkan untuk kelompok "segera hadir" berikutnya yang harganya belum diputuskan.
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
