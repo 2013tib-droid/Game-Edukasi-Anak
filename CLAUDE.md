@@ -424,6 +424,8 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 - **Hasil render pertama (2026-08-07): 723/723 baris, 18,2 MB, nol kegagalan.** Terbesar per game: Cerita Nusantara 2,9 MB · Taman Huruf 2,4 MB · Ejaan Jitu 1,6 MB — dan tiap game hanya mengunduh bagiannya sendiri.
 - Manifest diambil sekali saat chunk game dimuat, dengan **batas tunggu 2 detik** — jaringan HP yang tersendat tidak boleh membuat game bisu.
 - Teruji headless (Chromium, 380×800): baris berekaman memutar file & tidak memakai suara HP · baris tanpa rekaman jatuh ke suara HP · file hilang tetap terdengar · antrean campur file+suara HP berurutan tanpa tumpang tindih · `speak()` memotong antrean lama · `stopSpeaking()` membungkam semuanya · Hutan Hewan dimainkan sungguhan dengan & tanpa manifest, nol error console.
+- Setelah render penuh, diuji ulang dengan aset sungguhan: **Hutan Hewan, Cerita Kancil, Pasar Buah & Tulis Angka** dimainkan di 380×800 — keempatnya memutar file rekaman, **nol** yang jatuh ke suara HP, nol error console, tanpa scroll horizontal.
+- **Ter-deploy 2026-08-07** ke branch Pages (`app/assets/voice/`, 723 file). Terverifikasi lewat GitHub API bahwa filenya sampai di branch; **halaman live-nya sendiri TIDAK bisa dicek dari sesi Claude** — lihat catatan di "Deploy Web".
 
 ## Saluran Kontak "Hubungi Kami" (KEPUTUSAN PEMILIK — 2026-07-29)
 
@@ -470,6 +472,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 - **Struktur branch Pages:** app React (landing di route `/`) disajikan di subfolder **`app/`**. Root `index.html` = **redirect ke `./app/`** (bukan landing statis; satu landing kanonik). `404.html` juga redirect ke `app/` (app pakai HashRouter). `petualangan-pintar.html` tetap ada sebagai sumber standalone, tak ditaut dari root.
 - **Cara deploy:** `DEPLOY_BASE=/Game-Edukasi-Anak/app/ VITE_USE_HASH_ROUTER=1 npm run build`, lalu ganti isi folder `app/` di branch Pages dengan hasil `dist/` (termasuk `dist/assets/logo.svg`, `dist/assets/items/*.webp` & `dist/assets/voice/`). Produksi nanti (Firebase Hosting) pakai `base` default `/` + BrowserRouter.
 - URL live: `https://2013tib-droid.github.io/Game-Edukasi-Anak/` (redirect ke `/app/`). Setelah push, build Pages butuh ±1–2 menit; browser HP sering menyimpan cache versi lama (hard-refresh).
+- **Sesi Claude TIDAK bisa membuka URL live-nya** — kebijakan jaringan sesi memblokir `github.io` (403 di CONNECT), sama seperti host Azure. Jadi setelah deploy, **jangan mengaku situsnya sudah terverifikasi**. Yang BISA diverifikasi dari sesi: isi branch Pages lewat GitHub API (`/contents/app/...`) dan pengujian headless terhadap `npm run dev`/`vite preview` lokal. Konfirmasi akhir di HP asli tetap tugas pemilik.
 
 ## Aturan Desain Soal (dari pemilik proyek)
 
