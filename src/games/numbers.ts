@@ -14,16 +14,16 @@
  */
 
 const UNITS = [
-  "nol",
-  "satu",
-  "dua",
-  "tiga",
-  "empat",
-  "lima",
-  "enam",
-  "tujuh",
-  "delapan",
-  "sembilan",
+  'nol',
+  'satu',
+  'dua',
+  'tiga',
+  'empat',
+  'lima',
+  'enam',
+  'tujuh',
+  'delapan',
+  'sembilan',
 ];
 
 /**
@@ -38,19 +38,18 @@ const UNITS = [
 export function terbilang(n: number): string {
   if (!Number.isInteger(n) || n < 0 || n > 999999) return String(n);
   if (n < 10) return UNITS[n]!;
-  if (n === 10) return "sepuluh";
-  if (n === 11) return "sebelas";
+  if (n === 10) return 'sepuluh';
+  if (n === 11) return 'sebelas';
   if (n < 20) return `${UNITS[n - 10]!} belas`;
   if (n < 100) return join(`${UNITS[Math.floor(n / 10)]!} puluh`, n % 10);
-  if (n < 200) return join("seratus", n - 100);
+  if (n < 200) return join('seratus', n - 100);
   if (n < 1000) return join(`${UNITS[Math.floor(n / 100)]!} ratus`, n % 100);
-  if (n < 2000) return join("seribu", n - 1000);
+  if (n < 2000) return join('seribu', n - 1000);
   return join(`${terbilang(Math.floor(n / 1000))} ribu`, n % 1000);
 }
 
 /** "dua puluh" + 5 → "dua puluh lima"; remainder 0 drops the tail. */
-const join = (head: string, rest: number) =>
-  rest === 0 ? head : `${head} ${terbilang(rest)}`;
+const join = (head: string, rest: number) => (rest === 0 ? head : `${head} ${terbilang(rest)}`);
 
 /**
  * Rupiah in words: 15000 → "lima belas ribu rupiah". The written form
