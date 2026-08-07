@@ -27,11 +27,15 @@ const SENTENCES = [
  * NADA DASAR, bukan kecepatan — jadi yang digeser terutama `pitch`.
  * `sekarang` = setelan yang dipakai 62 file yang sudah dirender.
  */
+const HD = 'id-ID-Gadis:DragonHDLatestNeural';
 const VARIANTS = [
-  { name: 'sekarang', voice: 'id-ID-GadisNeural', rate: '-8%', pitch: '0%' },
-  { name: 'lembut', voice: 'id-ID-GadisNeural', rate: '-8%', pitch: '-8%' },
-  { name: 'lebih-lembut', voice: 'id-ID-GadisNeural', rate: '-10%', pitch: '-15%' },
-  { name: 'hangat', voice: 'id-ID-GadisNeural', rate: '-12%', pitch: '-22%' },
+  // Gadis HD bicara ±2x lebih ringkas dari Gadis biasa, jadi yang diuji di
+  // sini adalah apakah model HD MENURUTI `rate` sama sekali — kalau semua file
+  // berukuran sama, berarti prosody-nya diabaikan dan HD tidak terpakai.
+  { name: 'hd-0', voice: HD, rate: '0%', pitch: '0%' },
+  { name: 'hd-15', voice: HD, rate: '-15%', pitch: '0%' },
+  { name: 'hd-30', voice: HD, rate: '-30%', pitch: '0%' },
+  { name: 'hd-45', voice: HD, rate: '-45%', pitch: '0%' },
 ];
 
 if (existsSync('.env')) {
@@ -62,7 +66,9 @@ if (list.ok) {
   // adanya. Suara HD sering mengabaikan prosody, jadi pitch/rate dibiarkan
   // bawaan — kalau suaranya sendiri sudah lebih lembut, tak perlu digeser.
   for (const v of indo) {
-    if (v.Gender !== 'Female' || v.ShortName === 'id-ID-GadisNeural') continue;
+    // MAI-Voice-2-Flash menjawab 502 lewat endpoint REST ini — sudah dicoba.
+    if (v.Gender !== 'Female' || !v.ShortName.includes('Dragon')) continue;
+    if (VARIANTS.some((x) => x.voice === v.ShortName)) continue;
     const label = v.ShortName.replace('id-ID-', '').split(':')[0].toLowerCase() + (v.VoiceType === 'NeuralHD' ? '-hd' : '');
     console.log(`  ikut dicoba: ${v.ShortName} → ${label}`);
     VARIANTS.push({ name: label, voice: v.ShortName, rate: '0%', pitch: '0%' });
