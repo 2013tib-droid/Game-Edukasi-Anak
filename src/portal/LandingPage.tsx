@@ -87,7 +87,7 @@ export default function LandingPage() {
           <div className="pc-row">
             <span className="pc-was">Rp49.000</span>
             <span className="pc-now">Rp29.000</span>
-            <span className="pc-off">−41%</span>
+            <span className="pc-off">−40%</span>
           </div>
           <div className="pc-sub">Soal lebih menantang — menyusul!</div>
         </div>
