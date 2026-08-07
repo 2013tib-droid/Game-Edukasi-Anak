@@ -382,6 +382,14 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Mode kunci TETAP `'buka'`.** Yang berubah cuma halaman jualan; `DEFAULT_LOCK_MODE` di `src/data/access.ts` tidak disentuh, jadi semua game masih bisa dicoba bebas.
   - **PENGHALANG LAUNCHING YANG MASIH ADA (bukan soal SD saja):** Fase 5 belum dikerjakan — `functions/` masih README kosong dan `ActivationPage.tsx` masih stub yang menjawab *"Validasi kode belum aktif — menunggu Cloud Function (Fase 5)."* **Jangan nyalakan mode `'kunci'` sebelum itu jadi**: pembeli akan mentok di layar gembok karena kode aktivasinya tak divalidasi apa pun.
 
+- **Landing: bagian "Segera hadir" — SD Kelas 3 & 4 dan SD Kelas 5 & 6** (2026-08-07, permintaan pemilik), teruji headless 360×640, 380×800 & 820×1180 (kedua kartu terbaca utuh, urutan harga → segera hadir → FAQ, tanpa scroll horizontal & nol error console):
+  - Bagian baru `<section className="soon">` di `LandingPage.tsx`, **sesudah kartu harga & sebelum FAQ**: orang tua melihat dulu apa yang bisa dibeli hari ini, baru peta jalannya. Isinya data di konstanta `soonGroups` — menambah jenjang berikutnya = menambah satu entri, tidak menyentuh markup.
+  - **TANPA harga sama sekali** (bukan angka abu-abu, bukan angka dicoret). Harga kedua jenjang itu belum diputuskan, dan angka apa pun di kartu yang belum dijual terbaca sebagai penawaran. Kelas `.pc-now--soon` yang dulu disiapkan untuk ini tetap tak terpakai.
+  - **Tampilannya sengaja lebih ringan dari kartu harga**: bingkai putus-putus ungu, latar setengah bening, tanpa bayangan terangkat. Kartu harga (putih pekat + bayangan) harus tetap yang paling menonjol — ini pelengkap, bukan saingan. Badge "Segera Hadir" memakai warna yang sama dengan `.pc-badge--soon` yang lama supaya bahasa visual "belum dijual" konsisten.
+  - Penamaannya mengikuti pola resmi (lihat "Penamaan Kelompok"): judul menyebut jenjang, umur jadi bagian PERTAMA deskripsi dipisah "·" — "SD Kelas 3 & 4" / "Usia 8–10 tahun · Perkalian, pembagian, membaca cerita".
+  - **Chip "Petualangan seru menanti" TIDAK ditambah** untuk kedua jenjang ini: satu pun game-nya belum ada, dan aturan yang dipakai saat SD Kelas 1 & 2 mulai dijual (2026-08-07) adalah memajang dunia yang benar-benar bisa dimainkan. Chip baru menyusul kalau gamenya sudah jadi.
+  - Tak ada yang berubah di `src/data/groups.json`, `registry.ts`, maupun `access.ts` — ini murni halaman jualan, belum ada kelompok baru yang bisa dibuka.
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
