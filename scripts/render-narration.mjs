@@ -36,12 +36,14 @@ const OUT_DIR = 'public/assets/voice';
  * differ because the two models have very different default speeds:
  *
  * - `gadis` uses the HD model (owner found the standard neural voice shrill).
- *   It speaks about twice as briskly as the standard one, so it needs a much
- *   deeper cut to land at the pace the owner approved.
+ *   -15% is the owner's pick by ear from samples at 0/-15/-30/-45%; the HD
+ *   model reads more briskly than the standard one, and this is the pace they
+ *   chose for it. Don't "correct" it to match Ardi's number — the two models
+ *   have different default speeds, so equal numbers are NOT equal tempo.
  * - `ardi` stays on the standard neural model, approved as-is at -8%.
  */
 const VOICES = {
-  gadis: { name: 'id-ID-Gadis:DragonHDLatestNeural', rate: '-30%' },
+  gadis: { name: 'id-ID-Gadis:DragonHDLatestNeural', rate: '-15%' },
   ardi: { name: 'id-ID-ArdiNeural', rate: '-8%' },
 };
 
