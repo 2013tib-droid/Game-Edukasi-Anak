@@ -221,6 +221,67 @@
   text-align: center;
 }
 
+/* "Segera hadir" — groups still in production (SD Kelas 3 & 4, SD Kelas 5 & 6).
+   Deliberately lighter than the price cards above: dashed outline, translucent,
+   no raised shadow and no price. Nothing here is buyable yet, so it must never
+   compete with — or be mistaken for — the two cards that are on sale. */
+.landing .soon {
+  margin-top: 26px;
+  width: 100%;
+  max-width: 360px;
+}
+.landing .soon-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin: 0 0 14px;
+  text-align: center;
+}
+.landing .soon-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.landing .soon-item {
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px dashed rgba(94, 53, 177, 0.28);
+  border-radius: 20px;
+  padding: 12px 15px;
+  text-align: left;
+}
+.landing .soon-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.landing .soon-name {
+  font-weight: 800;
+  font-size: 15px;
+}
+.landing .soon-badge {
+  background: #e1d5f5;
+  color: #5e35b1;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.landing .soon-desc {
+  display: block;
+  margin-top: 5px;
+  font-size: 12.5px;
+  font-weight: 700;
+  opacity: 0.62;
+  line-height: 1.45;
+}
+
 /* FAQ — native <details> accordions, no JS. Soft cards so the section reads
    as calm reference text, not another row of actions. */
 .landing .faq {

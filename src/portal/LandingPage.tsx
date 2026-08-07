@@ -21,6 +21,23 @@ const worlds = [
   { cls: 'w-story', emoji: '📖', name: 'Cerita Nusantara' },
 ];
 
+/**
+ * Groups still in production. Listed WITHOUT a price on purpose — nothing here
+ * is for sale yet, so a number (even struck through) would read as an offer.
+ * Naming follows the official pattern: "SD Kelas 1 & 2" → "3 & 4" → "5 & 6",
+ * with the age at the start of the description.
+ */
+const soonGroups = [
+  {
+    name: 'SD Kelas 3 & 4',
+    desc: 'Usia 8–10 tahun · Perkalian, pembagian, membaca cerita',
+  },
+  {
+    name: 'SD Kelas 5 & 6',
+    desc: 'Usia 10–12 tahun · Pecahan, bangun ruang, soal cerita',
+  },
+];
+
 /** Parent-facing questions, ordered by what a first-time visitor asks first. */
 const faqs = [
   {
@@ -102,6 +119,21 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+
+      <section className="soon">
+        <h2 className="soon-title">Segera hadir</h2>
+        <ul className="soon-list">
+          {soonGroups.map((g) => (
+            <li key={g.name} className="soon-item">
+              <span className="soon-head">
+                <span className="soon-name">{g.name}</span>
+                <span className="soon-badge">Segera Hadir</span>
+              </span>
+              <span className="soon-desc">{g.desc}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="faq">
         <h2 className="faq-title">Pertanyaan yang sering ditanya</h2>
