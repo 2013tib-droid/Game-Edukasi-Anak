@@ -58,13 +58,14 @@ if (list.ok) {
   console.log(`Suara Indonesia yang ditawarkan Azure (${indo.length}):`);
   for (const v of indo) console.log(`  ${v.ShortName}  ${v.Gender}  ${v.VoiceType}`);
 
-  // Suara "multilingual" bisa membaca Indonesia juga — ikut dicoba sebagai
-  // kandidat kalau ada, karena pilihan id-ID sendiri cuma dua.
-  const multi = voices.filter((v) => v.ShortName?.includes('Multilingual') && v.Gender === 'Female');
-  console.log(`\nKandidat multilingual perempuan: ${multi.length}`);
-  for (const v of multi.slice(0, 3)) {
-    console.log(`  ikut dicoba: ${v.ShortName}`);
-    VARIANTS.push({ name: v.ShortName.split('-')[1].toLowerCase(), voice: v.ShortName, rate: '-8%', pitch: '0%' });
+  // Setiap suara perempuan Indonesia SELAIN Gadis biasa ikut dicoba apa
+  // adanya. Suara HD sering mengabaikan prosody, jadi pitch/rate dibiarkan
+  // bawaan — kalau suaranya sendiri sudah lebih lembut, tak perlu digeser.
+  for (const v of indo) {
+    if (v.Gender !== 'Female' || v.ShortName === 'id-ID-GadisNeural') continue;
+    const label = v.ShortName.replace('id-ID-', '').split(':')[0].toLowerCase() + (v.VoiceType === 'NeuralHD' ? '-hd' : '');
+    console.log(`  ikut dicoba: ${v.ShortName} → ${label}`);
+    VARIANTS.push({ name: label, voice: v.ShortName, rate: '0%', pitch: '0%' });
   }
 } else {
   console.error(`Tidak bisa mengambil daftar suara (HTTP ${list.status}) — lanjut dengan varian bawaan.`);
