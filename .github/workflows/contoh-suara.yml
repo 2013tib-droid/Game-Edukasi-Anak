@@ -1,0 +1,45 @@
+# Render beberapa kalimat contoh dalam beberapa setelan suara, untuk dipilih
+# sebelum merender seluruh narasi. Dipicu dengan mengubah
+# `.github/sample-request.txt`.
+#
+# Hasilnya masuk folder `sample-suara/` (di luar public/), jadi tidak pernah
+# ikut ter-deploy. Hapus foldernya setelah setelan suaranya diputuskan.
+name: Contoh suara
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/sample-request.txt
+
+concurrency:
+  group: contoh-suara-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contoh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Render contoh
+        env:
+          AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
+          AZURE_SPEECH_REGION: ${{ vars.AZURE_SPEECH_REGION || 'southeastasia' }}
+        run: node scripts/sample-voices.mjs
+
+      - name: Commit contohnya
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sample-suara
+          git diff --cached --quiet && exit 0
+          git commit -m 'Contoh setelan suara untuk dipilih'
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

@@ -1,11 +1,13 @@
 /**
- * Audio manager: Indonesian narration + SFX, zero assets required.
- * - Narration: Web Speech API (id-ID). When real TTS audio files arrive in
- *   public/assets/, `speak` will prefer them (keyed lookup) — same call site.
+ * Audio manager: Indonesian narration + SFX.
+ * - Narration: pre-rendered neural-voice clips when a line has one (see
+ *   `voice.ts`), otherwise the device's own Web Speech voice (id-ID). Call
+ *   sites never know the difference.
  * - SFX: tiny WebAudio chimes generated on the fly (no downloads, instant).
  * Everything is triggered from user gestures (button taps), which satisfies
  * mobile autoplay policies.
  */
+import { voiceUrl, voicesReady } from './voice';
 
 let audioCtx: AudioContext | null = null;
 
@@ -42,11 +44,108 @@ function utterance(text: string): SpeechSynthesisUtterance {
   return utter;
 }
 
+/* ---------- Narration queue ----------
+ *
+ * Lines go through ONE queue whichever source speaks them, because a screen
+ * can mix the two: while voices are being rendered game by game, a story page
+ * may have a real clip and its options may not. Two independent players would
+ * talk over each other; a single queue keeps the order the call site asked for.
+ */
+
+/** Lines waiting to be spoken, in order. */
+let queue: string[] = [];
+/** Bumped by every interruption — stale callbacks check it before continuing. */
+let generation = 0;
+/** True while a line is being spoken or resolved. */
+let busy = false;
+
+/**
+ * ONE reusable <audio> element for every clip. Mobile browsers grant playback
+ * permission per element, so reusing the element the child's first tap
+ * unlocked keeps later narration audible, where a fresh element per line could
+ * be blocked mid-game.
+ */
+let player: HTMLAudioElement | null = null;
+
+function element(): HTMLAudioElement {
+  player ??= new Audio();
+  return player;
+}
+
+/** Empty 44-byte WAV — plays instantly, makes no sound. */
+const SILENT_WAV = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAgD4AAAB9AAACABAAZGF0YQAAAAA=';
+
+// Warm the element up on the very first touch anywhere, long before the first
+// narration: otherwise level 1's clip can be refused by the autoplay policy
+// and the child hears the robot voice for that one line.
+if (typeof window !== 'undefined') {
+  window.addEventListener(
+    'pointerdown',
+    () => {
+      const el = element();
+      el.src = SILENT_WAV;
+      void el.play().catch(() => {});
+    },
+    { once: true },
+  );
+}
+
+/** Speak one line with the device's own voice (no rendered clip for it). */
+function speakWithDevice(text: string, gen: number): void {
+  if (gen !== generation) return;
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+    void pump(gen); // no voice at all on this device — don't stall the queue
+    return;
+  }
+  const utter = utterance(text);
+  utter.onend = () => void pump(gen);
+  utter.onerror = () => void pump(gen);
+  window.speechSynthesis.speak(utter);
+}
+
+/** Play the pre-rendered clip, falling back to the device voice if it can't. */
+function playClip(url: string, text: string, gen: number): void {
+  const el = element();
+  let settled = false;
+  const done = (fallback: boolean) => {
+    if (settled || gen !== generation) return;
+    settled = true;
+    el.onended = null;
+    el.onerror = null;
+    if (fallback) speakWithDevice(text, gen);
+    else void pump(gen);
+  };
+  el.onended = () => done(false);
+  el.onerror = () => done(true); // clip missing or corrupt
+  el.src = url;
+  void el.play().catch(() => done(true)); // autoplay refused
+}
+
+async function pump(gen: number): Promise<void> {
+  if (gen !== generation) return;
+  const text = queue.shift();
+  if (text === undefined) {
+    busy = false;
+    return;
+  }
+  await voicesReady(); // instant once loaded; capped so a bad network can't mute the game
+  if (gen !== generation) return;
+  const url = voiceUrl(text);
+  if (url) playClip(url, text, gen);
+  else speakWithDevice(text, gen);
+}
+
+function enqueue(texts: string[], interrupt: boolean): void {
+  if (interrupt) stopSpeaking();
+  queue.push(...texts.filter((t) => t.trim()));
+  if (busy) return;
+  busy = true;
+  void pump(generation);
+}
+
 /** Narrate instruction text in Indonesian. Cancels any ongoing narration. */
 export function speak(text: string): void {
-  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  window.speechSynthesis.speak(utterance(text));
+  enqueue([text], true);
 }
 
 /**
@@ -56,11 +155,18 @@ export function speak(text: string): void {
  * option, so these lines have to queue instead of cutting each other off.
  */
 export function speakNext(...texts: string[]): void {
-  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-  for (const text of texts) window.speechSynthesis.speak(utterance(text));
+  enqueue(texts, false);
 }
 
 export function stopSpeaking(): void {
+  generation += 1;
+  queue = [];
+  busy = false;
+  if (player) {
+    player.onended = null;
+    player.onerror = null;
+    player.pause();
+  }
   if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
     window.speechSynthesis.cancel();
   }
