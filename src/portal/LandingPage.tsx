@@ -85,7 +85,9 @@ export default function LandingPage() {
           <span className="pc-badge pc-badge--soon">🚀 Segera Hadir</span>
           <div className="pc-name">Kelompok SD Kelas 1 &amp; 2</div>
           <div className="pc-row">
-            <span className="pc-now pc-now--soon">Rp49.000</span>
+            <span className="pc-was">Rp49.000</span>
+            <span className="pc-now">Rp29.000</span>
+            <span className="pc-off">−40%</span>
           </div>
           <div className="pc-sub">Soal lebih menantang — menyusul!</div>
         </div>
