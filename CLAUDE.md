@@ -369,6 +369,33 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Wortel & jagung sengaja TIDAK masuk Pasar Buah**: itu sayur, dan di sana warna itu load-bearing (keranjang kuning & oranye tak boleh satu level).
   - Pemotongannya (`scripts/cut-item-sheet.py`): flood-fill dari tepi, gate "terang & tak berwarna" + toleransi tetangga **8** (percobaan pertama pakai 14 dan memakan badan TELUR yang memang nyaris putih — batas telur ke latar cuma beda 14). Latar yang TERKURUNG (celah antara sandaran & dudukan kursi, lubang kepala kunci) tak terjangkau flood-fill, jadi ditembus terpisah lewat daftar `HOLES` — **sengaja per item, jangan diotomatiskan**: bercak putih bola sepak terbaca persis sama oleh aturan otomatis apa pun.
 
+## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
+
+> Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
+
+**Penyedia: Azure Speech `id-ID-GadisNeural` (KEPUTUSAN PEMILIK 2026-08-07)**
+- **Bayar sekali pakai, bukan langganan** — Azure itu pay-as-you-go. Free tier F0 = 500rb karakter/bulan; seluruh narasi app **30.935 karakter (723 baris unik)** = 6,2% kuota, jadi **Rp0** dan masih muat ±16× render ulang untuk revisi. Kalau kuota jebol pun cuma ±Rp19.000 ($15/1 juta karakter).
+- ElevenLabs sengaja TIDAK dipakai untuk narasi umum: lisensi komersialnya nempel di langganan aktif $22/bulan. Boleh dipertimbangkan khusus 6 cerita nanti (di situ ekspresi berbayar), bukan untuk soal.
+- `edge-tts` (suara Gadis yang sama, gratis tanpa kunci) hanya untuk render coba-coba di komputer pemilik — endpoint tak resmi, jangan dipakai untuk produk berbayar.
+
+**Alur: ekstrak → render → putar**
+1. **`npm run narasi`** (`scripts/extract-narration.mjs`) mengumpulkan SEMUA kalimat yang bisa diucapkan ke `scripts/narration-lines.json`. Narasi tidak bisa di-grep — dibangun builder typed per varian, satu slot bisa berisi puluhan varian — jadi skripnya **mem-bundle config aslinya** (pola sama dengan `check-item-ids.mjs`) lalu menelusuri data level yang sudah jadi: **semua varian tiap slot**, bukan cuma yang terambil satu sesi. Ikut terkumpul: teks halaman cerita, umpan balik pilihan, dan kalimat tetap engine ("Hebat! Kamu benar!" dst).
+   - **Kalimat pilihan cerita dirender untuk SEMUA huruf yang mungkin** (A, B, dan C). `StoryChoice` mengacak urutan pilihan tiap halaman — kalau cuma "Pilihan A" yang ada, cerita yang teracak jatuh balik ke suara robot di tengah jalan.
+   - `key` tiap baris = hash isi kalimatnya. **Kalimat yang tidak diubah tidak perlu dirender ulang**; mengubah satu kata = key baru = satu file baru.
+   - `scope` menentukan folder audionya supaya tiap game cuma mengunduh suaranya sendiri: id game · `_shared` (dipakai beberapa game) · `_engine` (kalimat shell di semua game).
+2. **Render** → skrip Azure (belum ada, menunggu kunci API pemilik) menulis `public/assets/voice/<scope>/<key>.mp3` + `manifest.json`.
+3. **Putar** → `src/engine/audio/voice.ts` + antrean di `sound.ts`. **Call site tidak berubah**: `speak()`/`speakNext()` tetap sama di GameShell & StoryChoice.
+
+**Aturan & jebakan pemutar (`voice.ts` + `sound.ts`)**
+- **Manifest dikunci TEKS, bukan hash** (`{ "Ayo hitung! Ada berapa kuda?": "hutan-hewan/3f2a1c9d4b70.mp3" }`): lookup-nya sinkron (tanpa `crypto.subtle` yang async) dan hashing skrip tak mungkin diam-diam menyimpang dari hashing app. Nilainya **memuat ekstensi file** supaya format audio bisa diganti tanpa mengubah app.
+- **`spokenText()` di `voice.ts` WAJIB identik dengan `spoken()` di skrip ekstraksi.** Config merekatkan ruas persamaan dengan NBSP supaya "= ?" tak turun baris di HP — itu trik layout, dan file suaranya dirender dari spasi biasa. Beda satu karakter = lookup meleset = jatuh ke suara robot.
+- **SATU antrean untuk kedua sumber.** Selama render bertahap, satu layar bisa campur: halaman cerita punya rekaman, pilihannya belum. Dua pemutar terpisah akan bicara bersamaan — antrean tunggal menjaga urutan yang diminta call site.
+- **SATU elemen `<audio>` dipakai ulang untuk semua klip.** Browser mobile memberi izin putar **per elemen**, jadi elemen yang sudah "dibuka" sentuhan pertama anak tetap boleh berbunyi; elemen baru tiap baris bisa diblokir di tengah permainan. Elemen itu juga dihangatkan dengan WAV senyap pada `pointerdown` pertama — tanpa itu klip level 1 bisa ditolak kebijakan autoplay dan anak mendengar suara robot untuk satu baris itu.
+- **Tiga jalur jatuh ke suara HP, semuanya sengaja**: baris belum punya rekaman · file rekamannya hilang (deploy setengah jadi) · `play()` ditolak. Anak harus tetap mendengar kalimatnya — **jangan pernah membuat narasi bisa hilang total.**
+- **`public/assets/voice/manifest.json` berisi `{}` sampai render pertama.** Sengaja ada supaya `fetch` tidak 404 dan console tetap bersih. **Jangan dihapus.**
+- Manifest diambil sekali saat chunk game dimuat, dengan **batas tunggu 2 detik** — jaringan HP yang tersendat tidak boleh membuat game bisu.
+- Teruji headless (Chromium, 380×800): baris berekaman memutar file & tidak memakai suara HP · baris tanpa rekaman jatuh ke suara HP · file hilang tetap terdengar · antrean campur file+suara HP berurutan tanpa tumpang tindih · `speak()` memotong antrean lama · `stopSpeaking()` membungkam semuanya · Hutan Hewan dimainkan sungguhan dengan & tanpa manifest, nol error console.
+
 ## Saluran Kontak "Hubungi Kami" (KEPUTUSAN PEMILIK — 2026-07-29)
 
 - **WhatsApp = saluran utama, email = cadangan.** Orang tua Indonesia sudah hidup di WA (hambatan paling kecil); email tetap ada untuk pesan panjang + lampiran dan untuk yang enggan chat langsung. Keduanya cuma link — tanpa backend, tanpa data yang disimpan, tanpa moderasi. (Form dalam app ditolak: butuh Cloud Function + rules + anti-spam, dan pemilik tak bisa membalas.)
@@ -412,7 +439,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 - **GitHub Pages menyajikan situs dari branch `claude/web-demo-html-wa4dr9`** (folder root), BUKAN dari branch default. Yang harus tampil di web WAJIB di-build lalu di-push ke branch itu — push ke branch lain tidak memicu build Pages.
 - **Deploy HANYA dari `main`.** Build `app/` selalu dari `main` (yang pasti punya landing page + semua fitur). JANGAN pernah deploy `app/` dari branch fitur yang belum punya landing page — itulah penyebab landing page berulang ketimpa. Cek cepat landing (di atas) sebelum build.
 - **Struktur branch Pages:** app React (landing di route `/`) disajikan di subfolder **`app/`**. Root `index.html` = **redirect ke `./app/`** (bukan landing statis; satu landing kanonik). `404.html` juga redirect ke `app/` (app pakai HashRouter). `petualangan-pintar.html` tetap ada sebagai sumber standalone, tak ditaut dari root.
-- **Cara deploy:** `DEPLOY_BASE=/Game-Edukasi-Anak/app/ VITE_USE_HASH_ROUTER=1 npm run build`, lalu ganti isi folder `app/` di branch Pages dengan hasil `dist/` (termasuk `dist/assets/logo.svg` & `dist/assets/items/*.webp`). Produksi nanti (Firebase Hosting) pakai `base` default `/` + BrowserRouter.
+- **Cara deploy:** `DEPLOY_BASE=/Game-Edukasi-Anak/app/ VITE_USE_HASH_ROUTER=1 npm run build`, lalu ganti isi folder `app/` di branch Pages dengan hasil `dist/` (termasuk `dist/assets/logo.svg`, `dist/assets/items/*.webp` & `dist/assets/voice/`). Produksi nanti (Firebase Hosting) pakai `base` default `/` + BrowserRouter.
 - URL live: `https://2013tib-droid.github.io/Game-Edukasi-Anak/` (redirect ke `/app/`). Setelah push, build Pages butuh ±1–2 menit; browser HP sering menyimpan cache versi lama (hard-refresh).
 
 ## Aturan Desain Soal (dari pemilik proyek)

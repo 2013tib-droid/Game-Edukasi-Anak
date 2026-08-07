@@ -74,7 +74,7 @@ const mod = await load(
  * a layout trick, and TTS should just see an ordinary space.
  */
 function spoken(text) {
-  return text.replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
+  return text.replace(/\u00A0/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
 function keyOf(text) {
