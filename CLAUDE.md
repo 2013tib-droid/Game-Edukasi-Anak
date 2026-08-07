@@ -260,9 +260,9 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 - **Isi kelompok SD Kelas 1 & 2: 7 game baru** (2026-07-30), teruji headless 380×800 & 360×640 (tiap game dimainkan sampai layar "Selamat!", tanpa scroll & tanpa error console) + skrip validasi config (306 varian: jumlah pilihan, jawaban benar tepat satu, kartu kembar tak sengaja, pengecoh, pasangan drag-drop 1:1):
 
-  **Kapan dirilis (KEPUTUSAN PEMILIK 2026-07-30)**
-  - SD **baru dirilis setelah Playgroup & TK sukses launching.** Sekarang statusnya bahan uji coba: dibuat lengkap supaya bisa dicoba & direvisi lebih dulu, bukan untuk dijual dulu.
-  - **Tidak ada yang perlu diubah di `src/data/access.ts`**: tak satu pun game SD masuk `FREE_GAME_IDS`, jadi begitu mode `'kunci'` dinyalakan saat launching TK, semua game SD otomatis terkunci. Landing page juga sudah menandai kelompok SD **"🚀 Segera Hadir"**.
+  **Kapan dirilis (~~KEPUTUSAN PEMILIK 2026-07-30~~ → DIGANTI 2026-08-07)**
+  - ~~SD baru dirilis setelah Playgroup & TK sukses launching.~~ **DIBATALKAN: SD dijual BARENG TK sejak hari pertama** (keputusan pemilik 2026-08-07 — lihat entri "SD Kelas 1 & 2 ikut dijual sejak launching" di bawah).
+  - **Tidak ada yang perlu diubah di `src/data/access.ts`**: tak satu pun game SD masuk `FREE_GAME_IDS`, jadi begitu mode `'kunci'` dinyalakan saat launching, semua game SD ikut terkunci & minta kode aktivasi — persis yang dibutuhkan kelompok berbayar.
 
   **Daftar game (semua di `src/games/sd1/`, terdaftar di `registry.ts`)**
   | id | template | isi | slot × varian |
@@ -370,10 +370,17 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Pemotongannya (`scripts/cut-item-sheet.py`): flood-fill dari tepi, gate "terang & tak berwarna" + toleransi tetangga **8** (percobaan pertama pakai 14 dan memakan badan TELUR yang memang nyaris putih — batas telur ke latar cuma beda 14). Latar yang TERKURUNG (celah antara sandaran & dudukan kursi, lubang kepala kunci) tak terjangkau flood-fill, jadi ditembus terpisah lewat daftar `HOLES` — **sengaja per item, jangan diotomatiskan**: bercak putih bola sepak terbaca persis sama oleh aturan otomatis apa pun.
 
 - **Harga perkenalan SD Kelas 1 & 2 dipasang: Rp29.000 dari Rp49.000** (2026-08-07, keputusan pemilik), teruji headless 360×640 & 380×800 (kedua kartu harga terbaca utuh, tanpa scroll horizontal & nol error console):
-  - Kartu SD di landing dulu cuma menampilkan satu angka abu-abu redup (`pc-now--soon` Rp49.000) karena kelompoknya belum dijual. Sekarang formatnya **sama persis dengan kartu TK**: harga lama dicoret (`pc-was`) + harga perkenalan merah besar (`pc-now`) + chip diskon (`pc-off`). Badge **🚀 Segera Hadir** TETAP — harga sudah diumumkan, produknya belum dibuka.
+  - Kartu SD di landing dulu cuma menampilkan satu angka abu-abu redup (`pc-now--soon` Rp49.000) karena kelompoknya belum dijual. Sekarang formatnya **sama persis dengan kartu TK**: harga lama dicoret (`pc-was`) + harga perkenalan merah besar (`pc-now`) + chip diskon (`pc-off`). (Badge "Segera Hadir" sempat dipertahankan di sesi ini, lalu ikut dicabut — lihat entri berikutnya.)
   - **Chip tertulis −40%, padahal potongan aslinya 40,8%** (49→29). Sengaja **dibulatkan KE BAWAH**: potongan yang diterima pembeli tak boleh kurang dari yang tertulis di landing. Terapkan aturan yang sama kalau nanti mengubah harga — jangan bulatkan ke atas.
   - `priceLabel` `sd1` di `src/data/groups.json` ikut jadi `Rp29.000`. Field itu belum dipakai komponen mana pun, tapi jangan biarkan dua angka harga berbeda hidup di repo — yang berikutnya membaca file itu akan memakai angka yang salah.
   - Kelas `.pc-now--soon` (abu-abu redup) di `landing.css` jadi tak terpakai; dibiarkan untuk kelompok "segera hadir" berikutnya yang harganya belum diputuskan.
+
+- **SD Kelas 1 & 2 ikut dijual sejak launching — "Segera Hadir" dicabut** (2026-08-07, KEPUTUSAN PEMILIK yang MEMBATALKAN keputusan 2026-07-30 "SD menyusul setelah TK sukses"), teruji headless 360×640, 380×800 & 820×1180 (nol badge tersisa, kedua kartu setara, tanpa scroll horizontal & nol error console):
+  - **Dua kelompok dijual bersamaan sejak hari pertama.** Kartu SD di landing kini identik strukturnya dengan kartu TK: tanpa badge `pc-badge--soon`, tanpa kelas `pcard--soon`, dan sub-teks "Soal lebih menantang — menyusul!" diganti **"Buka semua game SD Kelas 1 & 2 · sekali bayar, main selamanya"** (pola kalimat yang sama dengan kartu TK).
+  - **Daftar "Petualangan seru menanti" wajib memuat KEDUA kelompok.** Dulu isinya 4 dunia TK saja — itu tak apa selagi SD belum dijual, tapi begitu SD ikut dijual, memajang nol game SD berarti menjual sesuatu yang tak pernah diperlihatkan. Sekarang 8 chip: baris 1 = TK (Hutan Hewan, Taman Huruf, Labirin Warna, Pasar Buah), baris 2 = SD (Hitung Hebat, Ejaan Jitu, Jam Pintar, Cerita Nusantara) + 4 kelas warna baru `w-count`/`w-spell`/`w-clock`/`w-story` di `landing.css`. Grid `repeat(4, 1fr)` yang lama otomatis jadi dua baris — CSS-nya tak perlu diubah.
+  - **Jam Pintar di chip landing pakai ⏰ (jam weker), BUKAN 🕒.** Alasannya sama dengan penggantian ikon kartu game 2026-08-02: 🕒 tampil seperti piringan abu-abu polos di HP. (Muka jam SVG `Clock.tsx` sengaja tidak dipakai di sini — chip landing itu emoji dalam lingkaran pastel, bukan komponen game.)
+  - **Mode kunci TETAP `'buka'`.** Yang berubah cuma halaman jualan; `DEFAULT_LOCK_MODE` di `src/data/access.ts` tidak disentuh, jadi semua game masih bisa dicoba bebas.
+  - **PENGHALANG LAUNCHING YANG MASIH ADA (bukan soal SD saja):** Fase 5 belum dikerjakan — `functions/` masih README kosong dan `ActivationPage.tsx` masih stub yang menjawab *"Validasi kode belum aktif — menunggu Cloud Function (Fase 5)."* **Jangan nyalakan mode `'kunci'` sebelum itu jadi**: pembeli akan mentok di layar gembok karena kode aktivasinya tak divalidasi apa pun.
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
@@ -449,7 +456,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 > Landing page berkali-kali "hilang" karena dikerjakan di branch yang tak pernah ter-merge. **Landing page & logo adalah fitur permanen app — bukan eksperimen.** Jangan hapus, bypass route-nya, atau ganti tanpa konfirmasi pemilik.
 
-- **Landing page = route `/`** → `src/portal/LandingPage.tsx` (+ `src/portal/landing.css`). Halaman marketing menghadap orang tua: hero "Petualangan Pintar" + logo, tombol **🎮 Main Sekarang**, chip 4 dunia, kartu harga perkenalan (TK Rp19.000 coret Rp39.000, SD Rp29.000 coret Rp49.000 chip −40% + badge "Segera Hadir"), akses orang tua lewat **`TopBar`** (`src/portal/TopBar.tsx`, tombol "Orang Tua" → `/masuk`). Pemilih kelompok anak pindah ke **`/portal`** (`src/portal/HomePage.tsx`).
+- **Landing page = route `/`** → `src/portal/LandingPage.tsx` (+ `src/portal/landing.css`). Halaman marketing menghadap orang tua: hero "Petualangan Pintar" + logo, tombol **🎮 Main Sekarang**, chip 8 dunia (4 TK + 4 SD), kartu harga perkenalan dua kelompok setara (TK Rp19.000 coret Rp39.000 −50%, SD Rp29.000 coret Rp49.000 −40%), akses orang tua lewat **`TopBar`** (`src/portal/TopBar.tsx`, tombol "Orang Tua" → `/masuk`). Pemilih kelompok anak pindah ke **`/portal`** (`src/portal/HomePage.tsx`).
   - Cek cepat masih utuh: `src/app/App.tsx` punya `<Route path="/" element={<LandingPage />} />` dan `<Route path="/portal" element={<HomePage />} />`. Kalau `/` menunjuk `HomePage` atau `LandingPage.tsx` hilang → **pulihkan dari `main` dulu**.
 - **Logo = satu aset kanonik `public/assets/logo.svg`** (anak ayam + pelangi + bintang). Dipakai di **semua** tempat lewat file itu — jangan bikin salinan/varian inline:
   - Favicon di `index.html` (`<link rel="icon" href="/assets/logo.svg">`; Vite tambah `base` saat build).

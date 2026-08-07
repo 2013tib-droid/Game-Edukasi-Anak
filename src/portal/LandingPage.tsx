@@ -5,11 +5,20 @@ import './landing.css';
 
 const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
 
+/**
+ * A taste of both groups — the first row is Playgroup & TK, the second is
+ * SD Kelas 1 & 2. Both groups are on sale, so neither may be the only one
+ * shown here.
+ */
 const worlds = [
   { cls: 'w-forest', emoji: '🦁', name: 'Hutan Hewan' },
   { cls: 'w-space', emoji: '🏕️', name: 'Taman Huruf' },
   { cls: 'w-color', emoji: '🎨', name: 'Labirin Warna' },
   { cls: 'w-fruit', emoji: '🍉', name: 'Pasar Buah' },
+  { cls: 'w-count', emoji: '🔢', name: 'Hitung Hebat' },
+  { cls: 'w-spell', emoji: '✏️', name: 'Ejaan Jitu' },
+  { cls: 'w-clock', emoji: '⏰', name: 'Jam Pintar' },
+  { cls: 'w-story', emoji: '📖', name: 'Cerita Nusantara' },
 ];
 
 /** Parent-facing questions, ordered by what a first-time visitor asks first. */
@@ -81,15 +90,16 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div className="pcard pcard--soon">
-          <span className="pc-badge pc-badge--soon">🚀 Segera Hadir</span>
+        <div className="pcard">
           <div className="pc-name">Kelompok SD Kelas 1 &amp; 2</div>
           <div className="pc-row">
             <span className="pc-was">Rp49.000</span>
             <span className="pc-now">Rp29.000</span>
             <span className="pc-off">−40%</span>
           </div>
-          <div className="pc-sub">Soal lebih menantang — menyusul!</div>
+          <div className="pc-sub">
+            Buka semua game SD Kelas 1 &amp; 2 · sekali bayar, main selamanya
+          </div>
         </div>
       </div>
 

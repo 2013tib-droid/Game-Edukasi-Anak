@@ -132,6 +132,18 @@
 .landing .w-fruit {
   background: linear-gradient(160deg, #ffe4c2, #ffc79a);
 }
+.landing .w-count {
+  background: linear-gradient(160deg, #d6efff, #a8d8f5);
+}
+.landing .w-spell {
+  background: linear-gradient(160deg, #fff3c4, #ffe08a);
+}
+.landing .w-clock {
+  background: linear-gradient(160deg, #d9f2ea, #a9dfd0);
+}
+.landing .w-story {
+  background: linear-gradient(160deg, #ffdfd6, #ffbfae);
+}
 
 /* price cards — placed below the worlds; compact, smaller price font */
 .landing .prices {
