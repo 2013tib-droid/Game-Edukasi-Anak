@@ -1,0 +1,5795 @@
+{
+  "generated": "2026-08-07",
+  "count": 723,
+  "chars": 30935,
+  "lines": [
+    {
+      "key": "bba8e787ee7e",
+      "text": "Coba lagi, kamu pasti bisa!",
+      "scope": "_engine",
+      "games": [
+        "_engine"
+      ]
+    },
+    {
+      "key": "9f804453863c",
+      "text": "Hebat! Kamu benar!",
+      "scope": "_engine",
+      "games": [
+        "_engine"
+      ]
+    },
+    {
+      "key": "d3a24fb2f64b",
+      "text": "Selamat! Kamu hebat sekali!",
+      "scope": "_engine",
+      "games": [
+        "_engine"
+      ]
+    },
+    {
+      "key": "37851b09287a",
+      "text": "Berapa 7 tambah 7?",
+      "scope": "_shared",
+      "games": [
+        "hitung-hebat",
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "64dec877d8a5",
+      "text": "Berapa 8 tambah 7?",
+      "scope": "_shared",
+      "games": [
+        "hitung-hebat",
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "0d7eaab29dbe",
+      "text": "Berapa 9 tambah 6?",
+      "scope": "_shared",
+      "games": [
+        "hitung-hebat",
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "3b95057b1c09",
+      "text": "Berapa 9 tambah 9?",
+      "scope": "_shared",
+      "games": [
+        "hitung-hebat",
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "d4243a39a4cc",
+      "text": "Buaya berbaris, Kancil melompat satu-satu sampai seberang. Kancil pulang dengan kenyang dan gembira!",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "5060c035146b",
+      "text": "Di sungai, ada buaya menghalangi jalan pulang. Bagaimana Kancil menyeberang?",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "2acc575e3741",
+      "text": "Hmm, mengambil tanpa izin itu tidak baik. Coba pilih yang lain!",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "b512d3901bf1",
+      "text": "Kancil melihat kebun mentimun Pak Tani. Apa yang sebaiknya Kancil lakukan?",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "b03bfb998dde",
+      "text": "Marah-marah tidak menyelesaikan masalah. Coba cara yang cerdik!",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "d0b4503a1f87",
+      "text": "Pak Tani senang Kancil jujur. \"Ambillah mentimun secukupnya,\" kata Pak Tani.",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "53d334ab62da",
+      "text": "Pilihan A. Ajak buaya berhitung sambil berbaris",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "93a8e0898e43",
+      "text": "Pilihan A. Ambil diam-diam",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "9cb7ef4c2582",
+      "text": "Pilihan A. Berteriak marah pada buaya",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "9ccb0c698697",
+      "text": "Pilihan A. Minta izin Pak Tani dulu",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "f677dcd91cc0",
+      "text": "Pilihan B. Ajak buaya berhitung sambil berbaris",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "d7af2f43c63d",
+      "text": "Pilihan B. Ambil diam-diam",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "baeb64da9521",
+      "text": "Pilihan B. Berteriak marah pada buaya",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "5b2aa52e26d1",
+      "text": "Pilihan B. Minta izin Pak Tani dulu",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "ae563c260818",
+      "text": "Si Kancil berjalan di hutan. Perutnya lapar sekali.",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "01f3d03645d0",
+      "text": "Si Kancil berjalan di hutan. Perutnya lapar sekali. Ayo bantu Kancil mencari makan!",
+      "scope": "cerita-kancil",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "6b6b4f8922a6",
+      "text": "\"Ayo lomba lari!\" tantang kelinci. Kura-kura menerima tantangan itu.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "d4083840ecfa",
+      "text": "\"Terima kasih, Rani. Kamu anak yang jujur,\" kata bapak itu.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "f5203e47a29a",
+      "text": "Anak Gembala dan Serigala. Ayo bantu dia mengambil keputusan!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "6632633dd0d5",
+      "text": "Anak gembala meniup serulingnya. Domba-domba ikut tenang mendengarnya.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "335ba8d70934",
+      "text": "Apa yang sebaiknya Rani lakukan dengan dompet itu?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "b3bc91f2e259",
+      "text": "Bawang Putih anak yang tidak serakah. Coba pilih yang lain!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "16763a93ec00",
+      "text": "Bawang Putih rajin membantu pekerjaan rumah setiap hari.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "9f5658f7eb04",
+      "text": "Bawang Putih sampai di rumah seorang nenek. Apa yang sebaiknya dia lakukan?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "e99ca2fbcffa",
+      "text": "Bawang Putih yang Baik Hati. Ayo ikuti ceritanya!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "c41ba0aa608e",
+      "text": "Belalang datang kelaparan ke rumah semut. Apa yang sebaiknya semut lakukan?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "3151bcd82f67",
+      "text": "Belalang malah bernyanyi seharian. \"Untuk apa bekerja? Makanan masih banyak!\" katanya.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "65dc22bb0d04",
+      "text": "Bungkusan itu bisa menolongnya nanti. Coba pilih yang lain!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "382db85bb9a1",
+      "text": "Di dalam labu kecil itu ternyata ada perhiasan dan emas!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "5cc61c491683",
+      "text": "Di musim panas, semut-semut sibuk mengumpulkan makanan.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "9149000de207",
+      "text": "Di trotoar, Rani menemukan sebuah dompet berisi uang.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "4f21f2d809ce",
+      "text": "Dia ingin ada yang menemani. Apa yang sebaiknya dia lakukan?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "b609ccf7f2a1",
+      "text": "Domba-domba selamat. Jujur membuat kita dipercaya!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "72495fd258fd",
+      "text": "Dompet di Jalan. Ayo bantu Rani memilih!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "aa526397f199",
+      "text": "Hari itu sepi sekali. Anak gembala merasa bosan.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "78560690b748",
+      "text": "Kalau diam, domba-dombanya dalam bahaya. Beranilah minta tolong!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "5dcc0ca7be94",
+      "text": "Kalau dibiarkan, dompetnya bisa hilang. Ada cara yang lebih baik!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "d3055317c3a4",
+      "text": "Kalau ikut tidur, usahanya jadi sia-sia. Ayo terus melangkah!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "3543022d94fc",
+      "text": "Kalau lupa bekerja, nanti tidak ada makanan saat musim hujan. Coba lagi!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "3e624322ced0",
+      "text": "Kebaikan hati selalu kembali kepada kita.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "939a1f3a8eb5",
+      "text": "Kelinci merasa pasti menang. Dia tidur siang di bawah pohon.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "ee50754af7b3",
+      "text": "Kura-kura berjalan pelan. Kelinci selalu menertawakannya.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "1e716426e842",
+      "text": "Kura-kura dan Kelinci. Ayo ikuti lombanya!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "834ed00d8b61",
+      "text": "Kura-kura lewat dan melihat kelinci tertidur. Sebaiknya kura-kura bagaimana?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "7ce6e56ddf51",
+      "text": "Kura-kura sampai lebih dulu di garis akhir. Kelinci terbangun dan kaget.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "4edfb739dd32",
+      "text": "Lomba dimulai. Kura-kura tertinggal jauh. Apa yang sebaiknya dia lakukan?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "4e1fe97e9056",
+      "text": "Masuk rumah orang harus permisi dulu ya. Coba lagi!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "fd9cc4bba6db",
+      "text": "Mbok Srini memberi Timun Mas empat bungkusan ajaib. Apa yang sebaiknya Timun Mas lakukan?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "96c5ba73d692",
+      "text": "Mbok Srini merawat seorang anak perempuan bernama Timun Mas.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "8b2a23f3514e",
+      "text": "Membohongi orang bisa membuat mereka tidak percaya lagi. Coba pilih yang lain!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "64253a3050af",
+      "text": "Menolong teman yang kesulitan itu perbuatan baik. Coba pilih yang lain!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "2d715d76a8d6",
+      "text": "Menyerah membuat kita tidak pernah sampai. Ayo coba lagi!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "8ee360ef80ea",
+      "text": "Musim hujan tiba. Makanan di ladang habis.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "2bce6f5f17aa",
+      "text": "Nenek meminta bantuan membersihkan rumah. Bawang Putih membantu dengan senang hati.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "7268898120ba",
+      "text": "Nenek menyuruhnya memilih satu labu sebagai hadiah. Sebaiknya Bawang Putih memilih apa?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "e9ec43f102d4",
+      "text": "Pelan tapi tekun mengalahkan cepat tapi sombong!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "a828e8a91752",
+      "text": "Pilihan A. Berbagi makanan dan mengajaknya bekerja bersama",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "835634f1183a",
+      "text": "Pilihan A. Berhenti dan menangis",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "088933a96a13",
+      "text": "Pilihan A. Berhenti dan pulang saja",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "f74288bccaec",
+      "text": "Pilihan A. Bermain seruling sambil menjaga domba",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "bd8494d846ec",
+      "text": "Pilihan A. Berteriak \"Ada serigala!\" padahal tidak ada",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "eeefd5032c8d",
+      "text": "Pilihan A. Berteriak minta tolong kepada warga desa",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "79f18fc946ae",
+      "text": "Pilihan A. Diam saja karena takut",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "16dfe7b8d980",
+      "text": "Pilihan A. Ikut bermain dan lupa bekerja",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "479e9a2bb311",
+      "text": "Pilihan A. Ikut tidur karena lelah",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "d30965c78a3e",
+      "text": "Pilihan A. Labu yang paling besar sambil meminta lebih",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "95ba6f8c3a70",
+      "text": "Pilihan A. Labu yang paling kecil",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "ede5c55dd758",
+      "text": "Pilihan A. Masuk tanpa permisi",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "5a05238e71a9",
+      "text": "Pilihan A. Membawanya dan berlari ke hutan",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "297e4cf110ed",
+      "text": "Pilihan A. Membiarkannya di jalan",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "fd583f211b87",
+      "text": "Pilihan A. Menebarkan terasi lalu terus berlari",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "e88a011e9d54",
+      "text": "Pilihan A. Mengusir belalang",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "b7f3b48f7270",
+      "text": "Pilihan A. Meninggalkan bungkusan itu",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "ea688beb27d1",
+      "text": "Pilihan A. Menyapa dengan sopan dan meminta tolong",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "fb1d12e58114",
+      "text": "Pilihan A. Menyelesaikan pekerjaan dulu, baru bermain",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "d2160fe6eab5",
+      "text": "Pilihan A. Menyerahkannya kepada guru atau satpam",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "a6f82c4f5f4b",
+      "text": "Pilihan A. Menyimpannya untuk jajan",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "d52967a32a8f",
+      "text": "Pilihan A. Terus berjalan menuju garis akhir",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "4cdb08231302",
+      "text": "Pilihan A. Terus berjalan pelan-pelan tanpa menyerah",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "ede4c3ddae8a",
+      "text": "Pilihan B. Berbagi makanan dan mengajaknya bekerja bersama",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "b8d1785136a8",
+      "text": "Pilihan B. Berhenti dan menangis",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "77cc45fd019d",
+      "text": "Pilihan B. Berhenti dan pulang saja",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "606022bace9b",
+      "text": "Pilihan B. Bermain seruling sambil menjaga domba",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "bdcfb8d25b10",
+      "text": "Pilihan B. Berteriak \"Ada serigala!\" padahal tidak ada",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "b1543a6bf226",
+      "text": "Pilihan B. Berteriak minta tolong kepada warga desa",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "62e242112b93",
+      "text": "Pilihan B. Diam saja karena takut",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "fe8c585f2422",
+      "text": "Pilihan B. Ikut bermain dan lupa bekerja",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "27c6fc69dbe8",
+      "text": "Pilihan B. Ikut tidur karena lelah",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "8ceef47048c7",
+      "text": "Pilihan B. Labu yang paling besar sambil meminta lebih",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "216067c7a392",
+      "text": "Pilihan B. Labu yang paling kecil",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "b64d60eddbd8",
+      "text": "Pilihan B. Masuk tanpa permisi",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "17c9fcd0f96d",
+      "text": "Pilihan B. Membawanya dan berlari ke hutan",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "1a83830fb3a2",
+      "text": "Pilihan B. Membiarkannya di jalan",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "e5b9103049bf",
+      "text": "Pilihan B. Menebarkan terasi lalu terus berlari",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "ff34832fa08e",
+      "text": "Pilihan B. Mengusir belalang",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "0a90735815f7",
+      "text": "Pilihan B. Meninggalkan bungkusan itu",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "6c3b8707112c",
+      "text": "Pilihan B. Menyapa dengan sopan dan meminta tolong",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "ea75d6450085",
+      "text": "Pilihan B. Menyelesaikan pekerjaan dulu, baru bermain",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "648b32086b99",
+      "text": "Pilihan B. Menyerahkannya kepada guru atau satpam",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "7c20e4431a90",
+      "text": "Pilihan B. Menyimpannya untuk jajan",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "e899ecdf6ead",
+      "text": "Pilihan B. Terus berjalan menuju garis akhir",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "2c3bcb968c71",
+      "text": "Pilihan B. Terus berjalan pelan-pelan tanpa menyerah",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "2c5def7af48b",
+      "text": "Pilihan C. Membiarkannya di jalan",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "3037d60895a4",
+      "text": "Pilihan C. Menyerahkannya kepada guru atau satpam",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "7881d1b3da1f",
+      "text": "Pilihan C. Menyimpannya untuk jajan",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "e603bebccb95",
+      "text": "Rajin bekerja dan suka menolong, dua-duanya penting!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "cd44ed531d9a",
+      "text": "Raksasa masih mengejar. Bungkusan terakhir berisi terasi. Sebaiknya Timun Mas bagaimana?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "b3f56d16d129",
+      "text": "Rani berjalan pulang dari sekolah.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "e257f48b44b9",
+      "text": "Rani menyerahkan dompet itu kepada satpam sekolah.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "1335ef93c8bd",
+      "text": "Saat mencuci di sungai, bajunya hanyut terbawa arus.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "dfcb69a7cf71",
+      "text": "Semut berbagi makanan. Belalang berjanji akan rajin mulai sekarang.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "e145c559f116",
+      "text": "Semut dan Belalang. Ayo ikuti ceritanya!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "a4ff396de2d9",
+      "text": "Semut diajak bermain oleh belalang. Sebaiknya semut menjawab apa?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "233b0ea7c8b6",
+      "text": "Seorang anak gembala menjaga domba-dombanya di padang rumput.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "072c666f9d8d",
+      "text": "Suatu hari, raksasa datang menagih janji. Timun Mas harus lari!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "60bbebfd4687",
+      "text": "Tak lama, seorang bapak datang mencari dompetnya. Wajahnya lega sekali.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "1131758df8b8",
+      "text": "Terasi berubah menjadi lautan lumpur. Raksasa tidak bisa lewat.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "7a8f70bf130b",
+      "text": "Tiba-tiba serigala sungguhan datang! Apa yang harus dilakukan anak gembala?",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "79333cc7315d",
+      "text": "Timun Mas anak yang berani. Ayo gunakan akalnya!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "1b9d0c8f0519",
+      "text": "Timun Mas menebar biji timun. Seketika tumbuh ladang timun yang lebat.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "97c41c2428f4",
+      "text": "Timun Mas pulang dengan selamat. Berani dan cerdik menyelamatkannya!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "8c5458610eaa",
+      "text": "Timun Mas. Ayo bantu Timun Mas pulang dengan selamat!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "9d15b31eafbe",
+      "text": "Uang itu milik orang lain yang pasti sedang mencarinya. Coba pilih yang lain!",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "7d8562218973",
+      "text": "Warga desa langsung datang menolong. Karena anak gembala selalu jujur, semua orang percaya padanya.",
+      "scope": "cerita-nusantara",
+      "games": [
+        "cerita-nusantara"
+      ]
+    },
+    {
+      "key": "30df6eeacac6",
+      "text": "Ini awan. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "50c9de101320",
+      "text": "Ini ayam. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "3dde7cf28b25",
+      "text": "Ini baju. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "8d0827b84be5",
+      "text": "Ini bebek. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "b335e4d92d8f",
+      "text": "Ini becak. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "b1fe379e2fb1",
+      "text": "Ini buku. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "7ed0203b67ea",
+      "text": "Ini bulan. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "c09d29e7dba0",
+      "text": "Ini bunga. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "5a6d52933280",
+      "text": "Ini celana. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "9cc00c7ac03c",
+      "text": "Ini daun. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "5a0acc287549",
+      "text": "Ini desa. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "c42d06d0a012",
+      "text": "Ini gajah. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "7a7a55a8f26a",
+      "text": "Ini gelas. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "ece44e17d6af",
+      "text": "Ini hujan. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "d1f4a664be82",
+      "text": "Ini jeruk. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "7a6756b0522b",
+      "text": "Ini kapal. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "edcc472e4c7b",
+      "text": "Ini katak. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "eb1bb48381e8",
+      "text": "Ini kebun. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "7a0101a1da16",
+      "text": "Ini kereta. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "1fcac60504b7",
+      "text": "Ini kota. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "5f9b15c748d4",
+      "text": "Ini krayon. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "0208cd178900",
+      "text": "Ini kucing. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "688ed8aab644",
+      "text": "Ini kuda. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "35afc922f7dc",
+      "text": "Ini kursi. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "27e98222fc7f",
+      "text": "Ini lampu. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "385526b2d80f",
+      "text": "Ini laut. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "b755c6d98bce",
+      "text": "Ini madu. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "a5e808212bf5",
+      "text": "Ini mata. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "a21f93e5fb7b",
+      "text": "Ini mobil. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "3dba56690fa9",
+      "text": "Ini nasi. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "6d5446337afb",
+      "text": "Ini pantai. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "a3a7eabc6b8b",
+      "text": "Ini pasar. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "22ba321fefd9",
+      "text": "Ini pena. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "f735c97819e6",
+      "text": "Ini pensil. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "9ac031aae011",
+      "text": "Ini pintu. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "5c0194626632",
+      "text": "Ini piring. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "c378d284ae1b",
+      "text": "Ini pisang. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "6b44dc28e71d",
+      "text": "Ini roti. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "ce0929b4ea2d",
+      "text": "Ini rumah. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "db4385c5533f",
+      "text": "Ini sapi. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "4244b3bbfbf4",
+      "text": "Ini sawah. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "505cef5f48a9",
+      "text": "Ini sendok. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "0dd9e2d41171",
+      "text": "Ini sepatu. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "63ec3cd273c0",
+      "text": "Ini sepeda. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "6bed998e30e7",
+      "text": "Ini susu. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "378b812d970b",
+      "text": "Ini tangan. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "c60d39e7e302",
+      "text": "Ini tas. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "f2631727d1ea",
+      "text": "Ini telur. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "8c455ffff6df",
+      "text": "Ini topi. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "06fc203b4ace",
+      "text": "Ini truk. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "db38a3ab5e7e",
+      "text": "Ada 2 kelompok bebek, tiap kelompok isinya 4. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "c2733d7edfc5",
+      "text": "Ada 2 kelompok kura-kura, tiap kelompok isinya 5. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "2ab3d5512f36",
+      "text": "Ada 2 kelompok pinguin, tiap kelompok isinya 3. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "78f83bcb7a9a",
+      "text": "Ada 3 ayam, datang lagi 5 ayam. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "22c895dbbb73",
+      "text": "Ada 3 kelompok ayam, tiap kelompok isinya 3. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "3f68ab2df724",
+      "text": "Ada 3 kelompok katak, tiap kelompok isinya 2. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "2995ce1f4e00",
+      "text": "Ada 4 kelinci, datang lagi 3 kelinci. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "807b7f297906",
+      "text": "Ada 4 kelompok kelinci, tiap kelompok isinya 2. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "a40df1fc1b1c",
+      "text": "Ada 4 pinguin, datang lagi 4 pinguin. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "21c73928087a",
+      "text": "Ada 5 bebek, datang lagi 4 bebek. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "c6f29e7d14bd",
+      "text": "Ada 5 kura-kura, datang lagi 5 kura-kura. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "6840930d53bc",
+      "text": "Ada 6 kambing, lalu 4 pulang ke rumah. Berapa yang tersisa?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "1dd7f75ccc71",
+      "text": "Ada 6 katak, datang lagi 2 katak. Berapa semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "52de907232b4",
+      "text": "Ada 7 bebek, lalu 3 pulang ke rumah. Berapa yang tersisa?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "73f63a740407",
+      "text": "Ada 7 monyet, lalu 5 pulang ke rumah. Berapa yang tersisa?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "6faf6617bd43",
+      "text": "Ada 8 kelinci, lalu 5 pulang ke rumah. Berapa yang tersisa?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "13757fa879c2",
+      "text": "Ada 8 kucing, lalu 2 pulang ke rumah. Berapa yang tersisa?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "3ec5d7c548a3",
+      "text": "Ada 9 panda, lalu 4 pulang ke rumah. Berapa yang tersisa?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "2d12cd067e25",
+      "text": "Berapa 11 tambah 8?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "963e2db5bbe4",
+      "text": "Berapa 12 tambah 5?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "34d631dd4192",
+      "text": "Berapa 13 dikurangi 4?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "4631240ee4b1",
+      "text": "Berapa 13 tambah 14?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "fae05f9ec021",
+      "text": "Berapa 13 tambah 6?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "f6383e0449a4",
+      "text": "Berapa 14 dikurangi 7?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "c7c065c6e0ef",
+      "text": "Berapa 15 dikurangi 6?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "f52c00e6ccd0",
+      "text": "Berapa 15 tambah 12?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "0a02cde9cfa9",
+      "text": "Berapa 16 dikurangi 9?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "1e4ed84b8305",
+      "text": "Berapa 17 dikurangi 5?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "391a3e3a2cf9",
+      "text": "Berapa 17 tambah 13?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "b1645140005f",
+      "text": "Berapa 18 dikurangi 9?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "31089c242eac",
+      "text": "Berapa 19 dikurangi 7?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "a3870da70b88",
+      "text": "Berapa 20 dikurangi 8?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "ee688ec0b7b2",
+      "text": "Berapa 21 tambah 8?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "9d813eacac81",
+      "text": "Berapa 24 dikurangi 12?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "758aae8df8fc",
+      "text": "Berapa 26 dikurangi 15?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "88add976e78a",
+      "text": "Berapa 28 dikurangi 14?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "92d6fdf6ce71",
+      "text": "Berapa 30 dikurangi 10?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "c1fb8be0eb6b",
+      "text": "Berapa 6 tambah 9?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "2d72dc098771",
+      "text": "Ibu punya Rp1.000 dan Rp500. Berapa uang Ibu semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "de9173478796",
+      "text": "Ibu punya Rp10.000 dan Rp5.000. Berapa uang Ibu semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "04a57bff59b7",
+      "text": "Ibu punya Rp2.000 dan Rp1.000. Berapa uang Ibu semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "a3e6e2a743ca",
+      "text": "Ibu punya Rp2.000 dan Rp2.000. Berapa uang Ibu semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "73e7b5dc4c22",
+      "text": "Ibu punya Rp5.000 dan Rp2.000. Berapa uang Ibu semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "ef003d809a80",
+      "text": "Ibu punya Rp5.000 dan Rp5.000. Berapa uang Ibu semuanya?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "15332e23b573",
+      "text": "Ketuk 5 bunga matahari. Hitung pelan-pelan ya!",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "15c5a61ea80c",
+      "text": "Ketuk 6 bola. Hitung pelan-pelan ya!",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "13c481e1a701",
+      "text": "Ketuk 6 mobil. Hitung pelan-pelan ya!",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "4de0a9d8cdac",
+      "text": "Ketuk 7 pensil. Hitung pelan-pelan ya!",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "c49706974024",
+      "text": "Ketuk 8 kue. Hitung pelan-pelan ya!",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "a6b88a9e0f83",
+      "text": "Ketuk 9 ikan. Hitung pelan-pelan ya!",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "3804bdc63661",
+      "text": "Lihat urutan bilangannya. Bilangan mana yang hilang?",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "e0c04281562f",
+      "text": "Sentuh bilangan yang paling besar!",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "7eeac0c8f6ca",
+      "text": "Sentuh bilangan yang paling kecil!",
+      "scope": "hitung-hebat",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "ce79ff8573d1",
+      "text": "Ada 4 bebek. satu bebek pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "ef14570977c7",
+      "text": "Ada 4 katak. dua katak pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "390e35765274",
+      "text": "Ada 5 ayam. dua ayam pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "8c867d60b039",
+      "text": "Ada 5 kelinci. satu kelinci pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "3a9d74300c76",
+      "text": "Ada 5 kucing. tiga kucing pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "3e732a7cf1fe",
+      "text": "Ada 6 kura-kura. dua kura-kura pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "000209860817",
+      "text": "Ada 6 panda. tiga panda pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "aae1ff88a4ee",
+      "text": "Ada 6 pinguin. dua pinguin pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "80163085a291",
+      "text": "Ada 6 singa. dua singa pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "d6cb6230093a",
+      "text": "Ada 6 zebra. dua zebra pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "632508eb5c8a",
+      "text": "Ada 7 bebek. tiga bebek pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "bc453b389caf",
+      "text": "Ada 7 beruang. dua beruang pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "2e51b96d7c85",
+      "text": "Ada 7 gajah. tiga gajah pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "24e727707357",
+      "text": "Ada 7 sapi. dua sapi pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "b9ffebaa626f",
+      "text": "Ada 8 bebek. tiga bebek pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "c0910125c5d0",
+      "text": "Ada 8 jerapah. empat jerapah pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "b5ef2b595413",
+      "text": "Ada 8 kuda. empat kuda pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "f68d0a65d410",
+      "text": "Ada 8 monyet. tiga monyet pulang ke rumah. Berapa yang masih tinggal?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "ed364848c5cb",
+      "text": "Ayo hitung! Ada berapa ayam?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "1d4ab1f59ab5",
+      "text": "Ayo hitung! Ada berapa bebek?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "972584cb90a3",
+      "text": "Ayo hitung! Ada berapa beruang?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "b49952af8dd0",
+      "text": "Ayo hitung! Ada berapa harimau?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "3c1582dbb495",
+      "text": "Ayo hitung! Ada berapa kambing?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "233b04e73052",
+      "text": "Ayo hitung! Ada berapa katak?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "97f51da81c8c",
+      "text": "Ayo hitung! Ada berapa kelinci?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "d2dd8acab769",
+      "text": "Ayo hitung! Ada berapa koala?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "3266b9247c1f",
+      "text": "Ayo hitung! Ada berapa kucing?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "b34d9acf274b",
+      "text": "Ayo hitung! Ada berapa kuda?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "e3b6b35134c1",
+      "text": "Ayo hitung! Ada berapa monyet?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "e1344f35cfc0",
+      "text": "Ayo hitung! Ada berapa panda?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "2b00fb80253a",
+      "text": "Ayo hitung! Ada berapa pinguin?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "0f808e562190",
+      "text": "Ayo hitung! Ada berapa sapi?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "59e49734ae17",
+      "text": "Ayo hitung! Ada berapa singa?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "635c723e4fb7",
+      "text": "Ayo hitung! Ada berapa zebra?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "aaac662bc3d2",
+      "text": "Ayo tambahkan! dua kelinci ditambah tiga kelinci, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "28574e530479",
+      "text": "Ayo tambahkan! dua kucing ditambah dua kucing, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "65554e4551c6",
+      "text": "Ayo tambahkan! dua singa ditambah lima singa, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "53f59056e742",
+      "text": "Ayo tambahkan! empat bebek ditambah dua bebek, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "360670a2e335",
+      "text": "Ayo tambahkan! empat beruang ditambah tiga beruang, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "0544f52583c7",
+      "text": "Ayo tambahkan! empat kuda ditambah empat kuda, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "e5818fe4d509",
+      "text": "Ayo tambahkan! lima jerapah ditambah tiga jerapah, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "e3418b18c987",
+      "text": "Ayo tambahkan! satu koala ditambah empat koala, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "c7799a5f35a0",
+      "text": "Ayo tambahkan! tiga gajah ditambah empat gajah, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "0adb3a79b8b9",
+      "text": "Ayo tambahkan! tiga harimau ditambah lima harimau, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "fc3b9a0c2f49",
+      "text": "Ayo tambahkan! tiga monyet ditambah dua monyet, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "529ed0e832ed",
+      "text": "Ayo tambahkan! tiga panda ditambah tiga panda, jadi berapa semuanya?",
+      "scope": "hutan-hewan",
+      "games": [
+        "hutan-hewan"
+      ]
+    },
+    {
+      "key": "7becae50d4c9",
+      "text": "Antar ambulans ke rumah sakit. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "9fcc166103d8",
+      "text": "Antar ambulans ke sekolah. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "5e6cb48a1385",
+      "text": "Antar bajaj ke perumahan. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "ed9cc38e07a9",
+      "text": "Antar bus ke pasar malam. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "01e69537cc10",
+      "text": "Antar bus ke sekolah. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "e5ecca37e568",
+      "text": "Antar bus ke tempat berkemah. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "79b540848227",
+      "text": "Antar bus listrik ke halte. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "de47f601d64f",
+      "text": "Antar gerbong kereta ke pabrik. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "8e6d81081d21",
+      "text": "Antar jip ke gunung. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "c932667416d4",
+      "text": "Antar jip ke pohon besar. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "b5d6024ac742",
+      "text": "Antar jip ke taman bermain. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "9a018f497967",
+      "text": "Antar jip ke taman. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "0c0fa5c0cfa4",
+      "text": "Antar kereta cepat ke kota. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "c2187183a707",
+      "text": "Antar kereta gunung ke gunung. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "4bc014f63fb3",
+      "text": "Antar kereta ke stasiun. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "0276238306c6",
+      "text": "Antar kereta listrik ke kantor. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "f2a8455b6012",
+      "text": "Antar mobil antar-jemput ke sekolah. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "496d13cb854d",
+      "text": "Antar mobil bak ke ladang jagung. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "9bf8c395418f",
+      "text": "Antar mobil bak ke padang pasir. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "ea5121f31c6e",
+      "text": "Antar mobil bak ke tempat bangunan. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "c2e34267b81f",
+      "text": "Antar mobil balap ke garis finis. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "a082c3f346b5",
+      "text": "Antar mobil ke menara. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "e4deb52a962c",
+      "text": "Antar mobil ke pantai. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "9a1f774a1b4c",
+      "text": "Antar mobil ke pom bensin. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "bc6c963a6ed3",
+      "text": "Antar mobil ke rumah. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "eb34056ade87",
+      "text": "Antar mobil pemadam ke api. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "3a00e3092557",
+      "text": "Antar mobil polisi ke jalan yang rusak. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "feb34e2540ff",
+      "text": "Antar mobil polisi ke kantor. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "5c3ca955ea51",
+      "text": "Antar monorel ke kincir ria. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "b037e50a7a6c",
+      "text": "Antar motor ke gunung besar. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "a25181c0bc7e",
+      "text": "Antar motor ke pom bensin. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "5067afa985cd",
+      "text": "Antar otoped ke lapangan. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "e2a89b08ce0f",
+      "text": "Antar papan luncur ke perosotan. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "190ed7eaf95f",
+      "text": "Antar sepeda ke jembatan. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "c09c49b07c12",
+      "text": "Antar sepeda ke rumah nenek. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "818a4af8d116",
+      "text": "Antar sepeda ke taman. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "c806aebfe312",
+      "text": "Antar skuter ke kebun bunga. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "1b1f439ed1aa",
+      "text": "Antar skuter ke stadion. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "4bc1a1d280ec",
+      "text": "Antar skuter ke warung. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "9f1ca12b49ff",
+      "text": "Antar taksi ke toko. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "efc3abc99866",
+      "text": "Antar traktor ke gudang. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "1debf8883c78",
+      "text": "Antar traktor ke hutan pinus. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "25680d5a6a01",
+      "text": "Antar traktor ke sawah. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "289a224d9f77",
+      "text": "Antar trem ke museum. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "2cee465fd273",
+      "text": "Antar truk besar ke toko besar. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "4cecb7e6ac35",
+      "text": "Antar truk ke istana. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "93ca2128db90",
+      "text": "Antar truk ke pabrik. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "6c4741e2b022",
+      "text": "Antar truk susu ke peternakan. Ikuti jalannya dengan jarimu!",
+      "scope": "jalan-kendaraan",
+      "games": [
+        "jalan-kendaraan"
+      ]
+    },
+    {
+      "key": "15065e2d2293",
+      "text": "Adik tidur siang pukul satu. Sentuh jamnya!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "79b88a2772f3",
+      "text": "Anak-anak tidur malam pukul sembilan. Sentuh jamnya!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "d549561f9f58",
+      "text": "Andi bangun tidur pukul lima pagi. Sentuh jamnya!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "d41b905e6ada",
+      "text": "Ayah pulang kerja pukul lima sore. Sentuh jamnya!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "79e6319bfd72",
+      "text": "Bel sekolah berbunyi pukul tujuh pagi. Sentuh jamnya!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "44c459bb3d21",
+      "text": "Jarum pendek di angka 11, jarum panjang di angka 12. Pukul berapa itu?",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "be6f06ecb860",
+      "text": "Jarum pendek di angka 2, jarum panjang di angka 12. Pukul berapa itu?",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "75deb04c51f8",
+      "text": "Jarum pendek di angka 4, jarum panjang di angka 12. Pukul berapa itu?",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "8efd3f4df6a5",
+      "text": "Jarum pendek di angka 6, jarum panjang di angka 12. Pukul berapa itu?",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "d9e29e38564b",
+      "text": "Jarum pendek di angka 8, jarum panjang di angka 12. Pukul berapa itu?",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "1086db0d079e",
+      "text": "Jarum pendek di angka 9, jarum panjang di angka 12. Pukul berapa itu?",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "5338445c653a",
+      "text": "Kita makan siang pukul dua belas. Sentuh jamnya!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "d3369b8f194e",
+      "text": "Lihat jam ini. Pukul berapa sekarang?",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "c535ae9d220e",
+      "text": "Sentuh jam yang menunjukkan pukul delapan lewat tiga puluh menit!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "fa50fdb06412",
+      "text": "Sentuh jam yang menunjukkan pukul delapan tepat!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "2a55b07242e4",
+      "text": "Sentuh jam yang menunjukkan pukul dua belas lewat tiga puluh menit!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "5d2bc31ae22e",
+      "text": "Sentuh jam yang menunjukkan pukul dua belas tepat!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "1acd084a449a",
+      "text": "Sentuh jam yang menunjukkan pukul dua lewat tiga puluh menit!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "2ebaf4aa6f5f",
+      "text": "Sentuh jam yang menunjukkan pukul dua tepat!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "81b23a230ddc",
+      "text": "Sentuh jam yang menunjukkan pukul empat lewat tiga puluh menit!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "d23800fe6883",
+      "text": "Sentuh jam yang menunjukkan pukul enam lewat tiga puluh menit!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "d6356e256865",
+      "text": "Sentuh jam yang menunjukkan pukul lima tepat!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "18895ff0d755",
+      "text": "Sentuh jam yang menunjukkan pukul sepuluh lewat tiga puluh menit!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "cafe0a3cfe33",
+      "text": "Sentuh jam yang menunjukkan pukul sepuluh tepat!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "6aac7c5df799",
+      "text": "Sentuh jam yang menunjukkan pukul setengah delapan!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "dc100cebcc3d",
+      "text": "Sentuh jam yang menunjukkan pukul setengah dua belas!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "2786bc1d4204",
+      "text": "Sentuh jam yang menunjukkan pukul setengah enam!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "d4084db4c84e",
+      "text": "Sentuh jam yang menunjukkan pukul setengah lima!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "208bf3de1c1c",
+      "text": "Sentuh jam yang menunjukkan pukul setengah sepuluh!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "84a27d6d2aca",
+      "text": "Sentuh jam yang menunjukkan pukul setengah tiga!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "2782c8daa908",
+      "text": "Sentuh jam yang menunjukkan pukul tujuh tepat!",
+      "scope": "jam-pintar",
+      "games": [
+        "jam-pintar"
+      ]
+    },
+    {
+      "key": "1fa26bda01ae",
+      "text": "Level terakhir! Kamu pasti bisa!",
+      "scope": "kartu-kembar",
+      "games": [
+        "kartu-kembar"
+      ]
+    },
+    {
+      "key": "9a1c0eb3ca63",
+      "text": "Sekarang lebih banyak! Temukan semua pasangannya!",
+      "scope": "kartu-kembar",
+      "games": [
+        "kartu-kembar"
+      ]
+    },
+    {
+      "key": "dcd22ffabbb7",
+      "text": "Temukan pasangan hewan yang sama!",
+      "scope": "kartu-kembar",
+      "games": [
+        "kartu-kembar"
+      ]
+    },
+    {
+      "key": "111cdf43b40c",
+      "text": "Ini huruf besar A. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "b5181dbf9706",
+      "text": "Ini huruf besar B. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "ab5e30f88615",
+      "text": "Ini huruf besar C. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "584a8f3f5591",
+      "text": "Ini huruf besar D. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "f04ca9bc8c33",
+      "text": "Ini huruf besar E. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "17bf8eed744c",
+      "text": "Ini huruf besar F. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "9e3c5aa4e6ce",
+      "text": "Ini huruf besar G. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "fcec9866cb70",
+      "text": "Ini huruf besar H. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "c9ddc9c22272",
+      "text": "Ini huruf besar I. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "fbe18ac8e5de",
+      "text": "Ini huruf besar J. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "d775cd27a105",
+      "text": "Ini huruf besar K. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "a86651c4f441",
+      "text": "Ini huruf besar L. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "ca28722bea75",
+      "text": "Ini huruf besar M. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "ef075371fe3d",
+      "text": "Ini huruf besar N. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "ab61c214bd5a",
+      "text": "Ini huruf besar O. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "c67343489ac7",
+      "text": "Ini huruf besar P. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "89a54a738e23",
+      "text": "Ini huruf besar Q. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "9890f0f61464",
+      "text": "Ini huruf besar R. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "4285f7d4e4fc",
+      "text": "Ini huruf besar S. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "51498ce9af64",
+      "text": "Ini huruf besar T. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "3c05efd3f149",
+      "text": "Ini huruf besar U. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "20ae53a53082",
+      "text": "Ini huruf besar V. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "51174fffc25e",
+      "text": "Ini huruf besar W. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "52ea761e984b",
+      "text": "Ini huruf besar X. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "885308cd74dd",
+      "text": "Ini huruf besar Y. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "dc205f895592",
+      "text": "Ini huruf besar Z. Mana huruf kecilnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "421f0b9ecdb2",
+      "text": "Ini huruf kecil a. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "e08fb010d299",
+      "text": "Ini huruf kecil b. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "094a28bc88a9",
+      "text": "Ini huruf kecil c. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "a85f1b2cfa26",
+      "text": "Ini huruf kecil d. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "4fd048b07e0c",
+      "text": "Ini huruf kecil e. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "e750ab264566",
+      "text": "Ini huruf kecil f. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "7e77612d1aa7",
+      "text": "Ini huruf kecil g. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "2bda9d367c6f",
+      "text": "Ini huruf kecil h. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "0fa663cc23b9",
+      "text": "Ini huruf kecil i. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "04650b6bfa5f",
+      "text": "Ini huruf kecil j. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "457f4c20eb74",
+      "text": "Ini huruf kecil k. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "f4088cfebda6",
+      "text": "Ini huruf kecil l. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "feae987f9ce6",
+      "text": "Ini huruf kecil m. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "241c447fbc96",
+      "text": "Ini huruf kecil n. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "38d763848e42",
+      "text": "Ini huruf kecil o. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "5c228b83a7ab",
+      "text": "Ini huruf kecil p. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "f64f81030bd8",
+      "text": "Ini huruf kecil q. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "b175270d38c7",
+      "text": "Ini huruf kecil r. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "ee3e501e0219",
+      "text": "Ini huruf kecil s. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "bcaf04dbf755",
+      "text": "Ini huruf kecil t. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "74285d83447f",
+      "text": "Ini huruf kecil u. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "0e523c99a940",
+      "text": "Ini huruf kecil v. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "8b029b826e7d",
+      "text": "Ini huruf kecil w. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "01c741755f69",
+      "text": "Ini huruf kecil x. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "b6b8c1ce79f3",
+      "text": "Ini huruf kecil y. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "35d258bc2643",
+      "text": "Ini huruf kecil z. Mana huruf besarnya?",
+      "scope": "kenal-huruf",
+      "games": [
+        "kenal-huruf"
+      ]
+    },
+    {
+      "key": "867f57ee6807",
+      "text": "Lihat polanya baik-baik. Bentuk apa selanjutnya?",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "744502037587",
+      "text": "Semua bentuknya sama. Sentuh awan warna biru!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "2c2741954f27",
+      "text": "Semua bentuknya sama. Sentuh awan warna merah!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "ea3c39f58f29",
+      "text": "Semua bentuknya sama. Sentuh bintang warna kuning!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "953f6af654b8",
+      "text": "Semua bentuknya sama. Sentuh bintang warna merah!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "fd7a9ca09eeb",
+      "text": "Semua bentuknya sama. Sentuh bulan sabit warna kuning!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "430d0ae68e56",
+      "text": "Semua bentuknya sama. Sentuh bulan sabit warna merah!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "cb364c15295d",
+      "text": "Semua bentuknya sama. Sentuh hati warna merah!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "3b2eda9d7513",
+      "text": "Semua bentuknya sama. Sentuh hati warna ungu!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "f9efa1f135cf",
+      "text": "Semua bentuknya sama. Sentuh kotak warna biru!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "393dc5cd4641",
+      "text": "Semua bentuknya sama. Sentuh kotak warna hijau!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "0c68ba2f1d96",
+      "text": "Semua bentuknya sama. Sentuh layang-layang warna hijau!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "8ecfe55603ad",
+      "text": "Semua bentuknya sama. Sentuh layang-layang warna ungu!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "b598245ab7d4",
+      "text": "Semua bentuknya sama. Sentuh lingkaran warna biru!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "d2791b9f3946",
+      "text": "Semua bentuknya sama. Sentuh lingkaran warna coklat!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "4d9abe6cd97b",
+      "text": "Semua bentuknya sama. Sentuh oval warna hijau!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "9459d3ac8b90",
+      "text": "Semua bentuknya sama. Sentuh oval warna merah muda!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "2a19efc4a176",
+      "text": "Semua bentuknya sama. Sentuh persegi panjang warna coklat!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "23cb33e0c9a0",
+      "text": "Semua bentuknya sama. Sentuh persegi panjang warna kuning!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "f89e8accb83a",
+      "text": "Semua bentuknya sama. Sentuh segitiga warna hijau!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "4ece5d3bd6c1",
+      "text": "Semua bentuknya sama. Sentuh segitiga warna ungu!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "7a5dd1e45831",
+      "text": "Semua warnanya sama. Sentuh bentuk awan!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "839c57829a6e",
+      "text": "Semua warnanya sama. Sentuh bentuk bintang!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "9bb3e629b51f",
+      "text": "Semua warnanya sama. Sentuh bentuk bulan sabit!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "31e89d192dd1",
+      "text": "Semua warnanya sama. Sentuh bentuk hati!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "fdca2593582d",
+      "text": "Semua warnanya sama. Sentuh bentuk kotak!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "41518cdb0618",
+      "text": "Semua warnanya sama. Sentuh bentuk layang-layang!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "f065e52dfa56",
+      "text": "Semua warnanya sama. Sentuh bentuk lingkaran!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "a6896833bb33",
+      "text": "Semua warnanya sama. Sentuh bentuk oval!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "cfc6858bd08a",
+      "text": "Semua warnanya sama. Sentuh bentuk persegi panjang!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "7817c41b2df0",
+      "text": "Semua warnanya sama. Sentuh bentuk segitiga!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "6723407429a1",
+      "text": "Sentuh awan yang berwarna biru!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "a37466aa95d1",
+      "text": "Sentuh awan yang berwarna ungu!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "2d377c414c57",
+      "text": "Sentuh bintang yang berwarna biru!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "d63e93fbfcf5",
+      "text": "Sentuh bintang yang berwarna hijau!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "f387bb221b5d",
+      "text": "Sentuh bulan sabit yang berwarna kuning!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "f31de8d10292",
+      "text": "Sentuh hati yang berwarna kuning!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "3ac2319512b0",
+      "text": "Sentuh hati yang berwarna merah!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "7b579c89f3b5",
+      "text": "Sentuh kotak yang berwarna kuning!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "cf9c2add6532",
+      "text": "Sentuh kotak yang berwarna merah!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "c736f9cf9a39",
+      "text": "Sentuh layang-layang yang berwarna merah!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "9b4bb3026495",
+      "text": "Sentuh layang-layang yang berwarna ungu!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "b6bc757a6680",
+      "text": "Sentuh lingkaran yang berwarna hijau!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "6cae99f57f7c",
+      "text": "Sentuh lingkaran yang berwarna ungu!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "26b3670485d8",
+      "text": "Sentuh oval yang berwarna biru!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "ee229e7e5b31",
+      "text": "Sentuh oval yang berwarna merah muda!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "482a8d29be55",
+      "text": "Sentuh persegi panjang yang berwarna hijau!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "8f7321021c99",
+      "text": "Sentuh segitiga yang berwarna coklat!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "001d55c3660d",
+      "text": "Sentuh segitiga yang berwarna ungu!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "6460db54379b",
+      "text": "Tiga bentuknya sama, satu berbeda. Sentuh yang berbeda!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "036bcdf3d086",
+      "text": "Tiga warnanya sama, satu berbeda. Sentuh yang berbeda!",
+      "scope": "labirin-warna",
+      "games": [
+        "labirin-warna"
+      ]
+    },
+    {
+      "key": "94b9e004cc85",
+      "text": "Pasangkan hewan dengan makanannya!",
+      "scope": "pasang-kata",
+      "games": [
+        "pasang-kata"
+      ]
+    },
+    {
+      "key": "1f0342d51e34",
+      "text": "Tarik kata ke gambar yang cocok!",
+      "scope": "pasang-kata",
+      "games": [
+        "pasang-kata"
+      ]
+    },
+    {
+      "key": "1bb5de0de909",
+      "text": "Balik kartunya. Cari dua gambar yang sama!",
+      "scope": "pasangan-pintar",
+      "games": [
+        "pasangan-pintar"
+      ]
+    },
+    {
+      "key": "a26b3f8a7dc7",
+      "text": "Tarik setiap benda ke tempat yang tepat!",
+      "scope": "pasangan-pintar",
+      "games": [
+        "pasangan-pintar"
+      ]
+    },
+    {
+      "key": "5813f24b75c7",
+      "text": "Tarik setiap hewan ke tempat tinggalnya!",
+      "scope": "pasangan-pintar",
+      "games": [
+        "pasangan-pintar"
+      ]
+    },
+    {
+      "key": "4c7beb5fc8d0",
+      "text": "Tarik setiap kata ke lawan katanya!",
+      "scope": "pasangan-pintar",
+      "games": [
+        "pasangan-pintar"
+      ]
+    },
+    {
+      "key": "972649063c29",
+      "text": "Tarik setiap orang ke alat kerjanya!",
+      "scope": "pasangan-pintar",
+      "games": [
+        "pasangan-pintar"
+      ]
+    },
+    {
+      "key": "fc83610ca004",
+      "text": "Tarik setiap soal ke hasilnya yang benar!",
+      "scope": "pasangan-pintar",
+      "games": [
+        "pasangan-pintar"
+      ]
+    },
+    {
+      "key": "3a8f261c7080",
+      "text": "Balik kartunya. Cari dua buah yang sama!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "2ade205418c3",
+      "text": "Ibu mau beli dua apel. Ketuk dua apel!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "c703d11491cb",
+      "text": "Ibu mau beli dua lemon. Ketuk dua lemon!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "00f58ed57721",
+      "text": "Ibu mau beli dua stroberi. Ketuk dua stroberi!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "d86d41d281af",
+      "text": "Ibu mau beli empat anggur. Ketuk empat anggur!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "4cfc11d6a4d8",
+      "text": "Ibu mau beli empat jeruk. Ketuk empat jeruk!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "54f7f099fad0",
+      "text": "Ibu mau beli empat kiwi. Ketuk empat kiwi!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "5716179aafa3",
+      "text": "Ibu mau beli empat mangga. Ketuk empat mangga!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "bc403b1674ec",
+      "text": "Ibu mau beli empat nanas. Ketuk empat nanas!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "fe9de35c900a",
+      "text": "Ibu mau beli empat semangka. Ketuk empat semangka!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "cb983b8a1135",
+      "text": "Ibu mau beli enam anggur. Ketuk enam anggur!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "4ab9ff94184f",
+      "text": "Ibu mau beli enam melon. Ketuk enam melon!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "921ee19af6a1",
+      "text": "Ibu mau beli enam pisang. Ketuk enam pisang!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "f1d196bd6210",
+      "text": "Ibu mau beli lima apel. Ketuk lima apel!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "fd6191937a5b",
+      "text": "Ibu mau beli lima ceri. Ketuk lima ceri!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "f84a3880d1d1",
+      "text": "Ibu mau beli lima stroberi. Ketuk lima stroberi!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "dc65adb39eea",
+      "text": "Ibu mau beli tiga apel. Ketuk tiga apel!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "2621a9fe3ac4",
+      "text": "Ibu mau beli tiga pir. Ketuk tiga pir!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "19368987c691",
+      "text": "Ibu mau beli tiga pisang. Ketuk tiga pisang!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "4154cdacada5",
+      "text": "Lihat bayangan ini. Buah apa ya? Sentuh yang sama!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "b36e8cd46dde",
+      "text": "Mana alpukat? Ayo sentuh!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "8b2b2eccbede",
+      "text": "Mana anggur? Ayo sentuh!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "36cf2a08f387",
+      "text": "Mana mangga? Ayo sentuh!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "8b98e6c45f92",
+      "text": "Mana nanas? Ayo sentuh!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "adbf086aad29",
+      "text": "Mana semangka? Ayo sentuh!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "9b662dae4653",
+      "text": "Mana stroberi? Ayo sentuh!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "2aa9878f8494",
+      "text": "Masukkan setiap buah ke keranjang warnanya!",
+      "scope": "pasar-buah",
+      "games": [
+        "pasar-buah"
+      ]
+    },
+    {
+      "key": "74ff8a8ded49",
+      "text": "Baca kata ini pelan-pelan. Ada berapa suku katanya?",
+      "scope": "suku-kata",
+      "games": [
+        "suku-kata"
+      ]
+    },
+    {
+      "key": "016ab8c4ca12",
+      "text": "Lihat gambarnya, lalu baca tulisannya. Suku kata mana yang hilang?",
+      "scope": "suku-kata",
+      "games": [
+        "suku-kata"
+      ]
+    },
+    {
+      "key": "d7da09b0e025",
+      "text": "Lihat gambarnya. Tulisan mana yang benar?",
+      "scope": "suku-kata",
+      "games": [
+        "suku-kata"
+      ]
+    },
+    {
+      "key": "504a80c28c24",
+      "text": "Ini ayam. Ayo susun hurufnya: A, Y, A, M.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "75aec4786300",
+      "text": "Ini balon. Ayo susun hurufnya: B, A, L, O, N.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "7a0cea0d43e1",
+      "text": "Ini bebek. Ayo susun hurufnya: B, E, B, E, K.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "976cb4eee559",
+      "text": "Ini bola. Ayo susun hurufnya: B, O, L, A.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "5a4ebf573245",
+      "text": "Ini buku. Ayo susun hurufnya: B, U, K, U.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "cf406bb48583",
+      "text": "Ini bumi. Ayo susun hurufnya: B, U, M, I.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "3856d61baf21",
+      "text": "Ini bunga. Ayo susun hurufnya: B, U, N, G, A.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "01b4b4d398c9",
+      "text": "Ini daun. Ayo susun hurufnya: D, A, U, N.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "a733bd241081",
+      "text": "Ini ikan. Ayo susun hurufnya: I, K, A, N.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "02e7c7ff155f",
+      "text": "Ini kapal. Ayo susun hurufnya: K, A, P, A, L.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "d2a915d737d4",
+      "text": "Ini kuda. Ayo susun hurufnya: K, U, D, A.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "b57f3a7ee61c",
+      "text": "Ini kunci. Ayo susun hurufnya: K, U, N, C, I.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "ff4ebed3a46d",
+      "text": "Ini mobil. Ayo susun hurufnya: M, O, B, I, L.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "89e9d27a085b",
+      "text": "Ini panda. Ayo susun hurufnya: P, A, N, D, A.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "4f3fcee28109",
+      "text": "Ini pohon. Ayo susun hurufnya: P, O, H, O, N.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "bcb739888f67",
+      "text": "Ini roket. Ayo susun hurufnya: R, O, K, E, T.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "bca73a516b9f",
+      "text": "Ini roti. Ayo susun hurufnya: R, O, T, I.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "ffdee00c8acc",
+      "text": "Ini rumah. Ayo susun hurufnya: R, U, M, A, H.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "1f44e8d43006",
+      "text": "Ini sapi. Ayo susun hurufnya: S, A, P, I.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "df5e4568a533",
+      "text": "Ini singa. Ayo susun hurufnya: S, I, N, G, A.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "dfe24ca662e4",
+      "text": "Ini topi. Ayo susun hurufnya: T, O, P, I.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "010ecd7d40f2",
+      "text": "Ini zebra. Ayo susun hurufnya: Z, E, B, R, A.",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "172c1d55848a",
+      "text": "Lihat gambarnya. Ini Apel. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "653c85ea119f",
+      "text": "Lihat gambarnya. Ini Awan. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "979810593a6b",
+      "text": "Lihat gambarnya. Ini Ayam. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "85d59dda93fd",
+      "text": "Lihat gambarnya. Ini Balon. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "9d66a336eb14",
+      "text": "Lihat gambarnya. Ini Bebek. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "52efa355b8a9",
+      "text": "Lihat gambarnya. Ini Bola. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "502e7548972a",
+      "text": "Lihat gambarnya. Ini Boneka. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "b2a4e9f7de61",
+      "text": "Lihat gambarnya. Ini Buku. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "d9534b0e070f",
+      "text": "Lihat gambarnya. Ini Bulan. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "c957f7854f6f",
+      "text": "Lihat gambarnya. Ini Bunga. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "e4a88ae3a71e",
+      "text": "Lihat gambarnya. Ini Bus. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "69505fe5a028",
+      "text": "Lihat gambarnya. Ini Daun. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "4869577a51a3",
+      "text": "Lihat gambarnya. Ini Gajah. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "726b35b98ed0",
+      "text": "Lihat gambarnya. Ini Jam. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "1577e5ee9ed5",
+      "text": "Lihat gambarnya. Ini Jerapah. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "59c0a8ca3e07",
+      "text": "Lihat gambarnya. Ini Jeruk. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "652356d06de2",
+      "text": "Lihat gambarnya. Ini Kapal. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "68ce2a4d4c2a",
+      "text": "Lihat gambarnya. Ini Katak. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "ac4f47573a6b",
+      "text": "Lihat gambarnya. Ini Kereta. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "135bd205c0d2",
+      "text": "Lihat gambarnya. Ini Kuda. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "c877117b0543",
+      "text": "Lihat gambarnya. Ini Kue. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "e8424a0568f2",
+      "text": "Lihat gambarnya. Ini Kunci. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "f19cb1ab31e4",
+      "text": "Lihat gambarnya. Ini Matahari. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "de2e2810c476",
+      "text": "Lihat gambarnya. Ini Mobil. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "88b6b5d616af",
+      "text": "Lihat gambarnya. Ini Nanas. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "1eb78e91f5fd",
+      "text": "Lihat gambarnya. Ini Panda. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "e9d2c13ff34d",
+      "text": "Lihat gambarnya. Ini Payung. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "699b5277ae47",
+      "text": "Lihat gambarnya. Ini Pesawat. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "d63bf7bd20ed",
+      "text": "Lihat gambarnya. Ini Pisang. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "b821fa54c663",
+      "text": "Lihat gambarnya. Ini Pohon. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "98dcf9742832",
+      "text": "Lihat gambarnya. Ini Roket. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "b476eceb2812",
+      "text": "Lihat gambarnya. Ini Roti. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "854f00061005",
+      "text": "Lihat gambarnya. Ini Rumah. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "169445ea6949",
+      "text": "Lihat gambarnya. Ini Sapi. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "69aadaa000cd",
+      "text": "Lihat gambarnya. Ini Semangka. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "0df87d3d326f",
+      "text": "Lihat gambarnya. Ini Sepatu. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "7bc03d2bb725",
+      "text": "Lihat gambarnya. Ini Sepeda. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "d9cec014a18c",
+      "text": "Lihat gambarnya. Ini Singa. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "9b9f972d98fc",
+      "text": "Lihat gambarnya. Ini Susu. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "f1a8de5fe671",
+      "text": "Lihat gambarnya. Ini Topi. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "4b3bf566f2a6",
+      "text": "Lihat gambarnya. Ini Wortel. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "a8f8c80ce105",
+      "text": "Lihat gambarnya. Ini Zebra. Huruf apa yang pertama?",
+      "scope": "taman-huruf",
+      "games": [
+        "taman-huruf"
+      ]
+    },
+    {
+      "key": "4f9b0322856b",
+      "text": "10 tambah berapa supaya jadi 16?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "48e5af20dae7",
+      "text": "2 tambah berapa supaya jadi 7?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "f80bf2c1f50e",
+      "text": "3 tambah berapa supaya jadi 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "3bd7d8135142",
+      "text": "4 tambah berapa supaya jadi 9?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "8afb22689082",
+      "text": "5 tambah berapa supaya jadi 8?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "85da7adeadf2",
+      "text": "6 tambah berapa supaya jadi 10?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "1ef651fb3c65",
+      "text": "7 tambah berapa supaya jadi 12?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "545cb9e034ee",
+      "text": "8 tambah berapa supaya jadi 15?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "17e62a06ce12",
+      "text": "9 tambah berapa supaya jadi 13?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "8acfedca2859",
+      "text": "Ada 18 anak di lapangan, datang 7 anak lagi. Berapa anak semuanya?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "95bed9897cd1",
+      "text": "Andi memetik 14 mangga, Adik memetik 5 mangga. Berapa mangga mereka?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "5288c4c3424a",
+      "text": "Berapa 1 tambah 2 tambah 3?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "46c2502a9f53",
+      "text": "Berapa 1 tambah 2?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "321c222e63e9",
+      "text": "Berapa 1 tambah 4?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "ec0e6fd347ab",
+      "text": "Berapa 10 tambah 10?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "432edf5f29a6",
+      "text": "Berapa 10 tambah 15?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "b12fa725e13d",
+      "text": "Berapa 10 tambah 20?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "9988a1cdfd45",
+      "text": "Berapa 10 tambah 3?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "db9c7e7912d4",
+      "text": "Berapa 10 tambah 5 tambah 3?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "cdf23ae7522f",
+      "text": "Berapa 10 tambah 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "3f9d719c8fc9",
+      "text": "Berapa 10 tambah 7?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "85ea11ff11bc",
+      "text": "Berapa 10 tambah 9?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "215a68b67309",
+      "text": "Berapa 12 tambah 12?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "fdfbad45e59b",
+      "text": "Berapa 12 tambah 6?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "441402bb697f",
+      "text": "Berapa 13 tambah 13?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "5672f4dd383e",
+      "text": "Berapa 13 tambah 4?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "5c41471e1abb",
+      "text": "Berapa 15 tambah 10?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "3b0c82f90786",
+      "text": "Berapa 15 tambah 15?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "4d0a07c0daad",
+      "text": "Berapa 15 tambah 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "09ec8e4134b2",
+      "text": "Berapa 16 tambah 3?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "550b0540c0f8",
+      "text": "Berapa 18 tambah 2?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "7a9cc449b826",
+      "text": "Berapa 19 tambah 4?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "5c2b48161434",
+      "text": "Berapa 2 tambah 1?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "17f957476c37",
+      "text": "Berapa 2 tambah 2?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "57ec1ed6aa05",
+      "text": "Berapa 2 tambah 3 tambah 4?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "081a33a01b2f",
+      "text": "Berapa 2 tambah 3?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "3fdf721bc49d",
+      "text": "Berapa 2 tambah 4 tambah 6?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "cb797b92533f",
+      "text": "Berapa 2 tambah 7?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "c3513c91949d",
+      "text": "Berapa 20 tambah 10?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "e502fa5060b9",
+      "text": "Berapa 20 tambah 3?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "6dc69ec2c49f",
+      "text": "Berapa 20 tambah 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "4e159f3e8e74",
+      "text": "Berapa 20 tambah 6?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "488a85866bd0",
+      "text": "Berapa 20 tambah 8?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "d82167dad005",
+      "text": "Berapa 21 tambah 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "b6170330f785",
+      "text": "Berapa 22 tambah 7?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "92eb089c3700",
+      "text": "Berapa 24 tambah 3?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "8e867f45f36c",
+      "text": "Berapa 25 tambah 4?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "d2d73838d997",
+      "text": "Berapa 25 tambah 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "0c3bb4c474fb",
+      "text": "Berapa 27 tambah 2?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "d2fc75f23a0b",
+      "text": "Berapa 3 tambah 1?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "b102ec94f401",
+      "text": "Berapa 3 tambah 2?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "564c31a104cc",
+      "text": "Berapa 3 tambah 3 tambah 3?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "4068553df2c3",
+      "text": "Berapa 3 tambah 3?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "6a4d1575f9a6",
+      "text": "Berapa 3 tambah 6?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "ad5ef7976798",
+      "text": "Berapa 4 tambah 1?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "7ab56b26c532",
+      "text": "Berapa 4 tambah 2 tambah 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "a330ce824655",
+      "text": "Berapa 4 tambah 4?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "c91545b171fa",
+      "text": "Berapa 4 tambah 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "0e19c75077fe",
+      "text": "Berapa 5 tambah 15?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "bdc6f654fd67",
+      "text": "Berapa 5 tambah 25?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "e3b20e0f0ff5",
+      "text": "Berapa 5 tambah 3?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "b76ff65b07e6",
+      "text": "Berapa 5 tambah 5 tambah 2?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "4749440daac7",
+      "text": "Berapa 5 tambah 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "7f8a25a45fe7",
+      "text": "Berapa 5 tambah 9?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "f9247b729a9d",
+      "text": "Berapa 6 tambah 2?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "74f691bb4cca",
+      "text": "Berapa 6 tambah 3 tambah 4?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "036476e322cf",
+      "text": "Berapa 6 tambah 4?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "d5335018924d",
+      "text": "Berapa 6 tambah 6?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "fa4a2b640bf4",
+      "text": "Berapa 6 tambah 7?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "6dbeb06878ca",
+      "text": "Berapa 7 tambah 2?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "14f2f0701e42",
+      "text": "Berapa 7 tambah 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "cfefe2c6a54f",
+      "text": "Berapa 7 tambah 6?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "0d0469eb43c5",
+      "text": "Berapa 8 tambah 1?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "23188401b651",
+      "text": "Berapa 8 tambah 5?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "0bd67e5fb86e",
+      "text": "Berapa 8 tambah 6?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "16de9dbf473c",
+      "text": "Berapa 8 tambah 8?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "2806c6d3b38e",
+      "text": "Berapa 9 tambah 4?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "0a07ac9cd95a",
+      "text": "Berapa 9 tambah 8?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "ffda968d2d81",
+      "text": "Budi punya 15 koin, lalu menabung 10 koin lagi. Berapa koin Budi?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "816d9225f493",
+      "text": "Di kandang ada 8 ayam, lalu datang 4 lagi. Berapa ayam semuanya?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "955caa7f5430",
+      "text": "Di kolam ada 11 ikan, Ayah menambah 8 ikan. Berapa ikan di kolam?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "15719fe2b471",
+      "text": "Di rak ada 9 buku, Kakak menaruh 7 buku lagi. Berapa buku di rak?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "7075f72057ba",
+      "text": "Ibu membeli 12 telur, lalu membeli 6 lagi. Berapa telur Ibu?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "767854d1dfb2",
+      "text": "Rani punya 6 kelereng, lalu diberi 5 lagi. Berapa kelerengnya?",
+      "scope": "tambah-tangkas",
+      "games": [
+        "tambah-tangkas"
+      ]
+    },
+    {
+      "key": "582370443578",
+      "text": "Tulis angka delapan belas dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "49a103572a6e",
+      "text": "Tulis angka delapan dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "e0384d318b40",
+      "text": "Tulis angka dua belas dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "fb4ffe55677f",
+      "text": "Tulis angka dua dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "11ca150a2709",
+      "text": "Tulis angka dua puluh dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "c1f8eadd2778",
+      "text": "Tulis angka empat belas dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "a2e177b79d26",
+      "text": "Tulis angka empat dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "8b74547daf3c",
+      "text": "Tulis angka enam belas dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "03e2cee9a06c",
+      "text": "Tulis angka enam dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "dcc5909ec515",
+      "text": "Tulis angka lima belas dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "fef62d3e47cc",
+      "text": "Tulis angka lima dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "4fa4c1e5b0e4",
+      "text": "Tulis angka satu dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "418d317cc733",
+      "text": "Tulis angka sebelas dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "2d267d654329",
+      "text": "Tulis angka sembilan belas dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "92efa43ddbbd",
+      "text": "Tulis angka sembilan dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "d694d6b0264a",
+      "text": "Tulis angka sepuluh dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "8cf0addaf2db",
+      "text": "Tulis angka tiga belas dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "940eb00358b8",
+      "text": "Tulis angka tiga dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "a44dbcb94be9",
+      "text": "Tulis angka tujuh belas dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "4ec44a691b0b",
+      "text": "Tulis angka tujuh dengan jarimu!",
+      "scope": "tulis-angka",
+      "games": [
+        "tulis-angka"
+      ]
+    },
+    {
+      "key": "7e1a03897abc",
+      "text": "Tulis huruf besar A.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "c6c70c9497f4",
+      "text": "Tulis huruf besar B.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "74aacb429490",
+      "text": "Tulis huruf besar C.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "c6241c6b7b93",
+      "text": "Tulis huruf besar D.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "96dfba36d43b",
+      "text": "Tulis huruf besar E.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "dbb990484497",
+      "text": "Tulis huruf besar F.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "0d97427afece",
+      "text": "Tulis huruf besar G.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "c986cbd4483b",
+      "text": "Tulis huruf besar H.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "83b021ba7d38",
+      "text": "Tulis huruf besar I.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "ece9ad04d494",
+      "text": "Tulis huruf besar J.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "4286973d5104",
+      "text": "Tulis huruf besar K.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "197fb5a2ad14",
+      "text": "Tulis huruf besar L.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "d7239d5dba2c",
+      "text": "Tulis huruf besar M.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "60e62adb8579",
+      "text": "Tulis huruf besar N.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "7fa0d7325f01",
+      "text": "Tulis huruf besar O.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "45ee246992a9",
+      "text": "Tulis huruf besar P.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "373a0175ed32",
+      "text": "Tulis huruf besar Q.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "0597631506a3",
+      "text": "Tulis huruf besar R.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "b658862f2393",
+      "text": "Tulis huruf besar S.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "4735e47f654e",
+      "text": "Tulis huruf besar T.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "0aa12b8c1bf5",
+      "text": "Tulis huruf besar U.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "0c2506d86aad",
+      "text": "Tulis huruf besar V.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "ca5334556266",
+      "text": "Tulis huruf besar W.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "1483bc5be889",
+      "text": "Tulis huruf besar X.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "ac3cbdd17295",
+      "text": "Tulis huruf besar Y.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "328b52494aa2",
+      "text": "Tulis huruf besar Z.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "b42f1a7dd689",
+      "text": "Tulis huruf kecil a.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "7bf625689141",
+      "text": "Tulis huruf kecil b.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "4698e7c13e9e",
+      "text": "Tulis huruf kecil c.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "1a6cf2b04e3c",
+      "text": "Tulis huruf kecil d.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "06c15f69c103",
+      "text": "Tulis huruf kecil e.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "e5595cd83340",
+      "text": "Tulis huruf kecil f.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "7497409f6a6e",
+      "text": "Tulis huruf kecil g.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "fa9d58e4358d",
+      "text": "Tulis huruf kecil h.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "e2e6dc7b9e8f",
+      "text": "Tulis huruf kecil i.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "c79e892ca4a3",
+      "text": "Tulis huruf kecil j.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "4cda39389334",
+      "text": "Tulis huruf kecil k.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "5e414503e148",
+      "text": "Tulis huruf kecil l.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "ac6104416e18",
+      "text": "Tulis huruf kecil m.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "0fca22984766",
+      "text": "Tulis huruf kecil n.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "c6189fc0fb84",
+      "text": "Tulis huruf kecil o.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "300cd45cc3cd",
+      "text": "Tulis huruf kecil p.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "1d057b00f45d",
+      "text": "Tulis huruf kecil q.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "a319df7bc028",
+      "text": "Tulis huruf kecil r.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "e5ee1d31c797",
+      "text": "Tulis huruf kecil s.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "0c5af5685638",
+      "text": "Tulis huruf kecil t.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "1e9b08344eb2",
+      "text": "Tulis huruf kecil u.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "edb51ae539a8",
+      "text": "Tulis huruf kecil v.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "b1403825cc24",
+      "text": "Tulis huruf kecil w.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "df3818cf6e6c",
+      "text": "Tulis huruf kecil x.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "49feb27dd662",
+      "text": "Tulis huruf kecil y.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    },
+    {
+      "key": "4172c5e52af3",
+      "text": "Tulis huruf kecil z.",
+      "scope": "tulis-huruf",
+      "games": [
+        "tulis-huruf"
+      ]
+    }
+  ]
+}
