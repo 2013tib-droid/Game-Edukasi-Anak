@@ -33,6 +33,8 @@
  * the guide's, which is a bigger change than this bug called for.
  */
 
+import { handwriting, type Stroke } from './glyphStrokes';
+
 /** Logical canvas size (square). */
 export const SIZE = 420;
 
@@ -66,16 +68,30 @@ export interface Tuning {
    * pinholes from a wobbly finger stay tiny, but a whole missed limb does not.
    */
   maxGap: number;
+  /**
+   * The same limit for glyphs still guided by the phone's font (letters). It
+   * has to be much tighter: printed letters overlap each other far more than
+   * handwriting strokes do, so there is less room between "traced it wobbly"
+   * and "traced a different letter". When letters get handwriting strokes of
+   * their own this can go away.
+   */
+  maxGapFont: number;
   /** Share of the finger path allowed to run off the glyph. */
   maxOffRatio: number;
 }
 
 /**
- * Measured headlessly against the real guide font (see the notes in CLAUDE.md).
- * A traced glyph — wobbly finger, only 85% of the line drawn — leaves a biggest
- * gap of at most 0.022 and covers ≥0.96, while a *different* glyph traced over
- * it leaves a gap of at least 0.06 (9 over 6: 0.10). `maxGap` sits between the
- * two with room on both sides.
+ * Measured headlessly, digit by digit (see the notes in CLAUDE.md).
+ *
+ * Handwriting guides: a fully traced digit leaves no gap worth the name even
+ * with a badly wobbling finger, while a different digit traced over it leaves
+ * 0.14 and up (9 over 6: 0.23, 6 over 9: 0.32). At `maxGap` 0.11 none of 360
+ * fully- or nearly-fully-traced runs were rejected, and only 4 of 180 runs that
+ * stopped a tenth short. Loosening further buys nothing: 0.09 and 0.11 catch
+ * exactly the same wrong digits, so 0.11 is free forgiveness.
+ *
+ * Font guides (letters, until they get strokes too) keep their own tighter
+ * limit — see `maxGapFont`.
  */
 export const TUNING: Tuning = {
   coverK: 0.8,
@@ -83,7 +99,8 @@ export const TUNING: Tuning = {
   coverFloor: 18,
   pathStep: 4,
   passCoverage: 0.75,
-  maxGap: 0.05,
+  maxGap: 0.11,
+  maxGapFont: 0.05,
   maxOffRatio: 0.25,
 };
 
@@ -96,8 +113,25 @@ export function glyphFont(glyph: string): string {
   return `bold ${SIZE * scale}px 'Fredoka', 'Baloo 2', sans-serif`;
 }
 
-/** Draws the glyph centred on a SIZE×SIZE context (guide *and* mask use this). */
+/**
+ * Draws the glyph centred on a SIZE×SIZE context (guide *and* mask use this).
+ * Digits are drawn as handwriting strokes; anything else still falls back to
+ * the phone's font (see glyphStrokes.ts).
+ */
 export function drawGlyph(ctx: CanvasRenderingContext2D, glyph: string): void {
+  const hand = handwriting(glyph, SIZE);
+  if (hand) {
+    ctx.strokeStyle = ctx.fillStyle;
+    ctx.lineWidth = hand.width;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    for (const stroke of hand.strokes) {
+      ctx.beginPath();
+      stroke.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
+      ctx.stroke();
+    }
+    return;
+  }
   ctx.font = glyphFont(glyph);
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -179,6 +213,31 @@ function skeleton(src: Uint8Array): Uint8Array {
 }
 
 /**
+ * Rasterises handwriting strokes into a 1px centre line on the mask grid — the
+ * same thing `skeleton()` recovers from a font glyph, only exact.
+ */
+function strokeLine(strokes: Stroke[]): Uint8Array {
+  const bits = new Uint8Array(MASK * MASK);
+  const put = (x: number, y: number) => {
+    const mx = Math.round(x / 2);
+    const my = Math.round(y / 2);
+    if (mx >= 0 && my >= 0 && mx < MASK && my < MASK) bits[my * MASK + mx] = 1;
+  };
+  for (const stroke of strokes) {
+    for (let i = 0; i < stroke.length - 1; i += 1) {
+      const a = stroke[i]!;
+      const b = stroke[i + 1]!;
+      // Step in half-mask-pixels so the line never has holes in it.
+      const steps = Math.max(1, Math.ceil(Math.hypot(b.x - a.x, b.y - a.y)));
+      for (let s = 0; s <= steps; s += 1) {
+        put(a.x + ((b.x - a.x) * s) / steps, a.y + ((b.y - a.y) * s) / steps);
+      }
+    }
+  }
+  return bits;
+}
+
+/**
  * Distance (two-pass chamfer) from every pixel to the nearest pixel set in
  * `seed`. Used twice: distance to the background gives a stroke's half width,
  * distance to the ink says how far off the glyph the finger wandered.
@@ -250,7 +309,11 @@ export interface TraceScorer {
 export function createTraceScorer(glyph: string, tune: Partial<Tuning> = {}): TraceScorer {
   const t: Tuning = { ...TUNING, ...tune };
   const ink = inkBitmap(glyph);
-  const bone = skeleton(ink);
+  // For handwriting glyphs the centre line is already known — it is the stroke
+  // the shape was drawn from. Only font glyphs have to have it guessed back out
+  // of the filled shape by thinning.
+  const hand = handwriting(glyph, SIZE);
+  const bone = hand ? strokeLine(hand.strokes) : skeleton(ink);
 
   // Centre-line points, in canvas coordinates.
   const background = ink.map((v) => (v ? 0 : 1));
@@ -359,8 +422,9 @@ export function createTraceScorer(glyph: string, tune: Partial<Tuning> = {}): Tr
       }
       const biggestGap = biggest / samples.length;
 
+      const gapLimit = hand ? t.maxGap : t.maxGapFont;
       return {
-        ok: coverage >= t.passCoverage && biggestGap <= t.maxGap && offRatio <= t.maxOffRatio,
+        ok: coverage >= t.passCoverage && biggestGap <= gapLimit && offRatio <= t.maxOffRatio,
         coverage,
         offRatio,
         biggestGap,

@@ -425,6 +425,31 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Jalur jari sekarang **diambil ulang tiap 4px** (`pathStep`), jadi penilaian tak lagi bergantung pada seberapa sering HP mengirim event pointer — dulu coretan cepat mendaftarkan sedikit titik dan bisa melompati bagian glyph.
   - `up()` mengabaikan pointer-up yang tak diawali pointer-down di kanvas (dulu `onPointerLeave` mengosongkan titik terakhir meski anak tak sedang menggambar).
 
+- **Panduan angka digambar sendiri sebagai goresan tulisan tangan** (2026-08-07, KEPUTUSAN PEMILIK setelah menulis batang tegak di panduan "1" ditolak), teruji headless 380×800 (kasus pemilik + 9↔6 di game sungguhan, nol error console, tanpa scroll horizontal):
+
+  **Kenapa panduan font itu salah untuk game menulis**
+  - Dulu panduan = TEKS yang digambar pakai font HP. App menyebut `Fredoka` di CSS tapi **tak pernah memuatnya**, jadi tiap HP menggambar bentuk yang berbeda: di iPhone pemilik "1" punya **bendera balok** hampir separuh lebar angkanya, font lain menambahkan tumit serif. Alasan yang sama persis dengan hewan pakai WebP, bukan emoji.
+  - Huruf cetak bukan tulisan tangan. Tak ada anak yang diajari menulis "1" dengan bendera + tumit; di sekolah Indonesia itu satu goresan turun. Menyuruh anak menelusuri hiasan tipografi = **mengajarkan bentuk yang salah**, dan menolak anak yang menulisnya dengan benar.
+  - **Tak ada ambang yang bisa menambal ini** (sudah diukur, jangan diulang): bendera "1" = 21,5% dari garis, sedangkan ekor 6 = 7,6% dan ekor 9 = 8,3%. Melonggarkan sampai bendera dimaafkan otomatis memaafkan ekor 6 & 9 → angka 9 lolos lagi sebagai 6. Masalahnya di BENTUK PANDUAN, bukan di angka ambang.
+
+  **Cara barunya (`src/engine/templates/glyphStrokes.ts`)**
+  - Angka 0–9 ditulis sebagai **goresan** dalam kotak 0..1 (helper `poly`/`arc`/`join`), lalu `handwriting(glyph, size)` menaruhnya di kanvas. Angka dua digit (10–20) otomatis dua kotak bersebelahan yang lebih kecil.
+  - **"1" = satu garis tegak polos.** Itu inti seluruh perubahan ini — jangan tambahkan bendera "biar mirip cetakan".
+  - `drawGlyph` menggores path itu (bukan `fillText`), dan penilai memakai **garis tengah yang sudah pasti** — tak perlu ditebak ulang lewat skeleton. Thinning cuma jalan untuk glyph yang masih pakai font.
+  - **Huruf belum punya data goresan** → `strokesFor` mengembalikan null dan jatuh ke font seperti dulu. Menambah huruf nanti = menambah entri di file itu, tak ada yang lain berubah.
+
+  **Angka kalibrasi (diukur ulang; bentuk baru = angka baru)**
+  - `maxGap` untuk panduan goresan = **0,11**; `maxGapFont` untuk huruf tetap **0,05**. Dua angka karena huruf cetak jauh lebih saling tumpang tindih — ruang antara "benar tapi goyang" dan "huruf lain" jauh lebih sempit di font.
+  - Coretan benar: **0 dari 360** ditolak (penuh & 95% digambar), 4 dari 180 ditolak kalau berhenti 10% lebih awal. Total **6 dari 720**.
+  - 9 di atas 6 = celah **0,338**; 6 di atas 9 = 0,381; 0 di atas 6 = 0,239 — semua ditolak dengan margin 2–3×.
+  - **0,09 dan 0,11 menangkap angka salah yang PERSIS SAMA** (8 dari 90 pasangan satu-angka), tapi 0,09 menolak 38 dari 180 coretan yang berhenti sedikit lebih awal. Jadi 0,11 itu kelonggaran gratis — jangan diturunkan lagi tanpa mengukur ulang.
+  - Huruf tak berubah: 624/624 coretan benar diterima.
+
+  **JEBAKAN**
+  - **Sudut busur di `arc()` bertambah SEARAH JARUM JAM** (y ke bawah): 0 = kanan, 90 = bawah, 180 = kiri, 270 = atas. Percobaan pertama untuk 2, 3, 5, dan 6 melengkung ke arah sebaliknya dan hasilnya bentuk aneh — **lihat dulu hasil gambarnya** sebelum percaya, jangan hanya membaca kodenya.
+  - Ujung tiap potongan busur harus **bertemu** dengan awal potongan berikutnya (`join` cuma menyambung; celah akan tergambar sebagai garis lurus).
+  - Batas yang tersisa tetap sama: glyph yang melewati SELURUH garis panduan (8 di atas 3, 8 di atas 5) masih lolos.
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
