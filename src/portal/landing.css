@@ -247,27 +247,35 @@
   flex-direction: column;
   gap: 10px;
 }
+/* Geometry deliberately mirrors .pcard (same radius, padding, centring and
+   type sizes) so all four group cards read as one family — only the dashed
+   outline and the missing shadow say "not for sale yet". */
 .landing .soon-item {
-  background: rgba(255, 255, 255, 0.55);
-  border: 2px dashed rgba(94, 53, 177, 0.28);
-  border-radius: 20px;
-  padding: 12px 15px;
-  text-align: left;
+  background: rgba(255, 255, 255, 0.6);
+  border: 2px dashed rgba(94, 53, 177, 0.3);
+  border-radius: 22px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
 }
 /* No per-card "Segera Hadir" badge on purpose — the section heading above
    already says it, so a badge on every card just repeats itself. */
 .landing .soon-name {
-  display: block;
   font-weight: 800;
   font-size: 15px;
 }
 .landing .soon-desc {
-  display: block;
-  margin-top: 5px;
   font-size: 12.5px;
   font-weight: 700;
-  opacity: 0.62;
+  opacity: 0.7;
   line-height: 1.45;
+  /* centred text that wraps looks lopsided when the last line is one orphan
+     word; balance evens the two lines out (ignored by older Android WebViews,
+     which simply keep the normal wrap) */
+  text-wrap: balance;
 }
 
 /* FAQ — native <details> accordions, no JS. Soft cards so the section reads
