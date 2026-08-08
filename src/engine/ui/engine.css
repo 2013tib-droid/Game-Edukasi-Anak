@@ -968,6 +968,32 @@
   font-size: 110px;
 }
 
+/* Results screen: the icon parties for as long as the victory tune plays
+   (~2.6 s = 4 × 0.62 s), then settles. */
+.game-center .game-big-emoji--party {
+  transform-origin: 50% 80%;
+  animation: party-pop 0.62s ease-in-out 4;
+}
+
+@keyframes party-pop {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.16) rotate(-7deg);
+  }
+  60% {
+    transform: scale(1.08) rotate(6deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-center .game-big-emoji--party {
+    animation: none;
+  }
+}
+
 /* Intro icon drawn as a real clock face (Jam Pintar) — same visual weight as
    the 110px emoji it replaces. */
 .game-center .game-big-clock {

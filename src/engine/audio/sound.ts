@@ -8,6 +8,8 @@
  * mobile autoplay policies.
  */
 import { voiceUrl, voicesReady } from './voice';
+import { playTune } from './tune';
+import type { Tune } from './tune';
 
 let audioCtx: AudioContext | null = null;
 
@@ -50,10 +52,17 @@ function utterance(text: string): SpeechSynthesisUtterance {
  * can mix the two: while voices are being rendered game by game, a story page
  * may have a real clip and its options may not. Two independent players would
  * talk over each other; a single queue keeps the order the call site asked for.
+ *
+ * The victory tune rides the same queue (see `celebrate`) so it plays *before*
+ * the praise line instead of over it, and so `stopSpeaking()` silences music
+ * and speech together — a child who taps "Main Lagi" must not hear the last
+ * screen's celebration over the next question.
  */
 
-/** Lines waiting to be spoken, in order. */
-let queue: string[] = [];
+type QueueItem = { kind: 'say'; text: string } | { kind: 'tune' };
+
+/** Items waiting to be played, in order. */
+let queue: QueueItem[] = [];
 /** Bumped by every interruption — stale callbacks check it before continuing. */
 let generation = 0;
 /** True while a line is being spoken or resolved. */
@@ -121,13 +130,37 @@ function playClip(url: string, text: string, gen: number): void {
   void el.play().catch(() => done(true)); // autoplay refused
 }
 
+/** The tune currently sounding, so an interruption can cut it short. */
+let tune: Tune | null = null;
+let tuneTimer = 0;
+
+/** Play the victory tune, then carry on with the rest of the queue. */
+function playTuneItem(gen: number): void {
+  const ac = ctx();
+  if (!ac) {
+    void pump(gen); // no WebAudio here — don't stall the queue
+    return;
+  }
+  tune = playTune(ac);
+  tuneTimer = window.setTimeout(() => {
+    tune = null;
+    tuneTimer = 0;
+    void pump(gen);
+  }, tune.duration * 1000);
+}
+
 async function pump(gen: number): Promise<void> {
   if (gen !== generation) return;
-  const text = queue.shift();
-  if (text === undefined) {
+  const item = queue.shift();
+  if (item === undefined) {
     busy = false;
     return;
   }
+  if (item.kind === 'tune') {
+    playTuneItem(gen);
+    return;
+  }
+  const { text } = item;
   await voicesReady(); // instant once loaded; capped so a bad network can't mute the game
   if (gen !== generation) return;
   const url = voiceUrl(text);
@@ -135,17 +168,31 @@ async function pump(gen: number): Promise<void> {
   else speakWithDevice(text, gen);
 }
 
-function enqueue(texts: string[], interrupt: boolean): void {
+function enqueue(items: QueueItem[], interrupt: boolean): void {
   if (interrupt) stopSpeaking();
-  queue.push(...texts.filter((t) => t.trim()));
+  queue.push(...items.filter((i) => i.kind === 'tune' || i.text.trim()));
   if (busy) return;
   busy = true;
   void pump(generation);
 }
 
+function say(text: string): QueueItem {
+  return { kind: 'say', text };
+}
+
 /** Narrate instruction text in Indonesian. Cancels any ongoing narration. */
 export function speak(text: string): void {
-  enqueue([text], true);
+  enqueue([say(text)], true);
+}
+
+/**
+ * Finishing a whole game: play the victory tune, then the praise line.
+ *
+ * Queued rather than mixed, because the tune is loud enough to bury a voice —
+ * and the praise line is the part the child has to understand.
+ */
+export function celebrate(text: string): void {
+  enqueue([{ kind: 'tune' }, say(text)], true);
 }
 
 /**
@@ -155,13 +202,21 @@ export function speak(text: string): void {
  * option, so these lines have to queue instead of cutting each other off.
  */
 export function speakNext(...texts: string[]): void {
-  enqueue(texts, false);
+  enqueue(texts.map(say), false);
 }
 
 export function stopSpeaking(): void {
   generation += 1;
   queue = [];
   busy = false;
+  if (tuneTimer) {
+    window.clearTimeout(tuneTimer);
+    tuneTimer = 0;
+  }
+  if (tune) {
+    tune.stop();
+    tune = null;
+  }
   if (player) {
     player.onended = null;
     player.onerror = null;
@@ -172,7 +227,9 @@ export function stopSpeaking(): void {
   }
 }
 
-type SfxKind = 'tap' | 'correct' | 'wrong' | 'win';
+// No 'win' chime here on purpose: finishing a game plays the real tune
+// (`celebrate`). Two victory sounds would only drift apart.
+type SfxKind = 'tap' | 'correct' | 'wrong';
 
 /** Note sequences per effect: [frequency Hz, start s, duration s] */
 const SEQUENCES: Record<SfxKind, [number, number, number][]> = {
@@ -186,12 +243,6 @@ const SEQUENCES: Record<SfxKind, [number, number, number][]> = {
   wrong: [
     [330, 0, 0.15],
     [294, 0.15, 0.2],
-  ],
-  win: [
-    [523, 0, 0.12],
-    [659, 0.12, 0.12],
-    [784, 0.24, 0.12],
-    [1047, 0.36, 0.3],
   ],
 };
 
