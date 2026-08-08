@@ -11,7 +11,7 @@ import type {
 import { getTotalStars, saveLevelStars } from '@/engine/core/progress';
 import { clearSession, getSession, saveSession } from '@/engine/core/session';
 import type { LevelPick } from '@/engine/core/session';
-import { sfx, speak, stopSpeaking } from '@/engine/audio/sound';
+import { celebrate, sfx, speak, stopSpeaking } from '@/engine/audio/sound';
 import { FeedbackOverlay, LevelDots, SpeakButton, StarsRow } from '@/engine/ui/Feedback';
 import MascotCard from '@/engine/ui/Mascot';
 import Clock from '@/engine/ui/Clock';
@@ -187,8 +187,8 @@ export default function GameShell({
         // Finished: nothing left to resume.
         clearSession(config.id);
         setSaved(null);
-        sfx('win');
-        speak('Selamat! Kamu hebat sekali!');
+        // Victory tune first, praise line after it — see `celebrate`.
+        celebrate('Selamat! Kamu hebat sekali!');
         setScreen('done');
       } else {
         // Remember where we are, so leaving now resumes here next time.
@@ -247,7 +247,7 @@ export default function GameShell({
     const total = earned.reduce<number>((s, x) => s + x, 0);
     return (
       <div className="game-center">
-        <div className="game-big-emoji" aria-hidden>
+        <div className="game-big-emoji game-big-emoji--party" aria-hidden>
           🎉
         </div>
         <h1>Selamat!</h1>
