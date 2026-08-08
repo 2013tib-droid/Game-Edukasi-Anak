@@ -471,6 +471,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 - **Lagu kemenangan saat satu game tamat** (2026-08-08, permintaan pemilik *"setelah game selesai, berikan ringtone dong. Biar lebih menarik"*), teruji headless 380×800, 360×640 & 820×1180 — 26 pemeriksaan, nol error console:
   - Dulu layar "Selamat!" cuma dapat `sfx('win')`: empat nada 0,66 detik, terdengar seperti jawaban benar biasa. Sekarang ada **lagu kemenangan ±2,7 detik** — arpeggio C mayor naik ke G yang ditahan, lalu IV–V–I mendarat di C tinggi dengan kerlip di atasnya. Empat suara: melodi (triangle), harmoni & bas (sine, bas WAJIB sine — gelombang kotak rendah jadi dengung di speaker HP), dan kerlip pelan (kalau dikeraskan jadi melengking).
   - **Disintesis WebAudio di `src/engine/audio/tune.ts`, bukan file audio.** Alasannya sama dengan SFX lain: nol unduhan, bunyi seketika, dan tak pernah bisa gagal karena jaringan. Narasi beda urusan — anak yang belum bisa membaca BERGANTUNG padanya, jadi yang itu memang layak jadi file sungguhan.
+  - **TAPI TIDAK diputar langsung lewat WebAudio — dirender dulu jadi klip (perbaikan 2026-08-08, laporan pemilik "aku selesaikan 3 game, ga ada ringtone").** Lihat "iPhone senyap membisukan WebAudio" di bawah.
   - **AudioContext-nya dioper sebagai argumen** (`playTune(ac)`), bukan dibuat di dalam: `sound.ts` yang memegang satu-satunya context (termasuk urusan buka-kunci autoplay di HP), dan efek sampingnya lagunya bisa dirender ke `OfflineAudioContext` untuk diukur headless — itulah cara panjang, kenyaringan & clipping-nya diverifikasi (puncak 0,41; bunyi terakhir di 2,47 detik).
   - **Lagu ikut ANTREAN NARASI, tidak ditumpuk di atasnya** (`celebrate()` di `sound.ts`, jenis item baru `{kind:'tune'}`): lagunya cukup keras untuk mengubur suara, sedangkan "Selamat! Kamu hebat sekali!" justru bagian yang harus dimengerti anak. Terukur: narasi mulai **2,70 detik** setelah nada pertama, persis sesudah lagunya selesai.
   - Karena selalu satu antrean, **`stopSpeaking()` membungkam musik dan suara sekaligus** — anak yang menekan "Main Lagi" tak pernah mendengar perayaan layar sebelumnya di atas soal berikutnya. Teruji: interupsi 19 ms setelah lagu mulai → 22 suara berhenti semua, baris pujian tak pernah jadi berbunyi.
@@ -478,6 +479,25 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **`sfx('win')` DIHAPUS** dari `SfxKind` — satu-satunya pemakainya adalah layar tamat ini. Dua bunyi kemenangan cuma akan saling menyimpang; jangan dihidupkan lagi.
   - Ikon 🎉 di layar hasil ikut berpesta selama lagunya berbunyi (`.game-big-emoji--party`, 4 × 0,62 detik ≈ 2,5 detik), dimatikan oleh `prefers-reduced-motion`. Terukur tidak menambah area scroll sedikit pun di ketiga ukuran layar.
   - **CATATAN (bug lama, TIDAK disentuh di sini):** layar hasil memang sudah melebihi tinggi HP 360×640 — isinya **707px** untuk layar 640px, jadi tombol "Kembali" ada di bawah lipatan. Terukur sama persis dengan atau tanpa animasi baru, jadi ini bukan akibat perubahan ini. Perbaikannya menyangkut ukuran ikon/kartu maskot di layar itu — keputusan tampilan yang perlu persetujuan pemilik dulu.
+
+- **iPhone SENYAP MEMBISUKAN SELURUH WEBAUDIO — bunyi yang harus terdengar wajib lewat elemen media** (2026-08-08, laporan pemilik: lagu kemenangan ter-deploy tapi *"aku selesaikan 3 game, ga ada ringtone"*, dengan ikon 🔕 terlihat di status bar tangkapan layarnya), teruji headless 380×800 — 18 pemeriksaan, nol error console:
+
+  **Sebabnya (aturan permanen, jangan dilupakan lagi)**
+  - iOS menaruh halaman web di kategori audio **"ambient"**, dan sakelar dering membisukan kategori itu. Yang kena: **semua Web Audio API** — lagu kemenangan DAN bunyi tik/teng/oops. Yang TIDAK kena: **elemen media** (`<audio>`/`<video>`), karena Safari memindahkan sesi ke "playback" saat elemen media berbunyi.
+  - Itulah kenapa narasi selama ini terdengar di HP pemilik sementara SFX tidak pernah: narasi = file MP3 di `<audio>`, SFX = WebAudio. Gejalanya menyesatkan — kedengarannya seperti "lagunya tidak jalan", padahal lagunya jalan, cuma tidak keluar dari speaker.
+  - **HP yang dipegangkan ke anak sangat sering dalam mode senyap.** Jadi ini bukan kasus pinggiran; ini keadaan normal.
+
+  **Cara memperbaikinya**
+  1. **Lagunya dirender dulu, tidak dimainkan langsung.** `tuneClipUrl()` di `tune.ts` merender not yang sama ke `OfflineAudioContext`, membungkusnya jadi WAV (`wavBlob`), lalu menyerahkan object URL-nya ke **elemen `<audio>` yang SAMA dengan narasi** — elemen yang sudah terbukti berbunyi di HP pemilik. Nol unduhan (233 kB itu di memori, bukan jaringan), bunyi tetap identik.
+     - Ini baru mungkin karena `playTune(ac)` menerima context sebagai argumen. **Jangan diubah jadi membuat context sendiri di dalam.**
+     - Dirender saat sentuhan pertama (numpang di penghangat elemen `<audio>` yang sudah ada), jadi layar tamat tak pernah menunggu.
+  2. **`navigator.audioSession.type = 'playback'`** (Safari 16.4+, diabaikan di tempat lain) supaya SFX tik/teng/oops ikut terdengar di HP senyap. Ini yang menyelamatkan bunyi yang memang HARUS lewat WebAudio.
+  - Pemutaran langsung WebAudio tetap ada sebagai **cadangan** kalau `OfflineAudioContext` tak ada atau klipnya ditolak — jangan dihapus, tapi jangan pula dijadikan jalur utama.
+
+  **Aturan untuk bunyi baru nanti**
+  - **Bunyi apa pun yang WAJIB terdengar harus lewat elemen media**, bukan WebAudio langsung. WebAudio hanya untuk bunyi yang boleh hilang.
+  - `playClip(url, gen, onFail)` sekarang dipakai bersama narasi & lagu; parameter `onFail`-nya beda per pemakai (narasi → suara HP, lagu → WebAudio langsung). **Jangan sampai ada jalur yang bisa berakhir tanpa bunyi sama sekali.**
+  - Jangan mencoba "memperbaiki" ini dengan menaikkan gain — sakelar senyap itu bukan soal volume.
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 

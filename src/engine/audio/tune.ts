@@ -1,14 +1,21 @@
 /**
  * The victory tune played when a child finishes a whole game.
  *
- * Synthesized with WebAudio instead of shipping an audio file, for the same
- * reason the other SFX are: it costs zero download, starts instantly, and can
- * never be the thing that fails on a slow connection. Narration is different —
- * a child who cannot read *depends* on it, so that one is worth real files.
+ * Synthesized rather than shipped as an audio file, for the same reason the
+ * other SFX are: zero download, instant, and it can never be the thing that
+ * fails on a slow connection.
+ *
+ * BUT it is not played *live* through WebAudio, because **iOS silences the Web
+ * Audio API whenever the ring switch is on silent** — a phone handed to a child
+ * is very often exactly that. Media elements are not silenced (that is why the
+ * narration clips keep playing), so the tune is rendered offline into a WAV and
+ * handed to the same `<audio>` element the narration uses. Same notes, same
+ * zero-download property, but on the audio path that actually reaches a
+ * speaker. Live playback stays as the fallback (see `playTune`).
  *
  * The context is passed in rather than created here: `sound.ts` owns the single
- * AudioContext (and the mobile unlock dance), and taking it as an argument also
- * makes the tune renderable into an OfflineAudioContext for testing.
+ * AudioContext (and the mobile unlock dance), and taking it as an argument is
+ * what lets the very same code render into an OfflineAudioContext.
  */
 
 /** Note frequencies, equal temperament (Hz). */
@@ -133,4 +140,62 @@ export function playTune(ac: BaseAudioContext): Tune {
       for (const osc of voices) osc.stop(t + 0.05);
     },
   };
+}
+
+/* ---------- Offline render, so the tune can play as a media clip ---------- */
+
+/** Wrap mono float samples in a 16-bit PCM WAV container. */
+function wavBlob(buffer: AudioBuffer): Blob {
+  const samples = buffer.getChannelData(0);
+  const bytes = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(bytes);
+  const text = (at: number, s: string) => {
+    for (let i = 0; i < s.length; i += 1) view.setUint8(at + i, s.charCodeAt(i));
+  };
+  const rate = buffer.sampleRate;
+  text(0, 'RIFF');
+  view.setUint32(4, 36 + samples.length * 2, true);
+  text(8, 'WAVE');
+  text(12, 'fmt ');
+  view.setUint32(16, 16, true); // chunk size
+  view.setUint16(20, 1, true); // PCM
+  view.setUint16(22, 1, true); // mono
+  view.setUint32(24, rate, true);
+  view.setUint32(28, rate * 2, true); // byte rate
+  view.setUint16(32, 2, true); // block align
+  view.setUint16(34, 16, true); // bits per sample
+  text(36, 'data');
+  view.setUint32(40, samples.length * 2, true);
+  for (let i = 0; i < samples.length; i += 1) {
+    const s = Math.max(-1, Math.min(1, samples[i]!));
+    view.setInt16(44 + i * 2, s < 0 ? s * 0x8000 : s * 0x7fff, true);
+  }
+  return new Blob([bytes], { type: 'audio/wav' });
+}
+
+const RENDER_RATE = 44100;
+
+let clip: Promise<string | null> | null = null;
+
+/**
+ * Render the tune once into an object URL an `<audio>` element can play.
+ * Resolves to null when the browser has no OfflineAudioContext — the caller
+ * then falls back to live WebAudio playback.
+ *
+ * Kept in memory rather than fetched: ~240 kB of PCM the user never downloads.
+ */
+export function tuneClipUrl(): Promise<string | null> {
+  clip ??= (async () => {
+    try {
+      const Offline =
+        typeof OfflineAudioContext !== 'undefined' ? OfflineAudioContext : undefined;
+      if (!Offline) return null;
+      const oc = new Offline(1, Math.ceil(RENDER_RATE * TUNE_SECONDS), RENDER_RATE);
+      playTune(oc);
+      return URL.createObjectURL(wavBlob(await oc.startRendering()));
+    } catch {
+      return null; // rendering unsupported or refused — live playback it is
+    }
+  })();
+  return clip;
 }

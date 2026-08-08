@@ -4,12 +4,40 @@
  *   `voice.ts`), otherwise the device's own Web Speech voice (id-ID). Call
  *   sites never know the difference.
  * - SFX: tiny WebAudio chimes generated on the fly (no downloads, instant).
+ * - Victory tune: synthesized too, but rendered offline and played as a media
+ *   clip — see `tune.ts` for why WebAudio alone is not audible on a muted
+ *   iPhone.
  * Everything is triggered from user gestures (button taps), which satisfies
  * mobile autoplay policies.
  */
 import { voiceUrl, voicesReady } from './voice';
-import { playTune } from './tune';
+import { playTune, tuneClipUrl } from './tune';
 import type { Tune } from './tune';
+
+/**
+ * Safari 16.4+ lets a page say what its audio is for. Without this, iOS files
+ * the page under "ambient" and **the ring switch silences every Web Audio
+ * sound** — the tap/correct/wrong chimes go mute on a phone in silent mode,
+ * while the narration (a media element) keeps playing. A game whose whole point
+ * is to be heard belongs in "playback", same as the narration it sits next to.
+ * Unknown to older iOS and to Android, where it does nothing.
+ */
+interface AudioSession {
+  type: 'auto' | 'playback' | 'transient' | 'transient-solo' | 'ambient' | 'play-and-record';
+}
+
+function claimPlaybackSession(): void {
+  const session = (navigator as Navigator & { audioSession?: AudioSession }).audioSession;
+  if (session && session.type === 'auto') session.type = 'playback';
+}
+
+if (typeof navigator !== 'undefined') {
+  try {
+    claimPlaybackSession();
+  } catch {
+    // Property is read-only on some builds — nothing to do but carry on.
+  }
+}
 
 let audioCtx: AudioContext | null = null;
 
@@ -86,7 +114,8 @@ const SILENT_WAV = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAgD4AAA
 
 // Warm the element up on the very first touch anywhere, long before the first
 // narration: otherwise level 1's clip can be refused by the autoplay policy
-// and the child hears the robot voice for that one line.
+// and the child hears the robot voice for that one line. Same moment is a good
+// one to render the victory tune, so finishing a game never waits on it.
 if (typeof window !== 'undefined') {
   window.addEventListener(
     'pointerdown',
@@ -94,6 +123,7 @@ if (typeof window !== 'undefined') {
       const el = element();
       el.src = SILENT_WAV;
       void el.play().catch(() => {});
+      void tuneClipUrl();
     },
     { once: true },
   );
@@ -112,33 +142,38 @@ function speakWithDevice(text: string, gen: number): void {
   window.speechSynthesis.speak(utter);
 }
 
-/** Play the pre-rendered clip, falling back to the device voice if it can't. */
-function playClip(url: string, text: string, gen: number): void {
+/**
+ * Play an audio clip on the shared element, then move the queue on. `onFail`
+ * runs instead when the clip cannot be played at all (missing, corrupt, or
+ * refused by the autoplay policy) — never leave the queue stuck, and never let
+ * a child end up hearing nothing.
+ */
+function playClip(url: string, gen: number, onFail: () => void): void {
   const el = element();
   let settled = false;
-  const done = (fallback: boolean) => {
+  const done = (failed: boolean) => {
     if (settled || gen !== generation) return;
     settled = true;
     el.onended = null;
     el.onerror = null;
-    if (fallback) speakWithDevice(text, gen);
+    if (failed) onFail();
     else void pump(gen);
   };
   el.onended = () => done(false);
-  el.onerror = () => done(true); // clip missing or corrupt
+  el.onerror = () => done(true);
   el.src = url;
-  void el.play().catch(() => done(true)); // autoplay refused
+  void el.play().catch(() => done(true));
 }
 
-/** The tune currently sounding, so an interruption can cut it short. */
+/** The live-synth tune, if that fallback is what is sounding right now. */
 let tune: Tune | null = null;
 let tuneTimer = 0;
 
-/** Play the victory tune, then carry on with the rest of the queue. */
-function playTuneItem(gen: number): void {
+/** Last resort: play the tune live through WebAudio (silent on a muted iPhone). */
+function playTuneLive(gen: number): void {
   const ac = ctx();
   if (!ac) {
-    void pump(gen); // no WebAudio here — don't stall the queue
+    void pump(gen); // no WebAudio here either — don't stall the queue
     return;
   }
   tune = playTune(ac);
@@ -149,6 +184,14 @@ function playTuneItem(gen: number): void {
   }, tune.duration * 1000);
 }
 
+/** Play the victory tune, then carry on with the rest of the queue. */
+async function playTuneItem(gen: number): Promise<void> {
+  const url = await tuneClipUrl(); // rendered once, then instant
+  if (gen !== generation) return;
+  if (url) playClip(url, gen, () => playTuneLive(gen));
+  else playTuneLive(gen);
+}
+
 async function pump(gen: number): Promise<void> {
   if (gen !== generation) return;
   const item = queue.shift();
@@ -157,14 +200,14 @@ async function pump(gen: number): Promise<void> {
     return;
   }
   if (item.kind === 'tune') {
-    playTuneItem(gen);
+    void playTuneItem(gen);
     return;
   }
   const { text } = item;
   await voicesReady(); // instant once loaded; capped so a bad network can't mute the game
   if (gen !== generation) return;
   const url = voiceUrl(text);
-  if (url) playClip(url, text, gen);
+  if (url) playClip(url, gen, () => speakWithDevice(text, gen));
   else speakWithDevice(text, gen);
 }
 
