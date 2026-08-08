@@ -395,6 +395,60 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Chip "Petualangan seru menanti" TIDAK ditambah** untuk kedua jenjang ini: satu pun game-nya belum ada, dan aturan yang dipakai saat SD Kelas 1 & 2 mulai dijual (2026-08-07) adalah memajang dunia yang benar-benar bisa dimainkan. Chip baru menyusul kalau gamenya sudah jadi.
   - Tak ada yang berubah di `src/data/groups.json`, `registry.ts`, maupun `access.ts` — ini murni halaman jualan, belum ada kelompok baru yang bisa dibuka.
 
+- **Tracing: angka 9 tidak lagi diterima sebagai angka 6** (2026-08-07, laporan pemilik lewat tangkapan layar Tulis Angka), teruji headless:
+
+  **Kenapa dulu lolos**
+  - Penilaian lama cuma menghitung **luas**: berapa persen area glyph yang tersentuh jari + berapa persen coretan yang keluar glyph. 6 dan 9 itu bentuk yang sama diputar 180°, jadi 9 yang digambar di atas panduan 6 menyapu hampir semua piksel yang sama → lolos. **Persentase total tidak akan pernah bisa membedakan keduanya** — jangan coba memperbaikinya dengan menaikkan ambang persen.
+
+  **Cara barunya (`src/engine/templates/traceScore.ts`, dipisah dari `Tracing.tsx` supaya bisa diuji headless)**
+  1. Glyph dikuliti jadi **GARIS TENGAH** (skeleton Zhang-Suen), lalu yang dinilai: bagian garis mana yang diikuti jari. Mengukur ke area terisi salah di dua arah — jari anak yang melenceng ke satu sisi coretan tebal meninggalkan separuh area tak tersentuh, sementara angka yang salah tapi kebetulan bertumpuk dapat area gratis.
+  2. Yang menentukan lulus adalah **potongan garis TERPUTUS TERPANJANG yang terlewat**, bukan totalnya. Jari yang goyang meninggalkan lubang-lubang kecil tersebar; glyph yang salah meninggalkan **satu anggota badan utuh** tak tersentuh (9 di atas 6 tak pernah mendekati sisi kiri lingkaran bawah). Total yang terlewat justru lebih besar pada coretan benar-tapi-goyang — makanya persentase total menyesatkan.
+  3. Aturan ketiga yang longgar (jari harus tetap di sekitar tinta) menolak coretan asal-asalan yang cuma melintasi glyph.
+  - **Toleransi diukur dalam SATUAN TEBAL CORETAN, bukan piksel** (`coverK` × setengah tebal coretan glyph itu sendiri, diukur lewat distance transform) + lantai piksel `coverFloor`. Alasannya: app meminta font `Fredoka` tapi **tak pernah memuatnya**, jadi HP merender panduan dengan font sistemnya sendiri (Roboto di Android) — tebal coretannya beda-beda. Lantai pikselnya perlu karena tangan anak goyang sejauh jarak nyata, bukan sepersekian tebal coretan.
+
+  **Angka kalibrasi (jangan diubah tanpa mengukur ulang)**
+  - Coretan BENAR (jari goyang ±14px, cuma 85–90% garis digambar): celah terbesar **≤ 0,022** dan cakupan ≥ 0,96.
+  - Glyph SALAH di atas panduan: celah **≥ 0,06** — 9 di atas 6 = **0,090** (Fredoka) / **0,116** (Roboto Bold).
+  - `maxGap: 0.05` duduk di antara keduanya dengan ruang di kedua sisi.
+  - Diuji di **dua font sungguhan**: Fredoka (yang diminta config) dan Roboto Bold (yang benar-benar dirender HP Android). 2592 percobaan coretan benar × 72 glyph (angka 1–20, A–Z, a–z): **2591 diterima** (satu-satunya yang ditolak: "14" dengan goyangan maksimal DAN cuma 90% digambar). 1680 pasangan glyph-salah diuji.
+
+  **JEBAKAN yang sudah kena — jangan diulang**
+  - **JANGAN kalibrasi lewat font bawaan container/CI.** Percobaan pertama "berhasil" padahal font fallback-nya merender 6 dan 9 nyaris sebagai bentuk yang sama (100% garis 6 berjarak <30px dari garis 9) — hasil kalibrasinya sama sekali tidak berlaku di font sungguhan. Pasang dulu Fredoka & Roboto Bold ke `~/.fonts` sebelum mengukur apa pun.
+  - **Model "jari goyang" harus goyangan LAMBAT (tangan mengembara), bukan derau per-titik.** Derau per-titik menggemukkan coretan jadi pita lebar sehingga bentuk salah apa pun ikut lulus — kalibrasi jadi terlalu longgar.
+  - **Ambang cakupan total & keluar-glyph nyaris tak berpengaruh**; yang menentukan cuma aturan celah. Keduanya tetap dipasang sebagai jaring pengaman, bukan alat pembeda.
+  - Loop thinning **tidak boleh mengalokasi** (dulu bikin array 8 tetangga per piksel): 48ms untuk huruf "W" di desktop = tersendat saat level dibuka di HP murah. Versi tanpa alokasi: 19ms desktop, **54–120ms di CPU yang di-throttle 6×** — sekali per level, terjadi saat transisi level yang memang sudah 1,3 detik.
+
+  **BATAS YANG DISADARI (jangan "diperbaiki" dengan mengetatkan angka)**
+  - Kalau glyph yang digambar melewati **SELURUH** garis panduan — 8 di atas 3, 6 di atas 5, "16" di atas "10" — tak ada aturan di sini yang bisa protes, karena panduannya memang benar-benar tertelusuri. Membedakannya butuh bentuk coretan anak dicocokkan balik ke bentuk panduan; itu perubahan yang jauh lebih besar dari yang diminta bug ini. Mengetatkan ambang demi kasus-kasus itu akan mulai menolak coretan yang BENAR — dan anak yang jawabannya benar lalu disuruh mengulang jauh lebih merugikan daripada angka salah yang lolos.
+
+  **Ikut terangkat**
+  - Jalur jari sekarang **diambil ulang tiap 4px** (`pathStep`), jadi penilaian tak lagi bergantung pada seberapa sering HP mengirim event pointer — dulu coretan cepat mendaftarkan sedikit titik dan bisa melompati bagian glyph.
+  - `up()` mengabaikan pointer-up yang tak diawali pointer-down di kanvas (dulu `onPointerLeave` mengosongkan titik terakhir meski anak tak sedang menggambar).
+
+- **Panduan angka digambar sendiri sebagai goresan tulisan tangan** (2026-08-07, KEPUTUSAN PEMILIK setelah menulis batang tegak di panduan "1" ditolak), teruji headless 380×800 (kasus pemilik + 9↔6 di game sungguhan, nol error console, tanpa scroll horizontal):
+
+  **Kenapa panduan font itu salah untuk game menulis**
+  - Dulu panduan = TEKS yang digambar pakai font HP. App menyebut `Fredoka` di CSS tapi **tak pernah memuatnya**, jadi tiap HP menggambar bentuk yang berbeda: di iPhone pemilik "1" punya **bendera balok** hampir separuh lebar angkanya, font lain menambahkan tumit serif. Alasan yang sama persis dengan hewan pakai WebP, bukan emoji.
+  - Huruf cetak bukan tulisan tangan. Tak ada anak yang diajari menulis "1" dengan bendera + tumit; di sekolah Indonesia itu satu goresan turun. Menyuruh anak menelusuri hiasan tipografi = **mengajarkan bentuk yang salah**, dan menolak anak yang menulisnya dengan benar.
+  - **Tak ada ambang yang bisa menambal ini** (sudah diukur, jangan diulang): bendera "1" = 21,5% dari garis, sedangkan ekor 6 = 7,6% dan ekor 9 = 8,3%. Melonggarkan sampai bendera dimaafkan otomatis memaafkan ekor 6 & 9 → angka 9 lolos lagi sebagai 6. Masalahnya di BENTUK PANDUAN, bukan di angka ambang.
+
+  **Cara barunya (`src/engine/templates/glyphStrokes.ts`)**
+  - Angka 0–9 ditulis sebagai **goresan** dalam kotak 0..1 (helper `poly`/`arc`/`join`), lalu `handwriting(glyph, size)` menaruhnya di kanvas. Angka dua digit (10–20) otomatis dua kotak bersebelahan yang lebih kecil.
+  - **"1" = satu garis tegak polos.** Itu inti seluruh perubahan ini — jangan tambahkan bendera "biar mirip cetakan".
+  - `drawGlyph` menggores path itu (bukan `fillText`), dan penilai memakai **garis tengah yang sudah pasti** — tak perlu ditebak ulang lewat skeleton. Thinning cuma jalan untuk glyph yang masih pakai font.
+  - **Huruf belum punya data goresan** → `strokesFor` mengembalikan null dan jatuh ke font seperti dulu. Menambah huruf nanti = menambah entri di file itu, tak ada yang lain berubah.
+
+  **Angka kalibrasi (diukur ulang; bentuk baru = angka baru)**
+  - `maxGap` untuk panduan goresan = **0,11**; `maxGapFont` untuk huruf tetap **0,05**. Dua angka karena huruf cetak jauh lebih saling tumpang tindih — ruang antara "benar tapi goyang" dan "huruf lain" jauh lebih sempit di font.
+  - Coretan benar: **0 dari 360** ditolak (penuh & 95% digambar), 4 dari 180 ditolak kalau berhenti 10% lebih awal. Total **6 dari 720**.
+  - 9 di atas 6 = celah **0,338**; 6 di atas 9 = 0,381; 0 di atas 6 = 0,239 — semua ditolak dengan margin 2–3×.
+  - **0,09 dan 0,11 menangkap angka salah yang PERSIS SAMA** (8 dari 90 pasangan satu-angka), tapi 0,09 menolak 38 dari 180 coretan yang berhenti sedikit lebih awal. Jadi 0,11 itu kelonggaran gratis — jangan diturunkan lagi tanpa mengukur ulang.
+  - Huruf tak berubah: 624/624 coretan benar diterima.
+
+  **JEBAKAN**
+  - **Sudut busur di `arc()` bertambah SEARAH JARUM JAM** (y ke bawah): 0 = kanan, 90 = bawah, 180 = kiri, 270 = atas. Percobaan pertama untuk 2, 3, 5, dan 6 melengkung ke arah sebaliknya dan hasilnya bentuk aneh — **lihat dulu hasil gambarnya** sebelum percaya, jangan hanya membaca kodenya.
+  - Ujung tiap potongan busur harus **bertemu** dengan awal potongan berikutnya (`join` cuma menyambung; celah akan tergambar sebagai garis lurus).
+  - Batas yang tersisa tetap sama: glyph yang melewati SELURUH garis panduan (8 di atas 3, 8 di atas 5) masih lolos.
 - **ANGKA DI NARASI DITULIS DENGAN KATA — jangan pernah pakai digit** (2026-08-07, laporan pemilik dari tangkapan layar Hutan Hewan: *"kok suaranya ada six singa, harusnya enam singa"*), teruji headless 380×800 & 360×640 — **Hutan Hewan, Tambah Tangkas & Jam Pintar** dimainkan sampai "Selamat!" (nol angka di kalimat soal, papan persamaannya tetap berangka, tanpa scroll & nol error console); **Hitung Hebat** diperiksa lewat `npm run narasi` (53 baris, semua varian) karena level count-tap & kartu ingatannya tak bisa diselesaikan penelusur otomatis:
   - Sebabnya: `narration` itu **satu string untuk dua hal** — dicetak di layar DAN diserahkan ke mesin suara. Digit adalah satu-satunya hal yang dibaca tiap mesin suara **dalam bahasanya sendiri**: baris "Ada 6 singa" kembali dari Azure sebagai "Ada **six** singa", dan HP yang jatuh ke `speechSynthesis` tanpa suara id-ID melakukan hal yang sama. Kata tidak bisa salah dibaca begitu.
   - **`src/games/numbers.ts` = satu-satunya sumber**: `terbilang(n)` (0–999.999, "enam" · "dua belas" · "dua puluh lima" · "lima belas ribu"), `rupiahWords(n)` ("lima belas ribu rupiah"), `capitalize()` untuk kalimat yang diawali bilangan. Tabel `WORDS` lama di `hutan-hewan.ts` (cuma 0–8) dihapus, `say` sekarang alias `terbilang`.
