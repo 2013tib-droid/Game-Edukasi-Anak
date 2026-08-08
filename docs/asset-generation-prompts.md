@@ -117,6 +117,51 @@ Status pengiriman:
 | Buah (14) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
 | Kendaraan & tujuan (20) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
 | Benda sehari-hari (20) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
+| **5 — Benda paling sering muncul (25)** | ⬜ **berikutnya** (2026-08-08) |
+| 6 — Alat musik (5) | ⬜ menunggu |
+| 7 — Profesi & alatnya (13) | ⬜ menunggu |
+| 8 — Hewan & rumahnya (8) | ⬜ menunggu |
+| 9 — Benda sisa (15) | ⬜ menunggu |
+
+### Sisa emoji: hasil audit 2026-08-08
+
+Seluruh config game di-bundle lalu data levelnya ditelusuri (**semua varian
+tiap slot**, bukan cuma yang keluar satu sesi) untuk mencari setiap field
+emoji yang belum punya pasangan id gambar — `emoji`/`item`,
+`picture`/`pictureItem`, `vehicle`/`vehicleItem`, `goal`/`goalItem`.
+
+Saat itu: **75 aset sudah ada, ±160 benda masih dirender pakai font emoji HP.**
+Batch 5–9 di `prompt-gambar-gemini.md` adalah 66 di antaranya yang benar-benar
+layak digambar; sisanya sengaja dibiarkan emoji (lihat "Yang Sengaja TIDAK
+Perlu Digambar" di dokumen itu — titik warna keranjang, huruf/angka, simbol,
+tujuan hiasan Jalan Kendaraan, adegan cerita).
+
+Cara mengulang audit ini kapan pun (mis. setelah menambah game baru): tiru
+`scripts/check-item-ids.mjs` — ia sudah mem-bundle config dan menelusuri
+`ID_FIELDS`; yang dibutuhkan cuma membalik logikanya (cari field emoji yang
+**tidak** punya id pendamping).
+
+**Yang paling merugikan sekarang bukan "emoji itu jelek", tapi ketidak-
+konsistenan**: benda yang sama tampil bergambar di satu game dan emoji di game
+lain (ikan, kapal, motor, madu, daun). Di mata anak itu dua benda berbeda.
+Karena itu Batch 5 diurutkan berdasarkan **berapa banyak game yang memakainya**,
+bukan berdasarkan game mana yang paling penting.
+
+**Konflik nama yang sudah ketahuan & sudah dihindari di daftar batch:**
+
+- `river` (sungai) harus jadi aset sendiri — emoji 🏞️ sekarang dipakai untuk
+  "sungai" **dan** sudah terdaftar sebagai `park` (taman). Satu gambar dua
+  arti, persis yang dilarang aturan proyek (lihat `teddy` vs `bear`).
+- `police-officer` (orang) bukan `police` — id itu sudah dipakai **mobil**
+  polisi.
+- `glass` (gelas) sengaja ditunda ke Batch 9 dan harus kosong/berisi air
+  bening, karena `milk` sudah berupa gelas berisi susu.
+
+**Arah kendaraan — koreksi.** Prompt Batch 3 menulis "menghadap ke KANAN", tapi
+aset yang dipakai sekarang menghadap **KIRI** (lihat `car.webp`), dan itu yang
+benar: `PathTrace` mencerminkan gambar dengan `scaleX(-1)` sebelum memutarnya
+mengikuti arah jalan. Kendaraan baru (motor, kapal, pesawat) **wajib menghadap
+kiri** — kalau tidak, di dalam game ia berjalan mundur.
 
 ### Pelajaran dari dua batch pertama (BACA sebelum minta batch baru)
 
