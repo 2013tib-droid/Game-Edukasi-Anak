@@ -1,3 +1,8 @@
-Ubah file ini lalu push untuk merender contoh setelan suara.
+Ubah file ini lalu push untuk merender contoh suara.
 
-(sudah diputuskan: Gadis HD -15% + Ardi -8%)
+mode: lafal
+
+Membandingkan lafal "e" taling (bebek → bébék) vs ejaan sekarang.
+Hasilnya di sample-suara/lafal-*.mp3 — dengarkan, lalu putuskan.
+
+(setelan suara sudah diputuskan: Gadis HD -15% + Ardi -8%)

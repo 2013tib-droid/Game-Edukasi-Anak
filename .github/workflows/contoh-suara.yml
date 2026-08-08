@@ -1,6 +1,10 @@
-# Render beberapa kalimat contoh dalam beberapa setelan suara, untuk dipilih
-# sebelum merender seluruh narasi. Dipicu dengan mengubah
-# `.github/sample-request.txt`.
+# Render beberapa kalimat contoh untuk dipilih dengan telinga sebelum ratusan
+# baris narasi dirender. Dipicu dengan mengubah `.github/sample-request.txt`.
+#
+# Dua jenis contoh, dipilih lewat baris `mode:` di file pemicu itu:
+#   mode: suara  (bawaan) — membandingkan SETELAN SUARA (voice/rate/pitch)
+#   mode: lafal            — membandingkan EJAAN LAFAL kata ber-e taling
+#                            (bebek → bébék), lihat scripts/pronounce.mjs
 #
 # Hasilnya masuk folder `sample-suara/` (di luar public/), jadi tidak pernah
 # ikut ter-deploy. Hapus foldernya setelah setelan suaranya diputuskan.
@@ -8,6 +12,12 @@ name: Contoh suara
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'suara (setelan voice) atau lafal (ejaan e taling)'
+        type: choice
+        options: [suara, lafal]
+        default: suara
   push:
     paths:
       - .github/sample-request.txt
@@ -28,11 +38,29 @@ jobs:
         with:
           node-version: 20
 
+      # Baris "mode: lafal" di file pemicu memilih contoh EJAAN, bukan contoh
+      # setelan suara. Sengaja dibatasi huruf: isinya masuk ke perbandingan di
+      # bawah.
+      - name: Baca mode contoh
+        id: req
+        run: |
+          MODE="${{ inputs.mode }}"
+          if [ -z "$MODE" ]; then
+            MODE=$(grep -oE '^mode: *[a-z]+' .github/sample-request.txt | head -1 | sed 's/^mode: *//' || true)
+          fi
+          echo "Mode: ${MODE:-suara}"
+          echo "mode=${MODE:-suara}" >> "$GITHUB_OUTPUT"
+
       - name: Render contoh
         env:
           AZURE_SPEECH_KEY: ${{ secrets.AZURE_SPEECH_KEY }}
           AZURE_SPEECH_REGION: ${{ vars.AZURE_SPEECH_REGION || 'southeastasia' }}
-        run: node scripts/sample-voices.mjs
+        run: |
+          if [ "${{ steps.req.outputs.mode }}" = "lafal" ]; then
+            node scripts/sample-lafal.mjs
+          else
+            node scripts/sample-voices.mjs
+          fi
 
       - name: Commit contohnya
         run: |
@@ -40,6 +68,6 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add sample-suara
           git diff --cached --quiet && exit 0
-          git commit -m 'Contoh setelan suara untuk dipilih'
+          git commit -m 'Contoh ${{ steps.req.outputs.mode }} untuk dipilih'
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"

@@ -22,6 +22,7 @@
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { forSpeech } from './pronounce.mjs';
 
 const LINES_FILE = 'scripts/narration-lines.json';
 const OUT_DIR = 'public/assets/voice';
@@ -65,6 +66,13 @@ const has = (name) => args.includes(`--${name}`);
 const dryRun = has('dry-run');
 const prune = has('prune');
 const only = flag('only', '');
+/**
+ * Render ulang baris yang memuat teks ini, walaupun filenya sudah ada. Dipakai
+ * setelah mengubah ejaan lafal (`scripts/pronounce.mjs`): `key` berasal dari
+ * teks LAYAR yang tidak berubah, jadi tanpa ini file lamanya cuma dilewati.
+ *     npm run suara -- --redo=bebek
+ */
+const redo = flag('redo', '').toLowerCase();
 const limit = Number(flag('limit', '0'));
 /**
  * Requests per minute. Azure's free F0 tier allows 20 neural requests per
@@ -106,7 +114,8 @@ if (only && !selected.length) {
 }
 
 const fileFor = (line) => `${line.scope}/${line.key}.mp3`;
-const pending = selected.filter((l) => !existsSync(path.join(OUT_DIR, fileFor(l))));
+const stale = (l) => redo && l.text.toLowerCase().includes(redo);
+const pending = selected.filter((l) => stale(l) || !existsSync(path.join(OUT_DIR, fileFor(l))));
 const todo = limit ? pending.slice(0, limit) : pending;
 const chars = todo.reduce((sum, l) => sum + l.text.length, 0);
 
@@ -114,6 +123,10 @@ console.log(
   `${selected.length} baris dipilih · ${selected.length - pending.length} sudah ada · ` +
     `${todo.length} akan dirender (${chars.toLocaleString('id-ID')} karakter)`,
 );
+if (redo) {
+  const n = selected.filter(stale).length;
+  console.log(`--redo="${redo}": ${n} baris dirender ulang walau filenya sudah ada.`);
+}
 if (todo.length) {
   const minutes = Math.ceil(todo.length / rpm);
   console.log(`Kecepatan ${rpm} permintaan/menit → perkiraan ±${minutes} menit.\n`);
@@ -123,7 +136,11 @@ if (todo.length) {
 
 function ssml(line) {
   const voice = VOICES[line.voice] ?? VOICES.gadis;
-  const text = line.text.replace(/[<>&'"]/g, (c) => `&#${c.charCodeAt(0)};`);
+  // Spoken spelling, not screen spelling: Indonesian writes "e" pepet and "e"
+  // taling with the same letter, so a few words have to be respelled with é
+  // for the voice (see scripts/pronounce.mjs). The screen text — and the
+  // manifest key built from it — is untouched.
+  const text = forSpeech(line.text).replace(/[<>&'"]/g, (c) => `&#${c.charCodeAt(0)};`);
   return (
     `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="id-ID">` +
     `<voice name="${voice.name}"><prosody rate="${voice.rate}">${text}</prosody></voice></speak>`
