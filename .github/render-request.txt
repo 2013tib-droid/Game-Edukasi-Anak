@@ -1,3 +1,6 @@
-Render penuh semua narasi.
+Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #4 — Gadis HD -15% (soal) + Ardi -8% (cerita)
+redo: lafal
+
+render #5 — ejaan "e" taling (bebek → bébék), 70 baris dirender ulang.
+Suaranya tetap Gadis HD -15% (soal) + Ardi -8% (cerita).

@@ -7,6 +7,7 @@
  *     npm run suara                       # render semua yang belum ada
  *     npm run suara -- --rpm=100          # kalau pakai tier bayar (S0), jauh lebih cepat
  *     npm run suara -- --prune            # buang file audio yang kalimatnya sudah dihapus
+ *     npm run suara -- --redo-lafal       # render ulang baris yang ejaan lafalnya berubah
  *
  * Input: `scripts/narration-lines.json` (jalankan `npm run narasi` dulu).
  * Output: `public/assets/voice/<scope>/<key>.mp3` + `manifest.json`.
@@ -73,6 +74,13 @@ const only = flag('only', '');
  *     npm run suara -- --redo=bebek
  */
 const redo = flag('redo', '').toLowerCase();
+/**
+ * Render ulang SEMUA baris yang ejaan lafalnya berbeda dari teks layar —
+ * yaitu setiap baris yang tersentuh `scripts/pronounce.mjs`. Ini yang dipakai
+ * setelah daftar lafal berubah; `--redo=<kata>` hanya untuk satu kata.
+ *     npm run suara -- --redo-lafal
+ */
+const redoLafal = has('redo-lafal');
 const limit = Number(flag('limit', '0'));
 /**
  * Requests per minute. Azure's free F0 tier allows 20 neural requests per
@@ -114,7 +122,8 @@ if (only && !selected.length) {
 }
 
 const fileFor = (line) => `${line.scope}/${line.key}.mp3`;
-const stale = (l) => redo && l.text.toLowerCase().includes(redo);
+const stale = (l) =>
+  (redo && l.text.toLowerCase().includes(redo)) || (redoLafal && forSpeech(l.text) !== l.text);
 const pending = selected.filter((l) => stale(l) || !existsSync(path.join(OUT_DIR, fileFor(l))));
 const todo = limit ? pending.slice(0, limit) : pending;
 const chars = todo.reduce((sum, l) => sum + l.text.length, 0);
@@ -123,9 +132,10 @@ console.log(
   `${selected.length} baris dipilih · ${selected.length - pending.length} sudah ada · ` +
     `${todo.length} akan dirender (${chars.toLocaleString('id-ID')} karakter)`,
 );
-if (redo) {
+if (redo || redoLafal) {
   const n = selected.filter(stale).length;
-  console.log(`--redo="${redo}": ${n} baris dirender ulang walau filenya sudah ada.`);
+  const why = redoLafal ? '--redo-lafal' : `--redo="${redo}"`;
+  console.log(`${why}: ${n} baris dirender ulang walau filenya sudah ada.`);
 }
 if (todo.length) {
   const minutes = Math.ceil(todo.length / rpm);

@@ -19,7 +19,16 @@
  *     dan sudah benar ("belas", "teman", "pesawat", "menara").
  *   - Sesudah menambah/mengubah kata, file suara lamanya TIDAK otomatis
  *     dirender ulang: `key`-nya berasal dari teks layar yang tidak berubah.
- *     Paksa dengan `npm run suara -- --redo=<kata>`.
+ *     Paksa dengan `npm run suara -- --redo-lafal` (semua baris yang tersentuh
+ *     daftar ini) atau `--redo=<kata>` untuk satu kata saja.
+ *
+ * KENAPA EJAAN é, BUKAN TAG <phoneme> IPA (keputusan pemilik 2026-08-08):
+ * keduanya dirender jadi contoh dan pemilik menilai **bunyinya sama**, jadi
+ * yang dipilih yang paling murah dirawat. Ejaan é = satu baris per kata dan
+ * otomatis ikut ke akhiran ("kelerengnya"); IPA menuntut transkripsi manual
+ * tiap kata baru. Kalau suatu saat ada kata yang é-nya tak mempan, tag
+ * <phoneme> tetap bisa dipakai khusus kata itu — Azure menuruti keduanya
+ * (terukur: ketiga varian menghasilkan audio yang berbeda).
  */
 
 /** kata (huruf kecil) → ejaan lafal. Urutan tidak penting. */
@@ -28,7 +37,6 @@ export const PRONOUNCE = {
   bebek: 'bébék',
 
   // Kata lain yang ber-e taling di narasi (satu kelas dengan "bebek").
-  apel: 'apél',
   becak: 'bécak',
   bel: 'bél',
   ceri: 'céri',
@@ -54,9 +62,16 @@ export const PRONOUNCE = {
   sore: 'soré',
   stroberi: 'strobéri',
   trem: 'trém',
-  wortel: 'wortél',
   zebra: 'zébra',
 };
+
+/*
+ * SENGAJA TIDAK DIDAFTARKAN: "apel" dan "wortel". Dua kata itu saya tidak
+ * yakin taling — banyak penutur mengucapkannya pepet (apəl, wortəl), dan
+ * salah menandai justru MERUSAK kata yang selama ini benar. Kata yang tidak
+ * terdaftar memakai tebakan bawaan Azure, alias keadaan sekarang: tidak ada
+ * yang memburuk. Kalau nanti terdengar salah di HP, tinggal tambahkan.
+ */
 
 /**
  * Akhiran yang boleh menempel tanpa memutus pencocokan: "dompetnya",

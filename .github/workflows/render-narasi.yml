@@ -32,6 +32,11 @@ on:
         type: boolean
         required: false
         default: false
+      redo_lafal:
+        description: 'Render ulang baris yang ejaan lafalnya berubah (scripts/pronounce.mjs)'
+        type: boolean
+        required: false
+        default: false
   push:
     paths:
       - .github/render-request.txt
@@ -85,6 +90,13 @@ jobs:
           SCOPE=$(grep -oE '^only: *[a-z0-9_-]+' .github/render-request.txt | head -1 | sed 's/^only: *//' || true)
           echo "Bagian yang diminta: ${SCOPE:-semua}"
           echo "only=$SCOPE" >> "$GITHUB_OUTPUT"
+          # Baris "redo: lafal" memaksa render ulang baris yang ejaan lafalnya
+          # berubah — `key` berasal dari teks layar yang tidak berubah, jadi
+          # tanpa ini file lamanya cuma dilewati.
+          if grep -qE '^redo: *lafal' .github/render-request.txt; then
+            echo 'Render ulang: baris yang tersentuh daftar lafal'
+            echo 'redo=--redo-lafal' >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Render suara
         env:
@@ -93,11 +105,12 @@ jobs:
           ONLY: ${{ inputs.only || steps.req.outputs.only }}
           RPM: ${{ inputs.rpm || '20' }}
           PRUNE: ${{ inputs.prune && '--prune' || '' }}
+          REDO: ${{ inputs.redo_lafal && '--redo-lafal' || steps.req.outputs.redo }}
         run: |
           npm run suara -- \
             ${ONLY:+--only="$ONLY"} \
             --rpm="${RPM:-20}" \
-            $PRUNE
+            $PRUNE $REDO
 
       - name: Commit hasilnya
         run: |
