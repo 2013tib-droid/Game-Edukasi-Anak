@@ -32,6 +32,13 @@ import type { GameConfig, GameLevel, StoryPage } from '@/engine/core/types';
 const page = (emoji: string, text: string): StoryPage => ({ emoji, text });
 
 /**
+ * Halaman bergambar: `id` item dari registry `src/engine/ui/items.ts`.
+ * Aturan proyek — kalau halamannya tentang HEWAN dan seninya sudah ada,
+ * pakai gambar, jangan emoji (emoji hewan beda bentuk di tiap HP).
+ */
+const pic = (item: string, text: string): StoryPage => ({ item, text });
+
+/**
  * Halaman keputusan: satu pilihan benar, sisanya diberi tanggapan lembut.
  * Urutan di sini tidak menentukan urutan di layar — `StoryChoice` mengacak
  * pilihannya tiap halaman supaya anak tidak bisa menang dengan selalu
@@ -92,14 +99,14 @@ const JALAK = story(
   'l2',
   'Burung Jalak dan Kerbau. Ayo ikuti ceritanya!',
   page('🐃', 'Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.'),
-  page('🐦', 'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"'),
+  pic('jalak', 'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"'),
   ask(
     '🤔',
     'Apa yang sebaiknya kerbau jawab?',
     'Boleh, hinggaplah di punggungku',
     ['Pergi! Aku tidak mau ditumpangi', 'Jalak justru ingin menolong. Coba pilih yang lain!'],
   ),
-  page('🪶', 'Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.'),
+  pic('jalak', 'Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.'),
   ask(
     '🐍',
     'Dari atas, jalak melihat ular besar mendekat. Sebaiknya jalak bagaimana?',
@@ -114,7 +121,7 @@ const GAJAH = story(
   'l3',
   'Kancil dan Gajah. Ayo bantu Kancil menolong temannya!',
   page('🦌', 'Pagi itu Kancil berjalan di tepi rawa.'),
-  page('🐘', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.'),
+  pic('elephant', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.'),
   ask(
     '🤔',
     'Gajah terlalu berat. Apa yang sebaiknya Kancil lakukan?',

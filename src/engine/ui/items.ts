@@ -58,6 +58,10 @@ export const ITEMS: Record<string, ItemDef> = {
   tiger: { emoji: '🐯', label: 'harimau', ext: 'webp' },
   monkey: { emoji: '🐵', label: 'monyet', ext: 'webp' },
   frog: { emoji: '🐸', label: 'katak', ext: 'webp' },
+  // Burung jalak (Cerita Anak). Emoji 🐦 itu burung biru generik — jalak
+  // justru dikenali dari badan hitam, paruh & kaki kuning, dan garis putih
+  // di sayap; tidak ada emoji yang membawanya.
+  jalak: { emoji: '🐦', label: 'burung jalak', ext: 'webp' },
   // Everyday objects — the things that show up again and again in letter,
   // syllable and spelling questions (Taman Huruf, Pasang Kata, Suku Kata,
   // Ejaan Jitu, Pasangan Pintar).

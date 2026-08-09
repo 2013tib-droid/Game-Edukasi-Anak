@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import { sfx, speakNext } from '@/engine/audio/sound';
+import ItemPic from '@/engine/ui/ItemPic';
 
 /**
  * Interactive story: narrated pages, some with a decision. Wrong choices get
@@ -94,9 +95,16 @@ export default function StoryChoice({
   return (
     <>
       <div className="game-area">
-        {page.emoji && (
-          <div className="story-emoji" aria-hidden>
-            {page.emoji}
+        {(page.item || page.emoji) && (
+          <div
+            className={`story-emoji${page.choices ? ' story-emoji--choices' : ''}`}
+            aria-hidden
+          >
+            {page.item ? (
+              <ItemPic id={page.item} className="story-emoji__img" />
+            ) : (
+              page.emoji
+            )}
           </div>
         )}
         <p className="story-text">{page.text}</p>

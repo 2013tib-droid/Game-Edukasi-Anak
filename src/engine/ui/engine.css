@@ -888,6 +888,29 @@
   text-align: center;
 }
 
+/*
+ * Art standing in for the page emoji. Drawn BIGGER than the emoji it replaces:
+ * a page without choices is just picture + one line of text + "Lanjut", so the
+ * screen has room, and art at emoji size looks like a stamp (the same
+ * complaint that drove the fruit/cue sizes elsewhere).
+ * Width is free (with a cap) so a wide animal is not squashed; `contain`
+ * keeps the shape — never `height: auto` (see .choice-img).
+ */
+.story-emoji__img {
+  height: clamp(170px, 50vw, 280px);
+  max-width: min(84vw, 340px);
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+/*
+ * A DECISION page has to fit the question plus two or three cards, so there
+ * the picture stays at emoji size. Engine rule, not a per-game patch.
+ */
+.story-emoji--choices .story-emoji__img {
+  height: clamp(72px, 22vw, 140px);
+}
+
 .story-text {
   font-size: 22px;
   font-weight: 600;
