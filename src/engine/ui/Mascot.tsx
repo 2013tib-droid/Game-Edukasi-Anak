@@ -5,18 +5,14 @@ import '@/engine/ui/mascot.css';
 /**
  * One mascot stage as a picture, falling back to its emoji if the asset is
  * missing — same graceful-degradation contract as `ItemPic` for board items.
+ * Stages whose art is not drawn yet carry no `pic`, so they render the emoji
+ * without ever requesting a file that would 404.
  */
 function MascotPic({ stage, className }: { stage: MascotStage; className: string }) {
   const [failed, setFailed] = useState(false);
-  if (failed) return <>{stage.emoji}</>;
-  return (
-    <img
-      className={className}
-      src={mascotImageUrl(stage)}
-      alt={stage.name}
-      onError={() => setFailed(true)}
-    />
-  );
+  const src = mascotImageUrl(stage);
+  if (!src || failed) return <>{stage.emoji}</>;
+  return <img className={className} src={src} alt={stage.name} onError={() => setFailed(true)} />;
 }
 
 /**
