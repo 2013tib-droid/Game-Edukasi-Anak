@@ -60,9 +60,22 @@ function ask(
   };
 }
 
-/** Satu cerita = satu level. */
-function story(id: string, narration: string, ...pages: StoryPage[]): GameLevel<'story-choice'> {
-  return { id, narration, data: { pages } };
+/**
+ * Satu cerita = satu level = satu kartu di layar pemilih.
+ * - `label` = judul pendek di kartu ("Kancil dan Gajah"),
+ * - `pic` = id item registry kalau seninya ada (aturan proyek: hewan pakai
+ *   gambar, bukan emoji), kalau tidak `emoji` yang dipakai,
+ * - `narration` = kalimat lengkap yang diucapkan saat cerita dimulai dan saat
+ *   anak menekan 🔊 di kartunya — JANGAN diubah tanpa alasan, kunci file
+ *   suaranya berasal dari isi kalimat ini.
+ */
+function story(
+  id: string,
+  card: { label: string; emoji?: string; item?: string },
+  narration: string,
+  ...pages: StoryPage[]
+): GameLevel<'story-choice'> {
+  return { id, narration, card, data: { pages } };
 }
 
 /* ---------- Cerita ---------- */
@@ -74,6 +87,7 @@ function story(id: string, narration: string, ...pages: StoryPage[]): GameLevel<
  */
 const KANCIL = story(
   'l1',
+  { label: 'Kancil dan Pak Tani', emoji: '🦌' },
   'Si Kancil berjalan di hutan. Perutnya lapar sekali. Ayo bantu Kancil mencari makan!',
   page('🦌', 'Si Kancil berjalan di hutan. Perutnya lapar sekali.'),
   ask(
@@ -97,6 +111,7 @@ const KANCIL = story(
 
 const JALAK = story(
   'l2',
+  { label: 'Jalak dan Kerbau', item: 'jalak' },
   'Burung Jalak dan Kerbau. Ayo ikuti ceritanya!',
   page('🐃', 'Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.'),
   pic('jalak', 'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"'),
@@ -119,6 +134,7 @@ const JALAK = story(
 
 const GAJAH = story(
   'l3',
+  { label: 'Kancil dan Gajah', item: 'elephant' },
   'Kancil dan Gajah. Ayo bantu Kancil menolong temannya!',
   page('🦌', 'Pagi itu Kancil berjalan di tepi rawa.'),
   pic('elephant', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.'),
@@ -146,10 +162,11 @@ const config: GameConfig<'story-choice'> = {
   title: 'Cerita Anak',
   emoji: '📗',
   template: 'story-choice',
-  // Satu cerita sudah cukup panjang untuk anak SD kelas 1 & 2 — dua cerita
-  // per sesi sudah pas (pola yang sama dengan Cerita Nusantara). Ceritanya
-  // dipilih acak, jadi sesi berikutnya belum tentu cerita yang sama.
-  sessionLevels: 2,
+  // Anak memilih sendiri ceritanya — ketiga judul tampil sebagai kartu begitu
+  // game dibuka (pola yang sama dengan Cerita Nusantara, keputusan pemilik
+  // 2026-08-09). Satu cerita sudah cukup panjang untuk sekali duduk, jadi
+  // tidak ada `sessionLevels`: satu pilihan = satu cerita.
+  chooseLevel: { title: 'Pilih ceritamu!', again: '📗 Pilih Cerita Lain' },
   levels: [KANCIL, JALAK, GAJAH],
 };
 

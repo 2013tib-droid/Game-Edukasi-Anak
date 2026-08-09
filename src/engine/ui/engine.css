@@ -1030,6 +1030,89 @@
   font-size: 34px;
 }
 
+/* ---------- Pemilih level (game cerita: semua judul tampil di awal) ---------- */
+
+/*
+ * `safe center` supaya kartu-kartunya di tengah layar lega (tablet) TAPI tidak
+ * pernah terpotong di atas saat kontennya lebih tinggi dari layar HP — dengan
+ * `center` biasa, bagian yang meluap keluar di atas tak bisa di-scroll.
+ * Browser Android lawas yang tak mengenal `safe` membuang barisnya dan jatuh
+ * ke flex-start — itu justru perilaku yang aman.
+ */
+.game-center--pick {
+  justify-content: safe center;
+  gap: 12px;
+  padding: 20px 16px 24px;
+}
+
+.pick-heading {
+  margin: 0;
+  font-size: 28px;
+}
+
+.pick-prompt {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  opacity: 0.72;
+}
+
+.pick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 12px;
+  width: 100%;
+  max-width: 620px;
+}
+
+.pick-card {
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4px;
+  padding: 12px 10px 10px;
+  text-align: center;
+}
+
+.pick-card__pic {
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+/* Kotak PERSEGI seperti `.choice-img`: gambar lebar (kerbau, gajah) tidak
+   boleh melebarkan kartunya, dan yang lonjong tidak boleh tergencet. */
+.pick-card__img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+.pick-card__label {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.pick-card__stars {
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.pick-card__speak {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  font-size: 17px;
+}
+
 /* Path trace (susuri jalan) — jalan raya yang diikuti jari anak */
 .road-stage {
   position: relative;

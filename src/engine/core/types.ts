@@ -302,10 +302,43 @@ export interface LevelDataMap {
 
 /* ---------- Game config ---------- */
 
+/**
+ * How a level shows up on the level picker (see `GameConfig.chooseLevel`).
+ * The card needs a SHORT title: `narration` is a full spoken sentence
+ * ("Timun Mas. Ayo bantu Timun Mas pulang dengan selamat!") and would not fit.
+ */
+export interface LevelCard {
+  /** Judul pendek di kartu, mis. "Timun Mas". */
+  label: string;
+  emoji?: string;
+  /** Item id (registry `src/engine/ui/items.ts`) — art instead of the emoji. */
+  item?: string;
+}
+
+/**
+ * Turn the game's opening screen into a LEVEL PICKER: every level is shown as
+ * a card and the child chooses which one to play (owner's decision 2026-08-09
+ * for the story games — the six titles are on screen from the start instead of
+ * two being drawn at random).
+ *
+ * Rules for a game that uses it:
+ * - every slot must be ONE level (no variant pools) carrying a `card`,
+ * - level ids must be unique — the picker shows the stars earned per level,
+ * - `sessionLevels` is ignored: one pick = one level.
+ */
+export interface LevelPicker {
+  /** Ajakan di atas kartu-kartu, mis. "Pilih ceritamu!". */
+  title: string;
+  /** Tombol di layar selesai. Bawaan: "🔁 Pilih Lagi". */
+  again?: string;
+}
+
 export interface GameLevel<T extends TemplateId = TemplateId> {
   id: string;
   /** Narrated instruction (TTS/speechSynthesis) — every level must have one. */
   narration: string;
+  /** Only for games with `chooseLevel` — how this level looks on the picker. */
+  card?: LevelCard;
   data: LevelDataMap[T];
 }
 
@@ -342,6 +375,8 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
    * them each play. Omit (or >= levels.length) to play every slot in order.
    */
   sessionLevels?: number;
+  /** Let the child pick the level from a card grid — see `LevelPicker`. */
+  chooseLevel?: LevelPicker;
 }
 
 /**
@@ -354,6 +389,8 @@ export type MixedLevel = {
   [T in TemplateId]: {
     id: string;
     narration: string;
+    /** See `GameLevel.card` — only used by games with `chooseLevel`. */
+    card?: LevelCard;
     template: T;
     data: LevelDataMap[T];
   };
@@ -374,6 +411,8 @@ export interface MixedGameConfig {
   levels: MixedSlot[];
   /** See `GameConfig.sessionLevels`. */
   sessionLevels?: number;
+  /** See `GameConfig.chooseLevel`. */
+  chooseLevel?: LevelPicker;
 }
 
 /** Either kind of game — what the shell, registry, and pages accept. */

@@ -5,9 +5,17 @@ import type { GameConfig, GameLevel, StoryPage } from '@/engine/core/types';
  * titik pilihan di tiap cerita. Anak membaca (dan mendengar) jalan ceritanya,
  * lalu memilih apa yang sebaiknya dilakukan tokohnya.
  *
- * Bedanya dengan Cerita Si Kancil (satu cerita tetap): di sini tiap slot
- * berisi KOLAM cerita dan hanya `sessionLevels` cerita yang dimainkan tiap
- * sesi, jadi anak jarang mendapat cerita yang sama dua kali berturut-turut.
+ * ANAK MEMILIH SENDIRI CERITANYA (keputusan pemilik 2026-08-09): keenam judul
+ * tampil sebagai kartu begitu game dibuka (`chooseLevel`), bukan dua cerita
+ * yang diundi engine. Buku cerita memang dipilih, bukan dibagikan — dan anak
+ * yang ingin mengulang cerita kesukaannya tak perlu menunggu undian.
+ * Karena itu TIAP CERITA = SATU SLOT dengan `id` sendiri (bintangnya per
+ * cerita) dan `card` berisi judul pendek + gambar; jangan kembalikan cerita
+ * ke dalam kolam varian.
+ *
+ * Id `l1`–`l3` sengaja tetap di cerita yang dulu jadi varian PERTAMA tiap slot
+ * supaya bintang lama tidak hilang; tiga cerita sisanya dapat id baru
+ * (`l4`–`l6`).
  *
  * Aturan (CLAUDE.md): tidak ada hukuman. Pilihan yang kurang tepat dijawab
  * lembut ("Coba pikirkan lagi…") dan anak boleh memilih lagi — ceritanya
@@ -34,22 +42,29 @@ function ask(
   };
 }
 
-/** Satu cerita = satu level. Id diisi oleh slot(). */
-function story(title: string, ...pages: StoryPage[]): GameLevel<'story-choice'> {
-  return { id: '', narration: title, data: { pages } };
-}
-
-/** Semua cerita dalam satu slot berbagi id — bintangnya per slot. */
-function slot(
+/**
+ * Satu cerita = satu level = satu kartu di layar pemilih.
+ * - `label` = judul pendek di kartu ("Timun Mas"),
+ * - `narration` = kalimat lengkap yang diucapkan saat cerita dimulai (dan saat
+ *   anak menekan 🔊 di kartunya) — kalimatnya JANGAN diubah tanpa alasan,
+ *   kunci file suaranya berasal dari isi kalimat ini.
+ */
+function story(
   id: string,
-  ...variants: GameLevel<'story-choice'>[]
-): GameLevel<'story-choice'>[] {
-  return variants.map((v) => ({ ...v, id }));
+  label: string,
+  emoji: string,
+  narration: string,
+  ...pages: StoryPage[]
+): GameLevel<'story-choice'> {
+  return { id, narration, card: { label, emoji }, data: { pages } };
 }
 
 /* ---------- Kolam cerita ---------- */
 
 const GEMBALA = story(
+  'l1',
+  'Anak Gembala dan Serigala',
+  '🐑',
   'Anak Gembala dan Serigala. Ayo bantu dia mengambil keputusan!',
   page('🧒', 'Seorang anak gembala menjaga domba-dombanya di padang rumput.'),
   page('🐑', 'Hari itu sepi sekali. Anak gembala merasa bosan.'),
@@ -74,6 +89,9 @@ const GEMBALA = story(
 );
 
 const UANG = story(
+  'l4',
+  'Dompet di Jalan',
+  '👛',
   'Dompet di Jalan. Ayo bantu Rani memilih!',
   page('👧', 'Rani berjalan pulang dari sekolah.'),
   page('👛', 'Di trotoar, Rani menemukan sebuah dompet berisi uang.'),
@@ -90,6 +108,9 @@ const UANG = story(
 );
 
 const SEMUT = story(
+  'l2',
+  'Semut dan Belalang',
+  '🐜',
   'Semut dan Belalang. Ayo ikuti ceritanya!',
   page('🐜', 'Di musim panas, semut-semut sibuk mengumpulkan makanan.'),
   page('🦗', 'Belalang malah bernyanyi seharian. "Untuk apa bekerja? Makanan masih banyak!" katanya.'),
@@ -111,6 +132,9 @@ const SEMUT = story(
 );
 
 const KURA = story(
+  'l5',
+  'Kura-kura dan Kelinci',
+  '🐢',
   'Kura-kura dan Kelinci. Ayo ikuti lombanya!',
   page('🐢', 'Kura-kura berjalan pelan. Kelinci selalu menertawakannya.'),
   page('🐰', '"Ayo lomba lari!" tantang kelinci. Kura-kura menerima tantangan itu.'),
@@ -132,6 +156,9 @@ const KURA = story(
 );
 
 const TIMUN = story(
+  'l3',
+  'Timun Mas',
+  '🥒',
   'Timun Mas. Ayo bantu Timun Mas pulang dengan selamat!',
   page('👵', 'Mbok Srini merawat seorang anak perempuan bernama Timun Mas.'),
   page('👹', 'Suatu hari, raksasa datang menagih janji. Timun Mas harus lari!'),
@@ -153,6 +180,11 @@ const TIMUN = story(
 );
 
 const BAWANG = story(
+  'l6',
+  'Bawang Putih',
+  // 💎 = perhiasan di dalam labu, adegan yang paling diingat anak. Emoji labu
+  // 🎃 sengaja TIDAK dipakai: di HP bentuknya labu Halloween berwajah ukiran.
+  '💎',
   'Bawang Putih yang Baik Hati. Ayo ikuti ceritanya!',
   page('👧', 'Bawang Putih rajin membantu pekerjaan rumah setiap hari.'),
   page('🏞️', 'Saat mencuci di sungai, bajunya hanyut terbawa arus.'),
@@ -179,16 +211,13 @@ const config: GameConfig<'story-choice'> = {
   title: 'Cerita Nusantara',
   emoji: '📚',
   template: 'story-choice',
-  // Satu cerita cukup panjang untuk anak — dua cerita per sesi sudah pas.
-  sessionLevels: 2,
-  levels: [
-    // --- 1. Jujur & tanggung jawab ---
-    slot('l1', GEMBALA, UANG),
-    // --- 2. Rajin & pantang menyerah ---
-    slot('l2', SEMUT, KURA),
-    // --- 3. Berani & baik hati ---
-    slot('l3', TIMUN, BAWANG),
-  ],
+  // Anak yang memilih ceritanya, bukan undian. `sessionLevels` sengaja tidak
+  // dipakai: satu pilihan = satu cerita, dan itu sudah cukup panjang untuk
+  // sekali duduk anak SD kelas 1 & 2.
+  chooseLevel: { title: 'Pilih ceritamu!', again: '📚 Pilih Cerita Lain' },
+  // Urutannya berpasangan menurut pesan moralnya: jujur & tanggung jawab,
+  // rajin & pantang menyerah, lalu berani & baik hati.
+  levels: [GEMBALA, UANG, SEMUT, KURA, TIMUN, BAWANG],
 };
 
 export default config;
