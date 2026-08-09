@@ -199,18 +199,174 @@ perhatian. Bentuknya harus versi paling umum dan paling gampang dikenali.
 
 ---
 
-## Batch Menyusul (belum mendesak)
+## BATCH 5 — Benda yang paling sering muncul (25 gambar) · BERIKUTNYA
 
-Untuk kelompok SD, yang baru dirilis setelah TK sukses launching:
+Daftar ini bukan tebakan: seluruh config game di-bundle lalu data levelnya
+ditelusuri (semua varian tiap slot, bukan cuma yang keluar satu sesi) untuk
+mencari emoji yang belum punya pasangan id gambar. Yang di batch ini adalah
+yang **muncul di beberapa game sekaligus** dan menjadi **subjek soal** — anak
+harus mengenali bendanya untuk bisa menjawab.
 
-- **Profesi** (Pasangan Pintar): dokter, polisi, guru, koki, petani, pemadam
-  kebakaran, tukang cukur, sopir. Emoji orang (👩👨🧑) adalah yang paling tidak
-  konsisten antar HP, jadi ini akan terasa besar — tapi tunggu TK beres dulu.
-- **Alat musik & benda sekolah tambahan**: gitar, drum, penggaris, penghapus,
-  krayon.
-- **Latar cerita** (Cerita Nusantara / Si Kancil): butuh fitur engine baru
-  (gambar latar per halaman cerita), bukan sekadar aset — bahas terpisah kalau
-  mau.
+Kenapa ini yang didahulukan: sekarang benda yang sama bisa tampil bergambar di
+satu game dan emoji di game lain (mis. ikan). Itu terlihat seperti dua benda
+berbeda, dan justru mencolok di game membaca.
+
+Kendaraan (`motorcycle`, `ship`, `plane`) ikut aturan khusus Batch 3, dengan
+satu koreksi penting di bawah tabel.
+
+| id (nama file) | Objek | Baris prompt untuk dikirim |
+|---|---|---|
+| `fish` | ikan | Buatkan: satu ikan oranye tampak samping menghadap ke kiri, sirip dan ekor jelas, mata besar ramah, imut. |
+| `ship` | kapal | Buatkan: kapal laut warna putih-biru dengan cerobong merah, tampak samping penuh menghadap ke kiri, mengapung tanpa air digambar, imut. |
+| `motorcycle` | motor | Buatkan: sepeda motor bebek warna biru, tampak samping penuh menghadap ke kiri, roda hitam, imut. |
+| `plane` | pesawat | Buatkan: pesawat terbang penumpang warna putih-merah, tampak samping penuh menghadap ke kiri, sayap dan ekor jelas, imut. |
+| `leaf` | daun | Buatkan: satu helai daun hijau dengan tulang daun terlihat dan tangkai pendek, posisi diagonal, tanpa wajah. |
+| `rain` | hujan | Buatkan: satu awan abu-abu muda dengan beberapa tetes air biru jatuh di bawahnya, tanpa wajah. |
+| `sea` | laut | Buatkan: gelombang ombak laut biru dengan buih putih di puncaknya, tanpa perahu, tanpa wajah. |
+| `mountain` | gunung | Buatkan: dua gunung hijau bersebelahan dengan puncak putih, tanpa matahari, tanpa awan, tanpa wajah. |
+| `beach` | pantai | Buatkan: sepotong pantai berpasir kuning dengan satu pohon kelapa dan garis ombak biru kecil, tanpa wajah. |
+| `river` | sungai | Buatkan: sungai biru berkelok di antara dua tepi rumput hijau, tampak dari atas-samping, tanpa jembatan, tanpa wajah. |
+| `city` | kota | Buatkan: deretan tiga gedung bertingkat warna abu-abu dan biru dengan banyak jendela kecil, tampak depan, tanpa tulisan, tanpa wajah. |
+| `honey` | madu | Buatkan: satu toples kaca berisi madu kuning keemasan dengan tutup kain kotak-kotak merah, tanpa tulisan, tanpa wajah. |
+| `shirt` | baju | Buatkan: satu kaos anak lengan pendek warna biru, tampak depan terbentang, tanpa tulisan atau gambar di dadanya, tanpa wajah. |
+| `pants` | celana | Buatkan: satu celana panjang anak warna biru denim, tampak depan terbentang, tanpa wajah. |
+| `crocodile` | buaya | Buatkan: buaya hijau tampak samping menghadap ke kiri, moncong panjang dengan gigi kecil, ekspresi ramah, imut. |
+| `octopus` | gurita | Buatkan: gurita ungu dengan delapan tentakel, mata besar ramah, tampak depan, imut. |
+| `cucumber` | timun | Buatkan: satu buah mentimun hijau utuh, posisi diagonal, tanpa wajah. |
+| `lamp` | lampu | Buatkan: satu bola lampu pijar menyala warna kuning dengan ulir logam abu-abu, tanpa wajah. |
+| `crayon` | krayon | Buatkan: satu krayon warna merah dengan pembungkus kertas, ujung tumpul, posisi diagonal, tanpa tulisan, tanpa wajah. |
+| `pen` | pena | Buatkan: satu pulpen warna biru dengan tutup dan penjepit, posisi diagonal, tanpa tulisan, tanpa wajah. |
+| `ruler` | penggaris | Buatkan: satu penggaris lurus warna kuning transparan dengan garis-garis ukur kecil di tepinya, posisi diagonal, tanpa angka, tanpa wajah. |
+| `scissors` | gunting | Buatkan: satu gunting dengan bilah logam abu-abu dan pegangan merah, posisi terbuka sedikit, tanpa wajah. |
+| `cookie` | kue | Buatkan: satu kue kering bulat warna coklat muda dengan butiran coklat, tanpa wajah. |
+| `grass` | rumput | Buatkan: seikat rumput hijau segar dengan beberapa helai daun panjang, tanpa tanah, tanpa wajah. |
+| `window` | jendela | Buatkan: satu jendela kayu coklat dengan empat kaca biru muda dan daun jendela terbuka, tampak depan, tanpa wajah. |
+
+**KOREKSI ARAH KENDARAAN (berlaku juga untuk Batch 3 ke depan).** Batch 3
+tertulis "menghadap ke KANAN", tapi aset yang benar-benar dipakai sekarang
+**menghadap KIRI** (lihat `car.webp`), dan itu yang cocok dengan engine:
+`PathTrace` mencerminkan gambar dengan `scaleX(-1)` sebelum memutarnya
+mengikuti arah jalan. Kendaraan baru **wajib menghadap kiri** — kalau
+menghadap kanan, di dalam game ia akan berjalan mundur.
+
+**Jebakan nama:** `glass` (gelas) belum ada di batch ini karena `milk` sudah
+berupa gelas berisi susu. Kalau nanti dibuat, gelasnya harus **kosong atau
+berisi air bening** — satu gambar tidak boleh punya dua arti.
+
+---
+
+## BATCH 6 — Alat musik (5 gambar)
+
+Dipakai slot "alat musik & mainan" di Pasang Kata dan Pasangan Pintar. Emoji
+alat musik termasuk yang paling sering salah dikenali anak (🎺 terompet pernah
+tertukar dengan seruling di config lama).
+
+Benda mati, **tanpa wajah**, tampak depan/samping paling khas.
+
+| id (nama file) | Objek | Baris prompt untuk dikirim |
+|---|---|---|
+| `guitar` | gitar | Buatkan: satu gitar akustik kayu coklat dengan lubang suara bulat dan enam senar, tampak depan, tanpa wajah. |
+| `drum` | drum | Buatkan: satu drum tabung merah-putih dengan dua stik kayu bersilang di atasnya, tampak depan, tanpa wajah. |
+| `trumpet` | terompet | Buatkan: satu terompet kuningan mengilap dengan corong lebar dan tiga tombol, tampak samping, tanpa wajah. |
+| `piano` | piano | Buatkan: satu piano kecil warna hitam dengan tuts putih dan hitam terlihat jelas, tampak depan, tanpa wajah. |
+| `violin` | biola | Buatkan: satu biola kayu coklat dengan empat senar dan penggeseknya di samping, tampak depan, tanpa wajah. |
+
+---
+
+## BATCH 7 — Profesi & alatnya (13 gambar)
+
+Satu slot utuh di Pasangan Pintar (profesi ↔ alat kerjanya) yang **seluruhnya**
+masih emoji. Emoji orang (👩‍⚕️👨‍🍳🧑‍🔧) adalah yang paling tidak konsisten antar HP —
+sebagian Android bahkan tidak punya emoji profesi gabungan dan menampilkannya
+sebagai dua gambar terpisah atau kotak kosong.
+
+**Aturan khusus batch ini:** orang digambar **setengah badan tampak depan**,
+ramah, dengan seragam/atribut yang menjelaskan profesinya, **tanpa memegang
+alat kerjanya** — alat itu jadi kartu jawaban terpisah, jadi kalau orangnya
+sudah memegang alat, jawabannya bocor.
+
+| id (nama file) | Objek | Baris prompt untuk dikirim |
+|---|---|---|
+| `doctor` | dokter | Buatkan: dokter perempuan setengah badan tampak depan, jas putih, tersenyum ramah, tanpa memegang alat apa pun, imut. |
+| `stethoscope` | stetoskop | Buatkan: satu stetoskop dokter warna biru dengan kepala logam bulat, tanpa wajah. |
+| `teacher` | guru | Buatkan: guru perempuan setengah badan tampak depan, baju rapi, tersenyum ramah, tanpa memegang apa pun, imut. |
+| `chef` | koki | Buatkan: koki laki-laki setengah badan tampak depan, topi koki putih tinggi dan baju koki putih, tersenyum, tanpa memegang alat, imut. |
+| `pan` | wajan | Buatkan: satu wajan penggorengan hitam dengan gagang panjang, tampak sedikit dari atas, tanpa isi, tanpa wajah. |
+| `farmer` | petani | Buatkan: petani laki-laki setengah badan tampak depan, topi caping anyaman dan baju lengan panjang, tersenyum ramah, tanpa memegang alat, imut. |
+| `hoe` | cangkul | Buatkan: satu cangkul dengan gagang kayu panjang dan mata logam abu-abu, posisi diagonal, tanpa wajah. |
+| `police-officer` | polisi | Buatkan: polisi laki-laki setengah badan tampak depan, seragam coklat dan topi polisi, tersenyum ramah, tanpa tulisan di seragam, imut. |
+| `firefighter` | pemadam kebakaran | Buatkan: petugas pemadam kebakaran setengah badan tampak depan, helm merah dan jaket kuning bergaris pantul, tersenyum, tanpa memegang selang, imut. |
+| `mechanic` | montir | Buatkan: montir laki-laki setengah badan tampak depan, baju kerja biru dan topi, tersenyum ramah, tanpa memegang alat, imut. |
+| `wrench` | kunci pas | Buatkan: satu kunci pas logam abu-abu, posisi diagonal, tanpa wajah. |
+| `painter` | pelukis | Buatkan: pelukis perempuan setengah badan tampak depan, celemek dan baret, tersenyum ramah, tanpa memegang kuas, imut. |
+| `brush` | kuas | Buatkan: satu kuas lukis dengan gagang kayu dan bulu kuas berwarna, ujungnya berlumur cat merah, posisi diagonal, tanpa wajah. |
+
+> `police-officer` sengaja BUKAN `police` — id `police` sudah dipakai untuk
+> **mobil** polisi di Jalan Kendaraan.
+
+---
+
+## BATCH 8 — Hewan & rumahnya (8 gambar)
+
+Slot "hewan ↔ tempat tinggalnya" di Pasangan Pintar. Sebagian pasangannya sudah
+punya seni (kucing, kambing, ikan lewat Batch 5), tinggal sisanya.
+
+| id (nama file) | Objek | Baris prompt untuk dikirim |
+|---|---|---|
+| `bird` | burung | Buatkan: satu burung kecil warna biru dengan paruh oranye, tampak samping menghadap ke kiri, mata besar ramah, imut. |
+| `nest` | sarang | Buatkan: satu sarang burung dari ranting coklat berisi dua telur putih kecil, tampak depan, tanpa burung, tanpa wajah. |
+| `spider` | laba-laba | Buatkan: satu laba-laba hitam kecil dengan delapan kaki dan mata besar ramah, tampak depan, imut. |
+| `web` | jaring laba-laba | Buatkan: satu jaring laba-laba putih berbentuk lingkaran dengan benang halus, tanpa laba-laba, tanpa wajah. |
+| `camel` | unta | Buatkan: unta coklat berpunuk satu, tampak samping menghadap ke kiri, mata besar ramah, imut. |
+| `desert` | gurun | Buatkan: gurun pasir kuning dengan dua bukit pasir dan satu kaktus hijau, tanpa matahari, tanpa wajah. |
+| `pond` | kolam | Buatkan: satu kolam air biru berbentuk bulat dengan tepi rumput hijau dan satu daun teratai, tanpa ikan, tanpa wajah. |
+| `snow` | salju | Buatkan: satu butir kepingan salju putih-biru muda berujung enam, tanpa wajah. |
+
+---
+
+## BATCH 9 — Benda sisa (15 gambar)
+
+Nilai per gambarnya paling kecil (rata-rata muncul sekali), tapi kalau batch ini
+selesai, **tidak ada lagi benda yang tampil sebagai emoji** di soal mana pun.
+Benda mati, tanpa wajah.
+
+| id (nama file) | Objek | Baris prompt untuk dikirim |
+|---|---|---|
+| `kite` | layang-layang | Buatkan: satu layang-layang belah ketupat warna merah-kuning dengan ekor pita panjang, tanpa wajah. |
+| `puzzle` | puzzle | Buatkan: satu keping puzzle warna biru, tampak depan, tanpa wajah. |
+| `glass` | gelas | Buatkan: satu gelas kaca bening berisi air putih, tampak depan, tanpa wajah. |
+| `plate` | piring | Buatkan: satu piring makan putih bulat dengan tepi biru, tampak sedikit dari atas, kosong, tanpa wajah. |
+| `spoon` | sendok | Buatkan: satu sendok makan logam mengilap, posisi diagonal, tanpa wajah. |
+| `candy` | permen | Buatkan: satu permen bulat merah dengan bungkus plastik terpuntir di kedua ujungnya, tanpa wajah. |
+| `donut` | donat | Buatkan: satu donat dengan lapisan gula merah muda dan taburan warna-warni, tampak depan, tanpa wajah. |
+| `sunflower` | bunga matahari | Buatkan: satu bunga matahari dengan kelopak kuning dan tengah coklat, tangkai hijau dengan dua daun, tanpa wajah. |
+| `tulip` | bunga tulip | Buatkan: satu bunga tulip merah dengan tangkai hijau dan dua daun panjang, tanpa wajah. |
+| `shell` | kerang | Buatkan: satu kerang laut warna merah muda berbentuk kipas dengan garis-garis, tampak depan, tanpa wajah. |
+| `fridge` | kulkas | Buatkan: satu kulkas dua pintu warna putih dengan gagang abu-abu, tampak depan, tertutup, tanpa tulisan, tanpa wajah. |
+| `wardrobe` | lemari | Buatkan: satu lemari pakaian kayu coklat dua pintu dengan gagang bulat, tampak depan, tertutup, tanpa wajah. |
+| `trash` | tempat sampah | Buatkan: satu tempat sampah hijau dengan tutup dan pegangan, tampak depan, tertutup, tanpa wajah. |
+| `jacket` | jaket | Buatkan: satu jaket anak warna merah dengan resleting depan, tampak depan terbentang, tanpa wajah. |
+| `coconut` | kelapa | Buatkan: satu buah kelapa utuh warna coklat berserat, tanpa wajah. |
+
+---
+
+## Yang Sengaja TIDAK Perlu Digambar
+
+Supaya tidak terbuang membuat gambar yang tak akan dipakai:
+
+- **Titik warna keranjang** 🔴🟢🟡🟣🟠 di Pasar Buah — itu label warna, bukan
+  subjek soal. Membesarkannya justru membuat layar 360×640 ikut scroll.
+- **Huruf & angka** (Kenal Huruf, Tulis Angka, Tulis Huruf) — engine
+  menggambarnya sendiri sebagai goresan tulisan tangan, dan itu memang harus
+  begitu supaya bentuk panduannya benar.
+- **Simbol** ⭐ 🎉 ➕ dan ikon kartu game di portal.
+- **Tujuan hiasan di Jalan Kendaraan** (halte, pabrik, gedung, istana,
+  jembatan, tugu, ±25 buah) — itu cuma titik akhir jalan, bukan yang
+  ditanyakan. Kerjakan paling akhir kalau masih ada tenaga.
+- **Adegan cerita** (Cerita Nusantara / Si Kancil) — emoji di sana adalah
+  ilustrasi halaman cerita, bukan benda yang ditanyakan. Menggambarnya butuh
+  fitur engine baru (gambar per halaman cerita) dan gaya yang berbeda
+  (pemandangan, bukan objek tunggal) — bahas terpisah kalau mau.
 
 ---
 
@@ -222,4 +378,9 @@ Untuk kelompok SD, yang baru dirilis setelah TK sukses launching:
 | 2 | Maskot | 6 | Dilihat tiap buka portal & tiap tamat game; identitas produk |
 | 3 | Kendaraan & tujuan | 20 | Seluruh isi Jalan Kendaraan; gambar diperbesar & diputar |
 | 4 | Benda sehari-hari | 20 | Cue besar di semua game huruf & ejaan |
-| | **Total** | **60** | |
+| 5 | Benda paling sering muncul | 25 | Muncul di beberapa game; sekarang emoji di satu game & bergambar di game lain |
+| 6 | Alat musik | 5 | Emoji alat musik paling sering salah dikenali |
+| 7 | Profesi & alatnya | 13 | Satu slot utuh Pasangan Pintar; emoji orang paling tidak konsisten antar HP |
+| 8 | Hewan & rumahnya | 8 | Melengkapi slot pasangan hewan–tempat tinggal |
+| 9 | Benda sisa | 15 | Menutup sisa emoji terakhir di semua soal |
+| | **Total** | **126** | |
