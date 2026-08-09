@@ -164,7 +164,8 @@ const config: MixedGameConfig = {
         ASK_HOME,
         home('🌊', 'laut', 'ikan', '🐟'),
         home('🪹', 'sarang', 'burung', '🐦'),
-        home('🏡', 'kandang', 'ayam', '🐔', 'chicken', 'house'),
+        // Kandang (`barn`), bukan rumah manusia — lihat items.ts.
+        home('🛖', 'kandang', 'ayam', '🐔', 'chicken', 'barn'),
       ),
       match(
         ASK_HOME,

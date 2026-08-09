@@ -25,6 +25,11 @@ export const ITEMS: Record<string, ItemDef> = {
   // Buildings & places (tujuan di Jalan Kendaraan, rumah di Hutan Hewan /
   // Pasang Kata / Hitung Hebat). Premium art, gaya kartun yang sama.
   house: { emoji: '🏠', label: 'rumah', ext: 'webp' },
+  // Rumah HEWAN — kandang beratap merah. Sengaja dipisah dari `house`: papan
+  // pengurangan ("hewan pulang ke rumah") dulu memakai rumah manusia, jadi
+  // gambarnya sama dengan soal "rumah" di Taman Huruf / Pasang Kata. Pakai
+  // `barn` untuk hewan, `house` untuk manusia — jangan ditukar.
+  barn: { emoji: '🛖', label: 'kandang', ext: 'webp' },
   school: { emoji: '🏫', label: 'sekolah', ext: 'webp' },
   hospital: { emoji: '🏥', label: 'rumah sakit', ext: 'webp' },
   shop: { emoji: '🏪', label: 'toko', ext: 'webp' },

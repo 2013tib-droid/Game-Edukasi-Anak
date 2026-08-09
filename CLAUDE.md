@@ -499,6 +499,12 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - `playClip(url, gen, onFail)` sekarang dipakai bersama narasi & lagu; parameter `onFail`-nya beda per pemakai (narasi → suara HP, lagu → WebAudio langsung). **Jangan sampai ada jalur yang bisa berakhir tanpa bunyi sama sekali.**
   - Jangan mencoba "memperbaiki" ini dengan menaikkan gain — sakelar senyap itu bukan soal volume.
 
+- **Rumah HEWAN pakai kandang sendiri (`barn`), bukan rumah manusia** (2026-08-09, permintaan pemilik dengan seni kandang beratap merah: *"biar membedakan rumah hewan dan rumah manusia"*), teruji headless 380×800 — Hutan Hewan & Hitung Hebat dimainkan sampai "Selamat!":
+  - Dulu papan pengurangan ("hewan pulang ke rumah") memakai id `house` — gambar yang PERSIS SAMA dengan soal "rumah" di Taman Huruf, Pasang Kata, Ejaan Jitu & tujuan rumah di Jalan Kendaraan. Anak melihat satu gambar dipakai untuk dua arti, hal yang sudah dilarang di aturan lama (🪑 tak boleh jadi "meja" sekaligus "kursi").
+  - Item baru **`barn`** di `src/engine/ui/items.ts` (label "kandang", emoji cadangan 🛖), aset `public/assets/items/barn.webp` dari pemilik. Dipakai di **tiga tempat yang subjeknya hewan**: `sub()` Hutan Hewan (papan + varian emoji cadangannya), `subPic()` Hitung Hebat (konstanta `BARN`), dan pasangan "ayam ↔ kandang" di Pasangan Pintar.
+  - **`house` tetap untuk manusia** — jangan ditukar: Taman Huruf ("Rumah"), Ejaan Jitu ("RUMAH"), Pasang Kata (kata "rumah"), Jalan Kendaraan (mobil→rumah, sepeda→rumah nenek).
+  - **Narasi SENGAJA tidak diubah** ("… pulang ke rumah"): dalam Bahasa Indonesia itu kalimat yang wajar untuk hewan juga, dan mengubah kalimatnya = key baru = 60+ file suara harus dirender ulang lewat workflow Azure. Kalau nanti pemilik mau "pulang ke kandang", ubah narasinya lalu jalankan `npm run narasi` + workflow render.
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
