@@ -118,13 +118,14 @@ function sub(a: Animal, total: number, leave: number): GameLevel<'tap-answer'> {
             boardItems: [
               { item: a.item, count: total },
               { op: 'arrow' },
-              { item: 'house', count: leave },
+              // Kandang, bukan rumah manusia — lihat `barn` di items.ts.
+              { item: 'barn', count: leave },
             ],
-            // Board shows "ducks → houses"; the line below states the same
+            // Board shows "ducks → barns"; the line below states the same
             // thing in numbers, with a real minus sign.
             equation: `${total} − ${leave} = ?`,
           }
-        : { board: `${a.e.repeat(total)} ➡️${NBSP}${'🏠'.repeat(leave)}` }),
+        : { board: `${a.e.repeat(total)} ➡️${NBSP}${'🛖'.repeat(leave)}` }),
       choices: numChoices(total - leave),
     },
   };

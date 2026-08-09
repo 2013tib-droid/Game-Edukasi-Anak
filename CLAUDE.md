@@ -507,6 +507,11 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Disimpan di `useRef`, bukan `useState`: ini cuma dibaca saat tombol ditekan, dan `setState` dari efek anak tiap ganti halaman akan memicu render ulang seisi shell tanpa guna.
   - **Nol file suara baru**: kalimat yang diulang sama persis dengan yang sudah dirender (teks halaman & "Pilihan A. …"), jadi manifest tetap 723 entri. Terverifikasi ketiga klip halaman kebun mentimun (halaman + 2 pilihan) benar-benar diputar berurutan dari file, nol yang jatuh ke suara HP.
   - Tombol 🔊 kecil di tiap kartu pilihan tidak berubah — itu tetap membacakan satu pilihan saja.
+- **Rumah HEWAN pakai kandang sendiri (`barn`), bukan rumah manusia** (2026-08-09, permintaan pemilik dengan seni kandang beratap merah: *"biar membedakan rumah hewan dan rumah manusia"*), teruji headless 380×800 — Hutan Hewan dimainkan sampai "Selamat!" (kandang tampil di 5 level pengurangan), Hitung Hebat 11 level (kandang di papan pengurangan), Pasangan Pintar slot "hewan & tempat tinggalnya"; `barn.webp` terambil 200, nol error console, tanpa scroll horizontal:
+  - Dulu papan pengurangan ("hewan pulang ke rumah") memakai id `house` — gambar yang PERSIS SAMA dengan soal "rumah" di Taman Huruf, Pasang Kata, Ejaan Jitu & tujuan rumah di Jalan Kendaraan. Anak melihat satu gambar dipakai untuk dua arti, hal yang sudah dilarang di aturan lama (🪑 tak boleh jadi "meja" sekaligus "kursi").
+  - Item baru **`barn`** di `src/engine/ui/items.ts` (label "kandang", emoji cadangan 🛖), aset `public/assets/items/barn.webp` dari pemilik. Dipakai di **tiga tempat yang subjeknya hewan**: `sub()` Hutan Hewan (papan + varian emoji cadangannya), `subPic()` Hitung Hebat (konstanta `BARN`), dan pasangan "ayam ↔ kandang" di Pasangan Pintar.
+  - **`house` tetap untuk manusia** — jangan ditukar: Taman Huruf ("Rumah"), Ejaan Jitu ("RUMAH"), Pasang Kata (kata "rumah"), Jalan Kendaraan (mobil→rumah, sepeda→rumah nenek).
+  - **Narasi SENGAJA tidak diubah** ("… pulang ke rumah"): dalam Bahasa Indonesia itu kalimat yang wajar untuk hewan juga, dan mengubah kalimatnya = key baru = 60+ file suara harus dirender ulang lewat workflow Azure. Kalau nanti pemilik mau "pulang ke kandang", ubah narasinya lalu jalankan `npm run narasi` + workflow render.
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 

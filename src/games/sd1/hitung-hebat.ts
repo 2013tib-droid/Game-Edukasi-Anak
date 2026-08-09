@@ -54,8 +54,11 @@ const PIC = {
   monkey: { id: 'monkey', n: 'monyet' },
 } satisfies Record<string, Pic>;
 
-/** Rumah tujuan di papan pengurangan. */
-const HOUSE = 'house';
+/**
+ * Tujuan di papan pengurangan. Yang dihitung selalu HEWAN, jadi kandang —
+ * bukan rumah manusia (`house`). Lihat `barn` di `src/engine/ui/items.ts`.
+ */
+const BARN = 'barn';
 
 /** Angka pengecoh: dekat dengan jawaban supaya anak benar-benar menghitung. */
 function numberChoices(answer: number, decoys: number[]): TapChoice[] {
@@ -105,7 +108,7 @@ function subPic(pic: Pic, a: number, b: number, decoys: number[]): MixedLevel {
     template: 'tap-answer',
     narration: `Ada ${terbilang(a)} ${pic.n}, lalu ${terbilang(b)} pulang ke rumah. Berapa yang tersisa?`,
     data: {
-      boardItems: [{ item: pic.id, count: a }, { op: 'arrow' }, { item: HOUSE, count: b }],
+      boardItems: [{ item: pic.id, count: a }, { op: 'arrow' }, { item: BARN, count: b }],
       equation: `${a} − ${b} = ?`,
       choices: numberChoices(a - b, decoys),
     },
