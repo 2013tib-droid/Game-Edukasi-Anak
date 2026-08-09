@@ -508,6 +508,15 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Nol file suara baru**: kalimat yang diulang sama persis dengan yang sudah dirender (teks halaman & "Pilihan A. …"), jadi manifest tetap 723 entri. Terverifikasi ketiga klip halaman kebun mentimun (halaman + 2 pilihan) benar-benar diputar berurutan dari file, nol yang jatuh ke suara HP.
   - Tombol 🔊 kecil di tiap kartu pilihan tidak berubah — itu tetap membacakan satu pilihan saja.
 
+- **"Cerita Si Kancil" jadi "Cerita Anak" + 2 cerita baru** (2026-08-09, permintaan pemilik), teruji headless 380×800, 360×640 & 820×1180 (9 sesi dimainkan sampai "Selamat!", tiap pilihan yang kurang tepat ditekan lebih dulu, ketiga cerita muncul, tanpa scroll horizontal & nol error console):
+  - **Judulnya saja yang berubah, `id` game TETAP `cerita-kancil`.** Id itu dipakai route `/game/:id`, bintang yang sudah dikumpulkan anak (`progress.ts`), sesi "lanjutkan permainan", dan **folder file suaranya** (`public/assets/voice/cerita-kancil/`). Mengganti id = bintang lama hilang + 66 rekaman harus dirender ulang tanpa alasan. Pola yang sama dengan id kelompok `tk`/`sd1` yang tak ikut berubah saat namanya diganti.
+  - Judul lama menutup pintu: game bernama "Cerita Si Kancil" tak bisa memuat cerita selain Kancil. Sekarang isinya campur — fabel Kancil (tetap, kalimatnya **tidak disentuh** supaya rekamannya terpakai lagi) + **Taman yang Bersih** (menjaga kebersihan bersama) + **Payung untuk Berdua** (berbagi & menolong saat hujan).
+  - **`sessionLevels: 2`** menyusul Cerita Nusantara: satu cerita sudah panjang untuk anak SD kelas 1 & 2, jadi tiap sesi memainkan dua cerita acak dari tiga. Dulu game ini satu cerita tetap.
+  - Ikon kartu **🦌 → 📗**: rusa itu ikon cerita Kancil, bukan ikon game yang isinya sudah bermacam cerita. 📗 sengaja beda dari 📚 (Cerita Nusantara) dan 📖 (Suku Kata).
+  - Bedanya dengan Cerita Nusantara: di sana cerita rakyat & fabel klasik (Timun Mas, Bawang Putih, Semut & Belalang); di sini fabel Kancil + **keseharian anak Indonesia**. Kalau menambah cerita rakyat baru, tempatnya Cerita Nusantara — jangan diadu.
+  - Config-nya memakai builder `page()`/`ask()`/`story()` yang sama persis dengan Cerita Nusantara. Ingat `ask()` menulis jawaban baik paling depan sementara `StoryChoice` mengacak urutannya — **jangan menulis pilihan yang menyebut posisinya**.
+  - **50 baris suara baru** (2.809 karakter, 0,6% kuota bulanan) di folder `cerita-kancil`, suara Ardi otomatis (skrip ekstraksi memilih Ardi untuk semua level `story-choice`). Manifest 723 → 773 baris; ke-16 rekaman lama tetap terpakai, nol file yatim.
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.

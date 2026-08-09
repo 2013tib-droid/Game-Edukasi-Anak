@@ -108,10 +108,12 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd1/pasang-kata'),
   },
   {
+    // Id sengaja tetap `cerita-kancil` walau judulnya sudah "Cerita Anak"
+    // (2026-08-09): id dipakai route, bintang anak, dan folder file suaranya.
     id: 'cerita-kancil',
     group: 'sd1',
-    title: 'Cerita Si Kancil',
-    emoji: '🦌',
+    title: 'Cerita Anak',
+    emoji: '📗',
     template: 'story-choice',
     load: () => import('@/games/sd1/cerita-kancil'),
   },
