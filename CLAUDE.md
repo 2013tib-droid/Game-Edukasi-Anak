@@ -546,6 +546,21 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - `.pick-card__img` dikotakkan **PERSEGI** (`width` = `height` + `object-fit: contain`), aturan yang sama dengan `.choice-img`: seni yang lebar (jalak, gajah) tak boleh melebarkan kartunya.
   - **Emoji kartu jangan 🎃 untuk Bawang Putih**: di HP bentuknya labu Halloween berwajah ukiran. Dipakai 💎 (perhiasan di dalam labu) — adegan yang paling diingat anak.
 
+- **Tangga maskot 6 → 12 tahap: naga terus tumbuh sampai 555 ⭐** (2026-08-09, pertanyaan pemilik *"untuk level, sebaiknya ditambah lagi apa mentok di naga jenius? Kalo ada anak yg rajin buka tiap hari"* dari tangkapan layar 159 ⭐ yang sudah "Sudah level tertinggi!"), teruji headless 380×800, 360×640 & 820×1180 — 13 titik bintang × 3 ukuran layar (nama, nomor level, sisa bintang, panjang bar, tanpa scroll horizontal), nol error console & nol permintaan 404:
+
+  **Kenapa perlu (ukur ulang kalau menambah game)**
+  - Seluruh app menyediakan **561 ⭐** (18 game, 187 slot level × 3). Tangga lama berhenti di **100 ⭐** — jadi anak yang rajin mentok setelah melihat **18%** isi app, lalu mengumpulkan 461 ⭐ berikutnya tanpa umpan balik apa pun.
+  - **Bintang itu nilai TERBAIK per level** (`progress.ts`), jadi 561 itu langit-langit SUNGGUHAN — main ulang tidak menambah bintang. Tangga maskot karena itu tak akan pernah bisa "tak terbatas"; kalau suatu saat perlu alasan buka tiap hari selamanya, itu hitungan lain (runtun hari main), bukan bintang. **Pemilik memilih menunda runtun harian** (2026-08-09) — tangga sampai 561 dinilai sudah cukup panjang.
+  - Ambang baru: **145 · 200 · 265 · 340 · 440 · 555**. Jaraknya sengaja melebar (45→115) supaya tahap akhir terasa dimenangkan, dan tahap ke-12 duduk **6 ⭐ di bawah langit-langit** — anak bisa benar-benar khatam.
+  - Kalau menambah game, **hitung ulang langit-langitnya** dan cek tahap teratas masih dekat ke sana (skrip hitungnya sekali pakai; polanya sama dengan `check-item-ids.mjs` — bundle config lalu jumlahkan id slot unik × 3).
+
+  **Wujudnya: naga yang SAMA makin megah (keputusan pemilik)**
+  - Naga Jenius → **Naga Api · Naga Kristal · Naga Petir · Naga Pelangi · Naga Bintang · Naga Legenda**. Bukan makhluk baru tiap tahap: seninya bisa diturunkan dari `mascot-6` yang sudah ada (tambah sayap api / kristal / aura / mahkota), dan intinya maskot ini **satu teman yang tumbuh**, bukan ganti-ganti hewan.
+  - **`MascotStage.pic` sekarang OPSIONAL.** Enam tahap baru belum punya WebP, jadi `pic`-nya dikosongkan dan `MascotPic` merender emoji cadangannya (🔥💎⚡🌈🌟👑) **tanpa membuat `<img>` sama sekali** — itulah sebabnya nol 404 di console. Dulu kontraknya "selalu minta file, jatuh ke emoji lewat `onError`"; itu berarti tiap tahap tanpa seni mengotori console. **Mengirim seninya nanti = taruh `mascot-7.webp`…`mascot-12.webp` di `public/assets/mascot/` + tambahkan `pic:` di barisnya.** Tak ada kode lain yang berubah.
+  - `mascotImageUrl()` kini mengembalikan `string | null`.
+  - Tangga ini murni data: `MASCOTS` di `src/engine/core/mascot.ts` adalah satu-satunya tempat: `mascotFor()` dan kartu maskot mengikutinya sendiri (nomor level = indeks, bar & sisa bintang dihitung dari ambang tetangganya). **Jangan menaruh angka tahap di tempat lain.**
+  - Nama tahap harus **pendek**: kartu maskot menaruh nama + chip "Level N" dalam satu baris. "Burung Hantu Pintar" itu yang terpanjang yang masih muat di HP 360px — semua nama naga baru jauh lebih pendek.
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
