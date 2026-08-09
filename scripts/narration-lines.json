@@ -1,7 +1,7 @@
 {
-  "generated": "2026-08-08",
-  "count": 723,
-  "chars": 32502,
+  "generated": "2026-08-09",
+  "count": 773,
+  "chars": 35102,
   "lines": [
     {
       "key": "bba8e787ee7e",
@@ -71,8 +71,62 @@
       ]
     },
     {
+      "key": "c731a3ed1549",
+      "text": "Ayu membawa payung. Di teras, Beni berdiri sendirian.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a0c55c780996",
+      "text": "Bel pulang sekolah berbunyi. Di luar, hujan turun deras.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "628bfd775da2",
+      "text": "Beni tidak membawa payung. Apa yang sebaiknya Ayu lakukan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "44fb736968c4",
+      "text": "Berbagi membuat hari hujan terasa hangat!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "d4243a39a4cc",
       "text": "Buaya berbaris, Kancil melompat satu-satu sampai seberang. Kancil pulang dengan kenyang dan gembira!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "3a084be82f62",
+      "text": "Di dekat ayunan masih banyak bungkus makanan berserakan. Sampah itu bukan milik mereka. Sebaiknya bagaimana?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "bc24722daabb",
+      "text": "Di pinggir jalan ada anak kucing basah kuyup yang menggigil kedinginan. Sebaiknya mereka bagaimana?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -89,8 +143,44 @@
       ]
     },
     {
+      "key": "41b6f246873b",
+      "text": "Doni dan Sari memungut sampah itu. Teman-teman yang lain ikut membantu.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "7c0908f2c266",
+      "text": "Doni membuang gelasnya ke tempat sampah. Sari ikut membuang gelasnya juga.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "71a2188e7d72",
+      "text": "Doni memegang gelas kosongnya. Sebaiknya diapakan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "2acc575e3741",
       "text": "Hmm, mengambil tanpa izin itu tidak baik. Coba pilih yang lain!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "b4facab39c99",
+      "text": "Kalau ditinggal, Beni akan kehujanan. Coba pilih yang lain!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -107,6 +197,15 @@
       ]
     },
     {
+      "key": "51d3092c7779",
+      "text": "Kucing kecil itu kedinginan sekali. Ayo tolong dulu!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "b03bfb998dde",
       "text": "Marah-marah tidak menyelesaikan masalah. Coba cara yang cerdik!",
       "scope": "cerita-kancil",
@@ -116,8 +215,62 @@
       ]
     },
     {
+      "key": "38595cef8406",
+      "text": "Menertawakan teman membuatnya sedih. Ada cara yang lebih baik!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "bbfb32249b5e",
+      "text": "Menjaga kebersihan itu tugas kita bersama!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "46e88209a515",
+      "text": "Mereka berjalan pulang berdua di bawah satu payung. Beni tersenyum lebar.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "8893e7e2a038",
+      "text": "Mereka kehausan lalu minum. Sekarang gelas plastiknya sudah kosong.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "37bc78c77d03",
+      "text": "Mereka memindahkan anak kucing itu ke teras toko. Pemilik toko memberinya susu hangat.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "d0b4503a1f87",
       "text": "Pak Tani senang Kancil jujur. \"Ambillah mentimun secukupnya,\" kata Pak Tani.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "92725bc2de6a",
+      "text": "Payung untuk Berdua. Ayo bantu Ayu memilih!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -152,8 +305,98 @@
       ]
     },
     {
+      "key": "9cac91bdbd90",
+      "text": "Pilihan A. Melemparkannya ke semak-semak",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "0830cd2a0c16",
+      "text": "Pilihan A. Meletakkannya di bawah bangku",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "96c8d32845fb",
+      "text": "Pilihan A. Membawanya ke tempat sampah",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a38aabcd109b",
+      "text": "Pilihan A. Membiarkannya di tengah hujan",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "717e8540f4e0",
+      "text": "Pilihan A. Membiarkannya karena bukan sampah mereka",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "50c19672a038",
+      "text": "Pilihan A. Memindahkannya ke teras toko yang kering",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "8ae193e4ee0d",
+      "text": "Pilihan A. Memungutnya bersama-sama",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a436a23eb0c9",
+      "text": "Pilihan A. Menertawakan Beni",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "2f7e904b62b6",
+      "text": "Pilihan A. Mengajak Beni berteduh di payungnya",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "9ccb0c698697",
       "text": "Pilihan A. Minta izin Pak Tani dulu",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a74c0bf87143",
+      "text": "Pilihan A. Pulang cepat-cepat sendirian",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -188,8 +431,179 @@
       ]
     },
     {
+      "key": "c80fef7e21f1",
+      "text": "Pilihan B. Melemparkannya ke semak-semak",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "eaefde94b571",
+      "text": "Pilihan B. Meletakkannya di bawah bangku",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "c28257ec6ff7",
+      "text": "Pilihan B. Membawanya ke tempat sampah",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "deaf18e9a8f8",
+      "text": "Pilihan B. Membiarkannya di tengah hujan",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "4df4f3f7671a",
+      "text": "Pilihan B. Membiarkannya karena bukan sampah mereka",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "ca1d6ca7857b",
+      "text": "Pilihan B. Memindahkannya ke teras toko yang kering",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "649b3084233a",
+      "text": "Pilihan B. Memungutnya bersama-sama",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "cd17c0accc9c",
+      "text": "Pilihan B. Menertawakan Beni",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "bb6c4c22f031",
+      "text": "Pilihan B. Mengajak Beni berteduh di payungnya",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "5b2aa52e26d1",
       "text": "Pilihan B. Minta izin Pak Tani dulu",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "731452e1f8e5",
+      "text": "Pilihan B. Pulang cepat-cepat sendirian",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "ad7383d3b83b",
+      "text": "Pilihan C. Melemparkannya ke semak-semak",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "c2b432d73dbf",
+      "text": "Pilihan C. Meletakkannya di bawah bangku",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "de8dcaa8a820",
+      "text": "Pilihan C. Membawanya ke tempat sampah",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "2862ce6e1c1a",
+      "text": "Pilihan C. Menertawakan Beni",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "1c04fdfb4630",
+      "text": "Pilihan C. Mengajak Beni berteduh di payungnya",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a35899943c2d",
+      "text": "Pilihan C. Pulang cepat-cepat sendirian",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "265a3f6f50af",
+      "text": "Sampah yang ditinggalkan membuat taman kotor. Coba pilih yang lain!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "301be99491ea",
+      "text": "Sampai di rumah, baju Ayu sedikit basah. Tapi hatinya senang sekali.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "5bbee86049cd",
+      "text": "Semak-semak bukan tempat sampah ya. Ada cara yang lebih baik!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -208,6 +622,42 @@
     {
       "key": "01f3d03645d0",
       "text": "Si Kancil berjalan di hutan. Perutnya lapar sekali. Ayo bantu Kancil mencari makan!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "4dbfd3d2c9c1",
+      "text": "Sore itu Doni dan Sari bermain bola di taman dekat rumah.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a1c2a108395f",
+      "text": "Taman ini dipakai bersama. Kalau semua membiarkan, tamannya akan kotor terus. Coba lagi!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "130fa7decaf9",
+      "text": "Taman jadi bersih dan sejuk. Semua senang bermain di sana.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "4d0b182d5fd7",
+      "text": "Taman yang Bersih. Ayo bantu Doni dan Sari menjaga tamannya!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
