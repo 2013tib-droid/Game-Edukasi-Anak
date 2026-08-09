@@ -30,6 +30,14 @@ export interface TemplateProps<T extends TemplateId = TemplateId> {
   onWrong: (silent?: boolean) => void;
   /** Narrate arbitrary text (e.g. a story page) through the engine. */
   narrate: (text: string) => void;
+  /**
+   * Change what the top-bar 🔊 button repeats. By default it re-reads
+   * `level.narration`, which is right for a level that shows one question —
+   * but a story level walks through several pages inside the same level, and a
+   * child on page 3 tapping 🔊 must hear page 3, not the opening line. Pass
+   * `null` (or let the template unmount) to fall back to `level.narration`.
+   */
+  setRepeat: (speakCurrent: (() => void) | null) => void;
 }
 
 // Lazy per-template chunks — a game only downloads the template it uses.
@@ -134,6 +142,13 @@ export default function GameShell({
   // Interrupted play from a previous visit, if any — read once on mount so
   // the intro can offer "Lanjut Main" at the level the child stopped at.
   const [saved, setSaved] = useState(() => getSession(config));
+  // What the 🔊 button repeats, when a template narrates something other than
+  // the level narration (story pages). Registered by the template and cleared
+  // on its unmount, so a level that never registers falls back to the default.
+  const repeat = useRef<(() => void) | null>(null);
+  const setRepeat = useCallback((speakCurrent: (() => void) | null) => {
+    repeat.current = speakCurrent;
+  }, []);
 
   const levels = useMemo(() => levelsFromPicks(config, picks), [config, picks]);
   const level = levels[levelIndex];
@@ -282,7 +297,7 @@ export default function GameShell({
           ⬅️
         </button>
         <LevelDots total={levels.length} current={levelIndex} />
-        <SpeakButton onSpeak={() => speak(level.narration)} />
+        <SpeakButton onSpeak={() => (repeat.current ? repeat.current() : speak(level.narration))} />
       </div>
       <Suspense fallback={<div className="game-center">⏳</div>}>
         <Template
@@ -291,6 +306,7 @@ export default function GameShell({
           onCorrect={handleCorrect}
           onWrong={handleWrong}
           narrate={speak}
+          setRepeat={setRepeat}
         />
       </Suspense>
       {feedback && <FeedbackOverlay kind={feedback} />}
