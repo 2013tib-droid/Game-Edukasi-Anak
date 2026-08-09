@@ -75,6 +75,7 @@ export default function GamePage() {
   return (
     <GameShell
       config={config}
+      icon={meta.emoji}
       iconClock={meta.iconClock}
       onExit={() => navigate(`/kelompok/${meta.group}`)}
     />
