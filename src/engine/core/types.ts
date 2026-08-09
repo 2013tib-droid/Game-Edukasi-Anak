@@ -213,6 +213,13 @@ export interface CountTapData {
 
 export interface StoryPage {
   emoji?: string;
+  /**
+   * Item id (registry `src/engine/ui/items.ts`) drawn as the page picture
+   * instead of `emoji` — real art instead of the device emoji font. Same rule
+   * as everywhere else: if the page is about an ANIMAL and art exists, use it.
+   * `emoji` stays as the fallback.
+   */
+  item?: string;
   text: string;
   /** Absent = plain "Lanjut" page; present = a decision point. */
   choices?: { text: string; correct?: boolean; feedback?: string }[];
