@@ -1,7 +1,7 @@
 {
   "generated": "2026-08-09",
   "count": 773,
-  "chars": 35325,
+  "chars": 35102,
   "lines": [
     {
       "key": "bba8e787ee7e",
@@ -71,8 +71,8 @@
       ]
     },
     {
-      "key": "985ac2a7bdc1",
-      "text": "Ayu membawa payung, jadi dia bersiap pulang.",
+      "key": "c731a3ed1549",
+      "text": "Ayu membawa payung. Di teras, Beni berdiri sendirian.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -82,6 +82,15 @@
     {
       "key": "a0c55c780996",
       "text": "Bel pulang sekolah berbunyi. Di luar, hujan turun deras.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "628bfd775da2",
+      "text": "Beni tidak membawa payung. Apa yang sebaiknya Ayu lakukan?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -134,15 +143,6 @@
       ]
     },
     {
-      "key": "619883607b12",
-      "text": "Di teras sekolah, Beni berdiri sendirian. Dia lupa membawa payung. Apa yang sebaiknya Ayu lakukan?",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
       "key": "41b6f246873b",
       "text": "Doni dan Sari memungut sampah itu. Teman-teman yang lain ikut membantu.",
       "scope": "cerita-kancil",
@@ -154,6 +154,15 @@
     {
       "key": "7c0908f2c266",
       "text": "Doni membuang gelasnya ke tempat sampah. Sari ikut membuang gelasnya juga.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "71a2188e7d72",
+      "text": "Doni memegang gelas kosongnya. Sebaiknya diapakan?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -305,8 +314,8 @@
       ]
     },
     {
-      "key": "ffdd80888577",
-      "text": "Pilihan A. Meletakkannya saja di bawah bangku",
+      "key": "0830cd2a0c16",
+      "text": "Pilihan A. Meletakkannya di bawah bangku",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -314,8 +323,8 @@
       ]
     },
     {
-      "key": "a1a93e5a9959",
-      "text": "Pilihan A. Membawanya ke tempat sampah di ujung taman",
+      "key": "96c8d32845fb",
+      "text": "Pilihan A. Membawanya ke tempat sampah",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -359,8 +368,8 @@
       ]
     },
     {
-      "key": "26566e284ff6",
-      "text": "Pilihan A. Menertawakan Beni yang lupa membawa payung",
+      "key": "a436a23eb0c9",
+      "text": "Pilihan A. Menertawakan Beni",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -368,8 +377,8 @@
       ]
     },
     {
-      "key": "5f2763ea10ea",
-      "text": "Pilihan A. Mengajak Beni berteduh di bawah payungnya",
+      "key": "2f7e904b62b6",
+      "text": "Pilihan A. Mengajak Beni berteduh di payungnya",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -431,8 +440,8 @@
       ]
     },
     {
-      "key": "0154a78d4a62",
-      "text": "Pilihan B. Meletakkannya saja di bawah bangku",
+      "key": "eaefde94b571",
+      "text": "Pilihan B. Meletakkannya di bawah bangku",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -440,8 +449,8 @@
       ]
     },
     {
-      "key": "fbb8be6f0b15",
-      "text": "Pilihan B. Membawanya ke tempat sampah di ujung taman",
+      "key": "c28257ec6ff7",
+      "text": "Pilihan B. Membawanya ke tempat sampah",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -485,8 +494,8 @@
       ]
     },
     {
-      "key": "dfd15cccf002",
-      "text": "Pilihan B. Menertawakan Beni yang lupa membawa payung",
+      "key": "cd17c0accc9c",
+      "text": "Pilihan B. Menertawakan Beni",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -494,8 +503,8 @@
       ]
     },
     {
-      "key": "8599792708e9",
-      "text": "Pilihan B. Mengajak Beni berteduh di bawah payungnya",
+      "key": "bb6c4c22f031",
+      "text": "Pilihan B. Mengajak Beni berteduh di payungnya",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -530,8 +539,8 @@
       ]
     },
     {
-      "key": "5a3bae628e77",
-      "text": "Pilihan C. Meletakkannya saja di bawah bangku",
+      "key": "c2b432d73dbf",
+      "text": "Pilihan C. Meletakkannya di bawah bangku",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -539,8 +548,8 @@
       ]
     },
     {
-      "key": "e6626699cd99",
-      "text": "Pilihan C. Membawanya ke tempat sampah di ujung taman",
+      "key": "de8dcaa8a820",
+      "text": "Pilihan C. Membawanya ke tempat sampah",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -548,8 +557,8 @@
       ]
     },
     {
-      "key": "dd60e5b03bc0",
-      "text": "Pilihan C. Menertawakan Beni yang lupa membawa payung",
+      "key": "2862ce6e1c1a",
+      "text": "Pilihan C. Menertawakan Beni",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -557,8 +566,8 @@
       ]
     },
     {
-      "key": "ce6b4b7b7fde",
-      "text": "Pilihan C. Mengajak Beni berteduh di bawah payungnya",
+      "key": "1c04fdfb4630",
+      "text": "Pilihan C. Mengajak Beni berteduh di payungnya",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -649,15 +658,6 @@
     {
       "key": "4d0b182d5fd7",
       "text": "Taman yang Bersih. Ayo bantu Doni dan Sari menjaga tamannya!",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "3cc9b9d362fc",
-      "text": "Tempat sampah ada di ujung taman. Apa yang sebaiknya Doni lakukan dengan gelas kosongnya?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
