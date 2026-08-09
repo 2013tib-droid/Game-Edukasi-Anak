@@ -13,9 +13,15 @@ import type { GameConfig, GameLevel, StoryPage } from '@/engine/core/types';
  * cerita-kancil/`). Mengganti id akan menghapus bintang lama dan membuat
  * semua rekaman narasi harus dirender ulang.
  *
- * Bedanya dengan Cerita Nusantara: di sana ceritanya cerita rakyat & fabel
- * klasik; di sini campur — fabel Kancil ditemani cerita keseharian anak
- * (menjaga kebersihan, berbagi saat hujan).
+ * ISINYA FABEL HEWAN SAJA (keputusan pemilik 2026-08-09). Percobaan pertama
+ * memakai cerita keseharian anak (menjaga kebersihan di taman, berbagi payung
+ * saat hujan) dan ditolak: tokoh anak laki-laki & perempuan yang berbagi
+ * payung terbaca seperti cerita romansa. Cerita baru di sini harus bertokoh
+ * HEWAN — Kancil dan kawan-kawannya.
+ *
+ * Bedanya dengan Cerita Nusantara: di sana cerita rakyat & fabel klasik yang
+ * sudah dikenal (Timun Mas, Bawang Putih, Semut & Belalang); di sini fabel
+ * hewan Indonesia, terutama Si Kancil.
  *
  * Aturan (CLAUDE.md): tidak ada hukuman. Pilihan yang kurang tepat dijawab
  * lembut dan anak boleh memilih lagi — ceritanya hanya maju setelah pilihan
@@ -82,55 +88,49 @@ const KANCIL = story(
   ),
 );
 
-const TAMAN = story(
+const JALAK = story(
   'l2',
-  'Taman yang Bersih. Ayo bantu Doni dan Sari menjaga tamannya!',
-  page('⚽', 'Sore itu Doni dan Sari bermain bola di taman dekat rumah.'),
-  page('🥤', 'Mereka kehausan lalu minum. Sekarang gelas plastiknya sudah kosong.'),
+  'Burung Jalak dan Kerbau. Ayo ikuti ceritanya!',
+  page('🐃', 'Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.'),
+  page('🐦', 'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"'),
   ask(
     '🤔',
-    'Doni memegang gelas kosongnya. Sebaiknya diapakan?',
-    'Membawanya ke tempat sampah',
-    ['Meletakkannya di bawah bangku', 'Sampah yang ditinggalkan membuat taman kotor. Coba pilih yang lain!'],
-    ['Melemparkannya ke semak-semak', 'Semak-semak bukan tempat sampah ya. Ada cara yang lebih baik!'],
+    'Apa yang sebaiknya kerbau jawab?',
+    'Boleh, hinggaplah di punggungku',
+    ['Pergi! Aku tidak mau ditumpangi', 'Jalak justru ingin menolong. Coba pilih yang lain!'],
   ),
-  page('🗑️', 'Doni membuang gelasnya ke tempat sampah. Sari ikut membuang gelasnya juga.'),
+  page('🪶', 'Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.'),
   ask(
-    '🍬',
-    'Di dekat ayunan masih banyak bungkus makanan berserakan. Sampah itu bukan milik mereka. Sebaiknya bagaimana?',
-    'Memungutnya bersama-sama',
-    ['Membiarkannya karena bukan sampah mereka', 'Taman ini dipakai bersama. Kalau semua membiarkan, tamannya akan kotor terus. Coba lagi!'],
+    '🐍',
+    'Dari atas, jalak melihat ular besar mendekat. Sebaiknya jalak bagaimana?',
+    'Berteriak memberi tahu kerbau',
+    ['Terbang pergi diam-diam', 'Kerbau sudah menolongnya. Teman tidak ditinggal saat bahaya. Coba lagi!'],
   ),
-  page('🧹', 'Doni dan Sari memungut sampah itu. Teman-teman yang lain ikut membantu.'),
-  page('🌳', 'Taman jadi bersih dan sejuk. Semua senang bermain di sana.'),
-  page('⭐', 'Menjaga kebersihan itu tugas kita bersama!'),
+  page('🏃', 'Kerbau cepat-cepat menjauh dari rawa. Ular itu pun pergi.'),
+  page('⭐', 'Sejak itu jalak dan kerbau selalu bersama. Saling menolong membuat keduanya senang!'),
 );
 
-const HUJAN = story(
+const GAJAH = story(
   'l3',
-  'Payung untuk Berdua. Ayo bantu Ayu memilih!',
-  page('🔔', 'Bel pulang sekolah berbunyi. Di luar, hujan turun deras.'),
-  page('👧', 'Ayu membawa payung. Di teras, Beni berdiri sendirian.'),
+  'Kancil dan Gajah. Ayo bantu Kancil menolong temannya!',
+  page('🦌', 'Pagi itu Kancil berjalan di tepi rawa.'),
+  page('🐘', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.'),
   ask(
-    '🧒',
-    'Beni tidak membawa payung. Apa yang sebaiknya Ayu lakukan?',
-    'Mengajak Beni berteduh di payungnya',
-    ['Pulang cepat-cepat sendirian', 'Kalau ditinggal, Beni akan kehujanan. Coba pilih yang lain!'],
-    ['Menertawakan Beni', 'Menertawakan teman membuatnya sedih. Ada cara yang lebih baik!'],
+    '🤔',
+    'Gajah terlalu berat. Apa yang sebaiknya Kancil lakukan?',
+    'Memanggil hewan lain untuk menolong',
+    ['Menarik gajah sendirian', 'Gajah terlalu berat untuk ditarik sendiri. Ada cara yang lebih baik!'],
+    ['Pergi karena badannya kecil', 'Kancil memang kecil, tapi akalnya besar. Coba pilih yang lain!'],
   ),
-  page('☔', 'Mereka berjalan pulang berdua di bawah satu payung. Beni tersenyum lebar.'),
+  page('🐃', 'Kancil memanggil kerbau, rusa, dan teman-teman lain. Semua datang membantu.'),
   ask(
-    '🐈',
-    'Di pinggir jalan ada anak kucing basah kuyup yang menggigil kedinginan. Sebaiknya mereka bagaimana?',
-    'Memindahkannya ke teras toko yang kering',
-    ['Membiarkannya di tengah hujan', 'Kucing kecil itu kedinginan sekali. Ayo tolong dulu!'],
+    '🌿',
+    'Lumpurnya licin sekali. Sebaiknya mereka pakai apa?',
+    'Ranting dan daun supaya tidak licin',
+    ['Menarik lebih keras lagi saja', 'Kalau licin, tenaganya jadi sia-sia. Coba cara yang lebih cerdik!'],
   ),
-  page(
-    '🏪',
-    'Mereka memindahkan anak kucing itu ke teras toko. Pemilik toko memberinya susu hangat.',
-  ),
-  page('🏠', 'Sampai di rumah, baju Ayu sedikit basah. Tapi hatinya senang sekali.'),
-  page('⭐', 'Berbagi membuat hari hujan terasa hangat!'),
+  page('💪', 'Semua menarik bersama-sama. Gajah akhirnya keluar dari lumpur!'),
+  page('⭐', 'Badan kecil pun bisa menolong, asal punya akal dan teman.'),
 );
 
 const config: GameConfig<'story-choice'> = {
@@ -143,7 +143,7 @@ const config: GameConfig<'story-choice'> = {
   // per sesi sudah pas (pola yang sama dengan Cerita Nusantara). Ceritanya
   // dipilih acak, jadi sesi berikutnya belum tentu cerita yang sama.
   sessionLevels: 2,
-  levels: [KANCIL, TAMAN, HUJAN],
+  levels: [KANCIL, JALAK, GAJAH],
 };
 
 export default config;

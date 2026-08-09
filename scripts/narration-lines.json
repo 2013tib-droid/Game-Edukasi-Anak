@@ -1,7 +1,7 @@
 {
   "generated": "2026-08-09",
-  "count": 773,
-  "chars": 35102,
+  "count": 765,
+  "chars": 34628,
   "lines": [
     {
       "key": "bba8e787ee7e",
@@ -71,8 +71,8 @@
       ]
     },
     {
-      "key": "c731a3ed1549",
-      "text": "Ayu membawa payung. Di teras, Beni berdiri sendirian.",
+      "key": "9dec31ae1b5f",
+      "text": "Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -80,8 +80,8 @@
       ]
     },
     {
-      "key": "a0c55c780996",
-      "text": "Bel pulang sekolah berbunyi. Di luar, hujan turun deras.",
+      "key": "bab7231b05bd",
+      "text": "Apa yang sebaiknya kerbau jawab?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -89,17 +89,8 @@
       ]
     },
     {
-      "key": "628bfd775da2",
-      "text": "Beni tidak membawa payung. Apa yang sebaiknya Ayu lakukan?",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "44fb736968c4",
-      "text": "Berbagi membuat hari hujan terasa hangat!",
+      "key": "72ab1aebb87c",
+      "text": "Badan kecil pun bisa menolong, asal punya akal dan teman.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -116,8 +107,8 @@
       ]
     },
     {
-      "key": "3a084be82f62",
-      "text": "Di dekat ayunan masih banyak bungkus makanan berserakan. Sampah itu bukan milik mereka. Sebaiknya bagaimana?",
+      "key": "0207f10f4878",
+      "text": "Burung Jalak dan Kerbau. Ayo ikuti ceritanya!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -125,8 +116,8 @@
       ]
     },
     {
-      "key": "bc24722daabb",
-      "text": "Di pinggir jalan ada anak kucing basah kuyup yang menggigil kedinginan. Sebaiknya mereka bagaimana?",
+      "key": "bd14deecfeb1",
+      "text": "Dari atas, jalak melihat ular besar mendekat. Sebaiknya jalak bagaimana?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -143,8 +134,8 @@
       ]
     },
     {
-      "key": "41b6f246873b",
-      "text": "Doni dan Sari memungut sampah itu. Teman-teman yang lain ikut membantu.",
+      "key": "bedd77b22ca7",
+      "text": "Gajah terlalu berat untuk ditarik sendiri. Ada cara yang lebih baik!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -152,17 +143,8 @@
       ]
     },
     {
-      "key": "7c0908f2c266",
-      "text": "Doni membuang gelasnya ke tempat sampah. Sari ikut membuang gelasnya juga.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "71a2188e7d72",
-      "text": "Doni memegang gelas kosongnya. Sebaiknya diapakan?",
+      "key": "d4169a7752f0",
+      "text": "Gajah terlalu berat. Apa yang sebaiknya Kancil lakukan?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -179,8 +161,35 @@
       ]
     },
     {
-      "key": "b4facab39c99",
-      "text": "Kalau ditinggal, Beni akan kehujanan. Coba pilih yang lain!",
+      "key": "acdb22b284ed",
+      "text": "Jalak justru ingin menolong. Coba pilih yang lain!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "9fea6ab8869f",
+      "text": "Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "599e4da23c7f",
+      "text": "Kalau licin, tenaganya jadi sia-sia. Coba cara yang lebih cerdik!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a71889682a6b",
+      "text": "Kancil dan Gajah. Ayo bantu Kancil menolong temannya!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -197,8 +206,53 @@
       ]
     },
     {
-      "key": "51d3092c7779",
-      "text": "Kucing kecil itu kedinginan sekali. Ayo tolong dulu!",
+      "key": "350d671a1f71",
+      "text": "Kancil memang kecil, tapi akalnya besar. Coba pilih yang lain!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "3394c4cb2f14",
+      "text": "Kancil memanggil kerbau, rusa, dan teman-teman lain. Semua datang membantu.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "5ed9fba5f0b2",
+      "text": "Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "cced72cad4ae",
+      "text": "Kerbau cepat-cepat menjauh dari rawa. Ular itu pun pergi.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "0e19dbc45005",
+      "text": "Kerbau sudah menolongnya. Teman tidak ditinggal saat bahaya. Coba lagi!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "666d6d92ee9f",
+      "text": "Lumpurnya licin sekali. Sebaiknya mereka pakai apa?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -215,44 +269,8 @@
       ]
     },
     {
-      "key": "38595cef8406",
-      "text": "Menertawakan teman membuatnya sedih. Ada cara yang lebih baik!",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "bbfb32249b5e",
-      "text": "Menjaga kebersihan itu tugas kita bersama!",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "46e88209a515",
-      "text": "Mereka berjalan pulang berdua di bawah satu payung. Beni tersenyum lebar.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "8893e7e2a038",
-      "text": "Mereka kehausan lalu minum. Sekarang gelas plastiknya sudah kosong.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "37bc78c77d03",
-      "text": "Mereka memindahkan anak kucing itu ke teras toko. Pemilik toko memberinya susu hangat.",
+      "key": "bfc6cd6429b4",
+      "text": "Pagi itu Kancil berjalan di tepi rawa.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -262,15 +280,6 @@
     {
       "key": "d0b4503a1f87",
       "text": "Pak Tani senang Kancil jujur. \"Ambillah mentimun secukupnya,\" kata Pak Tani.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "92725bc2de6a",
-      "text": "Payung untuk Berdua. Ayo bantu Ayu memilih!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -305,8 +314,8 @@
       ]
     },
     {
-      "key": "9cac91bdbd90",
-      "text": "Pilihan A. Melemparkannya ke semak-semak",
+      "key": "323a368f6867",
+      "text": "Pilihan A. Berteriak memberi tahu kerbau",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -314,8 +323,8 @@
       ]
     },
     {
-      "key": "0830cd2a0c16",
-      "text": "Pilihan A. Meletakkannya di bawah bangku",
+      "key": "8dfcd1c0c048",
+      "text": "Pilihan A. Boleh, hinggaplah di punggungku",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -323,8 +332,8 @@
       ]
     },
     {
-      "key": "96c8d32845fb",
-      "text": "Pilihan A. Membawanya ke tempat sampah",
+      "key": "9a1313a8bd74",
+      "text": "Pilihan A. Memanggil hewan lain untuk menolong",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -332,8 +341,8 @@
       ]
     },
     {
-      "key": "a38aabcd109b",
-      "text": "Pilihan A. Membiarkannya di tengah hujan",
+      "key": "8e82a322afe5",
+      "text": "Pilihan A. Menarik gajah sendirian",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -341,44 +350,8 @@
       ]
     },
     {
-      "key": "717e8540f4e0",
-      "text": "Pilihan A. Membiarkannya karena bukan sampah mereka",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "50c19672a038",
-      "text": "Pilihan A. Memindahkannya ke teras toko yang kering",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "8ae193e4ee0d",
-      "text": "Pilihan A. Memungutnya bersama-sama",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "a436a23eb0c9",
-      "text": "Pilihan A. Menertawakan Beni",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "2f7e904b62b6",
-      "text": "Pilihan A. Mengajak Beni berteduh di payungnya",
+      "key": "19a7b1656b50",
+      "text": "Pilihan A. Menarik lebih keras lagi saja",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -395,8 +368,35 @@
       ]
     },
     {
-      "key": "a74c0bf87143",
-      "text": "Pilihan A. Pulang cepat-cepat sendirian",
+      "key": "07d4613b8de8",
+      "text": "Pilihan A. Pergi karena badannya kecil",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "e351d6a524e5",
+      "text": "Pilihan A. Pergi! Aku tidak mau ditumpangi",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "181c4ac0595a",
+      "text": "Pilihan A. Ranting dan daun supaya tidak licin",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "e6283138e2b7",
+      "text": "Pilihan A. Terbang pergi diam-diam",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -431,8 +431,8 @@
       ]
     },
     {
-      "key": "c80fef7e21f1",
-      "text": "Pilihan B. Melemparkannya ke semak-semak",
+      "key": "fb7601251990",
+      "text": "Pilihan B. Berteriak memberi tahu kerbau",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -440,8 +440,8 @@
       ]
     },
     {
-      "key": "eaefde94b571",
-      "text": "Pilihan B. Meletakkannya di bawah bangku",
+      "key": "036271b7d186",
+      "text": "Pilihan B. Boleh, hinggaplah di punggungku",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -449,8 +449,8 @@
       ]
     },
     {
-      "key": "c28257ec6ff7",
-      "text": "Pilihan B. Membawanya ke tempat sampah",
+      "key": "a8bd12ce4d68",
+      "text": "Pilihan B. Memanggil hewan lain untuk menolong",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -458,8 +458,8 @@
       ]
     },
     {
-      "key": "deaf18e9a8f8",
-      "text": "Pilihan B. Membiarkannya di tengah hujan",
+      "key": "48f70fc50ec4",
+      "text": "Pilihan B. Menarik gajah sendirian",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -467,44 +467,8 @@
       ]
     },
     {
-      "key": "4df4f3f7671a",
-      "text": "Pilihan B. Membiarkannya karena bukan sampah mereka",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "ca1d6ca7857b",
-      "text": "Pilihan B. Memindahkannya ke teras toko yang kering",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "649b3084233a",
-      "text": "Pilihan B. Memungutnya bersama-sama",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "cd17c0accc9c",
-      "text": "Pilihan B. Menertawakan Beni",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "bb6c4c22f031",
-      "text": "Pilihan B. Mengajak Beni berteduh di payungnya",
+      "key": "92a49b0f2ebd",
+      "text": "Pilihan B. Menarik lebih keras lagi saja",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -521,8 +485,8 @@
       ]
     },
     {
-      "key": "731452e1f8e5",
-      "text": "Pilihan B. Pulang cepat-cepat sendirian",
+      "key": "5472528dccd4",
+      "text": "Pilihan B. Pergi karena badannya kecil",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -530,8 +494,8 @@
       ]
     },
     {
-      "key": "ad7383d3b83b",
-      "text": "Pilihan C. Melemparkannya ke semak-semak",
+      "key": "96db547bf980",
+      "text": "Pilihan B. Pergi! Aku tidak mau ditumpangi",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -539,8 +503,8 @@
       ]
     },
     {
-      "key": "c2b432d73dbf",
-      "text": "Pilihan C. Meletakkannya di bawah bangku",
+      "key": "0e1fffada924",
+      "text": "Pilihan B. Ranting dan daun supaya tidak licin",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -548,8 +512,8 @@
       ]
     },
     {
-      "key": "de8dcaa8a820",
-      "text": "Pilihan C. Membawanya ke tempat sampah",
+      "key": "e77b077a0eaa",
+      "text": "Pilihan B. Terbang pergi diam-diam",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -557,8 +521,8 @@
       ]
     },
     {
-      "key": "2862ce6e1c1a",
-      "text": "Pilihan C. Menertawakan Beni",
+      "key": "87d25426e77d",
+      "text": "Pilihan C. Memanggil hewan lain untuk menolong",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -566,8 +530,8 @@
       ]
     },
     {
-      "key": "1c04fdfb4630",
-      "text": "Pilihan C. Mengajak Beni berteduh di payungnya",
+      "key": "ec4d18bebc71",
+      "text": "Pilihan C. Menarik gajah sendirian",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -575,8 +539,8 @@
       ]
     },
     {
-      "key": "a35899943c2d",
-      "text": "Pilihan C. Pulang cepat-cepat sendirian",
+      "key": "08a8d80c9c0c",
+      "text": "Pilihan C. Pergi karena badannya kecil",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -584,8 +548,8 @@
       ]
     },
     {
-      "key": "265a3f6f50af",
-      "text": "Sampah yang ditinggalkan membuat taman kotor. Coba pilih yang lain!",
+      "key": "1f838911262e",
+      "text": "Seekor burung jalak hinggap di pagar. \"Bolehkah aku hinggap di punggungmu?\"",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -593,8 +557,8 @@
       ]
     },
     {
-      "key": "301be99491ea",
-      "text": "Sampai di rumah, baju Ayu sedikit basah. Tapi hatinya senang sekali.",
+      "key": "918deb0e9a77",
+      "text": "Sejak itu jalak dan kerbau selalu bersama. Saling menolong membuat keduanya senang!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -602,8 +566,8 @@
       ]
     },
     {
-      "key": "5bbee86049cd",
-      "text": "Semak-semak bukan tempat sampah ya. Ada cara yang lebih baik!",
+      "key": "3cdcc5a4baf1",
+      "text": "Semua menarik bersama-sama. Gajah akhirnya keluar dari lumpur!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -622,42 +586,6 @@
     {
       "key": "01f3d03645d0",
       "text": "Si Kancil berjalan di hutan. Perutnya lapar sekali. Ayo bantu Kancil mencari makan!",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "4dbfd3d2c9c1",
-      "text": "Sore itu Doni dan Sari bermain bola di taman dekat rumah.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "a1c2a108395f",
-      "text": "Taman ini dipakai bersama. Kalau semua membiarkan, tamannya akan kotor terus. Coba lagi!",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "130fa7decaf9",
-      "text": "Taman jadi bersih dan sejuk. Semua senang bermain di sana.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "4d0b182d5fd7",
-      "text": "Taman yang Bersih. Ayo bantu Doni dan Sari menjaga tamannya!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
