@@ -499,6 +499,15 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - `playClip(url, gen, onFail)` sekarang dipakai bersama narasi & lagu; parameter `onFail`-nya beda per pemakai (narasi → suara HP, lagu → WebAudio langsung). **Jangan sampai ada jalur yang bisa berakhir tanpa bunyi sama sekali.**
   - Jangan mencoba "memperbaiki" ini dengan menaikkan gain — sakelar senyap itu bukan soal volume.
 
+- **Tombol 🔊 membaca layar yang SEDANG dilihat, bukan narasi level** (2026-08-09, laporan pemilik dari tangkapan layar Cerita Kancil: menekan 🔊 di halaman kebun mentimun malah terdengar *"Si Kancil berjalan di hutan, perutnya lapar sekali"*), teruji headless 380×800 — 8 pemeriksaan dengan suara HP dipalsukan (agar kalimatnya bisa dibaca tes) + 4 pemeriksaan dengan file rekaman sungguhan, nol error console:
+  - Sebabnya: tombol 🔊 di `game-topbar` selalu mengucapkan `level.narration`. Untuk template lain itu benar — satu level = satu soal di layar. Tapi **cerita berjalan BEBERAPA HALAMAN di dalam satu level**, jadi begitu anak menekan "Lanjut", narasi level (judul/kalimat pembuka cerita) tidak lagi menggambarkan layarnya. Anak yang menekan 🔊 karena tak paham halaman ini justru mendengar awal cerita lagi.
+  - Perbaikannya di ENGINE, bukan di satu game: prop baru **`TemplateProps.setRepeat`** (`GameShell.tsx`). Template boleh mendaftarkan "apa yang diulang tombol 🔊"; kalau tak mendaftar (semua template lain), tetap `level.narration` seperti dulu.
+  - `StoryChoice` mendaftarkannya per halaman: teks halaman + semua "Pilihan A/B…" — persis yang dibacakan otomatis saat halaman muncul. Termasuk sesudah jawaban keliru.
+  - **Pendaftarannya dibersihkan lewat cleanup effect si template** (`return () => setRepeat(null)`), bukan di-reset dari GameShell saat level berganti: efek anak berjalan SEBELUM efek induk, jadi reset dari induk akan menghapus pendaftaran yang baru saja dipasang template berikutnya. Cleanup unmount berjalan lebih dulu — urutannya aman.
+  - Disimpan di `useRef`, bukan `useState`: ini cuma dibaca saat tombol ditekan, dan `setState` dari efek anak tiap ganti halaman akan memicu render ulang seisi shell tanpa guna.
+  - **Nol file suara baru**: kalimat yang diulang sama persis dengan yang sudah dirender (teks halaman & "Pilihan A. …"), jadi manifest tetap 723 entri. Terverifikasi ketiga klip halaman kebun mentimun (halaman + 2 pilihan) benar-benar diputar berurutan dari file, nol yang jatuh ke suara HP.
+  - Tombol 🔊 kecil di tiap kartu pilihan tidak berubah — itu tetap membacakan satu pilihan saja.
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.

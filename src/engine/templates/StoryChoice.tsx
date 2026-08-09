@@ -20,6 +20,7 @@ export default function StoryChoice({
   onCorrect,
   onWrong,
   narrate,
+  setRepeat,
 }: TemplateProps<'story-choice'>) {
   const [pageIndex, setPageIndex] = useState(0);
   const raw = level.data.pages[pageIndex];
@@ -54,6 +55,19 @@ export default function StoryChoice({
     else narrate(page.text);
     if (page.choices) speakNext(...optionLines(page.choices));
   }, [pageIndex, page, narrate]);
+
+  // A story keeps moving inside one level, so the level narration (the story
+  // title / opening line) stops matching the screen after page 1. Tell the
+  // shell's 🔊 button to repeat the page the child is actually looking at —
+  // hearing the beginning again would be no help at all.
+  useEffect(() => {
+    if (!page) return;
+    setRepeat(() => {
+      narrate(page.text);
+      if (page.choices) speakNext(...optionLines(page.choices));
+    });
+    return () => setRepeat(null);
+  }, [page, narrate, setRepeat]);
 
   if (!page) return null;
 
