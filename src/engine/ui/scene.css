@@ -1,0 +1,122 @@
+/*
+ * Latar tempat cerita (lihat `Scene.tsx`). Hanya diunduh oleh game bercerita —
+ * stylesheet-nya ikut chunk template `story-choice`, bukan `engine.css`.
+ */
+
+.scene {
+  /* `fixed`, jadi latar tidak pernah ikut menghitung tinggi konten: halaman
+     cerita yang isinya panjang tetap tak bisa membuat layar melebar/scroll. */
+  position: fixed;
+  inset: 0;
+  /* Di belakang seluruh isi layar. `.game-screen` tidak membuat stacking
+     context sendiri, jadi -1 cukup — jangan menaruh `transform`/`opacity` di
+     nenek moyangnya, itu akan mengurung latar ini di dalamnya. */
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  /* Langit: warna per tempat lewat dua variabel di bawah. Ini menggantikan
+     gradasi bawaan body selama halaman cerita tampil. */
+  background: linear-gradient(180deg, var(--sky-a) 0%, var(--sky-b) 62%, var(--sky-c) 100%);
+  animation: scene-in 0.45s ease-out;
+}
+
+/* Hutan: langit hangat yang menerobos sela daun. */
+.scene--hutan {
+  --sky-a: #d7f0c8;
+  --sky-b: #f3fbe4;
+  --sky-c: #e8f7d8;
+}
+
+.scene--kebun {
+  --sky-a: #cfeeff;
+  --sky-b: #eefaf1;
+  --sky-c: #f2fbe6;
+}
+
+.scene--sungai {
+  --sky-a: #cbeaff;
+  --sky-b: #eaf7ff;
+  --sky-c: #e9f8ee;
+}
+
+.scene--sawah {
+  --sky-a: #cfeaff;
+  --sky-b: #edf8f2;
+  --sky-c: #f0fae2;
+}
+
+.scene--padang {
+  --sky-a: #c8e9ff;
+  --sky-b: #eef9ff;
+  --sky-c: #f1fae4;
+}
+
+.scene--kota {
+  --sky-a: #cfe9ff;
+  --sky-b: #f0f7ff;
+  --sky-c: #fbf6ec;
+}
+
+/*
+ * Dua pita gambar: satu menempel di atas layar, satu di bawah, tengahnya
+ * langit polos supaya teks cerita tetap terbaca (lihat catatan di Scene.tsx).
+ * `slice` + tinggi tetap = layar lebar memotong ke SAMPING, bukan memotong
+ * pucuk pohon atau garis tanahnya.
+ */
+.scene__band {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  display: block;
+}
+
+/*
+ * Tingginya diukur dari LEBAR layar, bukan cuma tinggi: `slice` selalu
+ * memperbesar gambar mengikuti sisi terpanjang, jadi di layar lebar pita yang
+ * terlalu pendek akan memotong pucuk pohon dan menyisakan batangnya saja.
+ * `35vw`/`65vw` = tinggi gambar aslinya (140/400 dan 260/400), jadi selama
+ * layarnya tinggi, satu pohon utuh selalu kelihatan. Batas `vh` menjaga hutan
+ * tidak memakan layar HP, dan `max(...)` menjaga pita tak terlalu tipis.
+ */
+.scene__band--top {
+  top: 0;
+  height: max(76px, min(35vw, 16vh));
+}
+
+.scene__band--bottom {
+  bottom: 0;
+  height: max(170px, min(65vw, 40vh));
+}
+
+/*
+ * Layar MENDATAR (HP dimiringkan, tablet landscape): pohon utuh butuh tinggi
+ * 65% dari lebar layar — mustahil di layar yang lebih lebar daripada tinggi.
+ * Di sini pitanya justru dibuat TIPIS: yang tampil pucuk daun di atas dan
+ * rumput di bawah, dan tinggi layar yang memang sedikit itu tetap milik teks
+ * ceritanya. Batasnya rasio, bukan tinggi — tablet mendatar (1180×820) sama
+ * bermasalahnya dengan HP mendatar.
+ */
+@media (min-aspect-ratio: 4/3) {
+  .scene__band--top {
+    height: clamp(40px, 11vh, 80px);
+  }
+
+  .scene__band--bottom {
+    height: clamp(78px, 22vh, 140px);
+  }
+}
+
+@keyframes scene-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene {
+    animation: none;
+  }
+}

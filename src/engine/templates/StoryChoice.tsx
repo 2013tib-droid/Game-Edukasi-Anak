@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import { sfx, speakNext } from '@/engine/audio/sound';
 import ItemPic from '@/engine/ui/ItemPic';
+import Scene from '@/engine/ui/Scene';
 
 /**
  * Interactive story: narrated pages, some with a decision. Wrong choices get
@@ -37,6 +38,17 @@ export default function StoryChoice({
     }
     return { ...raw, choices };
   }, [raw]);
+  // Latar tempat: config hanya menyebutnya saat tempatnya BERGANTI, jadi
+  // halaman yang tidak menyebut apa-apa memakai latar halaman sebelumnya —
+  // satu cerita di hutan cukup menulis `scene` sekali di halaman pertama.
+  const scene = useMemo(() => {
+    for (let i = pageIndex; i >= 0; i -= 1) {
+      const s = level.data.pages[i]?.scene;
+      if (s) return s;
+    }
+    return undefined;
+  }, [pageIndex, level]);
+
   // Guards against narrating the same page twice (StrictMode runs effects
   // twice in dev, and queued lines would stack up instead of cancelling).
   const narratedPage = useRef(-1);
@@ -94,6 +106,7 @@ export default function StoryChoice({
 
   return (
     <>
+      {scene && <Scene id={scene} />}
       <div className="game-area">
         {(page.item || page.emoji) && (
           <div

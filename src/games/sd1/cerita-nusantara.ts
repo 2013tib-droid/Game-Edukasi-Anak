@@ -1,4 +1,4 @@
-import type { GameConfig, GameLevel, StoryPage } from '@/engine/core/types';
+import type { GameConfig, GameLevel, SceneId, StoryPage } from '@/engine/core/types';
 
 /**
  * "Cerita Nusantara" (SD Kelas 1 & 2) — cerita rakyat dan fabel dengan dua
@@ -24,6 +24,14 @@ import type { GameConfig, GameLevel, StoryPage } from '@/engine/core/types';
 
 /** Halaman cerita biasa (tanpa pilihan). */
 const page = (emoji: string, text: string): StoryPage => ({ emoji, text });
+
+/**
+ * Menandai halaman ini berpindah tempat: `at('sungai', page(...))`.
+ * Latarnya digambar engine (`src/engine/ui/Scene.tsx`), jadi cukup menyebut
+ * namanya. Ditulis HANYA saat tempatnya berganti — halaman sesudahnya ikut
+ * latar terakhir sampai ada `at()` berikutnya.
+ */
+const at = <P extends StoryPage>(scene: SceneId, p: P): P => ({ ...p, scene });
 
 /** Halaman keputusan: satu pilihan benar, sisanya diberi tanggapan lembut. */
 function ask(
@@ -66,7 +74,7 @@ const GEMBALA = story(
   'Anak Gembala dan Serigala',
   '🐑',
   'Anak Gembala dan Serigala. Ayo bantu dia mengambil keputusan!',
-  page('🧒', 'Seorang anak gembala menjaga domba-dombanya di padang rumput.'),
+  at('padang', page('🧒', 'Seorang anak gembala menjaga domba-dombanya di padang rumput.')),
   page('🐑', 'Hari itu sepi sekali. Anak gembala merasa bosan.'),
   ask(
     '🤔',
@@ -93,7 +101,7 @@ const UANG = story(
   'Dompet di Jalan',
   '👛',
   'Dompet di Jalan. Ayo bantu Rani memilih!',
-  page('👧', 'Rani berjalan pulang dari sekolah.'),
+  at('kota', page('👧', 'Rani berjalan pulang dari sekolah.')),
   page('👛', 'Di trotoar, Rani menemukan sebuah dompet berisi uang.'),
   ask(
     '🤔',
@@ -112,7 +120,7 @@ const SEMUT = story(
   'Semut dan Belalang',
   '🐜',
   'Semut dan Belalang. Ayo ikuti ceritanya!',
-  page('🐜', 'Di musim panas, semut-semut sibuk mengumpulkan makanan.'),
+  at('kebun', page('🐜', 'Di musim panas, semut-semut sibuk mengumpulkan makanan.')),
   page('🦗', 'Belalang malah bernyanyi seharian. "Untuk apa bekerja? Makanan masih banyak!" katanya.'),
   ask(
     '☀️',
@@ -136,7 +144,7 @@ const KURA = story(
   'Kura-kura dan Kelinci',
   '🐢',
   'Kura-kura dan Kelinci. Ayo ikuti lombanya!',
-  page('🐢', 'Kura-kura berjalan pelan. Kelinci selalu menertawakannya.'),
+  at('hutan', page('🐢', 'Kura-kura berjalan pelan. Kelinci selalu menertawakannya.')),
   page('🐰', '"Ayo lomba lari!" tantang kelinci. Kura-kura menerima tantangan itu.'),
   ask(
     '🏁',
@@ -160,22 +168,25 @@ const TIMUN = story(
   'Timun Mas',
   '🥒',
   'Timun Mas. Ayo bantu Timun Mas pulang dengan selamat!',
-  page('👵', 'Mbok Srini merawat seorang anak perempuan bernama Timun Mas.'),
+  at('kebun', page('👵', 'Mbok Srini merawat seorang anak perempuan bernama Timun Mas.')),
   page('👹', 'Suatu hari, raksasa datang menagih janji. Timun Mas harus lari!'),
-  ask(
-    '🏃‍♀️',
-    'Mbok Srini memberi Timun Mas empat bungkusan ajaib. Apa yang sebaiknya Timun Mas lakukan?',
-    'Membawanya dan berlari ke hutan',
-    ['Meninggalkan bungkusan itu', 'Bungkusan itu bisa menolongnya nanti. Coba pilih yang lain!'],
+  at(
+    'hutan',
+    ask(
+      '🏃‍♀️',
+      'Mbok Srini memberi Timun Mas empat bungkusan ajaib. Apa yang sebaiknya Timun Mas lakukan?',
+      'Membawanya dan berlari ke hutan',
+      ['Meninggalkan bungkusan itu', 'Bungkusan itu bisa menolongnya nanti. Coba pilih yang lain!'],
+    ),
   ),
-  page('🥒', 'Timun Mas menebar biji timun. Seketika tumbuh ladang timun yang lebat.'),
+  at('kebun', page('🥒', 'Timun Mas menebar biji timun. Seketika tumbuh ladang timun yang lebat.')),
   ask(
     '🌊',
     'Raksasa masih mengejar. Bungkusan terakhir berisi terasi. Sebaiknya Timun Mas bagaimana?',
     'Menebarkan terasi lalu terus berlari',
     ['Berhenti dan menangis', 'Timun Mas anak yang berani. Ayo gunakan akalnya!'],
   ),
-  page('🌫️', 'Terasi berubah menjadi lautan lumpur. Raksasa tidak bisa lewat.'),
+  at('sungai', page('🌫️', 'Terasi berubah menjadi lautan lumpur. Raksasa tidak bisa lewat.')),
   page('⭐', 'Timun Mas pulang dengan selamat. Berani dan cerdik menyelamatkannya!'),
 );
 
@@ -186,13 +197,16 @@ const BAWANG = story(
   // 🎃 sengaja TIDAK dipakai: di HP bentuknya labu Halloween berwajah ukiran.
   '💎',
   'Bawang Putih yang Baik Hati. Ayo ikuti ceritanya!',
-  page('👧', 'Bawang Putih rajin membantu pekerjaan rumah setiap hari.'),
-  page('🏞️', 'Saat mencuci di sungai, bajunya hanyut terbawa arus.'),
-  ask(
-    '👵',
-    'Bawang Putih sampai di rumah seorang nenek. Apa yang sebaiknya dia lakukan?',
-    'Menyapa dengan sopan dan meminta tolong',
-    ['Masuk tanpa permisi', 'Masuk rumah orang harus permisi dulu ya. Coba lagi!'],
+  at('kebun', page('👧', 'Bawang Putih rajin membantu pekerjaan rumah setiap hari.')),
+  at('sungai', page('🏞️', 'Saat mencuci di sungai, bajunya hanyut terbawa arus.')),
+  at(
+    'hutan',
+    ask(
+      '👵',
+      'Bawang Putih sampai di rumah seorang nenek. Apa yang sebaiknya dia lakukan?',
+      'Menyapa dengan sopan dan meminta tolong',
+      ['Masuk tanpa permisi', 'Masuk rumah orang harus permisi dulu ya. Coba lagi!'],
+    ),
   ),
   page('🧹', 'Nenek meminta bantuan membersihkan rumah. Bawang Putih membantu dengan senang hati.'),
   ask(
