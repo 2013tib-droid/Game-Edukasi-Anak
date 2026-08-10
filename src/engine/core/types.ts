@@ -228,6 +228,25 @@ export type SceneId =
   | 'gunung'
   | 'malam';
 
+/**
+ * Satu tokoh di dalam frame gambar halaman cerita. Dipakai lewat
+ * `StoryPage.cast` kalau satu halaman menceritakan DUA tokoh sekaligus
+ * ("burung jalak hinggap di punggung kerbau") — anak harus melihat keduanya,
+ * bukan salah satunya saja.
+ */
+export interface StoryFigure {
+  /** Item id registry (`src/engine/ui/items.ts`); dirender sebagai gambar. */
+  item?: string;
+  /** Emoji cadangan / tokoh yang seninya belum ada. */
+  emoji?: string;
+  /**
+   * Ukuran relatif di dalam frame. `'besar'` (bawaan) untuk tokoh sebesar
+   * gambar halaman biasa; `'kecil'` untuk tokoh yang memang jauh lebih kecil
+   * (burung di samping kerbau) — perbandingan ukurannya ikut bercerita.
+   */
+  size?: 'besar' | 'kecil';
+}
+
 export interface StoryPage {
   emoji?: string;
   /**
@@ -237,6 +256,12 @@ export interface StoryPage {
    * `emoji` stays as the fallback.
    */
   item?: string;
+  /**
+   * DUA tokoh atau lebih dalam satu frame, kiri ke kanan. Kalau diisi, ini
+   * yang dipakai dan `item`/`emoji` diabaikan. Batas wajar: 2–3 tokoh — lebih
+   * dari itu masing-masing jadi terlalu kecil di layar HP.
+   */
+  cast?: StoryFigure[];
   text: string;
   /**
    * Latar tempat halaman ini. Ditulis hanya saat tempatnya BERGANTI: halaman

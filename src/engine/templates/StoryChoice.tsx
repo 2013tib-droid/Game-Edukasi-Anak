@@ -108,12 +108,35 @@ export default function StoryChoice({
     <>
       {scene && <Scene id={scene} />}
       <div className="game-area">
-        {(page.item || page.emoji) && (
+        {(page.cast?.length || page.item || page.emoji) && (
           <div
             className={`story-emoji${page.choices ? ' story-emoji--choices' : ''}`}
             aria-hidden
           >
-            {page.item ? (
+            {page.cast?.length ? (
+              // Dua tokoh (atau lebih) dalam SATU frame: kalimatnya menyebut
+              // keduanya, jadi anak harus melihat keduanya.
+              <span className="story-cast">
+                {page.cast.map((f, i) => (
+                  <span
+                    key={i}
+                    className={`story-cast__fig${
+                      f.size === 'kecil' ? ' story-cast__fig--kecil' : ''
+                    }`}
+                  >
+                    {f.item ? (
+                      <ItemPic
+                        id={f.item}
+                        className="story-cast__img"
+                        fallbackClassName="story-cast__emoji"
+                      />
+                    ) : (
+                      <span className="story-cast__emoji">{f.emoji}</span>
+                    )}
+                  </span>
+                ))}
+              </span>
+            ) : page.item ? (
               <ItemPic id={page.item} className="story-emoji__img" />
             ) : (
               page.emoji

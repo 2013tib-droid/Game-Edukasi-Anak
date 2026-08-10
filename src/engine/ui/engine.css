@@ -911,6 +911,53 @@
   height: clamp(72px, 22vw, 140px);
 }
 
+/*
+ * DUA tokoh dalam satu frame (`StoryPage.cast`) — mis. kerbau + jalak. Tiap
+ * tokoh diukur dari satu variabel `--fig` supaya gambar dan emoji punya
+ * tinggi yang sebanding; tokoh `--kecil` sengaja setengahnya, karena
+ * perbandingan ukuran burung terhadap kerbau ikut bercerita.
+ * Tingginya lebih pendek dari gambar tunggal (.story-emoji__img): dua tokoh
+ * berbagi lebar layar, jadi frame yang setinggi itu akan membuat halaman
+ * ikut scroll di HP 360×640.
+ */
+.story-cast {
+  --fig: clamp(140px, 40vw, 230px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(2px, 1.5vw, 14px);
+}
+
+.story-cast__fig--kecil {
+  --fig: clamp(70px, 20vw, 115px);
+}
+
+.story-cast__img {
+  height: var(--fig);
+  max-width: 46vw;
+  object-fit: contain;
+  vertical-align: bottom;
+}
+
+/*
+ * Emoji sebagai tokoh (yang seninya belum ada). Kotak emoji menyisakan ruang
+ * turunan di bawah garis dasar, jadi tanpa margin negatif tokoh emoji tampak
+ * melayang di atas tokoh bergambar yang berdiri di garis yang sama.
+ */
+.story-cast__emoji {
+  font-size: var(--fig);
+  line-height: 1;
+  margin-bottom: calc(var(--fig) * -0.12);
+}
+
+.story-emoji--choices .story-cast {
+  --fig: clamp(72px, 22vw, 140px);
+}
+
+.story-emoji--choices .story-cast__fig--kecil {
+  --fig: clamp(40px, 12vw, 74px);
+}
+
 .story-text {
   font-size: 22px;
   font-weight: 600;

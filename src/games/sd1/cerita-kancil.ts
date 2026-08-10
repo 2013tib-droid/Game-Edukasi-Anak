@@ -1,4 +1,10 @@
-import type { GameConfig, GameLevel, SceneId, StoryPage } from '@/engine/core/types';
+import type {
+  GameConfig,
+  GameLevel,
+  SceneId,
+  StoryFigure,
+  StoryPage,
+} from '@/engine/core/types';
 
 /**
  * "Cerita Anak" (SD Kelas 1 & 2) — cerita pendek dengan titik pilihan; anak
@@ -37,6 +43,27 @@ const page = (emoji: string, text: string): StoryPage => ({ emoji, text });
  * pakai gambar, jangan emoji (emoji hewan beda bentuk di tiap HP).
  */
 const pic = (item: string, text: string): StoryPage => ({ item, text });
+
+/**
+ * Halaman dengan DUA tokoh dalam satu frame: `duo(kerbau, jalak, '…')`.
+ * Dipakai kalau kalimatnya menyebut keduanya — anak yang belum lancar
+ * membaca membaca gambarnya, jadi menampilkan salah satu tokoh saja membuat
+ * adegannya hilang.
+ */
+const duo = (a: StoryFigure, b: StoryFigure, text: string): StoryPage => ({
+  cast: [a, b],
+  text,
+});
+
+/*
+ * Kerbau belum punya seni sendiri, jadi masih emoji — SENGAJA bukan `cow`
+ * (itu sapi, dan satu gambar tidak boleh punya dua arti). Begitu seni kerbau
+ * dikirim pemilik: potong dengan `scripts/cut-item.py`, daftarkan id `kerbau`
+ * di `src/engine/ui/items.ts`, lalu ganti `{ emoji: '🐃' }` di bawah menjadi
+ * `{ item: 'kerbau' }` — tidak ada yang lain yang perlu berubah.
+ */
+const KERBAU: StoryFigure = { emoji: '🐃' };
+const JALAK_KECIL: StoryFigure = { item: 'jalak', size: 'kecil' };
 
 /**
  * Menandai halaman ini berpindah tempat: `at('sungai', page(...))`.
@@ -131,14 +158,22 @@ const JALAK = story(
   { label: 'Jalak dan Kerbau', item: 'jalak' },
   'Burung Jalak dan Kerbau. Ayo ikuti ceritanya!',
   at('sawah', page('🐃', 'Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.')),
-  pic('jalak', 'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"'),
+  duo(
+    KERBAU,
+    JALAK_KECIL,
+    'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"',
+  ),
   ask(
     '🤔',
     'Apa yang sebaiknya kerbau jawab?',
     'Boleh, hinggaplah di punggungku',
     ['Pergi! Aku tidak mau ditumpangi', 'Jalak justru ingin menolong. Coba pilih yang lain!'],
   ),
-  pic('jalak', 'Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.'),
+  duo(
+    KERBAU,
+    JALAK_KECIL,
+    'Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.',
+  ),
   ask(
     '🐍',
     'Dari atas, jalak melihat ular besar mendekat. Sebaiknya jalak bagaimana?',
