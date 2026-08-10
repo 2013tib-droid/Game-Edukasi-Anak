@@ -153,20 +153,24 @@ const GAJAH = story(
   'l3',
   { label: 'Kancil dan Gajah', item: 'elephant' },
   'Kancil dan Gajah. Ayo bantu Kancil menolong temannya!',
-  // Halaman pembuka ini SENGAJA tanpa `at()`: ilustrasinya (kiriman pemilik,
-  // 2026-08-10) sudah membawa rawanya sendiri — hutan, air, dan tepian — jadi
-  // latar gambar engine di belakangnya cuma jadi hutan di atas hutan.
-  // Latar `sungai` menyusul di halaman berikutnya dan berlaku sampai selesai.
+  // Dua halaman pembuka ini SENGAJA tanpa `at()`: ilustrasinya (kiriman
+  // pemilik, 2026-08-10) sudah membawa rawanya sendiri — hutan, air, dan
+  // tepian — jadi latar gambar engine di belakangnya cuma jadi hutan di atas
+  // hutan. Latar `sungai` menyusul di halaman keputusan dan berlaku sampai
+  // cerita selesai.
   pic('kancil-rawa', 'Pagi itu Kancil berjalan di tepi rawa.'),
+  pic('gajah-lumpur', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.'),
   // Rawa belum punya latar sendiri; `sungai` sudah membawa air + tepian hijau
-  // dan itu yang dikenali anak dari halaman ini.
-  at('sungai', pic('elephant', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.')),
-  ask(
-    '🤔',
-    'Gajah terlalu berat. Apa yang sebaiknya Kancil lakukan?',
-    'Memanggil hewan lain untuk menolong',
-    ['Menarik gajah sendirian', 'Gajah terlalu berat untuk ditarik sendiri. Ada cara yang lebih baik!'],
-    ['Pergi karena badannya kecil', 'Kancil memang kecil, tapi akalnya besar. Coba pilih yang lain!'],
+  // dan itu yang dikenali anak dari sisa cerita ini.
+  at(
+    'sungai',
+    ask(
+      '🤔',
+      'Gajah terlalu berat. Apa yang sebaiknya Kancil lakukan?',
+      'Memanggil hewan lain untuk menolong',
+      ['Menarik gajah sendirian', 'Gajah terlalu berat untuk ditarik sendiri. Ada cara yang lebih baik!'],
+      ['Pergi karena badannya kecil', 'Kancil memang kecil, tapi akalnya besar. Coba pilih yang lain!'],
+    ),
   ),
   page('🐃', 'Kancil memanggil kerbau, rusa, dan teman-teman lain. Semua datang membantu.'),
   ask(

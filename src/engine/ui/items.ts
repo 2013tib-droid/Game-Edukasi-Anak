@@ -69,6 +69,7 @@ export const ITEMS: Record<string, ItemDef> = {
   // dibandingkan anak adalah bentuk satu benda, dan gambar beradegan penuh
   // akan menyesatkan.
   'kancil-rawa': { emoji: '🦌', label: 'kancil di tepi rawa', ext: 'webp' },
+  'gajah-lumpur': { emoji: '🐘', label: 'gajah terperosok di lumpur', ext: 'webp' },
   // Everyday objects — the things that show up again and again in letter,
   // syllable and spelling questions (Taman Huruf, Pasang Kata, Suku Kata,
   // Ejaan Jitu, Pasangan Pintar).
