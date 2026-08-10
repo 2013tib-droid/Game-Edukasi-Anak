@@ -922,10 +922,15 @@
  */
 .story-art {
   display: block;
-  width: 100%;
+  /* Ukurannya diserahkan ke rasio gambarnya sendiri (`width`/`height` auto,
+     dibatasi `max-*`), BUKAN `width: 100%` + `object-fit: contain`. Dengan
+     cara yang kedua kotak elemennya tetap selebar kolom sementara gambarnya
+     menciut di dalam — sudut membulatnya jadi memotong ruang kosong, dan di
+     layar tampak seperti gambar bersudut siku. */
+  width: auto;
   height: auto;
+  max-width: 100%;
   max-height: 46vh;
-  object-fit: contain;
   border-radius: 18px;
   align-self: center;
 }
@@ -945,7 +950,7 @@
   }
 
   .story-art--choices {
-    max-height: 22vh;
+    max-height: 20vh;
   }
 }
 

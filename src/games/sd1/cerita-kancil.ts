@@ -64,14 +64,22 @@ const at = <P extends StoryPage>(scene: SceneId, p: P): P => ({ ...p, scene });
  * Urutan di sini tidak menentukan urutan di layar — `StoryChoice` mengacak
  * pilihannya tiap halaman supaya anak tidak bisa menang dengan selalu
  * menekan kartu pertama.
+ *
+ * Gambarnya boleh emoji (`ask('🤔', …)`) atau ilustrasi adegan
+ * (`ask({ art: 'jalak-kerbau-jawab', emoji: '🤔' }, …)`). Emoji berpikir itu
+ * cuma isyarat "ayo pilih"; kalau adegannya punya ilustrasi, ilustrasi itu
+ * yang harus tampil — anak yang belum lancar membaca menimbang pilihannya
+ * sambil melihat kejadiannya.
  */
 function ask(
-  emoji: string,
+  cue: string | { art: string; emoji: string },
   text: string,
   right: string,
   ...wrong: [string, string][]
 ): StoryPage {
+  const { art: artName, emoji } = typeof cue === 'string' ? { art: undefined, emoji: cue } : cue;
   return {
+    art: artName,
     emoji,
     text,
     choices: [
@@ -150,7 +158,7 @@ const JALAK = story(
     'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"',
   ),
   ask(
-    '🤔',
+    { art: 'jalak-kerbau-jawab', emoji: '🤔' },
     'Apa yang sebaiknya kerbau jawab?',
     'Boleh, hinggaplah di punggungku',
     ['Pergi! Aku tidak mau ditumpangi', 'Jalak justru ingin menolong. Coba pilih yang lain!'],
