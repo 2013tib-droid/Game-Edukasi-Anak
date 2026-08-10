@@ -211,6 +211,23 @@ export interface CountTapData {
   decoys: { emoji: string; count: number; item?: string }[];
 }
 
+/**
+ * Tempat cerita berlangsung, digambar layar penuh oleh engine
+ * (`src/engine/ui/Scene.tsx`) — bukan gambar yang harus diunduh. Config cuma
+ * menyebut namanya, persis seperti `RoadKind` di path-trace.
+ */
+export type SceneId =
+  | 'hutan'
+  | 'kebun'
+  | 'sungai'
+  | 'sawah'
+  | 'padang'
+  | 'kota'
+  | 'rumah'
+  | 'laut'
+  | 'gunung'
+  | 'malam';
+
 export interface StoryPage {
   emoji?: string;
   /**
@@ -221,6 +238,12 @@ export interface StoryPage {
    */
   item?: string;
   text: string;
+  /**
+   * Latar tempat halaman ini. Ditulis hanya saat tempatnya BERGANTI: halaman
+   * tanpa `scene` memakai latar halaman sebelumnya, jadi satu cerita cukup
+   * menyebutnya sekali di halaman pertama.
+   */
+  scene?: SceneId;
   /** Absent = plain "Lanjut" page; present = a decision point. */
   choices?: { text: string; correct?: boolean; feedback?: string }[];
 }

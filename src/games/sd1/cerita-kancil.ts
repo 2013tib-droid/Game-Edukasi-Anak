@@ -1,4 +1,4 @@
-import type { GameConfig, GameLevel, StoryPage } from '@/engine/core/types';
+import type { GameConfig, GameLevel, SceneId, StoryPage } from '@/engine/core/types';
 
 /**
  * "Cerita Anak" (SD Kelas 1 & 2) — cerita pendek dengan titik pilihan; anak
@@ -37,6 +37,14 @@ const page = (emoji: string, text: string): StoryPage => ({ emoji, text });
  * pakai gambar, jangan emoji (emoji hewan beda bentuk di tiap HP).
  */
 const pic = (item: string, text: string): StoryPage => ({ item, text });
+
+/**
+ * Menandai halaman ini berpindah tempat: `at('sungai', page(...))`.
+ * Latarnya digambar engine (`src/engine/ui/Scene.tsx`), jadi cukup menyebut
+ * namanya. Ditulis HANYA saat tempatnya berganti — halaman sesudahnya ikut
+ * latar terakhir sampai ada `at()` berikutnya.
+ */
+const at = <P extends StoryPage>(scene: SceneId, p: P): P => ({ ...p, scene });
 
 /**
  * Halaman keputusan: satu pilihan benar, sisanya diberi tanggapan lembut.
@@ -89,19 +97,28 @@ const KANCIL = story(
   'l1',
   { label: 'Kancil dan Pak Tani', emoji: '🦌' },
   'Si Kancil berjalan di hutan. Perutnya lapar sekali. Ayo bantu Kancil mencari makan!',
-  page('🦌', 'Si Kancil berjalan di hutan. Perutnya lapar sekali.'),
-  ask(
-    '🥒',
-    'Kancil melihat kebun mentimun Pak Tani. Apa yang sebaiknya Kancil lakukan?',
-    'Minta izin Pak Tani dulu',
-    ['Ambil diam-diam', 'Hmm, mengambil tanpa izin itu tidak baik. Coba pilih yang lain!'],
+  at('hutan', page('🦌', 'Si Kancil berjalan di hutan. Perutnya lapar sekali.')),
+  at(
+    'kebun',
+    ask(
+      '🥒',
+      'Kancil melihat kebun mentimun Pak Tani. Apa yang sebaiknya Kancil lakukan?',
+      'Minta izin Pak Tani dulu',
+      ['Ambil diam-diam', 'Hmm, mengambil tanpa izin itu tidak baik. Coba pilih yang lain!'],
+    ),
   ),
   page('👨‍🌾', 'Pak Tani senang Kancil jujur. "Ambillah mentimun secukupnya," kata Pak Tani.'),
-  ask(
-    '🐊',
-    'Di sungai, ada buaya menghalangi jalan pulang. Bagaimana Kancil menyeberang?',
-    'Ajak buaya berhitung sambil berbaris',
-    ['Berteriak marah pada buaya', 'Marah-marah tidak menyelesaikan masalah. Coba cara yang cerdik!'],
+  at(
+    'sungai',
+    ask(
+      '🐊',
+      'Di sungai, ada buaya menghalangi jalan pulang. Bagaimana Kancil menyeberang?',
+      'Ajak buaya berhitung sambil berbaris',
+      [
+        'Berteriak marah pada buaya',
+        'Marah-marah tidak menyelesaikan masalah. Coba cara yang cerdik!',
+      ],
+    ),
   ),
   page(
     '🎉',
@@ -113,7 +130,7 @@ const JALAK = story(
   'l2',
   { label: 'Jalak dan Kerbau', item: 'jalak' },
   'Burung Jalak dan Kerbau. Ayo ikuti ceritanya!',
-  page('🐃', 'Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.'),
+  at('sawah', page('🐃', 'Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.')),
   pic('jalak', 'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"'),
   ask(
     '🤔',
@@ -136,7 +153,9 @@ const GAJAH = story(
   'l3',
   { label: 'Kancil dan Gajah', item: 'elephant' },
   'Kancil dan Gajah. Ayo bantu Kancil menolong temannya!',
-  page('🦌', 'Pagi itu Kancil berjalan di tepi rawa.'),
+  // Rawa belum punya latar sendiri; `sungai` sudah membawa air + tepian hijau
+  // dan itu yang dikenali anak dari halaman ini.
+  at('sungai', page('🦌', 'Pagi itu Kancil berjalan di tepi rawa.')),
   pic('elephant', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.'),
   ask(
     '🤔',

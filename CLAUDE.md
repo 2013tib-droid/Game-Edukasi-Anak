@@ -561,6 +561,28 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Tangga ini murni data: `MASCOTS` di `src/engine/core/mascot.ts` adalah satu-satunya tempat: `mascotFor()` dan kartu maskot mengikutinya sendiri (nomor level = indeks, bar & sisa bintang dihitung dari ambang tetangganya). **Jangan menaruh angka tahap di tempat lain.**
   - Nama tahap harus **pendek**: kartu maskot menaruh nama + chip "Level N" dalam satu baris. "Burung Hantu Pintar" itu yang terpanjang yang masih muat di HP 360px — semua nama naga baru jauh lebih pendek.
 
+- **Latar tempat cerita (hutan, kebun, sungai, sawah, padang, kota) — digambar engine, TANPA impor gambar** (2026-08-10, permintaan pemilik dari tangkapan layar Cerita Anak: *"Bisa ngga ada background hutan? Apa perlu diimport gambar?"*), teruji headless 360×640, 380×800 & 820×1180 — **9 cerita (Cerita Anak + Cerita Nusantara) dimainkan sampai layar hasil di ketiga ukuran**, tiap pilihan yang kurang tepat ditekan lebih dulu; keenam latar tampil, nol scroll, nol error console, nol permintaan gagal:
+
+  **Jawaban atas "apa perlu diimport gambar?": TIDAK.**
+  - Latarnya SVG di `src/engine/ui/Scene.tsx` (±2 kB, ikut chunk `story-choice`), alasan yang sama dengan `Shape.tsx` & `Clock.tsx`: satu latar layar penuh sebagai WebP butuh ratusan kB **per tempat**, harus disiapkan untuk potret HP maupun tablet, dan bisa gagal dimuat. Yang WAJIB gambar impor tetap **subjek soal** (hewan, buah, benda) — di sana bentuknya harus persis; latar cuma suasana.
+  - Config hanya MENYEBUT nama tempatnya (`StoryPage.scene`), geometrinya urusan engine — pola yang sama dengan `RoadKind` di path-trace.
+
+  **Aturan keterbacaan (jangan dilanggar saat menambah tempat baru)**
+  - Gambarnya dibagi **dua pita**: satu menempel di ATAS layar, satu di BAWAH, **tengahnya langit polos**. Teks cerita & kartu pilihan hidup di tengah; pohon yang digambar sampai ke tengah akan membuat tulisan cokelat tua tak terbaca. Warna latar juga harus tetap pastel/muda.
+  - Tinggi pita diukur dari **LEBAR layar** (`min(65vw, 40vh)`), bukan cuma tinggi: `preserveAspectRatio=slice` selalu memperbesar mengikuti sisi terpanjang, jadi pita pendek di layar lebar memotong pucuk pohon dan menyisakan **batang raksasa** (kena di percobaan pertama, tablet 820×1180). `65vw` = tinggi gambar aslinya, jadi selama layarnya tinggi satu pohon selalu utuh.
+  - Layar **MENDATAR** (`min-aspect-ratio: 4/3` — HP dimiringkan DAN tablet landscape) tak mungkin memuat pohon utuh; di sana pitanya sengaja dibuat TIPIS (pucuk daun + rumput saja) supaya tinggi layar yang sedikit tetap milik teksnya.
+
+  **Cara memakainya di config**
+  - `at('sungai', page(...))` — helper di kedua config cerita. Ditulis **hanya saat tempatnya BERGANTI**; halaman sesudahnya ikut latar terakhir (`StoryChoice` menelusuri mundur dari halaman berjalan), jadi satu cerita di hutan cukup menyebutnya sekali.
+  - Sudah dipasang di **kesembilan cerita**: Kancil (hutan → kebun → sungai), Jalak & Kerbau (sawah), Kancil & Gajah (sungai — **rawa belum punya latar sendiri**, air + tepian hijau itu yang dikenali anak), Anak Gembala (padang), Dompet di Jalan (kota), Semut & Belalang (kebun), Kura-kura & Kelinci (hutan), Timun Mas (kebun → hutan → kebun → sungai), Bawang Putih (kebun → sungai → hutan).
+  - **NOL file suara baru** (`npm run narasi` tetap 765 baris): latar tidak menambah satu pun kalimat.
+  - **Empat latar tambahan (2026-08-10, permintaan pemilik di sesi yang sama): `rumah`, `laut`, `gunung`, `malam`** — total 10 tempat. Teruji headless 360×640, 380×800, 820×1180 & 740×380 (mendatar).
+    - **`rumah` = dalam ruangan**, jadi "langit"-nya warna DINDING (krem), bukan biru. Jendela, lampu gantung & rak ditaruh di pita ATAS: jendela itu barang tinggi — percobaan pertama menggambarnya di pita bawah dan hasilnya jendela berdiri sejajar karpet, terlihat seperti lubang di lantai. Pita bawah = meja rendah, lemari, karpet, lantai kayu.
+    - **`malam` SENGAJA TIDAK GELAP.** Teks cerita cokelat tua (#3a2e20) dan dibaca anak yang belum lancar membaca; langit biru tua akan membuatnya nyaris hilang, sedangkan mengganti warna teks per latar berarti tiap komponen cerita harus tahu-menahu soal latar. Yang dipakai: senja lembut + bulan sabit + bintang + kunang-kunang — bagi anak itu sudah terbaca "malam". **Jangan digelapkan** tanpa lebih dulu menyelesaikan urusan warna teksnya.
+    - **Bulan tidak ditaruh di pojok kanan atas**: di sana selalu ada tombol 🔊. (Matahari di latar terbuka boleh, karena yang tampak cuma cahayanya.)
+    - `rumah` sudah dipakai: "Belalang datang ke rumah semut" (Semut & Belalang) dan "membersihkan rumah nenek" (Bawang Putih). `laut`, `gunung` & `malam` belum dipakai cerita mana pun — sengaja disiapkan supaya cerita berikutnya tinggal menyebut namanya.
+  - Belum ada latar untuk **rawa, pasar, sekolah (dalam kelas)**. Menambahnya = satu cabang di `TopBand`/`BottomBand` + satu nama di `SceneId` + warna langit di `scene.css`; jangan menambal dengan gambar impor.
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
