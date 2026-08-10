@@ -1,10 +1,4 @@
-import type {
-  GameConfig,
-  GameLevel,
-  SceneId,
-  StoryFigure,
-  StoryPage,
-} from '@/engine/core/types';
+import type { GameConfig, GameLevel, SceneId, StoryPage } from '@/engine/core/types';
 
 /**
  * "Cerita Anak" (SD Kelas 1 & 2) — cerita pendek dengan titik pilihan; anak
@@ -45,25 +39,17 @@ const page = (emoji: string, text: string): StoryPage => ({ emoji, text });
 const pic = (item: string, text: string): StoryPage => ({ item, text });
 
 /**
- * Halaman dengan DUA tokoh dalam satu frame: `duo(kerbau, jalak, '…')`.
- * Dipakai kalau kalimatnya menyebut keduanya — anak yang belum lancar
- * membaca membaca gambarnya, jadi menampilkan salah satu tokoh saja membuat
- * adegannya hilang.
+ * Halaman berilustrasi adegan: `art` = nama file di `public/assets/story/`.
+ * Dipakai kalau satu halaman menceritakan DUA tokoh yang berinteraksi —
+ * anak yang belum lancar membaca membaca adegannya dari gambar, dan dua
+ * gambar item terpisah yang ditempel berdampingan tidak pernah rapi.
+ * `emoji` tetap ditulis sebagai cadangan kalau filenya belum ter-deploy.
  */
-const duo = (a: StoryFigure, b: StoryFigure, text: string): StoryPage => ({
-  cast: [a, b],
+const art = (name: string, emoji: string, text: string): StoryPage => ({
+  art: name,
+  emoji,
   text,
 });
-
-/*
- * Kerbau belum punya seni sendiri, jadi masih emoji — SENGAJA bukan `cow`
- * (itu sapi, dan satu gambar tidak boleh punya dua arti). Begitu seni kerbau
- * dikirim pemilik: potong dengan `scripts/cut-item.py`, daftarkan id `kerbau`
- * di `src/engine/ui/items.ts`, lalu ganti `{ emoji: '🐃' }` di bawah menjadi
- * `{ item: 'kerbau' }` — tidak ada yang lain yang perlu berubah.
- */
-const KERBAU: StoryFigure = { emoji: '🐃' };
-const JALAK_KECIL: StoryFigure = { item: 'jalak', size: 'kecil' };
 
 /**
  * Menandai halaman ini berpindah tempat: `at('sungai', page(...))`.
@@ -158,9 +144,9 @@ const JALAK = story(
   { label: 'Jalak dan Kerbau', item: 'jalak' },
   'Burung Jalak dan Kerbau. Ayo ikuti ceritanya!',
   at('sawah', page('🐃', 'Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.')),
-  duo(
-    KERBAU,
-    JALAK_KECIL,
+  art(
+    'jalak-kerbau',
+    '🐦',
     'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"',
   ),
   ask(
@@ -169,9 +155,9 @@ const JALAK = story(
     'Boleh, hinggaplah di punggungku',
     ['Pergi! Aku tidak mau ditumpangi', 'Jalak justru ingin menolong. Coba pilih yang lain!'],
   ),
-  duo(
-    KERBAU,
-    JALAK_KECIL,
+  art(
+    'jalak-kerbau',
+    '🐦',
     'Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.',
   ),
   ask(

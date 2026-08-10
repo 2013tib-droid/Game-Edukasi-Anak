@@ -912,50 +912,41 @@
 }
 
 /*
- * DUA tokoh dalam satu frame (`StoryPage.cast`) — mis. kerbau + jalak. Tiap
- * tokoh diukur dari satu variabel `--fig` supaya gambar dan emoji punya
- * tinggi yang sebanding; tokoh `--kecil` sengaja setengahnya, karena
- * perbandingan ukuran burung terhadap kerbau ikut bercerita.
- * Tingginya lebih pendek dari gambar tunggal (.story-emoji__img): dua tokoh
- * berbagi lebar layar, jadi frame yang setinggi itu akan membuat halaman
- * ikut scroll di HP 360×640.
+ * ILUSTRASI ADEGAN (`StoryPage.art`) — gambar yang membawa latarnya sendiri,
+ * jadi dirender sebagai PANEL gambar cerita: selebar layar, sudut membulat,
+ * bukan tokoh yang melayang seperti `.story-emoji__img`.
+ * `width: 100%` + `height: auto` di sini justru BENAR (kebalikan dari
+ * `.choice-img`): yang dijaga adalah rasio ilustrasinya, dan lebarnya sudah
+ * dibatasi kolom `.game-area`. `max-height` menjaga halaman tetap muat di HP
+ * pendek kalau suatu saat ada ilustrasi yang lebih tinggi dari lebarnya.
  */
-.story-cast {
-  --fig: clamp(140px, 40vw, 230px);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: clamp(2px, 1.5vw, 14px);
-}
-
-.story-cast__fig--kecil {
-  --fig: clamp(70px, 20vw, 115px);
-}
-
-.story-cast__img {
-  height: var(--fig);
-  max-width: 46vw;
+.story-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 46vh;
   object-fit: contain;
-  vertical-align: bottom;
+  border-radius: 18px;
+  align-self: center;
 }
 
-/*
- * Emoji sebagai tokoh (yang seninya belum ada). Kotak emoji menyisakan ruang
- * turunan di bawah garis dasar, jadi tanpa margin negatif tokoh emoji tampak
- * melayang di atas tokoh bergambar yang berdiri di garis yang sama.
- */
-.story-cast__emoji {
-  font-size: var(--fig);
-  line-height: 1;
-  margin-bottom: calc(var(--fig) * -0.12);
+/* Halaman KEPUTUSAN berbagi layar dengan dua-tiga kartu pilihan — aturan yang
+   sama dengan `.story-emoji--choices`. */
+.story-art--choices {
+  max-height: 28vh;
 }
 
-.story-emoji--choices .story-cast {
-  --fig: clamp(72px, 22vw, 140px);
-}
+/* Layar MENDATAR (HP dimiringkan / tablet landscape) tingginya sedikit dan
+   sudah harus memuat teks + tombol, jadi panelnya mengecil — ambang aspek
+   yang sama dengan pita latar di `scene.css`. */
+@media (min-aspect-ratio: 4 / 3) {
+  .story-art {
+    max-height: 34vh;
+  }
 
-.story-emoji--choices .story-cast__fig--kecil {
-  --fig: clamp(40px, 12vw, 74px);
+  .story-art--choices {
+    max-height: 22vh;
+  }
 }
 
 .story-text {

@@ -228,25 +228,6 @@ export type SceneId =
   | 'gunung'
   | 'malam';
 
-/**
- * Satu tokoh di dalam frame gambar halaman cerita. Dipakai lewat
- * `StoryPage.cast` kalau satu halaman menceritakan DUA tokoh sekaligus
- * ("burung jalak hinggap di punggung kerbau") — anak harus melihat keduanya,
- * bukan salah satunya saja.
- */
-export interface StoryFigure {
-  /** Item id registry (`src/engine/ui/items.ts`); dirender sebagai gambar. */
-  item?: string;
-  /** Emoji cadangan / tokoh yang seninya belum ada. */
-  emoji?: string;
-  /**
-   * Ukuran relatif di dalam frame. `'besar'` (bawaan) untuk tokoh sebesar
-   * gambar halaman biasa; `'kecil'` untuk tokoh yang memang jauh lebih kecil
-   * (burung di samping kerbau) — perbandingan ukurannya ikut bercerita.
-   */
-  size?: 'besar' | 'kecil';
-}
-
 export interface StoryPage {
   emoji?: string;
   /**
@@ -257,11 +238,23 @@ export interface StoryPage {
    */
   item?: string;
   /**
-   * DUA tokoh atau lebih dalam satu frame, kiri ke kanan. Kalau diisi, ini
-   * yang dipakai dan `item`/`emoji` diabaikan. Batas wajar: 2–3 tokoh — lebih
-   * dari itu masing-masing jadi terlalu kecil di layar HP.
+   * ILUSTRASI ADEGAN: nama file (tanpa ekstensi) di `public/assets/story/`,
+   * mis. `'jalak-kerbau'` → `public/assets/story/jalak-kerbau.webp`.
+   *
+   * Bedanya dengan `item`: item itu satu benda/hewan yang dipotong transparan
+   * dan bisa dipakai di soal mana pun, sedangkan ilustrasi adegan sudah
+   * membawa LATARNYA SENDIRI dan menggambarkan satu momen cerita — dua tokoh
+   * yang berinteraksi ("jalak bertengger di punggung kerbau") hanya bisa
+   * digambar begini; menempelkan dua gambar terpisah tidak pernah rapi.
+   *
+   * Kalau diisi, ini yang dipakai dan `item`/`emoji` tinggal jadi cadangan
+   * (dipakai kalau filenya gagal dimuat). Latar engine (`Scene`) TETAP
+   * digambar di belakangnya: langit + rumput di sekeliling panel gambar jauh
+   * lebih menyatu dengan ilustrasi daripada latar pastel bawaan app —
+   * sudah dibandingkan dengan tangkapan layar, jangan dibalik lagi. Pilih
+   * `scene` yang tempatnya sama dengan ilustrasinya.
    */
-  cast?: StoryFigure[];
+  art?: string;
   text: string;
   /**
    * Latar tempat halaman ini. Ditulis hanya saat tempatnya BERGANTI: halaman

@@ -49,6 +49,11 @@ export default function StoryChoice({
     return undefined;
   }, [pageIndex, level]);
 
+  // Ilustrasi adegan yang filenya gagal dimuat (deploy setengah jadi) jatuh
+  // ke `item`/`emoji` halaman itu — halaman cerita tidak boleh kosong.
+  const [brokenArt, setBrokenArt] = useState<Record<string, true>>({});
+  const art = page?.art && !brokenArt[page.art] ? page.art : undefined;
+
   // Guards against narrating the same page twice (StrictMode runs effects
   // twice in dev, and queued lines would stack up instead of cancelling).
   const narratedPage = useRef(-1);
@@ -108,40 +113,28 @@ export default function StoryChoice({
     <>
       {scene && <Scene id={scene} />}
       <div className="game-area">
-        {(page.cast?.length || page.item || page.emoji) && (
-          <div
-            className={`story-emoji${page.choices ? ' story-emoji--choices' : ''}`}
+        {art ? (
+          <img
+            className={`story-art${page.choices ? ' story-art--choices' : ''}`}
+            src={`${import.meta.env.BASE_URL}assets/story/${art}.webp`}
+            alt=""
             aria-hidden
-          >
-            {page.cast?.length ? (
-              // Dua tokoh (atau lebih) dalam SATU frame: kalimatnya menyebut
-              // keduanya, jadi anak harus melihat keduanya.
-              <span className="story-cast">
-                {page.cast.map((f, i) => (
-                  <span
-                    key={i}
-                    className={`story-cast__fig${
-                      f.size === 'kecil' ? ' story-cast__fig--kecil' : ''
-                    }`}
-                  >
-                    {f.item ? (
-                      <ItemPic
-                        id={f.item}
-                        className="story-cast__img"
-                        fallbackClassName="story-cast__emoji"
-                      />
-                    ) : (
-                      <span className="story-cast__emoji">{f.emoji}</span>
-                    )}
-                  </span>
-                ))}
-              </span>
-            ) : page.item ? (
-              <ItemPic id={page.item} className="story-emoji__img" />
-            ) : (
-              page.emoji
-            )}
-          </div>
+            draggable={false}
+            onError={() => setBrokenArt((b) => ({ ...b, [page.art!]: true }))}
+          />
+        ) : (
+          (page.item || page.emoji) && (
+            <div
+              className={`story-emoji${page.choices ? ' story-emoji--choices' : ''}`}
+              aria-hidden
+            >
+              {page.item ? (
+                <ItemPic id={page.item} className="story-emoji__img" />
+              ) : (
+                page.emoji
+              )}
+            </div>
+          )
         )}
         <p className="story-text">{page.text}</p>
         {page.choices ? (
