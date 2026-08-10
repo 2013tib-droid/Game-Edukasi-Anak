@@ -216,7 +216,17 @@ export interface CountTapData {
  * (`src/engine/ui/Scene.tsx`) — bukan gambar yang harus diunduh. Config cuma
  * menyebut namanya, persis seperti `RoadKind` di path-trace.
  */
-export type SceneId = 'hutan' | 'kebun' | 'sungai' | 'sawah' | 'padang' | 'kota';
+export type SceneId =
+  | 'hutan'
+  | 'kebun'
+  | 'sungai'
+  | 'sawah'
+  | 'padang'
+  | 'kota'
+  | 'rumah'
+  | 'laut'
+  | 'gunung'
+  | 'malam';
 
 export interface StoryPage {
   emoji?: string;

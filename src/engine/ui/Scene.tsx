@@ -120,6 +120,89 @@ function TopBand({ id }: { id: SceneId }) {
       </>
     );
   }
+
+  if (id === 'rumah') {
+    // Di dalam rumah: yang menempel di langit-langit adalah lampu gantung +
+    // rak dinding. "Langit"-nya = warna dinding (lihat scene.css).
+    return (
+      <>
+        <rect x="0" y="0" width="400" height="10" fill="#e6d3b8" />
+        {/* Lampu gantung */}
+        <g>
+          <rect x="196" y="10" width="8" height="26" fill="#c9b48f" />
+          <path d="M164 74 Q200 26 236 74 Z" fill="#ffd45e" />
+          <ellipse cx="200" cy="74" rx="36" ry="8" fill="#ffe9a8" />
+        </g>
+        {/* Jendela dengan pemandangan hijau — supaya kamarnya tidak pengap.
+            Sengaja di pita ATAS: jendela itu barang tinggi, kalau digambar di
+            pita bawah ia berdiri sejajar karpet dan terlihat seperti lubang. */}
+        <g>
+          <rect x="30" y="22" width="92" height="80" rx="8" fill="#bfe3f7" />
+          <path d="M34 102 Q60 68 82 102 Q100 76 118 102 Z" fill={LEAF_LIGHT} />
+          <rect x="72" y="22" width="8" height="80" fill="#ffffff" />
+          <rect x="30" y="58" width="92" height="8" fill="#ffffff" />
+          <rect
+            x="24"
+            y="16"
+            width="104"
+            height="92"
+            rx="10"
+            fill="none"
+            stroke="#d8ae7c"
+            strokeWidth="8"
+          />
+        </g>
+        {/* Rak dinding + pot */}
+        <g>
+          <rect x="290" y="76" width="78" height="8" rx="4" fill="#d8ae7c" />
+          <rect x="304" y="56" width="18" height="20" rx="4" fill="#ef7d6b" />
+          <circle cx="346" cy="62" r="13" fill={LEAF} />
+          <rect x="340" y="66" width="12" height="10" rx="3" fill="#c98f5f" />
+        </g>
+      </>
+    );
+  }
+
+  if (id === 'malam') {
+    // Bulan & bintang. Langitnya sengaja TIDAK gelap — lihat catatan warna di
+    // scene.css: teks cerita berwarna cokelat tua dan harus tetap terbaca.
+    return (
+      <>
+        {/* Bulan sengaja TIDAK di pojok kanan atas: di sana selalu ada tombol
+            🔊, dan bulan sabit itu bentuk yang justru harus terlihat. */}
+        <circle cx="238" cy="44" r="44" fill="#fff6c9" opacity="0.5" />
+        <path d="M258 16 A30 30 0 1 0 258 72 Q236 44 258 16 Z" fill="#ffe9a8" />
+        <g fill="#ffffff">
+          {[
+            [46, 34, 5],
+            [104, 66, 4],
+            [158, 28, 6],
+            [312, 62, 5],
+            [352, 26, 4],
+            [72, 100, 4],
+            [186, 104, 5],
+          ].map(([x, y, r]) => (
+            <circle key={`${x}-${y}`} cx={x} cy={y} r={r} />
+          ))}
+        </g>
+        <Cloud x={112} y={46} s={0.7} />
+      </>
+    );
+  }
+
+  if (id === 'laut') {
+    return (
+      <>
+        <OpenSky />
+        {/* Burung camar — dua goresan, jangan lebih: ini cuma suasana. */}
+        <g stroke="#8fa9bd" strokeWidth="4" strokeLinecap="round" fill="none">
+          <path d="M120 92 q10 -10 20 0 q10 -10 20 0" />
+          <path d="M244 74 q8 -8 16 0 q8 -8 16 0" />
+        </g>
+      </>
+    );
+  }
+
   return <OpenSky />;
 }
 
@@ -297,6 +380,153 @@ function BottomBand({ id }: { id: SceneId }) {
         </g>
         {/* Rumput tepi jalan */}
         <rect x="0" y="182" width="400" height="8" rx="4" fill="#a8db78" />
+      </>
+    );
+  }
+
+  if (id === 'rumah') {
+    // Dalam rumah: lantai kayu + perabot rendah. Semua perabot menempel di
+    // garis lantai (y=150) supaya tak ada yang mengambang.
+    return (
+      <>
+        {/* Dinding bawah + lis */}
+        <rect x="0" y="0" width="400" height="150" fill="#f7e7cf" />
+        {/* Meja rendah dengan buku */}
+        <g>
+          <rect x="26" y="104" width="104" height="12" rx="5" fill="#e0b98c" />
+          <rect x="36" y="116" width="10" height="34" rx="4" fill="#c98f5f" />
+          <rect x="110" y="116" width="10" height="34" rx="4" fill="#c98f5f" />
+          <rect x="50" y="92" width="34" height="12" rx="3" fill="#ef7d6b" />
+          <rect x="56" y="84" width="34" height="10" rx="3" fill="#7fa3d8" />
+        </g>
+        {/* Lemari kecil + vas berbunga */}
+        <g>
+          <rect x="286" y="74" width="90" height="76" rx="8" fill="#e0b98c" />
+          <rect x="296" y="88" width="70" height="24" rx="5" fill="#f2dcbe" />
+          <rect x="296" y="118" width="70" height="24" rx="5" fill="#f2dcbe" />
+          <ellipse cx="331" cy="66" rx="16" ry="10" fill="#a9d8ef" />
+          <path d="M320 66 q11 -30 22 0 Z" fill={LEAF} />
+          <circle cx="331" cy="42" r="8" fill="#ff9fb2" />
+        </g>
+        <rect x="0" y="144" width="400" height="12" fill="#e6d3b8" />
+        {/* Lantai kayu */}
+        <rect x="0" y="156" width="400" height="104" fill="#e8c9a0" />
+        <g stroke="#d9b489" strokeWidth="4" strokeLinecap="round">
+          <path d="M0 186 H400" />
+          <path d="M0 216 H400" />
+          <path d="M0 246 H400" />
+        </g>
+        {/* Karpet */}
+        <ellipse cx="200" cy="222" rx="150" ry="42" fill="#f6b9a6" />
+        <ellipse cx="200" cy="222" rx="118" ry="30" fill="#ffd9c9" />
+      </>
+    );
+  }
+
+  if (id === 'laut') {
+    return (
+      <>
+        {/* Laut sampai cakrawala */}
+        <rect x="0" y="96" width="400" height="102" fill="#7ec8e3" />
+        <rect x="0" y="96" width="400" height="26" fill="#5fb3d4" />
+        <g stroke="#e6f7ff" strokeWidth="5" strokeLinecap="round" fill="none" opacity="0.9">
+          <path d="M28 140 q18 -8 36 0" />
+          <path d="M132 158 q18 -8 36 0" />
+          <path d="M244 138 q18 -8 36 0" />
+          <path d="M320 162 q18 -8 36 0" />
+        </g>
+        {/* Perahu kecil di kejauhan */}
+        <g transform="translate(268 120)">
+          <path d="M-22 0 H22 L14 12 H-14 Z" fill="#e0805f" />
+          <path d="M0 -26 L16 -4 H0 Z" fill="#ffffff" />
+          <rect x="-2" y="-28" width="4" height="26" fill="#b3835a" />
+        </g>
+        {/* Buih tepi pantai */}
+        <path d="M0 198 Q100 186 200 198 Q300 210 400 194 V214 Q300 226 200 214 Q100 202 0 214 Z" fill="#dff4ff" />
+        {/* Pasir */}
+        <path d="M0 212 Q100 200 200 212 Q300 224 400 208 V260 H0 Z" fill="#f4e0b8" />
+        {/* Pohon kelapa */}
+        <g transform="translate(46 250)">
+          <path d="M0 0 q-10 -44 6 -76" stroke="#b3835a" strokeWidth="13" strokeLinecap="round" fill="none" />
+          <g fill={LEAF}>
+            <ellipse cx="-22" cy="-80" rx="28" ry="11" transform="rotate(-18 -22 -80)" />
+            <ellipse cx="30" cy="-84" rx="28" ry="11" transform="rotate(14 30 -84)" />
+            <ellipse cx="4" cy="-96" rx="26" ry="11" />
+          </g>
+          <circle cx="6" cy="-74" r="7" fill="#8a5a3b" />
+        </g>
+        {/* Kerang & bintang laut */}
+        <g>
+          <ellipse cx="212" cy="242" rx="12" ry="9" fill="#ffd9c9" />
+          <path d="M300 236 l5 11 12 1 -9 8 3 12 -11 -7 -11 7 3 -12 -9 -8 12 -1 Z" fill="#f6a08a" />
+        </g>
+      </>
+    );
+  }
+
+  if (id === 'gunung') {
+    return (
+      <>
+        {/* Punggungan berlapis — makin dekat makin pekat warnanya */}
+        <path d="M-20 150 L70 40 L160 150 Z" fill="#b7cfe0" />
+        <path d="M60 150 L170 24 L286 150 Z" fill="#9dbdd4" />
+        <path d="M240 150 L330 46 L420 150 Z" fill="#b7cfe0" />
+        <path d="M170 24 L200 60 L140 60 Z" fill="#ffffff" />
+        <path d="M330 46 L352 74 L308 74 Z" fill="#ffffff" />
+        {/* Kaki gunung */}
+        <path d="M0 138 Q100 118 200 136 Q300 152 400 130 V260 H0 Z" fill="#bfe3a8" />
+        {/* Pohon cemara */}
+        <g fill="#4f9a55">
+          {[
+            [40, 172, 1],
+            [96, 164, 0.8],
+            [318, 168, 0.9],
+            [372, 176, 1.05],
+          ].map(([x, y, s]) => (
+            <g key={`${x}-${y}`} transform={`translate(${x} ${y}) scale(${s})`}>
+              <path d="M0 -74 L22 -30 H-22 Z" />
+              <path d="M0 -50 L28 -4 H-28 Z" />
+              <rect x="-6" y="-6" width="12" height="18" rx="3" fill={TRUNK} />
+            </g>
+          ))}
+        </g>
+        {/* Padang di kaki gunung + jalan setapak */}
+        <path d="M0 176 Q110 162 230 178 Q320 188 400 172 V260 H0 Z" fill="#a8db78" />
+        <path d="M186 260 Q200 216 236 186 L268 190 Q214 222 214 260 Z" fill="#e8d5b0" />
+        <path d="M0 218 Q120 206 250 220 Q330 226 400 214 V260 H0 Z" fill="#8ed274" opacity="0.75" />
+        <Bush x={92} y={244} s={0.85} />
+        <Bush x={330} y={250} s={0.95} />
+      </>
+    );
+  }
+
+  if (id === 'malam') {
+    // Malam di luar rumah: bukit gelap-lembut, pohon, kunang-kunang.
+    return (
+      <>
+        <path d="M0 128 Q80 96 170 122 Q260 148 400 112 V260 H0 Z" fill="#9db9c9" />
+        <path d="M0 166 Q110 146 230 168 Q320 182 400 158 V260 H0 Z" fill="#7fa08f" />
+        <g>
+          <Tree x={44} y={196} s={0.9} fill="#4f7a5c" />
+          <Tree x={352} y={202} s={1} fill="#4f7a5c" />
+          <Tree x={196} y={182} s={0.6} fill="#5d8a68" />
+        </g>
+        <path d="M0 212 Q120 198 250 212 Q330 219 400 206 V260 H0 Z" fill="#6d9280" />
+        {/* Kunang-kunang */}
+        <g fill="#fff3b0">
+          {[
+            [118, 200, 5],
+            [162, 226, 4],
+            [244, 208, 5],
+            [292, 236, 4],
+            [82, 240, 4],
+          ].map(([x, y, r]) => (
+            <g key={`${x}-${y}`}>
+              <circle cx={x} cy={y} r={r + 5} opacity="0.35" />
+              <circle cx={x} cy={y} r={r} />
+            </g>
+          ))}
+        </g>
       </>
     );
   }

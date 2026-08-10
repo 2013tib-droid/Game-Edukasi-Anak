@@ -57,6 +57,38 @@
   --sky-c: #fbf6ec;
 }
 
+/* Di dalam rumah: "langit"-nya dinding, jadi warnanya krem hangat. */
+.scene--rumah {
+  --sky-a: #fbeedd;
+  --sky-b: #f9e8d3;
+  --sky-c: #f7e7cf;
+}
+
+.scene--laut {
+  --sky-a: #bfe6ff;
+  --sky-b: #e6f6ff;
+  --sky-c: #f2fbff;
+}
+
+.scene--gunung {
+  --sky-a: #c6e6ff;
+  --sky-b: #eaf6ff;
+  --sky-c: #f2fbe8;
+}
+
+/*
+ * MALAM SENGAJA TIDAK GELAP. Teks cerita berwarna cokelat tua (#3a2e20) dan
+ * dibaca anak yang belum lancar membaca — langit biru tua akan membuatnya
+ * nyaris hilang, dan mengganti warna teks per latar berarti tiap komponen
+ * cerita harus tahu-menahu soal latar. Yang dipakai: senja lembut + bulan,
+ * bintang, dan kunang-kunang. Bagi anak itu sudah terbaca "malam".
+ */
+.scene--malam {
+  --sky-a: #cdd6f4;
+  --sky-b: #e2e6f8;
+  --sky-c: #eef0fb;
+}
+
 /*
  * Dua pita gambar: satu menempel di atas layar, satu di bawah, tengahnya
  * langit polos supaya teks cerita tetap terbaca (lihat catatan di Scene.tsx).

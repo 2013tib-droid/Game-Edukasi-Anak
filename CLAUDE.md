@@ -576,7 +576,12 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - `at('sungai', page(...))` — helper di kedua config cerita. Ditulis **hanya saat tempatnya BERGANTI**; halaman sesudahnya ikut latar terakhir (`StoryChoice` menelusuri mundur dari halaman berjalan), jadi satu cerita di hutan cukup menyebutnya sekali.
   - Sudah dipasang di **kesembilan cerita**: Kancil (hutan → kebun → sungai), Jalak & Kerbau (sawah), Kancil & Gajah (sungai — **rawa belum punya latar sendiri**, air + tepian hijau itu yang dikenali anak), Anak Gembala (padang), Dompet di Jalan (kota), Semut & Belalang (kebun), Kura-kura & Kelinci (hutan), Timun Mas (kebun → hutan → kebun → sungai), Bawang Putih (kebun → sungai → hutan).
   - **NOL file suara baru** (`npm run narasi` tetap 765 baris): latar tidak menambah satu pun kalimat.
-  - Belum ada latar untuk **rumah/dalam ruangan, laut, gunung, malam**. Menambahnya = satu cabang di `TopBand`/`BottomBand` + satu nama di `SceneId` + warna langit di `scene.css`; jangan menambal dengan gambar impor.
+  - **Empat latar tambahan (2026-08-10, permintaan pemilik di sesi yang sama): `rumah`, `laut`, `gunung`, `malam`** — total 10 tempat. Teruji headless 360×640, 380×800, 820×1180 & 740×380 (mendatar).
+    - **`rumah` = dalam ruangan**, jadi "langit"-nya warna DINDING (krem), bukan biru. Jendela, lampu gantung & rak ditaruh di pita ATAS: jendela itu barang tinggi — percobaan pertama menggambarnya di pita bawah dan hasilnya jendela berdiri sejajar karpet, terlihat seperti lubang di lantai. Pita bawah = meja rendah, lemari, karpet, lantai kayu.
+    - **`malam` SENGAJA TIDAK GELAP.** Teks cerita cokelat tua (#3a2e20) dan dibaca anak yang belum lancar membaca; langit biru tua akan membuatnya nyaris hilang, sedangkan mengganti warna teks per latar berarti tiap komponen cerita harus tahu-menahu soal latar. Yang dipakai: senja lembut + bulan sabit + bintang + kunang-kunang — bagi anak itu sudah terbaca "malam". **Jangan digelapkan** tanpa lebih dulu menyelesaikan urusan warna teksnya.
+    - **Bulan tidak ditaruh di pojok kanan atas**: di sana selalu ada tombol 🔊. (Matahari di latar terbuka boleh, karena yang tampak cuma cahayanya.)
+    - `rumah` sudah dipakai: "Belalang datang ke rumah semut" (Semut & Belalang) dan "membersihkan rumah nenek" (Bawang Putih). `laut`, `gunung` & `malam` belum dipakai cerita mana pun — sengaja disiapkan supaya cerita berikutnya tinggal menyebut namanya.
+  - Belum ada latar untuk **rawa, pasar, sekolah (dalam kelas)**. Menambahnya = satu cabang di `TopBand`/`BottomBand` + satu nama di `SceneId` + warna langit di `scene.css`; jangan menambal dengan gambar impor.
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 

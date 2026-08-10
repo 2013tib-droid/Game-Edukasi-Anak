@@ -129,11 +129,14 @@ const SEMUT = story(
     ['Ikut bermain dan lupa bekerja', 'Kalau lupa bekerja, nanti tidak ada makanan saat musim hujan. Coba lagi!'],
   ),
   page('🏠', 'Musim hujan tiba. Makanan di ladang habis.'),
-  ask(
-    '🌧️',
-    'Belalang datang kelaparan ke rumah semut. Apa yang sebaiknya semut lakukan?',
-    'Berbagi makanan dan mengajaknya bekerja bersama',
-    ['Mengusir belalang', 'Menolong teman yang kesulitan itu perbuatan baik. Coba pilih yang lain!'],
+  at(
+    'rumah',
+    ask(
+      '🌧️',
+      'Belalang datang kelaparan ke rumah semut. Apa yang sebaiknya semut lakukan?',
+      'Berbagi makanan dan mengajaknya bekerja bersama',
+      ['Mengusir belalang', 'Menolong teman yang kesulitan itu perbuatan baik. Coba pilih yang lain!'],
+    ),
   ),
   page('🍚', 'Semut berbagi makanan. Belalang berjanji akan rajin mulai sekarang.'),
   page('⭐', 'Rajin bekerja dan suka menolong, dua-duanya penting!'),
@@ -208,7 +211,10 @@ const BAWANG = story(
       ['Masuk tanpa permisi', 'Masuk rumah orang harus permisi dulu ya. Coba lagi!'],
     ),
   ),
-  page('🧹', 'Nenek meminta bantuan membersihkan rumah. Bawang Putih membantu dengan senang hati.'),
+  at(
+    'rumah',
+    page('🧹', 'Nenek meminta bantuan membersihkan rumah. Bawang Putih membantu dengan senang hati.'),
+  ),
   ask(
     '🎁',
     'Nenek menyuruhnya memilih satu labu sebagai hadiah. Sebaiknya Bawang Putih memilih apa?',
