@@ -164,7 +164,7 @@ const JALAK = story(
     ['Pergi! Aku tidak mau ditumpangi', 'Jalak justru ingin menolong. Coba pilih yang lain!'],
   ),
   art(
-    'jalak-kerbau',
+    'jalak-kerbau-kutu',
     '🐦',
     'Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.',
   ),
