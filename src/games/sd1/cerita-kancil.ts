@@ -153,10 +153,14 @@ const GAJAH = story(
   'l3',
   { label: 'Kancil dan Gajah', item: 'elephant' },
   'Kancil dan Gajah. Ayo bantu Kancil menolong temannya!',
+  // Halaman pembuka ini SENGAJA tanpa `at()`: ilustrasinya (kiriman pemilik,
+  // 2026-08-10) sudah membawa rawanya sendiri — hutan, air, dan tepian — jadi
+  // latar gambar engine di belakangnya cuma jadi hutan di atas hutan.
+  // Latar `sungai` menyusul di halaman berikutnya dan berlaku sampai selesai.
+  pic('kancil-rawa', 'Pagi itu Kancil berjalan di tepi rawa.'),
   // Rawa belum punya latar sendiri; `sungai` sudah membawa air + tepian hijau
   // dan itu yang dikenali anak dari halaman ini.
-  at('sungai', page('🦌', 'Pagi itu Kancil berjalan di tepi rawa.')),
-  pic('elephant', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.'),
+  at('sungai', pic('elephant', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.')),
   ask(
     '🤔',
     'Gajah terlalu berat. Apa yang sebaiknya Kancil lakukan?',

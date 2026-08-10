@@ -62,6 +62,13 @@ export const ITEMS: Record<string, ItemDef> = {
   // justru dikenali dari badan hitam, paruh & kaki kuning, dan garis putih
   // di sayap; tidak ada emoji yang membawanya.
   jalak: { emoji: '🐦', label: 'burung jalak', ext: 'webp' },
+  // ILUSTRASI HALAMAN CERITA, bukan benda yang bisa dihitung. Gambarnya satu
+  // adegan utuh (Kancil berjalan di tepi rawa) berikut latarnya sendiri, jadi
+  // hanya boleh dipakai sebagai `StoryPage.item`. JANGAN dipakai sebagai
+  // jawaban tap-answer, sel papan hitung, atau kartu ingatan — di sana yang
+  // dibandingkan anak adalah bentuk satu benda, dan gambar beradegan penuh
+  // akan menyesatkan.
+  'kancil-rawa': { emoji: '🦌', label: 'kancil di tepi rawa', ext: 'webp' },
   // Everyday objects — the things that show up again and again in letter,
   // syllable and spelling questions (Taman Huruf, Pasang Kata, Suku Kata,
   // Ejaan Jitu, Pasangan Pintar).
