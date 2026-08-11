@@ -1,0 +1,57 @@
+# Pemeriksaan otomatis tiap ada perubahan kode.
+#
+# Gunanya: menangkap error TypeScript atau build yang gagal SEBELUM hasilnya
+# ter-deploy. Sebelum ini tidak ada yang memeriksa — satu typo di config game
+# bisa lolos sampai ke HP anak.
+#
+# Tidak perlu disetel apa-apa: tidak butuh secret, dan jalan sendiri.
+name: Periksa kode
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+# Kalau ada push baru di branch yang sama, batalkan pemeriksaan yang lama —
+# yang menentukan cuma commit terakhir.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  periksa:
+    name: Typecheck + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Pasang dependency
+        run: npm ci
+
+      - name: Typecheck (TypeScript strict)
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      # Cloud Functions punya package.json sendiri (deployable terpisah), jadi
+      # tidak ikut terperiksa oleh typecheck di atas.
+      - name: Pasang dependency Cloud Functions
+        working-directory: functions
+        run: npm ci
+
+      - name: Typecheck + build Cloud Functions
+        working-directory: functions
+        run: npm run build
+
+      # Narasi tidak boleh memuat digit — mesin suara membacanya dalam bahasa
+      # sendiri ("6 singa" jadi "six singa"). Skrip ini keluar dengan kode 1
+      # kalau ada yang lolos. Lihat CLAUDE.md bagian "ANGKA DI NARASI".
+      - name: Periksa narasi (tanpa angka digit)
+        run: npm run narasi

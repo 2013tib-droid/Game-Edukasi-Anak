@@ -3,8 +3,8 @@ import groupsData from '@/data/groups.json';
 import { gamesForGroup } from '@/games/registry';
 import { getGameStars } from '@/engine/core/progress';
 import type { GroupId } from '@/engine/core/types';
-import { isGameUnlocked } from '@/data/access';
-import { useLockMode } from '@/portal/useAccess';
+import { canPlayGame, isFreeGame } from '@/data/access';
+import { useLockMode, useOwnedGroups } from '@/portal/useAccess';
 import LockToggle from '@/portal/LockToggle';
 import Clock from '@/engine/ui/Clock';
 
@@ -16,6 +16,8 @@ export default function GroupPage() {
   const group = groupsData.groups.find((g) => g.id === groupId);
   // Re-render when the tester flips the lock switch.
   useLockMode();
+  // Kelompok yang sudah dibeli — menentukan gembok mana yang hilang.
+  const ownedGroups = useOwnedGroups();
 
   if (!group) {
     return (
@@ -45,7 +47,7 @@ export default function GroupPage() {
       >
         {games.map((game) => {
           const stars = getGameStars(game.id);
-          const unlocked = isGameUnlocked(game.id);
+          const unlocked = canPlayGame(game.id, group.id, ownedGroups);
           return (
             <Link
               key={game.id}
@@ -67,7 +69,9 @@ export default function GroupPage() {
               )}
               <span style={{ fontSize: 20 }}>{game.title}</span>
               <span style={{ fontSize: 16 }} aria-label={`${stars} bintang`}>
-                {stars > 0 ? `⭐ ${stars}` : unlocked ? 'GRATIS' : ''}
+                {/* "GRATIS" hanya untuk game yang memang gratis selamanya —
+                    game yang sudah DIBELI tidak boleh berlabel gratis. */}
+                {stars > 0 ? `⭐ ${stars}` : isFreeGame(game.id) ? 'GRATIS' : ''}
               </span>
             </Link>
           );

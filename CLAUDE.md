@@ -45,12 +45,12 @@ Alur pembeli:
 3. Masukkan kode aktivasi → Cloud Function memvalidasi kode di Firestore → tandai kode terpakai → set klaim akses kelompok di dokumen user.
 4. Game kelompok itu terbuka untuk akun tersebut.
 
-Aturan teknis:
-- Kode aktivasi: sekali pakai, disimpan di koleksi `activation_codes` (field: `code`, `group`, `used`, `usedBy`, `usedAt`). Generate batch kode via script.
-- **Batas perangkat: maksimal 3 device** per akun (simpan device fingerprint sederhana di `users/{uid}/devices`).
-- Validasi akses dilakukan **saat game diluncurkan** (online check), bukan hanya saat login.
-- Konten game premium TIDAK boleh ter-bundle di JS publik. Lazy-load per game, dan gate di level route + Firestore security rules.
-- Firestore Security Rules wajib ketat: user hanya bisa baca dokumen miliknya; kode aktivasi hanya bisa diproses lewat Cloud Function.
+Aturan teknis (**semuanya SUDAH terpasang di Fase 5** — lihat "Status Pengerjaan"):
+- Kode aktivasi: sekali pakai, disimpan di koleksi `activation_codes` (field: `code`, `group`, `used`, `usedBy`, `usedAt`). Dibuat lewat **Actions → "Buat kode aktivasi"** (`functions/scripts/generate-codes.mjs`).
+- **Batas perangkat: maksimal 3 device** per akun (`users/{uid}/devices`, ditulis hanya oleh Cloud Function).
+- Validasi akses dilakukan **saat game diluncurkan** (online check), bukan hanya saat login — `useGameAccess` di `GamePage`.
+- Konten game premium lazy-load per game, dan gate di level route + Firestore security rules. **CATATAN JUJUR:** chunk config-nya tetap file statis yang bisa diunduh siapa pun yang tahu URL-nya — yang dijual adalah AKSES (akun + kode + batas perangkat). Menutup celah itu = menyajikan config lewat Cloud Function bertoken, keputusan arsitektur yang **belum diambil**.
+- Firestore Security Rules ketat: user hanya bisa baca dokumen miliknya; kode aktivasi tertutup total dari client.
 
 ## Rencana Akses Saat Launching (KEPUTUSAN PEMILIK — 2026-07-26)
 
@@ -65,13 +65,15 @@ Aturan teknis:
 - **`src/data/access.ts` = satu-satunya sumber kebenaran.**
   - `FREE_GAME_IDS = ['hutan-hewan']` — daftar game yang tetap gratis saat terkunci.
   - `DEFAULT_LOCK_MODE` — `'buka'` (semua game terbuka, kondisi pra-rilis) atau `'kunci'` (hanya `FREE_GAME_IDS` yang terbuka).
-  - `isGameUnlocked(id)` dipakai `GroupPage` (gembok + label GRATIS) dan `GamePage` (gerbang akses). **Jangan menaruh keputusan akses di tempat lain.**
+  - `isGameUnlocked(id)` menjawab "apakah kunci berlaku untuk game ini"; **`canPlayGame(id, group, ownedGroups)`** adalah keputusan akhirnya — dipakai `GroupPage` (gembok + label GRATIS) dan, lewat `useGameAccess`, oleh `GamePage` (gerbang akses). **Jangan menaruh keputusan akses di tempat lain.**
+  - Sejak Fase 5, bagian yang mengikat bukan lagi mode kunci ini, melainkan `users/{uid}.groups` di Firestore yang cuma bisa ditulis Cloud Function. Mode kunci hanya menentukan **apakah** kepemilikan itu perlu diperiksa.
   - Field `freeDemo` sudah dihapus dari `GameConfig`/`MixedGameConfig` dan dari `GameMeta` — jangan dihidupkan lagi.
 - **Tiga cara mengubah mode** (prioritas dari atas):
   1. **Saklar di layar (untuk testing)** — tombol 🔓 Terbuka / 🔒 Terkunci di `TopBar` (landing & portal) dan di bawah daftar game (`/kelompok/:id`). Sekali ketuk, langsung berubah tanpa reload & tanpa build ulang; tersimpan di `localStorage` (`pp_lock_mode_v1`) per perangkat.
   2. **Env saat build**: `VITE_LOCK_MODE=kunci npm run build`.
   3. **Kode**: ubah `DEFAULT_LOCK_MODE` di `access.ts` — **inilah yang dilakukan saat launching**.
 - **Saklar hanya tampil di mode penguji**, supaya orang tua pembeli tak pernah melihatnya: aktif di dev server, atau setelah membuka URL berakhiran **`?test=1`** (di build HashRouter: `.../app/#/portal?test=1`). Matikan lagi dengan `?test=0`. Statusnya tersimpan di `localStorage` (`pp_test_mode_v1`).
+- **DAN saklar itu MATI TOTAL di build produksi** (sejak Fase 5, `TEST_TOGGLE_ALLOWED` di `access.ts`). Kalau tidak, saklarnya cuma satu baris `localStorage` — pembeli mana pun bisa membuka semua game tanpa membayar. Build penguji untuk HP sendiri: **`VITE_ALLOW_TEST_TOGGLE=1 VITE_LOCK_MODE=kunci npm run build`**. Di build tanpa env itu, override `localStorage` diabaikan dan `?test=1` tidak berefek (teruji).
 - Verifikasi cepat: buka `/kelompok/tk` & `/kelompok/sd1` saat mode `kunci` — hanya Hutan Hewan tanpa gembok & berlabel "GRATIS"; game lain menampilkan layar 🔒 + ajakan aktivasi. Sudah teruji headless 380×800 (buka↔kunci, persist setelah reload, TK & SD, layar gembok, Hutan Hewan tetap bisa dimainkan, nol error console).
 
 ## Arsitektur & Struktur Folder
@@ -128,8 +130,8 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, levels[]
 2. **Fase 2 — Engine:** core engine + 6 template game + sistem audio/narasi + progress bintang. ✅ **SELESAI**
 3. **Fase 3 — Migrasi:** porting game "Petualangan Pintar" (HTML standalone yang sudah ada) ke format engine sebagai game pertama kelompok TK.
 4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Saat rilis hanya `hutan-hewan` yang gratis (lihat "Sistem Kunci Game").
-5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi.
-6. **Fase 6 — Rilis:** deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli.
+5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi. ✅ **SELESAI** (2026-08-11, teruji di Firebase Emulator — lihat "Status Pengerjaan")
+6. **Fase 6 — Rilis:** buat project Firebase & deploy backend, sinkron bintang ke Firestore, halaman Privasi/S&K/refund, verifikasi email, analytics, lalu nyalakan mode `'kunci'` — deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli. **Langkah & prompt lengkapnya: `docs/fase-6-rilis-prompt.md`** (Bagian A = yang harus dikerjakan pemilik sendiri di Firebase Console).
 
 Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyakan konfirmasi sebelum keputusan arsitektur besar di luar dokumen ini.
 
@@ -141,13 +143,13 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Firebase **lazy-load via `getFirebase()`** (`src/auth/firebase.ts`) — SDK tidak ikut bundle awal (entry ±56 kB gzip). App tetap jalan tanpa `.env` (tampilkan notice "belum dikonfigurasi"); isi kunci dari `.env.example` saat project Firebase dibuat.
   - `firestore.rules` ketat: `activation_codes` tertutup dari client; field `users/{uid}.groups` hanya bisa diubah Cloud Function; default deny.
   - Kontrak config game type-safe di `src/engine/core/types.ts` (`GameConfig`, `TemplateId`, dst.) — fondasi Fase 2.
-  - `functions/` & `scripts/` masih README placeholder (diimplementasi Fase 5).
+  - `functions/` & `scripts/` waktu itu masih README placeholder — **sudah diimplementasi di Fase 5** (2026-08-11).
   - Perintah: `npm run dev` / `npm run build` / `npm run typecheck`.
 - **Fase 2 (Engine) — SELESAI** (2026-07-21), teruji headless-browser semua template:
   - `GameShell` (`src/engine/core/GameShell.tsx`): intro → level → selesai; feedback positif ("Coba lagi, kamu pasti bisa!"), bintang per level (0 salah = 3⭐), remount template per attempt.
   - **6 template** di `src/engine/templates/`: TapAnswer, DragDrop (pointer events, bukan HTML5 DnD — HTML5 DnD rusak di mobile), Tracing (canvas + cek coverage glyph), Memory, CountTap (pengecoh + target dilebihkan sesuai Aturan Desain Soal), StoryChoice. Semua lazy-load per chunk.
   - Audio (`src/engine/audio/sound.ts`): narasi `speechSynthesis` id-ID (nanti otomatis diganti file TTS saat aset tersedia) + SFX WebAudio tanpa aset.
-  - Progress bintang: localStorage (`src/engine/core/progress.ts`); sinkron Firestore menyusul Fase 5.
+  - Progress bintang: localStorage (`src/engine/core/progress.ts`). **MASIH localStorage sampai sekarang** — Fase 5 tidak mencakup ini, jadi ganti HP = maskot balik ke telur. Rules-nya (`users/{uid}/progress`) sudah siap menerima.
   - Registry game (`src/games/registry.ts`) + route `/game/:gameId` dengan gerbang akses (premium → layar terkunci + ajakan aktivasi).
   - **Config game = file `.ts` typed** (`src/games/tk/*.ts`, `src/games/sd1/*.ts`) dengan `GameConfig<T>` — sengaja .ts, bukan JSON, karena JSON tidak bisa dicek TypeScript secara literal. Ini pemenuhan niat "konten di file data terpisah": tetap data murni, tapi typo ketahuan saat build.
   - 7 game contoh: TK = hitung-buah (count-tap; **sudah dilebur ke Pasar Buah, 2026-07-26**), kenal-huruf (tap-answer), tulis-angka (tracing), kartu-kembar (memory); SD1 = pasang-kata (drag-drop), cerita-kancil (story-choice), tambah-tangkas (tap-answer). CATATAN: status gratis/terkunci sekarang diatur terpusat di `src/data/access.ts` (lihat "Sistem Kunci Game").
@@ -380,7 +382,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Daftar "Petualangan seru menanti" wajib memuat KEDUA kelompok.** Dulu isinya 4 dunia TK saja — itu tak apa selagi SD belum dijual, tapi begitu SD ikut dijual, memajang nol game SD berarti menjual sesuatu yang tak pernah diperlihatkan. Sekarang 8 chip: baris 1 = TK (Hutan Hewan, Taman Huruf, Labirin Warna, Pasar Buah), baris 2 = SD (Hitung Hebat, Ejaan Jitu, Jam Pintar, Cerita Nusantara) + 4 kelas warna baru `w-count`/`w-spell`/`w-clock`/`w-story` di `landing.css`. Grid `repeat(4, 1fr)` yang lama otomatis jadi dua baris — CSS-nya tak perlu diubah.
   - **Jam Pintar di chip landing pakai ⏰ (jam weker), BUKAN 🕒.** Alasannya sama dengan penggantian ikon kartu game 2026-08-02: 🕒 tampil seperti piringan abu-abu polos di HP. (Muka jam SVG `Clock.tsx` sengaja tidak dipakai di sini — chip landing itu emoji dalam lingkaran pastel, bukan komponen game.)
   - **Mode kunci TETAP `'buka'`.** Yang berubah cuma halaman jualan; `DEFAULT_LOCK_MODE` di `src/data/access.ts` tidak disentuh, jadi semua game masih bisa dicoba bebas.
-  - **PENGHALANG LAUNCHING YANG MASIH ADA (bukan soal SD saja):** Fase 5 belum dikerjakan — `functions/` masih README kosong dan `ActivationPage.tsx` masih stub yang menjawab *"Validasi kode belum aktif — menunggu Cloud Function (Fase 5)."* **Jangan nyalakan mode `'kunci'` sebelum itu jadi**: pembeli akan mentok di layar gembok karena kode aktivasinya tak divalidasi apa pun.
+  - **PENGHALANG LAUNCHING YANG MASIH ADA (bukan soal SD saja):** ~~Fase 5 belum dikerjakan~~ → **Fase 5 SELESAI 2026-08-11.** Penghalang yang tersisa sekarang cuma satu: **project Firebase-nya belum dibuat** (`.env` kosong), jadi login/daftar/aktivasi belum aktif di produksi. **Jangan nyalakan mode `'kunci'` sebelum project itu ada & backend-nya ter-deploy** — pembeli akan mentok di layar gembok karena tak ada server yang bisa memvalidasi kodenya. Langkah-langkahnya ada di `docs/fase-6-rilis-prompt.md`.
 
 - **Landing: bagian "Segera hadir" — SD Kelas 3 & 4 dan SD Kelas 5 & 6** (2026-08-07, permintaan pemilik), teruji headless 360×640, 380×800 & 820×1180 (kedua kartu terbaca utuh, urutan harga → segera hadir → FAQ, tanpa scroll horizontal & nol error console):
   - Bagian baru `<section className="soon">` di `LandingPage.tsx`, **sesudah kartu harga & sebelum FAQ**: orang tua melihat dulu apa yang bisa dibeli hari ini, baru peta jalannya. Isinya data di konstanta `soonGroups` — menambah jenjang berikutnya = menambah satu entri, tidak menyentuh markup.
@@ -590,6 +592,74 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
     - `rumah` sudah dipakai: "Belalang datang ke rumah semut" (Semut & Belalang) dan "membersihkan rumah nenek" (Bawang Putih). `laut`, `gunung` & `malam` belum dipakai cerita mana pun — sengaja disiapkan supaya cerita berikutnya tinggal menyebut namanya.
   - Belum ada latar untuk **rawa, pasar, sekolah (dalam kelas)**. Menambahnya = satu cabang di `TopBand`/`BottomBand` + satu nama di `SceneId` + warna langit di `scene.css`; jangan menambal dengan gambar impor.
 
+- **Persiapan rilis, bagian yang mudah dulu** (2026-08-11, dari audit "kurang apa untuk production"), teruji headless 380×800 lewat `vite preview` — 29 pemeriksaan lulus, nol error console, tanpa scroll horizontal:
+
+  **Yang dikerjakan (7 hal, semuanya di luar Fase 5)**
+  - **`ErrorBoundary`** (`src/app/ErrorBoundary.tsx`) membungkus `<App>` di `main.tsx`. Dulu satu error runtime = **layar putih total** tanpa jalan keluar; anak tak bisa melapor dan orang tua menyimpulkan aplikasinya rusak. Sekarang tampil 🐣 + "Aduh, permainannya tersendat · Bukan salahmu kok!" + tombol Coba Lagi / Beranda.
+    - **Diletakkan DI LUAR router** supaya error dari router-nya sendiri ikut tertangkap — konsekuensinya tak boleh ada `<Link>` di dalamnya, jadi kedua tombol memuat ulang halaman sungguhan. Itu justru yang menyembuhkan penyebab paling umum: **chunk lazy yang gagal diunduh** saat sinyal HP putus. Diuji persis dengan skenario itu (permintaan chunk `GamePage` diblokir).
+    - Harus tetap **class component** — hanya class yang bisa menangkap error render di React, walaupun seluruh app memakai function component.
+  - **Route `*` → `NotFoundPage`** (`src/app/NotFoundPage.tsx`). URL salah ketik / bookmark lama dulu memberi **halaman kosong**, bukan pesan.
+    - **Diimpor eager, bukan lazy** (satu-satunya halaman yang begitu): layar ini justru dibutuhkan saat ada yang sudah tidak beres, dan chunk lazy bisa ikut gagal dimuat.
+    - **JEBAKAN: jangan pakai kelas `.game-center` / `.game-big-emoji` di halaman eager.** Kelas-kelas itu ada di `engine.css`, yang hanya ikut chunk game (`GameShell` yang mengimpornya) — pengunjung yang mendarat langsung di URL ngawur akan melihatnya tanpa gaya. Karena itu `NotFoundPage`, `ErrorBoundary` & `SplashScreen` memakai gaya inline. `.btn` aman (ada di `global.css`).
+  - **Lupa kata sandi** — `resetPassword` di `AuthContext` + tautan di `LoginPage` yang memakai email yang sudah diketik (tanpa halaman baru). Tanpa ini, orang tua yang lupa kata sandi kehilangan kelompok yang sudah dibayar, dan satu-satunya pemulihan adalah japri WhatsApp pemilik satu per satu.
+    - **Email tak terdaftar HARUS mendapat pesan yang SAMA dengan yang terdaftar.** Firebase menjawab `auth/user-not-found`, dan menampilkannya akan mengubah form ini jadi alat pengecek "email siapa saja yang punya akun di sini". Yang ditampilkan: *"Kalau email itu terdaftar, kami sudah mengirim tautan…"*. `auth/invalid-email` boleh dijawab jujur (itu soal format, bukan soal siapa).
+  - **Meta share (og:image)** — link yang dibagikan di WhatsApp / bio TikTok dulu tampil polos tanpa gambar, padahal promosinya organik TikTok/Reels.
+    - Gambar `public/assets/og-image.jpg` (1200×630, 68 kB) dirender dari `logo.svg` + Fredoka asli. **JPEG, bukan PNG**: versi PNG-nya 291 kB karena gradien, dan pratinjau WhatsApp sebaiknya di bawah ±300 kB.
+    - **`og:image` WAJIB URL absolut** (crawler menolak path relatif), sedangkan `base` Vite cuma menghasilkan path. Karena itu ada plugin kecil `siteUrlPlugin` di `vite.config.ts` yang mengisi `%SITE_URL%` di `index.html`. Bawaannya URL GitHub Pages; saat pindah ke Firebase Hosting: **`SITE_URL=https://<domain>/ npm run build`**.
+  - **Ikon PWA + `public/manifest.webmanifest`** (Add to Home Screen). Ikon 180/192/512 dirender dari logo yang sama.
+    - **Latarnya sengaja PEKAT (#FFE9A8), bukan transparan** — iOS mengabaikan transparansi di `apple-touch-icon` dan menaruhnya di atas HITAM. Logonya digambar 78% supaya juga selamat dari masker maskable Android (lingkaran aman 80%).
+    - **Path di dalam manifest sengaja RELATIF** (`assets/icon-192.png`, `start_url: "."`): file itu disalin apa adanya, tidak diproses Vite, jadi path relatif inilah yang benar baik di root Firebase maupun di subfolder `/app/` GitHub Pages. Sebaliknya di `index.html` justru harus diawali `/` supaya Vite menambahkan base-nya.
+    - Belum ada service worker — jadi belum ada mode offline, dan Chrome mungkin tak menawarkan tombol "Install"; "Tambahkan ke Layar Utama" manual tetap jalan. Offline itu keputusan tersendiri (21 MB suara).
+  - **Cache header di `firebase.json`.** `/assets/voice/**` jadi `immutable` setahun — nama filenya hash isi kalimat, jadi kalimat yang berubah selalu jadi file BARU; ini yang mencegah 21 MB suara terunduh ulang dari kuota orang tua. JS/CSS ikut immutable (Vite mem-fingerprint namanya). **`items` & `mascot` TIDAK immutable** (`max-age=86400` + `stale-while-revalidate`) karena nama filenya tetap — mengganti gambar memakai URL yang sama. `index.html` & manifest `no-cache`.
+    - **JANGAN menaruh kunci `comment` di `firebase.json`**: Firebase CLI memvalidasi skemanya dan bisa menolak field asing saat deploy. Penjelasannya di sini saja.
+  - **CI `.github/workflows/ci.yml`** menjalankan `typecheck` + `build` + `npm run narasi` tiap push/PR. Sebelumnya tak ada yang memeriksa apa pun — dua workflow yang ada cuma untuk render suara. Langkah `narasi` ikut dipasang karena skrip itu **keluar dengan kode 1 kalau ada digit di narasi** (lihat "ANGKA DI NARASI"), jadi sekalian jadi penjaga.
+
+  **Yang SENGAJA belum dikerjakan (masih penghalang rilis)**
+  - ~~Fase 5 utuh~~ → **SELESAI 2026-08-11**, lihat entri berikutnya.
+  - Sinkron bintang ke Firestore (sekarang localStorage — ganti HP = maskot balik ke telur), verifikasi email, halaman Kebijakan Privasi / Syarat & Ketentuan / refund, dan analytics.
+  - Project Firebase-nya sendiri belum ada (`.env` kosong), jadi login & daftar pun belum aktif.
+
+- **Fase 5 (Monetisasi) — SELESAI** (2026-08-11), teruji di **Firebase Emulator Suite**: 39 pemeriksaan backend (rules + Cloud Functions) + 19 pemeriksaan ujung-ke-ujung aplikasi asli dalam mode terkunci + 8 pemeriksaan bahwa keadaan pra-rilis tidak ikut rusak — semuanya lulus, nol error console:
+
+  **Tiga Cloud Functions** (`functions/src/index.ts`, region **asia-southeast2/Jakarta** — client WAJIB sama, lihat `FUNCTIONS_REGION` di `firebase.ts`)
+  - `redeemActivationCode` — satu **transaksi** Firestore, jadi dua HP yang menekan "Aktifkan" bersamaan tak bisa memakai satu kode dua kali (teruji).
+  - `registerDevice` / `removeDevice` — batas **3 perangkat**. Penolakannya **membawa daftar perangkat** di `details`, dan `GamePage` menampilkannya dengan tombol "Lepas". Tanpa itu, ganti HP = kehilangan kelompok yang sudah dibayar, dan pemulihannya cuma japri WhatsApp — masalah yang sama seperti "lupa kata sandi".
+  - **Kode "tidak ada" dan "sudah dipakai" dijawab dengan kalimat yang SAMA.** Kalau dibedakan, jawabannya jadi alat untuk memetakan kode mana yang valid.
+  - **Rem anti-tebak**: 10 kegagalan per jam per akun, disimpan di koleksi `redeem_attempts` yang tertutup dari client — BUKAN di dokumen user, karena client boleh menulis dokumennya sendiri dan bisa mereset hitungannya. Teruji: selama direm, kode yang SAH pun ditolak.
+  - **Jangan melempar `HttpsError` dari dalam `runTransaction`**: callback-nya bisa dijalankan ulang saat tabrakan, dan errornya berisiko terbungkus jadi `internal` — pesan yang sudah disiapkan untuk orang tua hilang. Polanya: transaksi mengembalikan `status`, error dilempar sesudahnya.
+
+  **Gerbang akses yang sesungguhnya**
+  - `GamePage` memeriksa **setiap kali game diluncurkan** (`useGameAccess`), bukan sekali saat login: baca `users/{uid}.groups` dari Firestore → pastikan perangkat terdaftar → baru config game diunduh. **Jangan pindahkan `meta.load()` ke atas gerbang ini.**
+  - Game gratis & mode `'buka'` **tidak menyentuh jaringan sama sekali** — anak yang membuka Hutan Hewan tak boleh menunggu satu pun permintaan online.
+  - Perangkat dicek lewat **pembacaan Firestore** (murah), bukan panggilan function tiap kali; `registerDevice` hanya dipanggil kalau perangkatnya belum terdaftar, plus sekali sehari di latar untuk memperbarui "terakhir dipakai".
+  - Keputusannya tetap di satu tempat: `canPlayGame()` di `src/data/access.ts`. **Jangan menaruh keputusan akses di tempat lain.**
+
+  **Saklar penguji DIMATIKAN di build produksi — ini yang menutup lubang terbesar**
+  - `TEST_TOGGLE_ALLOWED` di `access.ts`: aktif hanya di dev server atau build bertanda `VITE_ALLOW_TEST_TOGGLE=1`. Di build yang dijual, override `localStorage` **diabaikan sepenuhnya** dan `?test=1` tidak berefek.
+  - Teruji langsung di aplikasi asli mode `'kunci'`: `localStorage.setItem('pp_lock_mode_v1','buka')` dan `?test=1` **tidak membuka game berbayar**.
+  - Build penguji untuk HP sendiri: `VITE_ALLOW_TEST_TOGGLE=1 VITE_LOCK_MODE=kunci npm run build`.
+
+  **BUG LAMA yang ikut ketahuan & diperbaiki: aturan `update` di firestore.rules**
+  - Bentuk lama `request.resource.data.groups == resource.data.groups` **ERROR**, bukan bernilai false, pada user yang belum pernah aktivasi (field `groups` belum ada). Akibatnya orang tua **tak bisa menulis APA PUN** di dokumennya sendiri. Terukur di emulator: "tulis field biasa" → ditolak.
+  - Sekarang `!request.resource.data.diff(resource.data).affectedKeys().hasAny(['groups'])` — menyatakan maksudnya langsung dan ikut menutup `setDoc` tanpa merge (yang menghapus `groups` tanpa menyebut namanya). **Jangan dikembalikan ke bentuk lama.**
+  - Log emulator tetap memuat satu `evaluation error` untuk aturan ini pada operasi **create** (di situ `resource` masih null). Itu tidak mengubah hasil — yang memutuskan create adalah aturan `create` — dan sudah diverifikasi 8 pengujian perilaku. **Jangan dikejar.**
+
+  **Kode aktivasi**
+  - Dibuat lewat **Actions → "Buat kode aktivasi"** (workflow_dispatch saja, tidak pernah otomatis dari push: tiap jalan ia mencetak barang jualan). Hasilnya CSV sebagai artifact, retensi 7 hari.
+  - Alfabet **tanpa I, L, O, 0, 1** — tiap karakter ambigu berubah jadi tiket "kode saya tidak bisa" di WhatsApp. Bentuk tampilan `TK-ABCD-2345`, id dokumennya versi tanpa tanda hubung.
+  - `normalizeCode()` di functions **harus sama persis** dengan `normalize()` di `generate-codes.mjs`. Orang tua boleh mengetik huruf kecil & tanda hubung sesukanya (teruji).
+  - Generator memakai `batch.create()`, bukan `set()` — menimpa dokumen lama berarti menghidupkan kembali kode yang sudah dipakai pembeli.
+
+  **JEBAKAN saat menguji dengan emulator**
+  - **JANGAN mengedit `firestore.rules` selagi emulator jalan.** File-watcher CLI memuat ulang rules lalu mati dengan `Unable to parse JSON: "denied by..."` (permintaan keluarnya diblokir kebijakan jaringan sesi). Hentikan emulator → ubah rules → jalankan lagi. Untuk mencoba-coba rules dengan cepat, pasang lewat REST: `PUT /emulator/v1/projects/<p>:securityRules`.
+  - Seed data uji lewat REST Firestore emulator dengan header `Authorization: Bearer owner` (melewati rules) — jauh lebih ringan daripada memasang admin SDK di sisi tes.
+  - Uji rules dengan **client SDK**, bukan admin SDK: admin SDK melewati rules, jadi tesnya tidak membuktikan apa pun.
+
+  **Yang MASIH kurang sebelum mode `'kunci'` dinyalakan**
+  - **Project Firebase-nya belum ada.** `.env` masih kosong, jadi login/daftar/aktivasi belum aktif di produksi. Workflow "Deploy backend" sudah ditulis tapi **belum pernah dijalankan** — jalankan sekali dengan "Cuma periksa" dulu.
+  - Sinkron bintang ke Firestore, verifikasi email, halaman Kebijakan Privasi / S&K / refund, analytics.
+  - **BATAS YANG DISADARI:** config game premium tetap berupa chunk JS statis yang bisa diunduh siapa pun yang tahu URL-nya. Yang dijual adalah AKSES (akun + kode + batas perangkat), dan itu memang menghentikan pembagian akun ke grup WhatsApp — tapi bukan orang yang sengaja mengambil file. Menutupnya berarti menyajikan config lewat Cloud Function bertoken: kehilangan type-safety saat build, menambah jeda & biaya tiap level. **Itu keputusan arsitektur tersendiri, belum diambil.**
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
@@ -678,7 +748,8 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 - **GitHub Pages menyajikan situs dari branch `claude/web-demo-html-wa4dr9`** (folder root), BUKAN dari branch default. Yang harus tampil di web WAJIB di-build lalu di-push ke branch itu — push ke branch lain tidak memicu build Pages.
 - **Deploy HANYA dari `main`.** Build `app/` selalu dari `main` (yang pasti punya landing page + semua fitur). JANGAN pernah deploy `app/` dari branch fitur yang belum punya landing page — itulah penyebab landing page berulang ketimpa. Cek cepat landing (di atas) sebelum build.
 - **Struktur branch Pages:** app React (landing di route `/`) disajikan di subfolder **`app/`**. Root `index.html` = **redirect ke `./app/`** (bukan landing statis; satu landing kanonik). `404.html` juga redirect ke `app/` (app pakai HashRouter). `petualangan-pintar.html` tetap ada sebagai sumber standalone, tak ditaut dari root.
-- **Cara deploy:** `DEPLOY_BASE=/Game-Edukasi-Anak/app/ VITE_USE_HASH_ROUTER=1 npm run build`, lalu ganti isi folder `app/` di branch Pages dengan hasil `dist/` (termasuk `dist/assets/logo.svg`, `dist/assets/items/*.webp` & `dist/assets/voice/`). Produksi nanti (Firebase Hosting) pakai `base` default `/` + BrowserRouter.
+- **Cara deploy:** `DEPLOY_BASE=/Game-Edukasi-Anak/app/ VITE_USE_HASH_ROUTER=1 npm run build`, lalu ganti isi folder `app/` di branch Pages dengan hasil `dist/` (termasuk `dist/assets/logo.svg`, `dist/assets/items/*.webp`, `dist/assets/voice/`, `dist/assets/og-image.jpg`, ikon PWA & `dist/manifest.webmanifest`). Produksi nanti (Firebase Hosting) pakai `base` default `/` + BrowserRouter.
+- **`SITE_URL` menentukan gambar pratinjau saat link dibagikan.** Bawaannya URL GitHub Pages, jadi build Pages tak perlu menyebutnya. **Saat pindah ke Firebase Hosting WAJIB diisi** — kalau tidak, link produksi yang dibagikan di WhatsApp/TikTok menarik gambar dari domain Pages yang lama: `SITE_URL=https://<domain-produksi>/ npm run build`.
 - URL live: `https://2013tib-droid.github.io/Game-Edukasi-Anak/` (redirect ke `/app/`). Setelah push, build Pages butuh ±1–2 menit; browser HP sering menyimpan cache versi lama (hard-refresh).
 - **Sesi Claude TIDAK bisa membuka URL live-nya** — kebijakan jaringan sesi memblokir `github.io` (403 di CONNECT), sama seperti host Azure. Jadi setelah deploy, **jangan mengaku situsnya sudah terverifikasi**. Yang BISA diverifikasi dari sesi: isi branch Pages lewat GitHub API (`/contents/app/...`) dan pengujian headless terhadap `npm run dev`/`vite preview` lokal. Konfirmasi akhir di HP asli tetap tugas pemilik.
 

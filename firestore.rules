@@ -1,37 +1,66 @@
 rules_version = '2';
 
-// Prinsip: user hanya bisa baca data miliknya sendiri.
-// Kode aktivasi TIDAK bisa dibaca/ditulis dari client sama sekali —
-// hanya Cloud Function (Admin SDK, melewati rules) yang memprosesnya.
+// Prinsip: user hanya bisa baca data miliknya sendiri, dan semua yang
+// menentukan AKSES BERBAYAR hanya boleh ditulis Cloud Function (Admin SDK
+// melewati rules ini). Apa pun yang berjalan di HP dianggap bisa diubah.
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Profil user: baca milik sendiri; field akses kelompok (groups)
-    // hanya boleh diubah oleh Cloud Function, jadi client tak boleh menulisnya.
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // Profil user. Field `groups` (kelompok yang sudah dibeli) hanya boleh
+    // diubah Cloud Function `redeemActivationCode` — client boleh menulis
+    // field lain di dokumennya sendiri, asal `groups` tidak ikut berubah.
     match /users/{uid} {
-      allow read: if request.auth != null && request.auth.uid == uid;
-      allow create: if request.auth != null
-        && request.auth.uid == uid
+      allow read: if isOwner(uid);
+      allow create: if isOwner(uid)
         && !('groups' in request.resource.data);
-      allow update: if request.auth != null
-        && request.auth.uid == uid
-        && request.resource.data.groups == resource.data.groups;
+      // Update tidak boleh MENYENTUH kunci `groups` — menambah, mengubah,
+      // maupun menghapusnya. Termasuk lewat `setDoc` tanpa merge, yang
+      // menghapus `groups` tanpa pernah menyebut namanya.
+      //
+      // JANGAN kembalikan ke `request.resource.data.groups == resource.data.groups`
+      // (bentuk lama). Sudah diuji di emulator: pada user yang BELUM pernah
+      // aktivasi field `groups` belum ada, dan membandingkan field yang tidak
+      // ada membuat seluruh aturan ERROR — akibatnya orang tua tak bisa
+      // menulis APA PUN di dokumennya sendiri, bukan cuma `groups`.
+      //
+      // CATATAN: log emulator tetap memuat satu "evaluation error" untuk
+      // aturan ini pada operasi CREATE (di situ `resource` masih null,
+      // jadi `resource.data` tidak bisa dibaca). Itu tidak mengubah hasil —
+      // yang memutuskan create adalah aturan `create` di atas — dan sudah
+      // diverifikasi lewat 8 pengujian perilaku. Jangan dikejar.
+      allow update: if isOwner(uid)
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['groups']);
       allow delete: if false;
 
-      // Device fingerprint (batas 3 device divalidasi di Cloud Function /
-      // saat peluncuran game; rules membatasi kepemilikan saja).
+      // Perangkat terdaftar (batas 3). Client boleh MELIHAT daftarnya supaya
+      // orang tua bisa memilih mana yang dilepas, tapi menambah/menghapusnya
+      // harus lewat `registerDevice` / `removeDevice` — kalau client boleh
+      // menulis sendiri, batas perangkatnya bisa dihapus dari HP.
       match /devices/{deviceId} {
-        allow read, write: if request.auth != null && request.auth.uid == uid;
+        allow read: if isOwner(uid);
+        allow write: if false;
       }
 
-      // Progress bintang per anak.
+      // Progress bintang per anak — murni milik user, aman ditulis client.
       match /progress/{gameId} {
-        allow read, write: if request.auth != null && request.auth.uid == uid;
+        allow read, write: if isOwner(uid);
       }
     }
 
-    // Kode aktivasi: tertutup total dari client.
+    // Kode aktivasi: tertutup total dari client. Kalau bisa dibaca, seluruh
+    // daftar kode yang belum terpakai ikut terbaca.
     match /activation_codes/{code} {
+      allow read, write: if false;
+    }
+
+    // Hitungan percobaan kode yang gagal (rem anti-tebak). Sengaja di luar
+    // dokumen user: client boleh menulis dokumennya sendiri, jadi hitungan
+    // yang ditaruh di sana bisa direset sendiri oleh penebak kode.
+    match /redeem_attempts/{uid} {
       allow read, write: if false;
     }
 
