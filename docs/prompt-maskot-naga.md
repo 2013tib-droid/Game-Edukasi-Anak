@@ -3,9 +3,23 @@
 Dokumen **siap tempel** untuk membuat enam gambar maskot lanjutan.
 
 Tangga maskot diperpanjang dari 6 jadi **12 tahap** (2026-08-09, lihat catatan
-di `CLAUDE.md`). Enam tahap baru sudah hidup di app dan **sudah ter-deploy** —
-sekarang tampil pakai emoji cadangan (🔥💎⚡🌈🌟👑) karena seninya belum ada.
-Begitu kamu kirim gambarnya, aku tinggal memasang file + satu kata di kodenya.
+di `CLAUDE.md`). **Tahap 7–9 sudah punya seninya** (2026-08-11, ter-deploy);
+tiga tahap sisanya (🌈🌟👑) masih tampil pakai emoji cadangan. Begitu kamu
+kirim gambarnya, aku tinggal memasang file + satu kata di kodenya.
+
+**Pelajaran dari batch 7–9 — pakai ini saat meminta tahap 10–12:**
+
+- Percobaan yang langsung diterima selalu punya tiga hal: **latar putih polos
+  tanpa bayangan lantai**, **tanpa partikel yang melayang jauh dari badan**
+  (setelah autocrop, partikel terluar yang menentukan batas gambar, jadi
+  naganya jadi mengecil), dan **sayap merapat ke badan**.
+- **Warna elemen barunya harus PEKAT dengan garis tepi jelas.** Kristal pucat
+  tembus pandang dan kilat setipis rambut sama-sama hilang di avatar 72px, dan
+  yang nyaris seputih latar berisiko ikut termakan saat latarnya dipotong.
+  Patokannya: sepekat api oranye di `mascot-7`.
+- Elemen yang jauh lebih kecil dari sayap (tanduk bercahaya, percikan) **tidak
+  perlu dikejar** — tak terlihat di 72px, dan menuntutnya cuma menambah putaran
+  revisi.
 
 > **Ini BUKAN gaya yang sama dengan `prompt-gambar-gemini.md`.** Aset benda &
 > hewan di sana bergaya stiker: outline hitam tebal, warna flat. Maskot
@@ -18,9 +32,9 @@ Begitu kamu kirim gambarnya, aku tinggal memasang file + satu kata di kodenya.
 
 | File yang dikirim | Tahap | Bintang | Emoji sementara |
 |---|---|---|---|
-| `mascot-7.png` | Naga Api | 145 ⭐ | 🔥 |
-| `mascot-8.png` | Naga Kristal | 200 ⭐ | 💎 |
-| `mascot-9.png` | Naga Petir | 265 ⭐ | ⚡ |
+| ~~`mascot-7.png`~~ | Naga Api | 145 ⭐ | ✅ **SUDAH ADA** (2026-08-11) |
+| ~~`mascot-8.png`~~ | Naga Kristal | 200 ⭐ | ✅ **SUDAH ADA** (2026-08-11) |
+| ~~`mascot-9.png`~~ | Naga Petir | 265 ⭐ | ✅ **SUDAH ADA** (2026-08-11) |
 | `mascot-10.png` | Naga Pelangi | 340 ⭐ | 🌈 |
 | `mascot-11.png` | Naga Bintang | 440 ⭐ | 🌟 |
 | `mascot-12.png` | Naga Legenda | 555 ⭐ | 👑 |

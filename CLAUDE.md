@@ -561,6 +561,13 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Tangga ini murni data: `MASCOTS` di `src/engine/core/mascot.ts` adalah satu-satunya tempat: `mascotFor()` dan kartu maskot mengikutinya sendiri (nomor level = indeks, bar & sisa bintang dihitung dari ambang tetangganya). **Jangan menaruh angka tahap di tempat lain.**
   - Nama tahap harus **pendek**: kartu maskot menaruh nama + chip "Level N" dalam satu baris. "Burung Hantu Pintar" itu yang terpanjang yang masih muat di HP 360px — semua nama naga baru jauh lebih pendek.
 
+- **Maskot tahap 7–9 jadi seni premium: Naga Api, Naga Kristal, Naga Petir** (2026-08-11, gambar dari pemilik), teruji headless 380×800, 360×640 & 820×1180 — 99 pemeriksaan, nol error console & nol permintaan gagal:
+  - `pic:` diisi untuk tiga tahap pertama dari enam tahap naga lanjutan; **tahap 10–12 (Pelangi, Bintang, Legenda) sengaja dibiarkan tanpa `pic`** sampai seninya ada, jadi tetap merender emoji tanpa `<img>` sama sekali (nol 404). Kontrak `MascotStage.pic` opsional tidak berubah.
+  - Ukuran 256px di sisi terpanjang, mengikuti `mascot-1..6`. Avatar cuma 72px — lebih besar hanya menambah berat tanpa terlihat.
+  - **Tesnya memeriksa `naturalWidth > 0`, bukan sekadar ada `<img>`.** Gambar yang 404 tetap merender elemennya, dan emoji cadangan hanya muncul lewat `onError` — jadi "ada gambarnya" tidak membuktikan apa pun.
+  - **Nyala api yang menggantung di ujung ekor `mascot-9` dihapus** sebelum dipotong (bercak abu-abu di tengahnya = cacat render, dan nyala api itu ciri tahap 7 bukan tahap petir). Caranya: di dalam kotak yang melingkupinya, semua piksel yang **bukan** teal (`b > r + 20`) dicat putih dulu supaya ikut terbuang flood-fill `cut-item.py`. Ekornya sendiri tak tersentuh — spesifikasi tahap 9 memang tidak menyebut ekor.
+  - Pelajaran memilih gambar (latar putih tanpa bayangan lantai · tanpa partikel melayang jauh · sayap merapat · warna elemen baru harus pekat) ditulis di kepala `docs/prompt-maskot-naga.md` — **baca itu dulu sebelum meminta tahap 10–12.**
+
 - **Latar tempat cerita (hutan, kebun, sungai, sawah, padang, kota) — digambar engine, TANPA impor gambar** (2026-08-10, permintaan pemilik dari tangkapan layar Cerita Anak: *"Bisa ngga ada background hutan? Apa perlu diimport gambar?"*), teruji headless 360×640, 380×800 & 820×1180 — **9 cerita (Cerita Anak + Cerita Nusantara) dimainkan sampai layar hasil di ketiga ukuran**, tiap pilihan yang kurang tepat ditekan lebih dulu; keenam latar tampil, nol scroll, nol error console, nol permintaan gagal:
 
   **Jawaban atas "apa perlu diimport gambar?": TIDAK.**
