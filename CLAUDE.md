@@ -128,7 +128,7 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, levels[]
 2. **Fase 2 — Engine:** core engine + 6 template game + sistem audio/narasi + progress bintang. ✅ **SELESAI**
 3. **Fase 3 — Migrasi:** porting game "Petualangan Pintar" (HTML standalone yang sudah ada) ke format engine sebagai game pertama kelompok TK.
 4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Saat rilis hanya `hutan-hewan` yang gratis (lihat "Sistem Kunci Game").
-5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi.
+5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi. ✅ **SELESAI** (2026-08-11, teruji di Firebase Emulator — lihat "Status Pengerjaan")
 6. **Fase 6 — Rilis:** deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli.
 
 Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyakan konfirmasi sebelum keputusan arsitektur besar di luar dokumen ini.
@@ -613,9 +613,50 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **CI `.github/workflows/ci.yml`** menjalankan `typecheck` + `build` + `npm run narasi` tiap push/PR. Sebelumnya tak ada yang memeriksa apa pun — dua workflow yang ada cuma untuk render suara. Langkah `narasi` ikut dipasang karena skrip itu **keluar dengan kode 1 kalau ada digit di narasi** (lihat "ANGKA DI NARASI"), jadi sekalian jadi penjaga.
 
   **Yang SENGAJA belum dikerjakan (masih penghalang rilis)**
-  - Fase 5 utuh: Cloud Function validasi kode, generator kode, batas 3 device, dan **gerbang akses yang sesungguhnya**. Ingat `isGameUnlocked()` masih 100% client-side — siapa pun bisa `localStorage.setItem('pp_lock_mode_v1','buka')` atau membuka `?test=1` lalu menekan 🔓. **Saklar penguji wajib mati total di build produksi sebelum mode `'kunci'` dinyalakan.**
+  - ~~Fase 5 utuh~~ → **SELESAI 2026-08-11**, lihat entri berikutnya.
   - Sinkron bintang ke Firestore (sekarang localStorage — ganti HP = maskot balik ke telur), verifikasi email, halaman Kebijakan Privasi / Syarat & Ketentuan / refund, dan analytics.
   - Project Firebase-nya sendiri belum ada (`.env` kosong), jadi login & daftar pun belum aktif.
+
+- **Fase 5 (Monetisasi) — SELESAI** (2026-08-11), teruji di **Firebase Emulator Suite**: 39 pemeriksaan backend (rules + Cloud Functions) + 19 pemeriksaan ujung-ke-ujung aplikasi asli dalam mode terkunci + 8 pemeriksaan bahwa keadaan pra-rilis tidak ikut rusak — semuanya lulus, nol error console:
+
+  **Tiga Cloud Functions** (`functions/src/index.ts`, region **asia-southeast2/Jakarta** — client WAJIB sama, lihat `FUNCTIONS_REGION` di `firebase.ts`)
+  - `redeemActivationCode` — satu **transaksi** Firestore, jadi dua HP yang menekan "Aktifkan" bersamaan tak bisa memakai satu kode dua kali (teruji).
+  - `registerDevice` / `removeDevice` — batas **3 perangkat**. Penolakannya **membawa daftar perangkat** di `details`, dan `GamePage` menampilkannya dengan tombol "Lepas". Tanpa itu, ganti HP = kehilangan kelompok yang sudah dibayar, dan pemulihannya cuma japri WhatsApp — masalah yang sama seperti "lupa kata sandi".
+  - **Kode "tidak ada" dan "sudah dipakai" dijawab dengan kalimat yang SAMA.** Kalau dibedakan, jawabannya jadi alat untuk memetakan kode mana yang valid.
+  - **Rem anti-tebak**: 10 kegagalan per jam per akun, disimpan di koleksi `redeem_attempts` yang tertutup dari client — BUKAN di dokumen user, karena client boleh menulis dokumennya sendiri dan bisa mereset hitungannya. Teruji: selama direm, kode yang SAH pun ditolak.
+  - **Jangan melempar `HttpsError` dari dalam `runTransaction`**: callback-nya bisa dijalankan ulang saat tabrakan, dan errornya berisiko terbungkus jadi `internal` — pesan yang sudah disiapkan untuk orang tua hilang. Polanya: transaksi mengembalikan `status`, error dilempar sesudahnya.
+
+  **Gerbang akses yang sesungguhnya**
+  - `GamePage` memeriksa **setiap kali game diluncurkan** (`useGameAccess`), bukan sekali saat login: baca `users/{uid}.groups` dari Firestore → pastikan perangkat terdaftar → baru config game diunduh. **Jangan pindahkan `meta.load()` ke atas gerbang ini.**
+  - Game gratis & mode `'buka'` **tidak menyentuh jaringan sama sekali** — anak yang membuka Hutan Hewan tak boleh menunggu satu pun permintaan online.
+  - Perangkat dicek lewat **pembacaan Firestore** (murah), bukan panggilan function tiap kali; `registerDevice` hanya dipanggil kalau perangkatnya belum terdaftar, plus sekali sehari di latar untuk memperbarui "terakhir dipakai".
+  - Keputusannya tetap di satu tempat: `canPlayGame()` di `src/data/access.ts`. **Jangan menaruh keputusan akses di tempat lain.**
+
+  **Saklar penguji DIMATIKAN di build produksi — ini yang menutup lubang terbesar**
+  - `TEST_TOGGLE_ALLOWED` di `access.ts`: aktif hanya di dev server atau build bertanda `VITE_ALLOW_TEST_TOGGLE=1`. Di build yang dijual, override `localStorage` **diabaikan sepenuhnya** dan `?test=1` tidak berefek.
+  - Teruji langsung di aplikasi asli mode `'kunci'`: `localStorage.setItem('pp_lock_mode_v1','buka')` dan `?test=1` **tidak membuka game berbayar**.
+  - Build penguji untuk HP sendiri: `VITE_ALLOW_TEST_TOGGLE=1 VITE_LOCK_MODE=kunci npm run build`.
+
+  **BUG LAMA yang ikut ketahuan & diperbaiki: aturan `update` di firestore.rules**
+  - Bentuk lama `request.resource.data.groups == resource.data.groups` **ERROR**, bukan bernilai false, pada user yang belum pernah aktivasi (field `groups` belum ada). Akibatnya orang tua **tak bisa menulis APA PUN** di dokumennya sendiri. Terukur di emulator: "tulis field biasa" → ditolak.
+  - Sekarang `!request.resource.data.diff(resource.data).affectedKeys().hasAny(['groups'])` — menyatakan maksudnya langsung dan ikut menutup `setDoc` tanpa merge (yang menghapus `groups` tanpa menyebut namanya). **Jangan dikembalikan ke bentuk lama.**
+  - Log emulator tetap memuat satu `evaluation error` untuk aturan ini pada operasi **create** (di situ `resource` masih null). Itu tidak mengubah hasil — yang memutuskan create adalah aturan `create` — dan sudah diverifikasi 8 pengujian perilaku. **Jangan dikejar.**
+
+  **Kode aktivasi**
+  - Dibuat lewat **Actions → "Buat kode aktivasi"** (workflow_dispatch saja, tidak pernah otomatis dari push: tiap jalan ia mencetak barang jualan). Hasilnya CSV sebagai artifact, retensi 7 hari.
+  - Alfabet **tanpa I, L, O, 0, 1** — tiap karakter ambigu berubah jadi tiket "kode saya tidak bisa" di WhatsApp. Bentuk tampilan `TK-ABCD-2345`, id dokumennya versi tanpa tanda hubung.
+  - `normalizeCode()` di functions **harus sama persis** dengan `normalize()` di `generate-codes.mjs`. Orang tua boleh mengetik huruf kecil & tanda hubung sesukanya (teruji).
+  - Generator memakai `batch.create()`, bukan `set()` — menimpa dokumen lama berarti menghidupkan kembali kode yang sudah dipakai pembeli.
+
+  **JEBAKAN saat menguji dengan emulator**
+  - **JANGAN mengedit `firestore.rules` selagi emulator jalan.** File-watcher CLI memuat ulang rules lalu mati dengan `Unable to parse JSON: "denied by..."` (permintaan keluarnya diblokir kebijakan jaringan sesi). Hentikan emulator → ubah rules → jalankan lagi. Untuk mencoba-coba rules dengan cepat, pasang lewat REST: `PUT /emulator/v1/projects/<p>:securityRules`.
+  - Seed data uji lewat REST Firestore emulator dengan header `Authorization: Bearer owner` (melewati rules) — jauh lebih ringan daripada memasang admin SDK di sisi tes.
+  - Uji rules dengan **client SDK**, bukan admin SDK: admin SDK melewati rules, jadi tesnya tidak membuktikan apa pun.
+
+  **Yang MASIH kurang sebelum mode `'kunci'` dinyalakan**
+  - **Project Firebase-nya belum ada.** `.env` masih kosong, jadi login/daftar/aktivasi belum aktif di produksi. Workflow "Deploy backend" sudah ditulis tapi **belum pernah dijalankan** — jalankan sekali dengan "Cuma periksa" dulu.
+  - Sinkron bintang ke Firestore, verifikasi email, halaman Kebijakan Privasi / S&K / refund, analytics.
+  - **BATAS YANG DISADARI:** config game premium tetap berupa chunk JS statis yang bisa diunduh siapa pun yang tahu URL-nya. Yang dijual adalah AKSES (akun + kode + batas perangkat), dan itu memang menghentikan pembagian akun ke grup WhatsApp — tapi bukan orang yang sengaja mengambil file. Menutupnya berarti menyajikan config lewat Cloud Function bertoken: kehilangan type-safety saat build, menambah jeda & biaya tiap level. **Itu keputusan arsitektur tersendiri, belum diambil.**
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 

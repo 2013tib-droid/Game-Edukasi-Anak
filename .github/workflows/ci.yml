@@ -40,6 +40,16 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Cloud Functions punya package.json sendiri (deployable terpisah), jadi
+      # tidak ikut terperiksa oleh typecheck di atas.
+      - name: Pasang dependency Cloud Functions
+        working-directory: functions
+        run: npm ci
+
+      - name: Typecheck + build Cloud Functions
+        working-directory: functions
+        run: npm run build
+
       # Narasi tidak boleh memuat digit — mesin suara membacanya dalam bahasa
       # sendiri ("6 singa" jadi "six singa"). Skrip ini keluar dengan kode 1
       # kalau ada yang lolos. Lihat CLAUDE.md bagian "ANGKA DI NARASI".
