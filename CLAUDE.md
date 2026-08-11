@@ -45,12 +45,12 @@ Alur pembeli:
 3. Masukkan kode aktivasi → Cloud Function memvalidasi kode di Firestore → tandai kode terpakai → set klaim akses kelompok di dokumen user.
 4. Game kelompok itu terbuka untuk akun tersebut.
 
-Aturan teknis:
-- Kode aktivasi: sekali pakai, disimpan di koleksi `activation_codes` (field: `code`, `group`, `used`, `usedBy`, `usedAt`). Generate batch kode via script.
-- **Batas perangkat: maksimal 3 device** per akun (simpan device fingerprint sederhana di `users/{uid}/devices`).
-- Validasi akses dilakukan **saat game diluncurkan** (online check), bukan hanya saat login.
-- Konten game premium TIDAK boleh ter-bundle di JS publik. Lazy-load per game, dan gate di level route + Firestore security rules.
-- Firestore Security Rules wajib ketat: user hanya bisa baca dokumen miliknya; kode aktivasi hanya bisa diproses lewat Cloud Function.
+Aturan teknis (**semuanya SUDAH terpasang di Fase 5** — lihat "Status Pengerjaan"):
+- Kode aktivasi: sekali pakai, disimpan di koleksi `activation_codes` (field: `code`, `group`, `used`, `usedBy`, `usedAt`). Dibuat lewat **Actions → "Buat kode aktivasi"** (`functions/scripts/generate-codes.mjs`).
+- **Batas perangkat: maksimal 3 device** per akun (`users/{uid}/devices`, ditulis hanya oleh Cloud Function).
+- Validasi akses dilakukan **saat game diluncurkan** (online check), bukan hanya saat login — `useGameAccess` di `GamePage`.
+- Konten game premium lazy-load per game, dan gate di level route + Firestore security rules. **CATATAN JUJUR:** chunk config-nya tetap file statis yang bisa diunduh siapa pun yang tahu URL-nya — yang dijual adalah AKSES (akun + kode + batas perangkat). Menutup celah itu = menyajikan config lewat Cloud Function bertoken, keputusan arsitektur yang **belum diambil**.
+- Firestore Security Rules ketat: user hanya bisa baca dokumen miliknya; kode aktivasi tertutup total dari client.
 
 ## Rencana Akses Saat Launching (KEPUTUSAN PEMILIK — 2026-07-26)
 
@@ -65,13 +65,15 @@ Aturan teknis:
 - **`src/data/access.ts` = satu-satunya sumber kebenaran.**
   - `FREE_GAME_IDS = ['hutan-hewan']` — daftar game yang tetap gratis saat terkunci.
   - `DEFAULT_LOCK_MODE` — `'buka'` (semua game terbuka, kondisi pra-rilis) atau `'kunci'` (hanya `FREE_GAME_IDS` yang terbuka).
-  - `isGameUnlocked(id)` dipakai `GroupPage` (gembok + label GRATIS) dan `GamePage` (gerbang akses). **Jangan menaruh keputusan akses di tempat lain.**
+  - `isGameUnlocked(id)` menjawab "apakah kunci berlaku untuk game ini"; **`canPlayGame(id, group, ownedGroups)`** adalah keputusan akhirnya — dipakai `GroupPage` (gembok + label GRATIS) dan, lewat `useGameAccess`, oleh `GamePage` (gerbang akses). **Jangan menaruh keputusan akses di tempat lain.**
+  - Sejak Fase 5, bagian yang mengikat bukan lagi mode kunci ini, melainkan `users/{uid}.groups` di Firestore yang cuma bisa ditulis Cloud Function. Mode kunci hanya menentukan **apakah** kepemilikan itu perlu diperiksa.
   - Field `freeDemo` sudah dihapus dari `GameConfig`/`MixedGameConfig` dan dari `GameMeta` — jangan dihidupkan lagi.
 - **Tiga cara mengubah mode** (prioritas dari atas):
   1. **Saklar di layar (untuk testing)** — tombol 🔓 Terbuka / 🔒 Terkunci di `TopBar` (landing & portal) dan di bawah daftar game (`/kelompok/:id`). Sekali ketuk, langsung berubah tanpa reload & tanpa build ulang; tersimpan di `localStorage` (`pp_lock_mode_v1`) per perangkat.
   2. **Env saat build**: `VITE_LOCK_MODE=kunci npm run build`.
   3. **Kode**: ubah `DEFAULT_LOCK_MODE` di `access.ts` — **inilah yang dilakukan saat launching**.
 - **Saklar hanya tampil di mode penguji**, supaya orang tua pembeli tak pernah melihatnya: aktif di dev server, atau setelah membuka URL berakhiran **`?test=1`** (di build HashRouter: `.../app/#/portal?test=1`). Matikan lagi dengan `?test=0`. Statusnya tersimpan di `localStorage` (`pp_test_mode_v1`).
+- **DAN saklar itu MATI TOTAL di build produksi** (sejak Fase 5, `TEST_TOGGLE_ALLOWED` di `access.ts`). Kalau tidak, saklarnya cuma satu baris `localStorage` — pembeli mana pun bisa membuka semua game tanpa membayar. Build penguji untuk HP sendiri: **`VITE_ALLOW_TEST_TOGGLE=1 VITE_LOCK_MODE=kunci npm run build`**. Di build tanpa env itu, override `localStorage` diabaikan dan `?test=1` tidak berefek (teruji).
 - Verifikasi cepat: buka `/kelompok/tk` & `/kelompok/sd1` saat mode `kunci` — hanya Hutan Hewan tanpa gembok & berlabel "GRATIS"; game lain menampilkan layar 🔒 + ajakan aktivasi. Sudah teruji headless 380×800 (buka↔kunci, persist setelah reload, TK & SD, layar gembok, Hutan Hewan tetap bisa dimainkan, nol error console).
 
 ## Arsitektur & Struktur Folder
@@ -129,7 +131,7 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, levels[]
 3. **Fase 3 — Migrasi:** porting game "Petualangan Pintar" (HTML standalone yang sudah ada) ke format engine sebagai game pertama kelompok TK.
 4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Saat rilis hanya `hutan-hewan` yang gratis (lihat "Sistem Kunci Game").
 5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi. ✅ **SELESAI** (2026-08-11, teruji di Firebase Emulator — lihat "Status Pengerjaan")
-6. **Fase 6 — Rilis:** deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli.
+6. **Fase 6 — Rilis:** buat project Firebase & deploy backend, sinkron bintang ke Firestore, halaman Privasi/S&K/refund, verifikasi email, analytics, lalu nyalakan mode `'kunci'` — deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli. **Langkah & prompt lengkapnya: `docs/fase-6-rilis-prompt.md`** (Bagian A = yang harus dikerjakan pemilik sendiri di Firebase Console).
 
 Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyakan konfirmasi sebelum keputusan arsitektur besar di luar dokumen ini.
 
@@ -141,13 +143,13 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Firebase **lazy-load via `getFirebase()`** (`src/auth/firebase.ts`) — SDK tidak ikut bundle awal (entry ±56 kB gzip). App tetap jalan tanpa `.env` (tampilkan notice "belum dikonfigurasi"); isi kunci dari `.env.example` saat project Firebase dibuat.
   - `firestore.rules` ketat: `activation_codes` tertutup dari client; field `users/{uid}.groups` hanya bisa diubah Cloud Function; default deny.
   - Kontrak config game type-safe di `src/engine/core/types.ts` (`GameConfig`, `TemplateId`, dst.) — fondasi Fase 2.
-  - `functions/` & `scripts/` masih README placeholder (diimplementasi Fase 5).
+  - `functions/` & `scripts/` waktu itu masih README placeholder — **sudah diimplementasi di Fase 5** (2026-08-11).
   - Perintah: `npm run dev` / `npm run build` / `npm run typecheck`.
 - **Fase 2 (Engine) — SELESAI** (2026-07-21), teruji headless-browser semua template:
   - `GameShell` (`src/engine/core/GameShell.tsx`): intro → level → selesai; feedback positif ("Coba lagi, kamu pasti bisa!"), bintang per level (0 salah = 3⭐), remount template per attempt.
   - **6 template** di `src/engine/templates/`: TapAnswer, DragDrop (pointer events, bukan HTML5 DnD — HTML5 DnD rusak di mobile), Tracing (canvas + cek coverage glyph), Memory, CountTap (pengecoh + target dilebihkan sesuai Aturan Desain Soal), StoryChoice. Semua lazy-load per chunk.
   - Audio (`src/engine/audio/sound.ts`): narasi `speechSynthesis` id-ID (nanti otomatis diganti file TTS saat aset tersedia) + SFX WebAudio tanpa aset.
-  - Progress bintang: localStorage (`src/engine/core/progress.ts`); sinkron Firestore menyusul Fase 5.
+  - Progress bintang: localStorage (`src/engine/core/progress.ts`). **MASIH localStorage sampai sekarang** — Fase 5 tidak mencakup ini, jadi ganti HP = maskot balik ke telur. Rules-nya (`users/{uid}/progress`) sudah siap menerima.
   - Registry game (`src/games/registry.ts`) + route `/game/:gameId` dengan gerbang akses (premium → layar terkunci + ajakan aktivasi).
   - **Config game = file `.ts` typed** (`src/games/tk/*.ts`, `src/games/sd1/*.ts`) dengan `GameConfig<T>` — sengaja .ts, bukan JSON, karena JSON tidak bisa dicek TypeScript secara literal. Ini pemenuhan niat "konten di file data terpisah": tetap data murni, tapi typo ketahuan saat build.
   - 7 game contoh: TK = hitung-buah (count-tap; **sudah dilebur ke Pasar Buah, 2026-07-26**), kenal-huruf (tap-answer), tulis-angka (tracing), kartu-kembar (memory); SD1 = pasang-kata (drag-drop), cerita-kancil (story-choice), tambah-tangkas (tap-answer). CATATAN: status gratis/terkunci sekarang diatur terpusat di `src/data/access.ts` (lihat "Sistem Kunci Game").
@@ -380,7 +382,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Daftar "Petualangan seru menanti" wajib memuat KEDUA kelompok.** Dulu isinya 4 dunia TK saja — itu tak apa selagi SD belum dijual, tapi begitu SD ikut dijual, memajang nol game SD berarti menjual sesuatu yang tak pernah diperlihatkan. Sekarang 8 chip: baris 1 = TK (Hutan Hewan, Taman Huruf, Labirin Warna, Pasar Buah), baris 2 = SD (Hitung Hebat, Ejaan Jitu, Jam Pintar, Cerita Nusantara) + 4 kelas warna baru `w-count`/`w-spell`/`w-clock`/`w-story` di `landing.css`. Grid `repeat(4, 1fr)` yang lama otomatis jadi dua baris — CSS-nya tak perlu diubah.
   - **Jam Pintar di chip landing pakai ⏰ (jam weker), BUKAN 🕒.** Alasannya sama dengan penggantian ikon kartu game 2026-08-02: 🕒 tampil seperti piringan abu-abu polos di HP. (Muka jam SVG `Clock.tsx` sengaja tidak dipakai di sini — chip landing itu emoji dalam lingkaran pastel, bukan komponen game.)
   - **Mode kunci TETAP `'buka'`.** Yang berubah cuma halaman jualan; `DEFAULT_LOCK_MODE` di `src/data/access.ts` tidak disentuh, jadi semua game masih bisa dicoba bebas.
-  - **PENGHALANG LAUNCHING YANG MASIH ADA (bukan soal SD saja):** Fase 5 belum dikerjakan — `functions/` masih README kosong dan `ActivationPage.tsx` masih stub yang menjawab *"Validasi kode belum aktif — menunggu Cloud Function (Fase 5)."* **Jangan nyalakan mode `'kunci'` sebelum itu jadi**: pembeli akan mentok di layar gembok karena kode aktivasinya tak divalidasi apa pun.
+  - **PENGHALANG LAUNCHING YANG MASIH ADA (bukan soal SD saja):** ~~Fase 5 belum dikerjakan~~ → **Fase 5 SELESAI 2026-08-11.** Penghalang yang tersisa sekarang cuma satu: **project Firebase-nya belum dibuat** (`.env` kosong), jadi login/daftar/aktivasi belum aktif di produksi. **Jangan nyalakan mode `'kunci'` sebelum project itu ada & backend-nya ter-deploy** — pembeli akan mentok di layar gembok karena tak ada server yang bisa memvalidasi kodenya. Langkah-langkahnya ada di `docs/fase-6-rilis-prompt.md`.
 
 - **Landing: bagian "Segera hadir" — SD Kelas 3 & 4 dan SD Kelas 5 & 6** (2026-08-07, permintaan pemilik), teruji headless 360×640, 380×800 & 820×1180 (kedua kartu terbaca utuh, urutan harga → segera hadir → FAQ, tanpa scroll horizontal & nol error console):
   - Bagian baru `<section className="soon">` di `LandingPage.tsx`, **sesudah kartu harga & sebelum FAQ**: orang tua melihat dulu apa yang bisa dibeli hari ini, baru peta jalannya. Isinya data di konstanta `soonGroups` — menambah jenjang berikutnya = menambah satu entri, tidak menyentuh markup.
