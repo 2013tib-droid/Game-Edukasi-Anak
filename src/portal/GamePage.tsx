@@ -106,6 +106,13 @@ export default function GamePage() {
 
   return (
     <GameShell
+      // `key` per game WAJIB: route-nya sama (`/game/:gameId`), jadi pindah
+      // langsung dari satu game ke game lain hanya mengubah param — React
+      // memakai ulang komponen ini beserta STATE-nya, dan game kedua terbuka
+      // di tengah level milik game pertama. Lewat menu hal ini tak terjadi
+      // (route kelompok menyela di tengah), tapi lewat URL langsung atau
+      // tombol maju/mundur browser, terjadi.
+      key={meta.id}
       config={config}
       iconClock={meta.iconClock}
       onExit={() => navigate(`/kelompok/${meta.group}`)}
