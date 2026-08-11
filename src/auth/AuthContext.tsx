@@ -19,6 +19,8 @@ interface AuthContextValue {
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
+  /** Send the "reset your password" email. See the note in `resetPassword`. */
+  resetPassword: (email: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -75,6 +77,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           import('firebase/auth'),
         ]);
         await signOut(auth);
+      },
+      /**
+       * A parent who forgets their password would otherwise lose the group
+       * they paid for, and the only recovery path would be messaging the
+       * owner on WhatsApp one by one.
+       *
+       * Callers must show the SAME confirmation whether or not the address is
+       * registered: Firebase reports unknown addresses as `auth/user-not-found`,
+       * and surfacing that would turn this form into a way to check which
+       * emails have an account here.
+       */
+      async resetPassword(email) {
+        const [{ auth }, { sendPasswordResetEmail }] = await Promise.all([
+          getFirebase(),
+          import('firebase/auth'),
+        ]);
+        await sendPasswordResetEmail(auth, email);
       },
     }),
     [user, loading],

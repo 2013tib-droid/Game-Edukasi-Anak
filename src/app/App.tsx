@@ -3,6 +3,7 @@ import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from '@/auth/AuthContext';
 import ProtectedRoute from '@/auth/ProtectedRoute';
 import Layout from '@/app/Layout';
+import NotFoundPage from '@/app/NotFoundPage';
 import SplashScreen from '@/app/SplashScreen';
 import { syncTestModeFromUrl } from '@/data/access';
 
@@ -44,6 +45,8 @@ export default function App() {
                   </ProtectedRoute>
                 }
               />
+              {/* Mistyped URL / old bookmark — never leave a blank page. */}
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </Suspense>
