@@ -43,10 +43,10 @@ export const MASCOTS: MascotStage[] = [
   { min: 45, pic: 'mascot-4', emoji: '🦉', name: 'Burung Hantu Pintar' },
   { min: 70, pic: 'mascot-5', emoji: '🦄', name: 'Unicorn Ajaib' },
   { min: 100, pic: 'mascot-6', emoji: '🐲', name: 'Naga Jenius' },
+  { min: 145, pic: 'mascot-7', emoji: '🔥', name: 'Naga Api' },
+  { min: 200, pic: 'mascot-8', emoji: '💎', name: 'Naga Kristal' },
+  { min: 265, pic: 'mascot-9', emoji: '⚡', name: 'Naga Petir' },
   // Art pending — the same dragon, growing more magnificent each stage.
-  { min: 145, emoji: '🔥', name: 'Naga Api' },
-  { min: 200, emoji: '💎', name: 'Naga Kristal' },
-  { min: 265, emoji: '⚡', name: 'Naga Petir' },
   { min: 340, emoji: '🌈', name: 'Naga Pelangi' },
   { min: 440, emoji: '🌟', name: 'Naga Bintang' },
   { min: 555, emoji: '👑', name: 'Naga Legenda' },
