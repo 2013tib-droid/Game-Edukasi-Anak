@@ -115,7 +115,7 @@ Status pengiriman:
 |---|---|
 | Maskot 6 tahap | ✅ diterima (2026-08-04) → `public/assets/mascot/mascot-1..6.webp` |
 | Buah (14) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
-| Kendaraan (12) | ✅ diterima (2026-08-04) → `car, bus, truck, pickup, tractor, bicycle, scooter, ambulance, firetruck, police, train, bajaj` |
+| Kendaraan (16) | ✅ LENGKAP (2026-08-04) → `car, bus, truck, pickup, tractor, bicycle, scooter, ambulance, firetruck, police, train, bajaj, taxi, jeep, motorcycle, racecar` |
 | Bangunan & tempat tujuan (8) | ✅ diterima (2026-08-04) → `house, school, hospital, shop, gas-station, field, tree, park` |
 | Benda sehari-hari (20) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
 | **5 — Benda paling sering muncul (25)** | ⬜ **berikutnya** (2026-08-08) |
@@ -124,11 +124,9 @@ Status pengiriman:
 | 8 — Hewan & rumahnya (8) | ⬜ menunggu |
 | 9 — Benda sisa (15) | ⬜ menunggu |
 
-**Yang didaftar belum ada (catatan 2026-08-05):** kendaraan — taksi, jip, motor,
-mobil balap, otoped, trem/monorel; tujuan — halte, pabrik, kantor, stasiun,
-istana, jembatan, pantai. Taksi, jip, motor & mobil balap **sudah digambar** di
-branch `claude/vehicle-image-analysis-68jj0l` (belum di-merge saat baris ini
-ditulis); sisanya belum disentuh.
+**Yang masih belum digambar:** kendaraan — otoped, papan luncur, truk besar,
+mobil antar-jemput, bus listrik, trem/monorel; tujuan — halte, pabrik, kantor,
+stasiun, istana, jembatan, pantai.
 
 ### Sisa emoji: hasil audit 2026-08-08
 
@@ -212,3 +210,42 @@ kiri** — kalau tidak, di dalam game ia berjalan mundur.
   diotomatiskan, karena bercak putih bola sepak terlihat sama persis.
 - **Jangan memberi nama yang bentrok dengan hewan asli**: boneka beruang jadi
   `teddy`, bukan `bear`.
+
+### Pelajaran dari batch kendaraan (2026-08-04)
+
+- **Arah hadap kendaraan: KIRI, bukan kanan.** `PathTrace` memasang
+  `scaleX(-1)` sebelum memutar gambar (aturan warisan dari emoji kendaraan
+  yang menghadap kiri). Sumber menghadap kanan akan berjalan MUNDUR di jalan.
+  Prompt lama di `prompt-gambar-gemini.md` sempat salah menulis "kanan" —
+  sudah diperbaiki di sana.
+- **Kendaraan TANPA WAJAH.** Set yang dikirim tidak bermata/bermulut, beda
+  dari aturan buah & hewan. Jangan campur dua gaya dalam satu game.
+- **JPEG boleh, asal tanpa bayangan lantai.** Bus sekolah dikirim JPEG
+  berlatar putih dengan bayangan lembut di bawah roda; bayangan itu netral
+  dan terang sehingga lolos dari penghapusan latar biasa dan tertinggal jadi
+  noda putih memanjang di atas aspal. Cara benarnya: kenali isi objek dari
+  **saturasi tinggi ATAU kegelapan** (bodi berwarna, garis tepi & roda
+  hitam), lalu isi lubang supaya sorotan putih di kaca tetap ada.
+- **Lembar berisi banyak kendaraan sekaligus TERNYATA aman** untuk kasus ini
+  — beda dari pelajaran batch buah. Ke-12 kendaraan datang dalam satu lembar
+  4×3 dan komponennya terpisah bersih, jadi bisa dipotong otomatis. Yang
+  membuatnya berhasil: latar transparan + jarak antar objek longgar. Tetap
+  saja satu file per objek lebih tajam kalau resolusinya jadi pertimbangan.
+- **Ukuran aset kendaraan cukup 240px lebar** (bukan 512px seperti hewan):
+  di `path-trace` kendaraan tampil maksimal 64px. Dua belas aset = 189 kB.
+- **Teks di dalam gambar harus Bahasa Indonesia.** Bus batch pertama
+  bertuliskan "SCHOOL BUS" dan harus digambar ulang jadi "BUS SEKOLAH".
+  Lebih aman: minta tanpa tulisan sama sekali — walau model tetap suka
+  menambahkannya (taksi tetap keluar bertuliskan "TAXI" dua kali berturut-turut
+  meski prompt melarangnya).
+- **Tulisan pada papan/plakat berwarna rata bisa dihapus tanpa menggambar
+  ulang.** Kenali papannya (satu blok warna), ambil lubang di dalamnya
+  (`binary_fill_holes` dikurangi papan aslinya) sebagai topeng tulisan,
+  lebarkan 2px supaya tepi antialias ikut terangkat, lalu isi tiap baris
+  dengan warna papan yang bersih di baris itu (papannya bergradasi vertikal,
+  jadi jangan pakai satu warna rata). Dipakai untuk menghapus "TAXI".
+- **Prompt teks saja TIDAK cukup mengunci gaya.** Percobaan pertama jip/taksi/
+  motor/mobil balap keluar sebagai clipart vektor realistis walau promptnya
+  sudah benar. Yang menyelesaikannya: melampirkan `docs/acuan-gaya-kendaraan.png`
+  (6 aset yang sudah diterima) + kalimat "ikuti gaya persis seperti acuan ini".
+  Percobaan kedua langsung sepadan. Lakukan ini untuk SEMUA batch berikutnya.

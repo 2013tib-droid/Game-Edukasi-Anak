@@ -127,11 +127,29 @@ Gambar tahap 1 (telur) dulu, karena warnanya menentukan lima gambar sisanya.
 Untuk `jalan-kendaraan`, yang seluruh isinya kendaraan dan **diperbesar serta
 diputar** mengikuti belokan jalan — di sinilah emoji paling ketahuan kasar.
 
-**Aturan khusus kendaraan (WAJIB):** semua kendaraan digambar **tampak samping
-penuh (side view), menghadap ke KANAN**, roda menempel di garis bawah yang
-tidak digambar, tanpa jalan, tanpa latar, tanpa bayangan. Ini penting karena
-engine memutar gambarnya mengikuti arah jalan — kalau sudutnya serong,
-kendaraannya akan terlihat miring aneh saat menanjak.
+**Aturan khusus kendaraan (WAJIB):**
+
+- **Tampak samping penuh (side view), MENGHADAP KE KIRI.** Roda menempel di
+  garis bawah yang tidak digambar, tanpa jalan, tanpa latar, tanpa bayangan.
+  Sudut serong dilarang — engine memutar gambar mengikuti arah jalan, jadi
+  kendaraan yang digambar serong akan terlihat miring aneh saat menanjak.
+- **KIRI, bukan kanan** (dikoreksi 2026-08-04). `PathTrace` memasang
+  `scaleX(-1)` sebelum memutar — aturan itu lahir dari emoji kendaraan yang
+  menghadap kiri di hampir semua font. Jadi sumber yang menghadap kiri akan
+  tampil menghadap kanan di layar dan berjalan maju; sumber yang menghadap
+  kanan akan berjalan MUNDUR. Ke-12 aset yang sudah diterima semuanya
+  menghadap kiri.
+- **TANPA WAJAH.** Kendaraan yang sudah dikirim tidak bermata dan tidak
+  bermulut — hanya bodi kartun berkilau. Ini beda dari aturan buah (yang
+  memakai "simple happy face"); kendaraan bermata akan terlihat asing di
+  antara set yang ada.
+- **Bentuk kanvas boleh melebar (16:9), bukan wajib persegi.** Kendaraan itu
+  objek lebar; di kanvas persegi separuh gambar jadi ruang kosong dan
+  kendaraannya keluar dengan resolusi lebih kecil.
+- **PNG transparan lebih baik daripada JPEG.** Kalau terpaksa JPEG, pastikan
+  benar-benar **tanpa bayangan lembut di bawah roda** — bayangan itu tidak
+  ikut terbuang saat latar putih dihapus dan tertinggal jadi noda putih di
+  atas aspal (kejadian di bus sekolah, 2026-08-04).
 
 | id (nama file) | Objek | Baris prompt untuk dikirim |
 |---|---|---|
@@ -144,9 +162,82 @@ kendaraannya akan terlihat miring aneh saat menanjak.
 | `scooter` | motor/skuter | Buatkan: sepeda motor skuter warna merah muda, tampak samping penuh menghadap ke kanan, imut. |
 | `ambulance` | ambulans | Buatkan: mobil ambulans putih dengan garis merah dan lampu sirene merah di atap, tampak samping penuh menghadap ke kanan, tanpa tulisan apa pun, imut. |
 | `firetruck` | mobil pemadam | Buatkan: mobil pemadam kebakaran warna merah dengan tangga di atapnya, tampak samping penuh menghadap ke kanan, tanpa tulisan, imut. |
-| `police-car` | mobil polisi | Buatkan: mobil polisi warna putih-biru dengan lampu sirene biru di atap, tampak samping penuh menghadap ke kanan, tanpa tulisan, imut. |
+| `police` | mobil polisi | Buatkan: mobil polisi warna putih-biru dengan lampu sirene biru di atap, tampak samping penuh menghadap ke kanan, tanpa tulisan, imut. |
 | `train` | kereta | Buatkan: lokomotif kereta api warna biru dengan cerobong asap, tampak samping penuh menghadap ke kanan, imut. |
 | `bajaj` | bajaj | Buatkan: bajaj beroda tiga khas Indonesia warna oranye dengan atap tertutup, tampak samping penuh menghadap ke kanan, imut. |
+
+> ✅ **Ke-12 baris di atas SUDAH diterima & terpasang** (2026-08-04). Baris
+> promptnya sengaja dibiarkan apa adanya sebagai arsip — perhatikan bahwa
+> semuanya tertulis "menghadap ke kanan", padahal aset yang benar-benar
+> dikirim menghadap KIRI. Untuk permintaan baru pakai tabel di bawah, yang
+> sudah diperbaiki.
+
+### Kendaraan yang tadinya kurang (4 gambar) — ✅ SELESAI (2026-08-04)
+
+Keempatnya paling sering muncul di kolam perjalanan `jalan-kendaraan` dan
+masih memakai emoji. **Warnanya sengaja dipilih yang belum terpakai** di 12
+aset yang sudah ada, supaya anak tidak tertukar saat gambarnya cuma setinggi
+±50px di layar HP.
+
+| id (nama file) | Objek | Baris prompt untuk dikirim |
+|---|---|---|
+> ✅ **Keempatnya sudah diterima & terpasang** pada percobaan KEDUA, setelah
+> lembar acuan gaya dilampirkan. Prompt di bawah adalah versi yang berhasil —
+> pakai polanya untuk batch kendaraan berikutnya.
+>
+> **WAJIB: lampirkan `docs/acuan-gaya-kendaraan.png`** ke chat Gemini sebelum
+> meminta keempatnya, dengan kalimat: *"Ikuti gaya persis seperti gambar
+> acuan ini — bodi gemuk membulat, kilau lembut, warna cerah, detail sedikit.
+> Jangan pakai gaya vektor datar yang realistis."* Percobaan pertama
+> (2026-08-04) gagal justru karena ini: promptnya benar, tapi tanpa acuan
+> Gemini mengeluarkan clipart vektor realistis yang tak sepadan dengan 12
+> aset yang sudah ada. Kata "imut" saja TIDAK cukup.
+
+| id (nama file) | Objek | Baris prompt untuk dikirim |
+|---|---|---|
+| `jeep` | jip | Buatkan: mobil jip petualang warna cokelat muda cerah, bodi gemuk membulat dengan atap keras, ban hitam besar polos tanpa jeruji, ban serep menempel di pintu belakang, jendela biru muda, kilau lembut, detail sedikit, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan, gaya mainan anak. |
+| `taxi` | taksi | Buatkan: mobil taksi sedan warna biru cerah, bodi gemuk membulat, kotak lampu kecil POLOS TANPA TULISAN di atap, jendela biru muda, roda hitam polos, kilau lembut, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan dan tanpa angka apa pun, gaya mainan anak. |
+| `motorcycle` | motor | Buatkan: sepeda motor warna merah cerah bergaya mainan anak, bentuk SEDERHANA tanpa detail mesin yang rumit, dua roda hitam polos tanpa jeruji, setang di depan dan jok memanjang, tanpa pengendara, kilau lembut, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan. |
+| `racecar` | mobil balap | Buatkan: mobil balap mainan warna ungu cerah, bodi gemuk dan PENDEK (bukan mobil formula yang panjang rendah), sayap spoiler kecil di belakang, ban hitam polos, kilau lembut, tampak samping penuh menghadap ke KIRI, tanpa wajah, tanpa tulisan dan tanpa angka, gaya mainan anak. |
+
+**Kenapa warna & bentuknya begitu — jangan diubah tanpa alasan:**
+
+| Aset baru | Harus jelas beda dari | Pembedanya |
+|---|---|---|
+| `jeep` cokelat muda | `pickup` hijau, `car` merah | Cokelat belum dipakai; ban serep di belakang jadi penanda. Hijau sudah dipakai pikap DAN traktor. **Harus cokelat MUDA CERAH** — percobaan pertama memakai khaki gelap dan di layar 50px jadi blok gelap yang tak terbaca. |
+| `taxi` biru | `truck`/`train` biru, `car` merah | Sama-sama biru tapi siluetnya sedan rendah, bukan truk/lokomotif. Kotak lampu di atap jadi penanda taksi tanpa perlu tulisan. |
+| `motorcycle` merah | `scooter` merah muda, `bicycle` biru | Motor sport: mesin terlihat, roda tebal, bodi condong. Skuter: rangka rendah tempat kaki. Merah aman — tak ada kendaraan roda dua lain yang merah. |
+| `racecar` ungu | `car` merah, `firetruck` merah | Ungu sama sekali belum dipakai di set ini. Mobil balap merah akan tertukar dengan sedan merah pada ukuran kecil. |
+
+**Taksi biru itu disengaja** — taksi di Indonesia identik biru, jadi anak
+Indonesia langsung mengenalinya. Taksi kuning kotak-kotak ala Amerika akan
+bertabrakan dengan bus kuning, dan pola kotak-kotaknya terbaca seperti tulisan
+pada ukuran kecil.
+
+#### Percobaan pertama DITOLAK (2026-08-04) — jangan ulangi
+
+Kiriman pertama keempat kendaraan ini ditolak. Arah hadapnya sudah benar
+(kiri), tapi:
+
+1. **Gaya tidak sepadan.** Hasilnya clipart vektor datar berproporsi
+   realistis (jip Wrangler, motor cruiser, mobil F1) — garis tipis, tanpa
+   kilau, detail banyak. Set yang ada bergaya mainan: bodi gemuk, kilau
+   lembut, detail sedikit. → **Solusi: lampirkan lembar acuan gaya.**
+2. **Detail halus jadi bubur di 50px.** Jeruji roda, sirip mesin motor, dan
+   gril jip semuanya hilang. Minta ban POLOS dan bentuk SEDERHANA.
+3. **Warna gelap tidak terbaca.** Khaki gelap dan ungu tua jadi blok gelap.
+   Selalu minta versi CERAH.
+4. **Masih ada tulisan "TAXI"** walau prompt sudah minta tanpa tulisan —
+   model suka menambahkan label pada kendaraan yang "butuh" identitas. Tegaskan
+   dua kali: *"kotak lampu POLOS TANPA TULISAN"* dan *"tanpa tulisan dan tanpa
+   angka apa pun"*.
+5. **Mobil balap terlalu panjang** (rasio 3,1:1; kendaraan lain ±1,8:1).
+   Mobil formula realistis terlihat pipih di jalan dan janggal saat diputar
+   mengikuti tikungan. Minta mobil balap MAINAN yang pendek dan gemuk.
+6. **PNG tanpa kanal alpha.** Filenya PNG tapi pola kotak-kotak transparansi
+   tergambar sebagai piksel biasa. Masih bisa dibuang (netral & saturasi
+   rendah — lihat "Kasus khusus latar checkerboard" di
+   `asset-generation-prompts.md`), tapi PNG ber-alpha asli lebih aman.
 
 Bangunan & tempat tujuan di ujung jalan (dan dipakai juga di soal huruf).
 **Tampak depan**, seluruh bangunan masuk, tanpa jalan dan tanpa latar langit:

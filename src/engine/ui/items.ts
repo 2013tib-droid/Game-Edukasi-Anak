@@ -131,6 +131,10 @@ export const ITEMS: Record<string, ItemDef> = {
   police: { emoji: '🚓', label: 'mobil polisi', ext: 'webp' },
   train: { emoji: '🚂', label: 'kereta', ext: 'webp' },
   bajaj: { emoji: '🛺', label: 'bajaj', ext: 'webp' },
+  jeep: { emoji: '🚙', label: 'jip', ext: 'webp' },
+  taxi: { emoji: '🚕', label: 'taksi', ext: 'webp' },
+  motorcycle: { emoji: '🏍️', label: 'motor', ext: 'webp' },
+  racecar: { emoji: '🏎️', label: 'mobil balap', ext: 'webp' },
 };
 
 /** Public URL of an item's picture, respecting the Vite base path. */
