@@ -138,7 +138,7 @@ hal baru muncul di tahap POTONG dan tahap PASANG — bukan di tahap prompt:
 | `tulis-huruf` | Buatkan: satu pulpen bertutup warna biru muda berwajah imut dalam posisi miring, sedang menuliskan satu garis tinta biru melengkung yang membentuk huruf a kecil di bawahnya. Selain huruf a itu tidak boleh ada tulisan lain. |
 | `cerita-nusantara` | Buatkan: satu buku tertutup bersampul hijau tosca berwajah imut, dengan pita pembatas merah muda menjuntai dari bawahnya dan satu bintang kuning kecil melayang di atasnya. Sampulnya berhias motif batik sederhana warna krem, POLOS tanpa judul dan tanpa tulisan apa pun. |
 | `jam-pintar` (opsional) | Buatkan: satu jam dinding bulat pastel berwajah imut, dengan angka 1 sampai 12 tertulis jelas dan urut mengelilingi muka jam, jarum pendek biru tua menunjuk angka 10 dan jarum panjang merah menunjuk angka 2. Selain angka jam itu tidak boleh ada tulisan lain. |
-| `pola-pintar` | Buatkan: empat ubin pastel bersudut membulat tersusun rapat dua baris dua kolom — ubin merah muda berisi lingkaran, ubin kuning berisi segitiga, ubin mint berisi lingkaran, dan ubin keempat KOSONG bergaris putus-putus sebagai tempat yang belum terisi. Ubin pertama berwajah imut. Susunannya rapat membentuk kotak, jangan berjajar melebar. |
+| `pola-pintar` | Buatkan: satu untaian manik-manik anak yang melengkung membentuk busur, talinya jatuh santai dan tidak lurus. Maniknya berselang-seling mengikuti pola: bulat merah muda, kubus kuning, bulat mint, kubus ungu muda, lalu satu tempat manik yang KOSONG bergaris putus-putus di ujung untaian. Manik bulat yang paling besar berwajah imut, dan maniknya miring ke arah berbeda-beda supaya terasa hidup, bukan berbaris rapi seperti tabel. Tinggi dan lebar untaiannya kira-kira sama. |
 
 ### Kalau hasilnya masih melenceng
 
@@ -162,12 +162,18 @@ Balas di chat yang sama dengan menyebut kesalahannya, jangan mengulang seluruh p
 - **`jam-pintar` opsional & berisiko**: mengganti ikonnya berarti melepas `iconClock`
   (muka jam SVG yang angkanya dijamin benar). Gambar AI sering salah menulis angka jam —
   kalau 1–12 tidak lengkap dan urut, JANGAN dipakai, biarkan SVG-nya.
-- **`pola-pintar` sengaja 2×2, BUKAN sederet ke samping.** Deret mendatar memang bahasa
-  gambar paling jelas untuk "lanjutkan polanya", tapi empat ubin berjajar rasionya ±3 —
-  jauh melewati batas ±1,5 (lihat Pelajaran Kelima), jadi ikonnya akan mengecil sendiri
-  kena pengaman `maxWidth` dan kalah menonjol dari tetangganya. Susunan 2×2 dengan satu
-  petak kosong bergaris putus-putus tetap terbaca "ada yang belum terisi".
-  Bedakan dari `labirin-warna` (palet cat kayu, kelompok TK): ini ubin geometris.
+- **`pola-pintar` = untaian manik, dan itu menyelesaikan DUA masalah sekaligus.**
+  - Deret mendatar memang bahasa gambar paling jelas untuk "lanjutkan polanya", tapi empat
+    ubin berjajar rasionya ±3 — jauh melewati batas ±1,5 (Pelajaran Kelima), jadi ikonnya
+    akan mengecil sendiri kena pengaman `maxWidth` dan kalah menonjol dari tetangganya.
+    Untaian yang MELENGKUNG memuat deret yang sama dalam bidang yang tinggi ≈ lebar.
+  - Percobaan pertama memakai empat ubin dalam grid 2×2 dan **ditolak pemilik: "kaku"**.
+    Grid itu bahasa gambar spreadsheet, bukan mainan anak. Manik-manik justru alat latihan
+    pola yang paling klasik untuk anak, dan tali yang jatuh santai + manik yang miring
+    ke arah berbeda-beda membuatnya hidup tanpa kehilangan "ini sebuah pola".
+  - Bedakan dari `pasangan-pintar` (DUA lingkaran besar dihubungkan garis putus-putus):
+    di sini maniknya BANYAK dan kecil, dan garis putus-putusnya cuma di satu tempat manik
+    yang kosong. Bedakan juga dari `labirin-warna` (palet cat kayu, kelompok TK).
 - **`ejaan-jitu` alternatif** kalau papan target terasa terlalu "permainan panah":
   Buatkan: tiga balok huruf kayu pastel berdiri berjajar, balok tengah berwajah imut,
   dengan satu bintang kuning melayang di atasnya.
