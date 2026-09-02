@@ -123,15 +123,25 @@ type Screen = 'intro' | 'pick' | 'playing' | 'done';
 export default function GameShell({
   config,
   onExit,
+  icon,
   iconClock,
 }: {
   config: AnyGameConfig;
   onExit: () => void;
   /**
-   * Draw the intro screen's big icon as a real clock face instead of
-   * `config.emoji`. Declared once in the game registry (`GameMeta.iconClock`)
-   * and passed down by `GamePage`, so the portal card and this screen always
-   * show the same icon.
+   * The game's icon, straight from the registry (`GameMeta.emoji`) via
+   * `GamePage`. The registry WINS over `config.emoji` on purpose: the portal
+   * card reads the registry, so anything else here would let the two drift —
+   * which is exactly what happened to Pasangan Pintar (card 🤝, intro 🧠).
+   * `config.emoji` stays as the fallback for shells rendered outside the
+   * portal (tests, previews).
+   */
+  icon?: string;
+  /**
+   * Draw the intro screen's big icon as a real clock face instead of an emoji.
+   * Declared once in the game registry (`GameMeta.iconClock`) and passed down
+   * by `GamePage`, so the portal card and this screen always show the same
+   * icon.
    */
   iconClock?: ClockSpec;
 }) {
@@ -320,7 +330,7 @@ export default function GameShell({
           <Clock time={iconClock} className="game-big-clock" />
         ) : (
           <div className="game-big-emoji" aria-hidden>
-            {config.emoji}
+            {icon ?? config.emoji}
           </div>
         )}
         <h1>{config.title}</h1>

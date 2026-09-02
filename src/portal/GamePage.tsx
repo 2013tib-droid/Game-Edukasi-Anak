@@ -114,6 +114,7 @@ export default function GamePage() {
       // tombol maju/mundur browser, terjadi.
       key={meta.id}
       config={config}
+      icon={meta.emoji}
       iconClock={meta.iconClock}
       onExit={() => navigate(`/kelompok/${meta.group}`)}
     />

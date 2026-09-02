@@ -13,14 +13,17 @@ export interface GameMeta {
   id: string;
   group: GroupId;
   title: string;
+  /**
+   * The game's icon — portal card AND intro screen. This is the ONLY place it
+   * is declared: `GamePage` hands it to `GameShell`, which prefers it over
+   * `config.emoji`. Don't rely on the config's copy; it is only a fallback.
+   */
   emoji: string;
   /**
    * Draw the game's icon as our own SVG clock face (`src/engine/ui/Clock.tsx`)
    * instead of `emoji`. The clock-face emoji has no numerals and looks like a
    * flat grey disc on a phone — see the Jam Pintar note in CLAUDE.md. `emoji`
    * stays as the fallback and as the game's spoken/alt identity.
-   * This is the ONLY place a game's icon is declared: `GamePage` hands it to
-   * `GameShell` for the intro screen, so card and intro never drift apart.
    */
   iconClock?: ClockSpec;
   /** Portal card badge; "mixed" games change question type per level. */

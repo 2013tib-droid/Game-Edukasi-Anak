@@ -399,7 +399,11 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
   id: string;
   group: GroupId;
   title: string;
-  /** Icon shown on portal cards. */
+  /**
+   * Fallback icon only. The icon actually shown (portal card + intro screen)
+   * is `GameMeta.emoji` in `src/games/registry.ts` — one place, so the two
+   * screens can't drift apart.
+   */
   emoji: string;
   template: T;
   /**
@@ -446,6 +450,7 @@ export interface MixedGameConfig {
   id: string;
   group: GroupId;
   title: string;
+  /** Fallback icon only — see `GameConfig.emoji`. */
   emoji: string;
   template: 'mixed';
   /** Free/locked status: see `src/data/access.ts` (not declared per game). */

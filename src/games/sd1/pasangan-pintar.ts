@@ -130,7 +130,10 @@ const config: MixedGameConfig = {
   id: 'pasangan-pintar',
   group: 'sd1',
   title: 'Pasangan Pintar',
-  emoji: '🧠',
+  // Ikon sebenarnya diambil dari registry (`GameMeta.emoji`) — nilai di sini
+  // cuma cadangan. Dijaga tetap sama supaya tak pernah beda lagi. JANGAN 🧠:
+  // otak mentah bukan gambar yang ramah untuk anak.
+  emoji: '🤝',
   template: 'mixed',
   sessionLevels: 6,
   levels: [
