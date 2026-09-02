@@ -605,6 +605,14 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Layar mendatar ikut terbereskan**: dulu halaman keputusan scroll 81px dan halaman bergambar 88px (bug lama, terukur sebelum perubahan ini). Sekarang keduanya 0 — panel gambar lebih pendek dari emoji besar yang digantikannya.
   - **NOL file suara baru** (`npm run narasi` tetap 765 baris): tak ada kalimat yang berubah.
 
+- **Ilustrasi adegan utuh di halaman cerita (`kancil-rawa`, `gajah-lumpur`)** (2026-08-10, gambar dari pemilik: *"Ganti kancil jalan di tepi rawa dengan ini"*, lalu *"Lanjut, gajah yang terperosok di lumpur"*), teruji headless 360×640, 380×800 & 820×1180 — cerita "Kancil dan Gajah" dimainkan sampai "Selamat!" (tiap pilihan yang kurang tepat ditekan lebih dulu), kedua WebP terambil 200, tiap halaman muat satu layar, tanpa scroll & nol error console:
+  - Dua halaman pembuka "Kancil dan Gajah" dulu emoji 🦌 dan seni item `elephant`; sekarang ilustrasi kiriman pemilik: kancil di jalan setapak tepi rawa, lalu gajah terperosok di lumpur. Aset `public/assets/items/{kancil-rawa,gajah-lumpur}.webp` — masing-masing 900×491, ±110 kB (kartu tampil maksimal 340 CSS px, jadi 900px sudah ±2,6× DPR; jangan diperbesar lagi).
+  - **Keduanya digambar di rawa yang SAMA** (jalan setapak, bakau, teratai) — kalau nanti menambah ilustrasi untuk cerita ini, minta pemilik memakai latar yang sama supaya halamannya terbaca satu perjalanan, bukan potongan tempat yang berbeda-beda.
+  - **Ini pengecualian yang disadari dari aturan "registry item = satu BENDA".** Gambarnya satu adegan berikut latarnya, bukan subjek terpotong, jadi entri registry-nya diberi komentar keras: hanya boleh dipakai sebagai `StoryPage.item`. **JANGAN dipakai sebagai jawaban tap-answer, sel papan hitung, atau kartu ingatan** — di sana anak membandingkan bentuk satu benda, dan adegan penuh akan menyesatkan. Kalau nanti ilustrasi adegan makin banyak, itu saatnya membuat field/berkas sendiri (`StoryPage.art` + `public/assets/story/`), bukan menumpuk adegan di registry benda.
+  - **Halaman berilustrasi adegan SENGAJA tidak memakai `at()`.** Gambarnya sudah membawa hutan + air + tepiannya sendiri; latar gambar engine di belakangnya cuma jadi hutan di atas hutan. `at('sungai', …)` karena itu digeser ke halaman keputusan pertama (halaman ke-3) dan berlaku sampai cerita selesai — halaman tanpa `scene` mewarisi latar halaman SEBELUMNYA, jadi menggeser `at()` ke bawah aman, menghapusnya tidak. **Kalau ilustrasi ditambahkan lagi di halaman berikutnya, `at()` ikut digeser lagi ke halaman pertama yang belum berilustrasi.**
+  - **Tanpa `border-radius`** (sudah dicoba lalu dibatalkan): `.story-emoji__img` itu `height` tetap + `object-fit: contain`, jadi gambar lebar di-letterbox di dalam kotaknya — sudutnya kotak elemen, bukan sudut gambarnya, dan radius apa pun jatuh di ruang kosong. Membuatnya berpengaruh butuh `height: auto`, dan itu justru mengecilkan seni subjek yang lain (aturan lama). Jangan diulang.
+  - **NOL file suara baru**: kalimat halamannya tidak disentuh sama sekali, jadi `npm run narasi` tetap 765 baris dan rekaman lamanya terpakai. Mengganti gambar tidak boleh sekalian "merapikan" kalimat — kunci file suara = isi kalimatnya.
+
 - **Persiapan rilis, bagian yang mudah dulu** (2026-08-11, dari audit "kurang apa untuk production"), teruji headless 380×800 lewat `vite preview` — 29 pemeriksaan lulus, nol error console, tanpa scroll horizontal:
 
   **Yang dikerjakan (7 hal, semuanya di luar Fase 5)**
@@ -672,6 +680,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Project Firebase-nya belum ada.** `.env` masih kosong, jadi login/daftar/aktivasi belum aktif di produksi. Workflow "Deploy backend" sudah ditulis tapi **belum pernah dijalankan** — jalankan sekali dengan "Cuma periksa" dulu.
   - Sinkron bintang ke Firestore, verifikasi email, halaman Kebijakan Privasi / S&K / refund, analytics.
   - **BATAS YANG DISADARI:** config game premium tetap berupa chunk JS statis yang bisa diunduh siapa pun yang tahu URL-nya. Yang dijual adalah AKSES (akun + kode + batas perangkat), dan itu memang menghentikan pembagian akun ke grup WhatsApp — tapi bukan orang yang sengaja mengambil file. Menutupnya berarti menyajikan config lewat Cloud Function bertoken: kehilangan type-safety saat build, menambah jeda & biaya tiap level. **Itu keputusan arsitektur tersendiri, belum diambil.**
+
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
