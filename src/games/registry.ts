@@ -170,6 +170,7 @@ export const games: GameMeta[] = [
     group: 'sd1',
     title: 'Ejaan Jitu',
     emoji: '🔤',
+    pic: 'ejaan-jitu',
     template: 'spell',
     load: () => import('@/games/sd1/ejaan-jitu'),
   },
@@ -181,6 +182,7 @@ export const games: GameMeta[] = [
     // hubungannya dengan isi game. 🤝 = "berpasangan", sesuai isinya
     // (profesi↔alat, hewan↔rumah, lawan kata).
     emoji: '🤝',
+    pic: 'pasangan-pintar',
     template: 'mixed',
     load: () => import('@/games/sd1/pasangan-pintar'),
   },
@@ -189,10 +191,14 @@ export const games: GameMeta[] = [
     group: 'sd1',
     title: 'Jam Pintar',
     emoji: '🕒',
-    // Muka jam sungguhan (berangka) sebagai ikon, bukan emoji 🕒 yang di HP
-    // tampil seperti piringan abu-abu polos. 10.10 = posisi jarum paling
-    // seimbang, jadi ikonnya langsung terbaca "jam".
-    iconClock: { h: 10, m: 10 },
+    // Seni jam berangka, menggantikan muka jam SVG (`iconClock`) yang dulu
+    // dipakai di sini. Syaratnya tetap sama seperti 2026-08-02: ikonnya WAJIB
+    // muka jam yang benar-benar berangka — emoji 🕒 di HP tampil seperti
+    // piringan abu-abu polos tanpa angka. Seninya sudah dicek: angka 1-12
+    // lengkap & urut, jarum di 10.10. `iconClock` sengaja DIHAPUS karena ia
+    // menang atas `pic`; kembalikan barisnya kalau seninya ditarik lagi.
+    // CATATAN: jam di dalam SOAL tetap Clock.tsx, tidak tersentuh perubahan ini.
+    pic: 'jam-pintar',
     template: 'tap-answer',
     load: () => import('@/games/sd1/jam-pintar'),
   },
@@ -201,6 +207,7 @@ export const games: GameMeta[] = [
     group: 'sd1',
     title: 'Tulis Huruf',
     emoji: '🖊️',
+    pic: 'tulis-huruf',
     template: 'tracing',
     load: () => import('@/games/sd1/tulis-huruf'),
   },
