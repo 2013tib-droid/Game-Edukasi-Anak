@@ -42,6 +42,29 @@ Risiko turunannya: **objek yang biasanya bertuliskan sesuatu di dunia nyata akan
 tulisan** — sampul buku dapat judul, balon ucapan dapat kalimat, papan dapat label. Objek
 seperti itu wajib diberi "polos, tanpa judul, tanpa tulisan" di baris promptnya sendiri.
 
+## PELAJARAN KETIGA (percobaan kedua, 2026-09-02)
+
+Percobaan kedua lolos semua aturan di atas — nol tulisan liar, latar putih, persegi, tanpa
+bingkai. `pasang-kata` langsung terpakai. Tapi `hitung-hebat` gagal karena hal baru:
+
+3. **WAJAH DAN ANGKA/HURUF TIDAK BOLEH BERBAGI PERMUKAAN YANG SAMA.** Mata, pipi, dan senyum
+   balok digambar tepat menimpa angka 3, jadi angkanya pudar dan setengah terhapus. Di kartu
+   portal balok itu cuma setinggi ±24px — angkanya terbaca sebagai noda. Padahal angka itu
+   INTI ikonnya. **Aturan: kalau objeknya membawa angka/huruf yang harus terbaca, sebutkan
+   posisi angka dan posisi wajah secara terpisah, dan tegaskan keduanya tidak menimpa.**
+   Jam Pintar aman dari ini (angka melingkar di pinggir, wajah di tengah), tapi apa pun yang
+   berupa balok/kartu/papan berangka wajib diberi kalimat pemisah itu.
+
+### Yang TIDAK perlu dikhawatirkan (sudah diukur, jangan "diperbaiki")
+
+- **Rasio menjulang itu aman.** Sempat dikira susunan tiga balok bertumpuk bermasalah karena
+  `GameIcon` mengukur lewat TINGGI (`width: auto`). Terukur rasio isinya 0,71 — masih di dalam
+  rentang ikon yang sudah ada (0,54 `tulis-angka` sampai 1,50 `kartu-kembar`). Tak perlu
+  memaksa komposisi jadi melebar.
+- **Garis putih tipis mengelilingi objek** (khas stiker die-cut) tidak jadi masalah: warnanya
+  putih dan menyatu dengan latar, jadi ikut terbuang flood-fill sampai mentok ke outline
+  coklatnya.
+
 ---
 
 ## BLOK GAYA (tempel sekali di awal chat Gemini)
@@ -74,7 +97,7 @@ seperti itu wajib diberi "polos, tanpa judul, tanpa tulisan" di baris promptnya 
 | id file | Baris prompt |
 |---|---|
 | `pasang-kata` | Buatkan: dua keping puzzle besar yang saling menyatu, satu keping warna peach dan satunya warna hijau mint, keduanya berwajah imut, dengan tiga bintang kecil pastel di sekitarnya. |
-| `hitung-hebat` | Buatkan: tiga balok angka bertumpuk — balok berangka 1 warna biru muda, balok berangka 2 warna kuning krem, balok berangka 3 warna hijau mint — balok paling depan berwajah imut, dengan tiga bintang kecil pastel di sekitarnya. Angka 1, 2, dan 3 harus jelas terbaca; selain ketiga angka itu tidak boleh ada tulisan apa pun. |
+| `hitung-hebat` | Buatkan: tiga balok mainan bertumpuk — balok berangka 1 warna biru muda, balok berangka 2 warna kuning krem, balok berangka 3 warna hijau mint. Angka besar tercetak jelas dan utuh di tengah permukaan tiap balok. Hanya balok paling bawah yang berwajah imut, dan wajahnya digambar KECIL di bagian bawah permukaan balok, di bawah angkanya — wajah dan angka tidak boleh saling menimpa. Tambahkan tiga bintang kecil pastel di sekitarnya. Angka 1, 2, dan 3 harus jelas terbaca; selain ketiga angka itu tidak boleh ada tulisan apa pun. |
 | `suku-kata` | Buatkan: satu balon ucapan besar warna biru muda berwajah imut. Bagian dalam balonnya POLOS tanpa kalimat, hanya berisi tiga bulatan kecil berjajar warna peach, kuning, dan mint. Tambahkan tiga bintang kecil pastel di sekitarnya. |
 | `ejaan-jitu` | Buatkan: satu papan target bundar pastel berlapis lingkaran merah muda, krem, dan mint, berwajah imut, dengan satu anak panah menancap tepat di titik tengahnya, dikelilingi lima huruf kapital pastel yang beterbangan. Huruf-huruf itu berdiri sendiri-sendiri dan tidak boleh merangkai kata. |
 | `pasangan-pintar` | Buatkan: dua lingkaran pastel besar yang dihubungkan satu garis lengkung bertitik-titik — satu lingkaran warna peach berisi gambar bintang kuning, satu lingkaran warna hijau mint berisi gambar hati merah muda — kedua lingkaran berwajah imut. |
