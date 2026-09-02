@@ -3,13 +3,23 @@
 Sasaran: `GameMeta.pic` di `src/games/registry.ts` → file `public/assets/games/<id>.webp`.
 Ikon ini dipakai DUA tempat sekaligus (kartu portal + layar intro), jadi satu file cukup.
 
-## Status (2026-09-02) — SELESAI
+## Status (2026-09-02)
 
-**Seluruh 18 game sudah bergambar; tak ada lagi ikon emoji.**
+**18 dari 19 game sudah bergambar.** Yang tersisa satu:
 
-Dikerjakan di sesi ini: `pasang-kata`, `suku-kata`, `hitung-hebat`, `jam-pintar`,
-`tulis-huruf`, `pasangan-pintar`, `ejaan-jitu`, `cerita-nusantara`. Sebelumnya: seluruh TK (8)
-+ `cerita-kancil` + `tambah-tangkas`.
+| id | Judul | Ikon sekarang |
+|---|---|---|
+| `pola-pintar` | Pola Pintar | 🔷 |
+
+Pola Pintar adalah game SD yang ditambahkan belakangan (`77b9ca6`), sesudah batch ikon di
+bawah selesai — jadi ia bukan sisa yang terlewat, tapi game baru yang belum kebagian.
+
+Sudah bergambar: seluruh TK (8) + `cerita-kancil`, `tambah-tangkas`, `pasang-kata`,
+`suku-kata`, `hitung-hebat`, `jam-pintar`, `tulis-huruf`, `pasangan-pintar`, `ejaan-jitu`,
+`cerita-nusantara`.
+
+Ikon `cerita-kancil` dijadwalkan diganti (sampulnya bertulisan Inggris) — baris promptnya ada
+di `prompt-ikon-cerita-anak.md`, yang memakai BLOK GAYA + EKOR PROMPT dari dokumen ini.
 
 `emoji` di registry tetap diisi semua — itu cadangan kalau file gagal dimuat, bukan sisa yang
 boleh dibersihkan.
@@ -128,6 +138,7 @@ hal baru muncul di tahap POTONG dan tahap PASANG — bukan di tahap prompt:
 | `tulis-huruf` | Buatkan: satu pulpen bertutup warna biru muda berwajah imut dalam posisi miring, sedang menuliskan satu garis tinta biru melengkung yang membentuk huruf a kecil di bawahnya. Selain huruf a itu tidak boleh ada tulisan lain. |
 | `cerita-nusantara` | Buatkan: satu buku tertutup bersampul hijau tosca berwajah imut, dengan pita pembatas merah muda menjuntai dari bawahnya dan satu bintang kuning kecil melayang di atasnya. Sampulnya berhias motif batik sederhana warna krem, POLOS tanpa judul dan tanpa tulisan apa pun. |
 | `jam-pintar` (opsional) | Buatkan: satu jam dinding bulat pastel berwajah imut, dengan angka 1 sampai 12 tertulis jelas dan urut mengelilingi muka jam, jarum pendek biru tua menunjuk angka 10 dan jarum panjang merah menunjuk angka 2. Selain angka jam itu tidak boleh ada tulisan lain. |
+| `pola-pintar` | Buatkan: empat ubin pastel bersudut membulat tersusun rapat dua baris dua kolom — ubin merah muda berisi lingkaran, ubin kuning berisi segitiga, ubin mint berisi lingkaran, dan ubin keempat KOSONG bergaris putus-putus sebagai tempat yang belum terisi. Ubin pertama berwajah imut. Susunannya rapat membentuk kotak, jangan berjajar melebar. |
 
 ### Kalau hasilnya masih melenceng
 
@@ -151,6 +162,12 @@ Balas di chat yang sama dengan menyebut kesalahannya, jangan mengulang seluruh p
 - **`jam-pintar` opsional & berisiko**: mengganti ikonnya berarti melepas `iconClock`
   (muka jam SVG yang angkanya dijamin benar). Gambar AI sering salah menulis angka jam —
   kalau 1–12 tidak lengkap dan urut, JANGAN dipakai, biarkan SVG-nya.
+- **`pola-pintar` sengaja 2×2, BUKAN sederet ke samping.** Deret mendatar memang bahasa
+  gambar paling jelas untuk "lanjutkan polanya", tapi empat ubin berjajar rasionya ±3 —
+  jauh melewati batas ±1,5 (lihat Pelajaran Kelima), jadi ikonnya akan mengecil sendiri
+  kena pengaman `maxWidth` dan kalah menonjol dari tetangganya. Susunan 2×2 dengan satu
+  petak kosong bergaris putus-putus tetap terbaca "ada yang belum terisi".
+  Bedakan dari `labirin-warna` (palet cat kayu, kelompok TK): ini ubin geometris.
 - **`ejaan-jitu` alternatif** kalau papan target terasa terlalu "permainan panah":
   Buatkan: tiga balok huruf kayu pastel berdiri berjajar, balok tengah berwajah imut,
   dengan satu bintang kuning melayang di atasnya.
