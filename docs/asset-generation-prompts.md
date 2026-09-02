@@ -115,13 +115,20 @@ Status pengiriman:
 |---|---|
 | Maskot 6 tahap | ✅ diterima (2026-08-04) → `public/assets/mascot/mascot-1..6.webp` |
 | Buah (14) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
-| Kendaraan & tujuan (20) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
+| Kendaraan (12) | ✅ diterima (2026-08-04) → `car, bus, truck, pickup, tractor, bicycle, scooter, ambulance, firetruck, police, train, bajaj` |
+| Bangunan & tempat tujuan (8) | ✅ diterima (2026-08-04) → `house, school, hospital, shop, gas-station, field, tree, park` |
 | Benda sehari-hari (20) | ✅ diterima (2026-08-04) → `public/assets/items/*.webp` |
 | **5 — Benda paling sering muncul (25)** | ⬜ **berikutnya** (2026-08-08) |
 | 6 — Alat musik (5) | ⬜ menunggu |
 | 7 — Profesi & alatnya (13) | ⬜ menunggu |
 | 8 — Hewan & rumahnya (8) | ⬜ menunggu |
 | 9 — Benda sisa (15) | ⬜ menunggu |
+
+**Yang didaftar belum ada (catatan 2026-08-05):** kendaraan — taksi, jip, motor,
+mobil balap, otoped, trem/monorel; tujuan — halte, pabrik, kantor, stasiun,
+istana, jembatan, pantai. Taksi, jip, motor & mobil balap **sudah digambar** di
+branch `claude/vehicle-image-analysis-68jj0l` (belum di-merge saat baris ini
+ditulis); sisanya belum disentuh.
 
 ### Sisa emoji: hasil audit 2026-08-08
 
@@ -180,6 +187,11 @@ kiri** — kalau tidak, di dalam game ia berjalan mundur.
 - **Bentuk harus benar, bukan cuma cantik.** Mangga percobaan pertama digambar
   bulat oranye — nyaris kembar dengan jeruk, dan ini game pengenalan buah.
   Versi kedua (lonjong melengkung, hijau-kekuningan) baru dipakai.
+- **Lembar bangunan (2026-08-04) kena dua hal yang sama**: latarnya gelap
+  bercahaya lagi, dan 8 objek dalam satu lembar → tiap ikon cuma ±256px. Kali
+  ini pemotongan selamat karena cahaya latarnya HALUS (gradasi) sementara garis
+  luar ikonnya tajam, jadi flood-fill berhenti di tepi. Itu keberuntungan, bukan
+  aturan — permintaan tetap: **latar putih polos, satu objek per file.**
 - **Warna buah tidak boleh diubah semaunya**: Pasar Buah menyortir buah ke
   keranjang warna, jadi seni yang warnanya menyimpang membuat jawaban benar
   jadi terlihat salah.
