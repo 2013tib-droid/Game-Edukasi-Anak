@@ -212,6 +212,16 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd1/tulis-huruf'),
   },
   {
+    // Pola & logika: satu-satunya game SD yang melatih penalaran pola
+    // (bentuk, warna, bilangan) — lihat docs/kurikulum-sd1-2.md.
+    id: 'pola-pintar',
+    group: 'sd1',
+    title: 'Pola Pintar',
+    emoji: '🔷',
+    template: 'tap-answer',
+    load: () => import('@/games/sd1/pola-pintar'),
+  },
+  {
     id: 'cerita-nusantara',
     group: 'sd1',
     title: 'Cerita Nusantara',
