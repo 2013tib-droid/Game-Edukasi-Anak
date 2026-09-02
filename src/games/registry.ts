@@ -220,6 +220,7 @@ export const games: GameMeta[] = [
     group: 'sd1',
     title: 'Pola Pintar',
     emoji: '🔷',
+    pic: 'pola-pintar',
     template: 'tap-answer',
     load: () => import('@/games/sd1/pola-pintar'),
   },

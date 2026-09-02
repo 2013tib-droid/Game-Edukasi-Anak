@@ -3,23 +3,24 @@
 Sasaran: `GameMeta.pic` di `src/games/registry.ts` → file `public/assets/games/<id>.webp`.
 Ikon ini dipakai DUA tempat sekaligus (kartu portal + layar intro), jadi satu file cukup.
 
-## Status (2026-09-02)
+## Status (2026-09-03) — SELESAI
 
-**18 dari 19 game sudah bergambar.** Yang tersisa satu:
+**Ke-18 game sudah bergambar; tak ada lagi ikon emoji.** Terakhir masuk: `pola-pintar`
+(ulat berbuku-buku), game SD yang ditambahkan belakangan (`77b9ca6`) sesudah batch ikon
+lainnya selesai.
 
-| id | Judul | Ikon sekarang |
-|---|---|---|
-| `pola-pintar` | Pola Pintar | 🔷 |
+Jumlahnya 18, bukan 19, karena Cerita Nusantara dilebur ke Cerita Anak menjadi satu game
+**"Baca Cerita"** (`d526672`).
 
-Pola Pintar adalah game SD yang ditambahkan belakangan (`77b9ca6`), sesudah batch ikon di
-bawah selesai — jadi ia bukan sisa yang terlewat, tapi game baru yang belum kebagian.
+`emoji` di registry tetap diisi semua — itu cadangan kalau file gagal dimuat, bukan sisa
+yang boleh dibersihkan.
 
-Sudah bergambar: seluruh TK (8) + `cerita-kancil`, `tambah-tangkas`, `pasang-kata`,
-`suku-kata`, `hitung-hebat`, `jam-pintar`, `tulis-huruf`, `pasangan-pintar`, `ejaan-jitu`,
-`cerita-nusantara`.
-
-Ikon `cerita-kancil` dijadwalkan diganti (sampulnya bertulisan Inggris) — baris promptnya ada
-di `prompt-ikon-cerita-anak.md`, yang memakai BLOK GAYA + EKOR PROMPT dari dokumen ini.
+**`public/assets/games/cerita-nusantara.webp` kini YATIM** akibat peleburan itu — tak
+dirujuk `pic` mana pun. Jangan buru-buru dihapus: ikon itu buku tertutup bermotif batik
+**tanpa tulisan**, sedangkan ikon `cerita-kancil` yang masih terpakai justru bermasalah
+(sampulnya bertulisan Inggris "My Story Adventures"). Memindahnya ke `cerita-kancil.webp`
+menyelesaikan dua hal sekaligus tanpa menggambar apa pun. Baris prompt untuk menggambar
+ikon baru tetap ada di `prompt-ikon-cerita-anak.md` kalau pemilik lebih suka gambar segar.
 
 `emoji` di registry tetap diisi semua — itu cadangan kalau file gagal dimuat, bukan sisa yang
 boleh dibersihkan.
