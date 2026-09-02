@@ -3,20 +3,20 @@
 Sasaran: `GameMeta.pic` di `src/games/registry.ts` → file `public/assets/games/<id>.webp`.
 Ikon ini dipakai DUA tempat sekaligus (kartu portal + layar intro), jadi satu file cukup.
 
-## Yang masih emoji (semuanya kelompok SD Kelas 1 & 2)
+## Status (2026-09-02)
+
+**17 dari 18 game sudah bergambar.** Yang tersisa cuma satu:
 
 | id | Judul | Ikon sekarang |
 |---|---|---|
-| `pasang-kata` | Pasang Kata | 🧩 |
-| `hitung-hebat` | Hitung Hebat | 🔢 |
-| `suku-kata` | Suku Kata | 📖 |
-| `ejaan-jitu` | Ejaan Jitu | 🔤 |
-| `pasangan-pintar` | Pasangan Pintar | 🤝 |
-| `tulis-huruf` | Tulis Huruf | 🖊️ |
 | `cerita-nusantara` | Cerita Nusantara | 📚 |
-| `jam-pintar` | Jam Pintar | muka jam SVG (opsional diganti) |
 
-Sudah bergambar: seluruh TK (8) + `cerita-kancil` + `tambah-tangkas`.
+Selesai di sesi ini: `pasang-kata`, `suku-kata`, `hitung-hebat`, `jam-pintar`, `tulis-huruf`,
+`pasangan-pintar`, `ejaan-jitu`. Sebelumnya: seluruh TK (8) + `cerita-kancil` + `tambah-tangkas`.
+
+`jam-pintar` tidak lagi memakai `iconClock` — barisnya dihapus dari registry karena ia menang
+atas `pic`. Syaratnya tetap dipenuhi (muka jam berangka 1–12 lengkap & urut). Jam di dalam
+SOAL tetap `Clock.tsx` dan tidak tersentuh.
 
 ---
 
@@ -54,6 +54,27 @@ bingkai. `pasang-kata` langsung terpakai. Tapi `hitung-hebat` gagal karena hal b
    posisi angka dan posisi wajah secara terpisah, dan tegaskan keduanya tidak menimpa.**
    Jam Pintar aman dari ini (angka melingkar di pinggir, wajah di tengah), tapi apa pun yang
    berupa balok/kartu/papan berangka wajib diberi kalimat pemisah itu.
+
+## PELAJARAN KEEMPAT & KELIMA (batch terakhir, 2026-09-02)
+
+Batch terakhir (jam, pulpen, dua lingkaran, papan target) lolos semua aturan gaya, tapi dua
+hal baru muncul di tahap POTONG dan tahap PASANG — bukan di tahap prompt:
+
+4. **Latar putih yang TERKURUNG artwork tetap buram.** Lubang huruf "a" di ikon Tulis Huruf
+   tidak terjangkau flood-fill dari tepi, jadi di atas latar berwarna tampak sebagai
+   gumpalan putih, bukan huruf. Ini jebakan yang memang sudah tertulis di kepala
+   `cut-item.py` (dan sengaja begitu — garis putih di sayap jalak harus selamat).
+   **Aturan: sesudah memotong, SELALU tempel hasilnya di atas latar berwarna dan lihat.**
+   Lubang yang perlu ditembus dikerjakan manual per gambar, jangan diotomatiskan.
+   Objek yang rawan: huruf berlubang (a, e, o, d, p), angka 0/6/8/9, gembok, cincin.
+
+5. **Ikon jangan lebih lebar dari rasio ±1,5.** `GameIcon` mengukur lewat TINGGI
+   (`width: auto`), dan kotak isi kartu portal cuma **±116px** di HP 360px. Pasangan Pintar
+   rasionya 2,08 → dirender 150px dan meluber keluar kartunya. Rekor lama cuma 1,50
+   (`kartu-kembar`, 108px) — jadi selama ini pas-pasan aman tanpa ada yang sadar.
+   Sekarang `GameIcon` punya `maxWidth: 100%` sebagai pengaman, tapi ikon yang kena
+   pengaman itu dirender lebih pendek dari 72px. **Lebih baik dicegah di prompt: minta
+   objeknya berdekatan/menumpuk, jangan berjajar melebar.**
 
 ### Yang TIDAK perlu dikhawatirkan (sudah diukur, jangan "diperbaiki")
 
