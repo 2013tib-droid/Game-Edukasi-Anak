@@ -3,12 +3,22 @@
 Sasaran: `GameMeta.pic` di `src/games/registry.ts` → file `public/assets/games/<id>.webp`.
 Ikon ini dipakai DUA tempat sekaligus (kartu portal + layar intro), jadi satu file cukup.
 
-## Status (2026-09-02)
+## Status (2026-09-02) — SELESAI
 
-**17 dari 18 game sudah bergambar.** Yang tersisa cuma satu:
+**Seluruh 18 game sudah bergambar; tak ada lagi ikon emoji.** Terakhir: 
+(buku tertutup bersampul motif, sengaja beda dari buku terbuka ungu milik Cerita Anak).
 
-| id | Judul | Ikon sekarang |
-|---|---|---|
+ di registry tetap diisi semua — itu cadangan kalau file gagal dimuat, bukan sisa
+yang boleh dibersihkan.
+
+ tidak lagi memakai `iconClock` — barisnya dihapus dari registry karena ia menang
+atas `pic`. Syaratnya tetap dipenuhi (muka jam berangka 1-12 lengkap & urut). Jam di dalam
+SOAL tetap `Clock.tsx` dan tidak tersentuh.
+
+Dokumen ini tetap berguna kalau nanti ada game baru atau ikon lama diganti — blok gaya,
+ekor prompt, dan lima pelajarannya berlaku untuk ikon mana pun.
+
+---|---|---|
 | `cerita-nusantara` | Cerita Nusantara | 📚 |
 
 Selesai di sesi ini: `pasang-kata`, `suku-kata`, `hitung-hebat`, `jam-pintar`, `tulis-huruf`,
