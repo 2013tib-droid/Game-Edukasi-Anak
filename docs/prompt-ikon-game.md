@@ -20,12 +20,36 @@ Sudah bergambar: seluruh TK (8) + `cerita-kancil` + `tambah-tangkas`.
 
 ---
 
+## DUA PELAJARAN DARI PERCOBAAN PERTAMA (2026-09-02) — jangan diulang
+
+Percobaan pertama `pasang-kata` menghasilkan gambar yang **karakternya sudah benar**
+(kawaii, peach & mint, outline coklat lembut, mata berkilau, pipi merona) tapi gagal di
+tujuh hal sekaligus: ada tulisan **"Kiri"** dan **"Kanan"** di badan puzzle, latar kamar
+tidur blur berbokeh, ada bingkai kartu, rasio 16:9, ada bayangan lantai, bintangnya ~10,
+dan kilau glitter ala foto.
+
+1. **Kata penunjuk LETAK ikut tertulis di gambar.** Baris promptnya menyebut "keping kiri
+   warna peach dan keping kanan warna mint" — dan Gemini menuliskan "Kiri"/"Kanan" di
+   badan puzzle-nya. Padahal sisi mana yang peach tidak penting sama sekali.
+   **Aturan: jangan pernah menyebut kiri/kanan/atas/bawah kalau tidak benar-benar perlu.**
+   Kalau terpaksa perlu, tulis "di sisi yang satu … di sisi lainnya".
+2. **Blok gaya di awal chat TIDAK bertahan.** Gaya visualnya diikuti, tapi aturan teknis
+   (latar, rasio, bingkai, bayangan) dilupakan mulai gambar pertama.
+   **Aturan: tempel EKOR PROMPT di bawah ini pada SETIAP pesan**, jangan mengandalkan
+   blok gaya awal saja.
+
+Risiko turunannya: **objek yang biasanya bertuliskan sesuatu di dunia nyata akan diberi
+tulisan** — sampul buku dapat judul, balon ucapan dapat kalimat, papan dapat label. Objek
+seperti itu wajib diberi "polos, tanpa judul, tanpa tulisan" di baris promptnya sendiri.
+
+---
+
 ## BLOK GAYA (tempel sekali di awal chat Gemini)
 
 > Kamu akan membantuku membuat ikon untuk game edukasi anak usia 4–8 tahun.
 > Semua ikon HARUS mengikuti aturan gaya yang sama persis:
 >
-> - Gaya kartun **kawaii** yang imut dan ramah anak, sticker style.
+> - Gaya kartun **kawaii** yang imut dan ramah anak, sticker style, ilustrasi datar.
 > - Warna **PASTEL lembut** (peach, mint, biru muda, kuning krem, ungu muda),
 >   shading halus, tanpa gradasi metalik, tanpa tekstur realistis.
 > - Outline **tebal tapi lembut berwarna coklat/krem tua** — bukan hitam pekat.
@@ -37,26 +61,46 @@ Sudah bergambar: seluruh TK (8) + `cerita-kancil` + `tambah-tangkas`.
 >   huruf/angka itu memang BENTUK objeknya.
 > - Format **persegi (1:1)**, resolusi tinggi.
 
-## Baris prompt (kirim SATU per pesan)
+## EKOR PROMPT (WAJIB ditempel di TIAP pesan, sesudah baris objeknya)
+
+> Aturan wajib: format persegi 1:1. Latar putih polos rata, tanpa pemandangan, tanpa
+> ruangan, tanpa meja, tanpa blur latar, tanpa bokeh. Tanpa bingkai, tanpa border, tanpa
+> sudut membulat di tepi gambar. Tanpa bayangan di lantai, tanpa pantulan, tanpa glitter.
+> JANGAN menuliskan kata, huruf, angka, label, judul, atau watermark apa pun di dalam
+> gambar. Ilustrasi datar bergaya stiker, bukan foto.
+
+## Baris prompt (kirim SATU per pesan, selalu + EKOR PROMPT)
 
 | id file | Baris prompt |
 |---|---|
-| `pasang-kata` | Buatkan: dua keping puzzle besar yang sedang menyatu, keping kiri warna peach dan keping kanan warna mint, keduanya berwajah imut, dikelilingi 3–4 bintang kecil pastel. |
-| `hitung-hebat` | Buatkan: tiga balok angka bertumpuk — angka 1 biru muda, angka 2 kuning krem, angka 3 hijau mint — balok paling depan berwajah imut, dikelilingi bintang kecil pastel. Angkanya harus jelas terbaca 1, 2, dan 3. |
-| `suku-kata` | Buatkan: satu balon ucapan (speech bubble) besar warna biru muda berwajah imut, di dalamnya tiga bulatan kecil berjajar warna peach, kuning, dan mint, dikelilingi percikan bintang kecil. |
-| `ejaan-jitu` | Buatkan: satu papan target bundar pastel (lingkaran merah muda, krem, mint) berwajah imut dengan satu anak panah bermata bintang menancap tepat di tengahnya, dikelilingi beberapa huruf kecil warna pastel yang beterbangan. |
-| `pasangan-pintar` | Buatkan: dua lingkaran pastel besar yang dihubungkan garis lengkung bertitik-titik — lingkaran kiri warna peach berisi bintang kuning, lingkaran kanan warna mint berisi hati merah muda — kedua lingkaran berwajah imut. |
-| `tulis-huruf` | Buatkan: satu pulpen warna biru muda berwajah imut berdiri miring, sedang menuliskan garis tinta lengkung yang membentuk huruf a kecil di bawahnya. Pulpen biru, BUKAN pensil kayu kuning. |
-| `cerita-nusantara` | Buatkan: satu buku TERTUTUP bersampul hijau tosca bermotif batik sederhana warna krem, dengan pita pembatas merah muda menjuntai, buku itu berwajah imut, dan satu bintang kuning kecil melayang di atasnya. |
-| `jam-pintar` (opsional) | Buatkan: satu jam dinding bulat pastel berwajah imut, angka 1 sampai 12 tertulis jelas dan urut di sekeliling muka jam, jarum pendek biru tua menunjuk angka 10 dan jarum panjang merah menunjuk angka 2. |
+| `pasang-kata` | Buatkan: dua keping puzzle besar yang saling menyatu, satu keping warna peach dan satunya warna hijau mint, keduanya berwajah imut, dengan tiga bintang kecil pastel di sekitarnya. |
+| `hitung-hebat` | Buatkan: tiga balok angka bertumpuk — balok berangka 1 warna biru muda, balok berangka 2 warna kuning krem, balok berangka 3 warna hijau mint — balok paling depan berwajah imut, dengan tiga bintang kecil pastel di sekitarnya. Angka 1, 2, dan 3 harus jelas terbaca; selain ketiga angka itu tidak boleh ada tulisan apa pun. |
+| `suku-kata` | Buatkan: satu balon ucapan besar warna biru muda berwajah imut. Bagian dalam balonnya POLOS tanpa kalimat, hanya berisi tiga bulatan kecil berjajar warna peach, kuning, dan mint. Tambahkan tiga bintang kecil pastel di sekitarnya. |
+| `ejaan-jitu` | Buatkan: satu papan target bundar pastel berlapis lingkaran merah muda, krem, dan mint, berwajah imut, dengan satu anak panah menancap tepat di titik tengahnya, dikelilingi lima huruf kapital pastel yang beterbangan. Huruf-huruf itu berdiri sendiri-sendiri dan tidak boleh merangkai kata. |
+| `pasangan-pintar` | Buatkan: dua lingkaran pastel besar yang dihubungkan satu garis lengkung bertitik-titik — satu lingkaran warna peach berisi gambar bintang kuning, satu lingkaran warna hijau mint berisi gambar hati merah muda — kedua lingkaran berwajah imut. |
+| `tulis-huruf` | Buatkan: satu pulpen bertutup warna biru muda berwajah imut dalam posisi miring, sedang menuliskan satu garis tinta biru melengkung yang membentuk huruf a kecil di bawahnya. Selain huruf a itu tidak boleh ada tulisan lain. |
+| `cerita-nusantara` | Buatkan: satu buku tertutup bersampul hijau tosca berwajah imut, dengan pita pembatas merah muda menjuntai dari bawahnya dan satu bintang kuning kecil melayang di atasnya. Sampulnya berhias motif batik sederhana warna krem, POLOS tanpa judul dan tanpa tulisan apa pun. |
+| `jam-pintar` (opsional) | Buatkan: satu jam dinding bulat pastel berwajah imut, dengan angka 1 sampai 12 tertulis jelas dan urut mengelilingi muka jam, jarum pendek biru tua menunjuk angka 10 dan jarum panjang merah menunjuk angka 2. Selain angka jam itu tidak boleh ada tulisan lain. |
+
+### Kalau hasilnya masih melenceng
+
+Balas di chat yang sama dengan menyebut kesalahannya, jangan mengulang seluruh prompt:
+
+> Ulangi gambar yang sama, pertahankan karakter dan warnanya, tapi perbaiki: ganti
+> latarnya jadi PUTIH POLOS rata tanpa ruangan dan tanpa blur, hapus semua tulisan,
+> hapus bingkainya, hapus bayangan di lantai, dan buat formatnya persegi 1:1.
 
 ### Catatan per ikon
 - **`cerita-nusantara` wajib buku TERTUTUP bermotif batik** — buku terbuka ungu sudah
-  dipakai `cerita-kancil`, dua ikon buku yang mirip akan membingungkan.
+  dipakai `cerita-kancil`, dua ikon buku yang mirip akan membingungkan. Sampul buku itu
+  magnet tulisan; jangan hapus bagian "POLOS tanpa judul" dari baris promptnya.
 - **`tulis-huruf` wajib pulpen biru** — pensil kayu kuning sudah dipakai `tulis-angka` (TK).
+  Perbedaannya ditulis sebagai ciri POSITIF ("pulpen bertutup warna biru muda"), bukan
+  sebagai larangan "bukan pensil": kata benda di dalam larangan sering justru ikut digambar.
 - **`pasang-kata` (puzzle) vs `pasangan-pintar` (dua lingkaran terhubung)** sengaja dibedakan
   bentuknya; keduanya game "menjodohkan", jangan sampai ikonnya sama-sama puzzle.
 - **`hitung-hebat` bukan tanda tambah** — tanda tambah sudah jadi ikon `tambah-tangkas`.
+- **`suku-kata`**: balon ucapan itu magnet kalimat. Tiga bulatan di dalamnya = tiga suku kata.
 - **`jam-pintar` opsional & berisiko**: mengganti ikonnya berarti melepas `iconClock`
   (muka jam SVG yang angkanya dijamin benar). Gambar AI sering salah menulis angka jam —
   kalau 1–12 tidak lengkap dan urut, JANGAN dipakai, biarkan SVG-nya.
@@ -79,4 +123,5 @@ Sudah bergambar: seluruh TK (8) + `cerita-kancil` + `tambah-tangkas`.
 ## Temuan sampingan
 `public/assets/games/cerita-kancil.webp` **memuat tulisan bahasa Inggris** di dalam gambarnya
 ("My Story Adventures", "Every chapter is an adventure!"). Aplikasinya berbahasa Indonesia dan
-aturan gaya melarang teks di dalam ikon — layak ikut diganti.
+aturan gaya melarang teks di dalam ikon — layak ikut diganti. Kalau dibuat ulang, pakai
+EKOR PROMPT di atas supaya sampul & halamannya polos.
