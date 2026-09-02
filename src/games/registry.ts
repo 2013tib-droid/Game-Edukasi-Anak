@@ -216,6 +216,7 @@ export const games: GameMeta[] = [
     group: 'sd1',
     title: 'Cerita Nusantara',
     emoji: '📚',
+    pic: 'cerita-nusantara',
     template: 'story-choice',
     load: () => import('@/games/sd1/cerita-nusantara'),
   },
