@@ -1,32 +1,25 @@
-# Prompt Ikon Kartu Game (yang masih emoji)
+# Prompt Ikon Kartu Game
 
 Sasaran: `GameMeta.pic` di `src/games/registry.ts` → file `public/assets/games/<id>.webp`.
 Ikon ini dipakai DUA tempat sekaligus (kartu portal + layar intro), jadi satu file cukup.
 
 ## Status (2026-09-02) — SELESAI
 
-**Seluruh 18 game sudah bergambar; tak ada lagi ikon emoji.** Terakhir: 
-(buku tertutup bersampul motif, sengaja beda dari buku terbuka ungu milik Cerita Anak).
+**Seluruh 18 game sudah bergambar; tak ada lagi ikon emoji.**
 
- di registry tetap diisi semua — itu cadangan kalau file gagal dimuat, bukan sisa
-yang boleh dibersihkan.
+Dikerjakan di sesi ini: `pasang-kata`, `suku-kata`, `hitung-hebat`, `jam-pintar`,
+`tulis-huruf`, `pasangan-pintar`, `ejaan-jitu`, `cerita-nusantara`. Sebelumnya: seluruh TK (8)
++ `cerita-kancil` + `tambah-tangkas`.
 
- tidak lagi memakai `iconClock` — barisnya dihapus dari registry karena ia menang
-atas `pic`. Syaratnya tetap dipenuhi (muka jam berangka 1-12 lengkap & urut). Jam di dalam
-SOAL tetap `Clock.tsx` dan tidak tersentuh.
-
-Dokumen ini tetap berguna kalau nanti ada game baru atau ikon lama diganti — blok gaya,
-ekor prompt, dan lima pelajarannya berlaku untuk ikon mana pun.
-
----|---|---|
-| `cerita-nusantara` | Cerita Nusantara | 📚 |
-
-Selesai di sesi ini: `pasang-kata`, `suku-kata`, `hitung-hebat`, `jam-pintar`, `tulis-huruf`,
-`pasangan-pintar`, `ejaan-jitu`. Sebelumnya: seluruh TK (8) + `cerita-kancil` + `tambah-tangkas`.
+`emoji` di registry tetap diisi semua — itu cadangan kalau file gagal dimuat, bukan sisa yang
+boleh dibersihkan.
 
 `jam-pintar` tidak lagi memakai `iconClock` — barisnya dihapus dari registry karena ia menang
 atas `pic`. Syaratnya tetap dipenuhi (muka jam berangka 1–12 lengkap & urut). Jam di dalam
 SOAL tetap `Clock.tsx` dan tidak tersentuh.
+
+Dokumen ini tetap berguna kalau nanti ada game baru atau ikon lama diganti — blok gaya, ekor
+prompt, dan lima pelajarannya berlaku untuk ikon mana pun.
 
 ---
 
