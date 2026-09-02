@@ -592,6 +592,19 @@
   font-weight: 800;
 }
 
+/* Gambar semangat saat salah. Kalimatnya sudah tergambar di dalam gambar,
+   jadi tidak ada .feedback-text di sebelahnya. Dibatasi tinggi layar juga
+   supaya di HP mendatar (landscape) tidak terpotong. */
+.feedback-pic {
+  width: min(88vw, 460px);
+  height: auto;
+  max-height: 62vh;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.12));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
 @keyframes pop-in {
   from {
     opacity: 0;

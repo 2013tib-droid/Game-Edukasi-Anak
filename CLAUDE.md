@@ -118,7 +118,7 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, levels[]
 
 - Tombol besar (min 64px), target sentuh lega, tanpa teks kecil.
 - **Semua instruksi dinarasikan audio Bahasa Indonesia** (anak TK belum lancar membaca). Teks hanya pendamping.
-- Feedback positif selalu: salah = "Coba lagi, kamu pasti bisa!" — tidak ada hukuman.
+- Feedback positif selalu: salah = "Coba lagi, kamu pasti bisa!" — tidak ada hukuman. Dua overlay-nya memakai seni pemilik di `public/assets/feedback/`: `hebat-benar.webp` (singa) untuk benar, `coba-lagi.webp` (kucing) untuk salah. **Kalimatnya tergambar di dalam gambar**, jadi jangan tambahkan `.feedback-text` di sebelahnya — emoji 🌟/💪 + teks lama hanya muncul sebagai cadangan kalau aset gagal dimuat (`src/engine/ui/Feedback.tsx`). Narasi suaranya tidak berubah. Gambar singa datang sebagai JPEG berlatar putih: dipotong pakai `scripts/cut-item.py`, lalu bayangan abu-abu sisa tepi stiker dikupas manual — flood fill saja meninggalkan cincin abu-abu tipis.
 - Progresi: bintang per level + maskot yang berkembang (lanjutkan konsep dari game "Petualangan Pintar" yang sudah ada).
 - Tidak ada iklan, tidak ada link keluar, tidak ada pembelian di dalam area anak. Area orang tua (akun, pembelian) dipisah di balik "gerbang orang tua" (mis. soal matematika sederhana).
 - Performa: harus mulus di Android low-mid end. Bundle kecil, lazy-load aset per game, gambar WebP, audio terkompresi.
