@@ -235,6 +235,15 @@
   font-size: clamp(26px, 7.6vw, 44px);
 }
 
+/* Kata 6 huruf atau lebih tanpa angka — "KUCING", "BONEKA" (Suku Kata).
+   SENGAJA lebih kecil dari --sm di bawah walau katanya lebih pendek: huruf
+   kapital jauh lebih lebar per karakter daripada angka, jadi "BONEKA" (4,3em)
+   hampir selebar "Rp15.000" (4,4em) yang dua karakter lebih panjang. Terukur
+   muat satu baris di layar 320/360/393/412px. */
+.choice-card .choice-text--word {
+  font-size: clamp(18px, 5.5vw, 28px);
+}
+
 /* 7+ characters — nilai uang "Rp15.000", jam "07.30 pagi". */
 .choice-card .choice-text--sm {
   font-size: clamp(20px, 6vw, 28px);

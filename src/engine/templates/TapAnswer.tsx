@@ -22,6 +22,13 @@ const OP_GLYPH: Record<BoardOp, string> = {
  * ~110px wide on a phone, and text with no spaces cannot wrap on its own.
  */
 function mainTextClass(text: string): string {
+  // A WORD (no digits) gets its own step. Capitals are far wider per character
+  // than the digits the tiers below were measured on: "BONEKA" runs ~4.3em
+  // against ~2.5em for the clock answer "10.30" and ~4.4em for the money
+  // answer "Rp15.000" that is two characters LONGER. Sized by length alone,
+  // six-letter answers wrapped to two lines on a 360px phone (Suku Kata:
+  // "KUCIN / G").
+  if (!/[0-9]/.test(text) && text.length >= 6) return 'choice-text choice-text--main choice-text--word';
   const size = text.length <= 3 ? '' : text.length <= 6 ? ' choice-text--md' : ' choice-text--sm';
   return `choice-text choice-text--main${size}`;
 }
