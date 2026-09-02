@@ -128,11 +128,13 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd1/pasang-kata'),
   },
   {
-    // Id sengaja tetap `cerita-kancil` walau judulnya sudah "Cerita Anak"
-    // (2026-08-09): id dipakai route, bintang anak, dan folder file suaranya.
+    // Id sengaja tetap `cerita-kancil` walau judulnya sudah berganti dua kali
+    // ("Cerita Anak" 2026-08-09, "Baca Cerita" 2026-09-02 setelah Cerita
+    // Nusantara dilebur ke sini): id dipakai route, bintang anak, dan folder
+    // file suaranya.
     id: 'cerita-kancil',
     group: 'sd1',
-    title: 'Cerita Anak',
+    title: 'Baca Cerita',
     emoji: '📗',
     pic: 'cerita-kancil',
     template: 'story-choice',
@@ -220,15 +222,6 @@ export const games: GameMeta[] = [
     emoji: '🔷',
     template: 'tap-answer',
     load: () => import('@/games/sd1/pola-pintar'),
-  },
-  {
-    id: 'cerita-nusantara',
-    group: 'sd1',
-    title: 'Cerita Nusantara',
-    emoji: '📚',
-    pic: 'cerita-nusantara',
-    template: 'story-choice',
-    load: () => import('@/games/sd1/cerita-nusantara'),
   },
 ];
 

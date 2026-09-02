@@ -18,7 +18,7 @@ const worlds = [
   { cls: 'w-count', emoji: '🔢', name: 'Hitung Hebat' },
   { cls: 'w-spell', emoji: '✏️', name: 'Ejaan Jitu' },
   { cls: 'w-clock', emoji: '⏰', name: 'Jam Pintar' },
-  { cls: 'w-story', emoji: '📖', name: 'Cerita Nusantara' },
+  { cls: 'w-story', emoji: '📖', name: 'Baca Cerita' },
 ];
 
 /**

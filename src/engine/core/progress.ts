@@ -47,3 +47,41 @@ export function saveLevelStars(gameId: string, levelId: string, stars: Stars): v
     localStorage.setItem(KEY, JSON.stringify(store));
   }
 }
+
+/**
+ * Pindahkan bintang "Cerita Nusantara" ke game gabungannya.
+ *
+ * Game itu dilebur ke `cerita-kancil` (judul "Baca Cerita") pada 2026-09-02.
+ * Bintang disimpan per `[gameId][levelId]`, jadi tanpa pemindahan ini anak
+ * yang sudah menamatkan Timun Mas akan menemukan bintangnya hilang — dan
+ * maskotnya ikut mengecil, karena `getTotalStars()` yang menumbuhkannya.
+ *
+ * Id level ikut berpindah `l1`-`l6` → `n1`-`n6` (nomornya tetap; awalannya
+ * dibedakan supaya tidak bentrok dengan `l1`-`l3` milik fabel Kancil).
+ *
+ * Kunci lama DIHAPUS setelah dipindah — kalau ditinggal, `getTotalStars()`
+ * menghitung bintang yang sama dua kali dan maskot melonjak tanpa sebab.
+ * Aman dijalankan berulang: sesudah kunci lamanya hilang, fungsi ini
+ * langsung keluar.
+ */
+export function migrateMergedStories(): void {
+  const store = load();
+  const old = store['cerita-nusantara'];
+  if (!old) return;
+
+  const merged = store['cerita-kancil'] ?? {};
+  for (const [levelId, stars] of Object.entries(old)) {
+    const moved = levelId.replace(/^l/, 'n');
+    // Ambil yang terbaik: anak mungkin sudah main lagi di game gabungannya.
+    if (stars > (merged[moved] ?? 0)) merged[moved] = stars;
+  }
+  store['cerita-kancil'] = merged;
+  delete store['cerita-nusantara'];
+
+  try {
+    localStorage.setItem(KEY, JSON.stringify(store));
+  } catch {
+    // Penyimpanan penuh / dimatikan: biarkan keadaan lama, jangan sampai
+    // boot aplikasi gagal cuma karena pemindahan bintang.
+  }
+}

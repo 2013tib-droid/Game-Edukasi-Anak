@@ -63,8 +63,14 @@ async function load(contents) {
   return import(`data:text/javascript;base64,${b64}`);
 }
 
+// Path di-JSON.stringify DAN backslash-nya dijadikan garis miring biasa.
+// Di Windows path.resolve menghasilkan `C:\Users\...`; ditanam mentah ke
+// dalam string import, backslash-nya dimakan sebagai escape dan esbuild
+// gagal "Could not resolve". `file://` URL bukan jawabannya — esbuild tidak
+// menerimanya sebagai specifier. `C:/Users/...` diterima keduanya, dan di
+// Linux (CI) penggantian ini tidak mengubah apa pun.
 const mod = await load(
-  gameFiles.map((f, i) => `import c${i} from '${path.resolve(f)}';`).join('\n') +
+  gameFiles.map((f, i) => `import c${i} from ${JSON.stringify(path.resolve(f).split(path.sep).join('/'))};`).join('\n') +
     `\nexport const configs = [${gameFiles.map((_, i) => `c${i}`).join(',')}];`,
 );
 

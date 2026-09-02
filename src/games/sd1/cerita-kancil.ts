@@ -1,27 +1,30 @@
 import type { GameConfig, GameLevel, SceneId, StoryPage } from '@/engine/core/types';
 
 /**
- * "Cerita Anak" (SD Kelas 1 & 2) — cerita pendek dengan titik pilihan; anak
+ * "Baca Cerita" (SD Kelas 1 & 2) — cerita pendek dengan titik pilihan; anak
  * mendengarkan jalan ceritanya lalu memilih apa yang sebaiknya dilakukan
- * tokohnya.
+ * tokohnya. Sembilan cerita, anak memilih sendiri judulnya.
  *
- * Dulu game ini bernama "Cerita Si Kancil" dan hanya berisi satu cerita.
- * Judulnya diganti (keputusan pemilik 2026-08-09) supaya bisa memuat cerita
- * bertema apa saja, bukan cuma fabel Kancil. **Id game-nya sengaja TETAP
- * `cerita-kancil`** — id itu dipakai route `/game/:id`, bintang yang sudah
- * dikumpulkan anak, dan folder file suaranya (`public/assets/voice/
- * cerita-kancil/`). Mengganti id akan menghapus bintang lama dan membuat
- * semua rekaman narasi harus dirender ulang.
+ * RIWAYAT NAMA — dulu "Cerita Si Kancil" (satu cerita), lalu "Cerita Anak"
+ * (2026-08-09), dan sejak 2026-09-02 "Baca Cerita" setelah game terpisah
+ * "Cerita Nusantara" DILEBUR ke sini atas permintaan pemilik. **Id game-nya
+ * sengaja TETAP `cerita-kancil` sepanjang tiga penggantian nama itu** — id
+ * dipakai route `/game/:id`, bintang yang sudah dikumpulkan anak, dan folder
+ * file suaranya (`public/assets/voice/cerita-kancil/`). Mengganti id =
+ * bintang hilang + seluruh rekaman narasi harus dirender ulang.
  *
- * ISINYA FABEL HEWAN SAJA (keputusan pemilik 2026-08-09). Percobaan pertama
- * memakai cerita keseharian anak (menjaga kebersihan di taman, berbagi payung
- * saat hujan) dan ditolak: tokoh anak laki-laki & perempuan yang berbagi
- * payung terbaca seperti cerita romansa. Cerita baru di sini harus bertokoh
- * HEWAN — Kancil dan kawan-kawannya.
+ * ISINYA DUA JENIS, dan pembatasnya berbeda:
+ *   - `l1`-`l3` fabel hewan Indonesia (Kancil dkk) — cerita ASLI game ini.
+ *   - `n1`-`n6` cerita rakyat & fabel klasik yang sudah dikenal (Timun Mas,
+ *     Bawang Putih, Semut & Belalang…), pindahan dari Cerita Nusantara.
  *
- * Bedanya dengan Cerita Nusantara: di sana cerita rakyat & fabel klasik yang
- * sudah dikenal (Timun Mas, Bawang Putih, Semut & Belalang); di sini fabel
- * hewan Indonesia, terutama Si Kancil.
+ * CERITA BARU BUATAN SENDIRI HARUS BERTOKOH HEWAN (keputusan pemilik
+ * 2026-08-09). Percobaan pertama memakai cerita keseharian anak (menjaga
+ * kebersihan di taman, berbagi payung saat hujan) dan ditolak: tokoh anak
+ * laki-laki & perempuan yang berbagi payung terbaca seperti cerita romansa.
+ * Aturan itu TIDAK berlaku surut untuk cerita rakyat yang sudah dikenal —
+ * Timun Mas & Bawang Putih bertokoh manusia dan tetap di sini karena anak
+ * (dan orang tuanya) sudah mengenal jalan ceritanya.
  *
  * Aturan (CLAUDE.md): tidak ada hukuman. Pilihan yang kurang tepat dijawab
  * lembut dan anak boleh memilih lagi — ceritanya hanya maju setelah pilihan
@@ -212,18 +215,182 @@ const GAJAH = story(
   page('⭐', 'Badan kecil pun bisa menolong, asal punya akal dan teman.'),
 );
 
+/* ---------- Cerita rakyat & fabel klasik — pindahan dari game
+ * "Cerita Nusantara", yang digabung ke sini 2026-09-02 atas permintaan
+ * pemilik. Id-nya `n1`-`n6`, BUKAN melanjutkan `l3`: awalan yang berbeda
+ * membuat asalnya terbaca dan membuat pemetaan bintang lama
+ * (`migrateMergedStories` di `progress.ts`) cuma soal menukar awalan.
+ * Nomornya sengaja sama dengan id lamanya di Cerita Nusantara.
+ * ---------- */
+
+const GEMBALA = story(
+  'n1',
+  { label: 'Anak Gembala dan Serigala', emoji: '🐑' },
+  'Anak Gembala dan Serigala. Ayo bantu dia mengambil keputusan!',
+  at('padang', page('🧒', 'Seorang anak gembala menjaga domba-dombanya di padang rumput.')),
+  page('🐑', 'Hari itu sepi sekali. Anak gembala merasa bosan.'),
+  ask(
+    '🤔',
+    'Dia ingin ada yang menemani. Apa yang sebaiknya dia lakukan?',
+    'Bermain seruling sambil menjaga domba',
+    ['Berteriak "Ada serigala!" padahal tidak ada', 'Membohongi orang bisa membuat mereka tidak percaya lagi. Coba pilih yang lain!'],
+  ),
+  page('🎶', 'Anak gembala meniup serulingnya. Domba-domba ikut tenang mendengarnya.'),
+  ask(
+    '🐺',
+    'Tiba-tiba serigala sungguhan datang! Apa yang harus dilakukan anak gembala?',
+    'Berteriak minta tolong kepada warga desa',
+    ['Diam saja karena takut', 'Kalau diam, domba-dombanya dalam bahaya. Beranilah minta tolong!'],
+  ),
+  page(
+    '🏃',
+    'Warga desa langsung datang menolong. Karena anak gembala selalu jujur, semua orang percaya padanya.',
+  ),
+  page('⭐', 'Domba-domba selamat. Jujur membuat kita dipercaya!'),
+);
+
+const UANG = story(
+  'n4',
+  { label: 'Dompet di Jalan', emoji: '👛' },
+  'Dompet di Jalan. Ayo bantu Rani memilih!',
+  at('kota', page('👧', 'Rani berjalan pulang dari sekolah.')),
+  page('👛', 'Di trotoar, Rani menemukan sebuah dompet berisi uang.'),
+  ask(
+    '🤔',
+    'Apa yang sebaiknya Rani lakukan dengan dompet itu?',
+    'Menyerahkannya kepada guru atau satpam',
+    ['Menyimpannya untuk jajan', 'Uang itu milik orang lain yang pasti sedang mencarinya. Coba pilih yang lain!'],
+    ['Membiarkannya di jalan', 'Kalau dibiarkan, dompetnya bisa hilang. Ada cara yang lebih baik!'],
+  ),
+  page('👮', 'Rani menyerahkan dompet itu kepada satpam sekolah.'),
+  page('🧑', 'Tak lama, seorang bapak datang mencari dompetnya. Wajahnya lega sekali.'),
+  page('⭐', '"Terima kasih, Rani. Kamu anak yang jujur," kata bapak itu.'),
+);
+
+const SEMUT = story(
+  'n2',
+  { label: 'Semut dan Belalang', emoji: '🐜' },
+  'Semut dan Belalang. Ayo ikuti ceritanya!',
+  at('kebun', page('🐜', 'Di musim panas, semut-semut sibuk mengumpulkan makanan.')),
+  page('🦗', 'Belalang malah bernyanyi seharian. "Untuk apa bekerja? Makanan masih banyak!" katanya.'),
+  ask(
+    '☀️',
+    'Semut diajak bermain oleh belalang. Sebaiknya semut menjawab apa?',
+    'Menyelesaikan pekerjaan dulu, baru bermain',
+    ['Ikut bermain dan lupa bekerja', 'Kalau lupa bekerja, nanti tidak ada makanan saat musim hujan. Coba lagi!'],
+  ),
+  page('🏠', 'Musim hujan tiba. Makanan di ladang habis.'),
+  at(
+    'rumah',
+    ask(
+      '🌧️',
+      'Belalang datang kelaparan ke rumah semut. Apa yang sebaiknya semut lakukan?',
+      'Berbagi makanan dan mengajaknya bekerja bersama',
+      ['Mengusir belalang', 'Menolong teman yang kesulitan itu perbuatan baik. Coba pilih yang lain!'],
+    ),
+  ),
+  page('🍚', 'Semut berbagi makanan. Belalang berjanji akan rajin mulai sekarang.'),
+  page('⭐', 'Rajin bekerja dan suka menolong, dua-duanya penting!'),
+);
+
+const KURA = story(
+  'n5',
+  { label: 'Kura-kura dan Kelinci', emoji: '🐢' },
+  'Kura-kura dan Kelinci. Ayo ikuti lombanya!',
+  at('hutan', page('🐢', 'Kura-kura berjalan pelan. Kelinci selalu menertawakannya.')),
+  page('🐰', '"Ayo lomba lari!" tantang kelinci. Kura-kura menerima tantangan itu.'),
+  ask(
+    '🏁',
+    'Lomba dimulai. Kura-kura tertinggal jauh. Apa yang sebaiknya dia lakukan?',
+    'Terus berjalan pelan-pelan tanpa menyerah',
+    ['Berhenti dan pulang saja', 'Menyerah membuat kita tidak pernah sampai. Ayo coba lagi!'],
+  ),
+  page('😴', 'Kelinci merasa pasti menang. Dia tidur siang di bawah pohon.'),
+  ask(
+    '🌳',
+    'Kura-kura lewat dan melihat kelinci tertidur. Sebaiknya kura-kura bagaimana?',
+    'Terus berjalan menuju garis akhir',
+    ['Ikut tidur karena lelah', 'Kalau ikut tidur, usahanya jadi sia-sia. Ayo terus melangkah!'],
+  ),
+  page('🏆', 'Kura-kura sampai lebih dulu di garis akhir. Kelinci terbangun dan kaget.'),
+  page('⭐', 'Pelan tapi tekun mengalahkan cepat tapi sombong!'),
+);
+
+const TIMUN = story(
+  'n3',
+  { label: 'Timun Mas', emoji: '🥒' },
+  'Timun Mas. Ayo bantu Timun Mas pulang dengan selamat!',
+  at('kebun', page('👵', 'Mbok Srini merawat seorang anak perempuan bernama Timun Mas.')),
+  page('👹', 'Suatu hari, raksasa datang menagih janji. Timun Mas harus lari!'),
+  at(
+    'hutan',
+    ask(
+      '🏃‍♀️',
+      'Mbok Srini memberi Timun Mas empat bungkusan ajaib. Apa yang sebaiknya Timun Mas lakukan?',
+      'Membawanya dan berlari ke hutan',
+      ['Meninggalkan bungkusan itu', 'Bungkusan itu bisa menolongnya nanti. Coba pilih yang lain!'],
+    ),
+  ),
+  at('kebun', page('🥒', 'Timun Mas menebar biji timun. Seketika tumbuh ladang timun yang lebat.')),
+  ask(
+    '🌊',
+    'Raksasa masih mengejar. Bungkusan terakhir berisi terasi. Sebaiknya Timun Mas bagaimana?',
+    'Menebarkan terasi lalu terus berlari',
+    ['Berhenti dan menangis', 'Timun Mas anak yang berani. Ayo gunakan akalnya!'],
+  ),
+  at('sungai', page('🌫️', 'Terasi berubah menjadi lautan lumpur. Raksasa tidak bisa lewat.')),
+  page('⭐', 'Timun Mas pulang dengan selamat. Berani dan cerdik menyelamatkannya!'),
+);
+
+const BAWANG = story(
+  'n6',
+  // 💎 = perhiasan di dalam labu, adegan yang paling diingat anak. Emoji labu
+  // 🎃 sengaja TIDAK dipakai: di HP bentuknya labu Halloween berwajah ukiran.
+  { label: 'Bawang Putih', emoji: '💎' },
+  'Bawang Putih yang Baik Hati. Ayo ikuti ceritanya!',
+  at('kebun', page('👧', 'Bawang Putih rajin membantu pekerjaan rumah setiap hari.')),
+  at('sungai', page('🏞️', 'Saat mencuci di sungai, bajunya hanyut terbawa arus.')),
+  at(
+    'hutan',
+    ask(
+      '👵',
+      'Bawang Putih sampai di rumah seorang nenek. Apa yang sebaiknya dia lakukan?',
+      'Menyapa dengan sopan dan meminta tolong',
+      ['Masuk tanpa permisi', 'Masuk rumah orang harus permisi dulu ya. Coba lagi!'],
+    ),
+  ),
+  at(
+    'rumah',
+    page('🧹', 'Nenek meminta bantuan membersihkan rumah. Bawang Putih membantu dengan senang hati.'),
+  ),
+  ask(
+    '🎁',
+    'Nenek menyuruhnya memilih satu labu sebagai hadiah. Sebaiknya Bawang Putih memilih apa?',
+    'Labu yang paling kecil',
+    ['Labu yang paling besar sambil meminta lebih', 'Bawang Putih anak yang tidak serakah. Coba pilih yang lain!'],
+  ),
+  page('✨', 'Di dalam labu kecil itu ternyata ada perhiasan dan emas!'),
+  page('⭐', 'Kebaikan hati selalu kembali kepada kita.'),
+);
+
 const config: GameConfig<'story-choice'> = {
+  // Id TETAP `cerita-kancil` walau judulnya kini "Baca Cerita" — id ini dipakai
+  // route `/game/:id`, bintang yang sudah dikumpulkan anak, dan folder file
+  // suaranya (`public/assets/voice/cerita-kancil/`). Menggantinya = bintang
+  // hilang + 166 rekaman narasi harus dirender ulang.
   id: 'cerita-kancil',
   group: 'sd1',
-  title: 'Cerita Anak',
+  title: 'Baca Cerita',
   emoji: '📗',
   template: 'story-choice',
-  // Anak memilih sendiri ceritanya — ketiga judul tampil sebagai kartu begitu
-  // game dibuka (pola yang sama dengan Cerita Nusantara, keputusan pemilik
-  // 2026-08-09). Satu cerita sudah cukup panjang untuk sekali duduk, jadi
-  // tidak ada `sessionLevels`: satu pilihan = satu cerita.
+  // Anak memilih sendiri ceritanya — kesembilan judul tampil sebagai kartu
+  // begitu game dibuka. Satu cerita sudah cukup panjang untuk sekali duduk,
+  // jadi tidak ada `sessionLevels`: satu pilihan = satu cerita.
   chooseLevel: { title: 'Pilih ceritamu!', again: '📗 Pilih Cerita Lain' },
-  levels: [KANCIL, JALAK, GAJAH],
+  // Fabel Kancil dulu (`l1`-`l3`, cerita asli game ini), lalu cerita rakyat &
+  // fabel klasik (`n1`-`n6`) dalam urutan berpasangan menurut pesan moralnya:
+  // jujur & tanggung jawab, rajin & pantang menyerah, berani & baik hati.
+  levels: [KANCIL, JALAK, GAJAH, GEMBALA, UANG, SEMUT, KURA, TIMUN, BAWANG],
 };
 
 export default config;

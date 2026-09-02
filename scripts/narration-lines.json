@@ -1,7 +1,7 @@
 {
-  "generated": "2026-08-09",
-  "count": 765,
-  "chars": 34628,
+  "generated": "2026-09-02",
+  "count": 770,
+  "chars": 34914,
   "lines": [
     {
       "key": "bba8e787ee7e",
@@ -71,8 +71,64 @@
       ]
     },
     {
+      "key": "867f57ee6807",
+      "text": "Lihat polanya baik-baik. Bentuk apa selanjutnya?",
+      "scope": "_shared",
+      "voice": "gadis",
+      "games": [
+        "labirin-warna",
+        "pola-pintar"
+      ]
+    },
+    {
+      "key": "3804bdc63661",
+      "text": "Lihat urutan bilangannya. Bilangan mana yang hilang?",
+      "scope": "_shared",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat",
+        "pola-pintar"
+      ]
+    },
+    {
+      "key": "6b6b4f8922a6",
+      "text": "\"Ayo lomba lari!\" tantang kelinci. Kura-kura menerima tantangan itu.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "d4083840ecfa",
+      "text": "\"Terima kasih, Rani. Kamu anak yang jujur,\" kata bapak itu.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "9dec31ae1b5f",
       "text": "Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "f5203e47a29a",
+      "text": "Anak Gembala dan Serigala. Ayo bantu dia mengambil keputusan!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "6632633dd0d5",
+      "text": "Anak gembala meniup serulingnya. Domba-domba ikut tenang mendengarnya.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -89,6 +145,15 @@
       ]
     },
     {
+      "key": "335ba8d70934",
+      "text": "Apa yang sebaiknya Rani lakukan dengan dompet itu?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "72ab1aebb87c",
       "text": "Badan kecil pun bisa menolong, asal punya akal dan teman.",
       "scope": "cerita-kancil",
@@ -98,8 +163,71 @@
       ]
     },
     {
+      "key": "b3bc91f2e259",
+      "text": "Bawang Putih anak yang tidak serakah. Coba pilih yang lain!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "16763a93ec00",
+      "text": "Bawang Putih rajin membantu pekerjaan rumah setiap hari.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "9f5658f7eb04",
+      "text": "Bawang Putih sampai di rumah seorang nenek. Apa yang sebaiknya dia lakukan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "e99ca2fbcffa",
+      "text": "Bawang Putih yang Baik Hati. Ayo ikuti ceritanya!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "c41ba0aa608e",
+      "text": "Belalang datang kelaparan ke rumah semut. Apa yang sebaiknya semut lakukan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "3151bcd82f67",
+      "text": "Belalang malah bernyanyi seharian. \"Untuk apa bekerja? Makanan masih banyak!\" katanya.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "d4243a39a4cc",
       "text": "Buaya berbaris, Kancil melompat satu-satu sampai seberang. Kancil pulang dengan kenyang dan gembira!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "65dc22bb0d04",
+      "text": "Bungkusan itu bisa menolongnya nanti. Coba pilih yang lain!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -125,8 +253,62 @@
       ]
     },
     {
+      "key": "382db85bb9a1",
+      "text": "Di dalam labu kecil itu ternyata ada perhiasan dan emas!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "5cc61c491683",
+      "text": "Di musim panas, semut-semut sibuk mengumpulkan makanan.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "5060c035146b",
       "text": "Di sungai, ada buaya menghalangi jalan pulang. Bagaimana Kancil menyeberang?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "9149000de207",
+      "text": "Di trotoar, Rani menemukan sebuah dompet berisi uang.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "4f21f2d809ce",
+      "text": "Dia ingin ada yang menemani. Apa yang sebaiknya dia lakukan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "b609ccf7f2a1",
+      "text": "Domba-domba selamat. Jujur membuat kita dipercaya!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "72495fd258fd",
+      "text": "Dompet di Jalan. Ayo bantu Rani memilih!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -145,6 +327,15 @@
     {
       "key": "d4169a7752f0",
       "text": "Gajah terlalu berat. Apa yang sebaiknya Kancil lakukan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "aa526397f199",
+      "text": "Hari itu sepi sekali. Anak gembala merasa bosan.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -179,8 +370,44 @@
       ]
     },
     {
+      "key": "78560690b748",
+      "text": "Kalau diam, domba-dombanya dalam bahaya. Beranilah minta tolong!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "5dcc0ca7be94",
+      "text": "Kalau dibiarkan, dompetnya bisa hilang. Ada cara yang lebih baik!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "d3055317c3a4",
+      "text": "Kalau ikut tidur, usahanya jadi sia-sia. Ayo terus melangkah!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "599e4da23c7f",
       "text": "Kalau licin, tenaganya jadi sia-sia. Coba cara yang lebih cerdik!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "3543022d94fc",
+      "text": "Kalau lupa bekerja, nanti tidak ada makanan saat musim hujan. Coba lagi!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -224,6 +451,24 @@
       ]
     },
     {
+      "key": "3e624322ced0",
+      "text": "Kebaikan hati selalu kembali kepada kita.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "939a1f3a8eb5",
+      "text": "Kelinci merasa pasti menang. Dia tidur siang di bawah pohon.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "5ed9fba5f0b2",
       "text": "Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.",
       "scope": "cerita-kancil",
@@ -251,6 +496,51 @@
       ]
     },
     {
+      "key": "ee50754af7b3",
+      "text": "Kura-kura berjalan pelan. Kelinci selalu menertawakannya.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "1e716426e842",
+      "text": "Kura-kura dan Kelinci. Ayo ikuti lombanya!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "834ed00d8b61",
+      "text": "Kura-kura lewat dan melihat kelinci tertidur. Sebaiknya kura-kura bagaimana?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "7ce6e56ddf51",
+      "text": "Kura-kura sampai lebih dulu di garis akhir. Kelinci terbangun dan kaget.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "4edfb739dd32",
+      "text": "Lomba dimulai. Kura-kura tertinggal jauh. Apa yang sebaiknya dia lakukan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "666d6d92ee9f",
       "text": "Lumpurnya licin sekali. Sebaiknya mereka pakai apa?",
       "scope": "cerita-kancil",
@@ -262,6 +552,87 @@
     {
       "key": "b03bfb998dde",
       "text": "Marah-marah tidak menyelesaikan masalah. Coba cara yang cerdik!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "4e1fe97e9056",
+      "text": "Masuk rumah orang harus permisi dulu ya. Coba lagi!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "fd9cc4bba6db",
+      "text": "Mbok Srini memberi Timun Mas empat bungkusan ajaib. Apa yang sebaiknya Timun Mas lakukan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "96c5ba73d692",
+      "text": "Mbok Srini merawat seorang anak perempuan bernama Timun Mas.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "8b2a23f3514e",
+      "text": "Membohongi orang bisa membuat mereka tidak percaya lagi. Coba pilih yang lain!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "64253a3050af",
+      "text": "Menolong teman yang kesulitan itu perbuatan baik. Coba pilih yang lain!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "2d715d76a8d6",
+      "text": "Menyerah membuat kita tidak pernah sampai. Ayo coba lagi!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "8ee360ef80ea",
+      "text": "Musim hujan tiba. Makanan di ladang habis.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "2bce6f5f17aa",
+      "text": "Nenek meminta bantuan membersihkan rumah. Bawang Putih membantu dengan senang hati.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "7268898120ba",
+      "text": "Nenek menyuruhnya memilih satu labu sebagai hadiah. Sebaiknya Bawang Putih memilih apa?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -287,6 +658,15 @@
       ]
     },
     {
+      "key": "e9ec43f102d4",
+      "text": "Pelan tapi tekun mengalahkan cepat tapi sombong!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "53d334ab62da",
       "text": "Pilihan A. Ajak buaya berhitung sambil berbaris",
       "scope": "cerita-kancil",
@@ -298,6 +678,51 @@
     {
       "key": "93a8e0898e43",
       "text": "Pilihan A. Ambil diam-diam",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a828e8a91752",
+      "text": "Pilihan A. Berbagi makanan dan mengajaknya bekerja bersama",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "835634f1183a",
+      "text": "Pilihan A. Berhenti dan menangis",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "088933a96a13",
+      "text": "Pilihan A. Berhenti dan pulang saja",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "f74288bccaec",
+      "text": "Pilihan A. Bermain seruling sambil menjaga domba",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "bd8494d846ec",
+      "text": "Pilihan A. Berteriak \"Ada serigala!\" padahal tidak ada",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -323,6 +748,15 @@
       ]
     },
     {
+      "key": "eeefd5032c8d",
+      "text": "Pilihan A. Berteriak minta tolong kepada warga desa",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "8dfcd1c0c048",
       "text": "Pilihan A. Boleh, hinggaplah di punggungku",
       "scope": "cerita-kancil",
@@ -332,8 +766,80 @@
       ]
     },
     {
+      "key": "79f18fc946ae",
+      "text": "Pilihan A. Diam saja karena takut",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "16dfe7b8d980",
+      "text": "Pilihan A. Ikut bermain dan lupa bekerja",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "479e9a2bb311",
+      "text": "Pilihan A. Ikut tidur karena lelah",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "d30965c78a3e",
+      "text": "Pilihan A. Labu yang paling besar sambil meminta lebih",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "95ba6f8c3a70",
+      "text": "Pilihan A. Labu yang paling kecil",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "ede5c55dd758",
+      "text": "Pilihan A. Masuk tanpa permisi",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "9a1313a8bd74",
       "text": "Pilihan A. Memanggil hewan lain untuk menolong",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "5a05238e71a9",
+      "text": "Pilihan A. Membawanya dan berlari ke hutan",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "297e4cf110ed",
+      "text": "Pilihan A. Membiarkannya di jalan",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -352,6 +858,69 @@
     {
       "key": "19a7b1656b50",
       "text": "Pilihan A. Menarik lebih keras lagi saja",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "fd583f211b87",
+      "text": "Pilihan A. Menebarkan terasi lalu terus berlari",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "e88a011e9d54",
+      "text": "Pilihan A. Mengusir belalang",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "b7f3b48f7270",
+      "text": "Pilihan A. Meninggalkan bungkusan itu",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "ea688beb27d1",
+      "text": "Pilihan A. Menyapa dengan sopan dan meminta tolong",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "fb1d12e58114",
+      "text": "Pilihan A. Menyelesaikan pekerjaan dulu, baru bermain",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "d2160fe6eab5",
+      "text": "Pilihan A. Menyerahkannya kepada guru atau satpam",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a6f82c4f5f4b",
+      "text": "Pilihan A. Menyimpannya untuk jajan",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -404,6 +973,24 @@
       ]
     },
     {
+      "key": "d52967a32a8f",
+      "text": "Pilihan A. Terus berjalan menuju garis akhir",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "4cdb08231302",
+      "text": "Pilihan A. Terus berjalan pelan-pelan tanpa menyerah",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "f677dcd91cc0",
       "text": "Pilihan B. Ajak buaya berhitung sambil berbaris",
       "scope": "cerita-kancil",
@@ -415,6 +1002,51 @@
     {
       "key": "d7af2f43c63d",
       "text": "Pilihan B. Ambil diam-diam",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "ede4c3ddae8a",
+      "text": "Pilihan B. Berbagi makanan dan mengajaknya bekerja bersama",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "b8d1785136a8",
+      "text": "Pilihan B. Berhenti dan menangis",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "77cc45fd019d",
+      "text": "Pilihan B. Berhenti dan pulang saja",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "606022bace9b",
+      "text": "Pilihan B. Bermain seruling sambil menjaga domba",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "bdcfb8d25b10",
+      "text": "Pilihan B. Berteriak \"Ada serigala!\" padahal tidak ada",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -440,6 +1072,15 @@
       ]
     },
     {
+      "key": "b1543a6bf226",
+      "text": "Pilihan B. Berteriak minta tolong kepada warga desa",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "036271b7d186",
       "text": "Pilihan B. Boleh, hinggaplah di punggungku",
       "scope": "cerita-kancil",
@@ -449,8 +1090,80 @@
       ]
     },
     {
+      "key": "62e242112b93",
+      "text": "Pilihan B. Diam saja karena takut",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "fe8c585f2422",
+      "text": "Pilihan B. Ikut bermain dan lupa bekerja",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "27c6fc69dbe8",
+      "text": "Pilihan B. Ikut tidur karena lelah",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "8ceef47048c7",
+      "text": "Pilihan B. Labu yang paling besar sambil meminta lebih",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "216067c7a392",
+      "text": "Pilihan B. Labu yang paling kecil",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "b64d60eddbd8",
+      "text": "Pilihan B. Masuk tanpa permisi",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "a8bd12ce4d68",
       "text": "Pilihan B. Memanggil hewan lain untuk menolong",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "17c9fcd0f96d",
+      "text": "Pilihan B. Membawanya dan berlari ke hutan",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "1a83830fb3a2",
+      "text": "Pilihan B. Membiarkannya di jalan",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -469,6 +1182,69 @@
     {
       "key": "92a49b0f2ebd",
       "text": "Pilihan B. Menarik lebih keras lagi saja",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "e5b9103049bf",
+      "text": "Pilihan B. Menebarkan terasi lalu terus berlari",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "ff34832fa08e",
+      "text": "Pilihan B. Mengusir belalang",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "0a90735815f7",
+      "text": "Pilihan B. Meninggalkan bungkusan itu",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "6c3b8707112c",
+      "text": "Pilihan B. Menyapa dengan sopan dan meminta tolong",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "ea75d6450085",
+      "text": "Pilihan B. Menyelesaikan pekerjaan dulu, baru bermain",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "648b32086b99",
+      "text": "Pilihan B. Menyerahkannya kepada guru atau satpam",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "7c20e4431a90",
+      "text": "Pilihan B. Menyimpannya untuk jajan",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -521,8 +1297,35 @@
       ]
     },
     {
+      "key": "e899ecdf6ead",
+      "text": "Pilihan B. Terus berjalan menuju garis akhir",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "2c3bcb968c71",
+      "text": "Pilihan B. Terus berjalan pelan-pelan tanpa menyerah",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "87d25426e77d",
       "text": "Pilihan C. Memanggil hewan lain untuk menolong",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "2c5def7af48b",
+      "text": "Pilihan C. Membiarkannya di jalan",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -539,8 +1342,71 @@
       ]
     },
     {
+      "key": "3037d60895a4",
+      "text": "Pilihan C. Menyerahkannya kepada guru atau satpam",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "7881d1b3da1f",
+      "text": "Pilihan C. Menyimpannya untuk jajan",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "08a8d80c9c0c",
       "text": "Pilihan C. Pergi karena badannya kecil",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "e603bebccb95",
+      "text": "Rajin bekerja dan suka menolong, dua-duanya penting!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "cd44ed531d9a",
+      "text": "Raksasa masih mengejar. Bungkusan terakhir berisi terasi. Sebaiknya Timun Mas bagaimana?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "b3f56d16d129",
+      "text": "Rani berjalan pulang dari sekolah.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "e257f48b44b9",
+      "text": "Rani menyerahkan dompet itu kepada satpam sekolah.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "1335ef93c8bd",
+      "text": "Saat mencuci di sungai, bajunya hanyut terbawa arus.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -575,6 +1441,42 @@
       ]
     },
     {
+      "key": "dfcb69a7cf71",
+      "text": "Semut berbagi makanan. Belalang berjanji akan rajin mulai sekarang.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "e145c559f116",
+      "text": "Semut dan Belalang. Ayo ikuti ceritanya!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a4ff396de2d9",
+      "text": "Semut diajak bermain oleh belalang. Sebaiknya semut menjawab apa?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "233b0ea7c8b6",
+      "text": "Seorang anak gembala menjaga domba-dombanya di padang rumput.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "ae563c260818",
       "text": "Si Kancil berjalan di hutan. Perutnya lapar sekali.",
       "scope": "cerita-kancil",
@@ -593,975 +1495,93 @@
       ]
     },
     {
-      "key": "6b6b4f8922a6",
-      "text": "\"Ayo lomba lari!\" tantang kelinci. Kura-kura menerima tantangan itu.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "d4083840ecfa",
-      "text": "\"Terima kasih, Rani. Kamu anak yang jujur,\" kata bapak itu.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "f5203e47a29a",
-      "text": "Anak Gembala dan Serigala. Ayo bantu dia mengambil keputusan!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "6632633dd0d5",
-      "text": "Anak gembala meniup serulingnya. Domba-domba ikut tenang mendengarnya.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "335ba8d70934",
-      "text": "Apa yang sebaiknya Rani lakukan dengan dompet itu?",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "b3bc91f2e259",
-      "text": "Bawang Putih anak yang tidak serakah. Coba pilih yang lain!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "16763a93ec00",
-      "text": "Bawang Putih rajin membantu pekerjaan rumah setiap hari.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "9f5658f7eb04",
-      "text": "Bawang Putih sampai di rumah seorang nenek. Apa yang sebaiknya dia lakukan?",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "e99ca2fbcffa",
-      "text": "Bawang Putih yang Baik Hati. Ayo ikuti ceritanya!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "c41ba0aa608e",
-      "text": "Belalang datang kelaparan ke rumah semut. Apa yang sebaiknya semut lakukan?",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "3151bcd82f67",
-      "text": "Belalang malah bernyanyi seharian. \"Untuk apa bekerja? Makanan masih banyak!\" katanya.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "65dc22bb0d04",
-      "text": "Bungkusan itu bisa menolongnya nanti. Coba pilih yang lain!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "382db85bb9a1",
-      "text": "Di dalam labu kecil itu ternyata ada perhiasan dan emas!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "5cc61c491683",
-      "text": "Di musim panas, semut-semut sibuk mengumpulkan makanan.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "9149000de207",
-      "text": "Di trotoar, Rani menemukan sebuah dompet berisi uang.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "4f21f2d809ce",
-      "text": "Dia ingin ada yang menemani. Apa yang sebaiknya dia lakukan?",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "b609ccf7f2a1",
-      "text": "Domba-domba selamat. Jujur membuat kita dipercaya!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "72495fd258fd",
-      "text": "Dompet di Jalan. Ayo bantu Rani memilih!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "aa526397f199",
-      "text": "Hari itu sepi sekali. Anak gembala merasa bosan.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "78560690b748",
-      "text": "Kalau diam, domba-dombanya dalam bahaya. Beranilah minta tolong!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "5dcc0ca7be94",
-      "text": "Kalau dibiarkan, dompetnya bisa hilang. Ada cara yang lebih baik!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "d3055317c3a4",
-      "text": "Kalau ikut tidur, usahanya jadi sia-sia. Ayo terus melangkah!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "3543022d94fc",
-      "text": "Kalau lupa bekerja, nanti tidak ada makanan saat musim hujan. Coba lagi!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "3e624322ced0",
-      "text": "Kebaikan hati selalu kembali kepada kita.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "939a1f3a8eb5",
-      "text": "Kelinci merasa pasti menang. Dia tidur siang di bawah pohon.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "ee50754af7b3",
-      "text": "Kura-kura berjalan pelan. Kelinci selalu menertawakannya.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "1e716426e842",
-      "text": "Kura-kura dan Kelinci. Ayo ikuti lombanya!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "834ed00d8b61",
-      "text": "Kura-kura lewat dan melihat kelinci tertidur. Sebaiknya kura-kura bagaimana?",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "7ce6e56ddf51",
-      "text": "Kura-kura sampai lebih dulu di garis akhir. Kelinci terbangun dan kaget.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "4edfb739dd32",
-      "text": "Lomba dimulai. Kura-kura tertinggal jauh. Apa yang sebaiknya dia lakukan?",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "4e1fe97e9056",
-      "text": "Masuk rumah orang harus permisi dulu ya. Coba lagi!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "fd9cc4bba6db",
-      "text": "Mbok Srini memberi Timun Mas empat bungkusan ajaib. Apa yang sebaiknya Timun Mas lakukan?",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "96c5ba73d692",
-      "text": "Mbok Srini merawat seorang anak perempuan bernama Timun Mas.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "8b2a23f3514e",
-      "text": "Membohongi orang bisa membuat mereka tidak percaya lagi. Coba pilih yang lain!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "64253a3050af",
-      "text": "Menolong teman yang kesulitan itu perbuatan baik. Coba pilih yang lain!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "2d715d76a8d6",
-      "text": "Menyerah membuat kita tidak pernah sampai. Ayo coba lagi!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "8ee360ef80ea",
-      "text": "Musim hujan tiba. Makanan di ladang habis.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "2bce6f5f17aa",
-      "text": "Nenek meminta bantuan membersihkan rumah. Bawang Putih membantu dengan senang hati.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "7268898120ba",
-      "text": "Nenek menyuruhnya memilih satu labu sebagai hadiah. Sebaiknya Bawang Putih memilih apa?",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "e9ec43f102d4",
-      "text": "Pelan tapi tekun mengalahkan cepat tapi sombong!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "a828e8a91752",
-      "text": "Pilihan A. Berbagi makanan dan mengajaknya bekerja bersama",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "835634f1183a",
-      "text": "Pilihan A. Berhenti dan menangis",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "088933a96a13",
-      "text": "Pilihan A. Berhenti dan pulang saja",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "f74288bccaec",
-      "text": "Pilihan A. Bermain seruling sambil menjaga domba",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "bd8494d846ec",
-      "text": "Pilihan A. Berteriak \"Ada serigala!\" padahal tidak ada",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "eeefd5032c8d",
-      "text": "Pilihan A. Berteriak minta tolong kepada warga desa",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "79f18fc946ae",
-      "text": "Pilihan A. Diam saja karena takut",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "16dfe7b8d980",
-      "text": "Pilihan A. Ikut bermain dan lupa bekerja",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "479e9a2bb311",
-      "text": "Pilihan A. Ikut tidur karena lelah",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "d30965c78a3e",
-      "text": "Pilihan A. Labu yang paling besar sambil meminta lebih",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "95ba6f8c3a70",
-      "text": "Pilihan A. Labu yang paling kecil",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "ede5c55dd758",
-      "text": "Pilihan A. Masuk tanpa permisi",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "5a05238e71a9",
-      "text": "Pilihan A. Membawanya dan berlari ke hutan",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "297e4cf110ed",
-      "text": "Pilihan A. Membiarkannya di jalan",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "fd583f211b87",
-      "text": "Pilihan A. Menebarkan terasi lalu terus berlari",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "e88a011e9d54",
-      "text": "Pilihan A. Mengusir belalang",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "b7f3b48f7270",
-      "text": "Pilihan A. Meninggalkan bungkusan itu",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "ea688beb27d1",
-      "text": "Pilihan A. Menyapa dengan sopan dan meminta tolong",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "fb1d12e58114",
-      "text": "Pilihan A. Menyelesaikan pekerjaan dulu, baru bermain",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "d2160fe6eab5",
-      "text": "Pilihan A. Menyerahkannya kepada guru atau satpam",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "a6f82c4f5f4b",
-      "text": "Pilihan A. Menyimpannya untuk jajan",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "d52967a32a8f",
-      "text": "Pilihan A. Terus berjalan menuju garis akhir",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "4cdb08231302",
-      "text": "Pilihan A. Terus berjalan pelan-pelan tanpa menyerah",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "ede4c3ddae8a",
-      "text": "Pilihan B. Berbagi makanan dan mengajaknya bekerja bersama",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "b8d1785136a8",
-      "text": "Pilihan B. Berhenti dan menangis",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "77cc45fd019d",
-      "text": "Pilihan B. Berhenti dan pulang saja",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "606022bace9b",
-      "text": "Pilihan B. Bermain seruling sambil menjaga domba",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "bdcfb8d25b10",
-      "text": "Pilihan B. Berteriak \"Ada serigala!\" padahal tidak ada",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "b1543a6bf226",
-      "text": "Pilihan B. Berteriak minta tolong kepada warga desa",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "62e242112b93",
-      "text": "Pilihan B. Diam saja karena takut",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "fe8c585f2422",
-      "text": "Pilihan B. Ikut bermain dan lupa bekerja",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "27c6fc69dbe8",
-      "text": "Pilihan B. Ikut tidur karena lelah",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "8ceef47048c7",
-      "text": "Pilihan B. Labu yang paling besar sambil meminta lebih",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "216067c7a392",
-      "text": "Pilihan B. Labu yang paling kecil",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "b64d60eddbd8",
-      "text": "Pilihan B. Masuk tanpa permisi",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "17c9fcd0f96d",
-      "text": "Pilihan B. Membawanya dan berlari ke hutan",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "1a83830fb3a2",
-      "text": "Pilihan B. Membiarkannya di jalan",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "e5b9103049bf",
-      "text": "Pilihan B. Menebarkan terasi lalu terus berlari",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "ff34832fa08e",
-      "text": "Pilihan B. Mengusir belalang",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "0a90735815f7",
-      "text": "Pilihan B. Meninggalkan bungkusan itu",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "6c3b8707112c",
-      "text": "Pilihan B. Menyapa dengan sopan dan meminta tolong",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "ea75d6450085",
-      "text": "Pilihan B. Menyelesaikan pekerjaan dulu, baru bermain",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "648b32086b99",
-      "text": "Pilihan B. Menyerahkannya kepada guru atau satpam",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "7c20e4431a90",
-      "text": "Pilihan B. Menyimpannya untuk jajan",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "e899ecdf6ead",
-      "text": "Pilihan B. Terus berjalan menuju garis akhir",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "2c3bcb968c71",
-      "text": "Pilihan B. Terus berjalan pelan-pelan tanpa menyerah",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "2c5def7af48b",
-      "text": "Pilihan C. Membiarkannya di jalan",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "3037d60895a4",
-      "text": "Pilihan C. Menyerahkannya kepada guru atau satpam",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "7881d1b3da1f",
-      "text": "Pilihan C. Menyimpannya untuk jajan",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "e603bebccb95",
-      "text": "Rajin bekerja dan suka menolong, dua-duanya penting!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "cd44ed531d9a",
-      "text": "Raksasa masih mengejar. Bungkusan terakhir berisi terasi. Sebaiknya Timun Mas bagaimana?",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "b3f56d16d129",
-      "text": "Rani berjalan pulang dari sekolah.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "e257f48b44b9",
-      "text": "Rani menyerahkan dompet itu kepada satpam sekolah.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "1335ef93c8bd",
-      "text": "Saat mencuci di sungai, bajunya hanyut terbawa arus.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "dfcb69a7cf71",
-      "text": "Semut berbagi makanan. Belalang berjanji akan rajin mulai sekarang.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "e145c559f116",
-      "text": "Semut dan Belalang. Ayo ikuti ceritanya!",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "a4ff396de2d9",
-      "text": "Semut diajak bermain oleh belalang. Sebaiknya semut menjawab apa?",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
-      "key": "233b0ea7c8b6",
-      "text": "Seorang anak gembala menjaga domba-dombanya di padang rumput.",
-      "scope": "cerita-nusantara",
-      "voice": "ardi",
-      "games": [
-        "cerita-nusantara"
-      ]
-    },
-    {
       "key": "072c666f9d8d",
       "text": "Suatu hari, raksasa datang menagih janji. Timun Mas harus lari!",
-      "scope": "cerita-nusantara",
+      "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
-        "cerita-nusantara"
+        "cerita-kancil"
       ]
     },
     {
       "key": "60bbebfd4687",
       "text": "Tak lama, seorang bapak datang mencari dompetnya. Wajahnya lega sekali.",
-      "scope": "cerita-nusantara",
+      "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
-        "cerita-nusantara"
+        "cerita-kancil"
       ]
     },
     {
       "key": "1131758df8b8",
       "text": "Terasi berubah menjadi lautan lumpur. Raksasa tidak bisa lewat.",
-      "scope": "cerita-nusantara",
+      "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
-        "cerita-nusantara"
+        "cerita-kancil"
       ]
     },
     {
       "key": "7a8f70bf130b",
       "text": "Tiba-tiba serigala sungguhan datang! Apa yang harus dilakukan anak gembala?",
-      "scope": "cerita-nusantara",
+      "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
-        "cerita-nusantara"
+        "cerita-kancil"
       ]
     },
     {
       "key": "79333cc7315d",
       "text": "Timun Mas anak yang berani. Ayo gunakan akalnya!",
-      "scope": "cerita-nusantara",
+      "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
-        "cerita-nusantara"
+        "cerita-kancil"
       ]
     },
     {
       "key": "1b9d0c8f0519",
       "text": "Timun Mas menebar biji timun. Seketika tumbuh ladang timun yang lebat.",
-      "scope": "cerita-nusantara",
+      "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
-        "cerita-nusantara"
+        "cerita-kancil"
       ]
     },
     {
       "key": "97c41c2428f4",
       "text": "Timun Mas pulang dengan selamat. Berani dan cerdik menyelamatkannya!",
-      "scope": "cerita-nusantara",
+      "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
-        "cerita-nusantara"
+        "cerita-kancil"
       ]
     },
     {
       "key": "8c5458610eaa",
       "text": "Timun Mas. Ayo bantu Timun Mas pulang dengan selamat!",
-      "scope": "cerita-nusantara",
+      "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
-        "cerita-nusantara"
+        "cerita-kancil"
       ]
     },
     {
       "key": "9d15b31eafbe",
       "text": "Uang itu milik orang lain yang pasti sedang mencarinya. Coba pilih yang lain!",
-      "scope": "cerita-nusantara",
+      "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
-        "cerita-nusantara"
+        "cerita-kancil"
       ]
     },
     {
       "key": "7d8562218973",
       "text": "Warga desa langsung datang menolong. Karena anak gembala selalu jujur, semua orang percaya padanya.",
-      "scope": "cerita-nusantara",
+      "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
-        "cerita-nusantara"
+        "cerita-kancil"
       ]
     },
     {
@@ -2458,15 +2478,6 @@
     {
       "key": "116ce3bd8252",
       "text": "Ketuk tujuh pensil. Hitung pelan-pelan ya!",
-      "scope": "hitung-hebat",
-      "voice": "gadis",
-      "games": [
-        "hitung-hebat"
-      ]
-    },
-    {
-      "key": "3804bdc63661",
-      "text": "Lihat urutan bilangannya. Bilangan mana yang hilang?",
       "scope": "hitung-hebat",
       "voice": "gadis",
       "games": [
@@ -4112,15 +4123,6 @@
       ]
     },
     {
-      "key": "867f57ee6807",
-      "text": "Lihat polanya baik-baik. Bentuk apa selanjutnya?",
-      "scope": "labirin-warna",
-      "voice": "gadis",
-      "games": [
-        "labirin-warna"
-      ]
-    },
-    {
       "key": "744502037587",
       "text": "Semua bentuknya sama. Sentuh awan warna biru!",
       "scope": "labirin-warna",
@@ -4883,6 +4885,51 @@
       "voice": "gadis",
       "games": [
         "pasar-buah"
+      ]
+    },
+    {
+      "key": "7e3a919ae560",
+      "text": "Bentuk dan warnanya sama-sama berpola. Yang mana selanjutnya?",
+      "scope": "pola-pintar",
+      "voice": "gadis",
+      "games": [
+        "pola-pintar"
+      ]
+    },
+    {
+      "key": "0af69b42a433",
+      "text": "Bilangannya menghitung mundur. Bilangan apa selanjutnya?",
+      "scope": "pola-pintar",
+      "voice": "gadis",
+      "games": [
+        "pola-pintar"
+      ]
+    },
+    {
+      "key": "b996e26e2db9",
+      "text": "Lihat polanya baik-baik. Bentuk apa yang hilang di tengah?",
+      "scope": "pola-pintar",
+      "voice": "gadis",
+      "games": [
+        "pola-pintar"
+      ]
+    },
+    {
+      "key": "f2e0c45e08bc",
+      "text": "Lihat urutan bilangannya. Bilangan apa selanjutnya?",
+      "scope": "pola-pintar",
+      "voice": "gadis",
+      "games": [
+        "pola-pintar"
+      ]
+    },
+    {
+      "key": "809c15c1e65a",
+      "text": "Semua bentuknya sama. Lihat warnanya. Warna apa selanjutnya?",
+      "scope": "pola-pintar",
+      "voice": "gadis",
+      "games": [
+        "pola-pintar"
       ]
     },
     {
