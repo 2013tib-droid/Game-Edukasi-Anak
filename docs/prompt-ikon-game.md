@@ -138,7 +138,7 @@ hal baru muncul di tahap POTONG dan tahap PASANG — bukan di tahap prompt:
 | `tulis-huruf` | Buatkan: satu pulpen bertutup warna biru muda berwajah imut dalam posisi miring, sedang menuliskan satu garis tinta biru melengkung yang membentuk huruf a kecil di bawahnya. Selain huruf a itu tidak boleh ada tulisan lain. |
 | `cerita-nusantara` | Buatkan: satu buku tertutup bersampul hijau tosca berwajah imut, dengan pita pembatas merah muda menjuntai dari bawahnya dan satu bintang kuning kecil melayang di atasnya. Sampulnya berhias motif batik sederhana warna krem, POLOS tanpa judul dan tanpa tulisan apa pun. |
 | `jam-pintar` (opsional) | Buatkan: satu jam dinding bulat pastel berwajah imut, dengan angka 1 sampai 12 tertulis jelas dan urut mengelilingi muka jam, jarum pendek biru tua menunjuk angka 10 dan jarum panjang merah menunjuk angka 2. Selain angka jam itu tidak boleh ada tulisan lain. |
-| `pola-pintar` | Buatkan: satu untaian manik-manik anak yang melengkung membentuk busur, talinya jatuh santai dan tidak lurus. Maniknya berselang-seling mengikuti pola: bulat merah muda, kubus kuning, bulat mint, kubus ungu muda, lalu satu tempat manik yang KOSONG bergaris putus-putus di ujung untaian. Manik bulat yang paling besar berwajah imut, dan maniknya miring ke arah berbeda-beda supaya terasa hidup, bukan berbaris rapi seperti tabel. Tinggi dan lebar untaiannya kira-kira sama. |
+| `pola-pintar` | Buatkan: satu ulat kecil yang lucu dan gemuk, badannya melengkung membentuk busur seperti sedang merayap. Ruas badannya berselang-seling mengikuti pola: hijau mint, kuning krem, hijau mint, kuning krem — lalu satu ruas terakhir KOSONG bergaris putus-putus, seolah ruas itu belum terpasang. Kepalanya hijau mint berwajah imut dengan dua antena kecil melengkung. Tinggi dan lebar ulatnya kira-kira sama. |
 
 ### Kalau hasilnya masih melenceng
 
@@ -162,18 +162,27 @@ Balas di chat yang sama dengan menyebut kesalahannya, jangan mengulang seluruh p
 - **`jam-pintar` opsional & berisiko**: mengganti ikonnya berarti melepas `iconClock`
   (muka jam SVG yang angkanya dijamin benar). Gambar AI sering salah menulis angka jam —
   kalau 1–12 tidak lengkap dan urut, JANGAN dipakai, biarkan SVG-nya.
-- **`pola-pintar` = untaian manik, dan itu menyelesaikan DUA masalah sekaligus.**
-  - Deret mendatar memang bahasa gambar paling jelas untuk "lanjutkan polanya", tapi empat
-    ubin berjajar rasionya ±3 — jauh melewati batas ±1,5 (Pelajaran Kelima), jadi ikonnya
-    akan mengecil sendiri kena pengaman `maxWidth` dan kalah menonjol dari tetangganya.
-    Untaian yang MELENGKUNG memuat deret yang sama dalam bidang yang tinggi ≈ lebar.
-  - Percobaan pertama memakai empat ubin dalam grid 2×2 dan **ditolak pemilik: "kaku"**.
-    Grid itu bahasa gambar spreadsheet, bukan mainan anak. Manik-manik justru alat latihan
-    pola yang paling klasik untuk anak, dan tali yang jatuh santai + manik yang miring
-    ke arah berbeda-beda membuatnya hidup tanpa kehilangan "ini sebuah pola".
-  - Bedakan dari `pasangan-pintar` (DUA lingkaran besar dihubungkan garis putus-putus):
-    di sini maniknya BANYAK dan kecil, dan garis putus-putusnya cuma di satu tempat manik
-    yang kosong. Bedakan juga dari `labirin-warna` (palet cat kayu, kelompok TK).
+- **`pola-pintar` = ulat berbuku-buku. Konsepnya sudah DUA KALI ditolak — baca dulu
+  sebelum mengusulkan yang lain.**
+  - **Deret mendatar terlarang.** Itu bahasa gambar paling jelas untuk "lanjutkan polanya",
+    tapi empat ubin berjajar rasionya ±3 — jauh melewati batas ±1,5 (Pelajaran Kelima),
+    jadi ikonnya mengecil sendiri kena pengaman `maxWidth` dan kalah menonjol dari
+    tetangganya. Apa pun konsepnya, deretnya harus MELENGKUNG supaya tinggi ≈ lebar.
+  - **Usulan 1: empat ubin dalam grid 2×2 — ditolak, "kaku".** Grid itu bahasa gambar
+    spreadsheet, bukan mainan anak.
+  - **Usulan 2: untaian manik-manik melengkung — ditolak, "lebih ke cewe".** Manik memang
+    alat latihan pola yang klasik, tapi gambarnya terbaca sebagai KALUNG. Ikon game harus
+    netral: yang main anak laki-laki maupun perempuan, dan kartu ini duduk di daftar yang
+    sama dengan mobil, jam, dan papan target.
+  - **Yang dipakai: ulat.** Netral, jelas mainan anak, dan sinyal polanya justru paling
+    kuat — BADANNYA SENDIRI yang jadi deretnya, bukan hiasan yang ditempel pada objek lain.
+    Badan yang merayap melengkung otomatis memenuhi syarat rasio.
+  - Bedakan dari `pasangan-pintar` (DUA lingkaran besar dihubungkan garis putus-putus): di
+    sini garis putus-putusnya cuma di SATU ruas badan yang belum terpasang. Bedakan juga
+    dari `labirin-warna` (palet cat kayu, kelompok TK).
+  - Kalau ulat pun ditolak, alternatif berikutnya yang netral & melengkung: **layang-layang
+    dengan ekor berpita berselang-seling** (satu pita kosong bergaris putus-putus). Sinyal
+    polanya lebih lemah — polanya di ekor, bukan di badan utamanya — jadi ini cadangan.
 - **`ejaan-jitu` alternatif** kalau papan target terasa terlalu "permainan panah":
   Buatkan: tiga balok huruf kayu pastel berdiri berjajar, balok tengah berwajah imut,
   dengan satu bintang kuning melayang di atasnya.
