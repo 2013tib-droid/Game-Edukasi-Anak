@@ -115,6 +115,7 @@ export default function GamePage() {
       key={meta.id}
       config={config}
       icon={meta.emoji}
+      iconPic={meta.pic}
       iconClock={meta.iconClock}
       onExit={() => navigate(`/kelompok/${meta.group}`)}
     />

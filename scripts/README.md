@@ -8,10 +8,15 @@
   `ART_ROWS` dan `HOLES` untuk lembar berikutnya, lalu **selalu lihat
   hasilnya di atas latar berwarna** sebelum dipakai.
 - `cut-checkerboard.py` — memotong SATU gambar hasil generator AI yang latarnya
-  berupa kotak-kotak abu-abu "transparan" palsu (file JPEG, jadi kotaknya ikut
-  tercetak di piksel) jadi WebP transparan. Butuh `pillow numpy`. Dipakai untuk
-  ikon kelompok di `public/assets/groups/`. Untuk gambar pemilik di atas kertas
+  berupa kotak-kotak "transparan" palsu (file JPEG, jadi kotaknya ikut tercetak
+  di piksel) jadi WebP transparan. Butuh `pillow numpy`. Warna kotaknya dibaca
+  sendiri dari tepi gambar, jadi kotak terang (~203/255) maupun gelap (~78/108)
+  sama-sama tertangani. Dipakai untuk ikon kelompok di `public/assets/groups/`
+  dan ikon game di `public/assets/games/`. Untuk gambar pemilik di atas kertas
   putih pakai `cut-item.py` — toleransi flood fill-nya beda.
+  **Selalu lihat hasilnya di atas latar berwarna sebelum dipakai**: lubang
+  tembus (lubang jempol palet cat) memang ikut dibuang, tapi bagian terang milik
+  gambar (surai singa, kulit putih semangka) harus tetap utuh.
 - `check-item-ids.mjs` — `node scripts/check-item-ids.mjs`. Memeriksa semua id
   item yang dirujuk config game benar-benar terdaftar di `items.ts` dan
   asetnya ada. Id yang salah TIDAK kelihatan saat main (diam-diam jatuh ke

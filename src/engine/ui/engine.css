@@ -1073,6 +1073,15 @@
   }
 }
 
+/* Intro icon drawn as the game's own art. Sized by HEIGHT only: each file is
+   cropped tight to its drawing, so widths differ and a fixed box would squash
+   the wide ones. Same visual weight as the 110px emoji it replaces. */
+.game-center .game-big-pic {
+  height: 132px;
+  width: auto;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
+}
+
 /* Intro icon drawn as a real clock face (Jam Pintar) — same visual weight as
    the 110px emoji it replaces. */
 .game-center .game-big-clock {

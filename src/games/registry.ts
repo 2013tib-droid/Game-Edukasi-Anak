@@ -20,6 +20,14 @@ export interface GameMeta {
    */
   emoji: string;
   /**
+   * Filename (without extension) of the game's icon ART in
+   * `public/assets/games/`. When present it REPLACES `emoji` on the portal card
+   * and the intro screen; `emoji` stays as the fallback if the file is missing
+   * and as the game's spoken/alt identity. Games without art drawn yet leave
+   * this out, so no request is made for a file that would 404.
+   */
+  pic?: string;
+  /**
    * Draw the game's icon as our own SVG clock face (`src/engine/ui/Clock.tsx`)
    * instead of `emoji`. The clock-face emoji has no numerals and looks like a
    * flat grey disc on a phone — see the Jam Pintar note in CLAUDE.md. `emoji`
@@ -38,6 +46,7 @@ export const games: GameMeta[] = [
     group: 'tk',
     title: 'Hutan Hewan',
     emoji: '🦁',
+    pic: 'hutan-hewan',
     template: 'tap-answer',
     load: () => import('@/games/tk/hutan-hewan'),
   },
@@ -46,6 +55,7 @@ export const games: GameMeta[] = [
     group: 'tk',
     title: 'Taman Huruf',
     emoji: '🏕️',
+    pic: 'taman-huruf',
     template: 'mixed',
     load: () => import('@/games/tk/taman-huruf'),
   },
@@ -54,6 +64,7 @@ export const games: GameMeta[] = [
     group: 'tk',
     title: 'Labirin Warna',
     emoji: '🎨',
+    pic: 'labirin-warna',
     template: 'tap-answer',
     load: () => import('@/games/tk/labirin-warna'),
   },
@@ -62,6 +73,7 @@ export const games: GameMeta[] = [
     group: 'tk',
     title: 'Pasar Buah',
     emoji: '🍉',
+    pic: 'pasar-buah',
     template: 'mixed',
     load: () => import('@/games/tk/pasar-buah'),
   },

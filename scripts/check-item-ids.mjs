@@ -37,11 +37,19 @@ async function load(contents) {
   return import(`data:text/javascript;base64,${b64}`);
 }
 
+/**
+ * Absolute path as an import specifier. The slashes MUST be forward slashes:
+ * on Windows `path.resolve` returns \\-separated paths, and pasted into a
+ * quoted import those read as escape sequences — esbuild then fails with
+ * "Could not resolve C:Users..." and the whole check never runs.
+ */
+const spec = (f) => path.resolve(f).replaceAll('\\', '/');
+
 const mod = await load(
-  games.map((f, i) => `import c${i} from '${path.resolve(f)}';`).join('\n') +
+  games.map((f, i) => `import c${i} from '${spec(f)}';`).join('\n') +
     `\nexport const configs = [${games.map((_, i) => `c${i}`).join(',')}];`,
 );
-const { ITEMS } = await load(`export * from '${path.resolve('src/engine/ui/items.ts')}'`);
+const { ITEMS } = await load(`export * from '${spec('src/engine/ui/items.ts')}'`);
 
 /** id → set of config files that use it. */
 const used = new Map();

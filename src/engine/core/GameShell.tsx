@@ -15,6 +15,7 @@ import { celebrate, sfx, speak, stopSpeaking } from '@/engine/audio/sound';
 import { FeedbackOverlay, LevelDots, SpeakButton, StarsRow } from '@/engine/ui/Feedback';
 import MascotCard from '@/engine/ui/Mascot';
 import Clock from '@/engine/ui/Clock';
+import { gameImageUrl } from '@/engine/ui/GameIcon';
 import ItemPic from '@/engine/ui/ItemPic';
 import '@/engine/ui/engine.css';
 
@@ -124,6 +125,7 @@ export default function GameShell({
   config,
   onExit,
   icon,
+  iconPic,
   iconClock,
 }: {
   config: AnyGameConfig;
@@ -137,6 +139,12 @@ export default function GameShell({
    * portal (tests, previews).
    */
   icon?: string;
+  /**
+   * The game's icon ART (`GameMeta.pic`), drawn instead of `icon` on the intro
+   * screen. Same single-source rule as `icon`: the registry decides, so the
+   * portal card and this screen can never drift apart.
+   */
+  iconPic?: string;
   /**
    * Draw the intro screen's big icon as a real clock face instead of an emoji.
    * Declared once in the game registry (`GameMeta.iconClock`) and passed down
@@ -328,6 +336,8 @@ export default function GameShell({
       <div className="game-center">
         {iconClock ? (
           <Clock time={iconClock} className="game-big-clock" />
+        ) : iconPic ? (
+          <img className="game-big-pic" src={gameImageUrl(iconPic)} alt="" />
         ) : (
           <div className="game-big-emoji" aria-hidden>
             {icon ?? config.emoji}

@@ -7,6 +7,7 @@ import { canPlayGame, isFreeGame } from '@/data/access';
 import { useLockMode, useOwnedGroups } from '@/portal/useAccess';
 import LockToggle from '@/portal/LockToggle';
 import Clock from '@/engine/ui/Clock';
+import GameIcon from '@/engine/ui/GameIcon';
 
 // Game list per group. Unlocked games open directly; locked ones show a
 // padlock until the account has group access (gate enforced again in
@@ -63,8 +64,8 @@ export default function GroupPage() {
               {game.iconClock ? (
                 <Clock time={game.iconClock} size={58} />
               ) : (
-                <span style={{ fontSize: 52 }} aria-hidden>
-                  {game.emoji}
+                <span aria-hidden>
+                  <GameIcon pic={game.pic} emoji={game.emoji} height={72} emojiSize={52} />
                 </span>
               )}
               <span style={{ fontSize: 20 }}>{game.title}</span>
