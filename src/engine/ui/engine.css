@@ -911,6 +911,49 @@
   height: clamp(72px, 22vw, 140px);
 }
 
+/*
+ * ILUSTRASI ADEGAN (`StoryPage.art`) — gambar yang membawa latarnya sendiri,
+ * jadi dirender sebagai PANEL gambar cerita: selebar layar, sudut membulat,
+ * bukan tokoh yang melayang seperti `.story-emoji__img`.
+ * `width: 100%` + `height: auto` di sini justru BENAR (kebalikan dari
+ * `.choice-img`): yang dijaga adalah rasio ilustrasinya, dan lebarnya sudah
+ * dibatasi kolom `.game-area`. `max-height` menjaga halaman tetap muat di HP
+ * pendek kalau suatu saat ada ilustrasi yang lebih tinggi dari lebarnya.
+ */
+.story-art {
+  display: block;
+  /* Ukurannya diserahkan ke rasio gambarnya sendiri (`width`/`height` auto,
+     dibatasi `max-*`), BUKAN `width: 100%` + `object-fit: contain`. Dengan
+     cara yang kedua kotak elemennya tetap selebar kolom sementara gambarnya
+     menciut di dalam — sudut membulatnya jadi memotong ruang kosong, dan di
+     layar tampak seperti gambar bersudut siku. */
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 46vh;
+  border-radius: 18px;
+  align-self: center;
+}
+
+/* Halaman KEPUTUSAN berbagi layar dengan dua-tiga kartu pilihan — aturan yang
+   sama dengan `.story-emoji--choices`. */
+.story-art--choices {
+  max-height: 28vh;
+}
+
+/* Layar MENDATAR (HP dimiringkan / tablet landscape) tingginya sedikit dan
+   sudah harus memuat teks + tombol, jadi panelnya mengecil — ambang aspek
+   yang sama dengan pita latar di `scene.css`. */
+@media (min-aspect-ratio: 4 / 3) {
+  .story-art {
+    max-height: 34vh;
+  }
+
+  .story-art--choices {
+    max-height: 20vh;
+  }
+}
+
 .story-text {
   font-size: 22px;
   font-weight: 600;

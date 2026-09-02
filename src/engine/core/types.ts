@@ -237,6 +237,24 @@ export interface StoryPage {
    * `emoji` stays as the fallback.
    */
   item?: string;
+  /**
+   * ILUSTRASI ADEGAN: nama file (tanpa ekstensi) di `public/assets/story/`,
+   * mis. `'jalak-kerbau'` → `public/assets/story/jalak-kerbau.webp`.
+   *
+   * Bedanya dengan `item`: item itu satu benda/hewan yang dipotong transparan
+   * dan bisa dipakai di soal mana pun, sedangkan ilustrasi adegan sudah
+   * membawa LATARNYA SENDIRI dan menggambarkan satu momen cerita — dua tokoh
+   * yang berinteraksi ("jalak bertengger di punggung kerbau") hanya bisa
+   * digambar begini; menempelkan dua gambar terpisah tidak pernah rapi.
+   *
+   * Kalau diisi, ini yang dipakai dan `item`/`emoji` tinggal jadi cadangan
+   * (dipakai kalau filenya gagal dimuat). Latar engine (`Scene`) TETAP
+   * digambar di belakangnya: langit + rumput di sekeliling panel gambar jauh
+   * lebih menyatu dengan ilustrasi daripada latar pastel bawaan app —
+   * sudah dibandingkan dengan tangkapan layar, jangan dibalik lagi. Pilih
+   * `scene` yang tempatnya sama dengan ilustrasinya.
+   */
+  art?: string;
   text: string;
   /**
    * Latar tempat halaman ini. Ditulis hanya saat tempatnya BERGANTI: halaman

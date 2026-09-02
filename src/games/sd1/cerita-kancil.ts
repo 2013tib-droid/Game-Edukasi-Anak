@@ -39,6 +39,19 @@ const page = (emoji: string, text: string): StoryPage => ({ emoji, text });
 const pic = (item: string, text: string): StoryPage => ({ item, text });
 
 /**
+ * Halaman berilustrasi adegan: `art` = nama file di `public/assets/story/`.
+ * Dipakai kalau satu halaman menceritakan DUA tokoh yang berinteraksi —
+ * anak yang belum lancar membaca membaca adegannya dari gambar, dan dua
+ * gambar item terpisah yang ditempel berdampingan tidak pernah rapi.
+ * `emoji` tetap ditulis sebagai cadangan kalau filenya belum ter-deploy.
+ */
+const art = (name: string, emoji: string, text: string): StoryPage => ({
+  art: name,
+  emoji,
+  text,
+});
+
+/**
  * Menandai halaman ini berpindah tempat: `at('sungai', page(...))`.
  * Latarnya digambar engine (`src/engine/ui/Scene.tsx`), jadi cukup menyebut
  * namanya. Ditulis HANYA saat tempatnya berganti — halaman sesudahnya ikut
@@ -51,14 +64,22 @@ const at = <P extends StoryPage>(scene: SceneId, p: P): P => ({ ...p, scene });
  * Urutan di sini tidak menentukan urutan di layar — `StoryChoice` mengacak
  * pilihannya tiap halaman supaya anak tidak bisa menang dengan selalu
  * menekan kartu pertama.
+ *
+ * Gambarnya boleh emoji (`ask('🤔', …)`) atau ilustrasi adegan
+ * (`ask({ art: 'jalak-kerbau-jawab', emoji: '🤔' }, …)`). Emoji berpikir itu
+ * cuma isyarat "ayo pilih"; kalau adegannya punya ilustrasi, ilustrasi itu
+ * yang harus tampil — anak yang belum lancar membaca menimbang pilihannya
+ * sambil melihat kejadiannya.
  */
 function ask(
-  emoji: string,
+  cue: string | { art: string; emoji: string },
   text: string,
   right: string,
   ...wrong: [string, string][]
 ): StoryPage {
+  const { art: artName, emoji } = typeof cue === 'string' ? { art: undefined, emoji: cue } : cue;
   return {
+    art: artName,
     emoji,
     text,
     choices: [
@@ -131,14 +152,22 @@ const JALAK = story(
   { label: 'Jalak dan Kerbau', item: 'jalak' },
   'Burung Jalak dan Kerbau. Ayo ikuti ceritanya!',
   at('sawah', page('🐃', 'Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.')),
-  pic('jalak', 'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"'),
+  art(
+    'jalak-kerbau',
+    '🐦',
+    'Seekor burung jalak hinggap di pagar. "Bolehkah aku hinggap di punggungmu?"',
+  ),
   ask(
-    '🤔',
+    { art: 'jalak-kerbau-jawab', emoji: '🤔' },
     'Apa yang sebaiknya kerbau jawab?',
     'Boleh, hinggaplah di punggungku',
     ['Pergi! Aku tidak mau ditumpangi', 'Jalak justru ingin menolong. Coba pilih yang lain!'],
   ),
-  pic('jalak', 'Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.'),
+  art(
+    'jalak-kerbau-kutu',
+    '🐦',
+    'Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.',
+  ),
   ask(
     '🐍',
     'Dari atas, jalak melihat ular besar mendekat. Sebaiknya jalak bagaimana?',
