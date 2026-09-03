@@ -226,31 +226,41 @@ const GAJAH = story(
   // Dua halaman pembuka ini SENGAJA tanpa `at()`: ilustrasinya (kiriman
   // pemilik, 2026-08-10) sudah membawa rawanya sendiri — hutan, air, dan
   // tepian — jadi latar gambar engine di belakangnya cuma jadi hutan di atas
-  // hutan. Latar `sungai` menyusul di halaman keputusan dan berlaku sampai
-  // cerita selesai.
+  // hutan. Sejak empat ilustrasi 2026-09-03, aturan itu berlaku sampai halaman
+  // keenam; `at('sungai')` tinggal di halaman penutup yang masih beremoji.
   pic('kancil-rawa', 'Pagi itu Kancil berjalan di tepi rawa.'),
   pic('gajah-lumpur', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.'),
-  // Rawa belum punya latar sendiri; `sungai` sudah membawa air + tepian hijau
-  // dan itu yang dikenali anak dari sisa cerita ini.
-  at(
-    'sungai',
-    ask(
-      '🤔',
-      'Gajah terlalu berat. Apa yang sebaiknya Kancil lakukan?',
-      'Memanggil hewan lain untuk menolong',
-      ['Menarik gajah sendirian', 'Gajah terlalu berat untuk ditarik sendiri. Ada cara yang lebih baik!'],
-      ['Pergi karena badannya kecil', 'Kancil memang kecil, tapi akalnya besar. Coba pilih yang lain!'],
-    ),
-  ),
-  page('🐃', 'Kancil memanggil kerbau, rusa, dan teman-teman lain. Semua datang membantu.'),
   ask(
-    '🌿',
+    { art: 'kancil-gajah-tanya', emoji: '🤔' },
+    'Gajah terlalu berat. Apa yang sebaiknya Kancil lakukan?',
+    'Memanggil hewan lain untuk menolong',
+    ['Menarik gajah sendirian', 'Gajah terlalu berat untuk ditarik sendiri. Ada cara yang lebih baik!'],
+    ['Pergi karena badannya kecil', 'Kancil memang kecil, tapi akalnya besar. Coba pilih yang lain!'],
+  ),
+  art(
+    'kancil-gajah-panggil',
+    '🐃',
+    'Kancil memanggil kerbau, rusa, dan teman-teman lain. Semua datang membantu.',
+  ),
+  ask(
+    { art: 'kancil-gajah-ranting', emoji: '🌿' },
     'Lumpurnya licin sekali. Sebaiknya mereka pakai apa?',
     'Ranting dan daun supaya tidak licin',
     ['Menarik lebih keras lagi saja', 'Kalau licin, tenaganya jadi sia-sia. Coba cara yang lebih cerdik!'],
   ),
-  page('💪', 'Semua menarik bersama-sama. Gajah akhirnya keluar dari lumpur!'),
-  page('⭐', 'Badan kecil pun bisa menolong, asal punya akal dan teman.'),
+  art(
+    'kancil-gajah-tarik',
+    '💪',
+    'Semua menarik bersama-sama. Gajah akhirnya keluar dari lumpur!',
+  ),
+  // Penutup: satu-satunya halaman cerita ini yang masih beremoji — kalimatnya
+  // pesan moral, bukan adegan, jadi tak ada yang bisa dilukis selain mengulang
+  // gambar halaman sebelumnya. Karena itu `at('sungai')` sekarang duduk DI
+  // SINI: aturan cerita ini (CLAUDE.md 2026-08-10) adalah latar engine dipakai
+  // di halaman pertama yang BELUM berilustrasi, dan sejak keempat gambar
+  // 2026-09-03 halaman itu tinggal yang ini. Rawa belum punya latar sendiri;
+  // `sungai` sudah membawa air + tepian hijau.
+  at('sungai', page('⭐', 'Badan kecil pun bisa menolong, asal punya akal dan teman.')),
 );
 
 /* ---------- Cerita rakyat & fabel klasik — pindahan dari game
