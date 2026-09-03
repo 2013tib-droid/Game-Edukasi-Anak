@@ -125,21 +125,32 @@ const KANCIL = story(
   'l1',
   { label: 'Kancil dan Pak Tani', emoji: '🦌' },
   'Si Kancil berjalan di hutan. Perutnya lapar sekali. Ayo bantu Kancil mencari makan!',
-  at('hutan', page('🦌', 'Si Kancil berjalan di hutan. Perutnya lapar sekali.')),
+  at(
+    'hutan',
+    art(
+      'kancil-tani-lapar',
+      '🦌',
+      'Si Kancil berjalan di hutan. Perutnya lapar sekali.',
+    ),
+  ),
   at(
     'kebun',
     ask(
-      '🥒',
+      { art: 'kancil-tani-kebun', emoji: '🥒' },
       'Kancil melihat kebun mentimun Pak Tani. Apa yang sebaiknya Kancil lakukan?',
       'Minta izin Pak Tani dulu',
       ['Ambil diam-diam', 'Hmm, mengambil tanpa izin itu tidak baik. Coba pilih yang lain!'],
     ),
   ),
-  page('👨‍🌾', 'Pak Tani senang Kancil jujur. "Ambillah mentimun secukupnya," kata Pak Tani.'),
+  art(
+    'kancil-tani-izin',
+    '👨‍🌾',
+    'Pak Tani senang Kancil jujur. "Ambillah mentimun secukupnya," kata Pak Tani.',
+  ),
   at(
     'sungai',
     ask(
-      '🐊',
+      { art: 'kancil-tani-buaya', emoji: '🐊' },
       'Di sungai, ada buaya menghalangi jalan pulang. Bagaimana Kancil menyeberang?',
       'Ajak buaya berhitung sambil berbaris',
       [
@@ -148,7 +159,8 @@ const KANCIL = story(
       ],
     ),
   ),
-  page(
+  art(
+    'kancil-tani-menyeberang',
     '🎉',
     'Buaya berbaris, Kancil melompat satu-satu sampai seberang. Kancil pulang dengan kenyang dan gembira!',
   ),
