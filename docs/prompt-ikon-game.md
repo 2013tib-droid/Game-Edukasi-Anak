@@ -5,7 +5,10 @@ Ikon ini dipakai DUA tempat sekaligus (kartu portal + layar intro), jadi satu fi
 
 ## Status (2026-09-03) — SELESAI
 
-**Ke-18 game sudah bergambar; tak ada lagi ikon emoji.** Terakhir masuk: `pola-pintar`
+**Ke-19 game sudah bergambar; tak ada lagi ikon emoji.** Terakhir masuk: `rute-kendaraan`
+(jalan berkelok S + rambu berwajah imut), game SD baru yang sengaja dibuat "Jalan
+Kendaraan tapi lebih sulit" — ikonnya sengaja BUKAN mobil, supaya tak tertukar dengan
+ikon Jalan Kendaraan (mobil merah) walau judulnya mirip. Sebelum itu: `pola-pintar`
 (ulat berbuku-buku), game SD yang ditambahkan belakangan (`77b9ca6`) sesudah batch ikon
 lainnya selesai.
 
@@ -140,6 +143,7 @@ hal baru muncul di tahap POTONG dan tahap PASANG — bukan di tahap prompt:
 | `cerita-nusantara` | Buatkan: satu buku tertutup bersampul hijau tosca berwajah imut, dengan pita pembatas merah muda menjuntai dari bawahnya dan satu bintang kuning kecil melayang di atasnya. Sampulnya berhias motif batik sederhana warna krem, POLOS tanpa judul dan tanpa tulisan apa pun. |
 | `jam-pintar` (opsional) | Buatkan: satu jam dinding bulat pastel berwajah imut, dengan angka 1 sampai 12 tertulis jelas dan urut mengelilingi muka jam, jarum pendek biru tua menunjuk angka 10 dan jarum panjang merah menunjuk angka 2. Selain angka jam itu tidak boleh ada tulisan lain. |
 | `pola-pintar` | Buatkan: satu ulat kecil yang lucu dan gemuk, badannya melengkung membentuk busur seperti sedang merayap. Ruas badannya berselang-seling mengikuti pola: hijau mint, kuning krem, hijau mint, kuning krem — lalu satu ruas terakhir KOSONG bergaris putus-putus, seolah ruas itu belum terpasang. Kepalanya hijau mint berwajah imut dengan dua antena kecil melengkung. Tinggi dan lebar ulatnya kira-kira sama. |
+| `rute-kendaraan` | Buatkan: satu jalan raya berkelok membentuk huruf S dari atas ke bawah, aspal abu-abu dengan garis putus-putus putih di tengah dan pinggir jalan berwarna oranye lembut, dengan satu rambu penunjuk arah berbentuk bulat warna hijau mint menempel di ujung atas jalan. Rambunya berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Tambahkan dua bintang kecil pastel melayang di sekitarnya. |
 
 ### Kalau hasilnya masih melenceng
 

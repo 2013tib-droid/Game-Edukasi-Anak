@@ -213,13 +213,15 @@ export const games: GameMeta[] = [
   },
   {
     // Saudara "Jalan Kendaraan" (TK) tapi sengaja lebih sulit — jalan lebih
-    // sempit & lebih banyak belokan (lihat komentar kepala config). Belum
-    // punya ikon ART sendiri (`pic`); emoji 🛣️ jadi identitasnya sampai
-    // asetnya dibuat.
+    // sempit & lebih banyak belokan (lihat komentar kepala config). Ikonnya
+    // SENGAJA jalan berkelok + rambu, BUKAN mobil — supaya beda jelas dari
+    // ikon Jalan Kendaraan (mobil merah); yang membedakan game ini memang
+    // rutenya, bukan kendaraannya.
     id: 'rute-kendaraan',
     group: 'sd1',
     title: 'Rute Kendaraan',
     emoji: '🛣️',
+    pic: 'rute-kendaraan',
     template: 'path-trace',
     load: () => import('@/games/sd1/rute-kendaraan'),
   },
