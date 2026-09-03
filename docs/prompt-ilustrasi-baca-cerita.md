@@ -8,10 +8,14 @@ Yang dibahas di sini **hanya 3 cerita yang aktif** per 2026-09-03:
 
 | Level | Judul | Halaman | Sudah ada | Perlu dibuat |
 |---|---|---|---|---|
-| `l1` | **Kancil dan Pak Tani** | 5 | 0 | **5** |
-| `l2` | **Jalak dan Kerbau** | 7 | 3 | **4** |
-| `l3` | **Kancil dan Gajah** | 7 | 2 | **5** |
-| | | **19** | **5** | **14** |
+| `l1` | **Kancil dan Pak Tani** | 5 | **5** | 0 — selesai |
+| `l2` | **Jalak dan Kerbau** | 7 | **7** | 0 — selesai |
+| `l3` | **Kancil dan Gajah** | 7 | **6** | **1** (halaman penutup) |
+| | | **19** | **18** | **1** |
+
+**Per 2026-09-03 tinggal SATU gambar** yang belum ada: `kancil-gajah-selamat`
+(penutup "Kancil dan Gajah"). Promptnya sempat ditolak Gemini — versi
+penggantinya ada di bagian Cerita 3 di bawah.
 
 Enam cerita rakyat (`n1`–`n6`) masih `soon: true` — jangan digambar dulu.
 
@@ -59,8 +63,10 @@ cerita anak, tanpa teks, tanpa bingkai, tokohnya sama persis dengan gambar rujuk
 ## BLOK GAYA (tempel sekali di awal tiap chat)
 
 > Kamu akan membantuku membuat ilustrasi halaman buku cerita anak Indonesia usia
-> 6–8 tahun. Gambar yang kulampirkan adalah ilustrasi yang sudah jadi — **ikuti
-> gaya dan karakternya persis**. Semua gambar HARUS mengikuti aturan berikut:
+> 6–8 tahun. Gambar yang kulampirkan adalah ilustrasi yang sudah jadi — **jaga
+> agar warna, bentuk tubuh, dan ekspresi tokohnya tetap konsisten dengan gambar
+> itu**. Semua tokohnya **karakter orisinal**, bukan tokoh dari film, kartun, atau
+> buku mana pun. Semua gambar HARUS mengikuti aturan berikut:
 >
 > **Gaya**
 > - Ilustrasi buku cerita anak, **cat digital lembut** — bukan stiker, bukan vektor
@@ -114,8 +120,9 @@ selebar ±318px. Jadi rasionya bukan selera, tapi hitungan layar.
 
 # CERITA 1 — Kancil dan Pak Tani (`l1`)
 
-**Rujukan yang dilampirkan:** belum ada. Buat halaman 1 dulu (`kancil-tani-lapar`),
-setujui hasilnya, lalu **lampirkan gambar itu di tiap pesan berikutnya**.
+✅ **SELESAI** — kelima gambarnya sudah dipasang (2026-09-03). Baris prompt di
+bawah disimpan sebagai arsip: kalau salah satu halaman mau digambar ulang, itu
+promptnya. `kancil-tani-lapar` sendiri sudah pernah diulang sekali.
 
 ## LEMBAR TOKOH (tempel sekali sesudah blok gaya)
 
@@ -198,7 +205,9 @@ setujui hasilnya, lalu **lampirkan gambar itu di tiap pesan berikutnya**.
 `public/assets/story/jalak-kerbau.webp`, `jalak-kerbau-jawab.webp`,
 `jalak-kerbau-kutu.webp` (ketiganya kiriman pemilik, sudah dipakai di app).
 
-Empat gambar baru di bawah harus terlihat **satu buku** dengan ketiganya.
+✅ **SELESAI** — keempat gambar barunya sudah dipasang (2026-09-03) dan cerita ini
+jadi yang pertama bergambar penuh. Baris promptnya disimpan sebagai arsip untuk
+kalau ada halaman yang mau digambar ulang.
 
 ## LEMBAR TOKOH (tempel sekali sesudah blok gaya)
 
@@ -224,13 +233,13 @@ Empat gambar baru di bawah harus terlihat **satu buku** dengan ketiganya.
 
 | # | id (nama file) | Rasio | Halaman di cerita | Status |
 |---|---|---|---|---|
-| 1 | `jalak-kerbau-kubang` | 4:3 | "Kerbau berkubang di sawah. Punggungnya gatal…" | **baru** |
+| 1 | `jalak-kerbau-kubang` | 4:3 | "Kerbau berkubang di sawah. Punggungnya gatal…" | sudah ada |
 | 2 | `jalak-kerbau` | — | "…burung jalak hinggap di pagar." | sudah ada |
 | 3 | `jalak-kerbau-jawab` | — | keputusan — "Apa yang sebaiknya kerbau jawab?" | sudah ada |
 | 4 | `jalak-kerbau-kutu` | — | "Jalak mematuki kutu di punggung kerbau…" | sudah ada |
-| 5 | `jalak-kerbau-ular` | **16:9** | keputusan — "jalak melihat ular besar mendekat." | **baru** |
-| 6 | `jalak-kerbau-lari` | 4:3 | "Kerbau cepat-cepat menjauh dari rawa…" | **baru** |
-| 7 | `jalak-kerbau-sahabat` | 4:3 | "Sejak itu jalak dan kerbau selalu bersama…" | **baru** |
+| 5 | `jalak-kerbau-ular` | **16:9** | keputusan — "jalak melihat ular besar mendekat." | sudah ada |
+| 6 | `jalak-kerbau-lari` | 4:3 | "Kerbau cepat-cepat menjauh dari rawa…" | sudah ada |
+| 7 | `jalak-kerbau-sahabat` | 4:3 | "Sejak itu jalak dan kerbau selalu bersama…" | sudah ada |
 
 ### Baris prompt (kirim satu per pesan, gambar rujukan tetap dilampirkan)
 
@@ -315,15 +324,20 @@ ulang `kancil-rawa` juga** (prompt penggantinya ada di akhir bagian ini).
 |---|---|---|---|---|
 | 1 | `kancil-rawa` | — | "Pagi itu Kancil berjalan di tepi rawa." | sudah ada |
 | 2 | `gajah-lumpur` | — | "Ada gajah terperosok di lumpur…" | sudah ada |
-| 3 | `kancil-gajah-pikir` | **16:9** | keputusan — "Apa yang sebaiknya Kancil lakukan?" | **baru** |
-| 4 | `kancil-gajah-teman` | 4:3 | "Kancil memanggil kerbau, rusa, dan teman-teman lain." | **baru** |
-| 5 | `kancil-gajah-ranting` | **16:9** | keputusan — "Lumpurnya licin sekali. Pakai apa?" | **baru** |
-| 6 | `kancil-gajah-tarik` | 4:3 | "Semua menarik bersama-sama…" | **baru** |
-| 7 | `kancil-gajah-selamat` | 4:3 | "Badan kecil pun bisa menolong…" | **baru** |
+| 3 | `kancil-gajah-tanya` | **16:9** | keputusan — "Apa yang sebaiknya Kancil lakukan?" | sudah ada |
+| 4 | `kancil-gajah-panggil` | 4:3 | "Kancil memanggil kerbau, rusa, dan teman-teman lain." | sudah ada |
+| 5 | `kancil-gajah-ranting` | **16:9** | keputusan — "Lumpurnya licin sekali. Pakai apa?" | sudah ada |
+| 6 | `kancil-gajah-tarik` | 4:3 | "Semua menarik bersama-sama…" | sudah ada |
+| 7 | `kancil-gajah-selamat` | 4:3 | "Badan kecil pun bisa menolong…" | **satu-satunya yang belum** |
+
+⚠️ **Dua nama file berbeda dari rancangan awal dokumen ini**: `-pikir` jadi
+**`-tanya`** dan `-teman` jadi **`-panggil`** (dipakai begitu saat dipasang
+2026-09-03). Yang berlaku adalah nama di tabel ini — sama dengan isi
+`public/assets/story/` dan `src/games/sd1/cerita-kancil.ts`.
 
 ### Baris prompt (kirim satu per pesan, gambar rujukan tetap dilampirkan)
 
-**1. `kancil-gajah-pikir` — rasio 16:9**
+**1. `kancil-gajah-tanya` — rasio 16:9** — SUDAH JADI
 > Buatkan ilustrasi buku cerita anak, rasio 16:9 (mendatar lebar), latar rawa yang
 > sama dengan gambar yang kulampirkan: **kancil berdiri di tepi lumpur sambil
 > berpikir, memandangi gajah yang terperosok**. Gajah di sisi kanan **terbenam
@@ -333,7 +347,7 @@ ulang `kancil-rawa` juga** (prompt penggantinya ada di akhir bagian ini).
 > mencari akal**. Jarak keduanya terlihat jelas. Pagi cerah, kabut tipis di
 > kejauhan.
 
-**2. `kancil-gajah-teman` — rasio 4:3**
+**2. `kancil-gajah-panggil` — rasio 4:3** — SUDAH JADI
 > Buatkan ilustrasi buku cerita anak, rasio 4:3, latar rawa yang sama: **kancil
 > berdiri di atas batu kecil sambil memanggil, dan dari arah hutan datang
 > rombongan hewan yang mau menolong**. Kancil di depan kiri, **kepala mendongak,
@@ -343,7 +357,7 @@ ulang `kancil-rawa` juga** (prompt penggantinya ada di akhir bagian ini).
 > wajah bersemangat dan ramah. Gajah yang terjebak lumpur terlihat samar di latar
 > belakang kanan. Suasananya ramai dan penuh semangat gotong royong.
 
-**3. `kancil-gajah-ranting` — rasio 16:9**
+**3. `kancil-gajah-ranting` — rasio 16:9** — SUDAH JADI
 > Buatkan ilustrasi buku cerita anak, rasio 16:9 (mendatar lebar), latar rawa yang
 > sama: **kancil dan teman-temannya berdiri di tepi lumpur sambil memandangi
 > tumpukan ranting dan daun besar yang sudah mereka kumpulkan**. Di tengah bawah
@@ -352,7 +366,7 @@ ulang `kancil-rawa` juga** (prompt penggantinya ada di akhir bagian ini).
 > kanan terlihat basah dan licin mengilap**, dengan gajah masih terbenam di sana.
 > Semua hewan berwajah serius tapi ceria — mereka sedang menyiapkan rencana.
 
-**4. `kancil-gajah-tarik` — rasio 4:3**
+**4. `kancil-gajah-tarik` — rasio 4:3** — SUDAH JADI
 > Buatkan ilustrasi buku cerita anak, rasio 4:3, latar rawa yang sama: **semua hewan
 > menarik gajah bersama-sama keluar dari lumpur**. Ranting dan daun sudah
 > **dihamparkan di atas lumpur sebagai alas** supaya tidak licin. Kerbau menarik di
@@ -362,15 +376,57 @@ ulang `kancil-rawa` juga** (prompt penggantinya ada di akhir bagian ini).
 > menegang tapi tetap tersenyum — ini adegan kerja sama, bukan adegan panik.
 > Percikan lumpur kecil di sekitar.
 
-**5. `kancil-gajah-selamat` — rasio 4:3**
-> Buatkan ilustrasi buku cerita anak, rasio 4:3, latar rawa yang sama: **gajah sudah
-> berdiri di tanah kering dan semua hewan bersorak gembira**. Gajah di tengah,
-> **berdiri tegak dengan belalai terangkat tinggi kegirangan**, badannya masih
-> berbercak lumpur. Kancil kecil berdiri di depannya, **kaki terangkat, wajah
-> gembira**; kerbau, rusa dan hewan-hewan lain mengelilingi sambil tersenyum.
-> Matahari pagi bersinar hangat menembus pepohonan, air rawa berkilau di belakang.
-> Suasananya lega dan bahagia — ini halaman penutup cerita. **Tanpa teks, tanpa
-> konfeti, tanpa bintang berkilau berlebihan.**
+**5. `kancil-gajah-selamat` — rasio 4:3** — BELUM JADI
+
+⚠️ **Versi pertama prompt ini DITOLAK Gemini** (2026-09-03): *"Saya tidak dapat
+membuat gambar yang Anda minta saat ini karena adanya kepentingan dari penyedia
+konten pihak ketiga."* Itu filter hak cipta karakter, bukan filter keamanan.
+Tiga dugaan pemicunya, dari yang paling kuat:
+
+1. **Gambar rujukan yang dilampirkan.** Rusa-rusa kecil bertotol di
+   `kancil-gajah-tarik.webp` terbaca mirip karakter film rusa yang terkenal.
+   Lampirkan **`kancil-gajah-tanya.webp`** saja — isinya cuma pelanduk + gajah.
+2. **Kalimat "ikuti gaya dan karakternya persis"** di BLOK GAYA lama. Sudah
+   diganti di atas jadi "jaga agar … tetap konsisten".
+3. **Komposisi penutupnya**: gajah berbelalai terangkat tinggi dikelilingi hewan
+   hutan yang bersorak — sangat dekat dengan beberapa adegan film animasi terkenal.
+   Versi baru di bawah sengaja **tenang, bukan pesta**.
+
+**Prompt pengganti** (chat BARU, lampirkan `kancil-gajah-tanya.webp` saja):
+
+> Buatkan ilustrasi halaman buku bacaan anak Indonesia, rasio 4:3 mendatar. Semua
+> tokohnya **karakter orisinal**, bukan tokoh dari film, kartun, atau buku mana pun.
+>
+> Adegan: **seekor gajah Asia sudah keluar dari lumpur dan berdiri di tanah kering
+> di tepi rawa.** Kulitnya masih berbercak lumpur coklat yang mengering, keempat
+> kakinya menapak tanah, kepalanya menunduk sedikit ke arah seekor **pelanduk
+> (mouse-deer) kecil** bertubuh coklat muda berperut putih, **tanpa tanduk, tanpa
+> aksesori**, yang berdiri di depannya. Belalai gajah turun santai menyentuh tanah
+> di dekat pelanduk itu.
+>
+> Di sisi kiri, seekor **kerbau air abu-abu bertanduk melengkung** dan seekor
+> **rusa coklat dewasa** berdiri tenang menonton. Di tanah masih tergeletak
+> ranting-ranting kayu dan daun pisang bekas alas.
+>
+> Latar: rawa hutan tropis Indonesia, air berteratai merah muda di kejauhan, pohon
+> kelapa, kabut pagi tipis, cahaya hangat.
+>
+> Nada gambarnya **tenang dan lega, bukan pesta** — semua hewan berekspresi kalem
+> dengan senyum kecil. Cat digital lembut, garis luar tipis, shading halus.
+>
+> Tanpa teks, tanpa bingkai, tanpa vignette, tanpa efek kilau, tanpa konfeti.
+
+**Kalau masih ditolak, turunkan bertahap** (jangan mengulang prompt yang sama):
+
+- **Langkah 2** — kirim ulang **tanpa melampirkan gambar apa pun**. Prompt di atas
+  sudah menyebut ciri tiap tokoh, jadi hasilnya tetap nyambung dengan yang lain.
+- **Langkah 3** — buang kerbau & rusanya, sisakan **gajah + pelanduk saja**.
+  Makin sedikit hewan hutan yang berkumpul, makin jauh dari adegan film yang
+  dikenali filternya.
+
+**Kalau ketiganya buntu, hentikan saja** — halaman penutup boleh tetap beremoji,
+tidak ada yang rusak di app. Lihat komentarnya di `cerita-kancil.ts`: kalimat
+penutup itu pesan moral, bukan adegan, jadi gambar apa pun di sana nilainya kecil.
 
 ### (Opsional) Menggambar ulang `kancil-rawa` supaya kancilnya konsisten
 
@@ -410,6 +466,37 @@ ulang `kancil-rawa` juga** (prompt penggantinya ada di akhir bagian ini).
 
 ---
 
+## Kalau Gemini menolak: *"kepentingan dari penyedia konten pihak ketiga"*
+
+Itu **filter hak cipta karakter**, bukan filter keamanan — jadi tak ada gunanya
+mengulang prompt yang sama atau membujuknya. Yang menggeser hasilnya, berurutan
+dari yang paling kuat:
+
+1. **Kurangi/ganti lampiran.** Rujukan yang memuat hewan mirip karakter film
+   terkenal (rusa kecil bertotol, singa, gajah kecil bertelinga besar) adalah
+   pemicu paling sering — filternya menilai gambar lampirannya, bukan cuma teks.
+   Pilih rujukan yang tokohnya paling "biasa", atau kirim tanpa lampiran sama
+   sekali dan gantikan dengan deskripsi ciri tokohnya.
+2. **Jangan minta meniru gaya.** "Ikuti gayanya persis", "buat seperti gambar ini",
+   "gaya studio X" — semuanya berbunyi seperti permintaan menyalin. Ganti dengan
+   "jaga agar warna dan bentuk tokohnya tetap konsisten".
+3. **Tulis "karakter orisinal, bukan tokoh dari film, kartun, atau buku mana pun"**
+   di kalimat pertama prompt.
+4. **Jauhkan komposisinya dari adegan film yang ikonik.** Rombongan hewan hutan
+   bersorak mengelilingi satu tokoh, hewan berbaris di padang, hewan yang diangkat
+   tinggi-tinggi — semuanya rawan. Versi yang tenang biasanya lolos.
+5. **Buka chat baru.** Konteks chat yang sudah panjang (banyak gambar hewan
+   sebelumnya) menaikkan peluang tertolak walau promptnya sendiri aman.
+6. **Kurangi jumlah tokoh** di adegannya. Dua hewan hampir selalu lolos; lima
+   hewan berkumpul jauh lebih rawan.
+
+Kalau tetap buntu, **berhenti dan biarkan halamannya beremoji** — halaman cerita
+tanpa `art` tetap jalan tanpa error. Jangan mengganti kalimat ceritanya supaya
+lebih mudah digambar: kunci file suara = hash isi kalimat, dan itu berarti render
+ulang narasi.
+
+---
+
 ## Setelah Gambarnya Terkumpul: yang saya kerjakan
 
 Catatan untuk saya sendiri — pemilik tidak perlu melakukan apa pun.
@@ -439,11 +526,11 @@ Catatan untuk saya sendiri — pemilik tidak perlu melakukan apa pun.
    | | ular mendekat (keputusan) | 🐍 | `ask({ art: 'jalak-kerbau-ular', emoji: '🐍' }, …)` |
    | | kerbau menjauh | 🏃 | `art('jalak-kerbau-lari')` |
    | | penutup | ⭐ | `art('jalak-kerbau-sahabat')` |
-   | Kancil dan Gajah | keputusan menolong | 🤔 | `ask({ art: 'kancil-gajah-pikir', emoji: '🤔' }, …)` |
-   | | teman-teman datang | 🐃 | `art('kancil-gajah-teman')` |
+   | Kancil dan Gajah | keputusan menolong | 🤔 | `ask({ art: 'kancil-gajah-tanya', emoji: '🤔' }, …)` |
+   | | teman-teman datang | 🐃 | `art('kancil-gajah-panggil')` |
    | | ranting & daun (keputusan) | 🌿 | `ask({ art: 'kancil-gajah-ranting', emoji: '🌿' }, …)` |
    | | menarik bersama | 💪 | `art('kancil-gajah-tarik')` |
-   | | penutup | ⭐ | `art('kancil-gajah-selamat')` |
+   | | penutup | ⭐ | — tetap emoji sampai `kancil-gajah-selamat` ada |
 
 3. **Rapikan `kancil-rawa` & `gajah-lumpur`.** Dua ilustrasi adegan itu sekarang
    terdaftar di registry **benda** (`src/engine/ui/items.ts`) dan dipakai lewat
