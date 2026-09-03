@@ -1187,6 +1187,48 @@
   font-size: 17px;
 }
 
+/* Cerita yang belum dibuka ("segera hadir"). Bentuknya sengaja SAMA dengan
+   kartu biasa — anak mengenali judulnya di tempat yang sama nanti — hanya
+   bahannya yang berubah: garis putus-putus, tanpa bayangan terangkat, dan
+   isinya diredupkan. Bayangan `.btn` dihapus supaya kartunya terbaca "rata,
+   belum bisa ditekan" bahkan sebelum jarinya menyentuh. */
+.pick-card--soon {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: none;
+  border: 2px dashed rgba(0, 0, 0, 0.16);
+  cursor: default;
+}
+
+/* `.btn:active` menurunkan kartunya 4px saat ditekan. Tombol yang disabled
+   tidak akan kena :active di desktop, tapi di WebView Android sentuhan tetap
+   bisa memicunya — dimatikan supaya kartu mati benar-benar tidak bergerak. */
+.pick-card--soon:active {
+  transform: none;
+  box-shadow: none;
+}
+
+.pick-card--soon .pick-card__pic,
+.pick-card--soon .pick-card__label,
+.pick-card--soon .pick-card__stars {
+  opacity: 0.42;
+}
+
+/* Gembok di posisi tombol 🔊 kartu aktif: satu titik yang sama, jadi
+   perbedaannya (bisa didengar vs terkunci) langsung terbaca berdampingan. */
+.pick-card__soon {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  opacity: 0.55;
+}
+
 /* Path trace (susuri jalan) — jalan raya yang diikuti jari anak */
 .road-stage {
   position: relative;

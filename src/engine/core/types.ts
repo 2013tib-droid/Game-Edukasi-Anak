@@ -354,6 +354,14 @@ export interface LevelCard {
   emoji?: string;
   /** Item id (registry `src/engine/ui/items.ts`) — art instead of the emoji. */
   item?: string;
+  /**
+   * Kartu tampil TAPI belum bisa dimainkan ("segera hadir"): redup, bergembok,
+   * tidak bisa ditekan. Dipakai saat isinya sudah ditulis tapi tampilannya
+   * belum digarap — anak tetap melihat judulnya, jadi jelas ceritanya menyusul
+   * dan bukan hilang. Levelnya SENGAJA tetap ada di `levels`: id dan bintang
+   * yang sudah terkumpul tidak ikut hilang saat kartunya dibuka lagi nanti.
+   */
+  soon?: boolean;
 }
 
 /**

@@ -1,9 +1,11 @@
-import type { GameConfig, GameLevel, SceneId, StoryPage } from '@/engine/core/types';
+import type { GameConfig, GameLevel, LevelCard, SceneId, StoryPage } from '@/engine/core/types';
 
 /**
  * "Baca Cerita" (SD Kelas 1 & 2) — cerita pendek dengan titik pilihan; anak
  * mendengarkan jalan ceritanya lalu memilih apa yang sebaiknya dilakukan
- * tokohnya. Sembilan cerita, anak memilih sendiri judulnya.
+ * tokohnya. Sembilan cerita, anak memilih sendiri judulnya — per 2026-09-03
+ * baru tiga yang aktif, enam sisanya kartunya `soon` (lihat `config.levels`
+ * di bawah).
  *
  * RIWAYAT NAMA — dulu "Cerita Si Kancil" (satu cerita), lalu "Cerita Anak"
  * (2026-08-09), dan sejak 2026-09-02 "Baca Cerita" setelah game terpisah
@@ -99,11 +101,13 @@ function ask(
  *   gambar, bukan emoji), kalau tidak `emoji` yang dipakai,
  * - `narration` = kalimat lengkap yang diucapkan saat cerita dimulai dan saat
  *   anak menekan 🔊 di kartunya — JANGAN diubah tanpa alasan, kunci file
- *   suaranya berasal dari isi kalimat ini.
+ *   suaranya berasal dari isi kalimat ini,
+ * - `card.soon` = kartunya tampil tapi mati ("segera hadir"); ceritanya tetap
+ *   lengkap di sini, tinggal hapus barisnya untuk membukanya.
  */
 function story(
   id: string,
-  card: { label: string; emoji?: string; item?: string },
+  card: LevelCard,
   narration: string,
   ...pages: StoryPage[]
 ): GameLevel<'story-choice'> {
@@ -225,7 +229,7 @@ const GAJAH = story(
 
 const GEMBALA = story(
   'n1',
-  { label: 'Anak Gembala dan Serigala', emoji: '🐑' },
+  { label: 'Anak Gembala dan Serigala', emoji: '🐑', soon: true },
   'Anak Gembala dan Serigala. Ayo bantu dia mengambil keputusan!',
   at('padang', page('🧒', 'Seorang anak gembala menjaga domba-dombanya di padang rumput.')),
   page('🐑', 'Hari itu sepi sekali. Anak gembala merasa bosan.'),
@@ -251,7 +255,7 @@ const GEMBALA = story(
 
 const UANG = story(
   'n4',
-  { label: 'Dompet di Jalan', emoji: '👛' },
+  { label: 'Dompet di Jalan', emoji: '👛', soon: true },
   'Dompet di Jalan. Ayo bantu Rani memilih!',
   at('kota', page('👧', 'Rani berjalan pulang dari sekolah.')),
   page('👛', 'Di trotoar, Rani menemukan sebuah dompet berisi uang.'),
@@ -269,7 +273,7 @@ const UANG = story(
 
 const SEMUT = story(
   'n2',
-  { label: 'Semut dan Belalang', emoji: '🐜' },
+  { label: 'Semut dan Belalang', emoji: '🐜', soon: true },
   'Semut dan Belalang. Ayo ikuti ceritanya!',
   at('kebun', page('🐜', 'Di musim panas, semut-semut sibuk mengumpulkan makanan.')),
   page('🦗', 'Belalang malah bernyanyi seharian. "Untuk apa bekerja? Makanan masih banyak!" katanya.'),
@@ -295,7 +299,7 @@ const SEMUT = story(
 
 const KURA = story(
   'n5',
-  { label: 'Kura-kura dan Kelinci', emoji: '🐢' },
+  { label: 'Kura-kura dan Kelinci', emoji: '🐢', soon: true },
   'Kura-kura dan Kelinci. Ayo ikuti lombanya!',
   at('hutan', page('🐢', 'Kura-kura berjalan pelan. Kelinci selalu menertawakannya.')),
   page('🐰', '"Ayo lomba lari!" tantang kelinci. Kura-kura menerima tantangan itu.'),
@@ -318,7 +322,7 @@ const KURA = story(
 
 const TIMUN = story(
   'n3',
-  { label: 'Timun Mas', emoji: '🥒' },
+  { label: 'Timun Mas', emoji: '🥒', soon: true },
   'Timun Mas. Ayo bantu Timun Mas pulang dengan selamat!',
   at('kebun', page('👵', 'Mbok Srini merawat seorang anak perempuan bernama Timun Mas.')),
   page('👹', 'Suatu hari, raksasa datang menagih janji. Timun Mas harus lari!'),
@@ -346,7 +350,7 @@ const BAWANG = story(
   'n6',
   // 💎 = perhiasan di dalam labu, adegan yang paling diingat anak. Emoji labu
   // 🎃 sengaja TIDAK dipakai: di HP bentuknya labu Halloween berwajah ukiran.
-  { label: 'Bawang Putih', emoji: '💎' },
+  { label: 'Bawang Putih', emoji: '💎', soon: true },
   'Bawang Putih yang Baik Hati. Ayo ikuti ceritanya!',
   at('kebun', page('👧', 'Bawang Putih rajin membantu pekerjaan rumah setiap hari.')),
   at('sungai', page('🏞️', 'Saat mencuci di sungai, bajunya hanyut terbawa arus.')),
@@ -386,6 +390,12 @@ const config: GameConfig<'story-choice'> = {
   // Anak memilih sendiri ceritanya — kesembilan judul tampil sebagai kartu
   // begitu game dibuka. Satu cerita sudah cukup panjang untuk sekali duduk,
   // jadi tidak ada `sessionLevels`: satu pilihan = satu cerita.
+  //
+  // 2026-09-03, permintaan pemilik: baru TIGA cerita yang aktif (`l1`-`l3`,
+  // fabel Kancil termasuk Jalak dan Kerbau) selagi tampilan ceritanya
+  // dipercantik. Enam cerita rakyat `n1`-`n6` ditandai `soon` di kartunya —
+  // isinya utuh dan tetap ada di `levels`, hanya kartunya yang dimatikan,
+  // jadi membukanya lagi nanti = menghapus satu `soon: true`.
   chooseLevel: { title: 'Pilih ceritamu!', again: '📗 Pilih Cerita Lain' },
   // Fabel Kancil dulu (`l1`-`l3`, cerita asli game ini), lalu cerita rakyat &
   // fabel klasik (`n1`-`n6`) dalam urutan berpasangan menurut pesan moralnya:

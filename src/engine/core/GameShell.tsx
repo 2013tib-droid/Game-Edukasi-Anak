@@ -279,11 +279,18 @@ export default function GameShell({
             const card = lv.card;
             const label = card?.label ?? lv.narration;
             const stars = getLevelStars(config.id, lv.id);
+            // Cerita yang tampilannya belum digarap: kartunya tetap terlihat
+            // supaya anak tahu judulnya menyusul, tapi mati total — tidak bisa
+            // ditekan, dan tombol 🔊-nya diganti gembok supaya tidak ada satu
+            // pun bagian kartu yang memberi respons dan bikin salah harap.
+            const soon = card?.soon === true;
             return (
               <button
                 key={lv.id}
                 type="button"
-                className="btn pick-card"
+                className={`btn pick-card${soon ? ' pick-card--soon' : ''}`}
+                disabled={soon}
+                aria-label={soon ? `${label} — segera hadir` : undefined}
                 onClick={() => handlePick(i)}
               >
                 <span className="pick-card__pic" aria-hidden>
@@ -298,28 +305,36 @@ export default function GameShell({
                   {'⭐'.repeat(stars)}
                   {'☆'.repeat(3 - stars)}
                 </span>
-                {/* Reading is not assumed: this replays the level's own
-                    narration line — already recorded, so no new audio. */}
-                <span
-                  className="pick-card__speak"
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`Dengarkan ${label}`}
-                  onClick={(e) => {
-                    // Listening must not count as choosing.
-                    e.stopPropagation();
-                    sfx('tap');
-                    speak(lv.narration);
-                  }}
-                  onKeyDown={(e) => {
-                    if (e.key !== 'Enter' && e.key !== ' ') return;
-                    e.stopPropagation();
-                    e.preventDefault();
-                    speak(lv.narration);
-                  }}
-                >
-                  🔊
-                </span>
+                {/* Reading is not assumed: 🔊 replays the level's own
+                    narration line — already recorded, so no new audio. A
+                    level that is not open yet gets a padlock in the same
+                    corner instead: nothing on the card responds. */}
+                {soon ? (
+                  <span className="pick-card__soon" aria-hidden>
+                    🔒
+                  </span>
+                ) : (
+                  <span
+                    className="pick-card__speak"
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Dengarkan ${label}`}
+                    onClick={(e) => {
+                      // Listening must not count as choosing.
+                      e.stopPropagation();
+                      sfx('tap');
+                      speak(lv.narration);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key !== 'Enter' && e.key !== ' ') return;
+                      e.stopPropagation();
+                      e.preventDefault();
+                      speak(lv.narration);
+                    }}
+                  >
+                    🔊
+                  </span>
+                )}
               </button>
             );
           })}
