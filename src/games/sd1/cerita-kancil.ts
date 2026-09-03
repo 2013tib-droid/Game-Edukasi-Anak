@@ -3,8 +3,8 @@ import type { GameConfig, GameLevel, LevelCard, SceneId, StoryPage } from '@/eng
 /**
  * "Baca Cerita" (SD Kelas 1 & 2) — cerita pendek dengan titik pilihan; anak
  * mendengarkan jalan ceritanya lalu memilih apa yang sebaiknya dilakukan
- * tokohnya. Sembilan cerita, anak memilih sendiri judulnya — per 2026-09-03
- * baru tiga yang aktif, enam sisanya kartunya `soon` (lihat `config.levels`
+ * tokohnya. Delapan cerita, anak memilih sendiri judulnya — per 2026-09-03
+ * baru tiga yang aktif, lima sisanya kartunya `soon` (lihat `config.levels`
  * di bawah).
  *
  * RIWAYAT NAMA — dulu "Cerita Si Kancil" (satu cerita), lalu "Cerita Anak"
@@ -97,14 +97,12 @@ function ask(
 /**
  * Satu cerita = satu level = satu kartu di layar pemilih.
  * - `label` = judul pendek di kartu ("Kancil dan Gajah"),
- * - `art` = SAMPUL kartu: satu ilustrasi adegan dari `public/assets/story/`,
- *   dirender selebar kartu seperti sampul buku. Yang dipakai sekarang adalah
- *   gambar yang sudah ada dari cerita itu sendiri — adegan yang paling
- *   menceritakan judulnya DAN tokohnya paling di tengah, karena sampulnya
- *   dipotong mengikuti kotak 16:9 (lihat `LevelCard.art`). Sampul khusus
- *   (yang memang digambar sebagai sampul) menyusul lewat
- *   `docs/prompt-gambar-judul-cerita.md`; enam cerita `soon` belum punya
- *   gambar sama sekali, jadi kartunya masih emoji,
+ * - `art` = SAMPUL kartu: satu gambar dari `public/assets/story/`, dirender
+ *   selebar kartu seperti sampul buku dan dipotong mengikuti kotak 16:9
+ *   (lihat `LevelCard.art`). `sampul-*` = gambar yang memang dibuat sebagai
+ *   sampul lewat `docs/prompt-gambar-judul-cerita.md`. Per 2026-09-03 KEDELAPAN
+ *   cerita sudah punya sampul sendiri (`sampul-*`), jadi tak ada lagi yang
+ *   meminjam ilustrasi halaman atau memakai emoji di kartunya,
  * - `pic` = id item registry kalau seninya ada (aturan proyek: hewan pakai
  *   gambar, bukan emoji), kalau tidak `emoji` yang dipakai — keduanya kini
  *   jadi cadangan kalau `art` tak ada atau filenya gagal dimuat,
@@ -132,7 +130,7 @@ function story(
  */
 const KANCIL = story(
   'l1',
-  { label: 'Kancil dan Pak Tani', emoji: '🦌', art: 'kancil-tani-lapar' },
+  { label: 'Kancil dan Pak Tani', emoji: '🦌', art: 'sampul-kancil-tani' },
   'Si Kancil berjalan di hutan. Perutnya lapar sekali. Ayo bantu Kancil mencari makan!',
   at(
     'hutan',
@@ -177,7 +175,7 @@ const KANCIL = story(
 
 const JALAK = story(
   'l2',
-  { label: 'Jalak dan Kerbau', item: 'jalak', art: 'jalak-kerbau' },
+  { label: 'Jalak dan Kerbau', item: 'jalak', art: 'sampul-jalak-kerbau' },
   'Burung Jalak dan Kerbau. Ayo ikuti ceritanya!',
   // `at('sawah')` TETAP di halaman pertama walau keempat halaman awal sudah
   // berilustrasi — kebalikan dari "Kancil dan Gajah". Di cerita ini latar
@@ -230,7 +228,7 @@ const JALAK = story(
 
 const GAJAH = story(
   'l3',
-  { label: 'Kancil dan Gajah', item: 'elephant', art: 'kancil-gajah-panggil' },
+  { label: 'Kancil dan Gajah', item: 'elephant', art: 'sampul-kancil-gajah' },
   'Kancil dan Gajah. Ayo bantu Kancil menolong temannya!',
   // Dua halaman pembuka ini SENGAJA tanpa `at()`: ilustrasinya (kiriman
   // pemilik, 2026-08-10) sudah membawa rawanya sendiri — hutan, air, dan
@@ -282,7 +280,7 @@ const GAJAH = story(
 
 const GEMBALA = story(
   'n1',
-  { label: 'Anak Gembala dan Serigala', emoji: '🐑', soon: true },
+  { label: 'Anak Gembala dan Serigala', emoji: '🐑', art: 'sampul-gembala', soon: true },
   'Anak Gembala dan Serigala. Ayo bantu dia mengambil keputusan!',
   at('padang', page('🧒', 'Seorang anak gembala menjaga domba-dombanya di padang rumput.')),
   page('🐑', 'Hari itu sepi sekali. Anak gembala merasa bosan.'),
@@ -306,27 +304,10 @@ const GEMBALA = story(
   page('⭐', 'Domba-domba selamat. Jujur membuat kita dipercaya!'),
 );
 
-const UANG = story(
-  'n4',
-  { label: 'Dompet di Jalan', emoji: '👛', soon: true },
-  'Dompet di Jalan. Ayo bantu Rani memilih!',
-  at('kota', page('👧', 'Rani berjalan pulang dari sekolah.')),
-  page('👛', 'Di trotoar, Rani menemukan sebuah dompet berisi uang.'),
-  ask(
-    '🤔',
-    'Apa yang sebaiknya Rani lakukan dengan dompet itu?',
-    'Menyerahkannya kepada guru atau satpam',
-    ['Menyimpannya untuk jajan', 'Uang itu milik orang lain yang pasti sedang mencarinya. Coba pilih yang lain!'],
-    ['Membiarkannya di jalan', 'Kalau dibiarkan, dompetnya bisa hilang. Ada cara yang lebih baik!'],
-  ),
-  page('👮', 'Rani menyerahkan dompet itu kepada satpam sekolah.'),
-  page('🧑', 'Tak lama, seorang bapak datang mencari dompetnya. Wajahnya lega sekali.'),
-  page('⭐', '"Terima kasih, Rani. Kamu anak yang jujur," kata bapak itu.'),
-);
 
 const SEMUT = story(
   'n2',
-  { label: 'Semut dan Belalang', emoji: '🐜', soon: true },
+  { label: 'Semut dan Belalang', emoji: '🐜', art: 'sampul-semut-belalang', soon: true },
   'Semut dan Belalang. Ayo ikuti ceritanya!',
   at('kebun', page('🐜', 'Di musim panas, semut-semut sibuk mengumpulkan makanan.')),
   page('🦗', 'Belalang malah bernyanyi seharian. "Untuk apa bekerja? Makanan masih banyak!" katanya.'),
@@ -352,7 +333,7 @@ const SEMUT = story(
 
 const KURA = story(
   'n5',
-  { label: 'Kura-kura dan Kelinci', emoji: '🐢', soon: true },
+  { label: 'Kura-kura dan Kelinci', emoji: '🐢', art: 'sampul-kura-kelinci', soon: true },
   'Kura-kura dan Kelinci. Ayo ikuti lombanya!',
   at('hutan', page('🐢', 'Kura-kura berjalan pelan. Kelinci selalu menertawakannya.')),
   page('🐰', '"Ayo lomba lari!" tantang kelinci. Kura-kura menerima tantangan itu.'),
@@ -375,7 +356,7 @@ const KURA = story(
 
 const TIMUN = story(
   'n3',
-  { label: 'Timun Mas', emoji: '🥒', soon: true },
+  { label: 'Timun Mas', emoji: '🥒', art: 'sampul-timun-mas', soon: true },
   'Timun Mas. Ayo bantu Timun Mas pulang dengan selamat!',
   at('kebun', page('👵', 'Mbok Srini merawat seorang anak perempuan bernama Timun Mas.')),
   page('👹', 'Suatu hari, raksasa datang menagih janji. Timun Mas harus lari!'),
@@ -403,7 +384,7 @@ const BAWANG = story(
   'n6',
   // 💎 = perhiasan di dalam labu, adegan yang paling diingat anak. Emoji labu
   // 🎃 sengaja TIDAK dipakai: di HP bentuknya labu Halloween berwajah ukiran.
-  { label: 'Bawang Putih', emoji: '💎', soon: true },
+  { label: 'Bawang Putih', emoji: '💎', art: 'sampul-bawang-putih', soon: true },
   'Bawang Putih yang Baik Hati. Ayo ikuti ceritanya!',
   at('kebun', page('👧', 'Bawang Putih rajin membantu pekerjaan rumah setiap hari.')),
   at('sungai', page('🏞️', 'Saat mencuci di sungai, bajunya hanyut terbawa arus.')),
@@ -440,20 +421,25 @@ const config: GameConfig<'story-choice'> = {
   title: 'Baca Cerita',
   emoji: '📗',
   template: 'story-choice',
-  // Anak memilih sendiri ceritanya — kesembilan judul tampil sebagai kartu
+  // Anak memilih sendiri ceritanya — kedelapan judul tampil sebagai kartu
   // begitu game dibuka. Satu cerita sudah cukup panjang untuk sekali duduk,
   // jadi tidak ada `sessionLevels`: satu pilihan = satu cerita.
   //
   // 2026-09-03, permintaan pemilik: baru TIGA cerita yang aktif (`l1`-`l3`,
   // fabel Kancil termasuk Jalak dan Kerbau) selagi tampilan ceritanya
-  // dipercantik. Enam cerita rakyat `n1`-`n6` ditandai `soon` di kartunya —
+  // dipercantik. Lima cerita rakyat sisanya ditandai `soon` di kartunya —
   // isinya utuh dan tetap ada di `levels`, hanya kartunya yang dimatikan,
   // jadi membukanya lagi nanti = menghapus satu `soon: true`.
+  //
+  // 2026-09-03 sore, permintaan pemilik: cerita `n4` "Dompet di Jalan" DIHAPUS
+  // seluruhnya (bukan `soon`). Id `n4` sengaja TIDAK dipakai ulang oleh cerita
+  // lain — bintang lama yang tersimpan dengan id itu tinggal tak terpakai,
+  // tidak nyasar ke cerita yang salah.
   chooseLevel: { title: 'Pilih ceritamu!', again: '📗 Pilih Cerita Lain' },
   // Fabel Kancil dulu (`l1`-`l3`, cerita asli game ini), lalu cerita rakyat &
-  // fabel klasik (`n1`-`n6`) dalam urutan berpasangan menurut pesan moralnya:
-  // jujur & tanggung jawab, rajin & pantang menyerah, berani & baik hati.
-  levels: [KANCIL, JALAK, GAJAH, GEMBALA, UANG, SEMUT, KURA, TIMUN, BAWANG],
+  // fabel klasik (`n1`-`n3`, `n5`, `n6`) dalam urutan berpasangan menurut
+  // pesan moralnya: jujur, rajin & pantang menyerah, berani & baik hati.
+  levels: [KANCIL, JALAK, GAJAH, GEMBALA, SEMUT, KURA, TIMUN, BAWANG],
 };
 
 export default config;

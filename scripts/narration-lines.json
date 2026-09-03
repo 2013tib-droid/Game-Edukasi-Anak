@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-03",
-  "count": 770,
-  "chars": 34914,
+  "count": 752,
+  "chars": 34064,
   "lines": [
     {
       "key": "bba8e787ee7e",
@@ -100,15 +100,6 @@
       ]
     },
     {
-      "key": "d4083840ecfa",
-      "text": "\"Terima kasih, Rani. Kamu anak yang jujur,\" kata bapak itu.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
       "key": "9dec31ae1b5f",
       "text": "Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.",
       "scope": "cerita-kancil",
@@ -138,15 +129,6 @@
     {
       "key": "bab7231b05bd",
       "text": "Apa yang sebaiknya kerbau jawab?",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "335ba8d70934",
-      "text": "Apa yang sebaiknya Rani lakukan dengan dompet itu?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -280,15 +262,6 @@
       ]
     },
     {
-      "key": "9149000de207",
-      "text": "Di trotoar, Rani menemukan sebuah dompet berisi uang.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
       "key": "4f21f2d809ce",
       "text": "Dia ingin ada yang menemani. Apa yang sebaiknya dia lakukan?",
       "scope": "cerita-kancil",
@@ -300,15 +273,6 @@
     {
       "key": "b609ccf7f2a1",
       "text": "Domba-domba selamat. Jujur membuat kita dipercaya!",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "72495fd258fd",
-      "text": "Dompet di Jalan. Ayo bantu Rani memilih!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -372,15 +336,6 @@
     {
       "key": "78560690b748",
       "text": "Kalau diam, domba-dombanya dalam bahaya. Beranilah minta tolong!",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "5dcc0ca7be94",
-      "text": "Kalau dibiarkan, dompetnya bisa hilang. Ada cara yang lebih baik!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -838,15 +793,6 @@
       ]
     },
     {
-      "key": "297e4cf110ed",
-      "text": "Pilihan A. Membiarkannya di jalan",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
       "key": "8e82a322afe5",
       "text": "Pilihan A. Menarik gajah sendirian",
       "scope": "cerita-kancil",
@@ -903,24 +849,6 @@
     {
       "key": "fb1d12e58114",
       "text": "Pilihan A. Menyelesaikan pekerjaan dulu, baru bermain",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "d2160fe6eab5",
-      "text": "Pilihan A. Menyerahkannya kepada guru atau satpam",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "a6f82c4f5f4b",
-      "text": "Pilihan A. Menyimpannya untuk jajan",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1162,15 +1090,6 @@
       ]
     },
     {
-      "key": "1a83830fb3a2",
-      "text": "Pilihan B. Membiarkannya di jalan",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
       "key": "48f70fc50ec4",
       "text": "Pilihan B. Menarik gajah sendirian",
       "scope": "cerita-kancil",
@@ -1227,24 +1146,6 @@
     {
       "key": "ea75d6450085",
       "text": "Pilihan B. Menyelesaikan pekerjaan dulu, baru bermain",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "648b32086b99",
-      "text": "Pilihan B. Menyerahkannya kepada guru atau satpam",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "7c20e4431a90",
-      "text": "Pilihan B. Menyimpannya untuk jajan",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1324,35 +1225,8 @@
       ]
     },
     {
-      "key": "2c5def7af48b",
-      "text": "Pilihan C. Membiarkannya di jalan",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
       "key": "ec4d18bebc71",
       "text": "Pilihan C. Menarik gajah sendirian",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "3037d60895a4",
-      "text": "Pilihan C. Menyerahkannya kepada guru atau satpam",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "7881d1b3da1f",
-      "text": "Pilihan C. Menyimpannya untuk jajan",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1380,24 +1254,6 @@
     {
       "key": "cd44ed531d9a",
       "text": "Raksasa masih mengejar. Bungkusan terakhir berisi terasi. Sebaiknya Timun Mas bagaimana?",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "b3f56d16d129",
-      "text": "Rani berjalan pulang dari sekolah.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "e257f48b44b9",
-      "text": "Rani menyerahkan dompet itu kepada satpam sekolah.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1504,15 +1360,6 @@
       ]
     },
     {
-      "key": "60bbebfd4687",
-      "text": "Tak lama, seorang bapak datang mencari dompetnya. Wajahnya lega sekali.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
       "key": "1131758df8b8",
       "text": "Terasi berubah menjadi lautan lumpur. Raksasa tidak bisa lewat.",
       "scope": "cerita-kancil",
@@ -1560,15 +1407,6 @@
     {
       "key": "8c5458610eaa",
       "text": "Timun Mas. Ayo bantu Timun Mas pulang dengan selamat!",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "9d15b31eafbe",
-      "text": "Uang itu milik orang lain yang pasti sedang mencarinya. Coba pilih yang lain!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [

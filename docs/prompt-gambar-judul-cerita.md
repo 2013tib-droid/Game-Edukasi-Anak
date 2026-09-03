@@ -19,25 +19,33 @@ dokumen itu — yang berbeda cuma aturan komposisinya.
 
 ---
 
-## Keadaan sekarang (per 2026-09-03)
+## Keadaan sekarang (per 2026-09-03, sore) — SELESAI
 
-Ketiga cerita yang aktif **sudah punya sampul**, tapi sampulnya adalah
-ilustrasi halaman yang dipinjam — bukan gambar yang memang dibuat sebagai
-sampul:
+**Semua cerita sudah punya sampulnya sendiri.** Delapan gambar kiriman pemilik
+hari ini sudah diperkecil ke 640px dan terpasang di config:
 
-| Level | Judul | Sampul sekarang | Perlu sampul sendiri? |
-|---|---|---|---|
-| `l1` | Kancil dan Pak Tani | `kancil-tani-lapar` (halaman 1) | opsional — sudah bagus, tokohnya besar & di tengah |
-| `l2` | Jalak dan Kerbau | `jalak-kerbau` (halaman 2) | opsional — dua tokohnya utuh & di tengah |
-| `l3` | Kancil dan Gajah | `kancil-gajah-panggil` (halaman 4) | **ya** — kancil & gajah ada, tapi keduanya kecil dan gajahnya nyaris di tepi |
-| `n1`–`n6` | enam cerita rakyat | **tidak ada** (emoji + kartu `soon`) | **ya, semuanya** |
+| Level | Judul | Sampul |
+|---|---|---|
+| `l1` | Kancil dan Pak Tani | `sampul-kancil-tani` |
+| `l2` | Jalak dan Kerbau | `sampul-jalak-kerbau` |
+| `l3` | Kancil dan Gajah | `sampul-kancil-gajah` |
+| `n1` | Anak Gembala dan Serigala | `sampul-gembala` |
+| `n2` | Semut dan Belalang | `sampul-semut-belalang` |
+| `n3` | Timun Mas | `sampul-timun-mas` |
+| `n5` | Kura-kura dan Kelinci | `sampul-kura-kelinci` |
+| `n6` | Bawang Putih | `sampul-bawang-putih` |
 
-Enam cerita rakyat kartunya masih emoji (🐑 👛 🐜 🐢 🥒 💎). Kartunya memang
-sedang dimatikan (`card.soon`), tapi anak tetap melihatnya — dan emoji di
-sebelah tiga sampul lukisan terlihat seperti kartu yang belum jadi.
+Tak ada lagi kartu beremoji dan tak ada lagi ilustrasi halaman yang dipinjam
+jadi sampul. `n1`-`n3`, `n5`, `n6` tetap `soon` (redup + gembok): sampulnya
+sudah ada, ceritanya yang belum dibuka.
 
-**Boleh dikirim sebagian.** Cerita yang belum punya sampul tetap jalan dengan
-emoji/gambar item seperti sekarang, tanpa error apa pun di app.
+**`n4` "Dompet di Jalan" DIHAPUS** (permintaan pemilik 2026-09-03 sore) —
+ceritanya, 18 baris narasinya dan 18 file suaranya sudah dibuang, jadi
+`sampul-dompet` tidak perlu dibuat. Promptnya di bawah dicoret, tidak dihapus,
+supaya jelas ini keputusan dan bukan kelupaan.
+
+Dokumen ini tinggal jadi CATATAN: kalau nanti ada cerita baru, ikuti aturan
+komposisi & blok gaya di bawah dan tulis promptnya dengan pola yang sama.
 
 ---
 
@@ -114,7 +122,7 @@ halaman (`l1`–`l3`), **lampirkan salah satu ilustrasinya** supaya tokohnya
 konsisten — model jauh lebih patuh melihat contoh daripada membaca deskripsi
 gayanya.
 
-**1 · `l3` Kancil dan Gajah → `sampul-kancil-gajah`**
+**1 · `l3` Kancil dan Gajah → `sampul-kancil-gajah`** *(✅ sudah terpasang)*
 
 > Sampul: seekor **kancil** kecil bertubuh cokelat berbintik putih berdiri
 > tegak di sebelah kiri tengah, dan seekor **gajah** abu-abu berkaki
@@ -122,14 +130,14 @@ gayanya.
 > ramah. Latar rawa hutan tropis yang lembut dan agak kabur. Dua tokoh itu
 > mengisi dua pertiga tinggi gambar.
 
-**2 · `n1` Anak Gembala dan Serigala → `sampul-gembala`**
+**2 · `n1` Anak Gembala dan Serigala → `sampul-gembala`** *(✅ sudah terpasang)*
 
 > Sampul: seorang **anak laki-laki gembala** Indonesia bertopi jerami
 > tersenyum sambil memegang tongkat, dan seekor **domba putih** berdiri di
 > sebelahnya. Keduanya di tengah dan besar. Latar padang rumput hijau luas
 > dengan bukit lembut di kejauhan. Tanpa serigala.
 
-**3 · `n2` Semut dan Belalang → `sampul-semut-belalang`**
+**3 · `n2` Semut dan Belalang → `sampul-semut-belalang`** *(✅ sudah terpasang)*
 
 > Sampul: seekor **semut** merah menggendong sebutir biji-bijian di
 > punggungnya, dan seekor **belalang** hijau memegang sehelai daun seperti
@@ -137,43 +145,41 @@ gayanya.
 > tokoh utama, bukan serangga kecil di kejauhan. Latar kebun berumput hijau
 > yang lembut.
 
-**4 · `n3` Timun Mas → `sampul-timun-mas`**
+**4 · `n3` Timun Mas → `sampul-timun-mas`** *(✅ sudah terpasang)*
 
 > Sampul: seorang **anak perempuan Indonesia** berkebaya sederhana, rambut
 > hitam dikuncir, tersenyum sambil memeluk sebuah **timun besar berwarna
 > keemasan**. Ia di tengah gambar dan besar. Latar kebun timun hijau dengan
 > pondok kayu kecil yang kabur di kejauhan. Tanpa raksasa.
 
-**5 · `n4` Dompet di Jalan → `sampul-dompet`**
+**~~5 · `n4` Dompet di Jalan → `sampul-dompet`~~** *(DIBATALKAN — ceritanya dihapus 2026-09-03)*
 
 > Sampul: seorang **anak perempuan Indonesia** berseragam sekolah dasar
 > (atasan putih, rok merah) berdiri di tengah, menunduk memandang sebuah
 > **dompet kecil** yang tergeletak di trotoar di depan kakinya; wajahnya
 > berpikir dan ramah. Latar jalan kota kecil yang lembut dan kabur.
 
-**6 · `n5` Kura-kura dan Kelinci → `sampul-kura-kelinci`**
+**6 · `n5` Kura-kura dan Kelinci → `sampul-kura-kelinci`** *(✅ sudah terpasang)*
 
 > Sampul: seekor **kura-kura** bercangkang hijau kecokelatan dan seekor
 > **kelinci** putih berdiri berdampingan seperti di garis start, keduanya
 > tersenyum, di tengah gambar dan besar. Latar tepi hutan berumput hijau yang
 > lembut.
 
-**7 · `n6` Bawang Putih → `sampul-bawang-putih`**
+**7 · `n6` Bawang Putih → `sampul-bawang-putih`** *(✅ sudah terpasang)*
 
 > Sampul: seorang **anak perempuan Indonesia** berkain sederhana, rambut
 > disanggul, tersenyum lembut sambil membawa **bakul anyaman berisi cucian**
 > di pinggangnya. Ia di tengah gambar dan besar. Latar tepi sungai jernih
 > dengan pepohonan hijau yang kabur.
 
-**8 · `l1` Kancil dan Pak Tani → `sampul-kancil-tani`** *(opsional — sampul
-sekarang sudah bagus)*
+**8 · `l1` Kancil dan Pak Tani → `sampul-kancil-tani`** *(✅ sudah terpasang)*
 
 > Sampul: seekor **kancil** kecil bertubuh cokelat berbintik putih berdiri
 > tegak di tengah sambil menggigit sehelai daun timun, wajahnya cerdik dan
 > ramah. Latar kebun timun hijau yang lembut dan agak kabur.
 
-**9 · `l2` Jalak dan Kerbau → `sampul-jalak-kerbau`** *(opsional — sampul
-sekarang sudah bagus)*
+**9 · `l2` Jalak dan Kerbau → `sampul-jalak-kerbau`** *(✅ sudah terpasang)*
 
 > Sampul: seekor **kerbau** abu-abu gelap bertanduk melengkung berdiri di
 > tengah, dan seekor **burung jalak** berbadan hitam, berparuh & berkaki
@@ -198,9 +204,24 @@ dan besar, latar sederhana, tanpa teks, tanpa bingkai."*
    ```
 
    **640px, bukan 900px** seperti ilustrasi halaman: sampul cuma tampil
-   selebar ±220px, jadi 640 sudah ±3× dan filenya tinggal ±35 kB. Sembilan
-   sampul 900px akan menambah ±800 kB yang harus diunduh anak sebelum sempat
+   selebar ±220px, jadi 640 sudah ±3× dan filenya tinggal ±35 kB. Delapan
+   sampul 900px akan menambah ±700 kB yang harus diunduh anak sebelum sempat
    memilih cerita.
+
+   **Ukuran akhirnya HARUS 640×360 persis** (16:9 bulat), bukan 640×357 yang
+   keluar kalau kiriman aslinya sedikit lebih lebar: kotak sampulnya
+   `aspect-ratio: 16/9`, dan gambar yang rasionya beda dipotong sendiri oleh
+   `object-fit: cover` — potongannya tak bisa diatur dan tokoh yang mepet tepi
+   bisa hilang.
+
+   **Kalau ada ruang kosong di atas tokohnya, potong dulu bagian atas itu**
+   sebelum diperkecil (2026-09-03, laporan pemilik: tokohnya "kayak nyisa" di
+   kartu). Model gambar suka menyisakan langit/tajuk pohon 5–15% di atas
+   kepala; di kartu selebar 160px ruang itu terbaca sebagai bercak kosong.
+   Potong atasnya lalu ambil jendela 16:9 dari sisanya (lebarnya ikut menyusut,
+   dibagi rata kiri-kanan) — jangan menggencet gambarnya. Sisakan ±3% di atas
+   bagian tertinggi tokoh: antena, telinga, tanduk, dan topi jerami paling
+   sering terpotong.
 3. Saya pasang di config — satu kata per cerita:
    `{ label: 'Kancil dan Gajah', item: 'elephant', art: 'sampul-kancil-gajah' }`.
 4. Kalau ada cerita rakyat yang sekalian mau **dibuka** (tidak `soon` lagi),

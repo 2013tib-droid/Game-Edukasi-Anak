@@ -164,7 +164,6 @@ Aturan benda mati (sama dengan Batch 4 di `prompt-gambar-gemini.md`):
 |---|---|---|---|
 | `cucumber` | mentimun | Kancil dan Pak Tani · **Timun Mas** | Buatkan: satu buah mentimun hijau utuh memanjang dengan kulit bergaris hijau tua dan ujung bertangkai kecil, posisi diagonal, tanpa wajah. |
 | `pumpkin` | labu | Bawang Putih (labu hadiah) | Buatkan: satu buah labu oranye bulat gemuk dengan alur vertikal dan tangkai hijau pendek di atas, tanpa wajah, **bukan labu Halloween — tanpa ukiran wajah sama sekali**. |
-| `wallet` | dompet | Dompet di Jalan | Buatkan: satu dompet lipat kulit warna coklat tertutup, tampak depan, tanpa tulisan, tanpa wajah. |
 | `broom` | sapu | Bawang Putih (membersihkan rumah) | Buatkan: satu sapu ijuk tradisional dengan gagang kayu coklat dan bulu sapu warna coklat kehitaman, posisi diagonal, tanpa wajah. |
 
 `cucumber` paling berguna — dipakai **dua cerita** di dua game berbeda, dan
