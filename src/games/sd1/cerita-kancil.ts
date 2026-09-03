@@ -170,7 +170,20 @@ const JALAK = story(
   'l2',
   { label: 'Jalak dan Kerbau', item: 'jalak' },
   'Burung Jalak dan Kerbau. Ayo ikuti ceritanya!',
-  at('sawah', page('🐃', 'Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.')),
+  // `at('sawah')` TETAP di halaman pertama walau keempat halaman awal sudah
+  // berilustrasi — kebalikan dari "Kancil dan Gajah". Di cerita ini latar
+  // engine-nya SEPADAN dengan lukisannya (sama-sama sawah), dan mematikannya
+  // sudah pernah dicoba lalu dibatalkan: sekeliling panel jadi gradien pastel
+  // bawaan app yang bertabrakan dengan lukisan hijau-biru (lihat CLAUDE.md
+  // 2026-08-10). Latarnya berlaku sampai cerita selesai.
+  at(
+    'sawah',
+    art(
+      'jalak-kerbau-kubang',
+      '🐃',
+      'Kerbau berkubang di sawah. Punggungnya gatal karena banyak kutu.',
+    ),
+  ),
   art(
     'jalak-kerbau',
     '🐦',
@@ -188,13 +201,22 @@ const JALAK = story(
     'Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.',
   ),
   ask(
-    '🐍',
+    { art: 'jalak-kerbau-ular', emoji: '🐍' },
     'Dari atas, jalak melihat ular besar mendekat. Sebaiknya jalak bagaimana?',
     'Berteriak memberi tahu kerbau',
     ['Terbang pergi diam-diam', 'Kerbau sudah menolongnya. Teman tidak ditinggal saat bahaya. Coba lagi!'],
   ),
-  page('🏃', 'Kerbau cepat-cepat menjauh dari rawa. Ular itu pun pergi.'),
-  page('⭐', 'Sejak itu jalak dan kerbau selalu bersama. Saling menolong membuat keduanya senang!'),
+  art('jalak-kerbau-lari', '🏃', 'Kerbau cepat-cepat menjauh dari rawa. Ular itu pun pergi.'),
+  // Ilustrasi penutupnya bermandi cahaya SENJA sementara latar engine di
+  // belakangnya (`sawah`) tetap siang. Dibiarkan begitu: `malam` — satu-satunya
+  // latar bernuansa senja — langitnya lilac kebiruan dengan bulan sabit &
+  // bintang, jadi justru lebih bertabrakan dengan lukisan jingga ini daripada
+  // hijau sawah yang tempatnya memang sama.
+  art(
+    'jalak-kerbau-sahabat',
+    '⭐',
+    'Sejak itu jalak dan kerbau selalu bersama. Saling menolong membuat keduanya senang!',
+  ),
 );
 
 const GAJAH = story(
