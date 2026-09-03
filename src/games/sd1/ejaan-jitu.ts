@@ -122,7 +122,13 @@ const config: GameConfig<'spell'> = {
     // --- 8. Tempat ---
     slot(
       'l8',
-      word('PASAR', '🏪', 'pasar', ['U', 'M'], 'shop'),
+      // TOKO, bukan PASAR (keputusan pemilik 2026-09-03): seni `shop` itu satu
+      // warung beratap terpal — label registrinya 'toko', dan Jalan Kendaraan
+      // memakainya untuk "toko", "warung" & "toko besar". PASAR (los banyak
+      // lapak) butuh seninya sendiri; sampai ada, katanya mengikuti gambarnya.
+      // Sengaja bersebelahan dengan KOTA yang hurufnya sama diacak — aman,
+      // karena satu slot cuma menampilkan SATU varian per sesi.
+      word('TOKO', '🏪', 'toko', ['U', 'M'], 'shop'),
       // TAMAN, bukan KEBUN: seni `tree` itu SATU POHON (label registry-nya
       // memang 'pohon', dan Pasang Kata/Taman Huruf memakainya untuk kata
       // "pohon") — anak yang melihatnya membaca "pohon", bukan "kebun".

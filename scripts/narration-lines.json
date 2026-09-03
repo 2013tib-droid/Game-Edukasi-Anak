@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-03",
   "count": 752,
-  "chars": 34064,
+  "chars": 34063,
   "lines": [
     {
       "key": "bba8e787ee7e",
@@ -1693,15 +1693,6 @@
       ]
     },
     {
-      "key": "a3a7eabc6b8b",
-      "text": "Ini pasar. Ayo susun hurufnya jadi satu kata!",
-      "scope": "ejaan-jitu",
-      "voice": "gadis",
-      "games": [
-        "ejaan-jitu"
-      ]
-    },
-    {
       "key": "22ba321fefd9",
       "text": "Ini pena. Ayo susun hurufnya jadi satu kata!",
       "scope": "ejaan-jitu",
@@ -1848,6 +1839,15 @@
     {
       "key": "f2631727d1ea",
       "text": "Ini telur. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "voice": "gadis",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "e379bc905ff0",
+      "text": "Ini toko. Ayo susun hurufnya jadi satu kata!",
       "scope": "ejaan-jitu",
       "voice": "gadis",
       "games": [
