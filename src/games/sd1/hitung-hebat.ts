@@ -32,6 +32,20 @@ import { capitalize, rupiahWords, terbilang } from '@/games/numbers';
  * membuat satu sesi mengambil 10 dari 20 slot, diacak — separuh kolam jadi
  * CADANGAN tiap sesi, bukan dibuang.
  *
+ * **Diseimbangkan 50:50 gambar vs angka (2026-09-03, keluhan pemilik: "soal
+ * masih banyak yg hitung biasa, yg bergambar kurang banyak").** Dulu cuma 4
+ * dari 20 slot bergambar (`l1`, `l2`, `l6`, `l9`) — sisanya papan angka
+ * polos. Sekarang **10 bergambar : 10 angka**: `l3`, `l4`, `t1`, `t2`, `t4`,
+ * `t5` diganti isinya jadi `addPic`/`subPic`/`times`/`count` (id-nya
+ * dipertahankan, jadi bintang lama tetap terpakai walau soalnya beda).
+ * Angka di slot bergambar sengaja dijaga **≤11** (jumlah maksimum icon yang
+ * sudah teruji muat rapi di HP 360px tanpa scroll — lihat riwayat Hutan
+ * Hewan "papan 2–11 gambar"), jadi slot yang aslinya berangka besar (sampai
+ * 20/30) TIDAK diubah jadi gambar — ikonnya akan terlalu padat. Sisa 10
+ * slot angka (`l5`, `l7`, `l8`, `l10`, `t3`, `t6`, `t7`, `t8`, `t9`, `t10`)
+ * yang menanggung cakupan kurikulum bilangan besar: dua digit, membandingkan,
+ * deret, uang, dobel, puluhan, suku hilang, soal cerita.
+ *
  * Aturan yang dipatuhi (CLAUDE.md):
  *   - **BATAS BILANGAN 30** (keputusan pemilik 2026-08-01): bilangan maupun
  *     hasil hitungan tidak pernah lebih dari 30. Satu-satunya pengecualian
@@ -349,29 +363,29 @@ const config: MixedGameConfig = {
       subPic(PIC.monkey, 7, 5, [1, 3]),
       subPic(PIC.rabbit, 8, 5, [2, 4]),
     ),
-    // --- 3. Penjumlahan sampai 20 (angka saja) ---
+    // --- 3. Penjumlahan bergambar (hasil sampai 11) ---
     slot(
       'l3',
-      sum(8, 7, [14, 16]),
-      sum(9, 6, [14, 16]),
-      sum(7, 7, [13, 15]),
-      sum(12, 5, [16, 18]),
-      sum(9, 9, [17, 19]),
-      sum(13, 6, [18, 20]),
-      sum(11, 8, [18, 20]),
-      sum(6, 9, [14, 16]),
+      addPic(PIC.cat, 3, 4, [6, 8]),
+      addPic(PIC.goat, 5, 3, [7, 9]),
+      addPic(PIC.monkey, 4, 4, [6, 10]),
+      addPic(PIC.panda, 6, 3, [8, 10]),
+      addPic(PIC.chicken, 5, 4, [7, 11]),
+      addPic(PIC.frog, 4, 6, [8, 12]),
+      addPic(PIC.rabbit, 5, 5, [9, 11]),
+      addPic(PIC.duck, 6, 5, [9, 13]),
     ),
-    // --- 4. Pengurangan sampai 20 (angka saja) ---
+    // --- 4. Pengurangan bergambar (minuend sampai 11) ---
     slot(
       'l4',
-      minus(15, 6, [8, 10]),
-      minus(18, 9, [8, 10]),
-      minus(14, 7, [6, 8]),
-      minus(20, 8, [11, 13]),
-      minus(17, 5, [11, 13]),
-      minus(16, 9, [6, 8]),
-      minus(13, 4, [8, 10]),
-      minus(19, 7, [11, 13]),
+      subPic(PIC.chicken, 9, 3, [4, 8]),
+      subPic(PIC.frog, 10, 4, [5, 9]),
+      subPic(PIC.turtle, 8, 3, [3, 7]),
+      subPic(PIC.penguin, 11, 5, [4, 8]),
+      subPic(PIC.duck, 9, 6, [1, 5]),
+      subPic(PIC.cat, 10, 7, [2, 6]),
+      subPic(PIC.goat, 11, 4, [5, 9]),
+      subPic(PIC.monkey, 8, 5, [1, 5]),
     ),
     // --- 5. Bilangan dua digit (masih dalam batas 30) ---
     slot(
@@ -458,31 +472,31 @@ const config: MixedGameConfig = {
       money(5000, 5000, [5500, 15000]),
     ),
     // ===== Ported dari Tambah Tangkas (2026-09-03) — id awalan `t` =====
-    // --- t1. Jumlah kecil, hasil sampai 5 (pemanasan) ---
+    // --- t1. Jumlah kecil bergambar, hasil sampai 5 (pemanasan) ---
     slot(
       't1',
-      sumEq(1, 2, [2, 4]),
-      sumEq(2, 2, [3, 5]),
-      sumEq(2, 3, [4, 6]),
-      sumEq(3, 1, [3, 5]),
-      sumEq(1, 4, [4, 6]),
-      sumEq(2, 1, [4, 5]),
-      sumEq(3, 2, [6, 4]),
-      sumEq(4, 1, [6, 3]),
+      addPic(PIC.rabbit, 1, 2, [2, 4]),
+      addPic(PIC.duck, 2, 2, [3, 5]),
+      addPic(PIC.frog, 2, 3, [4, 6]),
+      addPic(PIC.cat, 3, 1, [3, 5]),
+      addPic(PIC.chicken, 1, 4, [4, 6]),
+      addPic(PIC.turtle, 2, 1, [4, 5]),
+      addPic(PIC.panda, 3, 2, [6, 4]),
+      addPic(PIC.penguin, 4, 1, [6, 3]),
     ),
-    // --- t2. Hasil sampai 10 ---
+    // --- t2. Hasil bergambar sampai 10 ---
     slot(
       't2',
-      sumEq(4, 4, [7, 9]),
-      sumEq(5, 3, [7, 9]),
-      sumEq(6, 2, [7, 9]),
-      sumEq(3, 6, [8, 10]),
-      sumEq(5, 5, [9, 11]),
-      sumEq(7, 2, [8, 10]),
-      sumEq(4, 5, [8, 10]),
-      sumEq(6, 4, [9, 11]),
-      sumEq(2, 7, [8, 10]),
-      sumEq(8, 1, [8, 10]),
+      addPic(PIC.goat, 4, 4, [7, 9]),
+      addPic(PIC.monkey, 5, 3, [7, 9]),
+      addPic(PIC.rabbit, 6, 2, [7, 9]),
+      addPic(PIC.duck, 3, 6, [8, 10]),
+      addPic(PIC.frog, 5, 5, [9, 11]),
+      addPic(PIC.cat, 7, 2, [8, 10]),
+      addPic(PIC.chicken, 4, 5, [8, 10]),
+      addPic(PIC.turtle, 6, 4, [9, 11]),
+      addPic(PIC.panda, 2, 7, [8, 10]),
+      addPic(PIC.penguin, 8, 1, [8, 10]),
     ),
     // --- t3. Bilangan kembar (dobel) — pola yang gampang diingat ---
     slot(
@@ -497,31 +511,43 @@ const config: MixedGameConfig = {
       sumEq(13, 13, [24, 28]),
       sumEq(15, 15, [25, 29]),
     ),
-    // --- t4. Menambah 10 dan 20 (nilai tempat) ---
+    // --- t4. Perkalian bergambar (kelompok kedua) ---
     slot(
       't4',
-      sumEq(10, 3, [12, 14]),
-      sumEq(10, 7, [16, 18]),
-      sumEq(10, 9, [18, 20]),
-      sumEq(10, 5, [14, 16]),
-      sumEq(20, 5, [15, 26]),
-      sumEq(20, 8, [18, 29]),
-      sumEq(20, 3, [13, 24]),
-      sumEq(20, 6, [16, 27]),
+      times(PIC.cat, 2, 3, [4, 8]),
+      times(PIC.goat, 3, 3, [6, 12]),
+      times(PIC.monkey, 2, 4, [6, 10]),
+      times(PIC.panda, 3, 2, [4, 8]),
+      times(PIC.cat, 4, 2, [6, 10]),
+      times(PIC.goat, 2, 5, [7, 12]),
     ),
-    // --- t5. Melewati sepuluh (menyimpan) ---
+    // --- t5. Hitung benda bergambar (kelompok kedua) ---
     slot(
       't5',
-      sumEq(7, 5, [11, 13]),
-      sumEq(8, 6, [13, 15]),
-      sumEq(9, 4, [12, 14]),
-      sumEq(6, 7, [12, 14]),
-      sumEq(8, 5, [12, 14]),
-      sumEq(9, 8, [16, 18]),
-      sumEq(7, 6, [12, 14]),
-      sumEq(9, 6, [14, 16]),
-      sumEq(8, 7, [14, 16]),
-      sumEq(5, 9, [13, 15]),
+      count({ emoji: '📖', label: 'buku', item: 'book' }, 5, 3, [
+        ['🔑', 2],
+        ['✏️', 2],
+      ]),
+      count({ emoji: '🔑', label: 'kunci', item: 'key' }, 7, 2, [
+        ['🧸', 2],
+        ['🎈', 3],
+      ]),
+      count({ emoji: '☂️', label: 'payung', item: 'umbrella' }, 6, 3, [
+        ['👟', 2],
+        ['🎈', 2],
+      ]),
+      count({ emoji: '👟', label: 'sepatu', item: 'shoe' }, 8, 2, [
+        ['🌸', 3],
+        ['🎈', 2],
+      ]),
+      count({ emoji: '🧸', label: 'boneka', item: 'teddy' }, 9, 2, [
+        ['🎈', 3],
+        ['⭐', 2],
+      ]),
+      count({ emoji: '🥚', label: 'telur', item: 'egg' }, 6, 3, [
+        ['🍞', 2],
+        ['🥛', 2],
+      ]),
     ),
     // --- t6. Bilangan bulat lima & puluhan (sampai 30) ---
     slot(
