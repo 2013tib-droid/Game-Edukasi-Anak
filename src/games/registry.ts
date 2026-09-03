@@ -128,15 +128,6 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd1/pasang-kata'),
   },
   {
-    id: 'tambah-tangkas',
-    group: 'sd1',
-    title: 'Tambah Tangkas',
-    emoji: '➕',
-    pic: 'tambah-tangkas',
-    template: 'tap-answer',
-    load: () => import('@/games/sd1/tambah-tangkas'),
-  },
-  {
     id: 'hitung-hebat',
     group: 'sd1',
     title: 'Hitung Hebat',

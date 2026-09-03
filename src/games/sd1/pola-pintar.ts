@@ -25,7 +25,7 @@ import type { GameConfig, GameLevel, ShapeId, ShapeSpec, TapChoice } from '@/eng
  *     limas. Bahan TERBANYAK di game ini.
  *   - **Pola bilangan** (slot 12) — kurikulum kelas 1 & 2 memintanya
  *     ("melanjutkan pola gambar/bilangan", "menghitung mundur"), tapi cukup
- *     SATU slot: itu ranahnya Hitung Hebat & Tambah Tangkas, sedangkan
+ *     SATU slot: itu ranahnya Hitung Hebat, sedangkan
  *     game ini soal pola.
  *
  * Dua belas slot, tiap slot kolam varian yang diacak tiap main & tiap "Main

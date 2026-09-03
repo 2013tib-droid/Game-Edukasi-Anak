@@ -5,19 +5,32 @@ import type {
   MixedSlot,
   TapChoice,
 } from '@/engine/core/types';
-import { rupiahWords, terbilang } from '@/games/numbers';
+import { capitalize, rupiahWords, terbilang } from '@/games/numbers';
 
 /**
  * "Hitung Hebat" (SD Kelas 1 & 2) — dunia berhitung: dari penjumlahan
- * bergambar sampai bilangan dua digit, uang, dan perkalian sederhana.
+ * bergambar sampai bilangan dua digit, uang, perkalian, dan seluruh jalur
+ * penjumlahan yang dulu bernama "Tambah Tangkas".
  *
  * Bedanya dengan Hutan Hewan (TK): di sini LAMBANG BILANGAN yang jadi
  * bintang utama. Gambar cuma jembatan di slot-slot awal; makin ke belakang
  * anak membaca angkanya langsung — sesuai kelas 1–2 yang sudah kenal simbol.
  *
+ * **Tambah Tangkas DILEBUR KE SINI (2026-09-03, permintaan pemilik).** Dulu
+ * dua game terpisah yang isinya sama-sama penjumlahan/berhitung — sekarang
+ * satu game, satu kartu di portal. Slot `l1`–`l10` = isi Hitung Hebat asli;
+ * slot `t1`–`t10` = seluruh isi Tambah Tangkas (persamaan tampil besar di
+ * layar lewat field `equation`, bukan `board` — itu yang membedakan fungsi
+ * `*Eq()` di bawah dari `sum()`/`minus()` biasa). **Id sengaja dipisah
+ * awalan `l`/`t`, bukan dinomori ulang** — bintang lama dipindahkan lewat
+ * `migrateMergedMath()` di `progress.ts` (`tambah-tangkas` id `l1`–`l10` →
+ * `hitung-hebat` id `t1`–`t10`), pola yang sama dengan peleburan cerita
+ * 2026-09-02.
+ *
  * Tiap slot = kolam varian (lihat `LevelSlot` di engine/core/types.ts), jadi
- * "Main Lagi" hampir selalu memberi soal berbeda. `sessionLevels` membuat
- * satu sesi hanya mengambil 8 dari 10 slot, diacak.
+ * "Main Lagi" hampir selalu memberi soal berbeda. `sessionLevels: 10`
+ * membuat satu sesi mengambil 10 dari 20 slot, diacak — separuh kolam jadi
+ * CADANGAN tiap sesi, bukan dibuang.
  *
  * Aturan yang dipatuhi (CLAUDE.md):
  *   - **BATAS BILANGAN 30** (keputusan pemilik 2026-08-01): bilangan maupun
@@ -236,6 +249,72 @@ function money(a: number, b: number, decoys: number[]): MixedLevel {
   };
 }
 
+/* ---------- Ported dari Tambah Tangkas (dilebur 2026-09-03) ---------- */
+
+/**
+ * Soal penjumlahan angka murni khas Tambah Tangkas: persamaan BESAR lewat
+ * `equation` (bukan `board`) — ini yang dulu jadi alasan Tambah Tangkas
+ * dirombak 2026-08-01 (layar tengah kosong kalau cuma `board`). `sum()` di
+ * atas sengaja tidak dipakai ulang di sini karena field-nya beda.
+ */
+function sumEq(a: number, b: number, decoys: number[]): MixedLevel {
+  return {
+    id: '',
+    template: 'tap-answer',
+    narration: `Berapa ${terbilang(a)} tambah ${terbilang(b)}?`,
+    data: {
+      equation: `${a} + ${b} = ?`,
+      choices: numberChoices(a + b, decoys),
+    },
+  };
+}
+
+/** Tiga bilangan sekaligus — anak menjumlahkan bertahap dari kiri. */
+function sum3Eq(a: number, b: number, c: number, decoys: number[]): MixedLevel {
+  return {
+    id: '',
+    template: 'tap-answer',
+    narration: `Berapa ${terbilang(a)} tambah ${terbilang(b)} tambah ${terbilang(c)}?`,
+    data: {
+      equation: `${a} + ${b} + ${c} = ?`,
+      choices: numberChoices(a + b + c, decoys),
+    },
+  };
+}
+
+/**
+ * Suku yang hilang: "5 + ? = 9". Narasi sengaja tidak menyebut hasilnya
+ * sebagai jawaban — yang ditanyakan justru bilangan di tengah. Beda dari
+ * `missing()` di atas (yang mencari bilangan hilang di DERET).
+ */
+function missingAddend(a: number, total: number, decoys: number[]): MixedLevel {
+  return {
+    id: '',
+    template: 'tap-answer',
+    narration: `${capitalize(terbilang(a))} tambah berapa supaya jadi ${terbilang(total)}?`,
+    data: {
+      equation: `${a} + ? = ${total}`,
+      choices: numberChoices(total - a, decoys),
+    },
+  };
+}
+
+/**
+ * Soal cerita pendek: konteks sehari-hari dulu, persamaannya tetap tampil di
+ * layar supaya anak melihat ceritanya berubah jadi kalimat matematika.
+ */
+function story(text: string, a: number, b: number, decoys: number[]): MixedLevel {
+  return {
+    id: '',
+    template: 'tap-answer',
+    narration: text,
+    data: {
+      equation: `${a} + ${b} = ?`,
+      choices: numberChoices(a + b, decoys),
+    },
+  };
+}
+
 /** Semua varian dalam satu slot berbagi id — bintangnya per slot. */
 function slot(id: string, ...variants: MixedLevel[]): MixedSlot {
   return variants.map((v) => ({ ...v, id }));
@@ -247,7 +326,8 @@ const config: MixedGameConfig = {
   title: 'Hitung Hebat',
   emoji: '🔢',
   template: 'mixed',
-  sessionLevels: 8,
+  // 10 soal tiap sesi, diambil acak dari 20 slot (l1–l10 + t1–t10 di bawah).
+  sessionLevels: 10,
   levels: [
     // --- 1. Penjumlahan bergambar (jembatan dari TK) ---
     slot(
@@ -376,6 +456,138 @@ const config: MixedGameConfig = {
       money(10000, 5000, [10500, 20000]),
       money(2000, 2000, [2200, 6000]),
       money(5000, 5000, [5500, 15000]),
+    ),
+    // ===== Ported dari Tambah Tangkas (2026-09-03) — id awalan `t` =====
+    // --- t1. Jumlah kecil, hasil sampai 5 (pemanasan) ---
+    slot(
+      't1',
+      sumEq(1, 2, [2, 4]),
+      sumEq(2, 2, [3, 5]),
+      sumEq(2, 3, [4, 6]),
+      sumEq(3, 1, [3, 5]),
+      sumEq(1, 4, [4, 6]),
+      sumEq(2, 1, [4, 5]),
+      sumEq(3, 2, [6, 4]),
+      sumEq(4, 1, [6, 3]),
+    ),
+    // --- t2. Hasil sampai 10 ---
+    slot(
+      't2',
+      sumEq(4, 4, [7, 9]),
+      sumEq(5, 3, [7, 9]),
+      sumEq(6, 2, [7, 9]),
+      sumEq(3, 6, [8, 10]),
+      sumEq(5, 5, [9, 11]),
+      sumEq(7, 2, [8, 10]),
+      sumEq(4, 5, [8, 10]),
+      sumEq(6, 4, [9, 11]),
+      sumEq(2, 7, [8, 10]),
+      sumEq(8, 1, [8, 10]),
+    ),
+    // --- t3. Bilangan kembar (dobel) — pola yang gampang diingat ---
+    slot(
+      't3',
+      sumEq(3, 3, [5, 7]),
+      sumEq(6, 6, [11, 13]),
+      sumEq(7, 7, [12, 15]),
+      sumEq(8, 8, [14, 17]),
+      sumEq(9, 9, [16, 19]),
+      sumEq(10, 10, [18, 21]),
+      sumEq(12, 12, [22, 26]),
+      sumEq(13, 13, [24, 28]),
+      sumEq(15, 15, [25, 29]),
+    ),
+    // --- t4. Menambah 10 dan 20 (nilai tempat) ---
+    slot(
+      't4',
+      sumEq(10, 3, [12, 14]),
+      sumEq(10, 7, [16, 18]),
+      sumEq(10, 9, [18, 20]),
+      sumEq(10, 5, [14, 16]),
+      sumEq(20, 5, [15, 26]),
+      sumEq(20, 8, [18, 29]),
+      sumEq(20, 3, [13, 24]),
+      sumEq(20, 6, [16, 27]),
+    ),
+    // --- t5. Melewati sepuluh (menyimpan) ---
+    slot(
+      't5',
+      sumEq(7, 5, [11, 13]),
+      sumEq(8, 6, [13, 15]),
+      sumEq(9, 4, [12, 14]),
+      sumEq(6, 7, [12, 14]),
+      sumEq(8, 5, [12, 14]),
+      sumEq(9, 8, [16, 18]),
+      sumEq(7, 6, [12, 14]),
+      sumEq(9, 6, [14, 16]),
+      sumEq(8, 7, [14, 16]),
+      sumEq(5, 9, [13, 15]),
+    ),
+    // --- t6. Bilangan bulat lima & puluhan (sampai 30) ---
+    slot(
+      't6',
+      sumEq(10, 20, [20, 25]),
+      sumEq(20, 10, [25, 29]),
+      sumEq(15, 5, [15, 25]),
+      sumEq(5, 15, [10, 25]),
+      sumEq(15, 10, [20, 30]),
+      sumEq(10, 15, [20, 30]),
+      sumEq(25, 5, [20, 29]),
+      sumEq(5, 25, [26, 20]),
+    ),
+    // --- t7. Dua digit + satu digit ---
+    slot(
+      't7',
+      sumEq(13, 4, [16, 18]),
+      sumEq(21, 5, [25, 27]),
+      sumEq(12, 6, [17, 19]),
+      sumEq(24, 3, [26, 28]),
+      sumEq(18, 2, [19, 21]),
+      sumEq(22, 7, [28, 30]),
+      sumEq(16, 3, [18, 20]),
+      sumEq(27, 2, [28, 30]),
+      sumEq(19, 4, [22, 24]),
+      sumEq(25, 4, [28, 30]),
+    ),
+    // --- t8. Tiga bilangan sekaligus ---
+    slot(
+      't8',
+      sum3Eq(1, 2, 3, [5, 7]),
+      sum3Eq(2, 3, 4, [8, 10]),
+      sum3Eq(3, 3, 3, [8, 12]),
+      sum3Eq(4, 2, 5, [10, 12]),
+      sum3Eq(5, 5, 2, [11, 13]),
+      sum3Eq(2, 4, 6, [11, 13]),
+      sum3Eq(10, 5, 3, [17, 19]),
+      sum3Eq(6, 3, 4, [12, 14]),
+    ),
+    // --- t9. Suku yang hilang ---
+    slot(
+      't9',
+      missingAddend(3, 5, [3, 1]),
+      missingAddend(4, 9, [4, 6]),
+      missingAddend(5, 8, [4, 2]),
+      missingAddend(6, 10, [3, 5]),
+      missingAddend(7, 12, [4, 6]),
+      missingAddend(8, 15, [6, 8]),
+      missingAddend(2, 7, [4, 6]),
+      missingAddend(10, 16, [5, 7]),
+      missingAddend(9, 13, [3, 5]),
+    ),
+    // --- t10. Soal cerita sehari-hari ---
+    slot(
+      't10',
+      // Bilangannya ditulis dengan KATA: kalimat ini dibacakan, dan angka
+      // di narasi terbaca dalam bahasa mesin suaranya. Persamaannya tetap
+      // tampil berangka di papan.
+      story('Rani punya enam kelereng, lalu diberi lima lagi. Berapa kelerengnya?', 6, 5, [10, 12]),
+      story('Di kandang ada delapan ayam, lalu datang empat lagi. Berapa ayam semuanya?', 8, 4, [11, 13]),
+      story('Ibu membeli dua belas telur, lalu membeli enam lagi. Berapa telur Ibu?', 12, 6, [16, 20]),
+      story('Budi punya lima belas koin, lalu menabung sepuluh koin lagi. Berapa koin Budi?', 15, 10, [20, 30]),
+      story('Di rak ada sembilan buku, Kakak menaruh tujuh buku lagi. Berapa buku di rak?', 9, 7, [15, 17]),
+      story('Ada delapan belas anak di lapangan, datang tujuh anak lagi. Berapa anak semuanya?', 18, 7, [23, 27]),
+      story('Andi memetik empat belas mangga, Adik memetik lima mangga. Berapa mangga mereka?', 14, 5, [18, 20]),
+      story('Di kolam ada sebelas ikan, Ayah menambah delapan ikan. Berapa ikan di kolam?', 11, 8, [18, 20]),
     ),
   ],
 };

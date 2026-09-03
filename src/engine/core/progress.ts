@@ -85,3 +85,34 @@ export function migrateMergedStories(): void {
     // boot aplikasi gagal cuma karena pemindahan bintang.
   }
 }
+
+/**
+ * Pindahkan bintang "Tambah Tangkas" ke `hitung-hebat` (dilebur 2026-09-03).
+ *
+ * Id level ikut berpindah `l1`-`l10` → `t1`-`t10` (awalan `t` supaya tidak
+ * bentrok dengan `l1`-`l10` milik Hitung Hebat sendiri) — lihat komentar
+ * kepala `src/games/sd1/hitung-hebat.ts`. Pola & alasannya sama persis
+ * dengan `migrateMergedStories()` di atas: tanpa pemindahan ini, anak yang
+ * sudah mengumpulkan bintang di Tambah Tangkas akan melihatnya hilang dan
+ * maskotnya ikut mengecil. Aman dijalankan berulang.
+ */
+export function migrateMergedMath(): void {
+  const store = load();
+  const old = store['tambah-tangkas'];
+  if (!old) return;
+
+  const merged = store['hitung-hebat'] ?? {};
+  for (const [levelId, stars] of Object.entries(old)) {
+    const moved = levelId.replace(/^l/, 't');
+    if (stars > (merged[moved] ?? 0)) merged[moved] = stars;
+  }
+  store['hitung-hebat'] = merged;
+  delete store['tambah-tangkas'];
+
+  try {
+    localStorage.setItem(KEY, JSON.stringify(store));
+  } catch {
+    // Penyimpanan penuh / dimatikan: biarkan keadaan lama, jangan sampai
+    // boot aplikasi gagal cuma karena pemindahan bintang.
+  }
+}

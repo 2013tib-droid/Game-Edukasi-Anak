@@ -9,6 +9,11 @@ Game baru sejak acuan ini dibuat: **Pola Pintar** (`src/games/sd1/pola-pintar.ts
 2026-09-02) — 10 slot khusus penalaran pola: bentuk, warna, dua ciri sekaligus,
 lubang di tengah deret, serta pola bilangan maju, mundur dan hilang.
 
+**Tambah Tangkas dilebur ke Hitung Hebat (2026-09-03)** — bukan game
+terpisah lagi. Referensi "Tambah Tangkas slot N" di tabel bawah ini sekarang
+dibaca "Hitung Hebat slot tN" (awalan `t` = isi lama Tambah Tangkas, `l` =
+isi lama Hitung Hebat).
+
 ## Kelas 1
 
 ### Semester 1 — fokus bilangan 1–10 & operasi dasar
@@ -16,7 +21,7 @@ lubang di tengah deret, serta pola bilangan maju, mundur dan hilang.
 | Bab | Isi | Status |
 |---|---|---|
 | Ayo membilang sampai 10 | menghitung, membaca & menulis angka, membandingkan banyak benda (lebih banyak/sedikit/sama), menghitung maju-mundur, pasangan bilangan | sebagian — Hitung Hebat slot 6 (hitung benda) & 7 (membandingkan), Pola Pintar slot 8–9 (maju & mundur). **Belum:** pasangan bilangan (bond 10), menulis angka untuk jenjang SD |
-| Penjumlahan sampai 10 | konsep gabung, simbol +, soal cerita sederhana | **lengkap** — Tambah Tangkas slot 1–2 & 10 |
+| Penjumlahan sampai 10 | konsep gabung, simbol +, soal cerita sederhana | **lengkap** — Hitung Hebat slot t1–t2 & t10 |
 | Pengurangan sampai 10 | konsep ambil/kurang, hubungan penjumlahan–pengurangan, soal cerita | sebagian — Hitung Hebat slot 2 & 4. **Belum:** hubungan tambah↔kurang (fact family), soal cerita pengurangan |
 | Mengenal bentuk | bangun datar (lingkaran, segitiga, persegi, persegi panjang), mengelompokkan, menyusun & mengurai | **belum ada di `sd1`** — bentuk datar cuma ada di Labirin Warna (kelompok TK, dijual terpisah), dan itu pun hanya mengenal/membedakan |
 
@@ -25,7 +30,7 @@ lubang di tengah deret, serta pola bilangan maju, mundur dan hilang.
 | Bab | Isi | Status |
 |---|---|---|
 | Ayo membilang sampai 20 | nilai tempat (satuan–puluhan), membandingkan & mengurutkan | sebagian — membandingkan ada (Hitung Hebat slot 7). **Belum:** nilai tempat eksplisit, mengurutkan |
-| Penjumlahan & pengurangan sampai 20 | — | **lengkap** — Tambah Tangkas slot 5, Hitung Hebat slot 3–4 |
+| Penjumlahan & pengurangan sampai 20 | — | **lengkap** — Hitung Hebat slot t5 & l3–l4 |
 | Mengukur panjang benda | membandingkan panjang, mengukur dengan satuan tidak baku (jengkal, pensil) | **belum ada** |
 | Mengenal diagram | mengelompokkan data, piktogram sederhana | **belum ada** |
 | Waktu & pola | pagi–siang–sore–malam; pola warna, bentuk, bunyi | sebagian — Jam Pintar slot 8 (jam kegiatan); pola bentuk & warna **lengkap** di Pola Pintar slot 1–11. **Belum:** bagian hari sebagai soal sendiri, pola bunyi |
