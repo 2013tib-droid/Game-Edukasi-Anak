@@ -2,12 +2,11 @@ Ubah file ini lalu push untuk merender narasi jadi file suara.
 
 only: ejaan-jitu
 
-render #7 — Ejaan Jitu: kata KEBUN diganti TAMAN, jadi narasinya berubah dari
-"Ini kebun. …" menjadi "Ini taman. Ayo susun hurufnya jadi satu kata!".
-SATU baris baru saja (±45 karakter); 49 kalimat Ejaan Jitu yang lain tidak
-diubah, jadi rekamannya dilewati dan tidak memakan kuota.
+render #8 — Ejaan Jitu: kata PASAR diganti TOKO, jadi narasinya berubah dari
+"Ini pasar. …" menjadi "Ini toko. Ayo susun hurufnya jadi satu kata!".
+SATU baris baru saja; 49 kalimat Ejaan Jitu yang lain tidak diubah, jadi
+rekamannya dilewati dan tidak memakan kuota.
 
 Tanpa "redo: lafal" — daftar lafal tidak berubah.
-Tanpa prune — rekaman "Ini kebun" jadi yatim tapi sengaja dibiarkan; menghapus
-file yatim sebaiknya sekali saja untuk semua scope, bukan menumpang render
-satu game.
+Tanpa prune — rekaman "Ini pasar" & "Ini kebun" jadi yatim tapi sengaja
+dibiarkan; membuang file yatim sebaiknya sekali saja untuk semua scope.
