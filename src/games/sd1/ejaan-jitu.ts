@@ -116,7 +116,7 @@ const config: GameConfig<'spell'> = {
       word('TOPI', '🧢', 'topi', ['R', 'A'], 'cap'),
       word('SEPATU', '👟', 'sepatu', ['R', 'M'], 'shoe'),
       word('TANGAN', '✋', 'tangan', ['R', 'O']),
-      word('MATA', '👁️', 'mata', ['R', 'O']),
+      word('MATA', '👁️', 'mata', ['R', 'O'], 'eye'),
       word('CELANA', '👖', 'celana', ['R', 'U']),
     ),
     // --- 8. Tempat ---

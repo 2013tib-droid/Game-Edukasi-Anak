@@ -91,6 +91,16 @@ export const ITEMS: Record<string, ItemDef> = {
   flower: { emoji: '🌸', label: 'bunga', ext: 'webp' },
   moon: { emoji: '🌙', label: 'bulan', ext: 'webp' },
   cloud: { emoji: '☁️', label: 'awan', ext: 'webp' },
+  // BAGIAN TUBUH — dipakai kata "MATA" di Ejaan Jitu (slot "Pakaian & tubuh").
+  // Dipakai kata "MATA" di Ejaan Jitu. Emoji 👁️ bawaan HP terlihat SEREM untuk
+  // game anak (bola mata lepas render realistis) — keluhan pemilik 2026-09-03.
+  // BELUM ADA ASETNYA: percobaan pertama memakai foto mata sungguhan lalu
+  // dibatalkan pemilik ("bikin animasi aja") — foto sekilas pun tetap
+  // terbaca "mata lepas", sedangkan seluruh item lain di registry ini gaya
+  // kartun kawaii. Prompt gambarnya: `docs/prompt-gambar-mata.md`. Sampai
+  // filenya ada, `ItemPic` otomatis jatuh ke emoji 👁️ (fallback aman, sama
+  // seperti `wrench` di bawah).
+  eye: { emoji: '👁️', label: 'mata', ext: 'webp' },
   // Food & drink (everyday objects, not the Pasar Buah fruit below).
   milk: { emoji: '🥛', label: 'susu', ext: 'webp' },
   egg: { emoji: '🥚', label: 'telur', ext: 'webp' },
