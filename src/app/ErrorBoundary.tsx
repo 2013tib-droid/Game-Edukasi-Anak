@@ -11,7 +11,9 @@ import { Component, type ErrorInfo, type ReactNode } from 'react';
  * It sits OUTSIDE the router (see `main.tsx`) so it also catches errors thrown
  * by the router itself. That means no `<Link>` here: both buttons do a real
  * page load, which is also what actually fixes the most common cause — a lazy
- * chunk that failed to download on a flaky phone connection.
+ * chunk that failed to download on a flaky phone connection, or one whose file
+ * disappeared because a new build was deployed while the app was open (every
+ * deploy re-hashes every chunk, so the old file names 404).
  */
 interface Props {
   children: ReactNode;
@@ -19,12 +21,14 @@ interface Props {
 
 interface State {
   failed: boolean;
+  /** The picture itself failed to load — fall back to the emoji. */
+  artFailed: boolean;
 }
 
 export default class ErrorBoundary extends Component<Props, State> {
-  state: State = { failed: false };
+  state: State = { failed: false, artFailed: false };
 
-  static getDerivedStateFromError(): State {
+  static getDerivedStateFromError(): Partial<State> {
     return { failed: true };
   }
 
@@ -52,9 +56,29 @@ export default class ErrorBoundary extends Component<Props, State> {
           textAlign: 'center',
         }}
       >
-        <div style={{ fontSize: 72, lineHeight: 1 }} aria-hidden>
-          🐣
-        </div>
+        {/*
+          Same graceful-degradation contract as `MascotPic`/`FeedbackPic`: this
+          screen is shown precisely when something is already broken, so the art
+          must never be the thing that keeps it from rendering. If the file is
+          missing (deploy setengah jadi) or the phone is offline, the old emoji
+          takes its place.
+        */}
+        {this.state.artFailed ? (
+          <div style={{ fontSize: 72, lineHeight: 1 }} aria-hidden>
+            🐣
+          </div>
+        ) : (
+          <img
+            src={`${home}assets/ui/tersendat.webp`}
+            alt=""
+            aria-hidden
+            draggable={false}
+            style={{ width: 180, maxWidth: '48vw', maxHeight: '40vh', height: 'auto' }}
+            onError={() => {
+              this.setState({ artFailed: true });
+            }}
+          />
+        )}
         <h1 style={{ fontSize: 26, margin: 0 }}>Aduh, permainannya tersendat</h1>
         <p style={{ fontSize: 19, margin: 0, maxWidth: 360 }}>
           Bukan salahmu kok! Ayo coba buka lagi ya.

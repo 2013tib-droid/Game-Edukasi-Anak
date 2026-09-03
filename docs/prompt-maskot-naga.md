@@ -134,6 +134,11 @@ pesan, tetap dengan `mascot-6.webp` terlampir:
   dalam lingkaran, jadi gambar yang sangat lebar bikin badan naganya tampil
   kecil di tengah. Burung hantu (tahap 4) adalah yang terlebar yang masih
   aman — jangan melebihi itu.
+- **Potong latarnya dengan `scripts/cut-soft.py`, BUKAN `cut-item.py`**
+  (2026-09-03). `cut-item.py` menyusuri latar sambil membandingkan dengan
+  tetangganya, dan pada render lembut tanpa outline ia menuruni landaian
+  tepinya lalu **melahap perut krem naganya dari dalam** — terbukti di gambar
+  layar "tersendat". Ceritanya di `prompt-gambar-tersendat.md`.
 - **Latar harus polos putih**, tanpa lingkaran/aura berbentuk kotak di
   belakang. Aura cahaya menempel di badan naganya tidak apa-apa; latar
   bercahaya penuh susah dipotong (pelajaran dari batch aset sebelumnya:
