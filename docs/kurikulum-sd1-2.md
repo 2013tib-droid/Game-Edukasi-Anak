@@ -28,7 +28,7 @@ lubang di tengah deret, serta pola bilangan maju, mundur dan hilang.
 | Penjumlahan & pengurangan sampai 20 | — | **lengkap** — Tambah Tangkas slot 5, Hitung Hebat slot 3–4 |
 | Mengukur panjang benda | membandingkan panjang, mengukur dengan satuan tidak baku (jengkal, pensil) | **belum ada** |
 | Mengenal diagram | mengelompokkan data, piktogram sederhana | **belum ada** |
-| Waktu & pola | pagi–siang–sore–malam; pola warna, bentuk, bunyi | sebagian — Jam Pintar slot 8 (jam kegiatan); pola bentuk & warna **lengkap** di Pola Pintar slot 1–7. **Belum:** bagian hari sebagai soal sendiri, pola bunyi |
+| Waktu & pola | pagi–siang–sore–malam; pola warna, bentuk, bunyi | sebagian — Jam Pintar slot 8 (jam kegiatan); pola bentuk & warna **lengkap** di Pola Pintar slot 1–11. **Belum:** bagian hari sebagai soal sendiri, pola bunyi |
 
 ## Kelas 2
 
@@ -38,8 +38,8 @@ lubang di tengah deret, serta pola bilangan maju, mundur dan hilang.
 |---|---|---|
 | Ayo membilang sampai 50 | nilai tempat (puluhan–satuan), membandingkan & mengurutkan | **terbentur BATAS BILANGAN 30** — lihat catatan di bawah |
 | Penjumlahan & pengurangan | berbagai cara termasuk garis bilangan, soal cerita | sebagian. **Belum:** garis bilangan |
-| Bentuk di sekitar kita | bangun datar (segi banyak), menyusun & mengurai; bangun ruang (kubus, balok, bola, kerucut) | **belum ada** |
-| Posisi benda & pola | kanan–kiri, atas–bawah, depan–belakang; melanjutkan pola gambar/bilangan | sebagian — melanjutkan pola gambar & bilangan **lengkap** di Pola Pintar (10 slot). **Belum:** posisi benda |
+| Bentuk di sekitar kita | bangun datar (segi banyak), menyusun & mengurai; bangun ruang (kubus, balok, bola, kerucut) | sebagian — **bangun ruang** (kubus, balok, bola, tabung, kerucut, limas) dikenalkan lewat pola di Pola Pintar slot 8–11, bangun datar segi banyak di slot 1–4. **Belum:** menyusun & mengurai bangun |
+| Posisi benda & pola | kanan–kiri, atas–bawah, depan–belakang; melanjutkan pola gambar/bilangan | sebagian — melanjutkan pola gambar & bilangan **lengkap** di Pola Pintar (12 slot). **Belum:** posisi benda |
 
 ### Semester 2
 

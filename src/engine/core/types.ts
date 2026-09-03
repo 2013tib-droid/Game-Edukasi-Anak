@@ -39,7 +39,20 @@ export type ShapeId =
   | 'segienam'
   | 'layang-layang'
   | 'bulan'
-  | 'awan';
+  | 'awan'
+  // --- Bangun ruang (SD kelas 1 & 2) ---
+  // Digambar semu-3D di `Shape.tsx`: satu warna dasar, sisi-sisinya versi
+  // gelap/terang dari warna itu. Kurikulum kelas 1 & 2 memintanya ("bangun
+  // ruang: kubus, balok, bola, kerucut") dan sebelum ini tak ada satu game
+  // pun yang memakainya. Dipakai Pola Pintar; kelompok TK sengaja TIDAK
+  // memakainya (nama-namanya milik SD, aturan yang sama dengan ketupat &
+  // segienam).
+  | 'kubus'
+  | 'balok'
+  | 'bola'
+  | 'tabung'
+  | 'kerucut'
+  | 'limas';
 
 /** A single colored shape: which shape + its fill color (hex). */
 export interface ShapeSpec {

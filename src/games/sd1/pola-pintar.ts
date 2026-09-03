@@ -21,11 +21,15 @@ import type { GameConfig, GameLevel, ShapeId, ShapeSpec, TapChoice } from '@/eng
  *     deret, jadi anak harus membaca pola dua arah — bukan sekadar
  *     meneruskan sel terakhir.
  *   - **Warna bisa jadi polanya sendiri** (slot 5), lepas dari bentuk.
- *   - **Pola bilangan** (slot 8–10) — kurikulum kelas 1 & 2 memintanya
- *     ("melanjutkan pola gambar/bilangan", "menghitung mundur").
+ *   - **Bangun ruang** (slot 8–11) — kubus, balok, bola, tabung, kerucut,
+ *     limas. Bahan TERBANYAK di game ini.
+ *   - **Pola bilangan** (slot 12) — kurikulum kelas 1 & 2 memintanya
+ *     ("melanjutkan pola gambar/bilangan", "menghitung mundur"), tapi cukup
+ *     SATU slot: itu ranahnya Hitung Hebat & Tambah Tangkas, sedangkan
+ *     game ini soal pola.
  *
- * Sepuluh slot, tiap slot kolam varian yang diacak tiap main & tiap "Main
- * Lagi"; `sessionLevels: 8` mengambil 8 dari 10 slot, jadi dua sesi
+ * Dua belas slot, tiap slot kolam varian yang diacak tiap main & tiap "Main
+ * Lagi"; `sessionLevels: 8` mengambil 8 dari 12 slot, jadi dua sesi
  * berturut-turut hampir tak pernah sama.
  *
  * Aturan yang dipatuhi (CLAUDE.md + docs/kurikulum-sd1-2.md):
@@ -117,6 +121,32 @@ const duaCiri = (kinds: [ShapeId, ShapeId], colors: [string, string, string], de
     DUA_CIRI,
   );
 
+/* ---------- bangun ruang ---------- */
+
+/**
+ * **Bangun ruang** (kubus, balok, bola, tabung, kerucut, limas) — permintaan
+ * pemilik 2026-09-03: *"untuk pola angka bikin yang sedikit saja, banyakin
+ * pola bangun ruang"*. Empat slot penuh (8–11) plus sisipan di slot warna &
+ * dua ciri, lawan satu slot bilangan.
+ *
+ * Sekaligus menutup lubang kurikulum: `docs/kurikulum-sd1-2.md` menandai
+ * "bangun ruang (kubus, balok, bola, kerucut)" **belum ada** di game mana
+ * pun, dan enam ShapeId ini memang baru dibuat untuk slot-slot ini.
+ *
+ * Tak ada gambar yang perlu diimpor: keenamnya digambar SVG semu-3D di
+ * `Shape.tsx` — satu warna dasar, sisi-sisinya versi gelap/terang warna itu.
+ * Jadi bangun ruang ikut aturan warna yang sama dengan bangun datar, dan
+ * pola warna (slot 5) tetap jalan dengan kubus atau tabung.
+ *
+ * **Pasangan yang tidak boleh diadu sebagai jawaban lawan pengecoh** (di
+ * dalam deret tetap boleh berdampingan asal warnanya jauh berbeda) — sama
+ * alasannya dengan segilima lawan segienam di slot 1:
+ *   - **kubus ↔ balok** — dua-duanya kotak semu-3D; bedanya cuma
+ *     perbandingan rusuk, dan di sel 34 px itu ujian menaksir panjang.
+ *   - **kerucut ↔ limas** — siluetnya sama-sama segitiga.
+ *   - **bola ↔ lingkaran**, **kubus/balok ↔ kotak**, **kerucut ↔ segitiga** —
+ *     bangun ruang lawan bangun datar yang sesiluet: bedanya cuma bayangan.
+ */
 /* ---------- pola bilangan ---------- */
 
 const numberChoices = (answer: number, decoys: number[]): TapChoice[] => [
@@ -292,9 +322,12 @@ const config: GameConfig<'tap-answer'> = {
       warna('lingkaran', [MERAH, BIRU], [MERAH, HIJAU, KUNING]),
       warna('kotak', [HIJAU, KUNING], [HIJAU, BIRU, UNGU]),
       warna('bintang', [UNGU, KUNING, HIJAU], [UNGU, KUNING, BIRU]),
-      warna('segienam', [BIRU, BIRU, MERAH], [BIRU, UNGU, COKLAT]),
+      // Dua varian memakai bangun ruang: bentuknya sama sepanjang deret,
+      // jadi bayangan sisinya tidak pernah jadi bahan pembanding — cuma
+      // warnanya, dan warna dasar kartu tetap satu.
+      warna('kubus', [BIRU, BIRU, MERAH], [BIRU, UNGU, COKLAT]),
       warna('hati', [PINK, UNGU], [PINK, BIRU, COKLAT]),
-      warna('trapesium', [KUNING, HIJAU, HIJAU], [KUNING, BIRU, MERAH]),
+      warna('tabung', [KUNING, HIJAU, HIJAU], [KUNING, BIRU, MERAH]),
     ),
     // --- 6. Dua ciri sekaligus — bentuk berirama 2, warna berirama 3.
     //        Slot tersulit di game ini. ---
@@ -326,9 +359,9 @@ const config: GameConfig<'tap-answer'> = {
         [sh('segilima', KUNING), sh('trapesium', UNGU), sh('trapesium', KUNING)],
       ),
       duaCiri(
-        ['kotak', 'segitiga'],
+        ['tabung', 'bola'],
         [COKLAT, KUNING, BIRU],
-        [sh('segitiga', COKLAT), sh('kotak', BIRU), sh('kotak', COKLAT)],
+        [sh('bola', COKLAT), sh('tabung', BIRU), sh('tabung', COKLAT)],
       ),
     ),
     // --- 7. Lubang di TENGAH deret — anak harus membaca pola dari kiri DAN
@@ -372,36 +405,152 @@ const config: GameConfig<'tap-answer'> = {
         TENGAH,
       ),
     ),
-    // --- 8. Pola bilangan maju (loncat tetap, tak pernah lewat 30) ---
+    // --- 8. BANGUN RUANG, irama AB (pemanasan) — bentuknya yang baru,
+    //        iramanya yang paling mudah, persis seperti slot 1 ---
     slot(
       'l8',
-      maju(2, 2, [11, 14]),
-      maju(5, 5, [26, 28]),
-      maju(3, 3, [17, 20]),
-      maju(1, 2, [10, 12]),
-      maju(4, 4, [22, 25]),
-      maju(10, 2, [19, 22]),
+      lanjut(
+        [sh('kubus', BIRU), sh('bola', KUNING)],
+        // Pengecoh "warna benar, bentuk salah" di sini tabung, BUKAN
+        // lingkaran: bola lawan lingkaran cuma beda bayangan.
+        [sh('kubus', BIRU), sh('bola', HIJAU), sh('tabung', KUNING)],
+      ),
+      lanjut(
+        [sh('tabung', MERAH), sh('kerucut', HIJAU)],
+        [sh('tabung', MERAH), sh('kerucut', KUNING), sh('bola', HIJAU)],
+      ),
+      lanjut(
+        [sh('bola', UNGU), sh('balok', KUNING)],
+        [sh('bola', UNGU), sh('balok', HIJAU), sh('tabung', KUNING)],
+      ),
+      lanjut(
+        [sh('limas', HIJAU), sh('tabung', PINK)],
+        [sh('limas', HIJAU), sh('tabung', BIRU), sh('kubus', PINK)],
+      ),
+      lanjut(
+        [sh('kubus', MERAH), sh('kerucut', KUNING)],
+        [sh('kubus', MERAH), sh('kerucut', BIRU), sh('bola', KUNING)],
+      ),
+      lanjut(
+        [sh('balok', UNGU), sh('limas', KUNING)],
+        // Bukan kerucut: siluetnya sama-sama segitiga dengan limas.
+        [sh('balok', UNGU), sh('limas', HIJAU), sh('bola', KUNING)],
+      ),
     ),
-    // --- 9. Pola bilangan mundur — kurikulum kelas 1 minta "menghitung
-    //        maju-mundur", dan tak ada game lain yang melatih arah mundur ---
+    // --- 9. Bangun ruang, irama AAB / ABB ---
     slot(
       'l9',
-      mundur(30, 2, [21, 18]),
-      mundur(20, 2, [11, 8]),
-      mundur(30, 5, [8, 0]),
-      mundur(18, 3, [4, 2]),
-      mundur(10, 1, [4, 7]),
-      mundur(24, 4, [6, 2]),
+      lanjut(
+        [sh('kubus', MERAH), sh('kubus', MERAH), sh('bola', BIRU)],
+        [sh('kubus', MERAH), sh('bola', HIJAU), sh('tabung', BIRU)],
+      ),
+      lanjut(
+        [sh('tabung', HIJAU), sh('tabung', HIJAU), sh('limas', KUNING)],
+        [sh('tabung', HIJAU), sh('limas', UNGU), sh('balok', KUNING)],
+      ),
+      lanjut(
+        [sh('bola', KUNING), sh('bola', KUNING), sh('kerucut', MERAH)],
+        [sh('bola', KUNING), sh('kerucut', BIRU), sh('tabung', MERAH)],
+      ),
+      lanjut(
+        [sh('balok', UNGU), sh('balok', UNGU), sh('tabung', KUNING)],
+        [sh('balok', UNGU), sh('tabung', HIJAU), sh('bola', KUNING)],
+      ),
+      lanjut(
+        [sh('kerucut', PINK), sh('kubus', BIRU), sh('kubus', BIRU)],
+        // Bukan balok: bedanya dengan kubus cuma perbandingan rusuk.
+        [sh('kerucut', PINK), sh('kubus', KUNING), sh('tabung', BIRU)],
+      ),
+      lanjut(
+        [sh('limas', COKLAT), sh('bola', HIJAU), sh('bola', HIJAU)],
+        [sh('limas', COKLAT), sh('bola', KUNING), sh('kubus', HIJAU)],
+      ),
     ),
-    // --- 10. Bilangan hilang di TENGAH deret ---
+    // --- 10. Bangun ruang, irama ABC — tiga bangun berbeda sebelum
+    //         berulang, jadi anak harus memegang urutannya, bukan cuma
+    //         bergantian dua kartu ---
     slot(
       'l10',
+      lanjut(
+        [sh('kubus', MERAH), sh('tabung', BIRU), sh('bola', KUNING)],
+        [sh('tabung', BIRU), sh('bola', HIJAU), sh('kerucut', KUNING)],
+      ),
+      lanjut(
+        [sh('bola', HIJAU), sh('kerucut', KUNING), sh('balok', UNGU)],
+        [sh('kerucut', KUNING), sh('balok', MERAH), sh('tabung', UNGU)],
+      ),
+      lanjut(
+        [sh('limas', BIRU), sh('kubus', KUNING), sh('tabung', MERAH)],
+        [sh('kubus', KUNING), sh('tabung', HIJAU), sh('bola', MERAH)],
+      ),
+      lanjut(
+        [sh('tabung', UNGU), sh('balok', KUNING), sh('kerucut', HIJAU)],
+        [sh('balok', KUNING), sh('kerucut', BIRU), sh('bola', HIJAU)],
+      ),
+      lanjut(
+        [sh('kerucut', COKLAT), sh('bola', BIRU), sh('limas', KUNING)],
+        [sh('bola', BIRU), sh('limas', HIJAU), sh('kubus', KUNING)],
+      ),
+      lanjut(
+        [sh('balok', MERAH), sh('limas', HIJAU), sh('kubus', BIRU)],
+        [sh('limas', HIJAU), sh('kubus', KUNING), sh('tabung', BIRU)],
+      ),
+    ),
+    // --- 11. Bangun ruang dengan lubang di TENGAH — slot bangun ruang
+    //         tersulit: pola dibaca dari kiri DAN kanan ---
+    slot(
+      'l11',
+      pola(
+        ulang([sh('kubus', MERAH), sh('bola', BIRU)]),
+        2,
+        [sh('bola', BIRU), sh('kubus', HIJAU), sh('tabung', MERAH)],
+        TENGAH,
+      ),
+      pola(
+        ulang([sh('bola', KUNING), sh('tabung', MERAH), sh('kerucut', BIRU)]),
+        3,
+        [sh('kerucut', BIRU), sh('bola', HIJAU), sh('tabung', KUNING)],
+        TENGAH,
+      ),
+      pola(
+        ulang([sh('limas', HIJAU), sh('limas', HIJAU), sh('balok', UNGU)]),
+        4,
+        [sh('balok', UNGU), sh('limas', MERAH), sh('tabung', HIJAU)],
+        TENGAH,
+      ),
+      pola(
+        ulang([sh('tabung', UNGU), sh('kubus', KUNING)]),
+        3,
+        [sh('tabung', UNGU), sh('kubus', HIJAU), sh('bola', KUNING)],
+        TENGAH,
+      ),
+      pola(
+        ulang([sh('kerucut', BIRU), sh('bola', PINK), sh('bola', PINK)]),
+        2,
+        [sh('kerucut', BIRU), sh('bola', UNGU), sh('kubus', PINK)],
+        TENGAH,
+      ),
+      pola(
+        ulang([sh('balok', MERAH), sh('tabung', KUNING), sh('limas', HIJAU)]),
+        4,
+        [sh('limas', HIJAU), sh('tabung', BIRU), sh('bola', KUNING)],
+        TENGAH,
+      ),
+    ),
+    // --- 12. Pola bilangan — SATU slot berisi ketiga arahnya (maju, mundur,
+    //         hilang di tengah). Dulu tiga slot; dikecilkan atas permintaan
+    //         pemilik (2026-09-03) supaya game ini tetap tentang POLA, bukan
+    //         berhitung — bilangan sudah punya Hitung Hebat & Tambah
+    //         Tangkas. Ketiga kalimat narasinya tetap terpakai, jadi tak ada
+    //         file suara yang jadi mubazir. Batas 30 tetap berlaku. ---
+    slot(
+      'l12',
+      maju(2, 2, [11, 14]),
+      maju(5, 5, [26, 28]),
+      mundur(30, 2, [21, 18]),
+      mundur(20, 2, [11, 8]),
       hilang(2, 2, 2, [5, 7]),
       hilang(5, 5, 3, [18, 22]),
-      hilang(30, -3, 2, [25, 23]),
-      hilang(1, 3, 3, [9, 11]),
-      hilang(20, -2, 3, [13, 15]),
-      hilang(12, 2, 2, [15, 17]),
     ),
   ],
 };
