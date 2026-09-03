@@ -156,7 +156,11 @@ const config: MixedGameConfig = {
         ASK_JOB,
         job('🎨', 'kuas', 'pelukis', '👩‍🎨'),
         job('🚌', 'bus', 'sopir', '🧑‍✈️', 'bus'),
-        job('🔧', 'kunci', 'montir', '🧑‍🔧', 'key'),
+        // Dulu `'key'` (gambar kunci PINTU) — salah untuk montir, yang
+        // pakai kunci PAS. Satu gambar tak boleh punya dua arti (aturan
+        // lama); id `wrench` sengaja terpisah dari `key` yang tetap dipakai
+        // untuk kunci sungguhan di Taman Huruf & Pasang Kata.
+        job('🔧', 'kunci pas', 'montir', '🧑‍🔧', 'wrench'),
         job('🚓', 'mobil polisi', 'polisi', '👮', 'police'),
       ),
     ),

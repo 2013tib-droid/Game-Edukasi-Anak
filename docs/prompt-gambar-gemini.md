@@ -382,7 +382,13 @@ Benda mati, **tanpa wajah**, tampak depan/samping paling khas.
 
 ---
 
-## BATCH 7 — Profesi & alatnya (13 gambar)
+## BATCH 7 — Profesi & alatnya (13 gambar) — `wrench` PALING DICARI
+
+> **2026-09-03**: kartu "kunci" di Pasangan Pintar (soal montir) dulu memakai
+> gambar kunci PINTU (`key`) — salah, dan pemilik menandainya lewat tangkapan
+> layar. Kode sudah dialihkan ke id `wrench` (jatuh ke emoji 🔧 sampai
+> gambarnya ada) — begitu `wrench.png` dikirim, ini yang paling cepat
+> terlihat bedanya.
 
 Satu slot utuh di Pasangan Pintar (profesi ↔ alat kerjanya) yang **seluruhnya**
 masih emoji. Emoji orang (👩‍⚕️👨‍🍳🧑‍🔧) adalah yang paling tidak konsisten antar HP —
