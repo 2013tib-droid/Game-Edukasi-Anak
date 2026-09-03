@@ -128,6 +128,21 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd1/pasang-kata'),
   },
   {
+    // Sengaja di sebelah "Pasang Kata" (permintaan pemilik 2026-09-03) —
+    // saudara "Jalan Kendaraan" (TK) tapi sengaja lebih sulit: jalan lebih
+    // sempit & lebih banyak belokan (lihat komentar kepala config). Ikonnya
+    // SENGAJA jalan berkelok + rambu, BUKAN mobil — supaya beda jelas dari
+    // ikon Jalan Kendaraan (mobil merah); yang membedakan game ini memang
+    // rutenya, bukan kendaraannya.
+    id: 'rute-kendaraan',
+    group: 'sd1',
+    title: 'Rute Kendaraan',
+    emoji: '🛣️',
+    pic: 'rute-kendaraan',
+    template: 'path-trace',
+    load: () => import('@/games/sd1/rute-kendaraan'),
+  },
+  {
     id: 'tambah-tangkas',
     group: 'sd1',
     title: 'Tambah Tangkas',
@@ -210,20 +225,6 @@ export const games: GameMeta[] = [
     pic: 'pola-pintar',
     template: 'tap-answer',
     load: () => import('@/games/sd1/pola-pintar'),
-  },
-  {
-    // Saudara "Jalan Kendaraan" (TK) tapi sengaja lebih sulit — jalan lebih
-    // sempit & lebih banyak belokan (lihat komentar kepala config). Ikonnya
-    // SENGAJA jalan berkelok + rambu, BUKAN mobil — supaya beda jelas dari
-    // ikon Jalan Kendaraan (mobil merah); yang membedakan game ini memang
-    // rutenya, bukan kendaraannya.
-    id: 'rute-kendaraan',
-    group: 'sd1',
-    title: 'Rute Kendaraan',
-    emoji: '🛣️',
-    pic: 'rute-kendaraan',
-    template: 'path-trace',
-    load: () => import('@/games/sd1/rute-kendaraan'),
   },
   {
     // Sengaja PALING BAWAH di daftar SD (permintaan pemilik 2026-09-03): ia
