@@ -57,6 +57,24 @@ tanpa blok gaya di awal):
 
 ---
 
+## ❗ PALING MENDESAK — 3 gambar yang MEMPERBAIKI SOAL YANG SALAH BACA
+
+Beda dari batch di bawah (yang isinya "emoji → gambar biar seragam"), tiga ini
+memperbaiki soal yang **sekarang menyesatkan anak**. Ketiganya target di satu
+varian Pasangan Pintar slot "benda & tempatnya" — dilaporkan pemilik 2026-09-03
+dari tangkapan layar HP:
+
+| id (nama file) | Sekarang | Kenapa salah |
+|---|---|---|
+| `pond` | 💧 "kolam" | Emojinya SATU TETES AIR, bukan kolam. Anak diminta menaruh ikan ke dalam tetesan air. Prompt: Batch 8. |
+| `wardrobe` | 🗄️ "lemari" | Emojinya **lemari arsip kantor** (laci besi), bukan lemari pakaian. Prompt: Batch 9. |
+| `road` | 🛣️ "jalan raya" | Di iPhone emoji ini digambar sebagai jalan tol Amerika **lengkap dengan papan hijau bertulisan "CUPERTINO"** — tulisan asing di game membaca Bahasa Indonesia. Prompt: Batch 9. |
+
+Kirim tiga ini dulu kalau tidak sempat sekaligus sebatch; sisanya bisa menyusul
+kapan saja.
+
+---
+
 ## BATCH 1 — Buah (14 gambar) — ✅ SELESAI (2026-08-04)
 
 > Sudah terpasang di `public/assets/items/`. Catatan hasilnya ada di
@@ -415,7 +433,7 @@ punya seni (kucing, kambing, ikan lewat Batch 5), tinggal sisanya.
 
 ---
 
-## BATCH 9 — Benda sisa (15 gambar)
+## BATCH 9 — Benda sisa (18 gambar)
 
 Nilai per gambarnya paling kecil (rata-rata muncul sekali), tapi kalau batch ini
 selesai, **tidak ada lagi benda yang tampil sebagai emoji** di soal mana pun.
@@ -438,6 +456,9 @@ Benda mati, tanpa wajah.
 | `trash` | tempat sampah | Buatkan: satu tempat sampah hijau dengan tutup dan pegangan, tampak depan, tertutup, tanpa wajah. |
 | `jacket` | jaket | Buatkan: satu jaket anak warna merah dengan resleting depan, tampak depan terbentang, tanpa wajah. |
 | `coconut` | kelapa | Buatkan: satu buah kelapa utuh warna coklat berserat, tanpa wajah. |
+| `road` | jalan raya | Buatkan: sepotong jalan raya aspal abu-abu dengan garis putus-putus putih di tengah, tepinya rumput hijau, tampak dari depan-atas seperti jalan menjauh, **tanpa rambu, tanpa papan nama, tanpa tulisan apa pun**, tanpa kendaraan, tanpa wajah. |
+| `bookshelf` | rak buku | Buatkan: satu rak buku kayu coklat dua tingkat berisi beberapa buku warna-warni berdiri, tampak depan, tanpa tulisan di punggung buku, tanpa wajah. |
+| `litter` | sampah | Buatkan: satu gumpalan kertas kusut warna putih keabuan, tanpa wajah. |
 
 ---
 

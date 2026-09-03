@@ -1576,15 +1576,6 @@
       ]
     },
     {
-      "key": "eb1bb48381e8",
-      "text": "Ini kebun. Ayo susun hurufnya jadi satu kata!",
-      "scope": "ejaan-jitu",
-      "voice": "gadis",
-      "games": [
-        "ejaan-jitu"
-      ]
-    },
-    {
       "key": "7a0101a1da16",
       "text": "Ini kereta. Ayo susun hurufnya jadi satu kata!",
       "scope": "ejaan-jitu",
@@ -1821,6 +1812,15 @@
     {
       "key": "6bed998e30e7",
       "text": "Ini susu. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "voice": "gadis",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "63dcace75ebc",
+      "text": "Ini taman. Ayo susun hurufnya jadi satu kata!",
       "scope": "ejaan-jitu",
       "voice": "gadis",
       "games": [

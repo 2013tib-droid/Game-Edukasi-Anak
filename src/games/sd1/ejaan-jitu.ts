@@ -123,7 +123,14 @@ const config: GameConfig<'spell'> = {
     slot(
       'l8',
       word('PASAR', '🏪', 'pasar', ['U', 'M'], 'shop'),
-      word('KEBUN', '🌳', 'kebun', ['A', 'R'], 'tree'),
+      // TAMAN, bukan KEBUN: seni `tree` itu SATU POHON (label registry-nya
+      // memang 'pohon', dan Pasang Kata/Taman Huruf memakainya untuk kata
+      // "pohon") — anak yang melihatnya membaca "pohon", bukan "kebun".
+      // `park` menggambar pohon + bangku di rumput, jadi benar-benar sebuah
+      // TEMPAT, sesuai tema slot ini. POHON sengaja TIDAK dipakai: selain
+      // bukan tempat, kata itu sudah disusun di Taman Huruf (TK) dengan
+      // gambar yang sama persis.
+      word('TAMAN', '🏞️', 'taman', ['R', 'O'], 'park'),
       word('SAWAH', '🌾', 'sawah', ['R', 'U'], 'field'),
       word('DESA', '🏡', 'desa', ['R', 'U']),
       word('KOTA', '🏙️', 'kota', ['R', 'I']),
