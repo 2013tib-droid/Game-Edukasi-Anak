@@ -355,6 +355,17 @@ export interface LevelCard {
   /** Item id (registry `src/engine/ui/items.ts`) — art instead of the emoji. */
   item?: string;
   /**
+   * SAMPUL kartu: nama file (tanpa ekstensi) di `public/assets/story/`, mis.
+   * `'jalak-kerbau'`. Dirender selebar kartu seperti sampul buku, jadi yang
+   * dipakai harus ILUSTRASI ADEGAN berlatar (`StoryPage.art`), bukan item yang
+   * dipotong transparan — item akan tampak melayang di dalam bingkai sampul.
+   *
+   * Gambarnya DIPOTONG mengikuti kotak sampul (`object-fit: cover`), jadi pilih
+   * adegan yang tokohnya di TENGAH; yang menempel di tepi akan terpotong.
+   * `item`/`emoji` tetap jadi cadangan kalau filenya gagal dimuat.
+   */
+  art?: string;
+  /**
    * Kartu tampil TAPI belum bisa dimainkan ("segera hadir"): redup, bergembok,
    * tidak bisa ditekan. Dipakai saat isinya sudah ditulis tapi tampilannya
    * belum digarap — anak tetap melihat judulnya, jadi jelas ceritanya menyusul

@@ -97,8 +97,17 @@ function ask(
 /**
  * Satu cerita = satu level = satu kartu di layar pemilih.
  * - `label` = judul pendek di kartu ("Kancil dan Gajah"),
+ * - `art` = SAMPUL kartu: satu ilustrasi adegan dari `public/assets/story/`,
+ *   dirender selebar kartu seperti sampul buku. Yang dipakai sekarang adalah
+ *   gambar yang sudah ada dari cerita itu sendiri — adegan yang paling
+ *   menceritakan judulnya DAN tokohnya paling di tengah, karena sampulnya
+ *   dipotong mengikuti kotak 16:9 (lihat `LevelCard.art`). Sampul khusus
+ *   (yang memang digambar sebagai sampul) menyusul lewat
+ *   `docs/prompt-gambar-judul-cerita.md`; enam cerita `soon` belum punya
+ *   gambar sama sekali, jadi kartunya masih emoji,
  * - `pic` = id item registry kalau seninya ada (aturan proyek: hewan pakai
- *   gambar, bukan emoji), kalau tidak `emoji` yang dipakai,
+ *   gambar, bukan emoji), kalau tidak `emoji` yang dipakai — keduanya kini
+ *   jadi cadangan kalau `art` tak ada atau filenya gagal dimuat,
  * - `narration` = kalimat lengkap yang diucapkan saat cerita dimulai dan saat
  *   anak menekan 🔊 di kartunya — JANGAN diubah tanpa alasan, kunci file
  *   suaranya berasal dari isi kalimat ini,
@@ -123,7 +132,7 @@ function story(
  */
 const KANCIL = story(
   'l1',
-  { label: 'Kancil dan Pak Tani', emoji: '🦌' },
+  { label: 'Kancil dan Pak Tani', emoji: '🦌', art: 'kancil-tani-lapar' },
   'Si Kancil berjalan di hutan. Perutnya lapar sekali. Ayo bantu Kancil mencari makan!',
   at(
     'hutan',
@@ -168,7 +177,7 @@ const KANCIL = story(
 
 const JALAK = story(
   'l2',
-  { label: 'Jalak dan Kerbau', item: 'jalak' },
+  { label: 'Jalak dan Kerbau', item: 'jalak', art: 'jalak-kerbau' },
   'Burung Jalak dan Kerbau. Ayo ikuti ceritanya!',
   // `at('sawah')` TETAP di halaman pertama walau keempat halaman awal sudah
   // berilustrasi — kebalikan dari "Kancil dan Gajah". Di cerita ini latar
@@ -221,7 +230,7 @@ const JALAK = story(
 
 const GAJAH = story(
   'l3',
-  { label: 'Kancil dan Gajah', item: 'elephant' },
+  { label: 'Kancil dan Gajah', item: 'elephant', art: 'kancil-gajah-panggil' },
   'Kancil dan Gajah. Ayo bantu Kancil menolong temannya!',
   // Dua halaman pembuka ini SENGAJA tanpa `at()`: ilustrasinya (kiriman
   // pemilik, 2026-08-10) sudah membawa rawanya sendiri — hutan, air, dan

@@ -157,6 +157,10 @@ export default function GameShell({
   const [screen, setScreen] = useState<Screen>(picker ? 'pick' : 'intro');
   const [levelIndex, setLevelIndex] = useState(0);
   const [feedback, setFeedback] = useState<'correct' | 'wrong' | null>(null);
+  // Sampul kartu yang filenya gagal dimuat (deploy setengah jadi) — kartunya
+  // jatuh ke gambar item/emoji, jangan pernah kosong. Pola yang sama dengan
+  // `brokenArt` di `StoryChoice`.
+  const [brokenCover, setBrokenCover] = useState<Record<string, boolean>>({});
   const [earned, setEarned] = useState<Stars[]>([]);
   const wrongCount = useRef(0);
   // Remount the template on retry/advance so its internal state resets.
@@ -284,6 +288,9 @@ export default function GameShell({
             // ditekan, dan tombol 🔊-nya diganti gembok supaya tidak ada satu
             // pun bagian kartu yang memberi respons dan bikin salah harap.
             const soon = card?.soon === true;
+            // Sampulnya dilepas kalau filenya gagal dimuat — kartunya lalu
+            // memakai gambar item/emoji seperti sebelum ada sampul.
+            const cover = card?.art && !brokenCover[card.art] ? card.art : null;
             return (
               <button
                 key={lv.id}
@@ -293,48 +300,67 @@ export default function GameShell({
                 aria-label={soon ? `${label} — segera hadir` : undefined}
                 onClick={() => handlePick(i)}
               >
-                <span className="pick-card__pic" aria-hidden>
-                  {card?.item ? (
-                    <ItemPic id={card.item} className="pick-card__img" />
+                {/* Sampul: ilustrasi adegan selebar kartu, jadi kartunya
+                    terbaca seperti buku cerita di rak — anak yang belum lancar
+                    membaca mengenali ceritanya dari gambarnya, bukan judulnya.
+                    Cerita yang belum punya ilustrasi memakai gambar item/emoji
+                    di atas langit-rumput yang sama, supaya semua kartu tetap
+                    sebentuk. */}
+                <span className="pick-card__cover">
+                  {cover ? (
+                    <img
+                      className="pick-card__art"
+                      src={`${import.meta.env.BASE_URL}assets/story/${cover}.webp`}
+                      alt=""
+                      aria-hidden
+                      draggable={false}
+                      onError={() => setBrokenCover((b) => ({ ...b, [cover]: true }))}
+                    />
                   ) : (
-                    (card?.emoji ?? config.emoji)
+                    <span className="pick-card__pic" aria-hidden>
+                      {card?.item ? (
+                        <ItemPic id={card.item} className="pick-card__img" />
+                      ) : (
+                        (card?.emoji ?? config.emoji)
+                      )}
+                    </span>
+                  )}
+                  <span className="pick-card__stars" aria-label={`${stars} bintang`}>
+                    {'⭐'.repeat(stars)}
+                    {'☆'.repeat(3 - stars)}
+                  </span>
+                  {/* Reading is not assumed: 🔊 replays the level's own
+                      narration line — already recorded, so no new audio. A
+                      level that is not open yet gets a padlock in the same
+                      corner instead: nothing on the card responds. */}
+                  {soon ? (
+                    <span className="pick-card__soon" aria-hidden>
+                      🔒
+                    </span>
+                  ) : (
+                    <span
+                      className="pick-card__speak"
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Dengarkan ${label}`}
+                      onClick={(e) => {
+                        // Listening must not count as choosing.
+                        e.stopPropagation();
+                        sfx('tap');
+                        speak(lv.narration);
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key !== 'Enter' && e.key !== ' ') return;
+                        e.stopPropagation();
+                        e.preventDefault();
+                        speak(lv.narration);
+                      }}
+                    >
+                      🔊
+                    </span>
                   )}
                 </span>
                 <span className="pick-card__label">{label}</span>
-                <span className="pick-card__stars" aria-label={`${stars} bintang`}>
-                  {'⭐'.repeat(stars)}
-                  {'☆'.repeat(3 - stars)}
-                </span>
-                {/* Reading is not assumed: 🔊 replays the level's own
-                    narration line — already recorded, so no new audio. A
-                    level that is not open yet gets a padlock in the same
-                    corner instead: nothing on the card responds. */}
-                {soon ? (
-                  <span className="pick-card__soon" aria-hidden>
-                    🔒
-                  </span>
-                ) : (
-                  <span
-                    className="pick-card__speak"
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Dengarkan ${label}`}
-                    onClick={(e) => {
-                      // Listening must not count as choosing.
-                      e.stopPropagation();
-                      sfx('tap');
-                      speak(lv.narration);
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key !== 'Enter' && e.key !== ' ') return;
-                      e.stopPropagation();
-                      e.preventDefault();
-                      speak(lv.narration);
-                    }}
-                  >
-                    🔊
-                  </span>
-                )}
               </button>
             );
           })}

@@ -1133,42 +1133,112 @@
 
 .pick-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
   width: 100%;
-  max-width: 620px;
+  max-width: 560px;
+}
+
+/*
+ * Layar lebar dipatok TIGA kolom, bukan dibiarkan `auto-fit` menambah kolom:
+ * sembilan cerita jatuh rapi jadi 3×3, dan kartunya ikut melebar (±218px,
+ * sampulnya 122px) alih-alih empat kartu sempit bersampul setinggi 83px.
+ * Di bawah 560px aturan ini tidak berlaku dan HP tetap dua kolom seperti dulu.
+ */
+@media (min-width: 560px) {
+  .pick-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 680px;
+  }
 }
 
 .pick-card {
   position: relative;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 4px;
-  padding: 12px 10px 10px;
+  align-items: stretch;
+  gap: 0;
+  /* Sampulnya menempel ke tepi kartu, jadi paddingnya pindah ke judul di
+     bawah; `overflow: hidden` yang membulatkan sudut atas gambarnya. */
+  padding: 0;
+  overflow: hidden;
   text-align: center;
 }
 
+/*
+ * Kotak sampul. Rasio 16:9 dipatok supaya tinggi tiap kartu sama walau
+ * ilustrasinya bermacam rasio (900×502 sampai 900×720) — tanpa itu satu baris
+ * kartu jadi tidak rata dan gridnya terlihat goyah.
+ * Latarnya langit → rumput, sama seperti panggung Jalan Kendaraan: itu yang
+ * terlihat di kartu yang belum punya ilustrasi (gambar item/emoji di atasnya).
+ */
+.pick-card__cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(#eaf7ff, #e8f8e2);
+  overflow: hidden;
+}
+
+/*
+ * `cover`, BUKAN `contain`: sampul buku mengisi bingkainya: ilustrasi yang
+ * di-letterbox akan menyisakan pita kosong dan kartunya terbaca separuh jadi.
+ * Konsekuensinya tepi gambar terpotong — karena itu `LevelCard.art` mensyaratkan
+ * adegan yang tokohnya di tengah.
+ */
+.pick-card__art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Kartu tanpa ilustrasi: emoji/gambar item di tengah kotak sampul. Boleh jauh
+   lebih besar dari sebelum ada sampul — ruangnya memang untuk gambar. */
 .pick-card__pic {
-  font-size: 40px;
-  line-height: 1.1;
+  font-size: 46px;
+  line-height: 1;
 }
 
 /* Kotak PERSEGI seperti `.choice-img`: gambar lebar (kerbau, gajah) tidak
    boleh melebarkan kartunya, dan yang lonjong tidak boleh tergencet. */
 .pick-card__img {
-  width: 46px;
-  height: 46px;
+  width: 58px;
+  height: 58px;
   object-fit: contain;
 }
 
 .pick-card__label {
+  /* Dua baris dijatah walau judulnya pendek, supaya sampul kartu di baris
+     berikutnya tetap sejajar. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.4em;
+  padding: 8px 8px 10px;
   font-size: 16px;
   font-weight: 800;
   line-height: 1.2;
   overflow-wrap: anywhere;
 }
 
+/*
+ * Bintang & tombol 🔊 duduk DI ATAS sampul, di dua sudut yang berseberangan:
+ * keduanya keterangan tentang kartunya, dan menaruhnya di bawah judul akan
+ * menambah tinggi tiap kartu — sembilan cerita sudah membuat layar ini panjang.
+ * Latarnya putih pekat, bukan abu-abu tipis seperti dulu: sekarang yang di
+ * belakangnya lukisan, bukan kartu putih polos.
+ */
 .pick-card__stars {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
   font-size: 13px;
   letter-spacing: 1px;
   line-height: 1;
@@ -1176,15 +1246,16 @@
 
 .pick-card__speak {
   position: absolute;
-  top: 3px;
-  right: 3px;
+  top: 6px;
+  right: 6px;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.05);
-  font-size: 17px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  font-size: 18px;
 }
 
 /* Cerita yang belum dibuka ("segera hadir"). Bentuknya sengaja SAMA dengan
@@ -1207,7 +1278,14 @@
   box-shadow: none;
 }
 
+/* Sampulnya ikut diredupkan, bukan cuma isinya: kalau langit-rumputnya tetap
+   segar, kartu mati justru jadi yang paling mencolok di layar. */
+.pick-card--soon .pick-card__cover {
+  background: linear-gradient(rgba(234, 247, 255, 0.5), rgba(232, 248, 226, 0.5));
+}
+
 .pick-card--soon .pick-card__pic,
+.pick-card--soon .pick-card__art,
 .pick-card--soon .pick-card__label,
 .pick-card--soon .pick-card__stars {
   opacity: 0.42;
@@ -1217,15 +1295,15 @@
    perbedaannya (bisa didengar vs terkunci) langsung terbaca berdampingan. */
 .pick-card__soon {
   position: absolute;
-  top: 3px;
-  right: 3px;
+  top: 6px;
+  right: 6px;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.05);
-  font-size: 16px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 17px;
   opacity: 0.55;
 }
 

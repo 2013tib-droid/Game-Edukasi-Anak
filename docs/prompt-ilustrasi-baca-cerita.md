@@ -24,12 +24,13 @@ jalan dengan emoji/item seperti sekarang, tanpa error apa pun di app.
 
 ---
 
-## Beda dengan dua dokumen prompt yang lain (JANGAN tertukar)
+## Beda dengan dokumen prompt yang lain (JANGAN tertukar)
 
 | Dokumen | Gayanya | Latar | Isi |
 |---|---|---|---|
 | `prompt-gambar-gemini.md` · `prompt-hewan-cerita.md` | **stiker**: outline hitam tebal, warna flat | **putih polos**, dipotong transparan | SATU benda/hewan |
 | **dokumen ini** | **lukisan buku cerita**: shading lembut, cat digital | **latarnya ikut digambar**, tidak dipotong | satu ADEGAN, boleh 2+ tokoh |
+| `prompt-gambar-judul-cerita.md` | sama: **lukisan buku cerita** | latarnya ikut digambar, tapi **sederhana** | **SAMPUL kartu**: 1–2 tokoh besar di tengah, 16:9 |
 
 Dua gaya ini **tidak boleh dicampur dalam satu halaman**. Yang dipakai di sini
 adalah gaya lukisan — mengikuti `jalak-kerbau.webp`, `kancil-rawa.webp` dan
