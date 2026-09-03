@@ -135,6 +135,11 @@ export const ITEMS: Record<string, ItemDef> = {
   taxi: { emoji: '🚕', label: 'taksi', ext: 'webp' },
   motorcycle: { emoji: '🏍️', label: 'motor', ext: 'webp' },
   racecar: { emoji: '🏎️', label: 'mobil balap', ext: 'webp' },
+  // Alat kerja profesi (Pasangan Pintar, BATCH 7 di
+  // docs/prompt-gambar-gemini.md). Belum ada asetnya — jatuh ke emoji lewat
+  // ItemPic sampai gambarnya dikirim, pola yang sama dengan tahap maskot yang
+  // belum punya seni.
+  wrench: { emoji: '🔧', label: 'kunci pas', ext: 'webp' },
 };
 
 /** Public URL of an item's picture, respecting the Vite base path. */
