@@ -221,46 +221,6 @@
       ]
     },
     {
-      "key": "9bba02e4179d",
-      "text": "Berapa delapan tambah tujuh?",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "hitung-hebat",
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "074447bd2b0e",
-      "text": "Berapa sembilan tambah enam?",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "hitung-hebat",
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "0c243e6c4e37",
-      "text": "Berapa sembilan tambah sembilan?",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "hitung-hebat",
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "f96c9162b5e6",
-      "text": "Berapa tujuh tambah tujuh?",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "hitung-hebat",
-        "tambah-tangkas"
-      ]
-    },
-    {
       "key": "867f57ee6807",
       "text": "Lihat polanya baik-baik. Bentuk apa selanjutnya?",
       "scope": "_shared",
@@ -2063,6 +2023,15 @@
       ]
     },
     {
+      "key": "5b4ce1299d67",
+      "text": "Ada delapan belas anak di lapangan, datang tujuh anak lagi. Berapa anak semuanya?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
       "key": "2cf172a683d7",
       "text": "Ada delapan kelinci, lalu lima pulang ke rumah. Berapa yang tersisa?",
       "scope": "hitung-hebat",
@@ -2225,8 +2194,89 @@
       ]
     },
     {
+      "key": "bdea48d536bd",
+      "text": "Andi memetik empat belas mangga, Adik memetik lima mangga. Berapa mangga mereka?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
       "key": "7f9bd02cac78",
       "text": "Berapa delapan belas dikurangi sembilan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "5c98cbd46019",
+      "text": "Berapa delapan belas tambah dua?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "497fb427da64",
+      "text": "Berapa delapan tambah delapan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "21da21a5cad6",
+      "text": "Berapa delapan tambah enam?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "6feeb7bbb551",
+      "text": "Berapa delapan tambah lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "15f8c649514b",
+      "text": "Berapa delapan tambah satu?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "9bba02e4179d",
+      "text": "Berapa delapan tambah tujuh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "6f3fe45db807",
+      "text": "Berapa dua belas tambah dua belas?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "894e4ecaa4eb",
+      "text": "Berapa dua belas tambah enam?",
       "scope": "hitung-hebat",
       "voice": "gadis",
       "games": [
@@ -2261,8 +2311,26 @@
       ]
     },
     {
+      "key": "943beaa11ad1",
+      "text": "Berapa dua puluh dua tambah tujuh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
       "key": "dbc94682f085",
       "text": "Berapa dua puluh empat dikurangi dua belas?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "f309e7f47a04",
+      "text": "Berapa dua puluh empat tambah tiga?",
       "scope": "hitung-hebat",
       "voice": "gadis",
       "games": [
@@ -2279,8 +2347,143 @@
       ]
     },
     {
+      "key": "09e0e7bf8df4",
+      "text": "Berapa dua puluh lima tambah empat?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "409a57e0d917",
+      "text": "Berapa dua puluh lima tambah lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
       "key": "8b3cc0c8a7a8",
       "text": "Berapa dua puluh satu tambah delapan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "eda9c127c7fa",
+      "text": "Berapa dua puluh satu tambah lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "018ccb9f9235",
+      "text": "Berapa dua puluh tambah delapan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "280408fdc0f0",
+      "text": "Berapa dua puluh tambah enam?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "f05e31224b68",
+      "text": "Berapa dua puluh tambah lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "6866370bfd3c",
+      "text": "Berapa dua puluh tambah sepuluh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "7a8ab21b10ae",
+      "text": "Berapa dua puluh tambah tiga?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "39efa7baf289",
+      "text": "Berapa dua puluh tujuh tambah dua?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "0d5c9a91f531",
+      "text": "Berapa dua tambah dua?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "5eeca3edb533",
+      "text": "Berapa dua tambah empat tambah enam?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "71e47c945376",
+      "text": "Berapa dua tambah satu?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "e7fa4e388c7a",
+      "text": "Berapa dua tambah tiga tambah empat?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "1fb29e3109cf",
+      "text": "Berapa dua tambah tiga?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "8d0622087390",
+      "text": "Berapa dua tambah tujuh?",
       "scope": "hitung-hebat",
       "voice": "gadis",
       "games": [
@@ -2297,6 +2500,42 @@
       ]
     },
     {
+      "key": "527f954a0719",
+      "text": "Berapa empat tambah dua tambah lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "fefdf94d1f3f",
+      "text": "Berapa empat tambah empat?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "04e6b876ec58",
+      "text": "Berapa empat tambah lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "8a5962c6235c",
+      "text": "Berapa empat tambah satu?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
       "key": "a056ba8ef8c6",
       "text": "Berapa enam belas dikurangi sembilan?",
       "scope": "hitung-hebat",
@@ -2306,8 +2545,62 @@
       ]
     },
     {
+      "key": "e1b27edb2d99",
+      "text": "Berapa enam belas tambah tiga?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "ea08cc3cf846",
+      "text": "Berapa enam tambah dua?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "b9fba3450028",
+      "text": "Berapa enam tambah empat?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "197ea0ac6c8e",
+      "text": "Berapa enam tambah enam?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
       "key": "d9e63d6d78de",
       "text": "Berapa enam tambah sembilan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "0c1f61341576",
+      "text": "Berapa enam tambah tiga tambah empat?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "de248052ac93",
+      "text": "Berapa enam tambah tujuh?",
       "scope": "hitung-hebat",
       "voice": "gadis",
       "games": [
@@ -2333,6 +2626,114 @@
       ]
     },
     {
+      "key": "6ed46a73ec66",
+      "text": "Berapa lima belas tambah lima belas?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "451a26b6210e",
+      "text": "Berapa lima belas tambah lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "0c9c5700cf6f",
+      "text": "Berapa lima belas tambah sepuluh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "8d6c06116ed7",
+      "text": "Berapa lima tambah dua puluh lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "2b6f09589d94",
+      "text": "Berapa lima tambah lima belas?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "156e36221b5c",
+      "text": "Berapa lima tambah lima tambah dua?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "dc7180da1f5e",
+      "text": "Berapa lima tambah lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "1eb974d2bee5",
+      "text": "Berapa lima tambah sembilan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "a3de7588113b",
+      "text": "Berapa lima tambah tiga?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "0ad5858da4f9",
+      "text": "Berapa satu tambah dua tambah tiga?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "e628320c434f",
+      "text": "Berapa satu tambah dua?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "22232862fdb5",
+      "text": "Berapa satu tambah empat?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
       "key": "a785602b7acc",
       "text": "Berapa sebelas tambah delapan?",
       "scope": "hitung-hebat",
@@ -2344,6 +2745,123 @@
     {
       "key": "c3b00a3ff222",
       "text": "Berapa sembilan belas dikurangi tujuh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "b73d28e65977",
+      "text": "Berapa sembilan belas tambah empat?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "893080a2f039",
+      "text": "Berapa sembilan tambah delapan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "7e244c5ea4a4",
+      "text": "Berapa sembilan tambah empat?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "074447bd2b0e",
+      "text": "Berapa sembilan tambah enam?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "0c243e6c4e37",
+      "text": "Berapa sembilan tambah sembilan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "9fb01dd6f8f0",
+      "text": "Berapa sepuluh tambah dua puluh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "9a76a7f0a4a5",
+      "text": "Berapa sepuluh tambah lima belas?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "a053ef652765",
+      "text": "Berapa sepuluh tambah lima tambah tiga?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "ea4f410a0d12",
+      "text": "Berapa sepuluh tambah lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "5c38a0a872e3",
+      "text": "Berapa sepuluh tambah sembilan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "a796bb779d51",
+      "text": "Berapa sepuluh tambah sepuluh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "8563c67160b0",
+      "text": "Berapa sepuluh tambah tiga?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "5cfd22149d5a",
+      "text": "Berapa sepuluh tambah tujuh?",
       "scope": "hitung-hebat",
       "voice": "gadis",
       "games": [
@@ -2369,6 +2887,15 @@
       ]
     },
     {
+      "key": "c07efdf08e1a",
+      "text": "Berapa tiga belas tambah empat?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
       "key": "77bac2557b34",
       "text": "Berapa tiga belas tambah enam?",
       "scope": "hitung-hebat",
@@ -2378,8 +2905,62 @@
       ]
     },
     {
+      "key": "fd11a0ded55f",
+      "text": "Berapa tiga belas tambah tiga belas?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
       "key": "548839b3bf9f",
       "text": "Berapa tiga puluh dikurangi sepuluh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "1d57ab49e238",
+      "text": "Berapa tiga tambah dua?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "ebb41dffebd8",
+      "text": "Berapa tiga tambah enam?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "5d4733f872a9",
+      "text": "Berapa tiga tambah satu?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "f36b563fe86e",
+      "text": "Berapa tiga tambah tiga tambah tiga?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "1e2f8824621b",
+      "text": "Berapa tiga tambah tiga?",
       "scope": "hitung-hebat",
       "voice": "gadis",
       "games": [
@@ -2398,6 +2979,123 @@
     {
       "key": "d214470dd856",
       "text": "Berapa tujuh belas tambah tiga belas?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "e53d33c65865",
+      "text": "Berapa tujuh tambah dua?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "93a566ccf092",
+      "text": "Berapa tujuh tambah enam?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "150ad022213b",
+      "text": "Berapa tujuh tambah lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "f96c9162b5e6",
+      "text": "Berapa tujuh tambah tujuh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "7039036ac9ba",
+      "text": "Budi punya lima belas koin, lalu menabung sepuluh koin lagi. Berapa koin Budi?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "b872a714aca6",
+      "text": "Delapan tambah berapa supaya jadi lima belas?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "5faea05cfec1",
+      "text": "Di kandang ada delapan ayam, lalu datang empat lagi. Berapa ayam semuanya?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "19da9c20f755",
+      "text": "Di kolam ada sebelas ikan, Ayah menambah delapan ikan. Berapa ikan di kolam?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "249bf7d9d225",
+      "text": "Di rak ada sembilan buku, Kakak menaruh tujuh buku lagi. Berapa buku di rak?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "270305a29071",
+      "text": "Dua tambah berapa supaya jadi tujuh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "d06de201757a",
+      "text": "Empat tambah berapa supaya jadi sembilan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "c0a073a7d95d",
+      "text": "Enam tambah berapa supaya jadi sepuluh?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "6ddb31a5ad1b",
+      "text": "Ibu membeli dua belas telur, lalu membeli enam lagi. Berapa telur Ibu?",
       "scope": "hitung-hebat",
       "voice": "gadis",
       "games": [
@@ -2513,6 +3211,33 @@
       ]
     },
     {
+      "key": "7465a3517c42",
+      "text": "Lima tambah berapa supaya jadi delapan?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "48505c95a678",
+      "text": "Rani punya enam kelereng, lalu diberi lima lagi. Berapa kelerengnya?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "5ebda16860cc",
+      "text": "Sembilan tambah berapa supaya jadi tiga belas?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
       "key": "e0c04281562f",
       "text": "Sentuh bilangan yang paling besar!",
       "scope": "hitung-hebat",
@@ -2524,6 +3249,33 @@
     {
       "key": "7eeac0c8f6ca",
       "text": "Sentuh bilangan yang paling kecil!",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "5e6abae48f08",
+      "text": "Sepuluh tambah berapa supaya jadi enam belas?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "cd6880e9f587",
+      "text": "Tiga tambah berapa supaya jadi lima?",
+      "scope": "hitung-hebat",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat"
+      ]
+    },
+    {
+      "key": "c27eb17a6256",
+      "text": "Tujuh tambah berapa supaya jadi dua belas?",
       "scope": "hitung-hebat",
       "voice": "gadis",
       "games": [
@@ -5498,762 +6250,6 @@
       "voice": "gadis",
       "games": [
         "taman-huruf"
-      ]
-    },
-    {
-      "key": "5b4ce1299d67",
-      "text": "Ada delapan belas anak di lapangan, datang tujuh anak lagi. Berapa anak semuanya?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "bdea48d536bd",
-      "text": "Andi memetik empat belas mangga, Adik memetik lima mangga. Berapa mangga mereka?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "5c98cbd46019",
-      "text": "Berapa delapan belas tambah dua?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "497fb427da64",
-      "text": "Berapa delapan tambah delapan?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "21da21a5cad6",
-      "text": "Berapa delapan tambah enam?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "6feeb7bbb551",
-      "text": "Berapa delapan tambah lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "15f8c649514b",
-      "text": "Berapa delapan tambah satu?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "6f3fe45db807",
-      "text": "Berapa dua belas tambah dua belas?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "894e4ecaa4eb",
-      "text": "Berapa dua belas tambah enam?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "943beaa11ad1",
-      "text": "Berapa dua puluh dua tambah tujuh?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "f309e7f47a04",
-      "text": "Berapa dua puluh empat tambah tiga?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "09e0e7bf8df4",
-      "text": "Berapa dua puluh lima tambah empat?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "409a57e0d917",
-      "text": "Berapa dua puluh lima tambah lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "eda9c127c7fa",
-      "text": "Berapa dua puluh satu tambah lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "018ccb9f9235",
-      "text": "Berapa dua puluh tambah delapan?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "280408fdc0f0",
-      "text": "Berapa dua puluh tambah enam?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "f05e31224b68",
-      "text": "Berapa dua puluh tambah lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "6866370bfd3c",
-      "text": "Berapa dua puluh tambah sepuluh?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "7a8ab21b10ae",
-      "text": "Berapa dua puluh tambah tiga?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "39efa7baf289",
-      "text": "Berapa dua puluh tujuh tambah dua?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "0d5c9a91f531",
-      "text": "Berapa dua tambah dua?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "5eeca3edb533",
-      "text": "Berapa dua tambah empat tambah enam?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "71e47c945376",
-      "text": "Berapa dua tambah satu?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "e7fa4e388c7a",
-      "text": "Berapa dua tambah tiga tambah empat?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "1fb29e3109cf",
-      "text": "Berapa dua tambah tiga?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "8d0622087390",
-      "text": "Berapa dua tambah tujuh?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "527f954a0719",
-      "text": "Berapa empat tambah dua tambah lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "fefdf94d1f3f",
-      "text": "Berapa empat tambah empat?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "04e6b876ec58",
-      "text": "Berapa empat tambah lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "8a5962c6235c",
-      "text": "Berapa empat tambah satu?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "e1b27edb2d99",
-      "text": "Berapa enam belas tambah tiga?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "ea08cc3cf846",
-      "text": "Berapa enam tambah dua?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "b9fba3450028",
-      "text": "Berapa enam tambah empat?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "197ea0ac6c8e",
-      "text": "Berapa enam tambah enam?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "0c1f61341576",
-      "text": "Berapa enam tambah tiga tambah empat?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "de248052ac93",
-      "text": "Berapa enam tambah tujuh?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "6ed46a73ec66",
-      "text": "Berapa lima belas tambah lima belas?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "451a26b6210e",
-      "text": "Berapa lima belas tambah lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "0c9c5700cf6f",
-      "text": "Berapa lima belas tambah sepuluh?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "8d6c06116ed7",
-      "text": "Berapa lima tambah dua puluh lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "2b6f09589d94",
-      "text": "Berapa lima tambah lima belas?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "156e36221b5c",
-      "text": "Berapa lima tambah lima tambah dua?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "dc7180da1f5e",
-      "text": "Berapa lima tambah lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "1eb974d2bee5",
-      "text": "Berapa lima tambah sembilan?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "a3de7588113b",
-      "text": "Berapa lima tambah tiga?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "0ad5858da4f9",
-      "text": "Berapa satu tambah dua tambah tiga?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "e628320c434f",
-      "text": "Berapa satu tambah dua?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "22232862fdb5",
-      "text": "Berapa satu tambah empat?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "b73d28e65977",
-      "text": "Berapa sembilan belas tambah empat?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "893080a2f039",
-      "text": "Berapa sembilan tambah delapan?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "7e244c5ea4a4",
-      "text": "Berapa sembilan tambah empat?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "9fb01dd6f8f0",
-      "text": "Berapa sepuluh tambah dua puluh?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "9a76a7f0a4a5",
-      "text": "Berapa sepuluh tambah lima belas?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "a053ef652765",
-      "text": "Berapa sepuluh tambah lima tambah tiga?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "ea4f410a0d12",
-      "text": "Berapa sepuluh tambah lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "5c38a0a872e3",
-      "text": "Berapa sepuluh tambah sembilan?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "a796bb779d51",
-      "text": "Berapa sepuluh tambah sepuluh?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "8563c67160b0",
-      "text": "Berapa sepuluh tambah tiga?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "5cfd22149d5a",
-      "text": "Berapa sepuluh tambah tujuh?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "c07efdf08e1a",
-      "text": "Berapa tiga belas tambah empat?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "fd11a0ded55f",
-      "text": "Berapa tiga belas tambah tiga belas?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "1d57ab49e238",
-      "text": "Berapa tiga tambah dua?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "ebb41dffebd8",
-      "text": "Berapa tiga tambah enam?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "5d4733f872a9",
-      "text": "Berapa tiga tambah satu?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "f36b563fe86e",
-      "text": "Berapa tiga tambah tiga tambah tiga?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "1e2f8824621b",
-      "text": "Berapa tiga tambah tiga?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "e53d33c65865",
-      "text": "Berapa tujuh tambah dua?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "93a566ccf092",
-      "text": "Berapa tujuh tambah enam?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "150ad022213b",
-      "text": "Berapa tujuh tambah lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "7039036ac9ba",
-      "text": "Budi punya lima belas koin, lalu menabung sepuluh koin lagi. Berapa koin Budi?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "b872a714aca6",
-      "text": "Delapan tambah berapa supaya jadi lima belas?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "5faea05cfec1",
-      "text": "Di kandang ada delapan ayam, lalu datang empat lagi. Berapa ayam semuanya?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "19da9c20f755",
-      "text": "Di kolam ada sebelas ikan, Ayah menambah delapan ikan. Berapa ikan di kolam?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "249bf7d9d225",
-      "text": "Di rak ada sembilan buku, Kakak menaruh tujuh buku lagi. Berapa buku di rak?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "270305a29071",
-      "text": "Dua tambah berapa supaya jadi tujuh?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "d06de201757a",
-      "text": "Empat tambah berapa supaya jadi sembilan?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "c0a073a7d95d",
-      "text": "Enam tambah berapa supaya jadi sepuluh?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "6ddb31a5ad1b",
-      "text": "Ibu membeli dua belas telur, lalu membeli enam lagi. Berapa telur Ibu?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "7465a3517c42",
-      "text": "Lima tambah berapa supaya jadi delapan?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "48505c95a678",
-      "text": "Rani punya enam kelereng, lalu diberi lima lagi. Berapa kelerengnya?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "5ebda16860cc",
-      "text": "Sembilan tambah berapa supaya jadi tiga belas?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "5e6abae48f08",
-      "text": "Sepuluh tambah berapa supaya jadi enam belas?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "cd6880e9f587",
-      "text": "Tiga tambah berapa supaya jadi lima?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
-      ]
-    },
-    {
-      "key": "c27eb17a6256",
-      "text": "Tujuh tambah berapa supaya jadi dua belas?",
-      "scope": "tambah-tangkas",
-      "voice": "gadis",
-      "games": [
-        "tambah-tangkas"
       ]
     },
     {
