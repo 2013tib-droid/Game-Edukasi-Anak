@@ -230,12 +230,18 @@ const GAJAH = story(
   'l3',
   { label: 'Kancil dan Gajah', item: 'elephant', art: 'sampul-kancil-gajah' },
   'Kancil dan Gajah. Ayo bantu Kancil menolong temannya!',
-  // Dua halaman pembuka ini SENGAJA tanpa `at()`: ilustrasinya (kiriman
-  // pemilik, 2026-08-10) sudah membawa rawanya sendiri — hutan, air, dan
-  // tepian — jadi latar gambar engine di belakangnya cuma jadi hutan di atas
-  // hutan. Sejak empat ilustrasi 2026-09-03, aturan itu berlaku sampai halaman
-  // keenam; `at('sungai')` tinggal di halaman penutup yang masih beremoji.
-  pic('kancil-rawa', 'Pagi itu Kancil berjalan di tepi rawa.'),
+  // `at('sungai')` DIPINDAH ke halaman pertama (2026-09-03, laporan pemilik:
+  // "backgroundnya standar, tidak seperti 2 cerita lainnya"). Dulu tujuh
+  // halaman pertama sengaja tanpa `at()` — alasannya ilustrasinya (kiriman
+  // pemilik) sudah membawa rawanya sendiri, jadi latar engine di belakangnya
+  // dianggap cuma jadi "hutan di atas hutan". Tapi tanpa `scene` sama sekali,
+  // `StoryChoice` TIDAK merender `<Scene>` apa pun (`{scene && <Scene .../>}`)
+  // — jadi yang terlihat justru gradien pastel bawaan app, persis keluhan
+  // pemilik, dan berbeda dari "Kancil dan Pak Tani"/"Jalak dan Kerbau" yang
+  // keduanya set `at()` sejak halaman pertama. Rawa belum punya latar sendiri
+  // (lihat Scene.tsx); `sungai` dipilih karena sudah membawa air + tepian
+  // hijau, paling dekat dengan rawa di antara latar yang ada.
+  at('sungai', pic('kancil-rawa', 'Pagi itu Kancil berjalan di tepi rawa.')),
   pic('gajah-lumpur', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.'),
   ask(
     { art: 'kancil-gajah-tanya', emoji: '🤔' },
@@ -262,12 +268,10 @@ const GAJAH = story(
   ),
   // Penutup: satu-satunya halaman cerita ini yang masih beremoji — kalimatnya
   // pesan moral, bukan adegan, jadi tak ada yang bisa dilukis selain mengulang
-  // gambar halaman sebelumnya. Karena itu `at('sungai')` sekarang duduk DI
-  // SINI: aturan cerita ini (CLAUDE.md 2026-08-10) adalah latar engine dipakai
-  // di halaman pertama yang BELUM berilustrasi, dan sejak keempat gambar
-  // 2026-09-03 halaman itu tinggal yang ini. Rawa belum punya latar sendiri;
-  // `sungai` sudah membawa air + tepian hijau.
-  at('sungai', page('⭐', 'Badan kecil pun bisa menolong, asal punya akal dan teman.')),
+  // gambar halaman sebelumnya. Latar `sungai` yang dipasang di halaman
+  // pertama tetap berlaku sampai sini (scene mewarisi halaman sebelumnya),
+  // jadi tak perlu `at()` lagi di halaman ini.
+  page('⭐', 'Badan kecil pun bisa menolong, asal punya akal dan teman.'),
 );
 
 /* ---------- Cerita rakyat & fabel klasik — pindahan dari game

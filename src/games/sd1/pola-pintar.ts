@@ -39,10 +39,13 @@ import type { GameConfig, GameLevel, ShapeId, ShapeSpec, TapChoice } from '@/eng
  *   - **BATAS BILANGAN 30** (keputusan pemilik 2026-08-01): tak ada bilangan
  *     di deret maupun di kartu jawaban yang lewat 30.
  *   - Narasi tidak pernah memuat jawabannya.
- *   - Pengecoh selalu "hampir benar": bentuk yang benar dengan WARNA salah,
- *     warna yang benar dengan BENTUK salah, atau sel sebelumnya — supaya anak
- *     harus benar-benar membaca polanya, bukan menebak kartu yang paling beda
- *     sendiri.
+ *   - **Tiga pilihan per soal** (jawaban + 2 pengecoh) — dikecilkan dari 4
+ *     pilihan atas permintaan pemilik (2026-09-03). Pengecoh yang dibuang
+ *     selalu yang tipe "sel sebelumnya" (nilai yang sudah tampak di deret);
+ *     yang dipertahankan adalah pasangan "hampir benar" yang sengaja
+ *     dirancang: bentuk yang benar dengan WARNA salah, dan warna yang benar
+ *     dengan BENTUK salah — supaya anak harus benar-benar membaca polanya,
+ *     bukan menebak kartu yang paling beda sendiri.
  *   - **merah & pink tidak pernah diadu** sebagai jawaban vs pengecoh: di HP
  *     keduanya nyaris tak terbedakan. (Aturan warna Labirin Warna, berlaku
  *     di sini juga.)
@@ -205,27 +208,27 @@ const config: GameConfig<'tap-answer'> = {
         // Di deretnya sendiri keduanya boleh berdampingan — warnanya beda
         // jauh, jadi iramanya tetap terbaca.
         [sh('segilima', BIRU), sh('segienam', KUNING)],
-        [sh('segilima', BIRU), sh('segienam', HIJAU), sh('ketupat', KUNING)],
+        [sh('segienam', HIJAU), sh('ketupat', KUNING)],
       ),
       lanjut(
         [sh('trapesium', HIJAU), sh('ketupat', MERAH)],
-        [sh('trapesium', HIJAU), sh('ketupat', BIRU), sh('trapesium', MERAH)],
+        [sh('ketupat', BIRU), sh('trapesium', MERAH)],
       ),
       lanjut(
         [sh('ketupat', UNGU), sh('segitiga', KUNING)],
-        [sh('ketupat', UNGU), sh('segitiga', MERAH), sh('ketupat', KUNING)],
+        [sh('segitiga', MERAH), sh('ketupat', KUNING)],
       ),
       lanjut(
         [sh('segienam', HIJAU), sh('lingkaran', PINK)],
-        [sh('segienam', HIJAU), sh('lingkaran', BIRU), sh('segienam', PINK)],
+        [sh('lingkaran', BIRU), sh('segienam', PINK)],
       ),
       lanjut(
         [sh('trapesium', UNGU), sh('segilima', KUNING)],
-        [sh('trapesium', UNGU), sh('segilima', HIJAU), sh('trapesium', KUNING)],
+        [sh('segilima', HIJAU), sh('trapesium', KUNING)],
       ),
       lanjut(
         [sh('ketupat', BIRU), sh('segienam', MERAH)],
-        [sh('ketupat', BIRU), sh('segienam', KUNING), sh('ketupat', MERAH)],
+        [sh('segienam', KUNING), sh('ketupat', MERAH)],
       ),
     ),
     // --- 2. Pola AAB / ABB — satu bentuk mengulang, jadi anak tak bisa
@@ -234,27 +237,27 @@ const config: GameConfig<'tap-answer'> = {
       'l2',
       lanjut(
         [sh('segilima', MERAH), sh('segilima', MERAH), sh('trapesium', BIRU)],
-        [sh('segilima', MERAH), sh('trapesium', HIJAU), sh('segilima', BIRU)],
+        [sh('trapesium', HIJAU), sh('segilima', BIRU)],
       ),
       lanjut(
         [sh('ketupat', HIJAU), sh('ketupat', HIJAU), sh('bintang', KUNING)],
-        [sh('ketupat', HIJAU), sh('bintang', UNGU), sh('ketupat', KUNING)],
+        [sh('bintang', UNGU), sh('ketupat', KUNING)],
       ),
       lanjut(
         [sh('segienam', UNGU), sh('kotak', KUNING), sh('kotak', KUNING)],
-        [sh('segienam', UNGU), sh('kotak', HIJAU), sh('segienam', KUNING)],
+        [sh('kotak', HIJAU), sh('segienam', KUNING)],
       ),
       lanjut(
         [sh('trapesium', PINK), sh('lingkaran', BIRU), sh('lingkaran', BIRU)],
-        [sh('trapesium', PINK), sh('lingkaran', UNGU), sh('trapesium', BIRU)],
+        [sh('lingkaran', UNGU), sh('trapesium', BIRU)],
       ),
       lanjut(
         [sh('hati', MERAH), sh('hati', MERAH), sh('segilima', HIJAU)],
-        [sh('hati', MERAH), sh('segilima', BIRU), sh('hati', HIJAU)],
+        [sh('segilima', BIRU), sh('hati', HIJAU)],
       ),
       lanjut(
         [sh('ketupat', KUNING), sh('segienam', BIRU), sh('segienam', BIRU)],
-        [sh('ketupat', KUNING), sh('segienam', MERAH), sh('ketupat', BIRU)],
+        [sh('segienam', MERAH), sh('ketupat', BIRU)],
       ),
     ),
     // --- 3. Pola ABC — tiga bentuk berbeda sebelum berulang ---
@@ -262,27 +265,27 @@ const config: GameConfig<'tap-answer'> = {
       'l3',
       lanjut(
         [sh('segilima', MERAH), sh('trapesium', BIRU), sh('ketupat', KUNING)],
-        [sh('trapesium', BIRU), sh('ketupat', HIJAU), sh('segilima', KUNING)],
+        [sh('ketupat', HIJAU), sh('segilima', KUNING)],
       ),
       lanjut(
         [sh('segienam', HIJAU), sh('bintang', KUNING), sh('kotak', UNGU)],
-        [sh('bintang', KUNING), sh('kotak', MERAH), sh('segienam', UNGU)],
+        [sh('kotak', MERAH), sh('segienam', UNGU)],
       ),
       lanjut(
         [sh('ketupat', BIRU), sh('lingkaran', PINK), sh('segitiga', HIJAU)],
-        [sh('lingkaran', PINK), sh('segitiga', KUNING), sh('ketupat', HIJAU)],
+        [sh('segitiga', KUNING), sh('ketupat', HIJAU)],
       ),
       lanjut(
         [sh('trapesium', UNGU), sh('segienam', KUNING), sh('hati', MERAH)],
-        [sh('segienam', KUNING), sh('hati', BIRU), sh('trapesium', MERAH)],
+        [sh('hati', BIRU), sh('trapesium', MERAH)],
       ),
       lanjut(
         [sh('segilima', COKLAT), sh('oval', HIJAU), sh('ketupat', PINK)],
-        [sh('oval', HIJAU), sh('ketupat', BIRU), sh('segilima', PINK)],
+        [sh('ketupat', BIRU), sh('segilima', PINK)],
       ),
       lanjut(
         [sh('kotak', MERAH), sh('segienam', BIRU), sh('trapesium', KUNING)],
-        [sh('segienam', BIRU), sh('trapesium', HIJAU), sh('kotak', KUNING)],
+        [sh('trapesium', HIJAU), sh('kotak', KUNING)],
       ),
     ),
     // --- 4. Pola ABBC — empat sel per satuan, jadi deret 6 sel berhenti di
@@ -292,42 +295,42 @@ const config: GameConfig<'tap-answer'> = {
       'l4',
       lanjut(
         [sh('segilima', MERAH), sh('trapesium', BIRU), sh('trapesium', BIRU), sh('ketupat', KUNING)],
-        [sh('segilima', MERAH), sh('ketupat', KUNING), sh('trapesium', HIJAU)],
+        [sh('ketupat', KUNING), sh('trapesium', HIJAU)],
       ),
       lanjut(
         [sh('kotak', HIJAU), sh('bintang', KUNING), sh('bintang', KUNING), sh('hati', MERAH)],
-        [sh('kotak', HIJAU), sh('hati', MERAH), sh('bintang', UNGU)],
+        [sh('hati', MERAH), sh('bintang', UNGU)],
       ),
       lanjut(
         [sh('segienam', UNGU), sh('lingkaran', PINK), sh('lingkaran', PINK), sh('segitiga', BIRU)],
-        [sh('segienam', UNGU), sh('segitiga', BIRU), sh('lingkaran', KUNING)],
+        [sh('segitiga', BIRU), sh('lingkaran', KUNING)],
       ),
       lanjut(
         [sh('ketupat', KUNING), sh('segilima', HIJAU), sh('segilima', HIJAU), sh('oval', MERAH)],
-        [sh('ketupat', KUNING), sh('oval', MERAH), sh('segilima', BIRU)],
+        [sh('oval', MERAH), sh('segilima', BIRU)],
       ),
       lanjut(
         [sh('trapesium', BIRU), sh('hati', PINK), sh('hati', PINK), sh('segienam', KUNING)],
-        [sh('trapesium', BIRU), sh('segienam', KUNING), sh('hati', UNGU)],
+        [sh('segienam', KUNING), sh('hati', UNGU)],
       ),
       lanjut(
         [sh('bintang', MERAH), sh('ketupat', BIRU), sh('ketupat', BIRU), sh('segilima', KUNING)],
-        [sh('bintang', MERAH), sh('segilima', KUNING), sh('ketupat', HIJAU)],
+        [sh('segilima', KUNING), sh('ketupat', HIJAU)],
       ),
     ),
     // --- 5. Pola WARNA — bentuknya sama semua, warnanya yang berirama.
     //        Semua kartu jawaban sebentuk, jadi cuma warna yang menentukan. ---
     slot(
       'l5',
-      warna('lingkaran', [MERAH, BIRU], [MERAH, HIJAU, KUNING]),
-      warna('kotak', [HIJAU, KUNING], [HIJAU, BIRU, UNGU]),
-      warna('bintang', [UNGU, KUNING, HIJAU], [UNGU, KUNING, BIRU]),
+      warna('lingkaran', [MERAH, BIRU], [HIJAU, KUNING]),
+      warna('kotak', [HIJAU, KUNING], [BIRU, UNGU]),
+      warna('bintang', [UNGU, KUNING, HIJAU], [KUNING, BIRU]),
       // Dua varian memakai bangun ruang: bentuknya sama sepanjang deret,
       // jadi bayangan sisinya tidak pernah jadi bahan pembanding — cuma
       // warnanya, dan warna dasar kartu tetap satu.
-      warna('kubus', [BIRU, BIRU, MERAH], [BIRU, UNGU, COKLAT]),
-      warna('hati', [PINK, UNGU], [PINK, BIRU, COKLAT]),
-      warna('tabung', [KUNING, HIJAU, HIJAU], [KUNING, BIRU, MERAH]),
+      warna('kubus', [BIRU, BIRU, MERAH], [UNGU, COKLAT]),
+      warna('hati', [PINK, UNGU], [BIRU, COKLAT]),
+      warna('tabung', [KUNING, HIJAU, HIJAU], [BIRU, MERAH]),
     ),
     // --- 6. Dua ciri sekaligus — bentuk berirama 2, warna berirama 3.
     //        Slot tersulit di game ini. ---
@@ -336,32 +339,32 @@ const config: GameConfig<'tap-answer'> = {
       duaCiri(
         ['lingkaran', 'kotak'],
         [MERAH, BIRU, KUNING],
-        [sh('kotak', MERAH), sh('lingkaran', KUNING), sh('lingkaran', MERAH)],
+        [sh('kotak', MERAH), sh('lingkaran', KUNING)],
       ),
       duaCiri(
         ['segitiga', 'bintang'],
         [HIJAU, UNGU, KUNING],
-        [sh('bintang', HIJAU), sh('segitiga', KUNING), sh('segitiga', HIJAU)],
+        [sh('bintang', HIJAU), sh('segitiga', KUNING)],
       ),
       duaCiri(
         ['ketupat', 'segienam'],
         [BIRU, KUNING, MERAH],
-        [sh('segienam', BIRU), sh('ketupat', MERAH), sh('ketupat', BIRU)],
+        [sh('segienam', BIRU), sh('ketupat', MERAH)],
       ),
       duaCiri(
         ['hati', 'oval'],
         [PINK, BIRU, HIJAU],
-        [sh('oval', PINK), sh('hati', HIJAU), sh('hati', PINK)],
+        [sh('oval', PINK), sh('hati', HIJAU)],
       ),
       duaCiri(
         ['trapesium', 'segilima'],
         [KUNING, HIJAU, UNGU],
-        [sh('segilima', KUNING), sh('trapesium', UNGU), sh('trapesium', KUNING)],
+        [sh('segilima', KUNING), sh('trapesium', UNGU)],
       ),
       duaCiri(
         ['tabung', 'bola'],
         [COKLAT, KUNING, BIRU],
-        [sh('bola', COKLAT), sh('tabung', BIRU), sh('tabung', COKLAT)],
+        [sh('bola', COKLAT), sh('tabung', BIRU)],
       ),
     ),
     // --- 7. Lubang di TENGAH deret — anak harus membaca pola dari kiri DAN
@@ -371,37 +374,37 @@ const config: GameConfig<'tap-answer'> = {
       pola(
         ulang([sh('segilima', MERAH), sh('kotak', BIRU)]),
         2,
-        [sh('kotak', BIRU), sh('segilima', HIJAU), sh('kotak', MERAH)],
+        [sh('segilima', HIJAU), sh('kotak', MERAH)],
         TENGAH,
       ),
       pola(
         ulang([sh('bintang', KUNING), sh('hati', MERAH), sh('segienam', BIRU)]),
         3,
-        [sh('segienam', BIRU), sh('bintang', HIJAU), sh('hati', KUNING)],
+        [sh('bintang', HIJAU), sh('hati', KUNING)],
         TENGAH,
       ),
       pola(
         ulang([sh('ketupat', HIJAU), sh('ketupat', HIJAU), sh('trapesium', UNGU)]),
         4,
-        [sh('trapesium', UNGU), sh('ketupat', BIRU), sh('trapesium', HIJAU)],
+        [sh('ketupat', BIRU), sh('trapesium', HIJAU)],
         TENGAH,
       ),
       pola(
         ulang([sh('lingkaran', UNGU), sh('segitiga', KUNING)]),
         3,
-        [sh('lingkaran', UNGU), sh('segitiga', HIJAU), sh('lingkaran', KUNING)],
+        [sh('segitiga', HIJAU), sh('lingkaran', KUNING)],
         TENGAH,
       ),
       pola(
         ulang([sh('oval', BIRU), sh('hati', PINK), sh('hati', PINK)]),
         2,
-        [sh('oval', BIRU), sh('hati', UNGU), sh('oval', PINK)],
+        [sh('hati', UNGU), sh('oval', PINK)],
         TENGAH,
       ),
       pola(
         ulang([sh('segienam', MERAH), sh('trapesium', KUNING), sh('kotak', HIJAU)]),
         4,
-        [sh('kotak', HIJAU), sh('trapesium', BIRU), sh('segienam', KUNING)],
+        [sh('trapesium', BIRU), sh('segienam', KUNING)],
         TENGAH,
       ),
     ),
@@ -413,28 +416,28 @@ const config: GameConfig<'tap-answer'> = {
         [sh('kubus', BIRU), sh('bola', KUNING)],
         // Pengecoh "warna benar, bentuk salah" di sini tabung, BUKAN
         // lingkaran: bola lawan lingkaran cuma beda bayangan.
-        [sh('kubus', BIRU), sh('bola', HIJAU), sh('tabung', KUNING)],
+        [sh('bola', HIJAU), sh('tabung', KUNING)],
       ),
       lanjut(
         [sh('tabung', MERAH), sh('kerucut', HIJAU)],
-        [sh('tabung', MERAH), sh('kerucut', KUNING), sh('bola', HIJAU)],
+        [sh('kerucut', KUNING), sh('bola', HIJAU)],
       ),
       lanjut(
         [sh('bola', UNGU), sh('balok', KUNING)],
-        [sh('bola', UNGU), sh('balok', HIJAU), sh('tabung', KUNING)],
+        [sh('balok', HIJAU), sh('tabung', KUNING)],
       ),
       lanjut(
         [sh('limas', HIJAU), sh('tabung', PINK)],
-        [sh('limas', HIJAU), sh('tabung', BIRU), sh('kubus', PINK)],
+        [sh('tabung', BIRU), sh('kubus', PINK)],
       ),
       lanjut(
         [sh('kubus', MERAH), sh('kerucut', KUNING)],
-        [sh('kubus', MERAH), sh('kerucut', BIRU), sh('bola', KUNING)],
+        [sh('kerucut', BIRU), sh('bola', KUNING)],
       ),
       lanjut(
         [sh('balok', UNGU), sh('limas', KUNING)],
         // Bukan kerucut: siluetnya sama-sama segitiga dengan limas.
-        [sh('balok', UNGU), sh('limas', HIJAU), sh('bola', KUNING)],
+        [sh('limas', HIJAU), sh('bola', KUNING)],
       ),
     ),
     // --- 9. Bangun ruang, irama AAB / ABB ---
@@ -442,28 +445,28 @@ const config: GameConfig<'tap-answer'> = {
       'l9',
       lanjut(
         [sh('kubus', MERAH), sh('kubus', MERAH), sh('bola', BIRU)],
-        [sh('kubus', MERAH), sh('bola', HIJAU), sh('tabung', BIRU)],
+        [sh('bola', HIJAU), sh('tabung', BIRU)],
       ),
       lanjut(
         [sh('tabung', HIJAU), sh('tabung', HIJAU), sh('limas', KUNING)],
-        [sh('tabung', HIJAU), sh('limas', UNGU), sh('balok', KUNING)],
+        [sh('limas', UNGU), sh('balok', KUNING)],
       ),
       lanjut(
         [sh('bola', KUNING), sh('bola', KUNING), sh('kerucut', MERAH)],
-        [sh('bola', KUNING), sh('kerucut', BIRU), sh('tabung', MERAH)],
+        [sh('kerucut', BIRU), sh('tabung', MERAH)],
       ),
       lanjut(
         [sh('balok', UNGU), sh('balok', UNGU), sh('tabung', KUNING)],
-        [sh('balok', UNGU), sh('tabung', HIJAU), sh('bola', KUNING)],
+        [sh('tabung', HIJAU), sh('bola', KUNING)],
       ),
       lanjut(
         [sh('kerucut', PINK), sh('kubus', BIRU), sh('kubus', BIRU)],
         // Bukan balok: bedanya dengan kubus cuma perbandingan rusuk.
-        [sh('kerucut', PINK), sh('kubus', KUNING), sh('tabung', BIRU)],
+        [sh('kubus', KUNING), sh('tabung', BIRU)],
       ),
       lanjut(
         [sh('limas', COKLAT), sh('bola', HIJAU), sh('bola', HIJAU)],
-        [sh('limas', COKLAT), sh('bola', KUNING), sh('kubus', HIJAU)],
+        [sh('bola', KUNING), sh('kubus', HIJAU)],
       ),
     ),
     // --- 10. Bangun ruang, irama ABC — tiga bangun berbeda sebelum
@@ -473,27 +476,27 @@ const config: GameConfig<'tap-answer'> = {
       'l10',
       lanjut(
         [sh('kubus', MERAH), sh('tabung', BIRU), sh('bola', KUNING)],
-        [sh('tabung', BIRU), sh('bola', HIJAU), sh('kerucut', KUNING)],
+        [sh('bola', HIJAU), sh('kerucut', KUNING)],
       ),
       lanjut(
         [sh('bola', HIJAU), sh('kerucut', KUNING), sh('balok', UNGU)],
-        [sh('kerucut', KUNING), sh('balok', MERAH), sh('tabung', UNGU)],
+        [sh('balok', MERAH), sh('tabung', UNGU)],
       ),
       lanjut(
         [sh('limas', BIRU), sh('kubus', KUNING), sh('tabung', MERAH)],
-        [sh('kubus', KUNING), sh('tabung', HIJAU), sh('bola', MERAH)],
+        [sh('tabung', HIJAU), sh('bola', MERAH)],
       ),
       lanjut(
         [sh('tabung', UNGU), sh('balok', KUNING), sh('kerucut', HIJAU)],
-        [sh('balok', KUNING), sh('kerucut', BIRU), sh('bola', HIJAU)],
+        [sh('kerucut', BIRU), sh('bola', HIJAU)],
       ),
       lanjut(
         [sh('kerucut', COKLAT), sh('bola', BIRU), sh('limas', KUNING)],
-        [sh('bola', BIRU), sh('limas', HIJAU), sh('kubus', KUNING)],
+        [sh('limas', HIJAU), sh('kubus', KUNING)],
       ),
       lanjut(
         [sh('balok', MERAH), sh('limas', HIJAU), sh('kubus', BIRU)],
-        [sh('limas', HIJAU), sh('kubus', KUNING), sh('tabung', BIRU)],
+        [sh('kubus', KUNING), sh('tabung', BIRU)],
       ),
     ),
     // --- 11. Bangun ruang dengan lubang di TENGAH — slot bangun ruang
@@ -503,37 +506,37 @@ const config: GameConfig<'tap-answer'> = {
       pola(
         ulang([sh('kubus', MERAH), sh('bola', BIRU)]),
         2,
-        [sh('bola', BIRU), sh('kubus', HIJAU), sh('tabung', MERAH)],
+        [sh('kubus', HIJAU), sh('tabung', MERAH)],
         TENGAH,
       ),
       pola(
         ulang([sh('bola', KUNING), sh('tabung', MERAH), sh('kerucut', BIRU)]),
         3,
-        [sh('kerucut', BIRU), sh('bola', HIJAU), sh('tabung', KUNING)],
+        [sh('bola', HIJAU), sh('tabung', KUNING)],
         TENGAH,
       ),
       pola(
         ulang([sh('limas', HIJAU), sh('limas', HIJAU), sh('balok', UNGU)]),
         4,
-        [sh('balok', UNGU), sh('limas', MERAH), sh('tabung', HIJAU)],
+        [sh('limas', MERAH), sh('tabung', HIJAU)],
         TENGAH,
       ),
       pola(
         ulang([sh('tabung', UNGU), sh('kubus', KUNING)]),
         3,
-        [sh('tabung', UNGU), sh('kubus', HIJAU), sh('bola', KUNING)],
+        [sh('kubus', HIJAU), sh('bola', KUNING)],
         TENGAH,
       ),
       pola(
         ulang([sh('kerucut', BIRU), sh('bola', PINK), sh('bola', PINK)]),
         2,
-        [sh('kerucut', BIRU), sh('bola', UNGU), sh('kubus', PINK)],
+        [sh('bola', UNGU), sh('kubus', PINK)],
         TENGAH,
       ),
       pola(
         ulang([sh('balok', MERAH), sh('tabung', KUNING), sh('limas', HIJAU)]),
         4,
-        [sh('limas', HIJAU), sh('tabung', BIRU), sh('bola', KUNING)],
+        [sh('tabung', BIRU), sh('bola', KUNING)],
         TENGAH,
       ),
     ),
