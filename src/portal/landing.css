@@ -93,11 +93,39 @@
   place-items: center;
   width: 58px;
   height: 58px;
+  /* border-box: sisakan 46px untuk seninya, supaya gambar tidak menempel di
+     lengkung lingkaran */
+  padding: 6px;
   border-radius: 50%;
-  font-size: 30px;
   line-height: 1;
   /* soft inner light instead of a raised-button shadow */
   box-shadow: inset 0 2px 6px rgba(255, 255, 255, 0.45);
+}
+
+/* Seni ikon game dari registry (`GameMeta.pic`) — sumber yang sama dengan
+   kartu portal, jadi chip di sini tak bisa lagi berbeda dari game-nya.
+   Diukur lewat TINGGI: tiap file dipotong pas di gambarnya sehingga rasionya
+   beda-beda, dan kotak berukuran tetap akan menggepengkan yang lebar.
+   `max-width` yang menjaga seni terlebar (Ejaan Jitu, rasio 1,42) tetap di
+   dalam lingkaran — ia jadi sedikit lebih pendek dari tetangganya, dan itu
+   memang benar. Bayangan tipisnya memisahkan seni pastel dari cakram pastel
+   di belakangnya, aturan yang sama dengan `.dd-img` & `.spell-picture__img`. */
+.landing .world-art {
+  display: block;
+  /* Dua-duanya `max-`, BUKAN `height` yang dipatok: gambar dengan tinggi tetap
+     + `max-width` akan dipangkas lebarnya saja lalu GEPENG (lihat catatan di
+     GameIcon.tsx). Dengan dua batas ini gambar mengecil apa adanya sampai muat
+     keduanya, rasionya utuh. */
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 42px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.16));
+}
+
+/* Cadangan kalau file seninya gagal dimuat — ukuran emoji seperti dulu. */
+.landing .world-emoji {
+  font-size: 30px;
 }
 .landing .world-name {
   font-size: 12px;
@@ -107,11 +135,23 @@
   /* narrow enough that every two-word world name wraps the same way, so the
      four labels line up instead of mixing one- and two-line rows */
   max-width: 4.6em;
+  /* ...dan `min-height` yang benar-benar MENJAMIN-nya. `max-width` saja
+     bergantung pada metrik font, padahal app ini meminta Fredoka tanpa pernah
+     memuatnya — jadi tiap HP memakai font sistemnya sendiri dan lebar yang
+     sama bisa muat 2 baris di iPhone tapi 1 baris di tempat lain. Terukur
+     2026-09-03: "Ejaan Jitu" jadi satu baris dan barisnya ikut jomplang. */
+  min-height: 2.5em;
 }
 @media (max-width: 340px) {
   .landing .world-disc {
     width: 50px;
     height: 50px;
+    padding: 5px;
+  }
+  .landing .world-art {
+    max-height: 36px;
+  }
+  .landing .world-emoji {
     font-size: 26px;
   }
   .landing .world-name {

@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import FeedbackSection from '@/portal/FeedbackSection';
 import TopBar from '@/portal/TopBar';
+import GameIcon from '@/engine/ui/GameIcon';
+import { findGame } from '@/games/registry';
 import './landing.css';
 
 const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
@@ -9,16 +11,26 @@ const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
  * A taste of both groups — the first row is Playgroup & TK, the second is
  * SD Kelas 1 & 2. Both groups are on sale, so neither may be the only one
  * shown here.
+ *
+ * `id` menunjuk `src/games/registry.ts`: GAMBAR dan NAMA-nya diambil dari
+ * sana, sumber yang sama dengan kartu portal & layar intro. Jangan menyalin
+ * nama file seni atau judul ke sini — ikon yang ditulis di dua tempat pernah
+ * menyimpang sampai seminggu (CLAUDE.md, 2026-08-09).
+ *
+ * `emoji` di sini SENGAJA lokal: itu cuma cadangan kalau file seninya gagal
+ * dimuat, dan beberapa di antaranya ditera khusus untuk tampil sebagai emoji
+ * telanjang di lingkaran pastel — Jam Pintar memakai ⏰ (jam weker), BUKAN
+ * 🕒 milik registry yang di HP tampil seperti piringan abu-abu polos.
  */
 const worlds = [
-  { cls: 'w-forest', emoji: '🦁', name: 'Hutan Hewan' },
-  { cls: 'w-space', emoji: '🏕️', name: 'Taman Huruf' },
-  { cls: 'w-color', emoji: '🎨', name: 'Labirin Warna' },
-  { cls: 'w-fruit', emoji: '🍉', name: 'Pasar Buah' },
-  { cls: 'w-count', emoji: '🔢', name: 'Hitung Hebat' },
-  { cls: 'w-spell', emoji: '✏️', name: 'Ejaan Jitu' },
-  { cls: 'w-clock', emoji: '⏰', name: 'Jam Pintar' },
-  { cls: 'w-story', emoji: '📖', name: 'Baca Cerita' },
+  { cls: 'w-forest', id: 'hutan-hewan', emoji: '🦁' },
+  { cls: 'w-space', id: 'taman-huruf', emoji: '🏕️' },
+  { cls: 'w-color', id: 'labirin-warna', emoji: '🎨' },
+  { cls: 'w-fruit', id: 'pasar-buah', emoji: '🍉' },
+  { cls: 'w-count', id: 'hitung-hebat', emoji: '🔢' },
+  { cls: 'w-spell', id: 'ejaan-jitu', emoji: '✏️' },
+  { cls: 'w-clock', id: 'jam-pintar', emoji: '⏰' },
+  { cls: 'w-story', id: 'cerita-kancil', emoji: '📖' },
 ];
 
 /**
@@ -81,14 +93,22 @@ export default function LandingPage() {
       <section className="worlds">
         <h2 className="worlds-title">Petualangan seru menanti</h2>
         <ul className="world-list">
-          {worlds.map((w) => (
-            <li key={w.name} className="world">
-              <span className={`world-disc ${w.cls}`} aria-hidden="true">
-                {w.emoji}
-              </span>
-              <span className="world-name">{w.name}</span>
-            </li>
-          ))}
+          {worlds.map((w) => {
+            const meta = findGame(w.id);
+            return (
+              <li key={w.id} className="world">
+                <span className={`world-disc ${w.cls}`} aria-hidden="true">
+                  <GameIcon
+                    pic={meta?.pic}
+                    emoji={w.emoji}
+                    className="world-art"
+                    fallbackClassName="world-emoji"
+                  />
+                </span>
+                <span className="world-name">{meta?.title ?? w.id}</span>
+              </li>
+            );
+          })}
         </ul>
       </section>
 
