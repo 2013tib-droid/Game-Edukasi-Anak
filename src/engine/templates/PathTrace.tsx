@@ -30,13 +30,17 @@ const SAMPLES = 240; // path points precomputed for hit testing
 const LOOK_AHEAD = 26; // how many samples ahead a finger may jump to
 const ON_ROAD = 9; // distance that still counts as "on the road"
 const OFF_ROAD = 17; // beyond this the trip resets (one mistake)
+// `road.narrow` (SD, harder than TK): same idea, smaller margin — the finger
+// has to track the road more closely before a mistake resets the trip.
+const NARROW_ON_ROAD = 6;
+const NARROW_OFF_ROAD = 12;
 const FINISH_AT = 4; // samples from the end that already count as arrived
 const FOLLOW = 0.3; // per-frame easing of the car toward the finger
 const TURN = 0.25; // per-frame easing of the car's heading (no snapping)
 
 /** SVG path (`d`) for a road shape. Geometry lives here, configs only name it. */
 function roadPath(road: RoadSpec): string {
-  const steps = Math.max(1, Math.min(6, road.steps ?? 3));
+  const steps = Math.max(1, Math.min(8, road.steps ?? 3));
   const x0 = 10;
   const x1 = 90;
   const span = x1 - x0;
@@ -88,6 +92,11 @@ function roadPath(road: RoadSpec): string {
 
     case 'ess':
       return `M 12 56 C 34 56, 30 36, 50 36 S 66 15, 88 15`;
+
+    case 'kelokan':
+      // Triple wave — same y extremes as 'zigzag' (14/58, already proven to
+      // fit the road stage) but curved and with one bend more than 'ess'.
+      return `M ${x0} 58 C 24 58, 22 14, 36 14 S 50 58, 64 58 S 78 14, ${x1} 14`;
   }
 }
 
@@ -100,6 +109,10 @@ interface Pt {
 export default function PathTrace({ level, onCorrect, onWrong }: TemplateProps<'path-trace'>) {
   const { road, vehicle, vehicleItem, goal, goalItem } = level.data;
   const d = useMemo(() => roadPath(road), [road]);
+  // Recomputed per level (PathTrace remounts on level change), so tick()
+  // below always closes over the tolerance for the road it was drawn for.
+  const onRoad = road.narrow ? NARROW_ON_ROAD : ON_ROAD;
+  const offRoad = road.narrow ? NARROW_OFF_ROAD : OFF_ROAD;
 
   const svgRef = useRef<SVGSVGElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
@@ -180,14 +193,14 @@ export default function PathTrace({ level, onCorrect, onWrong }: TemplateProps<'
           best = i;
         }
       }
-      if (bestDist > OFF_ROAD) {
+      if (bestDist > offRoad) {
         // Off the road: one gentle mistake, the car drives back to the start.
         blocked.current = true;
         dragging.current = false;
         finger.current = null;
         target.current = 0;
         onWrong();
-      } else if (bestDist <= ON_ROAD && best > target.current) {
+      } else if (bestDist <= onRoad && best > target.current) {
         target.current = best; // progress only ever moves forward
       }
     }
@@ -281,7 +294,7 @@ export default function PathTrace({ level, onCorrect, onWrong }: TemplateProps<'
     const p = svgPoint(e);
     const here = pointAt(target.current);
     // The finger must start on (or right next to) the vehicle.
-    if (Math.hypot(p.x - here.x, p.y - here.y) > OFF_ROAD) return;
+    if (Math.hypot(p.x - here.x, p.y - here.y) > offRoad) return;
     dragging.current = true;
     blocked.current = false;
     finger.current = p;
@@ -309,7 +322,7 @@ export default function PathTrace({ level, onCorrect, onWrong }: TemplateProps<'
         <div className="road-stage">
           <svg
             ref={svgRef}
-            className="road-svg"
+            className={`road-svg${road.narrow ? ' road-svg--narrow' : ''}`}
             viewBox={`0 0 ${W} ${H}`}
             onPointerDown={down}
             onPointerMove={move}

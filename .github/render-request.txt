@@ -1,12 +1,15 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-only: ejaan-jitu
-
-render #8 — Ejaan Jitu: kata PASAR diganti TOKO, jadi narasinya berubah dari
-"Ini pasar. …" menjadi "Ini toko. Ayo susun hurufnya jadi satu kata!".
-SATU baris baru saja; 49 kalimat Ejaan Jitu yang lain tidak diubah, jadi
-rekamannya dilewati dan tidak memakan kuota.
+render #9 — Game baru "Rute Kendaraan" (SD): 12 kalimat narasi baru, plus 19
+kalimat yang tadinya milik Jalan Kendaraan (TK) sekarang naik jadi scope
+`_shared` karena dipakai kedua game (kombinasi kendaraan+tujuan yang sama
+persis, mis. "Antar mobil ke sekolah..."). Scope yang berubah = folder file
+yang berubah, jadi 19 baris itu perlu dirender ULANG di folder `_shared`
+walau kalimatnya tidak berubah — makanya TANPA baris "only:" di sini, biar
+render penuh (file yang sudah ada tetap dilewati, jadi bukan render 764 baris
+dari nol).
 
 Tanpa "redo: lafal" — daftar lafal tidak berubah.
-Tanpa prune — rekaman "Ini pasar" & "Ini kebun" jadi yatim tapi sengaja
-dibiarkan; membuang file yatim sebaiknya sekali saja untuk semua scope.
+Tanpa prune — file lama di folder `jalan-kendaraan` untuk 19 kalimat yang
+pindah scope jadi yatim, sengaja dibiarkan (aturan lama: prune sekali saja
+untuk semua scope, bukan tiap render).

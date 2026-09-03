@@ -1376,6 +1376,24 @@
   stroke-width: 11.5;
 }
 
+/* `road.narrow` (SD, lebih sulit dari TK): jalan digambar lebih tipis supaya
+   anak MELIHAT toleransinya menyempit, bukan cuma merasakannya lewat game
+   logic (lihat NARROW_ON_ROAD/NARROW_OFF_ROAD di PathTrace.tsx). Rasio
+   penyempitannya sama (±65%) supaya lebar garis tetap sepadan dengan jarak
+   yang benar-benar ditoleransi. */
+.road-svg--narrow .road-edge {
+  stroke-width: 10;
+}
+
+.road-svg--narrow .road-fill,
+.road-svg--narrow .road-done {
+  stroke-width: 7.5;
+}
+
+.road-svg--narrow .road-dash {
+  stroke-width: 1.2;
+}
+
 /* Posisi marker & kendaraan ditulis PathTrace lewat `transform` (translate3d),
    jadi keduanya cukup ditempel di pojok kiri-atas panggung. */
 .road-marker {

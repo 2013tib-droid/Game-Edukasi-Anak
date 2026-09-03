@@ -212,6 +212,18 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd1/pola-pintar'),
   },
   {
+    // Saudara "Jalan Kendaraan" (TK) tapi sengaja lebih sulit — jalan lebih
+    // sempit & lebih banyak belokan (lihat komentar kepala config). Belum
+    // punya ikon ART sendiri (`pic`); emoji 🛣️ jadi identitasnya sampai
+    // asetnya dibuat.
+    id: 'rute-kendaraan',
+    group: 'sd1',
+    title: 'Rute Kendaraan',
+    emoji: '🛣️',
+    template: 'path-trace',
+    load: () => import('@/games/sd1/rute-kendaraan'),
+  },
+  {
     // Sengaja PALING BAWAH di daftar SD (permintaan pemilik 2026-09-03): ia
     // kartu terakhir yang dilihat anak, bukan yang kedua. Urutan kartu portal
     // = urutan array ini (`GroupPage` tidak menyortir apa pun).

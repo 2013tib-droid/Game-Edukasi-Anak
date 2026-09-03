@@ -56,6 +56,13 @@ export function announcementsFor(isBuyer: boolean): Announcement[] {
  */
 export const announcements: Announcement[] = [
   {
+    id: 'a-2026-09-03-rute-kendaraan',
+    date: '2026-09-03',
+    tag: 'baru',
+    title: 'Game baru: Rute Kendaraan 🛣️',
+    body: 'Untuk kelompok SD Kelas 1 & 2 — susuri jalan yang lebih sempit dan berliku daripada Jalan Kendaraan TK. Melatih motorik halus yang lebih presisi.',
+  },
+  {
     id: 'a-2026-07-28-jalan-kendaraan',
     date: '2026-07-28',
     tag: 'baru',

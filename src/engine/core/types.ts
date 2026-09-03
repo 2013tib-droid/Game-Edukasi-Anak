@@ -313,15 +313,27 @@ export type RoadKind =
   | 'zigzag' // patah-patah tajam
   | 'tangga' // anak tangga (belok siku)
   | 'lengkung' // huruf U
-  | 'ess'; // huruf S
+  | 'ess' // huruf S
+  // Tiga lekukan berturut-turut (bukan dua seperti 'ess') — dipakai game SD
+  // yang levelnya sengaja lebih sulit dari 'ess' TK, lihat 'Rute Kendaraan'.
+  | 'kelokan';
 
 export interface RoadSpec {
   kind: RoadKind;
   /**
    * How many repeats for shapes that repeat (bukit, gelombang, zigzag,
-   * tangga) — more repeats = jalan lebih panjang & sulit. Default 3.
+   * tangga) — more repeats = jalan lebih panjang & sulit. Default 3,
+   * maksimal 8.
    */
   steps?: number;
+  /**
+   * Jalan lebih SEMPIT: toleransi jari yang masih dianggap "di jalan"
+   * dipersempit di engine (lihat `PathTrace.tsx`), dan garis jalannya
+   * digambar lebih tipis supaya anak melihat bedanya. Dipakai game SD yang
+   * levelnya sengaja menuntut presisi lebih daripada TK — bukan cuma bentuk
+   * jalannya yang lebih rumit, tapi ruang geraknya sendiri lebih kecil.
+   */
+  narrow?: boolean;
 }
 
 export interface PathTraceData {
