@@ -189,12 +189,21 @@ export default function GameShell({
 
   // Narrate the instruction whenever a new level is shown (covers first
   // level, advancing, and freshly re-rolled variants after a replay).
+  //
+  // **Cerita adalah kekecualian** (laporan pemilik 2026-09-03, Jalak &
+  // Kerbau): `narration` sebuah cerita itu judul + ajakan ("Burung Jalak dan
+  // Kerbau. Ayo ikuti ceritanya!") — kalimat untuk KARTU PEMILIH cerita, dan
+  // anak yang baru saja mengetuk kartu itu sudah mendengarnya di sana. Kalau
+  // shell membacakannya sekali lagi di sini, halaman pertama cerita ("Kerbau
+  // berkubang di sawah…") harus mengantre di belakangnya dulu — anak menatap
+  // gambar sambil mendengar judul yang sudah dia dengar. Cerita punya
+  // pembuka sendiri: halaman pertamanya, yang dibacakan `StoryChoice`.
   useEffect(() => {
     if (screen !== 'playing') return;
     wrongCount.current = 0;
     const lv = levels[levelIndex];
-    if (lv) speak(lv.narration);
-  }, [screen, levelIndex, levels]);
+    if (lv && templateFor(config, lv) !== 'story-choice') speak(lv.narration);
+  }, [screen, levelIndex, levels, config]);
 
   /** Start over from level 1 with freshly drawn questions. */
   function handleStart() {

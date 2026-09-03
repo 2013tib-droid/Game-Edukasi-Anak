@@ -63,14 +63,15 @@ export default function StoryChoice({
     return choices.map((c, i) => `Pilihan ${LETTERS[i] ?? i + 1}. ${c.text}`);
   }
 
-  // Narrate each page as it appears. Page 0's own text is queued behind the
-  // level narration (the story title, spoken by GameShell); later pages cancel
-  // it and speak on their own. Options always follow the page text.
+  // Narrate each page as it appears — **halaman pertama pun langsung**, tanpa
+  // mengantre di belakang apa pun. Dulu halaman 0 memakai `speakNext` karena
+  // shell membacakan judul cerita lebih dulu; sejak shell melewatkan narasi
+  // level untuk template ini (lihat GameShell), kalimat pembuka cerita itulah
+  // yang pertama terdengar. Pilihan selalu menyusul di belakang teks halaman.
   useEffect(() => {
     if (!page || narratedPage.current === pageIndex) return;
     narratedPage.current = pageIndex;
-    if (pageIndex === 0) speakNext(page.text);
-    else narrate(page.text);
+    narrate(page.text);
     if (page.choices) speakNext(...optionLines(page.choices));
   }, [pageIndex, page, narrate]);
 
