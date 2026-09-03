@@ -1,11 +1,13 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-only: cerita-kancil
+only: ejaan-jitu
 
-render #6 — "Cerita Anak": dua cerita baru (Taman yang Bersih, Payung untuk
-Berdua). 50 baris baru, ±2.800 karakter. Cerita Kancil yang lama tidak diubah
-kalimatnya, jadi ke-16 rekamannya dilewati (tidak memakan kuota).
-Suaranya Ardi -8% (semua cerita), otomatis dipilih skrip ekstraksi.
+render #7 — Ejaan Jitu: kata KEBUN diganti TAMAN, jadi narasinya berubah dari
+"Ini kebun. …" menjadi "Ini taman. Ayo susun hurufnya jadi satu kata!".
+SATU baris baru saja (±45 karakter); 49 kalimat Ejaan Jitu yang lain tidak
+diubah, jadi rekamannya dilewati dan tidak memakan kuota.
 
-Tanpa "redo: lafal" kali ini — daftar lafal tidak berubah, jadi tak ada baris
-lama yang perlu dirender ulang.
+Tanpa "redo: lafal" — daftar lafal tidak berubah.
+Tanpa prune — rekaman "Ini kebun" jadi yatim tapi sengaja dibiarkan; menghapus
+file yatim sebaiknya sekali saja untuk semua scope, bukan menumpang render
+satu game.
