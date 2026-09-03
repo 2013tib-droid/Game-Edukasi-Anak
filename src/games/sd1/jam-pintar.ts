@@ -16,6 +16,12 @@ import { terbilang } from '@/games/numbers';
  * Aturan yang dipatuhi (CLAUDE.md): narasi soal "jam berapa ini?" tidak
  * pernah menyebut jawabannya. Soal kebalikannya (dengar waktunya → cari
  * jamnya) memang menyebut waktu, karena di situ yang dicari GAMBAR jamnya.
+ * Pengecualiannya cuma soal arah jarum (`hands()`) — alasannya ada di sana.
+ *
+ * SETIAP soal di game ini memperlihatkan muka jam: sebagai cue besar di atas
+ * (`data.clock`) atau sebagai kartu jawaban (`choice.clock`). Kalau menambah
+ * varian baru, jangan ada yang cuma kalimat + kartu tulisan — layarnya jadi
+ * kosong di tengah (keluhan pemilik 2026-09-03).
  */
 
 const NAMES = [
@@ -110,6 +116,15 @@ function hands(hour: number, ...decoys: Time[]): GameLevel<'tap-answer'> {
     id: '',
     narration: `Jarum pendek di angka ${terbilang(hour)}, jarum panjang di angka dua belas. Pukul berapa itu?`,
     data: {
+      // Jamnya IKUT DIGAMBAR (permintaan pemilik 2026-09-03 dari tangkapan
+      // layar: soal ini satu-satunya yang layarnya kosong melompong — narasi
+      // di atas, tiga kartu tulisan di bawah, tak ada apa-apa di tengah).
+      // Ini juga satu-satunya soal yang narasinya menyebut posisi jarum
+      // SEKALIGUS memperlihatkan jamnya, jadi memang lebih mudah: yang
+      // dilatih di sini kosakata "jarum pendek/panjang" — anak mencocokkan
+      // kalimatnya dengan jarum biru gemuk & jarum merah tipis di muka jam,
+      // bukan menebak dalam kepala. Jangan "dirapikan" jadi tanpa jam lagi.
+      clock: face(answer),
       choices: [
         { id: 'a', text: digits(answer), correct: true },
         ...decoys.map((d, i) => ({ id: `d${i}`, text: digits(d) })),
