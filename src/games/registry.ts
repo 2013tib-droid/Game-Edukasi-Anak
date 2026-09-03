@@ -128,19 +128,6 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd1/pasang-kata'),
   },
   {
-    // Id sengaja tetap `cerita-kancil` walau judulnya sudah berganti dua kali
-    // ("Cerita Anak" 2026-08-09, "Baca Cerita" 2026-09-02 setelah Cerita
-    // Nusantara dilebur ke sini): id dipakai route, bintang anak, dan folder
-    // file suaranya.
-    id: 'cerita-kancil',
-    group: 'sd1',
-    title: 'Baca Cerita',
-    emoji: '📗',
-    pic: 'cerita-kancil',
-    template: 'story-choice',
-    load: () => import('@/games/sd1/cerita-kancil'),
-  },
-  {
     id: 'tambah-tangkas',
     group: 'sd1',
     title: 'Tambah Tangkas',
@@ -223,6 +210,22 @@ export const games: GameMeta[] = [
     pic: 'pola-pintar',
     template: 'tap-answer',
     load: () => import('@/games/sd1/pola-pintar'),
+  },
+  {
+    // Sengaja PALING BAWAH di daftar SD (permintaan pemilik 2026-09-03): ia
+    // kartu terakhir yang dilihat anak, bukan yang kedua. Urutan kartu portal
+    // = urutan array ini (`GroupPage` tidak menyortir apa pun).
+    // Id sengaja tetap `cerita-kancil` walau judulnya sudah berganti dua kali
+    // ("Cerita Anak" 2026-08-09, "Baca Cerita" 2026-09-02 setelah Cerita
+    // Nusantara dilebur ke sini): id dipakai route, bintang anak, dan folder
+    // file suaranya.
+    id: 'cerita-kancil',
+    group: 'sd1',
+    title: 'Baca Cerita',
+    emoji: '📗',
+    pic: 'cerita-kancil',
+    template: 'story-choice',
+    load: () => import('@/games/sd1/cerita-kancil'),
   },
 ];
 
