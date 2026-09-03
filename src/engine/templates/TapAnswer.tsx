@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import type { CSSProperties } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import type { BoardOp } from '@/engine/core/types';
 import { sfx } from '@/engine/audio/sound';
@@ -16,20 +17,53 @@ const OP_GLYPH: Record<BoardOp, string> = {
 };
 
 /**
+ * Lebar tulisan dalam satuan `em`, ditaksir per karakter.
+ *
+ * Jumlah karakter saja tidak cukup: di font tebal ini satu HURUF KAPITAL jauh
+ * lebih lebar daripada satu angka (~0,72em lawan ~0,58em), jadi "RAK" (3
+ * karakter) hampir selebar "10.30" (5 karakter). Menakar lebarnya dulu bikin
+ * satu aturan berlaku untuk suku kata, angka, jam, maupun nilai uang.
+ */
+function emWidth(text: string): number {
+  let em = 0;
+  for (const ch of text) {
+    if (/[0-9]/.test(ch)) em += 0.58;
+    else if (/[IJ]/.test(ch)) em += 0.4;
+    else if (/[MW]/.test(ch)) em += 0.94;
+    else if (/[A-Z]/.test(ch)) em += 0.72;
+    else if (/[a-z]/.test(ch)) em += 0.56;
+    else if (/[ .,:]/.test(ch)) em += 0.3;
+    else em += 0.6;
+  }
+  return em;
+}
+
+/**
  * Size class for a text-only answer. A single letter or number is the whole
- * visual and gets the huge type; longer answers (suku kata "SANG", uang
- * "Rp15.000") step down so they still fit inside the card — a card is only
- * ~110px wide on a phone, and text with no spaces cannot wrap on its own.
+ * visual and gets the huge type; a wider answer (suku kata "RAK", jam "10.30",
+ * uang "Rp15.000") steps down so it still fits di dalam kartu — kartu di HP
+ * cuma ~100px lebarnya dan tulisan tanpa spasi tidak bisa pindah baris sendiri.
+ *
+ * Ambangnya dihitung dari `emWidth`, bukan `text.length`. Dulu pakai panjang
+ * karakter dan jawaban 3 huruf kapital ("RAK", "ROK", "RUK" di Suku Kata)
+ * masuk kelas terbesar lalu patah jadi "RA / K" di HP.
+ *
+ * Ukuran final masih dipangkas lagi oleh `--fit` (lihat engine.css): CSS
+ * membagi lebar kartu yang SEBENARNYA dengan taksiran ini, jadi kartu sempit
+ * di layar 320px pun tidak pernah kepenuhan.
  */
 function mainTextClass(text: string): string {
-  // A WORD (no digits) gets its own step. Capitals are far wider per character
-  // than the digits the tiers below were measured on: "BONEKA" runs ~4.3em
-  // against ~2.5em for the clock answer "10.30" and ~4.4em for the money
-  // answer "Rp15.000" that is two characters LONGER. Sized by length alone,
-  // six-letter answers wrapped to two lines on a 360px phone (Suku Kata:
-  // "KUCIN / G").
-  if (!/[0-9]/.test(text) && text.length >= 6) return 'choice-text choice-text--main choice-text--word';
-  const size = text.length <= 3 ? '' : text.length <= 6 ? ' choice-text--md' : ' choice-text--sm';
+  const em = emWidth(text);
+  const size =
+    em <= 1.3
+      ? '' // "7", "A", "12"
+      : em <= 2.4
+        ? ' choice-text--lg' // "RAK", "BAL"
+        : em <= 3.3
+          ? ' choice-text--md' // "BUKU", "CANG", "10.30"
+          : em <= 4.7
+            ? ' choice-text--word' // "BONEKA", "Rp15.000"
+            : ' choice-text--sm'; // lebih panjang lagi
   return `choice-text choice-text--main${size}`;
 }
 
@@ -224,7 +258,13 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
               {c.text && (
                 // A text answer with no emoji (a letter/number) is the main
                 // visual — render it big. With an emoji it's just a caption.
-                <span className={c.emoji ? 'choice-text' : mainTextClass(c.text)}>
+                <span
+                  className={c.emoji ? 'choice-text' : mainTextClass(c.text)}
+                  // Lebar taksiran tulisan, dipakai engine.css untuk membagi
+                  // lebar kartu (`cqw`) — pengaman terakhir supaya tulisan
+                  // tidak pernah patah, berapa pun lebar layarnya.
+                  style={{ '--fit': emWidth(c.text) } as CSSProperties}
+                >
                   {c.text}
                 </span>
               )}

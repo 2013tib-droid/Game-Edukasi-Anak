@@ -217,9 +217,15 @@
 }
 
 /* A letter/number answer with no emoji — big and bold so it's easy for a
-   young child to read from arm's length. */
+   young child to read from arm's length.
+
+   `--step` = ukuran maksimum menurut kelas panjangnya (lihat `mainTextClass`
+   di TapAnswer.tsx); nilainya ditimpa oleh kelas-kelas di bawah. Angka vw di
+   sini cuma cadangan untuk Android lawas tanpa container query — di browser
+   modern ukurannya dihitung dari lebar kartu yang sebenarnya. */
 .choice-card .choice-text--main {
-  font-size: clamp(48px, 15vw, 68px);
+  --step: clamp(48px, 15vw, 68px);
+  font-size: var(--step);
   font-weight: 800;
   line-height: 1;
   /* A long answer without spaces (a syllable, "Rp15.000") must never push the
@@ -227,26 +233,38 @@
   overflow-wrap: anywhere;
 }
 
-/* Step the type down as the answer gets longer (see mainTextClass in
-   TapAnswer.tsx): 4–6 characters — suku kata "SANG", jam "09.30".
-   Measured at 380px: a 5-character answer with no spaces ("10.30") needs to
-   sit under ~8vw or it wraps mid-number ("10.3" / "0") in a 3-column row. */
+/* Selebar ~2,4em — suku kata 3 huruf "RAK"/"ROK"/"RUK", "BAL" (Suku Kata).
+   Dulu kelas ini tidak ada: 3 huruf masih ikut ukuran terbesar dan patah jadi
+   "RA / K" di HP 402px. */
+.choice-card .choice-text--lg {
+  --step: clamp(26px, 10vw, 44px);
+}
+
+/* Selebar ~3,3em — suku kata "CANG"/"NYAT", kata "BUKU", jam "10.30". */
 .choice-card .choice-text--md {
-  font-size: clamp(26px, 7.6vw, 44px);
+  --step: clamp(26px, 7.6vw, 44px);
 }
 
-/* Kata 6 huruf atau lebih tanpa angka — "KUCING", "BONEKA" (Suku Kata).
-   SENGAJA lebih kecil dari --sm di bawah walau katanya lebih pendek: huruf
-   kapital jauh lebih lebar per karakter daripada angka, jadi "BONEKA" (4,3em)
-   hampir selebar "Rp15.000" (4,4em) yang dua karakter lebih panjang. Terukur
-   muat satu baris di layar 320/360/393/412px. */
+/* Selebar ~4,7em — "KUCING", "BONEKA", "SEPEDA" (Suku Kata). */
 .choice-card .choice-text--word {
-  font-size: clamp(18px, 5.5vw, 28px);
+  --step: clamp(18px, 5.5vw, 28px);
 }
 
-/* 7+ characters — nilai uang "Rp15.000", jam "07.30 pagi". */
+/* Lebih lebar lagi — uang "Rp15.000", jam "07.30 pagi". */
 .choice-card .choice-text--sm {
-  font-size: clamp(20px, 6vw, 28px);
+  --step: clamp(20px, 6vw, 28px);
+}
+
+/* Pengaman terakhir: bagi lebar ISI kartu (100cqw) dengan taksiran lebar
+   tulisannya (`--fit`, dipasang inline oleh TapAnswer). Hasilnya ukuran yang
+   PASTI muat satu baris di lebar kartu berapa pun — 2, 3, atau 4 kolom, layar
+   320px sampai tablet — dan tetap tidak pernah lebih besar dari `--step`.
+   Ini yang menghentikan tebak-tebakan vw tiap kali ada jawaban baru. */
+@supports (container-type: inline-size) {
+  .choice-card .choice-text--main {
+    /* 0,96 = sisa napas supaya huruf tidak menempel di tepi kartu. */
+    font-size: min(var(--step), calc(96cqw / var(--fit, 3)));
+  }
 }
 
 @keyframes shake {
