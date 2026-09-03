@@ -230,17 +230,18 @@ const GAJAH = story(
   'l3',
   { label: 'Kancil dan Gajah', item: 'elephant', art: 'sampul-kancil-gajah' },
   'Kancil dan Gajah. Ayo bantu Kancil menolong temannya!',
-  // `at('sungai')` DIPINDAH ke halaman pertama (2026-09-03, laporan pemilik:
-  // "backgroundnya standar, tidak seperti 2 cerita lainnya"). Dulu tujuh
-  // halaman pertama sengaja tanpa `at()` — alasannya ilustrasinya (kiriman
-  // pemilik) sudah membawa rawanya sendiri, jadi latar engine di belakangnya
-  // dianggap cuma jadi "hutan di atas hutan". Tapi tanpa `scene` sama sekali,
-  // `StoryChoice` TIDAK merender `<Scene>` apa pun (`{scene && <Scene .../>}`)
-  // — jadi yang terlihat justru gradien pastel bawaan app, persis keluhan
-  // pemilik, dan berbeda dari "Kancil dan Pak Tani"/"Jalak dan Kerbau" yang
-  // keduanya set `at()` sejak halaman pertama. Rawa belum punya latar sendiri
-  // (lihat Scene.tsx); `sungai` dipilih karena sudah membawa air + tepian
-  // hijau, paling dekat dengan rawa di antara latar yang ada.
+  // `at('sungai')` di halaman PERTAMA (bukan cuma di penutup) — perbaikan
+  // 2026-09-03 setelah laporan pemilik "backgroundnya standar, ngga kayak
+  // 2 cerita lainnya". Alasan lama ("ilustrasinya sudah membawa rawanya
+  // sendiri, Scene di belakang cuma jadi hutan di atas hutan") ternyata
+  // salah terapan: `scene` dipakai TERUS oleh `StoryChoice` sampai `at()`
+  // berikutnya, jadi menahannya sampai halaman 7 berarti keenam halaman
+  // berilustrasi di atas TAK PUNYA Scene sama sekali — bukan "hutan di atas
+  // hutan", tapi gradien pastel bawaan app di sekeliling panel gambarnya.
+  // Persis pola JALAK di atas: latar dipasang di halaman pertama dan
+  // dibiarkan mengikuti sampai selesai, termasuk di belakang halaman
+  // ber-`art`/`item` — itulah yang membuat Jalak & Kerbau (dan Kancil & Pak
+  // Tani) terasa punya latar sementara cerita ini tidak.
   at('sungai', pic('kancil-rawa', 'Pagi itu Kancil berjalan di tepi rawa.')),
   pic('gajah-lumpur', 'Ada gajah terperosok di lumpur. Badannya terlalu berat untuk naik sendiri.'),
   ask(
@@ -267,10 +268,8 @@ const GAJAH = story(
     'Semua menarik bersama-sama. Gajah akhirnya keluar dari lumpur!',
   ),
   // Penutup: satu-satunya halaman cerita ini yang masih beremoji — kalimatnya
-  // pesan moral, bukan adegan, jadi tak ada yang bisa dilukis selain mengulang
-  // gambar halaman sebelumnya. Latar `sungai` yang dipasang di halaman
-  // pertama tetap berlaku sampai sini (scene mewarisi halaman sebelumnya),
-  // jadi tak perlu `at()` lagi di halaman ini.
+  // pesan moral, bukan adegan. Tak perlu `at()` lagi di sini: `sungai` sudah
+  // dipasang di halaman pertama dan ikut terbawa sampai sini.
   page('⭐', 'Badan kecil pun bisa menolong, asal punya akal dan teman.'),
 );
 
