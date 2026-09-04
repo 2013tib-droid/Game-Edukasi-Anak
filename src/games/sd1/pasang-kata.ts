@@ -252,7 +252,14 @@ const config: GameConfig<'drag-drop'> = {
       words({ word: 'topi', emoji: '🧢', item: 'cap' }, { word: 'sepatu', emoji: '👟', item: 'shoe' }, { word: 'baju', emoji: '👕' }),
       words({ word: 'celana', emoji: '👖' }, { word: 'kaus kaki', emoji: '🧦' }, { word: 'sandal', emoji: '🩴' }),
       words({ word: 'jaket', emoji: '🧥' }, { word: 'kacamata', emoji: '👓' }, { word: 'topi', emoji: '🧢', item: 'cap' }),
-      words({ word: 'dasi', emoji: '👔' }, { word: 'syal', emoji: '🧣' }, { word: 'sarung tangan', emoji: '🧤' }),
+      // Dasi, syal & sarung tangan DIBUANG (keputusan pemilik 2026-09-04).
+      // Dua alasan sekaligus: (1) Indonesia beriklim tropis — anak tidak
+      // pernah memakai syal & sarung tangan, dan dasi cuma muncul di seragam
+      // sebagian sekolah; (2) "sarung tangan" 13 huruf → `wordClass()`
+      // menurunkannya ke `.dd-word--sm` (20px), tulisan paling kecil di
+      // kartu. Gantinya pakaian sehari-hari yang semuanya ≤ 6 huruf, jadi
+      // tetap di ukuran tulisan PALING BESAR.
+      words({ word: 'gaun', emoji: '👗' }, { word: 'sepatu', emoji: '👟', item: 'shoe' }, { word: 'celana', emoji: '👖' }),
     ),
     // --- 12. Alam & langit ---
     slot(
