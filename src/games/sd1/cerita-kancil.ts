@@ -267,10 +267,16 @@ const GAJAH = story(
     '💪',
     'Semua menarik bersama-sama. Gajah akhirnya keluar dari lumpur!',
   ),
-  // Penutup: satu-satunya halaman cerita ini yang masih beremoji — kalimatnya
-  // pesan moral, bukan adegan. Tak perlu `at()` lagi di sini: `sungai` sudah
-  // dipasang di halaman pertama dan ikut terbawa sampai sini.
-  page('⭐', 'Badan kecil pun bisa menolong, asal punya akal dan teman.'),
+  // Penutup. Sejak 2026-09-04 halaman ini BERILUSTRASI juga — dengan begitu
+  // ketiga cerita aktif tak punya halaman beremoji lagi. Gambarnya butuh tiga
+  // kali percobaan prompt: dua yang pertama ditolak Gemini (filter tokoh pihak
+  // ketiga — komposisi "hewan hutan berkumpul mengelilingi gajah" terbaca mirip
+  // adegan film animasi), yang jadi adalah versi bergambar gajah + kancil
+  // berjalan pulang berdampingan (lihat `docs/prompt-ilustrasi-baca-cerita.md`).
+  // ⭐ tetap ditulis sebagai cadangan kalau filenya gagal dimuat. Tak perlu
+  // `at()` lagi di sini: `sungai` sudah dipasang di halaman pertama dan ikut
+  // terbawa sampai sini.
+  art('kancil-gajah-selamat', '⭐', 'Badan kecil pun bisa menolong, asal punya akal dan teman.'),
 );
 
 /* ---------- Cerita rakyat & fabel klasik — pindahan dari game

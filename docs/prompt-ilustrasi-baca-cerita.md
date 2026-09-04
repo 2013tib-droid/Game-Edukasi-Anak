@@ -10,12 +10,15 @@ Yang dibahas di sini **hanya 3 cerita yang aktif** per 2026-09-03:
 |---|---|---|---|---|
 | `l1` | **Kancil dan Pak Tani** | 5 | **5** | 0 — selesai |
 | `l2` | **Jalak dan Kerbau** | 7 | **7** | 0 — selesai |
-| `l3` | **Kancil dan Gajah** | 7 | **6** | **1** (halaman penutup) |
-| | | **19** | **18** | **1** |
+| `l3` | **Kancil dan Gajah** | 7 | **7** | 0 — selesai |
+| | | **19** | **19** | **0** |
 
-**Per 2026-09-03 tinggal SATU gambar** yang belum ada: `kancil-gajah-selamat`
-(penutup "Kancil dan Gajah"). Promptnya sempat ditolak Gemini — versi
-penggantinya ada di bagian Cerita 3 di bawah.
+✅ **Per 2026-09-04 KETIGA cerita aktif sudah lengkap bergambar** — tidak ada
+lagi halaman beremoji di `l1`–`l3`. Gambar terakhir, `kancil-gajah-selamat`
+(penutup "Kancil dan Gajah"), jadi lewat **prompt versi 3** di bagian Cerita 3:
+dua prompt sebelumnya tak menghasilkan gambar (yang pertama ditolak Gemini),
+versi 3 mengganti komposisinya total — cuma gajah + pelanduk, berjalan pulang
+berdampingan dilihat dari belakang.
 
 Enam cerita rakyat (`n1`–`n6`) masih `soon: true` — jangan digambar dulu.
 
@@ -329,7 +332,7 @@ ulang `kancil-rawa` juga** (prompt penggantinya ada di akhir bagian ini).
 | 4 | `kancil-gajah-panggil` | 4:3 | "Kancil memanggil kerbau, rusa, dan teman-teman lain." | sudah ada |
 | 5 | `kancil-gajah-ranting` | **16:9** | keputusan — "Lumpurnya licin sekali. Pakai apa?" | sudah ada |
 | 6 | `kancil-gajah-tarik` | 4:3 | "Semua menarik bersama-sama…" | sudah ada |
-| 7 | `kancil-gajah-selamat` | 4:3 | "Badan kecil pun bisa menolong…" | **satu-satunya yang belum** |
+| 7 | `kancil-gajah-selamat` | 4:3 | "Badan kecil pun bisa menolong…" | sudah ada (versi 3) |
 
 ⚠️ **Dua nama file berbeda dari rancangan awal dokumen ini**: `-pikir` jadi
 **`-tanya`** dan `-teman` jadi **`-panggil`** (dipakai begitu saat dipasang
@@ -377,7 +380,7 @@ ulang `kancil-rawa` juga** (prompt penggantinya ada di akhir bagian ini).
 > menegang tapi tetap tersenyum — ini adegan kerja sama, bukan adegan panik.
 > Percikan lumpur kecil di sekitar.
 
-**5. `kancil-gajah-selamat` — rasio 4:3** — BELUM JADI
+**5. `kancil-gajah-selamat` — rasio 4:3** — SUDAH JADI (pakai **versi 3** di bawah)
 
 ⚠️ **Versi pertama prompt ini DITOLAK Gemini** (2026-09-03): *"Saya tidak dapat
 membuat gambar yang Anda minta saat ini karena adanya kepentingan dari penyedia
@@ -393,7 +396,9 @@ Tiga dugaan pemicunya, dari yang paling kuat:
    hutan yang bersorak — sangat dekat dengan beberapa adegan film animasi terkenal.
    Versi baru di bawah sengaja **tenang, bukan pesta**.
 
-**Prompt pengganti** (chat BARU, lampirkan `kancil-gajah-tanya.webp` saja):
+**Prompt pengganti — versi 2** (chat BARU, lampirkan `kancil-gajah-tanya.webp`
+saja). *Belum menghasilkan gambar juga; disimpan sebagai catatan — yang dipakai
+sekarang adalah **versi 3** di bawahnya.*
 
 > Buatkan ilustrasi halaman buku bacaan anak Indonesia, rasio 4:3 mendatar. Semua
 > tokohnya **karakter orisinal**, bukan tokoh dari film, kartun, atau buku mana pun.
@@ -417,7 +422,61 @@ Tiga dugaan pemicunya, dari yang paling kuat:
 >
 > Tanpa teks, tanpa bingkai, tanpa vignette, tanpa efek kilau, tanpa konfeti.
 
-**Kalau masih ditolak, turunkan bertahap** (jangan mengulang prompt yang sama):
+**Prompt versi 3 — INI YANG BERHASIL** (2026-09-04). Gambarnya sudah dipasang
+sebagai `public/assets/story/kancil-gajah-selamat.webp`.
+
+Prompt pengganti di atas juga belum menghasilkan gambar, jadi komposisinya diganti
+sekalian, bukan cuma kata-katanya. Yang berubah: **hewannya tinggal dua** (gajah +
+pelanduk), **tidak ada kerumunan hewan hutan yang menonton**, dan adegannya
+**berjalan pulang berdampingan dilihat dari belakang** — jauh dari adegan
+"hewan-hewan hutan berkumpul mengelilingi gajah" yang paling mungkin memicu filter.
+Bonusnya: beda badan besar–kecil justru jadi jelas terlihat, persis pesan
+kalimatnya ("Badan kecil pun bisa menolong").
+
+Kirim di **chat baru**, **tanpa melampirkan gambar apa pun**:
+
+> Buatkan ilustrasi halaman buku bacaan anak, rasio 4:3 mendatar. Seluruh tokohnya
+> hewan orisinal hasil imajinasi sendiri, tidak meniru tokoh dari film, kartun,
+> serial, atau buku mana pun.
+>
+> Adegan: **seekor gajah Asia dan seekor pelanduk kecil berjalan berdampingan
+> menyusuri jalan setapak tanah di tepi rawa, dilihat dari arah belakang-samping,
+> menjauh dari kamera.** Gajah di sebelah kanan bertubuh besar, kulit abu-abu
+> dengan sisa bercak lumpur coklat yang sudah mengering di kaki dan perutnya,
+> telinga sedang, langkahnya santai, **ujung belalainya turun dan melingkar
+> ringan di dekat punggung si pelanduk seperti merangkul teman**. Pelanduk di
+> sebelah kiri bertubuh kecil ramping setinggi lutut gajah, bulu coklat muda
+> kekuningan, perut putih, **tidak bertanduk, tidak memakai syal, tas, atau baju
+> apa pun**, telinga tegak membulat, kepalanya sedikit mendongak ke arah gajah.
+> Keduanya berekspresi tenang dan senang.
+>
+> Latar: rawa hutan tropis Indonesia di pagi hari — kolam berair tenang dengan
+> daun dan bunga teratai merah muda di sisi kiri, pohon bakau berakar tunjang,
+> beberapa pohon kelapa, bukit samar berkabut tipis di kejauhan, cahaya matahari
+> pagi yang hangat dan lembut.
+>
+> Di lumpur di sisi kiri belakang masih tergeletak **beberapa ranting kayu dan
+> daun pisang lebar** serta bekas cekungan di lumpur, tanda kejadian sebelumnya —
+> digambar kecil saja di latar belakang.
+>
+> Gayanya cat digital lembut: garis luar tipis, warna hangat, shading halus,
+> tanpa outline hitam tebal.
+>
+> Tanpa teks, tanpa angka, tanpa bingkai, tanpa vignette, tanpa efek kilau,
+> tanpa konfeti, tanpa bintang berkilau.
+
+**Kalau versi 3 juga ditolak, turunkan bertahap** (jangan mengulang prompt yang sama):
+
+- **Langkah 2** — buang si gajah dari kalimat "merangkul": ganti jadi *"berjalan
+  beriringan, belalai gajah turun santai ke bawah"*. Sentuhan antar-tokoh kadang
+  yang memicu pencocokan adegan.
+- **Langkah 3** — ambil sudut jauh: *"pemandangan rawa dari kejauhan, dua siluet
+  hewan — satu besar satu kecil — berjalan beriringan di jalan setapak di sisi
+  kanan bawah gambar, sisanya pemandangan rawa"*. Tokohnya jadi kecil, jarak dari
+  karakter mana pun jadi maksimal, dan sebagai halaman penutup justru enak
+  dilihat.
+
+**Kalau versi 2 mau dicoba ulang dan ditolak lagi:**
 
 - **Langkah 2** — kirim ulang **tanpa melampirkan gambar apa pun**. Prompt di atas
   sudah menyebut ciri tiap tokoh, jadi hasilnya tetap nyambung dengan yang lain.
@@ -425,7 +484,7 @@ Tiga dugaan pemicunya, dari yang paling kuat:
   Makin sedikit hewan hutan yang berkumpul, makin jauh dari adegan film yang
   dikenali filternya.
 
-**Kalau ketiganya buntu, hentikan saja** — halaman penutup boleh tetap beremoji,
+**Kalau semuanya buntu, hentikan saja** — halaman penutup boleh tetap beremoji,
 tidak ada yang rusak di app. Lihat komentarnya di `cerita-kancil.ts`: kalimat
 penutup itu pesan moral, bukan adegan, jadi gambar apa pun di sana nilainya kecil.
 
@@ -531,7 +590,7 @@ Catatan untuk saya sendiri — pemilik tidak perlu melakukan apa pun.
    | | teman-teman datang | 🐃 | `art('kancil-gajah-panggil')` |
    | | ranting & daun (keputusan) | 🌿 | `ask({ art: 'kancil-gajah-ranting', emoji: '🌿' }, …)` |
    | | menarik bersama | 💪 | `art('kancil-gajah-tarik')` |
-   | | penutup | ⭐ | — tetap emoji sampai `kancil-gajah-selamat` ada |
+   | | penutup | `art('kancil-gajah-selamat', '⭐', …)` | ⭐ jadi cadangan |
 
 3. **Rapikan `kancil-rawa` & `gajah-lumpur`.** Dua ilustrasi adegan itu sekarang
    terdaftar di registry **benda** (`src/engine/ui/items.ts`) dan dipakai lewat
