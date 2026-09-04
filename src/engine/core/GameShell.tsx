@@ -17,6 +17,7 @@ import MascotCard from '@/engine/ui/Mascot';
 import Clock from '@/engine/ui/Clock';
 import { gameImageUrl } from '@/engine/ui/GameIcon';
 import ItemPic from '@/engine/ui/ItemPic';
+import BackIcon from '@/engine/ui/BackIcon';
 import '@/engine/ui/engine.css';
 
 /**
@@ -375,7 +376,7 @@ export default function GameShell({
           })}
         </div>
         <button className="btn" onClick={onExit}>
-          ⬅️ Kembali
+          <BackIcon /> Kembali
         </button>
       </div>
     );
@@ -411,7 +412,7 @@ export default function GameShell({
           </button>
         )}
         <button className="btn" onClick={onExit}>
-          ⬅️ Kembali
+          <BackIcon /> Kembali
         </button>
       </div>
     );
@@ -456,7 +457,7 @@ export default function GameShell({
           </button>
         )}
         <button className="btn" onClick={onExit}>
-          ⬅️ Kembali
+          <BackIcon /> Kembali
         </button>
       </div>
     );
@@ -468,7 +469,7 @@ export default function GameShell({
     <div className="game-screen">
       <div className="game-topbar">
         <button className="btn" onClick={onExit} aria-label="Kembali">
-          ⬅️
+          <BackIcon size={26} />
         </button>
         {/* A picked level plays alone: one lone dot says nothing, but the
             empty row keeps the back/🔊 buttons in their usual corners. */}

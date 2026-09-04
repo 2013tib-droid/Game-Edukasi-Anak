@@ -8,6 +8,7 @@ import { useLockMode, useOwnedGroups } from '@/portal/useAccess';
 import LockToggle from '@/portal/LockToggle';
 import Clock from '@/engine/ui/Clock';
 import GameIcon from '@/engine/ui/GameIcon';
+import BackIcon from '@/engine/ui/BackIcon';
 
 // Game list per group. Unlocked games open directly; locked ones show a
 // padlock until the account has group access (gate enforced again in
@@ -25,7 +26,7 @@ export default function GroupPage() {
       <div className="page" style={{ textAlign: 'center' }}>
         <p style={{ fontSize: 22 }}>Kelompok tidak ditemukan.</p>
         <Link to="/portal" className="btn">
-          ⬅️ Kembali
+          <BackIcon /> Kembali
         </Link>
       </div>
     );
@@ -80,7 +81,7 @@ export default function GroupPage() {
       </div>
       <p style={{ marginTop: 28 }}>
         <Link to="/portal" className="btn">
-          ⬅️ Kembali
+          <BackIcon /> Kembali
         </Link>
       </p>
       {/* Alat penguji: hanya tampil di mode penguji (?test=1). */}

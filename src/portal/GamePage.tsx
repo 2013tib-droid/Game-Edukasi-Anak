@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import type { AnyGameConfig } from '@/engine/core/types';
 import GameShell from '@/engine/core/GameShell';
+import BackIcon from '@/engine/ui/BackIcon';
 import SplashScreen from '@/app/SplashScreen';
 import { findGame } from '@/games/registry';
 import { useAuth } from '@/auth/AuthContext';
@@ -44,7 +45,7 @@ export default function GamePage() {
       <div className="game-center">
         <p style={{ fontSize: 22 }}>Game tidak ditemukan.</p>
         <Link to="/portal" className="btn">
-          ⬅️ Kembali
+          <BackIcon /> Kembali
         </Link>
       </div>
     );
@@ -52,7 +53,7 @@ export default function GamePage() {
 
   const backToGroup = (
     <Link to={`/kelompok/${meta.group}`} className="btn">
-      ⬅️ Kembali
+      <BackIcon /> Kembali
     </Link>
   );
 
