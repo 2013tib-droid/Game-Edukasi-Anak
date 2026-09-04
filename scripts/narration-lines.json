@@ -4,273 +4,6 @@
   "chars": 37321,
   "lines": [
     {
-      "key": "bba8e787ee7e",
-      "text": "Coba lagi, kamu pasti bisa!",
-      "scope": "_engine",
-      "voice": "gadis",
-      "games": [
-        "_engine"
-      ]
-    },
-    {
-      "key": "9f804453863c",
-      "text": "Hebat! Kamu benar!",
-      "scope": "_engine",
-      "voice": "gadis",
-      "games": [
-        "_engine"
-      ]
-    },
-    {
-      "key": "d3a24fb2f64b",
-      "text": "Selamat! Kamu hebat sekali!",
-      "scope": "_engine",
-      "voice": "gadis",
-      "games": [
-        "_engine"
-      ]
-    },
-    {
-      "key": "7becae50d4c9",
-      "text": "Antar ambulans ke rumah sakit. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "9fcc166103d8",
-      "text": "Antar ambulans ke sekolah. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "01e69537cc10",
-      "text": "Antar bus ke sekolah. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "e5ecca37e568",
-      "text": "Antar bus ke tempat berkemah. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "8e6d81081d21",
-      "text": "Antar jip ke gunung. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "9a018f497967",
-      "text": "Antar jip ke taman. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "0c0fa5c0cfa4",
-      "text": "Antar kereta cepat ke kota. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "4bc014f63fb3",
-      "text": "Antar kereta ke stasiun. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "9bf8c395418f",
-      "text": "Antar mobil bak ke padang pasir. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "ea5121f31c6e",
-      "text": "Antar mobil bak ke tempat bangunan. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "a082c3f346b5",
-      "text": "Antar mobil ke menara. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "cfbaec602f92",
-      "text": "Antar mobil ke sekolah. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "eb34056ade87",
-      "text": "Antar mobil pemadam ke api. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "3a00e3092557",
-      "text": "Antar mobil polisi ke jalan yang rusak. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "feb34e2540ff",
-      "text": "Antar mobil polisi ke kantor. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "190ed7eaf95f",
-      "text": "Antar sepeda ke jembatan. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "c09c49b07c12",
-      "text": "Antar sepeda ke rumah nenek. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "bcbc104b08b1",
-      "text": "Antar sepeda ke sekolah. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "cb97b218f640",
-      "text": "Antar skuter ke sekolah. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "25680d5a6a01",
-      "text": "Antar traktor ke sawah. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "289a224d9f77",
-      "text": "Antar trem ke museum. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "93ca2128db90",
-      "text": "Antar truk ke pabrik. Ikuti jalannya dengan jarimu!",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "jalan-kendaraan",
-        "rute-kendaraan"
-      ]
-    },
-    {
-      "key": "867f57ee6807",
-      "text": "Lihat polanya baik-baik. Bentuk apa selanjutnya?",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "labirin-warna",
-        "pola-pintar"
-      ]
-    },
-    {
-      "key": "3804bdc63661",
-      "text": "Lihat urutan bilangannya. Bilangan mana yang hilang?",
-      "scope": "_shared",
-      "voice": "gadis",
-      "games": [
-        "hitung-hebat",
-        "pola-pintar"
-      ]
-    },
-    {
       "key": "6b6b4f8922a6",
       "text": "\"Ayo lomba lari!\" tantang kelinci. Kura-kura menerima tantangan itu.",
       "scope": "cerita-kancil",
@@ -2050,6 +1783,33 @@
       "voice": "gadis",
       "games": [
         "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "bba8e787ee7e",
+      "text": "Coba lagi, kamu pasti bisa!",
+      "scope": "engine",
+      "voice": "gadis",
+      "games": [
+        "engine"
+      ]
+    },
+    {
+      "key": "9f804453863c",
+      "text": "Hebat! Kamu benar!",
+      "scope": "engine",
+      "voice": "gadis",
+      "games": [
+        "engine"
+      ]
+    },
+    {
+      "key": "d3a24fb2f64b",
+      "text": "Selamat! Kamu hebat sekali!",
+      "scope": "engine",
+      "voice": "gadis",
+      "games": [
+        "engine"
       ]
     },
     {
@@ -5830,6 +5590,246 @@
       "voice": "gadis",
       "games": [
         "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "7becae50d4c9",
+      "text": "Antar ambulans ke rumah sakit. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "9fcc166103d8",
+      "text": "Antar ambulans ke sekolah. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "01e69537cc10",
+      "text": "Antar bus ke sekolah. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "e5ecca37e568",
+      "text": "Antar bus ke tempat berkemah. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "8e6d81081d21",
+      "text": "Antar jip ke gunung. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "9a018f497967",
+      "text": "Antar jip ke taman. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "0c0fa5c0cfa4",
+      "text": "Antar kereta cepat ke kota. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "4bc014f63fb3",
+      "text": "Antar kereta ke stasiun. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "9bf8c395418f",
+      "text": "Antar mobil bak ke padang pasir. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "ea5121f31c6e",
+      "text": "Antar mobil bak ke tempat bangunan. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "a082c3f346b5",
+      "text": "Antar mobil ke menara. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "cfbaec602f92",
+      "text": "Antar mobil ke sekolah. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "eb34056ade87",
+      "text": "Antar mobil pemadam ke api. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "3a00e3092557",
+      "text": "Antar mobil polisi ke jalan yang rusak. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "feb34e2540ff",
+      "text": "Antar mobil polisi ke kantor. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "190ed7eaf95f",
+      "text": "Antar sepeda ke jembatan. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "c09c49b07c12",
+      "text": "Antar sepeda ke rumah nenek. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "bcbc104b08b1",
+      "text": "Antar sepeda ke sekolah. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "cb97b218f640",
+      "text": "Antar skuter ke sekolah. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "25680d5a6a01",
+      "text": "Antar traktor ke sawah. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "289a224d9f77",
+      "text": "Antar trem ke museum. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "93ca2128db90",
+      "text": "Antar truk ke pabrik. Ikuti jalannya dengan jarimu!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "jalan-kendaraan",
+        "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "867f57ee6807",
+      "text": "Lihat polanya baik-baik. Bentuk apa selanjutnya?",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "labirin-warna",
+        "pola-pintar"
+      ]
+    },
+    {
+      "key": "3804bdc63661",
+      "text": "Lihat urutan bilangannya. Bilangan mana yang hilang?",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "hitung-hebat",
+        "pola-pintar"
       ]
     },
     {
