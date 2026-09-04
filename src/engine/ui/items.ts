@@ -135,10 +135,22 @@ export const ITEMS: Record<string, ItemDef> = {
   taxi: { emoji: '🚕', label: 'taksi', ext: 'webp' },
   motorcycle: { emoji: '🏍️', label: 'motor', ext: 'webp' },
   racecar: { emoji: '🏎️', label: 'mobil balap', ext: 'webp' },
-  // Alat kerja profesi (Pasangan Pintar, BATCH 7 di
-  // docs/prompt-gambar-gemini.md). Belum ada asetnya — jatuh ke emoji lewat
-  // ItemPic sampai gambarnya dikirim, pola yang sama dengan tahap maskot yang
-  // belum punya seni.
+  // Profesi & alat kerjanya (Pasangan Pintar, BATCH 7 di
+  // docs/prompt-gambar-gemini.md). Emoji profesi (👩‍⚕️ 👨‍🍳 🧑‍🔧) itu emoji
+  // GABUNGAN (ZWJ): di HP Android yang fontnya tak punya glyph rakitannya,
+  // satu profesi pecah jadi DUA emoji berdampingan — anak melihat dua benda
+  // untuk satu soal. Jadi seni WebP di sini bukan sekadar mempercantik.
+  //
+  // ORANGNYA TIDAK BOLEH MEMEGANG ALAT KERJANYA: soal ini memasangkan profesi
+  // dengan alatnya, jadi koki yang menggenggam wajan membocorkan jawabannya.
+  //
+  // Yang belum ada asetnya (doctor, farmer, hoe, police-officer, firefighter,
+  // mechanic, painter, brush) sengaja BELUM didaftarkan — id tanpa file cuma
+  // menambah permintaan 404. Daftarkan bersamaan dengan WebP-nya.
+  chef: { emoji: '👨‍🍳', label: 'koki', ext: 'webp' },
+  teacher: { emoji: '👩‍🏫', label: 'guru', ext: 'webp' },
+  pan: { emoji: '🍳', label: 'wajan', ext: 'webp' },
+  stethoscope: { emoji: '🩺', label: 'stetoskop', ext: 'webp' },
   wrench: { emoji: '🔧', label: 'kunci pas', ext: 'webp' },
 };
 

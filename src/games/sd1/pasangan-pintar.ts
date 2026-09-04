@@ -62,19 +62,29 @@ function match(narration: string, ...pairs: Pair[]): MixedLevel {
   };
 }
 
-/** Profesi ↔ alat kerjanya. */
+/**
+ * Profesi ↔ alat kerjanya.
+ *
+ * Argumen kelima = seni ALATNYA, keenam = seni ORANGNYA. Keduanya opsional
+ * dan emoji selalu jadi cadangan, jadi pasangan yang baru punya salah satunya
+ * cukup mengisi slot itu saja — pola yang sama dengan `trip()` di
+ * jalan-kendaraan.ts. Kalau aset baru datang, ISI ARGUMENNYA di sini; jangan
+ * menambah field baru di engine.
+ */
 const job = (
   tool: string,
   toolName: string,
   person: string,
   personEmoji: string,
   toolItem?: string,
+  personItem?: string,
 ): Pair => ({
   target: toolName,
   targetEmoji: tool,
   targetItem: toolItem,
   item: person,
   itemEmoji: personEmoji,
+  itemItem: personItem,
 });
 
 /** Hewan ↔ tempat tinggalnya. */
@@ -142,15 +152,15 @@ const config: MixedGameConfig = {
       'l1',
       match(
         ASK_JOB,
-        job('🩺', 'stetoskop', 'dokter', '👩‍⚕️'),
+        job('🩺', 'stetoskop', 'dokter', '👩‍⚕️', 'stethoscope'),
         job('🚒', 'mobil pemadam', 'pemadam', '👨‍🚒', 'firetruck'),
         job('🌾', 'sawah', 'petani', '👨‍🌾', 'field'),
       ),
       match(
         ASK_JOB,
         job('✂️', 'gunting', 'penata rambut', '💇'),
-        job('🍳', 'wajan', 'koki', '👨‍🍳'),
-        job('📚', 'buku', 'guru', '👩‍🏫', 'book'),
+        job('🍳', 'wajan', 'koki', '👨‍🍳', 'pan', 'chef'),
+        job('📚', 'buku', 'guru', '👩‍🏫', 'book', 'teacher'),
       ),
       match(
         ASK_JOB,
