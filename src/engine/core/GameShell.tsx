@@ -13,6 +13,7 @@ import { clearSession, getSession, saveSession } from '@/engine/core/session';
 import type { LevelPick } from '@/engine/core/session';
 import { celebrate, sfx, speak, stopSpeaking } from '@/engine/audio/sound';
 import { FeedbackOverlay, LevelDots, SpeakButton, StarsRow } from '@/engine/ui/Feedback';
+import BackButton from '@/engine/ui/BackButton';
 import MascotCard from '@/engine/ui/Mascot';
 import Clock from '@/engine/ui/Clock';
 import { gameImageUrl } from '@/engine/ui/GameIcon';
@@ -374,9 +375,7 @@ export default function GameShell({
             );
           })}
         </div>
-        <button className="btn" onClick={onExit}>
-          ⬅️ Kembali
-        </button>
+        <BackButton onClick={onExit} />
       </div>
     );
   }
@@ -410,9 +409,7 @@ export default function GameShell({
             ▶️ Mulai Main
           </button>
         )}
-        <button className="btn" onClick={onExit}>
-          ⬅️ Kembali
-        </button>
+        <BackButton onClick={onExit} />
       </div>
     );
   }
@@ -455,9 +452,7 @@ export default function GameShell({
             🔁 Main Lagi
           </button>
         )}
-        <button className="btn" onClick={onExit}>
-          ⬅️ Kembali
-        </button>
+        <BackButton onClick={onExit} />
       </div>
     );
   }
@@ -467,9 +462,7 @@ export default function GameShell({
   return (
     <div className="game-screen">
       <div className="game-topbar">
-        <button className="btn" onClick={onExit} aria-label="Kembali">
-          ⬅️
-        </button>
+        <BackButton onClick={onExit} compact />
         {/* A picked level plays alone: one lone dot says nothing, but the
             empty row keeps the back/🔊 buttons in their usual corners. */}
         {levels.length > 1 ? (

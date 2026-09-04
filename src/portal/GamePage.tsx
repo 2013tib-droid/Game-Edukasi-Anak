@@ -7,6 +7,7 @@ import { findGame } from '@/games/registry';
 import { useAuth } from '@/auth/AuthContext';
 import { removeDevice, type DeviceInfo } from '@/auth/entitlements';
 import { useGameAccess } from '@/portal/useGameAccess';
+import BackLink from '@/portal/BackLink';
 
 /**
  * Gerbang akses + pemuat config.
@@ -43,17 +44,13 @@ export default function GamePage() {
     return (
       <div className="game-center">
         <p style={{ fontSize: 22 }}>Game tidak ditemukan.</p>
-        <Link to="/portal" className="btn">
-          ⬅️ Kembali
-        </Link>
+        <BackLink to="/portal" />
       </div>
     );
   }
 
   const backToGroup = (
-    <Link to={`/kelompok/${meta.group}`} className="btn">
-      ⬅️ Kembali
-    </Link>
+    <BackLink to={`/kelompok/${meta.group}`} />
   );
 
   if (access.status === 'memeriksa') return <SplashScreen />;

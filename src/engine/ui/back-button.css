@@ -1,0 +1,37 @@
+/* Tombol "Kembali" — lihat BackButton.tsx.
+   Tetap memakai .btn (target sentuh 64px + efek tekan yang sama), yang
+   ditambahkan di sini cuma keping panah + warna hangatnya. */
+.back-btn {
+  gap: 11px;
+  /* Kepingnya menempel dekat tepi kiri, tulisannya lega di kanan. */
+  padding: 10px 24px 10px 12px;
+  background: linear-gradient(180deg, #fff 0%, #fff4de 100%);
+  color: #7a5312;
+}
+
+/* Ukuran keping ikut font tombolnya (tombol intro/hasil memakai font lebih
+   besar), jadi tak perlu angka baru tiap kali ukuran tombol berubah. */
+.back-btn__arrow {
+  width: 1.85em;
+  height: 1.85em;
+  flex: none;
+}
+
+.back-btn__text {
+  /* Sedikit lebih tebal dari .btn biasa: ini penanda arah, bukan pilihan. */
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+/* Baris atas layar main: cuma panahnya, kotak seperti tombol 🔊 di kanannya. */
+/* `.game-topbar .btn` menang specificity-nya, jadi disebut lengkap di sini —
+   kalau tidak, tombolnya jadi lebih lebar dari tombol 🔊 di sebelahnya. */
+.back-btn--compact,
+.game-topbar .btn.back-btn--compact {
+  gap: 0;
+  padding: 8px;
+}
+.back-btn--compact .back-btn__arrow {
+  width: 38px;
+  height: 38px;
+}
