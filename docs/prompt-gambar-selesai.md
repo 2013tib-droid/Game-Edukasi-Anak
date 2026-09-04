@@ -78,6 +78,54 @@ Pilihan 1.
 
 ---
 
+## PILIHAN 3 — kembang api (ditanyakan pemilik 2026-09-04; BUKAN yang disarankan)
+
+Kembang api itu bahasa perayaan yang paling langsung, tapi di slot ini ia melawan tiga hal
+sekaligus. Kalau tetap ingin dicoba, coba **berdampingan** dengan Pilihan 1 lalu bandingkan
+di HP — jangan langsung dipasang.
+
+**Kenapa berisiko di layar ini:**
+
+- **Butuh langit gelap.** Kembang api terbaca karena percikan terang di atas gelap. Gambar
+  ini dipotong transparan dan ditempel di atas gradien pastel TERANG — percikan kuning/putih
+  langsung kehilangan kontras dan berubah jadi taburan confetti biasa. (Menambahkan panel
+  langit gelap di belakangnya = bingkai, dan bingkai dilarang di ikon.)
+- **Tampil cuma 132px.** Percikan tipis yang menyebar hilang di ukuran itu; yang tersisa
+  titik-titik kecil, bukan objek. Lebih buruk lagi sesudah dipotong: **percikan terluar yang
+  menentukan batas gambar**, jadi inti ledakannya dirender makin kecil (pelajaran yang sama
+  dengan maskot naga di `prompt-maskot-naga.md`).
+- **Bentuknya bintang memancar** — bentrok dengan baris ⭐⭐⭐ tepat di bawahnya yang
+  mengabarkan NILAI anak.
+- Ledakan tidak punya badan untuk wajah imut, jadi ia keluar dari bahasa gambar app ini.
+
+**Kalau tetap dicoba, syaratnya (semuanya wajib):**
+
+- Warnanya **pekat** (merah muda tua, ungu, biru, hijau mint) — **bukan kuning atau putih**,
+  keduanya hilang di latar pastel terang.
+- Percikannya **rapat dan pendek**, semua menempel ke inti ledakan; tidak ada percikan yang
+  melayang jauh ke tepi gambar.
+- **Bukan bintang bersudut runcing.** Percikan berujung bulat.
+- Punya **satu inti besar** yang jelas, supaya ada siluet di 132px.
+
+> Buatkan: satu ledakan kembang api besar yang imut, bentuknya bulat rapat dengan inti
+> terang di tengah dan percikan pendek berujung bulat memancar ke segala arah. Warnanya
+> merah muda tua, ungu muda, biru, dan hijau mint — tanpa kuning dan tanpa putih.
+> Percikannya rapat menempel ke intinya, tidak ada yang melayang jauh. Intinya berwajah
+> imut: mata besar berkilau, pipi merona, senyum lebar gembira. Percikannya berujung bulat,
+> bukan bintang bersudut runcing.
+>
+> Aturan wajib: format persegi 1:1. Latar putih polos rata, tanpa langit malam, tanpa
+> pemandangan, tanpa blur latar, tanpa bokeh. Tanpa bingkai, tanpa border, tanpa sudut
+> membulat di tepi gambar. Tanpa bayangan, tanpa pantulan, tanpa glitter. Tanpa bintang
+> kuning. JANGAN menuliskan kata, huruf, angka, label, judul, atau watermark apa pun di
+> dalam gambar. Ilustrasi datar bergaya stiker, bukan foto.
+
+**Jalan tengahnya:** minta Pilihan 1 atau 2 (terompet / kotak kado) tapi semburannya diganti
+percikan kembang api kecil berwarna pekat. Rasanya kembang api, tapi siluetnya tetap dipegang
+satu objek padat berwajah imut.
+
+---
+
 ## Aturan teknis khusus layar ini
 
 - **Gambarnya tampil 132px** — setinggi kotak emoji 110px yang digantikannya. Layar hasil
