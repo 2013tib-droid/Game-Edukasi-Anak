@@ -1074,6 +1074,20 @@
   font-size: 110px;
 }
 
+/* Ikon layar hasil digambar sebagai seni sendiri. Tingginya SENGAJA sama
+   dengan kotak emoji 110px yang digantikannya: layar hasil sudah pas-pasan di
+   HP 360×640 (bug lama, tercatat di CLAUDE.md), jadi gambar yang lebih besar
+   langsung mendorong tombol "Kembali" ke bawah lipatan. Diukur lewat TINGGI
+   saja (`width: auto`) — file-nya dipotong pas di gambarnya, kotak berukuran
+   tetap akan menggepengkan yang lebar. */
+.game-center .game-big-party {
+  height: 132px;
+  width: auto;
+  max-width: 70vw;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
+}
+
 /* Results screen: the icon parties for as long as the victory tune plays
    (~2.6 s = 4 × 0.62 s), then settles. */
 .game-center .game-big-emoji--party {

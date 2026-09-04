@@ -162,6 +162,10 @@ export default function GameShell({
   // jatuh ke gambar item/emoji, jangan pernah kosong. Pola yang sama dengan
   // `brokenArt` di `StoryChoice`.
   const [brokenCover, setBrokenCover] = useState<Record<string, boolean>>({});
+  // Seni layar hasil yang gagal dimuat -> kembali ke emoji 🎉. Layar ini muncul
+  // persis di momen paling membanggakan anak, jadi gambar tidak boleh pernah
+  // jadi sebab layarnya kosong. Pola yang sama dengan `ErrorBoundary`.
+  const [brokenParty, setBrokenParty] = useState(false);
   const [earned, setEarned] = useState<Stars[]>([]);
   const wrongCount = useRef(0);
   // Remount the template on retry/advance so its internal state resets.
@@ -422,9 +426,22 @@ export default function GameShell({
     const total = earned.reduce<number>((s, x) => s + x, 0);
     return (
       <div className="game-center">
-        <div className="game-big-emoji game-big-emoji--party" aria-hidden>
-          🎉
-        </div>
+        {brokenParty ? (
+          <div className="game-big-emoji game-big-emoji--party" aria-hidden>
+            🎉
+          </div>
+        ) : (
+          <img
+            className="game-big-party game-big-emoji--party"
+            src={`${import.meta.env.BASE_URL}assets/ui/selesai.webp`}
+            alt=""
+            aria-hidden
+            draggable={false}
+            onError={() => {
+              setBrokenParty(true);
+            }}
+          />
+        )}
         <h1>Selamat!</h1>
         <StarsRow stars={starsForMistakes(0)} />
         <p style={{ fontSize: 22 }}>
