@@ -56,6 +56,13 @@ export function announcementsFor(isBuyer: boolean): Announcement[] {
  */
 export const announcements: Announcement[] = [
   {
+    id: 'a-2026-09-04-jalan-kendaraan-jalan-baru',
+    date: '2026-09-04',
+    tag: 'update',
+    title: 'Jalan baru di Jalan Kendaraan 🚗',
+    body: 'Tiap sesi sekarang 9 jalan (dulu 6), diundi dari 18 jalan yang tersedia — lengkap dengan tujuan baru seperti kebun binatang, pasar, dan perpustakaan. Dua kali main hampir tak pernah sama.',
+  },
+  {
     id: 'a-2026-09-03-rute-kendaraan',
     date: '2026-09-03',
     tag: 'baru',

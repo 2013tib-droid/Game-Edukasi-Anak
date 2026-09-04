@@ -1,15 +1,15 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #10 — only: hitung-hebat
+render #11 — TANPA "only:" (render penuh, file lama tetap dilewati)
 
-Setelah gabung Tambah Tangkas ke Hitung Hebat & merge dua sesi paralel, ada
-revisi lanjutan di hitung-hebat.ts yang mengubah kalimat 46 baris narasinya.
-Baris lain tidak berubah (key = hash isi kalimat, jadi otomatis dilewati),
-jadi cukup scope ini saja.
+Jalan Kendaraan (TK) diperbesar jadi 18 slot, 9 dimainkan per sesi: 20 kalimat
+narasi baru di scope `jalan-kendaraan`.
+
+SENGAJA tanpa baris "only:" — tiga kalimat milik Rute Kendaraan naik scope ke
+`_shared` karena sekarang dipakai dua game ("Antar mobil / sepeda / skuter ke
+sekolah"). Scope berubah = FOLDER file berubah, jadi ketiganya harus dirender
+ulang di folder `_shared`; kalau di-`only: jalan-kendaraan`, Rute Kendaraan
+kehilangan rekaman untuk baris itu. Pelajaran yang sama dengan render #9.
 
 Tanpa "redo: lafal" — daftar lafal tidak berubah.
-Tanpa prune — file lama yang jadi yatim dari perubahan kalimat ini sengaja
-dibiarkan (aturan lama: prune sekali saja untuk semua scope, bukan tiap
-render).
-
-only: hitung-hebat
+Tanpa prune — belum ada file yatim yang perlu dibuang.
