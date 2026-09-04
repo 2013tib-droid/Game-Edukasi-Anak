@@ -1,15 +1,20 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #11 — TANPA "only:" (render penuh, file lama tetap dilewati)
+render #12 — only: kartu-kembar
 
-Jalan Kendaraan (TK) diperbesar jadi 18 slot, 9 dimainkan per sesi: 20 kalimat
-narasi baru di scope `jalan-kendaraan`.
+Kartu Kembar (TK) jadi 5 slot × 4 varian cadangan dan semua hewannya diganti
+benda mati: 3 kalimat baru di scope `kartu-kembar`
+("Temukan pasangan gambar yang sama!", "Ayo cari lagi pasangan yang sama!",
+"Kartunya makin banyak. Ayo cocokkan semuanya!").
 
-SENGAJA tanpa baris "only:" — tiga kalimat milik Rute Kendaraan naik scope ke
-`_shared` karena sekarang dipakai dua game ("Antar mobil / sepeda / skuter ke
-sekolah"). Scope berubah = FOLDER file berubah, jadi ketiganya harus dirender
-ulang di folder `_shared`; kalau di-`only: jalan-kendaraan`, Rute Kendaraan
-kehilangan rekaman untuk baris itu. Pelajaran yang sama dengan render #9.
+Aman di-`only:` — ketiganya milik game ini saja, tak ada satu pun yang naik
+scope ke `_shared` (sudah dicek di scripts/narration-lines.json). Beda dengan
+render #9 & #11 yang memang harus penuh.
 
 Tanpa "redo: lafal" — daftar lafal tidak berubah.
-Tanpa prune — belum ada file yatim yang perlu dibuang.
+Tanpa prune di file ini. Ada SATU file yatim baru,
+`kartu-kembar/dcd22ffabbb7.mp3` ("Temukan pasangan hewan yang sama!"),
+kalimat yang hilang karena game ini tak lagi memakai hewan. Manifest ditulis
+ulang dari daftar kalimat, jadi baris itu otomatis lenyap dari manifest dan
+tak pernah diminta app; mp3-nya boleh dibuang kapan saja lewat tombol `prune`
+di workflow render (jalankan manual, bukan lewat file ini).

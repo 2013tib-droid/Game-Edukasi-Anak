@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-04",
-  "count": 782,
-  "chars": 37242,
+  "count": 784,
+  "chars": 37321,
   "lines": [
     {
       "key": "bba8e787ee7e",
@@ -4429,6 +4429,24 @@
       ]
     },
     {
+      "key": "dc1a6de91f22",
+      "text": "Ayo cari lagi pasangan yang sama!",
+      "scope": "kartu-kembar",
+      "voice": "gadis",
+      "games": [
+        "kartu-kembar"
+      ]
+    },
+    {
+      "key": "73b341f5390d",
+      "text": "Kartunya makin banyak. Ayo cocokkan semuanya!",
+      "scope": "kartu-kembar",
+      "voice": "gadis",
+      "games": [
+        "kartu-kembar"
+      ]
+    },
+    {
       "key": "1fa26bda01ae",
       "text": "Level terakhir! Kamu pasti bisa!",
       "scope": "kartu-kembar",
@@ -4447,8 +4465,8 @@
       ]
     },
     {
-      "key": "dcd22ffabbb7",
-      "text": "Temukan pasangan hewan yang sama!",
+      "key": "71f999ccc61f",
+      "text": "Temukan pasangan gambar yang sama!",
       "scope": "kartu-kembar",
       "voice": "gadis",
       "games": [

@@ -56,6 +56,20 @@ export function announcementsFor(isBuyer: boolean): Announcement[] {
  */
 export const announcements: Announcement[] = [
   {
+    id: 'a-2026-09-04-pasang-kata-kata-baru',
+    date: '2026-09-04',
+    tag: 'update',
+    title: 'Pasang Kata: 8 soal tiap sesi 🧩',
+    body: 'Tiap sesi sekarang 8 soal (dulu 6), diundi dari 16 tema — bertambah bangunan, pakaian, alam, kendaraan penolong, sayur, dan peralatan dapur. Delapan tema sisanya jadi cadangan untuk sesi berikutnya.',
+  },
+  {
+    id: 'a-2026-09-04-kartu-kembar-tanpa-hewan',
+    date: '2026-09-04',
+    tag: 'update',
+    title: 'Kartu Kembar: 5 permainan tiap sesi 🃏',
+    body: 'Tiap sesi sekarang 5 papan (dulu 3), dan tiap papan diundi dari 4 tema cadangan: buah, kendaraan, benda sehari-hari, makanan, sampai bangunan. Dua kali main hampir tak pernah sama.',
+  },
+  {
     id: 'a-2026-09-04-jalan-kendaraan-jalan-baru',
     date: '2026-09-04',
     tag: 'update',
