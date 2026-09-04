@@ -126,6 +126,84 @@ satu objek padat berwajah imut.
 
 ---
 
+## KENAPA PERCOBAAN PERTAMA BISA JELEK (2026-09-04)
+
+Terompet pesta (Pilihan 1) **ditolak pemilik: hasil gambarnya jelek.** Sebabnya bukan
+kalimat promptnya — subjeknya yang sulit untuk model gambar:
+
+- Bentuknya **corong + ledakan yang berserakan**. Model menggambar corongnya jadi logam
+  berkilau berantakan dan confettinya jadi taburan acak; di 132px hasilnya cuma noda.
+- **Wajahnya tak punya tempat duduk yang jelas.** Corong itu permukaan miring menyempit,
+  jadi wajahnya sering melenceng ke tepi atau tumpang tindih pita.
+
+**Aturan untuk ide penggantinya:** pilih objek yang **BULAT/GEMUK, SATU BADAN, dan punya
+bidang datar besar untuk wajah**. Itu yang selalu berhasil di gaya stiker (lihat ikon-ikon
+kartu game yang sudah jadi: ulat, balon ucapan, papan target, jam). Hiasan seperti confetti
+maksimal **beberapa butir yang menempel di badan objeknya**, bukan taburan sepenuh gambar.
+
+**Satu langkah yang sangat membantu:** lampirkan **satu ikon game yang sudah jadi** (mis.
+`public/assets/games/pola-pintar.webp` atau `suku-kata.webp`) ke chat Gemini sebagai contoh
+gaya, lalu tulis *"ikuti gaya gambar ini persis"*. Model jauh lebih patuh melihat contoh
+daripada membaca deskripsi gaya — pelajaran yang sama dengan `prompt-maskot-naga.md`.
+
+---
+
+## PILIHAN 4 (disarankan sesudah terompet ditolak) — balon udara
+
+Paling nyambung dengan nama app-nya (**Petualangan Pintar**) dan dengan gagasan maskot yang
+tumbuh: anak baru saja menyelesaikan satu perjalanan. Bentuknya bulat gemuk — jenis objek
+yang paling aman digambar model DAN yang siluetnya paling terbaca di 132px. Tidak bentrok
+dengan gambar item mana pun (`balloon` di registry itu balon karet satu buah, bentuknya
+berbeda jauh).
+
+> Buatkan: satu balon udara panas yang imut dan gemuk, badan balonnya bergaris-garis lebar
+> warna pastel — krem, merah muda, hijau mint, dan biru muda — dengan keranjang rotan kecil
+> warna coklat muda menggantung di bawahnya. Wajah imutnya digambar besar di bagian tengah
+> bawah badan balon: mata besar berkilau, pipi merona, senyum lebar gembira. Tambahkan
+> empat confetti pastel kecil yang menempel dekat keranjangnya. Balon udaranya satu-satunya
+> objek, digambar besar memenuhi gambar.
+>
+> Aturan wajib: format persegi 1:1. Latar putih polos rata, tanpa langit, tanpa awan, tanpa
+> pemandangan, tanpa blur latar, tanpa bokeh. Tanpa bingkai, tanpa border, tanpa sudut
+> membulat di tepi gambar. Tanpa bayangan di lantai, tanpa pantulan, tanpa glitter. Tanpa
+> bintang kuning, tanpa piala, tanpa bendera bertulisan. JANGAN menuliskan kata, huruf,
+> angka, label, judul, atau watermark apa pun di dalam gambar. Ilustrasi datar bergaya
+> stiker, bukan foto.
+
+## PILIHAN 5 — peti harta karun terbuka
+
+Bahasa "hadiah setelah berusaha" yang langsung dimengerti anak, dan siluetnya kotak gemuk
+— paling kuat di ukuran kecil. Wajahnya duduk enak di badan peti.
+
+> Buatkan: satu peti harta karun kayu kecil yang imut dan gemuk, warna coklat muda dengan
+> ban logam krem, tutupnya terbuka lebar ke belakang. Dari dalam peti keluar cahaya lembut
+> kuning krem dan beberapa confetti pastel kecil yang menempel di dekat mulut peti. Wajah
+> imutnya digambar besar di badan depan peti: mata besar berkilau, pipi merona, senyum
+> lebar gembira. **Isinya hanya cahaya dan confetti — tanpa koin, tanpa uang, tanpa
+> perhiasan, tanpa mahkota.**
+>
+> Aturan wajib: (sama seperti Pilihan 4)
+
+## PILIHAN 6 — roket meluncur
+
+Paling "meledak-ledak" tanpa jadi berantakan, karena semburannya digambar sebagai satu
+gumpalan padat, bukan percikan berserakan.
+
+> Buatkan: satu roket mainan gemuk yang imut sedang meluncur ke atas, badannya warna krem
+> dengan ujung kerucut merah muda dan tiga sirip biru muda. Di bawahnya ada satu gumpalan
+> asap pastel membulat yang padat dan menempel ke ekor roket. Wajah imutnya digambar besar
+> di badan roket: mata besar berkilau, pipi merona, senyum lebar gembira. Roketnya tegak
+> lurus menghadap ke atas dan jadi satu-satunya objek.
+>
+> Aturan wajib: (sama seperti Pilihan 4) — ditambah: tanpa bintang, tanpa planet, tanpa
+> luar angkasa, tanpa api menyembur panjang.
+
+**Cara memilih:** minta ketiganya di chat yang sama (satu gambar per pesan), lalu lihat
+bertiga dalam ukuran ±132px — sekitar setinggi ibu jari di layar HP. Yang masih terbaca
+jelas di ukuran itu yang menang; jangan menilai dari tampilan besarnya di laptop.
+
+---
+
 ## Aturan teknis khusus layar ini
 
 - **Gambarnya tampil 132px** — setinggi kotak emoji 110px yang digantikannya. Layar hasil
