@@ -298,7 +298,11 @@ const config: GameConfig<'drag-drop'> = {
       words({ word: 'wortel', emoji: '🥕', item: 'carrot' }, { word: 'jagung', emoji: '🌽', item: 'corn' }, { word: 'tomat', emoji: '🍅' }),
       words({ word: 'terong', emoji: '🍆' }, { word: 'brokoli', emoji: '🥦' }, { word: 'kentang', emoji: '🥔' }),
       words({ word: 'bawang', emoji: '🧅' }, { word: 'cabai', emoji: '🌶️' }, { word: 'timun', emoji: '🥒' }),
-      words({ word: 'jamur', emoji: '🍄' }, { word: 'labu', emoji: '🎃' }, { word: 'jagung', emoji: '🌽', item: 'corn' }),
+      // "labu" 🎃 DIBUANG: di HP emoji itu labu Halloween berwajah ukiran —
+      // anak melihat wajah, bukan sayur (jebakan yang sama dengan kartu
+      // Bawang Putih di Baca Cerita). Tak ada emoji labu polos, jadi diganti
+      // sayur lain. "sawi", bukan "kubis": 🥬 itu daun berbatang, bukan bola.
+      words({ word: 'jamur', emoji: '🍄' }, { word: 'sawi', emoji: '🥬' }, { word: 'jagung', emoji: '🌽', item: 'corn' }),
     ),
     // --- 15. Benda di rumah (lanjutan slot 2) ---
     slot(
