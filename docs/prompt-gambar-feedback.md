@@ -2,6 +2,17 @@
 
 Sasaran: **`public/assets/feedback/coba-lagi.webp`** — mengganti satu gambar yang sudah ada.
 
+## Status (2026-09-05) — SELESAI
+
+Gambar penggantinya **sudah terpasang**, dari percobaan pertama: kucing yang sama persis,
+spanduk yang sama, cuma tulisannya jadi "Coba lagi! / Kamu pasti bisa!". 720×533, 75 kB.
+Ejaannya sudah diperiksa huruf per huruf — `lagi` benar-benar huruf l kecil.
+
+Dokumen ini disimpan untuk kalau gambarnya diganti lagi, **dan karena tahap POTONG-nya
+ternyata berbeda dari dugaan awal**: gambar kiriman pemilik datang dengan **latar yang sudah
+transparan**, bukan JPEG berlatar putih seperti gambar singa dulu. Lihat "Setelah gambarnya
+jadi" di bawah — `cut-item.py` JUSTRU BERBAHAYA untuk berkas seperti itu.
+
 ## Kenapa diganti (2026-09-05, laporan pemilik)
 
 Gambarnya bertuliskan **"Ayo semangat! Kamu pasti bisa!"** sementara narasinya berbunyi
@@ -114,20 +125,30 @@ kalimatnya sekilas — mata otomatis membetulkan sendiri kata yang hampir benar.
 
 ## Setelah gambarnya jadi
 
-1. Simpan sebagai `coba-lagi.png` (atau apa pun; nama sumbernya bebas).
-2. Potong latar + ekspor — **pakai `cut-item.py`**, karena ini seni stiker beroutline,
-   bukan render 3D lembut:
-   `python scripts/cut-item.py <art> public/assets/feedback/coba-lagi.webp 720`
+1. Simpan berkasnya (nama sumbernya bebas).
+2. **Lihat dulu latarnya sudah transparan atau belum** — ini yang menentukan skripnya, dan
+   sempat salah duga di dokumen ini:
+
+   - **Latar sudah transparan** (yang terjadi 2026-09-05):
+     `python scripts/trim-alpha.py <art> public/assets/feedback/coba-lagi.webp 720`
+     Skrip itu cuma memangkas pinggiran kosong, merapikan alpha, dan mengecilkan — tak ada
+     yang ditebak.
+   - **Latar putih polos** (seperti gambar singa dulu):
+     `python scripts/cut-item.py <art> public/assets/feedback/coba-lagi.webp 720`
+
+   **JANGAN menjalankan `cut-item.py` pada berkas yang latarnya sudah transparan.** Skrip
+   itu mencari latar PUTIH — sedangkan di gambar ini bagian putih yang tersisa justru milik
+   gambarnya (badan kucing DAN spanduknya), jadi yang terbuang bisa isi gambarnya sendiri.
+   Ini gambar paling rawan potong-latar di seluruh proyek.
+
    (720 = lebar file yang sekarang; overlay-nya tampil maksimal 460px, jadi 720 sudah cukup
-   tajam untuk layar 1,5×.)
-3. **Lihat hasilnya di atas latar berwarna dulu.** Latar overlay ini krem/oranye lembut,
-   jadi sisa piksel putih di sekitar spanduk akan terlihat sebagai bingkai kotor. Jangan
-   percaya angka "latar terbuang" yang dicetak skripnya.
-4. Cek sekali lagi bahwa **bagian putih yang memang milik gambar tidak ikut terbuang** —
-   badan kucingnya putih dan spanduknya putih, jadi ini gambar paling rawan di seluruh
-   proyek untuk urusan potong-latar. Kalau bolong, itu tanda ambangnya terlalu longgar.
-5. Tidak ada kode yang perlu diubah.
-6. Deploy seperti biasa; pastikan `dist/assets/feedback/` ikut tersalin ke folder `app/` di
+   tajam untuk layar 1,5×. Tingginya ikut rasio gambar — 533 px untuk yang sekarang.)
+3. **Lihat hasilnya di atas latar berwarna dulu**, jangan di atas putih dan jangan percaya
+   angka yang dicetak skripnya. Cara cepat: tempel gambarnya di atas beberapa pita warna
+   sekaligus (krem, oranye, hijau muda, abu tua, hampir hitam) — sisa piksel putih atau
+   bolong di badan kucingnya langsung terlihat, dan tak akan terlihat di atas putih.
+4. Tidak ada kode yang perlu diubah.
+5. Deploy seperti biasa; pastikan `dist/assets/feedback/` ikut tersalin ke folder `app/` di
    branch Pages.
 
 ## Kalau nanti gambar "Hebat kamu benar!" juga diganti
