@@ -153,7 +153,7 @@ const config: MixedGameConfig = {
       match(
         ASK_JOB,
         job('🩺', 'stetoskop', 'dokter', '👩‍⚕️', 'stethoscope', 'doctor'),
-        job('🚒', 'mobil pemadam', 'pemadam', '👨‍🚒', 'firetruck'),
+        job('🚒', 'mobil pemadam', 'pemadam', '👨‍🚒', 'firetruck', 'firefighter'),
         // Dulu pasangannya 'sawah' — itu TEMPAT kerja, bukan alat, padahal
         // narasinya berbunyi "tarik setiap orang ke ALAT KERJANYA". Sawah
         // dipakai waktu itu karena belum ada seni cangkul; sekarang ada.
@@ -167,13 +167,16 @@ const config: MixedGameConfig = {
       ),
       match(
         ASK_JOB,
-        job('🎨', 'kuas', 'pelukis', '👩‍🎨'),
+        // Emojinya dulu 🎨 (PALET) padahal kotaknya berlabel "kuas" — dua
+        // benda berbeda, persis jebakan "satu gambar dua arti". Seni kuas
+        // sudah ada, jadi emoji cadangannya ikut dibetulkan ke 🖌️.
+        job('🖌️', 'kuas', 'pelukis', '👩‍🎨', 'brush'),
         job('🚌', 'bus', 'sopir', '🧑‍✈️', 'bus'),
         // Dulu `'key'` (gambar kunci PINTU) — salah untuk montir, yang
         // pakai kunci PAS. Satu gambar tak boleh punya dua arti (aturan
         // lama); id `wrench` sengaja terpisah dari `key` yang tetap dipakai
         // untuk kunci sungguhan di Taman Huruf & Pasang Kata.
-        job('🔧', 'kunci pas', 'montir', '🧑‍🔧', 'wrench'),
+        job('🔧', 'kunci pas', 'montir', '🧑‍🔧', 'wrench', 'mechanic'),
         job('🚓', 'mobil polisi', 'polisi', '👮', 'police', 'police-officer'),
       ),
     ),
