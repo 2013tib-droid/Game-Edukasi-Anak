@@ -87,7 +87,7 @@ function utterance(text: string): SpeechSynthesisUtterance {
  * screen's celebration over the next question.
  */
 
-type QueueItem = { kind: 'say'; text: string } | { kind: 'tune' };
+type QueueItem = { kind: 'say'; text: string; onDone?: () => void } | { kind: 'tune' };
 
 /** Items waiting to be played, in order. */
 let queue: QueueItem[] = [];
@@ -130,15 +130,15 @@ if (typeof window !== 'undefined') {
 }
 
 /** Speak one line with the device's own voice (no rendered clip for it). */
-function speakWithDevice(text: string, gen: number): void {
+function speakWithDevice(text: string, gen: number, onEnd: () => void): void {
   if (gen !== generation) return;
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
-    void pump(gen); // no voice at all on this device — don't stall the queue
+    onEnd(); // no voice at all on this device — don't stall the queue
     return;
   }
   const utter = utterance(text);
-  utter.onend = () => void pump(gen);
-  utter.onerror = () => void pump(gen);
+  utter.onend = onEnd;
+  utter.onerror = onEnd;
   window.speechSynthesis.speak(utter);
 }
 
@@ -148,7 +148,7 @@ function speakWithDevice(text: string, gen: number): void {
  * refused by the autoplay policy) — never leave the queue stuck, and never let
  * a child end up hearing nothing.
  */
-function playClip(url: string, gen: number, onFail: () => void): void {
+function playClip(url: string, gen: number, onFail: () => void, onEnd: () => void): void {
   const el = element();
   let settled = false;
   const done = (failed: boolean) => {
@@ -157,7 +157,7 @@ function playClip(url: string, gen: number, onFail: () => void): void {
     el.onended = null;
     el.onerror = null;
     if (failed) onFail();
-    else void pump(gen);
+    else onEnd();
   };
   el.onended = () => done(false);
   el.onerror = () => done(true);
@@ -188,7 +188,7 @@ function playTuneLive(gen: number): void {
 async function playTuneItem(gen: number): Promise<void> {
   const url = await tuneClipUrl(); // rendered once, then instant
   if (gen !== generation) return;
-  if (url) playClip(url, gen, () => playTuneLive(gen));
+  if (url) playClip(url, gen, () => playTuneLive(gen), () => void pump(gen));
   else playTuneLive(gen);
 }
 
@@ -203,12 +203,20 @@ async function pump(gen: number): Promise<void> {
     void playTuneItem(gen);
     return;
   }
-  const { text } = item;
+  const { text, onDone } = item;
   await voicesReady(); // instant once loaded; capped so a bad network can't mute the game
   if (gen !== generation) return;
+  // Told only when the line was really heard to the end. An interruption
+  // (`stopSpeaking`) bumps the generation instead, so a caller waiting on a
+  // line the child cut short never gets the call.
+  const next = () => {
+    if (gen !== generation) return;
+    onDone?.();
+    void pump(gen);
+  };
   const url = voiceUrl(text);
-  if (url) playClip(url, gen, () => speakWithDevice(text, gen));
-  else speakWithDevice(text, gen);
+  if (url) playClip(url, gen, () => speakWithDevice(text, gen, next), next);
+  else speakWithDevice(text, gen, next);
 }
 
 function enqueue(items: QueueItem[], interrupt: boolean): void {
@@ -219,13 +227,22 @@ function enqueue(items: QueueItem[], interrupt: boolean): void {
   void pump(generation);
 }
 
-function say(text: string): QueueItem {
-  return { kind: 'say', text };
+function say(text: string, onDone?: () => void): QueueItem {
+  return { kind: 'say', text, onDone };
 }
 
-/** Narrate instruction text in Indonesian. Cancels any ongoing narration. */
-export function speak(text: string): void {
-  enqueue([say(text)], true);
+/**
+ * Narrate instruction text in Indonesian. Cancels any ongoing narration.
+ *
+ * `onDone` fires when the line has actually finished sounding — NOT after a
+ * fixed number of milliseconds. A rendered clip only starts once the mp3 has
+ * been fetched, so on a phone "Hebat! Kamu benar!" (1,15 s of audio) can still
+ * be talking well past a 1,4 s timer: the owner heard only "Hebat" before the
+ * next level's narration cut in (2026-09-05). Anything that has to happen
+ * AFTER a line is heard must wait for this, not guess a duration.
+ */
+export function speak(text: string, onDone?: () => void): void {
+  enqueue([say(text, onDone)], true);
 }
 
 /**
@@ -245,7 +262,10 @@ export function celebrate(text: string): void {
  * option, so these lines have to queue instead of cutting each other off.
  */
 export function speakNext(...texts: string[]): void {
-  enqueue(texts.map(say), false);
+  enqueue(
+    texts.map((t) => say(t)),
+    false,
+  );
 }
 
 export function stopSpeaking(): void {

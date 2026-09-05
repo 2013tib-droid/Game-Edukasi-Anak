@@ -55,6 +55,15 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'path-trace': lazy(() => import('@/engine/templates/PathTrace')),
 };
 
+/** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */
+const FEEDBACK_MS = 1400;
+/**
+ * Longest it may stay up. Only reached when the praise clip never reports back
+ * (stalled download, a tab the browser refuses to sound) — the child moves on
+ * anyway rather than sitting on a frozen overlay.
+ */
+const FEEDBACK_MAX_MS = 4000;
+
 /**
  * Resolve which template renders a level. Homogeneous games use the game's
  * `template`; "mixed" games carry the template on each level.
@@ -247,9 +256,9 @@ export default function GameShell({
     const earnedNow = [...earned, stars];
     setEarned(earnedNow);
     sfx('correct');
-    speak('Hebat! Kamu benar!');
     setFeedback('correct');
-    window.setTimeout(() => {
+
+    const go = () => {
       setFeedback(null);
       const next = levelIndex + 1;
       if (next >= levels.length) {
@@ -266,7 +275,36 @@ export default function GameShell({
         setAttemptKey((k) => k + 1);
         // narration handled by the level-change effect
       }
-    }, 1400);
+    };
+    // Move on once BOTH are true: the praise has been heard to the end, and the
+    // overlay has been up long enough to read. Waiting for the voice is what
+    // matters — whatever comes next (the new level's narration, or the victory
+    // tune) starts by cutting off whatever is still speaking, so advancing on a
+    // timer alone chopped "Hebat! Kamu benar!" down to "Hebat" on a phone,
+    // where a clip only starts after its mp3 has been fetched.
+    let spoken = false;
+    let shown = false;
+    let moved = false;
+    const step = () => {
+      if (!spoken || !shown || moved) return;
+      moved = true;
+      go();
+    };
+    speak('Hebat! Kamu benar!', () => {
+      spoken = true;
+      step();
+    });
+    window.setTimeout(() => {
+      shown = true;
+      step();
+    }, FEEDBACK_MS);
+    // A clip that never reports back (stalled download, muted tab) must not
+    // strand the child on the overlay for ever.
+    window.setTimeout(() => {
+      spoken = true;
+      shown = true;
+      step();
+    }, FEEDBACK_MAX_MS);
   }, [config, earned, level, levelIndex, levels, picks]);
 
   const handleWrong = useCallback((silent?: boolean) => {
