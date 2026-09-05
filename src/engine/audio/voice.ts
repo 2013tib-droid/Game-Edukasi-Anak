@@ -22,8 +22,11 @@
  *
  * Keyed by the text itself rather than by a hash the browser recomputes: the
  * lookup stays synchronous (no `crypto.subtle`), and there is no way for the
- * script's hashing and the app's hashing to silently drift apart. `_shared`
- * and `_engine` are scopes too — lines spoken by several games / by the shell.
+ * script's hashing and the app's hashing to silently drift apart. `shared`
+ * and `engine` are scopes too — lines spoken by several games / by the shell.
+ * Those two folders are deliberately NOT named `_shared`/`_engine`: GitHub
+ * Pages runs Jekyll, which drops every path starting with an underscore, so
+ * the clips 404'd on the live site while sitting happily in the repo.
  */
 
 /** Spoken text → file path relative to `public/assets/voice/`. */

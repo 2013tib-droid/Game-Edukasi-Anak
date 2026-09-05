@@ -18,8 +18,17 @@
  * the existing file is reused. `scope` decides which folder the audio lands in
  * so a game only downloads its own voice files:
  *   - a game id  → spoken only by that game
- *   - `_shared`  → spoken by several games
- *   - `_engine`  → spoken by the shell on every game (praise, "coba lagi")
+ *   - `shared`   → spoken by several games
+ *   - `engine`   → spoken by the shell on every game (praise, "coba lagi")
+ *
+ * SCOPE NAMES MUST NOT START WITH `_` (or `.`). GitHub Pages runs Jekyll on
+ * the published branch, and Jekyll silently DROPS every file and folder whose
+ * name starts with an underscore — so `_shared/` and `_engine/` were 404 on
+ * the live site while being perfectly present in the repo, and every line in
+ * them fell back to the phone's own voice (owner's report, 2026-09-04: the
+ * newest game, Rute Kendaraan, has 22 of its 31 lines in the shared scope).
+ * The two scope names below are therefore reserved: no game may use `shared`
+ * or `engine` as its id.
  */
 import { build } from 'esbuild';
 import { createHash } from 'node:crypto';
@@ -27,6 +36,14 @@ import { readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
 const OUT_FILE = 'scripts/narration-lines.json';
+
+/**
+ * The two non-game scopes. Plain names on purpose — see the header: a leading
+ * underscore makes GitHub Pages (Jekyll) drop the whole folder from the
+ * published site. Reserved: no game id may be `shared` or `engine`.
+ */
+const SHARED_SCOPE = 'shared';
+const ENGINE_SCOPE = 'engine';
 
 /**
  * Fixed lines spoken by the engine itself, not by any config:
@@ -112,6 +129,12 @@ function levelsOf(config) {
 }
 
 for (const config of mod.configs) {
+  // A game called `shared`/`engine` would land its audio in the folder those
+  // scopes own and quietly steal lines from it.
+  if (config.id === SHARED_SCOPE || config.id === ENGINE_SCOPE) {
+    console.error(`\nId game "${config.id}" bentrok dengan scope suara. Ganti id game-nya.`);
+    process.exit(1);
+  }
   for (const level of levelsOf(config)) {
     // Mixed games declare the template per level; homogeneous ones once.
     const isStory = (level.template ?? config.template) === 'story-choice';
@@ -137,13 +160,13 @@ for (const config of mod.configs) {
   }
 }
 
-for (const text of ENGINE_LINES) add(text, '_engine');
+for (const text of ENGINE_LINES) add(text, ENGINE_SCOPE);
 
 /* ---------- Write + report ---------- */
 
 const entries = [...lines.entries()]
   .map(([text, { games, voices }]) => {
-    const scope = games.has('_engine') ? '_engine' : games.size > 1 ? '_shared' : [...games][0];
+    const scope = games.has(ENGINE_SCOPE) ? ENGINE_SCOPE : games.size > 1 ? SHARED_SCOPE : [...games][0];
     // One line = one audio file, so a line a story shares with a non-story
     // game can't be in two voices — the neutral one wins.
     const voice = voices.size === 1 ? [...voices][0] : DEFAULT_VOICE;
