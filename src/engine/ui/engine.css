@@ -688,11 +688,24 @@
 
 /* Nama di kotak tujuan — juga nama kata yang SUDAH ditaruh anak, jadi jangan
    lebih kecil dari yang nyaman dibaca kelas 1–2. */
-.dd-target .dd-label {
+.dd-target .dd-label,
+.dd-target .dd-label--md,
+.dd-target .dd-label--sm {
   font-size: 20px;
   font-weight: 700;
   line-height: 1.15;
   overflow-wrap: anywhere;
+}
+
+/* Nama panjang dikecilkan supaya tetap satu baris — lihat `labelClass()` di
+   DragDrop.tsx. "mobil pemadam" & "tempat sampah" muat di 17px, "penata
+   rambut" di 15px, pada kotak selebar 158px di HP 360. */
+.dd-target .dd-label--md {
+  font-size: 17px;
+}
+
+.dd-target .dd-label--sm {
+  font-size: 15px;
 }
 
 .dd-items {
@@ -787,8 +800,18 @@
 /* Registry art (WebP) inside a chip or a filled target — matched to the emoji
    sizes above so a level can mix drawn animals with plain emoji objects. */
 .dd-img {
-  width: clamp(62px, 18vw, 88px);
-  height: clamp(62px, 18vw, 88px);
+  /* TINGGI yang dipatok, lebarnya ikut gambar. Dulu kotaknya PERSEGI supaya
+     seni tak pernah lebih tinggi dari emoji yang digantikannya — tinggi itu
+     sumbu yang bisa membuat layar scroll, dan itu tetap dijaga di sini. Yang
+     dilepas cuma lebarnya: gambar potret (orang setengah badan) di kotak
+     persegi di-letterbox jadi separuh lebar, terukur 37px berdampingan dengan
+     emoji 85px — seni premiumnya justru tampil paling kecil.
+     JANGAN dibalik jadi `width` tetap + `height: auto`: itu jebakan lama yang
+     membuat gambar lonjong 25% lebih tinggi dari emoji dan melempar HP kecil
+     ke scroll. */
+  height: clamp(62px, 19vw, 92px);
+  width: auto;
+  max-width: 100%;
   object-fit: contain;
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.18));
 }
@@ -809,9 +832,16 @@
 }
 
 /* Jarak ke kartu kata dirapatkan: tinggi yang dihemat dipakai gambarnya.
-   Kelasnya dipasang dari React (bukan `:has()`) supaya Android lawas ikut. */
+   Kelasnya dipasang dari React (bukan `:has()`) supaya Android lawas ikut.
+
+   4px, bukan 8px: sejak Pasangan Pintar ikut memakai `pictureTargets`, kotak
+   yang lebih tinggi (110→116) DUA BARIS membuat HP 360×640 scroll 2px —
+   kotaknya di sana memikul nama panjang ("mobil pemadam") yang turun dua
+   baris, beban yang tidak dipunyai Pasang Kata (labelnya cuma "?"). Tinggi
+   itu diambil dari jarak antar-blok, bukan dengan mengecilkan gambarnya
+   lagi — pelajaran yang sama seperti `.dd-targets` 24px→16px dulu. */
 .dd-targets--pic {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 /* The answer already dropped in: still the subject, still big. URUTAN PENTING:

@@ -42,6 +42,11 @@ function match(narration: string, ...pairs: Pair[]): MixedLevel {
     template: 'drag-drop',
     narration,
     data: {
+      // Gambar di kotak itu SOALNYA (alat kerja / tempat tinggal / kata), jadi
+      // ia dapat ruang seperti cue tap-answer — bukan ukuran label. Tanpa ini
+      // gambar alat cuma 42px sementara kartu orang di seberangnya 68-85px:
+      // seni yang justru jadi pertanyaan tampil paling kecil di layar.
+      pictureTargets: true,
       targets: pairs.map((p, i) => ({
         id: `t${i}`,
         ...(p.targetEmoji ? { emoji: p.targetEmoji } : {}),

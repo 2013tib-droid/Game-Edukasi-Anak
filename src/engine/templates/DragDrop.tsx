@@ -35,6 +35,23 @@ function Pic({ item, emoji, target }: { item?: string; emoji?: string; target?: 
  * row onto an extra line. Same idea as `mainTextClass()` in TapAnswer — the
  * size is automatic, so a new long word never needs new CSS.
  */
+/**
+ * Nama benda di kotak tujuan, dikecilkan bertingkat supaya nama panjang tetap
+ * SATU baris. Kotak yang labelnya turun dua baris tumbuh 12px, dan di
+ * Pasangan Pintar ("tempat sampah") itu cukup untuk melempar HP 360×640 ke
+ * scroll — tinggi yang diambil dari nama jauh lebih murah daripada dari
+ * gambarnya, karena gambarnya SOAL dan namanya cuma keterangan.
+ * Pola yang sama dengan `wordClass()` di bawah dan `mainTextClass()` di
+ * TapAnswer: kalau menambah nama panjang, JANGAN menambal dengan CSS baru.
+ */
+function labelClass(text: string): string {
+  // Ambang 12, bukan 13: terukur di HP 360, "tempat sampah" pada 17px
+  // memakan 150px sementara ruang di dalam kotak juga 150px — pas-pasan,
+  // jadi tetap pecah dua baris. Pada 15px ia muat satu baris.
+  const size = text.length <= 9 ? '' : text.length <= 12 ? ' dd-label--md' : ' dd-label--sm';
+  return `dd-label${size}`;
+}
+
 function wordClass(text: string): string {
   const size = text.length <= 6 ? '' : text.length <= 8 ? ' dd-word--md' : ' dd-word--sm';
   return `dd-word${size}`;
@@ -125,7 +142,7 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
                       <span
                         className={
                           filledBy.item || filledBy.emoji
-                            ? 'dd-label'
+                            ? labelClass(filledBy.text)
                             : wordClass(filledBy.text)
                         }
                       >
@@ -136,7 +153,7 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
                 ) : (
                   <>
                     <Pic item={t.item} emoji={t.emoji} target />
-                    <span className="dd-label">{t.label}</span>
+                    <span className={labelClass(t.label)}>{t.label}</span>
                   </>
                 )}
               </div>
