@@ -175,7 +175,7 @@ const config: MixedGameConfig = {
         // Emojinya dulu 🎨 (PALET) padahal kotaknya berlabel "kuas" — dua
         // benda berbeda, persis jebakan "satu gambar dua arti". Seni kuas
         // sudah ada, jadi emoji cadangannya ikut dibetulkan ke 🖌️.
-        job('🖌️', 'kuas', 'pelukis', '👩‍🎨', 'brush'),
+        job('🖌️', 'kuas', 'pelukis', '👩‍🎨', 'brush', 'painter'),
         job('🚌', 'bus', 'sopir', '🧑‍✈️', 'bus'),
         // Dulu `'key'` (gambar kunci PINTU) — salah untuk montir, yang
         // pakai kunci PAS. Satu gambar tak boleh punya dua arti (aturan

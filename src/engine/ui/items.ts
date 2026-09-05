@@ -144,11 +144,15 @@ export const ITEMS: Record<string, ItemDef> = {
   // ORANGNYA TIDAK BOLEH MEMEGANG ALAT KERJANYA: soal ini memasangkan profesi
   // dengan alatnya, jadi koki yang menggenggam wajan membocorkan jawabannya.
   //
-  // Yang belum ada asetnya (painter, wrench) sengaja BELUM punya file — id
-  // tanpa aset cuma menambah permintaan 404. `wrench` pengecualian yang
-  // disadari: sudah dirujuk config sejak 2026-09-03 supaya kartu montir
-  // berhenti memakai gambar kunci PINTU, jadi ia menunggu filenya sambil
-  // jatuh ke emoji.
+  // Batch 7 LENGKAP 13/13 (2026-09-05). Dua jebakan yang kena di batch ini,
+  // jangan diulang saat menambah alat kerja baru:
+  //   - Sebut BENTUK alatnya di prompt, bukan cuma namanya: kartu montir
+  //     dulu memakai gambar kunci PINTU, dan "kunci pas" tanpa penjelasan
+  //     gampang keluar sebagai kunci inggris.
+  //   - Lubang di dalam alat (ring kunci pas) itu latar yang TERKURUNG, tak
+  //     terjangkau flood fill `cut-item.py`, jadi ia tetap putih opak sampai
+  //     ditembus manual. Selalu tempel hasil potong di atas warna mencolok
+  //     dulu — di atas kertas putih cacat ini tak kelihatan sama sekali.
   //
   // `police-officer` sengaja BUKAN `police`: id `police` sudah dipakai untuk
   // MOBIL polisi di Jalan Kendaraan, dan satu gambar tak boleh punya dua arti.
@@ -163,6 +167,7 @@ export const ITEMS: Record<string, ItemDef> = {
   firefighter: { emoji: '👨‍🚒', label: 'pemadam kebakaran', ext: 'webp' },
   mechanic: { emoji: '🧑‍🔧', label: 'montir', ext: 'webp' },
   brush: { emoji: '🖌️', label: 'kuas', ext: 'webp' },
+  painter: { emoji: '👩‍🎨', label: 'pelukis', ext: 'webp' },
   wrench: { emoji: '🔧', label: 'kunci pas', ext: 'webp' },
 };
 

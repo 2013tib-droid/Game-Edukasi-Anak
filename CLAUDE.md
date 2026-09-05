@@ -569,7 +569,9 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 - **Seni profesi (Batch 7) + gambar di kotak drag & drop dibesarkan** (2026-09-05, aset dari pemilik; keputusan pemilik untuk memperbaiki ukurannya), teruji headless Chromium di build produksi 360×640, 380×800 & 820×1180:
 
-  **11 dari 13 gambar batch 7 masuk** (`chef`, `teacher`, `pan`, `stethoscope`, `doctor`, `farmer`, `hoe`, `police-officer`, `firefighter`, `mechanic`, `brush`). Sisa: `wrench`, `painter`. `police-officer` sengaja BUKAN `police` — id itu sudah dipakai untuk MOBIL polisi.
+  **Batch 7 LENGKAP 13/13** (`chef`, `teacher`, `pan`, `stethoscope`, `doctor`, `farmer`, `hoe`, `police-officer`, `firefighter`, `mechanic`, `brush`, `painter`, `wrench`). `police-officer` sengaja BUKAN `police` — id itu sudah dipakai untuk MOBIL polisi. Sejak batch ini `node scripts/check-item-ids.mjs` **bersih total** untuk pertama kalinya: `wrench.webp` sudah dirujuk config sejak 2026-09-03 tapi filenya baru ada sekarang.
+
+  **LUBANG DI DALAM BENDA harus ditembus manual.** Lubang ring kunci pas itu latar yang TERKURUNG garis luar, jadi flood fill `cut-item.py` tak menjangkaunya dan ia tetap **putih opak** — di kotak yang latarnya krem-merah muda itu tampak sebagai bercak putih. Perbaikannya: tembus komponen terang terkurung TERBESAR saja (sorotan putih kecil di badan kunci harus selamat), pola yang sama dengan daftar `HOLES` di `cut-item-sheet.py` — **sengaja per item, jangan diotomatiskan**. **Selalu tempel hasil potong di atas warna mencolok dulu**; di atas kertas putih cacat ini sama sekali tak kelihatan, dan itulah sebabnya ia nyaris lolos.
 
   **Batch ini membereskan TIGA soal yang keliru, bukan cuma mempercantik.** Ketiganya lahir dari memakai emoji sebagai pengganti sementara, dan ketiganya baru ketahuan saat gambarnya datang:
   - kartu montir dulu memakai gambar kunci **PINTU** (sudah diperbaiki 2026-09-03, tinggal menunggu filenya);
