@@ -400,6 +400,19 @@ ramah, dengan seragam/atribut yang menjelaskan profesinya, **tanpa memegang
 alat kerjanya** — alat itu jadi kartu jawaban terpisah, jadi kalau orangnya
 sudah memegang alat, jawabannya bocor.
 
+> **2026-09-05, setelah 11 gambar masuk — dua pelajaran:**
+>
+> - **"Tanpa memegang" saja tidak cukup: alatnya juga tak boleh DIPAKAI.**
+>   `doctor` yang sudah masuk MEMAKAI stetoskop di leher sementara pasangannya
+>   memang kotak "stetoskop" — jawabannya tetap bocor. Pemilik memilih
+>   memakainya dulu karena emoji lamanya juga begitu (jadi bukan kemunduran),
+>   tapi untuk gambar berikutnya sebut eksplisit benda yang dilarang: pelukis
+>   **tanpa kuas DAN tanpa palet**, dokter **tanpa stetoskop di leher**.
+> - **Sebut bentuk alatnya, jangan cuma namanya.** Kartu montir dulu memakai
+>   gambar kunci PINTU. Karena itu baris `wrench` sekarang menyebut "dua ujung
+>   terbuka berbentuk U" — tanpa itu yang keluar gampang jadi kunci inggris,
+>   benda yang berbeda lagi.
+
 | id (nama file) | Objek | Baris prompt untuk dikirim |
 |---|---|---|
 | `doctor` | dokter | Buatkan: dokter perempuan setengah badan tampak depan, jas putih, tersenyum ramah, tanpa memegang alat apa pun, imut. |
@@ -412,8 +425,8 @@ sudah memegang alat, jawabannya bocor.
 | `police-officer` | polisi | Buatkan: polisi laki-laki setengah badan tampak depan, seragam coklat dan topi polisi, tersenyum ramah, tanpa tulisan di seragam, imut. |
 | `firefighter` | pemadam kebakaran | Buatkan: petugas pemadam kebakaran setengah badan tampak depan, helm merah dan jaket kuning bergaris pantul, tersenyum, tanpa memegang selang, imut. |
 | `mechanic` | montir | Buatkan: montir laki-laki setengah badan tampak depan, baju kerja biru dan topi, tersenyum ramah, tanpa memegang alat, imut. |
-| `wrench` | kunci pas | Buatkan: satu kunci pas logam abu-abu, posisi diagonal, tanpa wajah. |
-| `painter` | pelukis | Buatkan: pelukis perempuan setengah badan tampak depan, celemek dan baret, tersenyum ramah, tanpa memegang kuas, imut. |
+| `wrench` | kunci pas | Buatkan: satu kunci pas logam abu-abu dengan dua ujung terbuka berbentuk U, posisi diagonal, tampak datar dari samping, seluruh alat masuk penuh, tanpa wajah, tanpa tangan yang memegang. |
+| `painter` | pelukis | Buatkan: pelukis perempuan setengah badan tampak depan, memakai celemek dan baret, tersenyum ramah, kedua tangan di depan badan, tanpa memegang kuas, tanpa palet, tanpa alat apa pun, imut. |
 | `brush` | kuas | Buatkan: satu kuas lukis dengan gagang kayu dan bulu kuas berwarna, ujungnya berlumur cat merah, posisi diagonal, tanpa wajah. |
 
 > `police-officer` sengaja BUKAN `police` — id `police` sudah dipakai untuk
