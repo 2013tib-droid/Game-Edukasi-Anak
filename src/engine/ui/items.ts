@@ -144,13 +144,20 @@ export const ITEMS: Record<string, ItemDef> = {
   // ORANGNYA TIDAK BOLEH MEMEGANG ALAT KERJANYA: soal ini memasangkan profesi
   // dengan alatnya, jadi koki yang menggenggam wajan membocorkan jawabannya.
   //
-  // Yang belum ada asetnya (doctor, farmer, hoe, police-officer, firefighter,
-  // mechanic, painter, brush) sengaja BELUM didaftarkan — id tanpa file cuma
-  // menambah permintaan 404. Daftarkan bersamaan dengan WebP-nya.
+  // Yang belum ada asetnya (firefighter, mechanic, painter, brush) sengaja
+  // BELUM didaftarkan — id tanpa file cuma menambah permintaan 404.
+  // Daftarkan bersamaan dengan WebP-nya.
+  //
+  // `police-officer` sengaja BUKAN `police`: id `police` sudah dipakai untuk
+  // MOBIL polisi di Jalan Kendaraan, dan satu gambar tak boleh punya dua arti.
   chef: { emoji: '👨‍🍳', label: 'koki', ext: 'webp' },
   teacher: { emoji: '👩‍🏫', label: 'guru', ext: 'webp' },
   pan: { emoji: '🍳', label: 'wajan', ext: 'webp' },
   stethoscope: { emoji: '🩺', label: 'stetoskop', ext: 'webp' },
+  doctor: { emoji: '👩‍⚕️', label: 'dokter', ext: 'webp' },
+  farmer: { emoji: '👨‍🌾', label: 'petani', ext: 'webp' },
+  hoe: { emoji: '⛏️', label: 'cangkul', ext: 'webp' },
+  'police-officer': { emoji: '👮', label: 'polisi', ext: 'webp' },
   wrench: { emoji: '🔧', label: 'kunci pas', ext: 'webp' },
 };
 

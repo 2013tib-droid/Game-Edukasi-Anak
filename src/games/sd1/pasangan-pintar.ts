@@ -152,9 +152,12 @@ const config: MixedGameConfig = {
       'l1',
       match(
         ASK_JOB,
-        job('🩺', 'stetoskop', 'dokter', '👩‍⚕️', 'stethoscope'),
+        job('🩺', 'stetoskop', 'dokter', '👩‍⚕️', 'stethoscope', 'doctor'),
         job('🚒', 'mobil pemadam', 'pemadam', '👨‍🚒', 'firetruck'),
-        job('🌾', 'sawah', 'petani', '👨‍🌾', 'field'),
+        // Dulu pasangannya 'sawah' — itu TEMPAT kerja, bukan alat, padahal
+        // narasinya berbunyi "tarik setiap orang ke ALAT KERJANYA". Sawah
+        // dipakai waktu itu karena belum ada seni cangkul; sekarang ada.
+        job('⛏️', 'cangkul', 'petani', '👨‍🌾', 'hoe', 'farmer'),
       ),
       match(
         ASK_JOB,
@@ -171,7 +174,7 @@ const config: MixedGameConfig = {
         // lama); id `wrench` sengaja terpisah dari `key` yang tetap dipakai
         // untuk kunci sungguhan di Taman Huruf & Pasang Kata.
         job('🔧', 'kunci pas', 'montir', '🧑‍🔧', 'wrench'),
-        job('🚓', 'mobil polisi', 'polisi', '👮', 'police'),
+        job('🚓', 'mobil polisi', 'polisi', '👮', 'police', 'police-officer'),
       ),
     ),
     // --- 2. Hewan & tempat tinggalnya ---
