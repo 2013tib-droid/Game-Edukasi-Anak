@@ -42,6 +42,11 @@ function match(narration: string, ...pairs: Pair[]): MixedLevel {
     template: 'drag-drop',
     narration,
     data: {
+      // Gambar di kotak itu SOALNYA (alat kerja / tempat tinggal / kata), jadi
+      // ia dapat ruang seperti cue tap-answer — bukan ukuran label. Tanpa ini
+      // gambar alat cuma 42px sementara kartu orang di seberangnya 68-85px:
+      // seni yang justru jadi pertanyaan tampil paling kecil di layar.
+      pictureTargets: true,
       targets: pairs.map((p, i) => ({
         id: `t${i}`,
         ...(p.targetEmoji ? { emoji: p.targetEmoji } : {}),
@@ -62,19 +67,29 @@ function match(narration: string, ...pairs: Pair[]): MixedLevel {
   };
 }
 
-/** Profesi ↔ alat kerjanya. */
+/**
+ * Profesi ↔ alat kerjanya.
+ *
+ * Argumen kelima = seni ALATNYA, keenam = seni ORANGNYA. Keduanya opsional
+ * dan emoji selalu jadi cadangan, jadi pasangan yang baru punya salah satunya
+ * cukup mengisi slot itu saja — pola yang sama dengan `trip()` di
+ * jalan-kendaraan.ts. Kalau aset baru datang, ISI ARGUMENNYA di sini; jangan
+ * menambah field baru di engine.
+ */
 const job = (
   tool: string,
   toolName: string,
   person: string,
   personEmoji: string,
   toolItem?: string,
+  personItem?: string,
 ): Pair => ({
   target: toolName,
   targetEmoji: tool,
   targetItem: toolItem,
   item: person,
   itemEmoji: personEmoji,
+  itemItem: personItem,
 });
 
 /** Hewan ↔ tempat tinggalnya. */
@@ -142,26 +157,32 @@ const config: MixedGameConfig = {
       'l1',
       match(
         ASK_JOB,
-        job('🩺', 'stetoskop', 'dokter', '👩‍⚕️'),
-        job('🚒', 'mobil pemadam', 'pemadam', '👨‍🚒', 'firetruck'),
-        job('🌾', 'sawah', 'petani', '👨‍🌾', 'field'),
+        job('🩺', 'stetoskop', 'dokter', '👩‍⚕️', 'stethoscope', 'doctor'),
+        job('🚒', 'mobil pemadam', 'pemadam', '👨‍🚒', 'firetruck', 'firefighter'),
+        // Dulu pasangannya 'sawah' — itu TEMPAT kerja, bukan alat, padahal
+        // narasinya berbunyi "tarik setiap orang ke ALAT KERJANYA". Sawah
+        // dipakai waktu itu karena belum ada seni cangkul; sekarang ada.
+        job('⛏️', 'cangkul', 'petani', '👨‍🌾', 'hoe', 'farmer'),
       ),
       match(
         ASK_JOB,
         job('✂️', 'gunting', 'penata rambut', '💇'),
-        job('🍳', 'wajan', 'koki', '👨‍🍳'),
-        job('📚', 'buku', 'guru', '👩‍🏫', 'book'),
+        job('🍳', 'wajan', 'koki', '👨‍🍳', 'pan', 'chef'),
+        job('📚', 'buku', 'guru', '👩‍🏫', 'book', 'teacher'),
       ),
       match(
         ASK_JOB,
-        job('🎨', 'kuas', 'pelukis', '👩‍🎨'),
+        // Emojinya dulu 🎨 (PALET) padahal kotaknya berlabel "kuas" — dua
+        // benda berbeda, persis jebakan "satu gambar dua arti". Seni kuas
+        // sudah ada, jadi emoji cadangannya ikut dibetulkan ke 🖌️.
+        job('🖌️', 'kuas', 'pelukis', '👩‍🎨', 'brush', 'painter'),
         job('🚌', 'bus', 'sopir', '🧑‍✈️', 'bus'),
         // Dulu `'key'` (gambar kunci PINTU) — salah untuk montir, yang
         // pakai kunci PAS. Satu gambar tak boleh punya dua arti (aturan
         // lama); id `wrench` sengaja terpisah dari `key` yang tetap dipakai
         // untuk kunci sungguhan di Taman Huruf & Pasang Kata.
-        job('🔧', 'kunci pas', 'montir', '🧑‍🔧', 'wrench'),
-        job('🚓', 'mobil polisi', 'polisi', '👮', 'police'),
+        job('🔧', 'kunci pas', 'montir', '🧑‍🔧', 'wrench', 'mechanic'),
+        job('🚓', 'mobil polisi', 'polisi', '👮', 'police', 'police-officer'),
       ),
     ),
     // --- 2. Hewan & tempat tinggalnya ---

@@ -252,7 +252,14 @@ const config: GameConfig<'drag-drop'> = {
       words({ word: 'topi', emoji: '🧢', item: 'cap' }, { word: 'sepatu', emoji: '👟', item: 'shoe' }, { word: 'baju', emoji: '👕' }),
       words({ word: 'celana', emoji: '👖' }, { word: 'kaus kaki', emoji: '🧦' }, { word: 'sandal', emoji: '🩴' }),
       words({ word: 'jaket', emoji: '🧥' }, { word: 'kacamata', emoji: '👓' }, { word: 'topi', emoji: '🧢', item: 'cap' }),
-      words({ word: 'dasi', emoji: '👔' }, { word: 'syal', emoji: '🧣' }, { word: 'sarung tangan', emoji: '🧤' }),
+      // Dasi, syal & sarung tangan DIBUANG (keputusan pemilik 2026-09-04).
+      // Dua alasan sekaligus: (1) Indonesia beriklim tropis — anak tidak
+      // pernah memakai syal & sarung tangan, dan dasi cuma muncul di seragam
+      // sebagian sekolah; (2) "sarung tangan" 13 huruf → `wordClass()`
+      // menurunkannya ke `.dd-word--sm` (20px), tulisan paling kecil di
+      // kartu. Gantinya pakaian sehari-hari yang semuanya ≤ 6 huruf, jadi
+      // tetap di ukuran tulisan PALING BESAR.
+      words({ word: 'gaun', emoji: '👗' }, { word: 'sepatu', emoji: '👟', item: 'shoe' }, { word: 'celana', emoji: '👖' }),
     ),
     // --- 12. Alam & langit ---
     slot(
@@ -298,7 +305,11 @@ const config: GameConfig<'drag-drop'> = {
       words({ word: 'wortel', emoji: '🥕', item: 'carrot' }, { word: 'jagung', emoji: '🌽', item: 'corn' }, { word: 'tomat', emoji: '🍅' }),
       words({ word: 'terong', emoji: '🍆' }, { word: 'brokoli', emoji: '🥦' }, { word: 'kentang', emoji: '🥔' }),
       words({ word: 'bawang', emoji: '🧅' }, { word: 'cabai', emoji: '🌶️' }, { word: 'timun', emoji: '🥒' }),
-      words({ word: 'jamur', emoji: '🍄' }, { word: 'labu', emoji: '🎃' }, { word: 'jagung', emoji: '🌽', item: 'corn' }),
+      // "labu" 🎃 DIBUANG: di HP emoji itu labu Halloween berwajah ukiran —
+      // anak melihat wajah, bukan sayur (jebakan yang sama dengan kartu
+      // Bawang Putih di Baca Cerita). Tak ada emoji labu polos, jadi diganti
+      // sayur lain. "sawi", bukan "kubis": 🥬 itu daun berbatang, bukan bola.
+      words({ word: 'jamur', emoji: '🍄' }, { word: 'sawi', emoji: '🥬' }, { word: 'jagung', emoji: '🌽', item: 'corn' }),
     ),
     // --- 15. Benda di rumah (lanjutan slot 2) ---
     slot(

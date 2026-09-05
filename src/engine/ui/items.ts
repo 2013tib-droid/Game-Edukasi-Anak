@@ -135,10 +135,39 @@ export const ITEMS: Record<string, ItemDef> = {
   taxi: { emoji: '🚕', label: 'taksi', ext: 'webp' },
   motorcycle: { emoji: '🏍️', label: 'motor', ext: 'webp' },
   racecar: { emoji: '🏎️', label: 'mobil balap', ext: 'webp' },
-  // Alat kerja profesi (Pasangan Pintar, BATCH 7 di
-  // docs/prompt-gambar-gemini.md). Belum ada asetnya — jatuh ke emoji lewat
-  // ItemPic sampai gambarnya dikirim, pola yang sama dengan tahap maskot yang
-  // belum punya seni.
+  // Profesi & alat kerjanya (Pasangan Pintar, BATCH 7 di
+  // docs/prompt-gambar-gemini.md). Emoji profesi (👩‍⚕️ 👨‍🍳 🧑‍🔧) itu emoji
+  // GABUNGAN (ZWJ): di HP Android yang fontnya tak punya glyph rakitannya,
+  // satu profesi pecah jadi DUA emoji berdampingan — anak melihat dua benda
+  // untuk satu soal. Jadi seni WebP di sini bukan sekadar mempercantik.
+  //
+  // ORANGNYA TIDAK BOLEH MEMEGANG ALAT KERJANYA: soal ini memasangkan profesi
+  // dengan alatnya, jadi koki yang menggenggam wajan membocorkan jawabannya.
+  //
+  // Batch 7 LENGKAP 13/13 (2026-09-05). Dua jebakan yang kena di batch ini,
+  // jangan diulang saat menambah alat kerja baru:
+  //   - Sebut BENTUK alatnya di prompt, bukan cuma namanya: kartu montir
+  //     dulu memakai gambar kunci PINTU, dan "kunci pas" tanpa penjelasan
+  //     gampang keluar sebagai kunci inggris.
+  //   - Lubang di dalam alat (ring kunci pas) itu latar yang TERKURUNG, tak
+  //     terjangkau flood fill `cut-item.py`, jadi ia tetap putih opak sampai
+  //     ditembus manual. Selalu tempel hasil potong di atas warna mencolok
+  //     dulu — di atas kertas putih cacat ini tak kelihatan sama sekali.
+  //
+  // `police-officer` sengaja BUKAN `police`: id `police` sudah dipakai untuk
+  // MOBIL polisi di Jalan Kendaraan, dan satu gambar tak boleh punya dua arti.
+  chef: { emoji: '👨‍🍳', label: 'koki', ext: 'webp' },
+  teacher: { emoji: '👩‍🏫', label: 'guru', ext: 'webp' },
+  pan: { emoji: '🍳', label: 'wajan', ext: 'webp' },
+  stethoscope: { emoji: '🩺', label: 'stetoskop', ext: 'webp' },
+  doctor: { emoji: '👩‍⚕️', label: 'dokter', ext: 'webp' },
+  farmer: { emoji: '👨‍🌾', label: 'petani', ext: 'webp' },
+  hoe: { emoji: '⛏️', label: 'cangkul', ext: 'webp' },
+  'police-officer': { emoji: '👮', label: 'polisi', ext: 'webp' },
+  firefighter: { emoji: '👨‍🚒', label: 'pemadam kebakaran', ext: 'webp' },
+  mechanic: { emoji: '🧑‍🔧', label: 'montir', ext: 'webp' },
+  brush: { emoji: '🖌️', label: 'kuas', ext: 'webp' },
+  painter: { emoji: '👩‍🎨', label: 'pelukis', ext: 'webp' },
   wrench: { emoji: '🔧', label: 'kunci pas', ext: 'webp' },
 };
 
