@@ -15,7 +15,7 @@ Platform web berbayar berisi kumpulan mini-game edukasi untuk anak Indonesia, di
 | Platform | Web app: **React (Vite) + TypeScript + Firebase** (Auth, Firestore, Hosting) |
 | Bahasa pemrograman | **TypeScript strict** untuk seluruh app & engine — config game type-safe (typo field ketahuan saat build, bukan saat anak main). Game lama `petualangan-pintar.html` tetap vanilla JS sampai Fase 3 |
 | Perangkat target | HP Android & tablet — mobile-first, touch-first |
-| Demo gratis | Saat launching: **hanya "Hutan Hewan" (TK) yang gratis**, sisanya wajib login (lihat "Rencana Akses Saat Launching") |
+| Demo gratis | Saat launching: **2 game gratis per kelompok** — TK: Hutan Hewan + Tulis Angka; SD Kelas 1 & 2: Hitung Hebat + Cerita Kancil. Sisanya wajib login (lihat "Rencana Akses Saat Launching") |
 | Aset | Gambar AI-generated + narasi TTS Bahasa Indonesia |
 | Harga | Naik per jenjang: Playgroup & TK Rp39rb (perkenalan Rp19rb), SD Kelas 1 & 2 Rp49rb (perkenalan Rp29rb) — selalu < Rp50rb |
 | Update | Beli sekali = bugfix gratis; konten besar baru = ekspansi berbayar |
@@ -52,18 +52,23 @@ Aturan teknis (**semuanya SUDAH terpasang di Fase 5** — lihat "Status Pengerja
 - Konten game premium lazy-load per game, dan gate di level route + Firestore security rules. **CATATAN JUJUR:** chunk config-nya tetap file statis yang bisa diunduh siapa pun yang tahu URL-nya — yang dijual adalah AKSES (akun + kode + batas perangkat). Menutup celah itu = menyajikan config lewat Cloud Function bertoken, keputusan arsitektur yang **belum diambil**.
 - Firestore Security Rules ketat: user hanya bisa baca dokumen miliknya; kode aktivasi tertutup total dari client.
 
-## Rencana Akses Saat Launching (KEPUTUSAN PEMILIK — 2026-07-26)
+## Rencana Akses Saat Launching (KEPUTUSAN PEMILIK — diperbarui 2026-09-04)
 
 - **Sekarang (pra-rilis): SEMUA game dibuka** supaya pemilik & penguji bisa mencoba semuanya tanpa login. Ini kondisi SEMENTARA, bukan keputusan produk.
-- **Saat launching: hanya `hutan-hewan` (Hutan Hewan, TK) yang GRATIS.** Semua game lain — TK maupun SD Kelas 1 & 2 — wajib **login + kode aktivasi**.
-- Cara mengeksekusinya sekarang **satu baris saja** — lihat "Sistem Kunci Game" di bawah (dulu harus mengubah `freeDemo` di 11 config + registry; field itu sudah DIHAPUS).
+- **Saat launching: 2 game GRATIS per kelompok** — TK: `hutan-hewan` + `tulis-angka`; SD Kelas 1 & 2: `hitung-hebat` + `cerita-kancil`. Semua game lain wajib **login + kode aktivasi**.
+  - Menggantikan keputusan 2026-07-26 ("hanya `hutan-hewan` yang gratis"), yang membuat SD Kelas 1 & 2 tidak punya demo sama sekali — orang tua harus membayar tanpa pernah melihat apa pun.
+  - Tiap kelompok sengaja dapat **dua template berbeda**: satu tap-answer (anak langsung bisa) + satu yang memamerkan kemampuan engine (tracing / story-choice). Jangan diganti jadi dua-duanya tap-answer.
+  - Game gratis **tidak minta login** dan **tidak dipotong** (level penuh).
+  - **Alasan lengkap, opsi yang ditolak, dan langkah eksekusinya: `docs/rencana-trial.md`.**
+- **BELUM DIEKSEKUSI** — `FREE_GAME_IDS` di kode masih berisi `hutan-hewan` saja. Diterapkan saat mendekati launching, bersama `DEFAULT_LOCK_MODE = 'kunci'`.
+- Cara mengeksekusinya **satu baris saja** — lihat "Sistem Kunci Game" di bawah (dulu harus mengubah `freeDemo` di 11 config + registry; field itu sudah DIHAPUS).
 
 ## Sistem Kunci Game (SAKLAR BUKA/TUTUP — 2026-07-29)
 
 > Dulu status gratis/berbayar ditulis dua kali per game (`freeDemo` di config + di `registry.ts`) — 22 tempat yang gampang tidak sinkron. Sekarang **satu sumber**: `src/data/access.ts`.
 
 - **`src/data/access.ts` = satu-satunya sumber kebenaran.**
-  - `FREE_GAME_IDS = ['hutan-hewan']` — daftar game yang tetap gratis saat terkunci.
+  - `FREE_GAME_IDS = ['hutan-hewan']` — daftar game yang tetap gratis saat terkunci. **Saat launching jadi 4 game** (lihat "Rencana Akses Saat Launching" & `docs/rencana-trial.md`); belum diubah.
   - `DEFAULT_LOCK_MODE` — `'buka'` (semua game terbuka, kondisi pra-rilis) atau `'kunci'` (hanya `FREE_GAME_IDS` yang terbuka).
   - `isGameUnlocked(id)` menjawab "apakah kunci berlaku untuk game ini"; **`canPlayGame(id, group, ownedGroups)`** adalah keputusan akhirnya — dipakai `GroupPage` (gembok + label GRATIS) dan, lewat `useGameAccess`, oleh `GamePage` (gerbang akses). **Jangan menaruh keputusan akses di tempat lain.**
   - Sejak Fase 5, bagian yang mengikat bukan lagi mode kunci ini, melainkan `users/{uid}.groups` di Firestore yang cuma bisa ditulis Cloud Function. Mode kunci hanya menentukan **apakah** kepemilikan itu perlu diperiksa.
@@ -131,7 +136,7 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, levels[]
 1. **Fase 1 — Fondasi:** setup Vite + React + TS + Firebase, routing, Auth, halaman portal dasar, Firestore rules. ✅ **SELESAI** (lihat "Status Pengerjaan" di bawah)
 2. **Fase 2 — Engine:** core engine + 6 template game + sistem audio/narasi + progress bintang. ✅ **SELESAI**
 3. **Fase 3 — Migrasi:** porting game "Petualangan Pintar" (HTML standalone yang sudah ada) ke format engine sebagai game pertama kelompok TK.
-4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Saat rilis hanya `hutan-hewan` yang gratis (lihat "Sistem Kunci Game").
+4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Saat rilis 2 game gratis per kelompok (lihat "Rencana Akses Saat Launching").
 5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi. ✅ **SELESAI** (2026-08-11, teruji di Firebase Emulator — lihat "Status Pengerjaan")
 6. **Fase 6 — Rilis:** buat project Firebase & deploy backend, sinkron bintang ke Firestore, halaman Privasi/S&K/refund, verifikasi email, analytics, lalu nyalakan mode `'kunci'` — deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli. **Langkah & prompt lengkapnya: `docs/fase-6-rilis-prompt.md`** (Bagian A = yang harus dikerjakan pemilik sendiri di Firebase Console).
 
