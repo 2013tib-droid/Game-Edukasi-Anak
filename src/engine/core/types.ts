@@ -16,7 +16,8 @@ export type TemplateId =
   | 'story-choice' // cerita interaktif
   | 'spell' // eja/susun huruf jadi kata (dari game Petualangan Pintar)
   | 'path-trace' // susuri jalan dengan jari (antar kendaraan ke tujuan)
-  | 'puzzle'; // susun kepingan gambar sampai utuh
+  | 'puzzle' // susun kepingan gambar sampai utuh
+  | 'tap-picture'; // sentuh bagian yang benar pada satu gambar (anggota tubuh)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -388,6 +389,65 @@ export interface PuzzleData {
   rows: 2 | 3;
 }
 
+/**
+ * Bagian tubuh yang bisa disentuh pada gambar anak. GEOMETRINYA ADA DI ENGINE
+ * (`src/engine/ui/Kid.tsx`): config cuma MENYEBUT namanya, persis seperti
+ * `RoadKind` di path-trace dan `SceneId` di cerita. Jadi kalau gambarnya nanti
+ * diganti ilustrasi kiriman pemilik, koordinatnya dibetulkan di SATU tempat dan
+ * tak satu pun config ikut berubah.
+ *
+ * Daftarnya sengaja mengikuti lagu "Kepala pundak lutut kaki" — kalimat yang
+ * sudah dihafal hampir semua anak TK Indonesia — plus bagian yang disebut bait
+ * keduanya (mata, telinga, mulut, hidung, pipi).
+ */
+export type BodyPartId =
+  | 'rambut'
+  | 'kepala'
+  | 'mata'
+  | 'telinga'
+  | 'hidung'
+  | 'mulut'
+  | 'pipi'
+  | 'leher'
+  | 'pundak'
+  | 'tangan'
+  | 'perut'
+  | 'lutut'
+  | 'kaki';
+
+/**
+ * Sentuh bagian yang benar pada SATU gambar utuh.
+ *
+ * Sengaja bukan kartu jawaban berisi potongan tubuh (telinga sendirian, tangan
+ * terpotong): itu menyeramkan untuk anak empat tahun dan melanggar aturan
+ * "satu gambar satu arti". Emoji bagian tubuh (👂 ✋ 🦶 👃) juga tidak dipakai —
+ * berwarna kulit tertentu dan beda bentuk di tiap HP, masalah yang sama dengan
+ * 🕒 di Jam Pintar.
+ *
+ * ATURAN MENULIS LEVEL (dijaga `scripts/check-body-parts.mjs`):
+ * - `parts` = jawaban + 2–3 pengecoh. Makin banyak bagian yang aktif, makin
+ *   kecil daerah sentuhnya — engine memperkecil radius tiap titik supaya dua
+ *   bagian tak pernah bertindihan, jadi bagian yang berdempetan di gambar
+ *   (pipi & telinga, lutut & kaki, leher & mulut) JANGAN diaktifkan bersama.
+ * - Engine memilih framing sendiri: semua bagian di wajah → gambar wajah
+ *   diperbesar; ada satu saja bagian badan → seluruh badan. Jadi jangan
+ *   mencampur bagian wajah yang kecil (hidung, mulut, pipi) dengan bagian
+ *   badan — di tampilan seluruh badan wajahnya jadi terlalu kecil.
+ * - `kepala` itu SELURUH kepala; jangan disatukan dengan bagian wajah mana pun.
+ */
+export interface TapPictureData {
+  /** Bagian yang bisa disentuh di level ini (2–4, termasuk jawabannya). */
+  parts: BodyPartId[];
+  /** Jawaban yang benar — wajib salah satu isi `parts`. */
+  answer: BodyPartId;
+  /**
+   * Isyarat benda di pojok gambar ("Topi dipakai di bagian mana?") — id item
+   * registry (`src/engine/ui/items.ts`). Bendanya yang ditanyakan, jadi anak
+   * tetap menjawab dengan menyentuh tubuh, bukan memilih kartu.
+   */
+  cueItem?: string;
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -398,6 +458,7 @@ export interface LevelDataMap {
   spell: SpellData;
   'path-trace': PathTraceData;
   puzzle: PuzzleData;
+  'tap-picture': TapPictureData;
 }
 
 /* ---------- Game config ---------- */

@@ -56,6 +56,13 @@ export function announcementsFor(isBuyer: boolean): Announcement[] {
  */
 export const announcements: Announcement[] = [
   {
+    id: 'a-2026-09-07-anggota-tubuh',
+    date: '2026-09-07',
+    tag: 'baru',
+    title: 'Game baru: Anggota Tubuh 🧒',
+    body: 'Anak menyentuh sendiri bagian tubuh pada gambar: mata, telinga, hidung, mulut, pundak, lutut, kaki. Delapan soal tiap sesi — menyebut bagiannya, panca indera, kegunaannya, sampai "topi dipakai di mana?" — lengkap dengan lagu "Kepala pundak lutut kaki".',
+  },
+  {
     id: 'a-2026-09-07-puzzle-gambar',
     date: '2026-09-07',
     tag: 'baru',

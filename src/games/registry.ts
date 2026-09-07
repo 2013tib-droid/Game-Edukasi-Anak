@@ -128,6 +128,20 @@ export const games: GameMeta[] = [
     template: 'puzzle',
     load: () => import('@/games/tk/puzzle-gambar'),
   },
+  {
+    // Satu-satunya game yang isinya DIRI SENDIRI: anak menyentuh bagian tubuh
+    // pada gambar anak yang digambar engine (`src/engine/ui/Kid.tsx`), bukan
+    // memilih kartu berisi potongan tubuh. Ikon 🧒 sengaja anak UTUH — emoji
+    // bagian tubuh (👂 ✋ 🦶 👃) berwarna kulit tertentu dan beda bentuk di
+    // tiap HP. Seninya belum ada; taruh `public/assets/games/anggota-tubuh.webp`
+    // + `pic: 'anggota-tubuh'` kalau sudah dibuat.
+    id: 'anggota-tubuh',
+    group: 'tk',
+    title: 'Anggota Tubuh',
+    emoji: '🧒',
+    template: 'mixed',
+    load: () => import('@/games/tk/anggota-tubuh'),
+  },
   // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
   {
     id: 'pasang-kata',
