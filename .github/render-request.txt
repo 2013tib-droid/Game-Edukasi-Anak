@@ -1,19 +1,13 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #13 — only: puzzle-gambar
+render #14 — only: anggota-tubuh
 
-Game baru "Puzzle Gambar" (TK): 36 kalimat baru di scope `puzzle-gambar`,
-939 karakter (0,2% kuota gratis bulanan).
+Game baru "Anggota Tubuh" (TK): 55 kalimat baru di scope `anggota-tubuh`,
+1.570 karakter (0,3% kuota gratis bulanan).
 
-Semuanya berpola "Ayo susun gambar <nama benda>!" — narasi di game ini
-sengaja MENYEBUT NAMA gambarnya, karena itulah muatan belajarnya: anak
-mendengar nama benda yang sedang disusunnya. (Beda dari Kartu Kembar yang
-sengaja memakai satu kalimat untuk semua varian; di sana namanya tak menambah
-apa pun.)
-
-Aman di-`only:` — ke-36 baris milik game ini saja, nol baris naik scope ke
-`shared`, nol baris lama hilang atau berubah scope (dibandingkan sebelum vs
-sesudah lewat scripts/narration-lines.json). Beda dengan render #9 & #11 yang
+Aman di-`only:` — ke-55 baris milik game ini saja. Dibandingkan sebelum vs
+sesudah lewat scripts/narration-lines.json: 820 baris jadi 875, NOL baris lama
+hilang dan NOL baris naik scope ke `shared`. Beda dengan render #9 & #11 yang
 memang harus penuh.
 
 Tanpa "redo: lafal" — daftar lafal tidak berubah.

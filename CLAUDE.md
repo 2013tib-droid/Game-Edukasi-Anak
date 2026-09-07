@@ -116,6 +116,8 @@ Buat engine sehingga **menambah game baru = menulis file config JSON + aset**, b
 6. **Cerita interaktif** (narasi + pilihan)
 7. **Spell** (susun kata dengan mengetuk huruf berurutan)
 8. **Path-trace** (susuri jalan dengan jari — antar kendaraan ke tujuan)
+9. **Puzzle** (susun kepingan gambar sampai utuh)
+10. **Sentuh gambar** (`tap-picture` — sentuh bagian yang benar pada SATU gambar utuh; dipakai game anggota tubuh)
 
 Setiap game dideklarasikan lewat config: `{ id, group, title, template, levels[], assets{} }`. Status gratis/terkunci TIDAK di sini — lihat "Sistem Kunci Game".
 
@@ -914,12 +916,55 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Pengumuman `a-2026-09-07-puzzle-gambar` (tag `baru`, `audience` bawaan `'semua'`).
   - **Game TK jadi 10** (target 10–15 terpenuhi di batas bawah).
 
-- **Game TK berikutnya yang sudah disepakati: "Anggota Tubuh" (BELUM dikerjakan)** — mengisi satu-satunya celah isi TK yang benar-benar kosong (diri sendiri & panca indera). Rancangan yang sudah diputuskan bersama pemilik 2026-09-07, tertahan menunggu **satu ilustrasi anak** dari pemilik:
-  - Bentuknya **satu ilustrasi anak utuh + anak mengetuk bagiannya** (template hotspot baru, mis. `tap-picture`; data level `{ art, parts: [{ id, label, x, y, r }] }` dengan koordinat 0..1 supaya bebas ukuran layar).
-  - **JANGAN kartu jawaban berisi potongan tubuh melayang** (telinga sendirian, tangan terpotong) — menyeramkan untuk anak 4 tahun dan melanggar aturan "satu gambar satu arti". **JANGAN emoji 👂 ✋ 🦶 👃** — berwarna kulit dan beda bentuk tiap HP, masalah yang sama dengan 🕒 & 🎃.
-  - Satu ilustrasi itu memberi banyak jenis soal **tanpa aset tambahan**: sebut bagian · panca indera ("Kita mendengar dengan apa?") · fungsi · benda→tempat ("Topi dipakai di mana?", memakai `cap`/`shoe` yang sudah ada) · jumlah ("Ada berapa mata?" → tap-answer kartu angka). Jadi game `mixed`.
-  - Kalau minta DUA ilustrasi (anak laki & perempuan), minta digambar dalam **pose & bingkai yang sama persis** — satu set koordinat dipakai dua gambar, jadi variannya gratis.
-  - Area sentuh minimal 64px, jadi batasi ke ±10 bagian besar; jari, gigi, alis terlalu kecil di HP.
+- **Template engine baru `tap-picture` + game "Anggota Tubuh" (TK)** (2026-09-07, melanjutkan rancangan yang disepakati pemilik di sesi Puzzle Gambar), teruji headless Chromium di build produksi (`vite preview`) pada **320×568, 360×640, 380×800, 820×1180 & 740×360 (mendatar)**:
+
+  **NOL ASET BARU — gambar anaknya digambar ENGINE**
+  - Rancangan awal menunggu **satu ilustrasi anak** dari pemilik. Ternyata tak perlu ditunggu: gambarnya SVG di `src/engine/ui/Kid.tsx` (±3 kB, ikut chunk template), alasan yang sama persis dengan `Shape.tsx` (bangun datar), `Clock.tsx` (muka jam) dan `Scene.tsx` (latar cerita). Yang WAJIB gambar impor tetap SUBJEK soal yang bentuknya harus tepat (hewan, buah, benda) — di sini bentuknya justru **milik engine**, karena titik sentuh tiap anggota tubuh harus cocok dengan gambarnya sampai ke pikselnya.
+  - **Kalau nanti pemilik tetap mengirim ilustrasi**: gambarnya masuk ke `Figure` di `Kid.tsx`, lalu koordinat di `BODY_PARTS` dibetulkan SEKALI mengikuti gambar itu. Tak satu pun config game ikut berubah — config cuma menyebut nama bagiannya (`parts: ['mata','hidung','mulut']`), pola yang sama dengan `RoadKind` di path-trace dan `SceneId` di cerita.
+  - Isyarat benda di slot "dipakai di mana" memakai ulang seni item yang sudah ada: topi, sepatu, tas, pensil, susu, bunga.
+
+  **Kenapa template baru, bukan tap-answer**
+  - Kartu jawaban untuk soal tubuh berarti memajang **potongan tubuh yang melayang** (telinga sendirian, tangan terpotong) — menyeramkan untuk anak empat tahun dan melanggar aturan "satu gambar satu arti". Emoji bagian tubuh (👂 ✋ 🦶 👃) juga tidak dipakai: berwarna kulit tertentu dan beda bentuk di tiap HP, masalah yang sama dengan 🕒 di Jam Pintar. Di sini anak MENUNJUK, persis seperti ia menunjuk hidungnya sendiri.
+  - Daftar bagiannya mengikuti lagu **"Kepala pundak lutut kaki"** (plus mata, telinga, mulut, hidung, pipi dari bait keduanya) — kalimat yang sudah dihafal hampir semua anak TK Indonesia, jadi yang dilatih bukan kosakata baru melainkan menghubungkannya dengan tempatnya di tubuh. Tiga belas bagian: rambut, kepala, mata, telinga, hidung, mulut, pipi, leher, pundak, tangan, perut, lutut, kaki.
+
+  **DAERAH SENTUH DIHITUNG, BUKAN DITEBAK — ini inti templatenya**
+  - Tiap bagian punya satu atau DUA titik (dua mata, dua telinga, dua tangan): anak menyentuh telinga mana pun dan dua-duanya benar.
+  - Radius tiap titik **dipangkas jadi setengah jarak ke titik bagian LAIN yang terdekat** (`hitRadii()` di `TapPicture.tsx`), jadi dua daerah sentuh tak pernah bertindihan — tak pernah ada sentuhan yang "sebenarnya benar tapi dihitung salah". Efek sampingnya jadi rem yang jujur: level yang mengaktifkan bagian berdempetan akan terlihat sendiri daerah sentuhnya menciut.
+  - **Lingkaran yang DIGAMBAR adalah daerah yang menerima sentuhan** — tak ada daerah rahasia yang lebih besar atau lebih kecil dari yang terlihat.
+  - Sentuhan **di luar semua lingkaran TIDAK dihitung salah** (pola yang sama dengan menjatuhkan keping di luar papan pada Puzzle). Yang dihitung salah cuma menyentuh bagian yang salah.
+  - **`node scripts/check-body-parts.mjs`** (BARU, ikut CI) mengukur daerah sentuh terkecil SEMUA varian di HP terkecil yang didukung dan menolak yang di bawah 60 px. Ini yang tidak terlihat saat dicoba sekali di layar besar: soalnya tetap bisa dimainkan, daerah sentuhnya cuma menciut diam-diam, dan yang gagal menyentuhnya adalah anak berjari gemuk di HP murah.
+  - **Pasangan yang TIDAK boleh aktif bersama** (terlalu berdempetan di gambar): pipi & telinga · lutut & kaki · leher & mulut · `kepala` dengan bagian wajah mana pun (`kepala` itu SELURUH kepala, radiusnya 19 satuan).
+
+  **BINGKAI DIPILIH ENGINE, BUKAN CONFIG**
+  - Semua bagian yang aktif ada di wajah → kamera mendekat ke kepala; satu bagian badan saja ikut aktif → seluruh badan. Config tak punya saklar untuk ini, jadi tak ada cara menuliskannya salah.
+  - **`viewBox` TIDAK memotong gambar** — apa yang di luarnya tetap tergambar sampai tepi kotaknya (yang memotong cuma viewport SVG). Jadi bingkai wajah bukan "kepala digunting" melainkan kamera yang mendekat: badannya terus ke bawah lalu habis di tepi layar, seperti foto close-up. Percobaan pertama tidak menyadari ini dan menyangka `viewBox` sudah memotong.
+  - Karena isinya bocor, bingkai wajah **dijangkarkan ke ATAS** (`xMidYMin`): kalau ditengahkan, kepalanya turun ke tengah layar sementara badannya bocor memenuhi bawah.
+  - **TINGGI BINGKAI = SKALA.** Karena isinya bocor, tinggi bingkai wajah cuma menentukan seberapa dekat kameranya: makin pendek, makin besar gambarnya saat TINGGI layar yang jadi batas. Enam puluh empat satuan = setinggi titik sentuh terbawah; memendekkannya lagi membuang titik sentuh ke luar layar. Justru ini yang menyelamatkan soal wajah saat HP dimiringkan: **46 px jadi 64 px**.
+
+  **Isi: 10 slot × kolam varian (55 varian), `sessionLevels: 8`**
+  - Wajah: sebut bagiannya · badan: sebut bagiannya · panca indera · kegunaannya · benda dipakai di mana (isyarat gambar) · **ada berapa? (kartu angka, template `tap-answer`)** · lagu "Kepala pundak lutut kaki" · merawat tubuh (sisir, cuci tangan, tutup mulut saat batuk, helm) · wajah dengan tiga pengecoh · badan dengan tiga pengecoh. Delapan dimainkan, dua jadi cadangan sesi berikutnya.
+  - Slot "ada berapa?" sengaja **kartu angka**, bukan sentuh gambar: yang dilatih di situ lambang bilangan, dan anak menghitungnya pada tubuhnya sendiri ("Lihat tubuhmu. Ada berapa mata?"). Angkanya tetap di kartu, tidak pernah di narasi (aturan lama).
+
+  **JEBAKAN yang kena di sesi ini**
+  - **Kalimat soal yang panjang MENGECILKAN daerah sentuh.** Kalimat empat baris di layar 320 px memakan 112 px tinggi, dan tinggi itu diambil dari gambarnya — semua lingkaran sentuh ikut menciut, dari 69 px jadi 58 px. Semua kalimat karena itu dipendekkan ke **maksimal 40 karakter** (= tiga baris), dan skrip pemeriksanya menolak yang lebih panjang. Pola yang sama dengan `wordClass()`/`mainTextClass()`: yang diatur ukurannya, bukan ditambal CSS baru.
+  - **Telinga harus digambar MELEBAR KELUAR kepala.** Percobaan pertama menaruhnya di x=25,5 sementara tepi kepala di x=24 — yang tersisa cuma tonjolan setipis garis, dan telinga yang tak terlihat tak bisa disentuh anak.
+  - **Kerah bajunya harus rendah**, kalau tidak lehernya tertelan baju — padahal "leher" salah satu bagian yang ditanyakan.
+  - **Lengan baju harus dimulai DI DALAM badan bajunya.** Dimulai tepat di tepinya, hasilnya dua kapsul biru yang tampak melayang lepas dari bajunya.
+  - **`transform` CSS pada elemen SVG bekerja di ruang koordinat LOKALNYA**, bukan piksel layar: memakai `@keyframes shake` yang sudah ada (8px) akan melempar lingkarannya ke seberang layar. Goyangan salah karena itu punya keyframe sendiri dalam satuan gambar.
+  - **Tebal garis lingkaran memakai `vector-effect: non-scaling-stroke`** — bingkai wajah memperbesar gambar ±4×, dan garis yang ikut membesar jadi cincin tebal yang menutupi wajahnya.
+  - **Titik penanda di tengah lingkaran DIBATALKAN**: di gambar wajah ia mendarat persis di atas pupil mata.
+  - **HP DIMIRINGKAN butuh tata letak sendiri** (kalimat soal pindah ke samping gambar, pola yang sama dengan baki Puzzle). Dan `height: 100%` TIDAK berlaku di dalam flex item yang tingginya belum pasti — percobaan pertama memakainya dan seluruh kolom runtuh ke `min-height` 180 px sehingga lingkaran sentuhnya cuma 31 px; yang benar `align-items: stretch`.
+
+  **Angka verifikasinya** (semuanya di build produksi, bukan dev server): **146 level dimainkan sampai tuntas** dengan sentuhan CDP sungguhan (ke-55 varian × 320×568 & 360×640, plus contoh di 380×800, 820×1180 & 740×360) — tiap kali diperiksa bingkainya benar, soalnya benar, titik jawabannya berubah hijau, namanya muncul, overlay "Hebat" tampil dengan gambarnya benar-benar termuat, **nol scroll tegak maupun mendatar, nol error console**. Ditambah: jawaban salah → overlay "coba lagi" dan tetap di soal yang sama · sentuhan di luar lingkaran tidak dihitung salah · dua sesi penuh delapan level sampai layar "Selamat!" (320×568 & 380×800) · isyarat gambar topi benar-benar termuat · Puzzle Gambar & Hutan Hewan masih normal (engine.css & GameShell ikut disentuh).
+  - Daerah sentuh terukur: **63–110 px tegak** (terkecil di 320×568), **46–64 px mendatar** — yang mendatar di bawah target 64 px dan itu **batas fisik**: tinggi layar 360 px tak cukup untuk menggambar orang seutuhnya. Soal WAJAH di layar mendatar sudah 64 px berkat bingkai pendek di atas.
+
+  **Sisanya**
+  - `src/data/access.ts` tidak disentuh — game ini tidak masuk `FREE_GAME_IDS`, jadi otomatis ikut terkunci saat mode `'kunci'` dinyalakan. Chip landing juga tidak ditambah (daftar 8 chip itu representatif, bukan lengkap).
+  - Ikon kartu **🧒** — sengaja anak UTUH, bukan potongan tubuh. Seninya belum ada; tinggal menaruh `public/assets/games/anggota-tubuh.webp` + `pic: 'anggota-tubuh'` di registry kalau sudah dibuat.
+  - **55 kalimat narasi baru**, semuanya scope `anggota-tubuh` (1.570 karakter). Aman di-`only:` — dibandingkan sebelum vs sesudah: 820 baris jadi 875, nol baris lama hilang, nol baris naik scope ke `shared`. `.github/render-request.txt` = render #14.
+  - Pengumuman `a-2026-09-07-anggota-tubuh` (tag `baru`, `audience` bawaan `'semua'`).
+  - **`cueItem` ditambahkan ke `ID_FIELDS` di `scripts/check-item-ids.mjs`** — field baru yang berisi id registry harus didaftarkan di situ, kalau tidak id yang salah lolos tanpa suara (gambarnya cuma diam-diam jatuh ke emoji).
+  - **Game TK jadi 11.**
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 

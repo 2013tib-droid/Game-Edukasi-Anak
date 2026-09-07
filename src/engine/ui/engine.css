@@ -1666,3 +1666,208 @@
      di Puzzle.tsx, jadi papannya tidak ikut bergeser naik. */
   display: none;
 }
+
+/* ---------------- Sentuh gambar (anggota tubuh) ----------------
+   Gambar anaknya SVG milik engine (`src/engine/ui/Kid.tsx`), jadi tak ada
+   satu berkas pun yang diunduh dan titik sentuhnya memakai koordinat yang
+   sama persis dengan gambarnya. Yang diatur di sini cuma seberapa besar
+   gambar itu boleh tumbuh dan bagaimana titik sentuhnya terlihat. */
+
+.tp-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* Tanpa ini kolom flex menolak mengecil di bawah tinggi isinya, dan gambar
+     yang "cuma sebesar ruang sisa" malah mendorong layar jadi bisa di-scroll. */
+  min-height: 0;
+}
+
+.tp-stage {
+  position: relative;
+  flex: 1;
+  /* Layar sependek 320×568 pun masih menyisakan segini setelah topbar, judul
+     soal, dan jarak antar blok. */
+  min-height: 180px;
+  max-width: 460px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Gambarnya dilepas dari alur (absolute) supaya tingginya benar-benar
+   ditentukan kotak `.tp-stage`, bukan sebaliknya. `preserveAspectRatio` di
+   Kid.tsx yang menjaga bentuknya, jadi kotak seukuran apa pun aman: gambarnya
+   mengecil sendiri, tidak pernah melebihi kotaknya, tidak pernah gepeng. */
+.tp-kid {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* Lingkaran sentuh boleh diklik; sisa gambarnya tidak — sentuhan yang jauh
+     dari semua titik memang sengaja TIDAK dihitung salah (pola yang sama
+     dengan menjatuhkan keping di luar papan pada Puzzle). */
+  pointer-events: none;
+}
+
+.tp-spot {
+  pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+/* Lingkaran yang terlihat ADALAH daerah yang menerima sentuhan — besarnya
+   dihitung `hitRadii()` di TapPicture.tsx, jangan ditimpa dari sini. */
+.tp-spot__ring {
+  fill: rgba(255, 255, 255, 0.26);
+  stroke: #ffb703;
+  /* Tebal garis dalam PIKSEL, bukan satuan gambar: bingkai wajah memperbesar
+     gambar ±4×, dan garis yang ikut membesar akan terlihat seperti cincin
+     tebal yang menutupi wajahnya. */
+  vector-effect: non-scaling-stroke;
+  stroke-width: 3;
+  stroke-dasharray: 7 5;
+  animation: tp-pulse 1.9s ease-in-out infinite;
+}
+
+.tp-spot:focus-visible .tp-spot__ring {
+  stroke: #3a2e20;
+  stroke-dasharray: none;
+}
+
+/* Jawaban benar: lingkarannya berhenti berkedip dan jadi hijau padat, jadi
+   anak melihat DI MANA jawaban yang barusan ia sentuh. */
+.tp-spot--ok .tp-spot__ring {
+  fill: rgba(106, 190, 86, 0.45);
+  stroke: #3f9142;
+  stroke-dasharray: none;
+  animation: none;
+}
+
+.tp-spot--miss {
+  animation: tp-miss 0.45s;
+}
+
+.tp-spot--miss .tp-spot__ring {
+  stroke: #e8604c;
+}
+
+@keyframes tp-pulse {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Goyangannya diukur dalam SATUAN GAMBAR, bukan piksel: transform CSS pada
+   elemen SVG bekerja di ruang koordinat lokalnya, jadi angka sebesar
+   `@keyframes shake` (8px) akan melempar lingkarannya ke seberang layar. */
+@keyframes tp-miss {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2.5px);
+  }
+  75% {
+    transform: translateX(2.5px);
+  }
+}
+
+/* Isyarat benda ("Topi dipakai di bagian mana?") di pojok gambar. Sudut
+   bingkai memang kosong — yang digambar orang, bukan kotak — jadi ia tidak
+   memakan tinggi layar sedikit pun. */
+.tp-cue {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(64px, 21vw, 96px);
+  height: clamp(64px, 21vw, 96px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.14);
+}
+
+/* Kotak PERSEGI (lebar = tinggi + contain), aturan yang sama dengan
+   `.choice-img`: benda yang gambarnya lebar tidak boleh melebarkan kartunya. */
+.tp-cue__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.tp-cue__emoji {
+  font-size: clamp(40px, 13vw, 60px);
+  line-height: 1;
+}
+
+/* Nama bagiannya, muncul hanya SETELAH dijawab benar. Melayang di kaki gambar
+   supaya tidak menambah tinggi apa pun — layar terpendek sudah pas-pasan. */
+.tp-label {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  padding: 6px 20px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.14);
+  font-size: 26px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/*
+ * HP DIMIRINGKAN (dan tablet mendatar): tinggi jadi barang langka, lebar
+ * berlimpah — jadi kalimat soalnya pindah ke SAMPING gambar. Ditumpuk seperti
+ * biasa, gambar setinggi ±230px membuat lingkaran sentuhnya cuma ±40px,
+ * di bawah target sentuh 64px yang diwajibkan standar UX anak. Pola yang sama
+ * dengan baki kepingan Puzzle.
+ */
+@media (min-aspect-ratio: 4/3) {
+  .tp-wrap {
+    flex-direction: row-reverse;
+    /* `stretch`, BUKAN `center`: gambarnya dibatasi TINGGI di sini, dan
+       tinggi persen (`height: 100%`) tidak berlaku di dalam flex item yang
+       tingginya belum pasti — percobaan pertama memakainya dan seluruh kolom
+       runtuh ke `min-height` 180px, jadi lingkaran sentuhnya cuma 31px. */
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .tp-wrap .tp-side {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Gambarnya dijatah sepertiga lebar layar; sisanya milik kalimat soal. */
+  .tp-wrap .game-area {
+    flex: 0 0 min(38vw, 460px);
+  }
+
+  .tp-wrap .tp-stage {
+    max-width: none;
+  }
+
+  /* Tinggi layar yang cuma ±360px habis untuk gambar orang seutuhnya, jadi
+     setiap piksel jarak diambil kembali. */
+  .tp-wrap .game-prompt {
+    margin: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-spot__ring {
+    animation: none;
+  }
+}

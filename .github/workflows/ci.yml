@@ -50,6 +50,12 @@ jobs:
         working-directory: functions
         run: npm run build
 
+      # Soal "sentuh gambar" (Anggota Tubuh): bagian tubuh yang berdempetan
+      # membuat daerah sentuhnya menciut tanpa terlihat saat dicoba sekali di
+      # layar besar. Skrip ini mengukurnya untuk SEMUA varian di HP terkecil.
+      - name: Periksa soal sentuh gambar
+        run: node scripts/check-body-parts.mjs
+
       # Narasi tidak boleh memuat digit — mesin suara membacanya dalam bahasa
       # sendiri ("6 singa" jadi "six singa"). Skrip ini keluar dengan kode 1
       # kalau ada yang lolos. Lihat CLAUDE.md bagian "ANGKA DI NARASI".
