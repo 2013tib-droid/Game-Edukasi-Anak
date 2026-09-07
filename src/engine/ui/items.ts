@@ -169,6 +169,46 @@ export const ITEMS: Record<string, ItemDef> = {
   brush: { emoji: '🖌️', label: 'kuas', ext: 'webp' },
   painter: { emoji: '👩‍🎨', label: 'pelukis', ext: 'webp' },
   wrench: { emoji: '🔧', label: 'kunci pas', ext: 'webp' },
+
+  // Uang rupiah TE 2022 (dipakai papan uang Hitung Hebat, dan game keuangan
+  // SD kelas 3 ke atas yang direncanakan). Berbeda dari SEMUA aset lain di
+  // registry ini: bukan kartun, melainkan gambar SPECIMEN resmi dari
+  // bi.go.id apa adanya. Alasannya pedagogis — singa cuma alat hitung,
+  // tapi uang harus DIKENALI anak di dunia nyata, jadi bentuknya wajib sama
+  // dengan yang dia pegang nanti. Gaya kartun justru mengajarkan yang salah.
+  //
+  // TANDA "SPECIMEN" MERAH DI TIAP GAMBAR ADALAH PENANDAAN RESMI BANK
+  // INDONESIA. JANGAN PERNAH dihapus, dikecilkan, dipotong, atau ditutupi
+  // elemen UI — itu yang memisahkan gambar contoh dari tiruan uang.
+  // Kalau suatu saat aset ini diganti, penggantinya harus bertanda sama.
+  //
+  // Emoji cadangannya SAMA SEMUA (💵) karena tak ada emoji yang
+  // membedakan nominal. Jadi papan soal WAJIB tetap menuliskan "Rp5.000" di
+  // samping gambarnya, jangan gambar saja: kalau aset gagal dimuat, tanpa
+  // teks itu soalnya jadi mustahil dijawab.
+  //
+  // Rasionya mendatar (~1,3:1), bukan persegi seperti aset lain — dirender
+  // lewat `.money-img`, bukan `.choice-img` yang memaksa kotak.
+  rp1000: { emoji: '💵', label: 'uang seribu rupiah', ext: 'webp' },
+  rp2000: { emoji: '💵', label: 'uang dua ribu rupiah', ext: 'webp' },
+  rp5000: { emoji: '💵', label: 'uang lima ribu rupiah', ext: 'webp' },
+  rp10000: { emoji: '💵', label: 'uang sepuluh ribu rupiah', ext: 'webp' },
+  rp20000: { emoji: '💵', label: 'uang dua puluh ribu rupiah', ext: 'webp' },
+  rp50000: { emoji: '💵', label: 'uang lima puluh ribu rupiah', ext: 'webp' },
+  rp100000: { emoji: '💵', label: 'uang seratus ribu rupiah', ext: 'webp' },
+  // Koin. Beda perlakuan dari uang kertas di atas dalam DUA hal:
+  //   - Koin itu BULAT, jadi latarnya benar-benar dipotong transparan (flood
+  //     fill dari tepi, gerbang putih ketat). Uang kertas tidak: bentuknya
+  //     persegi panjang penuh, tak ada yang perlu dipotong.
+  //   - TIDAK bertanda SPECIMEN — sumbernya foto koin, bukan halaman
+  //     SPECIMEN BI. Koin jauh di luar jangkauan pemalsuan gambar, tapi
+  //     asal-usulnya belum sejelas uang kertas; lihat docs.
+  // Resolusinya cuma ~204px (bukan 512 seperti aset lain) karena kirimannya
+  // memang sekecil itu. Cukup untuk ukuran tampilnya, jangan diperbesar
+  // buatan — foto koin yang di-upscale jadi berlumur.
+  koin200: { emoji: '🪙', label: 'koin dua ratus rupiah', ext: 'webp' },
+  koin500: { emoji: '🪙', label: 'koin lima ratus rupiah', ext: 'webp' },
+  koin1000: { emoji: '🪙', label: 'koin seribu rupiah', ext: 'webp' },
 };
 
 /** Public URL of an item's picture, respecting the Vite base path. */

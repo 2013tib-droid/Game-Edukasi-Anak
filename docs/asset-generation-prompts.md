@@ -249,3 +249,89 @@ kiri** — kalau tidak, di dalam game ia berjalan mundur.
   sudah benar. Yang menyelesaikannya: melampirkan `docs/acuan-gaya-kendaraan.png`
   (6 aset yang sudah diterima) + kalimat "ikuti gaya persis seperti acuan ini".
   Percobaan kedua langsung sepadan. Lakukan ini untuk SEMUA batch berikutnya.
+
+---
+
+## Uang Rupiah — TE 2022 (2026-09-07)
+
+**Bukan aset AI, dan sengaja BUKAN kartun.** Tujuh pecahan uang kertas diambil
+dari gambar **SPECIMEN resmi Bank Indonesia** (bi.go.id → Rupiah → Gambar
+Uang), dipakai apa adanya.
+
+Alasannya pedagogis. Seluruh aset lain di registry adalah kartun karena
+subjeknya cuma alat hitung — singa, apel, mobil. Uang berbeda: anak harus
+mengenalinya **di dunia nyata**. Gambar kartun mengajarkan ciri yang salah,
+jadi anak hafal uang mainan dan bingung melihat uang asli. Percobaan pertama
+(prompt kartun kawaii bergaya sama dengan hewan) dibatalkan karena alasan ini.
+
+### Aturan yang TIDAK boleh dilanggar
+
+- **Tanda "SPECIMEN" merah diagonal adalah penandaan resmi BI.** Jangan
+  dihapus, dikecilkan, dipotong keluar frame, atau ditutupi elemen UI. Itu
+  satu-satunya hal yang memisahkan gambar contoh dari tiruan uang.
+- **Jangan menaikkan realisme.** Tidak perlu mempertajam, menambah detail,
+  atau membuat versi tanpa tanda.
+- **Izin pakai belum diurus.** Halaman BI tidak memuat pernyataan lisensi,
+  hanya "© Bank Indonesia". Sebelum rilis publik, tanyakan ke BICARA (131):
+  gambar SPECIMEN dari situs BI, apa adanya, untuk aplikasi edukasi anak
+  gratis.
+
+### Pipeline (beda dari aset kartun — TANPA flood fill)
+
+Uang berbentuk persegi panjang penuh, tidak ada latar yang menyusup ke dalam
+gambar, jadi `cut-item.py` tidak dipakai sama sekali. Cukup resize sisi
+terpanjang ke 512px lalu ekspor WebP quality 78 (opak, tanpa alpha).
+Quality 78 bukan 88: ini foto berdetail halus, q88 menghasilkan 51–68 kB per
+file (410 kB total) sementara q78 turun ke 33–45 kB (268 kB total) tanpa beda
+yang terlihat pada ukuran tampil di HP.
+
+### Roster
+
+| id | Pecahan | Tokoh | File | Ukuran |
+|---|---|---|---|---|
+| rp1000 | Rp1.000 | Tjut Meutia | `public/assets/items/rp1000.webp` | 512×313, 34 kB |
+| rp2000 | Rp2.000 | Mohammad Hoesni Thamrin | `rp2000.webp` | 512×393, 36 kB |
+| rp5000 | Rp5.000 | K.H. Idham Chalid | `rp5000.webp` | 509×390, 33 kB |
+| rp10000 | Rp10.000 | Frans Kaisiepo | `rp10000.webp` | 512×394, 40 kB |
+| rp20000 | Rp20.000 | G.S.S.J. Ratulangi | `rp20000.webp` | 510×390, 44 kB |
+| rp50000 | Rp50.000 | Ir. H. Djuanda Kartawidjaja | `rp50000.webp` | 512×387, 44 kB |
+| rp100000 | Rp100.000 | Soekarno & Mohammad Hatta | `rp100000.webp` | 512×391, 45 kB |
+
+### Koin (2026-09-07, menyusul)
+
+| id | Pecahan | Gambar | File | Ukuran |
+|---|---|---|---|---|
+| koin200 | Rp200 | burung jalak bali | `koin200.webp` | 204×204, 14 kB |
+| koin500 | Rp500 | bunga melati | `koin500.webp` | 204×204, 14 kB |
+| koin1000 | Rp1.000 | Garuda + nominal | `koin1000.webp` | 203×203, 15 kB |
+
+Dua hal yang membedakan koin dari uang kertas di atas:
+
+- **Latarnya DIPOTONG transparan.** Koin bulat, jadi kalau latar putihnya
+  dibiarkan, muncul kotak putih di papan berwarna. Flood fill dari tepi dengan
+  gerbang ketat (`min(r,g,b) > 232` dan selisih kanal `< 14`), lalu blur 0,6px
+  di kanal alpha supaya tepinya tidak bergerigi. Gerbang seketat itu perlu
+  karena perak koin punya kilau terang — tapi kilau itu tidak pernah
+  tersentuh selama hanya piksel yang TERHUBUNG KE TEPI yang dibuang. Hasilnya
+  sudah diperiksa di atas latar magenta: tidak ada cincin putih sisa dan tepi
+  koin utuh.
+- **TIDAK bertanda SPECIMEN.** Sumbernya foto koin berlatar putih studio,
+  bukan halaman SPECIMEN BI. Untuk koin risiko pemalsuan gambar praktis nol,
+  tapi **asal-usul fotonya belum dipastikan** — kalau itu foto stok berbayar,
+  masalahnya lisensi, bukan mata uang. Perlu dikonfirmasi sebelum rilis.
+
+Resolusinya hanya ~204px, jauh di bawah 512px aset lain, karena kirimannya
+memang sekecil itu. Cukup untuk ukuran tampil di papan; **jangan di-upscale**,
+foto koin yang diperbesar buatan jadi berlumur. Kalau mau tajam, ambil ulang
+dari sumber beresolusi lebih besar dan timpa filenya.
+
+### Catatan mutu (kalau suatu saat mau diambil ulang)
+
+Kiriman ini berupa screenshot, jadi rasionya tidak seragam: `rp1000` 1,64:1
+sedangkan enam lainnya ~1,30:1, padahal uang aslinya ~1,86:1 — lembarannya
+sedikit gepeng dan tepi kiri-kanan terpotong. Untuk papan soal ini tidak
+mengganggu (semua ditampilkan selebar sama, `object-fit: contain`), tapi
+**ukuran relatif antarpecahan jadi hilang** — padahal "makin besar nominal
+makin panjang lembarannya" itu sendiri materi yang berguna. Kalau nanti ada
+gambar sumber beresolusi penuh dengan rasio asli, ganti berkasnya saja; id
+dan config tidak perlu berubah.
