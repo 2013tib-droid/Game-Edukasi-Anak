@@ -69,8 +69,9 @@ Dari situ lahir syarat-syarat di bawah. Yang bertanda ⚠️ paling sering salah
 
 > Buatkan satu ilustrasi untuk game edukasi anak usia 4–7 tahun di Indonesia.
 >
-> **Subjeknya:** seorang anak Indonesia yang ceria, digambar **seluruh badan, menghadap lurus
-> ke depan, berdiri tegak dan simetris**, seperti gambar di buku belajar "anggota tubuh".
+> **Subjeknya:** seorang **anak laki-laki** Indonesia yang ceria, digambar **seluruh badan,
+> menghadap lurus ke depan, berdiri tegak dan simetris**, seperti gambar di buku belajar
+> "anggota tubuh".
 >
 > **Proporsinya sengaja gaya chibi:** kepala besar dan bulat, kira-kira sepertiga tinggi
 > badannya, badan pendek dan gemuk. Wajahnya ramah: mata besar berbinar, alis tipis, hidung
@@ -106,7 +107,7 @@ Dari situ lahir syarat-syarat di bawah. Yang bertanda ⚠️ paling sering salah
 
 > One illustration for a children's educational game (ages 4–7, Indonesia).
 >
-> A cheerful Indonesian child, **full body, facing straight forward, standing upright and
+> A cheerful Indonesian **boy**, **full body, facing straight forward, standing upright and
 > symmetrical**, like a "parts of the body" chart in a kids' learning book.
 >
 > **Chibi proportions on purpose:** big round head, roughly one third of the total height,
@@ -137,18 +138,16 @@ Dari situ lahir syarat-syarat di bawah. Yang bertanda ⚠️ paling sering salah
 
 ---
 
-## Kalau mau DUA anak (laki-laki & perempuan)
+## Satu anak laki-laki saja (KEPUTUSAN PEMILIK 2026-09-07)
 
-Boleh, dan variannya praktis gratis — **tapi keduanya harus digambar dalam pose dan bingkai
-yang SAMA PERSIS** (tinggi kepala sama, posisi tangan sama, kaki sama terbuka). Satu set
-koordinat titik sentuh dipakai untuk dua gambar; kalau posenya beda sedikit saja, titik
-sentuhnya harus disetel dua kali dan gampang menyimpang.
+Sempat dibahas membuat dua gambar (laki-laki & perempuan) sebagai varian; **dibatalkan** —
+cukup satu anak laki-laki.
 
-Cara paling aman: hasilkan yang pertama, lalu minta *"anak yang sama, pose dan bingkai persis
-sama, tapi anak perempuan berambut sebahu"* — dan rambut sebahu itu pun **tetap tidak boleh
-menutupi telinga**.
-
----
+Kalau suatu saat anak perempuan tetap ditambahkan, syaratnya: digambar dalam **pose dan
+bingkai yang SAMA PERSIS** (tinggi kepala sama, posisi tangan sama, kaki sama terbuka).
+Satu set koordinat titik sentuh dipakai untuk dua gambar; kalau posenya beda sedikit saja,
+titik sentuhnya harus disetel dua kali dan gampang menyimpang. Rambutnya pun tetap **tidak
+boleh menutupi telinga**.
 
 ## Sesudah gambarnya jadi
 
