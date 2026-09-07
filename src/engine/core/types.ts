@@ -15,7 +15,8 @@ export type TemplateId =
   | 'count-tap' // hitung & ketuk (wajib ada pengecoh — lihat CLAUDE.md)
   | 'story-choice' // cerita interaktif
   | 'spell' // eja/susun huruf jadi kata (dari game Petualangan Pintar)
-  | 'path-trace'; // susuri jalan dengan jari (antar kendaraan ke tujuan)
+  | 'path-trace' // susuri jalan dengan jari (antar kendaraan ke tujuan)
+  | 'puzzle'; // susun kepingan gambar sampai utuh
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -355,6 +356,38 @@ export interface PathTraceData {
   goalItem?: string;
 }
 
+/**
+ * Puzzle gambar: anak menarik kepingan dari baki ke papan sampai gambarnya
+ * utuh.
+ *
+ * GAMBARNYA TIDAK PERNAH DIPOTONG JADI BERKAS. Tiap keping merender gambar
+ * UTUH yang sama, diperbesar sebesar papan lalu digeser sehingga cuma
+ * potongannya sendiri yang terlihat. Jadi satu puzzle = nol aset baru dan
+ * satu unduhan per level, dan menambah puzzle cukup menyebut gambar yang
+ * sudah ada.
+ *
+ * Dua sumber gambar — lihat komentar kepala `src/games/tk/puzzle-gambar.ts`
+ * untuk aturan memilih ukuran papan supaya tak ada keping yang jadi bidang
+ * kosong (kepingan polos tak bisa ditebak anak, dan itu tidak adil):
+ *  - `item` = seni potongan dari registry (`src/engine/ui/items.ts`), digelar
+ *    di atas panel berwarna.
+ *  - `art`  = ilustrasi berlatar penuh di `public/assets/story/`.
+ */
+export interface PuzzleData {
+  /** Id item registry — seni benda/hewan di atas panel berwarna. */
+  item?: string;
+  /** Nama berkas (tanpa ekstensi) di `public/assets/story/`. */
+  art?: string;
+  /**
+   * Warna panel di belakang gambar `item`. Diabaikan kalau memakai `art`
+   * (ilustrasi sudah membawa latarnya sendiri).
+   */
+  bg?: string;
+  /** Jumlah kolom & baris papan. Kepingan = cols × rows (4 atau 6). */
+  cols: 2 | 3;
+  rows: 2 | 3;
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -364,6 +397,7 @@ export interface LevelDataMap {
   'story-choice': StoryChoiceData;
   spell: SpellData;
   'path-trace': PathTraceData;
+  puzzle: PuzzleData;
 }
 
 /* ---------- Game config ---------- */

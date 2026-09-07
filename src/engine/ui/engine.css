@@ -1488,3 +1488,181 @@
   color: #6b6b7b;
   margin: 14px 0 0;
 }
+
+/* ---------------- Puzzle gambar ----------------
+   Papan + baki kepingan. Tak ada satu pun gambar yang dipotong jadi berkas:
+   tiap keping memuat gambar UTUH yang sama (`.pz-pic`), diperbesar sebesar
+   papan lalu digeser (lihat `Slice` di Puzzle.tsx). Jadi `object-fit: cover`
+   di `.pz-pic` yang menjaga gambar tak gepeng — papan boleh berbentuk apa pun,
+   gambarnya cuma terpotong. */
+
+.pz-board {
+  /*
+   * Lebar dibatasi TIGA hal sekaligus: lebar layar, batas nyaman di tablet,
+   * dan tinggi yang boleh dimakan papan. Yang terakhir ditulis sebagai lebar
+   * (`tinggi × rasio`) supaya `aspect-ratio` tak pernah dilanggar — kalau
+   * dibatasi lewat `max-height`, kotaknya melebar sendiri dan kepingan di baki
+   * tak lagi sebentuk dengan lubangnya.
+   *
+   * BATAS TINGGINYA BUKAN PECAHAN `vh` (sudah dicoba, 38vh/44vh, DITOLAK oleh
+   * ukuran): ongkos tetap di layar — topbar, judul soal, jarak — TIDAK ikut
+   * mengecil di HP pendek, jadi pecahan yang pas di 640px membuat 568px
+   * scroll 11–16px. Yang benar: kurangi dulu ongkos tetapnya, baru bagi.
+   *   var(--pz-fixed) = ongkos tetap + TINGGI JUDUL YANG DIUKUR. Judulnya
+   *                      diukur karena kalimat panjang turun tiga baris di HP
+   *                      sempit; ongkos yang ditebak itulah yang dulu membuat
+   *                      320×568 scroll 2px.
+   *   var(--pz-k)     = berapa kali tinggi papan yang dimakan papan + baki
+   *                     (dipasang Puzzle.tsx; lihat komentarnya).
+   * Jangan mengubah salah satunya tanpa mengukur ulang di 320×568 DAN 740×360.
+   */
+  width: min(100%, 420px, calc((100dvh - var(--pz-fixed)) / var(--pz-k) * var(--pz-ar)));
+  aspect-ratio: var(--pz-ar);
+  margin: 0 auto 14px;
+  position: relative;
+  display: grid;
+  /* JANGAN diberi gap. Kepingan dihitung dari kotak papan yang utuh, jadi
+     jarak antar sel akan menggeser tiap potongan dan gambarnya tak menyambung.
+     Garis petaknya digambar dengan bayangan ke DALAM sel. */
+  gap: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+  touch-action: none;
+}
+
+/*
+ * HP DIMIRINGKAN (dan tablet mendatar): tinggi jadi barang langka, lebar
+ * berlimpah — jadi bakinya pindah ke SAMPING papan. Ditumpuk seperti biasa,
+ * papan 2×3 di layar setinggi 360px menyusut sampai kepingannya 53px, di bawah
+ * target sentuh 64px yang diwajibkan standar UX anak.
+ */
+@media (min-aspect-ratio: 4/3) {
+  .pz-play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .pz-play .pz-board {
+    margin: 0;
+    /* Baki tak lagi menumpuk di bawah papan, jadi papannya boleh setinggi
+       ruang yang ada — cuma dijatah setengah lebar layar. */
+    width: min(48vw, 420px, calc((100dvh - var(--pz-fixed-wide)) * var(--pz-ar)));
+  }
+
+  .pz-play .pz-tray {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+.pz-guide {
+  position: absolute;
+  inset: 0;
+  opacity: 0.24;
+}
+
+.pz-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Panel di belakang seni potongan (hewan/buah/benda). Gradien lembutnya bukan
+   hiasan: seni item itu transparan di pinggirnya, dan panel yang RATA membuat
+   sudut papan jadi bidang polos — dua keping polos yang serupa tak bisa
+   dibedakan anak. */
+.pz-pic--panel {
+  background-image: linear-gradient(150deg, rgba(255, 255, 255, 0.72), rgba(0, 0, 0, 0.09));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pz-pic__item {
+  width: 94%;
+  height: 94%;
+  object-fit: contain;
+  display: block;
+}
+
+.pz-pic__emoji {
+  font-size: 90px;
+  line-height: 1;
+}
+
+.pz-slice {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+}
+
+.pz-cell {
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+}
+
+.pz-cell--over {
+  box-shadow: inset 0 0 0 4px #ffb703;
+}
+
+.pz-cell--missed {
+  animation: pz-missed 0.45s ease;
+}
+
+@keyframes pz-missed {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+  }
+  50% {
+    box-shadow: inset 0 0 0 4px #ff8fa3;
+  }
+}
+
+/* Keping yang sudah duduk di tempatnya. Begitu papan penuh, garis petaknya
+   dilepas supaya anak melihat gambarnya BENAR-BENAR utuh — itu hadiahnya. */
+.pz-board--done .pz-cell {
+  box-shadow: none;
+}
+
+.pz-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pz-piece {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.18);
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+
+.pz-piece--dragging {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1.12);
+  border-radius: 14px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+  cursor: grabbing;
+}
+
+.pz-piece--placed {
+  /* Keluar dari alur supaya sisa kepingnya merapat — baki berlubang-lubang
+     terbaca "rusak" oleh anak. Tinggi bakinya tetap dipesan lewat `minHeight`
+     di Puzzle.tsx, jadi papannya tidak ikut bergeser naik. */
+  display: none;
+}
