@@ -1,20 +1,22 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #12 — only: kartu-kembar
+render #13 — only: puzzle-gambar
 
-Kartu Kembar (TK) jadi 5 slot × 4 varian cadangan dan semua hewannya diganti
-benda mati: 3 kalimat baru di scope `kartu-kembar`
-("Temukan pasangan gambar yang sama!", "Ayo cari lagi pasangan yang sama!",
-"Kartunya makin banyak. Ayo cocokkan semuanya!").
+Game baru "Puzzle Gambar" (TK): 36 kalimat baru di scope `puzzle-gambar`,
+939 karakter (0,2% kuota gratis bulanan).
 
-Aman di-`only:` — ketiganya milik game ini saja, tak ada satu pun yang naik
-scope ke `_shared` (sudah dicek di scripts/narration-lines.json). Beda dengan
-render #9 & #11 yang memang harus penuh.
+Semuanya berpola "Ayo susun gambar <nama benda>!" — narasi di game ini
+sengaja MENYEBUT NAMA gambarnya, karena itulah muatan belajarnya: anak
+mendengar nama benda yang sedang disusunnya. (Beda dari Kartu Kembar yang
+sengaja memakai satu kalimat untuk semua varian; di sana namanya tak menambah
+apa pun.)
+
+Aman di-`only:` — ke-36 baris milik game ini saja, nol baris naik scope ke
+`shared`, nol baris lama hilang atau berubah scope (dibandingkan sebelum vs
+sesudah lewat scripts/narration-lines.json). Beda dengan render #9 & #11 yang
+memang harus penuh.
 
 Tanpa "redo: lafal" — daftar lafal tidak berubah.
-Tanpa prune di file ini. Ada SATU file yatim baru,
-`kartu-kembar/dcd22ffabbb7.mp3` ("Temukan pasangan hewan yang sama!"),
-kalimat yang hilang karena game ini tak lagi memakai hewan. Manifest ditulis
-ulang dari daftar kalimat, jadi baris itu otomatis lenyap dari manifest dan
-tak pernah diminta app; mp3-nya boleh dibuang kapan saja lewat tombol `prune`
-di workflow render (jalankan manual, bukan lewat file ini).
+Tanpa prune — tak ada file yatim baru dari perubahan ini. (Yang lama,
+`kartu-kembar/dcd22ffabbb7.mp3` dari render #12, masih boleh dibuang kapan
+saja lewat tombol `prune` di workflow.)

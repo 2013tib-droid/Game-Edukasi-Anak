@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-05",
-  "count": 784,
-  "chars": 37321,
+  "generated": "2026-09-07",
+  "count": 820,
+  "chars": 38260,
   "lines": [
     {
       "key": "6b6b4f8922a6",
@@ -5509,6 +5509,330 @@
       "voice": "gadis",
       "games": [
         "pola-pintar"
+      ]
+    },
+    {
+      "key": "848c698c1bd6",
+      "text": "Ayo susun gambar ambulans!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "50985ec39451",
+      "text": "Ayo susun gambar apel!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "c61986ff26e5",
+      "text": "Ayo susun gambar beruang!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "690b47b6d12e",
+      "text": "Ayo susun gambar bola!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "8639f11913d0",
+      "text": "Ayo susun gambar boneka!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "fb7edc4eeb13",
+      "text": "Ayo susun gambar buku!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "0e8553e0b9aa",
+      "text": "Ayo susun gambar burung jalak dan kerbau!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "2dc398e95e81",
+      "text": "Ayo susun gambar bus!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "d6b3c218f004",
+      "text": "Ayo susun gambar gajah!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "8a62247a6f8d",
+      "text": "Ayo susun gambar harimau!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "624db5654db6",
+      "text": "Ayo susun gambar hewan yang bergotong royong!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "7b916e2fbf60",
+      "text": "Ayo susun gambar jerapah!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "ec2c4ff2b0cc",
+      "text": "Ayo susun gambar jeruk!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "0ba21a1e8612",
+      "text": "Ayo susun gambar kancil dan buaya!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "fb3f2c383b4f",
+      "text": "Ayo susun gambar kancil dan teman-temannya!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "a39dd0c17bee",
+      "text": "Ayo susun gambar kancil di hutan!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "1815ab5b40f4",
+      "text": "Ayo susun gambar katak!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "561e1c4eb5cf",
+      "text": "Ayo susun gambar kelinci!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "dcc26282e46b",
+      "text": "Ayo susun gambar kerbau di sawah!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "7d92479af3fb",
+      "text": "Ayo susun gambar kereta!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "698f5bd1cac7",
+      "text": "Ayo susun gambar kucing!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "e0c94a1f5b3d",
+      "text": "Ayo susun gambar kuda!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "a2887ba32b99",
+      "text": "Ayo susun gambar kura-kura!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "7d2b704a4759",
+      "text": "Ayo susun gambar melon!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "3a617f730c56",
+      "text": "Ayo susun gambar mobil!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "3f2d843a9a2d",
+      "text": "Ayo susun gambar panda!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "c67db788b455",
+      "text": "Ayo susun gambar payung!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "554c93b3ab76",
+      "text": "Ayo susun gambar pinguin!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "1beadedd20cb",
+      "text": "Ayo susun gambar pisang!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "c952aba74849",
+      "text": "Ayo susun gambar semangka!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "5f4a7cbf7bae",
+      "text": "Ayo susun gambar singa!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "bcda6e1fd0ef",
+      "text": "Ayo susun gambar stroberi!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "6682d76c8088",
+      "text": "Ayo susun gambar tas!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "a48749b6a928",
+      "text": "Ayo susun gambar topi!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "5bf557bda0c9",
+      "text": "Ayo susun gambar traktor!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "29e30013f6e2",
+      "text": "Ayo susun gambar truk!",
+      "scope": "puzzle-gambar",
+      "voice": "gadis",
+      "games": [
+        "puzzle-gambar"
       ]
     },
     {

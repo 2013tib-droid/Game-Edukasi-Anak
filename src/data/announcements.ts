@@ -56,6 +56,13 @@ export function announcementsFor(isBuyer: boolean): Announcement[] {
  */
 export const announcements: Announcement[] = [
   {
+    id: 'a-2026-09-07-puzzle-gambar',
+    date: '2026-09-07',
+    tag: 'baru',
+    title: 'Game baru: Puzzle Gambar 🧩',
+    body: 'Kelompok Playgroup dan TK punya permainan baru: menyusun kepingan gambar sampai utuh. Enam permainan tiap sesi — hewan, buah, benda, kendaraan, dan gambar cerita — dan tiap gambar disebutkan namanya, jadi anak sekalian menambah kosakata.',
+  },
+  {
     id: 'a-2026-09-04-pasang-kata-kata-baru',
     date: '2026-09-04',
     tag: 'update',

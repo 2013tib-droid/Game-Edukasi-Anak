@@ -117,6 +117,17 @@ export const games: GameMeta[] = [
     template: 'memory',
     load: () => import('@/games/tk/kartu-kembar'),
   },
+  {
+    // Ikon 🧩 sama dengan cadangan Pasang Kata (SD) — tidak bertabrakan:
+    // keduanya di KELOMPOK berbeda, jadi tak pernah satu layar, dan Pasang
+    // Kata sudah memakai seni `pic` sehingga emojinya cuma cadangan.
+    id: 'puzzle-gambar',
+    group: 'tk',
+    title: 'Puzzle Gambar',
+    emoji: '🧩',
+    template: 'puzzle',
+    load: () => import('@/games/tk/puzzle-gambar'),
+  },
   // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
   {
     id: 'pasang-kata',

@@ -53,6 +53,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'story-choice': lazy(() => import('@/engine/templates/StoryChoice')),
   spell: lazy(() => import('@/engine/templates/Spell')),
   'path-trace': lazy(() => import('@/engine/templates/PathTrace')),
+  puzzle: lazy(() => import('@/engine/templates/Puzzle')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */
