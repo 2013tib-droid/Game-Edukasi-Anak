@@ -96,6 +96,17 @@ jobs:
           if grep -qE '^redo: *lafal' .github/render-request.txt; then
             echo 'Render ulang: baris yang tersentuh daftar lafal'
             echo 'redo=--redo-lafal' >> "$GITHUB_OUTPUT"
+          else
+            # "redo: <kata>" — render ulang hanya baris yang memuat kata itu,
+            # cara termurah memperbaiki SATU kata yang salah lafal tanpa ikut
+            # merender ulang semua kata lain di daftar. Dibatasi huruf/strip
+            # dengan alasan yang sama seperti "only:": isinya masuk ke baris
+            # perintah.
+            WORD=$(grep -oE '^redo: *[a-z-]+' .github/render-request.txt | head -1 | sed 's/^redo: *//' || true)
+            if [ -n "$WORD" ]; then
+              echo "Render ulang: baris yang memuat \"$WORD\""
+              echo "redo=--redo=$WORD" >> "$GITHUB_OUTPUT"
+            fi
           fi
 
       - name: Render suara

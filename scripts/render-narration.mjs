@@ -23,7 +23,7 @@
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { forSpeech } from './pronounce.mjs';
+import { speechSsml, touched } from './pronounce.mjs';
 
 const LINES_FILE = 'scripts/narration-lines.json';
 const OUT_DIR = 'public/assets/voice';
@@ -123,7 +123,7 @@ if (only && !selected.length) {
 
 const fileFor = (line) => `${line.scope}/${line.key}.mp3`;
 const stale = (l) =>
-  (redo && l.text.toLowerCase().includes(redo)) || (redoLafal && forSpeech(l.text) !== l.text);
+  (redo && l.text.toLowerCase().includes(redo)) || (redoLafal && touched(l.text));
 const pending = selected.filter((l) => stale(l) || !existsSync(path.join(OUT_DIR, fileFor(l))));
 const todo = limit ? pending.slice(0, limit) : pending;
 const chars = todo.reduce((sum, l) => sum + l.text.length, 0);
@@ -147,10 +147,14 @@ if (todo.length) {
 function ssml(line) {
   const voice = VOICES[line.voice] ?? VOICES.gadis;
   // Spoken spelling, not screen spelling: Indonesian writes "e" pepet and "e"
-  // taling with the same letter, so a few words have to be respelled with é
-  // for the voice (see scripts/pronounce.mjs). The screen text — and the
-  // manifest key built from it — is untouched.
-  const text = forSpeech(line.text).replace(/[<>&'"]/g, (c) => `&#${c.charCodeAt(0)};`);
+  // taling with the same letter, so a few words have to be respelled with é —
+  // and the ones that go the other way (taling read where pepet belongs, like
+  // "sentuh") get an IPA <phoneme> tag, because Indonesian spelling has no
+  // letter for pepet at all. Both layers live in scripts/pronounce.mjs, and
+  // both leave the screen text — and the manifest key built from it — alone.
+  // `speechSsml` escapes first and inserts tags after; doing it the other way
+  // round makes Azure read the tag out loud.
+  const text = speechSsml(line.text);
   return (
     `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="id-ID">` +
     `<voice name="${voice.name}"><prosody rate="${voice.rate}">${text}</prosody></voice></speak>`
