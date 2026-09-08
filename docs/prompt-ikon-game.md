@@ -3,7 +3,15 @@
 Sasaran: `GameMeta.pic` di `src/games/registry.ts` → file `public/assets/games/<id>.webp`.
 Ikon ini dipakai DUA tempat sekaligus (kartu portal + layar intro), jadi satu file cukup.
 
-## Status (2026-09-03) — SELESAI
+## Status (2026-09-08) — DUA IKON BARU BELUM DIGAMBAR
+
+Dua game TK yang ditambahkan 2026-09-07 masih memakai emoji cadangan dan **menunggu
+gambar**: **`puzzle-gambar`** (🧩) dan **`anggota-tubuh`** (🧒). Baris promptnya ada di
+tabel di bawah; catatan khususnya di "Catatan per ikon".
+
+Sisanya (18 game lama) sudah bergambar — riwayatnya di bawah ini.
+
+## Status (2026-09-03)
 
 **Ke-19 game sudah bergambar; tak ada lagi ikon emoji.** Terakhir masuk: `rute-kendaraan`
 (jalan berkelok S + rambu berwajah imut), game SD baru yang sengaja dibuat "Jalan
@@ -144,6 +152,8 @@ hal baru muncul di tahap POTONG dan tahap PASANG — bukan di tahap prompt:
 | `jam-pintar` (opsional) | Buatkan: satu jam dinding bulat pastel berwajah imut, dengan angka 1 sampai 12 tertulis jelas dan urut mengelilingi muka jam, jarum pendek biru tua menunjuk angka 10 dan jarum panjang merah menunjuk angka 2. Selain angka jam itu tidak boleh ada tulisan lain. |
 | `pola-pintar` | Buatkan: satu ulat kecil yang lucu dan gemuk, badannya melengkung membentuk busur seperti sedang merayap. Ruas badannya berselang-seling mengikuti pola: hijau mint, kuning krem, hijau mint, kuning krem — lalu satu ruas terakhir KOSONG bergaris putus-putus, seolah ruas itu belum terpasang. Kepalanya hijau mint berwajah imut dengan dua antena kecil melengkung. Tinggi dan lebar ulatnya kira-kira sama. |
 | `rute-kendaraan` | Buatkan: satu jalan raya berkelok membentuk huruf S dari atas ke bawah, aspal abu-abu dengan garis putus-putus putih di tengah dan pinggir jalan berwarna oranye lembut, dengan satu rambu penunjuk arah berbentuk bulat warna hijau mint menempel di ujung atas jalan. Rambunya berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Tambahkan dua bintang kecil pastel melayang di sekitarnya. |
+| `puzzle-gambar` | Buatkan: satu papan puzzle persegi berisi empat keping, kepingnya menyatu membentuk gambar sederhana matahari kuning berwajah imut di langit biru muda. Satu keping di sudut bawah HILANG, dan lubangnya diisi warna lavender pucat rata bergaris putus-putus. Keping yang hilang itu melayang miring tepat di atas lubangnya, warnanya peach. Permukaan tiap keping polos — tanpa angka, tanpa huruf, tanpa nomor urut. Tambahkan dua bintang kecil pastel di sekitarnya. |
+| `anggota-tubuh` | Buatkan: satu anak Indonesia berdiri tegak menghadap depan, seluruh badan dari kepala sampai kaki terlihat, berkulit sawo matang, rambut hitam pendek, memakai kaus lengan pendek biru muda dan celana pendek kuning krem. Kedua tangannya ditekuk ke atas menyentuh kepalanya sendiri seperti sedang menyanyikan lagu kepala pundak lutut kaki — lengannya merapat ke badan, tidak direntangkan ke samping. Wajahnya imut: mata besar berkilau, pipi merona, senyum kecil. Badannya UTUH menyatu, jangan ada bagian tubuh yang terpisah atau melayang sendiri. Tambahkan tiga bintang kecil pastel di sekitarnya. |
 
 ### Kalau hasilnya masih melenceng
 
@@ -191,6 +201,49 @@ Balas di chat yang sama dengan menyebut kesalahannya, jangan mengulang seluruh p
 - **`ejaan-jitu` alternatif** kalau papan target terasa terlalu "permainan panah":
   Buatkan: tiga balok huruf kayu pastel berdiri berjajar, balok tengah berwajah imut,
   dengan satu bintang kuning melayang di atasnya.
+
+- **`puzzle-gambar` (TK) vs `pasang-kata` (SD) — dua-duanya puzzle, jadi bentuknya WAJIB
+  dibedakan.** Keduanya memang tak pernah satu layar (beda kelompok), tapi aturan yang sama
+  sudah dipakai untuk `jalan-kendaraan` vs `rute-kendaraan`: judul/emoji yang mirip justru
+  alasan gambarnya harus berbeda. `pasang-kata` = DUA keping lepas yang saling menyatu;
+  `puzzle-gambar` = SATU papan persegi berisi empat keping dengan satu lubang kosong.
+  - **Gambar di dalam papannya sengaja matahari, bukan hewan atau buah.** Di kartu portal
+    papan itu cuma ±116px, jadi tiap keping ±50px — wajah hewan atau tekstur buah jadi noda.
+    Matahari itu satu bentuk bulat berwarna tegas, terbaca sampai sekecil apa pun. Sekaligus
+    tak bertabrakan dengan ikon yang sudah ada (singa `hutan-hewan`, semangka `pasar-buah`,
+    mobil merah `jalan-kendaraan`).
+  - **Wajah imutnya ditempel pada MATAHARINYA**, bukan pada kepingnya. Kalau tiap keping
+    berwajah, empat wajah kecil berdesakan dalam satu papan — melanggar "hanya SATU objek
+    utama" dan ramai di ukuran kartu.
+  - **Lubang kepingnya diberi warna lavender pucat, JANGAN dibiarkan putih.** Lubang itu
+    terkurung badan papan, jadi flood-fill dari tepi tak menjangkaunya (Pelajaran Keempat) —
+    kalau putih, di atas latar berwarna ia tampak sebagai gumpalan, bukan lubang. Memberinya
+    warna sejak di prompt membuat tahap potong tidak perlu ditembus manual sama sekali.
+  - **Keping puzzle itu magnet nomor urut** (di dunia nyata sering bernomor), karena itu
+    baris promptnya menyebut "polos — tanpa angka, tanpa huruf, tanpa nomor urut".
+- **`anggota-tubuh` = anak UTUH, dan itu bukan sekadar selera.** Ikonnya sengaja bukan
+  potongan tubuh melayang (telinga sendirian, tangan terpotong) — alasan yang sama dengan
+  kenapa game ini tidak memakai template tap-answer sama sekali: potongan tubuh menyeramkan
+  untuk anak empat tahun. Baris promptnya karena itu memuat "badannya UTUH menyatu, jangan
+  ada bagian tubuh yang terpisah".
+  - **Pose "kepala pundak lutut kaki"** yang menyampaikan isi game tanpa satu pun tulisan —
+    lagu itu sudah dihafal hampir semua anak TK Indonesia, dan sepuluh dari tiga belas bagian
+    tubuh di game ini datang dari sana.
+  - **Lengan JANGAN direntangkan ke samping** — itu langsung melewati batas rasio ±1,5
+    (Pelajaran Kelima) dan ikonnya mengecil sendiri kena pengaman `maxWidth`. Anak berdiri
+    dengan lengan merapat rasionya menjulang (±0,6), dan menjulang itu aman.
+  - **Penampilannya disebut positif & netral gender**: kulit sawo matang, rambut hitam
+    pendek, kaus + celana pendek. Ikon game harus netral — usulan manik-manik untuk
+    `pola-pintar` dulu ditolak pemilik karena "lebih ke cewe", dan kartu ini duduk di daftar
+    yang sama dengan mobil dan jam.
+  - **Tak perlu dicocokkan dengan `public/assets/kid/anak.webp`** (gambar anak di dalam
+    soal). Ikon dan gambar soal memang dua benda berbeda, dan koordinat titik sentuh
+    (`BODY_PARTS` di `Kid.tsx`) hanya terikat pada aset soal itu — ikon tidak menyentuhnya
+    sama sekali.
+  - **Jebakan potong: putih mata & gigi.** Keduanya putih dan terkurung garis wajah, jadi
+    berlaku Pelajaran Keempat — tempel hasil potongnya di atas latar berwarna dan pastikan
+    yang tertinggal itu MATA, bukan gumpalan. Kalau anaknya digambar tersenyum lebar
+    bergigi, minta ulang dengan senyum tertutup.
 
 ---
 
