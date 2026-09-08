@@ -1,19 +1,22 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #15 — only: anggota-tubuh
+render #16 — redo: sentuh
 
-"Anggota Tubuh" (TK): dua slot "Lebih sulit!" diganti tebak-tebakan wajah
-("Aku berkedip. Sentuh aku!") dan bunyi sehari-hari ("Kruyuk kruyuk! Apa yang
-lapar?"). 11 kalimat baru, 348 karakter (0,07% kuota gratis bulanan).
+Perbaikan LAFAL, bukan kalimat baru. Laporan pemilik: "sen" di "sentuh"
+terdengar seperti e di "lemon" (taling), harusnya seperti e di "perang"
+(pepet). Azure membacanya "séntuh".
 
-Aman di-`only:` — ke-11 baris milik game ini saja. Dibandingkan sebelum vs
-sesudah lewat scripts/narration-lines.json: 874 baris jadi 876, NOL baris
-naik/turun scope. Beda dengan render #9 & #11 yang memang harus penuh.
+Ejaan é tidak bisa menolong: tulisan Indonesia tidak punya huruf untuk pepet.
+Jadi kata ini memakai jalan cadangan yang sudah disiapkan sejak 2026-08-08 —
+tag <phoneme> IPA (`sentuh` → `səntuh`), daftarnya di scripts/pronounce.mjs.
 
-Tanpa "redo: lafal" — daftar lafal tidak berubah. ("sepeda" di kalimat baru
-sudah lama ada di daftar, dan barisnya memang baru, jadi ikut dirender.)
+SENGAJA TANPA "only:": "sentuh" muncul di 127 baris dari LIMA game (Anggota
+Tubuh 44, Labirin Warna 50, Jam Pintar 24, Pasar Buah 7, Hitung Hebat 2).
+Membatasi ke satu scope akan meninggalkan empat game lain tetap salah lafal.
 
-BOLEH dengan prune: 9 kalimat "Lebih sulit! Sentuh ..." dihapus, jadi 9 mp3
-di public/assets/voice/anggota-tubuh/ kini yatim. Kalau tombol `prune` tidak
-dicentang, file itu cuma menganggur — tidak ada yang rusak. (Yang lama,
-kartu-kembar/dcd22ffabbb7.mp3 dari render #12, ikut terbuang sekalian.)
+"redo: sentuh" (bukan "redo: lafal") supaya yang dirender ulang HANYA 127
+baris itu — 4.963 karakter, 1% kuota gratis bulanan. "redo: lafal" akan ikut
+merender ulang semua kata é yang selama ini sudah benar.
+
+Kunci file TIDAK berubah (key = hash teks layar), jadi ini menimpa 127 mp3
+yang sudah ada — nol file baru, nol entri manifest berubah.

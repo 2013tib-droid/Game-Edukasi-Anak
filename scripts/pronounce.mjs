@@ -74,6 +74,33 @@ export const PRONOUNCE = {
  */
 
 /**
+ * KEBALIKANNYA: kata yang salah dibaca TALING padahal seharusnya PEPET.
+ *
+ * Laporan pemilik (2026-09-08) dari game Anggota Tubuh: *"suaranya masih
+ * ke-inggrisan — 'sen' di 'sentuh' masih seperti e di 'lemon', harusnya
+ * seperti e di 'perang'"*. Azure membaca "sentuh" jadi "séntuh".
+ *
+ * Ejaan é tidak bisa menolong di sini: tulisan Indonesia **tidak punya huruf
+ * untuk pepet** — é menandai taling, dan tidak ada lawannya yang dimengerti
+ * mesin suara. Jadi kata jenis ini memakai jalan cadangan yang memang sudah
+ * disiapkan sejak 2026-08-08: tag `<phoneme>` IPA. Bunyi pepet = `ə`.
+ *
+ * ATURAN MENAMBAH KATA — sama seperti daftar di atas, plus satu:
+ *   - Tulis IPA SELURUH katanya, bukan cuma suku kata yang salah; tag ini
+ *     mengganti pengucapan kata itu sepenuhnya. Salah menulis satu bunyi =
+ *     kata itu jadi aneh di SELURUH app.
+ *   - Kalau ragu, JANGAN didaftarkan (kata tak terdaftar = keadaan sekarang).
+ *   - Sesudah menambah kata, baris lamanya perlu dirender ulang: baris
+ *     `redo: lafal` di `.github/render-request.txt` sudah mencakup daftar ini
+ *     (lihat `touched()` di bawah), atau `redo: <kata>` untuk satu kata saja.
+ */
+export const PHONEME = {
+  // "sentuh" muncul di 127 baris (Anggota Tubuh, Labirin Warna, Jam Pintar,
+  // Pasar Buah, Hitung Hebat) — satu kata yang salah, terdengar di mana-mana.
+  sentuh: 'səntuh',
+};
+
+/**
  * Akhiran yang boleh menempel tanpa memutus pencocokan: "dompetnya",
  * "kelerengnya". Tanpa ini `\b` membuat kata berakhiran ikut terlewat.
  */
@@ -90,4 +117,38 @@ const matchCase = (replacement, original) =>
 /** Teks layar → teks yang diucapkan. Kata yang tak terdaftar dibiarkan apa adanya. */
 export function forSpeech(text) {
   return text.replace(RE, (_m, word, suffix = '') => matchCase(PRONOUNCE[word.toLowerCase()], word) + suffix);
+}
+
+const PHONEME_RE = new RegExp(`\\b(${Object.keys(PHONEME).join('|')})${SUFFIX}\\b`, 'gi');
+const PHONEME_TEST = new RegExp(PHONEME_RE.source, 'i');
+
+/** Aman ditaruh di dalam SSML: `<`, `&`, kutip jadi entity. */
+const escape = (text) => text.replace(/[<>&'"]/g, (c) => `&#${c.charCodeAt(0)};`);
+
+/**
+ * Teks layar → potongan SSML siap pakai.
+ *
+ * URUTANNYA MENGIKAT: escape DULU, tag `<phoneme>` disisipkan SESUDAHNYA.
+ * Kalau dibalik, tanda `<` milik tag itu sendiri ikut ter-escape dan Azure
+ * menerima tulisan "&#60;phoneme..." sebagai teks yang harus dibacakan.
+ */
+export function speechSsml(text) {
+  const respelled = escape(forSpeech(text));
+  return respelled.replace(
+    PHONEME_RE,
+    (_m, word, suffix = '') =>
+      `<phoneme alphabet="ipa" ph="${PHONEME[word.toLowerCase()]}">${word}</phoneme>${suffix}`,
+  );
+}
+
+/**
+ * Apakah baris ini tersentuh salah satu daftar lafal? Dipakai `--redo-lafal`
+ * untuk memilih baris yang perlu dirender ulang — `key`-nya berasal dari teks
+ * LAYAR yang tidak berubah, jadi tanpa ini file lamanya cuma dilewati.
+ */
+export function touched(text) {
+  // Regex TERSENDIRI tanpa flag `g` untuk pengujian: `RegExp.test` pada regex
+  // ber-`g` menyimpan `lastIndex`, jadi panggilan kedua mulai dari tengah teks
+  // dan menjawab `false` untuk baris yang jelas-jelas cocok.
+  return forSpeech(text) !== text || PHONEME_TEST.test(text);
 }
