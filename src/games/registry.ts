@@ -125,6 +125,7 @@ export const games: GameMeta[] = [
     group: 'tk',
     title: 'Puzzle Gambar',
     emoji: '🧩',
+    pic: 'puzzle-gambar',
     template: 'puzzle',
     load: () => import('@/games/tk/puzzle-gambar'),
   },
@@ -133,12 +134,13 @@ export const games: GameMeta[] = [
     // pada gambar anak yang digambar engine (`src/engine/ui/Kid.tsx`), bukan
     // memilih kartu berisi potongan tubuh. Ikon 🧒 sengaja anak UTUH — emoji
     // bagian tubuh (👂 ✋ 🦶 👃) berwarna kulit tertentu dan beda bentuk di
-    // tiap HP. Seninya belum ada; taruh `public/assets/games/anggota-tubuh.webp`
-    // + `pic: 'anggota-tubuh'` kalau sudah dibuat.
+    // tiap HP. Seninya (2026-09-08) mengikuti aturan itu: anak berdiri UTUH
+    // dalam pose lagu "kepala pundak lutut kaki", bukan potongan tubuh.
     id: 'anggota-tubuh',
     group: 'tk',
     title: 'Anggota Tubuh',
     emoji: '🧒',
+    pic: 'anggota-tubuh',
     template: 'mixed',
     load: () => import('@/games/tk/anggota-tubuh'),
   },

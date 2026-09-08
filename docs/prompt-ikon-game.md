@@ -3,11 +3,25 @@
 Sasaran: `GameMeta.pic` di `src/games/registry.ts` → file `public/assets/games/<id>.webp`.
 Ikon ini dipakai DUA tempat sekaligus (kartu portal + layar intro), jadi satu file cukup.
 
-## Status (2026-09-08) — DUA IKON BARU BELUM DIGAMBAR
+## Status (2026-09-08) — SELESAI, KE-20 GAME BERGAMBAR
 
-Dua game TK yang ditambahkan 2026-09-07 masih memakai emoji cadangan dan **menunggu
-gambar**: **`puzzle-gambar`** (🧩) dan **`anggota-tubuh`** (🧒). Baris promptnya ada di
-tabel di bawah; catatan khususnya di "Catatan per ikon".
+**`puzzle-gambar` & `anggota-tubuh` sudah terpasang** — dua game TK yang ditambahkan
+2026-09-07. Keduanya lolos di percobaan PERTAMA (latar putih rata, persegi, nol tulisan,
+nol bingkai, nol bayangan lantai), jadi baris prompt di tabel bawah terbukti cukup apa
+adanya.
+
+Angka yang diukur sesudah dipotong `cut-item.py` 320:
+
+| id | ukuran | rasio | di kartu portal (HP 360) | sisa putih opak |
+|---|---|---|---|---|
+| `puzzle-gambar` | 320×300, 18 kB | 1,07 | 77×72 px | 549 px (bintang & kilau di dalam papan) |
+| `anggota-tubuh` | 252×320, 21 kB | 0,79 | 57×72 px | 224 px (kilau mata) |
+
+Dua-duanya jauh di dalam batas rasio ±1,5 (Pelajaran Kelima), jadi tak ada yang kena
+pengaman `maxWidth`. Sisa putih opaknya memang bagian gambar (kilau mata & bintang di
+dalam papan), bukan latar yang tertinggal — sudah ditempel di atas latar ungu dan dilihat,
+dan tak ada satu pun lubang yang perlu ditembus manual. Lubang keping puzzle selamat dari
+Pelajaran Keempat justru karena promptnya meminta warna lavender, bukan putih.
 
 Sisanya (18 game lama) sudah bergambar — riwayatnya di bawah ini.
 
