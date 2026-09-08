@@ -25,8 +25,8 @@ import type { BodyPartId, MixedGameConfig, MixedLevel } from '@/engine/core/type
  * - `parts` = jawaban + 2–3 pengecoh; engine memperkecil daerah sentuh tiap
  *   titik supaya dua bagian tak pernah bertindihan, jadi bagian yang
  *   BERDEMPETAN di gambar tidak boleh aktif bersama. Pasangan terlarangnya:
- *   pipi & telinga, lutut & kaki, leher & mulut, dan `kepala` dengan bagian
- *   wajah mana pun (`kepala` itu SELURUH kepala).
+ *   pipi & telinga, pipi & mata, lutut & kaki, leher & mulut, dan `kepala`
+ *   dengan bagian wajah mana pun (`kepala` itu SELURUH kepala).
  * - Bingkainya dipilih engine sendiri: semua bagian di wajah → gambar wajah
  *   diperbesar, satu bagian badan saja ikut → seluruh badan. Jadi soal wajah
  *   yang halus (hidung lawan mulut) HARUS memakai pengecoh wajah saja.
@@ -180,27 +180,51 @@ const config: MixedGameConfig = {
       ask('Sepatu melindungi apa? Sentuh!', 'kaki', 'tangan', 'kepala'),
       ask('Helm melindungi apa? Sentuh!', 'kepala', 'tangan', 'kaki'),
     ),
-    // --- 9. Wajah, tiga pengecoh ---
-    // HIDUNG SENGAJA TIDAK IKUT DI SINI. Dengan empat bagian aktif, bingkainya
+    // --- 9. Tebak-tebakan wajah: "Aku ..." ---
+    // MENGGANTIKAN slot lama "Lebih sulit!" (keputusan pemilik 2026-09-08).
+    // Kalimat itu mengabarkan tingkat kesulitan kepada anak empat tahun —
+    // yang tidak tahu ada tingkat kesulitan — lalu mengulang persis soal
+    // slot 1 dengan satu pengecoh tambahan. Yang bertambah cuma jumlah
+    // lingkaran; soalnya sendiri terasa sama.
+    //
+    // Di sini bagiannya TIDAK disebut namanya: anak menebaknya dari apa yang
+    // dilakukan bagian itu. Jumlah pengecohnya tetap sama, jadi tingkat
+    // kesulitannya tidak turun — yang naik justru bagian berpikirnya.
+    //
+    // HIDUNG TETAP TIDAK IKUT DI SINI. Dengan empat bagian aktif, bingkainya
     // harus memuat kedua telinga (lebar 61 satuan) — dan pada bingkai selebar
     // itu hidung, yang cuma berjarak 7,5 satuan dari mulut, tinggal 35 px.
     // Soal hidung yang halus tetap ada di slot 1 dan 3, di mana bingkainya
     // boleh mendekat karena telinga tak ikut aktif.
     slot(
       'l9',
-      ask('Lebih sulit! Sentuh matamu!', 'mata', 'telinga', 'mulut', 'rambut'),
-      ask('Lebih sulit! Sentuh telingamu!', 'telinga', 'mata', 'mulut', 'rambut'),
-      ask('Lebih sulit! Sentuh mulutmu!', 'mulut', 'mata', 'telinga', 'rambut'),
-      ask('Lebih sulit! Sentuh rambutmu!', 'rambut', 'mata', 'mulut', 'telinga'),
+      ask('Aku berkedip. Sentuh aku!', 'mata', 'telinga', 'mulut', 'rambut'),
+      ask('Aku dengar suara ibu. Sentuh aku!', 'telinga', 'mata', 'mulut', 'rambut'),
+      ask('Aku bisa tersenyum. Sentuh aku!', 'mulut', 'mata', 'telinga', 'rambut'),
+      ask('Aku disisir tiap pagi. Sentuh aku!', 'rambut', 'mata', 'telinga', 'mulut'),
+      // Pipi cuma berpengecoh dua: lingkaran pipi bersinggungan dengan mata
+      // (jaraknya 9 satuan) dan dengan telinga (11), jadi memasang salah satu
+      // dari keduanya menjatuhkan daerah sentuhnya ke 53–55 px — di bawah
+      // target sentuh anak. Diukur `scripts/check-body-parts.mjs`.
+      ask('Aku merah kalau malu. Sentuh aku!', 'pipi', 'mulut', 'rambut'),
     ),
-    // --- 10. Badan, tiga pengecoh ---
+    // --- 10. Bunyi & kejadian sehari-hari ---
+    // Pasangan slot 9 untuk badan, dan menggantikan "Lebih sulit!" yang kedua
+    // dengan alasan yang sama. Bunyinya sengaja ditiru ("Kruyuk kruyuk!",
+    // "Prok prok prok!") — anak TK mengenali kejadiannya dari bunyi jauh
+    // sebelum ia bisa membaca kalimatnya.
+    //
+    // Kalimat soal TIDAK BOLEH MEMUAT JAWABANNYA (aturan lama dari Kenal
+    // Huruf): karena itu tepuk tangan ditulis sebagai bunyinya, bukan
+    // "Tepuk tangan!" yang sudah menyebutkan tangannya sendiri.
     slot(
       'l10',
-      ask('Lebih sulit! Sentuh perutmu!', 'perut', 'tangan', 'kaki', 'kepala'),
-      ask('Lebih sulit! Sentuh pundakmu!', 'pundak', 'tangan', 'kaki', 'kepala'),
-      ask('Lebih sulit! Sentuh lututmu!', 'lutut', 'tangan', 'perut', 'kepala'),
-      ask('Lebih sulit! Sentuh lehermu!', 'leher', 'tangan', 'kaki', 'perut'),
-      ask('Lebih sulit! Sentuh tanganmu!', 'tangan', 'kaki', 'perut', 'kepala'),
+      ask('Kruyuk kruyuk! Apa yang lapar?', 'perut', 'tangan', 'kaki', 'kepala'),
+      ask('Prok prok prok! Apa yang bertepuk?', 'tangan', 'kaki', 'perut', 'kepala'),
+      ask('Naik sepeda. Apa yang ditekuk?', 'lutut', 'tangan', 'perut', 'kepala'),
+      ask('Menoleh ke kanan. Apa yang berputar?', 'leher', 'tangan', 'kaki', 'perut'),
+      ask('Baju dipakai lewat mana dulu?', 'kepala', 'tangan', 'kaki', 'perut'),
+      ask('Loncat tinggi! Apa yang melompat?', 'kaki', 'tangan', 'perut', 'kepala'),
     ),
   ],
 };

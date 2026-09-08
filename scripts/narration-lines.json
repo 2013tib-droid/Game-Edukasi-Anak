@@ -1,11 +1,65 @@
 {
   "generated": "2026-09-08",
-  "count": 874,
-  "chars": 39801,
+  "count": 876,
+  "chars": 39893,
   "lines": [
     {
       "key": "f6d27af1e176",
       "text": "Ada berapa jari di satu tanganmu?",
+      "scope": "anggota-tubuh",
+      "voice": "gadis",
+      "games": [
+        "anggota-tubuh"
+      ]
+    },
+    {
+      "key": "548a4a3bae0b",
+      "text": "Aku berkedip. Sentuh aku!",
+      "scope": "anggota-tubuh",
+      "voice": "gadis",
+      "games": [
+        "anggota-tubuh"
+      ]
+    },
+    {
+      "key": "39e72173a3b6",
+      "text": "Aku bisa tersenyum. Sentuh aku!",
+      "scope": "anggota-tubuh",
+      "voice": "gadis",
+      "games": [
+        "anggota-tubuh"
+      ]
+    },
+    {
+      "key": "496299a563ca",
+      "text": "Aku dengar suara ibu. Sentuh aku!",
+      "scope": "anggota-tubuh",
+      "voice": "gadis",
+      "games": [
+        "anggota-tubuh"
+      ]
+    },
+    {
+      "key": "2c5d1fd85cfb",
+      "text": "Aku disisir tiap pagi. Sentuh aku!",
+      "scope": "anggota-tubuh",
+      "voice": "gadis",
+      "games": [
+        "anggota-tubuh"
+      ]
+    },
+    {
+      "key": "cc9d6912301a",
+      "text": "Aku merah kalau malu. Sentuh aku!",
+      "scope": "anggota-tubuh",
+      "voice": "gadis",
+      "games": [
+        "anggota-tubuh"
+      ]
+    },
+    {
+      "key": "ff5c5b16cda8",
+      "text": "Baju dipakai lewat mana dulu?",
       "scope": "anggota-tubuh",
       "voice": "gadis",
       "games": [
@@ -166,80 +220,8 @@
       ]
     },
     {
-      "key": "3318f8f08a6b",
-      "text": "Lebih sulit! Sentuh lehermu!",
-      "scope": "anggota-tubuh",
-      "voice": "gadis",
-      "games": [
-        "anggota-tubuh"
-      ]
-    },
-    {
-      "key": "db514130fcdb",
-      "text": "Lebih sulit! Sentuh lututmu!",
-      "scope": "anggota-tubuh",
-      "voice": "gadis",
-      "games": [
-        "anggota-tubuh"
-      ]
-    },
-    {
-      "key": "805e43a9725b",
-      "text": "Lebih sulit! Sentuh matamu!",
-      "scope": "anggota-tubuh",
-      "voice": "gadis",
-      "games": [
-        "anggota-tubuh"
-      ]
-    },
-    {
-      "key": "6a8abb5b4ab5",
-      "text": "Lebih sulit! Sentuh mulutmu!",
-      "scope": "anggota-tubuh",
-      "voice": "gadis",
-      "games": [
-        "anggota-tubuh"
-      ]
-    },
-    {
-      "key": "0364cf4dfd1b",
-      "text": "Lebih sulit! Sentuh perutmu!",
-      "scope": "anggota-tubuh",
-      "voice": "gadis",
-      "games": [
-        "anggota-tubuh"
-      ]
-    },
-    {
-      "key": "892b71844670",
-      "text": "Lebih sulit! Sentuh pundakmu!",
-      "scope": "anggota-tubuh",
-      "voice": "gadis",
-      "games": [
-        "anggota-tubuh"
-      ]
-    },
-    {
-      "key": "6508c7ca9505",
-      "text": "Lebih sulit! Sentuh rambutmu!",
-      "scope": "anggota-tubuh",
-      "voice": "gadis",
-      "games": [
-        "anggota-tubuh"
-      ]
-    },
-    {
-      "key": "e9e2339945bd",
-      "text": "Lebih sulit! Sentuh tanganmu!",
-      "scope": "anggota-tubuh",
-      "voice": "gadis",
-      "games": [
-        "anggota-tubuh"
-      ]
-    },
-    {
-      "key": "f69278ff86fc",
-      "text": "Lebih sulit! Sentuh telingamu!",
+      "key": "8042958516a3",
+      "text": "Kruyuk kruyuk! Apa yang lapar?",
       "scope": "anggota-tubuh",
       "voice": "gadis",
       "games": [
@@ -292,8 +274,44 @@
       ]
     },
     {
+      "key": "c641de7774a9",
+      "text": "Loncat tinggi! Apa yang melompat?",
+      "scope": "anggota-tubuh",
+      "voice": "gadis",
+      "games": [
+        "anggota-tubuh"
+      ]
+    },
+    {
+      "key": "185c79700e31",
+      "text": "Menoleh ke kanan. Apa yang berputar?",
+      "scope": "anggota-tubuh",
+      "voice": "gadis",
+      "games": [
+        "anggota-tubuh"
+      ]
+    },
+    {
+      "key": "678135ad3076",
+      "text": "Naik sepeda. Apa yang ditekuk?",
+      "scope": "anggota-tubuh",
+      "voice": "gadis",
+      "games": [
+        "anggota-tubuh"
+      ]
+    },
+    {
       "key": "3a8919cf55d9",
       "text": "Pensil dipegang pakai apa? Sentuh!",
+      "scope": "anggota-tubuh",
+      "voice": "gadis",
+      "games": [
+        "anggota-tubuh"
+      ]
+    },
+    {
+      "key": "5f270758fdcd",
+      "text": "Prok prok prok! Apa yang bertepuk?",
       "scope": "anggota-tubuh",
       "voice": "gadis",
       "games": [

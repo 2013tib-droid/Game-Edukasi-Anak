@@ -56,6 +56,16 @@ export function announcementsFor(isBuyer: boolean): Announcement[] {
  */
 export const announcements: Announcement[] = [
   {
+    id: 'a-2026-09-08-anggota-tubuh-tebak-tebakan',
+    date: '2026-09-08',
+    tag: 'update',
+    title: 'Anggota Tubuh: soal tebak-tebakan baru',
+    body:
+      'Dua babak "lebih sulit" diganti soal yang lebih seru: tebak-tebakan wajah ' +
+      '("Aku berkedip. Sentuh aku!") dan tebak bunyi sehari-hari ' +
+      '("Kruyuk kruyuk! Apa yang lapar?"). Anak menebak bagian tubuhnya tanpa disebut namanya.',
+  },
+  {
     id: 'a-2026-09-07-anggota-tubuh',
     date: '2026-09-07',
     tag: 'baru',
