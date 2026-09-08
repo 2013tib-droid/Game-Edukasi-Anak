@@ -1,16 +1,19 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #14 — only: anggota-tubuh
+render #15 — only: anggota-tubuh
 
-Game baru "Anggota Tubuh" (TK): 55 kalimat baru di scope `anggota-tubuh`,
-1.570 karakter (0,3% kuota gratis bulanan).
+"Anggota Tubuh" (TK): dua slot "Lebih sulit!" diganti tebak-tebakan wajah
+("Aku berkedip. Sentuh aku!") dan bunyi sehari-hari ("Kruyuk kruyuk! Apa yang
+lapar?"). 11 kalimat baru, 348 karakter (0,07% kuota gratis bulanan).
 
-Aman di-`only:` — ke-55 baris milik game ini saja. Dibandingkan sebelum vs
-sesudah lewat scripts/narration-lines.json: 820 baris jadi 875, NOL baris lama
-hilang dan NOL baris naik scope ke `shared`. Beda dengan render #9 & #11 yang
-memang harus penuh.
+Aman di-`only:` — ke-11 baris milik game ini saja. Dibandingkan sebelum vs
+sesudah lewat scripts/narration-lines.json: 874 baris jadi 876, NOL baris
+naik/turun scope. Beda dengan render #9 & #11 yang memang harus penuh.
 
-Tanpa "redo: lafal" — daftar lafal tidak berubah.
-Tanpa prune — tak ada file yatim baru dari perubahan ini. (Yang lama,
-`kartu-kembar/dcd22ffabbb7.mp3` dari render #12, masih boleh dibuang kapan
-saja lewat tombol `prune` di workflow.)
+Tanpa "redo: lafal" — daftar lafal tidak berubah. ("sepeda" di kalimat baru
+sudah lama ada di daftar, dan barisnya memang baru, jadi ikut dirender.)
+
+BOLEH dengan prune: 9 kalimat "Lebih sulit! Sentuh ..." dihapus, jadi 9 mp3
+di public/assets/voice/anggota-tubuh/ kini yatim. Kalau tombol `prune` tidak
+dicentang, file itu cuma menganggur — tidak ada yang rusak. (Yang lama,
+kartu-kembar/dcd22ffabbb7.mp3 dari render #12, ikut terbuang sekalian.)
