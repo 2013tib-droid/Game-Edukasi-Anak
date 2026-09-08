@@ -384,9 +384,20 @@ export default function GameShell({
                       level that is not open yet gets a padlock in the same
                       corner instead: nothing on the card responds. */}
                   {soon ? (
-                    <span className="pick-card__soon" aria-hidden>
-                      🔒
-                    </span>
+                    <>
+                      <span className="pick-card__soon" aria-hidden>
+                        🔒
+                      </span>
+                      {/* Gemboknya sendiri hanya mengabarkan "tidak bisa
+                          dibuka" — orang tua yang melihat layar ini perlu tahu
+                          bahwa ceritanya MENYUSUL, bukan hilang atau rusak.
+                          Kalimatnya sengaja TIDAK ikut diredupkan bersama isi
+                          kartu: satu-satunya keterangan di kartu mati ini
+                          justru harus jadi yang paling terbaca. */}
+                      <span className="pick-card__soon-tag" aria-hidden>
+                        Segera hadir
+                      </span>
+                    </>
                   ) : (
                     <span
                       className="pick-card__speak"

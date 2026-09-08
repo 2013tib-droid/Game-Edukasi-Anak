@@ -1334,9 +1334,17 @@
 
 .pick-card--soon .pick-card__pic,
 .pick-card--soon .pick-card__art,
-.pick-card--soon .pick-card__label,
-.pick-card--soon .pick-card__stars {
+.pick-card--soon .pick-card__label {
   opacity: 0.42;
+}
+
+/* Bintangnya dilepas dari kartu yang terkunci — bukan sekadar diredupkan.
+   Cerita yang belum bisa dibuka SELALU ☆☆☆ (belum pernah dimainkan), jadi
+   deretan itu tidak mengabarkan apa pun, sementara tempat yang ditempatinya
+   (kaki sampul) justru yang dibutuhkan pita "Segera hadir" supaya terbaca
+   selebar kartu. Kartu yang aktif tidak berubah sedikit pun. */
+.pick-card--soon .pick-card__stars {
+  display: none;
 }
 
 /* Gembok di posisi tombol 🔊 kartu aktif: satu titik yang sama, jadi
@@ -1353,6 +1361,30 @@
   background: rgba(255, 255, 255, 0.7);
   font-size: 17px;
   opacity: 0.55;
+}
+
+/*
+ * "Segera hadir" = PITA SELEBAR SAMPUL di kakinya, bukan pil di sudut.
+ * Sudah dicoba sebagai pil di tengah sampul dan DITOLAK oleh ukuran: kartu
+ * dua kolom cuma 144–178px, jadi pil selebar 110px yang ditengahkan menabrak
+ * gembok di kanan-atas pada HP 360–380px (terukur). Pita selebar sampul tak
+ * punya masalah itu di lebar mana pun, dan justru paling terbaca.
+ * Sengaja TIDAK ikut diredupkan 0,42 seperti isi kartu lainnya: yang perlu
+ * terlihat pudar adalah gambarnya (supaya kartunya terbaca belum aktif),
+ * sedangkan penjelasannya justru harus terbaca jelas.
+ */
+.pick-card__soon-tag {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 4px 6px 5px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #b3541a;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  line-height: 1.1;
 }
 
 /* Path trace (susuri jalan) — jalan raya yang diikuti jari anak */
