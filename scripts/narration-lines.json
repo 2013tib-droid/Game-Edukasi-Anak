@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-07",
-  "count": 875,
-  "chars": 39830,
+  "generated": "2026-09-08",
+  "count": 874,
+  "chars": 39801,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -159,15 +159,6 @@
     {
       "key": "06978be5389d",
       "text": "Kita mengecap rasa pakai apa? Sentuh!",
-      "scope": "anggota-tubuh",
-      "voice": "gadis",
-      "games": [
-        "anggota-tubuh"
-      ]
-    },
-    {
-      "key": "8e1c921f4ec0",
-      "text": "Lebih sulit! Sentuh hidungmu!",
       "scope": "anggota-tubuh",
       "voice": "gadis",
       "games": [

@@ -3,8 +3,7 @@ import type { TemplateProps } from '@/engine/core/GameShell';
 import type { BodyPartId } from '@/engine/core/types';
 import { sfx } from '@/engine/audio/sound';
 import ItemPic from '@/engine/ui/ItemPic';
-import Kid, { BODY_PARTS, HIT_MAX } from '@/engine/ui/Kid';
-import type { KidView } from '@/engine/ui/Kid';
+import Kid, { BODY_PARTS, kidFrame, kidSpots } from '@/engine/ui/Kid';
 
 /**
  * Sentuh bagian yang benar pada SATU gambar utuh (anggota tubuh).
@@ -19,57 +18,17 @@ import type { KidView } from '@/engine/ui/Kid';
  * menyebut nama bagiannya.
  */
 
-/** Satu titik sentuh yang sudah jadi: bagian mana, di mana, seberapa besar. */
-interface Spot {
-  part: BodyPartId;
-  x: number;
-  y: number;
-  r: number;
-}
-
-/**
- * Besar daerah sentuh tiap titik, dalam satuan gambar.
- *
- * Radiusnya BUKAN angka tetap: tiap titik dipangkas jadi setengah jarak ke
- * titik milik bagian LAIN yang terdekat. Dengan begitu dua daerah sentuh tak
- * pernah bertindihan (r_a + r_b <= d), jadi tak pernah ada sentuhan yang
- * "sebenarnya benar tapi dihitung salah" — dan sekaligus jadi rem yang jujur:
- * level yang mengaktifkan bagian-bagian berdempetan akan terlihat sendiri
- * daerah sentuhnya menciut. `scripts/check-body-parts.mjs` mengukur ini untuk
- * SEMUA varian, jadi level yang terlalu sempit ketahuan sebelum sampai ke anak.
- *
- * Titik-titik milik bagian yang SAMA (dua mata, dua tangan) sengaja tidak
- * saling memangkas: keduanya jawaban yang sama, jadi bertindihan pun tak apa.
- */
-function hitRadii(spots: Omit<Spot, 'r'>[]): number[] {
-  return spots.map((a, i) => {
-    let r = BODY_PARTS[a.part].cap ?? HIT_MAX;
-    spots.forEach((b, j) => {
-      if (i === j || a.part === b.part) return;
-      const d = Math.hypot(a.x - b.x, a.y - b.y);
-      r = Math.min(r, d / 2);
-    });
-    return r;
-  });
-}
-
 export default function TapPicture({ level, onCorrect, onWrong }: TemplateProps<'tap-picture'>) {
   const data = level.data;
   const [solved, setSolved] = useState(false);
   const [shake, setShake] = useState<BodyPartId | null>(null);
 
-  // Bingkai dipilih ENGINE, bukan config: kalau semua bagian yang aktif ada di
-  // wajah, gambarnya dipotong ke kepala supaya hidung & mulut punya daerah
-  // sentuh selebar jari. Satu bagian badan saja ikut aktif → seluruh badan.
-  const view: KidView = data.parts.every((p) => BODY_PARTS[p].face) ? 'wajah' : 'badan';
-
-  const spots = useMemo<Spot[]>(() => {
-    const base = data.parts.flatMap((part) =>
-      BODY_PARTS[part].points.map((pt) => ({ part, x: pt.x, y: pt.y })),
-    );
-    const radii = hitRadii(base);
-    return base.map((s, i) => ({ ...s, r: radii[i]! }));
-  }, [data.parts]);
+  // Titik sentuh & bingkainya dihitung ENGINE, bukan config: config cuma
+  // menyebut nama bagiannya. Bingkainya kotak terkecil yang memuat seluruh
+  // lingkaran yang aktif, jadi soal wajah otomatis jadi close-up sementara
+  // soal badan tetap seluruh badan — lihat `kidFrame` di Kid.tsx.
+  const spots = useMemo(() => kidSpots(data.parts), [data.parts]);
+  const frame = useMemo(() => kidFrame(spots), [spots]);
 
   function handleTap(part: BodyPartId) {
     if (solved) return;
@@ -91,7 +50,7 @@ export default function TapPicture({ level, onCorrect, onWrong }: TemplateProps<
       </div>
       <div className="game-area">
         <div className="tp-stage">
-          <Kid view={view} className="tp-kid">
+          <Kid frame={frame} className="tp-kid">
             {spots.map((s, i) => {
               const state = solved && s.part === data.answer ? ' tp-spot--ok' : shake === s.part ? ' tp-spot--miss' : '';
               return (

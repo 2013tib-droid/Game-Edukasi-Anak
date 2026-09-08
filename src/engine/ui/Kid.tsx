@@ -2,38 +2,31 @@ import type { ReactNode } from 'react';
 import type { BodyPartId } from '@/engine/core/types';
 
 /**
- * Gambar seorang anak, digambar sebagai SVG di ENGINE — bukan gambar yang
- * diunduh.
+ * Gambar seorang anak untuk template `tap-picture` (game "Anggota Tubuh").
  *
- * Alasannya sama dengan `Shape.tsx` (bangun datar), `Clock.tsx` (muka jam) dan
- * `Scene.tsx` (latar cerita): satu berkas SVG ±3 kB yang ikut chunk template,
- * tak pernah bisa gagal karena jaringan, dan sama persis di tiap HP. Yang
- * WAJIB gambar impor tetap SUBJEK soal yang bentuknya harus tepat (hewan,
- * buah, benda) — di sini bentuknya justru milik engine, karena titik sentuh
- * tiap anggota tubuh harus cocok dengan gambarnya sampai ke pikselnya.
+ * DULU SVG BUATAN ENGINE, SEKARANG ILUSTRASI KIRIMAN PEMILIK. Jalur ganti ini
+ * memang sudah disiapkan sejak awal: gambarnya masuk ke `Figure`, lalu
+ * koordinat di `BODY_PARTS` dibetulkan sekali mengikuti gambar itu. Yang TIDAK
+ * ikut berubah: config game — ia cuma menyebut nama bagiannya.
  *
- * KALAU NANTI DIGANTI ILUSTRASI KIRIMAN PEMILIK: gambar barunya masuk ke
- * `Figure` di bawah (atau sebagai <image> di dalamnya), lalu koordinat di
- * `BODY_PARTS` dibetulkan sekali mengikuti gambar itu. Tak satu pun config
- * game ikut berubah — config cuma menyebut nama bagiannya.
+ * SATUANNYA IKUT GANTI: dulu 100×140 (anak chibi), sekarang 100×165 karena
+ * anak di ilustrasi ini berproporsi wajar, bukan kepala besar berbadan pendek.
+ * Semua angka di bawah — termasuk `HIT_MAX` — ikut diskalakan 140→165 supaya
+ * besar daerah sentuh dalam PIKSEL tidak ikut mengecil.
  *
- * PROPORSI SENGAJA "CHIBI" (kepala besar, badan pendek, tinggi 140 satuan):
- * bukan cuma karena lucu — kepala yang besar memberi ruang untuk mata, hidung
- * dan mulut yang berjauhan, dan jarak antar titik itulah yang menentukan
- * besar daerah sentuh anak (lihat `hitRadii` di `TapPicture.tsx`).
+ * AKIBAT YANG HARUS DIINGAT KALAU GAMBARNYA DIGANTI LAGI: di wajah yang
+ * digambar realistis, hidung dan mulut cuma berjarak 7,5 satuan (di anak chibi
+ * dulu 16). Itu sebabnya bingkai WAJAH sekarang dihitung per soal (`kidFrame`)
+ * dan bukan satu kotak tetap — kotak tetap yang harus memuat kedua telinga
+ * membuat soal "hidung lawan mulut" turun ke 35 px, jauh di bawah target
+ * sentuh anak. Bingkai badan tetap seluruh badan, seperti dulu.
  */
 
-const SKIN = '#f6c9a0';
-const SKIN_DARK = '#e2a97e';
-const HAIR = '#4b3524';
-const SHIRT = '#57b0e8';
-const SHIRT_DARK = '#3f95cd';
-const PANTS = '#3d6ea9';
-const SHOE = '#e8604c';
-const BLUSH = '#f79aa0';
-const INK = '#3a2e20';
+/** Ukuran gambar dalam satuan koordinat; sama dengan rasio berkas aslinya. */
+export const KID_W = 100;
+export const KID_H = 165;
 
-/** Satu titik di ruang koordinat gambar (viewBox 0 0 100 140). */
+/** Satu titik di ruang koordinat gambar (0 0 100 165). */
 export interface KidPoint {
   x: number;
   y: number;
@@ -50,231 +43,203 @@ export interface BodyPartGeom {
   /** Nama Indonesianya, ditampilkan setelah dijawab benar. */
   label: string;
   /**
-   * Bagian WAJAH. Kalau semua bagian yang aktif di satu level bertanda ini,
-   * engine memotong gambarnya jadi tampilan wajah (lihat `KID_VIEW`) — hidung
-   * dan mulut mustahil disentuh dengan adil di tampilan seluruh badan.
+   * Bagian WAJAH. Kalau SEMUA bagian yang aktif di satu soal bertanda ini,
+   * engine mendekatkan kameranya ke kepala (lihat `kidFrame`) — hidung dan
+   * mulut mustahil disentuh dengan adil di tampilan seluruh badan.
    */
   face?: boolean;
   /**
    * Batas atas radius sentuh dalam satuan gambar. Bawaannya `HIT_MAX`;
-   * `kepala` jauh lebih besar karena yang dimaksud memang seluruh kepala,
-   * bukan satu titik di dahi.
+   * `kepala` dan `perut` jauh lebih besar karena yang dimaksud memang seluruh
+   * kepala / seluruh perut, bukan satu titik di dahi.
    */
   cap?: number;
 }
 
-/** Batas atas radius sentuh (satuan gambar) untuk bagian biasa. */
-export const HIT_MAX = 12;
+/**
+ * Batas atas radius sentuh (satuan gambar) untuk bagian biasa. 15 satuan pada
+ * kanvas setinggi 165 = 12 satuan pada kanvas lama setinggi 140: besar yang
+ * SAMA di layar, cuma satuannya yang berganti.
+ */
+export const HIT_MAX = 15;
 
 /**
- * Geometri tiap bagian tubuh. Koordinatnya menempel pada gambar di `Figure`
- * di bawah — kalau salah satunya digeser, geser juga yang lain.
+ * Geometri tiap bagian tubuh, DIUKUR dari `public/assets/kid/anak.webp`
+ * (berkas 624×1030 px = 100×165 satuan). Kalau gambarnya diganti, seluruh
+ * tabel ini diukur ulang — jangan menggeser satu-dua saja.
+ *
+ * Titik hidung sengaja di UJUNG ATAS hidung dan mulut di ujung bawah bibir,
+ * bukan di tengah keduanya: jaraknya jadi 7,5 dan bukan 4,5 satuan, dan
+ * radius sentuh tiap titik persis setengah jarak itu (lihat `kidSpots`).
+ * Lingkaran yang dihasilkan tetap menutupi bentuk yang digambar.
  */
 export const BODY_PARTS: Record<BodyPartId, BodyPartGeom> = {
-  rambut: { points: [{ x: 50, y: 13 }], label: 'Rambut', face: true },
-  kepala: { points: [{ x: 50, y: 34 }], label: 'Kepala', cap: 19 },
+  rambut: { points: [{ x: 50, y: 9 }], label: 'Rambut', face: true },
+  kepala: { points: [{ x: 50, y: 26 }], label: 'Kepala', cap: 22 },
   mata: {
     points: [
-      { x: 38, y: 27.5 },
-      { x: 62, y: 27.5 },
+      { x: 40, y: 35.5 },
+      { x: 60, y: 35.5 },
     ],
     label: 'Mata',
     face: true,
   },
   telinga: {
     points: [
-      { x: 25, y: 37 },
-      { x: 75, y: 37 },
+      { x: 26.5, y: 37 },
+      { x: 73.5, y: 37 },
     ],
     label: 'Telinga',
     face: true,
     // Daun telinga menempel di tepi kepala, jadi lingkaran sentuhnya tumbuh
-    // KELUAR gambar. Dibatasi supaya tidak pernah terpotong bingkai wajah —
-    // lingkaran yang terpotong tepi layar terbaca seperti gambar rusak.
-    cap: 9,
+    // KELUAR gambar. Dibatasi supaya tidak melebar sampai terlihat lepas dari
+    // kepalanya.
+    cap: 8,
   },
-  hidung: { points: [{ x: 50, y: 38 }], label: 'Hidung', face: true },
-  mulut: { points: [{ x: 50, y: 54 }], label: 'Mulut', face: true },
+  hidung: { points: [{ x: 50, y: 39.5 }], label: 'Hidung', face: true },
+  mulut: { points: [{ x: 50, y: 47 }], label: 'Mulut', face: true },
   pipi: {
     points: [
-      { x: 28, y: 47 },
-      { x: 72, y: 47 },
+      { x: 35.5, y: 43.5 },
+      { x: 64.5, y: 43.5 },
     ],
     label: 'Pipi',
     face: true,
   },
-  leher: { points: [{ x: 50, y: 63 }], label: 'Leher' },
+  leher: { points: [{ x: 50, y: 53 }], label: 'Leher' },
   pundak: {
     points: [
-      { x: 32, y: 70 },
-      { x: 68, y: 70 },
+      { x: 35, y: 62 },
+      { x: 65, y: 62 },
     ],
     label: 'Pundak',
   },
   tangan: {
     points: [
-      { x: 17, y: 95 },
-      { x: 83, y: 95 },
+      { x: 15, y: 96 },
+      { x: 85, y: 96 },
     ],
     label: 'Tangan',
   },
-  perut: { points: [{ x: 50, y: 88 }], label: 'Perut', cap: 14 },
+  perut: { points: [{ x: 50, y: 93 }], label: 'Perut', cap: 16 },
   lutut: {
     points: [
-      { x: 40, y: 114 },
-      { x: 60, y: 114 },
+      { x: 39, y: 127 },
+      { x: 61, y: 127 },
     ],
     label: 'Lutut',
   },
   kaki: {
     points: [
-      { x: 40, y: 129 },
-      { x: 60, y: 129 },
+      { x: 40, y: 156 },
+      { x: 60, y: 156 },
     ],
     label: 'Kaki',
   },
 };
 
-export type KidView = 'badan' | 'wajah';
+/** Satu titik sentuh yang sudah jadi: bagian mana, di mana, seberapa besar. */
+export interface KidSpot {
+  part: BodyPartId;
+  x: number;
+  y: number;
+  r: number;
+}
 
 /**
- * Bingkai gambar. `wajah` menggeser "kamera" ke kepala supaya mata, hidung dan
- * mulut punya daerah sentuh selebar jari anak — di tampilan seluruh badan
- * ketiganya berdesakan dalam ruang seukuran kuku.
+ * Titik sentuh satu soal, lengkap dengan besarnya.
+ *
+ * Radiusnya BUKAN angka tetap: tiap titik dipangkas jadi setengah jarak ke
+ * titik milik bagian LAIN yang terdekat. Dengan begitu dua daerah sentuh tak
+ * pernah bertindihan (r_a + r_b <= d), jadi tak pernah ada sentuhan yang
+ * "sebenarnya benar tapi dihitung salah" — dan sekaligus jadi rem yang jujur:
+ * soal yang mengaktifkan bagian-bagian berdempetan akan terlihat sendiri
+ * daerah sentuhnya menciut. `scripts/check-body-parts.mjs` mengukur ini untuk
+ * SEMUA varian, jadi soal yang terlalu sempit ketahuan sebelum sampai ke anak.
+ *
+ * Titik-titik milik bagian yang SAMA (dua mata, dua tangan) sengaja tidak
+ * saling memangkas: keduanya jawaban yang sama, jadi bertindihan pun tak apa.
+ */
+export function kidSpots(parts: readonly BodyPartId[]): KidSpot[] {
+  const base = parts.flatMap((part) =>
+    BODY_PARTS[part].points.map((pt) => ({ part, x: pt.x, y: pt.y })),
+  );
+  return base.map((a, i) => {
+    let r = BODY_PARTS[a.part].cap ?? HIT_MAX;
+    base.forEach((b, j) => {
+      if (i === j || a.part === b.part) return;
+      r = Math.min(r, Math.hypot(a.x - b.x, a.y - b.y) / 2);
+    });
+    return { ...a, r };
+  });
+}
+
+/** Ruang napas di sekeliling lingkaran terluar, dalam satuan gambar. */
+const FRAME_PAD = 1;
+/** Bingkai terkecil yang boleh dipakai — rem supaya gambar tak dizoom ekstrem. */
+const FRAME_MIN = { w: 26, h: 20 };
+/** Seluruh badan, dari ujung rambut sampai telapak kaki. */
+const FRAME_BADAN = `0 0 ${KID_W} ${KID_H}`;
+
+/**
+ * Bingkai ("kamera") untuk satu soal.
+ *
+ * Soal yang menyinggung SATU SAJA bagian badan memakai seluruh badan — anak
+ * perlu melihat anaknya utuh untuk tahu di mana pundak itu, dan badan yang
+ * dipotong sebatas dada terbaca seperti gambar rusak.
+ *
+ * Soal yang SEMUA bagiannya di wajah mendapat kamera yang mendekat, dan
+ * sedekat apa DIHITUNG dari soal itu sendiri: kotak terkecil yang masih memuat
+ * seluruh lingkaran sentuhnya. Dulu bingkai wajahnya satu kotak tetap, dan itu
+ * cukup selama wajahnya chibi. Pada ilustrasi berproporsi wajar, satu bingkai
+ * yang harus memuat kedua telinga (lebar 61 satuan) membuat soal hidung-lawan-
+ * mulut mengecil jadi 35 px. Dihitung per soal, soal yang cuma memakai mata,
+ * hidung dan mulut mendapat bingkai selebar 33 satuan — kameranya mendekat dua
+ * kali lipat, dan daerah sentuhnya lolos target.
  *
  * `viewBox` TIDAK memotong gambar: apa yang ada di luarnya tetap tergambar
  * sampai tepi kotaknya (yang memotong cuma viewport SVG). Jadi bingkai wajah
- * bukan "kepala digunting", melainkan kamera yang mendekat — badannya terus
- * ke bawah lalu habis di tepi layar, persis seperti foto close-up. Karena itu
- * bingkai wajahnya dijangkarkan ke ATAS (`xMidYMin`, lihat di bawah): kalau
- * ditengahkan, kepalanya turun ke tengah dan menyisakan ruang kosong lebar di
- * atas kepala sementara badannya bocor memenuhi bawah.
- *
- * TINGGI BINGKAI = SKALA. Karena isinya bocor, tinggi `wajah` cuma menentukan
- * seberapa dekat kameranya: makin pendek, makin besar gambarnya saat TINGGI
- * layar yang jadi batas. Enam puluh empat satuan adalah setinggi titik sentuh
- * terbawah (mulut + radiusnya) — memendekkannya lagi akan membuang titik
- * sentuh ke luar layar. Justru ini yang menyelamatkan soal wajah saat HP
- * dimiringkan: 46 px jadi 64 px.
+ * bukan "kepala digunting", melainkan kamera yang mendekat — badannya terus ke
+ * bawah lalu habis di tepi layar, persis seperti foto close-up.
  */
-export const KID_VIEW: Record<KidView, string> = {
-  badan: '0 0 100 140',
-  wajah: '15 0 70 64',
-};
+export function kidFrame(spots: readonly KidSpot[]): string {
+  if (!spots.every((s) => BODY_PARTS[s.part].face)) return FRAME_BADAN;
+  let x0 = Math.min(...spots.map((s) => s.x - s.r)) - FRAME_PAD;
+  let x1 = Math.max(...spots.map((s) => s.x + s.r)) + FRAME_PAD;
+  let y0 = Math.min(...spots.map((s) => s.y - s.r)) - FRAME_PAD;
+  let y1 = Math.max(...spots.map((s) => s.y + s.r)) + FRAME_PAD;
+  if (x1 - x0 < FRAME_MIN.w) {
+    const cx = (x0 + x1) / 2;
+    x0 = cx - FRAME_MIN.w / 2;
+    x1 = cx + FRAME_MIN.w / 2;
+  }
+  if (y1 - y0 < FRAME_MIN.h) {
+    const cy = (y0 + y1) / 2;
+    y0 = cy - FRAME_MIN.h / 2;
+    y1 = cy + FRAME_MIN.h / 2;
+  }
+  const round = (n: number) => Math.round(n * 10) / 10;
+  return [round(x0), round(y0), round(x1 - x0), round(y1 - y0)].join(' ');
+}
 
-/** Anak yang digambar. Murni gambar — tak tahu-menahu soal soal atau sentuhan. */
+/**
+ * Anak yang digambar. Murni gambar — tak tahu-menahu soal soal atau sentuhan.
+ *
+ * `preserveAspectRatio="none"` aman DI SINI justru karena kotak 100×165
+ * dipilih persis mengikuti rasio berkasnya (624×1030), jadi tak ada yang
+ * gepeng; yang dihindari cuma celah setengah piksel di tepi kalau browser
+ * membulatkan sendiri.
+ */
 function Figure() {
   return (
-    <g>
-      {/* Rambut belakang, sedikit lebih besar dari kepala supaya tepinya
-          terlihat mengelilingi wajah. */}
-      <circle cx="50" cy="31" r="27.5" fill={HAIR} />
-      {/* Telinga digambar SEBELUM kepala: bagian dalamnya tertutup wajah, jadi
-          yang tersisa cuma daun telinganya. */}
-      {/* Digambar MELEBAR KELUAR kepala (tepi kepala di y=37 ada di x=24):
-          percobaan pertama menaruhnya di x=25,5 dan yang tersisa cuma tonjolan
-          setipis garis — telinga yang tak terlihat tak bisa disentuh anak. */}
-      <ellipse cx="23" cy="37" rx="6.8" ry="8.5" fill={SKIN} />
-      <ellipse cx="77" cy="37" rx="6.8" ry="8.5" fill={SKIN} />
-      <ellipse cx="22.6" cy="37" rx="2.8" ry="4" fill={SKIN_DARK} />
-      <ellipse cx="77.4" cy="37" rx="2.8" ry="4" fill={SKIN_DARK} />
-
-      {/* Leher (di belakang badan & kepala) */}
-      <rect x="43" y="54" width="14" height="14" rx="6" fill={SKIN_DARK} />
-
-      {/* Kepala */}
-      <circle cx="50" cy="35" r="26" fill={SKIN} />
-      {/* Poni: setengah lingkaran atas kepala, ditutup lengkung yang lebih
-          rendah di tengah dahi. */}
-      <path d="M24,35 A26,26 0 0 1 76,35 Q67,19 50,18 Q33,19 24,35 Z" fill={HAIR} />
-
-      {/* Mata. SENGAJA TANPA ALIS: poninya turun sampai sekitar y=21 di atas
-          mata, jadi alis apa pun akan tenggelam di dalam rambut — dan wajah
-          kartun anak memang lebih ramah tanpanya. */}
-      <circle cx="38" cy="27.5" r="4.6" fill={INK} />
-      <circle cx="62" cy="27.5" r="4.6" fill={INK} />
-      <circle cx="39.6" cy="25.9" r="1.7" fill="#fff" />
-      <circle cx="63.6" cy="25.9" r="1.7" fill="#fff" />
-      {/* Pipi */}
-      <ellipse cx="28" cy="47" rx="7" ry="4.6" fill={BLUSH} opacity="0.6" />
-      <ellipse cx="72" cy="47" rx="7" ry="4.6" fill={BLUSH} opacity="0.6" />
-      {/* Hidung */}
-      <path
-        d="M46.6,36.4 Q50,41.4 53.4,36.4"
-        stroke={SKIN_DARK}
-        strokeWidth="2.6"
-        strokeLinecap="round"
-        fill="none"
-      />
-      {/* Mulut tersenyum */}
-      <path d="M42,50.6 Q50,59.4 58,50.6 Z" fill="#c2564a" />
-      <path d="M46.4,56.2 Q50,59.2 53.6,56.2 Z" fill={BLUSH} />
-
-      {/* Lengan: kulit dulu, lengan baju menimpanya di bahu. */}
-      <path
-        d="M32,72 L18,94"
-        stroke={SKIN}
-        strokeWidth="9"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <path
-        d="M68,72 L82,94"
-        stroke={SKIN}
-        strokeWidth="9"
-        strokeLinecap="round"
-        fill="none"
-      />
-      {/* Badan / baju */}
-      {/* Kerah bajunya sengaja rendah (y=67 di tengah): dagu ada di y=61, dan
-          baju yang lebih tinggi menelan lehernya — padahal "leher" salah satu
-          bagian yang ditanyakan. */}
-      <path d="M31,72 Q50,67 69,72 L71,100 Q50,104 29,100 Z" fill={SHIRT} />
-      {/* Lengan baju dimulai DI DALAM badan bajunya (x=37, badan baju 31–69):
-          percobaan pertama memulainya di tepi dan hasilnya dua kapsul biru
-          yang tampak melayang lepas dari bajunya. */}
-      <path
-        d="M37,75 L30,85"
-        stroke={SHIRT_DARK}
-        strokeWidth="13"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <path
-        d="M63,75 L70,85"
-        stroke={SHIRT_DARK}
-        strokeWidth="13"
-        strokeLinecap="round"
-        fill="none"
-      />
-      {/* Tangan sengaja lebih gemuk dari lengannya (jari-jari 7,6 lawan tebal
-          lengan 9): kalau sama, ujung lengan cuma jadi garis membulat dan
-          tangannya tak terbaca sebagai tangan. */}
-      <circle cx="16.6" cy="96" r="7.6" fill={SKIN} />
-      <circle cx="83.4" cy="96" r="7.6" fill={SKIN} />
-
-      {/* Celana pendek */}
-      <path d="M31,97 L69,97 L67,111 L54,111 L50,102 L46,111 L33,111 Z" fill={PANTS} />
-      {/* Kaki */}
-      <path
-        d="M40,109 L40,126"
-        stroke={SKIN}
-        strokeWidth="9.5"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <path
-        d="M60,109 L60,126"
-        stroke={SKIN}
-        strokeWidth="9.5"
-        strokeLinecap="round"
-        fill="none"
-      />
-      {/* Sepatu, ujungnya menghadap keluar supaya kedua kaki tidak terlihat
-          melangkah ke arah yang sama. */}
-      <rect x="30" y="124" width="18" height="10" rx="5" fill={SHOE} />
-      <rect x="52" y="124" width="18" height="10" rx="5" fill={SHOE} />
-    </g>
+    <image
+      href={`${import.meta.env.BASE_URL}assets/kid/anak.webp`}
+      x="0"
+      y="0"
+      width={KID_W}
+      height={KID_H}
+      preserveAspectRatio="none"
+    />
   );
 }
 
@@ -285,24 +250,25 @@ function Figure() {
  * jadi keduanya ikut membesar/mengecil bersamaan tanpa hitungan piksel.
  */
 export default function Kid({
-  view = 'badan',
+  frame,
   className,
   children,
 }: {
-  view?: KidView;
+  /** viewBox dari `kidFrame`; bawaannya seluruh badan. */
+  frame?: string;
   className?: string;
   children?: ReactNode;
 }) {
+  const viewBox = frame ?? FRAME_BADAN;
   return (
     <svg
       className={className}
-      viewBox={KID_VIEW[view]}
+      viewBox={viewBox}
       /* Ditandai supaya tes headless bisa memeriksa bingkai yang BENAR-BENAR
-         tampil, bukan yang ditulis config — pola yang sama dengan `data-shape`
-         di Shape.tsx dan `data-clock` di Clock.tsx. */
-      data-kid={view}
-      /* Wajah dijangkarkan ke ATAS, badan ditengahkan — lihat `KID_VIEW`. */
-      preserveAspectRatio={view === 'wajah' ? 'xMidYMin meet' : 'xMidYMid meet'}
+         tampil, bukan yang dihitungnya sendiri — pola yang sama dengan
+         `data-shape` di Shape.tsx dan `data-clock` di Clock.tsx. */
+      data-kid={viewBox}
+      preserveAspectRatio="xMidYMid meet"
       aria-hidden
     >
       <Figure />

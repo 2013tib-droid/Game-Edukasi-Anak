@@ -124,7 +124,10 @@ const config: MixedGameConfig = {
       'l3',
       ask('Kita melihat pakai apa? Sentuh!', 'mata', 'telinga', 'mulut'),
       ask('Kita mendengar pakai apa? Sentuh!', 'telinga', 'mata', 'mulut'),
-      ask('Kita mencium bau pakai apa? Sentuh!', 'hidung', 'mata', 'telinga'),
+      // Pengecohnya mulut, bukan telinga: lingkaran telinga menarik bingkai
+      // melebar ke kedua sisi kepala, dan hidung yang berdempetan dengan
+      // mulut ikut menciut jadi 50 px (lihat aturan bingkai di Kid.tsx).
+      ask('Kita mencium bau pakai apa? Sentuh!', 'hidung', 'mata', 'mulut'),
       ask('Kita berbicara pakai apa? Sentuh!', 'mulut', 'mata', 'telinga'),
       ask('Kita mengecap rasa pakai apa? Sentuh!', 'mulut', 'hidung', 'mata'),
     ),
@@ -178,12 +181,16 @@ const config: MixedGameConfig = {
       ask('Helm melindungi apa? Sentuh!', 'kepala', 'tangan', 'kaki'),
     ),
     // --- 9. Wajah, tiga pengecoh ---
+    // HIDUNG SENGAJA TIDAK IKUT DI SINI. Dengan empat bagian aktif, bingkainya
+    // harus memuat kedua telinga (lebar 61 satuan) — dan pada bingkai selebar
+    // itu hidung, yang cuma berjarak 7,5 satuan dari mulut, tinggal 35 px.
+    // Soal hidung yang halus tetap ada di slot 1 dan 3, di mana bingkainya
+    // boleh mendekat karena telinga tak ikut aktif.
     slot(
       'l9',
-      ask('Lebih sulit! Sentuh matamu!', 'mata', 'hidung', 'mulut', 'telinga'),
-      ask('Lebih sulit! Sentuh hidungmu!', 'hidung', 'mata', 'mulut', 'telinga'),
-      ask('Lebih sulit! Sentuh mulutmu!', 'mulut', 'mata', 'hidung', 'telinga'),
-      ask('Lebih sulit! Sentuh telingamu!', 'telinga', 'mata', 'hidung', 'mulut'),
+      ask('Lebih sulit! Sentuh matamu!', 'mata', 'telinga', 'mulut', 'rambut'),
+      ask('Lebih sulit! Sentuh telingamu!', 'telinga', 'mata', 'mulut', 'rambut'),
+      ask('Lebih sulit! Sentuh mulutmu!', 'mulut', 'mata', 'telinga', 'rambut'),
       ask('Lebih sulit! Sentuh rambutmu!', 'rambut', 'mata', 'mulut', 'telinga'),
     ),
     // --- 10. Badan, tiga pengecoh ---

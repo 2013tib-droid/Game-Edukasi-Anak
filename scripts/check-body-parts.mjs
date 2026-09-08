@@ -70,26 +70,20 @@ const mod = await load(
   files.map((f, i) => `import c${i} from '${spec(f)}';`).join('\n') +
     `\nexport const configs = [${files.map((_, i) => `c${i}`).join(',')}];`,
 );
-const { BODY_PARTS, HIT_MAX, KID_VIEW } = await load(
+const { BODY_PARTS, kidFrame, kidSpots } = await load(
   `export * from '${spec('src/engine/ui/Kid.tsx')}'`,
 );
 
-/** Berapa piksel satu satuan gambar jadi, dengan bingkai `view` di `BOX`. */
-function scaleOf(view) {
-  const [, , w, h] = KID_VIEW[view].split(' ').map(Number);
+/**
+ * Berapa piksel satu satuan gambar jadi, di dalam `BOX`. Bingkainya BUKAN lagi
+ * salah satu dari dua kotak tetap: sejak gambarnya jadi ilustrasi, engine
+ * menghitung kotak terkecil yang memuat semua lingkaran sentuh soal itu, jadi
+ * skalanya beda-beda tiap soal — dan skrip ini memakai fungsi yang sama persis
+ * (`kidFrame`) supaya yang diukur benar-benar yang dilihat anak.
+ */
+function scaleOf(frame) {
+  const [, , w, h] = frame.split(' ').map(Number);
   return Math.min(BOX.w / w, BOX.h / h);
-}
-
-/** Sama persis dengan `hitRadii()` di `src/engine/templates/TapPicture.tsx`. */
-function radii(spots) {
-  return spots.map((a, i) => {
-    let r = BODY_PARTS[a.part].cap ?? HIT_MAX;
-    spots.forEach((b, j) => {
-      if (i === j || a.part === b.part) return;
-      r = Math.min(r, Math.hypot(a.x - b.x, a.y - b.y) / 2);
-    });
-    return r;
-  });
 }
 
 const problems = [];
@@ -120,11 +114,11 @@ for (const config of mod.configs) {
     }
     if (problems.length) continue;
 
-    // Bingkainya dipilih engine, bukan config — lihat `TapPicture.tsx`.
-    const view = parts.every((p) => BODY_PARTS[p].face) ? 'wajah' : 'badan';
-    const spots = parts.flatMap((part) => BODY_PARTS[part].points.map((pt) => ({ part, ...pt })));
-    const px = Math.min(...radii(spots)) * 2 * scaleOf(view);
-    if (px < smallest.px) smallest = { px, where, view };
+    // Titik sentuh & bingkainya dihitung engine, bukan config — lihat Kid.tsx.
+    const spots = kidSpots(parts);
+    const frame = kidFrame(spots);
+    const px = Math.min(...spots.map((s) => s.r)) * 2 * scaleOf(frame);
+    if (px < smallest.px) smallest = { px, where, frame };
     if (px < MIN_TOUCH) {
       problems.push(
         `${where}\n    daerah sentuh terkecil ${px.toFixed(0)} px (min ${MIN_TOUCH}) — ` +
@@ -142,5 +136,5 @@ if (problems.length > 0) {
 
 console.log(
   `${checked} level "sentuh gambar" diperiksa. Daerah sentuh terkecil di HP 320 px: ` +
-    `${smallest.px.toFixed(0)} px (${smallest.view}) — ${smallest.where}`,
+    `${smallest.px.toFixed(0)} px (bingkai ${smallest.frame}) — ${smallest.where}`,
 );
