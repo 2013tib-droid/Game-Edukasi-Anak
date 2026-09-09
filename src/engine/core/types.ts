@@ -193,7 +193,16 @@ export interface DragDropData {
 }
 
 export interface TracingData {
-  /** Single character to trace, e.g. "3" or "A". */
+  /**
+   * Karakter yang ditulis, mis. "3", "A", "a" — boleh lebih dari satu untuk
+   * bilangan dua digit ("14"). Bentuk & urutan goresannya ada di ENGINE
+   * (`src/engine/templates/glyphStrokes.ts`), config cuma menyebut hurufnya —
+   * pola yang sama dengan `RoadKind` di path-trace.
+   *
+   * Tiap karakter WAJIB punya data goresan di situ: sejak template `tracing`
+   * jadi rel yang diikuti jari, karakter tanpa data tidak lagi jatuh ke font
+   * HP — tak ada yang bisa ditelusuri anak. Dijaga `scripts/check-glyphs.mjs`.
+   */
   glyph: string;
 }
 

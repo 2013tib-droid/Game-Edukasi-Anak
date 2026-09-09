@@ -110,7 +110,7 @@ Buat engine sehingga **menambah game baru = menulis file config JSON + aset**, b
 
 1. **Tap-jawab** (pilih jawaban benar dari 2–4 gambar/angka/huruf)
 2. **Drag & drop** (pasangkan, urutkan, kelompokkan)
-3. **Tracing** (menulis huruf/angka dengan jari)
+3. **Tracing** (menulis huruf/angka dengan jari — mengikuti REL per goresan, seperti `path-trace`)
 4. **Memory/mencocokkan kartu**
 5. **Hitung & ketuk** (counting objek)
 6. **Cerita interaktif** (narasi + pilihan)
@@ -156,7 +156,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Perintah: `npm run dev` / `npm run build` / `npm run typecheck`.
 - **Fase 2 (Engine) — SELESAI** (2026-07-21), teruji headless-browser semua template:
   - `GameShell` (`src/engine/core/GameShell.tsx`): intro → level → selesai; feedback positif ("Coba lagi, kamu pasti bisa!"), bintang per level (0 salah = 3⭐), remount template per attempt.
-  - **6 template** di `src/engine/templates/`: TapAnswer, DragDrop (pointer events, bukan HTML5 DnD — HTML5 DnD rusak di mobile), Tracing (canvas + cek coverage glyph), Memory, CountTap (pengecoh + target dilebihkan sesuai Aturan Desain Soal), StoryChoice. Semua lazy-load per chunk.
+  - **6 template** di `src/engine/templates/`: TapAnswer, DragDrop (pointer events, bukan HTML5 DnD — HTML5 DnD rusak di mobile), Tracing (sejak 2026-09-09: rel SVG per goresan; dulu canvas + cek coverage glyph), Memory, CountTap (pengecoh + target dilebihkan sesuai Aturan Desain Soal), StoryChoice. Semua lazy-load per chunk.
   - Audio (`src/engine/audio/sound.ts`): narasi `speechSynthesis` id-ID (nanti otomatis diganti file TTS saat aset tersedia) + SFX WebAudio tanpa aset.
   - Progress bintang: localStorage (`src/engine/core/progress.ts`). **MASIH localStorage sampai sekarang** — Fase 5 tidak mencakup ini, jadi ganti HP = maskot balik ke telur. Rules-nya (`users/{uid}/progress`) sudah siap menerima.
   - Registry game (`src/games/registry.ts`) + route `/game/:gameId` dengan gerbang akses (premium → layar terkunci + ajakan aktivasi).
@@ -424,7 +424,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Chip "Petualangan seru menanti" TIDAK ditambah** untuk kedua jenjang ini: satu pun game-nya belum ada, dan aturan yang dipakai saat SD Kelas 1 & 2 mulai dijual (2026-08-07) adalah memajang dunia yang benar-benar bisa dimainkan. Chip baru menyusul kalau gamenya sudah jadi.
   - Tak ada yang berubah di `src/data/groups.json`, `registry.ts`, maupun `access.ts` — ini murni halaman jualan, belum ada kelompok baru yang bisa dibuka.
 
-- **Tracing: angka 9 tidak lagi diterima sebagai angka 6** (2026-08-07, laporan pemilik lewat tangkapan layar Tulis Angka), teruji headless:
+- **Tracing: angka 9 tidak lagi diterima sebagai angka 6** (2026-08-07, laporan pemilik lewat tangkapan layar Tulis Angka), teruji headless. **TIDAK BERLAKU LAGI sejak 2026-09-09** — `traceScore.ts` beserta seluruh kalibrasi di bawah ini DIHAPUS waktu template `tracing` jadi rel yang diikuti jari; menulis "9" di atas panduan "6" sekarang mustahil, bukan sekadar ditolak. Dibiarkan tertulis karena alasannya masih menjelaskan kenapa jalan itu ditinggalkan (lihat entri terbawah bagian ini):
 
   **Kenapa dulu lolos**
   - Penilaian lama cuma menghitung **luas**: berapa persen area glyph yang tersentuh jari + berapa persen coretan yang keluar glyph. 6 dan 9 itu bentuk yang sama diputar 180°, jadi 9 yang digambar di atas panduan 6 menyapu hampir semua piksel yang sama → lolos. **Persentase total tidak akan pernah bisa membedakan keduanya** — jangan coba memperbaikinya dengan menaikkan ambang persen.
@@ -454,7 +454,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Jalur jari sekarang **diambil ulang tiap 4px** (`pathStep`), jadi penilaian tak lagi bergantung pada seberapa sering HP mengirim event pointer — dulu coretan cepat mendaftarkan sedikit titik dan bisa melompati bagian glyph.
   - `up()` mengabaikan pointer-up yang tak diawali pointer-down di kanvas (dulu `onPointerLeave` mengosongkan titik terakhir meski anak tak sedang menggambar).
 
-- **Panduan angka digambar sendiri sebagai goresan tulisan tangan** (2026-08-07, KEPUTUSAN PEMILIK setelah menulis batang tegak di panduan "1" ditolak), teruji headless 380×800 (kasus pemilik + 9↔6 di game sungguhan, nol error console, tanpa scroll horizontal):
+- **Panduan angka digambar sendiri sebagai goresan tulisan tangan** (2026-08-07, KEPUTUSAN PEMILIK setelah menulis batang tegak di panduan "1" ditolak), teruji headless 380×800. **MASIH BERLAKU** — `glyphStrokes.ts` justru jadi fondasi rel 2026-09-09, dan sejak itu berisi huruf A–Z & a–z juga. Yang TIDAK berlaku lagi cuma angka kalibrasi penilainya (`maxGap` 0,11 / `maxGapFont` 0,05): penilainya sudah tak ada.
 
   **Kenapa panduan font itu salah untuk game menulis**
   - Dulu panduan = TEKS yang digambar pakai font HP. App menyebut `Fredoka` di CSS tapi **tak pernah memuatnya**, jadi tiap HP menggambar bentuk yang berbeda: di iPhone pemilik "1" punya **bendera balok** hampir separuh lebar angkanya, font lain menambahkan tumit serif. Alasan yang sama persis dengan hewan pakai WebP, bukan emoji.
@@ -1026,6 +1026,52 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - `aria-label` kartu **tidak berubah** (sudah berbunyi "… — segera hadir" sejak kartu `soon` dibuat), jadi pitanya `aria-hidden` supaya pembaca layar tidak mengucapkannya dua kali.
   - **NOL kalimat narasi baru & nol render Azure**: pita ini teks layar, tidak pernah diucapkan. `npm run narasi` tidak tersentuh.
   - Terverifikasi juga bahwa perilakunya tak berubah: menyentuh kartu terkunci MAUPUN pitanya tetap di daftar judul, kartu aktif tetap membuka ceritanya.
+
+- **Tulis Angka & Tulis Huruf jadi REL yang diikuti jari — template `tracing` dirombak jadi saudara `path-trace`** (2026-09-09, ide pemilik: *"gimana kalo skema game nya kayak rute kendaraan, jadi angka dan huruf di masing2 game sudah ada polanya. Si anak tinggal ngikutin pola angka dan huruf yg mirip kendaraan. Jadi tidak sering melenceng"*), teruji headless Chromium di build produksi (`vite preview`) pada **320×568, 380×800, 820×1180 & 740×360 (mendatar)**:
+
+  **Apa yang berubah**
+  - Dulu: anak mencoret bebas di atas panduan abu-abu, lalu menekan "✅ Sudah!" dan hasilnya DINILAI. Sekarang: huruf/angkanya digambar sebagai **jalan** (aspal abu-abu + garis putus-putus putih, sama persis dengan Jalan/Rute Kendaraan), **pensil** menunggu di titik mulai, dan anak menyusurinya satu goresan demi satu goresan. Goresan yang sudah selesai tetap di layar sebagai tinta oranye, jadi hurufnya tumbuh di depan matanya.
+  - **Aturannya diwarisi utuh dari `path-trace`**: kemajuan hanya MAJU (lepas jari tidak mengulang), goyang sedikit tidak dihitung salah, dan **keluar jauh** = satu kali salah → hanya GORESAN YANG SEDANG DITULIS yang diulang, goresan yang sudah jadi tidak hilang. Sentuhan harus dimulai di pensilnya.
+  - Gerakannya juga digerakkan **rAF, bukan state React** — pelajaran yang sama dengan PathTrace 2026-07-28. Jangan kembalikan posisi pensil ke `useState`.
+
+  **Kenapa ini menyelesaikan masalahnya, bukan menambalnya**
+  - Keluhan "sering melenceng" itu gejala dari sesuatu yang **tidak bisa dibereskan dengan angka ambang**. Penilai lama (`traceScore.ts`) harus menebak apakah coretan anak itu bentuk yang benar; "9" yang digambar di atas panduan "6" menyapu piksel yang hampir sama, dan tiap pengetatan yang menangkapnya mulai menolak coretan yang BENAR tapi goyang (lihat dua entri 2026-08-07 di atas, sekarang tidak berlaku lagi). Rel **menghapus pertanyaannya**: anak yang mengikuti jalur, secara konstruksi, sudah menulis bentuk yang benar — dengan urutan dan arah yang benar pula.
+  - **`src/engine/templates/traceScore.ts` DIHAPUS** (434 baris + seluruh kalibrasinya: `maxGap`, `maxGapFont`, skeleton Zhang-Suen, distance transform, pemasangan font Fredoka/Roboto untuk mengukur). Tak ada lagi yang memakainya. Batas yang dulu disadari ("8 di atas 3 tetap lolos") ikut lenyap dengan sendirinya.
+  - Bonusnya gratis: **urutan & arah goresan sekarang ikut diajarkan**. Batang dulu baru perutnya (B, D, P), turun dulu baru palangnya (A, E, F, t), lingkaran selalu berlawanan arah jarum jam dari atas (0, O, o) — hal yang dulu sama sekali tak bisa dinilai penilai luas-daerah.
+
+  **Data goresan: 52 huruf BARU (`glyphStrokes.ts`)**
+  - Dulu file itu cuma punya angka 0–9; huruf "jatuh ke font HP". **Jalan mundur itu sudah tidak ada** — glyph tanpa data sekarang berarti layar kosong, tak ada yang bisa ditelusuri. Karena itu A–Z dan a–z digambar semua (`UPPER`, `LOWER`), dan ada penjaga di CI (lihat bawah).
+  - **URUTAN TITIK DI ARRAY SEKARANG MENGIKAT DUA HAL — jangan diacak**: urutan goresan (template menyalakan satu per satu sesuai urutan array) DAN arah menulis (tiap goresan adalah rel dari titik pertama ke titik terakhir).
+  - Helper baru **`bez()`** (kubik Bézier) di samping `poly`/`arc`/`join` — S, s, f, r, t jauh lebih mudah & lebih kecil risikonya ditulis begitu daripada dirangkai dari busur.
+  - **Huruf kecil mempertahankan proporsi aslinya** (garis tiga: atas 0.06 · tengah 0.38 · dasar 0.86 · ekor 1.0). "o" memang lebih pendek dari "b", dan membesarkan tiap huruf sampai memenuhi kotak justru mengajarkan yang sebaliknya. Yang boleh berbeda cuma LEBAR kotaknya: `Glyph.width` (M, W, m, w = 1,28–1,3×).
+  - **Titik di atas i dan j BUKAN goresan** (`Glyph.dots`): titik itu ketukan, bukan jalur, dan rel selebar 20 px itu menyiksa anak empat tahun. Template menggambarnya pucat lalu menyalakannya sendiri begitu semua goresannya selesai.
+  - **Angka 8 dipindahkan mulainya ke ATAS.** Versi dua-elips yang lama mulai di titik SILANG di tengah — tak apa sebagai gambar, salah sebagai rel, karena pensilnya lalu menunggu anak di tengah bentuk. Sekarang: separuh kiri lingkaran atas → keliling lingkaran bawah → separuh kanan lingkaran atas. **Angka 0 & 9** ikut dibalik jadi berlawanan arah jarum jam supaya sama dengan huruf O.
+  - **JEBAKAN LAMA MASIH BERLAKU, malah makin penting: LIHAT hasil gambarnya.** Sudut `arc()` bertambah SEARAH jarum jam (0 = kanan, 90 = bawah), dan salah arah menghasilkan bentuk yang tetap "masuk akal" kalau cuma dibaca kodenya. Cara yang dipakai di sesi ini: bundel `glyphStrokes.ts` dengan esbuild, gambar SEMUA glyph jadi satu lembar SVG bernomor goresan + panah arah + titik hijau di titik mulai, screenshot dengan Chromium, **lihat**. Dua bug hanya ketahuan dari gambar itu: lengan kiri "y" kelewat jauh sehingga tampak menyilang seperti "x", dan bahu "r" mulai terlalu tinggi.
+
+  **Toleransi diukur dalam LEBAR JALAN, bukan piksel tetap**
+  - `ON_TRACK` 0,75× dan `OFF_TRACK` 1,35× lebar jalan. Alasannya: bilangan dua digit (10–20) digambar di kotak yang lebih kecil dengan jalan yang lebih tipis, jadi margin tetap akan longgar di sana dan sempit di sini. Untuk satu karakter angkanya jadi ±9,5 / 17 satuan — persis sepadan dengan `ON_ROAD`/`OFF_ROAD` di PathTrace.
+  - **`road.narrow` (mode sulit ala Rute Kendaraan) SENGAJA belum dipakai di sini.** Tulis Huruf (SD) memakai toleransi yang sama dengan Tulis Angka (TK). Kalau nanti dinilai terlalu mudah untuk anak kelas 1–2, itu satu field baru di `TracingData` + satu kelas CSS, pola yang sudah terbukti di `RoadSpec`.
+
+  **Penjaga permanen: `scripts/check-glyphs.mjs` (ikut CI)**
+  - Memeriksa SEMUA varian kedua game (72 level), bukan yang kebetulan terambil satu sesi: (1) tiap glyph punya data goresan, (2) goresan TERPENDEK di HP TERKECIL yang didukung masih ≥ 64 px, (3) tak ada goresan kosong.
+  - Terpendek sekarang: **palang huruf "f" = 69 px** di HP 320 px. Kalau ada glyph baru yang jatuh di bawah ambang, **perbesar goresannya — jangan turunkan angkanya**; goresan yang lebih pendek dari lebar jari praktis tak bisa disusuri.
+
+  **Yang ikut tersentuh**
+  - CSS: `.trace-canvas` (kanvas gambar bebas) diganti `.trace-stage` / `.trace-svg` / `.trace-track(--now)` / `.trace-dash` / `.trace-ink` / `.trace-measure` / `.trace-dot(--done)` / `.trace-pen`. `.trace-measure` sengaja tak terlihat — ia cuma dipakai `getPointAtLength()`.
+  - `.road-hint` → **`.game-hint`** (dipakai bersama PathTrace sekarang; satu nama untuk satu benda).
+  - **Pensilnya SVG, bukan emoji** — digambar ujung-dulu di titik asal lalu dimiringkan, jadi mata pensilnya persis di atas jalur. Emoji pensil menghadap arah berbeda di tiap HP, alasan yang sama dengan kendaraan & muka jam.
+  - Karena pensilnya ada DI DALAM SVG, posisinya sudah satuan viewBox — tak perlu konversi ke piksel seperti kendaraan di PathTrace.
+  - **Glyph-nya digeser sedikit ke BAWAH dari tengah kanvas** (`handwriting()`), bukan dipusatkan: pensil digambar dari mata pensil ke ATAS, jadi goresan yang mulai di tepi atas (angka "1" mulai di 0,03) membuat badan pensilnya terpotong tepi panggung. Kalau nanti pensilnya diperpanjang, geser lagi — jangan mengecilkan glyph-nya, ambang `check-glyphs.mjs` tinggal 5 px di atas batas.
+
+  **JEBAKAN: HP DIMIRINGKAN — panggung tulis itu PERSEGI**
+  - Ditumpuk seperti layar tegak, sisa tinggi setelah topbar + kalimat + petunjuk cuma **181 px** di layar setinggi 360 px, dan terukur **scroll 239 px** — pensilnya bisa berada di bawah lipatan, dan sesi tesnya sendiri gagal menyelesaikan level. Ini **bukan kemunduran** (kanvas lama juga persegi & `max-width: 420px`), tapi jadi jauh lebih berbahaya begitu anak harus menjangkau seluruh hurufnya dengan jari.
+  - Sekarang `@media (min-aspect-ratio: 4/3)` menaruh kalimat soal di SAMPING panggung (pola yang sama dengan baki Puzzle & kalimat Anggota Tubuh), dan panggungnya dibatasi TINGGI layar: `min(420px, calc(100dvh - 136px))`. Terukur 264 px → **224 px, nol scroll**.
+  - **`game-hint` HARUS tetap di dalam `.game-area`.** Percobaan pertama mengeluarkannya supaya bisa jadi item grid tersendiri — dan di layar TEGAK petunjuknya lalu terlempar ke dasar layar, jauh dari panggung, karena `.game-area` itu `flex: 1`. Angka 136 px di atas sudah menjatah tinggi barisnya.
+  - **NOL config game berubah, NOL id level berubah, NOL kalimat narasi berubah** (`scripts/narration-lines.json` nol perubahan) → **nol render Azure**, dan bintang lama kedua game tetap terpakai.
+
+  **Angka verifikasinya** (semuanya di build produksi `vite preview`, bukan dev server): sesi penuh Tulis Angka & Tulis Huruf dimainkan sampai layar "Selamat!" dengan seret jari CDP sungguhan di **enam kombinasi game × ukuran layar** — tiap level maju, **nol scroll tegak maupun mendatar, nol error console**. Ditambah pemeriksaan perilaku satu per satu: huruf "i" → titiknya menyala begitu batangnya selesai & pensilnya hilang · huruf "E" (4 goresan) → keluar jauh di goresan ke-2 memunculkan overlay "coba lagi", tetap di goresan ke-2, dan goresan pertama TETAP bertinta · bilangan dua digit ("14") muat di HP 320 px · "m"/"H" (3 goresan) maju goresan demi goresan.
+
+  **BELUM diuji di HP asli** — konfirmasi akhir tetap tugas pemilik (sesi Claude tak bisa membuka URL live-nya).
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 

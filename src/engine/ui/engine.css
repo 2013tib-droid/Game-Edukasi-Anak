@@ -940,16 +940,119 @@
   outline: 3px solid #58c65c;
 }
 
-/* Tracing */
-.trace-canvas {
+/* ---------------- Tracing (Tulis Angka / Tulis Huruf) ----------------
+   Huruf & angka digambar sebagai REL yang diikuti jari, satu goresan setiap
+   kali — bentuknya sama persis dengan jalan di `path-trace`, jadi warnanya pun
+   sengaja senada: rel abu-abu bergaris putus-putus putih, bagian yang sudah
+   ditulis jadi oranye. Goresan yang belum giliran ditampilkan pucat supaya
+   anak melihat bentuk hurufnya utuh tanpa bingung harus mulai dari mana. */
+/* Kolom soal + panggung. Di layar tegak ini cuma kolom biasa (kalimat di atas,
+   panggung di bawah) — gunanya baru terlihat saat HP DIMIRINGKAN, lihat
+   @media di bawah. */
+.tr-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* Tanpa ini kolom flex menolak mengecil di bawah tinggi isinya. */
+  min-height: 0;
+}
+
+.trace-stage {
+  position: relative;
   width: 100%;
   max-width: 420px;
   margin: 0 auto;
   border-radius: 24px;
   background: #fff;
   box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.08);
-  touch-action: none;
+  overflow: hidden;
+}
+
+.trace-svg {
   display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+}
+
+.trace-track,
+.trace-dash,
+.trace-ink {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Goresan yang belum gilirannya. */
+.trace-track {
+  stroke: #eae5d9;
+}
+
+/* Goresan yang sedang ditulis. */
+.trace-track--now {
+  stroke: #c3bfcc;
+}
+
+.trace-dash {
+  stroke: #fff;
+  stroke-dasharray: 2.4 3.2;
+}
+
+/* Bagian yang sudah ditulis. Dashoffset-nya digerakkan per frame oleh
+   Tracing (rAF) — jangan tambah transition, nanti malah tersendat. */
+.trace-ink {
+  stroke: #ff8f2c;
+}
+
+/* Dipakai HANYA untuk mengukur panjang goresan (getPointAtLength); tidak
+   pernah terlihat. */
+.trace-measure {
+  fill: none;
+  stroke: none;
+}
+
+/* Titik di atas i dan j: bukan goresan yang ditelusuri, jadi ia menyala
+   sendiri begitu semua goresannya selesai. */
+.trace-dot {
+  fill: #eae5d9;
+  transition: fill 0.25s ease;
+}
+
+.trace-dot--done {
+  fill: #ff8f2c;
+}
+
+/* HP DIMIRINGKAN butuh tata letak sendiri, sama seperti baki Puzzle & kalimat
+   soal Anggota Tubuh. Panggung tulis itu PERSEGI: ditumpuk seperti biasa, sisa
+   tinggi setelah topbar + kalimat + petunjuk cuma 181 px di layar setinggi 360
+   px — terukur scroll 239 px, dan pensilnya bisa berada di bawah lipatan.
+   Kalimat & petunjuknya karena itu pindah ke SAMPING panggung. */
+@media (min-aspect-ratio: 4/3) {
+  .tr-wrap {
+    display: grid;
+    grid-template-columns: 1fr min(46vw, 420px);
+    align-items: center;
+    gap: 18px;
+  }
+
+  .tr-wrap .game-prompt {
+    margin: 0;
+  }
+
+  /* Panggungnya PERSEGI, jadi yang membatasinya di sini tinggi layar, bukan
+     lebar kolomnya: 136px = topbar + padding `.game-screen` + baris petunjuk
+     yang tetap menempel di bawah panggung. */
+  .tr-wrap .trace-stage {
+    max-width: min(420px, calc(100dvh - 136px));
+  }
+}
+
+/* Posisi pensil ditulis Tracing lewat atribut `transform`. Karena pensilnya
+   ada DI DALAM SVG, koordinatnya sudah satuan viewBox — tak perlu dikonversi
+   ke piksel seperti kendaraan di path-trace. */
+.trace-pen {
+  pointer-events: none;
+  filter: drop-shadow(0 1px 1.2px rgba(0, 0, 0, 0.35));
 }
 
 /* Story */
@@ -1513,7 +1616,7 @@
   }
 }
 
-.road-hint {
+.game-hint {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
