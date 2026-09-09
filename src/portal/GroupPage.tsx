@@ -3,7 +3,7 @@ import groupsData from '@/data/groups.json';
 import { gamesForGroup } from '@/games/registry';
 import { getGameStars } from '@/engine/core/progress';
 import type { GroupId } from '@/engine/core/types';
-import { canPlayGame, isFreeGame } from '@/data/access';
+import { canPlayGame } from '@/data/access';
 import { useLockMode, useOwnedGroups } from '@/portal/useAccess';
 import LockToggle from '@/portal/LockToggle';
 import Clock from '@/engine/ui/Clock';
@@ -71,9 +71,7 @@ export default function GroupPage() {
               )}
               <span style={{ fontSize: 20 }}>{game.title}</span>
               <span style={{ fontSize: 16 }} aria-label={`${stars} bintang`}>
-                {/* "GRATIS" hanya untuk game yang memang gratis selamanya —
-                    game yang sudah DIBELI tidak boleh berlabel gratis. */}
-                {stars > 0 ? `⭐ ${stars}` : isFreeGame(game.id) ? 'GRATIS' : ''}
+                {stars > 0 ? `⭐ ${stars}` : ''}
               </span>
             </Link>
           );
