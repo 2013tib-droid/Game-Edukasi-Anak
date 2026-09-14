@@ -1148,8 +1148,10 @@
 }
 
 /* Results screen: the icon parties for as long as the victory tune plays
-   (~2.6 s = 4 × 0.62 s), then settles. */
-.game-center .game-big-emoji--party {
+   (~2.6 s = 4 × 0.62 s), then settles. Art and emoji share the animation —
+   which of the two shows depends only on whether the file loaded. */
+.game-center .game-big-emoji--party,
+.game-center .game-big-pic--party {
   transform-origin: 50% 80%;
   animation: party-pop 0.62s ease-in-out 4;
 }
@@ -1168,7 +1170,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .game-center .game-big-emoji--party {
+  .game-center .game-big-emoji--party,
+  .game-center .game-big-pic--party {
     animation: none;
   }
 }
@@ -1180,6 +1183,18 @@
   height: 132px;
   width: auto;
   filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
+}
+
+/* Results screen icon (`public/assets/ui/selamat.webp`). 128px, not the 132px
+   the intro icon uses: this screen ALREADY overflows a 640px phone (707px of
+   content, measured), so the art must not add a single pixel to the emoji box
+   it replaces — that box measures 129px at font-size 110px. `max-width` +
+   `contain` is the guard for art wider than it is tall; it then renders shorter
+   rather than stretching the layout (same contract as `GameIcon`). */
+.game-center .game-big-pic--party {
+  height: 128px;
+  max-width: 62vw;
+  object-fit: contain;
 }
 
 /* Intro icon drawn as a real clock face (Jam Pintar) — same visual weight as

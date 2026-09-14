@@ -127,6 +127,37 @@ function levelsFromPicks(config: AnyGameConfig, picks: LevelPick[]): ConcreteLev
 }
 
 /**
+ * The results screen's celebration icon, as the owner's art — falling back to
+ * the old 🎉 emoji if `public/assets/ui/selamat.webp` is missing (deploy
+ * setengah jadi, HP offline). Same graceful-degradation contract as
+ * `MascotPic`/`FeedbackPic`/`ErrorBoundary`, so the moment a child finishes a
+ * game is never met with a gap.
+ *
+ * Both branches carry the `--party` class: the icon pops for as long as the
+ * victory tune plays, art or emoji. See docs/prompt-gambar-selamat.md.
+ */
+function PartyPic() {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div className="game-big-emoji game-big-emoji--party" aria-hidden>
+        🎉
+      </div>
+    );
+  }
+  return (
+    <img
+      className="game-big-pic game-big-pic--party"
+      src={`${import.meta.env.BASE_URL}assets/ui/selamat.webp`}
+      alt=""
+      aria-hidden
+      draggable={false}
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
+/**
  * Screens: `intro` (start / resume) or `pick` (choose a level) → `playing` →
  * `done`. A game with `chooseLevel` opens straight on `pick` — its whole point
  * is that the child sees every title from the start.
@@ -473,9 +504,7 @@ export default function GameShell({
     const total = earned.reduce<number>((s, x) => s + x, 0);
     return (
       <div className="game-center">
-        <div className="game-big-emoji game-big-emoji--party" aria-hidden>
-          🎉
-        </div>
+        <PartyPic />
         <h1>Selamat!</h1>
         <StarsRow stars={starsForMistakes(0)} />
         <p style={{ fontSize: 22 }}>
