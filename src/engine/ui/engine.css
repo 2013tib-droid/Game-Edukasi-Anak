@@ -349,6 +349,49 @@
   filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
 }
 
+/* Anggota Tubuh "ada berapa mata?": gambar anak sebagai isyarat soal.
+   Dulu ruang di atas kartu angka dibiarkan KOSONG, dan soal hitung tanpa yang
+   bisa dihitung memang cuma tanya-jawab hafalan — anak TK perlu melihat dulu
+   apa yang dihitungnya. */
+.ta-kid {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+  /* Tanpa ini gambar yang tinggi menolak mengecil di kolom flex dan mendorong
+     kartu jawaban keluar layar (pelajaran yang sama dengan `.tp-wrap`). */
+  min-height: 0;
+}
+
+/* Yang dipatok TINGGInya, lebarnya ikut bingkai — dan itu bukan selera:
+   tinggi adalah sumbu yang bisa membuat layar scroll, dan ketiga bingkainya
+   (wajah 64×58, badan 100×165, tangan 30×33) berbeda bentuk jauh. Kotak
+   berukuran tetap akan menggepengkan salah satunya.
+
+   Karena bentuk elemennya jadi persis sama dengan `viewBox`, viewport SVG-nya
+   pas sebesar bingkai — bagian gambar di luar bingkai tidak ikut terlihat
+   (`viewBox` sendiri tidak memotong apa pun; lihat Kid.tsx). */
+.ta-kid__pic {
+  /* Diukur, bukan ditaksir: 30vh membuat HP 320×568 scroll 18 px — soal
+     hitung ini punya tiga kartu besar di bawahnya, jadi jatah gambarnya lebih
+     sempit daripada isyarat tap-answer yang lain. 24vh menyisakan ±34 px di
+     layar terpendek yang didukung. */
+  height: clamp(120px, 24vh, 240px);
+  width: auto;
+  max-width: 100%;
+  display: block;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
+}
+
+/* Layar MENDATAR (HP dimiringkan): tingginya sedikit dan sudah harus memuat
+   kalimat soal + tiga kartu, jadi gambarnya mengecil lagi — terukur, 24vh
+   masih menyisakan scroll 32 px di 740×360. Batas atasnya tetap 240 px supaya
+   tablet landscape yang layarnya tinggi tidak ikut dikecilkan. */
+@media (min-aspect-ratio: 4/3) {
+  .ta-kid__pic {
+    height: clamp(72px, 22vh, 240px);
+  }
+}
+
 /* Labirin Warna "Pola Ajaib": the repeating shape sequence above the choices. */
 .ta-sequence {
   display: flex;

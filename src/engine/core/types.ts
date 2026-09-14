@@ -155,6 +155,18 @@ export interface TapAnswerData {
    * ini?"). Drawn with numerals by `Clock.tsx` — see `ClockSpec`.
    */
   clock?: ClockSpec;
+  /**
+   * Isyarat gambar anak di atas kartu jawaban (Anggota Tubuh, "ada berapa
+   * mata?"). Nilainya cuma menyebut BINGKAINYA — wajah, seluruh badan, atau
+   * satu tangan — dan geometrinya urusan engine (`KID_CUE_FRAMES` di
+   * `src/engine/ui/Kid.tsx`), pola yang sama dengan `RoadKind` di path-trace
+   * dan `SceneId` di cerita.
+   *
+   * Ini murni gambar: tak ada satu pun titik yang bisa disentuh, anak tetap
+   * menjawab lewat kartu. Untuk soal yang jawabannya MENYENTUH tubuh, pakai
+   * template `tap-picture`, bukan ini.
+   */
+  kid?: KidView;
   choices: TapChoice[]; // 2–4, exactly one with correct: true
 }
 
@@ -423,6 +435,22 @@ export type BodyPartId =
   | 'perut'
   | 'lutut'
   | 'kaki';
+
+/**
+ * "Kamera" untuk gambar anak yang sama (`src/engine/ui/Kid.tsx`) saat ia
+ * dipakai sebagai ISYARAT SOAL — bukan sebagai papan sentuh.
+ *
+ * Bingkai template `tap-picture` dihitung engine dari bagian yang aktif
+ * (`kidFrame`), karena di sana yang harus muat adalah lingkaran sentuhnya. Di
+ * kartu jawaban tak ada lingkaran sentuh sama sekali, jadi bingkainya dipilih
+ * config: soal "ada berapa mata?" butuh wajah yang besar, "ada berapa kaki?"
+ * butuh seluruh badan, dan "ada berapa jari?" butuh satu tangan saja — di
+ * seluruh badan jarinya cuma beberapa piksel dan tak mungkin dihitung.
+ *
+ * Kotak tiap bingkai ada di `KID_CUE_FRAMES` (Kid.tsx), satu tempat bersama
+ * koordinat tubuhnya, supaya ikut dibetulkan kalau gambarnya diganti lagi.
+ */
+export type KidView = 'wajah' | 'badan' | 'tangan';
 
 /**
  * Sentuh bagian yang benar pada SATU gambar utuh.
