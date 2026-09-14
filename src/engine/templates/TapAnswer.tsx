@@ -6,6 +6,7 @@ import { sfx } from '@/engine/audio/sound';
 import Shape from '@/engine/ui/Shape';
 import Clock from '@/engine/ui/Clock';
 import ItemPic from '@/engine/ui/ItemPic';
+import Kid, { KID_CUE_FRAMES } from '@/engine/ui/Kid';
 
 /** Human-readable operator glyphs for equation picture boards. */
 const OP_GLYPH: Record<BoardOp, string> = {
@@ -167,6 +168,15 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
         {level.data.clock && (
           <div className="ta-clock" aria-hidden>
             <Clock time={level.data.clock} className="ta-clock__face" />
+          </div>
+        )}
+        {/* Anggota Tubuh "ada berapa mata?": gambar anak yang sama dengan
+            template `tap-picture`, tapi murni sebagai isyarat — tak ada titik
+            yang bisa disentuh, anak tetap menjawab lewat kartu angka.
+            Bingkainya dipilih config (`kid`), geometrinya milik Kid.tsx. */}
+        {level.data.kid && (
+          <div className="ta-kid">
+            <Kid frame={KID_CUE_FRAMES[level.data.kid]} className="ta-kid__pic" />
           </div>
         )}
         {level.data.sequence && (

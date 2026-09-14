@@ -1,4 +1,4 @@
-import type { BodyPartId, MixedGameConfig, MixedLevel } from '@/engine/core/types';
+import type { BodyPartId, KidView, MixedGameConfig, MixedLevel } from '@/engine/core/types';
 
 /**
  * "Anggota Tubuh" (TK) — mengenal bagian tubuh sendiri.
@@ -64,13 +64,28 @@ function withItem(
  * lambang bilangan, dan anak menghitungnya pada tubuhnya sendiri. Angkanya
  * tetap di kartu, tidak pernah di narasi (aturan lama: mesin suara membaca
  * digit dalam bahasanya sendiri).
+ *
+ * `view` MEMILIH BINGKAI GAMBAR ANAK di atas kartunya — gambar yang sama
+ * dengan slot sentuh, tapi tanpa satu pun titik yang bisa disentuh. Tanpa itu
+ * tengah layar kosong melompong (keluhan pemilik 2026-09-14), dan soal hitung
+ * tanpa yang bisa dihitung cuma jadi tanya-jawab hafalan.
+ *
+ * Pilih bingkai yang MEMPERLIHATKAN yang dihitung: bagian wajah → `wajah`,
+ * kaki/tangan/lutut → `badan`, jari → `tangan` (di seluruh badan jarinya cuma
+ * beberapa piksel).
  */
-function count(narration: string, answer: number, ...options: number[]): MixedLevel {
+function count(
+  narration: string,
+  view: KidView,
+  answer: number,
+  ...options: number[]
+): MixedLevel {
   return {
     id: '',
     narration,
     template: 'tap-answer',
     data: {
+      kid: view,
       choices: options.map((n) => ({
         id: `n${n}`,
         text: String(n),
@@ -151,15 +166,15 @@ const config: MixedGameConfig = {
       withItem('Susu diminum lewat mana? Sentuh!', 'milk', 'mulut', 'tangan', 'perut'),
       withItem('Bunga dicium pakai apa? Sentuh!', 'flower', 'hidung', 'tangan', 'kaki'),
     ),
-    // --- 6. Ada berapa? (kartu angka) ---
+    // --- 6. Ada berapa? (gambar anak + kartu angka) ---
     slot(
       'l6',
-      count('Lihat tubuhmu. Ada berapa mata?', 2, 1, 2, 3),
-      count('Lihat tubuhmu. Ada berapa telinga?', 2, 1, 2, 3),
-      count('Lihat tubuhmu. Ada berapa hidung?', 1, 1, 2, 3),
-      count('Lihat tubuhmu. Ada berapa mulut?', 1, 1, 2, 3),
-      count('Lihat tubuhmu. Ada berapa kaki?', 2, 1, 2, 3),
-      count('Ada berapa jari di satu tanganmu?', 5, 4, 5, 6),
+      count('Lihat tubuhmu. Ada berapa mata?', 'wajah', 2, 1, 2, 3),
+      count('Lihat tubuhmu. Ada berapa telinga?', 'wajah', 2, 1, 2, 3),
+      count('Lihat tubuhmu. Ada berapa hidung?', 'wajah', 1, 1, 2, 3),
+      count('Lihat tubuhmu. Ada berapa mulut?', 'wajah', 1, 1, 2, 3),
+      count('Lihat tubuhmu. Ada berapa kaki?', 'badan', 2, 1, 2, 3),
+      count('Ada berapa jari di satu tanganmu?', 'tangan', 5, 4, 5, 6),
     ),
     // --- 7. Lagu "Kepala pundak lutut kaki" ---
     // Lutut & kaki sengaja tidak pernah aktif bersama: di gambar keduanya cuma
