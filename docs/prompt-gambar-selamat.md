@@ -2,18 +2,19 @@
 
 Sasaran: **`public/assets/ui/selamat.webp`** — satu gambar saja.
 
-## Status (2026-09-14) — MENUNGGU GAMBAR
+## Status (2026-09-14) — SELESAI
 
-**Gambar penggantinya belum pernah ada di mana pun.** Sudah dicek: tidak di `main`, dan
-tidak di branch Pages (`app/assets/ui/` cuma berisi `tersendat.webp`), juga tak ada di
-riwayat commit. Jadi kalau dulu sempat dibuat, hasilnya memang belum pernah ter-push — dan
-kali ini tak ada berkas yang bisa dipulihkan seperti ikon Puzzle Gambar & Anggota Tubuh
-(2026-09-08), yang waktu itu ternyata nyangkut di branch Pages.
+Gambarnya **sudah terpasang**: terompet pesta Pilihan 1, dari percobaan pertama, langsung
+diterima. `public/assets/ui/selamat.webp`, 289×320, 27 kB (rasio 0,90 — aman, tidak kena
+pengaman `max-width`).
 
-**Kodenya SUDAH SIAP** (dipasang di sesi yang sama dengan dokumen ini): begitu filenya ada
-di `public/assets/ui/selamat.webp`, layar hasil langsung memakainya. Kalau filenya belum
-ada / gagal dimuat / HP-nya sedang offline, layarnya otomatis kembali ke emoji 🎉. Jadi
-**tidak ada tahap "pasang kode" lagi** dan tidak ada risiko layar kosong.
+Sebelum itu sudah dicek: gambar penggantinya **belum pernah ada di mana pun** — tidak di
+`main`, tidak di riwayat commit, dan tidak di branch Pages (`app/assets/ui/` cuma berisi
+`tersendat.webp`). Beda dari ikon Puzzle Gambar & Anggota Tubuh (2026-09-08) yang ternyata
+nyangkut di branch Pages; kali ini memang tak ada berkas yang bisa dipulihkan.
+
+Dokumen ini disimpan untuk kalau nanti gambarnya diganti lagi — dan karena tahap POTONG-nya
+memunculkan satu lubang yang harus ditembus manual (lihat "Setelah gambarnya jadi").
 
 Ini layar hasil `GameShell` (`screen === 'done'`) — layar yang paling sering dilihat anak,
 muncul tiap kali satu game tamat, bersamaan dengan lagu kemenangan ±2,7 detik.
@@ -141,30 +142,105 @@ Balas di chat yang sama dengan menyebut kesalahannya saja, jangan mengulang selu
 
    | Bahan yang datang | Skrip |
    |---|---|
-   | Latar **putih polos**, stiker beroutline (yang diminta prompt di atas) | `python scripts/cut-item.py <art> public/assets/ui/selamat.webp 320` |
-   | Latar **kotak-kotak palsu** (khas Gemini, seolah transparan) | `python scripts/cut-checkerboard.py <art> public/assets/ui/selamat.webp 320` |
-   | Latarnya **sudah transparan** sungguhan | `python scripts/trim-alpha.py <art> public/assets/ui/selamat.webp 320` |
-   | Render 3D lembut **tanpa outline** (kalau gaya maskot dipilih) | `python scripts/cut-soft.py <art> public/assets/ui/selamat.webp 320` |
+   | Latar **putih polos**, stiker beroutline (yang diminta prompt di atas) | `python3 scripts/cut-item.py <art> public/assets/ui/selamat.webp 320` |
+   | Latar **kotak-kotak palsu** (khas Gemini, seolah transparan) | `python3 scripts/cut-checkerboard.py <art> public/assets/ui/selamat.webp 320` |
+   | Latarnya **sudah transparan** sungguhan | `python3 scripts/trim-alpha.py <art> public/assets/ui/selamat.webp 320` |
+   | Render 3D lembut **tanpa outline** (kalau gaya maskot dipilih) | `python3 scripts/cut-soft.py <art> public/assets/ui/selamat.webp 320` |
 
    320px cukup: gambarnya tampil 128px, jadi masih ±2,5× untuk layar HP ber-DPR tinggi.
    `cut-item.py` pada berkas yang latarnya sudah transparan **berbahaya** — ia mencari latar
    PUTIH, dan bagian putih di gambar seperti itu justru milik gambarnya.
-3. **Tempel hasilnya di atas latar BERWARNA dan lihat**, jangan percaya angka "latar
-   terbuang" yang dicetak skripnya. Yang paling rawan di gambar ini: **confetti yang
-   terang/putih** dan **kilau putih di badan terompet** — keduanya bisa ikut terbuang
-   flood-fill. Kalau ada confetti yang hilang, minta ulang gambarnya dengan confetti pastel
-   yang lebih pekat; jangan ditambal dengan mengubah toleransi skripnya.
-4. **Tidak ada kode yang perlu diubah.** `GameShell` (komponen `PartyPic`) sudah menunjuk
+3. **LUBANG DI DALAM GANTUNGAN TALI harus ditembus manual** (kena di gambar 2026-09-14).
+   Tali kecil di ujung bawah kerucut membentuk lingkaran tertutup, jadi latar di dalamnya
+   **terkurung** dan tak terjangkau flood-fill: ia tetap **putih opak** (terukur 720 px di
+   berkas 1024 px) dan di atas latar krem-merah muda layar hasil terbaca seperti tetesan
+   pejal, bukan lubang. Pola yang sama dengan lubang ring kunci pas (Batch 7) dan daftar
+   `HOLES` di `cut-item-sheet.py` — **sengaja per gambar, jangan diotomatiskan.**
+
+   Yang ditembus **hanya komponen terang terkurung PALING BESAR**. Bercak terang lainnya
+   (132 px & 67 px di daerah wajah) adalah **kilau di mata dan sorot putih di badan
+   kerucut** — itu milik gambarnya dan harus selamat:
+
+   ```bash
+   python3 - <<'EOF'
+   import numpy as np
+   from PIL import Image
+   from collections import deque
+
+   SRC = '<art.png>'          # gambar asli kiriman pemilik
+   DST = 'public/assets/ui/selamat.webp'
+   a = np.asarray(Image.open(SRC).convert('RGB')).astype(np.int16)
+   H, W, _ = a.shape
+   lum, sat = a.max(axis=2), a.max(axis=2) - a.min(axis=2)
+   light = (lum >= 196) & (sat <= 30)
+
+   # Flood fill dari tepi — sama persis dengan cut-item.py.
+   bg = np.zeros((H, W), bool); q = deque()
+   for x in range(W):
+       for y in (0, H - 1):
+           if light[y, x] and not bg[y, x]: bg[y, x] = True; q.append((y, x))
+   for y in range(H):
+       for x in (0, W - 1):
+           if light[y, x] and not bg[y, x]: bg[y, x] = True; q.append((y, x))
+   while q:
+       y, x = q.popleft(); base = a[y, x]
+       for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+           ny, nx = y + dy, x + dx
+           if 0 <= ny < H and 0 <= nx < W and not bg[ny, nx] and light[ny, nx] \
+                   and int(np.abs(a[ny, nx] - base).max()) <= 8:
+               bg[ny, nx] = True; q.append((ny, nx))
+
+   # Tembus SATU lubang: komponen terang terkurung terbesar (lubang talinya).
+   trapped = (~bg) & (lum >= 235) & (sat <= 18)
+   seen = np.zeros((H, W), bool); best = (0, None)
+   for y0 in range(H):
+       for x0 in range(W):
+           if trapped[y0, x0] and not seen[y0, x0]:
+               dq = deque([(y0, x0)]); seen[y0, x0] = True; pts = []
+               while dq:
+                   y, x = dq.popleft(); pts.append((y, x))
+                   for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                       ny, nx = y + dy, x + dx
+                       if 0 <= ny < H and 0 <= nx < W and trapped[ny, nx] and not seen[ny, nx]:
+                           seen[ny, nx] = True; dq.append((ny, nx))
+               if len(pts) > best[0]: best = (len(pts), pts)
+   for y, x in best[1]: bg[y, x] = True
+   print('lubang ditembus:', best[0], 'px')
+
+   ys, xs = np.where(~bg)
+   y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+   rgba = np.dstack([a[y0:y1, x0:x1].astype(np.uint8),
+                     (~bg[y0:y1, x0:x1]).astype(np.uint8) * 255])
+   img = Image.fromarray(rgba, 'RGBA')
+   s = min(1.0, 320 / max(img.size))
+   if s < 1.0:
+       img = img.resize((round(img.width * s), round(img.height * s)), Image.LANCZOS)
+   img.save(DST, 'WEBP', quality=92, method=6)
+   print(DST, img.size)
+   EOF
+   ```
+4. **Tempel hasilnya di atas latar BERWARNA dan lihat**, jangan percaya angka "latar
+   terbuang" yang dicetak skripnya. Dua hal yang sudah diperiksa di gambar 2026-09-14:
+   - **Nol potongan confetti hilang.** Yang ikut terbuang cuma halo tipis di tepi (1.072
+     serpih, terbesar 74 px, warnanya ±(235,255,255)) — itu pinggiran JPEG, bukan
+     confetti. Kalau nanti ada gumpalan terbuang ≥ 100 px, ITU baru confetti yang hilang:
+     minta ulang gambarnya dengan pastel yang lebih pekat, **jangan** menaikkan toleransi
+     skripnya (itu akan melahap sorot putih di badan kerucut).
+   - **Halo pucat di sekeliling confetti & pita memang masih ada**, tapi cuma terlihat di
+     atas warna gelap. Layar hasil selalu pastel (`#ffe9a8` → `#ffd1dc`), jadi di app tak
+     kelihatan. Jangan "dibersihkan".
+5. **Tidak ada kode yang perlu diubah.** `GameShell` (komponen `PartyPic`) sudah menunjuk
    file itu, dengan emoji 🎉 sebagai cadangan otomatis, dan animasi "berpesta"-nya sudah
    berlaku untuk gambar maupun emoji.
-5. Deploy seperti biasa; pastikan `dist/assets/ui/` ikut tersalin ke folder `app/` di branch
+6. Deploy seperti biasa; pastikan `dist/assets/ui/` ikut tersalin ke folder `app/` di branch
    Pages. **Jangan menaruh asetnya langsung di branch Pages** — itu yang membuat dua ikon
    kartu game nyaris hilang (2026-09-08). Aset masuk ke `public/assets/**` di `main` dulu.
 
 ## Ukuran yang sudah terverifikasi (jangan diubah tanpa mengukur ulang)
 
 Diukur headless di build produksi (`vite preview`), layar hasil Hutan Hewan dimainkan sampai
-"Selamat!":
+"Selamat!" — angka "sesudah" di bawah diverifikasi ulang dengan gambar yang sungguhan
+terpasang (`naturalWidth` 289, benar-benar termuat, bukan sekadar ada `<img>`):
 
 | Layar | Emoji 🎉 (sebelum) | Gambar 128px (sesudah) |
 |---|---|---|
