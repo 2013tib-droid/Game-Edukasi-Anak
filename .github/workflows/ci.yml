@@ -56,6 +56,12 @@ jobs:
       - name: Periksa soal sentuh gambar
         run: node scripts/check-body-parts.mjs
 
+      # Level "tulis" (Tulis Angka, Tulis Huruf): huruf tanpa data goresan
+      # membuat layarnya kosong — sejak template ini jadi rel, tak ada lagi
+      # jalan mundur ke font HP. Skrip ini juga mengukur goresan terpendek.
+      - name: Periksa soal tulis
+        run: node scripts/check-glyphs.mjs
+
       # Narasi tidak boleh memuat digit — mesin suara membacanya dalam bahasa
       # sendiri ("6 singa" jadi "six singa"). Skrip ini keluar dengan kode 1
       # kalau ada yang lolos. Lihat CLAUDE.md bagian "ANGKA DI NARASI".

@@ -355,7 +355,7 @@ export default function PathTrace({ level, onCorrect, onWrong }: TemplateProps<'
             )}
           </div>
         </div>
-        <p className="road-hint">Geser dengan jarimu, jangan keluar jalan!</p>
+        <p className="game-hint">Geser dengan jarimu, jangan keluar jalan!</p>
       </div>
     </>
   );

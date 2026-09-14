@@ -56,6 +56,16 @@ export function announcementsFor(isBuyer: boolean): Announcement[] {
  */
 export const announcements: Announcement[] = [
   {
+    id: 'a-2026-09-09-tulis-ikuti-garis',
+    date: '2026-09-09',
+    tag: 'update',
+    title: 'Tulis Angka & Tulis Huruf sekarang ikut garis',
+    body:
+      'Menulis huruf dan angka jadi seperti Jalan Kendaraan: hurufnya punya jalur ' +
+      'sendiri, anak tinggal menyusurinya dengan jari satu goresan demi satu goresan. ' +
+      'Jadi jarinya tidak lagi melenceng, dan urutan menulisnya ikut benar sejak awal.',
+  },
+  {
     id: 'a-2026-09-08-anggota-tubuh-tebak-tebakan',
     date: '2026-09-08',
     tag: 'update',
