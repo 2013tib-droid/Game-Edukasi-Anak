@@ -252,3 +252,88 @@ terpasang (`naturalWidth` 289, benar-benar termuat, bukan sekadar ada `<img>`):
 Luber di HP kecil itu **bug lama** layar hasil (sudah tercatat sejak 2026-08-08, isinya 707px
 untuk layar 640px) — bukan akibat gambar ini; gambarnya justru 1px lebih pendek. Kalau suatu
 saat layar itu dirapikan, yang perlu dikecilkan ikon/kartu maskotnya, bukan gambar ini.
+
+---
+
+## Riwayat: percobaan 2026-09-04 yang DITOLAK (dan kenapa yang ini lolos)
+
+Pekerjaan ini pernah dikerjakan sekali, di branch **`claude/game-end-trumpet-prompt-q1w7gz`**
+(3 commit, dokumennya `docs/prompt-gambar-selesai.md`, 254 baris) — dan **tak pernah
+ter-merge ke `main`**. Branch itu **DIGANTIKAN oleh dokumen ini**; jangan di-merge, karena
+kodenya menunjuk nama berkas lain (`assets/ui/selesai.webp`) dengan tinggi 132px, jadi kalau
+dua-duanya masuk `main` ada dua jalur kode dan yang lama menunjuk berkas yang tidak ada.
+(Angka 132px-nya juga keliru menurut ukuran: kotak emoji 129px, dan 132px membuat layar
+360×640 jadi 710px alih-alih 707px.)
+
+**Yang penting dari branch itu: terompet pesta waktu itu DITOLAK pemilik — "gambarnya
+jelek".** Alasan yang ditulis di sana: corong + ledakan berserakan itu subjek yang sulit
+untuk model gambar (corongnya jadi logam berkilau berantakan, confettinya taburan acak,
+dan wajahnya tak punya bidang datar untuk duduk).
+
+**Kenapa percobaan 2026-09-14 justru diterima** — tiga hal yang berbeda, pakai ini kalau
+nanti minta ulang:
+
+- **Confettinya merapat di mulut kerucut**, tidak menyebar ke seluruh bingkai (itu memang
+  yang diminta baris promptnya, dan itulah bedanya).
+- **Kerucutnya digambar sebagai kertas pastel bergaris, bukan logam berkilau** — jadi
+  badannya punya bidang datar lebar, dan wajahnya duduk di situ dengan enak.
+- Rasionya jadi **0,90** (mendekati persegi), jadi tak kena pengaman `max-width`.
+
+**Aturan pemilihan subjek dari branch itu tetap berlaku** kalau gambar ini suatu saat
+diganti: pilih objek yang **BULAT/GEMUK, SATU BADAN, dan punya bidang datar besar untuk
+wajah** — itu yang selalu berhasil di gaya stiker app ini (lihat ikon kartu game: ulat,
+balon ucapan, papan target, jam). Hiasan maksimal beberapa butir yang MENEMPEL di badan
+objeknya, bukan taburan sepenuh gambar.
+
+## Cadangan kalau gambar ini diganti (dipindahkan dari branch lama)
+
+Gaya & **EKOR PROMPT sama persis** dengan Pilihan 1 di atas — tempel juga di tiap pesan.
+
+**Kotak kado meletus** — kalau terompetnya terasa kurang meriah:
+
+> Buatkan: satu kotak kado besar warna hijau mint dengan pita merah muda, tutupnya
+> terlempar terbuka ke atas dan dari dalamnya menyembur confetti kecil-kecil warna pastel
+> serta pita-pita melengkung. Kotaknya berwajah imut: mata besar berkilau, pipi merona,
+> senyum lebar gembira. Semburannya berkumpul rapat di atas kotak, tidak melayang jauh ke
+> tepi gambar. Tinggi dan lebar gambarnya kira-kira sama.
+
+**Balon udara** — paling nyambung dengan nama app ("Petualangan Pintar") dan bentuknya
+paling aman digambar model:
+
+> Buatkan: satu balon udara panas yang imut dan gemuk, badan balonnya bergaris-garis lebar
+> warna pastel — krem, merah muda, hijau mint, dan biru muda — dengan keranjang rotan kecil
+> warna coklat muda menggantung di bawahnya. Wajah imutnya digambar besar di bagian tengah
+> bawah badan balon: mata besar berkilau, pipi merona, senyum lebar gembira. Tambahkan
+> empat confetti pastel kecil yang menempel dekat keranjangnya. Balon udaranya satu-satunya
+> objek, digambar besar memenuhi gambar. Tanpa langit, tanpa awan, tanpa bintang kuning.
+
+**Peti harta karun terbuka** — bahasa "hadiah setelah berusaha", siluet kotak gemuk:
+
+> Buatkan: satu peti harta karun kayu kecil yang imut dan gemuk, warna coklat muda dengan
+> ban logam krem, tutupnya terbuka lebar ke belakang. Dari dalam peti keluar cahaya lembut
+> kuning krem dan beberapa confetti pastel kecil yang menempel di dekat mulut peti. Wajah
+> imutnya digambar besar di badan depan peti: mata besar berkilau, pipi merona, senyum
+> lebar gembira. Isinya hanya cahaya dan confetti — tanpa koin, tanpa uang, tanpa
+> perhiasan, tanpa mahkota.
+
+**Roket meluncur** — paling "meledak-ledak" tanpa jadi berantakan:
+
+> Buatkan: satu roket mainan gemuk yang imut sedang meluncur ke atas, badannya warna krem
+> dengan ujung kerucut merah muda dan tiga sirip biru muda. Di bawahnya ada satu gumpalan
+> asap pastel membulat yang padat dan menempel ke ekor roket. Wajah imutnya digambar besar
+> di badan roket: mata besar berkilau, pipi merona, senyum lebar gembira. Roketnya tegak
+> lurus menghadap ke atas dan jadi satu-satunya objek. Tanpa bintang, tanpa planet, tanpa
+> luar angkasa, tanpa api menyembur panjang.
+
+**KEMBANG API SENGAJA TIDAK DIREKOMENDASIKAN** (pernah ditanyakan pemilik 2026-09-04).
+Empat sebabnya, semuanya masih berlaku: ia butuh **langit gelap** untuk terbaca sementara
+gambar ini ditempel di gradien pastel TERANG · percikan tipis **hilang di 128px**, dan
+sesudah dipotong justru percikan terluar yang menentukan batas gambar sehingga inti
+ledakannya dirender makin kecil · bentuk **bintang memancar bentrok dengan baris ⭐⭐⭐**
+tepat di bawahnya · ledakan tak punya badan untuk wajah imut. Jalan tengahnya: minta
+terompet/kotak kado tapi semburannya diganti percikan kembang api kecil **berwarna pekat**
+(merah muda tua, ungu, biru, mint — jangan kuning atau putih), tetap rapat di badan objeknya.
+
+**Cara memilih:** minta beberapa di chat yang sama (satu gambar per pesan), lalu bandingkan
+bertiga pada ukuran **±128px** — sekitar setinggi ibu jari di layar HP. Yang masih terbaca
+di ukuran itu yang menang; jangan menilai dari tampilan besarnya di laptop.
