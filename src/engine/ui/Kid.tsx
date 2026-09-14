@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { BodyPartId } from '@/engine/core/types';
+import type { BodyPartId, KidView } from '@/engine/core/types';
 
 /**
  * Gambar seorang anak untuk template `tap-picture` (game "Anggota Tubuh").
@@ -221,6 +221,42 @@ export function kidFrame(spots: readonly KidSpot[]): string {
   const round = (n: number) => Math.round(n * 10) / 10;
   return [round(x0), round(y0), round(x1 - x0), round(y1 - y0)].join(' ');
 }
+
+/**
+ * Bingkai untuk gambar anak yang dipakai sebagai ISYARAT SOAL di kartu
+ * jawaban (`TapAnswerData.kid`), bukan sebagai papan sentuh.
+ *
+ * Di sini bingkainya TIDAK bisa dihitung seperti `kidFrame`: tak ada lingkaran
+ * sentuh yang harus dimuat, jadi yang menentukan cuma "apa yang harus terlihat
+ * anak". Ketiganya DIUKUR dari `public/assets/kid/anak.webp` yang sama, jadi
+ * kalau gambarnya diganti, tabel ini diukur ulang bersama `BODY_PARTS`.
+ *
+ * `wajah` sengaja berhenti di kerah baju, bukan di dagu: kepala yang dipotong
+ * pas di dagu terbaca seperti kepala lepas. `tangan` ikut membawa lengan
+ * bawahnya dengan alasan yang sama — aturan lama "jangan pernah memajang
+ * potongan tubuh yang melayang".
+ *
+ * Kotaknya dipakai apa adanya sebagai `viewBox`, dan CSS memberi elemennya
+ * bentuk yang SAMA (tinggi dipatok, lebar ikut), jadi viewport-nya persis
+ * sebesar kotak ini — tak ada bagian gambar di luar bingkai yang bocor
+ * terlihat (`viewBox` sendiri tidak pernah memotong apa pun).
+ */
+export const KID_CUE_FRAMES: Record<KidView, string> = {
+  /** Seluruh kepala: rambut, kedua telinga, wajah, sampai kerah baju. */
+  wajah: '18 0 64 58',
+  /** Seluruh badan — untuk yang dihitung di luar wajah (kaki, tangan, lutut). */
+  badan: FRAME_BADAN,
+  /**
+   * Satu telapak tangan, cukup besar untuk menghitung jarinya.
+   *
+   * Bingkainya sengaja naik sampai UJUNG LENGAN BAJU: tanpa itu yang tampil
+   * cuma lengan terpotong yang melayang — persis yang dilarang aturan "jangan
+   * pernah memajang potongan tubuh yang melayang", dan sudah kelihatan begitu
+   * di percobaan pertama. Dengan lengan bajunya ikut terlihat, gambarnya
+   * terbaca sebagai tangan MILIK anak yang sama, cuma didekatkan.
+   */
+  tangan: '72 68 32 36',
+};
 
 /**
  * Anak yang digambar. Murni gambar — tak tahu-menahu soal soal atau sentuhan.
