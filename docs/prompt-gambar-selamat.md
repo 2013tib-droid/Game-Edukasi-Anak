@@ -2,24 +2,21 @@
 
 Sasaran: **`public/assets/ui/selamat.webp`** — satu gambar saja.
 
-## Status (2026-09-15) — MENUNGGU GAMBAR PIALA
+## Status (2026-09-15) — SELESAI, PIALA TERPASANG ✅
 
 **Keputusan pemilik 2026-09-15: ikonnya jadi PIALA**, menggantikan terompet pesta yang
 terpasang sejak 2026-09-14 (pemilik mengirim mockup layar hasil bertrofi lalu: *"Jadi gini
-aja, bikin prompt pialanya"*). Promptnya: **PILIHAN 3** di bawah — itu yang dipakai sekarang,
+aja, bikin prompt pialanya"*). Promptnya: **PILIHAN 3** di bawah — itu yang dipakai,
 Pilihan 1 & 2 turun jadi catatan.
 
-Yang terpasang HARI INI masih terompet pesta (`public/assets/ui/selamat.webp`, 289×320,
-27 kB, rasio 0,90). Begitu gambar pialanya jadi, **timpa berkas yang sama** — tak ada kode
-yang perlu diubah, tak ada nama berkas yang berganti.
+Gambar pialanya sudah datang di sesi yang sama dan **sudah terpasang**:
+`public/assets/ui/selamat.webp`, **320×275, 34 kB, rasio 1,16** (menimpa terompet pesta
+289×320 tanpa satu baris kode pun berubah). Ia mengikuti prompt pada dua hal yang sengaja
+digeser dari mockup pemilik: percik kilaunya **empat sudut** (bukan bintang bersudut lima)
+dan plakat di alasnya **polos**.
 
-Sebelum itu sudah dicek: gambar penggantinya **belum pernah ada di mana pun** — tidak di
-`main`, tidak di riwayat commit, dan tidak di branch Pages (`app/assets/ui/` cuma berisi
-`tersendat.webp`). Beda dari ikon Puzzle Gambar & Anggota Tubuh (2026-09-08) yang ternyata
-nyangkut di branch Pages; kali ini memang tak ada berkas yang bisa dipulihkan.
-
-Dokumen ini disimpan untuk kalau nanti gambarnya diganti lagi — dan karena tahap POTONG-nya
-memunculkan satu lubang yang harus ditembus manual (lihat "Setelah gambarnya jadi").
+Bahannya datang sebagai **mockup layar penuh**, bukan gambar di atas kertas putih — jadi
+dipotong dengan **`scripts/cut-gradient.py`** (baru; lihat "Setelah gambarnya jadi").
 
 Ini layar hasil `GameShell` (`screen === 'done'`) — layar yang paling sering dilihat anak,
 muncul tiap kali satu game tamat, bersamaan dengan lagu kemenangan ±2,7 detik.
@@ -186,6 +183,7 @@ Balas di chat yang sama dengan menyebut kesalahannya saja, jangan mengulang selu
 
    | Bahan yang datang | Skrip |
    |---|---|
+   | **Mockup layar penuh**, latarnya gradien pastel app (yang datang 2026-09-15) | `python3 scripts/cut-gradient.py <art> public/assets/ui/selamat.webp --crop-bottom=… --max=320 --hole=x,y` |
    | Latar **putih polos**, stiker beroutline (yang diminta prompt di atas) | `python3 scripts/cut-item.py <art> public/assets/ui/selamat.webp 320` |
    | Latar **kotak-kotak palsu** (khas Gemini, seolah transparan) | `python3 scripts/cut-checkerboard.py <art> public/assets/ui/selamat.webp 320` |
    | Latarnya **sudah transparan** sungguhan | `python3 scripts/trim-alpha.py <art> public/assets/ui/selamat.webp 320` |
@@ -194,113 +192,66 @@ Balas di chat yang sama dengan menyebut kesalahannya saja, jangan mengulang selu
    320px cukup: gambarnya tampil 128px, jadi masih ±2,5× untuk layar HP ber-DPR tinggi.
    `cut-item.py` pada berkas yang latarnya sudah transparan **berbahaya** — ia mencari latar
    PUTIH, dan bagian putih di gambar seperti itu justru milik gambarnya.
-3. **LUBANG DI DALAM GANTUNGAN TALI harus ditembus manual** (kena di gambar 2026-09-14).
-   Tali kecil di ujung bawah kerucut membentuk lingkaran tertutup, jadi latar di dalamnya
-   **terkurung** dan tak terjangkau flood-fill: ia tetap **putih opak** (terukur 720 px di
-   berkas 1024 px) dan di atas latar krem-merah muda layar hasil terbaca seperti tetesan
-   pejal, bukan lubang. Pola yang sama dengan lubang ring kunci pas (Batch 7) dan daftar
-   `HOLES` di `cut-item-sheet.py` — **sengaja per gambar, jangan diotomatiskan.**
 
-   Yang ditembus **hanya komponen terang terkurung PALING BESAR**. Bercak terang lainnya
-   (132 px & 67 px di daerah wajah) adalah **kilau di mata dan sorot putih di badan
-   kerucut** — itu milik gambarnya dan harus selamat:
+3. **Kalau bahannya MOCKUP: pakai `scripts/cut-gradient.py`, bukan `cut-item.py`.** Prompt di
+   dokumen ini meminta latar putih polos, tapi yang datang 2026-09-15 adalah **gambar piala
+   yang sudah ditempel di mockup layar hasil** (lengkap dengan tulisan "Selamat!", tiga
+   bintang, dan gradien krem→merah muda). `cut-item.py` tak bisa menyentuhnya: ia mencari
+   piksel "terang DAN tak berwarna", sedangkan gradien pastel itu berwarna (krem (251,239,191)
+   saturasinya 60) — jadi ia berhenti beberapa piksel dari tepi dan seluruh layar ikut
+   terbawa sebagai "gambar".
 
-   **UNTUK PIALA (Pilihan 3): lubangnya ADA DUA, bukan satu — dua pegangan mangkuknya.**
-   Snippet di bawah ini menembus komponen terbesar SAJA, jadi kalau dipakai apa adanya satu
-   pegangan tetap tersumbat putih dan bentuknya terbaca seperti telinga pejal. Ganti bagian
-   pemilihannya jadi "tembus semua komponen terkurung di atas ambang", mis. **≥ 250 px**
-   pada berkas 1024 px:
+   Yang dilakukan `cut-gradient.py`: latar ditaksir **per BARIS** dari 8 kolom terluar (di
+   mockup, kolom paling tepi selalu gradien murni), lalu semua yang beda ≤ `--tol` dari
+   taksiran itu — plus **glow putih** di belakang subjeknya (`--dsat`: seterang kertas tapi
+   jelas kurang jenuh) — dihitung latar, dan seperti pemotong lain **hanya yang terjangkau
+   flood-fill dari tepi** yang dibuang.
+   - `--crop-bottom=575` memotong mockup-nya dulu tepat di atas tulisan "Selamat!". Tanpa
+     itu tulisan & bintang mockup ikut jadi bagian gambar.
+   - Bawaan `--tol=16 --dsat=10` sudah membuang glow-nya sampai bersih; `--dsat=30`
+     meninggalkan halo krem berbulu di sekeliling piala yang di app terbaca seperti awan.
 
-   ```python
-   # ganti blok best = (0, None) ... for y, x in best[1]
-   MIN_HOLE = 250   # px, pada berkas ±1024 px
-   holes = []       # kumpulkan SEMUA komponen, bukan cuma yang terbesar
-   # … di dalam loop: holes.append(pts)
-   for pts in holes:
-       if len(pts) >= MIN_HOLE:
-           for y, x in pts:
-               bg[y, x] = True
-   print('lubang ditembus:', [len(p) for p in holes if len(p) >= MIN_HOLE])
-   ```
+4. **LUBANG DI DALAM GAMBAR harus ditembus manual, DAN DIPILIH PER LOKASI — bukan per
+   ukuran.** Latar yang terkurung garis gambar tak terjangkau flood-fill, jadi ia tetap
+   opak: di piala ini kedua **lubang pegangan** tersumbat krem dan di app terbaca seperti
+   dua telinga pejal. Pola yang sama dengan lubang ring kunci pas (Batch 7), lubang
+   gantungan tali terompet (2026-09-14), dan daftar `HOLES` di `cut-item-sheet.py` —
+   **sengaja per gambar, jangan diotomatiskan.**
 
-   **Ambangnya WAJIB diukur dari hasil cetaknya, jangan ditebak**: cetak dulu ukuran semua
-   komponen terkurung, lalu pilih angka yang memisahkan dua pegangan (besar) dari kilau mata
-   & sorot mangkuk (kecil — di terompet 132 px & 67 px). Kalau kilau matanya ikut terbuang,
-   matanya jadi bolong dan itu **langsung terlihat di layar**; kalau pegangannya tak ikut
-   ditembus, cacatnya justru cuma kelihatan di atas latar berwarna (lihat langkah 4).
+   Caranya: cetak dulu daftarnya, **lihat mana yang benar-benar lubang**, lalu tembus satu
+   `--hole=x,y` per lubang:
 
    ```bash
-   python3 - <<'EOF'
-   import numpy as np
-   from PIL import Image
-   from collections import deque
-
-   SRC = '<art.png>'          # gambar asli kiriman pemilik
-   DST = 'public/assets/ui/selamat.webp'
-   a = np.asarray(Image.open(SRC).convert('RGB')).astype(np.int16)
-   H, W, _ = a.shape
-   lum, sat = a.max(axis=2), a.max(axis=2) - a.min(axis=2)
-   light = (lum >= 196) & (sat <= 30)
-
-   # Flood fill dari tepi — sama persis dengan cut-item.py.
-   bg = np.zeros((H, W), bool); q = deque()
-   for x in range(W):
-       for y in (0, H - 1):
-           if light[y, x] and not bg[y, x]: bg[y, x] = True; q.append((y, x))
-   for y in range(H):
-       for x in (0, W - 1):
-           if light[y, x] and not bg[y, x]: bg[y, x] = True; q.append((y, x))
-   while q:
-       y, x = q.popleft(); base = a[y, x]
-       for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-           ny, nx = y + dy, x + dx
-           if 0 <= ny < H and 0 <= nx < W and not bg[ny, nx] and light[ny, nx] \
-                   and int(np.abs(a[ny, nx] - base).max()) <= 8:
-               bg[ny, nx] = True; q.append((ny, nx))
-
-   # Tembus SATU lubang: komponen terang terkurung terbesar (lubang talinya).
-   trapped = (~bg) & (lum >= 235) & (sat <= 18)
-   seen = np.zeros((H, W), bool); best = (0, None)
-   for y0 in range(H):
-       for x0 in range(W):
-           if trapped[y0, x0] and not seen[y0, x0]:
-               dq = deque([(y0, x0)]); seen[y0, x0] = True; pts = []
-               while dq:
-                   y, x = dq.popleft(); pts.append((y, x))
-                   for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-                       ny, nx = y + dy, x + dx
-                       if 0 <= ny < H and 0 <= nx < W and trapped[ny, nx] and not seen[ny, nx]:
-                           seen[ny, nx] = True; dq.append((ny, nx))
-               if len(pts) > best[0]: best = (len(pts), pts)
-   for y, x in best[1]: bg[y, x] = True
-   print('lubang ditembus:', best[0], 'px')
-
-   ys, xs = np.where(~bg)
-   y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
-   rgba = np.dstack([a[y0:y1, x0:x1].astype(np.uint8),
-                     (~bg[y0:y1, x0:x1]).astype(np.uint8) * 255])
-   img = Image.fromarray(rgba, 'RGBA')
-   s = min(1.0, 320 / max(img.size))
-   if s < 1.0:
-       img = img.resize((round(img.width * s), round(img.height * s)), Image.LANCZOS)
-   img.save(DST, 'WEBP', quality=92, method=6)
-   print(DST, img.size)
-   EOF
+   python3 scripts/cut-gradient.py <art> --crop-bottom=575 --list-holes
+   python3 scripts/cut-gradient.py <art> public/assets/ui/selamat.webp \
+       --crop-bottom=575 --max=320 --hole=430,260 --hole=734,317
    ```
-4. **Tempel hasilnya di atas latar BERWARNA dan lihat**, jangan percaya angka "latar
-   terbuang" yang dicetak skripnya. Dua hal yang sudah diperiksa di gambar 2026-09-14:
-   - **Nol potongan confetti hilang.** Yang ikut terbuang cuma halo tipis di tepi (1.072
-     serpih, terbesar 74 px, warnanya ±(235,255,255)) — itu pinggiran JPEG, bukan
-     confetti. Kalau nanti ada gumpalan terbuang ≥ 100 px, ITU baru confetti yang hilang:
-     minta ulang gambarnya dengan pastel yang lebih pekat, **jangan** menaikkan toleransi
-     skripnya (itu akan melahap sorot putih di badan kerucut).
-   - **Halo pucat di sekeliling confetti & pita memang masih ada**, tapi cuma terlihat di
-     atas warna gelap. Layar hasil selalu pastel (`#ffe9a8` → `#ffd1dc`), jadi di app tak
-     kelihatan. Jangan "dibersihkan".
-5. **Tidak ada kode yang perlu diubah.** `GameShell` (komponen `PartyPic`) sudah menunjuk
+
+   **JANGAN menembus berdasarkan ambang ukuran** — dokumen ini sempat menyarankan begitu
+   (≥ 250 px), dan pada piala ini saran itu SALAH dan akibatnya parah: bidang terkurung
+   **TERBESAR (2190 px) adalah sorot krem yang dilukis di badan mangkuknya**, sementara dua
+   lubang pegangan cuma 1838 px & 1942 px dan sorot di bibir mangkuk 1263 px. Ambang apa pun
+   yang menembus kedua pegangan juga menembus sorot badannya — jadi **jendela bolong
+   menembus pialanya sendiri**. Ukurannya memang tumpang tindih; yang membedakan cuma
+   letaknya.
+
+   Bercak terkurung kecil (81–279 px di sini) adalah **kilau mata, sorot pegangan, dan
+   kilau gigi** — milik gambarnya, harus selamat.
+
+5. **Tempel hasilnya di atas latar BERWARNA dan lihat**, jangan percaya angka "latar
+   terbuang" yang dicetak skripnya — pada piala ini angkanya 81,0% dan tetap benar baik
+   dengan maupun tanpa lubang pegangan. Dua hal yang diperiksa di gambar 2026-09-15 (di atas
+   biru tua 3×, lalu di atas gradien app pada 149×128 px yang sungguhan):
+   - **Nol confetti & nol percik kilau hilang** — kotak gambarnya 588×505 piksel asli, sama
+     persis dengan sebaran confetti terluar. Kalau nanti ada gumpalan terbuang ≥ 100 px, ITU
+     baru confetti yang hilang: minta ulang gambarnya dengan pastel lebih pekat, **jangan**
+     menaikkan `--tol` (itu akan melahap sorot putih di badan pialanya).
+   - **Kedua lubang pegangan benar-benar tembus** — hanya kelihatan di atas warna gelap; di
+     atas pastel, pegangan yang tersumbat tampak "wajar". Itu sebabnya langkah ini wajib.
+6. **Tidak ada kode yang perlu diubah.** `GameShell` (komponen `PartyPic`) sudah menunjuk
    file itu, dengan emoji 🎉 sebagai cadangan otomatis, dan animasi "berpesta"-nya sudah
    berlaku untuk gambar maupun emoji.
-6. Deploy seperti biasa; pastikan `dist/assets/ui/` ikut tersalin ke folder `app/` di branch
+7. Deploy seperti biasa; pastikan `dist/assets/ui/` ikut tersalin ke folder `app/` di branch
    Pages. **Jangan menaruh asetnya langsung di branch Pages** — itu yang membuat dua ikon
    kartu game nyaris hilang (2026-09-08). Aset masuk ke `public/assets/**` di `main` dulu.
 
@@ -308,7 +259,9 @@ Balas di chat yang sama dengan menyebut kesalahannya saja, jangan mengulang selu
 
 Diukur headless di build produksi (`vite preview`), layar hasil Hutan Hewan dimainkan sampai
 "Selamat!" — angka "sesudah" di bawah diverifikasi ulang dengan gambar yang sungguhan
-terpasang (`naturalWidth` 289, benar-benar termuat, bukan sekadar ada `<img>`):
+terpasang (`naturalWidth` benar-benar termuat, bukan sekadar ada `<img>`): terompet pesta
+2026-09-14 (289×320) dan **piala 2026-09-15 (320×275) memberi angka yang SAMA PERSIS**, karena
+yang dipatok tingginya — 128px untuk keduanya.
 
 | Layar | Emoji 🎉 (sebelum) | Gambar 128px (sesudah) |
 |---|---|---|
@@ -320,6 +273,13 @@ terpasang (`naturalWidth` 289, benar-benar termuat, bukan sekadar ada `<img>`):
 Luber di HP kecil itu **bug lama** layar hasil (sudah tercatat sejak 2026-08-08, isinya 707px
 untuk layar 640px) — bukan akibat gambar ini; gambarnya justru 1px lebih pendek. Kalau suatu
 saat layar itu dirapikan, yang perlu dikecilkan ikon/kartu maskotnya, bukan gambar ini.
+
+Pialanya **lebih lebar daripada tinggi** (rasio 1,16 → 149×128 px di layar, sementara kotak
+emoji 🎉 ±129×129). Itu tak menambah luber sedikit pun karena yang dipatok tingginya, dan
+`max-width: 62vw` menjaga HP tersempit (62vw di layar 320px = 198px, masih di atas 149px).
+Efek sampingnya yang perlu diketahui kalau gambarnya diganti lagi: sebaran confetti-nya yang
+menentukan kotak gambar, jadi **semakin jauh confetti menyebar, semakin kecil pialanya
+dirender** — pelajaran yang sama seperti maskot naga & kembang api.
 
 ---
 
