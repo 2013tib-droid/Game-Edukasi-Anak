@@ -165,7 +165,13 @@ export default function LandingPage() {
 
       <FeedbackSection />
 
-      <footer>Tanpa iklan · Aman untuk anak</footer>
+      <footer>
+        <nav className="lfoot-links">
+          <Link to="/privasi">Kebijakan Privasi</Link>
+          <Link to="/ketentuan">Syarat &amp; Ketentuan</Link>
+        </nav>
+        <p className="lfoot-note">Tanpa iklan · Aman untuk anak</p>
+      </footer>
       </div>
     </>
   );

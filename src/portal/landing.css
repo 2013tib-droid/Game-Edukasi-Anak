@@ -388,6 +388,33 @@
   margin-top: 30px;
   font-size: 13px;
   font-weight: 700;
+}
+
+/* Tautan Privasi & Ketentuan — wajib ada sebelum berjualan, dan tempatnya
+   memang di kaki halaman: orang tua mencarinya di sini, dan letaknya tidak
+   boleh bersaing dengan tombol "Main Sekarang". Padding-nya untuk target
+   sentuh, bukan supaya terlihat seperti tombol. */
+.landing .lfoot-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  /* TANPA pemisah "·": di HP 360px kedua tautan turun dua baris, dan pemisah
+     apa pun tertinggal sendirian di ujung baris pertama. Jaraknya diatur gap. */
+  gap: 0 16px;
+}
+.landing .lfoot-links a {
+  /* 40px tinggi sentuh, disamakan dengan .back-link di area orang tua.
+     Padding-nya untuk jari, bukan supaya terlihat seperti tombol. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 6px;
+  color: #b3541a;
+  text-decoration: none;
+}
+.landing .lfoot-note {
+  margin: 2px 0 0;
   opacity: 0.55;
 }
 
