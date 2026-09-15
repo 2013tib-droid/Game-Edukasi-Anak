@@ -66,7 +66,7 @@ dari tangkapan layar HP:
 
 | id (nama file) | Sekarang | Kenapa salah |
 |---|---|---|
-| `pond` | 💧 "kolam" | Emojinya SATU TETES AIR, bukan kolam. Anak diminta menaruh ikan ke dalam tetesan air. Prompt: Batch 8. |
+| `pond` | 💧 "kolam" | Emojinya SATU TETES AIR, bukan kolam. Anak diminta menaruh ikan ke dalam tetesan air. Prompt + tiga aturan khususnya: Batch 8. |
 | `wardrobe` | 🗄️ "lemari" | Emojinya **lemari arsip kantor** (laci besi), bukan lemari pakaian. Prompt: Batch 9. |
 | `road` | 🛣️ "jalan raya" | Di iPhone emoji ini digambar sebagai jalan tol Amerika **lengkap dengan papan hijau bertulisan "CUPERTINO"** — tulisan asing di game membaca Bahasa Indonesia. Prompt: Batch 9. |
 
@@ -447,8 +447,28 @@ punya seni (kucing, kambing, ikan lewat Batch 5), tinggal sisanya.
 | `web` | jaring laba-laba | Buatkan: satu jaring laba-laba putih berbentuk lingkaran dengan benang halus, tanpa laba-laba, tanpa wajah. |
 | `camel` | unta | Buatkan: unta coklat berpunuk satu, tampak samping menghadap ke kiri, mata besar ramah, imut. |
 | `desert` | gurun | Buatkan: gurun pasir kuning dengan dua bukit pasir dan satu kaktus hijau, tanpa matahari, tanpa wajah. |
-| `pond` | kolam | Buatkan: satu kolam air biru berbentuk bulat dengan tepi rumput hijau dan satu daun teratai, tanpa ikan, tanpa wajah. |
+| `pond` | kolam | Buatkan: satu kolam air biru jernih dilihat dari **sudut tiga perempat** (agak dari atas, tapi kedalaman airnya masih terlihat), bentuknya bulat-lonjong dengan **tinggi dan lebar yang hampir sama**, tepinya dikelilingi rumput hijau dan beberapa batu bulat kecil, dua daun teratai hijau mengapung di airnya dan satu bunga teratai merah muda, riak air lembut biru muda. **TANPA IKAN, tanpa katak, tanpa bebek, tanpa hewan apa pun**, tanpa wajah, tanpa tulisan. |
 | `snow` | salju | Buatkan: satu butir kepingan salju putih-biru muda berujung enam, tanpa wajah. |
+
+**Tiga aturan khusus `pond` (diukur dari kodenya, jangan dilonggarkan):**
+
+1. **TANPA IKAN — ini kebocoran jawaban, bukan soal selera.** Di soal itu kartu
+   yang harus ditarik anak PERSIS ikan (`item: 'ikan'`). Kolam yang sudah
+   berisi ikan menjawab soalnya sendiri; anak mencocokkan gambar ke gambar
+   tanpa tahu artinya. Aturan yang sama menolak emoji 🧑‍🔧 yang menggenggam
+   kunci pas di Batch 7. Katak & bebek juga dilarang: keduanya sudah punya seni
+   sendiri (`frog.webp`, `duck.webp`) dan dipakai sebagai kartu ingatan di game
+   yang sama.
+2. **Siluetnya harus HAMPIR PERSEGI (±1:1), bukan elips gepeng.** Gambar di
+   kotak tujuan Pasangan Pintar dirender di kotak **PERSEGI** 52–72 px dengan
+   `object-fit: contain` (`.dd-target--pic .dd-img` di `engine.css`). Kolam yang
+   digambar lurus dari atas jadi elips lebar → di-*letterbox*, dan yang tampak
+   di HP tinggal pita biru setinggi ±30 px. Sudut tiga perempat memberi kolam
+   itu tinggi tanpa membuatnya berhenti terbaca sebagai kolam.
+3. **Harus terbaca sebagai KOLAM pada 60 px, bukan genangan air.** Yang
+   membedakannya justru TEPINYA — rumput + batu yang mengelilingi. Air saja
+   tanpa tepi akan terbaca seperti tetesan besar, yaitu masalah 💧 yang sedang
+   diperbaiki.
 
 ---
 
