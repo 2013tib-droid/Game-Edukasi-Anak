@@ -2,11 +2,16 @@
 
 Sasaran: **`public/assets/ui/selamat.webp`** — satu gambar saja.
 
-## Status (2026-09-14) — SELESAI
+## Status (2026-09-15) — MENUNGGU GAMBAR PIALA
 
-Gambarnya **sudah terpasang**: terompet pesta Pilihan 1, dari percobaan pertama, langsung
-diterima. `public/assets/ui/selamat.webp`, 289×320, 27 kB (rasio 0,90 — aman, tidak kena
-pengaman `max-width`).
+**Keputusan pemilik 2026-09-15: ikonnya jadi PIALA**, menggantikan terompet pesta yang
+terpasang sejak 2026-09-14 (pemilik mengirim mockup layar hasil bertrofi lalu: *"Jadi gini
+aja, bikin prompt pialanya"*). Promptnya: **PILIHAN 3** di bawah — itu yang dipakai sekarang,
+Pilihan 1 & 2 turun jadi catatan.
+
+Yang terpasang HARI INI masih terompet pesta (`public/assets/ui/selamat.webp`, 289×320,
+27 kB, rasio 0,90). Begitu gambar pialanya jadi, **timpa berkas yang sama** — tak ada kode
+yang perlu diubah, tak ada nama berkas yang berganti.
 
 Sebelum itu sudah dicek: gambar penggantinya **belum pernah ada di mana pun** — tidak di
 `main`, tidak di riwayat commit, dan tidak di branch Pages (`app/assets/ui/` cuma berisi
@@ -85,9 +90,48 @@ lembut maskot (`prompt-maskot-naga.md`); jangan campur dua gaya di satu gambar.
 > - **Tanpa teks, tanpa tulisan, tanpa watermark.**
 > - Format **persegi (1:1)**, resolusi tinggi.
 
-### PILIHAN 1 (disarankan) — terompet pesta yang meletus
+### PILIHAN 3 — PIALA (DIPILIH PEMILIK 2026-09-15) ✅ pakai ini
 
-Paling dekat dengan 🎉 yang sekarang, jadi anak yang sudah hafal layar ini tidak merasa ada
+**Kenapa piala justru subjek paling aman di layar ini** — ia lulus aturan pemilihan subjek
+yang lahir dari penolakan 2026-09-04 (lihat "Riwayat" di bawah) dengan nilai penuh:
+**bulat/gemuk, SATU badan, dan mangkuknya bidang datar paling lebar** di antara semua
+kandidat — wajah imutnya punya tempat duduk yang jelas, tidak melenceng ke tepi seperti di
+corong terompet. Bahasa gambarnya juga paling langsung: "hadiah setelah berusaha", persis
+alasan Pilihan 5 (peti harta) dulu diusulkan, tapi siluetnya lebih dikenal anak.
+
+> Buatkan: satu **piala kemenangan** yang imut dan gemuk. Mangkuk pialanya **kuning
+> keemasan LEMBUT** (pastel, bukan logam berkilau) dengan dua pegangan melengkung di kiri
+> dan kanan, berdiri di atas **alas kayu coklat muda** dengan plakat kuning kecil di
+> depannya. **Wajah imutnya digambar BESAR di badan mangkuk pialanya**: dua mata besar
+> berkilau, pipi merona, senyum lebar gembira. Di sekeliling piala ada **confetti pastel
+> kecil-kecil** (peach, merah muda, mint, biru muda, ungu muda) dan beberapa **percik kilau
+> berbentuk permata empat sudut** warna kuning krem — semuanya **merapat di sekitar piala**,
+> tidak menyebar jauh ke tepi gambar. Tinggi dan lebar gambarnya kira-kira sama.
+>
+> Percik kilaunya HARUS berbentuk permata/empat sudut — **jangan bintang bersudut lima yang
+> melayang**, jangan bintang emas besar, jangan angka, jangan piala kedua. Plakat di alasnya
+> **POLOS tanpa tulisan**; satu bintang kecil TERUKIR di plakat itu boleh. Suasananya
+> gembira dan bangga.
+
+**Dua hal yang sengaja beda dari mockup pemilik** — keduanya diukur, bukan selera:
+
+- **Percik kilaunya empat sudut, bukan bintang lima sudut.** Tepat di bawah gambar ada baris
+  ⭐⭐⭐ berisi bintang yang benar-benar didapat anak (aturan 2 di atas). Bintang lima sudut
+  yang melayang di sekitar piala bentuknya SAMA dengan bintang di baris itu, jadi terbaca
+  sebagai bintang tambahan. Permata empat sudut tetap terasa "berkilau" tanpa bentrok.
+  Bintang yang TERUKIR di plakat aman — ia jelas bagian dari pialanya, bukan bintang lepas.
+- **Confetti-nya lebih merapat.** Di mockup ia menyebar sampai tepi bingkai; setelah dipotong,
+  **percikan terluar itulah yang menentukan batas gambar**, jadi pialanya sendiri dirender
+  makin kecil di kotak 128px (pelajaran yang sama dengan maskot naga & kembang api).
+
+**Warna emas itu pengecualian yang disadari** dari blok gaya "pastel semua": piala yang
+di-pastel-kan sampai pucat berhenti terbaca sebagai piala. Yang dijaga cuma satu hal —
+**kuning keemasan LEMBUT dengan shading halus, bukan logam berkilau/metalik** (kalimat yang
+sama sudah dipakai di Pilihan 2).
+
+### PILIHAN 1 — terompet pesta yang meletus *(yang terpasang sampai 2026-09-15, digantikan Pilihan 3)*
+
+Paling dekat dengan 🎉 yang dulu, jadi anak yang sudah hafal layar ini tidak merasa ada
 yang hilang. "Terompet pesta" = kerucut party popper, benda yang memang digambar emoji itu.
 
 > Buatkan: satu **terompet pesta** (kerucut party popper) berwarna kuning krem bergaris
@@ -160,6 +204,30 @@ Balas di chat yang sama dengan menyebut kesalahannya saja, jangan mengulang selu
    Yang ditembus **hanya komponen terang terkurung PALING BESAR**. Bercak terang lainnya
    (132 px & 67 px di daerah wajah) adalah **kilau di mata dan sorot putih di badan
    kerucut** — itu milik gambarnya dan harus selamat:
+
+   **UNTUK PIALA (Pilihan 3): lubangnya ADA DUA, bukan satu — dua pegangan mangkuknya.**
+   Snippet di bawah ini menembus komponen terbesar SAJA, jadi kalau dipakai apa adanya satu
+   pegangan tetap tersumbat putih dan bentuknya terbaca seperti telinga pejal. Ganti bagian
+   pemilihannya jadi "tembus semua komponen terkurung di atas ambang", mis. **≥ 250 px**
+   pada berkas 1024 px:
+
+   ```python
+   # ganti blok best = (0, None) ... for y, x in best[1]
+   MIN_HOLE = 250   # px, pada berkas ±1024 px
+   holes = []       # kumpulkan SEMUA komponen, bukan cuma yang terbesar
+   # … di dalam loop: holes.append(pts)
+   for pts in holes:
+       if len(pts) >= MIN_HOLE:
+           for y, x in pts:
+               bg[y, x] = True
+   print('lubang ditembus:', [len(p) for p in holes if len(p) >= MIN_HOLE])
+   ```
+
+   **Ambangnya WAJIB diukur dari hasil cetaknya, jangan ditebak**: cetak dulu ukuran semua
+   komponen terkurung, lalu pilih angka yang memisahkan dua pegangan (besar) dari kilau mata
+   & sorot mangkuk (kecil — di terompet 132 px & 67 px). Kalau kilau matanya ikut terbuang,
+   matanya jadi bolong dan itu **langsung terlihat di layar**; kalau pegangannya tak ikut
+   ditembus, cacatnya justru cuma kelihatan di atas latar berwarna (lihat langkah 4).
 
    ```bash
    python3 - <<'EOF'
