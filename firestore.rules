@@ -64,6 +64,15 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // Penghitung kunjungan per hari (Fase 6 langkah 5). Tertutup total dari
+    // client: yang menulisnya cuma Cloud Function `catatStat` lewat Admin SDK
+    // (melewati rules ini). Kalau client boleh menulis, siapa pun bisa
+    // mengarang angkanya langsung dari browser — dan kalau client boleh
+    // MEMBACA, jumlah pengunjung & jumlah penjualan jadi terbuka untuk umum.
+    match /stats/{day} {
+      allow read, write: if false;
+    }
+
     // Default: tolak semua yang tidak dicocokkan di atas.
     match /{document=**} {
       allow read, write: if false;

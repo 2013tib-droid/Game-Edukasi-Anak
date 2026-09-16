@@ -109,7 +109,10 @@ export default function PrivacyPage() {
           Kami menyimpan <strong>angka jumlah</strong> — misalnya berapa kali halaman depan
           dibuka hari ini. Yang bertambah hanya angkanya. Tidak ada cookie, tidak ada id
           pengunjung, tidak ada riwayat per orang, dan angka itu tidak bisa ditelusuri balik ke
-          siapa pun. <strong>Tidak ada penghitung apa pun di dalam area anak.</strong>
+          siapa pun. Supaya satu orang tidak terhitung berulang kali, browser Anda menyimpan{' '}
+          <strong>tanggal hari ini</strong> saja sebagai penanda — sebuah tanggal, bukan nomor
+          pengenal, dan penanda itu tidak pernah dikirim ke mana pun.{' '}
+          <strong>Tidak ada penghitung apa pun di dalam area anak.</strong>
         </li>
       </ul>
 
@@ -167,7 +170,8 @@ export default function PrivacyPage() {
       <p>
         Beberapa hal disimpan di penyimpanan lokal browser dan <strong>tidak pernah dikirim ke
         mana pun</strong> kecuali disebut lain di atas: bintang hasil bermain, posisi “lanjutkan
-        permainan”, nomor acak perangkat, pengumuman yang sudah dibaca, dan pengaturan penguji.
+        permainan”, nomor acak perangkat, pengumuman yang sudah dibaca, penanda tanggal
+        penghitung kunjungan, dan pengaturan penguji.
         Menghapus data situs di browser akan menghapus semuanya dari HP itu; bintang yang sudah
         tercadang tetap bisa kembali saat Anda masuk lagi.
       </p>
