@@ -10,8 +10,8 @@
 export const contact = {
   /** WhatsApp number in international format, digits only: 62 + number without the leading 0. */
   whatsapp: '6285117378557',
-  /** Support inbox. Temporary owner address — swap for a dedicated one later. */
-  email: '2013.tib@gmail.com',
+  /** Kotak masuk khusus produk ini — bukan alamat pribadi pemilik. */
+  email: 'petualangsmart@gmail.com',
 };
 
 /**
