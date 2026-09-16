@@ -62,6 +62,13 @@ jobs:
       - name: Periksa soal tulis
         run: node scripts/check-glyphs.mjs
 
+      # Sinkron bintang ke Firestore harus MENGGABUNG (maksimum per level),
+      # tidak menimpa. Kalau ini jadi penulisan biasa, anak yang main di
+      # tablet lalu di HP kehilangan bintang tabletnya — dan itu cuma
+      # ketahuan di perangkat kedua orang tua, berminggu-minggu kemudian.
+      - name: Periksa sinkron bintang (gabung, bukan timpa)
+        run: node scripts/check-progress-merge.mjs
+
       # Narasi tidak boleh memuat digit — mesin suara membacanya dalam bahasa
       # sendiri ("6 singa" jadi "six singa"). Skrip ini keluar dengan kode 1
       # kalau ada yang lolos. Lihat CLAUDE.md bagian "ANGKA DI NARASI".

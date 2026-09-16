@@ -4,6 +4,7 @@ import { AuthProvider } from '@/auth/AuthContext';
 import ProtectedRoute from '@/auth/ProtectedRoute';
 import Layout from '@/app/Layout';
 import NotFoundPage from '@/app/NotFoundPage';
+import ProgressSync from '@/app/ProgressSync';
 import SplashScreen from '@/app/SplashScreen';
 import { syncTestModeFromUrl } from '@/data/access';
 
@@ -27,6 +28,9 @@ const Router = import.meta.env.VITE_USE_HASH_ROUTER === '1' ? HashRouter : Brows
 export default function App() {
   return (
     <AuthProvider>
+      {/* Cadangan bintang ke Firestore selagi ada akun yang masuk. Di luar
+          <Router> karena tidak terikat halaman mana pun. */}
+      <ProgressSync />
       <Router>
         <Suspense fallback={<SplashScreen />}>
           <Routes>
