@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import groupsData from '@/data/groups.json';
 import { gamesForGroup } from '@/games/registry';
-import { getGameStars } from '@/engine/core/progress';
+import { getGameStars, onProgressChange } from '@/engine/core/progress';
 import type { GroupId } from '@/engine/core/types';
 import { canPlayGame } from '@/data/access';
 import { useLockMode, useOwnedGroups } from '@/portal/useAccess';
@@ -14,6 +15,13 @@ import BackIcon from '@/engine/ui/BackIcon';
 // padlock until the account has group access (gate enforced again in
 // GamePage). Lock status comes from `src/data/access.ts`.
 export default function GroupPage() {
+  // Sinkron Firestore bisa menarik bintang dari perangkat lain selagi
+  // halaman ini terbuka; tanpa ini deret bintangnya tetap angka lama sampai
+  // halaman dimuat ulang. Cukup pemicu render — angkanya tetap dibaca
+  // langsung dari `getGameStars` di bawah.
+  const [, bumpStars] = useState(0);
+  useEffect(() => onProgressChange(() => bumpStars((n) => n + 1)), []);
+
   const { groupId } = useParams<{ groupId: string }>();
   const group = groupsData.groups.find((g) => g.id === groupId);
   // Re-render when the tester flips the lock switch.

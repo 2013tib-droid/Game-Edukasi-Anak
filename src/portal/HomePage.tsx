@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/auth/AuthContext';
 import groupsData from '@/data/groups.json';
-import { getTotalStars } from '@/engine/core/progress';
+import { getTotalStars, onProgressChange } from '@/engine/core/progress';
 import MascotCard from '@/engine/ui/Mascot';
 import TopBar from '@/portal/TopBar';
 
@@ -33,6 +33,11 @@ function GroupPic({ pic, emoji }: { pic?: string; emoji: string }) {
 // account actions stay small and lead to the parent area.
 export default function HomePage() {
   const { user } = useAuth();
+  // Bintang bisa BERTAMBAH selagi halaman ini terbuka: sinkron Firestore
+  // menarik bintang dari perangkat lain beberapa saat setelah masuk akun.
+  // Tanpa ini, maskotnya baru ikut naik setelah halaman dimuat ulang.
+  const [totalStars, setTotalStars] = useState(getTotalStars);
+  useEffect(() => onProgressChange(() => setTotalStars(getTotalStars())), []);
 
   return (
     <>
@@ -54,7 +59,7 @@ export default function HomePage() {
       <p style={{ fontSize: 20 }}>Pilih kelompok belajarmu!</p>
 
       <div style={{ marginTop: 16 }}>
-        <MascotCard totalStars={getTotalStars()} />
+        <MascotCard totalStars={totalStars} />
       </div>
 
       <div style={{ display: 'grid', gap: 20, marginTop: 24 }}>

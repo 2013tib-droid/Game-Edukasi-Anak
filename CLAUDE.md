@@ -1122,6 +1122,45 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **DOKUMEN INI IKUT BASI KALAU APLIKASINYA BERUBAH.** Yang paling dekat: bagian "Progres bermain anak" sekarang menyatakan bintang hanya tersimpan di perangkat — itu benar HARI INI, tapi **langsung salah begitu sinkron bintang ke Firestore (Fase 6 langkah 2) jadi**. Perbarui bagian itu DAN `UPDATED` di hari yang sama.
   - Isinya menyebut apa adanya: email, kata sandi (hash Firebase), penanda perangkat acak (bukan IMEI/nomor HP), kode aktivasi & kelompok terbuka, progres di perangkat; pembayaran diproses Lynk.id/Mayar.id sehingga data kartu tak pernah lewat app ini; Firebase/Google sebagai pengolah data di wilayah Jakarta; log teknis IP di sisi penyedia server; hak-hak menurut **UU PDP No. 27/2022**. Tanpa iklan, tanpa pelacak pihak ketiga, tanpa data anak.
 
+- **Sinkron bintang ke Firestore (Fase 6 langkah 2) — SELESAI** (2026-09-16), teruji di **Firebase Emulator Suite** dengan aplikasi asli di build produksi: **23 pemeriksaan lulus** (16 alur sinkron + 7 alur main sungguhan), nol error console:
+
+  **KEPUTUSAN PEMILIK: satu akun = SATU kumpulan bintang.** Kalau dua anak memakai satu akun orang tua, bintangnya digabung — **tidak ada profil anak terpisah**. Jadi tidak ada id anak di mana pun; kalau suatu saat profil terpisah dibutuhkan, itu jenjang baru di bawah `uid`, bukan mengubah bentuk dokumen yang sudah ada.
+
+  **Bentuk data & pembagian tugas**
+  - `users/{uid}/progress/{gameId}` = `{ levelId: stars }`. Rules-nya sudah siap sejak Fase 1, tidak disentuh.
+  - **localStorage TETAP sumber utama saat bermain** — selalu, termasuk tanpa sinyal dan tanpa akun. Firestore cuma cadangan, supaya ganti HP tidak mengembalikan maskot ke telur.
+  - **`progress.ts` sengaja TIDAK tahu-menahu soal Firebase.** Ia hanya mengabarkan perubahan lewat `onProgressChange`, dan `progressSync.ts` yang berlangganan. Kalau dibalik (progress mengimpor sync), ada siklus impor DAN boot aplikasi ikut menunggu jaringan.
+  - `emit(null)` = perubahan borongan hasil sinkron; modul sinkron **mengabaikannya**. Kalau tidak, tarikan dari server memicu dorongan balik ke server tanpa henti.
+
+  **GABUNGKAN, JANGAN TIMPA — dan itu butuh TRANSAKSI, bukan `setDoc`**
+  - Bintang itu nilai TERBAIK per level, jadi dua perangkat digabung dengan mengambil yang tertinggi, **ke dua arah**.
+  - Dorongan per game memakai `runTransaction` (baca → gabung → tulis). Ini bukan kemewahan: perangkat lain bisa menaikkan level yang sama sejak sinkron terakhir, dan `setDoc` biasa akan **menurunkannya kembali**. Satu pembacaan per game tamat jauh lebih murah daripada anak yang kehilangan bintang yang sudah didapatnya di tablet. **Sudah diuji persis untuk kasus itu** (server 3 vs lokal 1 → tetap 3).
+  - Transaksinya menulis **hanya kalau ada yang bertambah**, jadi dua HP yang bergantian menyinkron tidak saling menulis ulang isi yang sama.
+
+  **Kapan berjalan**
+  - Sinkron penuh saat **masuk akun** (`setSyncUser` dipanggil dari `onAuthStateChanged` — satu-satunya tempat yang tahu akun berganti) dan saat **jaringan pulih** (`online`).
+  - Dorongan per game **1,5 detik setelah level tamat** (debounce, supaya beberapa level beruntun jadi satu tulisan).
+  - **Tidak pernah di-`await` dari jalur permainan.** Semua tembak-lalu-lupakan; kegagalan dibereskan sinkron berikutnya — aman diulang karena penggabungannya mengambil nilai tertinggi. Itulah sebabnya tidak perlu antrean "dirty" tersendiri.
+
+  **`sanitize()` wajib, jangan dilepas**
+  - Nilai dari server yang bukan bilangan bulat 1–3 dibuang. Satu nilai aneh (`null`, `"tiga"`, `99`) yang lolos ke localStorage akan **menggelembungkan total bintang dan menaikkan maskot tanpa sebab — permanen di perangkat anak**, karena localStorage-lah sumber utamanya. Teruji dengan dokumen server yang sengaja dirusak.
+
+  **Yang ikut berubah**
+  - `HomePage` & `GroupPage` berlangganan `onProgressChange`: bintang bisa BERTAMBAH selagi halaman terbuka (sinkron menarik dari perangkat lain beberapa saat setelah masuk akun). Tanpa itu maskotnya baru ikut naik setelah halaman dimuat ulang.
+  - Bintang lokal **TIDAK dihapus saat keluar akun** — anak boleh bermain tanpa akun sama sekali, dan menghapusnya menghukum orang tua yang cuma keluar sebentar.
+  - **Halaman Kebijakan Privasi ikut diperbarui di hari yang sama** (bagian "Progres bermain anak" + `UPDATED`). Ini persis peringatan yang ditulis kemarin saat halaman itu dibuat: bagian itu menyatakan bintang hanya tersimpan di perangkat, dan **jadi keliru sehari kemudian**. Dokumen hukum ikut basi kalau aplikasinya berubah — perlakukan sebagai bagian dari fitur, bukan pekerjaan terpisah.
+
+  **Emulator BISA dijalankan dari sesi Claude** (dan itu yang membuat langkah ini tak perlu menunggu project Firebase pemilik): `npm i -g firebase-tools` lalu `firebase emulators:start --only firestore,auth --project demo-pp`. Java sudah tersedia di container, dan unduhan emulatornya tidak diblokir kebijakan jaringan (beda dari host Azure & github.io). Aplikasinya diarahkan ke sana lewat `.env.local` berisi kunci palsu + `VITE_USE_EMULATOR=1` (berkas itu ter-gitignore; **hapus sebelum build terakhir** supaya `dist` tidak terlanjur menunjuk emulator).
+
+  **JEBAKAN saat mengujinya — tiga, semuanya memakan waktu**
+  - **Firebase menyimpan sesi login di IndexedDB, BUKAN localStorage.** Mencari uid dengan memindai kunci `firebase:authUser:` di localStorage selalu menghasilkan `undefined` — dan karena `undefined` itu segmen path yang sah, tesnya diam-diam menulis & membaca `users/undefined/progress/...`. Semua assertion-nya "gagal" padahal aplikasinya benar. Ambil uid dari Auth emulator: **`POST /identitytoolkit.googleapis.com/v1/projects/<p>/accounts:query`** (GET ke `/emulator/v1/.../accounts` ditolak "Method GET not allowed").
+  - **Tiap `launch()` Chromium memakai profil baru**, jadi sesi login tidak terbawa antar peluncuran — skrip diagnosa yang membuka browser baru akan melihat "sinkron tidak jalan" padahal memang belum masuk akun.
+  - **Untuk menguji dorongan hasil main sungguhan, pilih game bertemplate `tap-answer` yang BELUM punya bintang.** Pasar Buah dibuka di slot count-tap yang tak bisa diselesaikan dengan ketukan buta, dan game yang levelnya sudah 3 bintang tidak akan menyimpan apa pun (`saveLevelStars` hanya menyimpan yang lebih tinggi) — dua-duanya terbaca seperti "dorongan tidak jalan". Yang dipakai: `kenal-huruf`, ketuk kartu satu per satu sampai level naik.
+
+  **Yang diverifikasi** (aplikasi asli, build produksi, 380×800): bintang yang dikumpulkan SEBELUM punya akun ikut naik saat daftar · perangkat kosong yang masuk akun mendapatkan bintangnya kembali ("ganti HP") · maskot ikut naik tanpa reload · penggabungan dua arah (bintang perangkat lain masuk, nilai lokal yang lebih rendah dinaikkan, bintang baru perangkat ini ikut terdorong, bintang perangkat lain tidak hilang) · dokumen server rusak tidak mencemari perangkat · main satu level sungguhan terdorong sendiri tanpa reload · server yang lebih tinggi tidak diturunkan · bermain offline tetap mencatat bintang · **pengunjung tanpa akun nol permintaan Firestore**.
+
+  **BELUM diuji dengan project Firebase sungguhan** — emulator membuktikan logikanya, bukan konfigurasi produksi. Itu bagian dari langkah 1 Fase 6, yang masih menunggu project Firebase dibuat.
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.

@@ -8,6 +8,7 @@ import {
 } from 'react';
 import type { User } from 'firebase/auth';
 import { getFirebase, isFirebaseConfigured } from '@/auth/firebase';
+import { setSyncUser } from '@/engine/core/progressSync';
 
 interface AuthContextValue {
   /** Current Firebase user, or null when signed out. */
@@ -43,6 +44,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       unsubscribe = onAuthStateChanged(auth, (u) => {
         setUser(u);
         setLoading(false);
+        // Cadangan bintang ke Firestore. Sengaja di sini, bukan di halaman
+        // mana pun: ini satu-satunya tempat yang tahu kapan akun berganti,
+        // dan sinkronnya berjalan di latar tanpa menahan layar.
+        setSyncUser(u?.uid ?? null);
       });
     })();
 

@@ -124,7 +124,14 @@ Pemilik sudah membuat project, mengisi `.env`, dan men-deploy backend
   dan pastikan bisa masuk lagi.
 - **JANGAN nyalakan mode `'kunci'` sebelum langkah ini lulus.**
 
-### 2. Sinkron bintang ke Firestore
+### 2. Sinkron bintang ke Firestore — ✅ SELESAI (2026-09-16)
+
+> Sudah dikerjakan & teruji di Firebase Emulator (23 pemeriksaan). Keputusan
+> pemilik: **satu akun = satu kumpulan bintang, tanpa profil anak terpisah.**
+> Rinciannya di CLAUDE.md. Yang tersisa: memastikannya jalan di project
+> Firebase sungguhan, yaitu bagian dari langkah 1.
+
+Catatan rancangan aslinya:
 Sekarang progress cuma di `localStorage` (`src/engine/core/progress.ts`), jadi
 ganti HP = maskot balik ke telur. Untuk produk berbayar dengan tangga maskot
 sampai 555 ⭐, itu kehilangan yang menyakitkan.

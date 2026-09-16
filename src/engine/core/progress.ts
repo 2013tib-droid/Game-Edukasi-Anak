@@ -1,13 +1,19 @@
 import type { Stars } from '@/engine/core/types';
 
 /**
- * Star progress, stored locally per device for now.
- * Fase 5 syncs this to users/{uid}/progress in Firestore.
+ * Bintang per level.
+ *
+ * localStorage adalah SUMBER UTAMA saat anak bermain — selalu, termasuk saat
+ * tidak ada sinyal dan saat belum punya akun. Firestore cuma cadangan yang
+ * disinkronkan (`progressSync.ts`), supaya ganti HP tidak mengembalikan
+ * maskot ke telur. Modul ini sengaja TIDAK tahu-menahu soal Firebase: ia
+ * hanya mengabarkan perubahan lewat `onProgressChange`, dan modul sinkron
+ * yang berlangganan. Kalau dibalik, boot aplikasi ikut menunggu jaringan.
  */
 
 const KEY = 'pp_progress_v1';
 
-interface ProgressStore {
+export interface ProgressStore {
   [gameId: string]: { [levelId: string]: Stars };
 }
 
@@ -17,6 +23,70 @@ function load(): ProgressStore {
   } catch {
     return {};
   }
+}
+
+/** Salinan seluruh catatan bintang — dipakai modul sinkron. */
+export function loadProgress(): ProgressStore {
+  return load();
+}
+
+/**
+ * Pelanggan perubahan bintang.
+ *
+ * Argumennya id game yang berubah, atau `null` kalau yang berubah banyak
+ * sekaligus (hasil sinkron). Modul sinkron MENGABAIKAN `null` — kalau tidak,
+ * hasil tarikan dari server memicu dorongan balik ke server tanpa henti.
+ */
+type ProgressListener = (gameId: string | null) => void;
+const listeners = new Set<ProgressListener>();
+
+export function onProgressChange(fn: ProgressListener): () => void {
+  listeners.add(fn);
+  return () => listeners.delete(fn);
+}
+
+function emit(gameId: string | null): void {
+  for (const fn of listeners) {
+    try {
+      fn(gameId);
+    } catch {
+      // Satu pelanggan yang gagal tidak boleh menghentikan yang lain, dan
+      // tidak boleh merusak permainan yang sedang berjalan.
+    }
+  }
+}
+
+/** Simpan ke localStorage; `false` kalau penyimpanan penuh/dimatikan. */
+function persist(store: ProgressStore): boolean {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(store));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Gabungkan catatan dari server ke catatan lokal — AMBIL YANG TERTINGGI per
+ * level, jangan pernah menimpa.
+ *
+ * Bintang itu nilai TERBAIK per level, jadi menggabungkan dua perangkat =
+ * mengambil yang tertinggi. Anak yang main di tablet lalu di HP tidak boleh
+ * kehilangan apa pun. Mengembalikan hasil gabungannya supaya pemanggil tahu
+ * mana yang perlu didorong balik ke server.
+ */
+export function mergeRemoteProgress(remote: ProgressStore): ProgressStore {
+  const store = load();
+  for (const [gameId, levels] of Object.entries(remote)) {
+    const game = store[gameId] ?? {};
+    for (const [levelId, stars] of Object.entries(levels)) {
+      if (stars > (game[levelId] ?? 0)) game[levelId] = stars;
+    }
+    store[gameId] = game;
+  }
+  persist(store);
+  emit(null);
+  return store;
 }
 
 export function getLevelStars(gameId: string, levelId: string): Stars {
@@ -44,7 +114,8 @@ export function saveLevelStars(gameId: string, levelId: string, stars: Stars): v
   if (stars > (game[levelId] ?? 0)) {
     game[levelId] = stars;
     store[gameId] = game;
-    localStorage.setItem(KEY, JSON.stringify(store));
+    persist(store);
+    emit(gameId);
   }
 }
 
@@ -78,12 +149,9 @@ export function migrateMergedStories(): void {
   store['cerita-kancil'] = merged;
   delete store['cerita-nusantara'];
 
-  try {
-    localStorage.setItem(KEY, JSON.stringify(store));
-  } catch {
-    // Penyimpanan penuh / dimatikan: biarkan keadaan lama, jangan sampai
-    // boot aplikasi gagal cuma karena pemindahan bintang.
-  }
+  // Penyimpanan penuh / dimatikan: biarkan keadaan lama, jangan sampai boot
+  // aplikasi gagal cuma karena pemindahan bintang.
+  if (persist(store)) emit(null);
 }
 
 /**
@@ -109,10 +177,7 @@ export function migrateMergedMath(): void {
   store['hitung-hebat'] = merged;
   delete store['tambah-tangkas'];
 
-  try {
-    localStorage.setItem(KEY, JSON.stringify(store));
-  } catch {
-    // Penyimpanan penuh / dimatikan: biarkan keadaan lama, jangan sampai
-    // boot aplikasi gagal cuma karena pemindahan bintang.
-  }
+  // Penyimpanan penuh / dimatikan: biarkan keadaan lama, jangan sampai boot
+  // aplikasi gagal cuma karena pemindahan bintang.
+  if (persist(store)) emit(null);
 }

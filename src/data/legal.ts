@@ -9,10 +9,11 @@
  * Teksnya sengaja di sini, bukan di komponen: satu tempat untuk diperiksa
  * ulang, dan komponennya tinggal merender. Pola yang sama dengan config game.
  *
- * KALAU APLIKASINYA BERUBAH, DOKUMEN INI IKUT BERUBAH. Yang paling mungkin:
- * begitu sinkron bintang ke Firestore jadi (Fase 6 langkah 2), bagian
- * "Progres bermain anak" di bawah TIDAK lagi benar — progres tidak lagi cuma
- * di perangkat. Perbarui bagian itu DAN `updated` di hari yang sama.
+ * KALAU APLIKASINYA BERUBAH, DOKUMEN INI IKUT BERUBAH — beserta `UPDATED`,
+ * di hari yang sama. Ini bukan peringatan teoretis: bagian "Progres bermain
+ * anak" sempat menyatakan bintang hanya tersimpan di perangkat, dan menjadi
+ * keliru sehari kemudian begitu sinkron Firestore dipasang (2026-09-16).
+ * Yang berikutnya menyusul: verifikasi email dan analytics.
  */
 
 /** Satu paragraf (string) atau satu daftar berbutir (array of string). */
@@ -43,7 +44,7 @@ export type LegalDoc = {
  */
 const SELLER = 'Petualangan Pintar';
 
-const UPDATED = '15 September 2026';
+const UPDATED = '16 September 2026';
 
 export const privacyDoc: LegalDoc = {
   title: 'Kebijakan Privasi',
@@ -71,6 +72,7 @@ export const privacyDoc: LegalDoc = {
           'Kata sandi — disimpan dalam bentuk teracak (hash) oleh Firebase Authentication. Kami sendiri tidak bisa melihatnya.',
           'Kode aktivasi dan kelompok yang terbuka — supaya game yang sudah Anda bayar bisa dibuka lagi kapan pun.',
           'Penanda perangkat acak — deretan huruf dan angka acak yang dibuat di perangkat Anda, dipakai hanya untuk menjaga batas 3 perangkat per akun. Ini bukan nomor IMEI, bukan nomor HP, dan tidak bisa dipakai mengenali Anda di luar aplikasi ini.',
+          'Catatan bintang — nama game, nomor level, dan jumlah bintang (1 sampai 3). Penjelasannya di bagian berikutnya.',
         ],
         'Kami tidak meminta nomor HP, alamat rumah, lokasi, atau akses ke kamera, mikrofon, kontak, maupun galeri Anda.',
       ],
@@ -78,8 +80,10 @@ export const privacyDoc: LegalDoc = {
     {
       h: 'Progres bermain anak',
       body: [
-        'Bintang dan tahap maskot disimpan di perangkat itu sendiri, lewat penyimpanan browser. Catatan permainan anak tidak dikirim ke server kami.',
-        'Konsekuensinya jujur kami sampaikan: kalau Anda membersihkan data browser atau berganti HP, progres itu ikut hilang. Kelompok yang sudah dibeli tidak ikut hilang, karena itu menempel pada akun Anda.',
+        'Bintang dan tahap maskot disimpan di perangkat itu sendiri lewat penyimpanan browser, dan itu tetap sumber utamanya. Anak bisa bermain tanpa akun dan tanpa sinyal sama sekali.',
+        'Kalau Anda masuk akun, catatan bintang itu juga disalin ke akun Anda sebagai cadangan — supaya berganti HP tidak menghapus kemajuan yang sudah dikumpulkan anak. Yang tersimpan hanya nama game, nomor level, dan jumlah bintang. Tidak ada nama anak, umur, foto, suara, maupun catatan kapan dan berapa lama ia bermain.',
+        'Satu akun menyimpan satu kumpulan bintang. Kalau dua anak memakai akun yang sama, bintangnya digabung menjadi satu — kami sengaja tidak membuat profil terpisah per anak, jadi kami juga tidak perlu tahu ada berapa anak di rumah Anda.',
+        'Selama Anda tidak masuk akun, catatan itu tidak pernah meninggalkan perangkat. Dan kalau Anda meminta akun dihapus, cadangan bintangnya ikut terhapus.',
       ],
     },
     {
