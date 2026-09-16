@@ -88,6 +88,11 @@ const config: GameConfig<'spell'> = {
       word('LAUT', '🌊', 'laut', ['R', 'M']),
       word('BUNGA', '🌸', 'bunga', ['R', 'I'], 'flower'),
       word('PANTAI', '🏖️', 'pantai', ['R', 'U']),
+      // Pengganti DESA yang dicabut dari slot 8 (alasannya di komentar slot
+      // itu). ⛰️ sudah dipakai konsisten sebagai "gunung" di seluruh proyek
+      // (Jalan & Rute Kendaraan, Suku Kata, Pasang Kata), jadi gambarnya tidak
+      // menambah arti baru untuk emoji yang sama.
+      word('GUNUNG', '⛰️', 'gunung', ['R', 'A']),
     ),
     // --- 5. Kendaraan ---
     slot(
@@ -138,7 +143,14 @@ const config: GameConfig<'spell'> = {
       // gambar yang sama persis.
       word('TAMAN', '🏞️', 'taman', ['R', 'O'], 'park'),
       word('SAWAH', '🌾', 'sawah', ['R', 'U'], 'field'),
-      word('DESA', '🏡', 'desa', ['R', 'U']),
+      // DESA DICABUT (laporan pemilik 2026-09-16). Gambarnya 🏡 — rumah
+      // berpekarangan — di layar nyaris tak terbedakan dari 🏠 milik RUMAH di
+      // slot yang sama: anak melihat RUMAH lalu diminta mengeja "desa", jadi
+      // yang diuji tebak-tebakan, bukan ejaan. Tidak ada emoji desa (kumpulan
+      // rumah + sawah + gunung), jadi KATANYA yang diganti, bukan dicarikan
+      // emoji yang "agak mirip" — aturan yang sama dengan labu 🎃 (2026-09-04)
+      // dan dengan PASAR/KEBUN di slot ini. DESA boleh kembali kalau nanti ada
+      // seni `desa` di items.ts; sampai itu ada, jangan dihidupkan lagi.
       word('KOTA', '🏙️', 'kota', ['R', 'I']),
       word('RUMAH', '🏠', 'rumah', ['I', 'T'], 'house'),
     ),

@@ -1,30 +1,27 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #16
+render #17
 
-redo: sentuh
+only: ejaan-jitu
 
-Perbaikan LAFAL, bukan kalimat baru. Laporan pemilik: "sen" di "sentuh"
-terdengar seperti e di "lemon" (taling), harusnya seperti e di "perang"
-(pepet). Azure membacanya "séntuh".
+SATU baris baru. Laporan pemilik: soal "Ini desa. Ayo susun hurufnya jadi satu
+kata!" memakai gambar 🏡 — rumah berpekarangan — sementara slot yang sama juga
+punya RUMAH 🏠. Anak melihat rumah, jadi "desa" terbaca sebagai tebak-tebakan,
+bukan ejaan. Tidak ada emoji desa, jadi KATANYA yang diganti: DESA dicabut dari
+slot Tempat, dan GUNUNG ⛰️ masuk ke slot Alam supaya kolam katanya tidak
+menyusut.
 
-Ejaan é tidak bisa menolong: tulisan Indonesia tidak punya huruf untuk pepet.
-Jadi kata ini memakai jalan cadangan yang sudah disiapkan sejak 2026-08-08 —
-tag <phoneme> IPA (`sentuh` → `səntuh`), daftarnya di scripts/pronounce.mjs.
+Baris baru : "Ini gunung. Ayo susun hurufnya jadi satu kata!" (46 karakter)
+Baris yatim: "Ini desa. Ayo susun hurufnya jadi satu kata!"
 
-PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI. Percobaan pertama menulis
-"render #16 — redo: sentuh" dalam satu baris; grep di workflow mencocokkan
-`^redo:`, jadi tak ada yang terbaca, nol baris dirender ulang, dan workflow-nya
-tetap **hijau** ("876 sudah ada"). Kalau suatu render terasa terlalu cepat,
-periksa baris ini dulu.
+Aman dibatasi "only: ejaan-jitu" — sudah dibandingkan sebelum vs sesudah lewat
+scripts/narration-lines.json: 876 baris tetap 876, tepat satu baris baru, dan
+NOL baris yang pindah scope (pelajaran render #9 & #11).
 
-Sengaja TANPA membatasi satu game: "sentuh" muncul di 127 baris dari LIMA game
-(Anggota Tubuh 44, Labirin Warna 50, Jam Pintar 24, Pasar Buah 7, Hitung Hebat
-2). Membatasinya akan meninggalkan empat game lain tetap salah lafal.
+mp3 "Ini desa…" jadi yatim. Dibiarkan menganggur — file yatim tidak merusak
+apa pun; buang sekalian lain kali lewat tombol `prune` di Run workflow, bersama
+33 yatim lain yang sudah tercatat di CLAUDE.md.
 
-"redo: sentuh" (bukan "redo: lafal") supaya yang dirender ulang HANYA 127 baris
-itu — 4.963 karakter, 1% kuota gratis bulanan. "redo: lafal" akan ikut merender
-ulang 203 baris, termasuk semua kata é yang selama ini sudah benar.
-
-Kunci file TIDAK berubah (key = hash teks layar), jadi ini menimpa 127 mp3 yang
-sudah ada — nol file baru, nol entri manifest berubah.
+PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
+mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender
+dan runnya tetap hijau.
