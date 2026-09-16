@@ -4,8 +4,31 @@ Fase 5 sudah selesai & teruji di emulator (2026-08-11). Yang tersisa untuk
 bisa menjual: **project Firebase-nya belum ada**, dan beberapa hal wajib
 sebelum orang tua menyerahkan uang & email.
 
+> **BAGIAN B SUDAH DIKERJAKAN (2026-09-16), KECUALI LANGKAH 1 & 6.** Langkah
+> 2 (sinkron bintang), 3 (Privasi/S&K/refund), 4 (verifikasi email) dan 5
+> (analytics) selesai & teruji — lihat "Status Pengerjaan" di `CLAUDE.md`.
+>
+> **Langkah 1 TERHALANG, dan karena itu langkah 6 (mode `'kunci'`) SENGAJA
+> TIDAK dinyalakan.** Dua hal yang cuma bisa dikerjakan pemilik:
+>
+> 1. **Auth Email/Password ternyata BELUM aktif** di project
+>    `petualangan-pintar` — terukur dari sesi: `accounts:signUp` menjawab
+>    `OPERATION_NOT_ALLOWED` dan `accounts:signInWithPassword` menjawab
+>    `PASSWORD_LOGIN_DISABLED`. Catatan Bagian A di bawah menyebutnya sudah
+>    aktif; itu keliru. Nyalakan di **Authentication → Sign-in method →
+>    Email/Password → Enable**.
+> 2. **Kode aktivasi asli tidak ada di sesi** (artifact CSV-nya hanya di
+>    komputer pemilik, dan kode = barang jualan yang tidak boleh ditempel ke
+>    chat). Uji ujung-ke-ujung dengan kode asli karena itu tugas pemilik.
+>
+> **Backend juga perlu di-deploy ulang**: ada satu function BARU (`catatStat`)
+> dan `firestore.rules` yang berubah (koleksi `stats` ditutup). Menjalankan
+> deploy sungguhan diblokir classifier dari sesi Claude, jadi tombol Run
+> workflow harus diklik pemilik (A4, `dry_run` dilepas).
+>
 > **SUDAH DIKERJAKAN (2026-09-16): SELURUH BAGIAN A.** Project Firebase
-> `petualangan-pintar` hidup — Auth Email/Password aktif, Firestore
+> `petualangan-pintar` hidup — ~~Auth Email/Password aktif~~ (**KELIRU, lihat
+> di atas: providernya masih mati**), Firestore
 > `(default)` di `asia-southeast2`, paket Blaze, tiga functions ter-deploy di
 > `asia-southeast2`, `firestore.rules` terpasang, dan 2 kode aktivasi `tk`
 > (batch `uji-sendiri2`) sudah tercetak. `.env` di akar repo sudah terisi.
