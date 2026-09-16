@@ -20,6 +20,10 @@ const LoginPage = lazy(() => import('@/auth/LoginPage'));
 const RegisterPage = lazy(() => import('@/auth/RegisterPage'));
 const ActivationPage = lazy(() => import('@/auth/ActivationPage'));
 const GamePage = lazy(() => import('@/portal/GamePage'));
+// Halaman hukum — area ORANG TUA, ditaut dari kaki landing. Jangan pernah
+// ditaut dari area anak (/portal, /kelompok/*, /game/*).
+const PrivacyPage = lazy(() => import('@/portal/PrivacyPage'));
+const TermsPage = lazy(() => import('@/portal/TermsPage'));
 
 // HashRouter for static hosts without SPA rewrites (GitHub Pages testing);
 // BrowserRouter everywhere else (Firebase Hosting has rewrites).
@@ -39,6 +43,8 @@ export default function App() {
               <Route path="/portal" element={<HomePage />} />
               <Route path="/kelompok/:groupId" element={<GroupPage />} />
               <Route path="/game/:gameId" element={<GamePage />} />
+              <Route path="/privasi" element={<PrivacyPage />} />
+              <Route path="/ketentuan" element={<TermsPage />} />
               <Route path="/masuk" element={<LoginPage />} />
               <Route path="/daftar" element={<RegisterPage />} />
               <Route

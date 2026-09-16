@@ -397,3 +397,30 @@
     transition: none !important;
   }
 }
+
+/* Kaki landing: tautan halaman hukum (Privasi, S&K, refund).
+ *
+ * Wajib ada sebelum berjualan, tapi sengaja TIDAK menonjol — ini bacaan yang
+ * dicari kalau dibutuhkan, bukan saingan tombol "Main Sekarang". Ukurannya
+ * mengikuti teks kaki yang sudah ada. */
+.lfoot {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.lfoot-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px 9px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.lfoot-links a {
+  color: #3a2e20;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}

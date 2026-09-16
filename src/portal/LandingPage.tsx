@@ -165,7 +165,19 @@ export default function LandingPage() {
 
       <FeedbackSection />
 
-      <footer>Tanpa iklan · Aman untuk anak</footer>
+      <footer className="lfoot">
+        <div className="lfoot-links">
+          {/* Wajib ada sebelum berjualan: app ini mengumpulkan email & kata
+              sandi, sasarannya anak, dan platform penjualan lazim memintanya.
+              Ditaut di KAKI LANDING (halaman orang tua) — bukan di area anak. */}
+          <Link to="/privasi">Kebijakan Privasi</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/ketentuan">Syarat &amp; Ketentuan</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/ketentuan">Pengembalian Dana</Link>
+        </div>
+        <div>Tanpa iklan · Aman untuk anak</div>
+      </footer>
       </div>
     </>
   );

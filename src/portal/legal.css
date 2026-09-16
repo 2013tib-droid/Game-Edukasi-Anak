@@ -1,0 +1,124 @@
+/* Halaman hukum (Privasi, Syarat & Ketentuan).
+ *
+ * Satu-satunya bacaan panjang di app ini selain FAQ landing, jadi aturannya
+ * kebalikan dari layar anak: rata kiri, teks kecil, baris rapat, dan lebar
+ * baca dibatasi supaya mata tidak kehilangan barisnya. Tidak ada tombol
+ * 64px di sini — ini bukan layar sentuh anak. */
+
+.legal {
+  max-width: 720px;
+  text-align: left;
+  color: #3a2e20;
+  line-height: 1.62;
+  font-size: 15.5px;
+}
+
+.legal-title {
+  margin: 0 0 4px;
+  font-size: 26px;
+  line-height: 1.2;
+}
+
+.legal-updated {
+  margin: 0 0 22px;
+  font-size: 13.5px;
+  font-weight: 700;
+  opacity: 0.6;
+}
+
+.legal h2 {
+  margin: 26px 0 8px;
+  font-size: 18.5px;
+  line-height: 1.3;
+}
+
+.legal h3 {
+  margin: 18px 0 6px;
+  font-size: 16px;
+}
+
+.legal p {
+  margin: 0 0 12px;
+}
+
+.legal ul {
+  margin: 0 0 14px;
+  padding-left: 22px;
+}
+
+.legal li {
+  margin-bottom: 7px;
+}
+
+.legal a {
+  color: #b3541a;
+  font-weight: 700;
+}
+
+/* Ringkasan di kepala halaman: yang paling ingin diketahui orang tua dalam
+   lima detik, sebelum mereka memutuskan membaca sisanya. */
+.legal-summary {
+  margin: 0 0 8px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 2px dashed #e0d5c0;
+  border-radius: 18px;
+}
+
+.legal-summary h2 {
+  margin-top: 0;
+}
+
+.legal-summary ul {
+  margin-bottom: 0;
+}
+
+/* Tabel "data apa, untuk apa" — dibuat sebagai daftar bertingkat, bukan
+   <table>, supaya tidak pernah perlu scroll mendatar di HP. */
+.legal-data {
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+}
+
+.legal-data > li {
+  margin-bottom: 12px;
+  padding-left: 14px;
+  border-left: 3px solid #ffd166;
+}
+
+.legal-data b {
+  display: block;
+  font-size: 15.5px;
+}
+
+.legal-contact ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.legal-note {
+  margin: 26px 0 0;
+  padding: 13px 15px;
+  background: #fff3cd;
+  border-radius: 16px;
+  font-size: 14.5px;
+}
+
+.legal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 22px 0 8px;
+  font-size: 14.5px;
+  font-weight: 800;
+}
+
+@media (max-width: 380px) {
+  .legal {
+    font-size: 15px;
+  }
+  .legal-title {
+    font-size: 23px;
+  }
+}
