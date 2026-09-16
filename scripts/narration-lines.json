@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-08",
+  "generated": "2026-09-16",
   "count": 876,
-  "chars": 39893,
+  "chars": 39895,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -1930,15 +1930,6 @@
       ]
     },
     {
-      "key": "5a0acc287549",
-      "text": "Ini desa. Ayo susun hurufnya jadi satu kata!",
-      "scope": "ejaan-jitu",
-      "voice": "gadis",
-      "games": [
-        "ejaan-jitu"
-      ]
-    },
-    {
       "key": "c42d06d0a012",
       "text": "Ini gajah. Ayo susun hurufnya jadi satu kata!",
       "scope": "ejaan-jitu",
@@ -1950,6 +1941,15 @@
     {
       "key": "7a7a55a8f26a",
       "text": "Ini gelas. Ayo susun hurufnya jadi satu kata!",
+      "scope": "ejaan-jitu",
+      "voice": "gadis",
+      "games": [
+        "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "384eace99f25",
+      "text": "Ini gunung. Ayo susun hurufnya jadi satu kata!",
       "scope": "ejaan-jitu",
       "voice": "gadis",
       "games": [
