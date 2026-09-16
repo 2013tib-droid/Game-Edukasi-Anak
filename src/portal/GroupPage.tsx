@@ -3,7 +3,7 @@ import groupsData from '@/data/groups.json';
 import { gamesForGroup } from '@/games/registry';
 import { getGameStars } from '@/engine/core/progress';
 import type { GroupId } from '@/engine/core/types';
-import { canPlayGame } from '@/data/access';
+import { canPlayGame, isFreeGame } from '@/data/access';
 import { useLockMode, useOwnedGroups } from '@/portal/useAccess';
 import LockToggle from '@/portal/LockToggle';
 import Clock from '@/engine/ui/Clock';
@@ -34,6 +34,12 @@ export default function GroupPage() {
 
   const games = gamesForGroup(group.id as GroupId);
 
+  // Label "GRATIS" hanya berarti kalau di layar ini MEMANG ada yang terkunci.
+  // Di masa pra-rilis (mode 'buka') dan untuk orang tua yang sudah membeli
+  // kelompok ini, semua game terbuka — menempelkan "GRATIS" di satu kartu di
+  // situ cuma membingungkan, seolah yang lain berbayar padahal tidak.
+  const anyLocked = games.some((g) => !canPlayGame(g.id, group.id, ownedGroups));
+
   return (
     <div className="page" style={{ textAlign: 'center' }}>
       <h1>
@@ -60,6 +66,28 @@ export default function GroupPage() {
               {!unlocked && (
                 <span style={{ position: 'absolute', top: 10, right: 12, fontSize: 22 }}>
                   🔒
+                </span>
+              )}
+              {/* Pasangan dari gembok: memberi tahu orang tua mana yang boleh
+                  dicoba tanpa membayar. Dijanjikan di CLAUDE.md ("Sistem Kunci
+                  Game") dan di halaman Syarat & Ketentuan, jadi jangan
+                  dihapus. */}
+              {unlocked && anyLocked && isFreeGame(game.id) && (
+                <span
+                  style={{
+                    position: 'absolute',
+                    top: 10,
+                    left: 12,
+                    padding: '2px 8px',
+                    borderRadius: 999,
+                    background: '#2d7a2d',
+                    color: '#fff',
+                    fontSize: 12,
+                    fontWeight: 800,
+                    letterSpacing: 0.3,
+                  }}
+                >
+                  GRATIS
                 </span>
               )}
               {game.iconClock ? (

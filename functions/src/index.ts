@@ -48,6 +48,33 @@ function requireUid(request: CallableRequest): string {
 }
 
 /**
+ * Email yang sudah terverifikasi — SYARAT MENUKAR KODE saja.
+ *
+ * Kenapa di sini dan bukan di HP: klaim `email_verified` ikut di dalam ID
+ * token yang ditandatangani Google, jadi ini satu-satunya tempat yang tidak
+ * bisa dipalsukan. Pemeriksaan di halaman aktivasi cuma supaya orang tua
+ * melihat penjelasannya lebih cepat.
+ *
+ * Kenapa cuma untuk aktivasi: akun dengan email salah ketik yang sudah
+ * menukar kode jadi akses berbayar yang TIDAK BISA DIPULIHKAN — setel ulang
+ * kata sandi mengirim ke alamat yang tidak ada, dan kodenya sudah hangus.
+ * Ini memeriksanya tepat pada satu-satunya saat yang penting.
+ *
+ * JANGAN menambahkan pemeriksaan ini ke `registerDevice`/`removeDevice`:
+ * keduanya berjalan di jalur ANAK SEDANG MAU MAIN, dan email verifikasi yang
+ * mendarat di folder spam tidak boleh menghentikan permainan yang sudah
+ * dibayar.
+ */
+function requireVerifiedEmail(request: CallableRequest): void {
+  if (request.auth?.token.email_verified === true) return;
+  throw new HttpsError(
+    'failed-precondition',
+    'Verifikasi dulu alamat emailnya ya. Kami sudah mengirim tautannya ke email Anda — '
+      + 'periksa juga folder spam.',
+  );
+}
+
+/**
  * Kode diketik orang tua di HP, jadi terima apa adanya: huruf kecil, spasi,
  * dan tanda hubung dibuang. "tk-abcd-2345" dan "TKABCD2345" adalah kode yang
  * sama. Bentuk tanpa pemisah inilah yang jadi id dokumen.
@@ -129,6 +156,9 @@ async function noteFailedAttempt(uid: string): Promise<void> {
  */
 export const redeemActivationCode = onCall(async (request) => {
   const uid = requireUid(request);
+  // Diperiksa SEBELUM kodenya dibaca: kode yang sah tidak boleh ikut hangus
+  // hanya karena emailnya belum diverifikasi.
+  requireVerifiedEmail(request);
   const code = normalizeCode((request.data as { code?: unknown } | undefined)?.code);
 
   await assertNotRateLimited(uid);
