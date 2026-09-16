@@ -16,7 +16,12 @@
 import { initializeApp } from 'firebase-admin/app';
 import { FieldValue, getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { setGlobalOptions } from 'firebase-functions/v2';
-import { HttpsError, onCall, type CallableRequest } from 'firebase-functions/v2/https';
+import {
+  HttpsError,
+  onCall,
+  onRequest,
+  type CallableRequest,
+} from 'firebase-functions/v2/https';
 
 initializeApp();
 const db = getFirestore();
@@ -45,6 +50,33 @@ function requireUid(request: CallableRequest): string {
     throw new HttpsError('unauthenticated', 'Silakan masuk ke akun dulu.');
   }
   return uid;
+}
+
+/**
+ * Email yang sudah terverifikasi — SYARAT MENUKAR KODE saja.
+ *
+ * Kenapa di sini dan bukan di HP: klaim `email_verified` ikut di dalam ID
+ * token yang ditandatangani Google, jadi ini satu-satunya tempat yang tidak
+ * bisa dipalsukan. Pemeriksaan di halaman aktivasi cuma supaya orang tua
+ * melihat penjelasannya lebih cepat.
+ *
+ * Kenapa cuma untuk aktivasi: akun dengan email salah ketik yang sudah
+ * menukar kode jadi akses berbayar yang TIDAK BISA DIPULIHKAN — setel ulang
+ * kata sandi mengirim ke alamat yang tidak ada, dan kodenya sudah hangus.
+ * Ini memeriksanya tepat pada satu-satunya saat yang penting.
+ *
+ * JANGAN menambahkan pemeriksaan ini ke `registerDevice`/`removeDevice`:
+ * keduanya berjalan di jalur ANAK SEDANG MAU MAIN, dan email verifikasi yang
+ * mendarat di folder spam tidak boleh menghentikan permainan yang sudah
+ * dibayar.
+ */
+function requireVerifiedEmail(request: CallableRequest): void {
+  if (request.auth?.token.email_verified === true) return;
+  throw new HttpsError(
+    'failed-precondition',
+    'Verifikasi dulu alamat emailnya ya. Kami sudah mengirim tautannya ke email Anda — '
+      + 'periksa juga folder spam.',
+  );
 }
 
 /**
@@ -129,6 +161,9 @@ async function noteFailedAttempt(uid: string): Promise<void> {
  */
 export const redeemActivationCode = onCall(async (request) => {
   const uid = requireUid(request);
+  // Diperiksa SEBELUM kodenya dibaca: kode yang sah tidak boleh ikut hangus
+  // hanya karena emailnya belum diverifikasi.
+  requireVerifiedEmail(request);
   const code = normalizeCode((request.data as { code?: unknown } | undefined)?.code);
 
   await assertNotRateLimited(uid);
@@ -199,6 +234,14 @@ export const redeemActivationCode = onCall(async (request) => {
 
   // Berhasil — bersihkan hitungan percobaan.
   await db.doc(`redeem_attempts/${uid}`).delete().catch(() => undefined);
+
+  // Hitung penukaran yang BERHASIL di sini, bukan dari HP: ini angka
+  // "berapa yang benar-benar membeli", dan di sisi server ia gratis
+  // (nol kode di client, nol permintaan tambahan) serta tak bisa dipalsukan.
+  // Penukaran ulang oleh akun yang sama tidak dihitung dua kali.
+  if (result.status === 'ok') {
+    await bumpStat([`redeem_ok`, `redeem_ok_${result.group}`]).catch(() => undefined);
+  }
 
   return { group: result.group, already: result.status === 'already-yours' };
 });
@@ -283,3 +326,82 @@ export const removeDevice = onCall(async (request) => {
   await db.doc(`users/${uid}/devices/${deviceId}`).delete();
   return { ok: true };
 });
+
+
+// --- 3. Penghitung seadanya (Fase 6 langkah 5) ------------------------------
+
+/**
+ * Analytics TANPA library apa pun (keputusan pemilik 2026-09-16).
+ *
+ * Kenapa bukan Firebase Analytics: SDK-nya ikut masuk bundle landing (halaman
+ * yang paling perlu ringan), ia menaruh pengenal di browser pengunjung, dan
+ * kebijakan privasi jadi harus menyebut Google sebagai penerima data. Yang
+ * dibutuhkan pemilik cuma dua angka: berapa yang membuka landing dan berapa
+ * yang menekan tombolnya.
+ *
+ * Bentuknya `onRequest`, BUKAN `onCall`: callable menuntut SDK Firebase di
+ * client, dan itu justru yang mau dihindari. Dengan endpoint HTTP biasa,
+ * client cukup memakai `navigator.sendBeacon` — nol library, nol cookie, nol
+ * pengenal.
+ *
+ * Yang disimpan cuma ANGKA JUMLAH per hari (`stats/YYYY-MM-DD`). Tidak ada
+ * id pengunjung, tidak ada IP yang kami tulis, tidak ada riwayat per orang —
+ * jadi angkanya tidak bisa ditelusuri balik ke siapa pun. `stats` tertutup
+ * total dari client di firestore.rules; hanya Admin SDK (dari sini) menulisnya.
+ *
+ * BATAS YANG DISADARI, jangan dikira lebih dari ini: endpoint-nya publik,
+ * jadi siapa pun yang tahu URL-nya bisa menaikkan angkanya. Ini angka
+ * PENUNJUK ARAH, bukan data penagihan — jangan pernah dipakai untuk
+ * menghitung bagi hasil atau klaim ke pengiklan. Kalau suatu saat
+ * disalahgunakan sampai memakan kuota, obatnya membuang function ini; tidak
+ * ada bagian app yang bergantung padanya.
+ */
+const ALLOWED_EVENTS = new Set([
+  'landing_view',
+  'landing_main_click',
+  'landing_parent_click',
+]);
+
+/** Tanggal UTC sebagai `YYYY-MM-DD` — satu dokumen per hari. */
+function statDay(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+async function bumpStat(events: string[]): Promise<void> {
+  const patch: Record<string, unknown> = { updatedAt: FieldValue.serverTimestamp() };
+  events.forEach((e) => {
+    patch[e] = FieldValue.increment(1);
+  });
+  await db.doc(`stats/${statDay()}`).set(patch, { merge: true });
+}
+
+export const catatStat = onRequest(
+  { cors: true, maxInstances: 3 },
+  async (req, res) => {
+    // Cuma POST. GET dari crawler tidak boleh ikut menaikkan angka.
+    if (req.method !== 'POST') {
+      res.status(405).send('');
+      return;
+    }
+    // `sendBeacon` mengirim badan sebagai teks biasa supaya tidak ada
+    // preflight; terima juga bentuk JSON kalau nanti dipakai `fetch`.
+    const raw =
+      typeof req.body === 'string'
+        ? req.body
+        : ((req.body as { event?: unknown } | undefined)?.event ?? '');
+    const event = String(raw).trim().slice(0, 40);
+
+    if (!ALLOWED_EVENTS.has(event)) {
+      // Nama yang tidak dikenal dibuang tanpa menulis apa pun — daftar
+      // tertutup ini yang mencegah endpoint publik dipakai membuat koleksi
+      // sembarangan.
+      res.status(204).send('');
+      return;
+    }
+
+    await bumpStat([event]).catch(() => undefined);
+    // Selalu 204: pengunjung tak perlu tahu hasilnya, dan jawaban yang
+    // berbeda-beda cuma jadi bahan untuk menebak-nebak.
+    res.status(204).send('');
+  },
+);

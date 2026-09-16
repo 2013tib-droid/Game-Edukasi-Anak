@@ -45,6 +45,10 @@ export function saveLevelStars(gameId: string, levelId: string, stars: Stars): v
     game[levelId] = stars;
     store[gameId] = game;
     localStorage.setItem(KEY, JSON.stringify(store));
+    // Beri tahu pencadang (kalau ada yang mendengarkan). Dipanggil SESUDAH
+    // localStorage ditulis, jadi cadangan selalu membawa angka yang sudah
+    // pasti tersimpan di perangkat ini.
+    notifyProgress(gameId);
   }
 }
 
@@ -115,4 +119,90 @@ export function migrateMergedMath(): void {
     // Penyimpanan penuh / dimatikan: biarkan keadaan lama, jangan sampai
     // boot aplikasi gagal cuma karena pemindahan bintang.
   }
+}
+
+// --- Cadangan ke Firestore (Fase 6) ----------------------------------------
+//
+// PENTING: file ini tetap TIDAK tahu-menahu soal Firebase. localStorage
+// adalah sumber utama selagi anak main — anak yang main tanpa sinyal tidak
+// boleh kehilangan bintang atau menunggu jaringan. Yang menyambungkannya ke
+// Firestore adalah `src/auth/progressSync.ts`, dan ia memakai tiga fungsi di
+// bawah ini. Jangan mengimpor apa pun dari `@/auth` ke sini: engine harus
+// tetap bisa dibangun & dimainkan tanpa lapisan akun.
+
+/** Bentuk cadangan yang baru diunduh: belum diperiksa, jadi `unknown`. */
+export type IncomingProgress = Record<string, Record<string, unknown> | undefined>;
+
+function isStars(v: unknown): v is Stars {
+  return v === 1 || v === 2 || v === 3;
+}
+
+/** Seluruh bintang di perangkat ini, untuk dikirim sebagai cadangan. */
+export function getAllProgress(): ProgressStore {
+  return load();
+}
+
+/**
+ * Gabungkan bintang dari perangkat lain ke perangkat ini.
+ *
+ * **Ambil yang TERTINGGI per level, jangan pernah menimpa.** Bintang itu
+ * nilai TERBAIK per level (lihat `saveLevelStars`), jadi penggabungan dua
+ * perangkat = maksimum per level. Anak yang main di tablet lalu di HP tidak
+ * boleh kehilangan apa pun — termasuk saat cadangan yang diunduh lebih tua
+ * daripada yang ada di HP ini.
+ *
+ * Mengembalikan `true` kalau ada yang benar-benar berubah di perangkat ini,
+ * supaya pemanggilnya tahu apakah tampilan perlu digambar ulang.
+ */
+export function mergeProgress(incoming: IncomingProgress): boolean {
+  const store = load();
+  let changed = false;
+
+  for (const [gameId, levels] of Object.entries(incoming)) {
+    if (!levels || typeof levels !== 'object') continue;
+    const game = store[gameId] ?? {};
+    for (const [levelId, raw] of Object.entries(levels)) {
+      // Cadangan datang dari jaringan, jadi bentuknya TIDAK dipercaya —
+      // itu sebabnya parameternya `unknown` dan bukan `Stars`. Bintang di
+      // luar 1-3 dibuang, bukan dipaksa masuk.
+      if (!isStars(raw)) continue;
+      if (raw > (game[levelId] ?? 0)) {
+        game[levelId] = raw;
+        changed = true;
+      }
+    }
+    if (Object.keys(game).length > 0) store[gameId] = game;
+  }
+
+  if (!changed) return false;
+  try {
+    localStorage.setItem(KEY, JSON.stringify(store));
+  } catch {
+    // Penyimpanan penuh / dimatikan: biarkan keadaan lama. Bintang yang baru
+    // diunduh hilang lagi, tapi permainan tetap jalan — dan percobaan sinkron
+    // berikutnya akan mengunduhnya ulang.
+    return false;
+  }
+  return true;
+}
+
+// Pemberitahuan "ada bintang baru tersimpan", supaya pencadangan bisa
+// dijadwalkan tanpa `saveLevelStars` perlu tahu siapa yang mendengarkan.
+const progressListeners = new Set<(gameId: string) => void>();
+
+export function subscribeProgress(fn: (gameId: string) => void): () => void {
+  progressListeners.add(fn);
+  return () => {
+    progressListeners.delete(fn);
+  };
+}
+
+function notifyProgress(gameId: string): void {
+  progressListeners.forEach((fn) => {
+    try {
+      fn(gameId);
+    } catch {
+      // Pencadangan tidak boleh pernah menjatuhkan permainan.
+    }
+  });
 }

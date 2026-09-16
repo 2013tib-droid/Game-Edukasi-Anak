@@ -3,6 +3,11 @@ node_modules/
 
 # Build output
 dist/
+# Build sementara untuk menguji lawan Firebase Emulator
+# (VITE_USE_EMULATOR=1 ... npx vite build --outDir dist-emu) — jangan pernah
+# ikut ter-commit, dan JANGAN pernah ter-deploy: bundel ini menunjuk
+# 127.0.0.1, jadi di HP pembeli ia tidak bisa masuk akun sama sekali.
+dist-emu/
 *.tsbuildinfo
 
 # Vite dependency pre-bundle cache (dibuat dev server / build, bukan sumber)

@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FeedbackSection from '@/portal/FeedbackSection';
 import TopBar from '@/portal/TopBar';
 import GameIcon from '@/engine/ui/GameIcon';
 import { findGame } from '@/games/registry';
+import { countVisit } from '@/portal/stats';
 import './landing.css';
 
 const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
@@ -78,6 +80,12 @@ const faqs = [
  * playable portal and the parent login live one tap away.
  */
 export default function LandingPage() {
+  // Penghitung seadanya — HANYA di halaman ini. Jangan pernah dipasang di
+  // area anak; lihat aturan di `src/portal/stats.ts`.
+  useEffect(() => {
+    countVisit('landing_view');
+  }, []);
+
   return (
     <>
       <TopBar accountTo="/masuk" accountLabel="Orang Tua" />
@@ -86,7 +94,7 @@ export default function LandingPage() {
       <h1>Petualangan Pintar</h1>
       <p className="tag">Main sambil belajar — dipandu suara Bahasa Indonesia 🎈</p>
 
-      <Link className="cta" to="/portal">
+      <Link className="cta" to="/portal" onClick={() => countVisit('landing_main_click')}>
         🎮 Main Sekarang
       </Link>
 
@@ -165,7 +173,19 @@ export default function LandingPage() {
 
       <FeedbackSection />
 
-      <footer>Tanpa iklan · Aman untuk anak</footer>
+      <footer className="lfoot">
+        <div className="lfoot-links">
+          {/* Wajib ada sebelum berjualan: app ini mengumpulkan email & kata
+              sandi, sasarannya anak, dan platform penjualan lazim memintanya.
+              Ditaut di KAKI LANDING (halaman orang tua) — bukan di area anak. */}
+          <Link to="/privasi">Kebijakan Privasi</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/ketentuan">Syarat &amp; Ketentuan</Link>
+          <span aria-hidden="true">·</span>
+          <Link to="/ketentuan">Pengembalian Dana</Link>
+        </div>
+        <div>Tanpa iklan · Aman untuk anak</div>
+      </footer>
       </div>
     </>
   );
