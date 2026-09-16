@@ -4,6 +4,14 @@ Fase 5 sudah selesai & teruji di emulator (2026-08-11). Yang tersisa untuk
 bisa menjual: **project Firebase-nya belum ada**, dan beberapa hal wajib
 sebelum orang tua menyerahkan uang & email.
 
+> **SUDAH DIKERJAKAN (2026-09-16): SELURUH BAGIAN A.** Project Firebase
+> `petualangan-pintar` hidup — Auth Email/Password aktif, Firestore
+> `(default)` di `asia-southeast2`, paket Blaze, tiga functions ter-deploy di
+> `asia-southeast2`, `firestore.rules` terpasang, dan 2 kode aktivasi `tk`
+> (batch `uji-sendiri2`) sudah tercetak. `.env` di akar repo sudah terisi.
+> Bagian A di bawah tinggal jadi rujukan kalau project dibuat ulang — catatan
+> izin di A3 WAJIB dibaca kalau itu terjadi.
+
 Dokumen ini dua bagian:
 
 - **Bagian A** — langkah yang HARUS dikerjakan pemilik sendiri (buka Firebase
@@ -67,6 +75,39 @@ Lalu di GitHub: **Settings → Secrets and variables → Actions**
 jangan ditaruh di repo. Kalau pernah bocor, hapus key-nya di halaman Service
 accounts lalu buat baru.
 
+### A3b. Beri peran ke service account-nya (KALAU TIDAK, A4 GAGAL 3×)
+
+Kunci hasil "Generate new private key" secara bawaan **hanya** punya peran
+Firebase Admin SDK — tidak cukup untuk men-deploy. Ini ditemukan 2026-09-16
+lewat tiga kegagalan berturut-turut, masing-masing satu izin yang kurang.
+
+Google Cloud Console (**bukan** Firebase Console) →
+`console.cloud.google.com/iam-admin/iam?project=<project-id>` → pilih project
+dulu di dropdown atas → cari principal `firebase-adminsdk-…` → ikon pensil →
+**+ ADD ANOTHER ROLE** untuk tiap peran ini:
+
+| Peran | Tanpa ini, gagalnya berbunyi |
+|---|---|
+| Firebase Admin | `403 The caller does not have permission` saat cek `firestore.rules` |
+| Cloud Functions Admin | gagal membuat/memperbarui function |
+| Service Account User | gagal memakai service account saat deploy |
+| Cloud Datastore Owner | gagal melepas rules ke Firestore |
+| **Service Usage Admin** | `Permissions denied enabling artifactregistry.googleapis.com` |
+
+Peran terakhir itu yang membuat Firebase CLI boleh menyalakan sendiri API yang
+dibutuhkan Functions gen-2 (artifactregistry, cloudbuild, run, eventarc,
+pubsub, storage). Tanpa itu, API-nya harus dinyalakan manual satu per satu —
+berulang tiap kali ada yang baru dibutuhkan.
+
+Satu API TIDAK ikut dinyalakan otomatis dan harus diklik manual sekali:
+
+- **Cloud Billing API** —
+  `console.cloud.google.com/apis/library/cloudbilling.googleapis.com?project=<project-id>`
+  → **Enable**. Gagalnya berbunyi `Cloud Billing API has not been used in
+  project … before or it is disabled`, dan **dry run tidak menangkapnya**
+  karena dry run tidak membaca status billing. Perubahan IAM/API butuh 1–2
+  menit untuk menyebar sebelum dicoba lagi.
+
 ## A4. Deploy backend
 
 Tab **Actions → "Deploy backend" → Run workflow**:
@@ -82,8 +123,16 @@ Sesudah itu, di Firebase Console harus terlihat 3 functions
 ## A5. Buat kode aktivasi untuk diri sendiri
 
 Tab **Actions → "Buat kode aktivasi" → Run workflow**: kelompok `tk`,
-jumlah `2`, centang "Cuma lihat contoh" **dilepas**. Unduh artifact CSV-nya —
-kode-kode ini yang dipakai menguji pembelian sungguhan.
+jumlah `2` (**defaultnya `50` — wajib diubah**), penanda batch bebas.
+
+Jalankan **dua kali**, seperti A4: sekali dengan "Cuma lihat contoh"
+**tercentang** (tidak menulis apa pun ke Firestore, hanya membuktikan skrip &
+kredensialnya jalan), lalu sekali dengan centang itu **dilepas**.
+
+Unduh artifact CSV-nya — kode-kode ini yang dipakai menguji pembelian
+sungguhan. Artifact-nya **hangus dalam 7 hari**, jadi unduh hari itu juga.
+Log workflow mencetak CSV-nya lengkap; kode = barang jualan, jangan ditempel
+ke chat atau dikirim lewat WhatsApp.
 
 ---
 
