@@ -10,8 +10,14 @@
 export const contact = {
   /** WhatsApp number in international format, digits only: 62 + number without the leading 0. */
   whatsapp: '6285117378557',
-  /** Support inbox. Temporary owner address — swap for a dedicated one later. */
-  email: '2013.tib@gmail.com',
+  /**
+   * Support inbox. Also the address Google shows parents on the sign-in
+   * consent screen (Firebase → Authentication → Google → project support
+   * email), so the two must stay the same: a parent who sees one address on
+   * the consent screen and another on the sales page has every reason to
+   * think the link is fake.
+   */
+  email: 'petualangsmart@gmail.com',
 };
 
 /**
