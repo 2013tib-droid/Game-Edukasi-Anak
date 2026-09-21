@@ -62,6 +62,37 @@ button {
   background: #ffb703;
 }
 
+/* Tombol "Masuk dengan Google". Sengaja PUTIH dengan bingkai tipis, bukan
+   kuning: kuning itu warna tombol utama app ini, dan tombol merek Google
+   harus tetap terbaca sebagai tombol Google. Tinggi & bayangannya tetap sama
+   dengan .btn supaya tidak terlihat seperti komponen dari halaman lain. */
+.btn--google {
+  width: 100%;
+  background: #fff;
+  border: 2px solid #e0d5c0;
+  font-size: 18px;
+}
+
+/* Pemisah "atau" antara jalur Google dan formulir email. Garisnya digambar
+   dengan pseudo-element supaya tidak ada elemen kosong tambahan di DOM. */
+.auth-or {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: #8a7a63;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.auth-or::before,
+.auth-or::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: #e0d5c0;
+}
+
 /* Inputs in parent-area forms (login/register) — still generous for touch */
 .input {
   width: 100%;

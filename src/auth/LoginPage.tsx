@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/auth/AuthContext';
+import GoogleSignInButton from '@/auth/GoogleSignInButton';
 import { ArrowLeftIcon } from '@/app/icons';
 
 // Parent-area screen: plain form, Indonesian copy, generous touch targets.
@@ -79,6 +80,25 @@ export default function LoginPage() {
           ⚠️ Firebase belum dikonfigurasi (.env kosong). Login belum aktif.
         </p>
       )}
+      <div style={{ display: 'grid', gap: 16 }}>
+        <GoogleSignInButton
+          label="Masuk dengan Google"
+          to={(location.state as { from?: string } | null)?.from ?? '/portal'}
+          busy={busy}
+          setBusy={setBusy}
+          onError={setError}
+        />
+        <p className="auth-or">atau</p>
+        {/* Satu tempat pesan untuk KEDUA jalur masuk, diapit tombol Google di
+            atas dan kolom email di bawah — pesan yang jauh dari tombol yang
+            baru ditekan terbaca seperti tidak ada jawaban sama sekali. */}
+        {error && <p style={{ color: '#c0392b', margin: 0 }}>{error}</p>}
+        {notice && (
+          <p style={{ background: '#e8f6ec', padding: 12, borderRadius: 12, margin: 0 }}>
+            ✉️ {notice}
+          </p>
+        )}
+      </div>
       <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 16 }}>
         <input
           className="input"
@@ -98,12 +118,6 @@ export default function LoginPage() {
           autoComplete="current-password"
           required
         />
-        {error && <p style={{ color: '#c0392b' }}>{error}</p>}
-        {notice && (
-          <p style={{ background: '#e8f6ec', padding: 12, borderRadius: 12, margin: 0 }}>
-            ✉️ {notice}
-          </p>
-        )}
         <button className="btn btn--primary" type="submit" disabled={busy || !configured}>
           {busy ? 'Memproses…' : 'Masuk'}
         </button>

@@ -51,6 +51,25 @@ Dokumen ini dua bagian:
 2. Nama: `petualangan-pintar` (atau bebas). Google Analytics boleh dimatikan.
 3. Setelah jadi, masuk **Build → Authentication → Get started → Email/Password
    → Enable → Save.**
+3b. **Nyalakan juga provider Google** (jalur "Masuk dengan Google" di layar
+   Masuk & Daftar): **Authentication → Sign-in method → Add new provider →
+   Google → Enable**, isi *Project support email* dengan email pemilik, lalu
+   **Save**. Tanpa langkah ini tombolnya tetap ada tapi menjawab *"Masuk
+   dengan Google belum aktif di aplikasi ini"* — pesan itu memang sengaja
+   dibuat supaya laporan yang masuk ke WhatsApp langsung bisa dikenali.
+   - Lalu **Authentication → Settings → Authorized domains**: pastikan domain
+     tempat app-nya disajikan ada di daftar. `localhost` dan
+     `<project>.firebaseapp.com`/`.web.app` sudah ada sejak awal, tapi
+     **`2013tib-droid.github.io` (build uji di GitHub Pages) dan domain
+     produksi nanti HARUS ditambahkan sendiri.** Kalau tidak, tombolnya
+     menjawab *"belum diizinkan untuk alamat situs ini"*.
+   - **Tidak perlu menyentuh Google Cloud Console.** Firebase membuatkan
+     OAuth client-nya sendiri, dan app ini hanya meminta profil dasar —
+     tidak ada akses Gmail/Drive, jadi tidak ada proses verifikasi OAuth.
+   - **Email + kata sandi tetap wajib menyala.** Google menolak alur OAuth di
+     dalam browser-dalam-aplikasi (WhatsApp, Instagram, TikTok) dengan
+     `disallowed_useragent` — padahal justru dari sanalah tautan promosi
+     dibuka. Di situ formulir email adalah satu-satunya jalan masuk.
 4. Masuk **Build → Firestore Database → Create database**:
    - Mulai dari **Production mode** (rules kita yang akan dipakai).
    - Lokasi: **`asia-southeast2` (Jakarta)** — samakan dengan region Cloud
