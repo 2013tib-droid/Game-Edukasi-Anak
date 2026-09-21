@@ -53,8 +53,17 @@ Dokumen ini dua bagian:
    → Enable → Save.**
 3b. **Nyalakan juga provider Google** (jalur "Masuk dengan Google" di layar
    Masuk & Daftar): **Authentication → Sign-in method → Add new provider →
-   Google → Enable**, isi *Project support email* dengan email pemilik, lalu
-   **Save**. Tanpa langkah ini tombolnya tetap ada tapi menjawab *"Masuk
+   Google → Enable**, isi *Project support email* dengan
+   **`petualangsmart@gmail.com`** (email Console pemilik), lalu **Save**.
+   - **Alamat itu DITAMPILKAN ke orang tua** di layar izin Google, jadi
+     memang harus alamat yang pantas dibalas — bukan alamat pribadi yang
+     tidak pernah dibuka.
+   - **Sekalian periksa nama publik project-nya**: *Project settings →
+     General → **Public-facing name***. Nama itulah yang dibaca orang tua di
+     layar izin Google (“Pilih akun untuk melanjutkan ke …”). Kalau masih
+     `petualangan-pintar` atau nomor project, ganti jadi **Petualangan
+     Pintar** — orang tua yang melihat nama mentah di layar izin akan
+     mengira tautannya salah. Tanpa langkah ini tombolnya tetap ada tapi menjawab *"Masuk
    dengan Google belum aktif di aplikasi ini"* — pesan itu memang sengaja
    dibuat supaya laporan yang masuk ke WhatsApp langsung bisa dikenali.
    - Lalu **Authentication → Settings → Authorized domains**: pastikan domain
