@@ -4,12 +4,14 @@ Fase 5 sudah selesai & teruji di emulator (2026-08-11). Yang tersisa untuk
 bisa menjual: **project Firebase-nya belum ada**, dan beberapa hal wajib
 sebelum orang tua menyerahkan uang & email.
 
-> **BAGIAN B SUDAH DIKERJAKAN (2026-09-16), KECUALI LANGKAH 1 & 6.** Langkah
-> 2 (sinkron bintang), 3 (Privasi/S&K/refund), 4 (verifikasi email) dan 5
-> (analytics) selesai & teruji — lihat "Status Pengerjaan" di `CLAUDE.md`.
+> **BAGIAN B SELESAI SELURUHNYA (2026-09-22).** Langkah 2 (sinkron bintang),
+> 3 (Privasi/S&K/refund), 4 (verifikasi email) dan 5 (analytics) selesai
+> 2026-09-16; langkah 1 (alur pembeli dengan kode ASLI) lulus 2026-09-22, dan
+> **langkah 6 — mode `'kunci'` — menyala & ter-deploy hari itu juga.** Lihat
+> "Status Pengerjaan" di `CLAUDE.md`.
 >
-> **Langkah 1 TERHALANG, dan karena itu langkah 6 (mode `'kunci'`) SENGAJA
-> TIDAK dinyalakan.** Dua hal yang cuma bisa dikerjakan pemilik:
+> Catatan di bawah ini dibiarkan sebagai riwayat: inilah dua penghalang yang
+> dulu menahan langkah 1, dan keduanya SUDAH dibereskan pemilik.
 >
 > 1. **Auth Email/Password ternyata BELUM aktif** di project
 >    `petualangan-pintar` — terukur dari sesi: `accounts:signUp` menjawab
@@ -264,7 +266,7 @@ klik beli. Pilih yang ringan & tanpa cookie pihak ketiga (mis. Firebase
 Analytics yang sudah ada, atau tanpa tambahan library sama sekali).
 **Jangan pasang pelacak apa pun di area anak.**
 
-### 6. Nyalakan mode `'kunci'` — LANGKAH TERAKHIR
+### 6. Nyalakan mode `'kunci'` — LANGKAH TERAKHIR ✅ SELESAI 2026-09-22
 Hanya setelah 1–5 lulus:
 - Ubah `DEFAULT_LOCK_MODE` di `src/data/access.ts` jadi `'kunci'`.
 - Build produksi **TANPA** `VITE_ALLOW_TEST_TOGGLE` (kalau ikut terbawa,
@@ -273,8 +275,19 @@ Hanya setelah 1–5 lulus:
 - Deploy ke Firebase Hosting dengan **`SITE_URL=https://<domain>/ npm run
   build`**, kalau tidak, link yang dibagikan di WhatsApp/TikTok akan menarik
   gambar pratinjau dari domain GitHub Pages yang lama.
-- Verifikasi terakhir: buka `/kelompok/tk` & `/kelompok/sd1` — hanya Hutan
-  Hewan tanpa gembok & berlabel GRATIS.
+- Verifikasi terakhir: buka `/kelompok/tk` & `/kelompok/sd1` — **tepat satu**
+  kartu tanpa gembok & berlabel GRATIS di TIAP kelompok (TK Hutan Hewan, SD
+  Tulis Huruf). Bukan "hanya Hutan Hewan": kalau itu yang diikuti, SD rilis
+  tanpa demo sama sekali.
+- **Buktikan saklar pengujinya mati dari BUNDELNYA, bukan dari perintah
+  build:** `getLockMode()` harus ter-minify jadi fungsi yang mengembalikan
+  satu konstanta, dan string `pp_test_mode_v1` nol kali muncul di seluruh
+  bundel. Lalu coba juga dari sisi perilaku: `localStorage` + `?test=1` tidak
+  boleh membuka apa pun.
+- **Bandingkan kunci `AIzaSy…` di bundel baru dengan bundel yang sedang
+  tayang sebelum push.** `.env` gitignored, jadi sesi tanpa salinannya akan
+  membangun app dengan `isFirebaseConfigured === false` — login, daftar,
+  Google & aktivasi mati semua, dan build-nya tetap "sukses".
 
 ## Yang TIDAK termasuk tugas ini
 

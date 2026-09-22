@@ -57,7 +57,7 @@ Aturan teknis (**semuanya SUDAH terpasang di Fase 5** — lihat "Status Pengerja
 
 ## Rencana Akses Saat Launching (KEPUTUSAN PEMILIK — diperbarui 2026-09-22)
 
-- **Sekarang (pra-rilis): SEMUA game dibuka** supaya pemilik & penguji bisa mencoba semuanya tanpa login. Ini kondisi SEMENTARA, bukan keputusan produk.
+- ~~**Sekarang (pra-rilis): SEMUA game dibuka**~~ → **SUDAH TIDAK BERLAKU sejak 2026-09-22**: mode `'kunci'` menyala (langkah 6), jadi hanya game di `FREE_GAME_IDS` yang terbuka tanpa login.
 - **Saat launching: 1 game GRATIS per kelompok** — TK: `hutan-hewan`; SD Kelas 1 & 2: `tulis-huruf`. Semua game lain wajib **login + kode aktivasi**.
   - **Menggantikan keputusan 2026-09-04** yang memberi DUA game gratis per kelompok (TK `hutan-hewan` + `tulis-angka`; SD `hitung-hebat` + `cerita-kancil`).
   - Yang TETAP berlaku dari keputusan 2026-09-04: **tiap kelompok berbayar wajib punya demo.** Sampai 2026-09-22 `FREE_GAME_IDS` cuma berisi `hutan-hewan`, jadi SD sama sekali tak punya pintu masuk — orang tua harus membayar tanpa pernah melihat apa pun. Kelompok baru nanti (`sd2`, `sd3`) wajib menambah satu game ke daftar itu.
@@ -65,7 +65,7 @@ Aturan teknis (**semuanya SUDAH terpasang di Fase 5** — lihat "Status Pengerja
   - **Harga yang dibayar, dan itu disadari:** demo SD jadi bukan berhitung, padahal itu yang paling dicari orang tua SD. Ditukar dengan memperlihatkan kemampuan engine yang paling kasatmata bedanya dari game gratisan.
   - Game gratis **tidak minta login** dan **tidak dipotong** (level penuh).
   - **Alasan lengkap, opsi yang ditolak, dan langkah eksekusinya: `docs/rencana-trial.md`.**
-- **`FREE_GAME_IDS` SUDAH DIISI** (2026-09-22), jadi langkah 6 saat launching tinggal mengubah `DEFAULT_LOCK_MODE` — daftarnya tidak perlu disentuh lagi. Mode masih `'buka'`, jadi belum ada efek apa pun di app.
+- **SUDAH DIEKSEKUSI 2026-09-22**: `FREE_GAME_IDS` terisi DAN `DEFAULT_LOCK_MODE = 'kunci'` — lihat entri langkah 6 di "Status Pengerjaan".
 - Cara mengeksekusinya **satu baris saja** — lihat "Sistem Kunci Game" di bawah (dulu harus mengubah `freeDemo` di 11 config + registry; field itu sudah DIHAPUS).
 
 ## Sistem Kunci Game (SAKLAR BUKA/TUTUP — 2026-07-29)
@@ -73,15 +73,15 @@ Aturan teknis (**semuanya SUDAH terpasang di Fase 5** — lihat "Status Pengerja
 > Dulu status gratis/berbayar ditulis dua kali per game (`freeDemo` di config + di `registry.ts`) — 22 tempat yang gampang tidak sinkron. Sekarang **satu sumber**: `src/data/access.ts`.
 
 - **`src/data/access.ts` = satu-satunya sumber kebenaran.**
-  - `FREE_GAME_IDS = ['hutan-hewan', 'tulis-huruf']` — daftar game yang tetap gratis saat terkunci: **SATU per kelompok** (sejak 2026-09-22; sebelumnya cuma `hutan-hewan`, jadi SD tidak punya demo sama sekali). **Sudah diisi**, jadi langkah 6 saat launching tinggal mengubah `DEFAULT_LOCK_MODE`. Kelompok baru nanti (`sd2`, `sd3`) wajib menambah satu game ke daftar ini.
-  - `DEFAULT_LOCK_MODE` — `'buka'` (semua game terbuka, kondisi pra-rilis) atau `'kunci'` (hanya `FREE_GAME_IDS` yang terbuka).
+  - `FREE_GAME_IDS = ['hutan-hewan', 'tulis-huruf']` — daftar game yang tetap gratis saat terkunci: **SATU per kelompok** (sejak 2026-09-22; sebelumnya cuma `hutan-hewan`, jadi SD tidak punya demo sama sekali). Kelompok baru nanti (`sd2`, `sd3`) wajib menambah satu game ke daftar ini.
+  - `DEFAULT_LOCK_MODE` — **`'kunci'` sejak 2026-09-22 (launching)**: hanya `FREE_GAME_IDS` yang terbuka. `'buka'` (semua game terbuka) sekarang cuma tombol darurat kalau alur pembelinya sendiri rusak — untuk mencoba-coba pakai build penguji, jangan mengubah baris ini.
   - `isGameUnlocked(id)` menjawab "apakah kunci berlaku untuk game ini"; **`canPlayGame(id, group, ownedGroups)`** adalah keputusan akhirnya — dipakai `GroupPage` (gembok + label GRATIS) dan, lewat `useGameAccess`, oleh `GamePage` (gerbang akses). **Jangan menaruh keputusan akses di tempat lain.**
   - Sejak Fase 5, bagian yang mengikat bukan lagi mode kunci ini, melainkan `users/{uid}.groups` di Firestore yang cuma bisa ditulis Cloud Function. Mode kunci hanya menentukan **apakah** kepemilikan itu perlu diperiksa.
   - Field `freeDemo` sudah dihapus dari `GameConfig`/`MixedGameConfig` dan dari `GameMeta` — jangan dihidupkan lagi.
 - **Tiga cara mengubah mode** (prioritas dari atas):
   1. **Saklar di layar (untuk testing)** — tombol 🔓 Terbuka / 🔒 Terkunci di `TopBar` (landing & portal) dan di bawah daftar game (`/kelompok/:id`). Sekali ketuk, langsung berubah tanpa reload & tanpa build ulang; tersimpan di `localStorage` (`pp_lock_mode_v1`) per perangkat.
   2. **Env saat build**: `VITE_LOCK_MODE=kunci npm run build`.
-  3. **Kode**: ubah `DEFAULT_LOCK_MODE` di `access.ts` — **inilah yang dilakukan saat launching**.
+  3. **Kode**: `DEFAULT_LOCK_MODE` di `access.ts` — **sudah `'kunci'` sejak launching 2026-09-22**.
 - **Saklar hanya tampil di mode penguji**, supaya orang tua pembeli tak pernah melihatnya: aktif di dev server, atau setelah membuka URL berakhiran **`?test=1`** (di build HashRouter: `.../app/#/portal?test=1`). Matikan lagi dengan `?test=0`. Statusnya tersimpan di `localStorage` (`pp_test_mode_v1`).
 - **DAN saklar itu MATI TOTAL di build produksi** (sejak Fase 5, `TEST_TOGGLE_ALLOWED` di `access.ts`). Kalau tidak, saklarnya cuma satu baris `localStorage` — pembeli mana pun bisa membuka semua game tanpa membayar. Build penguji untuk HP sendiri: **`VITE_ALLOW_TEST_TOGGLE=1 VITE_LOCK_MODE=kunci npm run build`**. Di build tanpa env itu, override `localStorage` diabaikan dan `?test=1` tidak berefek (teruji).
 - Verifikasi cepat: buka `/kelompok/tk` & `/kelompok/sd1` saat mode `kunci` — hanya Hutan Hewan tanpa gembok & berlabel "GRATIS"; game lain menampilkan layar 🔒 + ajakan aktivasi. Sudah teruji headless 380×800 (buka↔kunci, persist setelah reload, TK & SD, layar gembok, Hutan Hewan tetap bisa dimainkan, nol error console).
@@ -145,7 +145,7 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, levels[]
 3. **Fase 3 — Migrasi:** porting game "Petualangan Pintar" (HTML standalone yang sudah ada) ke format engine sebagai game pertama kelompok TK.
 4. **Fase 4 — Konten:** produksi 10–15 game per kelompok via config + aset. Saat rilis 1 game gratis per kelompok (lihat "Rencana Akses Saat Launching").
 5. **Fase 5 — Monetisasi:** Cloud Function validasi kode, script generator kode, device limit, halaman aktivasi. ✅ **SELESAI** (2026-08-11, teruji di Firebase Emulator — lihat "Status Pengerjaan")
-6. **Fase 6 — Rilis:** buat project Firebase & deploy backend, sinkron bintang ke Firestore, halaman Privasi/S&K/refund, verifikasi email, analytics, lalu nyalakan mode `'kunci'` — deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli. **Langkah & prompt lengkapnya: `docs/fase-6-rilis-prompt.md`** (Bagian A = yang harus dikerjakan pemilik sendiri di Firebase Console). **Bagian A SELESAI 2026-09-16.** **Bagian B: langkah 2–5 SELESAI 2026-09-16; langkah 1 masih terhalang (Auth Email/Password belum aktif + kode asli tak ada di sesi), jadi langkah 6 (mode `'kunci'`) SENGAJA belum dinyalakan** — lihat "Status Pengerjaan".
+6. **Fase 6 — Rilis:** buat project Firebase & deploy backend, sinkron bintang ke Firestore, halaman Privasi/S&K/refund, verifikasi email, analytics, lalu nyalakan mode `'kunci'` — deploy Firebase Hosting, build versi demo untuk itch.io, sanity test di Android asli. **Langkah & prompt lengkapnya: `docs/fase-6-rilis-prompt.md`** (Bagian A = yang harus dikerjakan pemilik sendiri di Firebase Console). **Bagian A SELESAI 2026-09-16. Bagian B SELESAI 2026-09-22 — langkah 1–6 semuanya lewat, mode `'kunci'` MENYALA & ter-deploy.** Sisa Fase 6: build demo itch.io + sanity test di Android asli (tugas pemilik).
 
 Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyakan konfirmasi sebelum keputusan arsitektur besar di luar dokumen ini.
 
@@ -212,11 +212,11 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Git Bash (MSYS) menerjemahkan argumen yang BERBENTUK PATH**, bukan cuma env var: `node shot.mjs /privasi` sampai ke Node sebagai `C:/Program Files/Git/privasi` dan CDP menjawab "Cannot navigate to invalid URL". Kirim tanpa garis miring depan. Ini kerabat jebakan `DEPLOY_BASE` yang sudah tercatat di "Deploy Web".
   - Edge headless di Windows: `--window-size` DIABAIKAN (pakai `Emulation.setDeviceMetricsOverride`), dan **target yang sudah dipakai menggantung di panggilan berikutnya** — jalankan Edge baru per pengukuran. Untuk `Page.captureScreenshot` dengan `clip`, koordinatnya **relatif DOKUMEN**: tambahkan `window.scrollY`, kalau tidak hasilnya gambar kosong.
 
-  **Yang MASIH kurang sebelum mode `'kunci'` dinyalakan**
-  1. Pemilik menyalakan **Auth Email/Password** di Console.
-  2. Pemilik men-deploy backend ulang (`catatStat` baru + `firestore.rules` yang berubah) lewat **Actions → "Deploy backend"**, dry run dulu lalu sungguhan. **Ingat: dry run tidak menangkap masalah billing.**
-  3. Pemilik menguji alur pembeli dengan **2 kode asli** (batch `uji-sendiri2`).
-  4. Baru setelah itu langkah 6: `DEFAULT_LOCK_MODE = 'kunci'`, build produksi **TANPA** `VITE_ALLOW_TEST_TOGGLE`, dan deploy dengan **`SITE_URL=https://<domain>/ npm run build`**.
+  **~~Yang MASIH kurang sebelum mode `'kunci'` dinyalakan~~ — KEEMPATNYA SUDAH LEWAT 2026-09-22**
+  1. ~~Pemilik menyalakan **Auth Email/Password** di Console.~~ ✅
+  2. ~~Pemilik men-deploy backend ulang~~ ✅ (dry run dulu lalu sungguhan; **ingat: dry run tidak menangkap masalah billing**).
+  3. ~~Pemilik menguji alur pembeli dengan kode asli~~ ✅ — terbukti dari layar `/aktivasi` pemilik yang menulis "Sudah aktif: Playgroup dan TK".
+  4. ~~Langkah 6~~ ✅ — lihat entri langkah 6 di bawah.
 
 - **Fase 6 Bagian A (project Firebase & backend) — SELESAI** (2026-09-16, dikerjakan pemilik di Console + workflow, diverifikasi dari log GitHub Actions):
   - Project **`petualangan-pintar`** (sender id `766973669747`), paket **Blaze**. Auth **Email/Password** aktif. Firestore `(default)` **Firestore Native, `asia-southeast2`** — sama dengan region functions, dan **tidak bisa diubah lagi**.
@@ -1273,6 +1273,16 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **JEBAKAN yang sengaja dihindari: JANGAN memotong kelebihan karakter di kolom itu.** Kode format LAMA masih sah di server (`normalizeCode` menerima 6–32 karakter) dan pemilik masih memegang satu kode uji lama yang belum terpakai. Kolom yang menolaknya = pembeli mentok padahal sudah membayar. Karena itu masukan **lebih dari enam karakter dibiarkan apa adanya tanpa tanda hubung** (`TK-ABCD-2345` → `TKABCD2345`): aturan "hubung tiap tiga" akan menampilkannya `TKA-BCD-234-5`, terbaca seperti salah ketik.
   - **NOL deploy backend**: `normalizeCode` sudah menerima 6–32 karakter sejak Fase 5, jadi tak ada function yang berubah. Yang berubah cuma generator kode + satu kolom input.
   - Diuji dengan menjalankan `formatCode` **dari teks sumbernya sendiri** (bukan salinan di berkas tes) atas 12 masukan: ketik bertahap, tempel kode bertanda hubung, spasi di tengah, hapus mundur melewati tanda hubungnya, dan kode format lama. Generator diuji `--dry-run` dengan & tanpa `--prefix`.
+
+- **LANGKAH 6 — mode `'kunci'` MENYALA & TER-DEPLOY** (2026-09-22, keputusan pemilik *"lanjut langkah 6"*), teruji headless Chromium di **build produksi yang persis akan di-deploy** (`vite preview`, base & HashRouter sama dengan build Pages) pada 360×640 & 390×844 — **31 pemeriksaan lulus, nol error console**:
+  - `DEFAULT_LOCK_MODE = 'kunci'`. Sejak build ini, dari 20 game hanya **dua** yang terbuka tanpa login: **Hutan Hewan** (TK) & **Tulis Huruf** (SD Kelas 1 & 2). Sembilan kartu lain di tiap kelompok bergembok.
+  - **Dinyalakan hanya setelah alur pembeli terbukti jalan dengan kode ASLI** — layar `/aktivasi` pemilik yang menulis "Sudah aktif: Playgroup dan TK" adalah buktinya. Urutan ini MENGIKAT dan sudah ditulis sejak 2026-08-07: kalau mode dinyalakan lebih dulu lalu ada yang salah di alur pembeli, pembeli mentok di layar gembok **padahal sudah membayar**.
+  - **Build TANPA `VITE_ALLOW_TEST_TOGGLE`, dan itu terbukti dari bundelnya, bukan dari perintah build-nya:** `getLockMode()` di bundel yang tayang ter-minify jadi **`function Lh(){return Ph}`** — seluruh cabang override `localStorage` DIHAPUS mati oleh dead-code elimination, dan string `pp_test_mode_v1` **nol kali** muncul di seluruh bundel. Ini bukti yang jauh lebih kuat daripada "saya tidak memasang env itu". Diuji juga dari sisi perilaku: `localStorage.setItem('pp_lock_mode_v1','buka')` + `?test=1` **tidak membuka satu pun** game berbayar.
+  - **Kunci Firebase di bundel baru dibandingkan byte-per-byte dengan bundel yang SEDANG TAYANG** sebelum push. Ini penjaga tetap untuk jebakan yang sudah dua kali kena: `.env` gitignored, jadi sesi yang tidak punya salinannya akan membangun app dengan `isFirebaseConfigured === false` — login, daftar, Google, dan aktivasi mati semua, dan build-nya tetap "sukses". **Selalu bandingkan `AIzaSy…` dist vs branch Pages sebelum deploy.**
+  - **Nol berkas yatim antara `dist/` dan `app/` di branch Pages: 1086 = 1086** (aturan 2026-09-08). Artinya tidak ada lagi pekerjaan yang cuma hidup di branch Pages dan akan terhapus deploy berikutnya.
+  - **Cara mengecek label GRATIS yang benar** (pelajaran yang terulang): ambil judulnya dari **`href` kartu induk**, bukan dari `innerText` elemen pertama — label "GRATIS" itu elemen tersendiri, jadi pemeriksaan naif menghitung dengan benar tapi tidak membuktikan game MANA.
+  - **Pemeriksaan PERTAMA di tiap ukuran layar tetap dua penjaga alat ukur**: `window.innerWidth === lebar yang diminta` dan `#root` punya anak. Tanpa keduanya, "nol gembok" di halaman 404 akan lulus tanpa arti (dua jebakan lama: port `vite preview` yang diam-diam bergeser, dan `setDeviceMetricsOverride` yang diabaikan).
+  - **BELUM diuji di HP asli** — `github.io` diblokir kebijakan jaringan sesi, jadi yang bisa diverifikasi dari sini cuma isi branch Pages + build lokal. Konfirmasi akhir di HP tetap tugas pemilik: buka `/kelompok/sd1`, pastikan cuma Tulis Huruf yang terbuka, lalu masuk dengan akun yang sudah aktivasi TK dan pastikan game TK terbuka semua sementara SD tetap terkunci.
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
