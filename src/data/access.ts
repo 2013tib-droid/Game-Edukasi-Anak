@@ -21,8 +21,27 @@
 
 export type LockMode = 'buka' | 'kunci';
 
-/** Game yang tetap GRATIS saat mode 'kunci' (keputusan pemilik). */
-export const FREE_GAME_IDS: readonly string[] = ['hutan-hewan'];
+/**
+ * Game yang tetap GRATIS saat mode 'kunci' — SATU per kelompok.
+ *
+ * KEPUTUSAN PEMILIK 2026-09-22, menggantikan keputusan 2026-09-04 yang
+ * memberi DUA game gratis per kelompok.
+ *
+ * Yang mengikat di sini: **tiap kelompok berbayar wajib punya tepat satu
+ * pintu masuk.** Sampai 2026-09-22 daftar ini cuma berisi `hutan-hewan`,
+ * jadi SD Kelas 1 & 2 sama sekali tidak punya demo — orang tua harus
+ * membayar tanpa pernah melihat apa pun. Kalau nanti ada kelompok baru
+ * (`sd2`, `sd3`), tambahkan satu game kelompok itu ke sini juga.
+ *
+ * Kenapa `tulis-huruf` dan bukan game berhitung: dengan cuma dua game
+ * gratis di seluruh app, keduanya tidak boleh bertemplate sama. Hutan
+ * Hewan sudah tap-answer ("pilih jawaban yang benar"); kalau demo SD juga
+ * begitu, calon pembeli menyimpulkan ke-19 game isinya begitu semua.
+ * Tulis Huruf memperlihatkan anak menulis mengikuti rel pakai jari —
+ * kemampuan yang paling kasatmata bedanya dari game gratisan. Alasan
+ * lengkapnya di `docs/rencana-trial.md`.
+ */
+export const FREE_GAME_IDS: readonly string[] = ['hutan-hewan', 'tulis-huruf'];
 
 const envMode = import.meta.env.VITE_LOCK_MODE as string | undefined;
 
