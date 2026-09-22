@@ -4,7 +4,12 @@ import { ArrowLeftIcon } from '@/app/icons';
 import groupsData from '@/data/groups.json';
 import { useAuth } from '@/auth/AuthContext';
 import { isFirebaseConfigured } from '@/auth/firebase';
-import { errorMessage, fetchOwnedGroups, redeemActivationCode } from '@/auth/entitlements';
+import {
+  errorCode,
+  errorMessage,
+  fetchOwnedGroups,
+  redeemActivationCode,
+} from '@/auth/entitlements';
 
 function groupTitle(id: string): string {
   return groupsData.groups.find((g) => g.id === id)?.title ?? id;
@@ -30,19 +35,37 @@ export default function ActivationPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<{ group: string; already: boolean } | null>(null);
-  // Kelompok yang sudah dimiliki akun ini. `null` = belum diketahui; ini
-  // keterangan tambahan, jadi kegagalannya ditelan dan tidak pernah
-  // menghalangi penukaran kode.
+  // Kelompok yang sudah dimiliki akun ini. `null` = masih diperiksa.
+  //
+  // KETIGA KEADAANNYA HARUS BERSUARA — memeriksa, kosong, dan gagal.
+  // Percobaan pertama menelan kegagalan dan kekosongan diam-diam, dan
+  // hasilnya panel yang tidak menyebut kelompok sama sekali: orang tua yang
+  // BARU SAJA menukar kode melihat formulir kode kosong lagi dan tak punya
+  // cara tahu apakah aktivasinya tersimpan (laporan pemilik 2026-09-22).
+  // Itu kesalahan yang sama dengan yang diperbaiki panel ini, satu lapis
+  // lebih dalam: keadaan yang tidak digambar dianggap tidak ada.
   const [owned, setOwned] = useState<string[] | null>(null);
+  const [ownedError, setOwnedError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isFirebaseConfigured || !user) return;
     let alive = true;
-    void fetchOwnedGroups(user.uid)
+    setOwnedError(null);
+    // Batas tunggu: `getDoc` di jaringan HP yang tersendat bisa menggantung
+    // lama tanpa pernah menolak, dan "Memeriksa…" yang tak pernah selesai
+    // sama tak berartinya dengan diam.
+    const timeout = new Promise<never>((_, reject) =>
+      setTimeout(() => reject(new Error('timeout')), 8000),
+    );
+    void Promise.race([fetchOwnedGroups(user.uid), timeout])
       .then((groups) => {
-        if (alive) setOwned(groups);
+        if (alive) setOwned(groups as string[]);
       })
-      .catch(() => undefined);
+      .catch((err: unknown) => {
+        // Kegagalannya TIDAK menghalangi penukaran kode — formulirnya tetap
+        // hidup; yang berubah cuma panelnya mengaku tidak tahu.
+        if (alive) setOwnedError(errorCode(err) || 'gagal');
+      });
     return () => {
       alive = false;
     };
@@ -97,6 +120,8 @@ export default function ActivationPage() {
     );
   }
 
+  const hasGroups = owned !== null && owned.length > 0;
+
   // Email belum terverifikasi: tahan di sini, jangan biarkan kodenya
   // dibakar oleh akun yang emailnya salah ketik.
   if (isFirebaseConfigured && user && !emailVerified) {
@@ -108,8 +133,30 @@ export default function ActivationPage() {
       <Link className="back-link" to="/portal">
         <ArrowLeftIcon /> Kembali
       </Link>
-      <AccountPanel email={user?.email ?? null} owned={owned} onLogout={handleLogout} />
-      <h1>Masukkan Kode Aktivasi</h1>
+      <AccountPanel
+        email={user?.email ?? null}
+        owned={owned}
+        ownedError={ownedError}
+        onLogout={handleLogout}
+      />
+      {hasGroups && (
+        // Orang tua yang sudah menukar kode tidak boleh mendarat di formulir
+        // kode kosong — itu terbaca seperti aktivasinya tidak tersimpan.
+        // Yang sudah dibeli tampil DULU, lengkap dengan jalan masuk ke
+        // permainannya; formulirnya turun jadi "punya kode lain?".
+        <div className="owned-box">
+          <h2 className="owned-box__title">🎉 Kelompok kamu sudah aktif</h2>
+          <p className="owned-box__note">
+            Akun ini sudah bisa membuka semua game di dalamnya. Tidak perlu kode lagi.
+          </p>
+          {owned?.map((g) => (
+            <Link key={g} className="btn btn--primary" to={`/kelompok/${g}`}>
+              🎮 Main {groupTitle(g)}
+            </Link>
+          ))}
+        </div>
+      )}
+      <h1>{hasGroups ? 'Punya kode lain?' : 'Masukkan Kode Aktivasi'}</h1>
       <p>Kode dikirim setelah pembelian di Lynk.id / Mayar.id.</p>
       {!isFirebaseConfigured && (
         <p style={{ background: '#fff3cd', padding: 12, borderRadius: 12 }}>
@@ -155,10 +202,12 @@ export default function ActivationPage() {
 function AccountPanel({
   email,
   owned,
+  ownedError,
   onLogout,
 }: {
   email: string | null;
   owned: string[] | null;
+  ownedError: string | null;
   onLogout: () => void;
 }) {
   if (!isFirebaseConfigured) return null;
@@ -167,16 +216,35 @@ function AccountPanel({
       <div className="account-panel__who">
         Masuk sebagai
         <span className="account-panel__email">{email ?? 'akun ini'}</span>
-        {owned && owned.length > 0 && (
-          <p className="account-panel__groups">
-            ✅ Sudah aktif: {owned.map(groupTitle).join(' · ')}
-          </p>
-        )}
+        <Status owned={owned} error={ownedError} />
       </div>
       <button className="account-panel__out" type="button" onClick={onLogout}>
         Keluar
       </button>
     </div>
+  );
+}
+
+/**
+ * Satu baris yang SELALU mengatakan sesuatu. Kode errornya sengaja ikut
+ * ditampilkan: laporan masuk lewat tangkapan layar WhatsApp, dan
+ * "permission-denied" vs "unavailable" vs "timeout" itu tiga perbaikan yang
+ * berbeda — tanpa itu yang sampai ke pemilik cuma "kok gini".
+ */
+function Status({ owned, error }: { owned: string[] | null; error: string | null }) {
+  if (error) {
+    return (
+      <p className="account-panel__warn">
+        ⚠️ Tidak bisa memeriksa kelompok ({error}). Periksa koneksinya, lalu muat ulang.
+      </p>
+    );
+  }
+  if (owned === null) return <p className="account-panel__note">Memeriksa kelompok…</p>;
+  if (owned.length === 0) {
+    return <p className="account-panel__note">Belum ada kelompok aktif di akun ini.</p>;
+  }
+  return (
+    <p className="account-panel__groups">✅ Sudah aktif: {owned.map(groupTitle).join(' · ')}</p>
   );
 }
 

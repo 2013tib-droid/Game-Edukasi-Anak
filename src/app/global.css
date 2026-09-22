@@ -290,3 +290,44 @@ button {
 .account-panel__out:active {
   transform: translateY(1px);
 }
+
+/* Baris status di panel akun: "Memeriksa…", "belum ada kelompok", atau
+   kegagalan berikut kode errornya. Sengaja ADA di ketiga keadaan — panel
+   yang diam saat pembacaan gagal membuat orang tua yang baru menukar kode
+   mengira aktivasinya hilang. */
+.account-panel__note {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: #8a7a63;
+}
+.account-panel__warn {
+  margin: 8px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #b3541a;
+}
+
+/* Kelompok yang SUDAH dibeli, tampil di atas formulir kode. Warna hijau
+   lembut (bukan putih seperti panel akun) supaya terbaca sebagai kabar
+   baik, dan tombolnya tetap `.btn` penuh — ini jalan utama orang tua yang
+   sudah membayar. */
+.owned-box {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 22px;
+  padding: 16px 14px;
+  border: 1px solid rgba(45, 122, 45, 0.25);
+  border-radius: 18px;
+  background: rgba(232, 246, 236, 0.85);
+}
+.owned-box__title {
+  margin: 0;
+  font-size: 19px;
+  color: #2d7a2d;
+}
+.owned-box__note {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #3a2e20;
+}
