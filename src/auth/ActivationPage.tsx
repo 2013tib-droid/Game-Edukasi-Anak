@@ -1,10 +1,10 @@
-import { useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState, type FormEvent } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@/app/icons';
 import groupsData from '@/data/groups.json';
 import { useAuth } from '@/auth/AuthContext';
 import { isFirebaseConfigured } from '@/auth/firebase';
-import { errorMessage, redeemActivationCode } from '@/auth/entitlements';
+import { errorMessage, fetchOwnedGroups, redeemActivationCode } from '@/auth/entitlements';
 
 function groupTitle(id: string): string {
   return groupsData.groups.find((g) => g.id === id)?.title ?? id;
@@ -24,11 +24,37 @@ function groupTitle(id: string): string {
  * "Aktifkan" dan ditolak tanpa tahu sebabnya.
  */
 export default function ActivationPage() {
-  const { user, emailVerified, sendVerification, refreshUser } = useAuth();
+  const { user, emailVerified, sendVerification, refreshUser, logout } = useAuth();
+  const navigate = useNavigate();
   const [code, setCode] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<{ group: string; already: boolean } | null>(null);
+  // Kelompok yang sudah dimiliki akun ini. `null` = belum diketahui; ini
+  // keterangan tambahan, jadi kegagalannya ditelan dan tidak pernah
+  // menghalangi penukaran kode.
+  const [owned, setOwned] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    if (!isFirebaseConfigured || !user) return;
+    let alive = true;
+    void fetchOwnedGroups(user.uid)
+      .then((groups) => {
+        if (alive) setOwned(groups);
+      })
+      .catch(() => undefined);
+    return () => {
+      alive = false;
+    };
+  }, [user, done]);
+
+  function handleLogout() {
+    // Pindah DULU, baru keluar. Kalau urutannya dibalik, `ProtectedRoute`
+    // sempat melihat `user` sudah null dan melempar ke /masuk — formulir
+    // kosong yang justru ingin kita hindari di seluruh perubahan ini.
+    navigate('/', { replace: true });
+    void logout();
+  }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -82,6 +108,7 @@ export default function ActivationPage() {
       <Link className="back-link" to="/portal">
         <ArrowLeftIcon /> Kembali
       </Link>
+      <AccountPanel email={user?.email ?? null} owned={owned} onLogout={handleLogout} />
       <h1>Masukkan Kode Aktivasi</h1>
       <p>Kode dikirim setelah pembelian di Lynk.id / Mayar.id.</p>
       {!isFirebaseConfigured && (
@@ -113,6 +140,42 @@ export default function ActivationPage() {
         Huruf besar/kecil dan tanda hubung tidak masalah — yang penting huruf dan angkanya
         benar.
       </p>
+    </div>
+  );
+}
+
+/**
+ * "Akun mana yang sedang masuk" — satu-satunya tempat di app ini yang
+ * menjawabnya, dan satu-satunya jalan keluar yang disengaja.
+ *
+ * Kelompok yang sudah dimiliki ikut ditampilkan supaya orang tua yang sudah
+ * menukar kode tidak melihat formulir kode kosong lalu mengira aktivasinya
+ * tidak tersimpan.
+ */
+function AccountPanel({
+  email,
+  owned,
+  onLogout,
+}: {
+  email: string | null;
+  owned: string[] | null;
+  onLogout: () => void;
+}) {
+  if (!isFirebaseConfigured) return null;
+  return (
+    <div className="account-panel">
+      <div className="account-panel__who">
+        Masuk sebagai
+        <span className="account-panel__email">{email ?? 'akun ini'}</span>
+        {owned && owned.length > 0 && (
+          <p className="account-panel__groups">
+            ✅ Sudah aktif: {owned.map(groupTitle).join(' · ')}
+          </p>
+        )}
+      </div>
+      <button className="account-panel__out" type="button" onClick={onLogout}>
+        Keluar
+      </button>
     </div>
   );
 }
