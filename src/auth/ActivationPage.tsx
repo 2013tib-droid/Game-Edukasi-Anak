@@ -6,6 +6,27 @@ import { useAuth } from '@/auth/AuthContext';
 import { isFirebaseConfigured } from '@/auth/firebase';
 import { errorMessage, fetchOwnedGroups, redeemActivationCode } from '@/auth/entitlements';
 
+/**
+ * Menyisipkan tanda hubungnya sendiri, supaya orang tua cukup mengetik huruf
+ * dan angkanya (permintaan pemilik 2026-09-22). Kode sekarang enam karakter,
+ * dicetak sebagai K7P-M4X.
+ *
+ * YANG LEBIH DARI ENAM KARAKTER SENGAJA DIBIARKAN APA ADANYA, tanpa tanda
+ * hubung: kode format lama (TK-ABCD-2345, sepuluh karakter) masih sah di
+ * server, dan aturan "hubung tiap tiga" akan menampilkannya jadi
+ * TKA-BCD-234-5 — terbaca seperti kode yang salah ketik. Dan JANGAN PERNAH
+ * memotong kelebihannya: kolom yang menolak kode lama berarti pembeli mentok
+ * padahal sudah membayar.
+ *
+ * Pemisahnya murni tampilan; server membuang semua pemisah sebelum
+ * mencocokkan (`normalizeCode` di functions/src/index.ts).
+ */
+export function formatCode(raw: string): string {
+  const clean = raw.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (clean.length > 6) return clean;
+  return clean.length > 3 ? `${clean.slice(0, 3)}-${clean.slice(3)}` : clean;
+}
+
 function groupTitle(id: string): string {
   return groupsData.groups.find((g) => g.id === id)?.title ?? id;
 }
@@ -119,9 +140,9 @@ export default function ActivationPage() {
       <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 16 }}>
         <input
           className="input"
-          placeholder="Contoh: TK-ABCD-2345"
+          placeholder="Contoh: K7P-M4X"
           value={code}
-          onChange={(e) => setCode(e.target.value.toUpperCase())}
+          onChange={(e) => setCode(formatCode(e.target.value))}
           autoComplete="off"
           autoCapitalize="characters"
           spellCheck={false}
@@ -137,8 +158,8 @@ export default function ActivationPage() {
         </button>
       </form>
       <p style={{ fontSize: 15, opacity: 0.75 }}>
-        Huruf besar/kecil dan tanda hubung tidak masalah — yang penting huruf dan angkanya
-        benar.
+        Ketik huruf dan angkanya saja — tanda hubungnya muncul sendiri. Huruf besar/kecil
+        tidak masalah.
       </p>
     </div>
   );

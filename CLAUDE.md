@@ -822,7 +822,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
   **Kode aktivasi**
   - Dibuat lewat **Actions → "Buat kode aktivasi"** (workflow_dispatch saja, tidak pernah otomatis dari push: tiap jalan ia mencetak barang jualan). Hasilnya CSV sebagai artifact, retensi 7 hari.
-  - Alfabet **tanpa I, L, O, 0, 1** — tiap karakter ambigu berubah jadi tiket "kode saya tidak bisa" di WhatsApp. Bentuk tampilan `TK-ABCD-2345`, id dokumennya versi tanpa tanda hubung.
+  - Alfabet **tanpa I, L, O, 0, 1** — tiap karakter ambigu berubah jadi tiket "kode saya tidak bisa" di WhatsApp. Bentuk tampilan **`K7P-M4X`** (sejak 2026-09-22; dulu `TK-ABCD-2345`), id dokumennya versi tanpa tanda hubung.
   - `normalizeCode()` di functions **harus sama persis** dengan `normalize()` di `generate-codes.mjs`. Orang tua boleh mengetik huruf kecil & tanda hubung sesukanya (teruji).
   - Generator memakai `batch.create()`, bukan `set()` — menimpa dokumen lama berarti menghidupkan kembali kode yang sudah dipakai pembeli.
 
@@ -1263,6 +1263,16 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Diisi SEKARANG walau mode masih `'buka'`.** Selama `DEFAULT_LOCK_MODE = 'buka'` daftar ini tidak dipakai sama sekali (terbukti: 12 pemeriksaan di build `'buka'` — nol gembok, nol label GRATIS di kedua kelompok), jadi tidak ada risikonya. Untungnya: **langkah 6 saat launching tinggal SATU baris**, bukan dua yang bisa terlupa sebelah.
   - Terbukti di build `VITE_LOCK_MODE=kunci`: `/kelompok/tk` & `/kelompok/sd1` masing-masing **tepat satu** kartu berlabel GRATIS tanpa gembok (9 kartu lain bergembok di tiap kelompok). Judulnya **dilihat lewat tangkapan layar**, bukan cuma dihitung — pemeriksaan otomatisnya sempat mengambil teks "GRATIS" (label itu elemen sendiri) alih-alih judul kartunya, jadi angkanya benar tapi tidak membuktikan game MANA. Kalau memeriksa kartu portal lagi, ambil judulnya dari kartu induk label itu, bukan dari `innerText` elemen pertama.
   - `docs/fase-6-uji-di-hp.md` langkah 6 ikut dibetulkan: dulu tertulis verifikasi akhirnya *"hanya Hutan Hewan"* — kalau diikuti apa adanya, SD rilis tanpa demo.
+
+- **Kode aktivasi jadi ENAM karakter (`K7P-M4X`) + kolomnya menyisipkan tanda hubungnya sendiri** (2026-09-22, keputusan pemilik: *"6 karakter huruf+angka aja, dan kalo ada tanda (-) sekalian isikan di inputan"* — dari pertanyaan "bisa dibikin kayak kode verifikasi ngga?"):
+  - **Bentuk lama `TK-ABCD-2345` (10 karakter + awalan kelompok) diganti `K7P-M4X`.** Alfabetnya tidak berubah (31 huruf/angka tanpa I·L·O·0·1), jadi 31⁶ = **887 juta** kemungkinan.
+  - **Yang membuat enam karakter aman BUKAN angkanya, melainkan rem di server**: 10 kegagalan per jam per akun (`redeem_attempts`, tertutup dari client). Menebak satu kode butuh puluhan juta akun. **Kalau rem itu pernah dilepas atau dilonggarkan, panjang kodenya WAJIB ditinjau ulang** — catatan ini ditulis juga di kepala `generate-codes.mjs`.
+  - **Enam ANGKA murni (sejuta kemungkinan) DITOLAK** walau itu yang paling mirip kode OTP: remnya per-AKUN, jadi penebak tinggal membuat akun baru. Kode OTP aman karena hidupnya 5 menit dan terikat satu sesi; kode aktivasi hidup selamanya sampai dipakai.
+  - **Awalan kelompok (`TK-`/`SD-`) DILEPAS** supaya kodenya benar-benar enam karakter. Kelompoknya tidak hilang: ada di kolom `group` CSV, di Firestore, dan di layar "Berhasil!" yang menyebut nama kelompoknya. `--prefix=TK` tetap didukung kalau suatu saat perlu terbaca dari kodenya sendiri.
+  - **`formatCode()` di `ActivationPage` menyisipkan tanda hubungnya saat diketik** — orang tua cukup mengetik huruf & angkanya. Murni tampilan; server sudah membuang semua pemisah sebelum mencocokkan (`normalizeCode`).
+  - **JEBAKAN yang sengaja dihindari: JANGAN memotong kelebihan karakter di kolom itu.** Kode format LAMA masih sah di server (`normalizeCode` menerima 6–32 karakter) dan pemilik masih memegang satu kode uji lama yang belum terpakai. Kolom yang menolaknya = pembeli mentok padahal sudah membayar. Karena itu masukan **lebih dari enam karakter dibiarkan apa adanya tanpa tanda hubung** (`TK-ABCD-2345` → `TKABCD2345`): aturan "hubung tiap tiga" akan menampilkannya `TKA-BCD-234-5`, terbaca seperti salah ketik.
+  - **NOL deploy backend**: `normalizeCode` sudah menerima 6–32 karakter sejak Fase 5, jadi tak ada function yang berubah. Yang berubah cuma generator kode + satu kolom input.
+  - Diuji dengan menjalankan `formatCode` **dari teks sumbernya sendiri** (bukan salinan di berkas tes) atas 12 masukan: ketik bertahap, tempel kode bertanda hubung, spasi di tengah, hapus mundur melewati tanda hubungnya, dan kode format lama. Generator diuji `--dry-run` dengan & tanpa `--prefix`.
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
