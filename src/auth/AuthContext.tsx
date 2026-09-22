@@ -139,7 +139,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(u);
         setLoading(false);
       });
-    })();
+    })().catch(() => {
+      // Chunk SDK-nya gagal diunduh (sinyal HP putus di tengah jalan).
+      // WAJIB melepas `loading`: yang menunggunya bukan cuma
+      // `ProtectedRoute` (yang akan menahan SplashScreen selamanya), tapi
+      // juga tombol akun di `TopBar` — yang berarti landing kehilangan
+      // satu-satunya jalan ke area orang tua tanpa pernah bilang kenapa.
+      // Diperlakukan sebagai "belum masuk": layar masuk masih bisa dibuka,
+      // dan permainan gratis tidak pernah menyentuh lapisan ini.
+      if (!cancelled) setLoading(false);
+    });
 
     return () => {
       cancelled = true;
