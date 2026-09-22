@@ -14,7 +14,7 @@
  * Pilihan:
  *   --group=tk|sd1   kelompok yang dibuka kode ini (wajib)
  *   --count=50       berapa kode dibuat (wajib, maksimal 500 sekali jalan)
- *   --prefix=TK      awalan yang terlihat (bawaan: huruf besar dari group)
+ *   --prefix=TK      awalan yang terlihat (bawaan: TANPA awalan)
  *   --batch=juli     penanda batch, untuk pembukuan
  *   --out=kode.csv   simpan CSV ke file
  *   --dry-run        cetak contoh kode TANPA menulis ke Firestore
@@ -32,7 +32,21 @@ const GROUPS = ['tk', 'sd1'];
  * jadi tiket "kode saya tidak bisa" di WhatsApp pemilik.
  */
 const ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
-const BLOCK = 4;
+
+/**
+ * ENAM karakter, dua blok tiga — sependek kode verifikasi (keputusan pemilik
+ * 2026-09-22, menggantikan 2 blok empat berawalan TK-/SD-).
+ *
+ * 31^6 = 887 juta kemungkinan. Itu aman BUKAN karena angkanya besar sendiri,
+ * melainkan karena penukaran kode direm di server: 10 kegagalan per jam per
+ * akun (`redeem_attempts`, lihat functions/src/index.ts). Menebak satu kode
+ * butuh puluhan juta akun. **Kalau rem itu pernah dilepas atau dilonggarkan,
+ * panjang kode ini harus ditinjau ulang.**
+ *
+ * Enam ANGKA saja (sejuta kemungkinan) sengaja TIDAK dipakai: remnya per-akun,
+ * jadi penebak tinggal membuat akun baru.
+ */
+const BLOCK = 3;
 const BLOCKS = 2;
 
 function arg(name, fallback = undefined) {
@@ -47,10 +61,17 @@ function randomBlock() {
   return out;
 }
 
-/** Bentuk tampilan: TK-ABCD-2345. Id dokumennya versi tanpa tanda hubung. */
+/**
+ * Bentuk tampilan: K7P-M4X (atau TK-K7P-M4X kalau --prefix diisi).
+ * Id dokumennya versi tanpa tanda hubung.
+ *
+ * Tanda hubungnya cuma supaya kodenya enak dibaca & disalin; orang tua tidak
+ * perlu mengetiknya (kolom di /aktivasi menyisipkannya sendiri, dan server
+ * membuang semua pemisah sebelum mencocokkan).
+ */
 function makeCode(prefix) {
   const blocks = Array.from({ length: BLOCKS }, randomBlock);
-  return `${prefix}-${blocks.join('-')}`;
+  return prefix ? `${prefix}-${blocks.join('-')}` : blocks.join('-');
 }
 
 /** HARUS sama persis dengan normalizeCode() di functions/src/index.ts. */
@@ -67,14 +88,18 @@ const group = arg('group');
 const count = Number(arg('count'));
 const dryRun = arg('dry-run') === true;
 const batch = arg('batch', new Date().toISOString().slice(0, 10));
-const prefix = String(arg('prefix', group === 'sd1' ? 'SD' : 'TK')).toUpperCase();
+// Bawaannya TANPA awalan: kodenya sengaja sependek mungkin, dan kelompoknya
+// sudah tercatat di kolom `group` CSV, di Firestore, dan di layar "Berhasil!"
+// yang menyebut nama kelompoknya. Isi --prefix=TK kalau suatu saat perlu
+// terbaca kelompoknya dari kodenya sendiri.
+const prefix = String(arg('prefix', '')).toUpperCase();
 const out = arg('out');
 
 if (!GROUPS.includes(group)) fail(`--group harus salah satu dari: ${GROUPS.join(', ')}`);
 if (!Number.isInteger(count) || count < 1 || count > 500) {
   fail('--count harus bilangan bulat 1–500');
 }
-if (!/^[A-Z]{1,6}$/.test(prefix)) fail('--prefix hanya huruf A–Z, maksimal 6');
+if (prefix && !/^[A-Z]{1,6}$/.test(prefix)) fail('--prefix hanya huruf A–Z, maksimal 6');
 
 // --- Buat kode unik ---------------------------------------------------------
 

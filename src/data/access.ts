@@ -16,21 +16,50 @@
  *   1. Saklar di layar (mode penguji) — lihat `LockToggle`, tersimpan di
  *      localStorage per perangkat. Ini yang dipakai untuk testing.
  *   2. Env saat build: `VITE_LOCK_MODE=kunci npm run build`.
- *   3. `DEFAULT_LOCK_MODE` di bawah — ubah saat launching.
+ *   3. `DEFAULT_LOCK_MODE` di bawah — sudah 'kunci' sejak launching
+ *      (2026-09-22).
  */
 
 export type LockMode = 'buka' | 'kunci';
 
-/** Game yang tetap GRATIS saat mode 'kunci' (keputusan pemilik). */
-export const FREE_GAME_IDS: readonly string[] = ['hutan-hewan'];
+/**
+ * Game yang tetap GRATIS saat mode 'kunci' — SATU per kelompok.
+ *
+ * KEPUTUSAN PEMILIK 2026-09-22, menggantikan keputusan 2026-09-04 yang
+ * memberi DUA game gratis per kelompok.
+ *
+ * Yang mengikat di sini: **tiap kelompok berbayar wajib punya tepat satu
+ * pintu masuk.** Sampai 2026-09-22 daftar ini cuma berisi `hutan-hewan`,
+ * jadi SD Kelas 1 & 2 sama sekali tidak punya demo — orang tua harus
+ * membayar tanpa pernah melihat apa pun. Kalau nanti ada kelompok baru
+ * (`sd2`, `sd3`), tambahkan satu game kelompok itu ke sini juga.
+ *
+ * Kenapa `tulis-huruf` dan bukan game berhitung: dengan cuma dua game
+ * gratis di seluruh app, keduanya tidak boleh bertemplate sama. Hutan
+ * Hewan sudah tap-answer ("pilih jawaban yang benar"); kalau demo SD juga
+ * begitu, calon pembeli menyimpulkan ke-19 game isinya begitu semua.
+ * Tulis Huruf memperlihatkan anak menulis mengikuti rel pakai jari —
+ * kemampuan yang paling kasatmata bedanya dari game gratisan. Alasan
+ * lengkapnya di `docs/rencana-trial.md`.
+ */
+export const FREE_GAME_IDS: readonly string[] = ['hutan-hewan', 'tulis-huruf'];
 
 const envMode = import.meta.env.VITE_LOCK_MODE as string | undefined;
 
 /**
- * Mode bawaan aplikasi. Pra-rilis 'buka' supaya semua game bisa dicoba.
- * SAAT LAUNCHING: ganti jadi 'kunci' (atau build dengan VITE_LOCK_MODE=kunci).
+ * Mode bawaan aplikasi. **'kunci' sejak 2026-09-22 (launching)** — hanya game
+ * di `FREE_GAME_IDS` yang terbuka, sisanya minta login + kode aktivasi.
+ *
+ * Dinyalakan setelah alur pembeli terbukti jalan ujung-ke-ujung dengan kode
+ * ASLI di project sungguhan (Fase 6 Bagian B langkah 1). Urutan itu MENGIKAT:
+ * menyalakannya lebih dulu berarti pembeli bisa mentok di layar gembok padahal
+ * sudah membayar.
+ *
+ * Kembalikan ke 'buka' hanya kalau alur pembelinya sendiri rusak — itu tombol
+ * darurat, bukan saklar kenyamanan. Untuk mencoba-coba pakai build penguji
+ * (`VITE_ALLOW_TEST_TOGGLE=1`), jangan mengubah baris ini.
  */
-export const DEFAULT_LOCK_MODE: LockMode = isLockMode(envMode) ? envMode : 'buka';
+export const DEFAULT_LOCK_MODE: LockMode = isLockMode(envMode) ? envMode : 'kunci';
 
 /**
  * Apakah build ini boleh menampilkan saklar penguji 🔓/🔒 dan menuruti

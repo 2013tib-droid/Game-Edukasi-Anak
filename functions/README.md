@@ -49,9 +49,15 @@ GOOGLE_APPLICATION_CREDENTIALS=kunci.json \
 
 Coba dulu dengan `--dry-run` untuk melihat bentuk kodenya tanpa menyimpan.
 
-Kode memakai huruf & angka yang tidak bisa tertukar (tanpa I, L, O, 0, 1) —
-jangan tambahkan karakter ambigu, tiap satu berubah jadi tiket "kode saya tidak
-bisa" di WhatsApp.
+Bentuknya **enam karakter**, dicetak `K7P-M4X`. Huruf & angka yang tidak bisa
+tertukar (tanpa I, L, O, 0, 1) — jangan tambahkan karakter ambigu, tiap satu
+berubah jadi tiket "kode saya tidak bisa" di WhatsApp.
+
+Enam karakter itu aman karena penukaran direm di server (10 kegagalan per jam
+per akun). Kalau rem itu dilonggarkan, panjang kodenya harus ditinjau ulang.
+
+Orang tua tidak perlu mengetik tanda hubungnya: kolom di `/aktivasi`
+menyisipkannya sendiri, dan server membuang semua pemisah sebelum mencocokkan.
 
 ## Deploy
 

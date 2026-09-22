@@ -92,8 +92,13 @@ Hanya setelah nomor 2 di atas lolos:
    pembeli bisa membuka semua game sendiri.
 3. Deploy dengan `SITE_URL=https://<domain>/` supaya gambar pratinjau link
    WhatsApp/TikTok tidak menarik dari domain lama.
-4. Verifikasi akhir: `/kelompok/tk` & `/kelompok/sd1` — hanya Hutan Hewan
-   tanpa gembok dan berlabel GRATIS.
+4. Verifikasi akhir: `/kelompok/tk` & `/kelompok/sd1` — **masing-masing
+   tepat SATU game** tanpa gembok dan berlabel GRATIS: **Hutan Hewan** di TK,
+   **Tulis Huruf** di SD.
+
+   Catatan: langkah ini dulu tertulis "hanya Hutan Hewan", yang keliru —
+   kalau diikuti apa adanya, SD rilis tanpa demo sama sekali. `FREE_GAME_IDS`
+   sudah diisi 2026-09-22, jadi langkah 1 di atas benar-benar satu baris.
 
 ---
 
