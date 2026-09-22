@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '@/auth/AuthContext';
 import groupsData from '@/data/groups.json';
 import { getTotalStars } from '@/engine/core/progress';
 import MascotCard from '@/engine/ui/Mascot';
@@ -32,15 +31,9 @@ function GroupPic({ pic, emoji }: { pic?: string; emoji: string }) {
 // Portal home: pick a group. Kid-facing, so only big friendly buttons —
 // account actions stay small and lead to the parent area.
 export default function HomePage() {
-  const { user } = useAuth();
-
   return (
     <>
-      <TopBar
-        back
-        accountTo={user ? '/aktivasi' : '/masuk'}
-        accountLabel={user ? 'Aktivasi' : 'Orang Tua'}
-      />
+      <TopBar back account />
       <div className="page" style={{ textAlign: 'center' }}>
       {/* Same logo badge as the landing page (public/assets/logo.svg). */}
       <img

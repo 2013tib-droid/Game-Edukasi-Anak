@@ -1,12 +1,12 @@
 import { useState, type FormEvent } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/auth/AuthContext';
 import GoogleSignInButton from '@/auth/GoogleSignInButton';
 import { ArrowLeftIcon } from '@/app/icons';
 
 // Parent-area screen: plain form, Indonesian copy, generous touch targets.
 export default function LoginPage() {
-  const { login, resetPassword, configured } = useAuth();
+  const { user, loading, login, resetPassword, configured } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState('');
@@ -22,7 +22,6 @@ export default function LoginPage() {
     setBusy(true);
     try {
       await login(email, password);
-      const from = (location.state as { from?: string } | null)?.from ?? '/portal';
       navigate(from, { replace: true });
     } catch {
       setError('Email atau kata sandi salah. Coba lagi ya.');
@@ -69,6 +68,15 @@ export default function LoginPage() {
     setBusy(false);
   }
 
+  const from = (location.state as { from?: string } | null)?.from ?? '/portal';
+
+  // Sudah masuk? JANGAN tampilkan formulirnya. Kolom email & kata sandi yang
+  // kosong adalah tanda "kamu keluar" yang paling kuat di seluruh app —
+  // orang tua yang baru saja menukar kode lalu menekan tombol akun akan
+  // menyimpulkan sesinya hilang, padahal tidak ada apa pun di app ini yang
+  // pernah mengeluarkan akun (laporan pemilik 2026-09-22).
+  if (!loading && user) return <Navigate to={from} replace />;
+
   return (
     <div className="page" style={{ maxWidth: 420 }}>
       <Link className="back-link" to="/">
@@ -83,7 +91,7 @@ export default function LoginPage() {
       <div style={{ display: 'grid', gap: 16 }}>
         <GoogleSignInButton
           label="Masuk dengan Google"
-          to={(location.state as { from?: string } | null)?.from ?? '/portal'}
+          to={from}
           busy={busy}
           setBusy={setBusy}
           onError={setError}

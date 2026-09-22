@@ -88,7 +88,7 @@ export default function LandingPage() {
 
   return (
     <>
-      <TopBar accountTo="/masuk" accountLabel="Orang Tua" />
+      <TopBar account />
       <div className="landing">
         <img className="logo" src={logo} alt="" width={112} height={112} />
       <h1>Petualangan Pintar</h1>
