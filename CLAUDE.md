@@ -41,7 +41,10 @@ Prinsip: **jual AKSES, bukan file.** Game hanya bisa dimainkan setelah login dan
 
 Alur pembeli:
 1. Beli kelompok di Lynk.id/Mayar.id → menerima **kode aktivasi unik** (dikirim otomatis oleh platform penjualan sebagai "produk digital" berupa kode).
-2. Buka portal → daftar/login dengan **Firebase Auth (email + password)**.
+2. Buka portal → daftar/login dengan **Firebase Auth**: **email + kata sandi**,
+   atau **"Masuk dengan Google"** (sejak 2026-09-21 — lihat "Masuk dengan Google"
+   di Status Pengerjaan). Keduanya hidup berdampingan; jalur email TIDAK boleh
+   dihapus.
 3. Masukkan kode aktivasi → Cloud Function memvalidasi kode di Firestore → tandai kode terpakai → set klaim akses kelompok di dokumen user.
 4. Game kelompok itu terbuka untuk akun tersebut.
 
@@ -201,6 +204,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **ID token untuk memanggil function langsung jangan diambil dari `localStorage`**: Firebase menyimpan sesi di **IndexedDB**, jadi yang didapat token kosong — dan "penolakan" yang dihasilkan membuktikan hal yang salah (`UNAUTHENTICATED`, bukan `FAILED_PRECONDITION`). Ambil lewat REST emulator Auth.
   - **Input React tidak bisa diisi dengan `el.value = …`**: pakai setter asli `HTMLInputElement.prototype.value` lalu `dispatchEvent(new Event('input', { bubbles: true }))`.
   - **`vite preview` mengikat IPv6**: `curl http://127.0.0.1:<port>` menjawab **000**, `http://localhost:<port>` menjawab 200. Jangan salah sangka servernya mati.
+  - **`vite preview` DIAM-DIAM PINDAH PORT kalau port yang diminta terpakai** ("Port 4174 is in use, trying another one…" → 4175). Menguji di port yang salah berarti browsernya membuka halaman 404 — dan pemeriksaan berbentuk "nol X di layar" atau "SEMUA tautan memakai Y" akan **LULUS tanpa arti** di halaman kosong. Baca port sungguhannya dari log preview, dan pasang satu penjaga "halamannya benar-benar termuat" (mis. `#root` punya anak) sebagai pemeriksaan PERTAMA. Kerabat pelajaran lama: kalau sekumpulan pemeriksaan berubah serentak, curigai dulu alat ukurnya.
   - **Git Bash (MSYS) menerjemahkan argumen yang BERBENTUK PATH**, bukan cuma env var: `node shot.mjs /privasi` sampai ke Node sebagai `C:/Program Files/Git/privasi` dan CDP menjawab "Cannot navigate to invalid URL". Kirim tanpa garis miring depan. Ini kerabat jebakan `DEPLOY_BASE` yang sudah tercatat di "Deploy Web".
   - Edge headless di Windows: `--window-size` DIABAIKAN (pakai `Emulation.setDeviceMetricsOverride`), dan **target yang sudah dipakai menggantung di panggilan berikutnya** — jalankan Edge baru per pengukuran. Untuk `Page.captureScreenshot` dengan `clip`, koordinatnya **relatif DOKUMEN**: tambahkan `window.scrollY`, kalau tidak hasilnya gambar kosong.
 
@@ -1188,6 +1192,35 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Tepat SATU baris narasi baru**, scope `ejaan-jitu` (aman di-`only:`). Dibandingkan sebelum vs sesudah lewat `scripts/narration-lines.json`: 876 baris tetap 876, nol baris pindah scope (pelajaran render #9 & #11). `.github/render-request.txt` = **render #17**. mp3 "Ini desa…" jadi yatim — dibiarkan menganggur, dibuang sekalian lain kali lewat tombol `prune`.
   - **Sampai render #17 jalan, baris "Ini gunung…" jatuh ke suara HP** — perilaku cadangan yang memang dirancang, bukan bug.
 
+- **"Masuk dengan Google" ditambahkan di layar Masuk & Daftar** (2026-09-21, permintaan pemilik dari tangkapan layar layar Daftar: *"Bisa ngga login nya via google?"*), teruji headless Chromium pada build produksi + Firebase Emulator Suite — **46 pemeriksaan lulus, nol error console, nol scroll mendatar**:
+
+  **Tambahan, BUKAN pengganti — dan jalur email tidak boleh dihapus**
+  - Keputusan produk "Firebase Auth (email + password)" tetap berdiri; Google jadi jalur KEDUA di layar yang sama. Alasannya keras, bukan selera: **Google menolak alur OAuth di dalam browser-dalam-aplikasi** (WhatsApp, Instagram, TikTok) dengan `disallowed_useragent` — dan promosinya justru dari sana. Di situ formulir email adalah satu-satunya jalan masuk yang tersisa.
+  - Yang didapat dari jalur Google: **akun Google datang dengan email yang SUDAH terverifikasi**, jadi gerbang `requireVerifiedEmail` di `redeemActivationCode` lolos seketika — orang tua yang baru membayar tidak perlu menunggu email verifikasi yang sering mendarat di folder spam sebelum kodenya bisa ditukar. Dan tidak ada kata sandi baru yang bisa dilupakan, jadi tiket "kata sandi saya lupa" di WhatsApp ikut berkurang.
+  - Kode aktivasi, batas 3 perangkat, sinkron bintang, dan `firestore.rules` **tidak disentuh sama sekali**: semuanya berkunci pada `uid`, dan uid tidak peduli caranya masuk.
+  - **Risiko migrasi NOL**: provider Email/Password masih MATI di project sungguhan (lihat entri Fase 6 Bagian B), jadi sampai hari ini **belum ada satu pun akun yang bisa dibuat**. Tidak ada akun lama yang bisa bentrok emailnya dengan akun Google.
+
+  **BELUM AKTIF SAMPAI PEMILIK MENYALAKANNYA DI CONSOLE** — kodenya sudah siap, tapi providernya belum ada. Dua langkahnya ditulis di `docs/fase-6-rilis-prompt.md` **A1 langkah 3b**: (1) Authentication → Sign-in method → Google → Enable, (2) Authentication → Settings → Authorized domains + `2013tib-droid.github.io` dan domain produksi nanti. Selama belum, tombolnya menjawab kalimat yang **sengaja menyebut "belum aktif"** supaya laporan yang masuk ke WhatsApp langsung bisa dikenali pemiliknya, bukan jadi "Google-nya error".
+
+  **Kodenya**
+  - `loginWithGoogle()` & `finishGoogleRedirect()` di `AuthContext` — semua impor Firebase tetap terkurung di lapisan auth, dan **tetap lazy**: entry bundle naik **+1,12 kB mentah / +0,40 kB gzip** (58,56 → 58,96 kB), terukur dengan membangun dua kali (baseline vs sesudahnya), bukan ditaksir.
+  - **`src/auth/GoogleSignInButton.tsx` = satu komponen untuk KEDUA layar.** Jangan menyalin tombolnya ke salah satu halaman — pelajaran ikon game yang ditulis di dua tempat lalu berbeda selama seminggu.
+  - **Pop-up dulu, pindah-halaman sebagai cadangan.** `auth/popup-blocked` & `auth/operation-not-supported-in-this-environment` jatuh ke `signInWithRedirect`; **`auth/popup-closed-by-user` & `auth/cancelled-popup-request` SENGAJA tidak** — itu artinya orang tuanya sendiri yang menutup jendelanya, dan melemparnya ke pindah-halaman memaksa meneruskan sesuatu yang baru saja dibatalkan. Pembatalan tidak memunculkan pesan kesalahan sama sekali.
+  - **Navigasinya MENUNGGU `user` muncul dari context, bukan langsung sesudah Firebase menjawab.** `ProtectedRoute` melempar balik ke `/masuk` selama `user` masih null, jadi pindah terlalu cepat akan terbaca persis seperti "masuknya gagal padahal berhasil". Jangan "dirapikan" jadi `navigate()` di dalam handler klik.
+  - Penanda pindah-halaman di **`sessionStorage`** (`pp_google_redirect_v1`), bukan `localStorage`: penanda ini cuma berlaku untuk satu tab dalam satu perjalanan, dan yang gagal di tengah jalan tidak boleh membuat tab lain menunggu selamanya. Dibersihkan di AWAL `finishGoogleRedirect`, jadi batal di halaman Google berakhir di formulir biasa, bukan layar menggantung.
+  - **Tujuannya beda per layar**: dari `/masuk` → `from` atau `/portal`; dari `/daftar` → `/aktivasi` (orang yang membuka "Daftar" memang sedang memegang kode).
+  - **Satu tempat pesan untuk kedua jalur**, diapit tombol Google di atas dan kolom email di bawah (terukur: pesan 315–334 px, formulir mulai 334 px). Pesan yang jauh dari tombol yang baru ditekan terbaca seperti tidak ada jawaban sama sekali.
+  - Logo **"G" resmi Google** (SVG 4 warna inline), bukan emoji atau huruf G — syarat merek Google, dan orang tua mengenalinya dari warnanya, bukan tulisannya. Tombolnya PUTIH dengan bingkai tipis: kuning itu warna tombol utama app ini.
+  - Halaman **Kebijakan Privasi & Syarat ikut diubah di commit yang sama** (aturan yang ditulis di kepala `PrivacyPage.tsx`): jalur Google berarti tidak ada kata sandi yang disimpan di sini, dan Firebase ikut menyimpan **nama + foto profil** Google — yang **tidak dipakai, tidak ditampilkan, dan tidak disalin ke Firestore**. Nol akses Gmail/Drive/kontak/kalender.
+  - **Pengumuman di lonceng sengaja BELUM ditambahkan**: mengabarkan jalur masuk yang masih menjawab "belum aktif" lebih buruk daripada diam. Tambahkan setelah providernya menyala.
+
+  **Angka verifikasinya & BATAS YANG DISADARI**
+  - 46 pemeriksaan di `/masuk` & `/daftar` pada **320×568, 380×800 & 820×1180**: tombol & pemisah "atau" tampil, logo 4 warna benar-benar tergambar, tinggi tombol 64–74 px (target sentuh), nol scroll mendatar, nol error console.
+  - **Regresi jalur email diuji lawan Auth Emulator sungguhan**: daftar email+kata sandi tetap sampai `/aktivasi`, dan pesan "Email atau kata sandi salah" muncul di tempat pesan yang baru.
+  - Cabang "pulang dari Google tanpa jadi masuk": dengan jaringan di-throttle 150 kbps/300 ms, tombolnya menampilkan **"Melanjutkan…"** sejak gambar pertama (tidak berkedip memperlihatkan formulir dulu), tombol Google DAN tombol formulir dua-duanya terkunci, lalu semuanya pulih dan penandanya terhapus.
+  - **JABAT TANGAN GOOGLE-nya SENDIRI TIDAK BISA DIUJI DI SESI CLAUDE.** `signInWithPopup` memuat **`https://apis.google.com/js/api.js`**, dan host itu diblokir kebijakan jaringan sesi (403 di CONNECT) — kelas yang sama dengan `github.io` dan Azure. Terukur: percobaan klik berakhir `auth/internal-error` dengan `net::ERR_TUNNEL_CONNECTION_FAILED` pada berkas itu, **bukan bug kode**. Jadi "benar-benar bisa masuk dengan akun Google" tetap harus dibuktikan pemilik di HP sungguhan setelah providernya dinyalakan.
+  - Catatan yang ikut terungkap dan berguna nanti: karena pop-up bergantung pada `apis.google.com`, jalur Google **tidak akan pernah bisa jalan offline** dan akan gagal di jaringan yang memblokir host itu. Satu alasan lagi kenapa formulir email wajib tetap ada.
+
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
 > Suara `speechSynthesis` bawaan HP itu undian: sebagian Android punya suara Indonesia yang hangat, sebagian robotik, sebagian **tidak punya suara id-ID sama sekali** dan membaca narasi dengan logat Inggris — atau diam. Padahal anak yang belum bisa membaca bergantung PENUH pada narasi. Jadi narasi dirender sekali jadi file audio, alasan yang sama persis dengan hewan pakai WebP alih-alih font emoji HP.
@@ -1262,7 +1295,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 ## Saluran Kontak "Hubungi Kami" (KEPUTUSAN PEMILIK — 2026-07-29)
 
 - **WhatsApp = saluran utama, email = cadangan.** Orang tua Indonesia sudah hidup di WA (hambatan paling kecil); email tetap ada untuk pesan panjang + lampiran dan untuk yang enggan chat langsung. Keduanya cuma link — tanpa backend, tanpa data yang disimpan, tanpa moderasi. (Form dalam app ditolak: butuh Cloud Function + rules + anti-spam, dan pemilik tak bisa membalas.)
-- **Kontak diisi di satu file: `src/data/contact.ts`** (`contact.whatsapp` = format internasional digit saja mis. `62812…`, `contact.email`). `whatsappUrl()`/`emailUrl()` menyusun link + pesan pembuka. Email sekarang masih alamat pribadi pemilik (`2013.tib@gmail.com`), ditandai `Temporary` di komentar.
+- **Kontak diisi di satu file: `src/data/contact.ts`** (`contact.whatsapp` = format internasional digit saja mis. `62812…`, `contact.email`). `whatsappUrl()`/`emailUrl()` menyusun link + pesan pembuka. Email = **`petualangsmart@gmail.com`** (sejak 2026-09-21, menggantikan alamat pribadi `2013.tib@gmail.com` yang dulu ditandai `Temporary`). **Alamat ini WAJIB sama dengan *project support email* di Firebase → Authentication → Google**, karena alamat itulah yang ditampilkan Google di layar izin saat orang tua menekan "Masuk dengan Google" — dua alamat berbeda di layar izin dan di halaman jualan terbaca seperti tautan palsu. Satu file ini sekaligus mengisi landing (`FeedbackSection`) dan kaki halaman Privasi & Ketentuan (`LegalPage`), jadi jangan menyalin alamatnya ke tempat lain.
 - **Nilai kosong = seluruh bagian TIDAK dirender** (`FeedbackSection` mengembalikan `null`). Jadi aman ter-deploy sebelum kontak diisi — tak pernah ada tombol mati.
 - Nomor & email itu **PUBLIK** begitu ter-deploy (ada di JS yang dikirim ke browser). Sebaiknya nomor WhatsApp Business, bukan pribadi.
 - **Nada bicara (revisi pemilik 2026-07-29):** judul **"Hubungi Kami"** (bukan "Ada kritik atau saran?"), pengantar satu baris *"Ada pertanyaan lebih lanjut? Silakan hubungi lewat:"*. Pesan otomatis WA/email cukup **satu kalimat** — *"Halo, saya mau bertanya tentang Petualangan Pintar."* JANGAN kembalikan format laporan masukan (kolom "Masukan saya", merek HP, browser) — sudah ditolak. JANGAN menjanjikan waktu balasan.

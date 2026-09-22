@@ -11,6 +11,7 @@ import LegalPage from '@/portal/LegalPage';
  *
  * Daftar "apa yang dikumpulkan" di bawah dicocokkan ke:
  *   - email & kata sandi ......... src/auth/AuthContext.tsx (Firebase Auth)
+ *   - masuk dengan Google ........ src/auth/AuthContext.tsx (loginWithGoogle)
  *   - id perangkat acak .......... src/auth/entitlements.ts (getDeviceId)
  *   - label perangkat ............ src/auth/entitlements.ts (describeDevice)
  *   - bintang per level .......... src/auth/progressSync.ts
@@ -43,6 +44,10 @@ export default function PrivacyPage() {
             <strong>bintang hasil bermain</strong>.
           </li>
           <li>
+            Kalau Anda memilih <strong>masuk dengan akun Google</strong>, kami tidak menyimpan
+            kata sandi sama sekali — Google yang memeriksanya.
+          </li>
+          <li>
             Data tidak dijual, tidak disewakan, dan tidak dibagikan ke siapa pun untuk
             pemasaran.
           </li>
@@ -72,6 +77,18 @@ export default function PrivacyPage() {
           Disimpan dalam bentuk <strong>teracak (hashed)</strong> oleh layanan Firebase
           Authentication milik Google. Kami tidak pernah bisa melihat kata sandi Anda, dan tidak
           menyimpan salinannya sendiri.
+        </li>
+        <li>
+          <b>Masuk dengan akun Google (pilihan, bukan keharusan)</b>
+          Kalau Anda menekan “Masuk dengan Google”, pemeriksaan kata sandinya dilakukan Google —
+          jadi <strong>tidak ada kata sandi yang dibuat maupun disimpan di sini</strong>. Yang
+          diterima aplikasi ini dari Google hanya <strong>alamat email</strong> Anda, ditambah{' '}
+          <strong>nama dan foto profil</strong> yang memang ditampilkan Google untuk akun itu.
+          Nama dan foto tersebut <strong>tidak kami pakai, tidak kami tampilkan, dan tidak kami
+          salin ke basis data kami</strong>; keduanya hanya ikut tersimpan di catatan akun
+          Firebase Authentication. Kami <strong>tidak pernah</strong> meminta akses ke Gmail,
+          Google Drive, kontak, maupun kalender Anda. Jalur ini sepenuhnya pilihan — mendaftar
+          dengan email &amp; kata sandi biasa tetap tersedia.
         </li>
         <li>
           <b>Id perangkat berupa angka acak</b>
@@ -148,6 +165,12 @@ export default function PrivacyPage() {
         region <strong>Jakarta (asia-southeast2)</strong>. Layanan autentikasi Google berjalan di
         infrastruktur globalnya, sehingga sebagian pemrosesan email dapat terjadi di luar
         Indonesia. Google bertindak sebagai pemroses data atas nama kami.
+      </p>
+      <p>
+        Kalau Anda memilih masuk dengan akun Google, proses masuknya terjadi di halaman milik
+        Google. Google akan mengetahui bahwa akun itu dipakai untuk masuk ke aplikasi ini, dan
+        pemrosesan di sisi mereka mengikuti kebijakan privasi Google sendiri. Anda bisa mencabut
+        izin itu kapan saja lewat halaman keamanan akun Google Anda.
       </p>
       <p>
         Seperti semua layanan web, penyedia server mencatat permintaan teknis (termasuk alamat IP

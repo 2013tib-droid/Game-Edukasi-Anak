@@ -110,6 +110,11 @@ export default function TermsPage() {
         — supaya akun dengan email salah ketik tidak menjadi akses berbayar yang tidak bisa
         dipulihkan. Bermain tidak pernah menunggu verifikasi.
       </p>
+      <p>
+        Anda juga bisa masuk dengan <strong>akun Google</strong>. Alamat email akun Google sudah
+        terverifikasi sejak awal, jadi kode aktivasi bisa langsung ditukar tanpa menunggu email
+        verifikasi.
+      </p>
 
       <h2>5. Yang tidak boleh dilakukan</h2>
       <ul>

@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/auth/AuthContext';
+import GoogleSignInButton from '@/auth/GoogleSignInButton';
 import { ArrowLeftIcon } from '@/app/icons';
 
 export default function RegisterPage() {
@@ -41,6 +42,22 @@ export default function RegisterPage() {
           ⚠️ Firebase belum dikonfigurasi (.env kosong). Pendaftaran belum aktif.
         </p>
       )}
+      <div style={{ display: 'grid', gap: 16 }}>
+        {/* Akun Google datang dengan email yang sudah terverifikasi, jadi
+            jalur ini langsung sampai ke layar aktivasi tanpa menunggu
+            tautan verifikasi di kotak masuk. */}
+        <GoogleSignInButton
+          label="Daftar dengan Google"
+          to="/aktivasi"
+          busy={busy}
+          setBusy={setBusy}
+          onError={setError}
+        />
+        <p className="auth-or">atau</p>
+        {/* Satu tempat pesan untuk kedua jalur daftar — lihat catatan yang
+            sama di LoginPage. */}
+        {error && <p style={{ color: '#c0392b', margin: 0 }}>{error}</p>}
+      </div>
       <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 16 }}>
         <input
           className="input"
@@ -60,7 +77,6 @@ export default function RegisterPage() {
           autoComplete="new-password"
           required
         />
-        {error && <p style={{ color: '#c0392b' }}>{error}</p>}
         <button className="btn btn--primary" type="submit" disabled={busy || !configured}>
           {busy ? 'Memproses…' : 'Daftar'}
         </button>
