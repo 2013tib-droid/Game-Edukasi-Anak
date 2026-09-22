@@ -16,7 +16,8 @@
  *   1. Saklar di layar (mode penguji) — lihat `LockToggle`, tersimpan di
  *      localStorage per perangkat. Ini yang dipakai untuk testing.
  *   2. Env saat build: `VITE_LOCK_MODE=kunci npm run build`.
- *   3. `DEFAULT_LOCK_MODE` di bawah — ubah saat launching.
+ *   3. `DEFAULT_LOCK_MODE` di bawah — sudah 'kunci' sejak launching
+ *      (2026-09-22).
  */
 
 export type LockMode = 'buka' | 'kunci';
@@ -46,10 +47,19 @@ export const FREE_GAME_IDS: readonly string[] = ['hutan-hewan', 'tulis-huruf'];
 const envMode = import.meta.env.VITE_LOCK_MODE as string | undefined;
 
 /**
- * Mode bawaan aplikasi. Pra-rilis 'buka' supaya semua game bisa dicoba.
- * SAAT LAUNCHING: ganti jadi 'kunci' (atau build dengan VITE_LOCK_MODE=kunci).
+ * Mode bawaan aplikasi. **'kunci' sejak 2026-09-22 (launching)** — hanya game
+ * di `FREE_GAME_IDS` yang terbuka, sisanya minta login + kode aktivasi.
+ *
+ * Dinyalakan setelah alur pembeli terbukti jalan ujung-ke-ujung dengan kode
+ * ASLI di project sungguhan (Fase 6 Bagian B langkah 1). Urutan itu MENGIKAT:
+ * menyalakannya lebih dulu berarti pembeli bisa mentok di layar gembok padahal
+ * sudah membayar.
+ *
+ * Kembalikan ke 'buka' hanya kalau alur pembelinya sendiri rusak — itu tombol
+ * darurat, bukan saklar kenyamanan. Untuk mencoba-coba pakai build penguji
+ * (`VITE_ALLOW_TEST_TOGGLE=1`), jangan mengubah baris ini.
  */
-export const DEFAULT_LOCK_MODE: LockMode = isLockMode(envMode) ? envMode : 'buka';
+export const DEFAULT_LOCK_MODE: LockMode = isLockMode(envMode) ? envMode : 'kunci';
 
 /**
  * Apakah build ini boleh menampilkan saklar penguji 🔓/🔒 dan menuruti
