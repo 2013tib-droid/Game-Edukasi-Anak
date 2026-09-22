@@ -180,7 +180,13 @@ function VerifyFirst({
         {email ? (
           <>
             {' '}
-            <strong>{email}</strong>
+            {/* Alamat email tidak punya spasi, jadi tanpa ini ia menolak
+                turun baris dan meluber keluar layar — terukur 35px di HP.
+                `anywhere` hanya memotong kalau memang tidak muat, jadi
+                alamat yang pendek tetap utuh dalam satu baris. Dipasang di
+                <strong>-nya saja supaya kalimat di sekelilingnya tetap
+                memotong di spasi seperti biasa. */}
+            <strong style={{ overflowWrap: 'anywhere' }}>{email}</strong>
           </>
         ) : (
           ' alamat email akun ini'
