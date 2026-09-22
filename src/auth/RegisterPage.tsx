@@ -1,11 +1,11 @@
 import { useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/auth/AuthContext';
 import GoogleSignInButton from '@/auth/GoogleSignInButton';
 import { ArrowLeftIcon } from '@/app/icons';
 
 export default function RegisterPage() {
-  const { register, configured } = useAuth();
+  const { user, loading, register, configured } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,6 +30,10 @@ export default function RegisterPage() {
       setBusy(false);
     }
   }
+
+  // Sudah masuk? Formulir daftar yang kosong terbaca seperti akunnya hilang;
+  // lihat catatan yang sama di `LoginPage`.
+  if (!loading && user) return <Navigate to="/aktivasi" replace />;
 
   return (
     <div className="page" style={{ maxWidth: 420 }}>
