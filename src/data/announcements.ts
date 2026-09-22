@@ -55,101 +55,24 @@ export function announcementsFor(isBuyer: boolean): Announcement[] {
  * entries that would frustrate someone who has not bought yet.
  */
 export const announcements: Announcement[] = [
-  {
-    id: 'a-2026-09-09-tulis-ikuti-garis',
-    date: '2026-09-09',
-    tag: 'update',
-    title: 'Tulis Angka & Tulis Huruf sekarang ikut garis',
-    body:
-      'Menulis huruf dan angka jadi seperti Jalan Kendaraan: hurufnya punya jalur ' +
-      'sendiri, anak tinggal menyusurinya dengan jari satu goresan demi satu goresan. ' +
-      'Jadi jarinya tidak lagi melenceng, dan urutan menulisnya ikut benar sejak awal.',
-  },
-  {
-    id: 'a-2026-09-08-anggota-tubuh-tebak-tebakan',
-    date: '2026-09-08',
-    tag: 'update',
-    title: 'Anggota Tubuh: soal tebak-tebakan baru',
-    body:
-      'Dua babak "lebih sulit" diganti soal yang lebih seru: tebak-tebakan wajah ' +
-      '("Aku berkedip. Sentuh aku!") dan tebak bunyi sehari-hari ' +
-      '("Kruyuk kruyuk! Apa yang lapar?"). Anak menebak bagian tubuhnya tanpa disebut namanya.',
-  },
-  {
-    id: 'a-2026-09-07-anggota-tubuh',
-    date: '2026-09-07',
-    tag: 'baru',
-    title: 'Game baru: Anggota Tubuh 🧒',
-    body: 'Anak menyentuh sendiri bagian tubuh pada gambar: mata, telinga, hidung, mulut, pundak, lutut, kaki. Delapan soal tiap sesi — menyebut bagiannya, panca indera, kegunaannya, sampai "topi dipakai di mana?" — lengkap dengan lagu "Kepala pundak lutut kaki".',
-  },
-  {
-    id: 'a-2026-09-07-puzzle-gambar',
-    date: '2026-09-07',
-    tag: 'baru',
-    title: 'Game baru: Puzzle Gambar 🧩',
-    body: 'Kelompok Playgroup dan TK punya permainan baru: menyusun kepingan gambar sampai utuh. Enam permainan tiap sesi — hewan, buah, benda, kendaraan, dan gambar cerita — dan tiap gambar disebutkan namanya, jadi anak sekalian menambah kosakata.',
-  },
-  {
-    id: 'a-2026-09-04-pasang-kata-kata-baru',
-    date: '2026-09-04',
-    tag: 'update',
-    title: 'Pasang Kata: 8 soal tiap sesi 🧩',
-    body: 'Tiap sesi sekarang 8 soal (dulu 6), diundi dari 16 tema — bertambah bangunan, pakaian, alam, kendaraan penolong, sayur, dan peralatan dapur. Delapan tema sisanya jadi cadangan untuk sesi berikutnya.',
-  },
-  {
-    id: 'a-2026-09-04-kartu-kembar-tanpa-hewan',
-    date: '2026-09-04',
-    tag: 'update',
-    title: 'Kartu Kembar: 5 permainan tiap sesi 🃏',
-    body: 'Tiap sesi sekarang 5 papan (dulu 3), dan tiap papan diundi dari 4 tema cadangan: buah, kendaraan, benda sehari-hari, makanan, sampai bangunan. Dua kali main hampir tak pernah sama.',
-  },
-  {
-    id: 'a-2026-09-04-jalan-kendaraan-jalan-baru',
-    date: '2026-09-04',
-    tag: 'update',
-    title: 'Jalan baru di Jalan Kendaraan 🚗',
-    body: 'Tiap sesi sekarang 9 jalan (dulu 6), diundi dari 18 jalan yang tersedia — lengkap dengan tujuan baru seperti kebun binatang, pasar, dan perpustakaan. Dua kali main hampir tak pernah sama.',
-  },
-  {
-    id: 'a-2026-09-03-rute-kendaraan',
-    date: '2026-09-03',
-    tag: 'baru',
-    title: 'Game baru: Rute Kendaraan 🛣️',
-    body: 'Untuk kelompok SD Kelas 1 & 2 — susuri jalan yang lebih sempit dan berliku daripada Jalan Kendaraan TK. Melatih motorik halus yang lebih presisi.',
-  },
-  {
-    id: 'a-2026-07-28-jalan-kendaraan',
-    date: '2026-07-28',
-    tag: 'baru',
-    title: 'Game baru: Jalan Kendaraan 🚗',
-    body: 'Antar mobil, ambulans, dan traktor ke tujuannya dengan menyusuri jalan pakai satu jari. Melatih motorik halus untuk persiapan menulis.',
-  },
-  {
-    id: 'a-2026-07-28-lanjut-main',
-    date: '2026-07-28',
-    tag: 'update',
-    title: 'Permainan bisa dilanjutkan',
-    body: 'Kalau keluar di tengah permainan, sekarang bisa lanjut dari level terakhir dengan soal yang sama. Bintang yang sudah didapat tetap aman.',
-  },
-  {
-    id: 'a-2026-07-27-soal-baru',
-    date: '2026-07-27',
-    tag: 'update',
-    title: 'Soal baru di Labirin Warna & Taman Huruf',
-    body: 'Tambah 7 bangun datar baru (trapesium, segienam, bulan sabit, dan lainnya) serta puluhan soal huruf baru supaya anak tidak cepat bosan.',
-  },
-  {
-    id: 'a-2026-07-26-harga-perkenalan',
-    date: '2026-07-26',
-    tag: 'promo',
-    title: 'Harga perkenalan kelompok TK',
-    body: 'Kelompok Playgroup & TK sedang Rp19.000 dari Rp39.000. Sekali bayar, main selamanya, tanpa langganan bulanan.',
-  },
-  {
-    id: 'a-2026-07-26-pasar-buah',
-    date: '2026-07-26',
-    tag: 'info',
-    title: 'Pasar Buah jadi lebih lengkap',
-    body: 'Game Hitung Buah dilebur ke Pasar Buah: sekarang satu dunia buah berisi 14 jenis buah dengan soal hitung, tebak bayangan, dan kartu kembar.',
-  },
+  // SENGAJA KOSONG sejak 2026-09-22 (keputusan pemilik, menjelang launching).
+  //
+  // Tiga belas pengumuman lama dibuang seluruhnya: isinya catatan pengerjaan
+  // pra-rilis ("game baru ditambahkan", "soal diperbanyak") yang ditulis saat
+  // belum ada pembeli sama sekali. Orang tua yang baru membuka situsnya di hari
+  // pertama akan membaca riwayat pembangunan, bukan kabar — dan lonceng
+  // berbadge 13 di layar jualan terbaca seperti app yang sudah lama jalan
+  // tanpa mereka.
+  //
+  // Lonceng & panelnya TIDAK dimatikan: daftar kosong menampilkan "Belum ada
+  // pengumuman baru." (`notif__empty` di NotificationBell), jadi tempatnya
+  // sudah siap begitu ada kabar sungguhan.
+  //
+  // Menambah kabar sesudah launching = menambah satu entri di sini, terbaru di
+  // atas. Aturan lamanya tetap berlaku:
+  //   - `id` unik & TIDAK boleh diubah (status sudah-dibaca disimpan per id).
+  //     JANGAN memakai ulang id pengumuman lama yang dibuang — pembaca yang
+  //     sudah pernah membukanya tidak akan melihat yang baru.
+  //   - `audience` dikosongkan untuk kabar biasa; `'pembeli'` hanya untuk hal
+  //     yang tak bisa ditindaklanjuti pengunjung.
 ];

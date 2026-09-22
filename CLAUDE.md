@@ -334,6 +334,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
   **Tempat & isi**
   - Lonceng ada di **`TopBar`**, jadi otomatis muncul di **landing (`/`) dan portal (`/portal`)** — dua tempat yang dilihat orang tua. Prop `bell` (default `true`) untuk mematikannya di layar khusus anak nanti.
+  - **DAFTARNYA SENGAJA KOSONG sejak 2026-09-22** (keputusan pemilik menjelang launching: *"yg isi notifikasi hapus semua dulu. Nanti pas launching baru update kalo ada news"*). Tiga belas entri lama dibuang seluruhnya — isinya catatan pengerjaan pra-rilis, dan orang tua yang baru membuka situsnya akan membaca riwayat pembangunan alih-alih kabar. Lonceng & panelnya TIDAK dimatikan: daftar kosong menampilkan "Belum ada pengumuman baru." **Jangan memakai ulang id pengumuman yang sudah dibuang.**
   - Isi pengumuman = data typed di **`src/data/announcements.ts`** (`{ id, date, tag, title, body, audience? }`, terbaru di atas). Menambah kabar = menambah satu entri di file itu, tidak menyentuh komponen. 4 tag berwarna: `baru` (hijau), `update` (biru), `info` (ungu), `promo` (oranye).
   - **`id` wajib unik & TIDAK boleh diubah** — status sudah-dibaca disimpan per id (`localStorage` `pp_notif_read_v1`, helper di `src/portal/notifications.ts`). Ganti id = pengumuman lama muncul lagi sebagai baru.
 
