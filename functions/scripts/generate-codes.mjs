@@ -4,12 +4,16 @@
  * Tiap kode = satu penjualan. Kode dikirim ke pembeli oleh Lynk.id / Mayar.id
  * sebagai "produk digital", lalu ditukar di halaman /aktivasi.
  *
- * Dijalankan lewat GitHub Actions (tab Actions → "Buat kode aktivasi"), jadi
- * pemilik tidak perlu memasang Node.js. Bisa juga lokal:
+ * DIJALANKAN DI KOMPUTER SENDIRI. Tombol Actions ("Buat kode aktivasi") cuma
+ * untuk `dry_run` selama repo ini PUBLIK: di repo publik, log workflow (90
+ * hari) dan artifact (7 hari) bisa diunduh siapa saja tanpa login, jadi kode
+ * yang lewat sana sama saja dibagikan gratis.
  *
  *   cd functions && npm ci
- *   GOOGLE_APPLICATION_CREDENTIALS=kunci.json \
- *     node scripts/generate-codes.mjs --group=tk --count=50
+ *   $env:GOOGLE_APPLICATION_CREDENTIALS = 'kunci.json'    # PowerShell
+ *   node scripts/generate-codes.mjs --group=tk --count=50 --out=kode-tk.csv
+ *
+ * Langkah lengkapnya untuk Windows: docs/cetak-kode-di-pc.md
  *
  * Pilihan:
  *   --group=tk|sd1   kelompok yang dibuka kode ini (wajib)

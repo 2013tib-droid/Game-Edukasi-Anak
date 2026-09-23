@@ -12,9 +12,12 @@
 # jangan memakai workflow ini untuk kode yang benar-benar dijual.** Jalankan
 # generatornya di komputer sendiri:
 #
-#   cd functions && npm ci
-#   GOOGLE_APPLICATION_CREDENTIALS=kunci.json \
-#     node scripts/generate-codes.mjs --group=tk --count=50 --out=kode.csv
+#   cd functions            # sekali saja: npm ci
+#   $env:GOOGLE_APPLICATION_CREDENTIALS = 'kunci.json'     # PowerShell
+#   node scripts/generate-codes.mjs --group=tk --count=50 --out=kode-tk.csv
+#
+# Langkah lengkapnya (Windows, dari memasang Node.js sampai mengambil
+# kuncinya): docs/cetak-kode-di-pc.md
 #
 # Workflow ini aman dipakai untuk `dry_run` (tidak menulis apa pun ke
 # Firestore), atau nanti setelah repo jadi privat.

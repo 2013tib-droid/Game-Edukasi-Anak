@@ -27,3 +27,13 @@ firebase-debug.log
 .DS_Store
 .idea/
 .vscode/
+
+# Kunci service account Firebase (admin penuh) & hasil cetak kode aktivasi.
+# Repo ini PUBLIK: kunci yang ter-commit = siapa pun bisa membaca/menulis
+# Firestore, dan CSV yang ter-commit = kode jualan dibagikan gratis.
+# Pola ini sengaja luas supaya salah nama pun tetap tertahan.
+kunci*.json
+serviceAccount*.json
+service-account*.json
+*-firebase-adminsdk-*.json
+kode*.csv

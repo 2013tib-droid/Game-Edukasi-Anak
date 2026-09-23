@@ -39,15 +39,22 @@ Hentikan emulator dulu, ubah rules, baru jalankan lagi.
 
 ## Membuat kode aktivasi
 
-Lewat GitHub Actions: tab **Actions → "Buat kode aktivasi" → Run workflow**
-(pilih kelompok & jumlah, hasilnya CSV yang bisa diunduh). Atau lokal:
+**Panduan lengkap langkah demi langkah untuk Windows/PowerShell — mulai dari
+memasang Node.js sampai mengambil kunci Firebase — ada di
+[`docs/cetak-kode-di-pc.md`](../docs/cetak-kode-di-pc.md).** Ringkasnya, dari
+folder `functions`:
 
-```bash
-GOOGLE_APPLICATION_CREDENTIALS=kunci.json \
-  node scripts/generate-codes.mjs --group=tk --count=50 --out=kode.csv
+```powershell
+$env:GOOGLE_APPLICATION_CREDENTIALS = 'kunci.json'
+node scripts/generate-codes.mjs --group=tk --count=50 --batch=jual-01 --out=kode-tk.csv
 ```
 
+Di macOS/Linux baris `$env:` diganti `GOOGLE_APPLICATION_CREDENTIALS=kunci.json`
+di depan perintahnya. **Jangan pakai Git Bash di Windows** — MSYS menerjemahkan
+nilai yang berbentuk path dan kuncinya jadi tak ketemu.
+
 Coba dulu dengan `--dry-run` untuk melihat bentuk kodenya tanpa menyimpan.
+Skripnya sengaja **tidak mencetak kodenya ke layar** — hanya jumlahnya.
 
 > ⚠️ **Jangan mencetak kode jualan lewat GitHub Actions selama repo ini
 > PUBLIK.** Log workflow (90 hari) dan artifact (7 hari) di repo publik bisa

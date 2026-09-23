@@ -822,7 +822,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Log emulator tetap memuat satu `evaluation error` untuk aturan ini pada operasi **create** (di situ `resource` masih null). Itu tidak mengubah hasil — yang memutuskan create adalah aturan `create` — dan sudah diverifikasi 8 pengujian perilaku. **Jangan dikejar.**
 
   **Kode aktivasi**
-  - **JANGAN mencetak kode jualan lewat GitHub Actions selama repo ini PUBLIK** — lihat entri "Kode aktivasi bocor lewat log Actions" di "Status Pengerjaan". Cetak di komputer sendiri: `cd functions && npm ci && GOOGLE_APPLICATION_CREDENTIALS=kunci.json node scripts/generate-codes.mjs --group=tk --count=50 --out=kode.csv`. Tombol Actions aman untuk `dry_run` saja.
+  - **JANGAN mencetak kode jualan lewat GitHub Actions selama repo ini PUBLIK** — lihat entri "Kode aktivasi bocor lewat log Actions" di "Status Pengerjaan". Cetak di komputer sendiri; langkah lengkapnya (Windows/PowerShell) di **`docs/cetak-kode-di-pc.md`**. Tombol Actions aman untuk `dry_run` saja.
   - Workflow **Actions → "Buat kode aktivasi"** tetap ada (workflow_dispatch saja, tidak pernah otomatis dari push: tiap jalan ia mencetak barang jualan). Hasilnya CSV sebagai artifact, retensi 7 hari — **dan artifact di repo publik bisa diunduh siapa saja.**
   - Batch yang bocor dihanguskan lewat **`functions/scripts/revoke-codes.mjs`** / Actions → "Batalkan kode aktivasi". Kodenya **ditandai terpakai, BUKAN dihapus**: dokumen yang dihapus bisa dibuat ulang generator dengan kode acak yang sama persis, dan `batch.create()` justru akan BERHASIL — menghidupkan kembali kode yang sudah beredar. Kode yang sudah ditukar pembeli tidak disentuh.
   - Alfabet **tanpa I, L, O, 0, 1** — tiap karakter ambigu berubah jadi tiket "kode saya tidak bisa" di WhatsApp. Bentuk tampilan **`K7P-M4X`** (sejak 2026-09-22; dulu `TK-ABCD-2345`), id dokumennya versi tanpa tanda hubung.
@@ -1293,13 +1293,15 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **100 kode (batch `launching-2026-09`, 50 `tk` + 50 `sd1`) langsung dibatalkan** — nol yang sempat ditukar. Batch uji lama `uji-sendiri2` dicek juga: **kedua kodenya sudah ditukar**, jadi tak ada yang bisa dihanguskan di situ. *(Catatan pemilik: pernah tertulis satu kode masih tersisa. Kalau Anda yakin cuma memakai satu, periksa `usedBy` kedua dokumen itu di Firestore — kode kedua tercetak di log publik sejak 2026-09-16.)*
   - **PELAJARAN UMUM: di repo publik, log & artifact Actions adalah tempat PUBLIK.** Apa pun yang jadi barang jualan atau rahasia jangan pernah melewatinya. Yang boleh dicetak dari skrip yang menyentuh barang jualan hanyalah **angka jumlah**.
   - Ini kerabat dari pelajaran lama *"berkasnya ada di branch ≠ berkasnya tersaji"* (2026-09-04), dari arah sebaliknya: **yang tidak Anda kira terbit, ternyata terbit.**
-  - **Cara mencetak kode jualan sekarang (keputusan pemilik 2026-09-23): di komputer sendiri.** Firebase Console → Project settings → Service accounts → "Generate new private key" → simpan `kunci.json` (JANGAN di-commit), lalu:
-    ```
-    cd functions && npm ci
-    GOOGLE_APPLICATION_CREDENTIALS=kunci.json \
-      node scripts/generate-codes.mjs --group=tk --count=50 --batch=<nama> --out=kode-tk.csv
+  - **Cara mencetak kode jualan sekarang (keputusan pemilik 2026-09-23): di komputer sendiri.** Panduan lengkapnya untuk Windows — pasang Node.js, ambil kunci service account, cetak, arsipkan, sampai tabel pesan error — ada di **`docs/cetak-kode-di-pc.md`**. Ringkasnya, dari `functions` (sekali saja: `npm ci`, dan `kunci.json` dari Firebase Console → Project settings → Service accounts → "Generate new private key"):
+    ```powershell
+    $env:GOOGLE_APPLICATION_CREDENTIALS = 'kunci.json'
+    node scripts/generate-codes.mjs --group=tk --count=50 --batch=<nama> --out=kode-tk.csv
     ```
     Kodenya cuma ada di CSV itu; skripnya tidak mencetaknya ke layar lagi.
+    - **PowerShell, JANGAN Git Bash** — MSYS menerjemahkan nilai yang berbentuk path, jadi `kunci.json` dicari di tempat yang salah (kerabat jebakan `DEPLOY_BASE` di "Deploy Web").
+    - **`.gitignore` sekarang menahan `kunci*.json`, `serviceAccount*.json`, `*-firebase-adminsdk-*.json` & `kode*.csv`** (ditambahkan 2026-09-23). Kunci service account itu admin PENUH atas Firestore dan repo ini publik — kalau pola barunya dibutuhkan, tambahkan ke daftar itu, jangan andalkan ingatan.
+  - **Pembersihannya sudah dijalankan (2026-09-23):** log ketiga run yang pernah mencetak kode DIHAPUS (`35806026077`, `35806032407`, dan run lama `35056435390` dari 2026-09-16) — terverifikasi 404 dari permintaan ANONIM — dan **ketiga artifact `kode-aktivasi` DIHAPUS** lewat REST API (`DELETE /actions/artifacts/<id>`, 204), tersisa nol. Tak ada tool MCP untuk artifact; pakai `curl` dengan `$GITHUB_TOKEN` yang ada di lingkungan sesi.
   - Opsi yang DITOLAK & alasannya: **repo dijadikan privat** — GitHub Pages dari repo privat butuh paket berbayar, jadi situsnya mati sampai pindah ke Firebase Hosting (boleh ditinjau ulang setelah pindah). **Artifact dienkripsi di workflow** — menambah satu sandi yang harus dirawat dan tetap menyisakan titik lemah.
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)

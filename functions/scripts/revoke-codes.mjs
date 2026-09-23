@@ -7,8 +7,11 @@
  * obatnya menghanguskannya sebelum ada yang menukarnya.
  *
  *   cd functions && npm ci
- *   GOOGLE_APPLICATION_CREDENTIALS=kunci.json \
- *     node scripts/revoke-codes.mjs --batch=launching-2026-09
+ *   $env:GOOGLE_APPLICATION_CREDENTIALS = 'kunci.json'    # PowerShell
+ *   node scripts/revoke-codes.mjs --batch=launching-2026-09 --dry-run
+ *   node scripts/revoke-codes.mjs --batch=launching-2026-09
+ *
+ * Langkah lengkapnya untuk Windows: docs/cetak-kode-di-pc.md
  *
  * Pilihan:
  *   --batch=<nama>   batch yang dibatalkan (wajib)
