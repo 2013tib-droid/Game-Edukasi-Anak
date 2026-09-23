@@ -822,7 +822,9 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - Log emulator tetap memuat satu `evaluation error` untuk aturan ini pada operasi **create** (di situ `resource` masih null). Itu tidak mengubah hasil — yang memutuskan create adalah aturan `create` — dan sudah diverifikasi 8 pengujian perilaku. **Jangan dikejar.**
 
   **Kode aktivasi**
-  - Dibuat lewat **Actions → "Buat kode aktivasi"** (workflow_dispatch saja, tidak pernah otomatis dari push: tiap jalan ia mencetak barang jualan). Hasilnya CSV sebagai artifact, retensi 7 hari.
+  - **JANGAN mencetak kode jualan lewat GitHub Actions selama repo ini PUBLIK** — lihat entri "Kode aktivasi bocor lewat log Actions" di "Status Pengerjaan". Cetak di komputer sendiri: `cd functions && npm ci && GOOGLE_APPLICATION_CREDENTIALS=kunci.json node scripts/generate-codes.mjs --group=tk --count=50 --out=kode.csv`. Tombol Actions aman untuk `dry_run` saja.
+  - Workflow **Actions → "Buat kode aktivasi"** tetap ada (workflow_dispatch saja, tidak pernah otomatis dari push: tiap jalan ia mencetak barang jualan). Hasilnya CSV sebagai artifact, retensi 7 hari — **dan artifact di repo publik bisa diunduh siapa saja.**
+  - Batch yang bocor dihanguskan lewat **`functions/scripts/revoke-codes.mjs`** / Actions → "Batalkan kode aktivasi". Kodenya **ditandai terpakai, BUKAN dihapus**: dokumen yang dihapus bisa dibuat ulang generator dengan kode acak yang sama persis, dan `batch.create()` justru akan BERHASIL — menghidupkan kembali kode yang sudah beredar. Kode yang sudah ditukar pembeli tidak disentuh.
   - Alfabet **tanpa I, L, O, 0, 1** — tiap karakter ambigu berubah jadi tiket "kode saya tidak bisa" di WhatsApp. Bentuk tampilan **`K7P-M4X`** (sejak 2026-09-22; dulu `TK-ABCD-2345`), id dokumennya versi tanpa tanda hubung.
   - `normalizeCode()` di functions **harus sama persis** dengan `normalize()` di `generate-codes.mjs`. Orang tua boleh mengetik huruf kecil & tanda hubung sesukanya (teruji).
   - Generator memakai `batch.create()`, bukan `set()` — menimpa dokumen lama berarti menghidupkan kembali kode yang sudah dipakai pembeli.
@@ -1284,6 +1286,21 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
   - **Cara mengecek label GRATIS yang benar** (pelajaran yang terulang): ambil judulnya dari **`href` kartu induk**, bukan dari `innerText` elemen pertama — label "GRATIS" itu elemen tersendiri, jadi pemeriksaan naif menghitung dengan benar tapi tidak membuktikan game MANA.
   - **Pemeriksaan PERTAMA di tiap ukuran layar tetap dua penjaga alat ukur**: `window.innerWidth === lebar yang diminta` dan `#root` punya anak. Tanpa keduanya, "nol gembok" di halaman 404 akan lulus tanpa arti (dua jebakan lama: port `vite preview` yang diam-diam bergeser, dan `setDeviceMetricsOverride` yang diabaikan).
   - **BELUM diuji di HP asli** — `github.io` diblokir kebijakan jaringan sesi, jadi yang bisa diverifikasi dari sini cuma isi branch Pages + build lokal. Konfirmasi akhir di HP tetap tugas pemilik: buka `/kelompok/sd1`, pastikan cuma Tulis Huruf yang terbuka, lalu masuk dengan akun yang sudah aktivasi TK dan pastikan game TK terbuka semua sementara SD tetap terkunci.
+
+- **KODE AKTIVASI BOCOR LEWAT LOG ACTIONS — repo publik + generator yang mencetak CSV** (2026-09-23, ketahuan saat memverifikasi batch pertama untuk dijual):
+  - **Sebabnya satu baris**: `generate-codes.mjs` berakhir dengan `console.log(csv)`. Itu wajar di komputer sendiri, tapi di GitHub Actions berarti seluruh kode tercetak ke log — dan **repo ini PUBLIK**, jadi log workflow bisa dibaca **siapa saja tanpa login** dan tersimpan **90 hari**. Artifact CSV-nya juga terbuka untuk umum (7 hari). Jadi tiap batch yang dicetak lewat Actions sama saja dibagikan gratis.
+  - **Dibuktikan, bukan diduga**: API menjawab `"visibility": "public"`, dan permintaan ANONIM ke endpoint log **dijawab dengan URL unduhan bertanda tangan** (unduhannya sendiri baru diblokir proksi sesi Claude, bukan oleh GitHub).
+  - **100 kode (batch `launching-2026-09`, 50 `tk` + 50 `sd1`) langsung dibatalkan** — nol yang sempat ditukar. Batch uji lama `uji-sendiri2` dicek juga: **kedua kodenya sudah ditukar**, jadi tak ada yang bisa dihanguskan di situ. *(Catatan pemilik: pernah tertulis satu kode masih tersisa. Kalau Anda yakin cuma memakai satu, periksa `usedBy` kedua dokumen itu di Firestore — kode kedua tercetak di log publik sejak 2026-09-16.)*
+  - **PELAJARAN UMUM: di repo publik, log & artifact Actions adalah tempat PUBLIK.** Apa pun yang jadi barang jualan atau rahasia jangan pernah melewatinya. Yang boleh dicetak dari skrip yang menyentuh barang jualan hanyalah **angka jumlah**.
+  - Ini kerabat dari pelajaran lama *"berkasnya ada di branch ≠ berkasnya tersaji"* (2026-09-04), dari arah sebaliknya: **yang tidak Anda kira terbit, ternyata terbit.**
+  - **Cara mencetak kode jualan sekarang (keputusan pemilik 2026-09-23): di komputer sendiri.** Firebase Console → Project settings → Service accounts → "Generate new private key" → simpan `kunci.json` (JANGAN di-commit), lalu:
+    ```
+    cd functions && npm ci
+    GOOGLE_APPLICATION_CREDENTIALS=kunci.json \
+      node scripts/generate-codes.mjs --group=tk --count=50 --batch=<nama> --out=kode-tk.csv
+    ```
+    Kodenya cuma ada di CSV itu; skripnya tidak mencetaknya ke layar lagi.
+  - Opsi yang DITOLAK & alasannya: **repo dijadikan privat** — GitHub Pages dari repo privat butuh paket berbayar, jadi situsnya mati sampai pindah ke Firebase Hosting (boleh ditinjau ulang setelah pindah). **Artifact dienkripsi di workflow** — menambah satu sandi yang harus dirawat dan tetap menyisakan titik lemah.
 
 ## Suara Narasi: file TTS neural, bukan suara bawaan HP (2026-08-07)
 
