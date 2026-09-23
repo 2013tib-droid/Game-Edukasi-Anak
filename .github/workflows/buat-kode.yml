@@ -3,6 +3,22 @@
 # SENGAJA hanya bisa dijalankan lewat tombol (workflow_dispatch), tidak pernah
 # otomatis dari push: tiap kali jalan, ia mencetak barang yang bisa dijual.
 #
+# ⚠️ REPO INI PUBLIK. Di repo publik, **log workflow DAN artifact bisa diunduh
+# siapa saja tanpa login** (log tersimpan 90 hari, artifact 7 hari). Artinya
+# CSV yang diunggah di bawah ini BUKAN rahasia.
+#
+# Sampai 2026-09-23 skripnya juga mencetak seluruh CSV ke log — itu sudah
+# dicabut, tapi artifact-nya tetap terbuka. **Selama repo masih publik,
+# jangan memakai workflow ini untuk kode yang benar-benar dijual.** Jalankan
+# generatornya di komputer sendiri:
+#
+#   cd functions && npm ci
+#   GOOGLE_APPLICATION_CREDENTIALS=kunci.json \
+#     node scripts/generate-codes.mjs --group=tk --count=50 --out=kode.csv
+#
+# Workflow ini aman dipakai untuk `dry_run` (tidak menulis apa pun ke
+# Firestore), atau nanti setelah repo jadi privat.
+#
 # SEBELUM MENJALANKAN, isi dulu di GitHub:
 #   Settings → Secrets and variables → Actions → New repository secret
 #     FIREBASE_SERVICE_ACCOUNT = isi file JSON service account

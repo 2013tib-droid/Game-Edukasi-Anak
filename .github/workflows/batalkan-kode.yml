@@ -1,0 +1,53 @@
+# Membatalkan satu batch kode aktivasi yang bocor.
+#
+# KENAPA ADA: repo ini PUBLIK, dan sampai 2026-09-23 generator kode
+# mencetak seluruh CSV ke log workflow. Log workflow di repo publik bisa
+# dibaca SIAPA SAJA tanpa login (tersimpan 90 hari), jadi batch mana pun
+# yang pernah tercetak di situ harus dianggap sudah beredar.
+#
+# Workflow ini TIDAK mencetak satu kode pun — cuma angka jumlahnya.
+name: Batalkan kode aktivasi
+
+on:
+  workflow_dispatch:
+    inputs:
+      batch:
+        description: 'Nama batch yang dibatalkan (mis. launching-2026-09)'
+        required: true
+      group:
+        description: 'Batasi ke satu kelompok (kosongkan untuk semua)'
+        required: false
+        type: choice
+        options: ['', tk, sd1]
+        default: ''
+      dry_run:
+        description: 'Cuma hitung, jangan ubah apa pun'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  batalkan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: functions/package-lock.json
+
+      - name: Pasang dependency
+        working-directory: functions
+        run: npm ci
+
+      - name: Batalkan
+        working-directory: functions
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          node scripts/revoke-codes.mjs \
+            --batch='${{ inputs.batch }}' \
+            ${{ inputs.group && format('--group={0}', inputs.group) || '' }} \
+            ${{ inputs.dry_run && '--dry-run' || '' }}

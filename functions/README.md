@@ -49,6 +49,16 @@ GOOGLE_APPLICATION_CREDENTIALS=kunci.json \
 
 Coba dulu dengan `--dry-run` untuk melihat bentuk kodenya tanpa menyimpan.
 
+> ⚠️ **Jangan mencetak kode jualan lewat GitHub Actions selama repo ini
+> PUBLIK.** Log workflow (90 hari) dan artifact (7 hari) di repo publik bisa
+> diunduh siapa saja tanpa login. Jalankan perintah di atas di komputer
+> sendiri. Tombol Actions aman untuk `dry_run` saja.
+>
+> Batch yang terlanjur bocor dibatalkan dengan
+> `node scripts/revoke-codes.mjs --batch=<nama>` (atau Actions → "Batalkan
+> kode aktivasi"). Kode ditandai terpakai, bukan dihapus — dokumen yang
+> dihapus bisa dibuat ulang oleh generator dan menghidupkan kode yang bocor.
+
 Bentuknya **enam karakter**, dicetak `K7P-M4X`. Huruf & angka yang tidak bisa
 tertukar (tanpa I, L, O, 0, 1) — jangan tambahkan karakter ambigu, tiap satu
 berubah jadi tiket "kode saya tidak bisa" di WhatsApp.

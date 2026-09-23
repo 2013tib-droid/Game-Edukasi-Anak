@@ -166,9 +166,24 @@ if (typeof out === 'string') {
 
 console.log(`\n✓ ${written} kode dibuat untuk kelompok "${group}" (batch: ${batch})`);
 if (collisions) console.log(`  ${collisions} kode gagal ditulis — jalankan lagi untuk melengkapi.`);
-console.log('\n--- CSV ---\n');
-console.log(csv);
+
+// KODENYA SENGAJA TIDAK DICETAK KE LAYAR.
+//
+// Dulu baris terakhir skrip ini `console.log(csv)`. Itu aman di komputer
+// sendiri, tapi MEMATIKAN di GitHub Actions: repo ini PUBLIK, dan log
+// workflow di repo publik bisa dibaca SIAPA SAJA tanpa login, tersimpan
+// 90 hari. Jadi tiap kode yang tercetak di log = barang jualan yang
+// dibagikan gratis. Ketahuan 2026-09-23, sesudah 100 kode terlanjur
+// tercetak (batch `launching-2026-09`) — semuanya dibatalkan.
+//
+// **JANGAN PERNAH mencetak kode, atau apa pun yang berasal darinya, ke
+// stdout/stderr.** Yang boleh dicetak cuma ANGKA JUMLAH.
 console.log(
-  '\nSimpan file ini baik-baik: tiap baris setara satu penjualan, dan siapa pun\n' +
+  out
+    ? `\nKodenya ada di ${out} saja — sengaja tidak dicetak ke layar.`
+    : '\nKodenya TIDAK dicetak ke layar. Jalankan dengan --out=kode.csv untuk menyimpannya.',
+);
+console.log(
+  'Simpan file itu baik-baik: tiap baris setara satu penjualan, dan siapa pun\n' +
     'yang punya kodenya bisa memakainya.\n',
 );
