@@ -19,6 +19,37 @@ import { useGameAccess } from '@/portal/useGameAccess';
  * Config game baru diunduh SESUDAH akses terbukti — jangan pindahkan
  * `meta.load()` ke atas gerbang ini.
  */
+/**
+ * Ikon layar terkunci: naga maskot menawarkan kunci di samping gemboknya
+ * (`public/assets/ui/terkunci.webp`). Emoji 🔒 tetap jadi cadangan lewat
+ * `onError` — kontrak yang sama dengan `PartyPic`/`MascotPic`/`ErrorBoundary`,
+ * jadi layar ini tak pernah kehilangan ikonnya. Lihat
+ * docs/prompt-gambar-gembok.md.
+ *
+ * Gembok kecil di kartu portal (`GroupPage`, 22px) SENGAJA tetap emoji: di
+ * ukuran itu ilustrasi jadi noda, dan di sana gemboknya cuma penanda.
+ */
+function LockPic() {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div className="game-big-emoji" aria-hidden>
+        🔒
+      </div>
+    );
+  }
+  return (
+    <img
+      className="game-big-lock"
+      src={`${import.meta.env.BASE_URL}assets/ui/terkunci.webp`}
+      alt=""
+      aria-hidden
+      draggable={false}
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 export default function GamePage() {
   const { gameId } = useParams<{ gameId: string }>();
   const navigate = useNavigate();
@@ -62,9 +93,7 @@ export default function GamePage() {
   if (access.status === 'perlu-masuk' || access.status === 'perlu-aktivasi') {
     return (
       <div className="game-center">
-        <div className="game-big-emoji" aria-hidden>
-          🔒
-        </div>
+        <LockPic />
         <h1>{meta.title}</h1>
         <p style={{ fontSize: 20, maxWidth: 420 }}>
           Game ini bagian dari versi lengkap. Minta bantuan Ayah/Bunda untuk membukanya ya!

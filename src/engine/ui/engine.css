@@ -1300,6 +1300,20 @@
   object-fit: contain;
 }
 
+/* Locked-game screen (`public/assets/ui/terkunci.webp`), rendered by `LockPic`
+   in GamePage. 128px, not the intro icon's 132px: this screen already carries
+   icon + title + a three-line sentence + two buttons, so the art must not add
+   a pixel to the 🔒 emoji box it replaces (129px at font-size 110px).
+   `max-width` + `contain` is the guard for art wider than it is tall — it then
+   renders shorter rather than stretching the layout (same contract as
+   `GameIcon`), and this one IS wider: dragon beside padlock. */
+.game-center .game-big-lock {
+  height: 128px;
+  max-width: 62vw;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.14));
+}
+
 /* Intro icon drawn as a real clock face (Jam Pintar) — same visual weight as
    the 110px emoji it replaces. */
 .game-center .game-big-clock {

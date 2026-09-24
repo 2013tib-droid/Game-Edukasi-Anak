@@ -2,17 +2,33 @@
 
 Sasaran: **`public/assets/ui/terkunci.webp`** — satu gambar saja.
 
-## Status (2026-09-23) — PROMPT SAJA, gambarnya belum ada
+## Status (2026-09-24) — SELESAI
+
+Gambarnya **sudah terpasang**: **Pilihan 2** (naga maskot duduk di samping gembok sambil
+memegang kunci emas), dari percobaan pertama, langsung diterima. 480×398, 24 kB.
+`LockPic` di `src/portal/GamePage.tsx` + `.game-big-lock` di `engine.css` sudah ada — emoji
+🔒 tetap jadi cadangan otomatis lewat `onError`.
+
+Terukur di build produksi: tampil **154×128 px**; di HP 320×568 layarnya luber **28 px**,
+**satu piksel LEBIH BAIK** daripada emoji yang digantikannya (29 px, diukur dengan menukar
+balik elemennya di layar yang sama) — jadi luber itu memang bawaan layar ini, bukan akibat
+gambarnya. Nol scroll di 380×800 & 820×1180, nol error console, nol permintaan gagal,
+`naturalWidth` 480 (bukan sekadar ada `<img>`).
+
+Sisa dokumen ini disimpan untuk kalau gambarnya diganti lagi — dan karena tahap POTONG-nya
+melahirkan satu skrip baru (`scripts/cut-holes.py`, lihat bagian bawah).
+
+## Status lama (2026-09-23) — prompt saja
 
 Layarnya `src/portal/GamePage.tsx` (cabang `perlu-masuk` / `perlu-aktivasi`): yang muncul
 kalau anak mengetuk game berbayar sesudah mode `'kunci'` menyala — jadi sejak launching ini
 **salah satu layar yang paling sering dilihat calon pembeli**. Sekarang isinya emoji 🔒
 polos setinggi 110px.
 
-**Kodenya SENGAJA belum dipasang** (beda dari layar "tersendat" & "Selamat!"): selama
-filenya belum ada, `<img>` yang menunjuk ke situ akan menembakkan **404 di tiap layar
-gembok**. Snippet siap-tempelnya ada di bagian "Setelah gambarnya jadi" — pasang bersamaan
-dengan filenya, satu commit.
+Waktu itu **kodenya sengaja belum dipasang**: selama filenya belum ada, `<img>` yang
+menunjuk ke situ akan menembakkan **404 di tiap layar gembok**. Keduanya akhirnya masuk
+dalam satu commit yang sama — aturan yang tetap berlaku kalau nanti ada ikon layar sistem
+baru.
 
 ## Kenapa 🔒 sebaiknya diganti
 
@@ -211,3 +227,38 @@ menentukan — model jauh lebih patuh melihat karakternya daripada membaca deskr
 6. Deploy seperti biasa; pastikan `dist/assets/ui/` ikut tersalin ke folder `app/` di branch
    Pages, dan bandingkan dulu isi keduanya (aturan 2026-09-08 — berkas yang ada di branch
    Pages tapi tidak di `dist/` = ada pekerjaan yang tak pernah sampai ke `main`).
+
+---
+
+## PELAJARAN POTONG (2026-09-24) — kenapa ada `scripts/cut-holes.py`
+
+Perintah yang benar-benar dipakai untuk `terkunci.webp`, urut:
+
+```
+python3 scripts/cut-soft.py <art.jpg> soft.webp 1024
+python3 scripts/cut-holes.py soft.webp --list
+python3 scripts/cut-holes.py soft.webp public/assets/ui/terkunci.webp \
+        --hole=650,266 --hole=179,332 --hole=442,488 480
+```
+
+- **`cut-soft.py` sendirian sudah benar di TEPI LUAR** — naga pastel tanpa outline, perut
+  krem, persis kasus yang melahirkan skrip itu. Yang tak bisa dikerjakannya: latar yang
+  **TERKURUNG**. Di gambar ini ada **tiga**, dan cuma satu yang kelihatan dari jauh:
+  **rongga di bawah gagang gembok** (26.632 px), **kantong antara sayap dan lengan yang
+  memegang kunci** (1.211 px), dan **celah antara kaki naga dan badan gembok** (1.073 px).
+  Ketiganya tetap putih opak dan di atas gradien layar ini terbaca sebagai bercak pejal.
+- **LUBANG KUNCINYA justru BUKAN lubang** — ia dilukis krem tua (bukan putih), jadi tak
+  perlu ditembus sama sekali. Jangan menembusnya "biar konsisten": di bawahnya ada badan
+  gembok, bukan latar.
+- **AMBANG PENEMBUS HARUS NEAR-WHITE (min kanal ≥ 238, sat ≤ 8).** Percobaan pertama memakai
+  ambang longgar (lum ≥ 200, sat ≤ 22) dan rantainya merambat dari rongga itu ke **gagang
+  gembok biru muda** — sisi dalam gagangnya termakan bergerigi, dan di layar 128 px itu
+  terlihat seperti gagang yang patah. Warna pastel apa pun, sepucat apa pun, milik gambarnya.
+- **Lubangnya disebut satu per satu (`--hole=x,y`), tidak pernah otomatis per ukuran.**
+  Aturan yang sama dengan daftar `HOLES` di `cut-item-sheet.py` dan `--hole` di
+  `cut-gradient.py`; alasan kenapa ambang UKURAN itu saran yang salah sudah tercatat di
+  `prompt-gambar-selamat.md` (di piala, bidang terkurung TERBESAR justru sorot krem di badan
+  mangkuknya).
+- **Cacatnya cuma kelihatan di atas warna.** Di atas kertas putih ketiga bercak itu tak
+  terlihat sama sekali; yang menunjukkannya adalah tempelan di atas biru tua, lalu di atas
+  gradien layar ini pada 128 px yang sungguhan.
