@@ -145,16 +145,25 @@ export const games: GameMeta[] = [
   },
   // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
   {
-    id: 'pasang-kata',
+    // PALING ATAS (keputusan pemilik 2026-09-24, ditukar dengan "Pasang Kata"):
+    // ini satu-satunya game SD yang GRATIS saat mode `'kunci'`
+    // (`FREE_GAME_IDS` di src/data/access.ts), jadi ia harus jadi kartu pertama
+    // yang dilihat calon pembeli — kalau demo satu-satunya terkubur di bawah
+    // delapan kartu bergembok, orang tua menutup halamannya sebelum
+    // menemukannya. Kalau demo SD nanti diganti game lain, PINDAHKAN JUGA
+    // urutannya ke sini.
+    id: 'tulis-huruf',
     group: 'sd1',
-    title: 'Pasang Kata',
-    emoji: '🧩',
-    pic: 'pasang-kata',
-    template: 'drag-drop',
-    load: () => import('@/games/sd1/pasang-kata'),
+    title: 'Tulis Huruf',
+    emoji: '🖊️',
+    pic: 'tulis-huruf',
+    template: 'tracing',
+    load: () => import('@/games/sd1/tulis-huruf'),
   },
   {
-    // Sengaja di sebelah "Pasang Kata" (permintaan pemilik 2026-09-03) —
+    // Dulu "sengaja di sebelah Pasang Kata" (permintaan pemilik 2026-09-03);
+    // sejak Tulis Huruf naik ke paling atas (2026-09-24) Pasang Kata pindah ke
+    // bawah, jadi kedua kartu itu tidak lagi bersebelahan.
     // saudara "Jalan Kendaraan" (TK) tapi sengaja lebih sulit: jalan lebih
     // sempit & lebih banyak belokan (lihat komentar kepala config). Ikonnya
     // SENGAJA jalan berkelok + rambu, BUKAN mobil — supaya beda jelas dari
@@ -224,13 +233,13 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd1/jam-pintar'),
   },
   {
-    id: 'tulis-huruf',
+    id: 'pasang-kata',
     group: 'sd1',
-    title: 'Tulis Huruf',
-    emoji: '🖊️',
-    pic: 'tulis-huruf',
-    template: 'tracing',
-    load: () => import('@/games/sd1/tulis-huruf'),
+    title: 'Pasang Kata',
+    emoji: '🧩',
+    pic: 'pasang-kata',
+    template: 'drag-drop',
+    load: () => import('@/games/sd1/pasang-kata'),
   },
   {
     // Pola & logika: satu-satunya game SD yang melatih penalaran pola
