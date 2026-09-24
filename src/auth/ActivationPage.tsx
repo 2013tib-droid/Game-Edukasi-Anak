@@ -157,10 +157,13 @@ export default function ActivationPage() {
           {busy ? 'Memeriksa…' : 'Aktifkan'}
         </button>
       </form>
-      <p style={{ fontSize: 15, opacity: 0.75 }}>
-        Ketik huruf dan angkanya saja — tanda hubungnya muncul sendiri. Huruf besar/kecil
-        tidak masalah.
-      </p>
+      {/* Keterangan "ketik huruf dan angkanya saja" DIHAPUS (keputusan pemilik
+          2026-09-24): contoh "K7P-M4X" di kolomnya sudah menunjukkan bentuknya,
+          dan perilakunya memang memaafkan — tanda hubung disisipkan sendiri
+          (`formatCode`), huruf kecil & pemisah apa pun dibuang server
+          (`normalizeCode`). Kalimat yang menerangkan hal yang sudah terjadi
+          sendiri cuma menambah bacaan di layar yang orang tuanya sedang
+          buru-buru. Jangan dihidupkan lagi tanpa alasan baru. */}
     </div>
   );
 }
