@@ -139,9 +139,33 @@ export function errorCode(e: unknown): string {
   return (e as { code?: string }).code ?? '';
 }
 
+/**
+ * Kalimat siap baca untuk orang tua.
+ *
+ * Cloud Function kita SELALU mengirim kalimat utuh ("Kodenya tidak dikenali…"),
+ * jadi `message` dipakai apa adanya. Yang disaring di sini adalah kegagalan
+ * yang TIDAK datang dari kodenya: jaringan putus, function tak terjangkau,
+ * project belum di-deploy. Di situ SDK mengisi `message` dengan nama kode
+ * errornya sendiri — "internal", "unavailable" — dan menampilkannya berarti
+ * orang tua yang sinyalnya hilang membaca kata "internal" di layar dan
+ * menyimpulkan kodenya rusak. Terlihat sendiri saat menguji tanpa emulator
+ * Functions (2026-09-24).
+ */
+const RAW_CODES = new Set([
+  'internal',
+  'unavailable',
+  'unknown',
+  'deadline-exceeded',
+  'cancelled',
+  'data-loss',
+]);
+
 export function errorMessage(e: unknown, fallback: string): string {
   const msg = (e as { message?: string }).message;
-  return typeof msg === 'string' && msg.length > 0 ? msg : fallback;
+  if (typeof msg !== 'string' || msg.length === 0) return fallback;
+  // Nama kode error, bukan kalimat: buang. Kalimat sungguhan selalu berspasi.
+  if (RAW_CODES.has(msg.trim().toLowerCase())) return fallback;
+  return msg;
 }
 
 export function errorDetails<T>(e: unknown): T | undefined {

@@ -1,0 +1,343 @@
+/* Layar aktivasi (/aktivasi) — area ORANG TUA.
+ *
+ * Gayanya sengaja beda dari layar anak: rata tengah tapi tenang, satu kartu
+ * putih sebagai pusat perhatian, teks pendukung kecil & redup. Yang dikejar
+ * bukan keriaan, tapi rasa "ini halaman resmi tempat uang saya jadi akses" —
+ * orang tua sedang memegang kode yang baru dibeli.
+ *
+ * Semua warnanya sudah dipakai di tempat lain (kuning #ffb703, coklat #3a2e20,
+ * oranye tua #b3541a, hijau #2d7a2d). JANGAN memperkenalkan warna baru di sini
+ * cuma untuk satu layar.
+ */
+
+.act {
+  max-width: 440px;
+}
+
+/* ── Kartu akun ──────────────────────────────────────────────────────────
+ *
+ * Ada karena sebelumnya TIDAK ADA SATU LAYAR PUN yang memperlihatkan akun mana
+ * yang sedang masuk: sesudah menukar kode, orang tua menekan "Beranda" dan tak
+ * menemukan jejak akunnya lagi — terbaca seperti keluar sendiri (laporan
+ * pemilik 2026-09-22), padahal tak ada apa pun di app ini yang pernah memanggil
+ * signOut. Panel ini yang menjawabnya, sekaligus memberi jalan keluar yang
+ * disengaja untuk HP yang dipakai berdua.
+ *
+ * Tetap lebih rendah bobotnya daripada kartu kode di bawahnya: latar setengah
+ * bening, tanpa bayangan terangkat. Ini keterangan, bukan tugas utama layar
+ * ini. */
+.acct {
+  margin-bottom: 16px;
+  padding: 11px 13px;
+  border: 1px solid rgba(58, 46, 32, 0.1);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.acct__row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+/* Huruf pertama email, bukan foto: jalur Google membawa foto profil, tapi
+   proyek ini sengaja tidak memakainya (lihat PrivacyPage) — dan lingkaran
+   berhuruf tak pernah gagal dimuat. */
+.acct__avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffe3a6;
+  color: #b3541a;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.acct__who {
+  min-width: 0;
+  flex: 1;
+}
+
+.acct__label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #8a7a63;
+}
+
+/* Alamat email tidak punya spasi: tanpa ini ia menolak turun baris dan meluber
+   keluar layar di HP. Sama seperti di layar verifikasi. */
+.acct__email {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 14.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #3a2e20;
+}
+
+.acct__out {
+  flex: none;
+  height: 40px;
+  padding: 0 15px;
+  border: 1px solid rgba(58, 46, 32, 0.12);
+  border-radius: 12px;
+  background: #fff;
+  color: #3a2e20;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.acct__out:active {
+  transform: translateY(1px);
+}
+
+/* Kelompok yang sudah dimiliki — chip, bukan kalimat berjajar dengan titik
+   tengah. Satu kelompok = satu chip, jadi tetap terbaca kalau nanti ada empat
+   jenjang dan namanya panjang-panjang. */
+.acct__owned {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(58, 46, 32, 0.08);
+}
+
+.acct__groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 5px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.acct__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: #e7f5e7;
+  color: #2d7a2d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ── Kartu kode ──────────────────────────────────────────────────────────── */
+.act-card {
+  padding: 20px 16px 22px;
+  border: 1px solid rgba(58, 46, 32, 0.08);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 12px 30px rgba(58, 46, 32, 0.1);
+  text-align: center;
+}
+
+/* Lencana kunci. SVG, bukan emoji 🔑 — emoji kunci digambar berbeda di tiap HP
+   (di sebagian jadi kunci pintu kuno, di sebagian kunci mobil), dan seluruh app
+   ini sudah pindah ke gambar sendiri justru karena itu. */
+.act-badge {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 35%, #fff3d0 0%, #ffe3a6 100%);
+  color: #b3541a;
+  box-shadow: 0 4px 14px rgba(179, 84, 26, 0.18);
+}
+
+.act-title {
+  margin: 0 0 8px;
+  font-size: 25px;
+  line-height: 1.2;
+  /* Judul dua baris yang rata tengah menyisakan satu kata yatim; browser
+     Android lawas mengabaikan ini dan membungkus normal — aman. */
+  text-wrap: balance;
+}
+
+.act-sub {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #6b5c47;
+}
+
+.act-form {
+  display: grid;
+  gap: 12px;
+}
+
+/* Kolom kode: satu-satunya hal yang harus diketik di layar ini, jadi ia yang
+   paling besar. Rata tengah + berjarak antar-huruf supaya kode pendek tidak
+   terlihat hilang di kolom selebar layar, dan supaya salah ketik gampang
+   terlihat sebelum ditekan Aktifkan. */
+.act-input {
+  min-height: 64px;
+  border-radius: 18px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+/* Contoh kode tak boleh sebesar & setebal kode yang sungguhan — kalau sama,
+   kolom yang masih kosong terbaca seperti sudah terisi. */
+.act-input::placeholder {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #b8ab95;
+}
+
+.act-submit {
+  width: 100%;
+  font-size: 22px;
+}
+
+.act-error,
+.act-note {
+  margin: 0;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.act-error {
+  background: #fdecea;
+  color: #b3261e;
+}
+
+.act-note {
+  margin-bottom: 16px;
+  background: #fff3cd;
+  color: #6b5c47;
+}
+
+/* ── Bantuan ─────────────────────────────────────────────────────────────
+ *
+ * Kode yang ditolak adalah saat orang tua paling butuh manusia, dan ini satu-
+ * satunya layar tempat hal itu terjadi. Tautannya keluar app — aman, ini area
+ * orang tua; JANGAN pernah memasangnya di layar anak. */
+.act-help {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #6b5c47;
+}
+
+.act-help a {
+  color: #b3541a;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(179, 84, 26, 0.25);
+}
+
+.act-help__dot {
+  margin: 0 7px;
+  opacity: 0.45;
+}
+
+/* ── Layar berhasil ────────────────────────────────────────────────────────
+ *
+ * Ditengahkan tegak: layar ini cuma berisi satu kartu, dan kartu yang menempel
+ * di tepi atas dengan setengah layar kosong di bawahnya terbaca seperti halaman
+ * yang belum selesai dimuat. `align-content: safe center` supaya isi yang lebih
+ * tinggi dari layar tetap bisa di-scroll (browser Android lawas yang tak
+ * mengenal `safe` jatuh ke start — justru perilaku yang aman). */
+.act--center {
+  display: grid;
+  align-content: safe center;
+  min-height: calc(100dvh - 48px);
+}
+
+.act-badge--ok {
+  background: radial-gradient(circle at 50% 35%, #eafae6 0%, #cdf0c8 100%);
+  color: #2d7a2d;
+  box-shadow: 0 4px 14px rgba(45, 122, 45, 0.18);
+}
+
+.act-done-group {
+  display: inline-block;
+  margin: 0 0 6px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: #e7f5e7;
+  color: #2d7a2d;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.act-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* HP paling kecil yang didukung: kolom kode & judulnya dikecilkan sedikit
+   supaya kode format LAMA (sepuluh karakter, masih sah di server) tetap muat
+   dalam satu baris. */
+@media (max-width: 340px) {
+  .act-title {
+    font-size: 23px;
+  }
+  .act-input {
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+}
+
+/* HP PENDEK (≈640px dan ke bawah, termasuk HP yang layarnya sudah terpotong
+   bilah browser). Yang dikecilkan cuma hiasannya — lencana, jarak, ukuran
+   judul — supaya "Aktifkan" naik ke atas lipatan. Kolom kode & tombolnya TIDAK
+   ikut mengecil: keduanya target sentuh 64px. */
+@media (max-height: 700px) {
+  /* Lencana kunci DILEPAS, bukan dikecilkan. Ia hiasan, dan 63px yang
+     dimakannya persis yang menentukan tombol "Aktifkan" ada di atas lipatan
+     atau tidak di HP 360x640 — terukur: dengan lencana 37px harus di-scroll,
+     tanpa lencana nol. Di HP yang layarnya lebih tinggi lencananya tetap ada. */
+  .act-badge {
+    display: none;
+  }
+  .act-title {
+    font-size: 22px;
+  }
+  .act-sub {
+    margin-bottom: 14px;
+    font-size: 14.5px;
+  }
+  .act-card {
+    padding: 16px 14px 18px;
+  }
+  .acct {
+    margin-bottom: 12px;
+  }
+  .act-help {
+    margin-top: 12px;
+  }
+}
+
+/* Lebih pendek lagi (HP 568px-an): judul & keterangannya ikut mengecil. Kolom
+   kode dan tombolnya tetap 64px — target sentuh tidak pernah jadi tumbal
+   ruang. */
+@media (max-height: 620px) {
+  .act-title {
+    font-size: 20px;
+  }
+  .act-sub {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  .acct__row {
+    gap: 9px;
+  }
+}

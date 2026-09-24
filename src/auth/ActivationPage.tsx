@@ -5,6 +5,8 @@ import groupsData from '@/data/groups.json';
 import { useAuth } from '@/auth/AuthContext';
 import { isFirebaseConfigured } from '@/auth/firebase';
 import { errorMessage, fetchOwnedGroups, redeemActivationCode } from '@/auth/entitlements';
+import { emailUrl, whatsappUrl } from '@/data/contact';
+import './activation.css';
 
 /**
  * Menyisipkan tanda hubungnya sendiri, supaya orang tua cukup mengetik huruf
@@ -97,23 +99,25 @@ export default function ActivationPage() {
 
   if (done) {
     return (
-      <div className="page" style={{ maxWidth: 420, textAlign: 'center' }}>
-        <div style={{ fontSize: 72, lineHeight: 1 }} aria-hidden>
-          🎉
-        </div>
-        <h1>{done.already ? 'Sudah aktif!' : 'Berhasil!'}</h1>
-        <p style={{ fontSize: 19 }}>
-          Kelompok <strong>{groupTitle(done.group)}</strong> sudah terbuka untuk akun ini.
-          Selamat bermain!
-        </p>
-        <p style={{ display: 'grid', gap: 12 }}>
-          <Link className="btn btn--primary" to={`/kelompok/${done.group}`}>
-            🎮 Mulai Main
-          </Link>
-          <Link className="btn" to="/portal">
-            🏠 Beranda
-          </Link>
-        </p>
+      <div className="page act act--center">
+        <section className="act-card">
+          <div className="act-badge act-badge--ok" aria-hidden>
+            <CheckIcon />
+          </div>
+          <h1 className="act-title">{done.already ? 'Sudah aktif!' : 'Berhasil!'}</h1>
+          <p className="act-done-group">{groupTitle(done.group)}</p>
+          <p className="act-sub" style={{ marginBottom: 0 }}>
+            Semua gamenya sudah terbuka untuk akun ini. Selamat bermain!
+          </p>
+          <div className="act-actions">
+            <Link className="btn btn--primary act-submit" to={`/kelompok/${done.group}`}>
+              🎮 Mulai Main
+            </Link>
+            <Link className="btn act-submit" to="/portal">
+              🏠 Beranda
+            </Link>
+          </div>
+        </section>
       </div>
     );
   }
@@ -125,46 +129,141 @@ export default function ActivationPage() {
   }
 
   return (
-    <div className="page" style={{ maxWidth: 420 }}>
+    <div className="page act">
       <Link className="back-link" to="/portal">
         <ArrowLeftIcon /> Kembali
       </Link>
       <AccountPanel email={user?.email ?? null} owned={owned} onLogout={handleLogout} />
-      <h1>Masukkan Kode Aktivasi</h1>
-      <p>Kode dikirim setelah pembelian di Lynk.id / Mayar.id.</p>
-      {!isFirebaseConfigured && (
-        <p style={{ background: '#fff3cd', padding: 12, borderRadius: 12 }}>
-          ⚠️ Firebase belum dikonfigurasi (.env kosong). Aktivasi belum aktif.
+      <section className="act-card">
+        <div className="act-badge" aria-hidden>
+          <KeyIcon />
+        </div>
+        <h1 className="act-title">Masukkan Kode Aktivasi</h1>
+        <p className="act-sub">
+          Kodenya dikirim setelah pembelian di <strong>Lynk.id</strong> /{' '}
+          <strong>Mayar.id</strong>.
         </p>
-      )}
-      <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 16 }}>
-        <input
-          className="input"
-          placeholder="Contoh: K7P-M4X"
-          value={code}
-          onChange={(e) => setCode(formatCode(e.target.value))}
-          autoComplete="off"
-          autoCapitalize="characters"
-          spellCheck={false}
-          required
-        />
-        {error && <p style={{ color: '#c0392b' }}>{error}</p>}
-        <button
-          className="btn btn--primary"
-          type="submit"
-          disabled={busy || !isFirebaseConfigured}
-        >
-          {busy ? 'Memeriksa…' : 'Aktifkan'}
-        </button>
-      </form>
-      {/* Keterangan "ketik huruf dan angkanya saja" DIHAPUS (keputusan pemilik
-          2026-09-24): contoh "K7P-M4X" di kolomnya sudah menunjukkan bentuknya,
-          dan perilakunya memang memaafkan — tanda hubung disisipkan sendiri
-          (`formatCode`), huruf kecil & pemisah apa pun dibuang server
-          (`normalizeCode`). Kalimat yang menerangkan hal yang sudah terjadi
-          sendiri cuma menambah bacaan di layar yang orang tuanya sedang
-          buru-buru. Jangan dihidupkan lagi tanpa alasan baru. */}
+        {!isFirebaseConfigured && (
+          <p className="act-note">
+            ⚠️ Firebase belum dikonfigurasi (.env kosong). Aktivasi belum aktif.
+          </p>
+        )}
+        <form onSubmit={handleSubmit} className="act-form">
+          <input
+            className="input act-input"
+            placeholder="K7P-M4X"
+            aria-label="Kode aktivasi"
+            value={code}
+            onChange={(e) => setCode(formatCode(e.target.value))}
+            autoComplete="off"
+            autoCapitalize="characters"
+            spellCheck={false}
+            required
+          />
+          {/* Keterangan "ketik huruf dan angkanya saja" DIHAPUS (keputusan
+              pemilik 2026-09-24): contoh di kolomnya sudah menunjukkan
+              bentuknya, dan perilakunya memang memaafkan — tanda hubung
+              disisipkan sendiri (`formatCode`), huruf kecil & pemisah apa pun
+              dibuang server (`normalizeCode`). Kalimat yang menerangkan hal
+              yang sudah terjadi sendiri cuma menambah bacaan di layar yang
+              orang tuanya sedang buru-buru. Jangan dihidupkan lagi tanpa
+              alasan baru. */}
+          {error && (
+            <p className="act-error" role="alert">
+              {error}
+            </p>
+          )}
+          <button
+            className="btn btn--primary act-submit"
+            type="submit"
+            disabled={busy || !isFirebaseConfigured}
+          >
+            {busy ? 'Memeriksa…' : 'Aktifkan'}
+          </button>
+        </form>
+      </section>
+      <HelpLine />
     </div>
+  );
+}
+
+/**
+ * Jalan keluar ke manusia, tepat di layar tempat orang tua paling mungkin
+ * mentok (kode ditolak, kode sudah dipakai, salah akun). Nomor & alamatnya
+ * dari `src/data/contact.ts` — satu sumber yang sama dengan kaki landing, jadi
+ * tidak pernah ada dua nomor berbeda di app ini.
+ *
+ * Tidak dirender sama sekali kalau kontaknya kosong, jadi build setengah jadi
+ * tak pernah menampilkan tautan mati. JANGAN pasang di layar anak.
+ */
+function HelpLine() {
+  const wa = whatsappUrl();
+  const mail = emailUrl();
+  if (!wa && !mail) return null;
+  return (
+    <p className="act-help">
+      Kodenya tidak bisa dipakai?{' '}
+      {wa && (
+        <a href={wa} target="_blank" rel="noopener noreferrer">
+          WhatsApp
+        </a>
+      )}
+      {wa && mail && <span className="act-help__dot">·</span>}
+      {mail && <a href={mail}>Email</a>}
+    </p>
+  );
+}
+
+/**
+ * Kunci yang digambar TEGAK, bukan miring 45°: di lingkaran 74px gagang yang
+ * miring berikut giginya terbaca seperti kaca pembesar bersilang (percobaan
+ * pertama, terlihat di tangkapan layar). Tegak, siluetnya tak bisa salah baca.
+ */
+function KeyIcon() {
+  return (
+    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="7.4" r="4.4" stroke="currentColor" strokeWidth="2.2" />
+      <path
+        d="M12 11.8V20.2M12 15.2h4M12 18h3"
+        stroke="currentColor"
+        strokeWidth="2.2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+/**
+ * Ikon orang, bukan huruf pertama email: alamat pemilik sendiri berawalan
+ * ANGKA ("2013.tib@…"), jadi lingkarannya berisi "2" — terbaca seperti
+ * penghitung, bukan identitas. Foto profil Google sengaja tidak dipakai
+ * (lihat PrivacyPage), jadi ikon tetap yang paling jujur.
+ */
+function PersonIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="8.4" r="3.9" stroke="currentColor" strokeWidth="2.1" />
+      <path
+        d="M4.9 20c.7-3.6 3.6-5.6 7.1-5.6s6.4 2 7.1 5.6"
+        stroke="currentColor"
+        strokeWidth="2.1"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="m4.5 12.5 5 5 10-11"
+        stroke="currentColor"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
@@ -187,19 +286,33 @@ function AccountPanel({
 }) {
   if (!isFirebaseConfigured) return null;
   return (
-    <div className="account-panel">
-      <div className="account-panel__who">
-        Masuk sebagai
-        <span className="account-panel__email">{email ?? 'akun ini'}</span>
-        {owned && owned.length > 0 && (
-          <p className="account-panel__groups">
-            ✅ Sudah aktif: {owned.map(groupTitle).join(' · ')}
-          </p>
-        )}
+    <div className="acct">
+      <div className="acct__row">
+        <span className="acct__avatar" aria-hidden>
+          <PersonIcon />
+        </span>
+        <span className="acct__who">
+          <span className="acct__label">Masuk sebagai</span>
+          <span className="acct__email">{email ?? 'akun ini'}</span>
+        </span>
+        <button className="acct__out" type="button" onClick={onLogout}>
+          Keluar
+        </button>
       </div>
-      <button className="account-panel__out" type="button" onClick={onLogout}>
-        Keluar
-      </button>
+      {owned && owned.length > 0 && (
+        <div className="acct__owned">
+          {/* Labelnya tetap ada: chip hijau sendirian tidak mengabarkan APA yang
+              hijau, dan yang membacanya orang tua yang baru sekali ke sini. */}
+          <span className="acct__label">Sudah aktif</span>
+          <ul className="acct__groups">
+            {owned.map((id) => (
+              <li className="acct__chip" key={id}>
+                ✅ {groupTitle(id)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
