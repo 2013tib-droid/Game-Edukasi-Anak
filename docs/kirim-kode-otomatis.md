@@ -143,6 +143,7 @@ Semua pesanan tercatat di Firebase Console → Firestore → koleksi **`orders`*
 | `code` terisi, `emailedAt` terisi | Beres | — |
 | `code` terisi, `emailedAt` kosong | Email gagal terkirim; Mayar akan mengulang sendiri | Kalau sampai 1 jam masih kosong, kirim kode di field `code` itu secara manual |
 | `problem: produk-tidak-dikenal` | Nama produk tidak memuat TK/SD | Cetak kode dengan `generate-codes.mjs`, kirim manual, lalu betulkan nama produknya |
+| `problem: status-…` | Status pembayarannya bukan `SUCCESS` | Cek transaksinya di dasbor Mayar. Kalau ternyata sudah lunas, kirim kode manual |
 
 Pembeli yang salah ketik email tidak akan menerima kodenya. Mereka biasanya
 menghubungi lewat WhatsApp. Cari pesanannya di `orders` (misalnya dari nama
@@ -162,9 +163,9 @@ ulang (langkah 5). URL-nya tidak perlu diganti.
   gagal tidak memicu webhook apa pun.
 - Kalau server kita menjawab error atau lambat, Mayar mengulang sampai
   **5 kali** dengan jeda yang makin panjang (±1, 5, 15 menit, …).
-- Contoh isi webhook ada di dokumentasi Postman Mayar. Dokumen itu terblokir
-  dari sesi Claude, jadi nama field-nya dibaca dengan beberapa kandidat
-  (`customerEmail` / `customer.email` / `email`, dst.). Kalau pembelian uji
-  pertama tercatat "data pesanan tidak lengkap" di log function, log itu ikut
-  mencatat NAMA field yang dikirim Mayar (bukan isinya). Kirim daftar nama itu
-  ke Claude untuk dicocokkan.
+- Contoh isi webhook `payment.received` dari dokumentasi Postman Mayar sudah
+  dicocokkan (2026-09-25): `id`, `status: "SUCCESS"`, `customerEmail`,
+  `customerName`, `productId`, `productName`, `amount`. Server memakai persis
+  nama-nama itu. Kalau suatu saat Mayar mengubahnya, log function mencatat
+  "data pesanan tidak lengkap" beserta NAMA field yang dikirim (bukan isinya);
+  kirim daftar nama itu ke Claude untuk dicocokkan.

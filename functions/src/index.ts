@@ -443,9 +443,11 @@ export const catatStat = onRequest(
  *     memicu webhook apa pun.
  *   - Jawaban non-2xx / timeout diulang sampai 5 kali (jeda bertambah:
  *     ±1, 5, 15 menit, …).
- *   Nama field `data` BELUM terverifikasi dari contoh resmi (docs Postman
- *   Mayar terblokir dari sesi Claude), jadi dibaca dengan beberapa kandidat
- *   nama — lihat `pick()`.
+ *   Contoh resmi payload-nya (dari dokumentasi Postman Mayar, ditempel pemilik
+ *   2026-09-25): `data.id` (= `data.transactionId`), `status: "SUCCESS"`,
+ *   `customerEmail`, `customerName`, `productId`, `productName`, `amount`.
+ *   Nama-nama itu yang dicoba PERTAMA oleh `pick()`; kandidat lainnya cuma
+ *   jaring pengaman.
  *
  * DIULANG TANPA DOBEL — Mayar mengulang webhook yang gagal. Pesanan dicatat di
  * `orders/{id transaksi Mayar}`: kiriman kedua untuk transaksi yang sama
@@ -698,6 +700,25 @@ export const mayarWebhook = onRequest(
         fields: Object.keys(data).slice(0, 40),
       });
       res.status(200).json({ ok: false, reason: 'incomplete' });
+      return;
+    }
+
+    // Contoh resmi Mayar memuat `status: "SUCCESS"`. Status lain yang TERTULIS
+    // (bukan yang kosong) tidak dibuatkan kode, tapi pesanannya dicatat supaya
+    // pemilik bisa memeriksanya — lebih baik satu pembeli dibalas manual
+    // daripada kode terkirim untuk pembayaran yang belum sah.
+    const status = pick(data, ['status']).toUpperCase();
+    if (status && !['SUCCESS', 'PAID', 'SETTLED'].includes(status)) {
+      await db.doc(`orders/${orderId}`).set(
+        {
+          email, name, productId, productName, amount, source: 'mayar',
+          code: null, problem: `status-${status.toLowerCase().slice(0, 20)}`,
+          createdAt: FieldValue.serverTimestamp(),
+        },
+        { merge: true },
+      );
+      logger.warn('mayarWebhook: status pembayaran bukan SUCCESS — tidak dikirimi kode', { orderId, status });
+      res.status(200).json({ ok: false, reason: 'not-success' });
       return;
     }
 
