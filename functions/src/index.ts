@@ -13,8 +13,11 @@
  *   3. Satu akun maksimal 3 perangkat, supaya satu pembelian tidak dibagikan
  *      ke satu grup WhatsApp.
  */
+import { randomInt, timingSafeEqual } from 'node:crypto';
 import { initializeApp } from 'firebase-admin/app';
 import { FieldValue, getFirestore, Timestamp } from 'firebase-admin/firestore';
+import { logger } from 'firebase-functions';
+import { defineSecret } from 'firebase-functions/params';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import {
   HttpsError,
@@ -22,6 +25,7 @@ import {
   onRequest,
   type CallableRequest,
 } from 'firebase-functions/v2/https';
+import { createTransport } from 'nodemailer';
 
 initializeApp();
 const db = getFirestore();
@@ -403,5 +407,362 @@ export const catatStat = onRequest(
     // Selalu 204: pengunjung tak perlu tahu hasilnya, dan jawaban yang
     // berbeda-beda cuma jadi bahan untuk menebak-nebak.
     res.status(204).send('');
+  },
+);
+
+
+// --- 4. Kirim kode otomatis setelah bayar di Mayar --------------------------
+
+/**
+ * Webhook Mayar → buat SATU kode baru → kirim ke email pembeli.
+ * (Keputusan pemilik 2026-09-25: "ribet kalo lagi sibuk masih manual
+ * kirim2 kode".)
+ *
+ * Alurnya:
+ *   1. Pembeli membayar di Mayar. Mayar memanggil URL ini dengan event
+ *      `payment.received` (badan: `{ event, data: { id, customerEmail,
+ *      customerName, productId, productName, amount, … } }`).
+ *   2. Kita menentukan kelompoknya dari produk yang dibeli.
+ *   3. Satu kode BARU dibuat khusus untuk pesanan ini, bersama catatan
+ *      pesanannya, dalam SATU transaksi — jadi tidak ada stok kode yang perlu
+ *      dicetak, dan satu kode tak mungkin jatuh ke dua pembeli.
+ *   4. Kodenya dikirim ke email pembeli dari Gmail pemilik.
+ *
+ * KEAMANAN — header `X-Callback-Token`:
+ *   Endpoint ini publik. Tanpa pengaman, siapa pun yang tahu URL-nya bisa
+ *   mengirim "pembayaran" palsu dan menerima kode gratis. Mayar menyertakan
+ *   Webhook Token milik merchant di header `X-Callback-Token` (dikonfirmasi tim
+ *   Mayar 2026-09-25); nilainya kita simpan di Secret Manager sebagai
+ *   `MAYAR_WEBHOOK_TOKEN`, BUKAN di repo (repo ini PUBLIK).
+ *   Kalau token pernah bocor: buat token baru di dasbor Mayar, perbarui
+ *   secret-nya, lalu deploy ulang.
+ *
+ * YANG DIKONFIRMASI TIM MAYAR (2026-09-25):
+ *   - `payment.received` = pembayaran MASUK. Checkout yang belum dibayar
+ *     memicu `payment.reminder` (diabaikan di sini), transaksi gagal tidak
+ *     memicu webhook apa pun.
+ *   - Jawaban non-2xx / timeout diulang sampai 5 kali (jeda bertambah:
+ *     ±1, 5, 15 menit, …).
+ *   Contoh resmi payload-nya (dari dokumentasi Postman Mayar, ditempel pemilik
+ *   2026-09-25): `data.id` (= `data.transactionId`), `status: "SUCCESS"`,
+ *   `customerEmail`, `customerName`, `productId`, `productName`, `amount`.
+ *   Nama-nama itu yang dicoba PERTAMA oleh `pick()`; kandidat lainnya cuma
+ *   jaring pengaman.
+ *
+ * DIULANG TANPA DOBEL — Mayar mengulang webhook yang gagal. Pesanan dicatat di
+ * `orders/{id transaksi Mayar}`: kiriman kedua untuk transaksi yang sama
+ * memakai kode yang SUDAH dibuat (tidak membuat kode baru), dan kalau emailnya
+ * sudah terkirim, tidak mengirim lagi.
+ *
+ * GAGAL KIRIM EMAIL → jawab 500, supaya Mayar mencoba lagi. Kodenya sudah
+ * tersimpan di pesanan, jadi percobaan berikutnya mengirim kode yang sama.
+ *
+ * Koleksi `orders` & `config` tertutup total dari client (firestore.rules):
+ * isinya email pembeli dan kode yang belum ditukar.
+ */
+const MAYAR_WEBHOOK_TOKEN = defineSecret('MAYAR_WEBHOOK_TOKEN');
+/** App Password Gmail (BUKAN kata sandi Gmail biasa) — lihat docs/kirim-kode-otomatis.md. */
+const GMAIL_APP_PASSWORD = defineSecret('GMAIL_APP_PASSWORD');
+
+/** Pengirim email. HARUS sama dengan src/data/contact.ts & email dukungan Firebase. */
+const SENDER_EMAIL = 'petualangsmart@gmail.com';
+/** Halaman tempat kode ditukar. Ganti saat pindah ke Firebase Hosting. */
+const ACTIVATION_URL = 'https://2013tib-droid.github.io/Game-Edukasi-Anak/app/#/aktivasi';
+
+const GROUP_TITLES: Record<Group, string> = {
+  tk: 'Playgroup dan TK',
+  sd1: 'SD Kelas 1 & 2',
+};
+
+/** HARUS sama dengan ALPHABET di scripts/generate-codes.mjs (tanpa I, L, O, 0, 1). */
+const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+
+/** Bentuk tampilan `K7P-M4X` — sama dengan generate-codes.mjs. */
+function mintCode(): { id: string; display: string } {
+  const block = () =>
+    Array.from({ length: 3 }, () => CODE_ALPHABET[randomInt(CODE_ALPHABET.length)]).join('');
+  const display = `${block()}-${block()}`;
+  return { id: display.replace(/-/g, ''), display };
+}
+
+/**
+ * Produk Mayar → kelompok.
+ *
+ * Yang dicek pertama: dokumen `config/mayar_products` (`{ "<productId>": "tk" }`)
+ * — diisi pemilik di Firebase Console, jadi mengganti produk tak perlu deploy.
+ * Cadangannya NAMA produk, yang memang kita tulis sendiri di Mayar.
+ * Tidak cocok dua-duanya → `null`, dan pesanannya dicatat untuk ditangani manual
+ * (lebih baik satu pembeli dibalas manual daripada dapat kelompok yang salah).
+ */
+async function groupForProduct(productId: string, productName: string): Promise<Group | null> {
+  if (productId) {
+    const cfg = (await db.doc('config/mayar_products').get()).data() ?? {};
+    const mapped = cfg[productId];
+    if (isGroup(mapped)) return mapped;
+  }
+  const name = productName.toLowerCase();
+  const isSd = /\bsd\b/.test(name);
+  const isTk = /\btk\b|playgroup/.test(name);
+  if (isSd && !isTk) return 'sd1';
+  if (isTk && !isSd) return 'tk';
+  return null;
+}
+
+/**
+ * Ambil nilai pertama yang ada dari beberapa kandidat nama field (boleh
+ * bertitik untuk objek bersarang, mis. `customer.email`). Nama field payload
+ * Mayar belum bisa dicocokkan dengan contoh resmi, jadi nama lain yang masuk
+ * akal ikut dicoba — lebih baik daripada kode tak pernah terkirim karena satu
+ * nama field.
+ */
+function pick(data: Record<string, unknown>, keys: string[]): string {
+  for (const key of keys) {
+    let cur: unknown = data;
+    for (const part of key.split('.')) {
+      cur = cur && typeof cur === 'object' ? (cur as Record<string, unknown>)[part] : undefined;
+    }
+    if (typeof cur === 'string' && cur.trim()) return cur;
+    if (typeof cur === 'number' && Number.isFinite(cur)) return String(cur);
+  }
+  return '';
+}
+
+function isEmail(value: string): boolean {
+  return /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(value) && value.length <= 200;
+}
+
+/** Teks dari pembeli dipakai di email — buang karakter yang bisa merusak HTML. */
+function escapeHtml(value: string): string {
+  return value.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+}
+
+function codeEmail(name: string, group: Group, display: string) {
+  const title = GROUP_TITLES[group];
+  const hello = name ? `Halo ${name},` : 'Halo,';
+  const text = [
+    hello,
+    '',
+    `Terima kasih sudah membeli Petualangan Pintar — ${title}.`,
+    '',
+    `Kode aktivasi Anda: ${display}`,
+    '',
+    'Cara memakainya:',
+    `1. Buka ${ACTIVATION_URL}`,
+    '2. Daftar atau masuk (bisa dengan email atau akun Google)',
+    '3. Masukkan kode di atas, lalu tekan Aktifkan',
+    '',
+    'Satu kode untuk satu akun, bisa dipakai di maksimal 3 perangkat.',
+    'Simpan email ini baik-baik. Kalau ada kendala, balas saja email ini.',
+    '',
+    'Salam,',
+    'Petualangan Pintar',
+  ].join('\n');
+
+  const html = `<div style="font-family:Arial,sans-serif;font-size:15px;color:#3a2e20;line-height:1.5">
+<p>${escapeHtml(hello)}</p>
+<p>Terima kasih sudah membeli <b>Petualangan Pintar — ${title}</b>.</p>
+<p>Kode aktivasi Anda:</p>
+<p style="font-size:30px;font-weight:bold;letter-spacing:4px;background:#fff4d6;border-radius:12px;padding:12px 18px;display:inline-block;margin:0">${display}</p>
+<p><b>Cara memakainya:</b></p>
+<ol>
+<li>Buka <a href="${ACTIVATION_URL}">halaman aktivasi</a></li>
+<li>Daftar atau masuk (bisa dengan email atau akun Google)</li>
+<li>Masukkan kode di atas, lalu tekan <b>Aktifkan</b></li>
+</ol>
+<p>Satu kode untuk satu akun, bisa dipakai di maksimal 3 perangkat.<br>
+Simpan email ini baik-baik. Kalau ada kendala, balas saja email ini.</p>
+<p>Salam,<br>Petualangan Pintar</p>
+</div>`;
+
+  return { subject: `Kode aktivasi Petualangan Pintar — ${title}`, text, html };
+}
+
+async function sendCodeEmail(to: string, name: string, group: Group, display: string) {
+  const mail = { from: `Petualangan Pintar <${SENDER_EMAIL}>`, to, ...codeEmail(name, group, display) };
+  // Di emulator tidak ada email sungguhan yang dikirim: pesannya cuma
+  // disusun, supaya webhook bisa diuji tanpa App Password.
+  if (process.env.FUNCTIONS_EMULATOR === 'true') {
+    await createTransport({ jsonTransport: true }).sendMail(mail);
+    logger.info('emulator: email tidak dikirim', { to, subject: mail.subject });
+    return;
+  }
+  const transport = createTransport({
+    service: 'gmail',
+    auth: { user: SENDER_EMAIL, pass: GMAIL_APP_PASSWORD.value().replace(/\s/g, '') },
+  });
+  await transport.sendMail(mail);
+}
+
+type OrderResult =
+  | { status: 'ready'; display: string; emailed: boolean }
+  | { status: 'exists-unfulfillable' };
+
+/**
+ * Membuat (atau mengambil lagi) kode untuk satu pesanan. Kode baru dan catatan
+ * pesanan ditulis dalam SATU transaksi: kalau webhook yang sama datang dua
+ * kali bersamaan, hanya satu yang berhasil membuat kode.
+ */
+async function codeForOrder(
+  orderId: string,
+  order: { email: string; name: string; group: Group; productId: string; productName: string; amount: number },
+): Promise<OrderResult> {
+  const orderRef = db.doc(`orders/${orderId}`);
+  // Tabrakan kode acak (31^6 kemungkinan) nyaris mustahil, tapi `create`
+  // menolaknya — coba lagi dengan kode lain beberapa kali.
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const minted = mintCode();
+    const codeRef = db.doc(`activation_codes/${minted.id}`);
+    try {
+      return await db.runTransaction(async (tx) => {
+        const existing = await tx.get(orderRef);
+        if (existing.exists) {
+          const data = existing.data() ?? {};
+          if (typeof data.code !== 'string') return { status: 'exists-unfulfillable' as const };
+          return { status: 'ready' as const, display: data.code, emailed: Boolean(data.emailedAt) };
+        }
+        tx.create(codeRef, {
+          code: minted.id,
+          display: minted.display,
+          group: order.group,
+          batch: 'mayar-otomatis',
+          orderId,
+          used: false,
+          usedBy: null,
+          usedAt: null,
+          createdAt: FieldValue.serverTimestamp(),
+        });
+        tx.create(orderRef, {
+          ...order,
+          source: 'mayar',
+          code: minted.display,
+          emailedAt: null,
+          createdAt: FieldValue.serverTimestamp(),
+        });
+        return { status: 'ready' as const, display: minted.display, emailed: false };
+      });
+    } catch (e) {
+      // 6 = ALREADY_EXISTS: kode acaknya kebetulan sudah ada → coba kode lain.
+      if ((e as { code?: unknown }).code === 6) continue;
+      throw e;
+    }
+  }
+  throw new Error('Gagal membuat kode unik setelah 5 percobaan');
+}
+
+export const mayarWebhook = onRequest(
+  { secrets: [MAYAR_WEBHOOK_TOKEN, GMAIL_APP_PASSWORD], maxInstances: 3 },
+  async (req, res) => {
+    if (req.method !== 'POST') {
+      res.status(405).send('');
+      return;
+    }
+    const header = req.get('x-callback-token');
+    const token = typeof header === 'string' ? header : '';
+    const expected = MAYAR_WEBHOOK_TOKEN.value();
+    const a = Buffer.from(token);
+    const b = Buffer.from(expected);
+    if (!expected || a.length !== b.length || !timingSafeEqual(a, b)) {
+      res.status(401).send('');
+      return;
+    }
+
+    const body = (req.body ?? {}) as { event?: unknown; data?: Record<string, unknown> };
+    const event = String(body.event ?? '');
+    const data = body.data ?? {};
+
+    // Event lain (pengingat, membership, uji coba dari dasbor) diterima tapi
+    // diabaikan — menjawab 200 supaya Mayar tidak terus mengulanginya.
+    if (event !== 'payment.received') {
+      logger.info('mayarWebhook: event diabaikan', { event });
+      res.status(200).json({ ok: true, ignored: event });
+      return;
+    }
+
+    const orderId = pick(data, ['id', 'transactionId', 'transaction_id'])
+      .replace(/[^A-Za-z0-9_-]/g, '')
+      .slice(0, 100);
+    const email = pick(data, ['customerEmail', 'customer.email', 'email']).trim().toLowerCase();
+    const name = pick(data, ['customerName', 'customer.name', 'name'])
+      .replace(/[\u0000-\u001f<>]/g, '')
+      .trim()
+      .slice(0, 80);
+    const productId = pick(data, ['productId', 'product.id', 'paymentLinkId']).slice(0, 100);
+    const productName = pick(data, ['productName', 'product.name', 'paymentLinkName']).slice(0, 200);
+    const amount = Number(pick(data, ['amount', 'totalAmount', 'credit'])) || 0;
+
+    if (!orderId || !isEmail(email)) {
+      // Yang dicatat cuma NAMA field-nya, bukan isinya (isinya data pribadi
+      // pembeli). Cukup untuk membetulkan `pick()` kalau nama field Mayar
+      // ternyata lain dari dugaan.
+      logger.warn('mayarWebhook: data pesanan tidak lengkap', {
+        orderId,
+        hasEmail: Boolean(email),
+        fields: Object.keys(data).slice(0, 40),
+      });
+      res.status(200).json({ ok: false, reason: 'incomplete' });
+      return;
+    }
+
+    // Contoh resmi Mayar memuat `status: "SUCCESS"`. Status lain yang TERTULIS
+    // (bukan yang kosong) tidak dibuatkan kode, tapi pesanannya dicatat supaya
+    // pemilik bisa memeriksanya — lebih baik satu pembeli dibalas manual
+    // daripada kode terkirim untuk pembayaran yang belum sah.
+    const status = pick(data, ['status']).toUpperCase();
+    if (status && !['SUCCESS', 'PAID', 'SETTLED'].includes(status)) {
+      await db.doc(`orders/${orderId}`).set(
+        {
+          email, name, productId, productName, amount, source: 'mayar',
+          code: null, problem: `status-${status.toLowerCase().slice(0, 20)}`,
+          createdAt: FieldValue.serverTimestamp(),
+        },
+        { merge: true },
+      );
+      logger.warn('mayarWebhook: status pembayaran bukan SUCCESS — tidak dikirimi kode', { orderId, status });
+      res.status(200).json({ ok: false, reason: 'not-success' });
+      return;
+    }
+
+    const group = await groupForProduct(productId, productName);
+    if (!group) {
+      // Dicatat supaya pemilik bisa membalas manual — tidak ada kode dibuat.
+      await db.doc(`orders/${orderId}`).set(
+        {
+          email, name, productId, productName, amount, source: 'mayar',
+          code: null, problem: 'produk-tidak-dikenal', createdAt: FieldValue.serverTimestamp(),
+        },
+        { merge: true },
+      );
+      logger.error('mayarWebhook: produk tidak dikenal — kirim kode manual', { orderId, productId, productName });
+      res.status(200).json({ ok: false, reason: 'unknown-product' });
+      return;
+    }
+
+    const result = await codeForOrder(orderId, { email, name, group, productId, productName, amount });
+    if (result.status === 'exists-unfulfillable') {
+      res.status(200).json({ ok: false, reason: 'needs-manual' });
+      return;
+    }
+    if (result.emailed) {
+      res.status(200).json({ ok: true, already: true });
+      return;
+    }
+
+    try {
+      await sendCodeEmail(email, name, group, result.display);
+    } catch (e) {
+      // KODENYA TIDAK DICATAT DI LOG — log Cloud Functions bisa dibaca siapa
+      // pun yang punya akses project, dan kode = barang jualan.
+      logger.error('mayarWebhook: email gagal terkirim, Mayar akan mengulang', {
+        orderId,
+        error: (e as Error).message,
+      });
+      res.status(500).json({ ok: false, reason: 'email-failed' });
+      return;
+    }
+
+    await db.doc(`orders/${orderId}`).update({ emailedAt: FieldValue.serverTimestamp() });
+    await bumpStat(['mayar_paid', `mayar_paid_${group}`]).catch(() => undefined);
+    logger.info('mayarWebhook: kode terkirim', { orderId, group });
+    res.status(200).json({ ok: true });
   },
 );

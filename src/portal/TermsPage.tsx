@@ -18,7 +18,7 @@ import LegalPage from '@/portal/LegalPage';
  */
 export default function TermsPage() {
   return (
-    <LegalPage title="Syarat & Ketentuan" updated="16 September 2026">
+    <LegalPage title="Syarat & Ketentuan" updated="25 September 2026">
       <div className="legal-summary">
         <h2>Ringkasnya</h2>
         <ul>
@@ -72,8 +72,9 @@ export default function TermsPage() {
       <h2>3. Kode aktivasi</h2>
       <ul>
         <li>
-          Kode dikirim oleh platform penjualan (Lynk.id / Mayar.id) segera setelah pembayaran
-          Anda selesai.
+          Setelah pembayaran di Mayar.id selesai, kode dikirim otomatis ke alamat email yang
+          Anda isi di halaman pembayaran, biasanya dalam beberapa menit. Pastikan alamat email
+          itu benar, dan periksa juga folder Spam/Promosi.
         </li>
         <li>
           <strong>Satu kode sekali pakai.</strong> Begitu ditukar, kode itu terikat permanen pada

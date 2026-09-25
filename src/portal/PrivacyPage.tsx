@@ -18,10 +18,11 @@ import LegalPage from '@/portal/LegalPage';
  *   - kode aktivasi terpakai ..... functions/src/index.ts (redeemActivationCode)
  *   - hitungan percobaan gagal ... functions/src/index.ts (redeem_attempts)
  *   - penghitung kunjungan ....... functions/src/index.ts (catatStat)
+ *   - pesanan dari Mayar ......... functions/src/index.ts (mayarWebhook, koleksi orders)
  */
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Kebijakan Privasi" updated="16 September 2026">
+    <LegalPage title="Kebijakan Privasi" updated="25 September 2026">
       <div className="legal-summary">
         <h2>Ringkasnya</h2>
         <ul>
@@ -42,6 +43,10 @@ export default function PrivacyPage() {
             <strong>kata sandi (tersimpan teracak / hashed oleh Firebase)</strong>,{' '}
             <strong>id perangkat berupa angka acak</strong>, dan{' '}
             <strong>bintang hasil bermain</strong>.
+          </li>
+          <li>
+            Kalau Anda membeli lewat Mayar.id, kami juga menerima <strong>nama &amp; email dari
+            halaman pembayaran</strong> — hanya untuk mengirim kode aktivasi ke email itu.
           </li>
           <li>
             Kalau Anda memilih <strong>masuk dengan akun Google</strong>, kami tidak menyimpan
@@ -117,6 +122,15 @@ export default function PrivacyPage() {
           Ini bukti pembelian dan yang membuat satu kode tidak bisa dipakai dua kali.
         </li>
         <li>
+          <b>Data pesanan dari platform penjualan</b>
+          Saat Anda membayar di Mayar.id, Mayar mengirimkan kepada kami <strong>nama, alamat
+          email, nomor pesanan, produk, dan nominal</strong> yang Anda isi di halaman
+          pembayarannya. Kami memakainya hanya untuk <strong>mengirim kode aktivasi ke email
+          itu</strong> dan untuk membantu bila kodenya tidak sampai. Nomor HP dari halaman
+          pembayaran tidak kami simpan. Data kartu dan dompet digital tidak pernah sampai ke
+          kami.
+        </li>
+        <li>
           <b>Hitungan percobaan kode yang gagal</b>
           Kalau kode salah dimasukkan berulang kali, jumlah kegagalan per jam disimpan
           sementara. Gunanya menahan orang yang mencoba menebak kode orang lain.
@@ -143,8 +157,8 @@ export default function PrivacyPage() {
       <h2>3. Kenapa kami memerlukannya (dasar pemrosesan)</h2>
       <ul>
         <li>
-          <strong>Untuk menjalankan perjanjian:</strong> email, kata sandi, id perangkat, dan
-          catatan kode aktivasi — tanpa itu, akses yang Anda bayar tidak bisa diberikan atau
+          <strong>Untuk menjalankan perjanjian:</strong> email, kata sandi, id perangkat,
+          data pesanan, dan catatan kode aktivasi — tanpa itu, akses yang Anda bayar tidak bisa diberikan atau
           dipulihkan.
         </li>
         <li>
@@ -186,7 +200,8 @@ export default function PrivacyPage() {
         Pembayaran dilakukan di platform penjualan (Lynk.id / Mayar.id), <strong>bukan di
         aplikasi ini</strong>. Kami tidak pernah menerima atau menyimpan nomor kartu, PIN, atau
         data dompet digital Anda. Data pembayaran diproses oleh platform tersebut menurut
-        kebijakan mereka sendiri.
+        kebijakan mereka sendiri. Email berisi kode aktivasi dikirim dari akun Gmail kami
+        (petualangsmart@gmail.com) melalui layanan email Google.
       </p>
 
       <h2>5. Yang disimpan di HP Anda sendiri</h2>
@@ -213,6 +228,10 @@ export default function PrivacyPage() {
           <strong>Catatan kode aktivasi terpakai</strong>: disimpan sebagai bukti pembelian
           walaupun akunnya dihapus, supaya kode yang sama tidak bisa dipakai ulang oleh orang
           lain. Catatan ini bisa dipisahkan dari identitas Anda bila Anda meminta akun dihapus.
+        </li>
+        <li>
+          <strong>Data pesanan</strong>: disimpan sebagai bukti pembelian, sama seperti catatan
+          kode aktivasi, dan bisa dihapus identitasnya atas permintaan Anda.
         </li>
         <li>
           <strong>Penghitung kunjungan</strong>: hanya angka jumlah, tidak terikat siapa pun,

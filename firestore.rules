@@ -73,6 +73,19 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // Pesanan Mayar (Cloud Function `mayarWebhook`): email pembeli + kode
+    // yang dikirim ke mereka. Tertutup total — kalau bisa dibaca client,
+    // email semua pembeli DAN kode yang belum ditukar ikut terbaca.
+    match /orders/{orderId} {
+      allow read, write: if false;
+    }
+
+    // Pengaturan server, mis. `config/mayar_products` (produk Mayar →
+    // kelompok). Diisi pemilik lewat Firebase Console, dibaca function saja.
+    match /config/{docId} {
+      allow read, write: if false;
+    }
+
     // Default: tolak semua yang tidak dicocokkan di atas.
     match /{document=**} {
       allow read, write: if false;

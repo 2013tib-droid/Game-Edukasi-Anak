@@ -33,6 +33,8 @@ firebase-debug.log
 # Firestore, dan CSV yang ter-commit = kode jualan dibagikan gratis.
 # Pola ini sengaja luas supaya salah nama pun tetap tertahan.
 kunci*.json
+# Secret lokal emulator Cloud Functions (token webhook Mayar, App Password Gmail).
+functions/.secret.local
 serviceAccount*.json
 service-account*.json
 *-firebase-adminsdk-*.json
