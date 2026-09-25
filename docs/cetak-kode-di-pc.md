@@ -37,19 +37,39 @@ node -v
 
 ### 2. Ambil salinan repo
 
-Kalau folder reponya belum ada di komputer:
+**Cek dulu — mungkin sudah ada:**
+
+```powershell
+Test-Path $HOME\Documents\Game-Edukasi-Anak
+```
+
+- `True` → sudah ada, cukup perbarui:
+  ```powershell
+  cd $HOME\Documents\Game-Edukasi-Anak
+  git checkout main
+  git pull
+  ```
+- `False` → **unduh dulu** (±67 MB; `--depth 1` supaya riwayat commit-nya tidak ikut):
+  ```powershell
+  cd $HOME\Documents
+  git clone --depth 1 https://github.com/2013tib-droid/Game-Edukasi-Anak.git
+  ```
+
+**Kalau `git` belum terpasang** (`git : The term 'git' is not recognized`), unduh ZIP-nya saja —
+repo ini publik, jadi tidak perlu login:
 
 ```powershell
 cd $HOME\Documents
-git clone https://github.com/2013tib-droid/Game-Edukasi-Anak.git
+Invoke-WebRequest "https://github.com/2013tib-droid/Game-Edukasi-Anak/archive/refs/heads/main.zip" -OutFile repo.zip
+Expand-Archive repo.zip -DestinationPath .
+Rename-Item Game-Edukasi-Anak-main Game-Edukasi-Anak
+Remove-Item repo.zip
 ```
 
-Kalau sudah ada, cukup perbarui:
+**Pastikan berhasil** sebelum lanjut — perintah ini harus menjawab `True`:
 
 ```powershell
-cd $HOME\Documents\Game-Edukasi-Anak
-git checkout main
-git pull
+Test-Path $HOME\Documents\Game-Edukasi-Anak\functions\scripts\generate-codes.mjs
 ```
 
 > Catat path foldernya — semua perintah berikutnya dimulai dari situ.
@@ -93,6 +113,17 @@ Selalu dari folder `functions`:
 ```powershell
 cd $HOME\Documents\Game-Edukasi-Anak\functions
 $env:GOOGLE_APPLICATION_CREDENTIALS = 'kunci.json'
+```
+
+**Kalau `cd` menjawab `Cannot find path ... because it does not exist`, BERHENTI** —
+repo-nya belum diunduh (persiapan langkah 2). Jangan lanjut mengetik perintah
+berikutnya: `$env:` akan berhasil di folder mana pun, lalu `node` gagal dengan
+`Cannot find module` dan errornya terlihat seperti masalah lain.
+
+Pastikan sudah di tempat yang benar — harus menjawab `True`:
+
+```powershell
+Test-Path scripts\generate-codes.mjs
 ```
 
 Baris `$env:` itu berlaku **selama jendela PowerShell itu terbuka**. Kalau
@@ -183,6 +214,8 @@ dan itu justru menghidupkan kembali kode yang sudah beredar).
 | Pesan | Artinya |
 |---|---|
 | `node : The term 'node' is not recognized` | Node.js belum terpasang, atau PowerShell belum dibuka ulang sesudah memasangnya (persiapan langkah 1) |
+| `cd : Cannot find path ...` | Repo-nya belum diunduh — kerjakan persiapan langkah 2 dulu |
+| `Cannot find module '...generate-codes.mjs'` | PowerShell-nya tidak sedang di folder `functions`. Cek dengan `Test-Path scripts\generate-codes.mjs` |
 | `Cannot find module 'firebase-admin'` | `npm ci` belum dijalankan di folder `functions` (persiapan langkah 3) |
 | `Could not load the default credentials` | `$env:GOOGLE_APPLICATION_CREDENTIALS` belum diketik di jendela itu, atau `kunci.json` tidak ada di folder `functions` |
 | `--group harus salah satu dari: tk, sd1` | `--group=tk` atau `--group=sd1` kelewat atau salah ketik |
