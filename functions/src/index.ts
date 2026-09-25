@@ -503,11 +503,31 @@ async function groupForProduct(productId: string, productName: string): Promise<
     const mapped = cfg[productId];
     if (isGroup(mapped)) return mapped;
   }
+  return groupFromName(productName);
+}
+
+/**
+ * Tebakan kelompok dari NAMA produk Mayar — cadangan kalau id produknya belum
+ * dipetakan di `config/mayar_products`.
+ *
+ * SD akan punya tiga tahap (Kelas 1 & 2 → 3 & 4 → 5 & 6), jadi "SD" saja TIDAK
+ * cukup: "SD Kelas 3 & 4" yang dipasang di Mayar sebelum kelompok `sd2` ada di
+ * kode akan terbaca sebagai `sd1`, dan pembelinya dikirimi kode kelompok yang
+ * salah padahal sudah membayar. Karena itu `sd1` hanya kalau namanya menyebut
+ * kelas 1 atau 2 dan TIDAK menyebut kelas 3–6. Selebihnya `null` → ditangani manual.
+ * Kalau kelompok SD berikutnya dibuat, tambahkan cabangnya di sini.
+ */
+function groupFromName(productName: string): Group | null {
   const name = productName.toLowerCase();
   const isSd = /\bsd\b/.test(name);
   const isTk = /\btk\b|playgroup/.test(name);
-  if (isSd && !isTk) return 'sd1';
   if (isTk && !isSd) return 'tk';
+  if (isSd && !isTk) {
+    const grades = name.match(/\b[1-6]\b/g) ?? [];
+    const early = grades.some((g) => g === '1' || g === '2');
+    const later = grades.some((g) => Number(g) >= 3);
+    if (early && !later) return 'sd1';
+  }
   return null;
 }
 

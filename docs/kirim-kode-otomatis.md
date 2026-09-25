@@ -105,12 +105,18 @@ Function menentukan jenjang dari **nama produk**:
 | Nama produk harus memuat | Jadi kode untuk |
 |---|---|
 | `TK` atau `Playgroup` | Playgroup dan TK |
-| `SD` | SD Kelas 1 & 2 |
+| `SD` **dan** `Kelas 1` atau `2` (mis. `SD Kelas 1 & 2`) | SD Kelas 1 & 2 |
 
 Nama yang disarankan sebelumnya (`Petualangan Pintar: Playgroup dan TK`,
 `Petualangan Pintar: SD Kelas 1 & 2`) sudah cocok. **Jangan pakai nama yang
 memuat keduanya** (misalnya paket bundel "TK + SD"): pesanan seperti itu
 tidak dikirimi kode otomatis dan harus Anda tangani manual.
+
+Nama yang menyebut **kelas 3 sampai 6** (`SD Kelas 3 & 4`, `SD Kelas 5 & 6`)
+sengaja TIDAK dikirimi kode sampai kelompok itu dibuat di kode, supaya
+pembelinya tidak menerima kode SD Kelas 1 & 2 yang salah. Pesanannya tercatat
+`problem: produk-tidak-dikenal` untuk ditangani manual. Jadi jangan membuka
+penjualan jenjang SD berikutnya di Mayar sebelum kelompoknya siap.
 
 Kalau suatu saat mau memakai nama lain, buat dokumen di Firebase Console →
 Firestore → koleksi `config` → dokumen `mayar_products`, dengan field bernama
