@@ -428,13 +428,24 @@ export const catatStat = onRequest(
  *      dicetak, dan satu kode tak mungkin jatuh ke dua pembeli.
  *   4. Kodenya dikirim ke email pembeli dari Gmail pemilik.
  *
- * KEAMANAN — kenapa ada `?t=<token>` di URL-nya:
+ * KEAMANAN — header `X-Callback-Token`:
  *   Endpoint ini publik. Tanpa pengaman, siapa pun yang tahu URL-nya bisa
- *   mengirim "pembayaran" palsu dan menerima kode gratis. Token rahasia di URL
- *   hanya diketahui Mayar (kita yang mendaftarkan URL-nya di dasbor Mayar), dan
- *   disimpan di Secret Manager, bukan di repo (repo ini PUBLIK).
- *   Kalau token pernah bocor: ganti nilai secret-nya, deploy ulang, lalu
- *   perbarui URL di dasbor Mayar.
+ *   mengirim "pembayaran" palsu dan menerima kode gratis. Mayar menyertakan
+ *   Webhook Token milik merchant di header `X-Callback-Token` (dikonfirmasi tim
+ *   Mayar 2026-09-25); nilainya kita simpan di Secret Manager sebagai
+ *   `MAYAR_WEBHOOK_TOKEN`, BUKAN di repo (repo ini PUBLIK).
+ *   Kalau token pernah bocor: buat token baru di dasbor Mayar, perbarui
+ *   secret-nya, lalu deploy ulang.
+ *
+ * YANG DIKONFIRMASI TIM MAYAR (2026-09-25):
+ *   - `payment.received` = pembayaran MASUK. Checkout yang belum dibayar
+ *     memicu `payment.reminder` (diabaikan di sini), transaksi gagal tidak
+ *     memicu webhook apa pun.
+ *   - Jawaban non-2xx / timeout diulang sampai 5 kali (jeda bertambah:
+ *     ±1, 5, 15 menit, …).
+ *   Nama field `data` BELUM terverifikasi dari contoh resmi (docs Postman
+ *   Mayar terblokir dari sesi Claude), jadi dibaca dengan beberapa kandidat
+ *   nama — lihat `pick()`.
  *
  * DIULANG TANPA DOBEL — Mayar mengulang webhook yang gagal. Pesanan dicatat di
  * `orders/{id transaksi Mayar}`: kiriman kedua untuk transaksi yang sama
@@ -493,6 +504,25 @@ async function groupForProduct(productId: string, productName: string): Promise<
   if (isSd && !isTk) return 'sd1';
   if (isTk && !isSd) return 'tk';
   return null;
+}
+
+/**
+ * Ambil nilai pertama yang ada dari beberapa kandidat nama field (boleh
+ * bertitik untuk objek bersarang, mis. `customer.email`). Nama field payload
+ * Mayar belum bisa dicocokkan dengan contoh resmi, jadi nama lain yang masuk
+ * akal ikut dicoba — lebih baik daripada kode tak pernah terkirim karena satu
+ * nama field.
+ */
+function pick(data: Record<string, unknown>, keys: string[]): string {
+  for (const key of keys) {
+    let cur: unknown = data;
+    for (const part of key.split('.')) {
+      cur = cur && typeof cur === 'object' ? (cur as Record<string, unknown>)[part] : undefined;
+    }
+    if (typeof cur === 'string' && cur.trim()) return cur;
+    if (typeof cur === 'number' && Number.isFinite(cur)) return String(cur);
+  }
+  return '';
 }
 
 function isEmail(value: string): boolean {
@@ -624,7 +654,8 @@ export const mayarWebhook = onRequest(
       res.status(405).send('');
       return;
     }
-    const token = typeof req.query.t === 'string' ? req.query.t : '';
+    const header = req.get('x-callback-token');
+    const token = typeof header === 'string' ? header : '';
     const expected = MAYAR_WEBHOOK_TOKEN.value();
     const a = Buffer.from(token);
     const b = Buffer.from(expected);
@@ -645,15 +676,27 @@ export const mayarWebhook = onRequest(
       return;
     }
 
-    const orderId = String(data.id ?? '').replace(/[^A-Za-z0-9_-]/g, '').slice(0, 100);
-    const email = String(data.customerEmail ?? '').trim().toLowerCase();
-    const name = String(data.customerName ?? '').replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 80);
-    const productId = String(data.productId ?? '').slice(0, 100);
-    const productName = String(data.productName ?? '').slice(0, 200);
-    const amount = Number(data.amount ?? 0) || 0;
+    const orderId = pick(data, ['id', 'transactionId', 'transaction_id'])
+      .replace(/[^A-Za-z0-9_-]/g, '')
+      .slice(0, 100);
+    const email = pick(data, ['customerEmail', 'customer.email', 'email']).trim().toLowerCase();
+    const name = pick(data, ['customerName', 'customer.name', 'name'])
+      .replace(/[\u0000-\u001f<>]/g, '')
+      .trim()
+      .slice(0, 80);
+    const productId = pick(data, ['productId', 'product.id', 'paymentLinkId']).slice(0, 100);
+    const productName = pick(data, ['productName', 'product.name', 'paymentLinkName']).slice(0, 200);
+    const amount = Number(pick(data, ['amount', 'totalAmount', 'credit'])) || 0;
 
     if (!orderId || !isEmail(email)) {
-      logger.warn('mayarWebhook: data pesanan tidak lengkap', { orderId, hasEmail: Boolean(email) });
+      // Yang dicatat cuma NAMA field-nya, bukan isinya (isinya data pribadi
+      // pembeli). Cukup untuk membetulkan `pick()` kalau nama field Mayar
+      // ternyata lain dari dugaan.
+      logger.warn('mayarWebhook: data pesanan tidak lengkap', {
+        orderId,
+        hasEmail: Boolean(email),
+        fields: Object.keys(data).slice(0, 40),
+      });
       res.status(200).json({ ok: false, reason: 'incomplete' });
       return;
     }

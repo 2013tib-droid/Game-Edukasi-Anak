@@ -32,17 +32,18 @@ tidak mengizinkan kata sandi Gmail biasa dipakai program, jadi yang dipakai
 Gmail bisa mengirim sekitar 500 email per hari. Itu jauh di atas kebutuhan
 awal; kalau suatu saat terlampaui, kita pindah ke layanan email khusus.
 
-## 2. Buat token rahasia webhook
+## 2. Salin Webhook Token dari dasbor Mayar
 
-Token ini memastikan hanya Mayar yang bisa memicu pengiriman kode. Buka
-PowerShell, lalu jalankan:
+Token ini memastikan hanya Mayar yang bisa memicu pengiriman kode. Mayar
+mengirimkannya di setiap webhook lewat header `X-Callback-Token`
+(dikonfirmasi tim Mayar 2026-09-25), dan server kita menolak kiriman yang
+tokennya tidak cocok.
 
-```powershell
-[guid]::NewGuid().ToString('N')
-```
+Dasbor Mayar → **Integrasi / Integration → Webhook** → salin **Webhook Token**
+milik Anda. Simpan sebentar di Notepad. **Jangan ditempel ke chat.**
 
-Hasilnya 32 huruf/angka acak. Simpan sebentar di Notepad. **Jangan ditempel ke
-chat.**
+(Kalau menunya belum muncul, biasanya KYC belum disetujui. Langkah 1, 3, dan 4
+tetap bisa dikerjakan lebih dulu.)
 
 ## 3. Simpan keduanya di Secret Manager
 
@@ -52,7 +53,7 @@ Repo ini PUBLIK, jadi rahasia tidak boleh ada di kode.
 2. Kalau diminta, tekan **Enable** (Secret Manager API).
 3. **Create secret**:
    - Name: `MAYAR_WEBHOOK_TOKEN` (persis begitu, huruf besar semua)
-   - Secret value: token dari langkah 2
+   - Secret value: Webhook Token dari langkah 2
    - Tekan **Create secret**.
 4. **Create secret** sekali lagi:
    - Name: `GMAIL_APP_PASSWORD`
@@ -84,14 +85,18 @@ ditutup total dari HP.
 Syarat: KYC Mayar sudah disetujui.
 
 1. Dasbor Mayar → **Integrasi / Integration → Webhook**.
-2. Isi URL (ganti `TOKEN` dengan token dari langkah 2):
+2. Isi URL webhook:
 
    ```
-   https://asia-southeast2-petualangan-pintar.cloudfunctions.net/mayarWebhook?t=TOKEN
+   https://asia-southeast2-petualangan-pintar.cloudfunctions.net/mayarWebhook
    ```
+
+   Tanpa `?t=` atau apa pun di belakangnya: tokennya dikirim Mayar sendiri
+   lewat header.
 
 3. Simpan, lalu tekan tombol **Test** kalau ada. Hasil yang benar: status
-   **200**. Kalau **401**, tokennya tidak sama dengan yang di Secret Manager.
+   **200**. Kalau **401**, Webhook Token di Secret Manager tidak sama dengan
+   yang di dasbor Mayar (cek juga tidak ada spasi yang ikut tersalin).
 
 ## 7. Nama produk di Mayar
 
@@ -146,6 +151,20 @@ kode baru**, supaya satu pembayaran tetap satu kode.
 
 ## Kalau token bocor
 
-Buat token baru (langkah 2), tambahkan sebagai **versi baru** di secret
-`MAYAR_WEBHOOK_TOKEN`, deploy ulang (langkah 5), lalu ganti URL di Mayar
-(langkah 6).
+Buat Webhook Token baru di dasbor Mayar (kalau ada tombol regenerate), lalu
+tambahkan sebagai **versi baru** di secret `MAYAR_WEBHOOK_TOKEN` dan deploy
+ulang (langkah 5). URL-nya tidak perlu diganti.
+
+## Yang dikonfirmasi tim Mayar (2026-09-25)
+
+- `payment.received` hanya untuk pembayaran yang MASUK. Checkout yang belum
+  dibayar memicu `payment.reminder`, dan itu diabaikan server kita. Transaksi
+  gagal tidak memicu webhook apa pun.
+- Kalau server kita menjawab error atau lambat, Mayar mengulang sampai
+  **5 kali** dengan jeda yang makin panjang (±1, 5, 15 menit, …).
+- Contoh isi webhook ada di dokumentasi Postman Mayar. Dokumen itu terblokir
+  dari sesi Claude, jadi nama field-nya dibaca dengan beberapa kandidat
+  (`customerEmail` / `customer.email` / `email`, dst.). Kalau pembelian uji
+  pertama tercatat "data pesanan tidak lengkap" di log function, log itu ikut
+  mencatat NAMA field yang dikirim Mayar (bukan isinya). Kirim daftar nama itu
+  ke Claude untuk dicocokkan.
