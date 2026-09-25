@@ -11,7 +11,10 @@
 #     Variable FIREBASE_PROJECT_ID      = id project, mis. petualangan-pintar
 #
 #   Service account-nya butuh peran: Firebase Admin, Cloud Functions Admin,
-#   Service Account User, dan Cloud Datastore Owner (untuk rules).
+#   Service Account User, dan Cloud Datastore Owner (untuk rules) —
+#   plus Secret Manager Admin sejak ada `mayarWebhook` (2026-09-25):
+#   function itu memakai secret, dan deploy-nya harus bisa memberi
+#   function akses ke secret tersebut. Lihat docs/kirim-kode-otomatis.md.
 #
 # Cara memakai: tab Actions → "Deploy backend" → Run workflow.
 name: Deploy backend
