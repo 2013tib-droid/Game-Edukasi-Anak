@@ -169,3 +169,8 @@ ulang (langkah 5). URL-nya tidak perlu diganti.
   nama-nama itu. Kalau suatu saat Mayar mengubahnya, log function mencatat
   "data pesanan tidak lengkap" beserta NAMA field yang dikirim (bukan isinya);
   kirim daftar nama itu ke Claude untuk dicocokkan.
+- `id` transaksi **tetap sama saat Mayar mengulang webhook**, jadi pengulangan
+  tidak pernah menghasilkan kode dobel.
+- **Satu checkout = satu pembelian** (tidak bisa beli 2 sekaligus). Pembeli yang
+  checkout dua kali mendapat dua transaksi terpisah, jadi otomatis dapat dua
+  kode. Itu sudah benar: bayar dua kali, dapat dua kode.
