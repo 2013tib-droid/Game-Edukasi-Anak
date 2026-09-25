@@ -31,7 +31,12 @@ import { FUNCTIONS_REGION } from '@/auth/firebase';
 const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID as string | undefined;
 
 /** Peristiwa yang dikenal server. Daftarnya juga ada di `functions/src/index.ts`. */
-export type StatEvent = 'landing_view' | 'landing_main_click' | 'landing_parent_click';
+export type StatEvent =
+  | 'landing_view'
+  | 'landing_main_click'
+  | 'landing_parent_click'
+  | 'landing_buy_tk'
+  | 'landing_buy_sd1';
 
 /**
  * Satu kali per browser per hari, per peristiwa.

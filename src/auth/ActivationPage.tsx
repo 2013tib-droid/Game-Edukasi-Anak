@@ -6,6 +6,7 @@ import { useAuth } from '@/auth/AuthContext';
 import { isFirebaseConfigured } from '@/auth/firebase';
 import { errorMessage, fetchOwnedGroups, redeemActivationCode } from '@/auth/entitlements';
 import { emailUrl, whatsappUrl } from '@/data/contact';
+import { buyUrl } from '@/data/purchase';
 import './activation.css';
 
 /**
@@ -152,8 +153,7 @@ export default function ActivationPage() {
         </div>
         <h1 className="act-title">Masukkan Kode Aktivasi</h1>
         <p className="act-sub">
-          Kodenya dikirim setelah pembelian di <strong>Lynk.id</strong> /{' '}
-          <strong>Mayar.id</strong>.
+          Kodenya dikirim ke email Anda setelah membayar di <strong>Mayar.id</strong>.
         </p>
         {!isFirebaseConfigured && (
           <p className="act-note">
@@ -194,8 +194,36 @@ export default function ActivationPage() {
           </button>
         </form>
       </section>
+      <BuyLine />
       <HelpLine />
     </div>
+  );
+}
+
+/**
+ * "Belum punya kode?" — satu-satunya jalan ke checkout bagi orang tua yang
+ * datang dari layar gembok game (layar itu di area anak, jadi ia menaut ke
+ * sini, bukan langsung ke Mayar). Link dari `src/data/purchase.ts`; kelompok
+ * yang linknya kosong tidak ditampilkan, dan kalau semuanya kosong barisnya
+ * hilang.
+ */
+function BuyLine() {
+  const links = (['tk', 'sd1'] as const)
+    .map((id) => ({ id, url: buyUrl(id), title: groupTitle(id) }))
+    .filter((l): l is { id: 'tk' | 'sd1'; url: string; title: string } => l.url !== null);
+  if (links.length === 0) return null;
+  return (
+    <p className="act-help">
+      Belum punya kode? Beli:{' '}
+      {links.map((l, i) => (
+        <span key={l.id}>
+          {i > 0 && <span className="act-help__dot">·</span>}
+          <a href={l.url} target="_blank" rel="noopener noreferrer">
+            {l.title}
+          </a>
+        </span>
+      ))}
+    </p>
   );
 }
 

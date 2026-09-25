@@ -5,6 +5,7 @@ import TopBar from '@/portal/TopBar';
 import GameIcon from '@/engine/ui/GameIcon';
 import { findGame } from '@/games/registry';
 import { countVisit } from '@/portal/stats';
+import { BuyButton } from '@/portal/BuyButton';
 import './landing.css';
 
 const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
@@ -131,6 +132,7 @@ export default function LandingPage() {
           <div className="pc-sub">
             Buka semua game Playgroup &amp; TK · sekali bayar, main selamanya
           </div>
+          <BuyButton group="tk" />
         </div>
 
         <div className="pcard">
@@ -143,6 +145,7 @@ export default function LandingPage() {
           <div className="pc-sub">
             Buka semua game SD Kelas 1 &amp; 2 · sekali bayar, main selamanya
           </div>
+          <BuyButton group="sd1" />
         </div>
       </div>
 
