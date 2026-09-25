@@ -235,24 +235,182 @@
  * Kode yang ditolak adalah saat orang tua paling butuh manusia, dan ini satu-
  * satunya layar tempat hal itu terjadi. Tautannya keluar app — aman, ini area
  * orang tua; JANGAN pernah memasangnya di layar anak. */
-.act-help {
-  margin: 14px 0 0;
+/* ── "Belum punya kode?" + kontak ──────────────────────────────────────────
+ *
+ * Lebih RINGAN dari kartu kode (latar setengah bening, bingkai putus-putus,
+ * tanpa bayangan terangkat) — bahasa rupa yang sama dengan kartu "segera
+ * hadir" di landing. Tombol "Aktifkan" harus tetap yang paling menonjol. */
+.act-buy {
+  margin: 16px 0 0;
+  padding: 14px 14px 12px;
+  border-radius: 22px;
+  border: 2px dashed rgba(179, 84, 26, 0.22);
+  background: rgba(255, 255, 255, 0.45);
   text-align: center;
-  font-size: 14.5px;
-  line-height: 1.6;
+}
+
+.act-buy__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  color: #3a2e20;
+}
+
+.act-buy__lead {
+  margin: 2px 0 10px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #6b5c47;
+  text-wrap: balance;
+}
+
+.act-buy__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.act-buy__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 64px;
+  padding: 8px 10px 8px 8px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid rgba(58, 46, 32, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #3a2e20;
+  text-align: left;
+  text-decoration: none;
+  transition:
+    box-shadow 0.12s,
+    transform 0.05s;
+}
+.act-buy__item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+}
+.act-buy__item:active {
+  transform: translateY(1px);
+}
+.act-buy__item:focus-visible {
+  outline: 2px solid #3a2e20;
+  outline-offset: 2px;
+}
+
+.act-buy__pic {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  background: #fff4d6;
+  overflow: hidden;
+}
+/* Gambar kelompok bermacam rasio — dipatok tinggi, lebar ikut (contain). */
+.act-buy__pic img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+.act-buy__emoji {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.act-buy__text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.act-buy__name {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.act-buy__price {
+  font-size: 14px;
+  font-weight: 700;
+  color: #b33f12;
+}
+
+.act-buy__cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: #ffe39a;
+  color: #3a2e20;
+  font-size: 14px;
+  font-weight: 800;
+}
+.act-buy__cta::after {
+  content: '›';
+  margin-left: 5px;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.act-contact {
+  margin: 14px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 10px;
+}
+.act-contact__label {
+  font-size: 13.5px;
+  font-weight: 600;
   color: #6b5c47;
 }
-
-.act-help a {
-  color: #b3541a;
-  font-weight: 700;
-  text-decoration: none;
-  border-bottom: 2px solid rgba(179, 84, 26, 0.25);
+.act-contact__chips {
+  display: inline-flex;
+  gap: 8px;
 }
 
-.act-help__dot {
-  margin: 0 7px;
-  opacity: 0.45;
+/* Sama dengan `.fb-btn` di kaki landing: warna merek hanya di ikon. */
+.act-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid rgba(58, 46, 32, 0.14);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #3a2e20;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.act-chip:active {
+  transform: translateY(1px);
+}
+.act-chip:focus-visible {
+  outline: 2px solid #3a2e20;
+  outline-offset: 2px;
+}
+.act-chip--wa svg {
+  color: #1fa855;
+}
+.act-chip--mail svg {
+  color: #b3541a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .act-buy__item {
+    transition: none;
+  }
 }
 
 /* ── Layar berhasil ────────────────────────────────────────────────────────
@@ -329,7 +487,7 @@
   .acct {
     margin-bottom: 12px;
   }
-  .act-help {
+  .act-buy {
     margin-top: 12px;
   }
 }
@@ -361,7 +519,8 @@
   .acct {
     padding: 9px 12px;
   }
-  .act-help {
+  .act-buy,
+  .act-contact {
     margin-top: 10px;
   }
 

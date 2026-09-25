@@ -6,7 +6,7 @@ import { useAuth } from '@/auth/AuthContext';
 import { isFirebaseConfigured } from '@/auth/firebase';
 import { errorMessage, fetchOwnedGroups, redeemActivationCode } from '@/auth/entitlements';
 import { emailUrl, whatsappUrl } from '@/data/contact';
-import { buyUrl } from '@/data/purchase';
+import { buyUrl, type SaleGroup } from '@/data/purchase';
 import './activation.css';
 
 /**
@@ -194,7 +194,7 @@ export default function ActivationPage() {
           </button>
         </form>
       </section>
-      <BuyLine />
+      <BuyLine owned={owned} />
       <HelpLine />
     </div>
   );
@@ -204,26 +204,59 @@ export default function ActivationPage() {
  * "Belum punya kode?" — satu-satunya jalan ke checkout bagi orang tua yang
  * datang dari layar gembok game (layar itu di area anak, jadi ia menaut ke
  * sini, bukan langsung ke Mayar). Link dari `src/data/purchase.ts`; kelompok
- * yang linknya kosong tidak ditampilkan, dan kalau semuanya kosong barisnya
- * hilang.
+ * yang linknya kosong tidak ditampilkan.
+ *
+ * Kelompok yang SUDAH dimiliki akun ini ikut disembunyikan: menawarkan beli
+ * lagi sesuatu yang baru saja tertulis "Sudah aktif" di atasnya terbaca
+ * seperti aktivasinya tidak tersimpan. Kalau semuanya sudah dimiliki (atau
+ * semua link kosong), bagian ini hilang.
+ *
+ * Tampilannya sengaja lebih ringan dari kartu kode di atasnya (latar setengah
+ * bening, tanpa bayangan terangkat): tombol "Aktifkan" tetap yang utama.
  */
-function BuyLine() {
-  const links = (['tk', 'sd1'] as const)
-    .map((id) => ({ id, url: buyUrl(id), title: groupTitle(id) }))
-    .filter((l): l is { id: 'tk' | 'sd1'; url: string; title: string } => l.url !== null);
+function BuyLine({ owned }: { owned: string[] | null }) {
+  const links = groupsData.groups
+    .filter((g): g is typeof g & { id: SaleGroup } => g.id === 'tk' || g.id === 'sd1')
+    .filter((g) => !owned?.includes(g.id))
+    .map((g) => ({ ...g, url: buyUrl(g.id) }))
+    .filter((g) => g.url !== null);
   if (links.length === 0) return null;
   return (
-    <p className="act-help">
-      Belum punya kode? Beli:{' '}
-      {links.map((l, i) => (
-        <span key={l.id}>
-          {i > 0 && <span className="act-help__dot">·</span>}
-          <a href={l.url} target="_blank" rel="noopener noreferrer">
-            {l.title}
-          </a>
-        </span>
-      ))}
-    </p>
+    <section className="act-buy" aria-labelledby="act-buy-title">
+      <h2 className="act-buy__title" id="act-buy-title">
+        Belum punya kode?
+      </h2>
+      <p className="act-buy__lead">Bayar di Mayar.id, kodenya langsung masuk ke email.</p>
+      <ul className="act-buy__list">
+        {links.map((g) => (
+          <li key={g.id}>
+            <a className="act-buy__item" href={g.url!} target="_blank" rel="noopener noreferrer">
+              <span className="act-buy__pic" aria-hidden>
+                <BuyPic pic={g.pic} emoji={g.emoji} />
+              </span>
+              <span className="act-buy__text">
+                <span className="act-buy__name">{g.title}</span>
+                <span className="act-buy__price">{g.priceLabel}</span>
+              </span>
+              <span className="act-buy__cta">Beli</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+/** Gambar kelompok (sama dengan kartu portal), emoji sebagai cadangan. */
+function BuyPic({ pic, emoji }: { pic?: string; emoji: string }) {
+  const [failed, setFailed] = useState(false);
+  if (!pic || failed) return <span className="act-buy__emoji">{emoji}</span>;
+  return (
+    <img
+      src={`${import.meta.env.BASE_URL}assets/groups/${pic}.webp`}
+      alt=""
+      onError={() => setFailed(true)}
+    />
   );
 }
 
@@ -233,6 +266,9 @@ function BuyLine() {
  * dari `src/data/contact.ts` — satu sumber yang sama dengan kaki landing, jadi
  * tidak pernah ada dua nomor berbeda di app ini.
  *
+ * Chip-nya meniru `.fb-btn` di kaki landing (putih, bingkai tipis, warna merek
+ * hanya di ikon) supaya "hubungi kami" terlihat sama di seluruh area orang tua.
+ *
  * Tidak dirender sama sekali kalau kontaknya kosong, jadi build setengah jadi
  * tak pernah menampilkan tautan mati. JANGAN pasang di layar anak.
  */
@@ -241,16 +277,28 @@ function HelpLine() {
   const mail = emailUrl();
   if (!wa && !mail) return null;
   return (
-    <p className="act-help">
-      Kodenya tidak bisa dipakai?{' '}
-      {wa && (
-        <a href={wa} target="_blank" rel="noopener noreferrer">
-          WhatsApp
-        </a>
-      )}
-      {wa && mail && <span className="act-help__dot">·</span>}
-      {mail && <a href={mail}>Email</a>}
-    </p>
+    <div className="act-contact">
+      <span className="act-contact__label">Kodenya tidak bisa dipakai?</span>
+      <span className="act-contact__chips">
+        {wa && (
+          <a className="act-chip act-chip--wa" href={wa} target="_blank" rel="noopener noreferrer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12.04 2C6.6 2 2.2 6.4 2.2 11.84c0 1.9.53 3.68 1.45 5.2L2 22l5.1-1.6a9.8 9.8 0 0 0 4.94 1.32c5.44 0 9.84-4.4 9.84-9.84S17.48 2 12.04 2zm5.7 13.9c-.24.68-1.4 1.3-1.94 1.34-.5.05-.98.22-3.3-.7-2.78-1.1-4.54-3.94-4.68-4.12-.13-.18-1.12-1.5-1.12-2.85s.7-2.02.96-2.3c.25-.27.55-.34.73-.34h.52c.17 0 .4-.06.62.48.24.57.8 1.98.87 2.12.07.14.12.3.02.48-.1.18-.15.3-.3.46l-.43.5c-.14.14-.29.3-.12.58.17.29.75 1.23 1.6 2 1.11.98 2.04 1.29 2.33 1.43.29.15.46.12.63-.07.17-.2.72-.84.91-1.13.19-.29.38-.24.64-.14.26.09 1.67.79 1.96.93.29.15.48.22.55.34.07.12.07.68-.17 1.35z" />
+            </svg>
+            WhatsApp
+          </a>
+        )}
+        {mail && (
+          <a className="act-chip act-chip--mail" href={mail}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+              <path d="m3.5 7 8.5 6 8.5-6" />
+            </svg>
+            Email
+          </a>
+        )}
+      </span>
+    </div>
   );
 }
 
