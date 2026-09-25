@@ -21,7 +21,7 @@
 export type SaleGroup = 'tk' | 'sd1';
 
 export const purchaseLinks: Record<SaleGroup, string> = {
-  tk: '',
+  tk: 'https://petualanganpintar.myr.id/pl/petualangan-pintar-playgroup-dan-tk',
   sd1: 'https://petualanganpintar.myr.id/pl/petualangan-pintar-sd-kelas-1-2',
 };
 
