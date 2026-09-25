@@ -340,4 +340,42 @@
   .acct__row {
     gap: 9px;
   }
+
+  /* Jarak antar-blok dirapatkan, bukan isinya dikecilkan lagi. Di HP 320x568
+     sisa 38px inilah yang menahan tombol "Aktifkan" di bawah lipatan. */
+  .act {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .back-link {
+    margin-bottom: 10px;
+  }
+  .acct {
+    padding: 9px 12px;
+  }
+  .act-help {
+    margin-top: 10px;
+  }
+
+  /* "Masuk sebagai" dilepas: yang menjawab "akun mana ini" adalah ALAMATNYA,
+     dan di sebelahnya sudah ada ikon orang + tombol Keluar, jadi labelnya cuma
+     mengulang yang sudah terbaca dari bentuknya. Label "Sudah aktif" TETAP —
+     chip hijau sendirian tidak mengabarkan apa yang hijau. */
+  .acct__row .acct__label {
+    display: none;
+  }
+
+  /* Label + chip jadi satu baris; kalau nama kelompoknya panjang ia tetap
+     turun baris sendiri (flex-wrap), bukan terpotong. */
+  .acct__owned {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+  }
+  .acct__groups {
+    margin: 0;
+  }
 }
