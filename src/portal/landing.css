@@ -424,3 +424,30 @@
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+/* Tombol beli di kartu harga — link keluar ke checkout Mayar
+   (src/data/purchase.ts). Sengaja lebih kecil dari CTA "Main Sekarang" di
+   atas: tombol utama landing tetap mencoba gratis dulu, baru membeli. Tinggi
+   48px masih lega untuk jari orang tua. */
+.landing .pc-buy {
+  margin-top: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffc93c, #ff8a5c);
+  color: #3a2e20;
+  font-weight: 800;
+  font-size: 17px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 rgba(179, 63, 18, 0.45);
+  transition:
+    transform 0.1s,
+    box-shadow 0.1s;
+}
+.landing .pc-buy:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(179, 63, 18, 0.45);
+}

@@ -364,6 +364,9 @@ const ALLOWED_EVENTS = new Set([
   'landing_view',
   'landing_main_click',
   'landing_parent_click',
+  // Tombol "Beli" di kartu harga landing — pasangan corong mayar_paid_*.
+  'landing_buy_tk',
+  'landing_buy_sd1',
 ]);
 
 /** Tanggal UTC sebagai `YYYY-MM-DD` — satu dokumen per hari. */
