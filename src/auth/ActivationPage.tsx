@@ -130,10 +130,22 @@ export default function ActivationPage() {
 
   return (
     <div className="page act">
-      <Link className="back-link" to="/portal">
-        <ArrowLeftIcon /> Kembali
-      </Link>
-      <AccountPanel email={user?.email ?? null} owned={owned} onLogout={handleLogout} />
+      {/* Kembali & Keluar berbagi satu baris di atas — dua-duanya "pergi dari
+          layar ini", dan yang penting: alamat email di bawahnya jadi dapat
+          SELEBAR kartu. Waktu tombol Keluar masih duduk di sebelahnya, alamat
+          pemilik sendiri patah di tengah kata ("2013.tib@gma / il.com") di HP
+          320px. */}
+      <div className="act-top">
+        <Link className="back-link" to="/portal">
+          <ArrowLeftIcon /> Kembali
+        </Link>
+        {isFirebaseConfigured && user && (
+          <button className="back-link act-out" type="button" onClick={handleLogout}>
+            Keluar
+          </button>
+        )}
+      </div>
+      <AccountPanel email={user?.email ?? null} owned={owned} />
       <section className="act-card">
         <div className="act-badge" aria-hidden>
           <KeyIcon />
@@ -275,15 +287,7 @@ function CheckIcon() {
  * menukar kode tidak melihat formulir kode kosong lalu mengira aktivasinya
  * tidak tersimpan.
  */
-function AccountPanel({
-  email,
-  owned,
-  onLogout,
-}: {
-  email: string | null;
-  owned: string[] | null;
-  onLogout: () => void;
-}) {
+function AccountPanel({ email, owned }: { email: string | null; owned: string[] | null }) {
   if (!isFirebaseConfigured) return null;
   return (
     <div className="acct">
@@ -295,9 +299,6 @@ function AccountPanel({
           <span className="acct__label">Masuk sebagai</span>
           <span className="acct__email">{email ?? 'akun ini'}</span>
         </span>
-        <button className="acct__out" type="button" onClick={onLogout}>
-          Keluar
-        </button>
       </div>
       {owned && owned.length > 0 && (
         <div className="acct__owned">

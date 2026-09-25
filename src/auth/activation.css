@@ -14,6 +14,32 @@
   max-width: 440px;
 }
 
+/* Baris atas: "Kembali" di kiri, "Keluar" di kanan — dua-duanya meninggalkan
+   layar ini, dan menaruhnya di ujung yang berlawanan membuat salah ketuk
+   hampir mustahil. Tombol Keluar SENGAJA tidak di dalam kartu akun lagi:
+   di sana ia memakan lebar, dan alamat email yang tersisa patah di tengah
+   kata di HP 320px (laporan pemilik 2026-09-25). */
+.act-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.act-top .back-link {
+  margin-bottom: 0;
+}
+
+/* Bentuknya sama persis dengan .back-link (pil putih rendah); yang ditambah
+   cuma hal-hal yang tidak diwarisi <button> dari <a>. */
+.act-out {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 /* ── Kartu akun ──────────────────────────────────────────────────────────
  *
  * Ada karena sebelumnya TIDAK ADA SATU LAYAR PUN yang memperlihatkan akun mana
@@ -77,24 +103,6 @@
   font-weight: 700;
   line-height: 1.3;
   color: #3a2e20;
-}
-
-.acct__out {
-  flex: none;
-  height: 40px;
-  padding: 0 15px;
-  border: 1px solid rgba(58, 46, 32, 0.12);
-  border-radius: 12px;
-  background: #fff;
-  color: #3a2e20;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.acct__out:active {
-  transform: translateY(1px);
 }
 
 /* Kelompok yang sudah dimiliki — chip, bukan kalimat berjajar dengan titik
@@ -347,7 +355,7 @@
     padding-top: 16px;
     padding-bottom: 16px;
   }
-  .back-link {
+  .act-top {
     margin-bottom: 10px;
   }
   .acct {
@@ -355,14 +363,6 @@
   }
   .act-help {
     margin-top: 10px;
-  }
-
-  /* "Masuk sebagai" dilepas: yang menjawab "akun mana ini" adalah ALAMATNYA,
-     dan di sebelahnya sudah ada ikon orang + tombol Keluar, jadi labelnya cuma
-     mengulang yang sudah terbaca dari bentuknya. Label "Sudah aktif" TETAP —
-     chip hijau sendirian tidak mengabarkan apa yang hijau. */
-  .acct__row .acct__label {
-    display: none;
   }
 
   /* Label + chip jadi satu baris; kalau nama kelompoknya panjang ia tetap
