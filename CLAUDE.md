@@ -1322,7 +1322,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 - **Tombol beli ke checkout Mayar** (2026-09-25, pertanyaan pemilik *"alur link pembayaran ke mayar dari web lewat mana? Kok belum ada?"*), typecheck + build lulus, landing dilihat lewat tangkapan layar headless:
   - Sebelumnya BELUM ADA satu pun link ke Mayar di web — "Mayar.id" cuma teks. Webhook (`mayarWebhook`) sudah menangani SESUDAH bayar; pintu SEBELUM bayar baru dibuat sekarang.
   - **Link di satu file: `src/data/purchase.ts`** (`purchaseLinks.tk` / `.sd1`). Nilai kosong = tombolnya tidak dirender. Pakai link **`/pl/…` (langsung checkout)**, bukan `/catalog/…`.
-  - **SD terisi, TK MASIH KOSONG** — pemilik baru mengirim link SD. Begitu link TK ada, isi satu baris itu; tombol TK muncul sendiri.
+  - **Kedua link terisi** (SD 2026-09-25 pagi, TK menyusul di hari yang sama). Nama produknya memuat "Playgroup dan TK" / "SD Kelas 1 & 2", jadi cocok dengan pemetaan nama di `mayarWebhook`.
   - Dipasang di: tombol **"Beli Sekarang"** di kartu harga landing (`BuyButton.tsx`, tab baru) dan baris **"Belum punya kode? Beli: …"** di `/aktivasi`. **Layar gembok game TIDAK menaut ke Mayar** — itu area anak; ia tetap menuju `/aktivasi`.
   - Penghitung `landing_buy_tk` / `landing_buy_sd1` ditambahkan ke `StatEvent` DAN `ALLOWED_EVENTS` di functions — baru terhitung setelah backend di-deploy ulang (sebelumnya dibuang server tanpa efek apa pun).
   - Kalimat `/aktivasi` "dikirim setelah pembelian di Lynk.id / Mayar.id" → "dikirim ke email Anda setelah membayar di Mayar.id".
