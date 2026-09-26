@@ -789,3 +789,167 @@ export const mayarWebhook = onRequest(
     res.status(200).json({ ok: true });
   },
 );
+
+// --- 5. Pesanan Mayar muncul di situs (lonceng & /aktivasi) -----------------
+
+/**
+ * Pembeli yang sudah bayar di Mayar melihat "Pembayaran diterima" di lonceng
+ * dan bisa mengaktifkan kelompoknya dengan SATU KETUKAN, tanpa mengetik kode
+ * dari email (permintaan pemilik 2026-09-26). Email kodenya tetap dikirim
+ * seperti biasa — ini jalan kedua, bukan pengganti: pembeli yang email Mayar-nya
+ * beda dengan email akunnya tetap memakai kode dari email.
+ *
+ * Pesanan dicocokkan lewat EMAIL: `orders.email` (dari halaman bayar Mayar)
+ * sama dengan email akun yang sedang masuk.
+ *
+ * SYARAT MUTLAK: email akun SUDAH TERVERIFIKASI (klaim `email_verified` di ID
+ * token). Tanpa itu siapa pun bisa mendaftar memakai email pembeli lain lalu
+ * mengambil pesanannya — karena itu dua function ini membaca email dari
+ * TOKEN, tidak pernah dari data yang dikirim HP.
+ *
+ * KODENYA TIDAK PERNAH DIKIRIM KE HP lewat jalur ini. `myPaidOrders` hanya
+ * menjawab "ada pesanan kelompok X yang belum diaktifkan"; `claimPaidOrder`
+ * menukarnya di server. Kode yang tampil di situs bisa difoto & dibagikan.
+ */
+
+/** Email dari ID token yang sudah terverifikasi, huruf kecil (sama dengan `orders.email`). */
+function verifiedEmail(request: CallableRequest): string | null {
+  const token = request.auth?.token;
+  if (token?.email_verified !== true || typeof token.email !== 'string') return null;
+  return token.email.trim().toLowerCase();
+}
+
+interface PaidOrderInfo {
+  orderId: string;
+  group: Group;
+  paidAt: number | null;
+}
+
+/**
+ * Pesanan Mayar milik email akun ini yang BELUM diaktifkan.
+ *
+ * Yang disaring keluar:
+ *   - pesanan tanpa kode (produk tak dikenal / status bukan SUCCESS — itu
+ *     ditangani manual oleh pemilik);
+ *   - kode yang sudah dipakai, oleh akun ini maupun akun lain (misalnya kode
+ *     dari email sudah diteruskan ke HP lain);
+ *   - kelompok yang SUDAH dimiliki akun ini: menukarnya lagi cuma membakar
+ *     kode kedua tanpa guna. Kode itu tetap ada di email, bisa diberikan ke
+ *     akun lain.
+ *
+ * Email belum terverifikasi → daftar kosong + `needsVerify`, BUKAN error:
+ * pemanggilnya lonceng di setiap halaman, dan error di sana tidak berguna.
+ */
+export const myPaidOrders = onCall(async (request) => {
+  const uid = requireUid(request);
+  const email = verifiedEmail(request);
+  if (!email) return { orders: [] as PaidOrderInfo[], needsVerify: true };
+
+  const [ordersSnap, userSnap] = await Promise.all([
+    db.collection('orders').where('email', '==', email).limit(20).get(),
+    db.doc(`users/${uid}`).get(),
+  ]);
+  const owned = new Set<string>((userSnap.data()?.groups as string[] | undefined) ?? []);
+
+  const candidates = ordersSnap.docs
+    .map((d) => ({ id: d.id, data: d.data() }))
+    .filter((o) => typeof o.data.code === 'string' && isGroup(o.data.group))
+    .filter((o) => !owned.has(o.data.group as string));
+
+  const codeSnaps = await Promise.all(
+    candidates.map((o) =>
+      db.doc(`activation_codes/${(o.data.code as string).replace(/-/g, '')}`).get(),
+    ),
+  );
+
+  // Urutan hasil query tidak dijamin; yang lebih dulu dibayar tampil di atas.
+  const paidMs = (o: (typeof candidates)[number]) =>
+    (o.data.createdAt as Timestamp | undefined)?.toMillis() ?? 0;
+  const order = candidates.map((o, i) => ({ o, i })).sort((x, y) => paidMs(x.o) - paidMs(y.o));
+
+  const orders: PaidOrderInfo[] = [];
+  const seenGroups = new Set<string>();
+  order.forEach(({ o, i }) => {
+    const code = codeSnaps[i]?.data();
+    if (!code || code.used === true) return;
+    const group = o.data.group as Group;
+    // Dua pesanan belum aktif untuk kelompok yang sama → cukup satu kartu;
+    // mengaktifkan satu saja sudah membuka kelompoknya.
+    if (seenGroups.has(group)) return;
+    seenGroups.add(group);
+    const created = o.data.createdAt as Timestamp | undefined;
+    orders.push({ orderId: o.id, group, paidAt: created ? created.toMillis() : null });
+  });
+
+  return { orders, needsVerify: false };
+});
+
+/**
+ * Mengaktifkan satu pesanan Mayar untuk akun ini — setara menukar kodenya,
+ * tapi kodenya tak pernah keluar dari server.
+ *
+ * Tidak memakai rem percobaan kode: di sini tak ada yang bisa ditebak. Id
+ * pesanan saja tidak cukup; email pesanannya harus sama dengan email token.
+ */
+export const claimPaidOrder = onCall(async (request) => {
+  const uid = requireUid(request);
+  requireVerifiedEmail(request);
+  const email = verifiedEmail(request);
+  const raw = (request.data as { orderId?: unknown } | undefined)?.orderId;
+  if (typeof raw !== 'string' || !/^[A-Za-z0-9_-]{1,100}$/.test(raw) || !email) {
+    throw new HttpsError('invalid-argument', 'Pesanan tidak terbaca.');
+  }
+
+  const orderRef = db.doc(`orders/${raw}`);
+  const userRef = db.doc(`users/${uid}`);
+
+  // Pola yang sama dengan redeemActivationCode: transaksi hanya MELAPORKAN
+  // hasilnya, error dilempar sesudahnya.
+  const result = await db.runTransaction(async (tx) => {
+    const orderSnap = await tx.get(orderRef);
+    const order = orderSnap.data();
+    if (!order || order.email !== email || typeof order.code !== 'string' || !isGroup(order.group)) {
+      return { status: 'not-found' as const };
+    }
+    const group = order.group;
+    const codeRef = db.doc(`activation_codes/${order.code.replace(/-/g, '')}`);
+    const codeSnap = await tx.get(codeRef);
+    const code = codeSnap.data();
+    if (!code) return { status: 'not-found' as const };
+    if (code.used === true) {
+      return code.usedBy === uid
+        ? { status: 'already-yours' as const, group }
+        : { status: 'used' as const };
+    }
+
+    tx.update(codeRef, { used: true, usedBy: uid, usedAt: FieldValue.serverTimestamp() });
+    tx.set(
+      userRef,
+      { groups: FieldValue.arrayUnion(group), updatedAt: FieldValue.serverTimestamp() },
+      { merge: true },
+    );
+    tx.update(orderRef, { claimedBy: uid, claimedAt: FieldValue.serverTimestamp() });
+    return { status: 'ok' as const, group };
+  });
+
+  if (result.status === 'not-found') {
+    throw new HttpsError('not-found', 'Pesanan ini tidak ditemukan untuk akun ini.');
+  }
+  if (result.status === 'used') {
+    throw new HttpsError(
+      'failed-precondition',
+      'Kode pesanan ini sudah dipakai di akun lain. Hubungi kami lewat WhatsApp ya.',
+    );
+  }
+
+  if (result.status === 'ok') {
+    // Dihitung sebagai penukaran berhasil (corong redeem_ok), ditambah
+    // penanda jalurnya supaya kelihatan berapa yang memakai tombol ini.
+    await bumpStat(['redeem_ok', `redeem_ok_${result.group}`, 'redeem_ok_tombol']).catch(
+      () => undefined,
+    );
+    logger.info('claimPaidOrder: pesanan diaktifkan', { orderId: raw, group: result.group });
+  }
+
+  return { group: result.group, already: result.status === 'already-yours' };
+});

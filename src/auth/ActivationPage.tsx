@@ -7,6 +7,7 @@ import { isFirebaseConfigured } from '@/auth/firebase';
 import { errorMessage, fetchOwnedGroups, redeemActivationCode } from '@/auth/entitlements';
 import { emailUrl, whatsappUrl } from '@/data/contact';
 import { buyUrl, type SaleGroup } from '@/data/purchase';
+import { PaidOrderCard, usePaidOrders } from '@/auth/PaidOrders';
 import './activation.css';
 
 /**
@@ -58,6 +59,9 @@ export default function ActivationPage() {
   // keterangan tambahan, jadi kegagalannya ditelan dan tidak pernah
   // menghalangi penukaran kode.
   const [owned, setOwned] = useState<string[] | null>(null);
+  // Pesanan Mayar yang cocok dengan email akun ini — bisa diaktifkan tanpa
+  // mengetik kode (lihat PaidOrders.tsx).
+  const { orders: paidOrders } = usePaidOrders();
 
   useEffect(() => {
     if (!isFirebaseConfigured || !user) return;
@@ -147,6 +151,15 @@ export default function ActivationPage() {
         )}
       </div>
       <AccountPanel email={user?.email ?? null} owned={owned} />
+      {paidOrders.length > 0 && (
+        <ul className="paid-list">
+          {paidOrders.map((o) => (
+            <li key={o.orderId}>
+              <PaidOrderCard order={o} onDone={setDone} />
+            </li>
+          ))}
+        </ul>
+      )}
       <section className="act-card">
         <div className="act-badge" aria-hidden>
           <KeyIcon />
