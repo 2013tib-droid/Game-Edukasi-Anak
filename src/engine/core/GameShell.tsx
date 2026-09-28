@@ -18,6 +18,7 @@ import Clock from '@/engine/ui/Clock';
 import { gameImageUrl } from '@/engine/ui/GameIcon';
 import ItemPic from '@/engine/ui/ItemPic';
 import BackIcon from '@/engine/ui/BackIcon';
+import PlayIcon from '@/engine/ui/PlayIcon';
 import '@/engine/ui/engine.css';
 
 /**
@@ -482,15 +483,15 @@ export default function GameShell({
             {/* Coming back after stopping mid-game: continue where the child
                 left off, with the same questions, instead of level 1 again. */}
             <button className="btn btn--primary" style={{ fontSize: 26 }} onClick={handleResume}>
-              ▶️ Lanjut Level {saved.index + 1}
+              <PlayIcon /> Lanjut Level {saved.index + 1}
             </button>
             <button className="btn" style={{ fontSize: 22 }} onClick={handleStart}>
-              🔄 Mulai dari Awal
+              <PlayIcon kind="replay" size="1.35em" /> Mulai dari Awal
             </button>
           </>
         ) : (
           <button className="btn btn--primary" style={{ fontSize: 26 }} onClick={handleStart}>
-            ▶️ Mulai Main
+            <PlayIcon /> Mulai Main
           </button>
         )}
         <button className="btn" onClick={onExit}>

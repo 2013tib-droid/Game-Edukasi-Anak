@@ -2078,3 +2078,16 @@
     animation: none;
   }
 }
+
+/* Lencana ▶ di tombol "Mulai Main": berdenyut pelan supaya anak tahu ke mana
+   harus mengetuk. Dimatikan untuk yang meminta gerak dikurangi. */
+.play-icon--pulse {
+  animation: play-pulse 1.6s ease-in-out infinite;
+}
+@keyframes play-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .play-icon--pulse { animation: none; }
+}
