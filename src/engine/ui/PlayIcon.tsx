@@ -1,7 +1,7 @@
 /**
  * Lencana "Main" untuk tombol utama layar intro game.
  *
- * Menggantikan emoji ▶️ / 🔄: di iPhone & Android emoji itu kotak biru-abu
+ * Menggantikan emoji ▶️ / 🔄 / ✅: di iPhone & Android emoji itu kotak biru-abu
  * mengkilap yang bentrok dengan tombol kuning kita (keluhan pemilik
  * 2026-09-28). SVG ini lingkaran putih berisi segitiga oranye membulat —
  * sama di semua HP, tanpa aset yang harus diunduh (pola `BackIcon`).
@@ -11,7 +11,7 @@ export default function PlayIcon({
   kind = 'play',
   size = '1.5em',
 }: {
-  kind?: 'play' | 'replay';
+  kind?: 'play' | 'replay' | 'check';
   size?: number | string;
 }) {
   return (
@@ -31,6 +31,17 @@ export default function PlayIcon({
           fill="#f0662a"
           stroke="#f0662a"
           strokeWidth={1.5}
+          strokeLinejoin="round"
+        />
+      ) : kind === 'check' ? (
+        // Green, not orange: "done / correct" is the one place colour
+        // carries meaning for a child who can't read the word "Sudah".
+        <path
+          d="M11.5 20.5 L17.5 26.5 L29 14"
+          fill="none"
+          stroke="#2fa84f"
+          strokeWidth={4.2}
+          strokeLinecap="round"
           strokeLinejoin="round"
         />
       ) : (
