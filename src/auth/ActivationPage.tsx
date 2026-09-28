@@ -239,7 +239,6 @@ function BuyLine({ owned }: { owned: string[] | null }) {
       <h2 className="act-buy__title" id="act-buy-title">
         Belum punya kode?
       </h2>
-      <p className="act-buy__lead">Bayar di Mayar.id, kodenya langsung masuk ke email.</p>
       <ul className="act-buy__list">
         {links.map((g) => (
           <li key={g.id}>
