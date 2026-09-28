@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import type { AnyGameConfig } from '@/engine/core/types';
 import GameShell from '@/engine/core/GameShell';
 import BackIcon from '@/engine/ui/BackIcon';
+import PlayIcon from '@/engine/ui/PlayIcon';
 import SplashScreen from '@/app/SplashScreen';
 import { findGame } from '@/games/registry';
 import { useAuth } from '@/auth/AuthContext';
@@ -125,7 +126,7 @@ export default function GamePage() {
         <h1>Belum bisa dibuka</h1>
         <p style={{ fontSize: 20, maxWidth: 420 }}>{access.message}</p>
         <button type="button" className="btn btn--primary" onClick={recheck}>
-          🔄 Coba Lagi
+          <PlayIcon kind="replay" size="1.35em" /> Coba Lagi
         </button>
         {backToGroup}
       </div>
