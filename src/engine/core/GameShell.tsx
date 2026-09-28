@@ -523,7 +523,11 @@ export default function GameShell({
               setScreen('pick');
             }}
           >
-            {picker.again ?? '🔁 Pilih Lagi'}
+            {picker.again ?? (
+              <>
+                <PlayIcon kind="replay" size="1.35em" /> Pilih Lagi
+              </>
+            )}
           </button>
         ) : (
           <button
@@ -534,7 +538,7 @@ export default function GameShell({
               handleStart(); // fresh variants, from level 1
             }}
           >
-            🔁 Main Lagi
+            <PlayIcon kind="replay" size="1.35em" /> Main Lagi
           </button>
         )}
         <button className="btn" onClick={onExit}>

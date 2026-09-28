@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import PlayIcon from '@/engine/ui/PlayIcon';
 
 /**
  * Last line of defence against a white screen.
@@ -91,7 +92,7 @@ export default class ErrorBoundary extends Component<Props, State> {
               window.location.reload();
             }}
           >
-            🔄 Coba Lagi
+            <PlayIcon kind="replay" size="1.35em" /> Coba Lagi
           </button>
           <a className="btn" href={home}>
             🏠 Beranda
