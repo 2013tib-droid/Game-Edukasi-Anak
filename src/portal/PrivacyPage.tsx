@@ -19,6 +19,7 @@ import LegalPage from '@/portal/LegalPage';
  *   - hitungan percobaan gagal ... functions/src/index.ts (redeem_attempts)
  *   - penghitung kunjungan ....... functions/src/index.ts (catatStat)
  *   - pesanan dari Mayar ......... functions/src/index.ts (mayarWebhook, koleksi orders)
+ *   - pesanan dicocokkan ke akun .. functions/src/index.ts (myPaidOrders, claimPaidOrder)
  */
 export default function PrivacyPage() {
   return (
@@ -126,7 +127,11 @@ export default function PrivacyPage() {
           Saat Anda membayar di Mayar.id, Mayar mengirimkan kepada kami <strong>nama, alamat
           email, nomor pesanan, produk, dan nominal</strong> yang Anda isi di halaman
           pembayarannya. Kami memakainya hanya untuk <strong>mengirim kode aktivasi ke email
-          itu</strong> dan untuk membantu bila kodenya tidak sampai. Nomor HP dari halaman
+          itu</strong> dan untuk membantu bila kodenya tidak sampai. Kalau Anda masuk ke akun
+          dengan <strong>email yang sama dan sudah terverifikasi</strong>, email itu juga dipakai
+          untuk menampilkan &ldquo;Pembayaran diterima&rdquo; di akun Anda supaya kelompoknya bisa
+          diaktifkan tanpa mengetik kode; saat itu kami mencatat akun mana yang mengaktifkan
+          pesanan tersebut. Nomor HP dari halaman
           pembayaran tidak kami simpan. Data kartu dan dompet digital tidak pernah sampai ke
           kami.
         </li>

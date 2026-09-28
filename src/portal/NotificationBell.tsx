@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { BellIcon } from '@/app/icons';
 import { announcementsFor, TAG_LABEL } from '@/data/announcements';
 import { useAuth } from '@/auth/AuthContext';
+import { PaidOrderCard, usePaidOrders } from '@/auth/PaidOrders';
 import { formatDate, getUnreadIds, markAllRead } from '@/portal/notifications';
 import './notifications.css';
 
@@ -15,6 +16,11 @@ import './notifications.css';
  * Buyers-only entries are filtered out for signed-out visitors, badge
  * included. Signing in reveals them as unread, because marking never touches
  * an entry the reader could not see.
+ *
+ * Paid-but-not-activated Mayar orders (matched by the account's verified
+ * email, see `myPaidOrders`) sit on top with a one-tap "Aktifkan sekarang".
+ * They are action items, not news: they keep counting in the badge until
+ * activated, instead of being cleared by opening the panel.
  */
 export default function NotificationBell() {
   const { user } = useAuth();
@@ -27,6 +33,10 @@ export default function NotificationBell() {
   // Signed in stands in for "has bought" until activation codes exist (Fase 5).
   const isBuyer = user !== null;
   const visible = useMemo(() => announcementsFor(isBuyer), [isBuyer]);
+  const { orders } = usePaidOrders();
+  // Activated from the panel: the card stays to show "Mulai Main", but it no
+  // longer counts in the badge.
+  const [claimed, setClaimed] = useState<string[]>([]);
 
   // localStorage is read after mount so the first render stays identical
   // for every visitor (and never touches storage during SSR/prerender).
@@ -65,7 +75,7 @@ export default function NotificationBell() {
     requestAnimationFrame(() => closeRef.current?.focus());
   }
 
-  const count = unread.length;
+  const count = unread.length + orders.filter((o) => !claimed.includes(o.orderId)).length;
   const isNew = (id: string) => highlight.includes(id);
 
   return (
@@ -106,7 +116,20 @@ export default function NotificationBell() {
               </button>
             </div>
 
-            {visible.length === 0 ? (
+            {orders.length > 0 && (
+              <ul className="paid-list notif__paid">
+                {orders.map((o) => (
+                  <li key={o.orderId}>
+                    <PaidOrderCard
+                      order={o}
+                      onClaimed={() => setClaimed((ids) => [...ids, o.orderId])}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {visible.length === 0 && orders.length > 0 ? null : visible.length === 0 ? (
               <div className="notif__empty">
                 <span aria-hidden="true">🔔</span>
                 <p>Belum ada pengumuman baru.</p>

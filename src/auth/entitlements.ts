@@ -117,6 +117,25 @@ export function redeemActivationCode(code: string): Promise<RedeemResult> {
   return call<{ code: string }, RedeemResult>('redeemActivationCode', { code });
 }
 
+export interface PaidOrder {
+  orderId: string;
+  group: string;
+  paidAt: number | null;
+}
+
+/**
+ * Pesanan Mayar milik email akun ini yang belum diaktifkan. Kodenya sendiri
+ * tidak pernah ikut — lihat `myPaidOrders` di functions/src/index.ts.
+ */
+export function fetchPaidOrders(): Promise<{ orders: PaidOrder[]; needsVerify: boolean }> {
+  return call('myPaidOrders', {});
+}
+
+/** Mengaktifkan satu pesanan Mayar untuk akun ini (tanpa mengetik kode). */
+export function claimPaidOrder(orderId: string): Promise<RedeemResult> {
+  return call<{ orderId: string }, RedeemResult>('claimPaidOrder', { orderId });
+}
+
 export interface DeviceFullError {
   devices: DeviceInfo[];
   max: number;

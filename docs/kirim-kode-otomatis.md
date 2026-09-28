@@ -139,6 +139,24 @@ Beli produk TK sendiri pakai email lain (Rp19.000). Dalam beberapa menit
 email berisi kode harus masuk. Tukarkan kodenya di `/aktivasi`, lalu pastikan
 yang terbuka memang game TK.
 
+## Pembeli juga melihatnya di situs (sejak 2026-09-26)
+
+Selain lewat email, pembeli yang **masuk ke akun dengan email yang sama
+dengan yang dipakai di Mayar** (dan emailnya sudah terverifikasi) melihat
+kartu **"Pembayaran diterima 🎉"** di lonceng notifikasi dan di `/aktivasi`,
+dengan tombol **"Aktifkan sekarang"** — tanpa mengetik kode.
+
+- Kodenya tidak pernah tampil di situs; tombolnya menukar kode itu di server
+  (`claimPaidOrder`). Kode di email ikut hangus, jadi satu pembayaran tetap
+  satu akses.
+- Email Mayar beda dengan email akun → kartunya tidak muncul; pembeli tetap
+  memakai kode dari email.
+- Di `orders`, pesanan yang diaktifkan lewat tombol ini mendapat
+  `claimedBy` (uid akun) dan `claimedAt`. Di `stats/`, jumlahnya tercatat
+  sebagai `redeem_ok_tombol` (ikut dihitung di `redeem_ok`).
+- Butuh deploy backend ulang (dua function baru: `myPaidOrders`,
+  `claimPaidOrder`) — satu kali klik workflow yang sama dengan langkah 5.
+
 ## Memantau & menangani masalah
 
 Semua pesanan tercatat di Firebase Console → Firestore → koleksi **`orders`**

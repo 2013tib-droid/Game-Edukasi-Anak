@@ -1,0 +1,83 @@
+/* Kartu "Pembayaran diterima" — dipakai lonceng & /aktivasi.
+ *
+ * Warnanya yang sudah ada di app (hijau #2d7a2d untuk "sudah dibayar",
+ * kuning #ffb703 untuk tombol utama, coklat #3a2e20 untuk teks). Tombolnya
+ * 52px, bukan 64px .btn: ini area orang tua dan kartunya juga duduk di panel
+ * lonceng yang sempit. */
+.paid {
+  padding: 13px 14px;
+  border: 1.5px solid rgba(45, 122, 45, 0.35);
+  border-radius: 18px;
+  background: #f1f9ee;
+  color: #3a2e20;
+  text-align: left;
+}
+
+.paid__title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: #2d7a2d;
+}
+
+.paid__group {
+  margin: 2px 0 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.paid__body {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  line-height: 1.4;
+  opacity: 0.8;
+}
+
+.paid__error {
+  margin: 8px 0 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #b3541a;
+}
+
+.paid__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 16px;
+  background: #ffb703;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.18);
+  color: #3a2e20;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.paid__btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
+}
+
+.paid__btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.paid--done .paid__title {
+  font-size: 16px;
+}
+
+.paid-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+}
