@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import { sfx } from '@/engine/audio/sound';
 import ItemPic from '@/engine/ui/ItemPic';
+import PlayIcon from '@/engine/ui/PlayIcon';
 
 interface Cell {
   key: number;
@@ -98,7 +99,7 @@ export default function CountTap({ level, onCorrect, onWrong }: TemplateProps<'c
           style={{ marginTop: 20, alignSelf: 'center', fontSize: 24 }}
           onClick={submit}
         >
-          ✅ Sudah!
+          <PlayIcon kind="check" size="1.4em" /> Sudah!
         </button>
       </div>
     </>
