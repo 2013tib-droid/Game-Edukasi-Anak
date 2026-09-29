@@ -145,7 +145,7 @@ export function toggleLockMode(): LockMode {
  * aktivasi tetap ditolak server untuk kelompok yang belum ada di `GROUPS`
  * functions, jadi menyembunyikan di sini bukan gerbang keamanan.
  */
-export function isGroupVisible(group: { draft?: boolean }): boolean {
+export function isGroupVisible(group: { id: string; draft?: boolean }): boolean {
   return !group.draft || TEST_TOGGLE_ALLOWED;
 }
 
