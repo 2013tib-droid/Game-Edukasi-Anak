@@ -196,7 +196,10 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
         )}
         {level.data.boardItems && (
           <div
-            className={'ta-board ta-board--pics' + (denseBoard ? ' ta-board--dense' : '')}
+            className={
+              'ta-board ta-board--pics' +
+              (level.data.boardRow ? ' ta-board--row' : denseBoard ? ' ta-board--dense' : '')
+            }
             aria-hidden
           >
             {level.data.boardItems.map((tok, i) =>
@@ -269,11 +272,21 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
                 // A text answer with no emoji (a letter/number) is the main
                 // visual — render it big. With an emoji it's just a caption.
                 <span
-                  className={c.emoji ? 'choice-text' : mainTextClass(c.text)}
+                  className={c.emoji || c.item ? 'choice-text' : mainTextClass(c.text)}
                   // Lebar taksiran tulisan, dipakai engine.css untuk membagi
                   // lebar kartu (`cqw`) — pengaman terakhir supaya tulisan
-                  // tidak pernah patah, berapa pun lebar layarnya.
-                  style={{ '--fit': emWidth(c.text) } as CSSProperties}
+                  // tidak pernah patah, berapa pun lebar layarnya. Keterangan
+                  // di bawah gambar boleh turun baris di SPASI, jadi yang
+                  // diukur cuma kata terpanjangnya ("Harimau" dulu patah jadi
+                  // "Harima / u" di kartu HP 360).
+                  style={
+                    {
+                      '--fit':
+                        c.emoji || c.item
+                          ? Math.max(...c.text.split(' ').map(emWidth))
+                          : emWidth(c.text),
+                    } as CSSProperties
+                  }
                 >
                   {c.text}
                 </span>
