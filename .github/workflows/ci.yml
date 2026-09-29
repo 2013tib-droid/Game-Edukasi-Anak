@@ -40,6 +40,21 @@ jobs:
       - name: Build
         run: npm run build
 
+      # PENJAGA BUILD PENGUJI (lihat guardTesterBuild di vite.config.ts): build
+      # yang membuka semua game tidak boleh sampai ke situs pembeli. Dua sisi:
+      # (1) build rilis di atas harus bersih dari tanda build penguji, dan
+      # (2) build penguji TANPA base "/uji-…/" harus gagal (kalau tidak, penjaga
+      # itu sudah hilang diam-diam).
+      - name: Build rilis harus bersih dari tanda build penguji
+        run: node scripts/check-release-build.mjs dist
+
+      - name: Build penguji tanpa base uji harus DITOLAK
+        run: |
+          if VITE_ALLOW_TEST_TOGGLE=1 npx vite build --outDir /tmp/dist-uji-salah; then
+            echo "Build penguji tanpa DEPLOY_BASE /uji-…/ seharusnya gagal, tapi lolos." >&2
+            exit 1
+          fi
+
       # Cloud Functions punya package.json sendiri (deployable terpisah), jadi
       # tidak ikut terperiksa oleh typecheck di atas.
       - name: Pasang dependency Cloud Functions
