@@ -1,1 +1,0 @@
-const t={tk:"https://petualanganpintar.myr.id/pl/petualangan-pintar-playgroup-dan-tk",sd1:"https://petualanganpintar.myr.id/pl/petualangan-pintar-sd-kelas-1-2"};function p(n){const a=t[n].trim();return a||null}export{p as b};
