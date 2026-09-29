@@ -1,7 +1,7 @@
 {
-  "generated": "2026-09-16",
-  "count": 876,
-  "chars": 39895,
+  "generated": "2026-09-29",
+  "count": 965,
+  "chars": 43882,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -4690,6 +4690,807 @@
       "voice": "gadis",
       "games": [
         "jam-pintar"
+      ]
+    },
+    {
+      "key": "69127105d8d4",
+      "text": "Ada delapan buku dibagi rata ke dua rak. Tiap rak dapat berapa?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "92d7170d7d47",
+      "text": "Ada delapan meja di kelas. Tiap meja diduduki dua anak. Berapa anak semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "0f55d7516eac",
+      "text": "Ada delapan roti dibagi rata ke empat anak. Tiap anak dapat berapa?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "5de016631e0f",
+      "text": "Ada dua belas bola dibagi rata ke empat tim. Tiap tim dapat berapa?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "a76a05b8f6c0",
+      "text": "Ada dua belas bunga dibagi rata ke tiga vas. Tiap vas dapat berapa?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "0d6995b09674",
+      "text": "Ada dua kelompok apel, tiap kelompok tiga. Berapa semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "36b39ec43a15",
+      "text": "Ada dua kelompok balon, tiap kelompok lima. Berapa semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "3ad266afad41",
+      "text": "Ada dua kelompok bola, tiap kelompok empat. Berapa semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "82a5de634477",
+      "text": "Ada dua puluh empat kelereng dimasukkan ke delapan kantong sama banyak. Tiap kantong berisi berapa kelereng?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "6c9761e605dc",
+      "text": "Ada dua puluh permen dibagi rata untuk empat anak. Tiap anak dapat berapa permen?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "67b2dd795c52",
+      "text": "Ada dua puluh satu kursi disusun jadi tujuh baris sama banyak. Tiap baris ada berapa kursi?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "d6fb5e1b08fe",
+      "text": "Ada empat kelompok bunga, tiap kelompok tiga. Berapa semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "b007624dc0af",
+      "text": "Ada empat kelompok pisang, tiap kelompok dua. Berapa semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "ff25327029aa",
+      "text": "Ada enam apel dibagi rata ke dua keranjang. Tiap keranjang dapat berapa?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "dbdc57d0173d",
+      "text": "Ada enam belas apel dibagi rata ke dua keranjang. Tiap keranjang ada berapa apel?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "6602821e9cc8",
+      "text": "Ada lima belas balon dibagi rata ke lima anak. Tiap anak dapat berapa?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "5cba674f30f6",
+      "text": "Ada sembilan jeruk dibagi rata ke tiga piring. Tiap piring dapat berapa?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "9fdb4bc0b8d0",
+      "text": "Ada sepuluh pensil dibagi rata ke lima kotak. Tiap kotak dapat berapa?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "37a534735207",
+      "text": "Ada tiga kelompok buku, tiap kelompok tiga. Berapa semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "2e9dfa3a6029",
+      "text": "Ada tiga kelompok jeruk, tiap kelompok dua. Berapa semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "ef027e14690b",
+      "text": "Ada tiga kelompok telur, tiap kelompok empat. Berapa semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "5f865ae423c2",
+      "text": "Ada tiga puluh bunga dirangkai jadi lima buket sama banyak. Tiap buket berisi berapa bunga?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "f9d4d7f3f3d0",
+      "text": "Berapa delapan belas dibagi tiga?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "dcd3d0717db3",
+      "text": "Berapa delapan kali lima?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "79d163a042ca",
+      "text": "Berapa delapan kali nol?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "6516b25fca8f",
+      "text": "Berapa delapan kali sembilan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "ccce06a8cb51",
+      "text": "Berapa delapan kali tiga?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "8ce8a2690b54",
+      "text": "Berapa delapan kali tujuh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "a5341c41abde",
+      "text": "Berapa dua belas dibagi tiga?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "5f10fe46016a",
+      "text": "Berapa dua kali empat?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "dc877fd681d5",
+      "text": "Berapa dua kali sembilan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "42037ed3d718",
+      "text": "Berapa dua kali tujuh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "93377b6c27f9",
+      "text": "Berapa dua puluh dibagi empat?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "0f2b17a8138a",
+      "text": "Berapa dua puluh empat dibagi enam?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "c8aa189b4a2b",
+      "text": "Berapa empat kali enam?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "511764941696",
+      "text": "Berapa empat kali sembilan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "eaa77c47f12b",
+      "text": "Berapa empat kali tiga?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "26789393f5d3",
+      "text": "Berapa empat kali tujuh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "0933f44a4bb5",
+      "text": "Berapa empat puluh dibagi delapan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "144e8f53110c",
+      "text": "Berapa enam kali lima?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "024af90a2122",
+      "text": "Berapa enam kali sembilan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "23d32448c1a3",
+      "text": "Berapa enam kali tiga?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "605436413ff9",
+      "text": "Berapa enam kali tujuh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "a403ceabaa93",
+      "text": "Berapa enam puluh tiga dibagi sembilan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "3ade3c11f806",
+      "text": "Berapa lima kali delapan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "4a77aad87b0e",
+      "text": "Berapa lima kali enam?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "6baccecd8aeb",
+      "text": "Berapa lima kali tiga?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "351cc5fb6d31",
+      "text": "Berapa lima puluh enam dibagi tujuh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "7ab6cee290f3",
+      "text": "Berapa nol kali enam?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "e8eb2d6c6fdf",
+      "text": "Berapa satu kali tujuh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "bdc872dc0d79",
+      "text": "Berapa sembilan kali delapan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "4f3d9bd50735",
+      "text": "Berapa sembilan kali enam?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "f0b5e6805a78",
+      "text": "Berapa sembilan kali lima?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "6e3e1a0af8cc",
+      "text": "Berapa sembilan kali satu?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "aee74dadf52d",
+      "text": "Berapa sembilan kali tiga?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "c7f517ee3198",
+      "text": "Berapa sepuluh kali delapan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "173042828d8d",
+      "text": "Berapa sepuluh kali empat?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "c8b7da9c33cc",
+      "text": "Berapa sepuluh kali lima?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "ac74fb4f2c1b",
+      "text": "Berapa sepuluh kali sembilan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "fe7c376a7788",
+      "text": "Berapa sepuluh kali tiga?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "9cf29578e33d",
+      "text": "Berapa sepuluh kali tujuh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "1dc24b0948db",
+      "text": "Berapa tiga kali delapan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "78d014488fa5",
+      "text": "Berapa tiga kali empat?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "49920b83e973",
+      "text": "Berapa tiga kali enam?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "7d642f3bbdb0",
+      "text": "Berapa tiga kali sembilan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "91391610b7ef",
+      "text": "Berapa tiga puluh lima dibagi lima?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "34446ef4a45e",
+      "text": "Berapa tujuh kali delapan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "58701143ffcb",
+      "text": "Berapa tujuh kali enam?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "1d0bd02ced62",
+      "text": "Berapa tujuh kali lima?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "1f8cf75d910e",
+      "text": "Berapa tujuh kali tiga?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "99b6bd3f92d6",
+      "text": "Bu Guru punya delapan belas buku untuk enam kelompok. Tiap kelompok dapat berapa buku?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "b8dabb989f28",
+      "text": "Delapan kali berapa sama dengan empat puluh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "c4fdc9b40ed4",
+      "text": "Di kebun ada enam baris pohon. Tiap baris ada empat pohon. Berapa pohon semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "fa187fa5af56",
+      "text": "Dua kali berapa sama dengan enam belas?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "c4a6266d1f25",
+      "text": "Empat kali berapa sama dengan dua puluh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "d8cc2de6f2fb",
+      "text": "Enam kali berapa sama dengan delapan belas?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "51fff7f985ae",
+      "text": "Ibu membeli empat kantong jeruk. Tiap kantong berisi lima jeruk. Berapa jeruk semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "4f8920528614",
+      "text": "Lihat loncatan bilangannya. Bilangan apa selanjutnya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "9a689ac0ae27",
+      "text": "Lima belas kue dibagi rata ke tiga piring. Tiap piring ada berapa kue?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "2dcda1b26e62",
+      "text": "Lima kali berapa sama dengan tiga puluh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "4f2dcef927d3",
+      "text": "Pak Tani punya tiga kandang ayam. Tiap kandang berisi delapan ekor. Berapa ekor ayam semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "0253c0796d0c",
+      "text": "Satu kotak berisi enam pensil. Ada tujuh kotak. Berapa pensil semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "f1d26b5ee9af",
+      "text": "Satu laba-laba punya delapan kaki. Berapa kaki lima laba-laba?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "b5312390359d",
+      "text": "Satu sepeda punya dua roda. Berapa roda sembilan sepeda?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "d27b4c778608",
+      "text": "Sembilan kali berapa sama dengan dua puluh tujuh?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "7e107ce8f7d0",
+      "text": "Tiap hari Adi membaca lima halaman buku. Berapa halaman dalam tujuh hari?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "38ddd1d8ee5b",
+      "text": "Tiga kali berapa sama dengan dua belas?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "dd9b96f1e7af",
+      "text": "Tujuh kali berapa sama dengan dua puluh delapan?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "1935dfe795f1",
+      "text": "Uang tiga puluh enam ribu rupiah dibagi rata untuk sembilan hari. Tiap hari berapa ribu rupiah?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
       ]
     },
     {

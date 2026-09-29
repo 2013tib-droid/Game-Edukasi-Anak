@@ -152,6 +152,15 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 ## Status Pengerjaan
 
+- **Game pertama `sd2`: "Kali Kilat" (perkalian & pembagian)** (2026-09-29), `src/games/sd2/kali-kilat.ts`, terdaftar di `registry.ts`. Kelompok `sd2` masih `draft` (lihat "Penamaan Kelompok"), jadi game ini hanya terlihat di dev server & build penguji. Teruji headless Chromium (sentuhan CDP asli) pada build `VITE_LOCK_MODE=buka`; 96 varian divalidasi lewat skrip (satu jawaban benar, 3 pilihan unik, jawaban cocok dengan persamaan, nol digit di narasi):
+  - **12 slot × 8 varian, `sessionLevels: 10`**: kali = tambah berulang bergambar → tabel 2/5/10 → 3&4 → 6&7 → 8&9 → kelipatan → faktor hilang → bagi rata bergambar → fakta bagi → cerita kali → cerita bagi → sifat ×0/×1/×10. Semua `tap-answer` dengan `equation` besar; NOL aset baru (gambar memakai id registry yang ada).
+  - **Batas bilangan `sd2` = 100** (tabel 10 × 10), bukan batas 30 milik `sd1`. Pengecoh dihitung dari kesalahan khas (menjumlah alih-alih mengalikan, lompatan tabel ±1), bukan asal.
+  - **Papan bergambar dibatasi 9 gambar.** Terukur: di 360×640 semua level muat tanpa scroll (6 sesi × 10 level, nol error console); versi awal dengan papan 10–12 gambar membuat kartu jawaban terdorong keluar layar. **Di 320×568 papan bergambar (slot l1 & l8) MASIH scroll 90–260 px** dan tiga kartu jawaban patah jadi dua kolom (level tanpa gambar scroll 14 px) — belum diperbaiki, sama seperti batasan 320 px yang sudah tercatat di Anggota Tubuh.
+  - Kalimat "Lihat loncatan bilangannya…" sengaja BEDA dari Pola Pintar: kalimat yang dipakai dua game naik ke scope `shared` dan memindahkan file suara game lama.
+  - **89 baris narasi baru (scope `kali-kilat`) BELUM dirender ke suara** — sampai workflow render dijalankan, baris itu jatuh ke suara HP. `narration-lines.json` sudah diperbarui (965 baris), nol baris lama berubah/pindah scope.
+  - Skrip `extract-narration`, `check-item-ids`, `check-glyphs`, `check-body-parts` sekarang ikut menelusuri folder `src/games/sd2/`.
+  - Belum ada ikon seni (`pic`), belum masuk `FREE_GAME_IDS` (memang belum dirilis), belum ada pengumuman lonceng.
+
 - **Fase 6 Bagian B — langkah 2, 3, 4 & 5 SELESAI; langkah 1 TERHALANG, jadi langkah 6 (mode `'kunci'`) SENGAJA BELUM dinyalakan** (2026-09-16), teruji headless (Edge CDP di Windows) pada build produksi + Firebase Emulator Suite — 148 pemeriksaan lulus, nol error console:
 
   **PENGHALANG: Auth Email/Password ternyata MATI di project sungguhan.** Terukur dari sesi dengan kunci di `.env`: `accounts:signUp` → `OPERATION_NOT_ALLOWED`, `accounts:signInWithPassword` → `PASSWORD_LOGIN_DISABLED`, sementara `getProjectConfig` menjawab normal (project id internal `766973669747`, `authorizedDomains` memuat `localhost`). Jadi kuncinya benar dan jaringannya tembus — yang mati cuma providernya. **Catatan Bagian A yang menyebut "Auth Email/Password aktif" itu KELIRU** dan sudah dicoret di `docs/fase-6-rilis-prompt.md`. Nyalakan di Authentication → Sign-in method → Email/Password → Enable.
