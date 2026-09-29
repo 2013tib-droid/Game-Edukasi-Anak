@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-29",
   "count": 965,
-  "chars": 43882,
+  "chars": 43865,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -4693,8 +4693,8 @@
       ]
     },
     {
-      "key": "69127105d8d4",
-      "text": "Ada delapan buku dibagi rata ke dua rak. Tiap rak dapat berapa?",
+      "key": "80383d6e4888",
+      "text": "Ada delapan bola dibagi rata ke empat tim. Tiap tim dapat berapa?",
       "scope": "kali-kilat",
       "voice": "gadis",
       "games": [
@@ -4711,26 +4711,17 @@
       ]
     },
     {
+      "key": "55e329be2f1d",
+      "text": "Ada delapan pensil dibagi rata ke dua kotak. Tiap kotak dapat berapa?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
       "key": "0f55d7516eac",
       "text": "Ada delapan roti dibagi rata ke empat anak. Tiap anak dapat berapa?",
-      "scope": "kali-kilat",
-      "voice": "gadis",
-      "games": [
-        "kali-kilat"
-      ]
-    },
-    {
-      "key": "5de016631e0f",
-      "text": "Ada dua belas bola dibagi rata ke empat tim. Tiap tim dapat berapa?",
-      "scope": "kali-kilat",
-      "voice": "gadis",
-      "games": [
-        "kali-kilat"
-      ]
-    },
-    {
-      "key": "a76a05b8f6c0",
-      "text": "Ada dua belas bunga dibagi rata ke tiga vas. Tiap vas dapat berapa?",
       "scope": "kali-kilat",
       "voice": "gadis",
       "games": [
@@ -4747,8 +4738,8 @@
       ]
     },
     {
-      "key": "36b39ec43a15",
-      "text": "Ada dua kelompok balon, tiap kelompok lima. Berapa semuanya?",
+      "key": "b4db4fb968e6",
+      "text": "Ada dua kelompok balon, tiap kelompok dua. Berapa semuanya?",
       "scope": "kali-kilat",
       "voice": "gadis",
       "games": [
@@ -4758,6 +4749,15 @@
     {
       "key": "3ad266afad41",
       "text": "Ada dua kelompok bola, tiap kelompok empat. Berapa semuanya?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "dce5c42d1668",
+      "text": "Ada dua kelompok bunga, tiap kelompok tiga. Berapa semuanya?",
       "scope": "kali-kilat",
       "voice": "gadis",
       "games": [
@@ -4792,8 +4792,8 @@
       ]
     },
     {
-      "key": "d6fb5e1b08fe",
-      "text": "Ada empat kelompok bunga, tiap kelompok tiga. Berapa semuanya?",
+      "key": "702b09ee4a47",
+      "text": "Ada empat buku dibagi rata ke dua rak. Tiap rak dapat berapa?",
       "scope": "kali-kilat",
       "voice": "gadis",
       "games": [
@@ -4828,8 +4828,17 @@
       ]
     },
     {
-      "key": "6602821e9cc8",
-      "text": "Ada lima belas balon dibagi rata ke lima anak. Tiap anak dapat berapa?",
+      "key": "2318d3e8df4c",
+      "text": "Ada enam bunga dibagi rata ke tiga vas. Tiap vas dapat berapa?",
+      "scope": "kali-kilat",
+      "voice": "gadis",
+      "games": [
+        "kali-kilat"
+      ]
+    },
+    {
+      "key": "d473f7efc3e8",
+      "text": "Ada sembilan balon dibagi rata ke tiga anak. Tiap anak dapat berapa?",
       "scope": "kali-kilat",
       "voice": "gadis",
       "games": [
@@ -4839,15 +4848,6 @@
     {
       "key": "5cba674f30f6",
       "text": "Ada sembilan jeruk dibagi rata ke tiga piring. Tiap piring dapat berapa?",
-      "scope": "kali-kilat",
-      "voice": "gadis",
-      "games": [
-        "kali-kilat"
-      ]
-    },
-    {
-      "key": "9fdb4bc0b8d0",
-      "text": "Ada sepuluh pensil dibagi rata ke lima kotak. Tiap kotak dapat berapa?",
       "scope": "kali-kilat",
       "voice": "gadis",
       "games": [
@@ -4873,8 +4873,8 @@
       ]
     },
     {
-      "key": "ef027e14690b",
-      "text": "Ada tiga kelompok telur, tiap kelompok empat. Berapa semuanya?",
+      "key": "18f07b9753d5",
+      "text": "Ada tiga kelompok telur, tiap kelompok dua. Berapa semuanya?",
       "scope": "kali-kilat",
       "voice": "gadis",
       "games": [
