@@ -5,7 +5,7 @@
  * fields) at build time instead of at runtime on a kid's tablet.
  */
 
-export type GroupId = 'tk' | 'sd1';
+export type GroupId = 'tk' | 'sd1' | 'sd2';
 
 export type TemplateId =
   | 'tap-answer' // pilih jawaban benar dari 2–4 pilihan

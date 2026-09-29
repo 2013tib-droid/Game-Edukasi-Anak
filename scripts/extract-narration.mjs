@@ -59,7 +59,7 @@ const ENGINE_LINES = ['Hebat! Kamu benar!', 'Selamat! Kamu hebat sekali!', 'Coba
 const LETTERS = ['A', 'B', 'C', 'D'];
 
 const gameFiles = [];
-for (const group of ['tk', 'sd1']) {
+for (const group of ['tk', 'sd1', 'sd2']) {
   for (const file of readdirSync(`src/games/${group}`)) {
     // letters.ts is a shared helper module, not a game config.
     if (file.endsWith('.ts') && file !== 'letters.ts') gameFiles.push(`src/games/${group}/${file}`);

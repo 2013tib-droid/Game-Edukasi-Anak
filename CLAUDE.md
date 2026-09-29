@@ -32,6 +32,7 @@ Judul kelompok menyebut **jenjang sekolah**, umur/kelas pindah ke awal deskripsi
 | `sd1` | SD Kelas 1 & 2 | Usia 6–8 tahun · Membaca, berhitung lanjut, logika sederhana |
 
 - **"SD Awal" DIPENSIUNKAN.** SD akan punya 3 tahap, dan "SD Awal/Tengah/Akhir" bukan istilah yang dipakai orang tua Indonesia. Pola resminya: **"SD Kelas 1 & 2" → "SD Kelas 3 & 4" → "SD Kelas 5 & 6"** — orang tua tahu persis anaknya kelas berapa, tanpa perlu menerjemahkan istilah.
+- **Saklar `draft` untuk kelompok yang sedang digarap (2026-09-29).** Entri di `groups.json` boleh diberi `"draft": true`: kelompok itu disembunyikan dari `/portal` dan `/kelompok/:id` di build produksi, tapi tetap tampil di dev server & build penguji (`VITE_ALLOW_TEST_TOGGLE=1`). Keputusannya satu tempat: `isGroupVisible()` di `access.ts`. Ini cuma soal TAMPILAN, bukan gerbang — backend tetap menolak kode untuk kelompok yang belum ada di `GROUPS` functions. Urutan rilis `sd2`: hapus `draft` → tambah `sd2` di `GROUPS` & `groupFromName()` functions + deploy backend → tambah satu game ke `FREE_GAME_IDS` → ubah kartu "Segera hadir" di landing jadi kartu harga. Menambah `sd2` juga berarti melebarkan `GroupId` di `types.ts`.
 - **Id kelompok TIDAK ikut berubah** (`tk`, `sd1`) supaya route `/kelompok/:groupId`, registry game, dan progress lama tetap jalan. Tahap SD berikutnya nanti pakai id baru (`sd2`, `sd3`), bukan mengubah `sd1`.
 - Judul jangan memuat umur/kelas lagi (dulu "TK (5–7 tahun)"): umur selalu jadi bagian PERTAMA deskripsi, dipisah "·".
 
@@ -150,6 +151,15 @@ Setiap game dideklarasikan lewat config: `{ id, group, title, template, levels[]
 Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyakan konfirmasi sebelum keputusan arsitektur besar di luar dokumen ini.
 
 ## Status Pengerjaan
+
+- **Game pertama `sd2`: "Kali Kilat" (perkalian & pembagian)** (2026-09-29), `src/games/sd2/kali-kilat.ts`, terdaftar di `registry.ts`. Kelompok `sd2` masih `draft` (lihat "Penamaan Kelompok"), jadi game ini hanya terlihat di dev server & build penguji. Teruji headless Chromium (sentuhan CDP asli) pada build `VITE_LOCK_MODE=buka`; 96 varian divalidasi lewat skrip (satu jawaban benar, 3 pilihan unik, jawaban cocok dengan persamaan, nol digit di narasi):
+  - **12 slot × 8 varian, `sessionLevels: 10`**: kali = tambah berulang bergambar → tabel 2/5/10 → 3&4 → 6&7 → 8&9 → kelipatan → faktor hilang → bagi rata bergambar → fakta bagi → cerita kali → cerita bagi → sifat ×0/×1/×10. Semua `tap-answer` dengan `equation` besar; NOL aset baru (gambar memakai id registry yang ada).
+  - **Batas bilangan `sd2` = 100** (tabel 10 × 10), bukan batas 30 milik `sd1`. Pengecoh dihitung dari kesalahan khas (menjumlah alih-alih mengalikan, lompatan tabel ±1), bukan asal.
+  - **Papan bergambar dibatasi 9 gambar.** Terukur: di 360×640 semua level muat tanpa scroll (6 sesi × 10 level, nol error console); versi awal dengan papan 10–12 gambar membuat kartu jawaban terdorong keluar layar. **Di 320×568 papan bergambar (slot l1 & l8) MASIH scroll 90–260 px** dan tiga kartu jawaban patah jadi dua kolom (level tanpa gambar scroll 14 px) — belum diperbaiki, sama seperti batasan 320 px yang sudah tercatat di Anggota Tubuh.
+  - Kalimat "Lihat loncatan bilangannya…" sengaja BEDA dari Pola Pintar: kalimat yang dipakai dua game naik ke scope `shared` dan memindahkan file suara game lama.
+  - **89 baris narasi baru (scope `kali-kilat`) BELUM dirender ke suara** — sampai workflow render dijalankan, baris itu jatuh ke suara HP. `narration-lines.json` sudah diperbarui (965 baris), nol baris lama berubah/pindah scope.
+  - Skrip `extract-narration`, `check-item-ids`, `check-glyphs`, `check-body-parts` sekarang ikut menelusuri folder `src/games/sd2/`.
+  - Belum ada ikon seni (`pic`), belum masuk `FREE_GAME_IDS` (memang belum dirilis), belum ada pengumuman lonceng.
 
 - **Fase 6 Bagian B — langkah 2, 3, 4 & 5 SELESAI; langkah 1 TERHALANG, jadi langkah 6 (mode `'kunci'`) SENGAJA BELUM dinyalakan** (2026-09-16), teruji headless (Edge CDP di Windows) pada build produksi + Firebase Emulator Suite — 148 pemeriksaan lulus, nol error console:
 

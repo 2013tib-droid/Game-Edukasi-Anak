@@ -268,6 +268,16 @@ export const games: GameMeta[] = [
     template: 'story-choice',
     load: () => import('@/games/sd1/cerita-kancil'),
   },
+
+  // --- SD Kelas 3 & 4 (group id `sd2`, masih draft — lihat groups.json) ---
+  {
+    id: 'kali-kilat',
+    group: 'sd2',
+    title: 'Kali Kilat',
+    emoji: '✖️',
+    template: 'tap-answer',
+    load: () => import('@/games/sd2/kali-kilat'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId): GameMeta[] {

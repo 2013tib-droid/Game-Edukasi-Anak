@@ -56,7 +56,7 @@ async function load(contents) {
 }
 
 const files = [];
-for (const group of ['tk', 'sd1']) {
+for (const group of ['tk', 'sd1', 'sd2']) {
   for (const file of readdirSync(`src/games/${group}`)) {
     if (file.endsWith('.ts') && file !== 'letters.ts') files.push(`src/games/${group}/${file}`);
   }

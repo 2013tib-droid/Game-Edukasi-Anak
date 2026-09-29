@@ -17,7 +17,7 @@ import path from 'node:path';
 const ID_FIELDS = ['item', 'pictureItem', 'vehicleItem', 'goalItem', 'cueItem'];
 
 const games = [];
-for (const group of ['tk', 'sd1']) {
+for (const group of ['tk', 'sd1', 'sd2']) {
   for (const file of readdirSync(`src/games/${group}`)) {
     if (file.endsWith('.ts') && file !== 'letters.ts') games.push(`src/games/${group}/${file}`);
   }
