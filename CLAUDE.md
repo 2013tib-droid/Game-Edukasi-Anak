@@ -152,6 +152,8 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 ## Status Pengerjaan
 
+- **Rencana isi `sd2`: 10 game untuk kelas 2 & 3 → `docs/rencana-game-sd-kelas-2-3.md`** (2026-09-29, patokan pengerjaan). Tiga keputusan pemilik yang ditunggu sebelum mulai: kelompok tujuan (usulan: `sd2`, slot awal = pemanasan kelas 2), batas bilangan `sd2` (usulan naik ke 1.000 per slot), dan game gratis `sd2` (usulan: Kebun Ilmu atau Toko Kembalian). Urutan kerja termurah: Waktu Tepat (nol perubahan engine).
+
 - **Game pertama `sd2`: "Kali Kilat" (perkalian & pembagian)** (2026-09-29), `src/games/sd2/kali-kilat.ts`, terdaftar di `registry.ts`. Kelompok `sd2` masih `draft` (lihat "Penamaan Kelompok"), jadi game ini hanya terlihat di dev server & build penguji. Teruji headless Chromium (sentuhan CDP asli) pada build `VITE_LOCK_MODE=buka`; 96 varian divalidasi lewat skrip (satu jawaban benar, 3 pilihan unik, jawaban cocok dengan persamaan, nol digit di narasi):
   - **12 slot × 8 varian, `sessionLevels: 10`**: kali = tambah berulang bergambar → tabel 2/5/10 → 3&4 → 6&7 → 8&9 → kelipatan → faktor hilang → bagi rata bergambar → fakta bagi → cerita kali → cerita bagi → sifat ×0/×1/×10. Semua `tap-answer` dengan `equation` besar; NOL aset baru (gambar memakai id registry yang ada).
   - **Batas bilangan `sd2` = 100** (tabel 10 × 10), bukan batas 30 milik `sd1`. Pengecoh dihitung dari kesalahan khas (menjumlah alih-alih mengalikan, lompatan tabel ±1), bukan asal.
