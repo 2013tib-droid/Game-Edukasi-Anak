@@ -10,6 +10,42 @@ catatan pengerjaannya tetap masuk ke "Status Pengerjaan" di `CLAUDE.md`.
 
 ---
 
+## ⚠️ STATUS: MASIH DEVELOPMENT — JANGAN IKUT DIRILIS KE PRODUCTION
+
+**Keputusan pemilik 2026-09-29:** SD Kelas 3 & 4 baru mulai dikerjakan. Selama
+dokumen ini belum menyatakan `sd2` siap rilis, kelompok ini **hanya boleh
+tampil di development**: dev server (`npm run dev`) dan build penguji
+(`VITE_ALLOW_TEST_TOGGLE=1`, base `/uji-…/`). Deploy production untuk TK dan
+SD Kelas 1 & 2 **tetap jalan seperti biasa** — `sd2` saja yang tidak ikut
+tampil.
+
+Mekanismenya sudah ada, jadi yang dijaga adalah **jangan dilepas**:
+- `"draft": true` pada `sd2` di `src/data/groups.json` **tetap terpasang**. Di
+  build production, `isGroupVisible()` (`src/data/access.ts`) menyembunyikan
+  `sd2` dari `/portal` dan `/kelompok/sd2`.
+- Game `sd2` boleh terdaftar di `registry.ts` dan kodenya ikut ter-build —
+  itu tidak membuatnya terlihat. Yang tahu URL `/game/<id>` langsung hanya
+  melihat layar gembok (`canPlayGame` menuntut kepemilikan `sd2`, dan backend
+  belum bisa memberikannya), jadi gamenya tidak bisa dimainkan.
+
+**JANGAN dilakukan sebelum pemilik bilang `sd2` siap rilis:**
+1. menghapus `"draft": true` dari `sd2`;
+2. menambah `sd2` ke `GROUPS` / `groupFromName()` di `functions/` atau membuat
+   produk SD Kelas 3 & 4 di Mayar;
+3. memasukkan game `sd2` (termasuk Toko Kembalian) ke `FREE_GAME_IDS`;
+4. mengubah kartu "Segera hadir" SD Kelas 3 & 4 di landing jadi kartu harga,
+   menambah chip dunia `sd2` di landing, atau memasang pengumuman lonceng
+   tentang game `sd2`.
+
+Urutan rilisnya nanti (satu tempat, jangan diacak) ada di `CLAUDE.md`
+"Penamaan Kelompok": hapus `draft` → `sd2` di backend + deploy → demo ke
+`FREE_GAME_IDS` → landing jadi kartu harga.
+
+**Cek cepat sebelum setiap deploy production:** `grep -n '"draft": true'
+src/data/groups.json` harus masih menemukan baris `sd2`.
+
+---
+
 ## 0. Keputusan pemilik (2026-09-29)
 
 | Pertanyaan | Keputusan |
@@ -282,8 +318,9 @@ Sisanya urut dari yang paling sedikit mengubah engine:
 | 9 | Ukur Yuk | sedang (`Ruler`, `Scale`, `Beaker`) | |
 | 10 | Kebun Ilmu | besar (generalisasi `tap-picture`) | |
 
-Minimal untuk rilis `sd2` (≥ 10 game): Kali Kilat + sembilan di atas, dengan
-Toko Kembalian wajib termasuk.
+Syarat minimal sebelum `sd2` BOLEH dibicarakan untuk rilis (≥ 10 game): Kali
+Kilat + sembilan di atas, dengan Toko Kembalian wajib termasuk. Terpenuhinya
+syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 
 ## 4. Aturan yang berlaku untuk SEMUA game di atas (ringkasan CLAUDE.md)
 
@@ -301,7 +338,7 @@ Toko Kembalian wajib termasuk.
   variasinya dari kolam varian per slot.
 - Muat tanpa scroll di **360×640** (320×568 minimal tidak patah); ukur **varian
   terburuk**, bukan yang keluar undian.
-- Game `sd2` tidak terlihat di produksi selama `sd2` masih `draft`.
+- **`sd2` tetap `draft` (development saja) sampai pemilik menyatakan siap rilis** — lihat bagian ⚠️ di atas. Menambah game `sd2` tidak pernah berarti melepas `draft`.
 - Narasi baru dirender lewat workflow "Render narasi" (periksa kalimat yang naik
   ke `shared` — jangan pakai `only:` kalau ada).
 
