@@ -216,6 +216,28 @@
   font-weight: 700;
 }
 
+/* Keterangan di bawah gambar: `--fit` = lebar taksiran KATA TERPANJANGNYA
+   (lihat TapAnswer). Kata yang lebih lebar dari kartu mengecil sendiri,
+   bukan patah di tengah kata. */
+@supports (container-type: inline-size) {
+  .choice-card .choice-text {
+    font-size: min(20px, calc(84cqw / var(--fit, 1)));
+  }
+}
+
+/* HP 320 px: tiga kartu jawaban (3 × 96 px + dua jarak 14 px = 316 px) tidak
+   muat di lebar isi 288 px dan patah jadi 2 + 1 — baris kedua itulah yang
+   membuat layar scroll di HP terkecil. Khusus grid berisi TEPAT tiga kartu
+   (Kebun Ilmu, 2026-09-29): kartu 88 px + jarak 8 px = 280 px, tetap di atas
+   target sentuh 64 px. Grid empat kartu sengaja tak disentuh (2 + 2 lebih rapi
+   daripada 3 + 1). Browser tanpa `:has()` mengabaikannya → perilaku lama. */
+@media (max-width: 340px) {
+  .choice-grid:not(.choice-grid--pics):has(> :nth-child(3):last-child) {
+    gap: 8px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 /* A letter/number answer with no emoji — big and bold so it's easy for a
    young child to read from arm's length.
 
@@ -543,6 +565,26 @@
   padding: 0 6px;
 }
 
+/* Papan urutan (`boardRow`, rantai makanan): tiga gambar + dua panah WAJIB
+   sebaris, jadi gambarnya diukur dari lebar layar dan tak boleh turun baris.
+   320 px: 3 × 56 + 2 × panah ±40 + jarak = ±270 px di lebar isi 288 px. */
+.ta-board--row {
+  flex-wrap: nowrap;
+  gap: 4px 6px;
+}
+.ta-board--row .ta-board__img,
+.ta-board--row .ta-board__emoji {
+  width: clamp(56px, 19vw, 110px);
+  height: clamp(56px, 19vw, 110px);
+}
+.ta-board--row .ta-board__emoji {
+  font-size: clamp(44px, 14vw, 84px);
+}
+.ta-board--row .ta-board__op {
+  font-size: clamp(30px, 9vw, 56px);
+  padding: 0 2px;
+}
+
 /* Busy boards shrink the pictures; keep the operator proportionally large so
    it still reads as the loudest symbol on the board. */
 .ta-board--dense .ta-board__op {
@@ -758,6 +800,7 @@
   justify-content: center;
 }
 
+
 .dd-item {
   min-width: clamp(92px, 25vw, 128px);
   min-height: clamp(92px, 25vw, 128px);
@@ -898,6 +941,29 @@
 .dd-target--pic .dd-img {
   width: clamp(52px, 15vw, 72px);
   height: clamp(52px, 15vw, 72px);
+}
+
+/* HP 320 px: tiga kartu tarik (3 × 92 px + 2 × 14 px = 304 px) patah jadi
+   2 + 1 di lebar isi 288 px, dan baris ketiga itu yang membuat layar scroll
+   (terukur di Kebun Ilmu: 54–79 px). Kartu 86 px + jarak 8 px = 274 px muat
+   sebaris, tetap di atas target sentuh. Nama di bawah gambar ikut turun ke
+   18 px supaya "Harimau"/"Jerapah" tidak melebarkan kartunya lagi; kartu
+   kata TANPA gambar (`.dd-word`) sengaja tak disentuh. Ditaruh SESUDAH semua
+   aturan `.dd-*` karena specificity-nya sama. */
+@media (max-width: 340px) {
+  .dd-items {
+    gap: 8px;
+  }
+  .dd-item {
+    min-width: 86px;
+    padding: 4px 6px;
+  }
+  .dd-item .dd-text {
+    font-size: 18px;
+  }
+  .dd-item .dd-emoji {
+    font-size: 54px;
+  }
 }
 
 /* Kotak yang masih kosong: gambarnya = soal, jadi sebesar cue tap-answer.

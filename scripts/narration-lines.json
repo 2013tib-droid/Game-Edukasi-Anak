@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-29",
-  "count": 965,
-  "chars": 43865,
+  "count": 1028,
+  "chars": 45884,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -5536,6 +5536,573 @@
       "voice": "gadis",
       "games": [
         "kartu-kembar"
+      ]
+    },
+    {
+      "key": "b2c7e5f82ae2",
+      "text": "Ada petir menyambar. Sebaiknya kita?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "dc0a4e0c0209",
+      "text": "Air direbus lama-lama berkurang. Ia?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "e4efd7bb219e",
+      "text": "Air ditaruh di pembeku kulkas. Ia?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "59f9f84ee2a5",
+      "text": "Apa yang dimakan kelinci?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "6653158ee902",
+      "text": "Apa yang dimakan monyet?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "9be410698362",
+      "text": "Apel itu bagian yang mana?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "6b76244c698a",
+      "text": "Apel jatuh dari pohon karena gaya?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "cf408ae6acd9",
+      "text": "Baju basah dijemur jadi kering. Airnya?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "6b0051436668",
+      "text": "Bayam yang kita makan bagian mana?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "f3102a810002",
+      "text": "Biji butuh apa supaya bisa tumbuh?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "c0b78256ddf1",
+      "text": "Biji lalu kecambah. Sesudahnya jadi apa?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "9d50a752a0dd",
+      "text": "Bola menggelinding lalu berhenti karena?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "f36cad0f12ae",
+      "text": "Cokelat di saku jadi lembek. Ia?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "a30d415ca91a",
+      "text": "Daun membuat makanan dengan bantuan?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "98c8e2ee48fb",
+      "text": "Di dalam buah ada apa?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "9c1060ac4fd2",
+      "text": "Es batu kena panas matahari. Ia?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "47314fe56aa2",
+      "text": "Gelas es dingin, luarnya basah. Itu?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "d57eaf29ca8e",
+      "text": "Hujan reda, matahari muncul. Terlihat?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "7a79ced0c153",
+      "text": "Hujan turun deras. Apa yang kita bawa?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "520bbea1b794",
+      "text": "Kalau kelinci habis, harimau jadi?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "611729dd8f6a",
+      "text": "Kapan jemuran paling cepat kering?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "c329f30fbb59",
+      "text": "Kecambah tumbuh dari apa?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "4610c85eb76e",
+      "text": "Kita melompat lalu turun lagi karena?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "1552d274e952",
+      "text": "Langit mendung gelap. Sebentar lagi?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "b12577978cf0",
+      "text": "Lihat urutannya. Apa yang hilang?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "3408c33e4dd8",
+      "text": "Lilin menyala lama-lama meleleh. Ia?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "d8ee92c217f7",
+      "text": "Mana yang didatangi lebah?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "63759ba265c9",
+      "text": "Mana yang membuat makanan tumbuhan?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "014dc3ef7ac6",
+      "text": "Mana yang mencengkeram tanah?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "7542c0c29719",
+      "text": "Mana yang mengalirkan air ke daun?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "c9a79228d506",
+      "text": "Mana yang menopang daun dan bunga?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "3486fb6aea50",
+      "text": "Mana yang menyerap air dari tanah?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "d7dfceb5f875",
+      "text": "Mana yang menyimpan biji?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "659ebdd0f279",
+      "text": "Mangga itu bagian yang mana?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "5e4def7f09fc",
+      "text": "Membuka laci meja. Gaya apa itu?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "aae45bc0986e",
+      "text": "Mencabut wortel dari tanah. Gaya apa?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "3e8a8b2c1ab6",
+      "text": "Menekan tombol bel. Gaya apa itu?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "16c02b033965",
+      "text": "Menendang bola. Gaya apa itu?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "89799c126e8a",
+      "text": "Mengangkat tas memakai gaya?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "c40d6fea6a3f",
+      "text": "Menimba air dari sumur. Gaya apa itu?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "ada17f99ad62",
+      "text": "Menutup laci meja. Gaya apa itu?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "c38f0b05d948",
+      "text": "Rem sepeda bekerja memakai gaya?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "844dc6e150c9",
+      "text": "Saat membuat makanan, daun melepas?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "9538b1e0603d",
+      "text": "Sentuh akar tanaman ini!",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "60bd5046685e",
+      "text": "Sentuh batang tanaman ini!",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "95f5491f55ef",
+      "text": "Sentuh buah tanaman ini!",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "c026e5bc85c1",
+      "text": "Sentuh bunga tanaman ini!",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "8822dceeb972",
+      "text": "Sentuh daun tanaman ini!",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "05f57845107f",
+      "text": "Sepeda berhenti pelan-pelan karena gaya?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "0c88421d3ede",
+      "text": "Siang sangat terik. Apa yang kita pakai?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "8de51ef43933",
+      "text": "Siapa yang hilang di tengah?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "72f195344ee9",
+      "text": "Siapa yang memakan kelinci?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "e5f4479c7028",
+      "text": "Siapa yang memakan monyet?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "b731be30255a",
+      "text": "Singkong itu bagian yang mana?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "021891b22834",
+      "text": "Tanaman lama di tempat gelap. Jadinya?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "b0517266d87e",
+      "text": "Tanaman sudah berbunga. Sesudahnya apa?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "a2ab37b6294f",
+      "text": "Tarik tiap benda ke wujudnya!",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "4c77dcd2e038",
+      "text": "Tarik tiap hewan ke kelompok makanannya!",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "5b00b7756ba0",
+      "text": "Tebu yang manis itu bagian mana?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "3c232e659ca1",
+      "text": "Tumbuhan di awal rantai disebut?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "e542e62dafd8",
+      "text": "Tumbuhan membuat makanannya dari?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "50c01811dd91",
+      "text": "Wortel itu bagian yang mana?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
+      ]
+    },
+    {
+      "key": "147fe42cb7e0",
+      "text": "Zat hijau daun namanya?",
+      "scope": "kebun-ilmu",
+      "voice": "gadis",
+      "games": [
+        "kebun-ilmu"
       ]
     },
     {

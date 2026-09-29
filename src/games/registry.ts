@@ -278,6 +278,14 @@ export const games: GameMeta[] = [
     template: 'tap-answer',
     load: () => import('@/games/sd2/kali-kilat'),
   },
+  {
+    id: 'kebun-ilmu',
+    group: 'sd2',
+    title: 'Kebun Ilmu',
+    emoji: '🌱',
+    template: 'mixed',
+    load: () => import('@/games/sd2/kebun-ilmu'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId): GameMeta[] {

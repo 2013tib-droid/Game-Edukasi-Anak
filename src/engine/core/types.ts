@@ -138,6 +138,15 @@ export interface TapAnswerData {
    */
   boardItems?: BoardItemToken[];
   /**
+   * Papan gambar dibaca sebagai SATU BARIS urutan (rantai makanan Kebun Ilmu:
+   * wortel → kelinci → ?). Gambarnya dikecilkan supaya tiga gambar + dua panah
+   * tetap sebaris: urutan yang patah jadi dua baris berhenti terbaca sebagai
+   * rantai, dan papan besar ukuran hitung-hitungan mendorong kartu jawaban
+   * keluar layar. Jangan dipakai di papan HITUNG — di sana gambarnya harus
+   * besar dan boleh turun baris.
+   */
+  boardRow?: boolean;
+  /**
    * Written sum shown as one line under the picture board ("3 + 3 = ?").
    * Use it on EQUATION boards (addition/subtraction) so the child meets the
    * number symbols next to the pictures they just counted — never on a plain
@@ -453,6 +462,34 @@ export type BodyPartId =
 export type KidView = 'wajah' | 'badan' | 'tangan';
 
 /**
+ * Bagian tanaman yang bisa disentuh (Kebun Ilmu, sd2). Geometrinya di
+ * `src/engine/ui/Plant.tsx` — config cuma menyebut namanya.
+ */
+export type PlantPartId = 'akar' | 'batang' | 'daun' | 'bunga' | 'buah';
+
+/**
+ * Gambar yang dipakai template `tap-picture`. `anak` = gambar anak
+ * (`Kid.tsx`, Anggota Tubuh), `tanaman` = tanaman SVG (`Plant.tsx`, Kebun
+ * Ilmu). Tabel keduanya dikumpulkan di `src/engine/ui/figures.ts`.
+ */
+export type FigureId = 'anak' | 'tanaman';
+
+interface TapPictureBase<F extends FigureId, P extends string> {
+  /** Figur yang disentuh. Bawaannya `anak`, supaya config lama tak berubah. */
+  figure?: F;
+  /** Bagian yang bisa disentuh di level ini (2–5, termasuk jawabannya). */
+  parts: P[];
+  /** Jawaban yang benar — wajib salah satu isi `parts`. */
+  answer: P;
+  /**
+   * Isyarat benda di pojok gambar ("Topi dipakai di bagian mana?") — id item
+   * registry (`src/engine/ui/items.ts`). Bendanya yang ditanyakan, jadi anak
+   * tetap menjawab dengan menyentuh gambar, bukan memilih kartu.
+   */
+  cueItem?: string;
+}
+
+/**
  * Sentuh bagian yang benar pada SATU gambar utuh.
  *
  * Sengaja bukan kartu jawaban berisi potongan tubuh (telinga sendirian, tangan
@@ -462,8 +499,8 @@ export type KidView = 'wajah' | 'badan' | 'tangan';
  * 🕒 di Jam Pintar.
  *
  * ATURAN MENULIS LEVEL (dijaga `scripts/check-body-parts.mjs`):
- * - `parts` = jawaban + 2–3 pengecoh. Makin banyak bagian yang aktif, makin
- *   kecil daerah sentuhnya — engine memperkecil radius tiap titik supaya dua
+ * - `parts` = jawaban + 2–3 pengecoh (tanaman boleh sampai 4 — kelimanya).
+ *   Makin banyak bagian yang aktif, makin kecil daerah sentuhnya — engine memperkecil radius tiap titik supaya dua
  *   bagian tak pernah bertindihan, jadi bagian yang berdempetan di gambar
  *   (pipi & telinga, lutut & kaki, leher & mulut) JANGAN diaktifkan bersama.
  * - Engine memilih framing sendiri: semua bagian di wajah → gambar wajah
@@ -471,19 +508,15 @@ export type KidView = 'wajah' | 'badan' | 'tangan';
  *   mencampur bagian wajah yang kecil (hidung, mulut, pipi) dengan bagian
  *   badan — di tampilan seluruh badan wajahnya jadi terlalu kecil.
  * - `kepala` itu SELURUH kepala; jangan disatukan dengan bagian wajah mana pun.
+ * - Figur tanaman: kelima bagian boleh aktif bersamaan (letaknya berjauhan).
+ *
+ * Discriminated union: `parts`/`answer` diperiksa TypeScript terhadap figur
+ * yang dipilih, jadi "akar" di gambar anak (atau "hidung" di tanaman) gagal
+ * saat build, bukan saat anak main.
  */
-export interface TapPictureData {
-  /** Bagian yang bisa disentuh di level ini (2–4, termasuk jawabannya). */
-  parts: BodyPartId[];
-  /** Jawaban yang benar — wajib salah satu isi `parts`. */
-  answer: BodyPartId;
-  /**
-   * Isyarat benda di pojok gambar ("Topi dipakai di bagian mana?") — id item
-   * registry (`src/engine/ui/items.ts`). Bendanya yang ditanyakan, jadi anak
-   * tetap menjawab dengan menyentuh tubuh, bukan memilih kartu.
-   */
-  cueItem?: string;
-}
+export type TapPictureData =
+  | (TapPictureBase<'anak', BodyPartId> & { figure?: 'anak' })
+  | (TapPictureBase<'tanaman', PlantPartId> & { figure: 'tanaman' });
 
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;

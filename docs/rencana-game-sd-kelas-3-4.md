@@ -297,6 +297,23 @@ dan jebakan desain soal yang sudah bisa dilihat sekarang.
 - **Aset:** hewan wajib seni WebP (sudah ada: singa, gajah, jerapah, sapi,
   kambing, kelinci, kucing, ayam…). Yang belum ada (harimau, ulat, elang) tunggu
   seninya atau jangan dipakai.
+- **SUDAH DIKERJAKAN (2026-09-29)** — keputusan pemilik di sesi itu:
+  1. **Tanaman = SVG engine** (`src/engine/ui/Plant.tsx`, kotak 100×128),
+     bukan ilustrasi. `tap-picture` sekarang menerima `figure: 'anak' | 'tanaman'`;
+     rumusnya pindah ke `src/engine/ui/figure.ts` (`figureSpots`/`figureFrame`),
+     tabel figurnya di `figures.ts`, dan `check-body-parts.mjs` memeriksa keduanya.
+  2. **Template yang ada saja**: kelompokkan = drag-drop 1:1 (tiga kotak, satu
+     hewan/benda per kotak); rantai makanan = tap-answer "apa yang hilang di
+     rantai" dengan papan gambar sebaris (field engine baru `boardRow`). Tidak
+     ada drag-drop urut.
+  3. **Hanya hewan berseni**: rantai makanan tiga tingkat (wortel → kelinci →
+     harimau, pisang → monyet → harimau). Ulat, belalang, ular, elang, tikus
+     menunggu seninya — tinggal menambah varian.
+  - Isi akhirnya 12 slot (kls 3: bagian tumbuhan · herbi/karni/omnivora · daur
+    hidup · cuaca · dorong/tarik; kls 4: fungsi bagian · bagian yang dimakan ·
+    fotosintesis · rantai makanan · wujud zat · perubahan wujud · jenis gaya),
+    `sessionLevels: 10`. Slot "cuaca & pakaian" jadi "cuaca" (payung, topi, dan
+    keselamatan saat petir) — tak ada benda empat musim.
 
 ---
 
@@ -364,4 +381,4 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | 7 | Detektif Data | `detektif-data` | rencana |
 | 8 | Detektif Bacaan | `detektif-bacaan` | rencana |
 | 9 | Susun Kalimat | `susun-kalimat` | rencana |
-| 10 | Kebun Ilmu | `kebun-ilmu` | rencana |
+| 10 | Kebun Ilmu | `kebun-ilmu` | ✅ sudah ada (2026-09-29), narasi belum dirender (render #19) |

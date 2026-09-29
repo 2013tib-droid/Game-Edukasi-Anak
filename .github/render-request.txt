@@ -1,15 +1,15 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #18
+render #19
 
-only: kali-kilat
+Game baru "Kebun Ilmu" (SD Kelas 3 & 4, kelompok sd2, masih draft): 63 baris
+baru (2.019 karakter), semuanya scope kebun-ilmu. Sudah dibandingkan sebelum
+vs sesudah lewat scripts/narration-lines.json: 965 baris jadi 1028, tepat 63
+baris baru, nol baris lama berubah atau pindah scope.
 
-Game baru "Kali Kilat" (SD Kelas 3 & 4, kelompok sd2, masih draft): 89 baris
-baru, semuanya scope kali-kilat. Sudah dibandingkan sebelum vs sesudah lewat
-scripts/narration-lines.json: 876 baris jadi 965, tepat 89 baris baru, nol
-baris lama berubah atau pindah scope (kalimat "Lihat loncatan bilangannya"
-sengaja beda dari Pola Pintar supaya tidak naik ke scope shared). Aman
-dibatasi "only: kali-kilat".
+SENGAJA TANPA baris "only:": 89 baris Kali Kilat (render #18) belum tentu
+sudah dirender, dan render penuh melewati file yang sudah ada — jadi sekali
+jalan ini membereskan keduanya tanpa membuang kuota.
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

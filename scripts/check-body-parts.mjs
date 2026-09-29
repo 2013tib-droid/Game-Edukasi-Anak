@@ -1,5 +1,7 @@
 /**
- * Validate every level of the `tap-picture` template (game "Anggota Tubuh").
+ * Validate every level of the `tap-picture` template — semua figurnya: gambar
+ * anak (Anggota Tubuh) dan tanaman (Kebun Ilmu). Nama berkasnya tetap
+ * `check-body-parts` karena dirujuk CI & catatan lama.
  *
  *     node scripts/check-body-parts.mjs
  *
@@ -70,16 +72,15 @@ const mod = await load(
   files.map((f, i) => `import c${i} from '${spec(f)}';`).join('\n') +
     `\nexport const configs = [${files.map((_, i) => `c${i}`).join(',')}];`,
 );
-const { BODY_PARTS, kidFrame, kidSpots } = await load(
-  `export * from '${spec('src/engine/ui/Kid.tsx')}'`,
-);
+const { FIGURES } = await load(`export * from '${spec('src/engine/ui/figures.ts')}'`);
+const { figureFrame, figureSpots } = await load(`export * from '${spec('src/engine/ui/figure.ts')}'`);
 
 /**
  * Berapa piksel satu satuan gambar jadi, di dalam `BOX`. Bingkainya BUKAN lagi
  * salah satu dari dua kotak tetap: sejak gambarnya jadi ilustrasi, engine
  * menghitung kotak terkecil yang memuat semua lingkaran sentuh soal itu, jadi
  * skalanya beda-beda tiap soal — dan skrip ini memakai fungsi yang sama persis
- * (`kidFrame`) supaya yang diukur benar-benar yang dilihat anak.
+ * (`figureFrame`) supaya yang diukur benar-benar yang dilihat anak.
  */
 function scaleOf(frame) {
   const [, , w, h] = frame.split(' ').map(Number);
@@ -97,14 +98,22 @@ for (const config of mod.configs) {
     checked += 1;
     const where = `${config.id} ${level.id}: "${level.narration}"`;
     const { parts, answer } = level.data;
+    const figure = level.data.figure ?? 'anak';
+    const def = FIGURES[figure];
+    // Figur tanaman boleh mengaktifkan kelima bagiannya: letaknya berjauhan.
+    const maxParts = figure === 'tanaman' ? 5 : 4;
+    if (!def) {
+      problems.push(`${where}\n    figur tak dikenal: "${figure}"`);
+      continue;
+    }
 
     if (!parts.includes(answer)) problems.push(`${where}\n    jawaban "${answer}" tidak ada di parts`);
     if (new Set(parts).size !== parts.length) problems.push(`${where}\n    ada bagian yang ditulis dua kali`);
-    if (parts.length < 2 || parts.length > 4) {
-      problems.push(`${where}\n    ${parts.length} bagian aktif — pakai 2 sampai 4`);
+    if (parts.length < 2 || parts.length > maxParts) {
+      problems.push(`${where}\n    ${parts.length} bagian aktif — pakai 2 sampai ${maxParts}`);
     }
     for (const part of parts) {
-      if (!BODY_PARTS[part]) problems.push(`${where}\n    bagian tak dikenal: "${part}"`);
+      if (!def.parts[part]) problems.push(`${where}\n    bagian tak dikenal: "${part}"`);
     }
     if (level.narration.length > MAX_NARRATION) {
       problems.push(
@@ -115,8 +124,8 @@ for (const config of mod.configs) {
     if (problems.length) continue;
 
     // Titik sentuh & bingkainya dihitung engine, bukan config — lihat Kid.tsx.
-    const spots = kidSpots(parts);
-    const frame = kidFrame(spots);
+    const spots = figureSpots(def, parts);
+    const frame = figureFrame(def, spots);
     const px = Math.min(...spots.map((s) => s.r)) * 2 * scaleOf(frame);
     if (px < smallest.px) smallest = { px, where, frame };
     if (px < MIN_TOUCH) {
