@@ -15,6 +15,13 @@
       "pic": "sd1",
       "description": "Usia 6–8 tahun · Membaca, berhitung lanjut, logika sederhana",
       "priceLabel": "Rp29.000"
+    },
+    {
+      "id": "sd2",
+      "title": "SD Kelas 3 & 4",
+      "emoji": "📚",
+      "description": "Usia 8–10 tahun · Perkalian, pembagian, membaca cerita",
+      "draft": true
     }
   ]
 }
