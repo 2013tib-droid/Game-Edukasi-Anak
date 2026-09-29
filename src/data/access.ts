@@ -137,6 +137,18 @@ export function toggleLockMode(): LockMode {
 
 // --- Pertanyaan yang dipakai UI --------------------------------------------
 
+/**
+ * Kelompok yang belum siap dijual ditandai `"draft": true` di `groups.json`.
+ * Draft disembunyikan dari pengunjung (portal + URL langsung), tapi tetap
+ * tampil di dev server & build penguji (`TEST_TOGGLE_ALLOWED`) supaya pemilik
+ * bisa mengisinya sambil mencobanya di HP. Ini cuma soal TAMPILAN: kode
+ * aktivasi tetap ditolak server untuk kelompok yang belum ada di `GROUPS`
+ * functions, jadi menyembunyikan di sini bukan gerbang keamanan.
+ */
+export function isGroupVisible(group: { draft?: boolean }): boolean {
+  return !group.draft || TEST_TOGGLE_ALLOWED;
+}
+
 /** Gratis selamanya (juga saat mode 'kunci'). */
 export function isFreeGame(gameId: string): boolean {
   return FREE_GAME_IDS.includes(gameId);

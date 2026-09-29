@@ -3,7 +3,7 @@ import groupsData from '@/data/groups.json';
 import { gamesForGroup } from '@/games/registry';
 import { getGameStars } from '@/engine/core/progress';
 import type { GroupId } from '@/engine/core/types';
-import { canPlayGame, isFreeGame } from '@/data/access';
+import { canPlayGame, isFreeGame, isGroupVisible } from '@/data/access';
 import { useLockMode, useOwnedGroups } from '@/portal/useAccess';
 import LockToggle from '@/portal/LockToggle';
 import Clock from '@/engine/ui/Clock';
@@ -15,7 +15,7 @@ import BackIcon from '@/engine/ui/BackIcon';
 // GamePage). Lock status comes from `src/data/access.ts`.
 export default function GroupPage() {
   const { groupId } = useParams<{ groupId: string }>();
-  const group = groupsData.groups.find((g) => g.id === groupId);
+  const group = groupsData.groups.find((g) => g.id === groupId && isGroupVisible(g));
   // Re-render when the tester flips the lock switch.
   useLockMode();
   // Kelompok yang sudah dibeli — menentukan gembok mana yang hilang.

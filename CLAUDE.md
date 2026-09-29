@@ -32,6 +32,7 @@ Judul kelompok menyebut **jenjang sekolah**, umur/kelas pindah ke awal deskripsi
 | `sd1` | SD Kelas 1 & 2 | Usia 6–8 tahun · Membaca, berhitung lanjut, logika sederhana |
 
 - **"SD Awal" DIPENSIUNKAN.** SD akan punya 3 tahap, dan "SD Awal/Tengah/Akhir" bukan istilah yang dipakai orang tua Indonesia. Pola resminya: **"SD Kelas 1 & 2" → "SD Kelas 3 & 4" → "SD Kelas 5 & 6"** — orang tua tahu persis anaknya kelas berapa, tanpa perlu menerjemahkan istilah.
+- **Saklar `draft` untuk kelompok yang sedang digarap (2026-09-29).** Entri di `groups.json` boleh diberi `"draft": true`: kelompok itu disembunyikan dari `/portal` dan `/kelompok/:id` di build produksi, tapi tetap tampil di dev server & build penguji (`VITE_ALLOW_TEST_TOGGLE=1`). Keputusannya satu tempat: `isGroupVisible()` di `access.ts`. Ini cuma soal TAMPILAN, bukan gerbang — backend tetap menolak kode untuk kelompok yang belum ada di `GROUPS` functions. Urutan rilis `sd2`: hapus `draft` → tambah `sd2` di `GROUPS` & `groupFromName()` functions + deploy backend → tambah satu game ke `FREE_GAME_IDS` → ubah kartu "Segera hadir" di landing jadi kartu harga. Menambah `sd2` juga berarti melebarkan `GroupId` di `types.ts`.
 - **Id kelompok TIDAK ikut berubah** (`tk`, `sd1`) supaya route `/kelompok/:groupId`, registry game, dan progress lama tetap jalan. Tahap SD berikutnya nanti pakai id baru (`sd2`, `sd3`), bukan mengubah `sd1`.
 - Judul jangan memuat umur/kelas lagi (dulu "TK (5–7 tahun)"): umur selalu jadi bagian PERTAMA deskripsi, dipisah "·".
 

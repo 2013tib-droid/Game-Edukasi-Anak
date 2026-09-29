@@ -4,6 +4,7 @@ import groupsData from '@/data/groups.json';
 import { getTotalStars } from '@/engine/core/progress';
 import MascotCard from '@/engine/ui/Mascot';
 import TopBar from '@/portal/TopBar';
+import { isGroupVisible } from '@/data/access';
 
 /**
  * Group icon: the owner's art (public/assets/groups/<pic>.webp), falling back
@@ -51,7 +52,7 @@ export default function HomePage() {
       </div>
 
       <div style={{ display: 'grid', gap: 20, marginTop: 24 }}>
-        {groupsData.groups.map((group) => (
+        {groupsData.groups.filter(isGroupVisible).map((group) => (
           <Link
             key={group.id}
             to={`/kelompok/${group.id}`}
