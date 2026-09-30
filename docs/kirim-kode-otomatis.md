@@ -157,6 +157,25 @@ dengan tombol **"Aktifkan sekarang"** — tanpa mengetik kode.
 - Butuh deploy backend ulang (dua function baru: `myPaidOrders`,
   `claimPaidOrder`) — satu kali klik workflow yang sama dengan langkah 5.
 
+## Email verifikasi juga dari Gmail ini (sejak 2026-09-30)
+
+Email "verifikasi alamat email" dulu dikirim Firebase dari
+`noreply@petualangan-pintar.firebaseapp.com` — domain yang dipakai bersama
+jutaan project lain, jadi sering masuk **spam**. Sekarang Cloud Function
+`sendVerifyEmail` yang mengirimnya dari `petualangsmart@gmail.com`, dengan
+isi bahasa Indonesia dan tombol "Verifikasi email saya".
+
+- Memakai **App Password yang sama** (`GMAIL_APP_PASSWORD`) — tidak ada
+  secret baru. Tapi artinya ia baru jalan setelah langkah 1–5 di atas beres.
+- Sampai itu, app otomatis memakai email bawaan Firebase seperti dulu
+  (mungkin masuk spam, tapi tetap terkirim).
+- Rem: sekali per menit, 5 kali per hari per akun (koleksi `verify_mail`).
+- Kuota Gmail biasa ±500 email/hari, dipakai bersama email kode Mayar. Untuk
+  skala sekarang jauh dari cukup; kalau suatu hari mendekati, itu saatnya
+  pindah ke domain sendiri.
+- **Masuk dengan Google tidak mengirim email verifikasi sama sekali** —
+  emailnya sudah terverifikasi dari Google.
+
 ## Memantau & menangani masalah
 
 Semua pesanan tercatat di Firebase Console → Firestore → koleksi **`orders`**

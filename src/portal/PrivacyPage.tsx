@@ -205,8 +205,8 @@ export default function PrivacyPage() {
         Pembayaran dilakukan di platform penjualan (Lynk.id / Mayar.id), <strong>bukan di
         aplikasi ini</strong>. Kami tidak pernah menerima atau menyimpan nomor kartu, PIN, atau
         data dompet digital Anda. Data pembayaran diproses oleh platform tersebut menurut
-        kebijakan mereka sendiri. Email berisi kode aktivasi dikirim dari akun Gmail kami
-        (petualangsmart@gmail.com) melalui layanan email Google.
+        kebijakan mereka sendiri. Email berisi kode aktivasi dan email verifikasi akun dikirim
+        dari akun Gmail kami (petualangsmart@gmail.com) melalui layanan email Google.
       </p>
 
       <h2>5. Yang disimpan di HP Anda sendiri</h2>
