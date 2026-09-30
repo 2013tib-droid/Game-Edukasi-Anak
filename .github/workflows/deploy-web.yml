@@ -1,0 +1,82 @@
+# Men-deploy WEB (app React) ke Firebase Hosting → https://petualanganpintar.com
+#
+# Beda dengan build GitHub Pages: base `/` + BrowserRouter (Firebase Hosting
+# punya rewrite ke index.html, lihat firebase.json), dan SITE_URL = domain
+# produksi supaya gambar pratinjau link WhatsApp/TikTok menunjuk ke sana.
+#
+# Konfigurasi Firebase web di bawah ini BUKAN rahasia: nilai yang sama persis
+# sudah ada di bundel JS yang dikirim ke setiap browser (Firebase memang
+# merancangnya publik; yang menjaga data adalah firestore.rules + Cloud
+# Functions). Ditulis di sini supaya build tidak bergantung pada `.env` yang
+# cuma ada di laptop pemilik — build tanpa config tetap "sukses" padahal
+# login & aktivasi mati semua (jebakan yang sudah dua kali kena).
+#
+# Kredensial: secret FIREBASE_SERVICE_ACCOUNT + variable FIREBASE_PROJECT_ID
+# yang sama dengan "Deploy backend". Peran Firebase Admin sudah mencakup
+# Hosting.
+#
+# Cara memakai: tab Actions → "Deploy web" → Run workflow.
+name: Deploy web
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Cuma build & periksa, jangan benar-benar deploy'
+        required: false
+        type: boolean
+        default: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: https://petualanganpintar.com/
+      VITE_FIREBASE_API_KEY: AIzaSyCRf0NX2Mo49s20kyJZcmAfOGmPK0MaMVA
+      VITE_FIREBASE_AUTH_DOMAIN: petualangan-pintar.firebaseapp.com
+      VITE_FIREBASE_PROJECT_ID: petualangan-pintar
+      VITE_FIREBASE_STORAGE_BUCKET: petualangan-pintar.firebasestorage.app
+      VITE_FIREBASE_MESSAGING_SENDER_ID: '766973669747'
+      VITE_FIREBASE_APP_ID: 1:766973669747:web:7093e4b0dd9d58a8305506
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build produksi
+        run: npm run build
+
+      - name: Periksa build (bukan build penguji, config Firebase ada, base benar)
+        run: |
+          node scripts/check-release-build.mjs dist
+          grep -rq "$VITE_FIREBASE_API_KEY" dist/assets || { echo "::error::Config Firebase tidak ikut ter-bundle."; exit 1; }
+          grep -q 'src="/assets/index-' dist/index.html || { echo "::error::Base build bukan '/'."; exit 1; }
+          grep -q 'content="https://petualanganpintar.com/assets/og-image.jpg"' dist/index.html || { echo "::error::SITE_URL tidak terpasang."; exit 1; }
+          if find dist -name '_*' | grep -q .; then echo "::error::Ada berkas berawalan _ di dist."; exit 1; fi
+
+      - name: Siapkan kredensial
+        if: ${{ !inputs.dry_run }}
+        env:
+          SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "$SA" ]; then echo "::error::Secret FIREBASE_SERVICE_ACCOUNT belum diisi."; exit 1; fi
+          printf '%s' "$SA" > "$RUNNER_TEMP/service-account.json"
+
+      - name: Deploy ke Firebase Hosting
+        if: ${{ !inputs.dry_run }}
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/service-account.json
+        run: |
+          npx --yes firebase-tools@13 deploy \
+            --only hosting \
+            --project '${{ vars.FIREBASE_PROJECT_ID }}' \
+            --non-interactive
+
+      - name: Hapus kredensial
+        if: always()
+        run: rm -f "$RUNNER_TEMP/service-account.json"
