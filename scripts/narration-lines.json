@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-30",
-  "count": 1028,
-  "chars": 45884,
+  "count": 1065,
+  "chars": 47326,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -8629,6 +8629,339 @@
       "voice": "gadis",
       "games": [
         "taman-huruf"
+      ]
+    },
+    {
+      "key": "7013766ad70a",
+      "text": "Adi menabung dua ribu sehari, lima hari. Berapa tabungannya?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "f999344bf5aa",
+      "text": "Bayar apel dan pisang!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "a887838c6f28",
+      "text": "Bayar apel dengan uang pas!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "fd105a1edb4c",
+      "text": "Bayar apel, jeruk, dan pisang!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "478d71a7a300",
+      "text": "Bayar bola dan balon!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "143b5e6636a9",
+      "text": "Bayar bola dengan uang paling sedikit!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "8305c1ecae7b",
+      "text": "Bayar bola dengan uang pas!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "aa805e8fd4ad",
+      "text": "Bayar boneka dan balon!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "3c4e50242335",
+      "text": "Bayar buku dengan uang paling sedikit!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "adb669e43156",
+      "text": "Bayar buku dengan uang pas!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "0ec974b8f281",
+      "text": "Bayar jeruk dengan uang paling sedikit!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "3c6b5cbc7b68",
+      "text": "Bayar payung, sepatu, dan topi!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "147756cc261a",
+      "text": "Bayar pensil dan buku!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "83464fbf259b",
+      "text": "Bayar pensil dengan uang pas!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "09bb12ac1dbc",
+      "text": "Bayar pensil, buku, dan balon!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "5e3055d19d2e",
+      "text": "Bayar roti dan susu!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "cfee2b0b2a89",
+      "text": "Bayar roti dengan uang pas!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "d7bed6be46ae",
+      "text": "Bayar roti, susu, dan telur!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "a83d08679be9",
+      "text": "Bayar semangka dengan uang paling sedikit!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "0a2b41f315c0",
+      "text": "Bayar susu dengan uang pas!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "55901c959a15",
+      "text": "Bayar tas dengan uang paling sedikit!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "e26e96a2f8cf",
+      "text": "Bayar telur dan jagung!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "2893c789ac23",
+      "text": "Bayar topi dengan uang paling sedikit!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "b10af47b3b64",
+      "text": "Bayar topi, bola, dan jagung!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "b96d83b2950b",
+      "text": "Bayar wortel, jagung, dan telur!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "5168a4c4f3f7",
+      "text": "Beni menabung lima ribu seminggu, empat minggu. Berapa tabungannya?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "025105b1fb90",
+      "text": "Bola dua belas ribu, uang Tini baru sembilan ribu. Kurang berapa?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "194a4f8ce8d7",
+      "text": "Dua buku: beli satuan atau paket? Mana lebih murah?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "8c508054309c",
+      "text": "Dua roti: beli satuan atau paket? Mana lebih murah?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "a3f9168892e8",
+      "text": "Dua susu: beli satuan atau paket? Mana lebih murah?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "a74ca7149b79",
+      "text": "Empat balon: beli satuan atau paket? Mana lebih murah?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "250315a549da",
+      "text": "Pembeli sudah membayar. Beri kembaliannya!",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "13374c376ef5",
+      "text": "Rina menabung lima ratus sehari, enam hari. Berapa tabungannya?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "b9b499b9a652",
+      "text": "Sinta menabung seribu sehari, tujuh hari. Berapa tabungannya?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "edfa39c12403",
+      "text": "Tas lima belas ribu, uang Dodi baru sepuluh ribu. Kurang berapa?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "1c97c7d8e655",
+      "text": "Tiga apel: beli satuan atau paket? Mana lebih murah?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
+      ]
+    },
+    {
+      "key": "204dab3ea384",
+      "text": "Tiga pensil: beli satuan atau paket? Mana lebih murah?",
+      "scope": "toko-kembalian",
+      "voice": "gadis",
+      "games": [
+        "toko-kembalian"
       ]
     },
     {

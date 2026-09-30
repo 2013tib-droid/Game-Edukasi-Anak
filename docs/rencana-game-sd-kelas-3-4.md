@@ -218,6 +218,21 @@ dan jebakan desain soal yang sudah bisa dilihat sekarang.
 - **Karena demo:** game ini **tidak dipotong** dan harus paling rapi di antara
   sepuluhnya — ini yang dilihat calon pembeli. Setelah jadi, masukkan ke
   `FREE_GAME_IDS` saat `sd2` dirilis (urutan rilis di "Penamaan Kelompok").
+- **SUDAH DIKERJAKAN (2026-09-30)** — keputusan pemilik di sesi itu:
+  1. **Gambar uang = foto SPECIMEN BI yang sudah ada di registry**, BUKAN SVG
+     (menggantikan rencana "SVG sederhana" di atas): anak harus mengenali uang
+     asli. Izin pakai dari BI diurus sebelum `sd2` rilis.
+  2. **Saat bayar pas, baki menampilkan total / target** dan soal selesai
+     sendiri begitu pas.
+  3. **Kembalian juga DITARIK**, bukan kartu pilihan.
+  - Engine: **template baru `cashier`** (`src/engine/templates/Cashier.tsx`),
+    bukan `DragTarget.accepts: 'many'` — dompetnya tak terbatas, isi baki
+    dinilai dari JUMLAHNYA, dan uang di baki bisa disentuh untuk dikembalikan;
+    itu perilaku yang tak ada hubungannya dengan drag-drop 1:1. Pecahan →
+    gambar di `src/engine/core/money.ts` (Rp500 koin, Rp1.000–Rp50.000 kertas).
+  - 8 slot × 6 varian, urutan tetap (tanpa `sessionLevels`, karena demo tidak
+    dipotong). Slot l7 (membandingkan harga) memakai tap-answer seperti rencana.
+
 
 ### 7. Detektif Data 📊
 `id: detektif-data` · **tap-answer** + diagram · piktogram, diagram batang, tabel
@@ -377,7 +392,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | 3 | Bagi Kue | `bagi-kue` | rencana |
 | 4 | Ukur Yuk | `ukur-yuk` | rencana |
 | 5 | Waktu Tepat | `waktu-tepat` | rencana |
-| 6 | Toko Kembalian | `toko-kembalian` | rencana — **demo gratis `sd2`** |
+| 6 | Toko Kembalian | `toko-kembalian` | ✅ sudah ada (2026-09-30), narasi belum dirender (render #20) — **demo gratis `sd2`**, belum masuk `FREE_GAME_IDS` |
 | 7 | Detektif Data | `detektif-data` | rencana |
 | 8 | Detektif Bacaan | `detektif-bacaan` | rencana |
 | 9 | Susun Kalimat | `susun-kalimat` | rencana |

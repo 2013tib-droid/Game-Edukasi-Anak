@@ -2157,3 +2157,286 @@
 @media (prefers-reduced-motion: reduce) {
   .play-icon--pulse { animation: none; }
 }
+
+/* ---------- Kasir (`cashier`, Toko Kembalian) ----------
+   Dari atas: papan soal (barang + harga, uang pembeli) → baki (laci /
+   tangan pembeli / celengan) → dompet. Dompet PALING BAWAH supaya jari yang
+   menyeret naik ke baki tidak menutupi angka total yang sedang berubah.
+   Foto uang = SPECIMEN BI: tidak ada elemen yang ditaruh DI ATAS gambarnya
+   (tanda SPECIMEN tak boleh tertutup) — nominal selalu di bawahnya. */
+.cs-area {
+  gap: 10px;
+}
+
+.cs-board {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 6px 8px;
+}
+
+.cs-good {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.cs-good__img {
+  width: clamp(48px, 14vw, 76px);
+  height: clamp(48px, 14vw, 76px);
+  object-fit: contain;
+}
+
+.cs-good__emoji {
+  font-size: clamp(38px, 11vw, 60px);
+  line-height: 1.1;
+}
+
+/* Label harga: pil kuning seperti label harga di warung. */
+.cs-price {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #ffe28a;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.14);
+  font-size: clamp(14px, 4.4vw, 17px);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.cs-paid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.cs-paid__label {
+  font-size: 13px;
+  font-weight: 800;
+  opacity: 0.65;
+}
+
+.cs-paid__money {
+  display: flex;
+  gap: 6px;
+}
+
+.cs-paid__piece {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cs-paid__img.cs-note {
+  height: clamp(40px, 12vw, 60px);
+  width: auto;
+  max-width: 30vw;
+  border-radius: 4px;
+}
+
+.cs-paid__img.cs-coin {
+  width: clamp(40px, 12vw, 60px);
+  height: clamp(40px, 12vw, 60px);
+}
+
+.cs-money-label {
+  /* Rp10.000 harus muat di kartu dompet selebar ±64 px (empat kartu sebaris
+     di HP 320 px). */
+  font-size: clamp(12px, 3.9vw, 16px);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.cs-money-emoji {
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.cs-tray {
+  border: 4px dashed rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 6px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.cs-tray--over {
+  border-color: #ffb703;
+  background: rgba(255, 243, 205, 0.9);
+}
+
+.cs-tray--done {
+  border-style: solid;
+  border-color: #3f9142;
+  background: rgba(214, 240, 206, 0.9);
+}
+
+.cs-tray--shake {
+  animation: shake 0.45s;
+}
+
+.cs-tray__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0 8px;
+}
+
+/* "Rp10.000 / Rp15.000" di HP 320 px bisa lebih lebar dari sisa baris: total
+   turun ke baris sendiri, rata kanan, alih-alih meluber keluar baki. */
+.cs-total {
+  margin-left: auto;
+}
+
+.cs-tray__name {
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.cs-total {
+  font-size: clamp(22px, 7vw, 30px);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.cs-total__target {
+  font-size: 0.72em;
+  opacity: 0.6;
+}
+
+.cs-tray__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cs-tray__body {
+  flex: 1;
+  min-width: 0;
+  min-height: 52px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.cs-tray__hint {
+  font-size: 15px;
+  font-weight: 700;
+  opacity: 0.55;
+}
+
+/* Satu tumpuk per pecahan; menyentuhnya mengembalikan SATU lembar ke dompet. */
+.cs-stack {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 3px;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.16);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.cs-stack__img.cs-note {
+  height: 40px;
+  width: auto;
+  max-width: 80px;
+  border-radius: 3px;
+  display: block;
+}
+
+.cs-stack__img.cs-coin {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.cs-stack__count {
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  min-width: 24px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  background: #e8604c;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.cs-submit {
+  flex: none;
+  padding: 0 14px;
+  font-size: clamp(17px, 5vw, 21px);
+}
+
+.cs-wallet {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Kartu dompet MELEBAR mengisi baris, tapi tak pernah turun baris: dompet
+   dibatasi empat pecahan (`CashierData.wallet`), dan empat kartu 64 px +
+   tiga jarak 6 px pas di lebar isi HP 320 px. */
+.cs-tile {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 118px;
+  padding: 6px 4px 4px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+
+/* Tinggi dipatok, lebar ikut rasio fotonya (1,3–1,6:1) tapi tak melebihi
+   kartunya — aturan `.dd-img`: jangan paksa kotak, jangan `height: auto`. */
+.cs-tile__img.cs-note {
+  height: clamp(44px, 12vw, 62px);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
+}
+
+.cs-tile__img.cs-coin {
+  width: clamp(44px, 12vw, 62px);
+  height: clamp(44px, 12vw, 62px);
+  display: block;
+}
+
+.cs-ghost {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(1.1);
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.25));
+}
+
+.cs-count {
+  align-self: flex-end;
+  margin-top: -4px;
+  font-size: 14px;
+  font-weight: 800;
+  opacity: 0.7;
+}

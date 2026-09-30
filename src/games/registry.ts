@@ -286,6 +286,14 @@ export const games: GameMeta[] = [
     template: 'mixed',
     load: () => import('@/games/sd2/kebun-ilmu'),
   },
+  {
+    id: 'toko-kembalian',
+    group: 'sd2',
+    title: 'Toko Kembalian',
+    emoji: '🏪',
+    template: 'mixed',
+    load: () => import('@/games/sd2/toko-kembalian'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId): GameMeta[] {
