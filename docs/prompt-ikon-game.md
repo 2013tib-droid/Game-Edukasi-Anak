@@ -209,3 +209,80 @@ Balas di chat yang sama dengan menyebut kesalahannya, jangan mengulang seluruh p
 ("My Story Adventures", "Every chapter is an adventure!"). Aplikasinya berbahasa Indonesia dan
 aturan gaya melarang teks di dalam ikon — layak ikut diganti. Kalau dibuat ulang, pakai
 EKOR PROMPT di atas supaya sampul & halamannya polos.
+
+---
+
+## Ikon SD Kelas 3 & 4 (`sd2`) — disusun 2026-09-30
+
+Sebelas game (`docs/rencana-game-sd-kelas-3-4.md`). Empat sudah ada di registry dan
+sekarang masih emoji: **Kali Kilat ✖️, Kebun Ilmu 🌱, Toko Kembalian 🏪, Ukur Yuk 📏**.
+Tujuh sisanya masih rencana, jadi ikonnya boleh dibuat duluan — filenya menunggu gamenya.
+
+Memasang `pic` di game `sd2` **tidak** merilis `sd2`: kelompoknya tetap `draft` dan
+tersembunyi di produksi.
+
+Pakai **BLOK GAYA** dan **EKOR PROMPT** yang sama di atas (tempel ekornya di TIAP pesan).
+Tiap baris di bawah sudah memuat aturan yang lahir dari lima pelajaran di atas:
+objek bertulisan wajib "polos", wajah dan angka tak berbagi permukaan, dan
+komposisinya rapat supaya rasio ≤ 1,5.
+
+### Yang sudah dipakai ikon lain — JANGAN diulang
+
+Sebelas ikon baru ini duduk di portal yang sama dengan tetangga SD Kelas 1 & 2, dan orang
+tua bisa memegang dua kelompok sekaligus. Bentuk yang sudah terpakai: singa · tenda huruf ·
+palet cat · semangka · huruf A · **pensil kuning** · mobil merah · sepasang kartu · puzzle
+dua keping · **balok berangka 1-2-3** · balon ucapan · papan target · dua lingkaran
+terhubung · pulpen biru · **buku ungu** · **jam dinding** · ulat · jalan berkelok S.
+
+Karena itu: Ukur Yuk **bukan penggaris/pensil** (dekat pensil kuning Tulis Angka),
+Waktu Tepat **bukan jam dinding**, Istana Bilangan **bukan balok berangka**,
+Detektif Bacaan **bukan buku**, dan hanya SATU dari dua "detektif" yang memegang
+kaca pembesar.
+
+### Baris prompt (SATU per pesan, selalu + EKOR PROMPT)
+
+| id file | Status game | Baris prompt |
+|---|---|---|
+| `kali-kilat` | sudah ada | Buatkan: satu tanda kali besar berbentuk silang tebal dan empuk seperti bantal, warna ungu muda, dengan wajah imut di titik silangnya, ditemani satu petir kecil warna kuning krem di sampingnya dan dua bintang kecil pastel. Tanda silangnya berdiri miring seperti tanda kali di buku hitungan, bukan huruf. Selain bentuk tanda kali itu tidak boleh ada angka atau tulisan apa pun. |
+| `kebun-ilmu` | sudah ada | Buatkan: satu pot tanah liat kecil warna peach berwajah imut, dari tanahnya tumbuh satu kecambah hijau mint dengan dua daun bulat, satu tetes air biru muda melayang di atas daunnya dan satu matahari kecil kuning krem di dekatnya. Tinggi dan lebar gambarnya kira-kira sama. |
+| `toko-kembalian` | sudah ada | Buatkan: satu mesin kasir mainan warna hijau mint berwajah imut di badan depannya, laci bawahnya sedikit terbuka berisi beberapa koin emas bulat POLOS. Layar kecil di atas mesin kasirnya kosong berwarna biru muda. Koin dan layar tidak boleh bertuliskan angka, harga, atau lambang mata uang apa pun. |
+| `ukur-yuk` | sudah ada | Buatkan: satu meteran gulung bundar warna kuning krem berwajah imut di badan bundarnya, pita meterannya yang oranye lembut keluar melengkung ke bawah seperti ekor. Pita itu hanya bergaris-garis skala pendek, TANPA angka. Tambahkan dua bintang kecil pastel. Pita jangan menjulur lurus panjang ke samping — biarkan melengkung dekat badannya supaya tinggi dan lebar gambarnya kira-kira sama. |
+| `waktu-tepat` | rencana | Buatkan: satu stopwatch bundar warna biru muda dengan tombol kecil di atasnya, berwajah imut di tengah muka stopwatch-nya. Pinggiran mukanya hanya bergaris-garis kecil, TANPA angka. Satu jarum merah pendek. Dua garis gerak kecil di sisinya seperti sedang berdetak. |
+| `istana-bilangan` | rencana | Buatkan: satu istana mungil warna krem dan ungu muda dengan tiga menara beratap lancip dan bendera kecil peach di puncak menara tengah, pintu gerbangnya berwajah imut. Dinding istana polos tanpa angka dan tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `lompat-katak` | rencana | Buatkan: satu katak kecil hijau mint berwajah imut sedang melompat dari satu daun teratai ke daun teratai lain, dengan garis lengkung putus-putus menunjukkan lintasan lompatannya. Daun teratai polos tanpa angka. Kedua daun berdekatan supaya gambarnya tidak melebar. |
+| `bagi-kue` | rencana | Buatkan: satu kue tart bulat warna merah muda dengan krim putih dan satu stroberi di atasnya, sudah terpotong jadi empat bagian sama besar, satu potongnya sedikit bergeser keluar. Wajah imut digambar di sisi depan tart. Tanpa lilin, tanpa tulisan di atas kue. |
+| `detektif-data` | rencana | Buatkan: satu diagram batang mainan dengan tiga batang tegak berbeda tinggi — biru muda, kuning krem, hijau mint — berdiri di atas satu garis dasar. Batang paling tinggi berwajah imut dan memakai topi detektif coklat kecil. Batang-batang polos tanpa angka dan tanpa label. |
+| `detektif-bacaan` | rencana | Buatkan: satu kaca pembesar bergagang peach berwajah imut di gagangnya, lensanya diarahkan ke selembar kertas krem bergaris-garis. Garis di kertas hanya garis abu-abu tipis, TIDAK boleh ada huruf atau kata. Tinggi dan lebar gambarnya kira-kira sama. |
+| `susun-kalimat` | rencana | Buatkan: satu kereta mainan kecil yang menanjak miring — lokomotif warna biru muda berwajah imut di depan, diikuti dua gerbong pendek warna peach dan hijau mint, tiap gerbong mengangkut satu kartu putih bergaris KOSONG. Kartu tidak boleh berisi huruf atau kata. Keretanya menanjak diagonal, bukan berjajar mendatar panjang. |
+
+### Catatan per ikon
+
+- **Uang di `toko-kembalian` wajib koin POLOS.** Game-nya memakai foto uang SPECIMEN BI
+  dan izin BI belum diurus; ikon yang menggambar uang kertas bernominal (atau lambang "Rp")
+  menambah masalah yang sama. Koin emas bulat tanpa tulisan sudah cukup terbaca "uang".
+- **Empat baris sengaja menyebut "TANPA angka"** (Ukur Yuk, Waktu Tepat, Istana Bilangan,
+  Lompat Katak) walau gamenya soal bilangan: Gemini sering salah menulis angka di skala,
+  dan skala penuh angka di kotak ±116 px cuma terbaca noda (Pelajaran Ketiga). Satu-satunya
+  ikon yang boleh berangka tetap `hitung-hebat`.
+- **Kali Kilat: tanda × harus terbaca TANDA KALI, bukan huruf X** — itu sebabnya ditulis
+  "empuk seperti bantal" dan "miring seperti di buku hitungan". Kalau hasilnya tetap mirip
+  huruf X, ganti petirnya jadi yang dominan (awan kecil berwajah imut menjatuhkan petir
+  berbentuk ×).
+- **Susun Kalimat & Lompat Katak rawan MELEBAR** (kereta dan dua daun cenderung berjajar
+  mendatar). Kalau rasionya lewat ±1,5, minta ulang: "rapatkan, tinggi dan lebar kira-kira
+  sama". Jangan dipasang sebelum diukur — ikon selebar itu meluber keluar kartu portal
+  (Pelajaran Kelima).
+- **Detektif Bacaan & Detektif Data sengaja beda benda**: kaca pembesar HANYA di Bacaan,
+  topi detektif HANYA di Data. Dua kaca pembesar berdampingan di satu daftar akan
+  tertukar.
+- **Katak = hewan, tapi di ikon boleh digambar bebas** (bukan seni `frog.webp`): aturan
+  "hewan wajib seni WebP" berlaku untuk SOAL, tempat anak harus mengenali bentuknya.
+  Ikon kartu sejak awal digambar Gemini (singa Hutan Hewan juga begitu).
+
+### Memasangnya
+
+Sama dengan langkah "Setelah gambarnya jadi" di atas: `scripts/cut-item.py <art>
+public/assets/games/<id>.webp 320` (latar putih polos) → tempel di atas latar berwarna
+dan periksa lubang terkurung (roda kereta, gagang kaca pembesar, lubang pot) → tambah
+`pic: '<id>',` di entri registry. Untuk tujuh game yang belum ada, simpan file-nya saja;
+`pic` ditambahkan saat entri registry-nya dibuat.
