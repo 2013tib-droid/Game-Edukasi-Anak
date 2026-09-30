@@ -51,3 +51,36 @@ export function ArrowLeftIcon() {
     </svg>
   );
 }
+
+/* Ikon tombol di layar verifikasi email. Dulu emoji (✅ 📧 🎮) — dan 📧
+   tampil sebagai kotak ungu buram di sebagian HP. Dirender di dalam lencana
+   bulat berwarna (`.btn-badge`), jadi garisnya putih & sedikit lebih tebal. */
+const badge = { ...base, width: 20, height: 20, strokeWidth: 2.6 };
+
+export function CheckBadgeIcon() {
+  return (
+    <svg {...badge}>
+      <path d="M5 12.5 10 17.5 19 7" />
+    </svg>
+  );
+}
+
+export function MailIcon() {
+  return (
+    <svg {...badge}>
+      <rect x="3" y="5.5" width="18" height="13" rx="2.5" />
+      <path d="m4 7.5 8 6 8-6" />
+    </svg>
+  );
+}
+
+export function GamepadIcon() {
+  return (
+    <svg {...badge}>
+      <path d="M7 7.5h10a4.5 4.5 0 0 1 4.3 5.8l-1.2 4a2.4 2.4 0 0 1-4 1L14.4 16.5H9.6L7.9 18.3a2.4 2.4 0 0 1-4-1l-1.2-4A4.5 4.5 0 0 1 7 7.5Z" />
+      <path d="M8 10.5v3M6.5 12h3" />
+      <circle cx="16" cy="11" r="0.6" fill="currentColor" />
+      <circle cx="17.5" cy="13" r="0.6" fill="currentColor" />
+    </svg>
+  );
+}

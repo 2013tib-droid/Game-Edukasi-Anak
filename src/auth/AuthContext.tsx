@@ -168,7 +168,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         // layar aktivasi. Kegagalan pengiriman TIDAK menggagalkan
         // pendaftaran: akunnya sudah jadi, dan tautannya bisa diminta lagi
         // dari halaman aktivasi.
-        await sendEmailVerification(cred.user).catch(() => undefined);
+        await sendVerificationMail(() => sendEmailVerification(cred.user)).catch(() => undefined);
       },
       /**
        * Masuk dengan akun Google.
@@ -270,7 +270,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         ]);
         const current = auth.currentUser;
         if (!current) throw new Error('Belum ada akun yang masuk.');
-        await sendEmailVerification(current);
+        const res = await sendVerificationMail(() => sendEmailVerification(current));
+        if (res === 'already-verified') {
+          // Server melihat token yang sudah terverifikasi — segarkan HP-nya
+          // supaya layar verifikasi menghilang sendiri.
+          await current.reload();
+          await current.getIdToken(true);
+          setVerifyTick((n) => n + 1);
+        }
       },
 
       async refreshUser() {
@@ -291,6 +298,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+/**
+ * Kirim email verifikasi lewat Cloud Function `sendVerifyEmail` — dikirim dari
+ * Gmail `petualangsmart@gmail.com`, bukan dari `noreply@…firebaseapp.com`
+ * bawaan Firebase yang sering mendarat di folder spam (2026-09-30).
+ *
+ * CADANGAN: kalau function-nya belum ter-deploy atau gagal, jatuh ke
+ * `sendEmailVerification` bawaan — email yang masuk spam masih lebih baik
+ * daripada tidak ada email sama sekali. Yang TIDAK dicadangkan cuma rem
+ * kirim ulang (`resource-exhausted`): di situ jawabannya memang "tunggu".
+ */
+async function sendVerificationMail(
+  fallback: () => Promise<void>,
+): Promise<'sent' | 'already-verified'> {
+  try {
+    const [{ functions }, { httpsCallable }] = await Promise.all([
+      getFirebase(),
+      import('firebase/functions'),
+    ]);
+    const fn = httpsCallable<void, { sent: boolean; alreadyVerified: boolean }>(
+      functions,
+      'sendVerifyEmail',
+    );
+    const { data } = await fn();
+    return data.alreadyVerified ? 'already-verified' : 'sent';
+  } catch (err) {
+    if ((err as { code?: string }).code === 'functions/resource-exhausted') throw err;
+    await fallback();
+    return 'sent';
+  }
 }
 
 export function useAuth(): AuthContextValue {

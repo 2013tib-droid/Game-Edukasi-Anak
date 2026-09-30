@@ -15,6 +15,7 @@
  */
 import { randomInt, timingSafeEqual } from 'node:crypto';
 import { initializeApp } from 'firebase-admin/app';
+import { getAuth } from 'firebase-admin/auth';
 import { FieldValue, getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { logger } from 'firebase-functions';
 import { defineSecret } from 'firebase-functions/params';
@@ -601,12 +602,17 @@ Simpan email ini baik-baik. Kalau ada kendala, balas saja email ini.</p>
 }
 
 async function sendCodeEmail(to: string, name: string, group: Group, display: string) {
-  const mail = { from: `Petualangan Pintar <${SENDER_EMAIL}>`, to, ...codeEmail(name, group, display) };
+  await sendMail({ to, ...codeEmail(name, group, display) });
+}
+
+/** Satu-satunya jalur kirim email dari Gmail `petualangsmart@gmail.com`. */
+async function sendMail(message: { to: string; subject: string; text: string; html: string }) {
+  const mail = { from: `Petualangan Pintar <${SENDER_EMAIL}>`, replyTo: SENDER_EMAIL, ...message };
   // Di emulator tidak ada email sungguhan yang dikirim: pesannya cuma
   // disusun, supaya webhook bisa diuji tanpa App Password.
   if (process.env.FUNCTIONS_EMULATOR === 'true') {
     await createTransport({ jsonTransport: true }).sendMail(mail);
-    logger.info('emulator: email tidak dikirim', { to, subject: mail.subject });
+    logger.info('emulator: email tidak dikirim', { to: mail.to, subject: mail.subject });
     return;
   }
   const transport = createTransport({
@@ -953,3 +959,118 @@ export const claimPaidOrder = onCall(async (request) => {
 
   return { group: result.group, already: result.status === 'already-yours' };
 });
+
+// --- Email verifikasi lewat Gmail sendiri ------------------------------------
+
+/**
+ * Mengirim tautan verifikasi email dari Gmail `petualangsmart@gmail.com`,
+ * BUKAN dari pengirim bawaan Firebase.
+ *
+ * KENAPA: email bawaan Firebase datang dari `noreply@<project>.firebaseapp.com`
+ * — domain yang dipakai bersama jutaan project lain (termasuk spammer), dan
+ * Gmail memasukkannya ke folder spam. Pemilik melihatnya sendiri di HP
+ * (2026-09-30). Email dari akun Gmail sungguhan jauh lebih sering masuk
+ * kotak utama, dan isinya bisa ditulis sendiri dalam bahasa Indonesia.
+ *
+ * Tautannya TETAP buatan Firebase (`generateEmailVerificationLink`), jadi
+ * yang menandai email terverifikasi tetap Firebase — function ini cuma
+ * mengganti KURIR-nya. Client jatuh ke `sendEmailVerification` bawaan kalau
+ * function ini belum ter-deploy atau gagal (lihat AuthContext).
+ *
+ * Email diambil dari ID token, TIDAK PERNAH dari data yang dikirim HP —
+ * kalau tidak, function ini bisa dipakai mengirim email atas nama kita ke
+ * alamat siapa saja.
+ *
+ * Rem: sekali per menit dan 5 kali per hari per akun (`verify_mail/{uid}`,
+ * tertutup dari client). Tanpa itu satu akun bisa membanjiri inbox orang
+ * lain sampai Gmail memblokir akun pengirim kita — dan kode aktivasi Mayar
+ * ikut berhenti terkirim.
+ */
+const VERIFY_MAIL_GAP_MS = 60 * 1000;
+const VERIFY_MAIL_PER_DAY = 5;
+
+function verifyEmail(link: string) {
+  const text = [
+    'Halo,',
+    '',
+    'Satu langkah lagi: ketuk tautan di bawah ini untuk memastikan alamat email Anda benar.',
+    '',
+    link,
+    '',
+    'Sesudah itu kembali ke halaman Petualangan Pintar dan tekan "Saya sudah verifikasi".',
+    '',
+    'Kalau Anda tidak merasa mendaftar di Petualangan Pintar, abaikan saja email ini.',
+    '',
+    'Salam,',
+    'Petualangan Pintar',
+  ].join('\n');
+
+  const html = `<div style="font-family:Arial,sans-serif;font-size:15px;color:#3a2e20;line-height:1.5">
+<p>Halo,</p>
+<p>Satu langkah lagi: ketuk tombol di bawah ini untuk memastikan alamat email Anda benar.</p>
+<p><a href="${escapeHtml(link)}" style="display:inline-block;background:#f6b800;color:#3a2e20;font-weight:bold;text-decoration:none;border-radius:14px;padding:12px 22px">Verifikasi email saya</a></p>
+<p>Sesudah itu kembali ke halaman Petualangan Pintar dan tekan <b>Saya sudah verifikasi</b>.</p>
+<p style="font-size:13px;color:#7a6a55">Tombolnya tidak bisa diketuk? Salin tautan ini ke browser:<br>
+<span style="word-break:break-all">${escapeHtml(link)}</span></p>
+<p style="font-size:13px;color:#7a6a55">Kalau Anda tidak merasa mendaftar di Petualangan Pintar, abaikan saja email ini.</p>
+<p>Salam,<br>Petualangan Pintar</p>
+</div>`;
+
+  return { subject: 'Verifikasi email akun Petualangan Pintar', text, html };
+}
+
+export const sendVerifyEmail = onCall(
+  { secrets: [GMAIL_APP_PASSWORD], maxInstances: 3 },
+  async (request) => {
+    const uid = requireUid(request);
+    if (request.auth?.token.email_verified === true) return { sent: false, alreadyVerified: true };
+    const email = request.auth?.token.email;
+    if (typeof email !== 'string' || !isEmail(email)) {
+      throw new HttpsError('failed-precondition', 'Akun ini tidak punya alamat email.');
+    }
+
+    // Rem dicatat SEBELUM mengirim (transaksi), jadi dua ketukan bersamaan
+    // tidak bisa lolos berdua.
+    const ref = db.doc(`verify_mail/${uid}`);
+    const today = new Date().toISOString().slice(0, 10);
+    const allowed = await db.runTransaction(async (tx) => {
+      const data = (await tx.get(ref)).data() ?? {};
+      const last = (data.lastAt as Timestamp | undefined)?.toMillis() ?? 0;
+      const count = data.day === today ? Number(data.count) || 0 : 0;
+      if (Date.now() - last < VERIFY_MAIL_GAP_MS || count >= VERIFY_MAIL_PER_DAY) return false;
+      tx.set(ref, { lastAt: Timestamp.now(), day: today, count: count + 1 });
+      return true;
+    });
+    if (!allowed) {
+      throw new HttpsError(
+        'resource-exhausted',
+        'Emailnya baru saja dikirim. Tunggu sebentar lalu coba lagi ya — periksa juga folder spam.',
+      );
+    }
+
+    // Setelah tautan diketuk, halaman Firebase menawarkan tombol "Lanjutkan"
+    // kembali ke halaman aktivasi. Alamat itu harus ada di Authorized domains;
+    // kalau belum, tautan tanpa tombol lanjut tetap sah — jangan gagal hanya
+    // karena itu.
+    const auth = getAuth();
+    let link: string;
+    try {
+      link = await auth.generateEmailVerificationLink(email, { url: ACTIVATION_URL });
+    } catch (e) {
+      logger.warn('sendVerifyEmail: continue URL ditolak, kirim tanpa tombol lanjut', {
+        code: (e as { code?: unknown }).code,
+      });
+      link = await auth.generateEmailVerificationLink(email);
+    }
+
+    // Halaman konfirmasi Firebase ikut bahasa di tautan — bawaannya Inggris.
+    link = link.replace(/([?&])lang=[^&]*/, '$1lang=id');
+
+    // Tautannya TIDAK dicatat di log: siapa pun yang memegangnya bisa
+    // memverifikasi akun ini.
+    await sendMail({ to: email, ...verifyEmail(link) });
+    if (process.env.FUNCTIONS_EMULATOR === 'true') logger.info('emulator: tautan', { link });
+    logger.info('sendVerifyEmail: terkirim', { uid });
+    return { sent: true, alreadyVerified: false };
+  },
+);

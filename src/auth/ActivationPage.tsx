@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeftIcon } from '@/app/icons';
+import { ArrowLeftIcon, CheckBadgeIcon, GamepadIcon, MailIcon } from '@/app/icons';
 import groupsData from '@/data/groups.json';
 import { useAuth } from '@/auth/AuthContext';
 import { isFirebaseConfigured } from '@/auth/firebase';
@@ -480,19 +480,8 @@ function VerifyFirst({
         ) : (
           ' alamat email akun ini'
         )}
-        . Buka email itu, ketuk tautannya, lalu kembali ke sini.
-      </p>
-      <p
-        style={{
-          background: '#fff3cd',
-          padding: 12,
-          borderRadius: 14,
-          fontSize: 15.5,
-        }}
-      >
-        Ini dilakukan sekali saja, dan gunanya melindungi pembelian Anda: kalau emailnya salah
-        ketik, kode yang sudah ditukar tidak bisa dipulihkan lagi.{' '}
-        <strong>Periksa juga folder spam.</strong>
+        . Buka email itu, ketuk tautannya, lalu kembali ke sini.{' '}
+        <strong>Belum masuk? Periksa juga folder spam.</strong>
       </p>
       {sent && (
         <p style={{ color: '#2d7a2d', fontWeight: 700 }}>Tautan verifikasi sudah dikirim ulang.</p>
@@ -510,14 +499,23 @@ function VerifyFirst({
           onClick={() => void handleRecheck()}
           disabled={checking}
         >
-          {checking ? 'Memeriksa…' : '✅ Saya sudah verifikasi'}
+          <span className="btn-badge btn-badge--green">
+            <CheckBadgeIcon />
+          </span>
+          {checking ? 'Memeriksa…' : 'Saya sudah verifikasi'}
         </button>
         <button className="btn" type="button" onClick={() => void handleSend()} disabled={sending}>
-          {sending ? 'Mengirim…' : '📧 Kirim ulang emailnya'}
+          <span className="btn-badge btn-badge--blue">
+            <MailIcon />
+          </span>
+          {sending ? 'Mengirim…' : 'Kirim ulang emailnya'}
         </button>
         {/* Menunggu email TIDAK boleh berarti menunggu untuk bermain. */}
         <Link className="btn" to="/portal">
-          🎮 Main dulu yang gratis
+          <span className="btn-badge btn-badge--purple">
+            <GamepadIcon />
+          </span>
+          Main dulu yang gratis
         </Link>
       </div>
     </div>

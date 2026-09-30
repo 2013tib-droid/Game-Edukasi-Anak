@@ -64,6 +64,12 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // Rem kirim ulang email verifikasi (Cloud Function `sendVerifyEmail`).
+    // Tertutup total — kalau client bisa menulisnya, remnya bisa direset.
+    match /verify_mail/{uid} {
+      allow read, write: if false;
+    }
+
     // Penghitung kunjungan per hari (Fase 6 langkah 5). Tertutup total dari
     // client: yang menulisnya cuma Cloud Function `catatStat` lewat Admin SDK
     // (melewati rules ini). Kalau client boleh menulis, siapa pun bisa
