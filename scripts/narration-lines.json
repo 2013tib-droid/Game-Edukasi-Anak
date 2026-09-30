@@ -1,7 +1,7 @@
 {
   "generated": "2026-09-30",
-  "count": 1065,
-  "chars": 47326,
+  "count": 1103,
+  "chars": 48945,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -9610,6 +9610,348 @@
       "voice": "gadis",
       "games": [
         "tulis-huruf"
+      ]
+    },
+    {
+      "key": "bbbc0ea8aca1",
+      "text": "Banyak susu ini diukur dengan satuan apa?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "249d21fc1cf7",
+      "text": "Berapa berat apel? Lihat jarum timbangannya.",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "cbe16dadfe8b",
+      "text": "Berapa berat buku? Lihat jarum timbangannya.",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "a9e94aa7c3d1",
+      "text": "Berapa berat nanas? Lihat jarum timbangannya.",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "cfe01b2b7c55",
+      "text": "Berapa berat pisang? Lihat jarum timbangannya.",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "5647cb86354d",
+      "text": "Berapa berat semangka? Lihat jarum timbangannya.",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "aaeb032df3de",
+      "text": "Berapa berat tas? Lihat jarum timbangannya.",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "f906d1012012",
+      "text": "Berapa meter keliling kebun ini?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "3193517265f9",
+      "text": "Berapa mililiter air di gelas takar?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "ea41d4627853",
+      "text": "Berapa mililiter jus di gelas takar?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "d27cade129d4",
+      "text": "Berapa mililiter susu di gelas takar?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "a185029d1bed",
+      "text": "Berapa sentimeter panjang krayon ini?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "625f9c6d5e3c",
+      "text": "Berapa sentimeter panjang penghapus ini?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "10772ff3528f",
+      "text": "Berapa sentimeter panjang pensil ini?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "08656fa3b564",
+      "text": "Berapa sentimeter panjang pita ini?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "02b84987ee8c",
+      "text": "Berapa sentimeter panjang sedotan ini?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "10b3dad0cd2a",
+      "text": "Berat apel diukur dengan satuan apa?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "b7174a56990b",
+      "text": "Berat semangka diukur dengan satuan apa?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "bbccf4e880b7",
+      "text": "Dua meter lima puluh sentimeter sama dengan berapa sentimeter?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "2fa0ae718cca",
+      "text": "Enam ratus sentimeter sama dengan berapa meter?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "859a797265b5",
+      "text": "Krayon ini tidak mulai dari nol. Berapa sentimeter panjangnya?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "b261512edd7b",
+      "text": "Mana yang lebih berat?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "2ef1a540f86a",
+      "text": "Mana yang lebih ringan?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "e30b62bf6616",
+      "text": "Mana yang paling berat?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "2a06f497c0a6",
+      "text": "Mana yang paling ringan?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "8551ab97a691",
+      "text": "Panjang payung diukur dengan satuan apa?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "67572a1cf229",
+      "text": "Panjang pensil diukur dengan satuan apa?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "c5d6b8b4743e",
+      "text": "Penghapus ini tidak mulai dari nol. Berapa sentimeter panjangnya?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "d937a631c104",
+      "text": "Pensil ini tidak mulai dari nol. Berapa sentimeter panjangnya?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "b4385074bdb0",
+      "text": "Pita ini tidak mulai dari nol. Berapa sentimeter panjangnya?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "ad20d2a51d99",
+      "text": "Satu kilogram sama dengan berapa gram?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "96230ccc68c1",
+      "text": "Satu petak panjangnya satu sentimeter. Berapa keliling bangun ini?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "ad8e7d66d560",
+      "text": "Sedotan ini tidak mulai dari nol. Berapa sentimeter panjangnya?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "ef95c22f2367",
+      "text": "Setengah kilogram sama dengan berapa gram?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "0e3900eaf0a9",
+      "text": "Setengah liter sama dengan berapa mililiter?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "bcb8643b8ed9",
+      "text": "Tiga meter sama dengan berapa sentimeter?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "65601d056610",
+      "text": "Tinggi pintu diukur dengan satuan apa?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
+      ]
+    },
+    {
+      "key": "5c305172d597",
+      "text": "Tujuh meter sama dengan berapa sentimeter?",
+      "scope": "ukur-yuk",
+      "voice": "gadis",
+      "games": [
+        "ukur-yuk"
       ]
     }
   ]

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { lazy, Suspense, useMemo, useState } from 'react';
 import type { CSSProperties } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import type { BoardOp } from '@/engine/core/types';
@@ -7,6 +7,10 @@ import Shape from '@/engine/ui/Shape';
 import Clock from '@/engine/ui/Clock';
 import ItemPic from '@/engine/ui/ItemPic';
 import Kid, { KID_CUE_FRAMES } from '@/engine/ui/Kid';
+
+// Alat ukur (Ukur Yuk) cuma dipakai satu game — dipisah jadi chunk sendiri
+// supaya game tap-answer lain tidak ikut mengunduhnya.
+const Measure = lazy(() => import('@/engine/ui/Measure'));
 
 /** Human-readable operator glyphs for equation picture boards. */
 const OP_GLYPH: Record<BoardOp, string> = {
@@ -169,6 +173,13 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
           <div className="ta-clock" aria-hidden>
             <Clock time={level.data.clock} className="ta-clock__face" />
           </div>
+        )}
+        {/* Ukur Yuk: penggaris, timbangan, gelas takar, bangun berpetak —
+            digambar engine dari NILAI di data soal (Measure.tsx). */}
+        {level.data.measure && (
+          <Suspense fallback={null}>
+            <Measure spec={level.data.measure} />
+          </Suspense>
         )}
         {/* Anggota Tubuh "ada berapa mata?": gambar anak yang sama dengan
             template `tap-picture`, tapi murni sebagai isyarat — tak ada titik
