@@ -515,7 +515,8 @@ async function groupForProduct(productId: string, productName: string): Promise<
  * kode akan terbaca sebagai `sd1`, dan pembelinya dikirimi kode kelompok yang
  * salah padahal sudah membayar. Karena itu `sd1` hanya kalau namanya menyebut
  * kelas 1 atau 2 dan TIDAK menyebut kelas 3–6. Selebihnya `null` → ditangani manual.
- * Kalau kelompok SD berikutnya dibuat, tambahkan cabangnya di sini.
+ * Kalau kelompok SD berikutnya dibuat, tambahkan cabangnya di sini — DAN di
+ * salinannya di functions/scripts/import-mayar.mjs (commit yang sama).
  */
 function groupFromName(productName: string): Group | null {
   const name = productName.toLowerCase();

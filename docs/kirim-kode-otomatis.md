@@ -11,6 +11,9 @@ Anda tidak perlu mencetak stok kode lagi untuk penjualan lewat Mayar.
 `generate-codes.mjs` tetap berguna untuk kode yang Anda bagikan sendiri
 (giveaway, penguji, pembeli yang bayar lewat transfer biasa).
 
+Webhook hanya menangkap pembayaran SESUDAH ia terpasang. Pembayaran yang lebih
+lama dipindahkan dari dasbor Mayar lewat API — lihat `docs/impor-mayar.md`.
+
 Persiapannya **sekali saja**, 7 langkah. Kerjakan berurutan: kalau langkah 3–4
 belum selesai, deploy di langkah 5 akan gagal.
 
