@@ -135,8 +135,10 @@ export default function Ruler({
 }) {
   // Penggaris sependek yang perlu (minimal 10 cm, maksimal 15 cm, selalu ada
   // sisa sesudah ujung benda supaya ujung penggaris bukan petunjuk jawaban):
-  // penggaris pendek = sentimeter lebih lebar di HP.
-  const len = max ?? Math.min(15, Math.max(10, Math.ceil(to) + 2));
+  // penggaris pendek = sentimeter lebih lebar di HP. Terukur di HP 320 px:
+  // 15 cm membuat angka 10–15 saling menempel, jadi config Ukur Yuk menjaga
+  // benda ≤ 12 cm (penggaris ≤ 13 cm).
+  const len = max ?? Math.min(15, Math.max(10, Math.ceil(to) + 1));
   const x = (cm: number) => M + cm * U;
   const w = rulerWidth(len);
   const ticks = [];
@@ -162,7 +164,7 @@ export default function Ruler({
           y={BODY_TOP + 22}
           // Angka dua digit dikecilkan: di font 9 "10" lebih lebar daripada
           // satu sentimeter dan angka-angkanya saling bertumpuk.
-          fontSize={cm >= 10 ? 7.4 : 9}
+          fontSize={cm >= 10 ? 6.6 : 9}
           fontWeight={700}
           fill="#3A2E20"
           textAnchor="middle"

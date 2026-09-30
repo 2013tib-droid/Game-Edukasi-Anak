@@ -17,7 +17,8 @@ import { gridArea, gridPerimeter } from '@/engine/core/measure';
  * ALUR (urutan TETAP — kelas 3 dulu baru kelas 4, dan tiap slot memakai
  * keterampilan slot sebelumnya; jadi tanpa `sessionLevels`, variasinya dari
  * kolam varian per slot — pelajaran Kartu Kembar):
- *   l1  penggaris, benda mulai di 0            (kls 3)
+ *   l1  penggaris, benda mulai di 0            (kls 3) — benda ≤ 12 cm:
+ *       penggaris 15 cm membuat angka 10–15 menempel di HP 320 px
  *   l2  penggaris, benda TIDAK mulai di 0      (kls 3)
  *   l3  memilih satuan (pengecoh beda besaran) (kls 3)
  *   l4  membaca timbangan jarum kg & g         (kls 3)
@@ -263,7 +264,7 @@ const config: GameConfig<'tap-answer'> = {
       ruler('pensil', 8),
       ruler('krayon', 6),
       ruler('pita', 11),
-      ruler('sedotan', 13),
+      ruler('sedotan', 12),
       ruler('penghapus', 4),
       ruler('pensil', 10),
     ),
@@ -273,10 +274,10 @@ const config: GameConfig<'tap-answer'> = {
       'l2',
       rulerFrom('pensil', 2, 9),
       rulerFrom('krayon', 3, 8),
-      rulerFrom('pita', 4, 13),
-      rulerFrom('sedotan', 1, 12),
+      rulerFrom('pita', 3, 11),
+      rulerFrom('sedotan', 1, 10),
       rulerFrom('penghapus', 5, 9),
-      rulerFrom('pita', 6, 14),
+      rulerFrom('pita', 5, 12),
     ),
 
     // --- l3 (kls 3) Memilih satuan: pengecoh dari besaran lain ---
