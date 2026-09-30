@@ -40,9 +40,9 @@ export const TAG_LABEL: Record<AnnouncementTag, string> = {
 /**
  * The entries a given reader may see, newest first.
  *
- * `isBuyer` is currently "signed in", because purchases do not exist yet
- * (Fase 5). When activation codes land, pass real group ownership instead —
- * this function does not need to change.
+ * `isBuyer` = the account owns at least one group (activated a code), read
+ * from `users/{uid}.groups` by `NotificationBell`. Signing in alone is not
+ * enough.
  */
 export function announcementsFor(isBuyer: boolean): Announcement[] {
   return announcements.filter((a) => (a.audience ?? 'semua') === 'semua' || isBuyer);

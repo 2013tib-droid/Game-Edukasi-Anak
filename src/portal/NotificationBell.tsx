@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { BellIcon } from '@/app/icons';
-import { announcementsFor, TAG_LABEL } from '@/data/announcements';
+import { announcements, announcementsFor, TAG_LABEL } from '@/data/announcements';
 import { useAuth } from '@/auth/AuthContext';
+import { isFirebaseConfigured } from '@/auth/firebase';
+import { fetchOwnedGroups } from '@/auth/entitlements';
 import { PaidOrderCard, usePaidOrders } from '@/auth/PaidOrders';
 import { formatDate, getUnreadIds, markAllRead } from '@/portal/notifications';
 import './notifications.css';
@@ -13,9 +15,10 @@ import './notifications.css';
  * were new stay highlighted while the panel is open so the parent can see
  * what changed instead of hunting for it.
  *
- * Buyers-only entries are filtered out for signed-out visitors, badge
- * included. Signing in reveals them as unread, because marking never touches
- * an entry the reader could not see.
+ * Buyers-only entries are shown only to accounts that OWN at least one group
+ * (activated a code), badge included — merely signing in is not enough.
+ * Activating reveals them as unread, because marking never touches an entry
+ * the reader could not see.
  *
  * Paid-but-not-activated Mayar orders (matched by the account's verified
  * email, see `myPaidOrders`) sit on top with a one-tap "Aktifkan sekarang".
@@ -30,13 +33,13 @@ export default function NotificationBell() {
   const closeRef = useRef<HTMLButtonElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  // Signed in stands in for "has bought" until activation codes exist (Fase 5).
-  const isBuyer = user !== null;
-  const visible = useMemo(() => announcementsFor(isBuyer), [isBuyer]);
   const { orders } = usePaidOrders();
   // Activated from the panel: the card stays to show "Mulai Main", but it no
   // longer counts in the badge.
   const [claimed, setClaimed] = useState<string[]>([]);
+  const owns = useOwnsAnyGroup(user?.uid ?? null);
+  const isBuyer = owns || claimed.length > 0;
+  const visible = useMemo(() => announcementsFor(isBuyer), [isBuyer]);
 
   // localStorage is read after mount so the first render stays identical
   // for every visitor (and never touches storage during SSR/prerender).
@@ -158,4 +161,34 @@ export default function NotificationBell() {
       )}
     </div>
   );
+}
+
+/** True only when some announcement is buyers-only — otherwise no need to ask. */
+const HAS_BUYER_NEWS = announcements.some((a) => a.audience === 'pembeli');
+
+/**
+ * "Has activated at least one group" — the real meaning of `pembeli`.
+ *
+ * Read from `users/{uid}.groups` (only Cloud Functions can write it). Skipped
+ * entirely while there is no buyers-only announcement, so the bell costs zero
+ * network on the landing page. Not cached across pages on purpose: a parent
+ * who just activated on /aktivasi must see the buyers' news on the next page.
+ * Failures are swallowed — worst case the buyers' news stays hidden.
+ */
+function useOwnsAnyGroup(uid: string | null): boolean {
+  const [owns, setOwns] = useState(false);
+  useEffect(() => {
+    setOwns(false);
+    if (!HAS_BUYER_NEWS || !isFirebaseConfigured || !uid) return;
+    let alive = true;
+    fetchOwnedGroups(uid)
+      .then((groups) => {
+        if (alive) setOwns(groups.length > 0);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, [uid]);
+  return owns;
 }
