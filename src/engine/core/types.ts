@@ -5,6 +5,8 @@
  * fields) at build time instead of at runtime on a kid's tablet.
  */
 
+import type { Denom } from '@/engine/core/money';
+
 export type GroupId = 'tk' | 'sd1' | 'sd2';
 
 export type TemplateId =
@@ -17,7 +19,8 @@ export type TemplateId =
   | 'spell' // eja/susun huruf jadi kata (dari game Petualangan Pintar)
   | 'path-trace' // susuri jalan dengan jari (antar kendaraan ke tujuan)
   | 'puzzle' // susun kepingan gambar sampai utuh
-  | 'tap-picture'; // sentuh bagian yang benar pada satu gambar (anggota tubuh)
+  | 'tap-picture' // sentuh bagian yang benar pada satu gambar (anggota tubuh)
+  | 'cashier'; // tarik uang ke laci sampai jumlahnya pas (Toko Kembalian)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -518,6 +521,61 @@ export type TapPictureData =
   | (TapPictureBase<'anak', BodyPartId> & { figure?: 'anak' })
   | (TapPictureBase<'tanaman', PlantPartId> & { figure: 'tanaman' });
 
+/** Pecahan rupiah yang tersedia di template `cashier` — lihat `src/engine/core/money.ts`. */
+export type { Denom };
+
+/** Satu barang di papan soal kasir: gambar + harga yang tertulis di labelnya. */
+export interface CashierGood {
+  /** Id registry item (seni WebP); `emoji` jadi cadangan. */
+  item?: string;
+  emoji?: string;
+  /** Nama pendek untuk pembaca layar ("roti"). */
+  label: string;
+  /** Harga dalam rupiah, ditulis di label "Rp4.000". */
+  price: number;
+}
+
+/**
+ * Kasir: tarik uang dari dompet ke SATU baki sampai jumlahnya pas.
+ *
+ * Bedanya dengan `drag-drop`: di sana satu kartu ke satu kotak dan kartunya
+ * habis; di sini dompetnya TAK TERBATAS (tiap pecahan boleh ditarik berkali-
+ * kali), banyak lembar masuk ke satu baki, dan yang dinilai JUMLAHNYA. Uang
+ * yang sudah masuk baki bisa disentuh untuk dikembalikan ke dompet.
+ *
+ * Dua cara menilai (`check`), dipilih per soal oleh config:
+ * - `'auto'`  — baki menampilkan "terkumpul / target" dan soal selesai sendiri
+ *   begitu pas. Untuk soal yang targetnya MEMANG diketahui ("bayar Rp7.000").
+ *   Kelebihan = satu kesalahan senyap, lembar terakhir memantul balik.
+ * - `'button'` — baki hanya menampilkan jumlah terkumpul, targetnya tidak, dan
+ *   anak menekan tombol untuk menyerahkan. Wajib untuk soal yang targetnya
+ *   JAWABANNYA (total belanja, kembalian, tabungan): kalau soal selesai sendiri
+ *   di angka yang benar, anak cukup menambah Rp1.000 terus sampai "menang"
+ *   tanpa pernah menghitung.
+ */
+export interface CashierData {
+  /** Jumlah yang harus terkumpul di baki (rupiah). */
+  target: number;
+  /**
+   * Pecahan di dompet (masing-masing tak terbatas), 2–4 macam — empat kartu
+   * pas sebaris di HP 320 px, lima tidak (turun baris = layar scroll).
+   */
+  wallet: Denom[];
+  check: 'auto' | 'button';
+  /** Barang yang dibeli, dengan harganya — isyarat soal di atas baki. */
+  goods?: CashierGood[];
+  /** Uang yang diserahkan pembeli (soal kembalian), ditampilkan di papan soal. */
+  paid?: Denom[];
+  /**
+   * Baki harus diisi dengan lembar/keping PALING SEDIKIT. Soal hanya benar
+   * kalau jumlahnya pas DAN banyaknya = minimum yang dihitung engine
+   * (`fewestPieces`), jadi config tak perlu — dan tak bisa salah — menulisnya.
+   */
+  fewest?: boolean;
+  /** Nama baki: laci kasir (membayar), tangan pembeli (kembalian), celengan. */
+  tray: 'laci' | 'tangan' | 'celengan';
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -529,6 +587,7 @@ export interface LevelDataMap {
   'path-trace': PathTraceData;
   puzzle: PuzzleData;
   'tap-picture': TapPictureData;
+  cashier: CashierData;
 }
 
 /* ---------- Game config ---------- */

@@ -56,6 +56,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'path-trace': lazy(() => import('@/engine/templates/PathTrace')),
   puzzle: lazy(() => import('@/engine/templates/Puzzle')),
   'tap-picture': lazy(() => import('@/engine/templates/TapPicture')),
+  cashier: lazy(() => import('@/engine/templates/Cashier')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */
