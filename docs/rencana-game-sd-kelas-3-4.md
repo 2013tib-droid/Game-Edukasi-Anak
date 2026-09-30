@@ -382,3 +382,27 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | 8 | Detektif Bacaan | `detektif-bacaan` | rencana |
 | 9 | Susun Kalimat | `susun-kalimat` | rencana |
 | 10 | Kebun Ilmu | `kebun-ilmu` | ✅ sudah ada (2026-09-29), narasi belum dirender (render #19) |
+
+## 7. Prompt untuk memulai sesi baru
+
+Salin ke sesi Claude Code baru, ganti `<Nama Game>` dengan judul dari tabel
+Status (urutan kerja di bagian 3):
+
+```
+Kerjakan game "<Nama Game>" untuk SD Kelas 3 & 4 (kelompok sd2).
+Patokannya docs/rencana-game-sd-kelas-3-4.md — baca dulu bagian ⚠️,
+bagian 0, bagian 4, dan bagian game ini.
+
+- Mulai dari branch main yang terbaru.
+- sd2 MASIH DEVELOPMENT: draft di groups.json tetap terpasang, jangan
+  sentuh FREE_GAME_IDS, backend, landing, atau pengumuman lonceng.
+- Kalau butuh perubahan engine (komponen SVG baru, field baru), kerjakan
+  sebagai fitur engine, bukan tambalan satu game.
+- Uji headless di 360×640 dan 320×568 pakai build penguji, ukur varian
+  terburuk, nol scroll, nol error console.
+- Jalankan npm run narasi dan pastikan nol digit di narasi. Kalau ada baris
+  narasi baru, perbarui .github/render-request.txt supaya dirender.
+- Sesudah selesai, perbarui tabel Status di dokumen rencana dan catat di
+  CLAUDE.md.
+- Kalau ada yang ambigu soal isi soal, tanya saya dulu.
+```
