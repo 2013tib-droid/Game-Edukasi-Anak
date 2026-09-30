@@ -692,9 +692,24 @@ export const mayarWebhook = onRequest(
     const header = req.get('x-callback-token');
     const token = typeof header === 'string' ? header : '';
     const expected = MAYAR_WEBHOOK_TOKEN.value();
-    const a = Buffer.from(token);
-    const b = Buffer.from(expected);
-    if (!expected || a.length !== b.length || !timingSafeEqual(a, b)) {
+    // Spasi/baris baru di TEPI dibuang di kedua sisi: menempel token ke
+    // Secret Manager sering membawa baris baru di ujungnya, dan itu membuat
+    // setiap webhook ditolak 401 walau tokennya benar.
+    const a = Buffer.from(token.trim());
+    const b = Buffer.from(expected.trim());
+    if (!b.length || a.length !== b.length || !timingSafeEqual(a, b)) {
+      // Diagnosa TANPA isi token: cukup untuk membedakan "Mayar tidak
+      // mengirim header", "secret kosong", dan "panjangnya beda" (biasanya
+      // spasi/baris baru ikut tersalin ke Secret Manager). Nama-nama header
+      // dicatat supaya kelihatan kalau Mayar memakai nama header lain.
+      logger.warn('mayarWebhook: token ditolak', {
+        headerAda: Boolean(header),
+        panjangHeader: token.length,
+        panjangSecret: expected.length,
+        secretAdaSpasiTepi: expected !== expected.trim(),
+        headerAdaSpasiTepi: token !== token.trim(),
+        namaHeader: Object.keys(req.headers).filter((h) => /token|signature|mayar|callback/i.test(h)),
+      });
       res.status(401).send('');
       return;
     }
