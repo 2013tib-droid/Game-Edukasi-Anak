@@ -1,0 +1,49 @@
+<!doctype html>
+<!--
+  PENGALIH GitHub Pages → domain produksi (petualanganpintar.com).
+
+  Dipasang di branch Pages (claude/web-demo-html-wa4dr9) sebagai:
+    index.html · 404.html · app/index.html
+  HANYA SESUDAH https://petualanganpintar.com terbuka tanpa peringatan sertifikat.
+  Dipasang lebih awal = pembeli dilempar ke layar "Your connection is not private".
+
+  Build lama memakai HashRouter (…/app/#/aktivasi), domain baru BrowserRouter
+  (/aktivasi), jadi hash `#/…` diterjemahkan jadi path. Folder uji-* dan aset
+  lama di app/assets JANGAN dihapus: HP yang tab-nya masih terbuka memuat chunk
+  lama sampai halaman dimuat ulang.
+-->
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Petualangan Pintar pindah alamat</title>
+    <link rel="canonical" href="https://petualanganpintar.com/" />
+    <meta name="robots" content="noindex" />
+    <script>
+      (function () {
+        var h = location.hash || '';
+        var path = h.indexOf('#/') === 0 ? h.slice(1) : '/';
+        location.replace('https://petualanganpintar.com' + path);
+      })();
+    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=https://petualanganpintar.com/" /></noscript>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff6dc;
+        color: #3a2e20;
+        font-family: system-ui, sans-serif;
+        text-align: center;
+        padding: 16px;
+      }
+      a { color: #b3541a; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <p>Petualangan Pintar sudah pindah ke<br /><a href="https://petualanganpintar.com/">petualanganpintar.com</a></p>
+  </body>
+</html>

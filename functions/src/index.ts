@@ -470,8 +470,12 @@ const GMAIL_APP_PASSWORD = defineSecret('GMAIL_APP_PASSWORD');
 
 /** Pengirim email. HARUS sama dengan src/data/contact.ts & email dukungan Firebase. */
 const SENDER_EMAIL = 'petualangsmart@gmail.com';
-/** Halaman tempat kode ditukar. Ganti saat pindah ke Firebase Hosting. */
-const ACTIVATION_URL = 'https://2013tib-droid.github.io/Game-Edukasi-Anak/app/#/aktivasi';
+/**
+ * Halaman tempat kode ditukar — domain produksi di Firebase Hosting (BrowserRouter,
+ * jadi tanpa `#/`). Dipakai di email kode Mayar DAN sebagai continue URL tautan
+ * verifikasi email, jadi domainnya WAJIB ada di Authentication → Authorized domains.
+ */
+const ACTIVATION_URL = 'https://petualanganpintar.com/aktivasi';
 
 const GROUP_TITLES: Record<Group, string> = {
   tk: 'Playgroup dan TK',
