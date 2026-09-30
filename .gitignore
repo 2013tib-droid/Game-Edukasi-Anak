@@ -39,3 +39,6 @@ serviceAccount*.json
 service-account*.json
 *-firebase-adminsdk-*.json
 kode*.csv
+# Hasil export dasbor penjualan (functions/scripts/export-dashboard.mjs) —
+# tanpa data pribadi, tapi omzet tetap bukan untuk repo publik.
+dasbor*.json

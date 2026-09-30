@@ -90,3 +90,27 @@ tadinya tanpa kelompok akan diberi kelompoknya.
 | `MAYAR_API_KEY belum diisi` | baris `$env:MAYAR_API_KEY = …` belum dijalankan di jendela PowerShell ini |
 | `API Mayar menolak kuncinya (401)` | API key salah/kedaluwarsa, atau key sandbox dipakai tanpa `--sandbox` (dan sebaliknya) |
 | `Could not load the default credentials` | `kunci.json` tidak ditemukan — lihat `docs/cetak-kode-di-pc.md` |
+
+## Dasbor penjualan
+
+Halaman **Dasbor Penjualan** (artifact Claude, privat untuk akun Anda):
+https://claude.ai/artifact/WBtQePE3sH8mKekjzssH7E
+
+Isinya omzet, pesanan per kelompok, corong *kunjungan landing → klik beli → bayar →
+diaktifkan*, pesanan yang perlu ditangani, dan pesanan terbaru. Halaman itu tidak bisa
+membaca Firestore sendiri — datanya Anda ambil dulu jadi satu file:
+
+```powershell
+# dari folder functions, dengan kunci.json yang sama
+$env:GOOGLE_APPLICATION_CREDENTIALS = 'kunci.json'
+node scripts/export-dashboard.mjs          # → dasbor.json
+```
+
+Lalu buka halaman dasbornya → **Buka dasbor.json** (atau seret filenya ke halaman).
+
+- File itu **tanpa email, nama, maupun kode aktivasi** — cuma tanggal, kelompok, nominal,
+  dan status. Dibaca di browser Anda saja, tidak dikirim ke mana pun.
+- Halaman mengingat file terakhir di browser itu. Untuk angka terbaru, export lagi lalu buka file barunya.
+- Sebelum file pertama dibuka, halaman menampilkan **data contoh** (ditandai jelas).
+- Urutan yang enak: `import-mayar.mjs --write` sekali (riwayat lama), lalu cukup
+  `export-dashboard.mjs` tiap kali mau melihat angka — pesanan baru masuk sendiri lewat webhook.
