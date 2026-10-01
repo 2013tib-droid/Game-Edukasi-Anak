@@ -114,7 +114,27 @@ export interface RedeemResult {
 
 /** Menukar kode aktivasi. Melempar FirebaseError dengan pesan siap tampil. */
 export function redeemActivationCode(code: string): Promise<RedeemResult> {
-  return call<{ code: string }, RedeemResult>('redeemActivationCode', { code });
+  return callVerified<{ code: string }, RedeemResult>('redeemActivationCode', { code });
+}
+
+/**
+ * Untuk function yang menuntut email terverifikasi (`failed-precondition`
+ * kalau belum). Klaimnya dibaca server dari ID TOKEN, dan token yang
+ * tersimpan sejak sebelum tautan verifikasi diketuk masih berbunyi false
+ * sampai kedaluwarsa (±1 jam) — jadi sekali ditolak, perbarui tokennya lalu
+ * coba SEKALI lagi. Server memeriksa ini sebelum kodenya dibaca, jadi
+ * percobaan pertama tidak menghanguskan apa pun.
+ */
+async function callVerified<TIn, TOut>(name: string, payload: TIn): Promise<TOut> {
+  try {
+    return await call<TIn, TOut>(name, payload);
+  } catch (err) {
+    if ((err as { code?: string }).code !== 'functions/failed-precondition') throw err;
+    const { auth } = await getFirebase();
+    if (!auth.currentUser?.emailVerified) throw err;
+    await auth.currentUser.getIdToken(true);
+    return call<TIn, TOut>(name, payload);
+  }
 }
 
 export interface PaidOrder {
@@ -127,13 +147,23 @@ export interface PaidOrder {
  * Pesanan Mayar milik email akun ini yang belum diaktifkan. Kodenya sendiri
  * tidak pernah ikut — lihat `myPaidOrders` di functions/src/index.ts.
  */
-export function fetchPaidOrders(): Promise<{ orders: PaidOrder[]; needsVerify: boolean }> {
+export async function fetchPaidOrders(): Promise<{ orders: PaidOrder[]; needsVerify: boolean }> {
+  const first = await call<object, { orders: PaidOrder[]; needsVerify: boolean }>('myPaidOrders', {});
+  if (!first.needsVerify) return first;
+  // HP sudah tahu emailnya terverifikasi (layar ini hanya memanggil kalau
+  // begitu), tapi server membaca klaim `email_verified` dari ID TOKEN — dan
+  // token yang tersimpan sejak sebelum tautan verifikasi diketuk masih
+  // berbunyi false sampai kedaluwarsa (±1 jam). Tanpa ini kartu "Aktifkan
+  // sekarang" tak pernah muncul setelah verifikasi (kejadian 2026-10-01).
+  const { auth } = await getFirebase();
+  if (!auth.currentUser) return first;
+  await auth.currentUser.getIdToken(true);
   return call('myPaidOrders', {});
 }
 
 /** Mengaktifkan satu pesanan Mayar untuk akun ini (tanpa mengetik kode). */
 export function claimPaidOrder(orderId: string): Promise<RedeemResult> {
-  return call<{ orderId: string }, RedeemResult>('claimPaidOrder', { orderId });
+  return callVerified<{ orderId: string }, RedeemResult>('claimPaidOrder', { orderId });
 }
 
 export interface DeviceFullError {
