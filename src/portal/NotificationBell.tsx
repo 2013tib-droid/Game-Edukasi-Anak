@@ -15,10 +15,10 @@ import './notifications.css';
  * were new stay highlighted while the panel is open so the parent can see
  * what changed instead of hunting for it.
  *
- * Buyers-only entries are shown only to accounts that OWN at least one group
- * (activated a code), badge included — merely signing in is not enough.
- * Activating reveals them as unread, because marking never touches an entry
- * the reader could not see.
+ * Buyers-only entries ('pembeli', or one group id) are shown only to accounts
+ * that OWN the group(s) — activated a code — badge included; merely signing
+ * in is not enough. Activating reveals them as unread, because marking never
+ * touches an entry the reader could not see.
  *
  * Paid-but-not-activated Mayar orders (matched by the account's verified
  * email, see `myPaidOrders`) sit on top with a one-tap "Aktifkan sekarang".
@@ -37,9 +37,20 @@ export default function NotificationBell() {
   // Activated from the panel: the card stays to show "Mulai Main", but it no
   // longer counts in the badge.
   const [claimed, setClaimed] = useState<string[]>([]);
-  const owns = useOwnsAnyGroup(user?.uid ?? null);
-  const isBuyer = owns || claimed.length > 0;
-  const visible = useMemo(() => announcementsFor(isBuyer), [isBuyer]);
+  const owned = useOwnedGroups(user?.uid ?? null);
+  // Groups activated from this panel count right away, without a re-read.
+  const ownedKey = [
+    ...new Set([
+      ...owned,
+      ...orders.filter((o) => claimed.includes(o.orderId)).map((o) => o.group),
+    ]),
+  ]
+    .sort()
+    .join(',');
+  const visible = useMemo(
+    () => announcementsFor(ownedKey ? ownedKey.split(',') : []),
+    [ownedKey],
+  );
 
   // localStorage is read after mount so the first render stays identical
   // for every visitor (and never touches storage during SSR/prerender).
@@ -164,10 +175,11 @@ export default function NotificationBell() {
 }
 
 /** True only when some announcement is buyers-only — otherwise no need to ask. */
-const HAS_BUYER_NEWS = announcements.some((a) => a.audience === 'pembeli');
+const HAS_BUYER_NEWS = announcements.some((a) => (a.audience ?? 'semua') !== 'semua');
 
 /**
- * "Has activated at least one group" — the real meaning of `pembeli`.
+ * The groups this account has activated — what `'pembeli'` and per-group
+ * audiences are matched against.
  *
  * Read from `users/{uid}.groups` (only Cloud Functions can write it). Skipped
  * entirely while there is no buyers-only announcement, so the bell costs zero
@@ -175,20 +187,20 @@ const HAS_BUYER_NEWS = announcements.some((a) => a.audience === 'pembeli');
  * who just activated on /aktivasi must see the buyers' news on the next page.
  * Failures are swallowed — worst case the buyers' news stays hidden.
  */
-function useOwnsAnyGroup(uid: string | null): boolean {
-  const [owns, setOwns] = useState(false);
+function useOwnedGroups(uid: string | null): string[] {
+  const [owned, setOwned] = useState<string[]>([]);
   useEffect(() => {
-    setOwns(false);
+    setOwned([]);
     if (!HAS_BUYER_NEWS || !isFirebaseConfigured || !uid) return;
     let alive = true;
     fetchOwnedGroups(uid)
       .then((groups) => {
-        if (alive) setOwns(groups.length > 0);
+        if (alive) setOwned(groups);
       })
       .catch(() => {});
     return () => {
       alive = false;
     };
   }, [uid]);
-  return owns;
+  return owned;
 }
