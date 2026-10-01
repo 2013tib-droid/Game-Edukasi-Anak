@@ -69,6 +69,20 @@ export function usePaidOrders(): { orders: PaidOrder[] } {
   return { orders };
 }
 
+/** Piala berwajah dari layar "Selamat!" (satu aset, dua tempat); 🎉 cadangan. */
+function CheerPic() {
+  const [failed, setFailed] = useState(false);
+  if (failed) return <span className="paid__pic paid__pic--emoji" aria-hidden="true">🎉</span>;
+  return (
+    <img
+      className="paid__pic"
+      src={`${import.meta.env.BASE_URL}assets/ui/selamat.webp`}
+      alt=""
+      onError={() => setFailed(true)}
+    />
+  );
+}
+
 /**
  * Satu kartu pesanan. `onDone` dipanggil sesudah berhasil; kalau tidak diberi,
  * kartunya sendiri yang menampilkan "Sudah aktif" + tombol main (lonceng).
@@ -117,10 +131,15 @@ export function PaidOrderCard({
 
   return (
     <div className="paid">
-      <p className="paid__title">Pembayaran diterima 🎉</p>
-      <p className="paid__group">{title}</p>
+      <div className="paid__head">
+        <CheerPic />
+        <div>
+          <p className="paid__title">Pembayaran diterima</p>
+          <p className="paid__group">{title}</p>
+        </div>
+      </div>
       <p className="paid__body">
-        Tidak perlu mengetik kode — tekan tombol ini untuk membuka semua gamenya di akun ini.
+        Silakan tekan tombol “Aktifkan Sekarang” untuk membuka semua game {title}.
       </p>
       {error && (
         <p className="paid__error" role="alert">
@@ -128,7 +147,7 @@ export function PaidOrderCard({
         </p>
       )}
       <button className="paid__btn" type="button" onClick={activate} disabled={busy}>
-        {busy ? 'Mengaktifkan…' : 'Aktifkan sekarang'}
+        {busy ? 'Mengaktifkan…' : 'Aktifkan Sekarang'}
       </button>
     </div>
   );

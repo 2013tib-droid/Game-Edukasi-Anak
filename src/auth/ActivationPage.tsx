@@ -166,7 +166,7 @@ export default function ActivationPage() {
         </div>
         <h1 className="act-title">Masukkan Kode Aktivasi</h1>
         <p className="act-sub">
-          Kodenya dikirim ke email Anda setelah membayar di <strong>Mayar.id</strong>.
+          Kode aktivasi dikirim otomatis ke email Anda setelah pembayaran di <strong>Mayar</strong> berhasil.
         </p>
         {!isFirebaseConfigured && (
           <p className="act-note">
