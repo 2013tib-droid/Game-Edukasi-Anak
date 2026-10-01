@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { buyUrl, type SaleGroup } from '@/data/purchase';
 import { countVisit } from '@/portal/stats';
 
@@ -7,8 +8,23 @@ import { countVisit } from '@/portal/stats';
  * Tidak dirender kalau link kelompok itu belum diisi di `src/data/purchase.ts`.
  * Dibuka di tab baru supaya landing (dan app yang sudah termuat) tetap ada
  * saat orang tua kembali untuk memasukkan kodenya.
+ *
+ * Kalau akun yang masuk SUDAH memiliki kelompok ini (`owned`), tombol beli
+ * diganti tanda "Sudah aktif" + jalan pintas ke daftar game-nya — menawari
+ * orang tua membayar dua kali untuk barang yang sama terbaca seperti
+ * aktivasinya tidak tersimpan. Ini cuma tampilan (dari `useOwnedGroups`).
  */
-export function BuyButton({ group }: { group: SaleGroup }) {
+export function BuyButton({ group, owned = false }: { group: SaleGroup; owned?: boolean }) {
+  if (owned) {
+    return (
+      <div className="pc-owned">
+        <span className="pc-owned__flag">✅ Sudah aktif di akun Anda</span>
+        <Link className="pc-play" to={`/kelompok/${group}`}>
+          Main Sekarang
+        </Link>
+      </div>
+    );
+  }
   const url = buyUrl(group);
   if (!url) return null;
   return (

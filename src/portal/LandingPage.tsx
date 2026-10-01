@@ -6,6 +6,7 @@ import GameIcon from '@/engine/ui/GameIcon';
 import { findGame } from '@/games/registry';
 import { countVisit } from '@/portal/stats';
 import { BuyButton } from '@/portal/BuyButton';
+import { useOwnedGroups } from '@/portal/useAccess';
 import './landing.css';
 
 const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
@@ -81,6 +82,7 @@ const faqs = [
  * playable portal and the parent login live one tap away.
  */
 export default function LandingPage() {
+  const owned = useOwnedGroups();
   // Penghitung seadanya — HANYA di halaman ini. Jangan pernah dipasang di
   // area anak; lihat aturan di `src/portal/stats.ts`.
   useEffect(() => {
@@ -132,7 +134,7 @@ export default function LandingPage() {
           <div className="pc-sub">
             Buka semua game Playgroup &amp; TK · sekali bayar, main selamanya
           </div>
-          <BuyButton group="tk" />
+          <BuyButton group="tk" owned={owned.includes('tk')} />
         </div>
 
         <div className="pcard">
@@ -145,7 +147,7 @@ export default function LandingPage() {
           <div className="pc-sub">
             Buka semua game SD Kelas 1 &amp; 2 · sekali bayar, main selamanya
           </div>
-          <BuyButton group="sd1" />
+          <BuyButton group="sd1" owned={owned.includes('sd1')} />
         </div>
       </div>
 
