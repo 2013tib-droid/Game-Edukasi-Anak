@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/auth/AuthContext';
 import GoogleSignInButton from '@/auth/GoogleSignInButton';
+import PasswordInput from '@/auth/PasswordInput';
 import { ArrowLeftIcon } from '@/app/icons';
 
 export default function RegisterPage() {
@@ -72,14 +73,11 @@ export default function RegisterPage() {
           autoComplete="email"
           required
         />
-        <input
-          className="input"
-          type="password"
+        <PasswordInput
           placeholder="Kata sandi (min. 8 karakter)"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={setPassword}
           autoComplete="new-password"
-          required
         />
         <button className="btn btn--primary" type="submit" disabled={busy || !configured}>
           {busy ? 'Memproses…' : 'Daftar'}
