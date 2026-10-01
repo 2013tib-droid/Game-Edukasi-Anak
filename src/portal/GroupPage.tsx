@@ -9,6 +9,7 @@ import LockToggle from '@/portal/LockToggle';
 import Clock from '@/engine/ui/Clock';
 import GameIcon from '@/engine/ui/GameIcon';
 import BackIcon from '@/engine/ui/BackIcon';
+import GroupPic from '@/portal/GroupPic';
 
 // Game list per group. Unlocked games open directly; locked ones show a
 // padlock until the account has group access (gate enforced again in
@@ -42,8 +43,18 @@ export default function GroupPage() {
 
   return (
     <div className="page" style={{ textAlign: 'center' }}>
-      <h1>
-        {group.emoji} {group.title}
+      <h1
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 12,
+        }}
+      >
+        <GroupPic pic={group.pic} emoji={group.emoji} height={64} emojiSize={40} />
+        {/* Non-breaking spaces so a wrapped title never strands "TK" or
+            "& 2" alone on the second line (HP 320–380 px). */}
+        <span>{group.title.replace(/ & /g, '\u00a0&\u00a0').replace(/ (\S+)$/, '\u00a0$1')}</span>
       </h1>
       <div
         style={{

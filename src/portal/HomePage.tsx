@@ -1,33 +1,10 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import groupsData from '@/data/groups.json';
 import { getTotalStars } from '@/engine/core/progress';
 import MascotCard from '@/engine/ui/Mascot';
 import TopBar from '@/portal/TopBar';
+import GroupPic from '@/portal/GroupPic';
 import { isGroupVisible } from '@/data/access';
-
-/**
- * Group icon: the owner's art (public/assets/groups/<pic>.webp), falling back
- * to the emoji if the file is missing — same contract as `MascotPic`. Groups
- * whose art is not drawn yet carry no `pic`, so they render the emoji without
- * ever requesting a file that would 404.
- *
- * The picture is sized by HEIGHT with `width: auto`: the art is cropped tight
- * to the drawing, so each file has its own aspect ratio and a fixed box would
- * squash one of them.
- */
-function GroupPic({ pic, emoji }: { pic?: string; emoji: string }) {
-  const [failed, setFailed] = useState(false);
-  if (!pic || failed) return <span style={{ fontSize: 48 }}>{emoji}</span>;
-  return (
-    <img
-      src={`${import.meta.env.BASE_URL}assets/groups/${pic}.webp`}
-      alt=""
-      style={{ height: 88, width: 'auto' }}
-      onError={() => setFailed(true)}
-    />
-  );
-}
 
 // Portal home: pick a group. Kid-facing, so only big friendly buttons —
 // account actions stay small and lead to the parent area.
