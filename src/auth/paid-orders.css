@@ -13,6 +13,25 @@
   text-align: left;
 }
 
+.paid__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.paid__pic {
+  flex: none;
+  height: 64px;
+  width: auto;
+  max-width: 80px;
+  object-fit: contain;
+}
+
+.paid__pic--emoji {
+  font-size: 44px;
+  line-height: 1;
+}
+
 .paid__title {
   margin: 0;
   font-size: 15px;
