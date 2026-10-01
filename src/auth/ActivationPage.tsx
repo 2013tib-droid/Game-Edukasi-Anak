@@ -4,7 +4,13 @@ import { ArrowLeftIcon, CheckBadgeIcon, GamepadIcon, MailIcon } from '@/app/icon
 import groupsData from '@/data/groups.json';
 import { useAuth } from '@/auth/AuthContext';
 import { isFirebaseConfigured } from '@/auth/firebase';
-import { errorMessage, fetchOwnedGroups, redeemActivationCode } from '@/auth/entitlements';
+import {
+  errorMessage,
+  fetchOwnedGroups,
+  readOwnedHint,
+  redeemActivationCode,
+  writeOwnedHint,
+} from '@/auth/entitlements';
 import { emailUrl, whatsappUrl } from '@/data/contact';
 import { buyUrl, type SaleGroup } from '@/data/purchase';
 import { PaidOrderCard, usePaidOrders } from '@/auth/PaidOrders';
@@ -58,7 +64,15 @@ export default function ActivationPage() {
   // Kelompok yang sudah dimiliki akun ini. `null` = belum diketahui; ini
   // keterangan tambahan, jadi kegagalannya ditelan dan tidak pernah
   // menghalangi penukaran kode.
-  const [owned, setOwned] = useState<string[] | null>(null);
+  //
+  // Starts from the hint saved on this phone (same one `useOwnedGroups` uses)
+  // so a parent who already paid never sees the "Beli" cards flash for the
+  // second Firestore takes to answer (owner report 2026-10-01). Display only —
+  // the server still decides every redemption.
+  const [owned, setOwned] = useState<string[] | null>(() => {
+    const hint = readOwnedHint();
+    return hint && user && hint.uid === user.uid ? hint.groups : null;
+  });
   // Pesanan Mayar yang cocok dengan email akun ini — bisa diaktifkan tanpa
   // mengetik kode (lihat PaidOrders.tsx).
   const { orders: paidOrders } = usePaidOrders();
@@ -68,9 +82,14 @@ export default function ActivationPage() {
     let alive = true;
     void fetchOwnedGroups(user.uid)
       .then((groups) => {
+        writeOwnedHint({ uid: user.uid, groups });
         if (alive) setOwned(groups);
       })
-      .catch(() => undefined);
+      // Unknown after a failed read = show the buy cards (the safe default
+      // for someone who may still need to buy), never keep them hidden.
+      .catch(() => {
+        if (alive) setOwned((prev) => prev ?? []);
+      });
     return () => {
       alive = false;
     };
@@ -207,7 +226,9 @@ export default function ActivationPage() {
           </button>
         </form>
       </section>
-      <BuyLine owned={owned} />
+      {/* Hidden until we know what this account owns, so a paid parent
+          never sees "Beli" flash and disappear. */}
+      {owned !== null && <BuyLine owned={owned} />}
       <HelpLine />
     </div>
   );
