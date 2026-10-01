@@ -447,6 +447,46 @@
     transform 0.1s,
     box-shadow 0.1s;
 }
+.landing .pc-owned {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.landing .pc-owned__flag {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: #dff5e3;
+  color: #1f6b33;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+/* Sengaja HIJAU, bukan gradien oranye tombol beli: yang ini bukan ajakan
+   membayar, jadi tak boleh terbaca sebagai "Beli Sekarang" yang berganti kata. */
+.landing .pc-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7ed99a, #3fb877);
+  color: #fff;
+  font-weight: 800;
+  font-size: 17px;
+  text-decoration: none;
+  box-shadow: 0 4px 0 rgba(31, 107, 51, 0.45);
+}
+
+.landing .pc-play:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(31, 107, 51, 0.45);
+}
+
 .landing .pc-buy:active {
   transform: translateY(3px);
   box-shadow: 0 1px 0 rgba(179, 63, 18, 0.45);
