@@ -1,13 +1,13 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #20
+render #21
 
-only: toko-kembalian
+only: ukur-yuk
 
-Game baru "Toko Kembalian" (SD Kelas 3 & 4, kelompok sd2, masih draft): 37
-baris baru, semuanya scope toko-kembalian. Dibandingkan sebelum vs sesudah
-lewat scripts/narration-lines.json: 1028 baris jadi 1065, nol baris lama
-berubah atau pindah scope, jadi aman dibatasi "only: toko-kembalian".
+Game baru "Ukur Yuk" (SD Kelas 3 & 4, kelompok sd2, masih draft): 38 baris
+baru, semuanya scope ukur-yuk. Dibandingkan sebelum vs sesudah lewat
+scripts/narration-lines.json: 1065 baris jadi 1103, nol baris lama berubah
+atau pindah scope, jadi aman dibatasi "only: ukur-yuk".
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

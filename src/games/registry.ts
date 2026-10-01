@@ -294,6 +294,14 @@ export const games: GameMeta[] = [
     template: 'mixed',
     load: () => import('@/games/sd2/toko-kembalian'),
   },
+  {
+    id: 'ukur-yuk',
+    group: 'sd2',
+    title: 'Ukur Yuk',
+    emoji: '📏',
+    template: 'tap-answer',
+    load: () => import('@/games/sd2/ukur-yuk'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId): GameMeta[] {

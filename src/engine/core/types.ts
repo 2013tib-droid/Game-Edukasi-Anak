@@ -179,6 +179,14 @@ export interface TapAnswerData {
    * template `tap-picture`, bukan ini.
    */
   kid?: KidView;
+  /**
+   * Alat ukur di atas kartu jawaban (Ukur Yuk, `sd2`): penggaris, timbangan
+   * jarum, timbangan dua lengan, gelas takar, atau bangun berpetak. Config
+   * cuma menyebut NILAINYA (panjang, berat, isi); gambarnya digambar engine
+   * (`src/engine/ui/Measure.tsx`) supaya alat ukurnya tak pernah "berbohong" —
+   * benda di atas penggaris selalu persis sepanjang angka di datanya.
+   */
+  measure?: MeasureSpec;
   choices: TapChoice[]; // 2–4, exactly one with correct: true
 }
 
@@ -463,6 +471,40 @@ export type BodyPartId =
  * koordinat tubuhnya, supaya ikut dibetulkan kalau gambarnya diganti lagi.
  */
 export type KidView = 'wajah' | 'badan' | 'tangan';
+
+/**
+ * Benda memanjang yang diletakkan di atas penggaris. SENGAJA digambar engine
+ * (SVG), bukan seni item: seni item digambar miring/berbingkai bebas, jadi
+ * ujungnya tak bisa dijamin jatuh tepat di garis sentimeter. Benda di sini
+ * direntangkan persis dari `from` sampai `to`.
+ */
+export type RulerThing = 'pensil' | 'krayon' | 'pita' | 'sedotan' | 'penghapus';
+
+/** Satu timbangan dua lengan: dua benda (id item registry) dan sisi yang lebih berat. */
+export interface BalanceSpec {
+  leftItem: string;
+  rightItem: string;
+  heavier: 'left' | 'right';
+}
+
+/** Lihat `TapAnswerData.measure`. Semua bilangan dalam satuan yang disebut. */
+export type MeasureSpec =
+  /** Penggaris 0…`max` cm (bawaan: sependek yang perlu, 10–15 cm); benda terentang dari `from` ke `to` cm. */
+  | { kind: 'ruler'; thing: RulerThing; from: number; to: number; max?: number }
+  /**
+   * Timbangan jarum. `kg`: skala 0–10 kg, tiap kilogram berangka. `g`: skala
+   * 0–1.000 g, garis tiap 100 g, angka tiap 200 g — nilai ganjil (300 g) harus
+   * dibaca dari garisnya.
+   */
+  | { kind: 'scale'; item: string; value: number; unit: 'kg' | 'g' }
+  /** Satu atau dua timbangan dua lengan berdampingan (membandingkan berat). */
+  | { kind: 'balance'; scales: BalanceSpec[] }
+  /** Gelas takar 0–1.000 mL, garis tiap 100 mL, angka tiap 200 mL. */
+  | { kind: 'beaker'; ml: number; liquid?: 'air' | 'susu' | 'jus' }
+  /** Bangun di kertas berpetak: tiap string satu baris, `#` = petak terisi. */
+  | { kind: 'grid'; rows: string[] }
+  /** Persegi panjang berlabel panjang & lebar (keliling kebun/lapangan). */
+  | { kind: 'rect'; w: number; h: number; unit: 'cm' | 'm' };
 
 /**
  * Bagian tanaman yang bisa disentuh (Kebun Ilmu, sd2). Geometrinya di

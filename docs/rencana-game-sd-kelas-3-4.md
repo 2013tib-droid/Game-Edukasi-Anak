@@ -173,6 +173,13 @@ dan jebakan desain soal yang sudah bisa dilihat sekarang.
   keliling bangun datar berpetak.
 - **Engine:** **`Ruler.tsx`**, **`Scale.tsx`**, **`Beaker.tsx`** (SVG). Bendanya
   pakai seni item yang sudah ada (pensil, buku, sepatu, semangka, apel, susu…).
+  **Dikoreksi saat dikerjakan (2026-09-30):** benda di atas PENGGARIS digambar
+  SVG engine (pensil, krayon, pita, sedotan, penghapus) — seni item digambar
+  miring, ujungnya tak bisa jatuh tepat di garis cm. Seni item tetap dipakai di
+  timbangan (berat tak punya ukuran di gambar).
+- **Keputusan pemilik 2026-09-30:** konversi tetap **≤ 1.000** (tanpa "2 kg =
+  2.000 g"); timbangan **jarum**; soal memilih satuan memakai pengecoh dari
+  **besaran lain** (berat semangka → kg / cm / L), bukan "cm atau m".
 - **Jebakan:** panjang benda harus **dari data soal**, gambarnya dipaksa ke
   panjang itu (kotak berlebar tetap, hanya untuk benda memanjang) — kalau tidak,
   penggarisnya "berbohong". Pengecoh khas: **membaca ujung benda tanpa
@@ -390,7 +397,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | 1 | Istana Bilangan | `istana-bilangan` | rencana |
 | 2 | Lompat Katak | `lompat-katak` | rencana |
 | 3 | Bagi Kue | `bagi-kue` | rencana |
-| 4 | Ukur Yuk | `ukur-yuk` | rencana |
+| 4 | Ukur Yuk | `ukur-yuk` | ✅ sudah ada (2026-09-30), narasi SUDAH dirender (render #21, 38 baris) — 9 slot × 55 varian, urutan tetap |
 | 5 | Waktu Tepat | `waktu-tepat` | rencana |
 | 6 | Toko Kembalian | `toko-kembalian` | ✅ sudah ada (2026-09-30), narasi belum dirender (render #20) — **demo gratis `sd2`**, belum masuk `FREE_GAME_IDS` |
 | 7 | Detektif Data | `detektif-data` | rencana |
