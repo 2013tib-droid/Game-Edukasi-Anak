@@ -21,10 +21,7 @@ export function BuyButton({ group, owned = false }: { group: SaleGroup; owned?: 
         <span className="pc-owned__icon">
           <CheckBadgeIcon />
         </span>
-        <span className="pc-owned__text">
-          <strong>Sudah aktif</strong>
-          <span>di akun Anda</span>
-        </span>
+        Sudah aktif
       </div>
     );
   }
