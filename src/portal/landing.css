@@ -448,43 +448,52 @@
     box-shadow 0.1s;
 }
 .landing .pc-owned {
-  margin-top: 6px;
-  display: flex;
-  flex-direction: column;
+  margin-top: 8px;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-}
-
-.landing .pc-owned__flag {
-  display: inline-block;
-  padding: 5px 14px;
+  gap: 12px;
+  padding: 10px 22px 10px 12px;
   border-radius: 999px;
-  background: #dff5e3;
-  color: #1f6b33;
-  font-weight: 800;
-  font-size: 14px;
+  background: linear-gradient(135deg, #effaf1, #dcf3e2);
+  border: 1.5px solid #b8e4c4;
+  text-align: left;
 }
 
-/* Sengaja HIJAU, bukan gradien oranye tombol beli: yang ini bukan ajakan
-   membayar, jadi tak boleh terbaca sebagai "Beli Sekarang" yang berganti kata. */
-.landing .pc-play {
+.landing .pc-owned__icon {
+  flex: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0 28px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #7ed99a, #3fb877);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5fcf86, #2fa45f);
   color: #fff;
-  font-weight: 800;
-  font-size: 17px;
-  text-decoration: none;
-  box-shadow: 0 4px 0 rgba(31, 107, 51, 0.45);
+  box-shadow: 0 2px 6px rgba(47, 164, 95, 0.35);
 }
 
-.landing .pc-play:active {
-  transform: translateY(3px);
-  box-shadow: 0 1px 0 rgba(31, 107, 51, 0.45);
+.landing .pc-owned__icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 3;
+}
+
+.landing .pc-owned__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.landing .pc-owned__text strong {
+  color: #1f6b33;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.landing .pc-owned__text span {
+  color: #4f8a5e;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .landing .pc-buy:active {

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { CheckBadgeIcon } from '@/app/icons';
 import { buyUrl, type SaleGroup } from '@/data/purchase';
 import { countVisit } from '@/portal/stats';
 
@@ -10,7 +10,7 @@ import { countVisit } from '@/portal/stats';
  * saat orang tua kembali untuk memasukkan kodenya.
  *
  * Kalau akun yang masuk SUDAH memiliki kelompok ini (`owned`), tombol beli
- * diganti tanda "Sudah aktif" + jalan pintas ke daftar game-nya — menawari
+ * diganti tanda "Sudah aktif" (tanpa tombol lain, keputusan pemilik) — menawari
  * orang tua membayar dua kali untuk barang yang sama terbaca seperti
  * aktivasinya tidak tersimpan. Ini cuma tampilan (dari `useOwnedGroups`).
  */
@@ -18,10 +18,13 @@ export function BuyButton({ group, owned = false }: { group: SaleGroup; owned?: 
   if (owned) {
     return (
       <div className="pc-owned">
-        <span className="pc-owned__flag">✅ Sudah aktif di akun Anda</span>
-        <Link className="pc-play" to={`/kelompok/${group}`}>
-          Main Sekarang
-        </Link>
+        <span className="pc-owned__icon">
+          <CheckBadgeIcon />
+        </span>
+        <span className="pc-owned__text">
+          <strong>Sudah aktif</strong>
+          <span>di akun Anda</span>
+        </span>
       </div>
     );
   }
