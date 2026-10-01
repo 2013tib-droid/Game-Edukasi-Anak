@@ -23,7 +23,7 @@
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
-import { speechSsml, touched } from './pronounce.mjs';
+import { KAMUS_SCOPES, kamusSsml, speechSsml, touched } from './pronounce.mjs';
 
 const LINES_FILE = 'scripts/narration-lines.json';
 const OUT_DIR = 'public/assets/voice';
@@ -154,7 +154,9 @@ function ssml(line) {
   // both leave the screen text — and the manifest key built from it — alone.
   // `speechSsml` escapes first and inserts tags after; doing it the other way
   // round makes Azure read the tag out loud.
-  const text = speechSsml(line.text);
+  // Games in KAMUS_SCOPES use the full e-lexicon instead: every word with an
+  // "e" gets an IPA tag, so Azure never guesses pepet vs taling.
+  const text = KAMUS_SCOPES.has(line.scope) ? kamusSsml(line.text) : speechSsml(line.text);
   return (
     `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="id-ID">` +
     `<voice name="${voice.name}"><prosody rate="${voice.rate}">${text}</prosody></voice></speak>`

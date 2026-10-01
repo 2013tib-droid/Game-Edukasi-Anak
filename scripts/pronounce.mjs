@@ -154,7 +154,7 @@ export function touched(text) {
 }
 
 /* ======================================================================
- * KAMUS LAFAL PENUH (usulan 2026-10-01, BELUM dipakai render produksi)
+ * KAMUS LAFAL PENUH (2026-10-01)
  * ======================================================================
  *
  * Laporan pemilik (2026-10-01) dari Kebun Ilmu: *"notasi suaranya masih
@@ -168,7 +168,9 @@ export function touched(text) {
  * pepet (ə), karena memang itu yang paling umum di bahasa Indonesia.
  * Azure jadi tak perlu menebak sama sekali.
  *
- * Belum dipasang ke `speechSsml()` karena dua hal harus didengar dulu:
+ * Sejak 2026-10-01 dipakai render produksi HANYA untuk game di
+ * `KAMUS_SCOPES` (lihat di bawah). Belum untuk semua, karena dua hal harus
+ * didengar dulu:
  *   1. apakah suara HD menuruti tag <phoneme> untuk SEMUA kata (lafal
  *      "sentuh" belum pernah dikonfirmasi dengan telinga), dan
  *   2. apakah kalimat yang separuh katanya bertag masih mengalir wajar.
@@ -179,6 +181,16 @@ export function touched(text) {
  * `node scripts/sample-lafal.mjs --cek` mendaftar semua kata ber-e di narasi
  * yang dianggap pepet, untuk diperiksa sekilas tiap kali ada game baru.
  */
+
+/**
+ * Game yang narasinya SUDAH memakai kamus penuh di render produksi.
+ * Dimulai dari Kebun Ilmu (laporan pemilik 2026-10-01: "Menendang bola",
+ * "Mengangkat tas memakai gaya?", "Hujan turun deras" — e-nya salah semua).
+ * Kalau pemilik menilai hasilnya benar, game lain menyusul dengan menambah
+ * id-nya di sini lalu render ulang: `only: <game>` + `redo: e` di
+ * `.github/render-request.txt` (redo "e" = setiap baris yang memuat huruf e).
+ */
+export const KAMUS_SCOPES = new Set(['kebun-ilmu']);
 
 /** Kata ber-e TALING. Termasuk semua isi `PRONOUNCE`. */
 export const KAMUS_TALING = {
