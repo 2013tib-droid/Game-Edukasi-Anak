@@ -6,14 +6,18 @@ import Layout from '@/app/Layout';
 import NotFoundPage from '@/app/NotFoundPage';
 import ProgressSync from '@/app/ProgressSync';
 import SplashScreen from '@/app/SplashScreen';
+import LandingPage from '@/portal/LandingPage';
 import { syncTestModeFromUrl } from '@/data/access';
 
 // `?test=1` in the URL turns on tester mode (shows the lock switch) and is
 // remembered on the device; `?test=0` turns it off again.
 syncTestModeFromUrl();
 
-// Lazy-load every page so the initial bundle stays small on low-end devices.
-const LandingPage = lazy(() => import('@/portal/LandingPage'));
+// The landing page is imported EAGERLY: it is the first screen every buyer
+// sees (links from WhatsApp/TikTok land on "/"), and as a lazy chunk it cost a
+// second round-trip of ~15 small files behind the entry bundle — measured
+// ~0.7–1 s of "Memuat…" on a throttled phone. Every other page stays lazy so
+// the initial bundle stays small on low-end devices.
 const HomePage = lazy(() => import('@/portal/HomePage'));
 const GroupPage = lazy(() => import('@/portal/GroupPage'));
 const LoginPage = lazy(() => import('@/auth/LoginPage'));
