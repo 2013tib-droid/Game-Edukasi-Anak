@@ -55,7 +55,19 @@ export function announcementsFor(isBuyer: boolean): Announcement[] {
  * entries that would frustrate someone who has not bought yet.
  */
 export const announcements: Announcement[] = [
-  // SENGAJA KOSONG sejak 2026-09-22 (keputusan pemilik, menjelang launching).
+  {
+    id: 'a-2026-10-01-terima-kasih-pembeli',
+    date: '2026-10-01',
+    tag: 'info',
+    audience: 'pembeli',
+    title: 'Terima kasih sudah bergabung!',
+    body:
+      'Senang sekali si kecil ikut berpetualang bersama kami. Satu tips kecil: ' +
+      'simpan situs ini di layar utama HP (buka menu browser, lalu pilih ' +
+      '"Tambahkan ke layar utama"). Nanti si kecil cukup mengetuk ikonnya, ' +
+      'seperti membuka aplikasi kesayangannya.',
+  },
+  // Daftar ini SENGAJA DIKOSONGKAN 2026-09-22 (keputusan pemilik, menjelang launching).
   //
   // Tiga belas pengumuman lama dibuang seluruhnya: isinya catatan pengerjaan
   // pra-rilis ("game baru ditambahkan", "soal diperbanyak") yang ditulis saat
