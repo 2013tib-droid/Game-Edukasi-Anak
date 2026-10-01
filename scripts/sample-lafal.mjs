@@ -1,79 +1,68 @@
 /**
- * Render contoh LAFAL: kalimat yang sama diucapkan dengan ejaan sekarang vs
- * ejaan lafal (`scripts/pronounce.mjs`), supaya pemilik memilih dengan telinga
- * sebelum ratusan file suara dirender ulang.
+ * Render contoh LAFAL "e": kalimat yang sama dalam beberapa varian, supaya
+ * pemilik memilih dengan telinga sebelum ratusan file suara dirender ulang.
  *
- *     node scripts/sample-lafal.mjs
+ *     node scripts/sample-lafal.mjs          # render contoh (butuh kunci Azure)
+ *     node scripts/sample-lafal.mjs --cek    # daftar kata yang dianggap PEPET
  *
  * Output: `sample-suara/lafal-*.mp3` — sengaja DI LUAR `public/assets/voice/`,
  * jadi contoh coba-coba tidak pernah ikut ter-deploy. Hapus foldernya setelah
- * diputuskan.
+ * diputuskan (SESUDAH merge — lihat CLAUDE.md, folder ini bisa hidup lagi).
  *
- * Tiga varian sengaja dirender sekaligus, supaya satu kali panggil Azure sudah
- * menjawab dua pertanyaan berbeda:
- *   1. `sebelum` vs `sesudah` — apakah ejaan é memperbaiki bunyinya?
- *   2. `ipa` — kalau é ternyata DIABAIKAN model HD, apakah tag <phoneme>
- *      dituruti? Itu rencana cadangannya, dan lebih baik diuji sekarang
- *      daripada satu putaran lagi nanti.
- *
- * Skrip ini juga membandingkan UKURAN file sebelum/sesudah: kalau dua file
- * berukuran persis sama, ejaannya diabaikan mentah-mentah — itu jawaban yang
- * bisa dibaca dari log, tanpa perlu mendengarkan.
+ * Putaran 2026-10-01 (laporan pemilik: "masih terasa seperti bule, terutama
+ * di kata e, sering terbolak-balik"). Tiga varian per kalimat:
+ *   1. `sekarang` — persis render produksi hari ini (Gadis HD + daftar lafal
+ *      tambalan di pronounce.mjs).
+ *   2. `kamus`    — Gadis HD, tapi SETIAP kata ber-e diberi lafal IPA dari
+ *      kamus penuh (`kamusSsml`). Menjawab: apakah menghapus tebakan Azure
+ *      membereskan "e"-nya?
+ *   3. `neural`   — kamus yang sama dengan suara Gadis NEURAL biasa (bukan HD).
+ *      Menjawab: kalau "bule"-nya ternyata dari model HD sendiri (model HD itu
+ *      multibahasa), apakah suara non-HD lebih Indonesia? Gadis neural dulu
+ *      ditolak karena "cempreng" — dengarkan lagi dengan pertanyaan yang beda.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { forSpeech } from './pronounce.mjs';
+import { isAllPepet, kamusSsml, speechSsml } from './pronounce.mjs';
 
 const OUT_DIR = 'sample-suara';
-
-/** Setelan suara narasi soal — sama persis dengan yang dipakai produksi. */
-const VOICE = 'id-ID-Gadis:DragonHDLatestNeural';
-const RATE = '-15%';
 const FORMAT = 'audio-24khz-48kbitrate-mono-mp3';
 
+/* ---------- --cek: kata ber-e yang dianggap pepet ---------- */
+
+if (process.argv.includes('--cek')) {
+  const { lines } = JSON.parse(readFileSync('scripts/narration-lines.json', 'utf8'));
+  const words = new Set();
+  for (const l of lines) for (const m of l.text.matchAll(/[A-Za-z]*[eE][A-Za-z]*/g)) words.add(m[0].toLowerCase());
+  const pepet = [...words].filter(isAllPepet).sort();
+  console.log(`${pepet.length} kata ber-e dianggap PEPET seluruhnya.`);
+  console.log('Kalau ada yang ber-e taling, tambahkan ke KAMUS_TALING di scripts/pronounce.mjs:\n');
+  console.log(pepet.join(' '));
+  process.exit(0);
+}
+
 /**
- * Kalimat uji. Yang pertama persis kalimat yang dilaporkan pemilik; sisanya
- * kata-kata lain yang se-kelas (e taling) supaya sekali dengar bisa menilai
- * banyak kata.
+ * Kalimat uji. Dua yang pertama persis tangkapan layar pemilik (Kebun Ilmu);
+ * sisanya mencakup "sentuh" (tag IPA yang belum pernah dikonfirmasi telinga),
+ * campuran taling+pepet, nama huruf E, dan kalimat game baru.
  */
 const SENTENCES = [
-  'Ayo hitung! Ada berapa bebek?',
-  'Ada delapan bebek. Tiga bebek pulang ke rumah. Berapa yang masih tinggal?',
-  'Bel sekolah berbunyi pukul tujuh pagi. Jarum pendek di angka dua.',
-  'Rani punya enam kelereng. Ada zebra, sepeda, wortel, dan pensil.',
+  'Menendang bola. Gaya apa itu?',
+  'Hujan turun deras. Apa yang kita bawa?',
+  'Sentuh lehermu!',
+  'Ada delapan bebek merah. Berapa semuanya?',
+  'Ini huruf besar E. Mana huruf kecilnya?',
+  'Pembeli sudah membayar. Beri kembaliannya!',
 ];
 
-/**
- * Lafal IPA untuk rencana cadangan. Hanya kata yang dipakai kalimat di atas —
- * ini uji coba mekanisme, bukan kamus.
- */
-const IPA = {
-  bebek: 'bɛbɛk',
-  bel: 'bɛl',
-  pendek: 'pɛndɛk',
-  kelereng: 'kəlɛrɛŋ',
-  zebra: 'zɛbra',
-  sepeda: 'səpɛda',
-  wortel: 'wortɛl',
-  pensil: 'pɛnsil',
-};
-const IPA_RE = new RegExp(`\\b(${Object.keys(IPA).join('|')})\\b`, 'gi');
-const withPhonemes = (text) =>
-  text.replace(
-    IPA_RE,
-    (m) => `<phoneme alphabet="ipa" ph="${IPA[m.toLowerCase()]}">${m}</phoneme>`,
-  );
-
-const escape = (t) => t.replace(/[<>&'"]/g, (c) => `&#${c.charCodeAt(0)};`);
-
-/** `inner` sudah berupa SSML siap pakai (boleh memuat tag). */
-const ssml = (inner) =>
+const ssml = (voice, rate, inner) =>
   `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="id-ID">` +
-  `<voice name="${VOICE}"><prosody rate="${RATE}">${inner}</prosody></voice></speak>`;
+  `<voice name="${voice}"><prosody rate="${rate}">${inner}</prosody></voice></speak>`;
 
+const HD = 'id-ID-Gadis:DragonHDLatestNeural';
 const VARIANTS = [
-  { name: 'sebelum', build: (t) => escape(t) },
-  { name: 'sesudah', build: (t) => escape(forSpeech(t)) },
-  { name: 'ipa', build: (t) => withPhonemes(escape(t)) },
+  { name: 'sekarang', build: (t) => ssml(HD, '-15%', speechSsml(t)) },
+  { name: 'kamus', build: (t) => ssml(HD, '-15%', kamusSsml(t)) },
+  { name: 'neural', build: (t) => ssml('id-ID-GadisNeural', '-8%', kamusSsml(t)) },
 ];
 
 /* ---------- Kunci ---------- */
@@ -99,7 +88,7 @@ const sizes = new Map();
 
 for (const [i, sentence] of SENTENCES.entries()) {
   console.log(`\nKalimat ${i + 1}: ${sentence}`);
-  console.log(`  diucapkan  : ${forSpeech(sentence)}`);
+  console.log(`  kamus      : ${kamusSsml(sentence)}`);
   for (const variant of VARIANTS) {
     const res = await fetch(`https://${REGION}.tts.speech.microsoft.com/cognitiveservices/v1`, {
       method: 'POST',
@@ -109,7 +98,7 @@ for (const [i, sentence] of SENTENCES.entries()) {
         'X-Microsoft-OutputFormat': FORMAT,
         'User-Agent': 'petualangan-pintar',
       },
-      body: ssml(variant.build(sentence)),
+      body: variant.build(sentence),
     });
     if (!res.ok) {
       console.error(`  ✗ ${variant.name}: HTTP ${res.status} — ${(await res.text()).slice(0, 160)}`);
@@ -128,8 +117,8 @@ for (const [i, sentence] of SENTENCES.entries()) {
 
 console.log('\nPerbandingan ukuran (file yang identik = ejaannya diabaikan):');
 for (const [i] of SENTENCES.entries()) {
-  const before = sizes.get(`${i}-sebelum`);
-  for (const name of ['sesudah', 'ipa']) {
+  const before = sizes.get(`${i}-sekarang`);
+  for (const name of ['kamus']) {
     const after = sizes.get(`${i}-${name}`);
     if (!before || !after) continue;
     const diff = after - before;

@@ -152,3 +152,115 @@ export function touched(text) {
   // dan menjawab `false` untuk baris yang jelas-jelas cocok.
   return forSpeech(text) !== text || PHONEME_TEST.test(text);
 }
+
+/* ======================================================================
+ * KAMUS LAFAL PENUH (usulan 2026-10-01, BELUM dipakai render produksi)
+ * ======================================================================
+ *
+ * Laporan pemilik (2026-10-01) dari Kebun Ilmu: *"notasi suaranya masih
+ * terasa seperti bule, kurang pure Indonesia, terutama di kata e. Sering
+ * terbolak-balik."* Contohnya "Menendang bola" dan "Hujan turun deras".
+ *
+ * Dua daftar di atas menambal kata SATU PER SATU sesudah ada yang mengeluh —
+ * dan tiap game baru membawa kata ber-e baru yang tak pernah didengar siapa
+ * pun. Kamus ini membalik caranya: SETIAP kata ber-e di narasi diberi lafal
+ * IPA, dan yang perlu ditulis tangan cuma kata ber-e TALING. Selebihnya
+ * pepet (ə), karena memang itu yang paling umum di bahasa Indonesia.
+ * Azure jadi tak perlu menebak sama sekali.
+ *
+ * Belum dipasang ke `speechSsml()` karena dua hal harus didengar dulu:
+ *   1. apakah suara HD menuruti tag <phoneme> untuk SEMUA kata (lafal
+ *      "sentuh" belum pernah dikonfirmasi dengan telinga), dan
+ *   2. apakah kalimat yang separuh katanya bertag masih mengalir wajar.
+ * Contohnya dirender `scripts/sample-lafal.mjs` (mode: lafal).
+ *
+ * ATURAN MENAMBAH KATA: kata baru yang ber-e TALING wajib masuk
+ * `KAMUS_TALING` (tulis é di suku kata taling saja). Kata pepet tak usah.
+ * `node scripts/sample-lafal.mjs --cek` mendaftar semua kata ber-e di narasi
+ * yang dianggap pepet, untuk diperiksa sekilas tiap kali ada game baru.
+ */
+
+/** Kata ber-e TALING. Termasuk semua isi `PRONOUNCE`. */
+export const KAMUS_TALING = {
+  ...PRONOUNCE,
+  beda: 'béda',
+  berbeda: 'berbéda',
+  beni: 'béni',
+  bensin: 'bénsin',
+  boleh: 'boléh',
+  boneka: 'bonéka',
+  buket: 'bukét',
+  ekor: 'ékor',
+  es: 'és',
+  hebat: 'hébat',
+  helm: 'hélm',
+  hewan: 'héwan',
+  kaget: 'kagét',
+  kue: 'kué',
+  leher: 'léher',
+  lembek: 'lembék',
+  lewat: 'léwat',
+  meja: 'méja',
+  meleleh: 'meléléh',
+  menoleh: 'menoléh',
+  merah: 'mérah',
+  mereka: 'meréka',
+  meter: 'méter',
+  sentimeter: 'sentiméter',
+  monyet: 'monyét',
+  oleh: 'oléh',
+  paket: 'pakét',
+  permen: 'pérmén',
+  persegi: 'perségi',
+  petak: 'pétak',
+  reda: 'réda',
+  rem: 'rém',
+  seekor: 'seékor',
+  // Nama huruf "E" dibaca é (huruf, bukan kata).
+  e: 'é',
+};
+
+const KAMUS_SUFFIX = /(nya|ku|mu|kah|lah)$/;
+
+/** Kata (huruf kecil) → ejaan dengan é di suku kata taling. */
+function talingSpelling(word) {
+  if (KAMUS_TALING[word]) return KAMUS_TALING[word];
+  const m = KAMUS_SUFFIX.exec(word);
+  if (m) {
+    const base = word.slice(0, -m[1].length);
+    if (KAMUS_TALING[base]) return KAMUS_TALING[base] + m[1];
+  }
+  return word;
+}
+
+/**
+ * Ejaan Indonesia → IPA. Ejaannya fonemis kecuali "e", jadi cukup aturan
+ * huruf: é → e, e → ə, ng → ŋ, ny → ɲ, sy → ʃ, kh → x, c → tʃ, j → dʒ, y → j.
+ */
+export function toIpa(word) {
+  const s = talingSpelling(word.toLowerCase());
+  let out = '';
+  for (let i = 0; i < s.length; i++) {
+    const two = s.slice(i, i + 2);
+    if (two === 'ng') { out += 'ŋ'; i++; continue; }
+    if (two === 'ny') { out += 'ɲ'; i++; continue; }
+    if (two === 'sy') { out += 'ʃ'; i++; continue; }
+    if (two === 'kh') { out += 'x'; i++; continue; }
+    const c = s[i];
+    out += { é: 'e', e: 'ə', c: 'tʃ', j: 'dʒ', y: 'j', q: 'k', x: 'ks' }[c] ?? c;
+  }
+  return out;
+}
+
+/** Apakah kata ini dianggap pepet seluruhnya (tak ada é sesudah kamus)? */
+export const isAllPepet = (word) => !talingSpelling(word.toLowerCase()).includes('é');
+
+/**
+ * Teks layar → SSML dengan tag <phoneme> di SETIAP kata ber-e. Escape dulu,
+ * tag sesudahnya — urutan yang sama dengan `speechSsml()`.
+ */
+export function kamusSsml(text) {
+  return escape(text).replace(/[A-Za-z]*[eE][A-Za-z]*/g, (word) =>
+    `<phoneme alphabet="ipa" ph="${toIpa(word)}">${word}</phoneme>`,
+  );
+}

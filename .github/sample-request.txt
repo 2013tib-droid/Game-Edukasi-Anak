@@ -2,7 +2,7 @@ Ubah file ini lalu push untuk merender contoh suara.
 
 mode: lafal
 
-Membandingkan lafal "e" taling (bebek → bébék) vs ejaan sekarang.
+Putaran 2026-10-01: "masih terasa seperti bule, terutama di kata e".
+Tiap kalimat tiga varian — sekarang (produksi) · kamus (Gadis HD + lafal IPA
+untuk SETIAP kata ber-e) · neural (kamus yang sama, suara Gadis non-HD).
 Hasilnya di sample-suara/lafal-*.mp3 — dengarkan, lalu putuskan.
-
-(setelan suara sudah diputuskan: Gadis HD -15% + Ardi -8%)
