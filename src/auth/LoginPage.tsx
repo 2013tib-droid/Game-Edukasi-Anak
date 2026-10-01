@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/auth/AuthContext';
 import GoogleSignInButton from '@/auth/GoogleSignInButton';
+import PasswordInput from '@/auth/PasswordInput';
 import { ArrowLeftIcon } from '@/app/icons';
 
 // Parent-area screen: plain form, Indonesian copy, generous touch targets.
@@ -117,14 +118,11 @@ export default function LoginPage() {
           autoComplete="email"
           required
         />
-        <input
-          className="input"
-          type="password"
+        <PasswordInput
           placeholder="Kata sandi"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={setPassword}
           autoComplete="current-password"
-          required
         />
         <button className="btn btn--primary" type="submit" disabled={busy || !configured}>
           {busy ? 'Memproses…' : 'Masuk'}
