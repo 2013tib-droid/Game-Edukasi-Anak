@@ -448,15 +448,17 @@
     box-shadow 0.1s;
 }
 .landing .pc-owned {
-  margin-top: 8px;
+  margin-top: 6px;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 22px 10px 12px;
+  gap: 8px;
+  padding: 7px 18px 7px 8px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #effaf1, #dcf3e2);
+  background: #e3f6e8;
   border: 1.5px solid #b8e4c4;
-  text-align: left;
+  color: #1f6b33;
+  font-size: 16px;
+  font-weight: 800;
 }
 
 .landing .pc-owned__icon {
@@ -464,36 +466,17 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #5fcf86, #2fa45f);
+  background: #34a865;
   color: #fff;
-  box-shadow: 0 2px 6px rgba(47, 164, 95, 0.35);
 }
 
 .landing .pc-owned__icon svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   stroke-width: 3;
-}
-
-.landing .pc-owned__text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-
-.landing .pc-owned__text strong {
-  color: #1f6b33;
-  font-size: 17px;
-  font-weight: 800;
-}
-
-.landing .pc-owned__text span {
-  color: #4f8a5e;
-  font-size: 13px;
-  font-weight: 700;
 }
 
 .landing .pc-buy:active {
