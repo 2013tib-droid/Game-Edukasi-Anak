@@ -21,6 +21,45 @@ export interface DeviceInfo {
 }
 
 /** Kelompok yang sudah dimiliki akun ini. */
+/** Petunjuk tampilan kelompok yang dimiliki — lihat `useOwnedGroups`. */
+const OWNED_HINT_KEY = 'pp_owned_hint_v1';
+
+export interface OwnedHint {
+  uid: string;
+  groups: string[];
+}
+
+export function readOwnedHint(): OwnedHint | null {
+  try {
+    const raw = localStorage.getItem(OWNED_HINT_KEY);
+    if (!raw) return null;
+    const v = JSON.parse(raw) as Partial<OwnedHint>;
+    if (typeof v.uid !== 'string' || !Array.isArray(v.groups)) return null;
+    return { uid: v.uid, groups: v.groups.filter((g): g is string => typeof g === 'string') };
+  } catch {
+    return null;
+  }
+}
+
+export function writeOwnedHint(hint: OwnedHint | null): void {
+  try {
+    if (hint) localStorage.setItem(OWNED_HINT_KEY, JSON.stringify(hint));
+    else localStorage.removeItem(OWNED_HINT_KEY);
+  } catch {
+    /* mode privat / penyimpanan penuh — petunjuk cuma kemudahan */
+  }
+}
+
+/** Sesudah aktivasi berhasil: kelompok barunya langsung masuk petunjuk. */
+async function rememberOwned(group: string): Promise<void> {
+  const { auth } = await getFirebase();
+  const uid = auth.currentUser?.uid;
+  if (!uid) return;
+  const hint = readOwnedHint();
+  const groups = hint && hint.uid === uid ? hint.groups : [];
+  if (!groups.includes(group)) writeOwnedHint({ uid, groups: [...groups, group] });
+}
+
 export async function fetchOwnedGroups(uid: string): Promise<string[]> {
   const [{ db }, { doc, getDoc }] = await Promise.all([
     getFirebase(),
@@ -114,7 +153,12 @@ export interface RedeemResult {
 
 /** Menukar kode aktivasi. Melempar FirebaseError dengan pesan siap tampil. */
 export function redeemActivationCode(code: string): Promise<RedeemResult> {
-  return callVerified<{ code: string }, RedeemResult>('redeemActivationCode', { code });
+  return callVerified<{ code: string }, RedeemResult>('redeemActivationCode', { code }).then(
+    async (r) => {
+      await rememberOwned(r.group).catch(() => undefined);
+      return r;
+    },
+  );
 }
 
 /**
@@ -163,7 +207,12 @@ export async function fetchPaidOrders(): Promise<{ orders: PaidOrder[]; needsVer
 
 /** Mengaktifkan satu pesanan Mayar untuk akun ini (tanpa mengetik kode). */
 export function claimPaidOrder(orderId: string): Promise<RedeemResult> {
-  return callVerified<{ orderId: string }, RedeemResult>('claimPaidOrder', { orderId });
+  return callVerified<{ orderId: string }, RedeemResult>('claimPaidOrder', { orderId }).then(
+    async (r) => {
+      await rememberOwned(r.group).catch(() => undefined);
+      return r;
+    },
+  );
 }
 
 export interface DeviceFullError {
