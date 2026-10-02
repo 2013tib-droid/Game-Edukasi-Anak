@@ -292,11 +292,13 @@ export function stopSpeaking(): void {
 
 // No 'win' chime here on purpose: finishing a game plays the real tune
 // (`celebrate`). Two victory sounds would only drift apart.
-type SfxKind = 'tap' | 'correct' | 'wrong';
+type SfxKind = 'tap' | 'correct' | 'wrong' | 'tick';
 
 /** Note sequences per effect: [frequency Hz, start s, duration s] */
 const SEQUENCES: Record<SfxKind, [number, number, number][]> = {
   tap: [[600, 0, 0.08]],
+  // Klik jam yang sangat lembut tiap jarum melewati lima menit (Waktu Tepat).
+  tick: [[1300, 0, 0.035]],
   correct: [
     [523, 0, 0.12],
     [659, 0.12, 0.12],
@@ -319,7 +321,8 @@ export function sfx(kind: SfxKind): void {
     osc.type = 'sine';
     osc.frequency.value = freq;
     gain.gain.setValueAtTime(0.0001, now + start);
-    gain.gain.exponentialRampToValueAtTime(0.18, now + start + 0.02);
+    const peak = kind === 'tick' ? 0.05 : 0.18;
+    gain.gain.exponentialRampToValueAtTime(peak, now + start + (kind === 'tick' ? 0.005 : 0.02));
     gain.gain.exponentialRampToValueAtTime(0.0001, now + start + dur);
     osc.connect(gain).connect(ac.destination);
     osc.start(now + start);

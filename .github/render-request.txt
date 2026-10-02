@@ -1,13 +1,15 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #22
+render #23
 
-only: detektif-data
+only: waktu-tepat
 
-Game baru "Detektif Data" (SD Kelas 3 & 4, kelompok sd2, masih draft): 47 baris
-baru (2.420 karakter), semuanya scope detektif-data. Dibandingkan sebelum vs
-sesudah lewat scripts/narration-lines.json: 1103 baris jadi 1150, nol baris lama
-berubah atau pindah scope, jadi aman dibatasi "only: detektif-data".
+Game baru "Waktu Tepat" versi premium "Sehari Bersama Kancil" (SD Kelas 3 & 4,
+kelompok sd2, masih draft): 41 baris baru, semuanya scope waktu-tepat.
+Dibandingkan sebelum vs sesudah lewat scripts/narration-lines.json: 1150 baris
+jadi 1191, nol baris lama berubah atau pindah scope (Jam Pintar yang ikut
+disentuh karena halfToward pindah ke src/games/time.ts tetap nol perubahan),
+jadi aman dibatasi "only: waktu-tepat".
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

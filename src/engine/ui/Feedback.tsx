@@ -65,6 +65,8 @@ export function LevelDots({ total, current }: { total: number; current: number }
             'level-dot' +
             (i < current ? ' level-dot--done' : i === current ? ' level-dot--active' : '')
           }
+          // Tujuan bintang yang terbang saat level benar (P1, juice.ts).
+          data-progress-active={i === current ? '' : undefined}
         />
       ))}
     </div>
