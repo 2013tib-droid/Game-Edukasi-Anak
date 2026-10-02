@@ -4,6 +4,7 @@ import type {
   AnyGameConfig,
   ClockSpec,
   GameLevel,
+  LevelStamp,
   MixedLevel,
   Stars,
   TemplateId,
@@ -18,6 +19,7 @@ import Clock from '@/engine/ui/Clock';
 import { gameImageUrl } from '@/engine/ui/GameIcon';
 import ItemPic from '@/engine/ui/ItemPic';
 import BackIcon from '@/engine/ui/BackIcon';
+import { buzz, flyStars, popTap, sparkleAt } from '@/engine/ui/juice';
 import PlayIcon from '@/engine/ui/PlayIcon';
 import '@/engine/ui/engine.css';
 
@@ -57,6 +59,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   puzzle: lazy(() => import('@/engine/templates/Puzzle')),
   'tap-picture': lazy(() => import('@/engine/templates/TapPicture')),
   cashier: lazy(() => import('@/engine/templates/Cashier')),
+  'clock-set': lazy(() => import('@/engine/templates/ClockSet')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */
@@ -160,6 +163,66 @@ function PartyPic() {
 }
 
 /**
+ * PROYEK SESI (P3) di baris atas layar: satu halaman per level, menggantikan
+ * titik-titik level — jadi proyeknya tumbuh di depan mata anak tanpa memakan
+ * tinggi layar sedikit pun. Halaman yang baru terisi muncul SESUDAH bintang
+ * terbang tiba di sana (lihat `.project-page__stamp` di engine.css).
+ */
+function ProjectStrip({
+  stamps,
+  filled,
+  current,
+}: {
+  stamps: (LevelStamp | undefined)[];
+  filled: number;
+  current: number;
+}) {
+  return (
+    <div className="level-dots project-strip">
+      {stamps.map((st, i) => {
+        const done = i < filled;
+        const active = !done && i === current;
+        return (
+          <span
+            key={i}
+            className={
+              'project-page' +
+              (done ? ' project-page--done' : active ? ' project-page--active' : '')
+            }
+            data-progress-active={active ? '' : undefined}
+          >
+            {done && (
+              <span key={`s${i}`} className="project-page__stamp" aria-hidden>
+                {st?.emoji ?? '⭐'}
+              </span>
+            )}
+          </span>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Hasil proyek sesi yang utuh — menggantikan gambar piala di layar "Selamat!". */
+function ProjectBook({ title, stamps }: { title: string; stamps: (LevelStamp | undefined)[] }) {
+  return (
+    <div className="project-book">
+      <div className="project-book__title">{title}</div>
+      <div className="project-book__pages">
+        {stamps.map((st, i) => (
+          <div key={i} className="project-book__page">
+            <span className="project-book__emoji" aria-hidden>
+              {st?.emoji ?? '⭐'}
+            </span>
+            {st?.label && <span className="project-book__label">{st.label}</span>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
  * Screens: `intro` (start / resume) or `pick` (choose a level) → `playing` →
  * `done`. A game with `chooseLevel` opens straight on `pick` — its whole point
  * is that the child sees every title from the start.
@@ -225,6 +288,11 @@ export default function GameShell({
   const setRepeat = useCallback((speakCurrent: (() => void) | null) => {
     repeat.current = speakCurrent;
   }, []);
+
+  // Titik sentuh terakhir di layar main (P1): percikan bintang muncul di
+  // tempat jawaban yang benar disentuh/dijatuhkan, bukan di tengah layar.
+  const lastPoint = useRef<{ x: number; y: number } | null>(null);
+  const topbarRef = useRef<HTMLDivElement>(null);
 
   const levels = useMemo(() => levelsFromPicks(config, picks), [config, picks]);
   const level = levels[levelIndex];
@@ -292,6 +360,12 @@ export default function GameShell({
     setEarned(earnedNow);
     sfx('correct');
     setFeedback('correct');
+    // P1: percikan di titik jawaban, bintang yang didapat terbang ke
+    // penghitung level di atas, dan getar halus (Android).
+    const pt = lastPoint.current ?? { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    sparkleAt(pt.x, pt.y);
+    flyStars(pt.x, pt.y, topbarRef.current?.querySelector('[data-progress-active]') ?? null, stars);
+    buzz(24);
 
     const go = () => {
       setFeedback(null);
@@ -506,7 +580,11 @@ export default function GameShell({
     const total = earned.reduce<number>((s, x) => s + x, 0);
     return (
       <div className="game-center">
-        <PartyPic />
+        {config.project ? (
+          <ProjectBook title={config.project.title} stamps={levels.map((l) => l.stamp)} />
+        ) : (
+          <PartyPic />
+        )}
         <h1>Selamat!</h1>
         <StarsRow stars={starsForMistakes(0)} />
         <p style={{ fontSize: 22 }}>
@@ -552,14 +630,30 @@ export default function GameShell({
   if (!level) return null;
 
   return (
-    <div className="game-screen">
-      <div className="game-topbar">
+    <div
+      className="game-screen"
+      onPointerDownCapture={(e) => {
+        lastPoint.current = { x: e.clientX, y: e.clientY };
+        popTap(e.target);
+      }}
+      onPointerUpCapture={(e) => {
+        // Jawaban drag-drop "terjadi" di titik jari dilepas, bukan disentuh.
+        lastPoint.current = { x: e.clientX, y: e.clientY };
+      }}
+    >
+      <div className="game-topbar" ref={topbarRef}>
         <button className="btn" onClick={onExit} aria-label="Kembali">
           <BackIcon size={26} />
         </button>
         {/* A picked level plays alone: one lone dot says nothing, but the
             empty row keeps the back/🔊 buttons in their usual corners. */}
-        {levels.length > 1 ? (
+        {config.project ? (
+          <ProjectStrip
+            stamps={levels.map((l) => l.stamp)}
+            filled={earned.length}
+            current={levelIndex}
+          />
+        ) : levels.length > 1 ? (
           <LevelDots total={levels.length} current={levelIndex} />
         ) : (
           <div className="level-dots" />

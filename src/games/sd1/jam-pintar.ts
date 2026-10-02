@@ -1,5 +1,6 @@
 import type { ClockSpec, GameConfig, GameLevel, TapChoice } from '@/engine/core/types';
 import { terbilang } from '@/games/numbers';
+import { halfToward as halfTowardHour } from '@/games/time';
 
 /**
  * "Jam Pintar" (SD Kelas 1 & 2) — membaca jam: jam tepat, setengah jam,
@@ -58,9 +59,10 @@ const spoken = (x: Time) =>
 
 /**
  * Sebutan "setengah" ala Indonesia: 07.30 dibaca "setengah DELAPAN" —
- * setengah jalan MENUJU jam berikutnya, bukan setengah setelah jam ini.
+ * setengah jalan MENUJU jam berikutnya. Aturannya tinggal di `src/games/time.ts`
+ * (dipakai juga Waktu Tepat `sd2`).
  */
-const halfToward = (x: Time) => `setengah ${NAMES[x.h === 12 ? 1 : x.h + 1]!}`;
+const halfToward = (x: Time) => halfTowardHour(x.h);
 
 /* ---------- Pembangun varian (id diisi oleh slot()) ---------- */
 

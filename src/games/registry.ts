@@ -310,6 +310,18 @@ export const games: GameMeta[] = [
     template: 'tap-answer',
     load: () => import('@/games/sd2/detektif-data'),
   },
+  {
+    id: 'waktu-tepat',
+    group: 'sd2',
+    title: 'Waktu Tepat',
+    emoji: '⏱️',
+    // Muka jam SVG yang sama dengan yang diputar di dalam game. Pukul 07.15
+    // (bukan 10.10 milik Jam Pintar) — jam pertama hari Kancil, dan jarum di
+    // angka 3 langsung terbaca "seperempat", materi pembuka game ini.
+    iconClock: { h: 7, m: 15 },
+    template: 'clock-set',
+    load: () => import('@/games/sd2/waktu-tepat'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId): GameMeta[] {

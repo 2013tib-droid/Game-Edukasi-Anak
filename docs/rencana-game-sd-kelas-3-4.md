@@ -400,6 +400,12 @@ yang sudah dijual) ikut terangkat tanpa menyentuh config-nya.
 | P4 | **Misi besar** | level terakhir tiap sesi menggabungkan dua-tiga keterampilan + tokoh yang berterima kasih | kecil (config) | cukup slot terakhir berurutan tetap, bukan ikut diundi `sessionLevels` |
 | P5 | **Album stiker** | satu stiker per game yang ditamatkan, dipajang di portal | sedang | **dihitung dari bintang yang sudah tersimpan** — nol data baru, jadi Kebijakan Privasi tidak berubah |
 
+**Status (2026-10-02):** **P1 SELESAI** (`src/engine/ui/juice.ts`, berlaku di
+semua game termasuk TK & SD Kelas 1 & 2 — atas permintaan pemilik). **P3
+SELESAI sebagai fitur engine** (`GameConfig.project` + `GameLevel.stamp`),
+pemakai pertamanya Waktu Tepat; game lama belum memakainya. P2, P4 (selain di
+Waktu Tepat), P5 belum.
+
 Urutan kerja yang disarankan: **P1 dulu** (murah, langsung terasa di semua 25
 game), lalu P2 & P3 sambil membangun game premium pertama.
 
@@ -644,7 +650,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | 2 | Lompat Katak | `lompat-katak` | rencana |
 | 3 | Bagi Kue | `bagi-kue` | rencana |
 | 4 | Ukur Yuk | `ukur-yuk` | ✅ sudah ada (2026-09-30), narasi SUDAH dirender (render #21, 38 baris) — 9 slot × 55 varian, urutan tetap |
-| 5 | Waktu Tepat | `waktu-tepat` | rencana |
+| 5 | Waktu Tepat | `waktu-tepat` | ✅ sudah ada (2026-10-02) — **versi premium pertama** "Sehari Bersama Kancil": template baru `clock-set` (putar jarum), 9 slot × 54 varian, urutan tetap, proyek sesi "Buku Harian Kancil" (P3); narasi belum dirender (render #23, 41 baris). Kalender & hari–minggu belum. |
 | 6 | Toko Kembalian | `toko-kembalian` | ✅ sudah ada (2026-09-30), narasi belum dirender (render #20) — **demo gratis `sd2`**, belum masuk `FREE_GAME_IDS` |
 | 7 | Detektif Data | `detektif-data` | ✅ sudah ada (2026-10-02), narasi belum dirender (render #22, 47 baris) — 9 slot × 54 varian, urutan tetap; fitur engine `TapAnswerData.chart` / `TapChoice.chart` (`Chart.tsx`) |
 | 8 | Detektif Bacaan | `detektif-bacaan` | rencana |

@@ -141,6 +141,10 @@ for (const config of mod.configs) {
     const voice = isStory ? STORY_VOICE : DEFAULT_VOICE;
     add(level.narration, config.id, voice);
 
+    // clock-set (Waktu Tepat): later steps and the closing question speak too.
+    for (const step of level.data?.steps ?? []) add(step.say, config.id, voice);
+    add(level.data?.ask?.prompt, config.id, voice);
+
     // Story pages carry their own spoken text, on top of the level narration.
     const pages = level.data?.pages;
     if (!Array.isArray(pages)) continue;

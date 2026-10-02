@@ -20,7 +20,8 @@ export type TemplateId =
   | 'path-trace' // susuri jalan dengan jari (antar kendaraan ke tujuan)
   | 'puzzle' // susun kepingan gambar sampai utuh
   | 'tap-picture' // sentuh bagian yang benar pada satu gambar (anggota tubuh)
-  | 'cashier'; // tarik uang ke laci sampai jumlahnya pas (Toko Kembalian)
+  | 'cashier' // tarik uang ke laci sampai jumlahnya pas (Toko Kembalian)
+  | 'clock-set'; // putar jarum panjang dengan jari (Waktu Tepat)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -672,6 +673,70 @@ export interface CashierData {
   tray: 'laci' | 'tangan' | 'celengan';
 }
 
+/**
+ * Waktu dalam sehari untuk template `clock-set`: `h` 0–23 (format 24 jam),
+ * `m` 0–59. Muka jamnya tetap 12 jam — `h` 24 jam dipakai supaya "pukul tujuh
+ * malam" (19.00) dan "pukul tujuh pagi" (07.00) tidak dianggap sama.
+ */
+export interface DayTime {
+  h: number;
+  m: number;
+}
+
+/**
+ * Satu tugas memutar jarum di template `clock-set`. Anak memutar jarum
+ * PANJANG; jarum pendek ikut bergerak sendiri (60 menit = 1 jam).
+ */
+export interface ClockStep {
+  /** Waktu yang harus ditunjukkan jam sebelum tombol "Cocok!" diterima. */
+  to: DayTime;
+  /**
+   * Gambar BUSUR WAKTU dari posisi jam saat langkah ini dimulai sampai posisi
+   * jarum sekarang — "tiga puluh menit" jadi setengah lingkaran yang terlihat.
+   * Untuk soal lama kegiatan.
+   */
+  arc?: boolean;
+  /**
+   * Tulisan jam digital besar di atas jam ("08.40"), untuk soal digital →
+   * analog. Tulisan layar saja, tidak pernah dibacakan — boleh berdigit.
+   */
+  show?: string;
+  /**
+   * Kalimat untuk langkah KE-2 dan seterusnya (langkah pertama memakai
+   * `narration` level). Dibacakan, jadi TANPA digit.
+   */
+  say?: string;
+}
+
+/**
+ * Template `clock-set` (Waktu Tepat): anak MEMEGANG jamnya — memutar jarum
+ * panjang dengan jari — bukan memilih satu dari tiga kartu jam.
+ *
+ * Satu level = satu kegiatan dalam hari Kancil: nol, satu, atau beberapa
+ * langkah memutar jarum (`steps`, dikerjakan berurutan dan bersambung dari
+ * posisi langkah sebelumnya), lalu boleh ditutup satu pertanyaan (`ask`).
+ * `steps: []` = jamnya diam dan cuma dibaca (soal analog → digital).
+ */
+export interface ClockSetData {
+  /** Posisi jam saat level dimulai. */
+  from: DayTime;
+  steps: ClockStep[];
+  /**
+   * Pertanyaan sesudah semua langkah selesai, dijawab dengan mengetuk salah
+   * satu pilihan tulisan. Pengecohnya dari kesalahan khas (jarum tertukar,
+   * angka di bawah jarum panjang dibaca sebagai menit, 09.15 − 08.45 = 70).
+   */
+  ask?: {
+    /** Dibacakan — TANPA digit. */
+    prompt: string;
+    choices: { text: string; correct?: boolean }[];
+  };
+  /** Cincin luar 13–24 (kelas 4, jam 24): muncul saat hari sudah sore. */
+  ring24?: boolean;
+  /** Latar tempat kegiatan ini (pagi di rumah, siang di kota, malam…). */
+  scene?: SceneId;
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -684,6 +749,7 @@ export interface LevelDataMap {
   puzzle: PuzzleData;
   'tap-picture': TapPictureData;
   cashier: CashierData;
+  'clock-set': ClockSetData;
 }
 
 /* ---------- Game config ---------- */
@@ -738,12 +804,33 @@ export interface LevelPicker {
   again?: string;
 }
 
+/**
+ * PROYEK SESI (lapisan premium P3, docs/rencana-game-sd-kelas-3-4.md 2b.2):
+ * satu benda yang terbangun selama satu sesi main — tiap level yang benar
+ * menambah satu bagian (`GameLevel.stamp`), dan layar "Selamat!"
+ * memperlihatkan hasilnya utuh. Saat dipasang, deretan titik level di atas
+ * layar diganti halaman-halaman proyek ini, jadi tidak memakan tinggi layar.
+ */
+export interface ProjectSpec {
+  /** Nama proyeknya, mis. "Buku Harian Kancil". */
+  title: string;
+}
+
+/** Bagian proyek sesi yang didapat dari satu level — lihat `ProjectSpec`. */
+export interface LevelStamp {
+  emoji: string;
+  /** Keterangan pendek di bawahnya (mis. "07.15"). Tulisan layar saja. */
+  label?: string;
+}
+
 export interface GameLevel<T extends TemplateId = TemplateId> {
   id: string;
   /** Narrated instruction (TTS/speechSynthesis) — every level must have one. */
   narration: string;
   /** Only for games with `chooseLevel` — how this level looks on the picker. */
   card?: LevelCard;
+  /** Bagian proyek sesi dari level ini — hanya untuk game ber-`project`. */
+  stamp?: LevelStamp;
   data: LevelDataMap[T];
 }
 
@@ -786,6 +873,8 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
   sessionLevels?: number;
   /** Let the child pick the level from a card grid — see `LevelPicker`. */
   chooseLevel?: LevelPicker;
+  /** Proyek sesi — lihat `ProjectSpec`. */
+  project?: ProjectSpec;
 }
 
 /**
@@ -800,6 +889,8 @@ export type MixedLevel = {
     narration: string;
     /** See `GameLevel.card` — only used by games with `chooseLevel`. */
     card?: LevelCard;
+    /** See `GameLevel.stamp`. */
+    stamp?: LevelStamp;
     template: T;
     data: LevelDataMap[T];
   };
@@ -823,6 +914,8 @@ export interface MixedGameConfig {
   sessionLevels?: number;
   /** See `GameConfig.chooseLevel`. */
   chooseLevel?: LevelPicker;
+  /** See `GameConfig.project`. */
+  project?: ProjectSpec;
 }
 
 /** Either kind of game — what the shell, registry, and pages accept. */
