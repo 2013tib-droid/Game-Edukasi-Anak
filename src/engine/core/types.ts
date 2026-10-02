@@ -92,6 +92,12 @@ export interface TapChoice {
   shape?: ShapeSpec;
   /** Analog clock face with numerals drawn as SVG (Jam Pintar). */
   clock?: ClockSpec;
+  /**
+   * Diagram batang MINI di kartu jawaban (Detektif Data "diagram mana yang
+   * cocok dengan tabel?"). Hanya `kind: 'bar'`; kartunya otomatis memakai
+   * grid lebar dua kolom seperti kartu bergambar.
+   */
+  chart?: BarChartSpec;
   correct?: boolean;
 }
 
@@ -187,6 +193,15 @@ export interface TapAnswerData {
    * benda di atas penggaris selalu persis sepanjang angka di datanya.
    */
   measure?: MeasureSpec;
+  /**
+   * Data statistik di atas kartu jawaban (Detektif Data, `sd2`): tabel turus,
+   * piktogram, diagram batang, tabel angka, atau deret data. Config cuma
+   * menyebut NILAINYA per kategori; gambarnya digambar engine
+   * (`src/engine/ui/Chart.tsx`), jadi batang selalu persis setinggi datanya.
+   * Diagram batang SENGAJA tanpa angka di atas batang — itu jawaban bocor;
+   * yang dibaca anak garis bantu & angka di sumbunya.
+   */
+  chart?: ChartSpec;
   choices: TapChoice[]; // 2–4, exactly one with correct: true
 }
 
@@ -505,6 +520,45 @@ export type MeasureSpec =
   | { kind: 'grid'; rows: string[] }
   /** Persegi panjang berlabel panjang & lebar (keliling kebun/lapangan). */
   | { kind: 'rect'; w: number; h: number; unit: 'cm' | 'm' };
+
+/**
+ * Satu kategori data statistik (Detektif Data): gambarnya (id item registry,
+ * `src/engine/ui/items.ts`), namanya, dan nilainya. Maksimal 4 kategori per
+ * diagram — sesuai kurikulum Fase B dan batas yang muat di HP 320 px.
+ */
+export interface ChartRow {
+  item: string;
+  label: string;
+  value: number;
+}
+
+/**
+ * Diagram batang tegak. Garis bantu tiap `step`, angka di sumbu tiap
+ * `step × (labelEvery ?? 1)`, puncak sumbu `max` (kelipatan `step`).
+ */
+export interface BarChartSpec {
+  kind: 'bar';
+  rows: ChartRow[];
+  step: number;
+  max: number;
+  labelEvery?: number;
+}
+
+/** Lihat `TapAnswerData.chart`. */
+export type ChartSpec =
+  /** Tabel turus: gambar + nama + turus (berikat lima). Tanpa kolom angka. */
+  | { kind: 'tally'; rows: ChartRow[] }
+  /**
+   * Piktogram: gambar kategori diulang. `per` = nilai SATU gambar (1 atau 2;
+   * nilai ganjil pada `per: 2` digambar setengah gambar). Keterangan
+   * "gambar = per" selalu ikut tergambar.
+   */
+  | { kind: 'picto'; rows: ChartRow[]; per: 1 | 2 }
+  | BarChartSpec
+  /** Tabel angka mendatar: satu kolom per kategori (gambar di atas angka). */
+  | { kind: 'table'; rows: ChartRow[] }
+  /** Deret data mentah (mis. nilai ulangan) dengan judul pendek — soal modus. */
+  | { kind: 'list'; title: string; values: number[] };
 
 /**
  * Bagian tanaman yang bisa disentuh (Kebun Ilmu, sd2). Geometrinya di

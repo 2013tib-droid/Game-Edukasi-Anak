@@ -302,6 +302,14 @@ export const games: GameMeta[] = [
     template: 'tap-answer',
     load: () => import('@/games/sd2/ukur-yuk'),
   },
+  {
+    id: 'detektif-data',
+    group: 'sd2',
+    title: 'Detektif Data',
+    emoji: '📊',
+    template: 'tap-answer',
+    load: () => import('@/games/sd2/detektif-data'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId): GameMeta[] {

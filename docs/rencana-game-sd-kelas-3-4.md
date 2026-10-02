@@ -400,7 +400,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | 4 | Ukur Yuk | `ukur-yuk` | ✅ sudah ada (2026-09-30), narasi SUDAH dirender (render #21, 38 baris) — 9 slot × 55 varian, urutan tetap |
 | 5 | Waktu Tepat | `waktu-tepat` | rencana |
 | 6 | Toko Kembalian | `toko-kembalian` | ✅ sudah ada (2026-09-30), narasi belum dirender (render #20) — **demo gratis `sd2`**, belum masuk `FREE_GAME_IDS` |
-| 7 | Detektif Data | `detektif-data` | rencana |
+| 7 | Detektif Data | `detektif-data` | ✅ sudah ada (2026-10-02), narasi belum dirender (render #22, 47 baris) — 9 slot × 54 varian, urutan tetap; fitur engine `TapAnswerData.chart` / `TapChoice.chart` (`Chart.tsx`) |
 | 8 | Detektif Bacaan | `detektif-bacaan` | rencana |
 | 9 | Susun Kalimat | `susun-kalimat` | rencana |
 | 10 | Kebun Ilmu | `kebun-ilmu` | ✅ sudah ada (2026-09-29), narasi belum dirender (render #19) |
