@@ -11,6 +11,9 @@ import Kid, { KID_CUE_FRAMES } from '@/engine/ui/Kid';
 // Alat ukur (Ukur Yuk) cuma dipakai satu game — dipisah jadi chunk sendiri
 // supaya game tap-answer lain tidak ikut mengunduhnya.
 const Measure = lazy(() => import('@/engine/ui/Measure'));
+// Data statistik (Detektif Data) — alasan yang sama: chunk sendiri.
+const Chart = lazy(() => import('@/engine/ui/Chart'));
+const BarChart = lazy(() => import('@/engine/ui/Chart').then((m) => ({ default: m.BarChart })));
 
 /** Human-readable operator glyphs for equation picture boards. */
 const OP_GLYPH: Record<BoardOp, string> = {
@@ -120,7 +123,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
   // grid. Clocks belong here too — their numerals only stay legible on a phone
   // if the card is wide.
   const pictureChoices = choices.every(
-    (c) => (c.emoji || c.item || c.clock) && !c.text && !c.shape,
+    (c) => (c.emoji || c.item || c.clock || c.chart) && !c.text && !c.shape,
   );
 
   function handleTap(id: string, correct: boolean | undefined) {
@@ -179,6 +182,13 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
         {level.data.measure && (
           <Suspense fallback={null}>
             <Measure spec={level.data.measure} />
+          </Suspense>
+        )}
+        {/* Detektif Data: turus, piktogram, diagram batang, tabel, deret —
+            digambar engine dari NILAI di data soal (Chart.tsx). */}
+        {level.data.chart && (
+          <Suspense fallback={null}>
+            <Chart spec={level.data.chart} />
           </Suspense>
         )}
         {/* Anggota Tubuh "ada berapa mata?": gambar anak yang sama dengan
@@ -253,7 +263,13 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
             ))}
           </div>
         )}
-        <div className={'choice-grid' + (pictureChoices ? ' choice-grid--pics' : '')}>
+        <div
+          className={
+            'choice-grid' +
+            (pictureChoices ? ' choice-grid--pics' : '') +
+            (choices.some((c) => c.chart) ? ' choice-grid--charts' : '')
+          }
+        >
           {choices.map((c) => (
             <button
               key={c.id}
@@ -270,6 +286,11 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
                 />
               )}
               {c.clock && <Clock time={c.clock} className="choice-clock" />}
+              {c.chart && (
+                <Suspense fallback={null}>
+                  <BarChart spec={c.chart} mini />
+                </Suspense>
+              )}
               {c.item ? (
                 <ItemPic id={c.item} className="choice-img" fallbackClassName="choice-emoji" />
               ) : (

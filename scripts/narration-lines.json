@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-01",
-  "count": 1103,
-  "chars": 48945,
+  "generated": "2026-10-02",
+  "count": 1150,
+  "chars": 51365,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -1837,6 +1837,429 @@
       "voice": "ardi",
       "games": [
         "cerita-kancil"
+      ]
+    },
+    {
+      "key": "27e8cd10ad24",
+      "text": "Bekal apa yang paling banyak dibawa?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "e9fe33a0c272",
+      "text": "Berapa jumlah semuanya?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "de755dbdaa03",
+      "text": "Berapa selisih apel dan jeruk?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "369629bff210",
+      "text": "Berapa selisih bebek dan kelinci?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "1dfdaad82f33",
+      "text": "Berapa selisih bus dan sepeda?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "8cc3dceba948",
+      "text": "Buah apa yang paling banyak disukai?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "77740ffdb253",
+      "text": "Buah apa yang paling sedikit disukai?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "7cc29ea5ae44",
+      "text": "Diagram mana yang cocok dengan tabel ini?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "6e7048f3f485",
+      "text": "Hewan apa yang paling banyak dipelihara?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "eef685bf42fc",
+      "text": "Hewan apa yang paling sedikit disukai?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "9db75ffcdbc3",
+      "text": "Ini banyak buku yang dibaca sembilan anak. Bilangan berapa yang paling sering muncul?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "543d21613df2",
+      "text": "Ini banyak saudara delapan anak. Bilangan berapa yang paling sering muncul?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "a8dae5d379cc",
+      "text": "Ini nilai ulangan delapan anak. Nilai berapa yang paling sering muncul?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "5fd842033f48",
+      "text": "Ini tinggi tanaman milik delapan anak. Tinggi berapa yang paling sering muncul?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "b5a7f2bf8ca1",
+      "text": "Ini ukuran sepatu delapan anak. Ukuran berapa yang paling sering muncul?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "d845396aab1b",
+      "text": "Ini umur delapan anak. Umur berapa yang paling sering muncul?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "244891298c9f",
+      "text": "Kendaraan apa yang paling sedikit dinaiki?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "0564d9eb511d",
+      "text": "Lihat diagram batangnya. Berapa anak yang membawa jagung?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "63771b0fdca7",
+      "text": "Lihat diagram batangnya. Berapa anak yang memelihara bebek?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "939a670bcc0e",
+      "text": "Lihat diagram batangnya. Berapa anak yang naik motor?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "f48b15ffbd06",
+      "text": "Lihat diagram batangnya. Berapa anak yang suka apel?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "4e539ad7aeb1",
+      "text": "Lihat diagram batangnya. Berapa anak yang suka jerapah?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "73a332f4a84d",
+      "text": "Lihat diagram batangnya. Berapa anak yang suka semangka?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "a3a251dbd655",
+      "text": "Lihat piktogramnya. Berapa anak yang membawa jagung?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "d61a98f00450",
+      "text": "Lihat piktogramnya. Berapa anak yang memelihara bebek?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "a0a664f16fb4",
+      "text": "Lihat piktogramnya. Berapa anak yang naik sepeda?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "78a3c5925f64",
+      "text": "Lihat piktogramnya. Berapa anak yang suka harimau?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "467b4c94465d",
+      "text": "Lihat piktogramnya. Berapa anggur yang terjual?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "71f9ad5c955a",
+      "text": "Lihat piktogramnya. Berapa apel yang terjual?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "1780f78961cb",
+      "text": "Lihat turusnya. Berapa anak yang membawa telur?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "85efc0d31577",
+      "text": "Lihat turusnya. Berapa anak yang memelihara kucing?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "9f4e23bbaddb",
+      "text": "Lihat turusnya. Berapa anak yang naik bus?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "66590888fbf6",
+      "text": "Lihat turusnya. Berapa anak yang suka anggur?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "5efbdd3d299e",
+      "text": "Lihat turusnya. Berapa anak yang suka apel?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "34fb439f0753",
+      "text": "Lihat turusnya. Berapa anak yang suka jerapah?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "a94a44177a71",
+      "text": "Satu gambar sama dengan dua. Berapa anak yang membawa roti?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "58067e272f4a",
+      "text": "Satu gambar sama dengan dua. Berapa anak yang memelihara bebek?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "a63562249a98",
+      "text": "Satu gambar sama dengan dua. Berapa anak yang naik sepeda?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "da1f1ad582f5",
+      "text": "Satu gambar sama dengan dua. Berapa anak yang suka panda?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "01c4d1d76812",
+      "text": "Satu gambar sama dengan dua. Berapa anggur yang terjual?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "57edc6c04d6f",
+      "text": "Satu gambar sama dengan dua. Berapa apel yang terjual?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "11d38c833b56",
+      "text": "Satu garis bernilai lima. Berapa anak yang membawa nasi?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "32293f9e9956",
+      "text": "Satu garis bernilai lima. Berapa anak yang memelihara ayam?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "be698cb436fb",
+      "text": "Satu garis bernilai lima. Berapa anak yang suka apel?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "ad07f7566cea",
+      "text": "Satu garis bernilai sepuluh. Berapa anak yang naik sepeda?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "ba23e8c2b866",
+      "text": "Satu garis bernilai sepuluh. Berapa anak yang suka panda?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
+      ]
+    },
+    {
+      "key": "28957e3cb8f2",
+      "text": "Satu garis bernilai sepuluh. Berapa semangka yang terjual?",
+      "scope": "detektif-data",
+      "voice": "gadis",
+      "games": [
+        "detektif-data"
       ]
     },
     {
