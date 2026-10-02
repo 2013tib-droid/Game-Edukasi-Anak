@@ -102,6 +102,8 @@ dan jebakan desain soal yang sudah bisa dilihat sekarang.
 ---
 
 ### 1. Istana Bilangan 🏰
+> ⭐ **Cara mainnya DIGANTI versi premium — lihat bagian 2b.** Materi & jebakan di bawah tetap berlaku.
+
 `id: istana-bilangan` · **mixed** (tap-answer + drag-drop) · nilai tempat, membandingkan, pembulatan
 
 > **Deskripsi:** Bangun istana dari balok ratusan, puluhan, dan satuan! Anak
@@ -120,6 +122,8 @@ dan jebakan desain soal yang sudah bisa dilihat sekarang.
   3–4 di papan, kalau tidak HP 360 px scroll (pelajaran papan 9 gambar Kali Kilat).
 
 ### 2. Lompat Katak 🐸
+> ⭐ **Cara mainnya DIGANTI versi premium — lihat bagian 2b.** Materi & jebakan di bawah tetap berlaku.
+
 `id: lompat-katak` · **tap-answer** + garis bilangan · tambah & kurang sampai 1.000
 
 > **Deskripsi:** Si katak melompat di garis bilangan! Tiap lompatan adalah
@@ -139,6 +143,8 @@ dan jebakan desain soal yang sudah bisa dilihat sekarang.
   dan **mengurangi angka kecil dari besar per kolom** (523 − 187 = 464).
 
 ### 3. Bagi Kue 🍰
+> ⭐ **Cara mainnya DIGANTI versi premium — lihat bagian 2b.** Materi & jebakan di bawah tetap berlaku.
+
 `id: bagi-kue` · **mixed** (tap-answer + drag-drop) · pecahan & desimal awal
 
 > **Deskripsi:** Kue, pizza, dan martabak dibagi sama rata! Anak mengenal ½, ⅓,
@@ -186,6 +192,8 @@ dan jebakan desain soal yang sudah bisa dilihat sekarang.
   mengurangi titik awal** (benda dari 2 sampai 9 dibaca 9 cm).
 
 ### 5. Waktu Tepat ⏱️
+> ⭐ **Cara mainnya DIGANTI versi premium — lihat bagian 2b.** Materi & jebakan di bawah tetap berlaku.
+
 `id: waktu-tepat` · **tap-answer** + `Clock.tsx` · menit, durasi, jam 24, kalender
 
 > **Deskripsi:** Lanjutan Jam Pintar! Jarum panjang sekarang menunjuk menit:
@@ -259,6 +267,8 @@ dan jebakan desain soal yang sudah bisa dilihat sekarang.
   (prinsip Kenal Huruf). Sumbu diberi garis bantu supaya bisa dibaca tanpa label.
 
 ### 8. Detektif Bacaan 🔍
+> ⭐ **Cara mainnya DIGANTI versi premium — lihat bagian 2b.** Materi & jebakan di bawah tetap berlaku.
+
 `id: detektif-bacaan` · **tap-answer** dengan teks bacaan · membaca pemahaman
 
 > **Deskripsi:** Baca teks pendek, lalu pecahkan misterinya! Siapa tokohnya,
@@ -280,6 +290,8 @@ dan jebakan desain soal yang sudah bisa dilihat sekarang.
   ditebak tanpa membaca. Teks ±4–5 kalimat + 3 pilihan harus muat 360×640.
 
 ### 9. Susun Kalimat ✏️
+> ⭐ **Cara mainnya DIGANTI versi premium — lihat bagian 2b.** Materi & jebakan di bawah tetap berlaku.
+
 `id: susun-kalimat` · **spell (kata)** + tap-answer · kalimat, tanda baca, kelas kata, kata baku
 
 > **Deskripsi:** Kata-kata berantakan, ayo disusun jadi kalimat yang benar!
@@ -339,7 +351,241 @@ dan jebakan desain soal yang sudah bisa dilihat sekarang.
 
 ---
 
+## 2b. ARAH PREMIUM untuk game yang belum dibuat (keinginan pemilik 2026-10-02)
+
+Permintaan pemilik: *"sisa game yang belum dibuat lebih banyak interaksi, lebih
+menarik, dan seperti game mahal yang kalau subscribe harganya ratusan ribu."*
+
+**Bagian ini MENGGANTIKAN rancangan di bagian 2 untuk enam game yang belum
+dibuat** (Istana Bilangan, Lompat Katak, Bagi Kue, Waktu Tepat, Detektif
+Bacaan, Susun Kalimat). Materi kurikulum, batas bilangan 1.000, dan jebakan
+desain soal di bagian 2 TETAP berlaku — yang berubah adalah CARA anak
+memainkannya. Kalau bagian 2 dan bagian ini bertentangan soal cara bermain,
+**bagian ini yang menang.**
+
+**Status: USULAN.** Belum ada yang diputuskan pemilik selain arahnya. Daftar
+keputusan yang ditunggu ada di 2b.6.
+
+### 2b.1 Apa yang membuat game anak terasa "mahal"
+
+Diambil dari pola aplikasi berlangganan (DragonBox, Khan Academy Kids, Prodigy,
+Endless, Toca Boca), lalu disaring dengan aturan proyek ini:
+
+| Ciri game mahal | Ciri game murah | Artinya untuk kita |
+|---|---|---|
+| Anak **memegang** konsepnya: memotong kue, memutar jarum, menyusun balok | Anak **memilih** satu dari tiga kartu | Tiap game sisa punya cara main sendiri, bukan tap-answer lagi |
+| Benda di layar **bereaksi**: memantul, berbunyi, bergabung, berubah | Layar diam sampai jawaban dinilai | Animasi & bunyi untuk SETIAP sentuhan, bukan cuma saat benar |
+| Ada **dunia yang tumbuh** selama main: istana makin tinggi, kereta makin panjang | Level berganti tanpa bekas | Tiap game punya "proyek" yang terbangun selama satu sesi |
+| **Banyak jalan benar** (458 → 693 boleh +200+30+5 atau +235) | Satu jawaban, satu cara | Nilai hasilnya, bukan langkahnya |
+| Anak **tak pernah buntu**: petunjuk muncul bertahap | "Salah, coba lagi" berulang tanpa bantuan | Petunjuk bertingkat sesudah dua kali salah |
+| **Tokoh** yang punya kebutuhan ("Pak Beruang pesan ¾ martabak") | Soal tanpa alasan | Tiap game punya tokoh hewan pemberi tugas |
+| **Puncak** di akhir sesi: soal gabungan yang terasa seperti misi | Level terakhir sama dengan level pertama | Level terakhir tiap sesi = "misi besar" |
+
+**Yang TIDAK kita tiru** (walau game mahal memakainya): iklan, pembelian di
+dalam game, kotak hadiah acak, penghitung mundur yang menghukum, nyawa yang
+habis, dan peringkat antar-anak. Semuanya bertentangan dengan "Standar UX Anak"
+di CLAUDE.md. Premium di sini = **lebih kaya interaksinya**, bukan lebih
+menekan anaknya.
+
+### 2b.2 Lapisan premium untuk SEMUA game (fitur engine, sekali bangun)
+
+Lima hal ini dikerjakan di engine, jadi game lama (termasuk TK & SD Kelas 1 & 2
+yang sudah dijual) ikut terangkat tanpa menyentuh config-nya.
+
+| # | Fitur | Isinya | Biaya | Catatan |
+|---|---|---|---|---|
+| P1 | **"Hidup" saat disentuh** | percikan bintang saat benar, kartu memantul saat disentuh, getar halus (`navigator.vibrate`, Android saja), angka bintang yang "terbang" ke penghitung | kecil | dimatikan oleh `prefers-reduced-motion`; CSS transform + rAF saja, tanpa library (HP murah) |
+| P2 | **Petunjuk bertingkat** | salah ke-2 → bagian yang perlu dilihat menyala; salah ke-3 → satu langkah diperlihatkan | sedang (per template) | menggantikan "coba lagi" yang berulang tanpa bantuan; bintang tetap dihitung seperti sekarang |
+| P3 | **Proyek sesi** | tiap level benar menambah satu bagian gambar (menara, gerbong, kue di etalase); layar "Selamat!" memperlihatkan hasil utuhnya | sedang | `GameConfig.project`: daftar tahap gambar, satu per level; SVG engine, bukan aset impor |
+| P4 | **Misi besar** | level terakhir tiap sesi menggabungkan dua-tiga keterampilan + tokoh yang berterima kasih | kecil (config) | cukup slot terakhir berurutan tetap, bukan ikut diundi `sessionLevels` |
+| P5 | **Album stiker** | satu stiker per game yang ditamatkan, dipajang di portal | sedang | **dihitung dari bintang yang sudah tersimpan** — nol data baru, jadi Kebijakan Privasi tidak berubah |
+
+Urutan kerja yang disarankan: **P1 dulu** (murah, langsung terasa di semua 25
+game), lalu P2 & P3 sambil membangun game premium pertama.
+
+### 2b.3 Enam game sisa, versi premium
+
+Pola tiap game: **cara main inti** (yang dipegang anak) → **momen "wah"** →
+**proyek sesi** → **misi besar** → **biaya engine**.
+
+---
+
+#### 1. Istana Bilangan 🏰 → "Pembangun Istana"
+- **Cara main:** anak MENYERET balok ratusan, puluhan, dan satuan ke tiang
+  istana sampai sama dengan bilangan pesanan Raja Singa. Bukan memilih kartu
+  "347", tapi **membangun** 347.
+- **Momen wah — tukar otomatis:** begitu ada **10 kubus satuan**, kubusnya
+  bergabung (animasi menempel) jadi **1 batang puluhan**; 10 batang jadi 1 pelat
+  ratusan. Itulah inti "menyimpan" yang selama ini cuma dihafal anak. Arah
+  sebaliknya juga ada: ketuk batang → pecah jadi 10 kubus (inti "meminjam").
+- **Pembulatan = bukit:** bola diletakkan di garis bilangan berbentuk bukit
+  (350 di puncak) lalu menggelinding ke lembah terdekat — 300 atau 400.
+  Anak melihat KENAPA 349 turun dan 351 naik.
+- **Proyek sesi:** tiap level benar menambah satu bagian istana (gerbang,
+  menara, bendera); misi besar = menyalakan lampu istana.
+- **Engine:** template `cashier` sudah menilai "jumlah isi baki", dompet tak
+  terbatas, dan isi baki bisa dikembalikan — persis yang dibutuhkan.
+  **Generalisasi `cashier` jadi template "baki nilai"** (token uang ATAU balok)
+  + aturan tukar 10→1, ditambah `Blocks.tsx`. Biaya sedang-besar, tapi Toko
+  Kembalian ikut mendapat fitur tukar uang (Rp10.000 → 10 × Rp1.000) gratis.
+
+#### 2. Lompat Katak 🐸 → "Katak Penjelajah"
+- **Cara main:** katak duduk di daun teratai 458, tujuannya teratai 693. Anak
+  menekan tombol lompat **+100 / +10 / +1** (dan −100 / −10 / −1); tiap tekan,
+  katak benar-benar melompat di garis bilangan dengan busur & bunyi "plung".
+  Persamaannya **tersusun sendiri** di bawah: 458 + 100 + 100 + 10 + … = 693.
+- **Banyak jalan benar:** +200+35 atau +235 atau +300−65 sama-sama sampai.
+  Yang dinilai: katak tiba di teratai yang benar. Bintang 3 kalau lompatannya
+  hemat (jumlah lompatan paling sedikit) — dorongan halus ke strategi, bukan
+  hukuman.
+- **Tombol "mundur satu lompat"** — anak boleh memperbaiki tanpa mengulang.
+- **Menaksir:** anak menyeret katak ke kira-kira tempat 398 + 205; diterima
+  dalam rentang toleransi, lalu angka sebenarnya muncul.
+- **Proyek sesi:** setiap teratai yang dicapai tumbuh bunga; misi besar =
+  menyeberangi seluruh kolam (soal cerita dua langkah).
+- **Engine:** template baru `number-hop` (`NumberLine.tsx` + tombol lompat).
+  Narasi lompatan memakai kata ("tambah seratus") yang dirender sekali, dipakai
+  ulang semua level — jumlah rekaman kecil.
+- **Aset:** seni katak WebP (aturan hewan wajib seni) — satu gambar.
+
+#### 3. Bagi Kue 🍰 → "Toko Kue Bu Beruang"
+- **Cara main:** pelanggan hewan datang memesan ("Kelinci pesan seperempat
+  martabak"). Anak **MEMOTONG** dengan menggesek jari melintasi kue — garis
+  potong mengunci ke potongan sama besar — lalu **menyeret potongan** ke piring
+  pelanggan.
+- **Momen wah — tumpuk untuk membandingkan:** potongan ¼ diseret ke atas ½,
+  dan terlihat ia cuma menutupi separuhnya. Pecahan senilai = dua potongan ¼
+  pas menutupi satu ½. Anak melihat ½ > ¼ alih-alih dihafalkan.
+- **Pecahan dari kumpulan:** 12 kue kering dibagi ke 4 piring dengan menyeret
+  — tiap piring berisi ¼.
+- **Desimal (kls 4):** gelas jus dibagi 10 garis; "nol koma lima" = isi sampai
+  garis kelima.
+- **Proyek sesi:** etalase toko terisi kue yang sudah terjual; misi besar =
+  pesta ulang tahun dengan tiga pesanan sekaligus.
+- **Engine:** template baru `fraction-kitchen` + `Fraction.tsx` (SVG, potong
+  bergaris, potongan bisa diseret). Biaya **paling besar** di daftar ini — kalau
+  waktu sempit, pakai versi ringan: memotong saja, tanpa tumpuk.
+
+#### 4. Waktu Tepat ⏱️ → "Sehari Bersama Kancil"
+- **Cara main:** anak **MEMUTAR jarum panjang dengan jari**; jarum pendek ikut
+  bergerak sendiri seperti jam sungguhan (60 menit = 1 jam). Tugasnya: "Kancil
+  berangkat sekolah pukul tujuh lewat seperempat — atur jamnya!"
+- **Momen wah — busur waktu:** saat menghitung lama kegiatan, jarum diputar dari
+  jam berangkat ke jam tiba, dan **busur berwarna** mengisi permukaan jam.
+  "Tiga puluh menit" jadi setengah lingkaran yang kelihatan.
+- **Hari yang berjalan:** level-level satu sesi = satu hari Kancil (bangun →
+  sekolah → main → makan → tidur). **Latar `Scene` ikut berubah**: pagi, siang,
+  senja, malam — latar yang sudah ada di engine.
+- **Jam 24 (kls 4):** cincin luar angka 13–24 muncul saat matahari terbenam.
+- **Proyek sesi:** buku harian Kancil terisi satu halaman per kegiatan; misi
+  besar = menyusun jadwal satu hari.
+- **Engine:** `Clock.tsx` jadi bisa diputar + busur; template baru `clock-set`.
+  Biaya sedang. **Paling murah di antara keenamnya** karena jam & latar sudah ada.
+
+#### 5. Detektif Bacaan 🔍 → "Kasus Detektif Kucing"
+- **Cara main:** Detektif Kucing membawa kasus ("Siapa yang mengambil mangga
+  Pak Kerbau?"). Anak membaca teks pendek lalu **MENYENTUH KALIMAT di dalam
+  teks** yang menjadi bukti — bukan memilih kartu A/B/C. Menyentuh kalimat juga
+  membacakannya, jadi anak yang tersendat membaca tetap terbantu.
+- **Momen wah — papan bukti:** tiap bukti yang ditemukan terbang ke papan kasus
+  (kartu foto + benang merah). Di misi besar, anak menyusun bukti-bukti itu
+  untuk menunjuk pelakunya — deduksi kecil, bukan hafalan.
+- **Kaca pembesar:** teks disapu kaca pembesar yang mengikuti jari — sekadar
+  rasa main detektif, tidak mengubah penilaian.
+- **Kelas 4:** ide pokok (sentuh kalimat utama), fakta vs pendapat (tarik
+  kalimat ke dua map), makna kata dari konteks (sentuh kata).
+- **Proyek sesi:** satu kasus utuh per sesi, ditutup dengan "Kasus Terpecahkan!"
+- **Engine:** template baru `read-find` (teks dengan kalimat/kata yang bisa
+  disentuh; jawaban = id kalimat). Biaya sedang. Tokoh: hewan semua (aturan
+  cerita buatan sendiri). **Seni detektif kucing** perlu dibuat.
+- **Jebakan baru:** kalimat yang bisa disentuh harus selebar target sentuh
+  (≥ 64 px tinggi baris) — teks ±4 kalimat, huruf besar, jarak baris lega.
+
+#### 6. Susun Kalimat ✏️ → "Kereta Kata"
+- **Cara main:** kata-kata adalah **gerbong kereta**. Anak menyeret gerbong ke
+  rel sesuai urutan; lokomotif = kata pertama (berhuruf kapital), gerbong
+  terakhir membawa tanda baca (. ? !).
+- **Momen wah — kereta berangkat:** begitu urutannya benar, kereta melaju
+  sambil **membacakan kalimatnya** satu kata per gerbong yang lewat. Hadiahnya
+  adalah mendengar kalimat buatan sendiri.
+- **Salah urut:** kereta tidak bergerak, sambungan yang salah menyala lembut
+  (petunjuk P2) — tanpa overlay penghukum.
+- **Kelas kata:** "sentuh gerbong yang berisi kata KERJA" → gerbongnya
+  berjoget. **Imbuhan:** tempelkan gerbong kecil "me-"/"ber-" ke kata dasar.
+- **Proyek sesi:** rel kereta makin panjang menembus kota; misi besar =
+  menyusun dua kalimat jadi satu cerita pendek.
+- **Engine:** template baru `word-train` (urutkan dengan seret). Hanya kalimat
+  yang BENAR yang dibacakan — kalimatnya diketahui sebelumnya, jadi bisa
+  dirender Azure; urutan salah tidak pernah dibacakan.
+
+### 2b.4 Dua game BARU yang sama premiumnya (usulan, di luar sepuluh)
+
+Kalau pemilik mau `sd2` lebih dari 11 game (target kelompok 10–15):
+
+- **Misi Robot 🤖 (arah, peta & logika berurutan)** — anak menyusun **deret
+  perintah panah** (maju, belok kiri, belok kanan) lalu menekan "Jalan!" dan
+  robot menjalankannya di peta kota berpetak. Latihan mata angin & denah (Fase B)
+  sekaligus pengenalan berpikir komputasional — jenis game yang paling sering
+  dijual mahal. Engine: template baru `command-grid`. Menggantikan cadangan
+  "Arah & Peta".
+- **Lipat Kubus 📦 (bangun ruang & jaring-jaring)** — anak memilih jaring-jaring
+  lalu melihatnya **terlipat jadi kubus/balok** dalam animasi; misinya membuat
+  kotak kado untuk teman hewan. Engine: SVG lipat semu-3D (pola `Shape.tsx`).
+  Biaya sedang-besar.
+
+### 2b.5 Sentuhan premium untuk game `sd2` yang SUDAH jadi (opsional)
+
+Tidak wajib — game ini sudah bisa dimainkan. Kalau ada waktu sesudah enam game
+di atas:
+- **Toko Kembalian:** antrean pelanggan hewan + rekap "uang hari ini" di akhir
+  sesi (proyek sesi).
+- **Kali Kilat:** slot "kebun larik" — anak menanam bibit berbaris-berkolom
+  untuk membuat 3 × 4 (model luas perkalian).
+- **Detektif Data:** anak **menarik batang diagram** sendiri sampai tingginya
+  sesuai tabel (dari membaca diagram ke membuat diagram).
+- **Ukur Yuk:** anak **menggeser penggaris** sendiri ke benda, bukan membaca
+  penggaris yang sudah terpasang.
+- **Kebun Ilmu:** rantai makanan disusun dengan menyeret (dulu ditunda karena
+  belum ada template urutkan — `word-train` di atas bisa dipakai ulang).
+
+### 2b.6 Harga yang dibayar & keputusan yang ditunggu
+
+**Harga yang disadari:**
+- Dulu menambah game = menulis config. Versi premium = **satu template baru per
+  game** (5 template baru + generalisasi `cashier`). Perkiraan kasar: satu game
+  premium ≈ **2–3 kali kerja** game config biasa.
+- **Seni tokoh** perlu dibuat: katak, Bu Beruang + kue, Detektif Kucing, Raja
+  Singa (singa sudah ada), robot. Prompt gambarnya disiapkan per game.
+- **Narasi lebih banyak** (tokoh berbicara) — tetap di bawah kuota gratis Azure.
+- Animasi harus diuji di HP murah (CPU di-throttle 4–6× saat uji headless).
+
+**Keputusan pemilik yang ditunggu:**
+1. Setuju arah premium ini untuk enam game sisa? (atau sebagian saja)
+2. Lapisan premium P1–P5: mana yang dikerjakan, dan apakah boleh ikut mengubah
+   game TK & SD Kelas 1 & 2 yang sudah dijual?
+3. Dua game baru (Misi Robot, Lipat Kubus): ditambahkan, menggantikan, atau tidak?
+4. Urutan: usulan di 2b.7.
+
+### 2b.7 Urutan kerja yang disarankan
+
+| Urutan | Pekerjaan | Kenapa di sini |
+|---|---|---|
+| 1 | **P1 "hidup" saat disentuh** | murah, langsung terasa di 25 game yang ada |
+| 2 | **Waktu Tepat** (`clock-set`) + P3 proyek sesi | template baru termurah; jadi contoh pola premium untuk game berikutnya |
+| 3 | **Istana Bilangan** (generalisasi `cashier`) | memakai ulang template yang sudah teruji |
+| 4 | **Lompat Katak** (`number-hop`) + P2 petunjuk bertingkat | |
+| 5 | **Susun Kalimat** (`word-train`) | template urutkan ini juga dipakai Kebun Ilmu |
+| 6 | **Detektif Bacaan** (`read-find`) | butuh seni Detektif Kucing |
+| 7 | **Bagi Kue** (`fraction-kitchen`) | paling mahal, paling akhir |
+| 8 | P5 album stiker, P4 misi besar di game lama | |
+| 9 | Misi Robot / Lipat Kubus (kalau disetujui) | |
+
+---
+
 ## 3. Urutan pengerjaan
+
+> **Untuk game yang belum dibuat, urutan terbaru ada di 2b.7.** Tabel di bawah
+> adalah urutan awal 2026-09-29 (game bertanda ✅ di bagian 6 sudah selesai).
 
 `sd2` baru bisa dirilis kalau punya demo, jadi **Toko Kembalian naik ke depan**.
 Sisanya urut dari yang paling sedikit mengubah engine:
@@ -413,7 +659,7 @@ Status (urutan kerja di bagian 3):
 ```
 Kerjakan game "<Nama Game>" untuk SD Kelas 3 & 4 (kelompok sd2).
 Patokannya docs/rencana-game-sd-kelas-3-4.md — baca dulu bagian ⚠️,
-bagian 0, bagian 4, dan bagian game ini.
+bagian 0, bagian 2b (versi premium), bagian 4, dan bagian game ini.
 
 - Mulai dari branch main yang terbaru.
 - sd2 MASIH DEVELOPMENT: draft di groups.json tetap terpasang, jangan
