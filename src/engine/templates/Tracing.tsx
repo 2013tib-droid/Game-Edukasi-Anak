@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { PointerEvent as ReactPointerEvent } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
-import { sfx } from '@/engine/audio/sound';
+import { sfx, speak } from '@/engine/audio/sound';
 import { handwriting, type Stroke } from './glyphStrokes';
 
 /**
@@ -26,6 +26,17 @@ import { handwriting, type Stroke } from './glyphStrokes';
  *   written.
  * - Finished strokes stay on screen in ink, so the letter builds up.
  *
+ * Two cues borrowed from a reference game the owner sent (2026-10-03,
+ * `docs/rencana-referensi-galaksi.md` tahap 1):
+ * - Every stroke that is still to come shows its NUMBER at its starting
+ *   point, so the child sees the order before writing. The current stroke has
+ *   no badge — the pencil already sits on its start — and neither does a later
+ *   stroke that starts at that same spot (B, D, P…): a "2" under the pencil
+ *   reads as "begin here with stroke 2"; when its turn comes the pencil
+ *   itself marks it.
+ * - `repeat` writes the same glyph several times in one level, with a row of
+ *   numbered bubbles showing which round this is. Stars stay per level.
+ *
  * Smoothness: pointer events only record where the finger is; one rAF loop
  * eases the pencil and writes `transform` / `stroke-dashoffset` straight to the
  * DOM. No React re-render while a finger is down — that is what made the road
@@ -45,6 +56,10 @@ const ON_TRACK = 0.75; // × track width — still counts as "on the line"
 const OFF_TRACK = 1.35; // × track width — beyond this the stroke restarts
 const FINISH_AT = 5; // samples from the end that already count as finished
 const FOLLOW = 0.3; // per-frame easing of the pencil toward the finger
+const ROUND_PAUSE = 1100; // ms the finished glyph stays in ink before the next round
+// Said between rounds. An ENGINE line (scripts/extract-narration.mjs), so it
+// has one recording shared by every tracing game.
+const AGAIN_LINE = 'Bagus! Tulis sekali lagi!';
 
 interface Pt {
   x: number;
@@ -58,6 +73,7 @@ function toPath(stroke: Stroke): string {
 
 export default function Tracing({ level, onCorrect, onWrong }: TemplateProps<'tracing'>) {
   const { glyph } = level.data;
+  const rounds = Math.max(1, Math.floor(level.data.repeat ?? 1));
   const hand = useMemo(() => handwriting(glyph, SIZE), [glyph]);
   const paths = useMemo(() => (hand ? hand.strokes.map(toPath) : []), [hand]);
   const track = hand?.width ?? 10;
@@ -74,6 +90,8 @@ export default function Tracing({ level, onCorrect, onWrong }: TemplateProps<'tr
   const [index, setIndex] = useState(0);
   const idx = useRef(0);
   const [solved, setSolved] = useState(false);
+  const [round, setRound] = useState(0);
+  const roundTimer = useRef(0);
 
   const geom = useRef<{ points: Pt[]; length: number }>({ points: [], length: 0 });
   const shown = useRef(0); // drawn position along the stroke (float index)
@@ -154,7 +172,21 @@ export default function Tracing({ level, onCorrect, onWrong }: TemplateProps<'tr
       } else {
         finished.current = true;
         setSolved(true);
-        onCorrect();
+        if (round < rounds - 1) {
+          // Not the last round: let the finished glyph sit in ink for a
+          // moment, then wipe it and start again from the first stroke.
+          sfx('correct');
+          speak(AGAIN_LINE);
+          roundTimer.current = window.setTimeout(() => {
+            idx.current = 0;
+            finished.current = false;
+            setIndex(0);
+            setSolved(false);
+            setRound((r) => r + 1);
+          }, ROUND_PAUSE);
+        } else {
+          onCorrect();
+        }
       }
       return;
     }
@@ -188,7 +220,8 @@ export default function Tracing({ level, onCorrect, onWrong }: TemplateProps<'tr
       if (raf.current) cancelAnimationFrame(raf.current);
       raf.current = 0;
     };
-  }, [glyph, index]); // eslint-disable-line react-hooks/exhaustive-deps
+    // `round` too: a one-stroke glyph stays on index 0 between rounds.
+  }, [glyph, index, round]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // A new glyph: back to the first stroke.
   useEffect(() => {
@@ -196,7 +229,10 @@ export default function Tracing({ level, onCorrect, onWrong }: TemplateProps<'tr
     setIndex(0);
     finished.current = false;
     setSolved(false);
+    setRound(0);
   }, [glyph]);
+
+  useEffect(() => () => window.clearTimeout(roundTimer.current), []);
 
   function svgPoint(e: ReactPointerEvent): Pt {
     const rect = svgRef.current!.getBoundingClientRect();
@@ -236,10 +272,28 @@ export default function Tracing({ level, onCorrect, onWrong }: TemplateProps<'tr
 
   if (!hand) return <div className="game-prompt">{level.narration}</div>;
 
+  const penStart = hand.strokes[index]?.[0];
+  const nearPen = (p: Pt) => !!penStart && Math.hypot(p.x - penStart.x, p.y - penStart.y) < track * 1.2;
+
   return (
-    <div className="tr-wrap">
+    <div className={`tr-wrap${rounds > 1 ? ' tr-wrap--rounds' : ''}`}>
       <div className="game-prompt">{level.narration}</div>
       <div className="game-area">
+        {rounds > 1 && (
+          <div className="trace-rounds" aria-label={`Tulisan ke-${round + 1} dari ${rounds}`}>
+            {Array.from({ length: rounds }, (_, i) => {
+              const done = i < round || (i === round && solved);
+              return (
+                <span
+                  key={i}
+                  className={`trace-round${done ? ' trace-round--done' : i === round ? ' trace-round--now' : ''}`}
+                >
+                  {done ? '✓' : i + 1}
+                </span>
+              );
+            })}
+          </div>
+        )}
         <div className="trace-stage">
           <svg
             ref={svgRef}
@@ -273,6 +327,27 @@ export default function Tracing({ level, onCorrect, onWrong }: TemplateProps<'tr
                 in behind the pencil. */}
             <path ref={liveRef} className="trace-measure" d={paths[index] ?? ''} />
             <path ref={inkRef} className="trace-ink" d={paths[index] ?? ''} style={{ strokeWidth: track }} />
+
+            {/* Number badges on the start of every stroke still to come. Drawn
+                last-first so that when two strokes start at the same spot the
+                LOWER number (the next one to write) ends up on top. */}
+            {!solved &&
+              paths.length > 1 &&
+              hand.strokes
+                .map((stroke, i) => ({ start: stroke[0], i }))
+                // Hidden where it would sit under the pencil: B, D, P… start
+                // their second stroke where the first one starts, and a "2"
+                // right on the pencil reads as "start here with stroke 2".
+                .filter(({ start, i }) => start && i > index && !nearPen(start))
+                .reverse()
+                .map(({ start, i }) => (
+                  <g key={`n${i}`} className="trace-num" transform={`translate(${start!.x} ${start!.y})`}>
+                    <circle r={track * 0.46} />
+                    <text fontSize={track * 0.62} dy="0.05em">
+                      {i + 1}
+                    </text>
+                  </g>
+                ))}
 
             {/* The dot on i and j: a tap, not a stroke — see glyphStrokes.ts. */}
             {hand.dots.map((dot, i) => (

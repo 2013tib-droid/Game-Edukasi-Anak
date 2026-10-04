@@ -252,6 +252,14 @@ export interface TracingData {
    * HP — tak ada yang bisa ditelusuri anak. Dijaga `scripts/check-glyphs.mjs`.
    */
   glyph: string;
+  /**
+   * Berapa kali glyph yang sama ditulis dalam SATU level (bawaan 1). Menulis
+   * ulang itu cara menghafal bentuk huruf; tiga bulatan di atas panggung
+   * menunjukkan sudah ulangan ke berapa. Bintang tetap per level, bukan per
+   * ulangan — jadi menaikkan angka ini memperpanjang sesi, pertimbangkan
+   * `sessionLevels`-nya.
+   */
+  repeat?: number;
 }
 
 export interface MemoryPair {

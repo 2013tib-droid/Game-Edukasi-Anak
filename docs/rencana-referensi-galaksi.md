@@ -16,6 +16,17 @@
 
 ## Tahap 1 — Tracing: nomor goresan + ulangi huruf (kecil, kerjakan dulu)
 
+> **✅ SELESAI 2026-10-04.** Yang dibangun (dan yang menyimpang dari rencana di bawah):
+> - Nomor goresan di titik mulai **goresan yang BELUM giliran saja**. Goresan yang sedang
+>   ditulis sudah ditandai pensil, dan nomor yang titik mulainya tepat di bawah pensil
+>   (B, D, P, angka 4: goresan ke-2 mulai di titik yang sama) **disembunyikan** — "2" di
+>   bawah pensil terbaca "mulai di sini dengan goresan 2" (ketahuan dari tangkapan layar).
+>   Nomor goresan yang sudah selesai tidak "meredup", tapi hilang bersama giliran.
+> - `TracingData.repeat` + tiga bulatan "1 2 3" di atas panggung. Tulis Angka & Tulis
+>   Huruf memakai `repeat: 3`, dan `sessionLevels` keduanya turun **7 → 5** (15 tulisan
+>   per sesi, dulu 7).
+> - Satu kalimat baru scope `engine`: **"Bagus! Tulis sekali lagi!"** (render #24).
+
 Berlaku untuk template `tracing` (Tulis Angka TK & Tulis Huruf SD — **Tulis Huruf itu demo
 gratis SD**, jadi perbaikannya langsung terlihat calon pembeli).
 
