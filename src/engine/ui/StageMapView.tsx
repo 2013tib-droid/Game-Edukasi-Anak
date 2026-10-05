@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Stage, StageMap } from '@/engine/core/types';
 import { getLevelStars } from '@/engine/core/progress';
-import { sfx } from '@/engine/audio/sound';
+import { sfx, speak, stopSpeaking } from '@/engine/audio/sound';
 import BackIcon from './BackIcon';
 import './stage-map.css';
 
@@ -39,6 +39,13 @@ export function stageUnlocked(gameId: string, stages: Stage[], i: number): boole
   return prev.done >= prev.total;
 }
 
+/**
+ * Dibacakan saat tahap terkunci disentuh. WAJIB sama persis dengan baris di
+ * `ENGINE_LINES` (scripts/extract-narration.mjs), kalau tidak rekamannya tak
+ * ketemu dan jatuh ke suara HP.
+ */
+const LOCKED_LINE = 'Tahap ini masih terkunci. Selesaikan tahap sebelumnya dulu ya!';
+
 /** Tinggi satu baris peta dalam piksel CSS; jalan & titik dihitung darinya. */
 const ROW = 116;
 /** Posisi mendatar titik, persen lebar peta — bergantian kiri/kanan. */
@@ -71,6 +78,15 @@ export default function StageMapView({
   useEffect(() => {
     currentRef.current?.scrollIntoView({ block: 'center' });
   }, []);
+
+  // Peta ini layar PEMBUKA game, jadi ajakannya dibacakan — anak yang belum
+  // lancar membaca tak punya pegangan lain (laporan pemilik 2026-10-05:
+  // "tangga membaca gaada suaranya"). Kalimatnya `map.title`, ikut dirender
+  // lewat `npm run narasi`.
+  useEffect(() => {
+    speak(map.title);
+    return () => stopSpeaking();
+  }, [map.title]);
 
   const pts = stages.map((_, i) => ({ x: X[i % 2]!, y: i * ROW + ROW / 2 }));
   const height = stages.length * ROW;
@@ -135,6 +151,7 @@ export default function StageMapView({
                 onClick={() => {
                   if (!open) {
                     sfx('wrong');
+                    speak(LOCKED_LINE);
                     setShake(i);
                     window.setTimeout(() => setShake(null), 450);
                     return;

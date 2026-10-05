@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-05",
-  "count": 1253,
-  "chars": 56604,
+  "count": 1255,
+  "chars": 56716,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -2742,6 +2742,15 @@
     {
       "key": "d3a24fb2f64b",
       "text": "Selamat! Kamu hebat sekali!",
+      "scope": "engine",
+      "voice": "gadis",
+      "games": [
+        "engine"
+      ]
+    },
+    {
+      "key": "1a3a9345b545",
+      "text": "Tahap ini masih terkunci. Selesaikan tahap sebelumnya dulu ya!",
       "scope": "engine",
       "voice": "gadis",
       "games": [
@@ -9606,6 +9615,15 @@
     {
       "key": "6872d6b30005",
       "text": "Ini gambar apa? Pilih tulisan yang tepat!",
+      "scope": "tangga-membaca",
+      "voice": "gadis",
+      "games": [
+        "tangga-membaca"
+      ]
+    },
+    {
+      "key": "40bd9358e503",
+      "text": "Naik satu anak tangga, lalu buka tahap berikutnya!",
       "scope": "tangga-membaca",
       "voice": "gadis",
       "games": [
