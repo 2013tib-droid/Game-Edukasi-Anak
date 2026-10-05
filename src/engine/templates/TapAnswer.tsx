@@ -4,6 +4,7 @@ import type { TemplateProps } from '@/engine/core/GameShell';
 import type { BoardOp } from '@/engine/core/types';
 import { sfx } from '@/engine/audio/sound';
 import Shape from '@/engine/ui/Shape';
+import Sila from '@/engine/ui/Sila';
 import Clock from '@/engine/ui/Clock';
 import ItemPic from '@/engine/ui/ItemPic';
 import Kid, { KID_CUE_FRAMES } from '@/engine/ui/Kid';
@@ -123,7 +124,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
   // grid. Clocks belong here too — their numerals only stay legible on a phone
   // if the card is wide.
   const pictureChoices = choices.every(
-    (c) => (c.emoji || c.item || c.clock || c.chart) && !c.text && !c.shape,
+    (c) => (c.emoji || c.item || c.clock || c.chart || c.sila) && !c.text && !c.shape,
   );
 
   function handleTap(id: string, correct: boolean | undefined) {
@@ -171,6 +172,11 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
               {level.data.picture}
             </div>
           )
+        )}
+        {level.data.sila && (
+          <div className="ta-sila">
+            <Sila n={level.data.sila} className="ta-sila__pic" />
+          </div>
         )}
         {level.data.clock && (
           <div className="ta-clock" aria-hidden>
@@ -287,6 +293,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
                 />
               )}
               {c.clock && <Clock time={c.clock} className="choice-clock" />}
+              {c.sila && <Sila n={c.sila} className="choice-sila" />}
               {c.chart && (
                 <Suspense fallback={null}>
                   <BarChart spec={c.chart} mini />
@@ -305,7 +312,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
                 // A text answer with no emoji (a letter/number) is the main
                 // visual — render it big. With an emoji it's just a caption.
                 <span
-                  className={c.emoji || c.item ? 'choice-text' : mainTextClass(c.text)}
+                  className={c.emoji || c.item || c.sila ? 'choice-text' : mainTextClass(c.text)}
                   // Lebar taksiran tulisan, dipakai engine.css untuk membagi
                   // lebar kartu (`cqw`) — pengaman terakhir supaya tulisan
                   // tidak pernah patah, berapa pun lebar layarnya. Keterangan
@@ -315,7 +322,7 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
                   style={
                     {
                       '--fit':
-                        c.emoji || c.item
+                        c.emoji || c.item || c.sila
                           ? Math.max(...c.text.split(' ').map(emWidth))
                           : emWidth(c.text),
                     } as CSSProperties

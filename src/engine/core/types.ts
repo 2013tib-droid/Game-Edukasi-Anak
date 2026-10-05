@@ -78,6 +78,12 @@ export interface ClockSpec {
   m?: number;
 }
 
+/**
+ * Lambang sila Pancasila (Perisai Garuda, `sd2`), digambar engine di
+ * `src/engine/ui/Sila.tsx` — config cuma menyebut nomornya.
+ */
+export type SilaId = 1 | 2 | 3 | 4 | 5;
+
 export interface TapChoice {
   id: string;
   /** Big visual — emoji for now, later an image asset path. */
@@ -99,6 +105,8 @@ export interface TapChoice {
    * grid lebar dua kolom seperti kartu bergambar.
    */
   chart?: BarChartSpec;
+  /** Lambang sila di kartu jawaban (gambar penuh kartu, seperti `item`). */
+  sila?: SilaId;
   correct?: boolean;
 }
 
@@ -212,6 +220,8 @@ export interface TapAnswerData {
    * yang dibaca anak garis bantu & angka di sumbunya.
    */
   chart?: ChartSpec;
+  /** Lambang sila besar sebagai isyarat soal ("lambang ini sila ke berapa?"). */
+  sila?: SilaId;
   choices: TapChoice[]; // 2–4, exactly one with correct: true
 }
 
@@ -223,6 +233,8 @@ export interface DragItem {
    * (WebP) instead of the device emoji font. `emoji` stays as the fallback.
    */
   item?: string;
+  /** Lambang sila di kartu tarik (Perisai Garuda). */
+  sila?: SilaId;
   text?: string;
   /** id of the target this item belongs to */
   targetId: string;
@@ -233,6 +245,8 @@ export interface DragTarget {
   emoji?: string;
   /** Item id from the picture registry — see `DragItem.item`. */
   item?: string;
+  /** Lambang sila di kotak tujuan — lihat `DragItem.sila`. */
+  sila?: SilaId;
   label: string;
 }
 
@@ -869,6 +883,8 @@ export interface ProjectSpec {
 /** Bagian proyek sesi yang didapat dari satu level — lihat `ProjectSpec`. */
 export interface LevelStamp {
   emoji: string;
+  /** Lambang sila sebagai bagian proyek (Perisai Garuda); `emoji` tetap cadangan teks. */
+  sila?: SilaId;
   /** Keterangan pendek di bawahnya (mis. "07.15"). Tulisan layar saja. */
   label?: string;
 }

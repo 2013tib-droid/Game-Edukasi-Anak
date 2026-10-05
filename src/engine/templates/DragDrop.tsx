@@ -3,6 +3,8 @@ import type { PointerEvent as ReactPointerEvent } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import { sfx } from '@/engine/audio/sound';
 import ItemPic from '@/engine/ui/ItemPic';
+import Sila from '@/engine/ui/Sila';
+import type { SilaId } from '@/engine/core/types';
 
 interface DragState {
   itemId: string;
@@ -15,8 +17,19 @@ interface DragState {
  * `item`, otherwise the plain emoji. `target` marks the cue drawn on an empty
  * target, which is sized separately from the thing being dragged.
  */
-function Pic({ item, emoji, target }: { item?: string; emoji?: string; target?: boolean }) {
+function Pic({
+  item,
+  emoji,
+  sila,
+  target,
+}: {
+  item?: string;
+  emoji?: string;
+  sila?: SilaId;
+  target?: boolean;
+}) {
   const cls = 'dd-emoji' + (target ? ' dd-emoji--target' : '');
+  if (sila) return <Sila n={sila} className={`dd-sila${target ? ' dd-sila--target' : ''}`} />;
   if (item) {
     return <ItemPic id={item} className={`dd-img${target ? ' dd-img--target' : ''}`} fallbackClassName={cls} />;
   }
@@ -134,14 +147,14 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
               >
                 {filledBy ? (
                   <>
-                    <Pic item={filledBy.item} emoji={filledBy.emoji} />
+                    <Pic item={filledBy.item} emoji={filledBy.emoji} sila={filledBy.sila} />
                     {filledBy.text && (
                       // A word that arrived on its own keeps the big type it
                       // had on the chip — it just moved, it didn't become a
                       // caption. With a picture it labels that picture.
                       <span
                         className={
-                          filledBy.item || filledBy.emoji
+                          filledBy.item || filledBy.emoji || filledBy.sila
                             ? labelClass(filledBy.text)
                             : wordClass(filledBy.text)
                         }
@@ -152,7 +165,7 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
                   </>
                 ) : (
                   <>
-                    <Pic item={t.item} emoji={t.emoji} target />
+                    <Pic item={t.item} emoji={t.emoji} sila={t.sila} target />
                     <span className={labelClass(t.label)}>{t.label}</span>
                   </>
                 )}
@@ -174,11 +187,11 @@ export default function DragDrop({ level, onCorrect, onWrong }: TemplateProps<'d
               }
               onPointerDown={(e) => handleDown(e, item.id)}
             >
-              <Pic item={item.item} emoji={item.emoji} />
+              <Pic item={item.item} emoji={item.emoji} sila={item.sila} />
               {item.text && (
                 // A chip that also carries a picture uses the caption size;
                 // a word-only chip IS the question, so it gets the big type.
-                <span className={item.emoji || item.item ? 'dd-text' : wordClass(item.text)}>
+                <span className={item.emoji || item.item || item.sila ? 'dd-text' : wordClass(item.text)}>
                   {item.text}
                 </span>
               )}

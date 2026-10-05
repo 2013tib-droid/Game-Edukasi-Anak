@@ -349,6 +349,15 @@ export const games: GameMeta[] = [
     template: 'clock-set',
     load: () => import('@/games/sd2/waktu-tepat'),
   },
+  {
+    id: 'perisai-garuda',
+    group: 'sd2',
+    subject: 'pancasila',
+    title: 'Perisai Garuda',
+    emoji: '🦅',
+    template: 'mixed',
+    load: () => import('@/games/sd2/perisai-garuda'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {

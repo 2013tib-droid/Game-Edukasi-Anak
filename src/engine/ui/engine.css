@@ -2746,3 +2746,50 @@
     animation: none;
   }
 }
+
+/* ── Lambang sila (Perisai Garuda, `sd2`) — Sila.tsx ──────────────────────
+   Selalu PERSEGI (viewBox 100×100), jadi lebar = tinggi tanpa jebakan
+   `height: auto` milik seni item. */
+.ta-sila {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.ta-sila__pic {
+  width: clamp(120px, 38vw, 190px);
+  height: clamp(120px, 38vw, 190px);
+  max-height: 26vh;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.16));
+}
+
+.choice-card .choice-sila {
+  width: clamp(56px, 18vw, 110px);
+  height: clamp(56px, 18vw, 110px);
+}
+
+@supports (container-type: inline-size) {
+  .choice-card .choice-sila {
+    width: 70cqw;
+    height: 70cqw;
+    max-width: 120px;
+    max-height: 120px;
+  }
+}
+
+.dd-sila {
+  width: clamp(58px, 17vw, 84px);
+  height: clamp(58px, 17vw, 84px);
+}
+
+.dd-sila--target {
+  width: clamp(40px, 11vw, 54px);
+  height: clamp(40px, 11vw, 54px);
+}
+
+/* Di halaman proyek & buku perisai: seukuran emoji yang digantikannya. */
+.sila-em {
+  display: block;
+  width: 1em;
+  height: 1em;
+}
