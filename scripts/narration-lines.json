@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-05",
-  "count": 1196,
-  "chars": 54058,
+  "count": 1253,
+  "chars": 56604,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -7768,6 +7768,519 @@
       "voice": "gadis",
       "games": [
         "pasar-buah"
+      ]
+    },
+    {
+      "key": "d85a0171f0a4",
+      "text": "Ada berapa sila dalam Pancasila?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "0d3c7e3704c5",
+      "text": "Ada teman baru dari Papua. Apa yang kamu lakukan?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "173551890c14",
+      "text": "Ada warga yang belum kebagian sapu. Apa yang Raka lakukan?",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "b2dad86d15e5",
+      "text": "Apa arti Bhinneka Tunggal Ika?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "8a10af440fed",
+      "text": "Apa nama lambang negara kita?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "5de09000faed",
+      "text": "Bayu menolong teman yang jatuh. Ini sila yang mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "73d10f7e453a",
+      "text": "Bekal temanmu makanan khas daerahnya. Apa sikapmu?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "085a0d09ad23",
+      "text": "Dina berdoa sebelum makan. Ini sila yang mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "5270727456d7",
+      "text": "Garuda mencengkeram pita bertuliskan semboyan. Apa bunyinya?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "ce95d28f7a65",
+      "text": "Gotong royong berarti saling membantu. Coba pikirkan lagi!",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "cb19c157db29",
+      "text": "Indonesia punya banyak suku dan bahasa. Bagaimana sikap kita?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "67993aa6a557",
+      "text": "Kakak membagi kue sama rata. Ini sila yang mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "e3933f89f5d0",
+      "text": "Kami bermain dengan teman dari suku lain. Sila yang mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "2d613d94859e",
+      "text": "Kami menyanyikan Indonesia Raya dengan khidmat. Sila mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "19ebac352dc4",
+      "text": "Kapan kita memperingati Hari Lahir Pancasila?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "7513f494bb22",
+      "text": "Kelas memilih ketua dengan musyawarah. Sila yang mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "b0f424057a2d",
+      "text": "Kerja bakti di kampung. Ayo ikuti ceritanya!",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "3db484586c5c",
+      "text": "Kerja bakti itu tugas semua warga, termasuk anak-anak. Ayo coba lagi!",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "593daac6cef0",
+      "text": "Lambang ini milik sila ke berapa?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "e29edf0f9963",
+      "text": "Lambang sila ada di perisai. Perisai itu di bagian mana Garuda?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "9a76ef0a7f08",
+      "text": "Mana lambang sila Keadilan sosial?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "4bbbfd562b65",
+      "text": "Mana lambang sila kedua?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "7e00e12c0ba3",
+      "text": "Mana lambang sila keempat?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "d6026654f822",
+      "text": "Mana lambang sila kelima?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "17383940fc3f",
+      "text": "Mana lambang sila ketiga?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "da26cab01403",
+      "text": "Mana lambang sila Ketuhanan Yang Maha Esa?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "21e03149903b",
+      "text": "Mana lambang sila Persatuan Indonesia?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "41eba827f953",
+      "text": "Mana lambang sila pertama?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "7159065eeef6",
+      "text": "Mana lambang sila tentang musyawarah?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "93138f6b53c5",
+      "text": "Mana yang MELANGGAR aturan sekolah?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "5ed465c15611",
+      "text": "Mana yang menaati aturan di jalan?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "7bdc0447210f",
+      "text": "Mana yang menaati aturan di rumah?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "b57d827cb792",
+      "text": "Mana yang menaati aturan di sekolah?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "47e6722c6457",
+      "text": "Mana yang sebaiknya dilakukan lebih dulu?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "26e9320658ab",
+      "text": "Mana yang termasuk HAK anak?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "8a81a729c0a2",
+      "text": "Mana yang termasuk KEWAJIBAN anak di rumah?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "499273e7823e",
+      "text": "Mana yang termasuk KEWAJIBAN anak di sekolah?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "e4675afa86f8",
+      "text": "Minggu pagi, warga kampung Raka bekerja bakti membersihkan selokan.",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "331a331d9f99",
+      "text": "Pilihan A. Ikut kerja bakti bersama warga",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "4eb4db38c809",
+      "text": "Pilihan A. Memakai sapunya bergantian",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "918406391562",
+      "text": "Pilihan A. Menyembunyikan sapunya",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "d622c2d2fa13",
+      "text": "Pilihan A. Terus bermain gim di rumah",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "95df9df6452f",
+      "text": "Pilihan B. Ikut kerja bakti bersama warga",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "26c5a87fb92e",
+      "text": "Pilihan B. Memakai sapunya bergantian",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "b3e9bb2ceadd",
+      "text": "Pilihan B. Menyembunyikan sapunya",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "2e9aea79e3ae",
+      "text": "Pilihan B. Terus bermain gim di rumah",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "a820897ffd2c",
+      "text": "Raka masih ingin bermain gim. Apa yang sebaiknya Raka lakukan?",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "33d1e1e0a4a4",
+      "text": "Raka membawa ember dan membantu Pak RT mengangkat sampah.",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "45066327d738",
+      "text": "Raka menghormati teman yang beribadah. Sila yang mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "70315155d911",
+      "text": "Rani menerima hasil musyawarah. Ini sila yang mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "d5e28986d242",
+      "text": "Selokan bersih, kampung jadi indah. Bersama-sama, pekerjaan berat terasa ringan!",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "3db16bc37f00",
+      "text": "Sinta meminta maaf saat berbuat salah. Sila yang mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "055419c734e5",
+      "text": "Tarik setiap lambang ke nomor silanya!",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "af6ece7885c5",
+      "text": "Teman sekelasmu berbeda agama. Bagaimana kalian berteman?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "abb2df703312",
+      "text": "Temanmu sedang berdoa menurut agamanya. Apa sikapmu?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "bd0e4b5c6d1d",
+      "text": "Tono menabung dan tidak boros jajan. Sila yang mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "e395f593a549",
+      "text": "Warga memperbaiki pos ronda bersama-sama. Ini disebut apa?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
       ]
     },
     {

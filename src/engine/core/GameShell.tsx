@@ -16,6 +16,7 @@ import { celebrate, sfx, speak, stopSpeaking } from '@/engine/audio/sound';
 import { FeedbackOverlay, LevelDots, SpeakButton, StarsRow } from '@/engine/ui/Feedback';
 import MascotCard from '@/engine/ui/Mascot';
 import Clock from '@/engine/ui/Clock';
+import Sila from '@/engine/ui/Sila';
 import { gameImageUrl } from '@/engine/ui/GameIcon';
 import ItemPic from '@/engine/ui/ItemPic';
 import BackIcon from '@/engine/ui/BackIcon';
@@ -194,7 +195,7 @@ function ProjectStrip({
           >
             {done && (
               <span key={`s${i}`} className="project-page__stamp" aria-hidden>
-                {st?.emoji ?? '⭐'}
+                {st?.sila ? <Sila n={st.sila} className="sila-em" /> : (st?.emoji ?? '⭐')}
               </span>
             )}
           </span>
@@ -213,7 +214,7 @@ function ProjectBook({ title, stamps }: { title: string; stamps: (LevelStamp | u
         {stamps.map((st, i) => (
           <div key={i} className="project-book__page">
             <span className="project-book__emoji" aria-hidden>
-              {st?.emoji ?? '⭐'}
+              {st?.sila ? <Sila n={st.sila} className="sila-em" /> : (st?.emoji ?? '⭐')}
             </span>
             {st?.label && <span className="project-book__label">{st.label}</span>}
           </div>

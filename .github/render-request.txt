@@ -1,14 +1,14 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #25
+render #26
 
-only: tangga-membaca
+only: perisai-garuda
 
-Game baru SD Kelas 1 & 2 "Tangga Membaca" (docs/rencana-referensi-galaksi.md
-tahap 2). Empat baris baru, semuanya scope tangga-membaca. Dibandingkan
-sebelum vs sesudah lewat scripts/narration-lines.json: 1192 baris jadi 1196,
-nol baris lama berubah atau pindah scope, jadi aman dibatasi
-"only: tangga-membaca" (file yang sudah ada dilewati).
+Game baru SD Kelas 3 & 4 "Perisai Garuda" (Pancasila). 57 baris baru
+(2.546 karakter), semuanya scope perisai-garuda. Dibandingkan sebelum vs
+sesudah lewat scripts/narration-lines.json: 1196 baris jadi 1253, nol baris
+lama berubah atau pindah scope, jadi aman dibatasi "only: perisai-garuda"
+(file yang sudah ada dilewati).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender
