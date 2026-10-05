@@ -129,15 +129,33 @@ export default function LandingPage() {
 
           <span className="hero-eyebrow">Untuk anak Playgroup, TK &amp; SD</span>
           <h1>Petualangan Pintar</h1>
-          <p className="tag">
-            Game edukasi yang bikin anak betah belajar — tiap soal dibacakan suara Bahasa
-            Indonesia.
-          </p>
+          <p className="tag">Belajar jadi menyenangkan, tanpa terasa seperti belajar.</p>
 
           <Link className="cta" to="/portal" onClick={() => countVisit('landing_main_click')}>
-            ✨ Coba Gratis
+            <span className="cta-spark cta-spark--l" aria-hidden="true" />
+            <span className="cta-spark cta-spark--r" aria-hidden="true" />
+            <svg className="cta-star" viewBox="0 0 100 100" aria-hidden="true">
+              <path
+                d="M50 6 61.8 33.6 92 36.4 69.2 56.4 76 86 50 70.4 24 86 30.8 56.4 8 36.4 38.2 33.6Z"
+                fill="#ffcf3f"
+                stroke="#f29a1f"
+                strokeWidth="5"
+                strokeLinejoin="round"
+              />
+              <path d="M30 34 40 31" stroke="#fff" strokeWidth="5" strokeLinecap="round" opacity=".7" />
+              <circle cx="40" cy="50" r="4.5" fill="#4a2a14" />
+              <path d="M56 50q4.5-4 9 0" fill="none" stroke="#4a2a14" strokeWidth="4" strokeLinecap="round" />
+              <path d="M42 59q8 8 16 0" fill="#e35d4a" stroke="#4a2a14" strokeWidth="3.5" strokeLinejoin="round" />
+              <circle cx="31" cy="58" r="5" fill="#ff8fa0" opacity=".6" />
+              <circle cx="69" cy="58" r="5" fill="#ff8fa0" opacity=".6" />
+            </svg>
+            <span className="cta-label">Coba Gratis</span>
+            <span className="cta-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 12h13M12.5 6l6 6-6 6" fill="none" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
           </Link>
-          <p className="cta-note">Langsung main · tanpa daftar</p>
 
           <ul className="perks">
             <li>
