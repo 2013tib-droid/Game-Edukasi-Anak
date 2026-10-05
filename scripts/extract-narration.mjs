@@ -49,7 +49,14 @@ const ENGINE_SCOPE = 'engine';
  * Fixed lines spoken by the engine itself, not by any config:
  * `GameShell` praise/retry (see handleCorrect/handleWrong).
  */
-const ENGINE_LINES = ['Hebat! Kamu benar!', 'Selamat! Kamu hebat sekali!', 'Coba lagi, kamu pasti bisa!'];
+// 'Bagus! Tulis sekali lagi!' = between rounds of a `tracing` level with
+// `repeat` (AGAIN_LINE in Tracing.tsx — keep the two identical).
+const ENGINE_LINES = [
+  'Hebat! Kamu benar!',
+  'Selamat! Kamu hebat sekali!',
+  'Coba lagi, kamu pasti bisa!',
+  'Bagus! Tulis sekali lagi!',
+];
 
 /**
  * Option labels in `StoryChoice`. The engine SHUFFLES options per page, so any

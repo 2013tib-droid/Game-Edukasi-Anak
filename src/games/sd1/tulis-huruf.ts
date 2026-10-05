@@ -6,8 +6,9 @@ import type { GameConfig, GameLevel, LevelSlot } from '@/engine/core/types';
  *
  * Tiap huruf = satu slot berisi dua varian: HURUF BESAR dan huruf kecil.
  * Engine mengacak variannya tiap main, jadi satu huruf tidak selalu muncul
- * dalam bentuk yang sama. `sessionLevels: 7` membuat satu sesi hanya
- * menuliskan 7 huruf acak — 26 huruf sekali duduk terlalu panjang untuk anak.
+ * dalam bentuk yang sama. `sessionLevels: 5` membuat satu sesi hanya
+ * menuliskan 5 huruf acak, masing-masing 3 kali (`repeat`) — 26 huruf sekali
+ * duduk terlalu panjang untuk anak, dan menulis ulang itu cara menghafal bentuk.
  *
  * Id slot `hA`–`hZ` (bukan `l1`–`l26`) supaya tidak bentrok dengan bintang
  * game lain kalau nanti isinya dirombak.
@@ -27,7 +28,7 @@ function level(letter: string, lower: boolean): GameLevel<'tracing'> {
     narration: lower
       ? `Tulis huruf kecil ${letter.toLowerCase()}.`
       : `Tulis huruf besar ${letter}.`,
-    data: { glyph: lower ? letter.toLowerCase() : letter },
+    data: { glyph: lower ? letter.toLowerCase() : letter, repeat: 3 },
   };
 }
 
@@ -46,7 +47,7 @@ const config: GameConfig<'tracing'> = {
   title: 'Tulis Huruf',
   emoji: '🖊️',
   template: 'tracing',
-  sessionLevels: 7,
+  sessionLevels: 5,
   levels: LETTERS.map(slot),
 };
 

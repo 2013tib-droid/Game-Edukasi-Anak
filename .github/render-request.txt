@@ -1,15 +1,14 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #23
+render #24
 
-only: waktu-tepat
+only: engine
 
-Game baru "Waktu Tepat" versi premium "Sehari Bersama Kancil" (SD Kelas 3 & 4,
-kelompok sd2, masih draft): 41 baris baru, semuanya scope waktu-tepat.
-Dibandingkan sebelum vs sesudah lewat scripts/narration-lines.json: 1150 baris
-jadi 1191, nol baris lama berubah atau pindah scope (Jam Pintar yang ikut
-disentuh karena halfToward pindah ke src/games/time.ts tetap nol perubahan),
-jadi aman dibatasi "only: waktu-tepat".
+Tracing (Tulis Angka & Tulis Huruf) sekarang menulis tiap glyph 3 kali; di
+antara ulangan diucapkan "Bagus! Tulis sekali lagi!". Satu baris baru, scope
+engine. Dibandingkan sebelum vs sesudah lewat scripts/narration-lines.json:
+1191 baris jadi 1192, nol baris lama berubah atau pindah scope, jadi aman
+dibatasi "only: engine" (file yang sudah ada dilewati).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

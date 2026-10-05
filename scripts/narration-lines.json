@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-02",
-  "count": 1191,
-  "chars": 53873,
+  "generated": "2026-10-04",
+  "count": 1192,
+  "chars": 53898,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -2710,6 +2710,15 @@
       "voice": "gadis",
       "games": [
         "ejaan-jitu"
+      ]
+    },
+    {
+      "key": "f2bdd340f254",
+      "text": "Bagus! Tulis sekali lagi!",
+      "scope": "engine",
+      "voice": "gadis",
+      "games": [
+        "engine"
       ]
     },
     {

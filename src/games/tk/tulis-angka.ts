@@ -28,7 +28,7 @@ const NAMES = [
 const levels: LevelSlot<'tracing'>[] = NAMES.map((name, i) => ({
   id: `l${i + 1}`,
   narration: `Tulis angka ${name} dengan jarimu!`,
-  data: { glyph: String(i + 1) },
+  data: { glyph: String(i + 1), repeat: 3 },
 }));
 
 const config: GameConfig<'tracing'> = {
@@ -37,8 +37,9 @@ const config: GameConfig<'tracing'> = {
   title: 'Tulis Angka',
   emoji: '✏️',
   template: 'tracing',
-  // 20 angka di kolam soal; tiap sesi main mengambil 7 angka acak.
-  sessionLevels: 7,
+  // 20 angka di kolam soal; tiap sesi main mengambil 5 angka acak, dan tiap
+  // angka ditulis 3 kali (`repeat`) — 15 tulisan, dulu 7 angka × 1.
+  sessionLevels: 5,
   levels,
 };
 
