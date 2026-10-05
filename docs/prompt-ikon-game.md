@@ -144,6 +144,7 @@ hal baru muncul di tahap POTONG dan tahap PASANG — bukan di tahap prompt:
 | `jam-pintar` (opsional) | Buatkan: satu jam dinding bulat pastel berwajah imut, dengan angka 1 sampai 12 tertulis jelas dan urut mengelilingi muka jam, jarum pendek biru tua menunjuk angka 10 dan jarum panjang merah menunjuk angka 2. Selain angka jam itu tidak boleh ada tulisan lain. |
 | `pola-pintar` | Buatkan: satu ulat kecil yang lucu dan gemuk, badannya melengkung membentuk busur seperti sedang merayap. Ruas badannya berselang-seling mengikuti pola: hijau mint, kuning krem, hijau mint, kuning krem — lalu satu ruas terakhir KOSONG bergaris putus-putus, seolah ruas itu belum terpasang. Kepalanya hijau mint berwajah imut dengan dua antena kecil melengkung. Tinggi dan lebar ulatnya kira-kira sama. |
 | `rute-kendaraan` | Buatkan: satu jalan raya berkelok membentuk huruf S dari atas ke bawah, aspal abu-abu dengan garis putus-putus putih di tengah dan pinggir jalan berwarna oranye lembut, dengan satu rambu penunjuk arah berbentuk bulat warna hijau mint menempel di ujung atas jalan. Rambunya berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Tambahkan dua bintang kecil pastel melayang di sekitarnya. |
+| `tangga-membaca` | Buatkan: satu tangga kayu mainan pendek warna kuning krem dengan TIGA anak tangga, berdiri tegak sedikit miring. Di tiap anak tangga menempel satu ubin huruf kecil pastel: huruf a di anak tangga bawah (peach), huruf i di tengah (hijau mint), huruf u di atas (biru muda). Di puncak tangga duduk satu bintang kuning kecil berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Hanya bintang itu yang berwajah; tangga dan ubin hurufnya polos tanpa wajah. Selain huruf a, i, dan u itu tidak boleh ada tulisan apa pun. Tangganya gemuk dan pendek, tinggi gambarnya paling banyak satu setengah kali lebarnya. |
 
 ### Kalau hasilnya masih melenceng
 
@@ -188,6 +189,14 @@ Balas di chat yang sama dengan menyebut kesalahannya, jangan mengulang seluruh p
   - Kalau ulat pun ditolak, alternatif berikutnya yang netral & melengkung: **layang-layang
     dengan ekor berpita berselang-seling** (satu pita kosong bergaris putus-putus). Sinyal
     polanya lebih lemah — polanya di ekor, bukan di badan utamanya — jadi ini cadangan.
+- **`tangga-membaca` (2026-10-05) = tangga, BUKAN buku.** Buku sudah dipakai dua ikon cerita
+  (`cerita-kancil`, `cerita-nusantara`), dan tangga adalah nama game-nya sendiri: naik satu
+  anak tangga = buka satu tahap di peta. Tiga ubin **a · i · u** = suku kata terbuka, tahap
+  pertama game ini. Wajahnya SENGAJA di bintang, bukan di tangga: wajah yang ditaruh di anak
+  tangga akan menimpa ubin hurufnya (Pelajaran Ketiga). Tangga cenderung MENJULANG kurus —
+  kalau hasilnya rasio < 0,5 (lebih kurus dari pensil `tulis-angka`), minta ulang "lebih
+  gemuk dan pendek". Lubang di antara anak tangga itu latar TERKURUNG: wajib ditembus manual
+  sesudah dipotong (Pelajaran Keempat).
 - **`ejaan-jitu` alternatif** kalau papan target terasa terlalu "permainan panah":
   Buatkan: tiga balok huruf kayu pastel berdiri berjajar, balok tengah berwajah imut,
   dengan satu bintang kuning melayang di atasnya.
