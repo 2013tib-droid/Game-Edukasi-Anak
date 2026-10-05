@@ -131,7 +131,7 @@ async function readRemote(uid: string): Promise<Record<string, Levels>> {
   try {
     const [{ db }, { collection, getDocs }] = await Promise.all([
       getFirebase(),
-      import('firebase/firestore'),
+      import('firebase/firestore/lite'),
     ]);
     const snap = await getDocs(collection(db, 'users', uid, 'progress'));
     const out: Record<string, Levels> = {};
@@ -150,7 +150,7 @@ async function readRemote(uid: string): Promise<Record<string, Levels>> {
 async function writeRemote(uid: string, gameId: string, levels: Levels): Promise<void> {
   const [{ db }, { doc, serverTimestamp, setDoc }] = await Promise.all([
     getFirebase(),
-    import('firebase/firestore'),
+    import('firebase/firestore/lite'),
   ]);
   // `merge: true` supaya level yang cuma ada di cadangan lama tidak terhapus
   // kalau suatu saat config game berubah. Nilainya sendiri sudah hasil
