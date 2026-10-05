@@ -217,11 +217,12 @@ export const games: GameMeta[] = [
   },
   {
     // Tangga membaca berjenjang di peta jalan (docs/rencana-referensi-galaksi.md
-    // tahap 2). Seni ikon belum ada — emoji jadi tampilannya.
+    // tahap 2).
     id: 'tangga-membaca',
     group: 'sd1',
     title: 'Tangga Membaca',
     emoji: '🪜',
+    pic: 'tangga-membaca',
     template: 'tap-answer',
     load: () => import('@/games/sd1/tangga-membaca'),
   },
