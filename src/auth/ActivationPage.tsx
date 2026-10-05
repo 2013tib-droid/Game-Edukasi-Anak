@@ -14,6 +14,7 @@ import {
 import { emailUrl, whatsappUrl } from '@/data/contact';
 import { buyUrl, type SaleGroup } from '@/data/purchase';
 import { PaidOrderCard, usePaidOrders } from '@/auth/PaidOrders';
+import { CHILD_NAME_MAX, cleanChildName, readChildName, writeChildName } from '@/portal/childName';
 import './activation.css';
 
 /**
@@ -100,6 +101,8 @@ export default function ActivationPage() {
     // sempat melihat `user` sudah null dan melempar ke /masuk — formulir
     // kosong yang justru ingin kita hindari di seluruh perubahan ini.
     navigate('/', { replace: true });
+    // HP yang dipakai berdua tidak boleh menyapa anak akun sebelumnya.
+    writeChildName('');
     void logout();
   }
 
@@ -409,6 +412,7 @@ function AccountPanel({ email, owned }: { email: string | null; owned: string[] 
           <span className="acct__email">{email ?? 'akun ini'}</span>
         </span>
       </div>
+      <ChildNameField />
       {owned && owned.length > 0 && (
         <div className="acct__owned">
           {/* Labelnya tetap ada: chip hijau sendirian tidak mengabarkan APA yang
@@ -424,6 +428,59 @@ function AccountPanel({ email, owned }: { email: string | null; owned: string[] 
         </div>
       )}
     </div>
+  );
+}
+
+/**
+ * Nama sapaan anak (opsional) — "Halo, <nama>!" di layar mata pelajaran.
+ * Disimpan HANYA di HP ini (lihat `src/portal/childName.ts`); kosong = "Halo,
+ * Petualang!".
+ */
+function ChildNameField() {
+  const [saved, setSaved] = useState(readChildName);
+  const [value, setValue] = useState(saved);
+  const [justSaved, setJustSaved] = useState(false);
+  const clean = cleanChildName(value);
+  const dirty = clean !== saved;
+
+  function handleSave(e: FormEvent) {
+    e.preventDefault();
+    writeChildName(clean);
+    setSaved(clean);
+    setValue(clean);
+    setJustSaved(true);
+  }
+
+  return (
+    <form className="acct__child" onSubmit={handleSave}>
+      <label className="acct__label" htmlFor="acct-child">
+        Nama sapaan anak <span className="acct__opt">(opsional)</span>
+      </label>
+      <div className="acct__child-row">
+        <input
+          id="acct-child"
+          className="input acct__child-input"
+          placeholder="mis. Aira"
+          value={value}
+          maxLength={CHILD_NAME_MAX}
+          autoComplete="off"
+          onChange={(e) => {
+            setValue(e.target.value);
+            setJustSaved(false);
+          }}
+        />
+        <button className="acct__child-save" type="submit" disabled={!dirty}>
+          Simpan
+        </button>
+      </div>
+      <span className="acct__hint" aria-live="polite">
+        {justSaved
+          ? clean
+            ? `Tersimpan. Anak akan disapa "Halo, ${clean}!"`
+            : 'Dihapus. Anak akan disapa "Halo, Petualang!"'
+          : 'Hanya tersimpan di HP ini, tidak dikirim ke server.'}
+      </span>
+    </form>
   );
 }
 
