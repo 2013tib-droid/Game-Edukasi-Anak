@@ -2,7 +2,7 @@
 // initial bundle — critical for low-end Android. Only type imports here.
 import type { FirebaseApp } from 'firebase/app';
 import type { Auth } from 'firebase/auth';
-import type { Firestore } from 'firebase/firestore';
+import type { Firestore } from 'firebase/firestore/lite';
 import type { Functions } from 'firebase/functions';
 
 const config = {
@@ -46,9 +46,16 @@ export function getFirebase(): Promise<FirebaseServices> {
     const [{ initializeApp }, { getAuth }, { getFirestore }, { getFunctions }] = await Promise.all([
       import('firebase/app'),
       import('firebase/auth'),
-      import('firebase/firestore'),
+      import('firebase/firestore/lite'),
       import('firebase/functions'),
     ]);
+    // Firestore LITE, bukan Firestore lengkap (2026-10-05): app ini cuma
+    // membaca/menulis sekali-jalan, tak pernah mendengarkan perubahan. SDK
+    // lengkap membuka koneksi streaming (WebChannel) dulu, dan kalau koneksi
+    // itu tersendat ia baru menyerah sesudah 10 detik — persis "game berbayar
+    // memuat 10 detik" yang dilaporkan pemilik dari iPhone. Lite = satu
+    // permintaan HTTPS biasa per operasi, dan bundelnya jauh lebih kecil.
+    // Kalau suatu saat butuh `onSnapshot`, itu baru alasan kembali ke lengkap.
     const app = initializeApp(config);
     const services: FirebaseServices = {
       app,
@@ -75,7 +82,7 @@ async function connectEmulatorsIfAsked(services: FirebaseServices): Promise<void
   const [{ connectAuthEmulator }, { connectFirestoreEmulator }, { connectFunctionsEmulator }] =
     await Promise.all([
       import('firebase/auth'),
-      import('firebase/firestore'),
+      import('firebase/firestore/lite'),
       import('firebase/functions'),
     ]);
   connectAuthEmulator(services.auth, `http://${host}:9099`, { disableWarnings: true });

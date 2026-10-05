@@ -94,7 +94,14 @@ export function useGameAccess(gameId: string | undefined, group: string | undefi
 
     void (async () => {
       try {
-        const owned = await fetchOwnedGroups(user.uid);
+        // Dua pembacaan BERSAMAAN, bukan berurutan: tiap pembacaan satu
+        // perjalanan ke server, dan di sinyal HP itu ratusan milidetik
+        // sendiri-sendiri. Daftar perangkat yang ikut terbaca padahal
+        // kelompoknya belum dimiliki cuma terbuang — rules mengizinkannya.
+        const [owned, devices] = await Promise.all([
+          fetchOwnedGroups(user.uid),
+          fetchDevices(user.uid),
+        ]);
         if (cancelled) return;
 
         if (!owned.includes(group)) {
@@ -103,10 +110,8 @@ export function useGameAccess(gameId: string | undefined, group: string | undefi
         }
 
         // Kelompoknya dimiliki — tinggal pastikan perangkat ini termasuk yang
-        // terdaftar. Dibaca dulu (murah) supaya peluncuran game tidak selalu
-        // menunggu panggilan Cloud Function.
-        const devices = await fetchDevices(user.uid);
-        if (cancelled) return;
+        // terdaftar. Dibaca langsung (murah) supaya peluncuran game tidak
+        // selalu menunggu panggilan Cloud Function.
         const mine = devices.some((d) => d.id === getDeviceId());
 
         if (mine) {

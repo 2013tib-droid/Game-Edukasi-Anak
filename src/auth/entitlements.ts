@@ -63,7 +63,7 @@ async function rememberOwned(group: string): Promise<void> {
 export async function fetchOwnedGroups(uid: string): Promise<string[]> {
   const [{ db }, { doc, getDoc }] = await Promise.all([
     getFirebase(),
-    import('firebase/firestore'),
+    import('firebase/firestore/lite'),
   ]);
   const snap = await getDoc(doc(db, 'users', uid));
   const groups = snap.data()?.groups;
@@ -122,7 +122,7 @@ export function describeDevice(): string {
 export async function fetchDevices(uid: string): Promise<DeviceInfo[]> {
   const [{ db }, { collection, getDocs }] = await Promise.all([
     getFirebase(),
-    import('firebase/firestore'),
+    import('firebase/firestore/lite'),
   ]);
   const snap = await getDocs(collection(db, 'users', uid, 'devices'));
   return snap.docs.map((d) => {
