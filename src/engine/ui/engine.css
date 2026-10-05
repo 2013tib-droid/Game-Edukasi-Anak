@@ -190,6 +190,17 @@
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
+/* TapAnswerData.choiceRow: kartu gambar sebaris, selebar sepertiga. Ditulis
+   SESUDAH --pics karena specificity-nya sama. Batas lebar supaya di tablet
+   kartunya tidak jadi raksasa. */
+.choice-grid--row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
 /* Counting board ("Beli Buah"): four fixed columns with a tighter gap than
    the answer grid, so each cell — and the fruit in it — is as wide as the
    phone allows. Cells are square-ish rather than tall-and-empty. */

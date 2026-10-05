@@ -21,6 +21,7 @@ import ItemPic from '@/engine/ui/ItemPic';
 import BackIcon from '@/engine/ui/BackIcon';
 import { buzz, flyStars, popTap, sparkleAt } from '@/engine/ui/juice';
 import PlayIcon from '@/engine/ui/PlayIcon';
+import StageMapView from '@/engine/ui/StageMapView';
 import '@/engine/ui/engine.css';
 
 /**
@@ -223,11 +224,11 @@ function ProjectBook({ title, stamps }: { title: string; stamps: (LevelStamp | u
 }
 
 /**
- * Screens: `intro` (start / resume) or `pick` (choose a level) → `playing` →
- * `done`. A game with `chooseLevel` opens straight on `pick` — its whole point
+ * Screens: `intro` (start / resume), `pick` (choose a level) or `map` (choose a
+ * stage on the winding stage map) → `playing` → `done`. A game with `chooseLevel` opens straight on `pick` — its whole point
  * is that the child sees every title from the start.
  */
-type Screen = 'intro' | 'pick' | 'playing' | 'done';
+type Screen = 'intro' | 'pick' | 'map' | 'playing' | 'done';
 
 export default function GameShell({
   config,
@@ -262,7 +263,8 @@ export default function GameShell({
   iconClock?: ClockSpec;
 }) {
   const picker = config.chooseLevel;
-  const [screen, setScreen] = useState<Screen>(picker ? 'pick' : 'intro');
+  const stageMap = config.stageMap;
+  const [screen, setScreen] = useState<Screen>(stageMap ? 'map' : picker ? 'pick' : 'intro');
   const [levelIndex, setLevelIndex] = useState(0);
   const [feedback, setFeedback] = useState<'correct' | 'wrong' | null>(null);
   // Sampul kartu yang filenya gagal dimuat (deploy setengah jadi) — kartunya
@@ -271,6 +273,9 @@ export default function GameShell({
   const [brokenCover, setBrokenCover] = useState<Record<string, boolean>>({});
   const [earned, setEarned] = useState<Stars[]>([]);
   const wrongCount = useRef(0);
+  // Naik tiap kali anak meninggalkan permainan ke peta tahap, supaya pindah
+  // level yang masih tertunda (jeda "Hebat!") tidak menyeret layar kembali.
+  const playGen = useRef(0);
   // Remount the template on retry/advance so its internal state resets.
   const [attemptKey, setAttemptKey] = useState(0);
   // Level list of the current play, re-rolled on each play/replay so variant
@@ -280,7 +285,9 @@ export default function GameShell({
   // the intro can offer "Lanjut Main" at the level the child stopped at.
   // A picker game has nothing to resume: one pick = one level, so a play is
   // either finished or never got past its first level.
-  const [saved, setSaved] = useState(() => (picker ? null : getSession(config)));
+  // A stage-map game has nothing to resume either: a stage is short enough
+  // to replay, and the map itself shows how far the child has come.
+  const [saved, setSaved] = useState(() => (picker || stageMap ? null : getSession(config)));
   // What the 🔊 button repeats, when a template narrates something other than
   // the level narration (story pages). Registered by the template and cleared
   // on its unmount, so a level that never registers falls back to the default.
@@ -342,6 +349,30 @@ export default function GameShell({
     setScreen('playing');
   }
 
+  /** Play every slot of one stage, in order, each with a fresh variant. */
+  function handleStage(stageIndex: number) {
+    const stage = stageMap?.stages[stageIndex];
+    if (!stage) return;
+    sfx('tap');
+    const slots = config.levels as Array<ConcreteLevel | ConcreteLevel[]>;
+    const indexOf = (id: string) =>
+      slots.findIndex((slot) => (Array.isArray(slot) ? slot[0]!.id : slot.id) === id);
+    setPicks(
+      stage.slots
+        .map(indexOf)
+        .filter((s) => s >= 0)
+        .map((s) => {
+          const slot = slots[s]!;
+          return { s, v: Array.isArray(slot) ? Math.floor(Math.random() * slot.length) : 0 };
+        }),
+    );
+    setEarned([]);
+    setLevelIndex(0);
+    setAttemptKey((k) => k + 1);
+    clearSession(config.id);
+    setScreen('playing');
+  }
+
   /** Pick up the interrupted play at the level the child stopped at. */
   function handleResume() {
     if (!saved) return;
@@ -367,7 +398,9 @@ export default function GameShell({
     flyStars(pt.x, pt.y, topbarRef.current?.querySelector('[data-progress-active]') ?? null, stars);
     buzz(24);
 
+    const gen = playGen.current;
     const go = () => {
+      if (gen !== playGen.current) return;
       setFeedback(null);
       const next = levelIndex + 1;
       if (next >= levels.length) {
@@ -424,6 +457,18 @@ export default function GameShell({
     setFeedback('wrong');
     window.setTimeout(() => setFeedback(null), 1300);
   }, []);
+
+  if (screen === 'map' && stageMap) {
+    return (
+      <StageMapView
+        gameId={config.id}
+        title={config.title}
+        map={stageMap}
+        onPlay={handleStage}
+        onExit={onExit}
+      />
+    );
+  }
 
   if (screen === 'pick' && picker) {
     const slots = config.levels as Array<ConcreteLevel | ConcreteLevel[]>;
@@ -591,7 +636,19 @@ export default function GameShell({
           Kamu dapat <strong>{total}</strong> dari {levels.length * 3} bintang!
         </p>
         <MascotCard totalStars={getTotalStars()} />
-        {picker ? (
+        {stageMap ? (
+          // Back to the map: the next stage may have just opened.
+          <button
+            className="btn btn--primary"
+            style={{ fontSize: 24 }}
+            onClick={() => {
+              sfx('tap');
+              setScreen('map');
+            }}
+          >
+            <PlayIcon kind="replay" size="1.35em" /> Kembali ke Peta
+          </button>
+        ) : picker ? (
           // Back to the titles: replaying the same level is one more tap from
           // there, and the child usually wants a different story anyway.
           <button
@@ -642,7 +699,22 @@ export default function GameShell({
       }}
     >
       <div className="game-topbar" ref={topbarRef}>
-        <button className="btn" onClick={onExit} aria-label="Kembali">
+        <button
+          className="btn"
+          onClick={
+            // Dari dalam satu tahap, "kembali" berarti kembali ke petanya —
+            // bukan keluar dari game.
+            stageMap
+              ? () => {
+                  playGen.current += 1;
+                  stopSpeaking();
+                  setFeedback(null);
+                  setScreen('map');
+                }
+              : onExit
+          }
+          aria-label="Kembali"
+        >
           <BackIcon size={26} />
         </button>
         {/* A picked level plays alone: one lone dot says nothing, but the
