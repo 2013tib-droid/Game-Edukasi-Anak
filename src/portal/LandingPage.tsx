@@ -38,6 +38,21 @@ const worlds = [
 ];
 
 /**
+ * Game art floating around the logo in the hero — the first thing a parent
+ * sees, so it shows the product's art instead of describing it. Deliberately
+ * DIFFERENT games from `worlds` below so the two rows don't repeat each other.
+ * Art comes from the registry (same rule as `worlds`); emoji is only a fallback.
+ */
+const floaters = [
+  { cls: 'f1', id: 'puzzle-gambar', emoji: '🧩' },
+  { cls: 'f2', id: 'tulis-huruf', emoji: '✏️' },
+  { cls: 'f3', id: 'kartu-kembar', emoji: '🃏' },
+  { cls: 'f4', id: 'jalan-kendaraan', emoji: '🚗' },
+  { cls: 'f5', id: 'kenal-huruf', emoji: '🔤' },
+  { cls: 'f6', id: 'anggota-tubuh', emoji: '🧒' },
+];
+
+/**
  * Groups still in production. Listed WITHOUT a price on purpose — nothing here
  * is for sale yet, so a number (even struck through) would read as an offer.
  *
@@ -93,13 +108,67 @@ export default function LandingPage() {
     <>
       <TopBar account />
       <div className="landing">
-        <img className="logo" src={logo} alt="" width={112} height={112} />
-      <h1>Petualangan Pintar</h1>
-      <p className="tag">Main sambil belajar — dipandu suara Bahasa Indonesia 🎈</p>
+        <section className="hero">
+          <div className="hero-stage">
+            <span className="hero-glow" aria-hidden="true" />
+            {floaters.map((f) => {
+              const meta = findGame(f.id);
+              return (
+                <span key={f.id} className={`floater ${f.cls}`} aria-hidden="true">
+                  <GameIcon
+                    pic={meta?.pic}
+                    emoji={f.emoji}
+                    className="floater-art"
+                    fallbackClassName="floater-emoji"
+                  />
+                </span>
+              );
+            })}
+            <img className="logo" src={logo} alt="" width={128} height={128} />
+          </div>
 
-      <Link className="cta" to="/portal" onClick={() => countVisit('landing_main_click')}>
-        ✨ Coba Gratis
-      </Link>
+          <span className="hero-eyebrow">Untuk anak Playgroup, TK &amp; SD</span>
+          <h1>Petualangan Pintar</h1>
+          <p className="tag">Belajar jadi menyenangkan, tanpa terasa seperti belajar.</p>
+
+          <Link className="cta" to="/portal" onClick={() => countVisit('landing_main_click')}>
+            <span className="cta-spark cta-spark--l" aria-hidden="true" />
+            <span className="cta-spark cta-spark--r" aria-hidden="true" />
+            <svg className="cta-star" viewBox="0 0 100 100" aria-hidden="true">
+              <path
+                d="M50 6 61.8 33.6 92 36.4 69.2 56.4 76 86 50 70.4 24 86 30.8 56.4 8 36.4 38.2 33.6Z"
+                fill="#ffcf3f"
+                stroke="#f29a1f"
+                strokeWidth="5"
+                strokeLinejoin="round"
+              />
+              <path d="M30 34 40 31" stroke="#fff" strokeWidth="5" strokeLinecap="round" opacity=".7" />
+              <circle cx="40" cy="50" r="4.5" fill="#4a2a14" />
+              <path d="M56 50q4.5-4 9 0" fill="none" stroke="#4a2a14" strokeWidth="4" strokeLinecap="round" />
+              <path d="M42 59q8 8 16 0" fill="#e35d4a" stroke="#4a2a14" strokeWidth="3.5" strokeLinejoin="round" />
+              <circle cx="31" cy="58" r="5" fill="#ff8fa0" opacity=".6" />
+              <circle cx="69" cy="58" r="5" fill="#ff8fa0" opacity=".6" />
+            </svg>
+            <span className="cta-label">Coba Gratis</span>
+            <span className="cta-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 12h13M12.5 6l6 6-6 6" fill="none" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+          </Link>
+
+          <ul className="perks">
+            <li>
+              <span aria-hidden="true">🔊</span> Dipandu suara
+            </li>
+            <li>
+              <span aria-hidden="true">🛡️</span> Tanpa iklan
+            </li>
+            <li>
+              <span aria-hidden="true">💛</span> Sekali bayar
+            </li>
+          </ul>
+        </section>
 
       <section className="worlds">
         <h2 className="worlds-title">Petualangan seru menanti</h2>
