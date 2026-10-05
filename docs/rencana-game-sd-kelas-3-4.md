@@ -41,6 +41,15 @@ Urutan rilisnya nanti (satu tempat, jangan diacak) ada di `CLAUDE.md`
 "Penamaan Kelompok": hapus `draft` → `sd2` di backend + deploy → demo ke
 `FREE_GAME_IDS` → landing jadi kartu harga.
 
+**TAHAN DEPLOY WEB (keputusan pemilik 2026-10-05):** sejak layar "Pilih Mata
+Pelajaran" + nama sapaan anak masuk `main` (PR #82), **jangan menjalankan
+Actions → "Deploy web" sampai game SD Kelas 3 & 4 sudah beres dan matang** —
+pemilik sendiri yang menyatakan kapan. Ini lebih ketat dari aturan "deploy TK &
+SD 1-2 tetap jalan seperti biasa" di atas: yang tayang di petualanganpintar.com
+tetap build terakhir sebelum PR #82. Kalau ada bugfix darurat untuk pembeli TK /
+SD 1-2 sebelum itu, **tanya pemilik dulu** — deploy dari `main` otomatis ikut
+membawa kolom nama anak & halaman privasi yang baru.
+
 **Cek cepat sebelum setiap deploy production:** `grep -n '"draft": true'
 src/data/groups.json` harus masih menemukan baris `sd2`.
 
