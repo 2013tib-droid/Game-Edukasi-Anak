@@ -401,7 +401,7 @@
 /* Kaki landing: tautan halaman hukum (Privasi, S&K, refund).
  *
  * Wajib ada sebelum berjualan, tapi sengaja TIDAK menonjol — ini bacaan yang
- * dicari kalau dibutuhkan, bukan saingan tombol "Main Sekarang". Ukurannya
+ * dicari kalau dibutuhkan, bukan saingan tombol "Coba Gratis". Ukurannya
  * mengikuti teks kaki yang sudah ada. */
 .lfoot {
   display: grid;
@@ -426,7 +426,7 @@
 }
 
 /* Tombol beli di kartu harga — link keluar ke checkout Mayar
-   (src/data/purchase.ts). Sengaja lebih kecil dari CTA "Main Sekarang" di
+   (src/data/purchase.ts). Sengaja lebih kecil dari CTA "Coba Gratis" di
    atas: tombol utama landing tetap mencoba gratis dulu, baru membeli. Tinggi
    48px masih lega untuk jari orang tua. */
 .landing .pc-buy {

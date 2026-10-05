@@ -56,7 +56,7 @@ const soonGroups = [
 const faqs = [
   {
     q: 'Bisa dicoba dulu sebelum bayar?',
-    a: 'Bisa. Ketuk "Main Sekarang" — ada beberapa game yang gratis dimainkan penuh tanpa perlu daftar atau login.',
+    a: 'Bisa. Ketuk "Coba Gratis" — ada beberapa game yang gratis dimainkan penuh tanpa perlu daftar atau login.',
   },
   {
     q: 'Bayarnya sekali atau langganan?',
@@ -98,7 +98,7 @@ export default function LandingPage() {
       <p className="tag">Main sambil belajar — dipandu suara Bahasa Indonesia 🎈</p>
 
       <Link className="cta" to="/portal" onClick={() => countVisit('landing_main_click')}>
-        🎮 Main Sekarang
+        ✨ Coba Gratis
       </Link>
 
       <section className="worlds">
