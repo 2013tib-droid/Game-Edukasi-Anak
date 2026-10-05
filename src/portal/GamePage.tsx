@@ -5,7 +5,7 @@ import GameShell from '@/engine/core/GameShell';
 import BackIcon from '@/engine/ui/BackIcon';
 import PlayIcon from '@/engine/ui/PlayIcon';
 import SplashScreen from '@/app/SplashScreen';
-import { findGame } from '@/games/registry';
+import { findGame, gameListPath } from '@/games/registry';
 import { useAuth } from '@/auth/AuthContext';
 import { removeDevice, type DeviceInfo } from '@/auth/entitlements';
 import { useGameAccess } from '@/portal/useGameAccess';
@@ -84,7 +84,7 @@ export default function GamePage() {
   }
 
   const backToGroup = (
-    <Link to={`/kelompok/${meta.group}`} className="btn">
+    <Link to={gameListPath(meta)} className="btn">
       <BackIcon /> Kembali
     </Link>
   );
@@ -148,7 +148,7 @@ export default function GamePage() {
       icon={meta.emoji}
       iconPic={meta.pic}
       iconClock={meta.iconClock}
-      onExit={() => navigate(`/kelompok/${meta.group}`)}
+      onExit={() => navigate(gameListPath(meta))}
     />
   );
 }

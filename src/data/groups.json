@@ -22,6 +22,13 @@
       "emoji": "📚",
       "description": "Usia 8–10 tahun · Perkalian, pembagian, membaca cerita",
       "draft": true
+    },
+    {
+      "id": "sd3",
+      "title": "SD Kelas 5 & 6",
+      "emoji": "🎓",
+      "description": "Usia 10–12 tahun · Pecahan, bangun ruang, membaca & IPAS",
+      "draft": true
     }
   ]
 }
