@@ -51,11 +51,14 @@ const ENGINE_SCOPE = 'engine';
  */
 // 'Bagus! Tulis sekali lagi!' = between rounds of a `tracing` level with
 // `repeat` (AGAIN_LINE in Tracing.tsx — keep the two identical).
+// The last line = a locked stage on a `stageMap` is touched (LOCKED_LINE in
+// StageMapView.tsx — keep the two identical).
 const ENGINE_LINES = [
   'Hebat! Kamu benar!',
   'Selamat! Kamu hebat sekali!',
   'Coba lagi, kamu pasti bisa!',
   'Bagus! Tulis sekali lagi!',
+  'Tahap ini masih terkunci. Selesaikan tahap sebelumnya dulu ya!',
 ];
 
 /**
@@ -142,6 +145,9 @@ for (const config of mod.configs) {
     console.error(`\nId game "${config.id}" bentrok dengan scope suara. Ganti id game-nya.`);
     process.exit(1);
   }
+  // Stage map (Tangga Membaca): its heading is read aloud when the map opens.
+  add(config.stageMap?.title, config.id, DEFAULT_VOICE);
+
   for (const level of levelsOf(config)) {
     // Mixed games declare the template per level; homogeneous ones once.
     const isStory = (level.template ?? config.template) === 'story-choice';
