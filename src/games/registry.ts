@@ -1,4 +1,5 @@
 import type { AnyGameConfig, ClockSpec, GroupId, TemplateId } from '@/engine/core/types';
+import type { SubjectId } from '@/data/subjects';
 
 /**
  * Portal-facing game catalog. Metadata lives here (small, in the main
@@ -9,9 +10,8 @@ import type { AnyGameConfig, ClockSpec, GroupId, TemplateId } from '@/engine/cor
  * `src/data/access.ts` (`FREE_GAME_IDS` + mode kunci). Dulu nilainya ditulis
  * dua kali (registry + config game) dan gampang tidak sinkron.
  */
-export interface GameMeta {
+interface GameMetaBase {
   id: string;
-  group: GroupId;
   title: string;
   /**
    * The game's icon — portal card AND intro screen. This is the ONLY place it
@@ -38,6 +38,17 @@ export interface GameMeta {
   template: TemplateId | 'mixed';
   load: () => Promise<{ default: AnyGameConfig }>;
 }
+
+/**
+ * Kelompok ber-mapel (lihat `SUBJECTS_BY_GROUP` di `src/data/subjects.ts`)
+ * WAJIB menyebut `subject` tiap game-nya; kelompok tanpa mapel dilarang
+ * menyebutnya. Dipaksa di sini supaya lupa menulisnya gagal saat build.
+ */
+export type GameMeta = GameMetaBase &
+  (
+    | { group: 'tk' | 'sd1'; subject?: never }
+    | { group: 'sd2' | 'sd3'; subject: SubjectId }
+  );
 
 export const games: GameMeta[] = [
   // --- TK: dunia Petualangan Pintar (Fase 3) ---
@@ -283,6 +294,7 @@ export const games: GameMeta[] = [
   {
     id: 'kali-kilat',
     group: 'sd2',
+    subject: 'matematika',
     title: 'Kali Kilat',
     emoji: '✖️',
     template: 'tap-answer',
@@ -291,6 +303,7 @@ export const games: GameMeta[] = [
   {
     id: 'kebun-ilmu',
     group: 'sd2',
+    subject: 'ipas',
     title: 'Kebun Ilmu',
     emoji: '🌱',
     template: 'mixed',
@@ -299,6 +312,7 @@ export const games: GameMeta[] = [
   {
     id: 'toko-kembalian',
     group: 'sd2',
+    subject: 'matematika',
     title: 'Toko Kembalian',
     emoji: '🏪',
     template: 'mixed',
@@ -307,6 +321,7 @@ export const games: GameMeta[] = [
   {
     id: 'ukur-yuk',
     group: 'sd2',
+    subject: 'matematika',
     title: 'Ukur Yuk',
     emoji: '📏',
     template: 'tap-answer',
@@ -315,6 +330,7 @@ export const games: GameMeta[] = [
   {
     id: 'detektif-data',
     group: 'sd2',
+    subject: 'matematika',
     title: 'Detektif Data',
     emoji: '📊',
     template: 'tap-answer',
@@ -323,6 +339,7 @@ export const games: GameMeta[] = [
   {
     id: 'waktu-tepat',
     group: 'sd2',
+    subject: 'matematika',
     title: 'Waktu Tepat',
     emoji: '⏱️',
     // Muka jam SVG yang sama dengan yang diputar di dalam game. Pukul 07.15
@@ -334,8 +351,13 @@ export const games: GameMeta[] = [
   },
 ];
 
-export function gamesForGroup(group: GroupId): GameMeta[] {
-  return games.filter((g) => g.group === group);
+export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {
+  return games.filter((g) => g.group === group && (!subject || g.subject === subject));
+}
+
+/** Layar yang dituju tombol Kembali dari game: daftar mapelnya kalau ada. */
+export function gameListPath(meta: GameMeta): string {
+  return meta.subject ? `/kelompok/${meta.group}/${meta.subject}` : `/kelompok/${meta.group}`;
 }
 
 export function findGame(id: string): GameMeta | undefined {

@@ -46,6 +46,7 @@ export default function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/portal" element={<HomePage />} />
               <Route path="/kelompok/:groupId" element={<GroupPage />} />
+              <Route path="/kelompok/:groupId/:subjectId" element={<GroupPage />} />
               <Route path="/game/:gameId" element={<GamePage />} />
               <Route path="/privasi" element={<PrivacyPage />} />
               <Route path="/ketentuan" element={<TermsPage />} />

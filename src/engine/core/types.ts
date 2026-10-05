@@ -7,7 +7,7 @@
 
 import type { Denom } from '@/engine/core/money';
 
-export type GroupId = 'tk' | 'sd1' | 'sd2';
+export type GroupId = 'tk' | 'sd1' | 'sd2' | 'sd3';
 
 export type TemplateId =
   | 'tap-answer' // pilih jawaban benar dari 2–4 pilihan

@@ -532,3 +532,54 @@
     margin: 0;
   }
 }
+
+/* Nama sapaan anak (opsional) di kartu akun. Bobotnya sama dengan bagian
+   "Sudah aktif": keterangan, bukan tugas utama layar ini. */
+.acct__child {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(58, 46, 32, 0.08);
+}
+
+.acct__opt {
+  font-weight: 500;
+}
+
+.acct__child-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.acct__child-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  font-size: 16px; /* < 16px membuat iPhone memperbesar layar saat diketuk */
+}
+
+.acct__child-save {
+  flex: none;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 999px;
+  background: #ffd54a;
+  color: #3a2e20;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.acct__child-save:disabled {
+  background: #efe7d6;
+  color: #a39478;
+  cursor: default;
+}
+
+.acct__hint {
+  display: block;
+  margin-top: 5px;
+  font-size: 12.5px;
+  color: #8a7a63;
+}

@@ -20,10 +20,11 @@ import LegalPage from '@/portal/LegalPage';
  *   - penghitung kunjungan ....... functions/src/index.ts (catatStat)
  *   - pesanan dari Mayar ......... functions/src/index.ts (mayarWebhook, koleksi orders)
  *   - pesanan dicocokkan ke akun .. functions/src/index.ts (myPaidOrders, claimPaidOrder)
+ *   - nama sapaan anak (HP saja) . src/portal/childName.ts (localStorage, tak ke server)
  */
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Kebijakan Privasi" updated="25 September 2026">
+    <LegalPage title="Kebijakan Privasi" updated="5 Oktober 2026">
       <div className="legal-summary">
         <h2>Ringkasnya</h2>
         <ul>
@@ -33,7 +34,9 @@ export default function PrivacyPage() {
           </li>
           <li>
             <strong>Kami tidak mengumpulkan data apa pun tentang anak</strong> — tidak nama,
-            tidak umur, tidak foto, tidak suara. Akunnya milik orang tua.
+            tidak umur, tidak foto, tidak suara. Akunnya milik orang tua. Nama sapaan anak yang
+            boleh Anda isi di menu Akun <strong>hanya tersimpan di HP itu</strong> dan tidak
+            pernah dikirim ke server kami.
           </li>
           <li>
             Aplikasi ini <strong>tidak pernah meminta akses kamera, mikrofon, kontak, maupun
@@ -214,7 +217,8 @@ export default function PrivacyPage() {
         Beberapa hal disimpan di penyimpanan lokal browser dan <strong>tidak pernah dikirim ke
         mana pun</strong> kecuali disebut lain di atas: bintang hasil bermain, posisi “lanjutkan
         permainan”, nomor acak perangkat, pengumuman yang sudah dibaca, penanda tanggal
-        penghitung kunjungan, dan pengaturan penguji.
+        penghitung kunjungan, pengaturan penguji, dan nama sapaan anak kalau Anda mengisinya
+        (dipakai untuk sapaan “Halo, …!”, dan dihapus saat Anda menekan Keluar).
         Menghapus data situs di browser akan menghapus semuanya dari HP itu; bintang yang sudah
         tercadang tetap bisa kembali saat Anda masuk lagi.
       </p>

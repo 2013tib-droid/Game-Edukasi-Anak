@@ -10,12 +10,14 @@ import Clock from '@/engine/ui/Clock';
 import GameIcon from '@/engine/ui/GameIcon';
 import BackIcon from '@/engine/ui/BackIcon';
 import GroupPic from '@/portal/GroupPic';
+import SubjectPage from '@/portal/SubjectPage';
+import { SUBJECT_STYLE, subjectsFor } from '@/data/subjects';
 
 // Game list per group. Unlocked games open directly; locked ones show a
 // padlock until the account has group access (gate enforced again in
 // GamePage). Lock status comes from `src/data/access.ts`.
 export default function GroupPage() {
-  const { groupId } = useParams<{ groupId: string }>();
+  const { groupId, subjectId } = useParams<{ groupId: string; subjectId?: string }>();
   const group = groupsData.groups.find((g) => g.id === groupId && isGroupVisible(g));
   // Re-render when the tester flips the lock switch.
   useLockMode();
@@ -33,7 +35,25 @@ export default function GroupPage() {
     );
   }
 
-  const games = gamesForGroup(group.id as GroupId);
+  // Kelompok ber-mapel (SD kelas 3 ke atas): tanpa mapel di URL tampilkan
+  // pemilih mapel; dengan mapel, daftar game mapel itu saja.
+  const subjects = subjectsFor(group.id as GroupId);
+  const subject = subjects?.find((s) => s.id === subjectId);
+  if (subjects && !subjectId) return <SubjectPage group={group} subjects={subjects} />;
+  if ((subjects && !subject) || (!subjects && subjectId)) {
+    return (
+      <div className="page" style={{ textAlign: 'center' }}>
+        <p style={{ fontSize: 22 }}>Mata pelajaran tidak ditemukan.</p>
+        <Link to={`/kelompok/${group.id}`} className="btn">
+          <BackIcon /> Kembali
+        </Link>
+      </div>
+    );
+  }
+
+  const games = gamesForGroup(group.id as GroupId, subject?.id);
+  const heading = subject ? SUBJECT_STYLE[subject.id].title : group.title;
+  const backTo = subject ? `/kelompok/${group.id}` : '/portal';
 
   // Label "GRATIS" hanya berarti kalau di layar ini MEMANG ada yang terkunci.
   // Di masa pra-rilis (mode 'buka') dan untuk orang tua yang sudah membeli
@@ -51,11 +71,22 @@ export default function GroupPage() {
           gap: 12,
         }}
       >
-        <GroupPic pic={group.pic} emoji={group.emoji} height={64} emojiSize={40} />
+        {subject ? (
+          <span style={{ fontSize: 40 }} aria-hidden>
+            {SUBJECT_STYLE[subject.id].deco}
+          </span>
+        ) : (
+          <GroupPic pic={group.pic} emoji={group.emoji} height={64} emojiSize={40} />
+        )}
         {/* Non-breaking spaces so a wrapped title never strands "TK" or
             "& 2" alone on the second line (HP 320–380 px). */}
-        <span>{group.title.replace(/ & /g, '\u00a0&\u00a0').replace(/ (\S+)$/, '\u00a0$1')}</span>
+        <span>{heading.replace(/ & /g, '\u00a0&\u00a0').replace(/ (\S+)$/, '\u00a0$1')}</span>
       </h1>
+      {games.length === 0 && (
+        // Mapel yang belum punya game (kartunya pun tak bisa diketuk) — ini
+        // cuma untuk yang datang lewat URL langsung.
+        <p style={{ fontSize: 20, marginTop: 24 }}>Gamenya segera hadir! 🚧</p>
+      )}
       <div
         style={{
           display: 'grid',
@@ -117,7 +148,7 @@ export default function GroupPage() {
         })}
       </div>
       <p style={{ marginTop: 28 }}>
-        <Link to="/portal" className="btn">
+        <Link to={backTo} className="btn">
           <BackIcon /> Kembali
         </Link>
       </p>
