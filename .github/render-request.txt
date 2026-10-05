@@ -1,14 +1,14 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #24
+render #25
 
-only: engine
+only: tangga-membaca
 
-Tracing (Tulis Angka & Tulis Huruf) sekarang menulis tiap glyph 3 kali; di
-antara ulangan diucapkan "Bagus! Tulis sekali lagi!". Satu baris baru, scope
-engine. Dibandingkan sebelum vs sesudah lewat scripts/narration-lines.json:
-1191 baris jadi 1192, nol baris lama berubah atau pindah scope, jadi aman
-dibatasi "only: engine" (file yang sudah ada dilewati).
+Game baru SD Kelas 1 & 2 "Tangga Membaca" (docs/rencana-referensi-galaksi.md
+tahap 2). Empat baris baru, semuanya scope tangga-membaca. Dibandingkan
+sebelum vs sesudah lewat scripts/narration-lines.json: 1192 baris jadi 1196,
+nol baris lama berubah atau pindah scope, jadi aman dibatasi
+"only: tangga-membaca" (file yang sudah ada dilewati).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

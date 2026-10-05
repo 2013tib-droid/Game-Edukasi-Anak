@@ -46,30 +46,30 @@ gratis SD**, jadi perbaikannya langsung terlihat calon pembeli).
 Kriteria selesai: `check-glyphs.mjs` lulus, uji headless 320×568 / 380×800 / 740×360,
 nol scroll, sesi penuh sampai "Selamat!".
 
-## Tahap 2 — "Tangga Membaca" (game baru SD Kelas 1 & 2) — USULAN, perlu keputusan pemilik
+## Tahap 2 — "Tangga Membaca" (game baru SD Kelas 1 & 2) — SELESAI 2026-10-05
 
 Yang berharga dari Peta Galaksi bukan galaksinya, tapi **jenjang membaca yang berurutan**
-dengan progres per tahap ("17/17"), sehingga orang tua tahu anaknya sudah sampai mana.
-SD1 sekarang punya Suku Kata & Ejaan Jitu, tapi belum ada jenjang membaca berurutan.
+dengan progres per tahap, sehingga orang tua tahu anaknya sudah sampai mana.
 
-Usulan tahap (bahasa Indonesia, bukan fonik Inggris):
-1. Suku kata terbuka (ba-bi-bu, BU-KU)
-2. Kata dua suku terbuka (bola, sapi)
-3. Suku kata tertutup (ban, kur-si)
-4. Diftong (ai, au, oi: pantai, pulau)
-5. Gabungan huruf (ng, ny: nyanyi, bunga)
-6. Klaster (tr, pr, bl: truk, putri, blus)
-7. Kata panjang / tiga-empat suku
-8. Kalimat pendek
+**Keputusan pemilik (2026-10-05):** game BARU (Suku Kata & Ejaan Jitu tetap berdiri sendiri),
+tahap **terkunci berurutan**, **peta jalan berkelok pastel**, **6 soal per tahap**.
 
-Hal yang perlu diputuskan pemilik sebelum dibangun:
-- Nama game & ikon; berapa soal per tahap.
-- Tampilan **peta jalan** (pastel, senada app — bukan galaksi gelap) di atas pemilih level
-  `chooseLevel`, atau cukup kartu bertahap biasa dulu.
-- Tahap berikutnya terkunci sampai tahap sebelumnya selesai, atau bebas dipilih.
-- Tipe soal per tahap: memakai template yang ada (tap-answer, spell, drag-drop) — nol
-  template baru kalau bisa.
-- Hubungannya dengan Suku Kata & Ejaan Jitu (dilebur, atau berdampingan).
+Isinya (`src/games/sd1/tangga-membaca.ts`, 8 tahap × 6 slot = 48 slot, 92 varian):
+1. Suku Kata (BU KU, SU SU — papan menulis kata terpisah per suku)
+2. Kata Pendek (dua suku terbuka: sapu, gigi)
+3. Tiga Suku (sepatu, kamera)
+4. Suku Tertutup (kursi, wortel)
+5. Diftong (pantai, pulau, kerbau…)
+6. NG dan NY (bunga, tangga)
+7. Klaster (truk, drum, planet)
+8. Kalimat ("Adik minum susu." → gambar susu)
+
+Tiap tahap berselang-seling dua arah: **baca tulisan → pilih gambar** dan **lihat gambar →
+pilih tulisan**. Narasi TIDAK PERNAH membacakan kata/kalimatnya (kalau dibacakan, yang
+dilatih mendengar, bukan membaca). Pengecoh dari kesalahan membaca khas: vokal tertukar,
+huruf akhir hilang (APEL→APE), NG kehilangan G, klaster disisipi vokal (TRUK→TURUK),
+diftong kehilangan vokal kedua (CABAI→CABA). Bentuk lisan (CABE, PULO, RANTE) SENGAJA
+tidak dijadikan pengecoh — itu ejaan yang dilihat anak sehari-hari.
 
 ## Yang ditolak & alasannya (jangan diusulkan ulang tanpa alasan baru)
 

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-05",
-  "count": 1192,
-  "chars": 53898,
+  "count": 1196,
+  "chars": 54058,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -9061,6 +9061,42 @@
       "voice": "gadis",
       "games": [
         "taman-huruf"
+      ]
+    },
+    {
+      "key": "733c83a26696",
+      "text": "Baca kalimatnya. Gambar mana yang cocok?",
+      "scope": "tangga-membaca",
+      "voice": "gadis",
+      "games": [
+        "tangga-membaca"
+      ]
+    },
+    {
+      "key": "e7ae12ba988f",
+      "text": "Baca katanya. Gambar mana yang cocok?",
+      "scope": "tangga-membaca",
+      "voice": "gadis",
+      "games": [
+        "tangga-membaca"
+      ]
+    },
+    {
+      "key": "2b0d67e3434c",
+      "text": "Baca suku katanya. Gambar mana yang cocok?",
+      "scope": "tangga-membaca",
+      "voice": "gadis",
+      "games": [
+        "tangga-membaca"
+      ]
+    },
+    {
+      "key": "6872d6b30005",
+      "text": "Ini gambar apa? Pilih tulisan yang tepat!",
+      "scope": "tangga-membaca",
+      "voice": "gadis",
+      "games": [
+        "tangga-membaca"
       ]
     },
     {

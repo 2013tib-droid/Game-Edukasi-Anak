@@ -157,6 +157,15 @@ export interface TapAnswerData {
    */
   boardRow?: boolean;
   /**
+   * Kartu jawaban GAMBAR dalam SATU baris (tiga kolom), bukan grid dua kolom
+   * yang besar. Untuk soal yang isyaratnya TULISAN (kata/kalimat yang harus
+   * dibaca, Tangga Membaca): grid gambar bawaan `minmax(150px)` jatuh ke satu
+   * kolom di HP 320 px dan tiga kartu bertumpuk melewati layar (terukur
+   * 455 px scroll). Jangan dipakai kalau isyaratnya GAMBAR besar — di sana
+   * kartu memang sengaja lebar supaya bentuknya bisa dibandingkan.
+   */
+  choiceRow?: boolean;
+  /**
    * Written sum shown as one line under the picture board ("3 + 3 = ?").
    * Use it on EQUATION boards (addition/subtraction) so the child meets the
    * number symbols next to the pictures they just counted — never on a plain
@@ -805,6 +814,39 @@ export interface LevelCard {
  * - level ids must be unique — the picker shows the stars earned per level,
  * - `sessionLevels` is ignored: one pick = one level.
  */
+/**
+ * Satu tahap di peta tahap (`GameConfig.stageMap`): sekelompok slot yang
+ * dimainkan berurutan dalam satu kali main.
+ */
+export interface Stage {
+  /** Id stabil; jangan diubah — dipakai sebagai kunci React & penanda uji. */
+  id: string;
+  /** Nama pendek di bawah titik peta, mis. "Suku Kata". */
+  label: string;
+  /** Ikon titik peta. */
+  emoji: string;
+  /**
+   * Id slot (`GameLevel.id`) yang menjadi isi tahap ini, dimainkan berurutan.
+   * Tiap slot WAJIB milik tepat satu tahap. Tahap dianggap SELESAI kalau
+   * semua slotnya sudah punya bintang — jadi kemajuan tahap diturunkan dari
+   * bintang biasa (ikut tersinkron ke Firestore tanpa penyimpanan baru).
+   */
+  slots: string[];
+}
+
+/**
+ * Peta tahap berkelok (Tangga Membaca, 2026-10-05): layar pembuka berupa
+ * jalan dengan titik-titik tahap. Tahap ke-n baru terbuka setelah tahap
+ * sebelumnya selesai (keputusan pemilik: terkunci berurutan). Mengetuk tahap
+ * memainkan seluruh slot tahap itu; tak ada "lanjutkan permainan" — satu
+ * tahap cukup pendek untuk diulang.
+ */
+export interface StageMap {
+  /** Ajakan di bawah judul game, mis. "Naik satu anak tangga tiap hari!". */
+  title: string;
+  stages: Stage[];
+}
+
 export interface LevelPicker {
   /** Ajakan di atas kartu-kartu, mis. "Pilih ceritamu!". */
   title: string;
@@ -881,6 +923,8 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
   sessionLevels?: number;
   /** Let the child pick the level from a card grid — see `LevelPicker`. */
   chooseLevel?: LevelPicker;
+  /** Layar pembuka berupa peta tahap — lihat `StageMap`. */
+  stageMap?: StageMap;
   /** Proyek sesi — lihat `ProjectSpec`. */
   project?: ProjectSpec;
 }
@@ -922,6 +966,8 @@ export interface MixedGameConfig {
   sessionLevels?: number;
   /** See `GameConfig.chooseLevel`. */
   chooseLevel?: LevelPicker;
+  /** See `GameConfig.stageMap`. */
+  stageMap?: StageMap;
   /** See `GameConfig.project`. */
   project?: ProjectSpec;
 }
