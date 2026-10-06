@@ -98,10 +98,23 @@
   fill: #7fd36a;
 }
 
+.nh-petal {
+  fill: #ff8fc0;
+  stroke: #e0559a;
+  stroke-width: 0.6;
+}
+
+.nh-flower-heart {
+  fill: #ffd34d;
+}
+
 .nh-goal__num {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 800;
   fill: #c2185b;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 3px;
 }
 
 .nh-frog {

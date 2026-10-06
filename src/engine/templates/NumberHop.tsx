@@ -314,8 +314,20 @@ export default function NumberHop({ level, onCorrect, onWrong, narrate, hint }: 
             {step.goal && (
               <g className="nh-goal">
                 <ellipse cx={xOf(step.target)} cy={41} rx={12} ry={5} className="nh-lily nh-lily--goal" />
+                {/* Bunga teratai digambar SVG — emoji di dalam <text> SVG tidak
+                    tergambar di semua HP. */}
+                {[0, 72, 144, 216, 288].map((a) => (
+                  <circle
+                    key={a}
+                    cx={xOf(step.target) + 4.5 * Math.cos((a * Math.PI) / 180)}
+                    cy={35 + 4.5 * Math.sin((a * Math.PI) / 180)}
+                    r={3.6}
+                    className="nh-petal"
+                  />
+                ))}
+                <circle cx={xOf(step.target)} cy={35} r={2.4} className="nh-flower-heart" />
                 <text x={xOf(step.target)} y={14} textAnchor="middle" className="nh-goal__num">
-                  🌸{step.target}
+                  {step.target}
                 </text>
               </g>
             )}
