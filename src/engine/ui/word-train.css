@@ -230,6 +230,31 @@
   }
 }
 
+/* HP DIMIRINGKAN: tinggi layar ±360 px, jadi jarak-jarak dirapatkan (terukur
+   scroll 10–20 px pada kalimat lima kata sebelum ini). */
+@media (min-aspect-ratio: 4/3) and (max-height: 500px) {
+  .wt-prompt {
+    font-size: 18px;
+    margin: 0 0 6px;
+    padding: 4px 10px;
+  }
+  .wt-area {
+    gap: 8px;
+  }
+  .wt-rail {
+    row-gap: 10px;
+    padding: 6px 8px 8px;
+  }
+  .wt-car {
+    min-height: 42px;
+    padding: 4px 9px;
+  }
+  .wt-tray {
+    gap: 10px 8px;
+    min-height: 54px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .wt-rail--sing .wt-car,
   .wt-rail--sing .wt-loco,
