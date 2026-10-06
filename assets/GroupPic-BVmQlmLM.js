@@ -1,0 +1,1 @@
+import{r as n,j as t}from"./index-CTkN93br.js";function l({pic:s,emoji:r,height:e=88,emojiSize:o=48}){const[a,i]=n.useState(!1);return!s||a?t.jsx("span",{style:{fontSize:o},children:r}):t.jsx("img",{src:`/uji-sd2/assets/groups/${s}.webp`,alt:"",style:{height:e,width:"auto"},onError:()=>i(!0)})}export{l as G};
