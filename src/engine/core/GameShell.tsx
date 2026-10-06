@@ -62,6 +62,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'tap-picture': lazy(() => import('@/engine/templates/TapPicture')),
   cashier: lazy(() => import('@/engine/templates/Cashier')),
   'clock-set': lazy(() => import('@/engine/templates/ClockSet')),
+  'word-train': lazy(() => import('@/engine/templates/WordTrain')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */

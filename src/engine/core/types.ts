@@ -21,7 +21,8 @@ export type TemplateId =
   | 'puzzle' // susun kepingan gambar sampai utuh
   | 'tap-picture' // sentuh bagian yang benar pada satu gambar (anggota tubuh)
   | 'cashier' // tarik uang ke laci sampai jumlahnya pas (Toko Kembalian)
-  | 'clock-set'; // putar jarum panjang dengan jari (Waktu Tepat)
+  | 'clock-set' // putar jarum panjang dengan jari (Waktu Tepat)
+  | 'word-train'; // susun gerbong kata jadi kalimat (Susun Kalimat)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -768,6 +769,43 @@ export interface ClockSetData {
   scene?: SceneId;
 }
 
+/**
+ * Satu putaran template `word-train` (Susun Kalimat → "Kereta Kata"): tiap
+ * kata = satu GERBONG. `words` SELALU kalimat utuh yang benar, dari kata
+ * pertama (berhuruf kapital) sampai tanda bacanya sendiri sebagai gerbong
+ * terakhir (".", "?", "!"). Kalimat itulah yang dibacakan saat kereta
+ * berangkat — dan HANYA sesudah benar (lihat `sentenceText` di wordTrain.ts).
+ *
+ * Kata boleh memuat `|` untuk menandai imbuhan ("me|nyapu"): di gerbong,
+ * bagian sebelum `|` tampil sebagai gerbong kecil berwarna; di suara & di
+ * penilaian `|`-nya dibuang.
+ */
+export type TrainRound =
+  /** Seret/ketuk gerbong ke rel sampai urutannya benar. */
+  | {
+      kind: 'order';
+      words: string[];
+      /** Urutan lain yang JUGA benar (kalimat yang bisa disusun dua cara). */
+      alt?: string[][];
+      /** Gerbong pengecoh di baki: tanda baca lain, huruf kecil di depan… */
+      decoys?: string[];
+      say?: string;
+    }
+  /** Kereta sudah tersusun; sentuh gerbong yang ditanyakan (kata kerja…). */
+  | { kind: 'pick'; words: string[]; answer: number[]; say?: string }
+  /** Satu gerbong kosong; pilih gerbong yang tepat dari baki. */
+  | { kind: 'fill'; words: string[]; gap: number; options: string[]; say?: string };
+
+export interface WordTrainData {
+  /**
+   * Dikerjakan berurutan dalam satu level; level selesai sesudah putaran
+   * terakhir. Misi besar = dua kalimat yang menjadi satu cerita pendek.
+   * `say` putaran pertama diabaikan (narasi level yang dibacakan).
+   */
+  rounds: TrainRound[];
+  scene?: SceneId;
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -781,6 +819,7 @@ export interface LevelDataMap {
   'tap-picture': TapPictureData;
   cashier: CashierData;
   'clock-set': ClockSetData;
+  'word-train': WordTrainData;
 }
 
 /* ---------- Game config ---------- */
