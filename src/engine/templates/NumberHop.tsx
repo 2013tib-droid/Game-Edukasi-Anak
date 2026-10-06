@@ -317,9 +317,12 @@ export default function NumberHop({ level, onCorrect, onWrong, narrate, hint }: 
                   />
                 ))}
                 <circle cx={xOf(step.target)} cy={35} r={2.4} className="nh-flower-heart" />
-                <text x={xOf(step.target)} y={14} textAnchor="middle" className="nh-goal__num">
-                  {step.target}
-                </text>
+                {/* Disembunyikan begitu katak berdiri di sana: angkanya sudah ada di atas katak. */}
+                {pos !== step.target && (
+                  <text x={xOf(step.target)} y={14} textAnchor="middle" className="nh-goal__num">
+                    {step.target}
+                  </text>
+                )}
               </g>
             )}
           </svg>

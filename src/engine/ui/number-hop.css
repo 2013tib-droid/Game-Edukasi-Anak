@@ -11,7 +11,7 @@
 }
 
 .nh-area {
-  gap: 8px;
+  gap: 6px;
   justify-content: center;
 }
 
@@ -43,7 +43,7 @@
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  --nh-top: 52px;
+  --nh-top: 48px;
   padding-top: var(--nh-top);
   touch-action: none;
   user-select: none;
@@ -240,7 +240,7 @@
 }
 
 .nh-btn {
-  min-height: 50px;
+  min-height: 48px;
   border: none;
   border-radius: 14px;
   background: #4caf50;
