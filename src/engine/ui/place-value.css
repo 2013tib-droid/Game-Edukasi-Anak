@@ -311,6 +311,16 @@
     grid-row: 2;
     flex-wrap: wrap;
   }
+  /* Kolom kanan cuma ±280 px: tiga kartu gudang + tombol sebaris membuat
+     "✓ Cocok!" terpotong (terukur di 740×360). Tombolnya turun ke baris sendiri. */
+  .pv-check {
+    flex: 1 1 100%;
+    min-height: 52px;
+  }
+  .pv-tile__img {
+    width: 36px;
+    height: 36px;
+  }
   .pv-col__blocks {
     width: min(100%, calc(100dvh - 190px));
   }
