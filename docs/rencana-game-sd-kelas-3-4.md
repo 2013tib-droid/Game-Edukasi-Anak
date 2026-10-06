@@ -663,7 +663,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | 6 | Toko Kembalian | `toko-kembalian` | ✅ sudah ada (2026-09-30), narasi belum dirender (render #20) — **demo gratis `sd2`**, belum masuk `FREE_GAME_IDS` |
 | 7 | Detektif Data | `detektif-data` | ✅ sudah ada (2026-10-02), narasi belum dirender (render #22, 47 baris) — 9 slot × 54 varian, urutan tetap; fitur engine `TapAnswerData.chart` / `TapChoice.chart` (`Chart.tsx`) |
 | 8 | Detektif Bacaan | `detektif-bacaan` | rencana |
-| 9 | Susun Kalimat | `susun-kalimat` | rencana |
+| 9 | Susun Kalimat | `susun-kalimat` | ✅ sudah ada (2026-10-06) — versi premium "Kereta Kata": template baru `word-train` (seret gerbong kata), 9 slot × 54 varian, urutan tetap, proyek sesi "Kereta Kata"; kalimat dibacakan saat kereta berangkat; narasi SUDAH dirender (render #28, 73 baris). |
 | 10 | Kebun Ilmu | `kebun-ilmu` | ✅ sudah ada (2026-09-29), narasi belum dirender (render #19) |
 | – | Perisai Garuda (Pancasila) | `perisai-garuda` | ✅ sudah ada (2026-10-05) — game Pancasila pertama: lambang sila SVG engine (`Sila.tsx`), 9 slot × 55 varian, urutan tetap, proyek sesi "Perisai Garuda" (stempel = lambang sila); narasi SUDAH dirender (render #26, 57 baris). Rumah & pakaian adat belum. |
 

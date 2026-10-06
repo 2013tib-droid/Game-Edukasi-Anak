@@ -359,6 +359,15 @@ export const games: GameMeta[] = [
     template: 'mixed',
     load: () => import('@/games/sd2/perisai-garuda'),
   },
+  {
+    id: 'susun-kalimat',
+    group: 'sd2',
+    subject: 'bahasa-indonesia',
+    title: 'Susun Kalimat',
+    emoji: '🚂',
+    template: 'word-train',
+    load: () => import('@/games/sd2/susun-kalimat'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {

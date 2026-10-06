@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-05",
-  "count": 1255,
-  "chars": 56716,
+  "generated": "2026-10-06",
+  "count": 1328,
+  "chars": 58552,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -9007,6 +9007,663 @@
       "voice": "gadis",
       "games": [
         "suku-kata"
+      ]
+    },
+    {
+      "key": "3ddb2e2f1398",
+      "text": "Adik bermain bola di halaman.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "4bf38fca10bb",
+      "text": "Adik bersepeda ke taman.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "e96a23fc23ca",
+      "text": "Adik makan roti.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "bbe1533d0422",
+      "text": "Adik makan telur rebus.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "24675f5dd8bb",
+      "text": "Adik menyiram bunga.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "ee8e3853a709",
+      "text": "Adik sedang tidur.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "f8640b516ba8",
+      "text": "Adik tidur di kamar.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "e89e68294b1c",
+      "text": "Air sungai itu jernih.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "fe5a502b4a4e",
+      "text": "Apakah kamu sudah makan?",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "f1a98e5aeebf",
+      "text": "Ayah bekerja di Jakarta.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "9bd44af299f5",
+      "text": "Ayah membaca koran.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "274c8701e8a3",
+      "text": "Ayah memberi nasihat baik.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "921b025dc046",
+      "text": "Ayah menyiram tanaman.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "93f3185cbc33",
+      "text": "Ayah pergi ke pasar pagi ini.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "7f76de6d9f0d",
+      "text": "Ayah pergi pagi ini ke pasar.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "b350c1eddfd6",
+      "text": "Ayo kita bermain!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "dcf3d5e1d27d",
+      "text": "Bagus! Sekarang susun kalimat kedua!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "6d9877fceef7",
+      "text": "Belalainya menyemprot air.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "7166cd53a375",
+      "text": "Budi suka makan apel.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "566d563f1ccc",
+      "text": "Bunga mawar itu harum.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "d8350d7b7863",
+      "text": "Burung bernyanyi di pohon.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "0b0fde9e3562",
+      "text": "Burung membuat sarang.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "ce32e3a6ffe4",
+      "text": "Gajah itu besar.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "e39e4ffd7b37",
+      "text": "Gajah mandi di sungai.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "6dd30171ce48",
+      "text": "Hari Rabu kami berenang.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "076bc1521af6",
+      "text": "Ia makan wortel segar.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "038bc5c646b1",
+      "text": "Ia memetik pisang.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "d6a8b9a38e59",
+      "text": "Ia mengejar bola itu.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "33ee89a2f650",
+      "text": "Ia minum di sungai.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "ac766daf7637",
+      "text": "Ibu memasak nasi.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "d3d8842d608c",
+      "text": "Ibu membantu Kakak memasak.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "beae82706471",
+      "text": "Ibu membeli obat di apotek.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "d5f8ebed5592",
+      "text": "Ibu menjahit baju.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "b5bd11c473fc",
+      "text": "Ibu menyapu lantai.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "74eb4fad867a",
+      "text": "Isi gerbong kosong dengan imbuhan yang tepat!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "e2253e2ac685",
+      "text": "Isi gerbong kosong dengan kata yang baku!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "a9ed3ad7fc93",
+      "text": "Jangan buang sampah sembarangan!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "e56edaccd78b",
+      "text": "Kakak memasak nasi goreng.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "f88275c0b169",
+      "text": "Kakak membaca buku.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "cb68b24abf87",
+      "text": "Kakak membantu Ibu memasak.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "cd03ce53603f",
+      "text": "Kakak menyapu halaman.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "6d6cac4c3ef0",
+      "text": "Kalimatnya lebih panjang! Susun gerbongnya!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "3759ff986fa0",
+      "text": "Kamar Adik bersih.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "64ff3503b81a",
+      "text": "Kami belajar di perpustakaan sekolah.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "e734ed2491de",
+      "text": "Kami bermain bola.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "5e72ad9b003b",
+      "text": "Kami membaca jadwal pelajaran.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "be3ba4e53e49",
+      "text": "Kami tinggal di Medan.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "14d688ef7178",
+      "text": "Kancil haus sekali.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "0e3672a67d86",
+      "text": "Kelinci itu lucu.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "12d7d2f8082a",
+      "text": "Kelinci lapar sekali.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "5c02448d2d85",
+      "text": "Kucing berlari di halaman.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "955af4fdb0c4",
+      "text": "Kucing melihat bola.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "ab7fefcf27e3",
+      "text": "Kucing mengejar tikus.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "2dd5eb83f27b",
+      "text": "Kucing tidur di kursi.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "65896bd71879",
+      "text": "Kue buatan Ibu enak.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "66993a19ae16",
+      "text": "Misi besar! Susun dua kalimat jadi cerita!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "3427640f9a02",
+      "text": "Monyet naik pohon.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "44545fb48b9c",
+      "text": "Nenek menanam bunga di kebun.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "17701e71f004",
+      "text": "Nenek menanam cabai merah.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "ae69a3fa8c3b",
+      "text": "Nenek tinggal di Bandung.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "0f8aceb8fb7a",
+      "text": "Pak Guru menulis di papan.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "8812b8c2422f",
+      "text": "Rani dan Tono bermain.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "f947b9a73a24",
+      "text": "Rina menulis surat.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "d3eff83ef15c",
+      "text": "Rina pergi ke Bali.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "a1a10dab3d49",
+      "text": "Sarangnya di pohon tinggi.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "92e1beacaddd",
+      "text": "Sentuh gerbong yang berisi kata kerja!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "6f84f8e0f9b9",
+      "text": "Sentuh gerbong yang berisi kata sifat!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "88acfe1a7026",
+      "text": "Seret gerbong kata jadi kalimat yang benar!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "979f4aece3c2",
+      "text": "Siapa nama kucingmu?",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "7a7c980a156d",
+      "text": "Susun kalimatnya, lalu pasang tanda baca yang tepat!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "7f5388535270",
+      "text": "Susun kalimatnya. Ingat huruf kapital!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "0dfbbc774c04",
+      "text": "Tolong buka pintunya!",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
+      ]
+    },
+    {
+      "key": "78d80af5cd97",
+      "text": "Tono dan Rani bermain.",
+      "scope": "susun-kalimat",
+      "voice": "gadis",
+      "games": [
+        "susun-kalimat"
       ]
     },
     {

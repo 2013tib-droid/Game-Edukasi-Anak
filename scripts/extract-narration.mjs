@@ -98,7 +98,8 @@ async function load(contents) {
 // Linux (CI) penggantian ini tidak mengubah apa pun.
 const mod = await load(
   gameFiles.map((f, i) => `import c${i} from ${JSON.stringify(path.resolve(f).split(path.sep).join('/'))};`).join('\n') +
-    `\nexport const configs = [${gameFiles.map((_, i) => `c${i}`).join(',')}];`,
+    `\nexport const configs = [${gameFiles.map((_, i) => `c${i}`).join(',')}];` +
+    `\nexport { sentenceText } from ${JSON.stringify(path.resolve('src/engine/core/wordTrain.ts').split(path.sep).join('/'))};`,
 );
 
 /**
@@ -157,6 +158,16 @@ for (const config of mod.configs) {
     // clock-set (Waktu Tepat): later steps and the closing question speak too.
     for (const step of level.data?.steps ?? []) add(step.say, config.id, voice);
     add(level.data?.ask?.prompt, config.id, voice);
+
+    // word-train (Susun Kalimat): later rounds speak their own prompt, and
+    // every sentence is read aloud as the train leaves (sentenceText — the
+    // SAME function the template calls, so the text can never drift).
+    for (const round of level.data?.rounds ?? []) {
+      add(round.say, config.id, voice);
+      add(mod.sentenceText(round.words), config.id, voice);
+      // The child may build an `alt` order instead — it is read back as built.
+      for (const alt of round.alt ?? []) add(mod.sentenceText(alt), config.id, voice);
+    }
 
     // Story pages carry their own spoken text, on top of the level narration.
     const pages = level.data?.pages;

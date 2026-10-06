@@ -1,10 +1,16 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #27
+render #28
 
-Tangga Membaca: layar peta tahap sekarang bersuara (laporan pemilik
-2026-10-05: "tangga membaca gaada suaranya"). Dua baris baru:
-- scope tangga-membaca: judul peta "Naik satu anak tangga, lalu buka tahap berikutnya!"
-- scope engine: "Tahap ini masih terkunci. Selesaikan tahap sebelumnya dulu ya!"
-Dua scope berbeda, jadi SENGAJA tanpa baris only (file yang sudah ada dilewati).
-1253 jadi 1255 baris, nol baris lama berubah atau pindah scope.
+only: susun-kalimat
+
+Game baru SD Kelas 3 & 4 "Susun Kalimat" (Kereta Kata). 73 baris baru
+(1.836 karakter), semuanya scope susun-kalimat: 10 kalimat perintah + 63
+kalimat yang dibacakan saat kereta berangkat (termasuk dua urutan alternatif).
+Dibandingkan sebelum vs sesudah lewat scripts/narration-lines.json: 1255 baris
+jadi 1328, nol baris lama berubah atau pindah scope, jadi aman dibatasi
+"only: susun-kalimat" (file yang sudah ada dilewati).
+
+PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
+mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender
+dan runnya tetap hijau.
