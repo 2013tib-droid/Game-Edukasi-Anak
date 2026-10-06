@@ -16,7 +16,7 @@ import '@/engine/ui/number-hop.css';
  *   +300 −63. Yang dinilai teratai tempat katak berdiri saat "Cocok!".
  * - Catatan lompatan tersusun sendiri ("+100 ×2  +10 ×3  +1 ×7"): jembatan
  *   dari lompatan ke nilai tempat. Tombol ↩️ membatalkan satu lompatan.
- * - Lompatan paling sedikit dapat lencana "Lompatan hemat!" — pujian saja.
+ * - Lompatan tanpa yang sia-sia dapat lencana "Lompatan hemat!" — pujian saja.
  *   Bintang tetap dihitung dari jumlah salah (keputusan pemilik).
  * - Langkah `place` (menaksir): katak DISERET ke kira-kira hasilnya di garis
  *   0–1.000, lalu melompat ke hasil sebenarnya.
@@ -34,24 +34,15 @@ const SIZES = [100, 10, 1] as const;
 const VB_W = 300;
 const PAD = 18;
 
-/** Jumlah lompatan paling sedikit untuk berpindah `d` (boleh lewat lalu mundur). */
-function fewestHops(d: number): number {
-  const target = Math.abs(d);
-  const off = 1200;
-  const seen = new Int16Array(2 * off + 1).fill(-1);
-  const queue = [0];
-  seen[off] = 0;
-  for (let i = 0; i < queue.length; i += 1) {
-    const v = queue[i]!;
-    if (v === target) return seen[v + off]!;
-    for (const s of [100, -100, 10, -10, 1, -1]) {
-      const n = v + s;
-      if (n < -off || n > off || seen[n + off]! >= 0) continue;
-      seen[n + off] = seen[v + off]! + 1;
-      queue.push(n);
-    }
-  }
-  return Infinity;
+/**
+ * Batas "lompatan hemat": sebanyak angka-angka selisihnya (237 → 2 + 3 + 7 =
+ * 12) — satu lompatan per ratusan, puluhan, dan satuan, tanpa lompatan
+ * sia-sia. Anak yang mengurai per nilai tempat SELALU bisa mendapatkannya;
+ * jalan pintas yang lebih pendek (+300 −63) juga lolos.
+ */
+function thriftyLimit(d: number): number {
+  const n = Math.abs(d);
+  return Math.floor(n / 100) + (Math.floor(n / 10) % 10) + (n % 10);
 }
 
 /** "398 + 205" → "400 + 200" (petunjuk menaksir). */
@@ -183,7 +174,7 @@ export default function NumberHop({ level, onCorrect, onWrong, narrate, hint }: 
       sfx('correct');
       sparkleFrog();
       setBusy(true);
-      const hemat = hops.length > 0 && hops.length <= fewestHops(step.target - start);
+      const hemat = hops.length > 0 && hops.length <= thriftyLimit(step.target - start);
       setThrifty(hemat);
       window.setTimeout(() => advance(pos), hemat ? 1100 : 500);
     } else {
