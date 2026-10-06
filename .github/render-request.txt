@@ -1,15 +1,14 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #28
+render #29
 
-only: susun-kalimat
+only: istana-bilangan
 
-Game baru SD Kelas 3 & 4 "Susun Kalimat" (Kereta Kata). 73 baris baru
-(1.836 karakter), semuanya scope susun-kalimat: 10 kalimat perintah + 63
-kalimat yang dibacakan saat kereta berangkat (termasuk dua urutan alternatif).
-Dibandingkan sebelum vs sesudah lewat scripts/narration-lines.json: 1255 baris
-jadi 1328, nol baris lama berubah atau pindah scope, jadi aman dibatasi
-"only: susun-kalimat" (file yang sudah ada dilewati).
+Game baru SD Kelas 3 & 4 "Istana Bilangan" (nilai tempat & pembulatan).
+16 baris baru (888 karakter), semuanya scope istana-bilangan. Dibandingkan
+sebelum vs sesudah lewat scripts/narration-lines.json: 1328 baris jadi 1344,
+nol baris lama berubah atau pindah scope, jadi aman dibatasi
+"only: istana-bilangan" (file yang sudah ada dilewati).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

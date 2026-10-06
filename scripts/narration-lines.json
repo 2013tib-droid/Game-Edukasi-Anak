@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06",
-  "count": 1328,
-  "chars": 58552,
+  "count": 1344,
+  "chars": 59440,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -4411,6 +4411,150 @@
       "voice": "gadis",
       "games": [
         "hutan-hewan"
+      ]
+    },
+    {
+      "key": "0f2bb788d7cb",
+      "text": "Angka yang menyala bernilai berapa?",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "0009866656fb",
+      "text": "Balok ratusan habis! Bangun bilangannya dengan puluhan dan satuan.",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "ef411244d23b",
+      "text": "Balok ratusan habis! Bangun bilangannya dengan puluhan saja.",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "2c0499003e94",
+      "text": "Bilangan berapa ini?",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "4d50f2ad4bec",
+      "text": "Bulatkan ke puluhan terdekat! Ke lembah mana bolanya menggelinding?",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "b1887acda538",
+      "text": "Bulatkan ke ratusan terdekat! Ke lembah mana bolanya menggelinding?",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "dbbe35e8176b",
+      "text": "Lengkapi bentuk panjangnya!",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "2c73a0f2dc84",
+      "text": "Pilih tanda yang tepat!",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "2d4f930662ed",
+      "text": "Raja Singa memesan bilangan ini. Bangun istananya dengan balok!",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "63909e5b7060",
+      "text": "Raja Singa menyusun balok ini. Bilangan berapa itu?",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "59a687f8bde1",
+      "text": "Raja Singa perlu dua puluh balok untuk jembatan. Ambil dari istana!",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "e08add89e1f5",
+      "text": "Raja Singa perlu empat puluh balok untuk jembatan. Ambil dari istana!",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "eb4f2624c749",
+      "text": "Raja Singa perlu enam puluh balok untuk jembatan. Ambil dari istana!",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "3e0428c149c7",
+      "text": "Raja Singa perlu lima puluh balok untuk jembatan. Ambil dari istana!",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "faaa316522d0",
+      "text": "Raja Singa perlu tiga puluh balok untuk jembatan. Ambil dari istana!",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
+      ]
+    },
+    {
+      "key": "cd2b3efbf7b4",
+      "text": "Raja Singa perlu tujuh puluh balok untuk jembatan. Ambil dari istana!",
+      "scope": "istana-bilangan",
+      "voice": "gadis",
+      "games": [
+        "istana-bilangan"
       ]
     },
     {

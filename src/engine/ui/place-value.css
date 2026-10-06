@@ -266,8 +266,12 @@
 .pv-check {
   flex: 1.3 1 0;
   min-width: 0;
-  padding: 10px 8px;
+  padding: 10px 6px;
+  gap: 4px;
   white-space: nowrap;
+  /* Tiga kartu gudang + tombol di HP 320 px: tulisan "✓ Cocok!" pada 22 px
+     terpotong (terukur), jadi ukurannya ikut lebar layar. */
+  font-size: clamp(17px, 5.4vw, 22px);
 }
 
 .pv-ghost {
