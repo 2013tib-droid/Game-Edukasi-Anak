@@ -71,6 +71,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'clock-set': lazy(() => import('@/engine/templates/ClockSet')),
   'word-train': lazy(() => import('@/engine/templates/WordTrain')),
   'place-value': lazy(() => import('@/engine/templates/PlaceValue')),
+  'number-hop': lazy(() => import('@/engine/templates/NumberHop')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */

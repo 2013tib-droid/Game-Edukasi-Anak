@@ -23,7 +23,8 @@ export type TemplateId =
   | 'cashier' // tarik uang ke laci sampai jumlahnya pas (Toko Kembalian)
   | 'clock-set' // putar jarum panjang dengan jari (Waktu Tepat)
   | 'word-train' // susun gerbong kata jadi kalimat (Susun Kalimat)
-  | 'place-value'; // bangun bilangan dari balok ratusan-puluhan-satuan (Istana Bilangan)
+  | 'place-value' // bangun bilangan dari balok ratusan-puluhan-satuan (Istana Bilangan)
+  | 'number-hop'; // katak melompat di garis bilangan (Lompat Katak)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -768,6 +769,41 @@ export interface CashierData {
 }
 
 /**
+ * Satu tugas di template `number-hop` (Lompat Katak). Langkah bersambung: katak
+ * memulai langkah berikutnya dari tempat ia tiba.
+ * - `hop` (bawaan): anak menekan tombol lompat ±100 / ±10 / ±1 (bebas, boleh
+ *   maju-mundur) lalu "Cocok!". Benar kalau katak berdiri di `target`. Tujuan
+ *   TIDAK digambar — kecuali `goal`, untuk soal "bawa katak ke teratai itu".
+ * - `place`: anak MENYERET katak ke kira-kira hasil `show` (menaksir) di garis
+ *   0–1.000; diterima kalau selisihnya ≤ `tolerance`. Sesudahnya katak
+ *   melompat ke hasil sebenarnya.
+ */
+export interface HopStep {
+  kind?: 'hop' | 'place';
+  target: number;
+  /** Soal yang ditulis besar di atas garis, mis. "458 + 237". Tulisan layar. */
+  show: string;
+  /** Gambar teratai tujuan (berbunga + angkanya) di `target`. */
+  goal?: boolean;
+  /** Kalimat yang dibacakan saat langkah ini mulai (langkah ke-2 dst.). */
+  say?: string;
+  /** Langkah `place`: selisih yang masih diterima (bawaan 30). */
+  tolerance?: number;
+}
+
+/** Lompat Katak: katak melompat di garis bilangan — lihat `HopStep`. */
+export interface NumberHopData {
+  /** Teratai tempat katak mulai (0–999). */
+  from: number;
+  steps: HopStep[];
+  /** Pertanyaan penutup sesudah langkah terakhir (pilihan diacak engine). */
+  ask?: {
+    prompt: string;
+    choices: { text: string; correct?: boolean }[];
+  };
+}
+
+/**
  * Waktu dalam sehari untuk template `clock-set`: `h` 0–23 (format 24 jam),
  * `m` 0–59. Muka jamnya tetap 12 jam — `h` 24 jam dipakai supaya "pukul tujuh
  * malam" (19.00) dan "pukul tujuh pagi" (07.00) tidak dianggap sama.
@@ -883,6 +919,7 @@ export interface LevelDataMap {
   'clock-set': ClockSetData;
   'word-train': WordTrainData;
   'place-value': PlaceValueData;
+  'number-hop': NumberHopData;
 }
 
 /* ---------- Game config ---------- */
