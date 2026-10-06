@@ -1646,6 +1646,11 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 ## Deploy Web (PENTING)
 
+- **DUA JALUR DEPLOY (2026-10-06, permintaan pemilik):**
+  - **Produksi** → Actions → **"Deploy web"** → `https://petualanganpintar.com` (Firebase Hosting, build rilis). Masih DITAHAN (lihat di bawah).
+  - **Development** → Actions → **"Deploy development"** (`.github/workflows/deploy-dev.yml`) → `https://2013tib-droid.github.io/Game-Edukasi-Anak/development/<nama>/` (daftar semua di `/development/`). Input `ref` (bawaan `main`) & `nama` (bawaan dari ref). Build PENGUJI: saklar 🔓/🔒 hidup, kelompok `draft` (sd2) tampil, HashRouter, `noindex`. Memakai project Firebase PRODUKSI yang sama (data sungguhan). Input `hapus` membuang subfoldernya. **Tidak termasuk larangan "Deploy web"** — tidak menyentuh situs pembeli.
+  - Tak bisa tertukar: `guardTesterBuild` kini menerima base `/uji-…/` ATAU `/development/<nama>/` saja, dan `check-release-build.mjs` menolak base `/development/` (workflow dev malah GAGAL kalau pemeriksa itu meloloskan build dev).
+  - Halaman development PUBLIK — siapa pun yang tahu URL-nya bisa membuka semua game lewat saklar. Jangan sebarkan ke pembeli.
 - **⛔ SEJAK 2026-10-05 DEPLOY WEB DITAHAN** sampai game SD Kelas 3 & 4 matang — lihat entri teratas "Status Pengerjaan".
 - **SEJAK 2026-09-30 SITUS PRODUKSI = `https://petualanganpintar.com` (Firebase Hosting), deploy lewat Actions → "Deploy web".** GitHub Pages TIDAK lagi menyajikan app: `index.html`, `404.html` & `app/index.html` di branch Pages sudah diganti pengalih (`deploy/pages-pengalih/index.html`, commit `85d90a0`) yang menerjemahkan `…/app/#/x` → `petualanganpintar.com/x`. **Jangan men-deploy app ke `app/` lagi** — itu menimpa pengalihnya. Aturan di bawah ini tinggal berlaku untuk build penguji `uji-*` saja.
 - **GitHub Pages menyajikan situs dari branch `claude/web-demo-html-wa4dr9`** (folder root), BUKAN dari branch default. Yang harus tampil di web WAJIB di-build lalu di-push ke branch itu — push ke branch lain tidak memicu build Pages.

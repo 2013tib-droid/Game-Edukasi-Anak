@@ -1,0 +1,151 @@
+# Jalur DEVELOPMENT — build penguji ke GitHub Pages, TERPISAH dari produksi.
+#
+#   Produksi    : Actions → "Deploy web"          → https://petualanganpintar.com
+#   Development : Actions → "Deploy development"  → https://2013tib-droid.github.io/Game-Edukasi-Anak/development/<nama>/
+#
+# Build development = build PENGUJI: saklar 🔓/🔒 hidup (VITE_ALLOW_TEST_TOGGLE=1)
+# dan kelompok `draft` (sd2, sd3) ikut tampil. Karena itu base-nya WAJIB
+# `/development/<nama>/` — `guardTesterBuild` di vite.config.ts menolak base
+# lain, dan `check-release-build.mjs` menolak build ini masuk ke produksi.
+# Jadi dua jalur ini tak bisa tertukar: build development yang salah disalin ke
+# Firebase Hosting akan rusak (aset 404), bukan membuka semua game gratis.
+#
+# Memakai project Firebase yang SAMA dengan produksi (akun, kode aktivasi,
+# bintang semuanya data sungguhan). Saklar penguji cuma mengubah tampilan di
+# HP itu; backend tidak ikut longgar.
+#
+# Cara memakai: tab Actions → "Deploy development" → Run workflow.
+#   - ref  : branch/commit yang di-build (bawaan: main)
+#   - nama : subfolder di /development/ (bawaan: diambil dari ref, mis. "main")
+# Beberapa nama boleh hidup bersamaan (mis. development/main/ dan
+# development/sd2/). Hapus subfoldernya dengan input `hapus`.
+#
+# Halaman ini PUBLIK (siapa pun yang tahu URL-nya bisa membuka semua game
+# lewat saklar). Diberi `noindex` supaya tak muncul di Google, tapi jangan
+# sebarkan URL-nya ke pembeli.
+name: Deploy development
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch/commit yang di-build'
+        required: false
+        default: main
+      nama:
+        description: 'Subfolder di /development/ (huruf kecil, angka, tanda hubung). Kosong = dari ref'
+        required: false
+        default: ''
+      hapus:
+        description: 'Hapus subfolder ini dari Pages (tanpa build)'
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: pages-branch
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  PAGES_BRANCH: claude/web-demo-html-wa4dr9
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VITE_FIREBASE_API_KEY: AIzaSyCRf0NX2Mo49s20kyJZcmAfOGmPK0MaMVA
+      VITE_FIREBASE_AUTH_DOMAIN: petualangan-pintar.firebaseapp.com
+      VITE_FIREBASE_PROJECT_ID: petualangan-pintar
+      VITE_FIREBASE_STORAGE_BUCKET: petualangan-pintar.firebasestorage.app
+      VITE_FIREBASE_MESSAGING_SENDER_ID: '766973669747'
+      VITE_FIREBASE_APP_ID: 1:766973669747:web:7093e4b0dd9d58a8305506
+    steps:
+      - name: Tentukan nama subfolder
+        id: nama
+        env:
+          NAMA: ${{ inputs.nama }}
+          REF: ${{ inputs.ref }}
+        run: |
+          n="${NAMA:-$REF}"
+          n="$(printf '%s' "$n" | sed 's#^claude/##' | tr 'A-Z_/. ' 'a-z----' | tr -cd 'a-z0-9-' | sed 's/^-*//; s/-*$//' | cut -c1-40)"
+          if [ -z "$n" ]; then echo "::error::Nama subfolder kosong."; exit 1; fi
+          echo "nama=$n" >> "$GITHUB_OUTPUT"
+          echo "Subfolder: development/$n/"
+
+      - uses: actions/checkout@v4
+        if: ${{ !inputs.hapus }}
+        with:
+          ref: ${{ inputs.ref }}
+          path: src-repo
+
+      - uses: actions/setup-node@v4
+        if: ${{ !inputs.hapus }}
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: src-repo/package-lock.json
+
+      - name: Build development
+        if: ${{ !inputs.hapus }}
+        working-directory: src-repo
+        env:
+          DEPLOY_BASE: /Game-Edukasi-Anak/development/${{ steps.nama.outputs.nama }}/
+          SITE_URL: https://2013tib-droid.github.io/Game-Edukasi-Anak/development/${{ steps.nama.outputs.nama }}/
+          VITE_USE_HASH_ROUTER: '1'
+          VITE_ALLOW_TEST_TOGGLE: '1'
+          VITE_LOCK_MODE: kunci
+        run: |
+          npm ci
+          npm run build
+          grep -q "src=\"$DEPLOY_BASE"'assets/index-' dist/index.html || { echo "::error::Base build salah."; exit 1; }
+          grep -rq "$VITE_FIREBASE_API_KEY" dist/assets || { echo "::error::Config Firebase tidak ikut ter-bundle."; exit 1; }
+          if node scripts/check-release-build.mjs dist >/dev/null 2>&1; then
+            echo "::error::Pemeriksa rilis MELOLOSKAN build development — penjaganya rusak."; exit 1
+          fi
+          if find dist -name '_*' | grep -q .; then echo "::error::Ada berkas berawalan _ (dibuang Jekyll)."; exit 1; fi
+          # Jangan sampai halaman development terindeks mesin pencari.
+          sed -i 's#<head>#<head>\n    <meta name="robots" content="noindex, nofollow" />#' dist/index.html
+          grep -q 'name="robots"' dist/index.html || { echo "::error::Gagal memasang noindex."; exit 1; }
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.PAGES_BRANCH }}
+          path: pages
+
+      - name: Salin ke development/<nama>/ dan push
+        working-directory: pages
+        env:
+          NAMA: ${{ steps.nama.outputs.nama }}
+          HAPUS: ${{ inputs.hapus }}
+          REF: ${{ inputs.ref }}
+        run: |
+          target="development/$NAMA"
+          rm -rf "$target"
+          if [ "$HAPUS" != "true" ]; then
+            mkdir -p "$target"
+            cp -R ../src-repo/dist/. "$target/"
+          fi
+          # Halaman daftar di /development/ (tanpa tautan dari situs mana pun).
+          mkdir -p development
+          {
+            echo '<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Development</title>'
+            echo '<style>body{font-family:system-ui,sans-serif;max-width:480px;margin:40px auto;padding:0 16px;background:#fff8e7;color:#3a2e20}a{display:block;padding:14px 16px;margin:8px 0;background:#fff;border-radius:12px;color:#3a2e20;text-decoration:none;font-weight:700;box-shadow:0 2px 6px #0001}</style></head><body>'
+            echo '<h1>Petualangan Pintar — development</h1><p>Build penguji, BUKAN situs pembeli. Produksi: <a href="https://petualanganpintar.com" style="display:inline;padding:0;box-shadow:none">petualanganpintar.com</a></p>'
+            for d in development/*/; do
+              n="$(basename "$d")"
+              [ -f "$d/index.html" ] && echo "<a href=\"./$n/#/portal?test=1\">$n</a>"
+            done
+            echo '</body></html>'
+          } > development/index.html
+          [ -f .nojekyll ] || touch .nojekyll
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -A development .nojekyll
+          if git diff --cached --quiet; then echo "Tak ada perubahan."; exit 0; fi
+          if [ "$HAPUS" = "true" ]; then msg="Development: hapus $NAMA"; else msg="Development: $NAMA dari $REF ($(git -C ../src-repo rev-parse --short HEAD))"; fi
+          git commit -q -m "$msg"
+          for i in 1 2 3 4; do git push origin "HEAD:$PAGES_BRANCH" && break; sleep $((2**i)); git pull --rebase -q origin "$PAGES_BRANCH"; done
+          echo "### https://2013tib-droid.github.io/Game-Edukasi-Anak/$target/" >> "$GITHUB_STEP_SUMMARY"

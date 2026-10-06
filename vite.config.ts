@@ -38,10 +38,12 @@ function siteUrlPlugin() {
  */
 function guardTesterBuild(env: Record<string, string | undefined>, base: string) {
   if (env.VITE_ALLOW_TEST_TOGGLE !== '1') return;
-  if (/\/uji[^/]*\/$/.test(base)) return;
+  // `/uji-…/` = build penguji lama; `/development/<nama>/` = jalur development
+  // (workflow "Deploy development"). Keduanya tak pernah dipakai produksi.
+  if (/\/uji[^/]*\/$/.test(base) || /\/development\/[a-z0-9-]+\/$/.test(base)) return;
   throw new Error(
     'Build penguji (VITE_ALLOW_TEST_TOGGLE=1) wajib memakai DEPLOY_BASE berakhiran ' +
-      '"/uji-…/", mis. DEPLOY_BASE=/Game-Edukasi-Anak/uji-sd2/. Base sekarang: "' +
+      '"/uji-…/" atau "/development/<nama>/", mis. DEPLOY_BASE=/Game-Edukasi-Anak/development/main/. Base sekarang: "' +
       base +
       '". Ini penjaga supaya build yang membuka semua game tidak ikut terunggah ke produksi.',
   );
