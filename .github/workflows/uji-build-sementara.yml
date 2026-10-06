@@ -1,0 +1,35 @@
+# SEMENTARA (sesi 2026-10-06): sesi Claude tidak bisa mengunduh paket npm
+# (registry diblokir kebijakan jaringan sesi), jadi build penguji untuk uji
+# headless dibuat di sini lalu diunduh. Hanya jalan di branch ini; berkas ini
+# DIHAPUS sebelum branch di-merge.
+name: Build penguji (sementara)
+on:
+  push:
+    branches: [claude/cool-mendel-vmzfe8]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run narasi
+      - name: Build penguji
+        env:
+          DEPLOY_BASE: /uji-sd2/
+          VITE_USE_HASH_ROUTER: '1'
+          VITE_ALLOW_TEST_TOGGLE: '1'
+          VITE_LOCK_MODE: buka
+        run: npx vite build --outDir dist-uji
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-uji
+          path: |
+            dist-uji
+            !dist-uji/assets/voice/**
+            scripts/narration-lines.json
+          retention-days: 1

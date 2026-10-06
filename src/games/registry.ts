@@ -368,6 +368,15 @@ export const games: GameMeta[] = [
     template: 'word-train',
     load: () => import('@/games/sd2/susun-kalimat'),
   },
+  {
+    id: 'istana-bilangan',
+    group: 'sd2',
+    subject: 'matematika',
+    title: 'Istana Bilangan',
+    emoji: '🏰',
+    template: 'mixed',
+    load: () => import('@/games/sd2/istana-bilangan'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {

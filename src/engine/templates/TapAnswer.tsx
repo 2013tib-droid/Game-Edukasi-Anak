@@ -14,6 +14,8 @@ import Kid, { KID_CUE_FRAMES } from '@/engine/ui/Kid';
 const Measure = lazy(() => import('@/engine/ui/Measure'));
 // Data statistik (Detektif Data) — alasan yang sama: chunk sendiri.
 const Chart = lazy(() => import('@/engine/ui/Chart'));
+// Isyarat bilangan (Istana Bilangan) — chunk sendiri juga.
+const NumberCue = lazy(() => import('@/engine/ui/NumberCue'));
 const BarChart = lazy(() => import('@/engine/ui/Chart').then((m) => ({ default: m.BarChart })));
 
 /** Human-readable operator glyphs for equation picture boards. */
@@ -90,7 +92,7 @@ function equationClass(eq: string, dense: boolean): string {
 }
 
 /** Pick the one correct answer out of 2–4 big cards. */
-export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'tap-answer'>) {
+export default function TapAnswer({ level, onCorrect, onWrong, hint }: TemplateProps<'tap-answer'>) {
   const [shakeId, setShakeId] = useState<string | null>(null);
   const [solved, setSolved] = useState(false);
 
@@ -99,6 +101,10 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
     () => [...level.data.choices].sort(() => Math.random() - 0.5),
     [level],
   );
+
+  // Petunjuk bertingkat (P2) tingkat 2: satu kartu salah dipudarkan. Kartu
+  // yang sama sepanjang soal ini (urutan acaknya tetap), jadi tidak berpindah.
+  const outId = hint >= 2 ? choices.find((c) => !c.correct)?.id : undefined;
 
   // Total picture count on the board (animals + props like houses, ignoring
   // operators). Busy boards (subtraction: "7 ducks → 3 houses" = 10 items)
@@ -192,6 +198,12 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
         )}
         {/* Detektif Data: turus, piktogram, diagram batang, tabel, deret —
             digambar engine dari NILAI di data soal (Chart.tsx). */}
+        {/* Istana Bilangan: balok, angka yang menyala, bukit pembulatan. */}
+        {level.data.number && (
+          <Suspense fallback={null}>
+            <NumberCue spec={level.data.number} focus={hint >= 1} solved={solved} />
+          </Suspense>
+        )}
         {level.data.chart && (
           <Suspense fallback={null}>
             <Chart spec={level.data.chart} />
@@ -281,7 +293,12 @@ export default function TapAnswer({ level, onCorrect, onWrong }: TemplateProps<'
             <button
               key={c.id}
               type="button"
-              className={'choice-card' + (shakeId === c.id ? ' choice-card--shake' : '')}
+              className={
+                'choice-card' +
+                (shakeId === c.id ? ' choice-card--shake' : '') +
+                (outId === c.id ? ' choice-card--out' : '')
+              }
+              disabled={outId === c.id}
               onClick={() => handleTap(c.id, c.correct)}
             >
               {c.shape && (
