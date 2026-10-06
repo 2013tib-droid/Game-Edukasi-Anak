@@ -582,8 +582,9 @@ di atas:
 - Animasi harus diuji di HP murah (CPU di-throttle 4–6× saat uji headless).
 
 **Keputusan pemilik (2026-10-06):** arah premium jalan terus game per game;
-berikutnya **Istana Bilangan** (selesai 2026-10-06), sisa: Lompat Katak,
-Detektif Bacaan, Bagi Kue. **P2 hanya untuk game `sd2` baru**; P4 di game lama &
+berikutnya **Istana Bilangan** (selesai 2026-10-06), lalu **Lompat Katak**
+(selesai 2026-10-06: bebas arah "asal tiba", bintang tetap dari salah, lompatan
+hemat = lencana pujian), sisa: Detektif Bacaan, Bagi Kue. **P2 hanya untuk game `sd2` baru**; P4 di game lama &
 P5 belum. **Misi Robot & Lipat Kubus DITUNDA.** Isi slot Istana Bilangan
 disetujui: bangun · baca balok · angka menyala · bentuk panjang · bandingkan ·
 tukar · bulat puluhan · bulat ratusan · misi pinjam (urutan mengurutkan,
@@ -673,7 +674,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 |---|---|---|---|
 | – | Kali Kilat | `kali-kilat` | ✅ sudah ada (2026-09-29), narasi SUDAH dirender (89 baris) |
 | 1 | Istana Bilangan | `istana-bilangan` | ✅ sudah ada (2026-10-06) — versi premium "Pembangun Istana": template baru `place-value` (bangun bilangan dari balok, tukar otomatis 10→1, pecah pelat = meminjam) + isyarat `TapAnswerData.number` (balok, angka menyala, bukit pembulatan); 9 slot × 54 varian, urutan tetap, proyek sesi "Istana Raja Singa", **petunjuk bertingkat P2 menyala**; narasi 16 baris, render #29. |
-| 2 | Lompat Katak | `lompat-katak` | rencana |
+| 2 | Lompat Katak | `lompat-katak` | ✅ sudah ada (2026-10-06) — versi premium "Katak Penjelajah": template baru `number-hop` (tombol lompat ±100/±10/±1 bebas arah, catatan lompatan, ↩️, lencana "Lompatan hemat!", menaksir dengan menyeret katak), 9 slot × 54 varian, urutan tetap, proyek sesi "Kolam Katak", P2 menyala; seni `frog` yang sudah ada; narasi 12 baris, render #30. |
 | 3 | Bagi Kue | `bagi-kue` | rencana |
 | 4 | Ukur Yuk | `ukur-yuk` | ✅ sudah ada (2026-09-30), narasi SUDAH dirender (render #21, 38 baris) — 9 slot × 55 varian, urutan tetap |
 | 5 | Waktu Tepat | `waktu-tepat` | ✅ sudah ada (2026-10-02) — **versi premium pertama** "Sehari Bersama Kancil": template baru `clock-set` (putar jarum), 9 slot × 54 varian, urutan tetap, proyek sesi "Buku Harian Kancil" (P3); narasi SUDAH dirender (render #23, 41 baris). Kalender & hari–minggu belum. |
