@@ -2793,3 +2793,12 @@
   width: 1em;
   height: 1em;
 }
+
+/* Petunjuk bertingkat P2 tingkat 2 di tap-answer (`GameConfig.hints`): satu kartu
+   jawaban yang salah dipudarkan & tak bisa ditekan lagi — satu langkah
+   diperlihatkan tanpa membocorkan jawabannya. */
+.choice-card--out {
+  opacity: 0.28;
+  pointer-events: none;
+  filter: grayscale(1);
+}

@@ -46,6 +46,13 @@ export interface TemplateProps<T extends TemplateId = TemplateId> {
    * `null` (or let the template unmount) to fall back to `level.narration`.
    */
   setRepeat: (speakCurrent: (() => void) | null) => void;
+  /**
+   * Petunjuk bertingkat (P2, `GameConfig.hints`): 0 = belum ada, 1 = sesudah
+   * salah ke-2 (nyalakan bagian yang perlu dilihat), 2 = sesudah salah ke-3
+   * (perlihatkan satu langkah). Selalu 0 di game yang tidak memasang `hints`.
+   * Template yang tidak memakainya cukup mengabaikannya.
+   */
+  hint: 0 | 1 | 2;
 }
 
 // Lazy per-template chunks — a game only downloads the template it uses.
@@ -63,6 +70,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   cashier: lazy(() => import('@/engine/templates/Cashier')),
   'clock-set': lazy(() => import('@/engine/templates/ClockSet')),
   'word-train': lazy(() => import('@/engine/templates/WordTrain')),
+  'place-value': lazy(() => import('@/engine/templates/PlaceValue')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */
@@ -280,6 +288,11 @@ export default function GameShell({
   const playGen = useRef(0);
   // Remount the template on retry/advance so its internal state resets.
   const [attemptKey, setAttemptKey] = useState(0);
+  // Kesalahan di SOAL INI, untuk petunjuk bertingkat (P2). Dikunci ke soalnya
+  // (`at`), bukan di-reset lewat efek: efek berjalan sesudah render, jadi soal
+  // baru sempat tergambar sekali dengan petunjuk soal sebelumnya.
+  const [mistakes, setMistakes] = useState({ at: '', n: 0 });
+  const attemptId = `${levelIndex}-${attemptKey}`;
   // Level list of the current play, re-rolled on each play/replay so variant
   // slots serve fresh questions.
   const [picks, setPicks] = useState<LevelPick[]>(() => rollPicks(config));
@@ -306,6 +319,8 @@ export default function GameShell({
   const levels = useMemo(() => levelsFromPicks(config, picks), [config, picks]);
   const level = levels[levelIndex];
   const Template = TEMPLATES[templateFor(config, level)] as ComponentType<TemplateProps>;
+  const wrongHere = mistakes.at === attemptId ? mistakes.n : 0;
+  const hintLevel: 0 | 1 | 2 = !config.hints ? 0 : wrongHere >= 3 ? 2 : wrongHere >= 2 ? 1 : 0;
 
   useEffect(() => () => stopSpeaking(), []);
 
@@ -453,12 +468,13 @@ export default function GameShell({
 
   const handleWrong = useCallback((silent?: boolean) => {
     wrongCount.current += 1;
+    setMistakes((m) => ({ at: attemptId, n: m.at === attemptId ? m.n + 1 : 1 }));
     if (silent) return;
     sfx('wrong');
     speak('Coba lagi, kamu pasti bisa!');
     setFeedback('wrong');
     window.setTimeout(() => setFeedback(null), 1300);
-  }, []);
+  }, [attemptId]);
 
   if (screen === 'map' && stageMap) {
     return (
@@ -742,6 +758,7 @@ export default function GameShell({
           onWrong={handleWrong}
           narrate={speak}
           setRepeat={setRepeat}
+          hint={hintLevel}
         />
       </Suspense>
       {feedback && <FeedbackOverlay kind={feedback} />}

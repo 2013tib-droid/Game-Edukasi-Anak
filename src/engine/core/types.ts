@@ -22,7 +22,8 @@ export type TemplateId =
   | 'tap-picture' // sentuh bagian yang benar pada satu gambar (anggota tubuh)
   | 'cashier' // tarik uang ke laci sampai jumlahnya pas (Toko Kembalian)
   | 'clock-set' // putar jarum panjang dengan jari (Waktu Tepat)
-  | 'word-train'; // susun gerbong kata jadi kalimat (Susun Kalimat)
+  | 'word-train' // susun gerbong kata jadi kalimat (Susun Kalimat)
+  | 'place-value'; // bangun bilangan dari balok ratusan-puluhan-satuan (Istana Bilangan)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -223,7 +224,68 @@ export interface TapAnswerData {
   chart?: ChartSpec;
   /** Lambang sila besar sebagai isyarat soal ("lambang ini sila ke berapa?"). */
   sila?: SilaId;
+  /**
+   * Isyarat BILANGAN (Istana Bilangan, `sd2`): balok ratusan-puluhan-satuan,
+   * bilangan dengan satu angka yang menyala, atau bukit pembulatan. Config
+   * cuma menyebut bilangannya; gambarnya digambar engine
+   * (`src/engine/ui/NumberCue.tsx`), jadi balok selalu persis sebanyak angkanya.
+   */
+  number?: NumberCueSpec;
   choices: TapChoice[]; // 2–4, exactly one with correct: true
+}
+
+/** Nilai tempat yang punya balok sendiri: ratusan (pelat), puluhan (batang), satuan (kubus). */
+export type Place = 100 | 10 | 1;
+
+/** Isi balok per nilai tempat. Bilangan 347 = `{ h: 3, t: 4, o: 7 }`. */
+export interface PlaceCounts {
+  h: number;
+  t: number;
+  o: number;
+}
+
+/**
+ * Isyarat bilangan di atas kartu jawaban tap-answer:
+ * - `blocks` — balok Dienes sebanyak `n` (TANPA angka; anak yang membacanya).
+ * - `digits` — `n` ditulis besar, angka di tempat `mark` menyala ("angka yang
+ *   menyala bernilai berapa?").
+ * - `hill`   — bukit pembulatan: garis bilangan dari kelipatan `step` di bawah
+ *   `n` sampai di atasnya, puncaknya di tengah, bola di `n`. Sesudah soal
+ *   terjawab bolanya menggelinding ke lembah terdekat. `n` TIDAK boleh tepat di
+ *   puncak (aturan "lima ke atas" tidak terbaca dari bukit).
+ */
+export type NumberCueSpec =
+  | { kind: 'blocks'; n: number }
+  | { kind: 'digits'; n: number; mark: Place }
+  | { kind: 'hill'; n: number; step: 10 | 100 };
+
+/**
+ * Bangun bilangan dari balok (template `place-value`, Istana Bilangan).
+ *
+ * Anak mengetuk atau menyeret balok dari gudang ke tiga menara istana
+ * (ratusan · puluhan · satuan). Di bawah tiap menara tertulis banyak baloknya,
+ * jadi bilangannya "terbentuk" di layar sambil dibangun. Dinilai saat anak
+ * menekan "Cocok!" — tidak selesai sendiri, supaya mencoba-coba tak dihukum.
+ *
+ * - `build` — mulai kosong, bangun `target`. **Tukar otomatis**: kubus satuan
+ *   ke-10 menempel jadi satu batang puluhan, batang ke-10 jadi satu pelat
+ *   ratusan (inti "menyimpan"). Menara yang disentuh = satu balok kembali ke
+ *   gudang.
+ * - `take` — istana sudah berisi `start`; anak harus MENGAMBIL `take` balok.
+ *   Pelat ratusan yang disentuh PECAH jadi sepuluh batang puluhan (inti
+ *   "meminjam"); batang/kubus yang disentuh = diambil. Tanpa tukar otomatis
+ *   (sepuluh batang hasil pecahan tidak boleh menempel lagi).
+ */
+export interface PlaceValueData {
+  mode: 'build' | 'take';
+  /** Bilangan yang harus ada di istana saat "Cocok!" (1–999). */
+  target: number;
+  /** Balok yang ada di gudang (mode `build`), masing-masing tak terbatas. */
+  wallet?: Place[];
+  /** Isi awal istana (mode `take`). Puluhannya WAJIB 0 — lihat Istana Bilangan. */
+  start?: PlaceCounts;
+  /** Banyak yang diambil (mode `take`), ditulis di gelembung Raja Singa. */
+  take?: number;
 }
 
 export interface DragItem {
@@ -820,6 +882,7 @@ export interface LevelDataMap {
   cashier: CashierData;
   'clock-set': ClockSetData;
   'word-train': WordTrainData;
+  'place-value': PlaceValueData;
 }
 
 /* ---------- Game config ---------- */
@@ -982,6 +1045,14 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
   stageMap?: StageMap;
   /** Proyek sesi — lihat `ProjectSpec`. */
   project?: ProjectSpec;
+  /**
+   * PETUNJUK BERTINGKAT (lapisan premium P2): sesudah salah ke-2 di satu soal,
+   * bagian yang perlu dilihat menyala; sesudah salah ke-3, satu langkah
+   * diperlihatkan. Template menerimanya sebagai `TemplateProps.hint`. Bintang
+   * tetap dihitung seperti biasa. Keputusan pemilik 2026-10-06: dinyalakan
+   * HANYA di game `sd2` baru — game TK & SD 1-2 yang sudah dijual tidak.
+   */
+  hints?: boolean;
 }
 
 /**
@@ -1025,6 +1096,8 @@ export interface MixedGameConfig {
   stageMap?: StageMap;
   /** See `GameConfig.project`. */
   project?: ProjectSpec;
+  /** See `GameConfig.hints`. */
+  hints?: boolean;
 }
 
 /** Either kind of game — what the shell, registry, and pages accept. */

@@ -415,6 +415,13 @@ SELESAI sebagai fitur engine** (`GameConfig.project` + `GameLevel.stamp`),
 pemakai pertamanya Waktu Tepat; game lama belum memakainya. P2, P4 (selain di
 Waktu Tepat), P5 belum.
 
+**Status (2026-10-06):** **P2 SELESAI sebagai fitur engine** (`GameConfig.hints`
+→ `TemplateProps.hint` 0/1/2). Keputusan pemilik: **hanya dinyalakan di game
+`sd2` baru**, game TK & SD 1-2 tidak. Pemakai pertama Istana Bilangan:
+tap-answer menyalakan isyarat bilangan (tingkat 1) lalu memudarkan satu kartu
+salah (tingkat 2); `place-value` menyalakan menara yang salah lalu menulis
+banyak balok yang dibutuhkan samar-samar. Visual saja, nol narasi tambahan.
+
 Urutan kerja yang disarankan: **P1 dulu** (murah, langsung terasa di semua 25
 game), lalu P2 & P3 sambil membangun game premium pertama.
 
@@ -574,7 +581,15 @@ di atas:
 - **Narasi lebih banyak** (tokoh berbicara) — tetap di bawah kuota gratis Azure.
 - Animasi harus diuji di HP murah (CPU di-throttle 4–6× saat uji headless).
 
-**Keputusan pemilik yang ditunggu:**
+**Keputusan pemilik (2026-10-06):** arah premium jalan terus game per game;
+berikutnya **Istana Bilangan** (selesai 2026-10-06), sisa: Lompat Katak,
+Detektif Bacaan, Bagi Kue. **P2 hanya untuk game `sd2` baru**; P4 di game lama &
+P5 belum. **Misi Robot & Lipat Kubus DITUNDA.** Isi slot Istana Bilangan
+disetujui: bangun · baca balok · angka menyala · bentuk panjang · bandingkan ·
+tukar · bulat puluhan · bulat ratusan · misi pinjam (urutan mengurutkan,
+genap/ganjil, 399→400 dari rancangan lama dibuang).
+
+**Keputusan pemilik yang ditunggu (versi 2026-10-02, sudah terjawab di atas):**
 1. Setuju arah premium ini untuk enam game sisa? (atau sebagian saja)
 2. Lapisan premium P1–P5: mana yang dikerjakan, dan apakah boleh ikut mengubah
    game TK & SD Kelas 1 & 2 yang sudah dijual?
@@ -652,19 +667,21 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 
 ## 6. Status
 
+> Status narasi diperiksa 2026-10-06 dari `public/assets/voice/manifest.json` + berkasnya: seluruh app 1.328/1.328 baris punya entri manifest DAN mp3-nya ada; nol entri menunjuk berkas hilang.
+
 | # | Game | id | Status |
 |---|---|---|---|
-| – | Kali Kilat | `kali-kilat` | ✅ sudah ada (2026-09-29), narasi belum dirender |
-| 1 | Istana Bilangan | `istana-bilangan` | rencana |
+| – | Kali Kilat | `kali-kilat` | ✅ sudah ada (2026-09-29), narasi SUDAH dirender (89 baris) |
+| 1 | Istana Bilangan | `istana-bilangan` | ✅ sudah ada (2026-10-06) — versi premium "Pembangun Istana": template baru `place-value` (bangun bilangan dari balok, tukar otomatis 10→1, pecah pelat = meminjam) + isyarat `TapAnswerData.number` (balok, angka menyala, bukit pembulatan); 9 slot × 54 varian, urutan tetap, proyek sesi "Istana Raja Singa", **petunjuk bertingkat P2 menyala**; narasi 16 baris, render #29. |
 | 2 | Lompat Katak | `lompat-katak` | rencana |
 | 3 | Bagi Kue | `bagi-kue` | rencana |
 | 4 | Ukur Yuk | `ukur-yuk` | ✅ sudah ada (2026-09-30), narasi SUDAH dirender (render #21, 38 baris) — 9 slot × 55 varian, urutan tetap |
-| 5 | Waktu Tepat | `waktu-tepat` | ✅ sudah ada (2026-10-02) — **versi premium pertama** "Sehari Bersama Kancil": template baru `clock-set` (putar jarum), 9 slot × 54 varian, urutan tetap, proyek sesi "Buku Harian Kancil" (P3); narasi belum dirender (render #23, 41 baris). Kalender & hari–minggu belum. |
-| 6 | Toko Kembalian | `toko-kembalian` | ✅ sudah ada (2026-09-30), narasi belum dirender (render #20) — **demo gratis `sd2`**, belum masuk `FREE_GAME_IDS` |
-| 7 | Detektif Data | `detektif-data` | ✅ sudah ada (2026-10-02), narasi belum dirender (render #22, 47 baris) — 9 slot × 54 varian, urutan tetap; fitur engine `TapAnswerData.chart` / `TapChoice.chart` (`Chart.tsx`) |
+| 5 | Waktu Tepat | `waktu-tepat` | ✅ sudah ada (2026-10-02) — **versi premium pertama** "Sehari Bersama Kancil": template baru `clock-set` (putar jarum), 9 slot × 54 varian, urutan tetap, proyek sesi "Buku Harian Kancil" (P3); narasi SUDAH dirender (render #23, 41 baris). Kalender & hari–minggu belum. |
+| 6 | Toko Kembalian | `toko-kembalian` | ✅ sudah ada (2026-09-30), narasi SUDAH dirender (render #20, 37 baris) — **demo gratis `sd2`**, belum masuk `FREE_GAME_IDS` |
+| 7 | Detektif Data | `detektif-data` | ✅ sudah ada (2026-10-02), narasi SUDAH dirender (render #22, 47 baris) — 9 slot × 54 varian, urutan tetap; fitur engine `TapAnswerData.chart` / `TapChoice.chart` (`Chart.tsx`) |
 | 8 | Detektif Bacaan | `detektif-bacaan` | rencana |
 | 9 | Susun Kalimat | `susun-kalimat` | ✅ sudah ada (2026-10-06) — versi premium "Kereta Kata": template baru `word-train` (seret gerbong kata), 9 slot × 54 varian, urutan tetap, proyek sesi "Kereta Kata"; kalimat dibacakan saat kereta berangkat; narasi SUDAH dirender (render #28, 73 baris). |
-| 10 | Kebun Ilmu | `kebun-ilmu` | ✅ sudah ada (2026-09-29), narasi belum dirender (render #19) |
+| 10 | Kebun Ilmu | `kebun-ilmu` | ✅ sudah ada (2026-09-29), narasi SUDAH dirender (render #19, 63 baris) |
 | – | Perisai Garuda (Pancasila) | `perisai-garuda` | ✅ sudah ada (2026-10-05) — game Pancasila pertama: lambang sila SVG engine (`Sila.tsx`), 9 slot × 55 varian, urutan tetap, proyek sesi "Perisai Garuda" (stempel = lambang sila); narasi SUDAH dirender (render #26, 57 baris). Rumah & pakaian adat belum. |
 
 ## 7. Prompt untuk memulai sesi baru
