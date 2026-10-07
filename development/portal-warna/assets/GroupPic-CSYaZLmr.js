@@ -1,0 +1,1 @@
+import{r as i,j as e}from"./index-COqVjk4j.js";function l({pic:t,emoji:r,height:s=88,emojiSize:a=48}){const[o,n]=i.useState(!1);return!t||o?e.jsx("span",{style:{fontSize:a},children:r}):e.jsx("img",{src:`/Game-Edukasi-Anak/development/portal-warna/assets/groups/${t}.webp`,alt:"",style:{height:s,width:"auto"},onError:()=>n(!0)})}export{l as G};
