@@ -377,6 +377,15 @@ export const games: GameMeta[] = [
     template: 'mixed',
     load: () => import('@/games/sd2/istana-bilangan'),
   },
+  {
+    id: 'lompat-katak',
+    group: 'sd2',
+    subject: 'matematika',
+    title: 'Lompat Katak',
+    emoji: '🐸',
+    template: 'mixed',
+    load: () => import('@/games/sd2/lompat-katak'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {

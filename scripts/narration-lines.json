@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-06",
-  "count": 1344,
-  "chars": 59440,
+  "count": 1356,
+  "chars": 59957,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -7606,6 +7606,114 @@
       "voice": "gadis",
       "games": [
         "labirin-warna"
+      ]
+    },
+    {
+      "key": "e97c8ad46fc6",
+      "text": "Bantu katak melompat puluhan. Ke teratai mana ia tiba?",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "729ffacbd717",
+      "text": "Bawa katak ke teratai berbunga!",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "65c41ebd8cb0",
+      "text": "Berapa jauh katak melompat?",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "b644e372fe99",
+      "text": "Katak melompat mundur. Ke mana ia tiba?",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "aa0c7d0793bd",
+      "text": "Kira-kira berapa hasilnya? Bulatkan dulu ke ratusan!",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "42087bb3e3e4",
+      "text": "Lompat maju dulu sesuai soalnya!",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "1a1d6802096f",
+      "text": "Lompat ratusan, puluhan, lalu satuan. Ke mana katak tiba?",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "e3178ccd2348",
+      "text": "Lompatan kedua! Ke mana katak tiba sekarang?",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "d53c7b08707b",
+      "text": "Lompatannya melewati ratusan! Ke mana katak tiba?",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "6d7a0b363e1a",
+      "text": "Misi kolam! Ikuti dua lompatan katak sampai seberang.",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "e24f7d988d13",
+      "text": "Sekarang mundur sejauh tadi. Kembali ke mana?",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
+      ]
+    },
+    {
+      "key": "77dbefac4ce3",
+      "text": "Seret katak ke kira-kira hasilnya!",
+      "scope": "lompat-katak",
+      "voice": "gadis",
+      "games": [
+        "lompat-katak"
       ]
     },
     {
