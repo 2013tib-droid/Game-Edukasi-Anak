@@ -519,7 +519,9 @@ Pola tiap game: **cara main inti** (yang dipegang anak) → **momen "wah"** →
 - **Proyek sesi:** satu kasus utuh per sesi, ditutup dengan "Kasus Terpecahkan!"
 - **Engine:** template baru `read-find` (teks dengan kalimat/kata yang bisa
   disentuh; jawaban = id kalimat). Biaya sedang. Tokoh: hewan semua (aturan
-  cerita buatan sendiri). **Seni detektif kucing** perlu dibuat.
+  cerita buatan sendiri). **Seni detektif kucing** perlu dibuat — promptnya
+  di `docs/prompt-detektif-kucing.md` (2026-10-07; tokohnya abu-abu belang
+  supaya beda dari kucing soal & kucing "Coba lagi").
 - **Jebakan baru:** kalimat yang bisa disentuh harus selebar target sentuh
   (≥ 64 px tinggi baris) — teks ±4 kalimat, huruf besar, jarak baris lega.
 
