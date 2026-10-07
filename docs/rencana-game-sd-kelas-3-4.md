@@ -680,7 +680,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 
 ## 6. Status
 
-> Status narasi diperiksa 2026-10-07 dari `public/assets/voice/manifest.json` + berkasnya: 1.356/1.356 baris sebelum Detektif Bacaan punya entri manifest DAN mp3-nya ada; nol entri menunjuk berkas hilang. Detektif Bacaan menambah 272 baris (render #31).
+> Status narasi diperiksa 2026-10-07 dari `public/assets/voice/manifest.json` + berkasnya: 1.356/1.356 baris sebelum Detektif Bacaan punya entri manifest DAN mp3-nya ada; nol entri menunjuk berkas hilang. Detektif Bacaan menambah 272 baris, SUDAH dirender (render #31): 1.628/1.628.
 
 | # | Game | id | Status |
 |---|---|---|---|
@@ -692,7 +692,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | 5 | Waktu Tepat | `waktu-tepat` | ✅ sudah ada (2026-10-02) — **versi premium pertama** "Sehari Bersama Kancil": template baru `clock-set` (putar jarum), 9 slot × 54 varian, urutan tetap, proyek sesi "Buku Harian Kancil" (P3); narasi SUDAH dirender (render #23, 41 baris). Kalender & hari–minggu belum. |
 | 6 | Toko Kembalian | `toko-kembalian` | ✅ sudah ada (2026-09-30), narasi SUDAH dirender (render #20, 37 baris) — **demo gratis `sd2`**, belum masuk `FREE_GAME_IDS` |
 | 7 | Detektif Data | `detektif-data` | ✅ sudah ada (2026-10-02), narasi SUDAH dirender (render #22, 47 baris) — 9 slot × 54 varian, urutan tetap; fitur engine `TapAnswerData.chart` / `TapChoice.chart` (`Chart.tsx`) |
-| 8 | Detektif Bacaan | `detektif-bacaan` | ✅ sudah ada (2026-10-07) — versi premium "Kasus Detektif Kucing": template baru `read-find` (sentuh KALIMAT bukti di dalam bacaan, kalimat dibacakan saat disentuh; sentuh KATA untuk makna kata; misi besar = papan bukti + tunjuk tokohnya), 9 slot × 54 varian, urutan tetap, proyek sesi "Kasus Detektif Kucing", P2 menyala. Seni Detektif Kucing BELUM ada (pemandu sementara 🔍), kaca pembesar pengikut jari ditunda. Narasi 272 baris BELUM dirender (render #31). |
+| 8 | Detektif Bacaan | `detektif-bacaan` | ✅ sudah ada (2026-10-07) — versi premium "Kasus Detektif Kucing": template baru `read-find` (sentuh KALIMAT bukti di dalam bacaan, kalimat dibacakan saat disentuh; sentuh KATA untuk makna kata; misi besar = papan bukti + tunjuk tokohnya), 9 slot × 54 varian, urutan tetap, proyek sesi "Kasus Detektif Kucing", P2 menyala. Seni Detektif Kucing BELUM ada (pemandu sementara 🔍), kaca pembesar pengikut jari ditunda. Narasi 272 baris SUDAH dirender (render #31). |
 | 9 | Susun Kalimat | `susun-kalimat` | ✅ sudah ada (2026-10-06) — versi premium "Kereta Kata": template baru `word-train` (seret gerbong kata), 9 slot × 54 varian, urutan tetap, proyek sesi "Kereta Kata"; kalimat dibacakan saat kereta berangkat; narasi SUDAH dirender (render #28, 73 baris). |
 | 10 | Kebun Ilmu | `kebun-ilmu` | ✅ sudah ada (2026-09-29), narasi SUDAH dirender (render #19, 63 baris) |
 | – | Perisai Garuda (Pancasila) | `perisai-garuda` | ✅ sudah ada (2026-10-05) — game Pancasila pertama: lambang sila SVG engine (`Sila.tsx`), 9 slot × 55 varian, urutan tetap, proyek sesi "Perisai Garuda" (stempel = lambang sila); narasi SUDAH dirender (render #26, 57 baris). Rumah & pakaian adat belum. |
