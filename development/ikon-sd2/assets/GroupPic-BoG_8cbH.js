@@ -1,0 +1,1 @@
+import{r as i,j as s}from"./index-CVVKnPHU.js";function l({pic:e,emoji:t,height:r=88,emojiSize:a=48}){const[o,n]=i.useState(!1);return!e||o?s.jsx("span",{style:{fontSize:a},children:t}):s.jsx("img",{src:`/Game-Edukasi-Anak/development/ikon-sd2/assets/groups/${e}.webp`,alt:"",style:{height:r,width:"auto"},onError:()=>n(!0)})}export{l as G};
