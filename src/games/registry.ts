@@ -347,11 +347,9 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Waktu Tepat',
     emoji: '⏱️',
+    // Seni stopwatch pemilik (2026-10-07) menggantikan iconClock 07.15:
+    // iconClock menang atas pic, jadi keduanya tak boleh dipasang bersama.
     pic: 'waktu-tepat',
-    // Muka jam SVG yang sama dengan yang diputar di dalam game. Pukul 07.15
-    // (bukan 10.10 milik Jam Pintar) — jam pertama hari Kancil, dan jarum di
-    // angka 3 langsung terbaca "seperempat", materi pembuka game ini.
-    iconClock: { h: 7, m: 15 },
     template: 'clock-set',
     load: () => import('@/games/sd2/waktu-tepat'),
   },
