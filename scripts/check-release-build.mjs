@@ -9,7 +9,7 @@
  *     cabangnya dibuang mati oleh minifier (terbukti nol kemunculan sejak
  *     2026-09-22), jadi kalau ada, saklarnya hidup dan semua game bisa dibuka
  *     tanpa bayar.
- *   - `/uji-` di index.html: base build penguji (lihat `guardTesterBuild` di
+ *   - `/uji-` atau `/development/` di index.html: base build penguji/development (lihat `guardTesterBuild` di
  *     vite.config.ts).
  * Ini lapis kedua; lapis pertama membuat build penguji gagal tanpa base `/uji-`.
  */
@@ -37,6 +37,7 @@ try {
     const text = readFileSync(f, 'utf8');
     for (const m of MARKERS) if (text.includes(m)) problems.push(`${f}: memuat "${m}" (saklar penguji hidup)`);
     if (f.endsWith('index.html') && /\/uji-/.test(text)) problems.push(`${f}: base "/uji-…/" (build penguji)`);
+    if (f.endsWith('index.html') && /\/development\//.test(text)) problems.push(`${f}: base "/development/…/" (build development)`);
   }
 } catch (e) {
   console.error(`Tidak bisa membaca "${dist}": ${e.message}`);
