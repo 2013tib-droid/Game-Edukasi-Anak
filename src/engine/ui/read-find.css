@@ -473,7 +473,7 @@
 
   .rf-area {
     grid-area: area;
-    max-height: calc(100dvh - 88px);
+    max-height: calc(100dvh - 96px);
     overflow-y: auto;
     gap: 6px;
   }
