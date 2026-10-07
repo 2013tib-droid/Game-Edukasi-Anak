@@ -72,6 +72,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'word-train': lazy(() => import('@/engine/templates/WordTrain')),
   'place-value': lazy(() => import('@/engine/templates/PlaceValue')),
   'number-hop': lazy(() => import('@/engine/templates/NumberHop')),
+  'read-find': lazy(() => import('@/engine/templates/ReadFind')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */
