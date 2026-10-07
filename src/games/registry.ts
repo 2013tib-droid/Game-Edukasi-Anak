@@ -298,6 +298,7 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Kali Kilat',
     emoji: '✖️',
+    pic: 'kali-kilat',
     template: 'tap-answer',
     load: () => import('@/games/sd2/kali-kilat'),
   },
@@ -307,6 +308,7 @@ export const games: GameMeta[] = [
     subject: 'ipas',
     title: 'Kebun Ilmu',
     emoji: '🌱',
+    pic: 'kebun-ilmu',
     template: 'mixed',
     load: () => import('@/games/sd2/kebun-ilmu'),
   },
@@ -316,6 +318,7 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Toko Kembalian',
     emoji: '🏪',
+    pic: 'toko-kembalian',
     template: 'mixed',
     load: () => import('@/games/sd2/toko-kembalian'),
   },
@@ -325,6 +328,7 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Ukur Yuk',
     emoji: '📏',
+    pic: 'ukur-yuk',
     template: 'tap-answer',
     load: () => import('@/games/sd2/ukur-yuk'),
   },
@@ -343,10 +347,9 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Waktu Tepat',
     emoji: '⏱️',
-    // Muka jam SVG yang sama dengan yang diputar di dalam game. Pukul 07.15
-    // (bukan 10.10 milik Jam Pintar) — jam pertama hari Kancil, dan jarum di
-    // angka 3 langsung terbaca "seperempat", materi pembuka game ini.
-    iconClock: { h: 7, m: 15 },
+    // Seni stopwatch pemilik (2026-10-07) menggantikan iconClock 07.15:
+    // iconClock menang atas pic, jadi keduanya tak boleh dipasang bersama.
+    pic: 'waktu-tepat',
     template: 'clock-set',
     load: () => import('@/games/sd2/waktu-tepat'),
   },
@@ -374,6 +377,7 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Istana Bilangan',
     emoji: '🏰',
+    pic: 'istana-bilangan',
     template: 'mixed',
     load: () => import('@/games/sd2/istana-bilangan'),
   },
