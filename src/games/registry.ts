@@ -328,6 +328,7 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Ukur Yuk',
     emoji: '📏',
+    pic: 'ukur-yuk',
     template: 'tap-answer',
     load: () => import('@/games/sd2/ukur-yuk'),
   },
@@ -346,6 +347,7 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Waktu Tepat',
     emoji: '⏱️',
+    pic: 'waktu-tepat',
     // Muka jam SVG yang sama dengan yang diputar di dalam game. Pukul 07.15
     // (bukan 10.10 milik Jam Pintar) — jam pertama hari Kancil, dan jarum di
     // angka 3 langsung terbaca "seperempat", materi pembuka game ini.
@@ -377,6 +379,7 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Istana Bilangan',
     emoji: '🏰',
+    pic: 'istana-bilangan',
     template: 'mixed',
     load: () => import('@/games/sd2/istana-bilangan'),
   },
