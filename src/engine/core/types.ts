@@ -24,7 +24,8 @@ export type TemplateId =
   | 'clock-set' // putar jarum panjang dengan jari (Waktu Tepat)
   | 'word-train' // susun gerbong kata jadi kalimat (Susun Kalimat)
   | 'place-value' // bangun bilangan dari balok ratusan-puluhan-satuan (Istana Bilangan)
-  | 'number-hop'; // katak melompat di garis bilangan (Lompat Katak)
+  | 'number-hop' // katak melompat di garis bilangan (Lompat Katak)
+  | 'read-find'; // sentuh kalimat/kata bukti di dalam bacaan (Detektif Bacaan)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -904,6 +905,58 @@ export interface WordTrainData {
   scene?: SceneId;
 }
 
+/**
+ * Satu langkah template `read-find` (Detektif Bacaan → "Kasus Detektif
+ * Kucing"). Langkah-langkah satu level dikerjakan berurutan di atas bacaan
+ * yang SAMA; `say` langkah pertama diabaikan (narasi level yang dibacakan).
+ */
+export type ReadStep =
+  /**
+   * Sentuh KALIMAT bukti. `answer` = indeks kalimat di `sentences` (boleh
+   * lebih dari satu kalau dua kalimat sama-sama bukti yang sah).
+   */
+  | {
+      kind: 'sentence';
+      answer: number[];
+      say?: string;
+      /**
+       * Kartu di PAPAN BUKTI begitu kalimatnya ketemu. Papan hanya tampil di
+       * level yang punya `clue` (misi besar).
+       */
+      clue?: { emoji?: string; item?: string; label: string };
+    }
+  /**
+   * Sentuh KATA di dalam satu kalimat (makna kata dari konteks). Hanya
+   * kalimat `sentence` yang katanya bisa disentuh; `answer` = kata itu persis
+   * seperti tertulis (tanpa tanda baca).
+   */
+  | { kind: 'word'; sentence: number; answer: string; say?: string }
+  /** Tunjuk jawabannya dari kartu (misi besar: siapa yang melakukannya?). */
+  | {
+      kind: 'choose';
+      say: string;
+      choices: { text: string; item?: string; emoji?: string; correct?: boolean }[];
+    };
+
+export interface ReadFindData {
+  /** Judul kasus di atas bacaan, mis. "Mangga yang Hilang". Tulisan layar. */
+  title: string;
+  /**
+   * Bacaannya, SATU KALIMAT per butir. Tiap kalimat bisa disentuh dan
+   * DIBACAKAN saat disentuh (anak yang tersendat membaca tetap terbantu),
+   * jadi tiap kalimat juga baris narasi — TANPA digit.
+   */
+  sentences: string[];
+  steps: ReadStep[];
+  scene?: SceneId;
+  /**
+   * Seni tokoh pemandu: nama file (tanpa ekstensi) di `public/assets/ui/`.
+   * Kosong = kaca pembesar emoji. Sengaja opsional: `<img>` ke berkas yang
+   * belum ada akan mengotori console dengan 404.
+   */
+  guide?: string;
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -920,6 +973,7 @@ export interface LevelDataMap {
   'word-train': WordTrainData;
   'place-value': PlaceValueData;
   'number-hop': NumberHopData;
+  'read-find': ReadFindData;
 }
 
 /* ---------- Game config ---------- */

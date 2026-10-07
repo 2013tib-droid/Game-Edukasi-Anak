@@ -36,6 +36,9 @@ const POP_SELECTOR = [
   '.pv-check',
   '.nh-btn',
   '.nh-check',
+  '.rf-row',
+  '.rf-word',
+  '.rf-check',
 ].join(',');
 
 function reducedMotion(): boolean {

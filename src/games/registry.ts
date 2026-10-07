@@ -386,6 +386,15 @@ export const games: GameMeta[] = [
     template: 'mixed',
     load: () => import('@/games/sd2/lompat-katak'),
   },
+  {
+    id: 'detektif-bacaan',
+    group: 'sd2',
+    subject: 'bahasa-indonesia',
+    title: 'Detektif Bacaan',
+    emoji: '🔍',
+    template: 'read-find',
+    load: () => import('@/games/sd2/detektif-bacaan'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-07",
-  "count": 1356,
-  "chars": 59957,
+  "count": 1628,
+  "chars": 70099,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -1837,6 +1837,2454 @@
       "voice": "ardi",
       "games": [
         "cerita-kancil"
+      ]
+    },
+    {
+      "key": "682f8739bfe8",
+      "text": "Ada jejak kaki kecil di tanah kebun.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "131e5ab30a1d",
+      "text": "Ada kulit mangga di bawah pohon besar.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0fd9f7ef7970",
+      "text": "Adiknya mencari pisang di dapur.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8e8a096b46b3",
+      "text": "Air dipakai untuk minum dan memasak.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "9046baf1f43c",
+      "text": "Air kelapa segar untuk diminum.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0cdecfd5e0d9",
+      "text": "Anak ayam itu mungil dan berbulu kuning.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5af43251238c",
+      "text": "Angin bertiup sangat kencang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "a01c830f643c",
+      "text": "Anyamannya dijadikan keranjang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f59f7c9de6ca",
+      "text": "Apa yang Bebek lakukan paling awal? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "c2f995a439d6",
+      "text": "Apa yang Beruang lakukan paling awal? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5a772f1894c2",
+      "text": "Apa yang Gajah lakukan paling awal? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "6574f8b5ce21",
+      "text": "Apa yang Kelinci lakukan paling awal? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f76a7e542cc3",
+      "text": "Apa yang Panda lakukan paling awal? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "77214017d6fb",
+      "text": "Apa yang terjadi pada apel Beruang? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "d3bd4989a01e",
+      "text": "Apa yang terjadi pada balon Kelinci? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "846d752b245a",
+      "text": "Apa yang terjadi pada kue Bu Bebek? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "6acc4eb64c84",
+      "text": "Apa yang terjadi pada layang-layang Kucing? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5222d17c27a7",
+      "text": "Apa yang terjadi pada perahu kertas Bebek? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "783bca0ac770",
+      "text": "Apa yang terjadi saat Jerapah lewat jalan becek? Sentuh buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8928337cb83b",
+      "text": "Apa yang Zebra lakukan paling awal? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "421e98443755",
+      "text": "Apel-apelnya jatuh berguling ke jalan.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "ff82e7f9d7aa",
+      "text": "Ayam berkokok saat matahari terbit.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "cf63acafa408",
+      "text": "Ayam ingin datang paling awal ke lomba.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "74b82638b9aa",
+      "text": "Ayam ingin mencicipi kue itu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "17d1a9729762",
+      "text": "Ayam tidak keluar rumah hari ini.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0f8b2d4484da",
+      "text": "Badannya panas dan ia batuk.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "73fc94c13471",
+      "text": "Balonnya berwarna kuning cerah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "6d4c2986ddb4",
+      "text": "Bambu banyak sekali gunanya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "914d98918d92",
+      "text": "Batangnya bisa dipakai untuk jembatan.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "89f862a9ac14",
+      "text": "Batangnya dipakai untuk membuat rumah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "320ee80b3f91",
+      "text": "Bebek baru pulang dari sekolah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f866de9c94e2",
+      "text": "Bebek berenang di kolam yang jernih.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "559e33d8fac4",
+      "text": "Bebek datang memakai topi merahnya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5b4ea69c6b16",
+      "text": "Bebek duduk di dekat sarang menjaganya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "4c9b4a3fda96",
+      "text": "Bebek membuat perahu dari kertas.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8f105afa5d34",
+      "text": "Bebek memetik bunga untuk ibunya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "3a4568284f3a",
+      "text": "Bebek mencari makan di kolam.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "6ac37ddfa021",
+      "text": "Bebek menutup kedua telinganya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "374c2cb7381c",
+      "text": "Bebek tinggal di dekat sawah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "d7cb5a6dcae5",
+      "text": "Beratnya sama dengan beberapa mobil.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "7d98f6e54daa",
+      "text": "Beruang makan roti dengan madu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5ee1ea79a68a",
+      "text": "Beruang membawa sekeranjang apel.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "688643346e24",
+      "text": "Beruang memperbaiki rantainya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0c4e8ccc82e9",
+      "text": "Bola ditendang dengan kaki.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "168fdc99d24e",
+      "text": "Bu Ayam pergi mencari makan.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1d2020cdf913",
+      "text": "Bu Ayam punya anak yang baru menetas.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e17d9192fbfe",
+      "text": "Bu Bebek membuat kue di dapur.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0d8955c9ccd8",
+      "text": "Bu Bebek membuat kue pisang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "7900f73288e5",
+      "text": "Bu Panda menanam bunga di depan rumah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e24f99f94c67",
+      "text": "Bukti kedua: remah itu sampai ke mana?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "2166ecdc4792",
+      "text": "Bukti kedua: siapa yang ada di pohon itu?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "3dd3efd3984e",
+      "text": "Bukti kedua: siapa yang bermain di tempat itu?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "bbfec077e30a",
+      "text": "Bukti kedua: siapa yang kakinya kecil?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "719b926863b9",
+      "text": "Bukti kedua: siapa yang membaca buku itu?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "971bcde7f7e0",
+      "text": "Bukti kedua: siapa yang pulang tanpa basah?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "c1575e9d8979",
+      "text": "Bukti pertama: apa yang ada di lantai?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f12578e245f6",
+      "text": "Bukti pertama: bagaimana cuaca siang tadi?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "386b9b9fe991",
+      "text": "Bukti pertama: di mana ada sisa mangga?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "ba729f586629",
+      "text": "Bukti pertama: di mana topi biru itu?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "3c387e92b281",
+      "text": "Bukti pertama: jejak apa yang ada di kebun?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0752b6463e51",
+      "text": "Bukti pertama: sampul buku itu bergambar apa?",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e3522166bccb",
+      "text": "Buku itu ia pinjam di sekolah pagi tadi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b242b0522fac",
+      "text": "Bus itu berangkat setiap pagi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5c24b80f81df",
+      "text": "Bus itu bisa membawa banyak anak.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "fd0809992980",
+      "text": "Bus sekolah berwarna kuning.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "7d1276a0b49c",
+      "text": "Cangkangnya keras melindungi badannya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8f57472cc7d2",
+      "text": "Daunnya dianyam menjadi ketupat.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "58603fa0fd65",
+      "text": "Di lantai ada remah kue cokelat.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "451a2e2fa75a",
+      "text": "Di mana Bebek berenang setiap pagi? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0a7528583d9e",
+      "text": "Di mana kunci Kelinci akhirnya ditemukan? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "a32e95f6c773",
+      "text": "Di mana Monyet menyimpan pisangnya? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "bc81c8552b5a",
+      "text": "Di pasar ia membeli bambu dan apel.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "cea3d17d810e",
+      "text": "Esok harinya ia membuat kue lagi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5c9fe9db643b",
+      "text": "Gajah adalah hewan darat yang besar.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "65d108edbee8",
+      "text": "Gajah berjalan ke taman sekolah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "7b78dd46ab3a",
+      "text": "Gajah berteduh di bawah pohon.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "17564d158adc",
+      "text": "Gajah datang menghiburnya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "65c1b1b4cab3",
+      "text": "Gajah ingin menyiram bunga yang layu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1239d2174046",
+      "text": "Gajah membawa sepeda itu ke bengkel.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f7fc629a6d86",
+      "text": "Gajah menggambar pohon di kertas.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "eb1b8dcab283",
+      "text": "Gajah pun tertidur dengan nyenyak.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e17c7edf0187",
+      "text": "Gajah punya kaki yang sangat besar.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1202976e19d4",
+      "text": "Gajah suka bermain air.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e374b592aae8",
+      "text": "Gambarnya lalu ditempel di dinding.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "c029adabf6bd",
+      "text": "Hari ini Panda tidak masuk sekolah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "111bc717dda2",
+      "text": "Hari Minggu pagi, Panda ke pasar.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e3cca800d3ae",
+      "text": "Harimau pulang dengan baju basah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0e788dec8985",
+      "text": "Hujan mulai turun rintik-rintik.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "a7602ebb7beb",
+      "text": "Hujan turun deras sekali.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b932ce7495eb",
+      "text": "Ia bisa menahan lapar berhari-hari.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8008b477d21e",
+      "text": "Ia duduk dan minum air.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "941b13720cb0",
+      "text": "Ia lupa mematikan kompor.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "c0e9b656d8af",
+      "text": "Ia meletakkannya di sungai kecil.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "32e10a0c6494",
+      "text": "Ia melewati jalan yang becek.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "2b9e59b94ec1",
+      "text": "Ia melompat-lompat karena hatinya gembira.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0037200c7463",
+      "text": "Ia membaca buku itu sampai sore.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0e88ec5693cb",
+      "text": "Ia membawa ember berisi air.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "2acd8193c18b",
+      "text": "Ia membawa pisang itu pulang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "c5b02a27f606",
+      "text": "Ia mencari di bawah meja, tidak ada.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "efd4fcf3761c",
+      "text": "Ia mencari di kebun, juga tidak ada.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "4744aa817842",
+      "text": "Ia mencium bau ikan goreng.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "fa130c021d98",
+      "text": "Ia sampai sebelum bel berbunyi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1f8def46b5d1",
+      "text": "Ia sarapan jagung sebentar.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "d7f4a2cb6bc1",
+      "text": "Ia selalu berjalan di belakang ibunya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "c2f44d7ce3cc",
+      "text": "Ibu membantu mencuci sepatunya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "fdc2bb120ff3",
+      "text": "Ibu memberinya sepotong ikan.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "bd9beb9aa083",
+      "text": "Jagung itu ia petik kemarin sore.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "c21ec3f674c4",
+      "text": "Jalannya pelan tapi tidak berhenti.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "4f97acb18fa9",
+      "text": "Jerapah bisa bersepeda lagi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "2ad8e9b9df6c",
+      "text": "Jerapah makan daun di pohon tinggi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "cd80bb508041",
+      "text": "Jerapah membaca buku bergambar gajah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "74887fdfab33",
+      "text": "Jerapah pulang dari sekolah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "eb7932465b3e",
+      "text": "Jerapah punya leher yang panjang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b56c337b108b",
+      "text": "Jerapah tinggal di padang rumput.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "4c70619ac39a",
+      "text": "Kakinya tersandung batu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "33d53ce9540e",
+      "text": "Kalimat mana yang berisi pendapat, bukan fakta? Sentuh kalimatnya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "a368ea0e3931",
+      "text": "Kalimat mana yang menjadi ide pokok paragraf ini? Sentuh kalimat utamanya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "da1a91415d64",
+      "text": "Kambing duduk di teras rumah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0d0150f1cf98",
+      "text": "Kapan Gajah mandi di sungai? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b85b274f04f9",
+      "text": "Kapan Kura-kura sampai di sekolah? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "82cefefd09b4",
+      "text": "Kapan Panda pergi ke pasar? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "06aa8cc37917",
+      "text": "Karena itu, Ayam bangun lebih pagi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "ac82e55c117a",
+      "text": "Kata mana yang artinya capek? Sentuh katanya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "24febaf25bfb",
+      "text": "Kata mana yang artinya cepat? Sentuh katanya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e343042af01e",
+      "text": "Kata mana yang artinya dingin dan segar? Sentuh katanya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "514e0ce2f2b0",
+      "text": "Kata mana yang artinya kecil? Sentuh katanya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8e083c060b2e",
+      "text": "Kata mana yang artinya ramai? Sentuh katanya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "d10fcba4b36d",
+      "text": "Kata mana yang artinya senang? Sentuh katanya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e117b0240f67",
+      "text": "Katak melihatnya dari atas daun.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "88457d3803ac",
+      "text": "Kelinci berkaki kecil dan suka wortel.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "46721a19d555",
+      "text": "Kelinci makan wortel di meja.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b4454ddbf7dd",
+      "text": "Kelinci melambai ke balonnya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1137914c1f20",
+      "text": "Kelinci mendapat balon dari Paman.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e2a619d0aeb0",
+      "text": "Kelinci mendapat hadiah buku.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b45d20e74617",
+      "text": "Kelinci menunggu di dekat pagar.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "a869a57c5ccf",
+      "text": "Kini bunga Bu Panda segar sekali.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "44f86845098c",
+      "text": "Kita juga mandi dengan air.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "63d6d081ee79",
+      "text": "Kita memerlukan air setiap hari.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1ef91e75884c",
+      "text": "Koala meminjamkan payung birunya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "3b667549d058",
+      "text": "Koala pulang sekolah tanpa basah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8a172798e3b1",
+      "text": "Koala sedang menggambar di mejanya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "3836e15b4391",
+      "text": "Kucing bermain layang-layang di lapangan.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "807a61251201",
+      "text": "Kucing dan Ayam mengejarnya bersama.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b20d3caf0004",
+      "text": "Kucing langsung berlari ke dapur.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "233f5c9bf304",
+      "text": "Kucing membawa kue itu ke rumah Nenek.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "40322879d9bc",
+      "text": "Kucing membersihkan bulunya sendiri.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0d5fb7dcd347",
+      "text": "Kucing punya kumis yang panjang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b645399161c6",
+      "text": "Kucing sedang tidur di kursi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "efb7abfb4bdb",
+      "text": "Kucing suka tidur di tempat hangat.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8cf18d651a12",
+      "text": "Kucing tidur di sofa sejak pagi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "31cc5d4d5923",
+      "text": "Kuda berlari mengelilingi lapangan.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5cb5c9116e17",
+      "text": "Kuda membaca buku tentang mobil.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "61dfd70f850f",
+      "text": "Kue cokelat di piring tinggal sedikit.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "a936d00b48e8",
+      "text": "Kuenya menjadi gosong dan hitam.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "ec8424a4afef",
+      "text": "Kunci rumah Kelinci hilang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "7565dbb3484f",
+      "text": "Kura-kura adalah hewan yang tangguh.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "704fa21fcc84",
+      "text": "Kura-kura berangkat sangat pagi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "c09de13d788f",
+      "text": "Kura-kura berjalan pelan sekali.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "83a9e51e0035",
+      "text": "Kura-kura membuka payung kuningnya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "03bc41436089",
+      "text": "Kura-kura menemukan bola itu di semak.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f5b12bdd0e80",
+      "text": "Kura-kura pergi ke rumah Kelinci.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "da24dd49870b",
+      "text": "Lalu ia berlari menuju lapangan.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f1fe5e274194",
+      "text": "Lalu ia pergi bermain ke taman.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "445d7b1820d6",
+      "text": "Lalu Zebra berlari ke lapangan.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "61bc51da6f95",
+      "text": "Langit tiba-tiba menjadi gelap.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "d5c6eb64a1f5",
+      "text": "Lusa Panda sudah sehat lagi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "454586162bc8",
+      "text": "Mainan kesayangannya rusak tadi pagi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8c23ea20f72f",
+      "text": "Malam hari ia tidur di bawah pohon.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "67b4dcdb7d65",
+      "text": "Malam hari ia tidur di kandang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1cc5a1c8c87d",
+      "text": "Malam hari matahari tidak terlihat.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "bcee9b6946fb",
+      "text": "Mangga adalah buah paling enak.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "484c5cb5fa3c",
+      "text": "Mangga bisa dibuat jus.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "32250c38fbf1",
+      "text": "Mangga di meja Pak Beruang hilang satu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "30e32f628576",
+      "text": "Mangga muda berwarna hijau.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e81e419ea834",
+      "text": "Mangga tumbuh di daerah yang panas.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "15b8ba743708",
+      "text": "Matahari membuat tanaman tumbuh.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "da1d6895d196",
+      "text": "Matahari terbit di sebelah timur.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "2235bc5b97b8",
+      "text": "Mengapa Ayam bangun lebih pagi? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "fa4525cbe2d1",
+      "text": "Mengapa Gajah membawa ember berisi air? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "03605a5330ed",
+      "text": "Mengapa Kucing berlari ke dapur? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5b7bcdc51119",
+      "text": "Mengapa Kura-kura membuka payungnya? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f923617b03de",
+      "text": "Mengapa Monyet sedih? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e9af038b44e1",
+      "text": "Mengapa Panda tidak masuk sekolah? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e8bf7a938eb4",
+      "text": "Menurutku, jerapah hewan paling cantik.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "7957d860abe6",
+      "text": "Mereka membawakan buah untuknya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1a567a1c33ff",
+      "text": "Mereka pulang bersama tanpa basah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "17f56355ef3b",
+      "text": "Monyet duduk sendirian di bawah pohon.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f33c471263bf",
+      "text": "Monyet kehilangan bola merahnya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "9753d1c2d8f2",
+      "text": "Monyet memetik pisang di hutan.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1dceabfe445a",
+      "text": "Monyet sedang tidur siang di pohon itu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "7a5ed70c05e9",
+      "text": "Monyet senang bolanya kembali.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "d7495433b29c",
+      "text": "Naik bus sekolah sangat menyenangkan.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "357f0370a055",
+      "text": "Nenek Kura-kura tersenyum gembira.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "90f7ab210c93",
+      "text": "Pagi adalah waktu terbaik untuk belajar.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0597ab598b0a",
+      "text": "Pagi hari, Gajah makan rumput.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e74c18e267a6",
+      "text": "Pagi ini, Kelinci menyiram bunga itu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f66396c0ecec",
+      "text": "Pak Beruang mencari ke mana-mana.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1d3dae4237d6",
+      "text": "Panda lupa membawa payung.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "74a049d0c936",
+      "text": "Panda sedang sakit flu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b3cce90a235e",
+      "text": "Panda suka makan bambu segar.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "261c0e0fc7be",
+      "text": "Panda tidur siang dengan nyenyak.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "392dc2bb65aa",
+      "text": "Pasar pagi itu penuh pembeli.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "126cd71e8534",
+      "text": "Payung Ibu Panda tidak ada di rak.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "bcf8cd0f7f44",
+      "text": "Pensil itu ia terima dari Nenek kemarin.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1ce1a6c78fed",
+      "text": "Perahu itu hanyut terbawa arus.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b7ba00c6661c",
+      "text": "Pinguin bermain di kolam sepanjang pagi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "7e56614e5a83",
+      "text": "Pisangnya ia simpan di atas lemari.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "a8a32f260c51",
+      "text": "Pohon kelapa sangat berguna bagi kita.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "365d51ead9f9",
+      "text": "Rantai sepeda Jerapah putus.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "035f380ef3c2",
+      "text": "Rebungnya bisa dimasak jadi sayur.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "6e2774d1cb84",
+      "text": "Remah itu sampai ke kamar Beruang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "c9908aca250b",
+      "text": "Rotinya ia beli di toko pagi tadi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "9c956895b36d",
+      "text": "Saat Bu Ayam pulang, telurnya aman.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b7771edd7560",
+      "text": "Saat siang panas, Gajah mandi di sungai.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "71a9a961808c",
+      "text": "Sampul buku itu bergambar gajah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "3194946a2a83",
+      "text": "Sapi makan rumput di padang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "91c24994adaa",
+      "text": "Sapi tidak suka makan wortel.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f9ff284d88d7",
+      "text": "Satu buku cerita di kelas hilang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "7f11c0232055",
+      "text": "Saya rasa kucing lebih lucu dari kelinci.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5f8546d7aebb",
+      "text": "Sebelum berenang, ia sarapan jagung.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f7335ddeee0a",
+      "text": "Sebelum makan, ia mencuci wortel itu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "426d05172b6f",
+      "text": "Sebelum memakainya, ia mencuci kaki.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "9adcc97def28",
+      "text": "Sebelum menggambar, ia meraut pensil.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "cf1c2011b000",
+      "text": "Sebelum tidur, ia membaca buku cerita.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "34e08bac7e1e",
+      "text": "Sepak bola adalah olahraga paling seru.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "7b764375a878",
+      "text": "Sepak bola dimainkan dua regu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "02681904e475",
+      "text": "Sepatu itu ia beli bersama Ayah kemarin.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "60bc8ff7405f",
+      "text": "Sepatunya terbenam di dalam lumpur.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "a843c9017baf",
+      "text": "Sesudah berenang, ia mengeringkan bulu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8914009d1e62",
+      "text": "Sesudah itu, ia merasa sangat letih.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "78335b455366",
+      "text": "Sesudah makan, ia mencuci piring.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8266d44735b8",
+      "text": "Sesudah makan, ia minum susu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "e75e719302c7",
+      "text": "Setiap pagi, Bebek berenang di kolam.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "cb0542bfe3f6",
+      "text": "Setiap regu ingin mencetak gol.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "58f54216eb35",
+      "text": "Siang harinya ia makan bersama keluarga.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "8ac4950b0aee",
+      "text": "Siang tadi hujan turun deras.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "42757d00530d",
+      "text": "Siapa yang lupa mengembalikan buku? Tunjuk dia!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "6bca1ce538d5",
+      "text": "Siapa yang memakan kue itu? Tunjuk dia!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "28d11fc3e84d",
+      "text": "Siapa yang membawa kue ke rumah Nenek? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "3c83e3df89e6",
+      "text": "Siapa yang membawa topi itu ke kolam? Tunjuk dia!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "9427852c73f9",
+      "text": "Siapa yang meminjam payung itu? Tunjuk dia!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "ecb021ccec0e",
+      "text": "Siapa yang meminjamkan payung kepada Panda? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "805ee1b8ecad",
+      "text": "Siapa yang memperbaiki sepeda Jerapah? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1bc676d95b53",
+      "text": "Siapa yang mencabut wortel itu? Tunjuk dia!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "68479f44c195",
+      "text": "Siapa yang menemukan bola Monyet? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "146b7746c471",
+      "text": "Siapa yang mengambil mangga itu? Tunjuk dia!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "98b8f3917567",
+      "text": "Siapa yang menjaga telur Bu Ayam? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "5f9d7d57474d",
+      "text": "Siapa yang menyiram bunga Bu Panda? Sentuh kalimat buktinya!",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "a88e49b2ba2e",
+      "text": "Sore hari ia bermain di halaman.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "b30d4df7c55a",
+      "text": "Sore harinya ia bermain bola.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "50514a2aef8b",
+      "text": "Suara pedagang dan pembeli sangat riuh.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "1c51cdc0ba92",
+      "text": "Tali layang-layangnya putus.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "bf402fbdb2c2",
+      "text": "Tanaman di kebun pun perlu disiram.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "33a649224fe5",
+      "text": "Telinganya lebar seperti kipas.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "0807792c4a30",
+      "text": "Telurnya ada di dalam sarang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "316c22aa3c2a",
+      "text": "Teman-teman berdoa agar Panda lekas sembuh.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "c29e6bebef4d",
+      "text": "Teman-teman mengirim surat untuknya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "55cc183a3344",
+      "text": "Teman-temannya datang sesudah itu.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "21818ef2a027",
+      "text": "Ternyata kuncinya ada di dalam tas.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "f0461c2265d5",
+      "text": "Tiap hewan ternak punya kebiasaan sendiri.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "51dec4e8a9a4",
+      "text": "Tiba-tiba balon itu terbang tinggi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "dd717c0d3d80",
+      "text": "Tingginya melebihi atap rumah.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "fc262d8cd557",
+      "text": "Topi biru Ayah Kelinci hilang.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "85070360cd35",
+      "text": "Topi biru itu ada di dekat kolam.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "69103c531afc",
+      "text": "Udara di bawah pohon itu terasa sejuk.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "eacf05031427",
+      "text": "Wajahnya terlihat sedih.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "fc1e94170b7c",
+      "text": "Wortel di kebun Bu Kambing tercabut.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "ec87f5fce4f5",
+      "text": "Wortel itu ia cabut dari kebun pagi tadi.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "df8e6e81318a",
+      "text": "Zebra dan Kelinci bermain bola di halaman.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "52eebffd7fbd",
+      "text": "Zebra memakai sepatu barunya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "6b650207059a",
+      "text": "Zebra membantu memungutnya.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
+      ]
+    },
+    {
+      "key": "921cff88778d",
+      "text": "Zebra mencari bola di dekat pohon.",
+      "scope": "detektif-bacaan",
+      "voice": "gadis",
+      "games": [
+        "detektif-bacaan"
       ]
     },
     {

@@ -169,6 +169,11 @@ for (const config of mod.configs) {
       for (const alt of round.alt ?? []) add(mod.sentenceText(alt), config.id, voice);
     }
 
+    // read-find (Detektif Bacaan): every sentence of the passage is read
+    // aloud when the child touches it. Later steps' `say` is covered by the
+    // clock-set loop above (same field name).
+    for (const sentence of level.data?.sentences ?? []) add(sentence, config.id, voice);
+
     // Story pages carry their own spoken text, on top of the level narration.
     const pages = level.data?.pages;
     if (!Array.isArray(pages)) continue;

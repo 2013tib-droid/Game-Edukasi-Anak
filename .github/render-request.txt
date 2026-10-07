@@ -1,14 +1,15 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #30
+render #31
 
-only: lompat-katak
+only: detektif-bacaan
 
-Game baru SD Kelas 3 & 4 "Lompat Katak" (tambah & kurang di garis bilangan).
-12 baris baru (517 karakter), semuanya scope lompat-katak. Dibandingkan
-sebelum vs sesudah lewat scripts/narration-lines.json: 1344 baris jadi 1356,
+Game baru SD Kelas 3 & 4 "Detektif Bacaan" (sentuh kalimat bukti di dalam
+bacaan). 272 baris baru (10.142 karakter), semuanya scope detektif-bacaan:
+narasi soal + SETIAP kalimat bacaan (dibacakan saat disentuh). Dibandingkan
+sebelum vs sesudah lewat scripts/narration-lines.json: 1356 baris jadi 1628,
 nol baris lama berubah atau pindah scope, jadi aman dibatasi
-"only: lompat-katak" (file yang sudah ada dilewati).
+"only: detektif-bacaan" (file yang sudah ada dilewati).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

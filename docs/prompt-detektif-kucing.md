@@ -132,7 +132,10 @@ item yang sudah ada.
 1. Unduh dengan nama persis seperti di judul (`detektif-kucing.png`, dst.) —
    PNG/JPEG latar putih apa adanya, jangan dipotong sendiri.
 2. Dipotong dengan **`scripts/cut-item.py`** (stiker berlatar putih), ekspor
-   WebP ±320 px sisi terpanjang.
+   WebP ±320 px sisi terpanjang ke **`public/assets/ui/detektif-kucing.webp`**,
+   lalu isi konstanta `GUIDE = 'detektif-kucing'` di
+   `src/games/sd2/detektif-bacaan.ts` (game-nya sudah jadi sejak 2026-10-07 dan
+   memakai 🔍 sampai gambar ini ada).
 3. Pemeriksaan sebelum dipakai: hasil potong ditempel di atas **warna gelap**
    dulu (celah putih yang terkurung — mis. di antara lengan & badan, atau di
    lengkung ekor — hanya kelihatan di situ), lalu di atas latar pastel app pada
