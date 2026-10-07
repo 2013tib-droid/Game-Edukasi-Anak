@@ -1,0 +1,116 @@
+/* Kartu kelompok di /portal (HomePage.tsx) — bahasa rupa yang sama dengan
+   kartu mapel SD 3-4 (subjects.css): gradien berwarna, tulisan putih, pil
+   putih "Mulai Belajar", hiasan emoji pudar di sudut. Bedanya: gambar
+   kelompok (seni pemilik) tetap tampil penuh di kanan, di atas lingkaran
+   putih supaya warna pastelnya tidak tenggelam di gradien. */
+.home-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+@media (min-width: 560px) {
+  .home-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.home-card {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 168px;
+  padding: 16px 16px 18px 18px;
+  border-radius: 24px;
+  color: #fff;
+  text-align: left;
+  text-decoration: none;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.14), 0 10px 18px rgba(58, 46, 32, 0.12);
+  transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+.home-card:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.14), 0 4px 10px rgba(58, 46, 32, 0.12);
+}
+.home-card:focus-visible {
+  outline: 4px solid #ffd54a;
+  outline-offset: 3px;
+}
+
+.home-card__text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+}
+
+.home-card__tag {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.24);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.home-card__title {
+  font-size: clamp(22px, 6.4vw, 27px);
+  font-weight: 800;
+  line-height: 1.12;
+}
+
+.home-card__desc {
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  opacity: 0.95;
+}
+
+.home-card__cta {
+  margin-top: 4px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--home-ink);
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Gambar kelompok di lingkaran putih. Ukurannya ikut lebar layar supaya di
+   HP 320 px kolom teks tetap cukup lebar. */
+.home-card__art {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: clamp(92px, 27vw, 118px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+.home-card__art img {
+  max-height: 74%;
+}
+
+.home-card__deco {
+  position: absolute;
+  font-size: 46px;
+  line-height: 1;
+  opacity: 0.28;
+  pointer-events: none;
+}
+.home-card__deco--a {
+  right: 6px;
+  bottom: 2px;
+}
+.home-card__deco--b {
+  right: 34%;
+  top: 6px;
+  font-size: 30px;
+}
