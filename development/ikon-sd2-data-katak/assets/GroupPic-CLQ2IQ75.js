@@ -1,0 +1,1 @@
+import{r as i,j as e}from"./index-CzvPMojp.js";function d({pic:t,emoji:s,height:a=88,emojiSize:r=48}){const[o,n]=i.useState(!1);return!t||o?e.jsx("span",{style:{fontSize:r},children:s}):e.jsx("img",{src:`/Game-Edukasi-Anak/development/ikon-sd2-data-katak/assets/groups/${t}.webp`,alt:"",style:{height:a,width:"auto"},onError:()=>n(!0)})}export{d as G};
