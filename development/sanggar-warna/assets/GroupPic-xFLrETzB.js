@@ -1,0 +1,1 @@
+import{r as i,j as s}from"./index-DTis0xoS.js";function l({pic:e,emoji:t,height:r=88,emojiSize:a=48}){const[n,o]=i.useState(!1);return!e||n?s.jsx("span",{style:{fontSize:a},children:t}):s.jsx("img",{src:`/Game-Edukasi-Anak/development/sanggar-warna/assets/groups/${e}.webp`,alt:"",style:{height:r,width:"auto"},onError:()=>o(!0)})}export{l as G};
