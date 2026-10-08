@@ -1,0 +1,1 @@
+import{r as n,j as t}from"./index-DM8oLxeb.js";function l({pic:e,emoji:s,height:r=88,emojiSize:a=48}){const[o,i]=n.useState(!1);return!e||o?t.jsx("span",{style:{fontSize:a},children:s}):t.jsx("img",{src:`/Game-Edukasi-Anak/development/bagi-kue/assets/groups/${e}.webp`,alt:"",style:{height:r,width:"auto"},onError:()=>i(!0)})}export{l as G};
