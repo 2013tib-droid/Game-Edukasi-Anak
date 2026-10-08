@@ -74,6 +74,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'number-hop': lazy(() => import('@/engine/templates/NumberHop')),
   'fraction-kitchen': lazy(() => import('@/engine/templates/FractionKitchen')),
   'read-find': lazy(() => import('@/engine/templates/ReadFind')),
+  'paint-studio': lazy(() => import('@/engine/templates/PaintStudio')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */

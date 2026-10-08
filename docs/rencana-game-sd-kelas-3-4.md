@@ -625,6 +625,33 @@ ada, isi konstanta `GUIDE` di config.
 
 ---
 
+### 2b.8 Seni Rupa — Sanggar Warna 🎨 (game Seni Rupa pertama, 2026-10-08)
+
+Mapel Seni Rupa (`subject: 'seni-rupa'`) sebelumnya nol game ("Segera hadir").
+Cakupan mapel yang disetujui pemilik 2026-10-05: campur warna, pola & motif
+batik/nusantara, kolase.
+
+**Keputusan pemilik (2026-10-08, semua rekomendasi disetujui):**
+
+| Pertanyaan | Keputusan |
+|---|---|
+| Nama & cara main | **"Sanggar Warna"** 🎨 (`sanggar-warna`), versi PENUH: anak MENCAMPUR cat (tetes ke mangkuk, warnanya berubah perlahan), MEWARNAI (pilih cat, ketuk kotak), MENYUSUN keping motif. Template engine baru `paint-studio`. |
+| Tokoh | Kucing pelukis (seni `cat` + baret CSS) pemilik sanggar; pemesan = hewan berseni WebP yang sudah ada. Nol aset baru. |
+| 9 slot | kls 3: warna primer · campur → sekunder · "dicampur dari apa?" · muda & tua · **hiasan PINGGIRAN KAIN** (tumpal, sulur, selang-seling arah — bukan deret bentuk ala Pola Pintar) → kls 4: panas & dingin · motif batik (lengkapi / kenali) · simetri · **misi besar selendang** (campur → warnai simetris → hias pinggiran). Urutan TETAP, 6 varian per slot. |
+| Kolase | **DITUNDA** ke game Seni Rupa kedua (butuh template tempel-sobek sendiri). |
+| Motif batik | **SVG engine** (`Paint.tsx`), disederhanakan tapi strukturnya dijaga; **asal daerah disebut** di narasi: kawung & parang Yogyakarta, mega mendung Cirebon, truntum Surakarta. |
+
+**Aturan yang dijaga di config (builder melempar error):** tiap pasangan tetes
+dari tabung di mangkuk harus jadi warna BERNAMA (`checkTubes`) · kuning & oranye,
+merah & merah muda tak pernah berdampingan sebagai pilihan · paling banyak lima
+tabung (HP 320) · resep yang salah tak boleh menghasilkan warnanya · motif simetri
+wajib simetris DAN menyalin-tanpa-mencerminkan harus terlihat salah · hanya parang
+yang boleh jadi pengecoh "dicerminkan" (motif lain sama saja kalau dicerminkan) ·
+keping yang dibutuhkan pinggiran wajib ada di baki.
+
+**Yang belum:** kolase (game kedua), seni ikon kartu (`pic` — prompt di
+`docs/prompt-ikon-game.md`), seni Kucing pelukis sendiri (sekarang `cat` + baret).
+
 ## 3. Urutan pengerjaan
 
 > **Untuk game yang belum dibuat, urutan terbaru ada di 2b.7.** Tabel di bawah
@@ -696,6 +723,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | 9 | Susun Kalimat | `susun-kalimat` | ✅ sudah ada (2026-10-06) — versi premium "Kereta Kata": template baru `word-train` (seret gerbong kata), 9 slot × 54 varian, urutan tetap, proyek sesi "Kereta Kata"; kalimat dibacakan saat kereta berangkat; narasi SUDAH dirender (render #28, 73 baris). |
 | 10 | Kebun Ilmu | `kebun-ilmu` | ✅ sudah ada (2026-09-29), narasi SUDAH dirender (render #19, 63 baris) |
 | – | Perisai Garuda (Pancasila) | `perisai-garuda` | ✅ sudah ada (2026-10-05) — game Pancasila pertama: lambang sila SVG engine (`Sila.tsx`), 9 slot × 55 varian, urutan tetap, proyek sesi "Perisai Garuda" (stempel = lambang sila); narasi SUDAH dirender (render #26, 57 baris). Rumah & pakaian adat belum. |
+| – | Sanggar Warna (Seni Rupa) | `sanggar-warna` | ✅ sudah ada (2026-10-08) — game Seni Rupa pertama: template baru `paint-studio` (campur cat di mangkuk dengan warna yang berubah perlahan, palet, resep, pinggiran kain, toples panas/dingin, kain batik, simetri) + `paint.ts` (satu sumber nama/hasil campuran/suhu warna) + `Paint.tsx` (tabung, mangkuk, roda warna, hiasan, motif batik SVG); 9 slot × 54 varian, urutan tetap, proyek sesi "Galeri Sanggar Warna", P2 menyala; narasi 78 baris, render #33. Kolase ditunda. |
 
 ## 7. Prompt untuk memulai sesi baru
 

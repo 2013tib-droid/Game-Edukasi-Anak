@@ -263,6 +263,7 @@ kaca pembesar.
 | `detektif-data` | rencana | Buatkan: satu diagram batang mainan dengan tiga batang tegak berbeda tinggi — biru muda, kuning krem, hijau mint — berdiri di atas satu garis dasar. Batang paling tinggi berwajah imut dan memakai topi detektif coklat kecil. Batang-batang polos tanpa angka dan tanpa label. |
 | `detektif-bacaan` | rencana | Buatkan: satu kaca pembesar bergagang peach berwajah imut di gagangnya, lensanya diarahkan ke selembar kertas krem bergaris-garis. Garis di kertas hanya garis abu-abu tipis, TIDAK boleh ada huruf atau kata. Tinggi dan lebar gambarnya kira-kira sama. |
 | `susun-kalimat` | rencana | Buatkan: satu kereta mainan kecil yang menanjak miring — lokomotif warna biru muda berwajah imut di depan, diikuti dua gerbong pendek warna peach dan hijau mint, tiap gerbong mengangkut satu kartu putih bergaris KOSONG. Kartu tidak boleh berisi huruf atau kata. Keretanya menanjak diagonal, bukan berjajar mendatar panjang. |
+| `sanggar-warna` | sudah ada (2026-10-08) | Buatkan: satu mangkuk cat bundar kecil warna putih krem berwajah imut di badan depannya, tiga tetes cat besar berbentuk tetesan air — satu merah, satu kuning, satu biru — sedang jatuh ke dalam mangkuk dari atas, dan cat di dalam mangkuk berpusar warna oranye, hijau, dan ungu. Satu kuas kecil bergagang kayu bersandar di tepi mangkuk. Tanpa palet cat, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 
 ### Catatan per ikon
 
@@ -293,6 +294,13 @@ kaca pembesar.
 - **Katak = hewan, tapi di ikon boleh digambar bebas** (bukan seni `frog.webp`): aturan
   "hewan wajib seni WebP" berlaku untuk SOAL, tempat anak harus mengenali bentuknya.
   Ikon kartu sejak awal digambar Gemini (singa Hutan Hewan juga begitu).
+
+- **Sanggar Warna: JANGAN palet cat** — palet sudah jadi ikon Labirin Warna (TK), dan
+  orang tua yang memegang dua kelompok melihat keduanya. Mangkuk pencampur + tiga tetes
+  primer justru inti game ini (merah + kuning = oranye di mangkuk). Tiga tetes WAJIB
+  merah, kuning, biru yang pekat — kalau Gemini memberi tetes pastel, kuning & oranye di
+  pusarannya tak terbedakan di kotak ±116 px (pelajaran Labirin Warna). Periksa lubang
+  terkurung di antara gagang kuas & tepi mangkuk sesudah `cut-item.py`.
 
 ### Memasangnya
 

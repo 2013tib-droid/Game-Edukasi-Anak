@@ -42,6 +42,11 @@ const POP_SELECTOR = [
   '.fk-choice',
   '.fk-btn',
   '.fk-plate',
+  '.ps-tube',
+  '.ps-piece',
+  '.ps-swatch',
+  '.ps-cell',
+  '.ps-jar',
 ].join(',');
 
 function reducedMotion(): boolean {

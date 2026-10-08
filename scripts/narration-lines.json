@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-08",
-  "count": 1650,
-  "chars": 71161,
+  "count": 1728,
+  "chars": 74877,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -11638,6 +11638,708 @@
       "voice": "gadis",
       "games": [
         "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "c191fd7db675",
+      "text": "Bagus! Sekarang warnai motif selendangnya supaya simetris!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "18161daa6ed7",
+      "text": "Bebek ingin cat warna hijau. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "71abd3917658",
+      "text": "Bebek ingin motif yang simetris. Warnai separuh kanannya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "ea3f0026c122",
+      "text": "Bebek melukis pantai. Pilah catnya: panas atau dingin?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "e8a69decc316",
+      "text": "Bebek menghias kain. Susun keping hiasan sampai pinggiran kainnya penuh!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "355b5f3c71ba",
+      "text": "Benar! Ini motif mega mendung dari Cirebon.",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "f3f370f54b06",
+      "text": "Benar! Ini motif parang dari Yogyakarta.",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "36f955a80d4f",
+      "text": "Beruang ingin cat warna biru tua. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "584cdfa68e1c",
+      "text": "Beruang memesan kain batik truntum dari Surakarta. Lengkapi motifnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "7154ba4b52ef",
+      "text": "Beruang memesan selendang hijau. Campur dulu catnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "4cbd27d5f612",
+      "text": "Beruang menemukan cat ungu. Dicampur dari dua warna apa?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "6a86e4b3f547",
+      "text": "Gajah ingin cat warna hijau. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "f56ae4b052b1",
+      "text": "Gajah ingin cat warna ungu muda. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "f8c68c000fac",
+      "text": "Gajah mau melukis. Isi paletnya dengan tiga warna primer!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "c0a65f6015d4",
+      "text": "Gajah memesan kain batik parang dari Yogyakarta. Lengkapi motifnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "9bab1347d3de",
+      "text": "Gajah memesan selendang ungu. Campur dulu catnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "003ce32567ad",
+      "text": "Harimau ingin cat warna merah tua. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "ad4aa4aaec2c",
+      "text": "Harimau membawa sehelai kain batik. Ini motif batik apa?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "1dec6383d132",
+      "text": "Harimau menemukan cat ungu. Dicampur dari dua warna apa?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "626259bb1f1d",
+      "text": "Jadi warna abu-abu!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "2225858780b9",
+      "text": "Jadi warna biru muda!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "f80ca29dd3ee",
+      "text": "Jadi warna biru tua!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "bbd68ae02a4f",
+      "text": "Jadi warna biru!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "2f8acdc08868",
+      "text": "Jadi warna cokelat!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "1bdd314be5cc",
+      "text": "Jadi warna hijau muda!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "5332e5215f99",
+      "text": "Jadi warna hijau tua!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "2a13fa0db5e8",
+      "text": "Jadi warna hijau!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "94033cc1290b",
+      "text": "Jadi warna hitam!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "8011508a514f",
+      "text": "Jadi warna kuning muda!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "17907f29a2b8",
+      "text": "Jadi warna kuning tua!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "40a96bd7bb92",
+      "text": "Jadi warna kuning!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "0fd9a50fb437",
+      "text": "Jadi warna merah muda!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "8b175882fa7f",
+      "text": "Jadi warna merah tua!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "d575d6b12b91",
+      "text": "Jadi warna merah!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "f67dbb9cc9cb",
+      "text": "Jadi warna oranye!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "4a6d7a077a15",
+      "text": "Jadi warna putih!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "ad3e6fd66e55",
+      "text": "Jadi warna ungu muda!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "4417ec79846a",
+      "text": "Jadi warna ungu tua!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "2fe2dad5a6f3",
+      "text": "Jadi warna ungu!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "cabaf1247f48",
+      "text": "Jerapah ingin motif yang simetris. Warnai separuh kanannya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "f38576611a1b",
+      "text": "Jerapah memesan selendang oranye. Campur dulu catnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "c12a04df013c",
+      "text": "Jerapah memilah cat: warna panas atau warna dingin?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "18c17c9e0e20",
+      "text": "Jerapah menemukan cat oranye. Dicampur dari dua warna apa?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "d4fd8ab09fce",
+      "text": "Jerapah menghias kain. Lanjutkan hiasan pinggiran kainnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "f30a336ffbbf",
+      "text": "Kelinci ingin cat warna merah muda. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "2256d7d63085",
+      "text": "Kelinci ingin cat warna ungu. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "6ee19e22e7cc",
+      "text": "Kelinci ingin motif yang simetris. Warnai separuh kanannya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "f717c6a49b36",
+      "text": "Kelinci mau melukis. Isi paletnya dengan tiga warna primer!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "4692b1df1f6c",
+      "text": "Kelinci memesan kain batik mega mendung dari Cirebon. Lengkapi motifnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "083c47af393a",
+      "text": "Kelinci memesan selendang hijau. Campur dulu catnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "426c454324a7",
+      "text": "Koala ingin cat warna ungu. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "a96ff3d69d57",
+      "text": "Koala ingin motif yang simetris. Warnai separuh kanannya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "187e71d7bda4",
+      "text": "Koala membawa sehelai kain batik. Ini motif batik apa?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "e69f8111f401",
+      "text": "Koala menghias kain. Lanjutkan hiasan pinggiran kainnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "0f8fb556bda2",
+      "text": "Monyet ingin cat warna hijau tua. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "40ed0676d31a",
+      "text": "Monyet memesan selendang oranye. Campur dulu catnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "22d5b7bb95b4",
+      "text": "Monyet memilah cat: warna panas atau warna dingin?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "cb972f15ed3f",
+      "text": "Monyet menemukan cat hijau. Dicampur dari dua warna apa?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "e7807e7249b1",
+      "text": "Palet Jerapah masih kurang satu warna primer. Lengkapi!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "f36819678607",
+      "text": "Palet Koala masih kurang satu warna primer. Lengkapi!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "fd115171f07e",
+      "text": "Palet Monyet masih kurang satu warna primer. Lengkapi!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "a5cd9bad592c",
+      "text": "Panda ingin cat warna oranye. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "c43be53a77e1",
+      "text": "Panda ingin motif yang simetris. Warnai separuh kanannya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "503f307e5199",
+      "text": "Panda mau melukis. Isi paletnya dengan tiga warna primer!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "5e5740aaadd4",
+      "text": "Panda memesan kain batik kawung dari Yogyakarta. Lengkapi motifnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "47ef07fde235",
+      "text": "Panda memesan selendang ungu. Campur dulu catnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "0a737489f4a0",
+      "text": "Panda menghias kain. Lanjutkan hiasan pinggiran kainnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "153f8b27d6eb",
+      "text": "Pinguin ingin cat warna biru muda. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "fe0a4b22ef13",
+      "text": "Pinguin melukis pantai. Pilah catnya: panas atau dingin?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "659466ba5d59",
+      "text": "Pinguin menemukan cat hijau. Dicampur dari dua warna apa?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "3b0a149e8cd5",
+      "text": "Singa ingin cat warna oranye. Teteskan dua warna ke mangkuk!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "36411f3705c4",
+      "text": "Singa ingin motif yang simetris. Warnai separuh kanannya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "744b7e2bd9d2",
+      "text": "Singa memilah cat: warna panas atau warna dingin?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "f6a0884ca3ae",
+      "text": "Singa menghias kain. Susun keping hiasan sampai pinggiran kainnya penuh!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "34f01a9e4135",
+      "text": "Terakhir, hias pinggiran selendangnya!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "624b35d90a96",
+      "text": "Zebra memilah cat: warna panas atau warna dingin?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "5d13d745521f",
+      "text": "Zebra menemukan cat oranye. Dicampur dari dua warna apa?",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
+      ]
+    },
+    {
+      "key": "e0de0c122990",
+      "text": "Zebra menghias kain. Susun keping hiasan sampai pinggiran kainnya penuh!",
+      "scope": "sanggar-warna",
+      "voice": "gadis",
+      "games": [
+        "sanggar-warna"
       ]
     },
     {
