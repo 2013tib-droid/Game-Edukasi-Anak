@@ -60,3 +60,27 @@ export const rupiahWords = (n: number) => `${terbilang(n)} rupiah`;
 
 /** Capitalize a sentence that starts with a spelled-out number. */
 export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/**
+ * A fraction in words: ½ → "setengah", ¼ → "seperempat", ⅓ → "sepertiga",
+ * ⅖ → "dua per lima". The stacked symbol stays on screen; this is only what
+ * the child hears (the same pairing rule as `terbilang`).
+ */
+export function pecahan(n: number, d: number): string {
+  if (n === 1 && d === 2) return 'setengah';
+  if (n === 1) return `seper${terbilang(d)}`;
+  return `${terbilang(n)} per ${terbilang(d)}`;
+}
+
+/**
+ * A decimal in words, digit by digit after the comma as Indonesians say it:
+ * 0.5 → "nol koma lima", 0.05 → "nol koma nol lima".
+ */
+export function desimal(value: number, places = 1): string {
+  const [whole, frac = ''] = value.toFixed(places).split('.');
+  const digits = [...frac].map((c) => UNITS[Number(c)]!).join(' ');
+  return `${terbilang(Number(whole))} koma ${digits}`;
+}
+
+/** Written decimal with an Indonesian comma: 0.5 → "0,5" (screen only). */
+export const decimalText = (value: number, places = 1) => value.toFixed(places).replace('.', ',');

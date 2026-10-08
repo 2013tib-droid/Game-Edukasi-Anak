@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-07",
-  "count": 1628,
-  "chars": 70099,
+  "generated": "2026-10-08",
+  "count": 1650,
+  "chars": 71161,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -505,6 +505,204 @@
       "voice": "gadis",
       "games": [
         "anggota-tubuh"
+      ]
+    },
+    {
+      "key": "6507c15f1977",
+      "text": "Ada yang sudah dimakan! Pecahan berapa yang masih ada di piring?",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "746a6dc93d69",
+      "text": "Bagi kue kering sama rata ke semua piring!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "f5400bbb5129",
+      "text": "Bebek pesan lima per enam pizza. Potong lalu berikan!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "e53f3e8c2656",
+      "text": "Berapa kue kering di piring yang menyala?",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "fde646588f68",
+      "text": "Gelas ini berisi berapa liter? Pilih desimalnya!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "2a7e85bf5623",
+      "text": "Jerapah pesan dua per tiga kue. Potong lalu berikan!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "5359638dec35",
+      "text": "Kelinci pesan jus nol koma tiga liter. Isi gelasnya!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "cd6bc49ca1b4",
+      "text": "Kelinci pesan seperempat kue. Potong lalu berikan!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "eb379d0c0d75",
+      "text": "Koala pesan jus nol koma delapan liter. Isi gelasnya!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "e3ca4ac29c3c",
+      "text": "Kucing pesan tiga per empat pizza. Potong lalu berikan!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "162d42ad86aa",
+      "text": "Mana gambar yang cocok dengan pesanannya?",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "e61ccf6f06ff",
+      "text": "Mana potongan yang lebih besar?",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "526cd58ca96c",
+      "text": "Mana potongan yang lebih kecil?",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "027782a97754",
+      "text": "Panda pesan jus nol koma lima liter. Isi gelasnya!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "6d558f1dacf5",
+      "text": "Pesanan kedua: bagi kue kering sama rata!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "e9a691bb010c",
+      "text": "Pesanan terakhir: isi gelas jusnya sesuai pesanan!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "e7656a78d746",
+      "text": "Pesta ulang tahun! Ada tiga pesanan. Pertama, potong sesuai pesanan!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "84ec7cbae345",
+      "text": "Pinguin pesan sepertiga martabak. Potong lalu berikan!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "c978d70d6e8a",
+      "text": "Sudah dipotong-potong! Berikan sesuai pesanannya!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "cbfcfd730d1f",
+      "text": "Taruh ceri di garis bilangan sesuai pesanan!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "d68a04b58be8",
+      "text": "Tumpuk satu potongan di atas yang lain!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
+      ]
+    },
+    {
+      "key": "b0944ea7911d",
+      "text": "Zebra pesan dua per lima cokelat. Potong lalu berikan!",
+      "scope": "bagi-kue",
+      "voice": "gadis",
+      "games": [
+        "bagi-kue"
       ]
     },
     {

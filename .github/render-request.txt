@@ -1,15 +1,14 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #31
+render #32
 
-only: detektif-bacaan
+only: bagi-kue
 
-Game baru SD Kelas 3 & 4 "Detektif Bacaan" (sentuh kalimat bukti di dalam
-bacaan). 272 baris baru (10.142 karakter), semuanya scope detektif-bacaan:
-narasi soal + SETIAP kalimat bacaan (dibacakan saat disentuh). Dibandingkan
-sebelum vs sesudah lewat scripts/narration-lines.json: 1356 baris jadi 1628,
-nol baris lama berubah atau pindah scope, jadi aman dibatasi
-"only: detektif-bacaan" (file yang sudah ada dilewati).
+Game baru SD Kelas 3 & 4 "Bagi Kue" (Toko Kue Bu Beruang: potong, bagi,
+tumpuk pecahan). 22 baris baru (1.062 karakter), semuanya scope bagi-kue.
+Dibandingkan sebelum vs sesudah lewat scripts/narration-lines.json: 1628
+baris jadi 1650, nol baris lama berubah atau pindah scope, jadi aman dibatasi
+"only: bagi-kue" (file yang sudah ada dilewati).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

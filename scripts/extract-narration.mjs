@@ -156,7 +156,12 @@ for (const config of mod.configs) {
     add(level.narration, config.id, voice);
 
     // clock-set (Waktu Tepat): later steps and the closing question speak too.
-    for (const step of level.data?.steps ?? []) add(step.say, config.id, voice);
+    for (const step of level.data?.steps ?? []) {
+      add(step.say, config.id, voice);
+      // fraction-kitchen (Bagi Kue): the follow-up question after sharing /
+      // stacking / filling is read aloud when it appears.
+      add(step.task?.question, config.id, voice);
+    }
     add(level.data?.ask?.prompt, config.id, voice);
 
     // word-train (Susun Kalimat): later rounds speak their own prompt, and

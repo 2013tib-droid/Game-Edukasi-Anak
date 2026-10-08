@@ -14,7 +14,7 @@ import { existsSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 
 /** Level-data fields that hold a registry id. */
-const ID_FIELDS = ['item', 'pictureItem', 'vehicleItem', 'goalItem', 'cueItem', 'leftItem', 'rightItem'];
+const ID_FIELDS = ['item', 'pictureItem', 'vehicleItem', 'goalItem', 'cueItem', 'leftItem', 'rightItem', 'customer'];
 
 const games = [];
 for (const group of ['tk', 'sd1', 'sd2']) {

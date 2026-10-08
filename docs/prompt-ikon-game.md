@@ -259,7 +259,7 @@ kaca pembesar.
 | `waktu-tepat` | rencana | Buatkan: satu stopwatch bundar warna biru muda dengan tombol kecil di atasnya, berwajah imut di tengah muka stopwatch-nya. Pinggiran mukanya hanya bergaris-garis kecil, TANPA angka. Satu jarum merah pendek. Dua garis gerak kecil di sisinya seperti sedang berdetak. |
 | `istana-bilangan` | rencana | Buatkan: satu istana mungil warna krem dan ungu muda dengan tiga menara beratap lancip dan bendera kecil peach di puncak menara tengah, pintu gerbangnya berwajah imut. Dinding istana polos tanpa angka dan tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 | `lompat-katak` | rencana | Buatkan: satu katak kecil hijau mint berwajah imut sedang melompat dari satu daun teratai ke daun teratai lain, dengan garis lengkung putus-putus menunjukkan lintasan lompatannya. Daun teratai polos tanpa angka. Kedua daun berdekatan supaya gambarnya tidak melebar. |
-| `bagi-kue` | rencana | Buatkan: satu kue tart bulat warna merah muda dengan krim putih dan satu stroberi di atasnya, sudah terpotong jadi empat bagian sama besar, satu potongnya sedikit bergeser keluar. Wajah imut digambar di sisi depan tart. Tanpa lilin, tanpa tulisan di atas kue. |
+| `bagi-kue` | sudah ada (2026-10-08) | Buatkan: satu kue tart bulat warna merah muda dengan krim putih dan satu stroberi di atasnya, sudah terpotong jadi empat bagian SAMA BESAR dengan garis potong lurus dari tengah, satu potongnya sedikit bergeser keluar ke kanan bawah di atas piring kecil putih. Wajah imut digambar di sisi depan tart. Tanpa lilin, tanpa tulisan di atas kue, tanpa pisau. Tinggi dan lebar gambarnya kira-kira sama. |
 | `detektif-data` | rencana | Buatkan: satu diagram batang mainan dengan tiga batang tegak berbeda tinggi — biru muda, kuning krem, hijau mint — berdiri di atas satu garis dasar. Batang paling tinggi berwajah imut dan memakai topi detektif coklat kecil. Batang-batang polos tanpa angka dan tanpa label. |
 | `detektif-bacaan` | rencana | Buatkan: satu kaca pembesar bergagang peach berwajah imut di gagangnya, lensanya diarahkan ke selembar kertas krem bergaris-garis. Garis di kertas hanya garis abu-abu tipis, TIDAK boleh ada huruf atau kata. Tinggi dan lebar gambarnya kira-kira sama. |
 | `susun-kalimat` | rencana | Buatkan: satu kereta mainan kecil yang menanjak miring — lokomotif warna biru muda berwajah imut di depan, diikuti dua gerbong pendek warna peach dan hijau mint, tiap gerbong mengangkut satu kartu putih bergaris KOSONG. Kartu tidak boleh berisi huruf atau kata. Keretanya menanjak diagonal, bukan berjajar mendatar panjang. |
@@ -284,6 +284,12 @@ kaca pembesar.
 - **Detektif Bacaan & Detektif Data sengaja beda benda**: kaca pembesar HANYA di Bacaan,
   topi detektif HANYA di Data. Dua kaca pembesar berdampingan di satu daftar akan
   tertukar.
+- **Bagi Kue: empat potongnya WAJIB sama besar** (game ini justru memakai potongan TIDAK
+  sama besar sebagai pengecoh "apakah ini seperempat?" — ikon yang potongannya miring
+  mengajarkan kebalikannya). Tanpa pisau (benda tajam di kartu anak) dan tanpa Bu Beruang:
+  beruang sudah jadi tokoh di dalam game lewat seni `bear`, dan kue lebih cepat terbaca
+  "pecahan" di kotak ±116 px. Periksa celah putih di antara potongan yang bergeser — kalau
+  terkurung, tembus manual sesudah `cut-item.py` (pelajaran ring kunci pas).
 - **Katak = hewan, tapi di ikon boleh digambar bebas** (bukan seni `frog.webp`): aturan
   "hewan wajib seni WebP" berlaku untuk SOAL, tempat anak harus mengenali bentuknya.
   Ikon kartu sejak awal digambar Gemini (singa Hutan Hewan juga begitu).
