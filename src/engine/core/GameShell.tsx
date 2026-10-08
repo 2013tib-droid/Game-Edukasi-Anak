@@ -72,6 +72,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'word-train': lazy(() => import('@/engine/templates/WordTrain')),
   'place-value': lazy(() => import('@/engine/templates/PlaceValue')),
   'number-hop': lazy(() => import('@/engine/templates/NumberHop')),
+  'fraction-kitchen': lazy(() => import('@/engine/templates/FractionKitchen')),
   'read-find': lazy(() => import('@/engine/templates/ReadFind')),
 };
 

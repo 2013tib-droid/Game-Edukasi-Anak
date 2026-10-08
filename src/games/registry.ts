@@ -391,6 +391,15 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd2/lompat-katak'),
   },
   {
+    id: 'bagi-kue',
+    group: 'sd2',
+    subject: 'matematika',
+    title: 'Bagi Kue',
+    emoji: '🍰',
+    template: 'fraction-kitchen',
+    load: () => import('@/games/sd2/bagi-kue'),
+  },
+  {
     id: 'detektif-bacaan',
     group: 'sd2',
     subject: 'bahasa-indonesia',

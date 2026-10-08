@@ -25,6 +25,7 @@ export type TemplateId =
   | 'word-train' // susun gerbong kata jadi kalimat (Susun Kalimat)
   | 'place-value' // bangun bilangan dari balok ratusan-puluhan-satuan (Istana Bilangan)
   | 'number-hop' // katak melompat di garis bilangan (Lompat Katak)
+  | 'fraction-kitchen' // potong, bagi, tumpuk pecahan di toko kue (Bagi Kue)
   | 'read-find'; // sentuh kalimat/kata bukti di dalam bacaan (Detektif Bacaan)
 
 /* ---------- Per-template level payloads ---------- */
@@ -804,6 +805,95 @@ export interface NumberHopData {
   };
 }
 
+/* ---------- fraction-kitchen (Bagi Kue) ---------- */
+
+/**
+ * Makanan yang dipotong di template `fraction-kitchen`. Bentuknya ikut
+ * makanannya: kue & pizza = LINGKARAN (dipotong dari tengah), martabak &
+ * cokelat = PERSEGI PANJANG (dipotong lurus). Digambar SVG engine
+ * (`Fraction.tsx`) supaya garis potongnya tepat sama besar.
+ */
+export type FoodKind = 'kue' | 'pizza' | 'martabak' | 'cokelat';
+
+/** Pecahan n/d. Ditampilkan BERTUMPUK (pembilang di atas garis), bukan "1/4". */
+export interface Frac {
+  n: number;
+  d: number;
+}
+
+/** Gambar pecahan: makanan dipotong `d`, `show` potong pertama masih ada. */
+export interface FracPicture {
+  food: FoodKind;
+  d: number;
+  show: number;
+  /**
+   * Potongannya TIDAK sama besar (potong pertama jauh lebih besar) — pengecoh
+   * "apakah ini seperempat?". Hanya untuk kartu pilihan, bukan jawaban benar.
+   */
+  uneven?: boolean;
+}
+
+export interface KitchenChoice {
+  frac?: Frac;
+  picture?: FracPicture;
+  /** Tulisan polos (desimal "0,5", "Sama besar"). */
+  text?: string;
+  correct?: boolean;
+}
+
+/**
+ * Satu tugas di toko kue. Semuanya dinilai engine dari datanya — config tak
+ * menulis jawabannya dua kali.
+ * - `pick`: tap jawaban — gambar → lambang (`picture`) atau lambang → gambar
+ *   (`show`, pilihannya gambar). Salah = overlay "coba lagi".
+ * - `cut`: GESEK jari melintasi makanan untuk memotong (garis potong mengunci
+ *   ke potongan sama besar), lalu SERET potongan ke piring pelanggan sampai
+ *   sama dengan `order`. `precut` = makanannya sudah dipotong (pecahan
+ *   senilai: pesan ½, kue sudah dipotong 4).
+ * - `share`: bagikan `cookies` kue kering sama rata ke `plates` piring
+ *   (ketuk piring / seret kue), lalu `question` tentang `take` piring.
+ * - `stack`: dua potongan; anak MENUMPUK satu di atas yang lain lalu menjawab
+ *   `question` (lebih besar / lebih kecil / sama besar).
+ * - `line`: seret ceri di garis bilangan 0–1 ke `order`.
+ * - `juice`: gelas jus bergaris sepuluh. `fill` = isi sampai desimal
+ *   `tenths`/10; `read` = gelas sudah terisi, pilih desimalnya.
+ */
+export type KitchenTask =
+  | { kind: 'pick'; picture?: FracPicture; show?: Frac; choices: KitchenChoice[] }
+  | { kind: 'cut'; food: FoodKind; order: Frac; precut?: number }
+  | {
+      kind: 'share';
+      cookies: number;
+      plates: number;
+      take: number;
+      question: string;
+      choices: { value: number; correct?: boolean }[];
+    }
+  | { kind: 'stack'; food: FoodKind; a: Frac; b: Frac; question: string; answer: 'a' | 'b' | 'same' }
+  | { kind: 'line'; order: Frac }
+  | { kind: 'juice'; mode: 'fill'; tenths: number }
+  | {
+      kind: 'juice';
+      mode: 'read';
+      tenths: number;
+      question: string;
+      choices: { text: string; correct?: boolean }[];
+    };
+
+/** Satu pelanggan dengan satu pesanan. */
+export interface KitchenStep {
+  /** Id item hewan (registry `items.ts`) — aturan hewan wajib seni WebP. */
+  customer: string;
+  /** Kalimat yang dibacakan saat langkah ke-2 dst. mulai (misi besar). */
+  say?: string;
+  task: KitchenTask;
+}
+
+/** Bagi Kue: toko kue Bu Beruang — pelanggan datang satu per satu. */
+export interface FractionKitchenData {
+  steps: KitchenStep[];
+}
+
 /**
  * Waktu dalam sehari untuk template `clock-set`: `h` 0–23 (format 24 jam),
  * `m` 0–59. Muka jamnya tetap 12 jam — `h` 24 jam dipakai supaya "pukul tujuh
@@ -973,6 +1063,7 @@ export interface LevelDataMap {
   'word-train': WordTrainData;
   'place-value': PlaceValueData;
   'number-hop': NumberHopData;
+  'fraction-kitchen': FractionKitchenData;
   'read-find': ReadFindData;
 }
 
