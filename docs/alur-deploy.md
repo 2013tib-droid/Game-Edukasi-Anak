@@ -3,6 +3,16 @@
 > Keputusan pemilik 2026-10-07: **setiap fitur/game baru WAJIB lewat jalur development dulu**,
 > dicek di HP, baru dibawa ke produksi. Ikuti dokumen ini untuk semua tambahan fitur berikutnya.
 
+## Ringkasan untuk pemilik (keputusan yang sudah diambil — jangan ditanyakan ulang)
+
+| Keputusan | Isinya |
+|---|---|
+| **Satu link development** (2026-10-09) | Semua game baru/update dicek di **satu alamat**: `https://2013tib-droid.github.io/Game-Edukasi-Anak/development/main/`. Tidak ada link per game lagi. |
+| **Development selalu terbuka** (2026-10-09) | Di link development **semua game langsung bisa dimainkan** — tanpa gembok, tanpa tombol 🔓/🔒, tanpa login. Pilihan "Terkunci" yang dulu tersimpan di HP diabaikan. |
+| **Kunci dipasang menjelang rilis** (2026-10-09) | Kalau game `sd2` sudah hampir selesai dan mau dicoba alur belinya, pemilik cukup bilang **"pasang kunci di development"** — Claude melepas `VITE_FORCE_OPEN` di `.github/workflows/deploy-dev.yml`. |
+| **Development dulu, baru produksi** (2026-10-07) | Fitur baru → link development → dicek pemilik di HP → merge → baru "Deploy web" ke petualanganpintar.com kalau pemilik bilang "deploy". |
+| **Situs pembeli tidak ikut berubah** | petualanganpintar.com tetap terkunci seperti biasa; pengaturan development tidak bisa menyala di sana. |
+
 ## Dua jalur
 
 | | Development | Produksi |
