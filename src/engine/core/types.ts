@@ -28,7 +28,8 @@ export type TemplateId =
   | 'number-hop' // katak melompat di garis bilangan (Lompat Katak)
   | 'fraction-kitchen' // potong, bagi, tumpuk pecahan di toko kue (Bagi Kue)
   | 'read-find' // sentuh kalimat/kata bukti di dalam bacaan (Detektif Bacaan)
-  | 'paint-studio'; // campur cat, warnai, susun motif batik (Sanggar Warna)
+  | 'paint-studio' // campur cat, warnai, susun motif batik (Sanggar Warna)
+  | 'eco-mission'; // pilah sampah, daur air, jaga sungai (Sahabat Bumi)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -1119,6 +1120,91 @@ export interface PaintStudioData {
   steps: PaintStep[];
 }
 
+/**
+ * Benda sampah & sumber daya yang digambar SVG engine (`Eco.tsx`) — keputusan
+ * pemilik 2026-10-09: tak ada emoji untuk "kulit pisang" (🍌 = pisang utuh),
+ * jadi bendanya digambar sendiri supaya satu gambar satu arti.
+ */
+export type EcoArt =
+  | 'kulit-pisang'
+  | 'daun-kering'
+  | 'sisa-apel'
+  | 'kulit-telur'
+  | 'tulang-ikan'
+  | 'botol'
+  | 'kaleng'
+  | 'kantong'
+  | 'sedotan'
+  | 'gelas-plastik'
+  | 'kardus'
+  | 'koran'
+  | 'paku'
+  | 'baterai'
+  | 'bohlam'
+  | 'semprotan'
+  | 'minyak'
+  | 'batu-bara'
+  | 'emas';
+
+/**
+ * Satu benda di Sahabat Bumi. Gambarnya SVG engine (`art`), seni item
+ * (`item`, registry `items.ts`) atau emoji — salah satu. `label` SELALU
+ * tertulis di bawahnya (anak kelas 3 sudah membaca; gambar kecil di HP 320
+ * butuh nama).
+ */
+export interface EcoThing {
+  art?: EcoArt;
+  item?: string;
+  emoji?: string;
+  label: string;
+}
+
+/**
+ * Tempat tujuan pilah. `tong` = tong sampah berwarna (hijau organik, kuning
+ * anorganik, merah B3 — warna standar tong sampah Indonesia; biru/cokelat/abu
+ * untuk bank sampah plastik/kertas/logam); `kotak` = kotak berlabel biasa.
+ * `rule` = ciri singkat yang muncul sebagai petunjuk tingkat 1.
+ */
+export interface EcoBin {
+  id: string;
+  label: string;
+  look: 'tong' | 'kotak';
+  color: 'hijau' | 'kuning' | 'merah' | 'biru' | 'cokelat' | 'abu' | 'ungu';
+  emoji?: string;
+  rule?: string;
+}
+
+/**
+ * Satu tugas di Sahabat Bumi. Semuanya dinilai engine dari datanya.
+ * - `sort`  seret / ketuk-lalu-ketuk tiap benda ke tempatnya (`bin`). Salah =
+ *           senyap, bendanya kembali ke baki.
+ * - `spot`  sentuh SEMUA kartu yang `bad` (boros air, merusak lingkungan).
+ *           Salah = senyap.
+ * - `cycle` daur berputar searah jarum jam: `stages` berurutan, `given` sudah
+ *           terpasang; sisanya disusun dari baki (`decoys` = pengecoh). Senyap.
+ * - `pick`  pilih satu jawaban (overlay "coba lagi"); `cue` = isyarat besar.
+ * - `plant` tanam pohon di tepi sungai — ketuk `spots` lubang tanah.
+ */
+export type EcoTask =
+  | { kind: 'sort'; bins: EcoBin[]; items: (EcoThing & { bin: string })[] }
+  | { kind: 'spot'; cards: (EcoThing & { bad?: boolean })[] }
+  | { kind: 'cycle'; stages: EcoThing[]; given: number; decoys?: EcoThing[] }
+  | { kind: 'pick'; cue?: EcoThing; choices: (EcoThing & { correct?: boolean })[] }
+  | { kind: 'plant'; spots: number };
+
+export interface EcoStep {
+  /** Kalimat langkah ke-2 dst. (misi besar). Dibacakan — TANPA digit. */
+  say?: string;
+  /** Langkah ini terjadi di sungai: baki = sampah yang hanyut di air. */
+  river?: boolean;
+  task: EcoTask;
+}
+
+/** Sahabat Bumi: Kura-kura penjaga sungai memandu misi demi misi. */
+export interface EcoMissionData {
+  steps: EcoStep[];
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -1138,6 +1224,7 @@ export interface LevelDataMap {
   'fraction-kitchen': FractionKitchenData;
   'read-find': ReadFindData;
   'paint-studio': PaintStudioData;
+  'eco-mission': EcoMissionData;
 }
 
 /* ---------- Game config ---------- */

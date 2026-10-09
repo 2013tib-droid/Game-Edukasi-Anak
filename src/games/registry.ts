@@ -313,6 +313,15 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd2/kebun-ilmu'),
   },
   {
+    id: 'sahabat-bumi',
+    group: 'sd2',
+    subject: 'ipas',
+    title: 'Sahabat Bumi',
+    emoji: '🌍',
+    template: 'eco-mission',
+    load: () => import('@/games/sd2/sahabat-bumi'),
+  },
+  {
     id: 'toko-kembalian',
     group: 'sd2',
     subject: 'matematika',

@@ -1,16 +1,16 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #33
+render #34
 
-only: sanggar-warna
+only: sahabat-bumi
 
-Game baru SD Kelas 3 & 4 "Sanggar Warna" (Seni Rupa pertama: campur cat,
-warna muda-tua, panas-dingin, pinggiran kain, motif batik, simetri). 78 baris
-baru (3.716 karakter), semuanya scope sanggar-warna — termasuk kalimat
-"Jadi warna …!" untuk tiap hasil mangkuk dan asal daerah motif batik.
-Dibandingkan sebelum vs sesudah lewat scripts/narration-lines.json: 1650
-baris jadi 1728, nol baris lama berubah atau pindah scope, jadi aman dibatasi
-"only: sanggar-warna" (file yang sudah ada dilewati).
+Game baru SD Kelas 3 & 4 "Sahabat Bumi" (IPAS: pilah sampah organik /
+anorganik / berbahaya, bank sampah, hemat air, daur air, sumber daya alam,
+misi besar sungai). 25 baris baru (1.305 karakter), semuanya scope
+sahabat-bumi. Dibandingkan sebelum vs sesudah lewat
+scripts/narration-lines.json: 1728 baris jadi 1753, nol baris lama berubah
+atau pindah scope, jadi aman dibatasi "only: sahabat-bumi" (file yang sudah
+ada dilewati).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

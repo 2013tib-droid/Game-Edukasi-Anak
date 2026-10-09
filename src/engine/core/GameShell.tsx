@@ -75,6 +75,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'fraction-kitchen': lazy(() => import('@/engine/templates/FractionKitchen')),
   'read-find': lazy(() => import('@/engine/templates/ReadFind')),
   'paint-studio': lazy(() => import('@/engine/templates/PaintStudio')),
+  'eco-mission': lazy(() => import('@/engine/templates/EcoMission')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */

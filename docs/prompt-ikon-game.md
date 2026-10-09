@@ -264,6 +264,7 @@ kaca pembesar.
 | `detektif-bacaan` | rencana | Buatkan: satu kaca pembesar bergagang peach berwajah imut di gagangnya, lensanya diarahkan ke selembar kertas krem bergaris-garis. Garis di kertas hanya garis abu-abu tipis, TIDAK boleh ada huruf atau kata. Tinggi dan lebar gambarnya kira-kira sama. |
 | `susun-kalimat` | rencana | Buatkan: satu kereta mainan kecil yang menanjak miring — lokomotif warna biru muda berwajah imut di depan, diikuti dua gerbong pendek warna peach dan hijau mint, tiap gerbong mengangkut satu kartu putih bergaris KOSONG. Kartu tidak boleh berisi huruf atau kata. Keretanya menanjak diagonal, bukan berjajar mendatar panjang. |
 | `sanggar-warna` | sudah ada (2026-10-08) | Buatkan: satu mangkuk cat bundar kecil warna putih krem berwajah imut di badan depannya, tiga tetes cat besar berbentuk tetesan air — satu merah, satu kuning, satu biru — sedang jatuh ke dalam mangkuk dari atas, dan cat di dalam mangkuk berpusar warna oranye, hijau, dan ungu. Satu kuas kecil bergagang kayu bersandar di tepi mangkuk. Tanpa palet cat, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `sahabat-bumi` | sudah ada (2026-10-09) | Buatkan: satu bola bumi kecil yang bulat berwajah imut tersenyum, benua hijau dan laut biru muda, memeluk satu tunas daun hijau di tangannya yang mungil. Di sampingnya satu tong sampah kecil hijau. Dua bintang kecil pastel. Tanpa tulisan, tanpa panah daur ulang. Tinggi dan lebar gambarnya kira-kira sama. |
 
 ### Catatan per ikon
 
