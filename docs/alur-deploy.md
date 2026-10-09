@@ -10,7 +10,7 @@
 | Tombol | Actions → **"Deploy development"** (`.github/workflows/deploy-dev.yml`) | Actions → **"Deploy web"** (`.github/workflows/deploy-web.yml`) |
 | Alamat | `https://2013tib-droid.github.io/Game-Edukasi-Anak/development/<nama>/` | `https://petualanganpintar.com` |
 | Siapa yang buka | Pemilik / penguji saja | Pembeli |
-| Jenis build | Build PENGUJI: saklar 🔓/🔒 hidup, kelompok `draft` (sd2, sd3) tampil, HashRouter, `noindex` | Build RILIS: saklar mati total, kelompok `draft` tersembunyi |
+| Jenis build | Build PENGUJI: **SEMUA game terbuka, tanpa saklar 🔓/🔒** (`VITE_FORCE_OPEN=1`, keputusan pemilik 2026-10-09 — pilihan kunci yang tersimpan di HP diabaikan), kelompok `draft` (sd2, sd3) tampil, HashRouter, `noindex` | Build RILIS: saklar mati total, kelompok `draft` tersembunyi |
 | Firebase | Project produksi yang SAMA (akun, kode, bintang = data sungguhan) | Project produksi |
 | Boleh dijalankan Claude? | Ya — tidak menyentuh situs pembeli | **Hanya sesudah pemilik bilang "deploy"** (dry run dulu) |
 
@@ -42,7 +42,8 @@ Daftar semua versi development yang sedang hidup: `https://2013tib-droid.github.
    - Beranda: `…/development/<nama>/#/portal?test=1`
    - Kelompok tertentu: `…/development/<nama>/#/kelompok/<id>?test=1` (mis. `sd2`)
    - Game tertentu: `…/development/<nama>/#/game/<id>?test=1`
-   - `?test=1` memunculkan tombol 🔓/🔒; tekan 🔓 supaya semua game terbuka tanpa beli.
+   - Semua game sudah terbuka di development (tanpa saklar). Untuk mencoba alur TERKUNCI menjelang rilis: lepas `VITE_FORCE_OPEN` di `deploy-dev.yml`, lalu pakai `?test=1` + saklar 🔒.
+   - **Workflow-nya dijalankan dengan `ref` = branch fiturnya juga** (bukan `main`) kalau branch itu mengubah `deploy-dev.yml` — GitHub memakai berkas workflow dari ref yang dijalankan.
    - Halaman butuh ±1–2 menit sesudah workflow hijau; minta pemilik muat ulang kalau masih versi lama.
 5. **Pemilik menyetujui** → merge PR ke `main`.
 6. **Produksi**: hanya kalau pemilik minta deploy — Actions → "Deploy web" dengan `dry_run: true` dulu, lalu `false`.

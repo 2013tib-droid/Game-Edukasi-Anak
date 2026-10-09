@@ -1,4 +1,4 @@
-import { getLockMode, setLockMode } from '@/data/access';
+import { FORCE_OPEN, getLockMode, setLockMode } from '@/data/access';
 import { useLockMode, useTestMode } from '@/portal/useAccess';
 import './lock-toggle.css';
 
@@ -13,7 +13,7 @@ export default function LockToggle() {
   const testMode = useTestMode();
   const mode = useLockMode();
 
-  if (!testMode) return null;
+  if (!testMode || FORCE_OPEN) return null;
 
   const locked = mode === 'kunci';
 
