@@ -58,6 +58,10 @@ export const PRONOUNCE = {
   roket: 'rokét',
   sendok: 'séndok',
   sepeda: 'sepéda',
+  // Sanggar Warna (2026-10-08): KBBI se·lén·dang, mé·ga, pa·lét.
+  selendang: 'seléndang',
+  mega: 'méga',
+  palet: 'palét',
   skuter: 'skutér',
   sore: 'soré',
   stroberi: 'strobéri',

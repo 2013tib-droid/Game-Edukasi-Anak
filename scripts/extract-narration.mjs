@@ -99,7 +99,8 @@ async function load(contents) {
 const mod = await load(
   gameFiles.map((f, i) => `import c${i} from ${JSON.stringify(path.resolve(f).split(path.sep).join('/'))};`).join('\n') +
     `\nexport const configs = [${gameFiles.map((_, i) => `c${i}`).join(',')}];` +
-    `\nexport { sentenceText } from ${JSON.stringify(path.resolve('src/engine/core/wordTrain.ts').split(path.sep).join('/'))};`,
+    `\nexport { sentenceText } from ${JSON.stringify(path.resolve('src/engine/core/wordTrain.ts').split(path.sep).join('/'))};` +
+    `\nexport { mixPaint, mixLine, batikLine } from ${JSON.stringify(path.resolve('src/engine/core/paint.ts').split(path.sep).join('/'))};`,
 );
 
 /**
@@ -161,6 +162,13 @@ for (const config of mod.configs) {
       // fraction-kitchen (Bagi Kue): the follow-up question after sharing /
       // stacking / filling is read aloud when it appears.
       add(step.task?.question, config.id, voice);
+      // paint-studio (Sanggar Warna): every colour the bowl can end up as is
+      // named aloud ("Jadi warna ungu!") — any two tubes, the same tube twice
+      // included — and a recognised batik motif names its home region.
+      if (step.task?.kind === 'mix') {
+        for (const a of step.task.tubes) for (const b of step.task.tubes) add(mod.mixLine(mod.mixPaint(a, b)), config.id, voice);
+      }
+      if (step.task?.kind === 'batik' && step.task.mode === 'name') add(mod.batikLine(step.task.motif), config.id, voice);
     }
     add(level.data?.ask?.prompt, config.id, voice);
 

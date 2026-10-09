@@ -6,6 +6,7 @@
  */
 
 import type { Denom } from '@/engine/core/money';
+import type { PaintColor } from '@/engine/core/paint';
 
 export type GroupId = 'tk' | 'sd1' | 'sd2' | 'sd3';
 
@@ -26,7 +27,8 @@ export type TemplateId =
   | 'place-value' // bangun bilangan dari balok ratusan-puluhan-satuan (Istana Bilangan)
   | 'number-hop' // katak melompat di garis bilangan (Lompat Katak)
   | 'fraction-kitchen' // potong, bagi, tumpuk pecahan di toko kue (Bagi Kue)
-  | 'read-find'; // sentuh kalimat/kata bukti di dalam bacaan (Detektif Bacaan)
+  | 'read-find' // sentuh kalimat/kata bukti di dalam bacaan (Detektif Bacaan)
+  | 'paint-studio'; // campur cat, warnai, susun motif batik (Sanggar Warna)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -1047,6 +1049,76 @@ export interface ReadFindData {
   guide?: string;
 }
 
+/* ---------- paint-studio (Sanggar Warna) ---------- */
+
+/**
+ * Hiasan pinggiran kain (`border`): digambar SVG engine (`Paint.tsx`).
+ * `tumpal` = segitiga pinggiran kain khas nusantara.
+ */
+export type OrnamentId = 'tumpal' | 'bunga' | 'daun' | 'wajik' | 'sulur';
+
+/** Satu keping hiasan. `flip` = diputar setengah lingkaran (tumpal menghadap bawah). */
+export interface OrnamentPiece {
+  o: OrnamentId;
+  c: PaintColor;
+  flip?: boolean;
+}
+
+/**
+ * Motif batik yang digambar `Batik.tsx`. Disederhanakan untuk HP tapi
+ * STRUKTURNYA dijaga (kawung = empat buah kolang-kaling bersilang, parang =
+ * pita miring berulang, mega mendung = awan bergradasi berlapis, truntum =
+ * bunga bintang bertaburan). Nama & asal daerah di `BATIK` (paint.ts).
+ */
+export type BatikId = 'kawung' | 'parang' | 'mega-mendung' | 'truntum';
+
+/** Satu keping kain batik. `flip` = dicerminkan (parang miring ke arah lain). */
+export interface BatikTile {
+  m: BatikId;
+  flip?: boolean;
+}
+
+/**
+ * Satu tugas di Sanggar Warna. Semuanya dinilai engine dari datanya; warna
+ * campuran DIHITUNG engine (`mixPaint`), config cuma menyebut warnanya.
+ * - `palette`: isi lubang palet dengan warna `want` (urutan bebas); `given`
+ *   sudah terpasang. Salah tabung = senyap.
+ * - `mix`: teteskan dua cat dari `tubes` ke mangkuk sampai jadi `target`.
+ *   Hasil yang salah TETAP diperlihatkan namanya ("merah + biru = ungu") lalu
+ *   mangkuk dikosongkan — senyap.
+ * - `recipe`: mangkuk berisi `target`; pilih resep dua warnanya (overlay).
+ * - `border`: pinggiran kain `pattern` (urutan keping), `shown` keping pertama
+ *   sudah terpasang; sisanya disusun dari `tray`. Salah = senyap.
+ * - `sort`: seret tiap cat ke toples warna panas / warna dingin (senyap).
+ * - `batik`: `fill` = lengkapi lubang kain dari keping (`decoys` pengecoh);
+ *   `name` = pilih nama motifnya (overlay), lalu asal daerahnya dibacakan.
+ * - `mirror`: warnai separuh kanan supaya simetris dengan separuh kiri.
+ *   `grid` = baris-baris huruf (`.` = kosong), `colors` memetakan huruf → cat.
+ */
+export type PaintTask =
+  | { kind: 'palette'; want: PaintColor[]; tubes: PaintColor[]; given?: PaintColor[] }
+  | { kind: 'mix'; target: PaintColor; tubes: PaintColor[] }
+  | { kind: 'recipe'; target: PaintColor; choices: { a: PaintColor; b: PaintColor; correct?: boolean }[] }
+  | { kind: 'border'; pattern: OrnamentPiece[]; shown: number; tray: OrnamentPiece[] }
+  | { kind: 'sort'; colors: PaintColor[] }
+  | { kind: 'batik'; mode: 'fill'; motif: BatikId; holes: number[]; decoys: BatikTile[] }
+  | { kind: 'batik'; mode: 'name'; motif: BatikId; choices: BatikId[] }
+  | { kind: 'mirror'; grid: string[]; colors: Record<string, PaintColor> };
+
+/** Satu pemesan karya. */
+export interface PaintStep {
+  /** Id item hewan (registry `items.ts`) — aturan hewan wajib seni WebP. */
+  customer: string;
+  /** Kalimat langkah ke-2 dst. (misi besar). Dibacakan — TANPA digit. */
+  say?: string;
+  task: PaintTask;
+}
+
+/** Sanggar Warna: Kucing pelukis menerima pesanan karya satu per satu. */
+export interface PaintStudioData {
+  steps: PaintStep[];
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -1065,6 +1137,7 @@ export interface LevelDataMap {
   'number-hop': NumberHopData;
   'fraction-kitchen': FractionKitchenData;
   'read-find': ReadFindData;
+  'paint-studio': PaintStudioData;
 }
 
 /* ---------- Game config ---------- */

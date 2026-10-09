@@ -1,0 +1,816 @@
+/*
+ * Template `paint-studio` (Sanggar Warna). Hanya diunduh bersama chunk
+ * template-nya.
+ *
+ * Tinggi diperhitungkan untuk HP 320×568: soal + meja sanggar + panggung +
+ * status + baki harus muat tanpa scroll. Kotak simetri & kain batik diukur
+ * dari TINGGI layar yang tersisa (`--ps-fixed`), bukan pecahan `vh`
+ * (pelajaran Puzzle Gambar).
+ */
+
+.ps-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  --ps-fixed: 380px;
+}
+
+.ps-prompt {
+  font-size: 19px;
+  line-height: 1.28;
+  margin: 2px 0 4px;
+}
+
+.ps-area {
+  gap: 8px;
+  justify-content: center;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ---------- meja sanggar ---------- */
+
+.ps-counter {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6px;
+  min-height: 62px;
+}
+
+.ps-host {
+  position: relative;
+  width: 50px;
+  height: 56px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.ps-host__img {
+  width: 50px;
+  height: 56px;
+  object-fit: contain;
+}
+
+.ps-host__emoji {
+  font-size: 38px;
+}
+
+/* Baret pelukis di kepala kucing — penanda "pemilik sanggar". */
+.ps-host__beret {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 26px;
+  height: 11px;
+  margin-left: -15px;
+  border-radius: 50% 50% 40% 40%;
+  background: #c8437e;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.18);
+  rotate: -12deg;
+}
+
+.ps-host__beret::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 11px;
+  width: 4px;
+  height: 6px;
+  border-radius: 2px;
+  background: #c8437e;
+}
+
+.ps-customer {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: ps-arrive 0.45s ease-out;
+}
+
+.ps-customer__img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.ps-customer__emoji {
+  font-size: 44px;
+}
+
+.ps-customer--happy {
+  animation: ps-hop 0.5s ease-out 2;
+}
+
+@keyframes ps-arrive {
+  from {
+    translate: 60px 0;
+    opacity: 0;
+  }
+}
+
+@keyframes ps-hop {
+  50% {
+    translate: 0 -12px;
+  }
+}
+
+.ps-bubble {
+  position: relative;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  min-height: 46px;
+  padding: 4px 10px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.12);
+  font-weight: 800;
+  animation: ps-arrive 0.45s ease-out;
+}
+
+.ps-bubble::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  bottom: 10px;
+  border: 7px solid transparent;
+  border-right-color: #fff;
+  border-left: 0;
+}
+
+.ps-bubble__swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ps-bubble__blob {
+  width: 34px;
+  height: 34px;
+}
+
+.ps-bubble__q {
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+.ps-bubble__orn {
+  width: 36px;
+  height: 36px;
+}
+
+.ps-bubble__batik {
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+}
+
+.ps-pips {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  gap: 4px;
+}
+
+.ps-pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e2d6c2;
+}
+
+.ps-pip--now {
+  background: #c8437e;
+}
+
+.ps-pip--done {
+  background: #2f9e44;
+}
+
+/* ---------- nama warna (wajib di setiap cat) ---------- */
+
+.ps-name {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #3a2e20;
+  text-align: center;
+}
+
+/* ---------- panggung ---------- */
+
+.ps-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 0;
+}
+
+.ps-wheel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 66px;
+  height: 66px;
+  animation: ps-pop-in 0.35s ease-out;
+}
+
+.ps-wheel--mid {
+  position: static;
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+@keyframes ps-pop-in {
+  from {
+    scale: 0.4;
+    opacity: 0;
+  }
+}
+
+.ps-palette__svg {
+  display: block;
+  width: clamp(180px, 58vw, 270px);
+  height: auto;
+}
+
+.ps-bowl {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ps-bowl__svg {
+  display: block;
+  width: clamp(150px, 50vw, 230px);
+  height: auto;
+}
+
+.ps-bowl__name {
+  margin-top: -2px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #3a2e20;
+}
+
+.ps-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-height: 26px;
+  font-weight: 800;
+}
+
+.ps-status__slot {
+  min-width: 52px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #fff8ec;
+  font-size: 14px;
+  text-align: center;
+  color: #3a2e20;
+}
+
+.ps-status--eq {
+  gap: 4px;
+  min-height: 56px;
+}
+
+.ps-op {
+  font-size: 22px;
+  font-weight: 800;
+  color: #6b5a44;
+}
+
+.ps-op--sm {
+  font-size: 18px;
+}
+
+.ps-drop {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 52px;
+}
+
+.ps-drop__blob {
+  width: 34px;
+  height: 34px;
+}
+
+.ps-drop__blob--ghost {
+  opacity: 0.45;
+}
+
+.ps-drop--empty {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border: 2.5px dashed #c9b897;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+.ps-drop__q {
+  position: absolute;
+  font-size: 20px;
+  color: #a8957a;
+}
+
+/* ---------- tabung cat ---------- */
+
+.ps-tubes {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ps-tube,
+.ps-swatch {
+  flex: 0 1 72px;
+  min-width: 0;
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  padding: 4px 2px 5px;
+  border: 0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.12);
+  cursor: grab;
+  touch-action: none;
+  font: inherit;
+}
+
+.ps-tube__svg {
+  width: auto;
+  height: clamp(44px, 12.5vw, 58px);
+  pointer-events: none;
+}
+
+.ps-tube--sel {
+  outline: 4px solid #c8437e;
+  outline-offset: 1px;
+}
+
+.ps-lifted {
+  opacity: 0.35;
+}
+
+.ps-ghost {
+  position: fixed;
+  z-index: 60;
+  margin: 0;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.25));
+}
+
+.ps-out {
+  opacity: 0.25;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+.ps-glow {
+  animation: ps-glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes ps-glow {
+  from {
+    box-shadow:
+      0 0 0 3px #ffd43b,
+      0 3px 0 rgba(0, 0, 0, 0.12);
+  }
+  to {
+    box-shadow:
+      0 0 0 7px #ffd43b,
+      0 3px 0 rgba(0, 0, 0, 0.12);
+  }
+}
+
+.ps-shake {
+  animation: ps-shake 0.42s ease-in-out;
+}
+
+@keyframes ps-shake {
+  20%,
+  60% {
+    translate: -6px 0;
+  }
+  40%,
+  80% {
+    translate: 6px 0;
+  }
+}
+
+/* ---------- resep ---------- */
+
+.ps-choices {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.ps-choice {
+  min-height: 58px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 4px 8px;
+}
+
+.ps-choice__half {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.ps-choice__half .ps-name {
+  font-size: 17px;
+}
+
+.ps-choice__blob {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+}
+
+.ps-choices--names {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ps-choice--name {
+  min-height: 64px;
+  font-size: clamp(15px, 4.6vw, 20px);
+  font-weight: 800;
+  line-height: 1.1;
+  padding: 4px;
+}
+
+/* ---------- pinggiran kain ---------- */
+
+.ps-stage--cloth {
+  width: 100%;
+}
+
+.ps-strip {
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  width: 100%;
+  max-width: 460px;
+  padding: 8px 6px;
+  border-radius: 10px;
+  background:
+    linear-gradient(#a8743b, #a8743b) top / 100% 4px no-repeat,
+    linear-gradient(#a8743b, #a8743b) bottom / 100% 4px no-repeat,
+    #f6e7c8;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ps-strip__cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.ps-strip__cell--empty {
+  margin: 2px;
+  border: 2px dashed #c9b897;
+}
+
+.ps-strip__cell--next {
+  border-color: #c8437e;
+  background: #fff4f8;
+}
+
+.ps-strip__cell--unit {
+  background: #fff3bf;
+  box-shadow: inset 0 0 0 2px #f2b705;
+}
+
+.ps-orn {
+  width: 92%;
+  height: 92%;
+  pointer-events: none;
+}
+
+.ps-tray {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ps-piece {
+  width: 60px;
+  height: 60px;
+  padding: 4px;
+  border: 0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.12);
+  cursor: grab;
+  touch-action: none;
+}
+
+/* ---------- toples panas / dingin ---------- */
+
+.ps-stage--jars {
+  width: 100%;
+  align-items: stretch;
+}
+
+.ps-jar {
+  flex: 1 1 0;
+  max-width: 180px;
+  min-height: clamp(104px, calc(100dvh - 470px), 170px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  border: 3px solid;
+  border-radius: 14px 14px 26px 26px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.ps-jar--panas {
+  border-color: #f08c00;
+  background: #fff4e0;
+}
+
+.ps-jar--dingin {
+  border-color: #1c6fd6;
+  background: #e7f2ff;
+}
+
+.ps-jar--ready {
+  outline: 3px dashed #c8437e;
+  outline-offset: 2px;
+}
+
+.ps-jar__head {
+  font-size: 17px;
+  font-weight: 800;
+  color: #3a2e20;
+  white-space: nowrap;
+}
+
+.ps-jar__in {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+}
+
+.ps-jar__blob {
+  width: 30px;
+  height: 30px;
+}
+
+.ps-swatch {
+  flex: 0 0 auto;
+  width: 74px;
+  justify-content: center;
+}
+
+.ps-swatch__blob {
+  width: 36px;
+  height: 36px;
+  pointer-events: none;
+}
+
+/* ---------- kain batik ---------- */
+
+.ps-cloth {
+  --tile: clamp(62px, min(27vw, calc((100dvh - var(--ps-fixed) - 64px) / 2)), 120px);
+  display: grid;
+  grid-template-columns: repeat(3, var(--tile));
+  grid-auto-rows: var(--tile);
+  padding: 6px;
+  border-radius: 8px;
+  background: #a8743b;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.ps-cloth__tile {
+  display: block;
+  overflow: hidden;
+}
+
+.ps-cloth__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ps-cloth__tile--hole {
+  margin: 3px;
+  border: 3px dashed #fff3d6;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.ps-cloth__tile.ps-glow {
+  position: relative;
+  z-index: 1;
+}
+
+.ps-piece--batik {
+  width: 66px;
+  height: 66px;
+  padding: 5px;
+}
+
+.ps-piece__batik {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.ps-batik-name {
+  padding: 2px 10px;
+  border-radius: 10px;
+  background: #fff8ec;
+  font-size: 15px;
+  color: #6b3b17;
+}
+
+.ps-batik-name--hint {
+  background: #fff3bf;
+}
+
+/* ---------- simetri ---------- */
+
+.ps-grid {
+  --cell: clamp(40px, min(calc((100vw - 68px) / var(--cols)), calc((100dvh - var(--ps-fixed)) / var(--rows))), 56px);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--cell));
+  grid-auto-rows: var(--cell);
+  gap: 3px;
+  padding: 5px;
+  border-radius: 10px;
+  background: #e9dcc4;
+}
+
+.ps-grid--axis::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  border-left: 3px dashed #c8437e;
+  margin-left: -1.5px;
+  pointer-events: none;
+}
+
+.ps-cell {
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: #fff;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.ps-cell--given {
+  cursor: default;
+  opacity: 1;
+  background-image: none;
+}
+
+.ps-cell--given:not([style]) {
+  background: #f6efe2;
+}
+
+.ps-cell--axis {
+  box-shadow: inset 3px 0 0 rgba(200, 67, 126, 0.25);
+}
+
+.ps-cell--mark {
+  outline: 3px solid #f2b705;
+  outline-offset: -1px;
+  z-index: 1;
+}
+
+.ps-cell--no {
+  animation: ps-no 0.42s ease-in-out;
+}
+
+@keyframes ps-no {
+  50% {
+    background: #ffc9c9;
+  }
+}
+
+/* ---------- HP dimiringkan: meja + baki di kiri, panggung di kanan ---------- */
+
+@media (min-aspect-ratio: 4/3) and (max-height: 520px) {
+  .ps-wrap {
+    --ps-fixed: 116px;
+  }
+
+  .ps-prompt {
+    font-size: 17px;
+    margin: 0 0 2px;
+  }
+
+  .ps-area {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-auto-rows: min-content;
+    align-content: center;
+    column-gap: 14px;
+    row-gap: 6px;
+  }
+
+  .ps-area > * {
+    grid-column: 1;
+  }
+
+  .ps-area > .ps-stage {
+    grid-column: 2;
+    grid-row: 1 / span 4;
+    align-self: center;
+  }
+
+  .ps-host {
+    display: none;
+  }
+
+  .ps-bowl__svg,
+  .ps-palette__svg {
+    width: clamp(150px, 30vw, 240px);
+  }
+
+  .ps-jar {
+    min-height: calc(100dvh - 150px);
+  }
+
+  .ps-grid {
+    --cell: clamp(40px, calc((100dvh - var(--ps-fixed)) / var(--rows)), 52px);
+  }
+
+  .ps-cloth {
+    --tile: clamp(56px, calc((100dvh - var(--ps-fixed) - 40px) / 2), 110px);
+  }
+
+  .ps-choice {
+    min-height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ps-customer,
+  .ps-customer--happy,
+  .ps-bubble,
+  .ps-glow,
+  .ps-shake,
+  .ps-wheel,
+  .ps-cell--no {
+    animation: none;
+  }
+}
+
+/* Tanpa animasi, petunjuk yang menyala tetap harus terlihat. */
+@media (prefers-reduced-motion: reduce) {
+  .ps-glow {
+    box-shadow:
+      0 0 0 5px #ffd43b,
+      0 3px 0 rgba(0, 0, 0, 0.12);
+  }
+}

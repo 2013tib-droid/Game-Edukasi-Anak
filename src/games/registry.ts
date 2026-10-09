@@ -410,6 +410,15 @@ export const games: GameMeta[] = [
     template: 'read-find',
     load: () => import('@/games/sd2/detektif-bacaan'),
   },
+  {
+    id: 'sanggar-warna',
+    group: 'sd2',
+    subject: 'seni-rupa',
+    title: 'Sanggar Warna',
+    emoji: '🎨',
+    template: 'paint-studio',
+    load: () => import('@/games/sd2/sanggar-warna'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {
