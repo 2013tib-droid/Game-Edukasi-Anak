@@ -1,1 +1,0 @@
-const o=[100,10,1],r={100:"h",10:"t",1:"o"},n={100:"Ratusan",10:"Puluhan",1:"Satuan"};function u(t){if(!Number.isInteger(t)||t<0||t>999)throw new Error(`Bilangan di luar 0–999: ${t}`);return{h:Math.floor(t/100),t:Math.floor(t/10)%10,o:t%10}}function s(t){return t.h*100+t.t*10+t.o}function e(t,a){return Math.floor(t/a)%10}export{o as P,r as a,n as b,u as c,e as d,s as v};

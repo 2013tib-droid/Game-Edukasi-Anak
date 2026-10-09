@@ -1,1 +1,0 @@
-import{r as n,j as e}from"./index-Bp8ktCEB.js";function l({pic:t,emoji:s,height:r=88,emojiSize:a=48}){const[o,i]=n.useState(!1);return!t||o?e.jsx("span",{style:{fontSize:a},children:s}):e.jsx("img",{src:`/Game-Edukasi-Anak/development/sahabat-bumi/assets/groups/${t}.webp`,alt:"",style:{height:r,width:"auto"},onError:()=>i(!0)})}export{l as G};

@@ -1,1 +1,0 @@
-import{t as s}from"./numbers-cPMMzDfQ.js";const a=t=>s(((t-1)%12+12)%12+1),o=t=>`setengah ${a(t+1)}`,n=t=>`${a(t)} lewat seperempat`,p=t=>`${a(t+1)} kurang seperempat`,d=(t,r)=>`${String(t).padStart(2,"0")}.${String(r).padStart(2,"0")}`;export{n as a,d,o as h,p as q};
