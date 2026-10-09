@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-09",
-  "count": 1728,
-  "chars": 74877,
+  "count": 1753,
+  "chars": 76182,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -11638,6 +11638,231 @@
       "voice": "gadis",
       "games": [
         "rute-kendaraan"
+      ]
+    },
+    {
+      "key": "5d69ae9997ac",
+      "text": "Ada dua hal yang merusak lingkungan. Sentuh semuanya!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "646d5f51e146",
+      "text": "Ada dua kebiasaan yang boros air. Sentuh semuanya!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "7c15ecbf81f3",
+      "text": "Ada sampah berbahaya juga! Pilah ke tiga tong.",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "83de9df32e5c",
+      "text": "Ada tiga hal yang merusak lingkungan. Sentuh semuanya!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "e43d2f6ce197",
+      "text": "Ada tiga kebiasaan yang boros air. Sentuh semuanya!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "7fca2318a486",
+      "text": "Air di bumi berputar terus. Susun daur airnya searah panah!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "84d1d99a20df",
+      "text": "Bantu Kura-kura memilah sampah: yang bisa membusuk dan yang tidak!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "af02a2db4744",
+      "text": "Di bank sampah, sampah dipilah menurut bahannya. Pilah ke plastik, kertas, dan logam!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "7ef20dcd052e",
+      "text": "Garam dapur dibuat dari apa?",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "31097661ba92",
+      "text": "Kertas buku ini dibuat dari apa?",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "09e30b0cc01a",
+      "text": "Kura-kura menemukan sampah di taman. Pilah ke tong organik dan anorganik!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "0bb6e3fc68b3",
+      "text": "Kursi kayu ini dibuat dari apa?",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "35ae4f058f77",
+      "text": "Mana yang bisa tumbuh lagi, mana yang bisa habis? Pilah!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "f99275dbcfb2",
+      "text": "Misi besar! Sungai penuh sampah hanyut. Ambil dan pilah sampahnya!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "09b790fd5997",
+      "text": "Nasi ini berasal dari apa?",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "8cc31f9b8b88",
+      "text": "Pilah sumber daya alam: yang dapat diperbarui dan yang tidak!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "52d402cf7d3f",
+      "text": "Sampah berbahaya jangan dicampur. Pilah ke tong yang benar!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "0c3393566c63",
+      "text": "Sekarang tanam pohon di tepi sungai supaya tanahnya kuat!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "ef54cc7e007f",
+      "text": "Sungainya sudah bersih! Baterai bekas dibuang ke mana?",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "d25eb65ee62c",
+      "text": "Sungainya sudah bersih! Belanja ke pasar, sebaiknya bawa apa?",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "e01be444011b",
+      "text": "Sungainya sudah bersih! Supaya tetap bersih, apa yang kita lakukan?",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "4ef06cec8b3a",
+      "text": "Supaya bisa didaur ulang, pilah sampah menurut bahannya!",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "60f09e10d57f",
+      "text": "Susu ini berasal dari apa?",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "72f127099f4d",
+      "text": "Susun daur airnya! Hati-hati, ada kartu yang bukan bagiannya.",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
+      ]
+    },
+    {
+      "key": "abd2276c5eef",
+      "text": "Telur ini berasal dari apa?",
+      "scope": "sahabat-bumi",
+      "voice": "gadis",
+      "games": [
+        "sahabat-bumi"
       ]
     },
     {

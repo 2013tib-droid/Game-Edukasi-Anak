@@ -47,6 +47,10 @@ const POP_SELECTOR = [
   '.ps-swatch',
   '.ps-cell',
   '.ps-jar',
+  '.eco-thing',
+  '.eco-bin',
+  '.eco-card',
+  '.eco-hole',
 ].join(',');
 
 function reducedMotion(): boolean {

@@ -652,6 +652,24 @@ keping yang dibutuhkan pinggiran wajib ada di baki.
 **Yang belum:** kolase (game kedua), seni ikon kartu (`pic` — prompt di
 `docs/prompt-ikon-game.md`), seni Kucing pelukis sendiri (sekarang `cat` + baret).
 
+### 2b.9 IPAS — tiga game baru (keputusan pemilik 2026-10-09)
+
+Sampai 2026-10-09 IPAS cuma punya SATU game (Kebun Ilmu) — memang begitu sejak
+rencana awal (komposisi 7 matematika · 2 bahasa · 1 IPAS). Kebun Ilmu sudah
+memborong bagian IPA (tumbuhan, hewan, cuaca, wujud zat, gaya), jadi tiga game
+baru diarahkan ke bagian IPAS yang belum tersentuh.
+
+**Keputusan pemilik (semua rekomendasi disetujui):**
+
+| Pertanyaan | Keputusan |
+|---|---|
+| Tiga game | **Sahabat Bumi ♻️** (sampah, daur air, sumber daya alam) · **Lab Cahaya & Bunyi 🔦** (energi, cahaya & bayangan, bunyi, hemat energi) · **Jelajah Kampung 🧭** (mata angin, denah, peta — menghidupkan ide "Misi Robot" yang dulu ditunda) |
+| Urutan | Sahabat Bumi dulu (paling dekat dengan template yang ada), lalu Lab Cahaya, terakhir Jelajah Kampung (template baru paling besar) |
+| Cara kerja | SATU PER SATU: tiap game jadi → uji → "Deploy development" → pemilik cek di HP → merge, baru game berikutnya |
+| Sahabat Bumi: 9 slot | pilah organik/anorganik · + berbahaya (tong merah) · bank sampah plastik/kertas/logam · hemat air (sentuh yang boros) · daur air (lingkaran) → kls 4: dapat/tidak dapat diperbarui · benda dibuat dari sumber daya apa · sentuh yang merusak lingkungan · **misi besar sungai** (pungut & pilah → jaga sungai → tanam pohon) |
+| Gambar sampah | **SVG engine** (`Eco.tsx`) — 🍌 itu pisang utuh, bukan kulitnya |
+| Pemandu | **Kura-kura penjaga sungai** (seni `turtle` yang sudah ada) |
+
 ## 3. Urutan pengerjaan
 
 > **Untuk game yang belum dibuat, urutan terbaru ada di 2b.7.** Tabel di bawah
@@ -724,6 +742,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | 10 | Kebun Ilmu | `kebun-ilmu` | ✅ sudah ada (2026-09-29), narasi SUDAH dirender (render #19, 63 baris) |
 | – | Perisai Garuda (Pancasila) | `perisai-garuda` | ✅ sudah ada (2026-10-05) — game Pancasila pertama: lambang sila SVG engine (`Sila.tsx`), 9 slot × 55 varian, urutan tetap, proyek sesi "Perisai Garuda" (stempel = lambang sila); narasi SUDAH dirender (render #26, 57 baris). Rumah & pakaian adat belum. |
 | – | Sanggar Warna (Seni Rupa) | `sanggar-warna` | ✅ sudah ada (2026-10-08) — game Seni Rupa pertama: template baru `paint-studio` (campur cat di mangkuk dengan warna yang berubah perlahan, palet, resep, pinggiran kain, toples panas/dingin, kain batik, simetri) + `paint.ts` (satu sumber nama/hasil campuran/suhu warna) + `Paint.tsx` (tabung, mangkuk, roda warna, hiasan, motif batik SVG); 9 slot × 54 varian, urutan tetap, proyek sesi "Galeri Sanggar Warna", P2 menyala; narasi 78 baris, render #33. Kolase ditunda. |
+| – | Sahabat Bumi (IPAS) | `sahabat-bumi` | ✅ sudah ada (2026-10-09) — game IPAS kedua: template baru `eco-mission` (seret sampah ke tong berwarna, sentuh kebiasaan boros/merusak, susun daur air di lingkaran, pilih sumber daya, tanam pohon) + `Eco.tsx` (19 benda SVG + tong); 9 slot × 54 varian, urutan tetap, proyek sesi "Sungai Bersih", P2 menyala; narasi 25 baris, render #34. Lab Cahaya & Bunyi dan Jelajah Kampung menyusul (2b.9). |
 
 ## 7. Prompt untuk memulai sesi baru
 
