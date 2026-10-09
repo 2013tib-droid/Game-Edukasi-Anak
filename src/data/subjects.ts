@@ -58,7 +58,7 @@ export const SUBJECTS_BY_GROUP: Partial<Record<GroupId, readonly GroupSubject[]>
     { id: 'bahasa-indonesia', description: 'Membaca cerita, mencari informasi & menyusun kalimat.' },
     { id: 'ipas', description: 'Tumbuhan, hewan, cuaca, wujud benda, gaya & lingkungan.' },
     { id: 'pancasila', description: 'Lambang sila, aturan di rumah & sekolah, keberagaman.' },
-    { id: 'seni-rupa', description: 'Warna, pola, motif batik & bentuk.' },
+    { id: 'seni-rupa', description: 'Warna, pola, motif batik, kolase & mozaik.' },
     { id: 'bahasa-inggris', description: 'Alphabet, colors, family, numbers & animals.' },
   ],
   sd3: [

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-09",
-  "count": 1753,
-  "chars": 76182,
+  "count": 1808,
+  "chars": 79468,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -12805,6 +12805,501 @@
       "games": [
         "hitung-hebat",
         "pola-pintar"
+      ]
+    },
+    {
+      "key": "a73ed3085588",
+      "text": "Bahan kolase bisa dari alam atau buatan pabrik. Pilah ke keranjangnya!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "156dae88e3a2",
+      "text": "Buat kolase ayam dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "5204409aafc7",
+      "text": "Buat kolase bunga dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "d39c02018dd2",
+      "text": "Buat kolase ikan dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "505e83d97a27",
+      "text": "Buat kolase kupu-kupu dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "a06d14a31702",
+      "text": "Buat kolase langit! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "4cd19bc16107",
+      "text": "Buat kolase layang-layang dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "873e126b7728",
+      "text": "Buat kolase pohon dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "0cd87f63cd47",
+      "text": "Buat kolase pohon! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "804ea20363df",
+      "text": "Buat kolase semangka! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "404f3db3bd67",
+      "text": "Buat kolase terong! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "6085549068ac",
+      "text": "Buat kolase tomat! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "c52ba7a9d6a3",
+      "text": "Buat kolase wortel! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "bbf32355c63b",
+      "text": "Di pameran, karya temanmu berbeda dengan karyamu. Bagaimana sikapmu?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "ce4a55617b23",
+      "text": "Gambar ini ditutup sobekan kertas yang ditempel. Karya apakah ini?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "fc51d26aaf98",
+      "text": "Karya ini dari keping kecil yang disusun berjarak. Disebut apa?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "80e4677266a0",
+      "text": "Karya ini dari potongan gambar jadi yang ditempel. Disebut apa?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "639a16837329",
+      "text": "Karyanya siap dipamerkan! Sisa kertas dan lemnya bagaimana?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "ab65dc026baa",
+      "text": "Mana bahan alam, mana bahan buatan? Pilah ke keranjang yang benar!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "9453e452e408",
+      "text": "Mana karya yang disebut kolase?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "c408ff3d89b8",
+      "text": "Mana karya yang disebut montase?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "876b69141be5",
+      "text": "Mana karya yang disebut mozaik?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "f50909e6c375",
+      "text": "Misi besar! Pak Monyet ikut pameran sekolah. Buat kolase laut dulu!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "67f14a60beb0",
+      "text": "Misi besar! Pak Monyet ikut pameran sekolah. Buat kolase pemandangan dulu!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "529e408d43f8",
+      "text": "Mozaik bunga belum selesai. Lanjutkan sampai sama dengan contohnya!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "d98875acbe31",
+      "text": "Mozaik kupu-kupu belum selesai. Lanjutkan sampai sama dengan contohnya!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "510c68d8f3aa",
+      "text": "Sekarang hias kartu namanya dengan mozaik bintang!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "a304970c5b72",
+      "text": "Sekarang hias kartu namanya dengan mozaik hati!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "5e7de3e49142",
+      "text": "Sekarang hias kartu namanya dengan mozaik ikan!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "686760df21a2",
+      "text": "Sekarang hias kartu namanya dengan mozaik jamur!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "92da14345fb4",
+      "text": "Sekarang hias kartu namanya dengan mozaik kupu-kupu!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "99bbe92c3ea8",
+      "text": "Sekarang hias kartu namanya dengan mozaik pohon!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "b9f3c1215fde",
+      "text": "Teman bertanya cara membuat kolasemu. Apa yang kamu lakukan?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "f7a1fa87368b",
+      "text": "Tiru contoh kolase bunga! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "59cf74a014c7",
+      "text": "Tiru contoh kolase ikan! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "dc189a775e90",
+      "text": "Tiru contoh kolase kupu-kupu! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "f6176669f6e6",
+      "text": "Tiru contoh kolase layang-layang! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "21b5f76e3d8f",
+      "text": "Tiru contoh kolase perahu! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "3738723b26a0",
+      "text": "Tiru contoh kolase rumah! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "9ce38b3eca5c",
+      "text": "Tiru contoh mozaik es krim! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "e690b1dcb174",
+      "text": "Tiru contoh mozaik hati! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "f0d752ac834d",
+      "text": "Tiru contoh mozaik ikan! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "5bf1148ae1ce",
+      "text": "Tiru contoh mozaik jamur! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "35af94fcb0d8",
+      "text": "Tiru contoh mozaik kapal! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "f00394b1839b",
+      "text": "Tiru contoh mozaik kupu-kupu! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "c15d0e1f1d56",
+      "text": "Tiru contoh mozaik perahu! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "270f866001cf",
+      "text": "Tiru contoh mozaik pohon apel! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "8ba96fa157a0",
+      "text": "Tiru contoh mozaik pohon! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "61f79ea84872",
+      "text": "Tiru contoh mozaik rumah! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "9f3613404052",
+      "text": "Urutkan langkah membuat kolase biji-bijian!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "ec187fc9f838",
+      "text": "Urutkan langkah membuat kolase biji-bijian! Ada satu kartu yang bukan langkahnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "01d446076e41",
+      "text": "Urutkan langkah membuat kolase!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "d915480eadb0",
+      "text": "Urutkan langkah membuat kolase! Ada satu kartu yang bukan langkahnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "645c9227cdc5",
+      "text": "Urutkan langkah membuat mozaik!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "dbacd9b2f0d0",
+      "text": "Urutkan langkah membuat mozaik! Ada satu kartu yang bukan langkahnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
       ]
     },
     {

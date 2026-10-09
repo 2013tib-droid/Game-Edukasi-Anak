@@ -670,6 +670,40 @@ baru diarahkan ke bagian IPAS yang belum tersentuh.
 | Gambar sampah | **SVG engine** (`Eco.tsx`) — 🍌 itu pisang utuh, bukan kulitnya |
 | Pemandu | **Kura-kura penjaga sungai** (seni `turtle` yang sudah ada) |
 
+### 2b.10 Seni Rupa — Studio Kolase ✂️ (game Seni Rupa kedua, 2026-10-09)
+
+Melanjutkan 2b.8: kolase memang disisakan Sanggar Warna untuk game kedua.
+
+**Keputusan pemilik (2026-10-09, semua rekomendasi disetujui):**
+
+| Pertanyaan | Keputusan |
+|---|---|
+| Isi & cara main | **Kolase & Mozaik** — "Studio Kolase" ✂️ (`studio-kolase`). Anak MENYOBEK kertas dengan menyeretnya keluar dari lembar bahan (sobekan bertepi robek ikut jari), MENEMPEL di titik jari dilepas sampai bagian pola tertutup (sobekan terpotong rapi mengikuti garis pola), menyusun MOZAIK keping persegi bercelah dengan ketuk atau sapuan jari, memilah bahan alam/buatan, mengurutkan langkah, membedakan kolase / mozaik / montase. Template engine baru `collage-studio`. |
+| Tokoh | **Pak Monyet** (seni `monkey` yang sudah ada). |
+| Gambar pola | **SVG engine** (`core/collage.ts` + `ui/Collage.tsx`), 2–5 bagian berwarna per gambar — nol aset baru. |
+
+**9 slot, urutan TETAP, 6 varian per slot, proyek sesi "Pameran Kolase":**
+kls 3: kolase kertas gambar ALAM (warnanya ditalar: daun hijau, langit biru) ·
+bahan alam vs buatan · urutkan langkah (kolase / mozaik / kolase biji, ± kartu
+pengecoh) · mozaik 5×5 tiru contoh · kolase tiru RANCANGAN berwarna →
+kls 4: kenali karya (kolase / mozaik / montase — montase dari seni item WebP
+bertepi guntingan) · kolase BIJI-BIJIAN tiru contoh (jagung, beras, kacang
+hijau, kacang merah, daun kering) · mozaik 6×6 tiga warna (dua varian
+"lanjutkan yang sudah separuh") · **misi besar pameran**: kolase pemandangan/laut
+→ hias kartu nama dengan mozaik → sikap sesudah berkarya / menghargai karya teman.
+
+**Aturan yang dijaga (builder melempar error):** tiap bagian pola diberi bahan
+dan tak ada bahan untuk bagian yang tak ada · minimal SATU bahan/keping
+pengecoh · paling banyak 5 lembar / 4 keping (HP 320) · pasangan yang terbaca
+sama di HP murah tak pernah bersama (`lookAlike`: kuning–oranye, merah–merah
+muda, beras–kulit telur, putih–beras/kulit telur, cokelat–daun kering) · baris
+mozaik sama panjang & tiap huruf bewarna · jenis karya di soal "mana yang …"
+tak kembar · narasi tanpa digit.
+
+**Yang belum:** seni ikon kartu (`pic` — prompt di `docs/prompt-ikon-game.md`),
+latar studio. Lafal "tempel", "sobek", "berbeda" belum didaftarkan di
+`scripts/pronounce.mjs` (ragu taling/pepet — dengarkan dulu hasil render).
+
 ## 3. Urutan pengerjaan
 
 > **Untuk game yang belum dibuat, urutan terbaru ada di 2b.7.** Tabel di bawah
@@ -743,6 +777,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | – | Perisai Garuda (Pancasila) | `perisai-garuda` | ✅ sudah ada (2026-10-05) — game Pancasila pertama: lambang sila SVG engine (`Sila.tsx`), 9 slot × 55 varian, urutan tetap, proyek sesi "Perisai Garuda" (stempel = lambang sila); narasi SUDAH dirender (render #26, 57 baris). Rumah & pakaian adat belum. |
 | – | Sanggar Warna (Seni Rupa) | `sanggar-warna` | ✅ sudah ada (2026-10-08) — game Seni Rupa pertama: template baru `paint-studio` (campur cat di mangkuk dengan warna yang berubah perlahan, palet, resep, pinggiran kain, toples panas/dingin, kain batik, simetri) + `paint.ts` (satu sumber nama/hasil campuran/suhu warna) + `Paint.tsx` (tabung, mangkuk, roda warna, hiasan, motif batik SVG); 9 slot × 54 varian, urutan tetap, proyek sesi "Galeri Sanggar Warna", P2 menyala; narasi 78 baris, render #33. Kolase ditunda. |
 | – | Sahabat Bumi (IPAS) | `sahabat-bumi` | ✅ sudah ada (2026-10-09) — game IPAS kedua: template baru `eco-mission` (seret sampah ke tong berwarna, sentuh kebiasaan boros/merusak, susun daur air di lingkaran, pilih sumber daya, tanam pohon) + `Eco.tsx` (19 benda SVG + tong); 9 slot × 54 varian, urutan tetap, proyek sesi "Sungai Bersih", P2 menyala; narasi 25 baris, render #34. Lab Cahaya & Bunyi dan Jelajah Kampung menyusul (2b.9). |
+| – | Studio Kolase (Seni Rupa) | `studio-kolase` | ✅ sudah ada (2026-10-09) — game Seni Rupa kedua: template baru `collage-studio` (sobek kertas dengan menyeret keluar dari lembarnya, tempel sampai bagian pola tertutup dengan sobekan yang terpotong mengikuti garis pola, mozaik dengan sapuan jari, kolase biji-bijian, urutkan langkah, pilah bahan, kenali kolase/mozaik/montase) + `core/collage.ts` (bahan, 15 gambar pola, montase) + `ui/Collage.tsx`; 9 slot × 54 varian, urutan tetap, proyek sesi "Pameran Kolase", P2 menyala; narasi 55 baris, render #35. |
 
 ## 7. Prompt untuk memulai sesi baru
 

@@ -428,6 +428,15 @@ export const games: GameMeta[] = [
     template: 'paint-studio',
     load: () => import('@/games/sd2/sanggar-warna'),
   },
+  {
+    id: 'studio-kolase',
+    group: 'sd2',
+    subject: 'seni-rupa',
+    title: 'Studio Kolase',
+    emoji: '✂️',
+    template: 'collage-studio',
+    load: () => import('@/games/sd2/studio-kolase'),
+  },
 ];
 
 export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {
