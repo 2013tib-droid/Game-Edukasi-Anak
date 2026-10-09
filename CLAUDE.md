@@ -155,7 +155,7 @@ Kerjakan bertahap, satu fase selesai & teruji dulu sebelum lanjut. Selalu tanyak
 
 ## Status Pengerjaan
 
-- **ALUR DEPLOY: development dulu, baru produksi** (keputusan pemilik 2026-10-07) — tiap fitur baru di-deploy ke `…/development/<nama>/` lewat Actions → "Deploy development", dicek pemilik di HP, baru merge & "Deploy web". Lihat **`docs/alur-deploy.md`**.
+- **ALUR DEPLOY: development dulu, baru produksi** (keputusan pemilik 2026-10-07) — tiap fitur baru di-deploy lewat Actions → "Deploy development", dicek pemilik di HP, baru merge & "Deploy web". **SATU ALAMAT SAJA (keputusan pemilik 2026-10-09: *"semua di main aja, biar ga bingung"*): selalu `nama: main` → `…/development/main/`**, juga untuk branch fitur yang belum di-merge. Lihat **`docs/alur-deploy.md`**.
 
 - **✅ TAHAN "DEPLOY WEB" DICABUT 2026-10-06 (keputusan pemilik: *"sudah ku merge, deploy"*, dikonfirmasi sesudah diingatkan isi yang ikut tayang).** Deploy web dari `main` `38608fa` (sesudah PR #94) sukses ke petualanganpintar.com: dry run dulu (Actions run 37432072495, langkah deploy dilewati), lalu sungguhan (run 37432168823, langkah "Deploy ke Firebase Hosting" sukses). Yang ikut tayang: layar pilih mapel + nama sapaan anak & Kebijakan Privasi baru (PR #82), Firestore lite, Tangga Membaca + peta bersuara, P1, dan engine Istana Bilangan/P2. **`sd2` & `sd3` tetap `draft`** (dicek di `groups.json` `main` sebelum deploy), jadi tak terlihat pembeli. Situsnya sendiri TIDAK bisa dibuka dari sesi Claude — konfirmasi di HP tetap tugas pemilik. ~~Tahan 2026-10-05: "deploy nanti kalo sudah semua beres dan mateng game kelas 3-4 nya".~~ Deploy berikutnya: tetap tanya pemilik dulu.
 

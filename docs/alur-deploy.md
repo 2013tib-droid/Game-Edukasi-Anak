@@ -16,13 +16,27 @@
 
 Daftar semua versi development yang sedang hidup: `https://2013tib-droid.github.io/Game-Edukasi-Anak/development/`
 
+## SATU ALAMAT SAJA: `/development/main/` (keputusan pemilik 2026-10-09)
+
+> *"Semua di main aja… biar ga bingung kalo ada update game."*
+
+- **Setiap** "Deploy development" memakai **`nama: main`**, apa pun `ref`-nya. Pemilik cukup membuka satu link:
+  `https://2013tib-droid.github.io/Game-Edukasi-Anak/development/main/`
+- Fitur yang belum di-merge tetap di-deploy dari branch-nya (`ref: claude/<fitur>`) **ke folder `main`** — jadi isi
+  `/development/main/` = versi TERBARU yang sedang dicek, bisa lebih maju dari branch `main`. Itu disengaja.
+- **JEBAKAN: dua branch fitur yang belum di-merge saling menimpa** di folder yang sama. Deploy branch B sesudah
+  branch A = game dari A hilang dari link itu. Kalau dua fitur sedang dicek bersamaan, gabungkan dulu ke satu branch,
+  atau merge yang sudah disetujui ke `main` lalu cabangkan yang berikutnya dari `main` terbaru.
+- Sesudah merge ke `main`, deploy ulang `ref: main` ke `nama: main` supaya isinya kembali = `main`.
+- Subfolder lain (`/development/<nama>/`) tidak dipakai lagi; yang lama boleh dihapus dengan `hapus: true`.
+
 ## Langkah untuk SETIAP fitur baru
 
 1. **Kerjakan di branch pendek dari `main`** (`claude/<fitur>`), seperti biasa (lihat "Branch & Alur Kerja" di CLAUDE.md).
 2. **Uji di sesi** (typecheck, build, headless) seperti biasa.
 3. **Deploy ke development dulu** — Actions → "Deploy development" → Run workflow:
    - `ref` = branch fiturnya (mis. `claude/lompat-katak`) — fitur BELUM perlu masuk `main`.
-   - `nama` = boleh dikosongkan (diambil dari nama branch, awalan `claude/` dibuang) atau diisi nama pendek (mis. `sd2`).
+   - `nama` = **selalu `main`** (keputusan pemilik 2026-10-09, lihat di atas).
    - Claude boleh menjalankannya sendiri lewat `actions_run_trigger` (`workflow_id: deploy-dev.yml`, `ref: main`, `inputs: { ref, nama }`).
 4. **Kirim link ke pemilik** untuk dicek di HP. Bentuk link:
    - Beranda: `…/development/<nama>/#/portal?test=1`
