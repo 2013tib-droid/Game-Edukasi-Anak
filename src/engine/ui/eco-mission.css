@@ -350,6 +350,11 @@
   font: inherit;
 }
 
+/* Langkah sungai: baki sampah di atas tong, jadi tong yang mengalah. */
+.eco-tray--river ~ .eco-bins .eco-bin {
+  min-height: clamp(96px, calc(100dvh - 470px), 150px);
+}
+
 .eco-bin--ready {
   outline: 3px dashed #2f9e44;
   outline-offset: 2px;
@@ -676,6 +681,21 @@
 
   .eco-area > * {
     grid-column: 1;
+  }
+
+  /* Setinggi 360 px kura-kura tak muat bersama baki dua baris — tugasnya
+     sudah dibacakan, jadi pemandunya yang mengalah (pola Sanggar Warna). */
+  .eco-guide {
+    display: none;
+  }
+
+  .eco-thing {
+    min-height: 56px;
+    padding: 3px 3px 4px;
+  }
+
+  .eco-tray--river {
+    padding: 6px;
   }
 
   .eco-area > .eco-bins,

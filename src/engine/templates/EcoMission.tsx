@@ -107,6 +107,7 @@ function grab(e: ReactPointerEvent<HTMLElement>, end: (x: number, y: number, mov
 function sparkleOn(el: Element | null | undefined, n = 8) {
   if (!el) return;
   const r = el.getBoundingClientRect();
+  if (!r.width) return; // pemandu disembunyikan saat HP dimiringkan
   sparkleAt(r.left + r.width / 2, r.top + r.height / 2, n);
 }
 
