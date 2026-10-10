@@ -76,6 +76,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'read-find': lazy(() => import('@/engine/templates/ReadFind')),
   'paint-studio': lazy(() => import('@/engine/templates/PaintStudio')),
   'eco-mission': lazy(() => import('@/engine/templates/EcoMission')),
+  'collage-studio': lazy(() => import('@/engine/templates/CollageStudio')),
   'word-voyage': lazy(() => import('@/engine/templates/WordVoyage')),
 };
 

@@ -7,6 +7,7 @@
 
 import type { Denom } from '@/engine/core/money';
 import type { PaintColor } from '@/engine/core/paint';
+import type { CollageArtId, CollageMaterial, MontageScene } from '@/engine/core/collage';
 
 export type GroupId = 'tk' | 'sd1' | 'sd2' | 'sd3';
 
@@ -30,6 +31,7 @@ export type TemplateId =
   | 'read-find' // sentuh kalimat/kata bukti di dalam bacaan (Detektif Bacaan)
   | 'paint-studio' // campur cat, warnai, susun motif batik (Sanggar Warna)
   | 'eco-mission' // pilah sampah, daur air, jaga sungai (Sahabat Bumi)
+  | 'collage-studio' // sobek & tempel kolase, susun mozaik (Studio Kolase)
   | 'word-voyage'; // kosakata & kalimat bahasa Inggris, 7 mode berganti (Kapten Kata)
 
 /* ---------- Per-template level payloads ---------- */
@@ -1206,6 +1208,66 @@ export interface EcoMissionData {
   steps: EcoStep[];
 }
 
+/* ---------- collage-studio (Studio Kolase) ---------- */
+
+/**
+ * Karya yang sudah jadi, digambar engine untuk soal "karya ini disebut apa?":
+ * `kolase` = gambar pola yang ditutup sobekan bahan, `mozaik` = keping
+ * persegi berjarak (`rows` + `colors` seperti tugas `mosaic`), `montase` =
+ * potongan gambar jadi (seni item WebP) yang ditempel jadi satu adegan.
+ */
+export type CollageArtwork =
+  | { type: 'kolase'; art: CollageArtId; parts: Record<string, CollageMaterial> }
+  | { type: 'mozaik'; rows: string[]; colors: Record<string, PaintColor> }
+  | { type: 'montase'; scene: MontageScene };
+
+/**
+ * Satu tugas di Studio Kolase. Semuanya dinilai engine dari datanya.
+ * - `collage` gambar pola `art` (bagian-bagiannya di `collage.ts`); tiap
+ *             bagian butuh bahan `parts[bagian]`. Anak MENYOBEK bahan dari
+ *             `sheets` (seret keluar dari lembarnya, atau ketuk lembar lalu
+ *             ketuk gambarnya) dan menempelkannya sampai bagian itu tertutup.
+ *             `example` = contoh berwarna ikut tampil (tiru rancangan);
+ *             tanpa itu anak menalar warnanya sendiri (daun = hijau). Bahan
+ *             salah = senyap.
+ * - `mosaic`  salin contoh mozaik: `rows` (huruf = warna di `colors`, titik =
+ *             petak kosong), pilih keping dari `palette` lalu ketuk/sapukan
+ *             jari di petaknya. `given` = baris atas yang sudah terpasang.
+ *             Salah petak = senyap.
+ * - `order`   urutkan langkah membuat karya (`steps` berurutan) dari baki;
+ *             `decoys` = kartu yang bukan langkahnya. Senyap.
+ * - `sort`    pilah bahan ke `bins` (seret / ketuk-lalu-ketuk). Senyap.
+ * - `pick`    pilih satu jawaban (overlay "coba lagi"); `show` = karya besar
+ *             yang ditanyakan, atau pilihannya sendiri berupa karya.
+ */
+export type CollageTask =
+  | {
+      kind: 'collage';
+      art: CollageArtId;
+      parts: Record<string, CollageMaterial>;
+      sheets: CollageMaterial[];
+      example?: boolean;
+    }
+  | { kind: 'mosaic'; rows: string[]; colors: Record<string, PaintColor>; palette: PaintColor[]; given?: number }
+  | { kind: 'order'; steps: EcoThing[]; decoys?: EcoThing[] }
+  | { kind: 'sort'; bins: EcoBin[]; items: (EcoThing & { bin: string })[] }
+  | {
+      kind: 'pick';
+      show?: CollageArtwork;
+      choices: { label?: string; artwork?: CollageArtwork; emoji?: string; correct?: boolean }[];
+    };
+
+export interface CollageStep {
+  /** Kalimat langkah ke-2 dst. (misi besar). Dibacakan — TANPA digit. */
+  say?: string;
+  task: CollageTask;
+}
+
+/** Studio Kolase: Pak Monyet memandu pesanan demi pesanan. */
+export interface CollageStudioData {
+  steps: CollageStep[];
+}
+
 /* ---------- word-voyage (Kapten Kata, Bahasa Inggris sd2) ---------- */
 
 /**
@@ -1287,6 +1349,7 @@ export interface LevelDataMap {
   'read-find': ReadFindData;
   'paint-studio': PaintStudioData;
   'eco-mission': EcoMissionData;
+  'collage-studio': CollageStudioData;
   'word-voyage': WordVoyageData;
 }
 

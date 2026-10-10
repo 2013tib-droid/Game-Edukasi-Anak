@@ -1,0 +1,936 @@
+/*
+ * Template `collage-studio` (Studio Kolase). Hanya diunduh bersama chunk
+ * template-nya.
+ *
+ * Tingginya PASTI: `.ks-wrap` = tinggi layar dikurangi baris atas engine
+ * (padding 12 + tombol 56 + jarak 8 + padding bawah 16). Dengan begitu
+ * panggung gambar (`.ks-stage`) bisa `flex: 1 1 0` dan kanvasnya diukur
+ * lewat container query — gambar pola selalu sebesar sisa layar, tanpa
+ * menebak tinggi kalimat soal (pelajaran Puzzle Gambar).
+ */
+
+.ks-wrap {
+  height: calc(100dvh - 92px - env(safe-area-inset-bottom));
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ks-prompt {
+  flex: 0 0 auto;
+  font-size: 19px;
+  line-height: 1.28;
+  margin: 0 0 4px;
+}
+
+.ks-area {
+  flex: 1 1 0;
+  min-height: 0;
+  gap: 6px;
+  /* `safe`: isi yang lebih tinggi dari layar meluap ke BAWAH (bisa digulir),
+     bukan ke atas menutupi kalimat soal. */
+  justify-content: safe center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.ks-wrap--collage .ks-area,
+.ks-wrap--mosaic .ks-area {
+  justify-content: flex-start;
+}
+
+/* ---------- Pak Monyet + contoh ---------- */
+
+.ks-guide {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+}
+
+.ks-host {
+  width: 52px;
+  height: 62px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.ks-host__img {
+  width: 52px;
+  height: 62px;
+  object-fit: contain;
+}
+
+.ks-host__emoji {
+  font-size: 42px;
+  line-height: 1;
+}
+
+.ks-host--happy {
+  animation: ks-hop 0.5s ease-out 2;
+}
+
+@keyframes ks-hop {
+  50% {
+    translate: 0 -12px;
+    rotate: -6deg;
+  }
+}
+
+.ks-bubble {
+  position: relative;
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  min-height: 40px;
+  padding: 4px 10px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.12);
+  font-size: 22px;
+  animation: ks-arrive 0.45s ease-out;
+}
+
+.ks-bubble::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  bottom: 9px;
+  border: 7px solid transparent;
+  border-right-color: #fff;
+  border-left: 0;
+}
+
+@keyframes ks-arrive {
+  from {
+    translate: 40px 0;
+    opacity: 0;
+  }
+}
+
+/* Contoh: kartu kecil bertali seperti dijepit di papan. */
+.ks-example {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 4px 2px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.12);
+  rotate: 3deg;
+  animation: ks-arrive 0.45s ease-out;
+}
+
+.ks-example__art {
+  display: block;
+  width: 62px;
+  height: 62px;
+}
+
+.ks-example__tag {
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #8a5a00;
+}
+
+.ks-pips {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  gap: 4px;
+}
+
+.ks-pip {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #f1dfc9;
+}
+
+.ks-pip--now {
+  background: #c8437e;
+}
+
+.ks-pip--done {
+  background: #2f9e44;
+}
+
+/* ---------- panggung gambar ---------- */
+
+.ks-stage {
+  flex: 1 1 0;
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  container-type: size;
+}
+
+.ks-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: #fffdf6;
+  box-shadow:
+    0 0 0 3px #f1dfc9,
+    0 4px 0 rgba(0, 0, 0, 0.12);
+  touch-action: none;
+  transition: box-shadow 0.4s ease;
+}
+
+@supports (container-type: size) {
+  .ks-canvas {
+    width: min(100cqw, 100cqh, 560px);
+    height: min(100cqw, 100cqh, 560px);
+  }
+}
+
+.ks-canvas--ready {
+  cursor: copy;
+  box-shadow:
+    0 0 0 3px #f1dfc9,
+    0 0 0 6px rgba(47, 158, 68, 0.55),
+    0 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* Karya jadi: dipasang di bingkai kayu. */
+.ks-stage--framed .ks-canvas {
+  box-shadow:
+    0 0 0 5px #c08a4f,
+    0 0 0 9px #8b5a2b,
+    0 6px 0 rgba(0, 0, 0, 0.2);
+  animation: ks-frame 0.6s ease-out;
+}
+
+@keyframes ks-frame {
+  40% {
+    scale: 1.04;
+  }
+}
+
+.ks-piece {
+  animation: ks-stick 0.28s ease-out;
+}
+
+@keyframes ks-stick {
+  from {
+    opacity: 0.4;
+  }
+}
+
+.ks-line {
+  /* Separuh garis tertutup alas bagiannya (lihat Collage.tsx): yang tampak 1. */
+  stroke: #8a6a45;
+  stroke-width: 2;
+  stroke-dasharray: 2.4 1.8;
+  stroke-linejoin: round;
+}
+
+.ks-line--glow {
+  stroke: #f2b705;
+  stroke-width: 4.4;
+  stroke-dasharray: none;
+  animation: ks-blink 0.9s ease-in-out infinite alternate;
+}
+
+.ks-line--no {
+  stroke: #e03131;
+  stroke-width: 4;
+  stroke-dasharray: none;
+}
+
+@keyframes ks-blink {
+  to {
+    opacity: 0.35;
+  }
+}
+
+/* ---------- lembar bahan / keping ---------- */
+
+.ks-sheets {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(var(--n), minmax(0, 76px));
+  justify-content: center;
+  gap: 6px;
+}
+
+.ks-sheet {
+  min-width: 0;
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 4px 2px 5px;
+  border: 0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.12);
+  cursor: grab;
+  touch-action: none;
+  font: inherit;
+  color: #3a2e20;
+}
+
+.ks-sheet__art {
+  display: block;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+}
+
+.ks-sheet__label {
+  max-width: 100%;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.1;
+  text-align: center;
+  pointer-events: none;
+}
+
+.ks-sheet--sel {
+  outline: 4px solid #2f9e44;
+  outline-offset: 1px;
+}
+
+.ks-sheets--nudge .ks-sheet {
+  animation: ks-nudge 0.45s ease-in-out;
+}
+
+@keyframes ks-nudge {
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+.ks-swatch {
+  cursor: pointer;
+}
+
+.ks-swatch__art {
+  display: block;
+  width: 36px;
+  height: 36px;
+  pointer-events: none;
+}
+
+/* ---------- mozaik ---------- */
+
+.ks-mosaic {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--rows), minmax(0, 1fr));
+  gap: 3px;
+  padding: 5px;
+  width: 100%;
+  aspect-ratio: var(--cols) / var(--rows);
+  border-radius: 14px;
+  /* Nat: celah di antara keping — justru ciri mozaik. */
+  background: #e7dfcf;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+  touch-action: none;
+}
+
+@supports (container-type: size) {
+  .ks-mosaic {
+    width: min(100cqw, 100cqh * var(--cols) / var(--rows), 520px);
+  }
+}
+
+.ks-mosaic--ready {
+  cursor: copy;
+  box-shadow:
+    0 0 0 3px rgba(47, 158, 68, 0.55),
+    0 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.ks-cell {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  border-radius: 4px;
+  background: #fffdf6;
+  pointer-events: none;
+}
+
+.ks-cell--no {
+  background: #ffc9c9;
+  animation: ks-shake 0.42s ease-in-out;
+}
+
+.ks-cell--glow {
+  box-shadow: inset 0 0 0 3px #f2b705;
+}
+
+.ks-cell__dot {
+  position: absolute;
+  inset: 34%;
+  border-radius: 50%;
+  opacity: 0.55;
+}
+
+.ks-tile {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: ks-pop 0.22s ease-out;
+}
+
+@keyframes ks-pop {
+  from {
+    scale: 0.4;
+  }
+}
+
+.ks-mosaic--shine .ks-tile {
+  animation: ks-shine 0.9s ease-in-out;
+}
+
+@keyframes ks-shine {
+  50% {
+    filter: brightness(1.35);
+    scale: 1.08;
+  }
+}
+
+/* ---------- urutkan langkah ---------- */
+
+.ks-steps {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.ks-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 3px 8px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px dashed #d6c3a5;
+}
+
+.ks-step--done {
+  background: #fff;
+  border-style: solid;
+  border-color: #b2dfb9;
+}
+
+.ks-step--next {
+  border-color: #c8437e;
+}
+
+.ks-step__no {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #c8437e;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.ks-step__card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  animation: ks-pop 0.25s ease-out;
+}
+
+.ks-step__text {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #3a2e20;
+}
+
+.ks-step__empty {
+  font-size: 20px;
+  font-weight: 800;
+  color: #b9a283;
+}
+
+/* ---------- baki kartu & keranjang ---------- */
+
+.ks-tray {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.ks-thing {
+  flex: 0 0 auto;
+  width: clamp(70px, 21vw, 92px);
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px 3px 5px;
+  border: 0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.12);
+  cursor: grab;
+  touch-action: none;
+  font: inherit;
+  color: #3a2e20;
+}
+
+.ks-thing--wide {
+  width: calc(50% - 3px);
+  max-width: 220px;
+  min-height: 48px;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 4px 8px;
+}
+
+.ks-thing--wide .ks-label {
+  text-align: left;
+}
+
+.ks-thing--sel {
+  outline: 4px solid #2f9e44;
+  outline-offset: 1px;
+}
+
+.ks-pic {
+  display: block;
+  flex: 0 0 auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.ks-pic--xs {
+  width: 22px;
+  height: 22px;
+}
+
+.ks-pic--sm {
+  width: 30px;
+  height: 30px;
+}
+
+.ks-pic--md {
+  width: clamp(38px, 11vw, 50px);
+  height: clamp(38px, 11vw, 50px);
+}
+
+/* Gambar emoji dari EcoPic (kelas eco-emoji milik Sahabat Bumi tak ikut termuat). */
+.ks-pic.eco-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  white-space: nowrap;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.ks-pic--md.eco-emoji {
+  font-size: clamp(28px, 8.4vw, 38px);
+}
+
+.ks-pic--xs.eco-emoji {
+  font-size: 18px;
+}
+
+.ks-label {
+  display: block;
+  max-width: 100%;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.12;
+  text-align: center;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+}
+
+.ks-bins {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.ks-bin {
+  min-width: 0;
+  min-height: clamp(116px, calc(100dvh - 430px), 190px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px 6px;
+  border: 3px solid #b98b55;
+  border-radius: 18px 18px 26px 26px;
+  /* Anyaman keranjang. */
+  background:
+    repeating-linear-gradient(45deg, rgba(185, 139, 85, 0.16) 0 6px, transparent 6px 12px),
+    repeating-linear-gradient(-45deg, rgba(185, 139, 85, 0.16) 0 6px, transparent 6px 12px),
+    #fff6e8;
+  cursor: pointer;
+  font: inherit;
+  color: #3a2e20;
+}
+
+.ks-bin--ready {
+  outline: 3px dashed #2f9e44;
+  outline-offset: 2px;
+}
+
+.ks-bin__emoji {
+  font-size: 30px;
+  line-height: 1.1;
+  pointer-events: none;
+}
+
+.ks-bin__label {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.1;
+  text-align: center;
+  pointer-events: none;
+}
+
+.ks-bin__rule {
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.8;
+  text-align: center;
+  pointer-events: none;
+}
+
+.ks-bin__in {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  margin-top: auto;
+  pointer-events: none;
+}
+
+/* ---------- pilih karya ---------- */
+
+.ks-show {
+  min-height: 150px;
+}
+
+.ks-frame {
+  display: block;
+  padding: 6px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #c08a4f, #8b5a2b);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.18);
+}
+
+.ks-show .ks-frame {
+  width: min(100cqw, 100cqh, 300px);
+  height: min(100cqw, 100cqh, 300px);
+}
+
+.ks-show__art,
+.ks-choice__art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background: #fffdf6;
+}
+
+.ks-frame--sm {
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 4px;
+}
+
+.ks-choices {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.ks-choice {
+  min-width: 0;
+  min-height: 64px;
+  padding: 6px 4px;
+}
+
+.ks-choice__text {
+  font-size: clamp(16px, 5vw, 20px);
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.ks-choice__emoji {
+  font-size: 26px;
+  line-height: 1;
+}
+
+/* Tiga pilihan kalimat panjang (misi besar): satu kolom. */
+.ks-choices--rows {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.ks-choices--rows .ks-choice {
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 6px 12px;
+}
+
+.ks-choices--rows .ks-choice__text {
+  text-align: left;
+  font-size: 16px;
+}
+
+/* ---------- montase ---------- */
+
+.ks-montage {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(#bfe3ff 0 58%, #a9e5a0 58%);
+}
+
+.ks-montage__cut {
+  position: absolute;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ks-montage__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Tepi guntingan putih: tanda potongan gambar yang ditempel. */
+  filter: drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff) drop-shadow(0 1.5px 0 #fff)
+    drop-shadow(0 -1.5px 0 #fff) drop-shadow(0 2px 1px rgba(0, 0, 0, 0.25));
+}
+
+.ks-montage__emoji {
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* ---------- umum ---------- */
+
+.ks-lifted {
+  opacity: 0.35;
+}
+
+.ks-ghost {
+  position: fixed;
+  z-index: 60;
+  margin: 0;
+  pointer-events: none;
+  will-change: transform;
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.25));
+}
+
+.ks-ghost--piece {
+  rotate: -8deg;
+}
+
+.ks-glow {
+  animation: ks-glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes ks-glow {
+  from {
+    box-shadow:
+      0 0 0 3px #ffd43b,
+      0 3px 0 rgba(0, 0, 0, 0.12);
+  }
+  to {
+    box-shadow:
+      0 0 0 7px #ffd43b,
+      0 3px 0 rgba(0, 0, 0, 0.12);
+  }
+}
+
+.ks-shake {
+  animation: ks-shake 0.42s ease-in-out;
+}
+
+@keyframes ks-shake {
+  20%,
+  60% {
+    translate: -6px 0;
+  }
+  40%,
+  80% {
+    translate: 6px 0;
+  }
+}
+
+/* HP pendek: di soal urutkan, monyetnya mengalah (kalimatnya dibacakan). */
+@media (max-height: 620px) {
+  .ks-wrap--order .ks-guide {
+    display: none;
+  }
+}
+
+/* ---------- HP dimiringkan: pemandu + bahan di kiri, gambar di kanan ---------- */
+
+@media (min-aspect-ratio: 4/3) and (max-height: 520px) {
+  .ks-prompt {
+    font-size: 17px;
+    margin: 0 0 2px;
+  }
+
+  .ks-area {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-rows: minmax(0, 1fr);
+    grid-auto-rows: min-content;
+    align-content: center;
+    column-gap: 14px;
+    row-gap: 6px;
+  }
+
+  .ks-area > * {
+    grid-column: 1;
+  }
+
+  /* Monyetnya mengalah; contoh TETAP tampil (anak menirunya). */
+  .ks-host,
+  .ks-bubble {
+    display: none;
+  }
+
+  .ks-guide {
+    min-height: 0;
+  }
+
+  /* Kolase & mozaik: gambar di kanan setinggi sisa layar, contoh + bahan di kiri. */
+  .ks-wrap--collage .ks-area,
+  .ks-wrap--mosaic .ks-area,
+  .ks-wrap--pick .ks-area {
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-content: stretch;
+  }
+
+  .ks-wrap--collage .ks-guide,
+  .ks-wrap--mosaic .ks-guide {
+    align-self: end;
+  }
+
+  .ks-area > .ks-stage,
+  .ks-area > .ks-bins,
+  .ks-area > .ks-steps {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    align-self: stretch;
+    min-height: 0;
+  }
+
+  .ks-area > .ks-show {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    min-height: 0;
+  }
+
+  .ks-wrap--pick .ks-choices {
+    grid-row: 1 / -1;
+    align-self: center;
+  }
+
+  /* Pilihan berupa karya / kalimat: memakai seluruh lebar layar. */
+  .ks-area > .ks-choices--works,
+  .ks-area > .ks-choices--rows {
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+
+  .ks-choices--works {
+    width: min(100%, calc((100dvh - 150px) * 3 + 16px));
+    max-width: none;
+  }
+
+  .ks-area > .ks-steps,
+  .ks-area > .ks-bins {
+    align-self: center;
+  }
+
+  .ks-sheets {
+    grid-template-columns: repeat(3, minmax(0, 76px));
+  }
+
+  .ks-step {
+    min-height: 40px;
+  }
+
+  .ks-bin {
+    min-height: calc(100dvh - 160px);
+  }
+
+  .ks-thing--wide {
+    min-height: 42px;
+  }
+
+  .ks-choices--works {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks-host--happy,
+  .ks-bubble,
+  .ks-example,
+  .ks-glow,
+  .ks-shake,
+  .ks-piece,
+  .ks-tile,
+  .ks-mosaic--shine .ks-tile,
+  .ks-stage--framed .ks-canvas,
+  .ks-sheets--nudge .ks-sheet,
+  .ks-line--glow,
+  .ks-cell--no,
+  .ks-step__card {
+    animation: none;
+  }
+
+  .ks-glow {
+    box-shadow:
+      0 0 0 5px #ffd43b,
+      0 3px 0 rgba(0, 0, 0, 0.12);
+  }
+}
