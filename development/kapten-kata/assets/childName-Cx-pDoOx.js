@@ -1,0 +1,1 @@
+const t="pp_child_name_v1",n=20;function r(e){return e.replace(/\s+/g," ").trim().slice(0,20).trim()}function c(){try{return r(localStorage.getItem(t)??"")}catch{return""}}function l(e){try{const a=r(e);a?localStorage.setItem(t,a):localStorage.removeItem(t)}catch{}}function o(){return`Halo, ${c()||"Petualang"}!`}export{n as C,r as c,o as g,c as r,l as w};

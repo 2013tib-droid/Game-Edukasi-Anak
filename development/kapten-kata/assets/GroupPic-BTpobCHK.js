@@ -1,0 +1,1 @@
+import{r as i,j as e}from"./index-rHx_rwNI.js";function p({pic:t,emoji:s,height:r=88,emojiSize:a=48}){const[o,n]=i.useState(!1);return!t||o?e.jsx("span",{style:{fontSize:a},children:s}):e.jsx("img",{src:`/Game-Edukasi-Anak/development/kapten-kata/assets/groups/${t}.webp`,alt:"",style:{height:r,width:"auto"},onError:()=>n(!0)})}export{p as G};
