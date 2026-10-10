@@ -21,6 +21,7 @@ import LegalPage from '@/portal/LegalPage';
  *   - pesanan dari Mayar ......... functions/src/index.ts (mayarWebhook, koleksi orders)
  *   - pesanan dicocokkan ke akun .. functions/src/index.ts (myPaidOrders, claimPaidOrder)
  *   - nama sapaan anak (HP saja) . src/portal/childName.ts (localStorage, tak ke server)
+ *   - ingatan kata Kapten Kata ... src/engine/core/wordVoyage.ts (localStorage pp_kata_v1, tak ke server)
  */
 export default function PrivacyPage() {
   return (
@@ -217,7 +218,8 @@ export default function PrivacyPage() {
         Beberapa hal disimpan di penyimpanan lokal browser dan <strong>tidak pernah dikirim ke
         mana pun</strong> kecuali disebut lain di atas: bintang hasil bermain, posisi “lanjutkan
         permainan”, nomor acak perangkat, pengumuman yang sudah dibaca, penanda tanggal
-        penghitung kunjungan, pengaturan penguji, dan nama sapaan anak kalau Anda mengisinya
+        penghitung kunjungan, pengaturan penguji, catatan kata bahasa Inggris yang sudah dikuasai
+        (dipakai game Kapten Kata untuk memilih kata latihan), dan nama sapaan anak kalau Anda mengisinya
         (dipakai untuk sapaan “Halo, …!”, dan dihapus saat Anda menekan Keluar).
         Menghapus data situs di browser akan menghapus semuanya dari HP itu; bintang yang sudah
         tercadang tetap bisa kembali saat Anda masuk lagi.

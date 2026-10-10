@@ -47,6 +47,10 @@ const OUT_DIR = 'public/assets/voice';
 const VOICES = {
   gadis: { name: 'id-ID-Gadis:DragonHDLatestNeural', rate: '-15%' },
   ardi: { name: 'id-ID-ArdiNeural', rate: '-8%' },
+  // Kapten Kata's English words & sentences (owner's decision 2026-10-10).
+  // Slower than conversation: these are words a child is learning to hear.
+  // No pronunciation layer — pronounce.mjs is Indonesian spelling rules.
+  en: { name: 'en-US-JennyNeural', rate: '-15%', lang: 'en-US' },
 };
 
 /** 24 kHz / 48 kbps mono MP3: plays everywhere, ~6 kB per spoken second. */
@@ -123,7 +127,7 @@ if (only && !selected.length) {
 
 const fileFor = (line) => `${line.scope}/${line.key}.mp3`;
 const stale = (l) =>
-  (redo && l.text.toLowerCase().includes(redo)) || (redoLafal && touched(l.text));
+  (redo && l.text.toLowerCase().includes(redo)) || (redoLafal && l.voice !== 'en' && touched(l.text));
 const pending = selected.filter((l) => stale(l) || !existsSync(path.join(OUT_DIR, fileFor(l))));
 const todo = limit ? pending.slice(0, limit) : pending;
 const chars = todo.reduce((sum, l) => sum + l.text.length, 0);
@@ -154,11 +158,16 @@ function ssml(line) {
   // both leave the screen text — and the manifest key built from it — alone.
   // `speechSsml` escapes first and inserts tags after; doing it the other way
   // round makes Azure read the tag out loud.
-  const text = speechSsml(line.text);
+  const english = voice.lang === 'en-US';
+  const text = english ? escapeXml(line.text) : speechSsml(line.text);
   return (
-    `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="id-ID">` +
+    `<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="${voice.lang ?? 'id-ID'}">` +
     `<voice name="${voice.name}"><prosody rate="${voice.rate}">${text}</prosody></voice></speak>`
   );
+}
+
+function escapeXml(s) {
+  return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' })[c]);
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
