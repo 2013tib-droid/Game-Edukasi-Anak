@@ -313,6 +313,15 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd2/kebun-ilmu'),
   },
   {
+    id: 'kapten-kata',
+    group: 'sd2',
+    subject: 'bahasa-inggris',
+    title: 'Kapten Kata',
+    emoji: '⛵',
+    template: 'word-voyage',
+    load: () => import('@/games/sd2/kapten-kata'),
+  },
+  {
     id: 'sahabat-bumi',
     group: 'sd2',
     subject: 'ipas',

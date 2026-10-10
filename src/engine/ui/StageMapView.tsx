@@ -46,6 +46,49 @@ export function stageUnlocked(gameId: string, stages: Stage[], i: number): boole
  */
 const LOCKED_LINE = 'Tahap ini masih terkunci. Selesaikan tahap sebelumnya dulu ya!';
 
+/** Angka acak berbenih — tiap pulau punya garis pantai sendiri yang tetap. */
+function seeded(seed: number) {
+  let a = seed;
+  return () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/** Garis pantai membulat dari titik-titik acak di sekeliling elips. */
+function blob(cx: number, cy: number, rx: number, ry: number, rand: () => number, n = 10, j = 0.14): string {
+  const pts: [number, number][] = [];
+  for (let i = 0; i < n; i += 1) {
+    const a = (i / n) * Math.PI * 2;
+    const k = 1 - j + rand() * j * 2;
+    pts.push([cx + Math.cos(a) * rx * k, cy + Math.sin(a) * ry * k]);
+  }
+  const mid = (a: [number, number], b: [number, number]) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  const f = (v: number) => v.toFixed(1);
+  const m0 = mid(pts[n - 1]!, pts[0]!);
+  let d = `M${f(m0[0]!)} ${f(m0[1]!)}`;
+  for (let i = 0; i < n; i += 1) {
+    const p = pts[i]!;
+    const m = mid(p, pts[(i + 1) % n]!);
+    d += ` Q${f(p[0])} ${f(p[1])} ${f(m[0]!)} ${f(m[1]!)}`;
+  }
+  return `${d}Z`;
+}
+
+/** Pulau untuk peta laut (`look: 'sea'`) — buih, pasir, rumput. */
+function IslandArt({ seed }: { seed: number }) {
+  const r = seeded(seed * 977 + 13);
+  return (
+    <svg className="stage-isle" viewBox="0 0 160 104" aria-hidden>
+      <ellipse className="stage-isle__foam" cx="80" cy="62" rx="78" ry="40" />
+      <path className="stage-isle__sand" d={blob(80, 62, 62, 30, r)} />
+      <path className="stage-isle__grass" d={blob(80, 54, 44, 20, r, 9, 0.12)} />
+    </svg>
+  );
+}
+
 /** Tinggi satu baris peta dalam piksel CSS; jalan & titik dihitung darinya. */
 const ROW = 116;
 /** Posisi mendatar titik, persen lebar peta — bergantian kiri/kanan. */
@@ -65,6 +108,7 @@ export default function StageMapView({
   onExit: () => void;
 }) {
   const { stages } = map;
+  const sea = map.look === 'sea';
   const progress = stages.map((s) => stageProgress(gameId, s));
   const unlocked = stages.map((_, i) => stageUnlocked(gameId, stages, i));
   // Tahap "sekarang" = tahap terbuka pertama yang belum selesai; kalau semua
@@ -106,10 +150,10 @@ export default function StageMapView({
   const lastDone = progress.reduce((acc, p, i) => (p.done >= p.total ? i : acc), -1);
 
   return (
-    <div className="game-center game-center--pick stage-screen">
+    <div className={'game-center game-center--pick stage-screen' + (sea ? ' stage-screen--sea' : '')}>
       <h1 className="pick-heading">{title}</h1>
       <p className="pick-prompt">{map.title}</p>
-      <div className="stage-map" style={{ height }}>
+      <div className={'stage-map' + (sea ? ' stage-map--sea' : '')} style={{ height }}>
         <svg
           className="stage-map__road"
           viewBox={`0 0 100 ${height}`}
@@ -159,6 +203,7 @@ export default function StageMapView({
                   onPlay(i);
                 }}
               >
+                {sea && <IslandArt seed={i} />}
                 <span className="stage-node__emoji" aria-hidden>
                   {stage.emoji}
                 </span>
@@ -168,7 +213,7 @@ export default function StageMapView({
               </button>
               {isCurrent && (
                 <span className="stage-node__go" aria-hidden>
-                  Mulai
+                  {sea ? '⛵ Berlayar' : 'Mulai'}
                 </span>
               )}
               <span className="stage-node__label">{stage.label}</span>

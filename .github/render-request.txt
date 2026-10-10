@@ -1,16 +1,13 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #35
+render #36
 
-only: studio-kolase
-
-Game baru SD Kelas 3 & 4 "Studio Kolase" (Seni Rupa: kolase kertas,
-kolase biji-bijian, mozaik, bahan alam/buatan, langkah membuat karya,
-kolase/mozaik/montase, misi besar pameran). 55 baris baru (3.286 karakter),
-semuanya scope studio-kolase. Dibandingkan sebelum vs sesudah lewat
-scripts/narration-lines.json: 1753 baris jadi 1808, nol baris lama berubah
-atau pindah scope, jadi aman dibatasi "only: studio-kolase" (file yang sudah
-ada dilewati).
+Gabungan Studio Kolase (render #35, only: studio-kolase, 55 baris) dan
+Kapten Kata (render #35, only: kapten-kata, 169 baris) — keduanya SUDAH
+dirender di branch masing-masing. Merge main ke studio-kolase cuma
+menyatukan scripts/narration-lines.json (1753 + 55 + 169 = 1977 baris, nol
+baris lama berubah/pindah scope). Run ini sengaja tanpa "only:": semua file
+sudah ada, jadi harusnya nol yang dirender (penjaga kalau ada yang tertinggal).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

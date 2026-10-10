@@ -77,6 +77,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'paint-studio': lazy(() => import('@/engine/templates/PaintStudio')),
   'eco-mission': lazy(() => import('@/engine/templates/EcoMission')),
   'collage-studio': lazy(() => import('@/engine/templates/CollageStudio')),
+  'word-voyage': lazy(() => import('@/engine/templates/WordVoyage')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */
