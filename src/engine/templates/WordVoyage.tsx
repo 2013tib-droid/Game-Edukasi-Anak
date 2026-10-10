@@ -106,13 +106,13 @@ function wordSize(text: string): string {
 
 /**
  * Kata TIDAK BOLEH patah di tengah ("elephan / t" terbaca dua kata). Jadi
- * tulisannya diperkecil sampai kata terpanjangnya muat selebar kartu: ±0,62em
+ * tulisannya diperkecil sampai kata terpanjangnya muat selebar kartu: ±0,6em
  * per huruf, diukur dari lebar kartunya sendiri (`cqw`, kartunya container).
  */
 function fitStyle(text: string): { fontSize: string } | undefined {
   const longest = Math.max(...text.split(' ').map((w) => w.length));
   if (longest <= 3) return undefined;
-  return { fontSize: `min(var(--wv-fs), ${(140 / longest).toFixed(1)}cqw)` };
+  return { fontSize: `min(var(--wv-fs), ${(150 / longest).toFixed(1)}cqw)` };
 }
 
 /** Satu kata Inggris di kartu/gelembung — ukuran dasar + dijaga muat. */
