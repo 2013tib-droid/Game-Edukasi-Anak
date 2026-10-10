@@ -61,11 +61,36 @@ function indonesianVoice(): SpeechSynthesisVoice | null {
 if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
   window.speechSynthesis.addEventListener?.('voiceschanged', () => {
     cachedVoice = undefined;
+    cachedEnglish = undefined;
   });
 }
 
-function utterance(text: string): SpeechSynthesisUtterance {
+let cachedEnglish: SpeechSynthesisVoice | null | undefined;
+
+/** Device voice for ENGLISH lines (Kapten Kata) — en-US first, any English after. */
+function englishVoice(): SpeechSynthesisVoice | null {
+  if (cachedEnglish !== undefined) return cachedEnglish;
+  const voices = window.speechSynthesis?.getVoices() ?? [];
+  cachedEnglish =
+    voices.find((v) => /^en[-_]us/i.test(v.lang)) ?? voices.find((v) => /^en/i.test(v.lang)) ?? null;
+  return cachedEnglish;
+}
+
+/** Language of a spoken line. Every line is Indonesian except Kapten Kata's English words. */
+export type SpeechLang = 'id' | 'en';
+
+function utterance(text: string, lang: SpeechLang = 'id'): SpeechSynthesisUtterance {
   const utter = new SpeechSynthesisUtterance(text);
+  if (lang === 'en') {
+    // An English word read by the Indonesian voice is worse than useless — it
+    // teaches the wrong sound. Ask for en-US even if the phone has no voice
+    // for it: the browser then picks whatever English it has.
+    utter.lang = 'en-US';
+    const voice = englishVoice();
+    if (voice) utter.voice = voice;
+    utter.rate = 0.82;
+    return utter;
+  }
   utter.lang = 'id-ID';
   const voice = indonesianVoice();
   if (voice) utter.voice = voice;
@@ -87,7 +112,7 @@ function utterance(text: string): SpeechSynthesisUtterance {
  * screen's celebration over the next question.
  */
 
-type QueueItem = { kind: 'say'; text: string; onDone?: () => void } | { kind: 'tune' };
+type QueueItem = { kind: 'say'; text: string; lang?: SpeechLang; onDone?: () => void } | { kind: 'tune' };
 
 /** Items waiting to be played, in order. */
 let queue: QueueItem[] = [];
@@ -130,13 +155,13 @@ if (typeof window !== 'undefined') {
 }
 
 /** Speak one line with the device's own voice (no rendered clip for it). */
-function speakWithDevice(text: string, gen: number, onEnd: () => void): void {
+function speakWithDevice(text: string, gen: number, onEnd: () => void, lang: SpeechLang = 'id'): void {
   if (gen !== generation) return;
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
     onEnd(); // no voice at all on this device — don't stall the queue
     return;
   }
-  const utter = utterance(text);
+  const utter = utterance(text, lang);
   utter.onend = onEnd;
   utter.onerror = onEnd;
   window.speechSynthesis.speak(utter);
@@ -203,7 +228,7 @@ async function pump(gen: number): Promise<void> {
     void playTuneItem(gen);
     return;
   }
-  const { text, onDone } = item;
+  const { text, onDone, lang } = item;
   await voicesReady(); // instant once loaded; capped so a bad network can't mute the game
   if (gen !== generation) return;
   // Told only when the line was really heard to the end. An interruption
@@ -215,8 +240,8 @@ async function pump(gen: number): Promise<void> {
     void pump(gen);
   };
   const url = voiceUrl(text);
-  if (url) playClip(url, gen, () => speakWithDevice(text, gen, next), next);
-  else speakWithDevice(text, gen, next);
+  if (url) playClip(url, gen, () => speakWithDevice(text, gen, next, lang), next);
+  else speakWithDevice(text, gen, next, lang);
 }
 
 function enqueue(items: QueueItem[], interrupt: boolean): void {
@@ -227,8 +252,8 @@ function enqueue(items: QueueItem[], interrupt: boolean): void {
   void pump(generation);
 }
 
-function say(text: string, onDone?: () => void): QueueItem {
-  return { kind: 'say', text, onDone };
+function say(text: string, onDone?: () => void, lang?: SpeechLang): QueueItem {
+  return { kind: 'say', text, onDone, lang };
 }
 
 /**
@@ -266,6 +291,17 @@ export function speakNext(...texts: string[]): void {
     texts.map((t) => say(t)),
     false,
   );
+}
+
+/**
+ * Speak an ENGLISH word or sentence (Kapten Kata). Same queue and same clip
+ * lookup as `speak` — the rendered clip is the Azure en-US voice — but when
+ * there is no clip the device is asked for an English voice, not id-ID.
+ * `next: true` waits behind whatever is already being said (e.g. the
+ * Indonesian instruction that opens a mission) instead of cutting it off.
+ */
+export function speakEnglish(text: string, onDone?: () => void, next = false): void {
+  enqueue([say(text, onDone, 'en')], !next);
 }
 
 export function stopSpeaking(): void {

@@ -1,15 +1,16 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #34
+render #35
 
-only: sahabat-bumi
+only: kapten-kata
 
-Game baru SD Kelas 3 & 4 "Sahabat Bumi" (IPAS: pilah sampah organik /
-anorganik / berbahaya, bank sampah, hemat air, daur air, sumber daya alam,
-misi besar sungai). 25 baris baru (1.305 karakter), semuanya scope
-sahabat-bumi. Dibandingkan sebelum vs sesudah lewat
-scripts/narration-lines.json: 1728 baris jadi 1753, nol baris lama berubah
-atau pindah scope, jadi aman dibatasi "only: sahabat-bumi" (file yang sudah
+Game baru SD Kelas 3 & 4 "Kapten Kata" (Bahasa Inggris, template engine
+baru word-voyage). 169 baris baru (2.141 karakter), semuanya scope
+kapten-kata: 160 baris BAHASA INGGRIS (suara baru `en` = en-US-JennyNeural,
+rate -15%, lihat VOICES di scripts/render-narration.mjs) + 9 baris instruksi
+Indonesia (Gadis). Dibandingkan sebelum vs sesudah lewat
+scripts/narration-lines.json: 1753 baris jadi 1922, nol baris lama berubah
+atau pindah scope, jadi aman dibatasi "only: kapten-kata" (file yang sudah
 ada dilewati).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow

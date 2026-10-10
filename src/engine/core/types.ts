@@ -29,7 +29,8 @@ export type TemplateId =
   | 'fraction-kitchen' // potong, bagi, tumpuk pecahan di toko kue (Bagi Kue)
   | 'read-find' // sentuh kalimat/kata bukti di dalam bacaan (Detektif Bacaan)
   | 'paint-studio' // campur cat, warnai, susun motif batik (Sanggar Warna)
-  | 'eco-mission'; // pilah sampah, daur air, jaga sungai (Sahabat Bumi)
+  | 'eco-mission' // pilah sampah, daur air, jaga sungai (Sahabat Bumi)
+  | 'word-voyage'; // kosakata & kalimat bahasa Inggris, 7 mode berganti (Kapten Kata)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -1205,6 +1206,67 @@ export interface EcoMissionData {
   steps: EcoStep[];
 }
 
+/* ---------- word-voyage (Kapten Kata, Bahasa Inggris sd2) ---------- */
+
+/**
+ * Satu kata Inggris. Gambarnya SALAH SATU: seni item (`item`, registry
+ * `items.ts` — WAJIB untuk hewan), `emoji`, contoh warna (`color`, hex) atau
+ * angka (`num`, ditulis besar — hanya di LAYAR; yang diucapkan tetap `en`).
+ * `en` diucapkan suara Inggris, `id` = artinya, tulisan layar saja.
+ */
+export interface VoyWord {
+  en: string;
+  id: string;
+  item?: string;
+  emoji?: string;
+  color?: string;
+  num?: number;
+}
+
+/**
+ * Satu kalimat Inggris pendek. `words` sudah urut, tanda baca menempel di
+ * kata terakhir ("small."). `gap` = indeks kata yang dikosongkan di soal
+ * lawan gurita, `wrong` = dua pengecohnya (kesalahan khas: is/are, has/have,
+ * a/an). `id` = artinya, tulisan layar saja.
+ */
+export interface VoyPhrase {
+  words: string[];
+  id: string;
+  gap: number;
+  wrong: [string, string];
+  item?: string;
+  emoji?: string;
+}
+
+/**
+ * Tujuh mode Kapten Kata — satu level = satu misi di satu pulau:
+ * - `pick`    lihat gambar → pilih kata Inggrisnya
+ * - `listen`  dengar kata Inggris → pilih gambarnya
+ * - `spell`   susun huruf acak jadi kata (huruf pengecoh ikut)
+ * - `bubbles` ketuk gelembung berisi kata yang dicari sebelum lolos ke atas
+ * - `pairs`   kartu kembar gambar ↔ kata Inggris
+ * - `build`   rangkai kata jadi kalimat Inggris (arti Indonesianya di atas)
+ * - `boss`    lawan gurita: soal campuran + isi kalimat rumpang sampai
+ *             guritanya menyerah
+ *
+ * Kata yang dipakai DIPILIH ENGINE dari `words` saat main (yang masih lemah
+ * di ingatan anak lebih sering keluar — `src/engine/core/wordVoyage.ts`),
+ * jadi config cuma menyebut kolam kata pulau itu.
+ */
+export type VoyMode = 'pick' | 'listen' | 'spell' | 'bubbles' | 'pairs' | 'build' | 'boss';
+
+export interface WordVoyageData {
+  mode: VoyMode;
+  /** Kolam kata pulau ini (minimal 6). */
+  words: VoyWord[];
+  /** Kalimat pulau ini — wajib untuk `build` & `boss`. */
+  phrases?: VoyPhrase[];
+  /** Banyak soal/target/pasang di misi ini (bawaan per mode di engine). */
+  count?: number;
+  /** Nama pulau, ditulis di kepala misi. */
+  island: string;
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -1225,6 +1287,7 @@ export interface LevelDataMap {
   'read-find': ReadFindData;
   'paint-studio': PaintStudioData;
   'eco-mission': EcoMissionData;
+  'word-voyage': WordVoyageData;
 }
 
 /* ---------- Game config ---------- */
@@ -1302,6 +1365,11 @@ export interface Stage {
 export interface StageMap {
   /** Ajakan di bawah judul game, mis. "Naik satu anak tangga tiap hari!". */
   title: string;
+  /**
+   * Rupa peta. `road` (bawaan) = jalan berkelok pastel (Tangga Membaca);
+   * `sea` = laut dengan pulau-pulau dan jalur kapal (Kapten Kata).
+   */
+  look?: 'road' | 'sea';
   stages: Stage[];
 }
 
