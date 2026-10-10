@@ -773,8 +773,9 @@
     max-width: none;
   }
   .wv-pond {
-    height: calc(100dvh - 210px);
-    min-height: 150px;
+    /* 360 − topbar 92 − kepala & soal 58 − isyarat 62 − jarak = ±132 px */
+    height: calc(100dvh - 230px);
+    min-height: 110px;
   }
   .wv-octo {
     width: 64px;
