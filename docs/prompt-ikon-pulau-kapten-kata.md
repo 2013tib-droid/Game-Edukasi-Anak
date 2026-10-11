@@ -6,7 +6,7 @@ jadi yang dibutuhkan **benda kecil yang langsung terbaca**, bukan adegan.
 
 ## Status (2026-10-11)
 
-**Sudah bergambar khusus (`art`): Satwa, Rasa, Warna, Angka** — dipotong `scripts/cut-soft.py … 256`, lalu bayangan lantai abu-abu di dasar & serpih lepas dibuang manual (render 3D ini selalu membawa bayangan lantai). Sisa: Barangku, Profesi, Aksi, Kota.
+**SELESAI — kedelapan pulau bergambar khusus (`art`)** — dipotong `scripts/cut-soft.py … 256`, lalu bayangan lantai abu-abu di dasar & serpih lepas dibuang manual (render 3D ini selalu membawa bayangan lantai). Lubang gagang tas (Barangku) ditembus manual; bayangan melayang di bawah sepatu (Aksi) dibuang sebagai serpih terpisah, garis geraknya dipertahankan.
 
 Catatan awal:
 

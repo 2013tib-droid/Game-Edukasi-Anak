@@ -184,7 +184,7 @@ const ISLANDS: Island[] = [
     key: 'barang',
     name: 'Pulau Barangku',
     emoji: '🎒',
-    item: 'backpack',
+    art: 'barangku',
     words: [
       W('book', 'buku', { item: 'book' }),
       W('pencil', 'pensil', { item: 'pencil' }),
@@ -215,7 +215,7 @@ const ISLANDS: Island[] = [
     key: 'profesi',
     name: 'Pulau Profesi',
     emoji: '🧑‍🍳',
-    item: 'chef',
+    art: 'profesi',
     words: [
       W('teacher', 'guru', { item: 'teacher' }),
       W('doctor', 'dokter', { item: 'doctor' }),
@@ -242,6 +242,7 @@ const ISLANDS: Island[] = [
     key: 'aksi',
     name: 'Pulau Aksi',
     emoji: '🏃',
+    art: 'aksi',
     words: [
       W('run', 'berlari', { emoji: '🏃' }),
       W('walk', 'berjalan', { emoji: '🚶' }),
@@ -270,7 +271,7 @@ const ISLANDS: Island[] = [
     key: 'kota',
     name: 'Pulau Kota',
     emoji: '🚌',
-    item: 'bus',
+    art: 'kota',
     words: [
       W('car', 'mobil', { item: 'car' }),
       W('bus', 'bus', { item: 'bus' }),
