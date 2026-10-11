@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-10",
-  "count": 1977,
-  "chars": 81609,
+  "generated": "2026-10-11",
+  "count": 2027,
+  "chars": 84562,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -11323,6 +11323,456 @@
       "voice": "gadis",
       "games": [
         "kenal-huruf"
+      ]
+    },
+    {
+      "key": "3678bd391110",
+      "text": "Angkat pemukulnya lalu lepas. Lihat berasnya! Waktu berbunyi, sentuh gendangnya.",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "db9da42ff42c",
+      "text": "Apakah cahaya senter bisa menembusnya? Uji dulu, lalu pilah!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "7e6506ecbbf5",
+      "text": "Atur air di gelasmu supaya bunyinya lebih rendah dari gelas contoh!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "9da79706f2d0",
+      "text": "Atur karetmu supaya bunyinya lebih tinggi dari karet contoh!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "30d01af4ca36",
+      "text": "Ayo main telepon kaleng! Tarik temanmu menjauh.",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "b8af8112b70f",
+      "text": "Bunyi bisa merambat lewat…",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "9100b09dc86c",
+      "text": "Bunyi keras terjadi kalau getarannya…",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "9440b0f493bd",
+      "text": "Bunyi pelan terjadi kalau getarannya…",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "416a204d47ca",
+      "text": "Colokkan tiap alat. Listriknya berubah jadi energi apa? Tempelkan!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "ef9ed19ee485",
+      "text": "Di tempat gelap, mana yang memancarkan cahaya sendiri? Matikan lampunya dulu!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "2d5c8f4c8cfc",
+      "text": "Gendang berbunyi keras kalau dipukul…",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "d7221ce56722",
+      "text": "Geser senter maju mundur. Buat bayangan bebek di layar jadi kecil, pas dengan kotaknya!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "a9536b27d98f",
+      "text": "Geser senter maju mundur. Buat bayangan beruang di layar jadi sedang, pas dengan kotaknya!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "f0be748007f5",
+      "text": "Geser senter maju mundur. Buat bayangan jerapah di layar jadi besar, pas dengan kotaknya!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "625cdbf18977",
+      "text": "Geser senter supaya bayangan kelinci jatuh ke arah rumah!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "19fed384019d",
+      "text": "Geser senter supaya bayangan kucing jatuh ke arah bola!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "2b26b4874d39",
+      "text": "Geser senter supaya bayangan pohon jatuh ke arah bunga!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "2077efca8882",
+      "text": "Halo, Panda! Aku Bebek. Suaramu terdengar jelas!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "8e611f0245ff",
+      "text": "Halo, Panda! Aku Katak. Suaramu terdengar jelas!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "87f3b55d18dc",
+      "text": "Halo, Panda! Aku Kelinci. Suaramu terdengar jelas!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "6a0bc9174366",
+      "text": "Halo, Panda! Aku Koala. Suaramu terdengar jelas!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "476af7002fdb",
+      "text": "Halo, Panda! Aku Kucing. Suaramu terdengar jelas!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "489ab3322eee",
+      "text": "Halo, Panda! Aku Monyet. Suaramu terdengar jelas!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "09de4bb33360",
+      "text": "Ikan di kolam bisa mendengar bunyi. Bunyi merambat lewat apa?",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "6ca6cd1315fb",
+      "text": "Ketuk tiap gelas dan dengarkan. Susun dari bunyi paling rendah ke paling tinggi!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "3a84b0ef548d",
+      "text": "Ketuk tiap gelas dan dengarkan. Susun dari bunyi paling tinggi ke paling rendah!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "bd1471e4b3ee",
+      "text": "Kita mendengar burung berkicau. Bunyinya merambat lewat apa?",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "e44145fc9589",
+      "text": "Listrik bisa berubah bentuk. Nyalakan alatnya, lalu tempel energinya!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "a81ce788a98e",
+      "text": "Matikan lampunya. Lalu sentuh semua benda yang bercahaya sendiri!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "eeca22029402",
+      "text": "Mengapa beras di atas gendang melompat?",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "6f1621c4710b",
+      "text": "Mengapa bunyinya berhenti?",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "ae3f429a19b5",
+      "text": "Misi besar: pertunjukan wayang! Geser senter, buat bayangan garuda di layar jadi besar!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "77736c92b3d0",
+      "text": "Misi besar: pertunjukan wayang! Geser senter, buat bayangan gunungan di layar jadi besar!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "39e6d67432f1",
+      "text": "Misi besar: pertunjukan wayang! Geser senter, buat bayangan wayang di layar jadi besar!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "c04c3568d126",
+      "text": "Pertunjukan selesai! Matikan alat yang tidak dipakai lagi.",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "5fe8a73baf8a",
+      "text": "Petik karetnya supaya bunyinya keras!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "434c616fa54d",
+      "text": "Petik karetnya supaya bunyinya pelan!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "dd4d342fb570",
+      "text": "Petik tiap karet dan dengarkan. Susun dari bunyi paling rendah ke paling tinggi!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "719094b282de",
+      "text": "Pukul gendangnya supaya bunyinya keras!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "6104ec7fb366",
+      "text": "Pukul gendangnya supaya bunyinya pelan!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "55622cc50a99",
+      "text": "Putar cerminnya supaya cahaya senter sampai ke tunas!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "a61e99a45f07",
+      "text": "Sekarang mainkan gamelan gelas! Susun dari nada rendah ke nada tinggi.",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "7a1a25b3b4d1",
+      "text": "Semua bunyi terjadi karena benda…",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "2133f67ebc4f",
+      "text": "Suara di telepon kaleng merambat lewat apa?",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "efb1e7cd9095",
+      "text": "Tarik karetnya lalu lepas. Waktu berbunyi, sentuh karetnya!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "df9974c463e8",
+      "text": "Telepon kaleng! Suaranya sampai kalau benangnya kencang. Tarik temanmu!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "b8237d43b025",
+      "text": "Telinga ditempel ke meja, ketukan terdengar jelas. Bunyi merambat lewat apa?",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "a41916f05d79",
+      "text": "Tunas butuh cahaya. Ketuk cermin untuk memutarnya, sampai cahaya senter mengenai tunas!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "d6ddddf5a16b",
+      "text": "Uji tiap benda di depan senter. Lalu pilah ke kotaknya!",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
+      ]
+    },
+    {
+      "key": "eb91205f78f6",
+      "text": "Waktu benangnya kendur, mengapa suaranya tidak sampai?",
+      "scope": "lab-cahaya-bunyi",
+      "voice": "gadis",
+      "games": [
+        "lab-cahaya-bunyi"
       ]
     },
     {

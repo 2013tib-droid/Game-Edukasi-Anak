@@ -170,6 +170,9 @@ for (const config of mod.configs) {
       // fraction-kitchen (Bagi Kue): the follow-up question after sharing /
       // stacking / filling is read aloud when it appears.
       add(step.task?.question, config.id, voice);
+      // light-lab (Lab Cahaya & Bunyi): the friend's line heard through the
+      // tin-can phone once the string is taut.
+      add(step.task?.line, config.id, voice);
       // paint-studio (Sanggar Warna): every colour the bowl can end up as is
       // named aloud ("Jadi warna ungu!") — any two tubes, the same tube twice
       // included — and a recognised batik motif names its home region.

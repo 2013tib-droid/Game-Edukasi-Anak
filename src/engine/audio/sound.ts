@@ -48,6 +48,11 @@ function ctx(): AudioContext | null {
   return audioCtx;
 }
 
+/** The shared AudioContext (for `tones.ts`' live fallback). Null without WebAudio. */
+export function audioContext(): AudioContext | null {
+  return ctx();
+}
+
 let cachedVoice: SpeechSynthesisVoice | null | undefined;
 
 function indonesianVoice(): SpeechSynthesisVoice | null {

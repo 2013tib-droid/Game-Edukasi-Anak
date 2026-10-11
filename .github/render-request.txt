@@ -1,13 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #36
+render #37 — Lab Cahaya & Bunyi (game IPAS ketiga sd2): 50 baris baru,
+semuanya scope lab-cahaya-bunyi (2.953 karakter). 1977 → 2027 baris, nol
+baris lama berubah/pindah scope, nol digit — jadi aman pakai "only:".
 
-Gabungan Studio Kolase (render #35, only: studio-kolase, 55 baris) dan
-Kapten Kata (render #35, only: kapten-kata, 169 baris) — keduanya SUDAH
-dirender di branch masing-masing. Merge main ke studio-kolase cuma
-menyatukan scripts/narration-lines.json (1753 + 55 + 169 = 1977 baris, nol
-baris lama berubah/pindah scope). Run ini sengaja tanpa "only:": semua file
-sudah ada, jadi harusnya nol yang dirender (penjaga kalau ada yang tertinggal).
+only: lab-cahaya-bunyi
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender
