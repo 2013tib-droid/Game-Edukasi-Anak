@@ -387,6 +387,7 @@ export const games: GameMeta[] = [
     subject: 'pancasila',
     title: 'Perisai Garuda',
     emoji: '🦅',
+    pic: 'perisai-garuda',
     template: 'mixed',
     load: () => import('@/games/sd2/perisai-garuda'),
   },

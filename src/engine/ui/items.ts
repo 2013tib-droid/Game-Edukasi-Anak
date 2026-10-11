@@ -61,6 +61,10 @@ export const ITEMS: Record<string, ItemDef> = {
   // Burung jalak (Cerita Anak). Emoji 🐦 itu burung biru generik — jalak
   // justru dikenali dari badan hitam, paruh & kaki kuning, dan garis putih
   // di sayap; tidak ada emoji yang membawanya.
+  // Lambang negara Garuda Pancasila (Perisai Garuda, sd2) — gambar resmi
+  // kiriman pemilik. Jangan diubah/dikarang warnanya, dan jangan dipakai
+  // sebagai hiasan sembarangan: ini lambang negara.
+  garuda: { emoji: '🦅', label: 'Garuda Pancasila', ext: 'webp' },
   jalak: { emoji: '🐦', label: 'burung jalak', ext: 'webp' },
   // ILUSTRASI HALAMAN CERITA, bukan benda yang bisa dihitung. Gambarnya satu
   // adegan utuh (Kancil berjalan di tepi rawa) berikut latarnya sendiri, jadi

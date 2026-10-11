@@ -62,13 +62,13 @@ function silaChoices(answer: SilaId, decoys: SilaId[] = others(answer)): TapChoi
   ];
 }
 
-/** Satu pilihan kalimat: [teks, emoji]. */
-type Opt = [text: string, emoji: string];
+/** Satu pilihan kalimat: [teks, emoji, id gambar registry?]. */
+type Opt = [text: string, emoji: string, item?: string];
 
 function cards(answer: Opt, decoys: Opt[]): TapChoice[] {
   return [
-    { id: 'c0', text: answer[0], emoji: answer[1], correct: true },
-    ...decoys.map(([text, emoji], i) => ({ id: `c${i + 1}`, text, emoji })),
+    { id: 'c0', text: answer[0], emoji: answer[1], item: answer[2], correct: true },
+    ...decoys.map(([text, emoji, item], i) => ({ id: `c${i + 1}`, text, emoji, item })),
   ];
 }
 
@@ -206,7 +206,7 @@ const config: MixedGameConfig = {
       { emoji: '🐂', sila: 4, label: 'Sila 4' },
       ask(
         'Apa nama lambang negara kita?',
-        ['Garuda Pancasila', '🦅'],
+        ['Garuda Pancasila', '🦅', 'garuda'],
         [
           ['Burung Merak', '🦚'],
           ['Burung Beo', '🦜'],
