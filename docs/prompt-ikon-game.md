@@ -264,7 +264,8 @@ kaca pembesar.
 | `detektif-bacaan` | rencana | Buatkan: satu kaca pembesar bergagang peach berwajah imut di gagangnya, lensanya diarahkan ke selembar kertas krem bergaris-garis. Garis di kertas hanya garis abu-abu tipis, TIDAK boleh ada huruf atau kata. Tinggi dan lebar gambarnya kira-kira sama. |
 | `susun-kalimat` | rencana | Buatkan: satu kereta mainan kecil yang menanjak miring — lokomotif warna biru muda berwajah imut di depan, diikuti dua gerbong pendek warna peach dan hijau mint, tiap gerbong mengangkut satu kartu putih bergaris KOSONG. Kartu tidak boleh berisi huruf atau kata. Keretanya menanjak diagonal, bukan berjajar mendatar panjang. |
 | `sanggar-warna` | sudah ada (2026-10-08) | Buatkan: satu mangkuk cat bundar kecil warna putih krem berwajah imut di badan depannya, tiga tetes cat besar berbentuk tetesan air — satu merah, satu kuning, satu biru — sedang jatuh ke dalam mangkuk dari atas, dan cat di dalam mangkuk berpusar warna oranye, hijau, dan ungu. Satu kuas kecil bergagang kayu bersandar di tepi mangkuk. Tanpa palet cat, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
-| `sahabat-bumi` | sudah ada (2026-10-09) | Buatkan: satu bola bumi kecil yang bulat berwajah imut tersenyum, benua hijau dan laut biru muda, memeluk satu tunas daun hijau di tangannya yang mungil. Di sampingnya satu tong sampah kecil hijau. Dua bintang kecil pastel. Tanpa tulisan, tanpa panah daur ulang. Tinggi dan lebar gambarnya kira-kira sama. |
+| `sahabat-bumi` | **TERPASANG 2026-10-11** | Buatkan: satu tong sampah kecil yang gemuk dan pendek warna hijau mint berwajah imut di badan depannya, tutupnya sedikit terbuka. Dari celah tutupnya tumbuh satu tunas hijau dengan dua daun bulat, dan satu kulit pisang kuning kecil sedang jatuh masuk ke dalam tong dari atas. Satu tetes air biru muda dan dua bintang kecil pastel melayang di sampingnya. Tanpa panah daur ulang, tanpa bola bumi, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `lab-cahaya-bunyi` | **TERPASANG 2026-10-11** | Buatkan: satu senter genggam kecil yang gemuk warna biru muda dengan kepala lampu kuning krem, berwajah imut di badan senternya, berdiri miring menghadap ke kanan atas. Dari kepala lampunya memancar satu berkas cahaya kuning lembut berbentuk kerucut pendek yang melebar sedikit, dan di dalam berkas cahaya itu melayang dua not musik kecil warna peach dan ungu muda. Dua bintang kecil pastel di sekitarnya. Berkas cahayanya pendek dan miring ke atas, tidak menjulur panjang ke samping. Tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 | `studio-kolase` | rencana (2026-10-09) | Buatkan: selembar kertas gambar persegi warna krem berwajah imut di pojok bawahnya, di atasnya menempel kolase seekor ikan kecil yang tersusun dari sobekan kertas warna-warni (biru, kuning, merah muda) bertepi robek tidak rata. Satu sobekan kertas hijau melayang di sampingnya dan satu botol lem putih kecil berdiri di dekatnya. Tanpa gunting, tanpa kuas, tanpa palet, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 
 ### Catatan per ikon
@@ -309,6 +310,27 @@ kaca pembesar.
   terbaca "kolase" adalah TEPI ROBEK sobekannya — kalau Gemini memberi potongan bertepi
   lurus rapi, itu terbaca mozaik/stiker; minta ulang "tepi sobekan kertasnya robek,
   bergerigi tidak rata".
+
+- **Sahabat Bumi: BUKAN bola bumi lagi** (ganti 2026-10-11). Bola bumi terbaca persis
+  emoji 🌍 yang sedang dipakai kartunya, jadi ikon baru tidak terasa "baru". Tong sampah
+  hijau = warna tong organik yang dipakai di dalam game (standar Indonesia), kulit pisang
+  = benda organik pertama yang dipilah anak. JANGAN pot/kecambah saja — itu ikon Kebun
+  Ilmu; tunasnya di sini cuma hiasan di tutup tong. Tanpa panah daur ulang (lambang itu
+  tidak dipakai di game). Periksa lubang terkurung di celah tutup tong sesudah
+  `cut-item.py`.
+
+- **Lab Cahaya & Bunyi: senter dengan not musik di dalam cahayanya** — satu benda untuk
+  dua materi (cahaya + bunyi). Berkas cahaya rawan MELEBAR dan rawan jadi gradasi pucat
+  yang ikut terbuang flood-fill: kalau sesudah dipotong kerucutnya hilang/berlubang,
+  minta ulang "berkas cahayanya kuning krem PEKAT dengan outline coklat tipis". Kalau
+  rasionya lewat ±1,5, minta "rapatkan, berkas cahayanya lebih pendek". Jangan wayang
+  atau gelas: itu isi misi besar, dan di kotak ±116 px cuma terbaca noda.
+
+- **Bingkai stiker putih Gemini meninggalkan garis bayangan ABU-ABU tipis** sesudah
+  `cut-item.py` (kena di kedua ikon 2026-10-11, cuma terlihat di atas warna gelap). Dikupas
+  dengan flood fill dari area transparan lewat piksel abu-abu terang (selisih RGB < 28,
+  terang > 140) lalu serpih < 30 px dibuang. Kilau mata & sorot badan selamat karena
+  terkurung warna. Tempel hasilnya di atas biru tua untuk memeriksa.
 
 ### Memasangnya
 
