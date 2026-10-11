@@ -44,13 +44,13 @@ export interface SubjectStyle {
 export const SUBJECT_STYLE: Record<SubjectId, SubjectStyle> = {
   // 🧮, bukan 🔢: keycap 🔢 tampil sebagai kotak abu-abu "1234" di iPhone.
   matematika: { title: 'Matematika', tag: 'Angka & Logika', deco: '🧮', pic: 'matematika', from: '#4f56d6', to: '#7a6cf0' },
-  'bahasa-indonesia': { title: 'Bahasa Indonesia', tag: 'Literasi & Kata', deco: '📚', from: '#8445d0', to: '#a45fe4' },
+  'bahasa-indonesia': { title: 'Bahasa Indonesia', tag: 'Literasi & Kata', deco: '📚', pic: 'bahasa-indonesia', from: '#8445d0', to: '#a45fe4' },
   // Kurikulum Merdeka menggabungkan IPA & IPS jadi IPAS mulai kelas 3.
-  ipas: { title: 'IPAS', tag: 'Alam & Sosial', deco: '🌿', from: '#2b8a47', to: '#47a95a' },
+  ipas: { title: 'IPAS', tag: 'Alam & Sosial', deco: '🌿', pic: 'ipas', from: '#2b8a47', to: '#47a95a' },
   // 🦅, bukan 🇮🇩: bendera emoji tampil sebagai huruf "ID" di sebagian perangkat.
   pancasila: { title: 'Pancasila', tag: 'Nilai & Karakter', deco: '🦅', from: '#c7621a', to: '#e2862c' },
-  'seni-rupa': { title: 'Seni Rupa', tag: 'Kreativitas', deco: '🎨', from: '#c8437e', to: '#e0659b' },
-  'bahasa-inggris': { title: 'Bahasa Inggris', tag: 'English Fun', deco: '🔤', from: '#2475c4', to: '#4793e0' },
+  'seni-rupa': { title: 'Seni Rupa', tag: 'Kreativitas', deco: '🎨', pic: 'seni-rupa', from: '#c8437e', to: '#e0659b' },
+  'bahasa-inggris': { title: 'Bahasa Inggris', tag: 'English Fun', deco: '🔤', pic: 'bahasa-inggris', from: '#2475c4', to: '#4793e0' },
 };
 
 export interface GroupSubject {

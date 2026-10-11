@@ -14,7 +14,8 @@ tambahkan `pic: 'matematika'` di barisnya. Tak ada kode lain yang berubah.
 | mapel | file | status |
 |---|---|---|
 | `matematika` | `matematika.webp` (320×269, 20 kB) | ✅ terpasang 2026-10-11 — sempoa Pilihan 1. Empat bidang putih di jendela sempoa (terkurung, tak terjangkau flood-fill) ditembus manual; kilau mata dibiarkan. |
-| `bahasa-indonesia` · `ipas` · `pancasila` · `seni-rupa` · `bahasa-inggris` | — | prompt di bawah, masih emoji |
+| `bahasa-indonesia` · `seni-rupa` · `bahasa-inggris` · `ipas` | `<id>.webp` (sisi terpanjang 320, 13–16 kB) | ✅ terpasang 2026-10-11 — datang sebagai STIKER (bingkai putih die-cut + bayangan abu-abu). `cut-item.py` meninggalkan cincin abu-abu di sekeliling gambar, jadi dipotong `cut-soft.py <art> <out> 1024 185 22 5` lalu serpih abu-abu kecil (sisa bayangan, saturasi < 30) dibuang dan dipangkas ke kotak isinya. Dua bintang yang sangat pucat ikut terbuang (ABC & kanvas) — tak apa. |
+| `pancasila` | — | prompt di bawah, masih emoji 🦅 |
 
 ## Kenapa diganti (2026-10-11)
 
