@@ -85,7 +85,7 @@ export const SUBJECT_STYLE: Record<SubjectId, SubjectStyle> = {
     tag: 'Warna & karya',
     deco: '🎨',
     pic: 'seni-rupa',
-    look: { cover: '#8a6cc9', ink: '#6448a3', pattern: 'konfeti' },
+    look: { cover: '#e0698f', ink: '#b2405f', pattern: 'konfeti' },
   },
   'bahasa-inggris': {
     title: 'Bahasa Inggris',

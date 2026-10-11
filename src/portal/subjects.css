@@ -3,7 +3,8 @@
   max-width: 760px;
 }
 
-/* Nama kelompok = pita besar bergradien dengan stiker gambarnya di kiri dan
+/* Nama kelompok = pita besar bergradien jingga (BUKAN ungu — pemilik tak
+   suka ungu, 2026-10-11) dengan stiker gambarnya di kiri dan
    dua kerlip bintang. Dulu teks cokelat 16px yang tenggelam di latar. */
 .subj-group {
   display: flex;
@@ -18,13 +19,13 @@
   max-width: 100%;
   padding: 7px 26px 7px 7px;
   border-radius: 999px;
-  background: linear-gradient(135deg, #6a5ae0 0%, #9b62e0 55%, #d46cb8 100%);
+  background: linear-gradient(135deg, #ffad3b 0%, #ff8a3d 50%, #f2675c 100%);
   color: #fff;
   font-size: clamp(22px, 6.8vw, 30px);
   font-weight: 800;
   line-height: 1.1;
-  text-shadow: 0 2px 0 rgba(60, 30, 120, 0.35);
-  box-shadow: 0 5px 0 #4b3aa8, 0 12px 20px rgba(80, 50, 160, 0.28);
+  text-shadow: 0 2px 0 rgba(150, 60, 10, 0.35);
+  box-shadow: 0 5px 0 #c9542a, 0 12px 20px rgba(200, 90, 30, 0.28);
 }
 .subj-ribbon__pic {
   flex: none;
@@ -34,7 +35,7 @@
   height: 58px;
   border-radius: 50%;
   background: #fff8e6;
-  box-shadow: 0 0 0 3px #ffe08a;
+  box-shadow: 0 0 0 3px #fff3c4;
   rotate: -6deg;
 }
 .subj-ribbon__pic img {
@@ -43,8 +44,8 @@
 }
 .subj-ribbon__spark {
   position: absolute;
-  color: #ffd84a;
-  text-shadow: 0 1px 0 #c99a00;
+  color: #ffe066;
+  text-shadow: 0 1px 0 #d08a00;
   line-height: 1;
   pointer-events: none;
   animation: subj-twinkle 1.8s ease-in-out infinite;
@@ -101,11 +102,11 @@
   min-width: 0;
   padding: 10px 14px 11px;
   border-radius: 18px;
-  /* Bukan putih (permintaan pemilik): lilac-ke-langit yang senada pita
-     kelompok, bingkai ungu muda. */
-  background: linear-gradient(135deg, #efe7ff 0%, #e2f1ff 100%);
-  border: 2.5px solid #c7b4f4;
-  box-shadow: 0 4px 0 #b9a3ee;
+  /* Bukan putih DAN bukan ungu (dua-duanya ditolak pemilik): biru langit
+     ke hijau mint, bingkai biru muda. */
+  background: linear-gradient(135deg, #e0f3ff 0%, #ddf6ec 100%);
+  border: 2.5px solid #9fd2ea;
+  box-shadow: 0 4px 0 #8cc4dc;
 }
 /* Ekor balon menunjuk ke maskot. */
 .subj-hello__bubble::before {
@@ -115,9 +116,9 @@
   top: 50%;
   width: 18px;
   height: 18px;
-  background: #efe7ff;
-  border-left: 2.5px solid #c7b4f4;
-  border-bottom: 2.5px solid #c7b4f4;
+  background: #e0f3ff;
+  border-left: 2.5px solid #9fd2ea;
+  border-bottom: 2.5px solid #9fd2ea;
   transform: translateY(-50%) rotate(45deg);
   border-radius: 0 0 0 3px;
 }
@@ -126,7 +127,7 @@
   display: block;
   font-size: 15px;
   font-weight: 800;
-  color: #7a4bd6;
+  color: #d4552f;
   overflow-wrap: anywhere;
 }
 .subj-hello__ask {
