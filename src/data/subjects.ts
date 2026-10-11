@@ -43,7 +43,7 @@ export interface SubjectStyle {
 /** Tampilan tiap mapel — sama di semua kelompok. */
 export const SUBJECT_STYLE: Record<SubjectId, SubjectStyle> = {
   // 🧮, bukan 🔢: keycap 🔢 tampil sebagai kotak abu-abu "1234" di iPhone.
-  matematika: { title: 'Matematika', tag: 'Angka & Logika', deco: '🧮', from: '#4f56d6', to: '#7a6cf0' },
+  matematika: { title: 'Matematika', tag: 'Angka & Logika', deco: '🧮', pic: 'matematika', from: '#4f56d6', to: '#7a6cf0' },
   'bahasa-indonesia': { title: 'Bahasa Indonesia', tag: 'Literasi & Kata', deco: '📚', from: '#8445d0', to: '#a45fe4' },
   // Kurikulum Merdeka menggabungkan IPA & IPS jadi IPAS mulai kelas 3.
   ipas: { title: 'IPAS', tag: 'Alam & Sosial', deco: '🌿', from: '#2b8a47', to: '#47a95a' },

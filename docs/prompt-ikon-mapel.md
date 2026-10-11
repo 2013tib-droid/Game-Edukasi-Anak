@@ -9,6 +9,13 @@ Pasang: potong dengan `python3 scripts/cut-item.py <gambar> public/assets/subjec
 tempel hasilnya di atas warna gelap dulu (lubang terkurung harus ditembus manual), lalu
 tambahkan `pic: 'matematika'` di barisnya. Tak ada kode lain yang berubah.
 
+## Status
+
+| mapel | file | status |
+|---|---|---|
+| `matematika` | `matematika.webp` (320×269, 20 kB) | ✅ terpasang 2026-10-11 — sempoa Pilihan 1. Empat bidang putih di jendela sempoa (terkurung, tak terjangkau flood-fill) ditembus manual; kilau mata dibiarkan. |
+| `bahasa-indonesia` · `ipas` · `pancasila` · `seni-rupa` · `bahasa-inggris` | — | prompt di bawah, masih emoji |
+
 ## Kenapa diganti (2026-10-11)
 
 Emoji 🔢 tampil sebagai kotak abu-abu bertulisan "1234" di iPhone — terbaca seperti
@@ -52,3 +59,25 @@ ditempel di tiap pesan.
 
 Pilihan 2 rawan: toples bisa diberi label bertulisan, dan bagian dalam kaca yang putih bisa
 terkurung (perlu ditembus manual). Coba Pilihan 1 dulu.
+
+## Baris prompt — mapel lainnya (kirim SATU per pesan, selalu + EKOR PROMPT)
+
+Ikon yang SUDAH dipakai game di mapel itu dihindari, supaya ikon mapel tidak terbaca
+sebagai salah satu game-nya.
+
+| id file | hindari | Baris prompt |
+|---|---|---|
+| `bahasa-indonesia` | kereta (Susun Kalimat), kaca pembesar (Detektif Bacaan) | Buatkan: satu buku terbuka yang gemuk dan membulat, sampulnya warna ungu lavender pastel, dengan pita pembatas buku warna peach menjuntai dari tengahnya. Halaman-halamannya POLOS krem, tanpa tulisan, tanpa garis kalimat, tanpa gambar. Wajah imut digambar di sampul bagian bawah depan, tidak di halaman. Bentuk keseluruhan hampir persegi. Tambahkan dua bintang kecil pastel di dekatnya. |
+| `ipas` | kecambah dalam pot (Kebun Ilmu), bola dunia (Sahabat Bumi), kaca pembesar | Buatkan: satu mikroskop mainan kecil yang gemuk dan membulat warna hijau mint pastel, dengan satu daun kecil hijau muda di atas meja kacanya. Wajah imut digambar di badan mikroskop yang lebar, tidak di lensanya. Bentuk keseluruhan menjulang dan ringkas, tidak melebar. Tambahkan dua bintang kecil pastel di dekatnya. |
+| `pancasila` | burung garuda & lambang sila (Perisai Garuda — lambang negara tidak boleh dikarang) | Buatkan: satu bendera kecil berkibar di tiang kayu pendek, bendera itu terdiri dari DUA warna saja: merah di setengah bagian atas dan putih di setengah bagian bawah, tanpa gambar atau simbol apa pun di benderanya. Wajah imut digambar di bulatan emas di puncak tiang, tidak di benderanya. Bentuk keseluruhan hampir persegi. Tambahkan dua bintang kecil pastel di dekatnya. |
+| `seni-rupa` | palet cat (Labirin Warna), kuas & palet (Sanggar Warna), gunting (Studio Kolase) | Buatkan: satu kanvas lukis kecil berdiri di atas penyangga lukisan (easel) kayu, kanvasnya berisi lukisan pelangi lembut warna merah muda, kuning, dan mint di atas langit biru muda. Wajah imut digambar di papan kayu penyangga di bawah kanvas, tidak di lukisannya. Bentuk keseluruhan menjulang dan ringkas. Tambahkan dua bintang kecil pastel di dekatnya. |
+| `bahasa-inggris` | perahu layar (Kapten Kata), bola dunia | Buatkan: satu balon ucapan bulat yang gemuk warna biru muda pastel, di dalamnya tiga huruf kapital besar A, B, dan C berjajar, warna peach, kuning krem, dan hijau mint. Wajah imut digambar KECIL di bagian bawah balon, di bawah hurufnya — wajah dan huruf tidak boleh saling menimpa. Selain huruf A, B, dan C tidak boleh ada tulisan apa pun. Tambahkan dua bintang kecil pastel di dekatnya. |
+
+Catatan per gambar:
+
+- **`pancasila`: cek urutan warnanya** — MERAH di atas, putih di bawah. Bendera terbalik
+  (putih di atas) itu bendera Polandia; jangan dipakai walau gambarnya lucu.
+- **`bahasa-inggris`: huruf A dan B punya lubang terkurung** — tembus manual sesudah dipotong
+  (pelajaran keempat `prompt-ikon-game.md`).
+- **`ipas` & `seni-rupa`**: celah di antara kaki penyangga/mikroskop juga terkurung —
+  periksa di atas latar gelap.
