@@ -98,9 +98,11 @@ jobs:
           SITE_URL: https://2013tib-droid.github.io/Game-Edukasi-Anak/development/${{ steps.nama.outputs.nama }}/
           VITE_USE_HASH_ROUTER: '1'
           VITE_ALLOW_TEST_TOGGLE: '1'
-          # Development = SEMUA game TERBUKA (keputusan pemilik 2026-10-10).
-          # Gembok cuma untuk produksi; mode terkunci tetap bisa dicoba lewat 🔒.
           VITE_LOCK_MODE: buka
+          # Keputusan pemilik 2026-10-09: development SELALU terbuka (saklar
+          # disembunyikan, pilihan kunci di HP diabaikan). Hapus baris ini kalau
+          # mau mencoba alur terkunci lagi menjelang rilis.
+          VITE_FORCE_OPEN: '1'
         run: |
           npm ci
           npm run build

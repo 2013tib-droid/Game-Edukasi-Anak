@@ -76,6 +76,21 @@ export const DEFAULT_LOCK_MODE: LockMode = isLockMode(envMode) ? envMode : 'kunc
 export const TEST_TOGGLE_ALLOWED: boolean =
   import.meta.env.DEV || import.meta.env.VITE_ALLOW_TEST_TOGGLE === '1';
 
+/**
+ * Build DEVELOPMENT (`/development/main/`): SEMUA game terbuka, saklar 🔓/🔒
+ * disembunyikan, dan pilihan kunci yang tersimpan di HP DIABAIKAN — keputusan
+ * pemilik 2026-10-09: *"untuk yang development buka aja, gausah dikunci-kunci;
+ * nanti kalau game-nya mau selesai baru dikasih kunci"*. Pilihan tersimpan
+ * memang harus diabaikan: localStorage dipakai bersama seluruh
+ * `2013tib-droid.github.io`, jadi "Terkunci" yang pernah diketuk di HP
+ * pemilik dulu tetap mengunci walau build-nya terbuka.
+ *
+ * Hanya berlaku di build penguji (`TEST_TOGGLE_ALLOWED`) — build produksi tak
+ * bisa menyalakannya. Untuk mencoba alur terkunci lagi: lepas
+ * `VITE_FORCE_OPEN` di `.github/workflows/deploy-dev.yml`.
+ */
+export const FORCE_OPEN: boolean = TEST_TOGGLE_ALLOWED && import.meta.env.VITE_FORCE_OPEN === '1';
+
 const MODE_KEY = 'pp_lock_mode_v1';
 const TEST_KEY = 'pp_test_mode_v1';
 
@@ -109,6 +124,7 @@ function write(key: string, value: string | null): void {
  */
 export function getLockMode(): LockMode {
   if (!TEST_TOGGLE_ALLOWED) return DEFAULT_LOCK_MODE;
+  if (FORCE_OPEN) return 'buka';
   const stored = read(MODE_KEY);
   return isLockMode(stored) ? stored : DEFAULT_LOCK_MODE;
 }

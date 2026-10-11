@@ -10,8 +10,12 @@ import LandingPage from '@/portal/LandingPage';
 import { syncTestModeFromUrl, TEST_TOGGLE_ALLOWED } from '@/data/access';
 
 // `?test=1` in the URL turns on tester mode (shows the lock switch) and is
-// remembered on the device; `?test=0` turns it off again.
+// remembered on the device; `?test=0` turns it off again. Re-read on every
+// hash change too: with HashRouter, opening a `…/#/kelompok/sd2?test=1` link in
+// a tab that already shows the app does NOT reload it, so reading it once at
+// start-up missed the flag and the switch never appeared (owner 2026-10-09).
 syncTestModeFromUrl();
+window.addEventListener('hashchange', syncTestModeFromUrl);
 
 // The landing page is imported EAGERLY: it is the first screen every buyer
 // sees (links from WhatsApp/TikTok land on "/"), and as a lazy chunk it cost a
