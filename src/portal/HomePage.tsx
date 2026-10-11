@@ -45,7 +45,7 @@ export default function HomePage() {
       <div className="nb-shelf home-shelf">
         {groupsData.groups.filter(isGroupVisible).map((group) => {
           // Umur selalu bagian PERTAMA deskripsi (lihat "Penamaan Kelompok").
-          const [age, ...rest] = group.description.split(' · ');
+          const [age] = group.description.split(' · ');
           const count = gamesForGroup(group.id as GroupId).length;
           return (
             <Notebook
@@ -55,7 +55,6 @@ export default function HomePage() {
               kicker={age}
               // NBSP: tak ada kata yatim ("TK", "2") di baris kedua — sama dengan GroupPage.
               name={group.title.replace(/ & /g, '\u00a0&\u00a0').replace(/ (\S+)$/, '\u00a0$1')}
-              desc={rest.join(' · ') || undefined}
               count={count}
               to={`/kelompok/${group.id}`}
               ariaLabel={group.title}

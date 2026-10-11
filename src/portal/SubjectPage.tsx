@@ -57,7 +57,6 @@ export default function SubjectPage({ group, subjects }: Props) {
               sticker={<GroupPic dir="subjects" pic={style.pic} emoji={style.deco} height={84} emojiSize={58} />}
               kicker={style.tag}
               name={style.title}
-              desc={s.description}
               count={count}
               to={count === 0 ? null : `/kelompok/${group.id}/${s.id}`}
               ariaLabel={count === 0 ? undefined : `${style.title}, ${count} game`}
