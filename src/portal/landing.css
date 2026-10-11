@@ -492,7 +492,8 @@
 
 /* "Segera hadir" — groups still in production (SD Kelas 3 & 4, SD Kelas 5 & 6).
    Deliberately lighter than the price cards above: dashed outline, translucent,
-   no raised shadow and no price. Nothing here is buyable yet, so it must never
+   no raised shadow, no buy button (a planned price may show — owner's call
+   2026-10-11). Nothing here is buyable yet, so it must never
    compete with — or be mistaken for — the two cards that are on sale. */
 .landing .soon {
   margin-top: 26px;
