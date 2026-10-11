@@ -10,6 +10,8 @@ import Notebook from '@/portal/Notebook';
 import BackIcon from '@/engine/ui/BackIcon';
 import LockToggle from '@/portal/LockToggle';
 import { greeting } from '@/portal/childName';
+import Scene from '@/engine/ui/Scene';
+import '@/engine/ui/scene.css';
 import './subjects.css';
 
 interface Props {
@@ -31,17 +33,8 @@ export default function SubjectPage({ group, subjects }: Props) {
   const mascot = mascotFor(getTotalStars()).stage;
   return (
     <div className="page subj-page">
-      <p className="subj-group">
-        <span className="subj-ribbon">
-          <span className="subj-ribbon__pic" aria-hidden>
-            <GroupPic pic={group.pic} emoji={group.emoji} height={46} emojiSize={32} />
-          </span>
-          {/* NBSP: "& 4" tak pernah turun baris sendirian. */}
-          {group.title.replace(/ & /g, '\u00a0&\u00a0')}
-          <span className="subj-ribbon__spark subj-ribbon__spark--a" aria-hidden>✦</span>
-          <span className="subj-ribbon__spark subj-ribbon__spark--b" aria-hidden>✦</span>
-        </span>
-      </p>
+      <Scene id="padang" />
+      <SignTitle group={group} />
 
       <div className="subj-hello">
         <span className="subj-hello__buddy" aria-hidden>
@@ -80,6 +73,36 @@ export default function SubjectPage({ group, subjects }: Props) {
       <div style={{ marginTop: 18, textAlign: 'center' }}>
         <LockToggle />
       </div>
+    </div>
+  );
+}
+
+/**
+ * Papan kayu bertuliskan nama kelompok. "SD Kelas 3 & 4" dipecah: kata di
+ * baris atas, nomor kelasnya besar & jingga di bawah — anak SD mengenali
+ * "3 & 4"-nya, bukan kalimatnya. Judul tanpa angka tampil satu baris.
+ */
+function SignTitle({ group }: { group: Props['group'] }) {
+  const m = /^(.*?)\s*(\d.*)$/.exec(group.title);
+  return (
+    <div className="subj-sign" role="img" aria-label={group.title}>
+      <span className="subj-sign__pic" aria-hidden>
+        <GroupPic pic={group.pic} emoji={group.emoji} height={58} emojiSize={40} />
+      </span>
+      <span className="subj-sign__text" aria-hidden>
+        {m ? (
+          <>
+            <span className="subj-sign__top">{m[1]}</span>
+            <span className="subj-sign__big">
+              <span className="subj-sign__spark">✦</span>
+              {m[2].replace(/ & /g, '\u00a0&\u00a0')}
+              <span className="subj-sign__spark subj-sign__spark--b">✦</span>
+            </span>
+          </>
+        ) : (
+          <span className="subj-sign__top">{group.title}</span>
+        )}
+      </span>
     </div>
   );
 }

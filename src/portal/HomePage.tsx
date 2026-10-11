@@ -13,10 +13,10 @@ import './home.css';
 // gradien sebelumnya ikut bergaya kartu yang disalin dari situs lain).
 // Kelompok tanpa entri jatuh ke tosca (bukan ungu — pemilik tak suka ungu).
 const GROUP_LOOK: Record<string, NotebookLook> = {
-  tk: { cover: '#e0688a', ink: '#b2405f', pattern: 'konfeti' },
-  sd1: { cover: '#ee8a2f', ink: '#b45f12', pattern: 'garis' },
-  sd2: { cover: '#3d86c6', ink: '#255f95', pattern: 'kotak' },
-  sd3: { cover: '#4b9a68', ink: '#2f6f47', pattern: 'titik' },
+  tk: { cover: '#e0688a', ink: '#b2405f', pattern: 'konfeti', doodles: ['★', '♥', '✿'] },
+  sd1: { cover: '#ee8a2f', ink: '#b45f12', pattern: 'garis', doodles: ['A', '1', '+', 'b'] },
+  sd2: { cover: '#3d86c6', ink: '#255f95', pattern: 'kotak', doodles: ['×', '÷', '3'] },
+  sd3: { cover: '#4b9a68', ink: '#2f6f47', pattern: 'titik', doodles: ['½', '%', '△'] },
 };
 const FALLBACK_LOOK: NotebookLook = { cover: '#2a9d8f', ink: '#1d7268', pattern: 'bintang' };
 

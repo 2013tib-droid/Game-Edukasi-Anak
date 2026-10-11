@@ -15,6 +15,8 @@ export interface NotebookLook {
   /** Warna tulisan kecil di label (senada sampul, lebih gelap). */
   ink: string;
   pattern: CoverPattern;
+  /** Coretan kecil di sampul (≤ 4 karakter teks, BUKAN emoji). */
+  doodles?: readonly string[];
 }
 
 interface Props {
@@ -50,6 +52,11 @@ export default function Notebook({ look, sticker, kicker, name, desc, count, to,
   const body = (
     <>
       <span className="nb__spiral" aria-hidden />
+      {look.doodles?.slice(0, 4).map((d, i) => (
+        <span key={i} className={`nb__doodle nb__doodle--${i + 1}`} aria-hidden>
+          {d}
+        </span>
+      ))}
       {!!count && !soon && (
         <span className="nb__ribbon" aria-hidden>
           <b>{count}</b>
@@ -63,6 +70,9 @@ export default function Notebook({ look, sticker, kicker, name, desc, count, to,
         <span className="nb__kicker">{kicker}</span>
         <span className="nb__name">{name}</span>
         {desc && <span className="nb__desc">{desc}</span>}
+        <span className="nb__star" aria-hidden>
+          ★
+        </span>
       </span>
       {soon && (
         <span className="nb__tape" aria-hidden>

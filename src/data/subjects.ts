@@ -55,14 +55,14 @@ export const SUBJECT_STYLE: Record<SubjectId, SubjectStyle> = {
     tag: 'Hitung & ukur',
     deco: '🧮',
     pic: 'matematika',
-    look: { cover: '#2a9d8f', ink: '#1d7268', pattern: 'kotak' },
+    look: { cover: '#3d8be0', ink: '#235fa8', pattern: 'kotak', doodles: ['2', '+', '×', '÷'] },
   },
   'bahasa-indonesia': {
     title: 'Bahasa Indonesia',
     tag: 'Baca & tulis',
     deco: '📚',
     pic: 'bahasa-indonesia',
-    look: { cover: '#e3a127', ink: '#9a6508', pattern: 'garis' },
+    look: { cover: '#f2b233', ink: '#b8780a', pattern: 'garis', doodles: ['A', 'C', 'B', '♡'] },
   },
   // Kurikulum Merdeka menggabungkan IPA & IPS jadi IPAS mulai kelas 3.
   ipas: {
@@ -70,7 +70,7 @@ export const SUBJECT_STYLE: Record<SubjectId, SubjectStyle> = {
     tag: 'Amati & coba',
     deco: '🌿',
     pic: 'ipas',
-    look: { cover: '#6a9f3a', ink: '#4a7424', pattern: 'titik' },
+    look: { cover: '#5bb84a', ink: '#358a2a', pattern: 'titik', doodles: ['✿', '❋', '✦'] },
   },
   // 🦅, bukan 🇮🇩: bendera emoji tampil sebagai huruf "ID" di sebagian perangkat.
   pancasila: {
@@ -78,21 +78,21 @@ export const SUBJECT_STYLE: Record<SubjectId, SubjectStyle> = {
     tag: 'Rukun & adil',
     deco: '🦅',
     pic: 'pancasila',
-    look: { cover: '#cf4b45', ink: '#a5302b', pattern: 'serong' },
+    look: { cover: '#ec5b5b', ink: '#b8302f', pattern: 'serong', doodles: ['★', '✦', '✶'] },
   },
   'seni-rupa': {
     title: 'Seni Rupa',
     tag: 'Warna & karya',
     deco: '🎨',
     pic: 'seni-rupa',
-    look: { cover: '#e0698f', ink: '#b2405f', pattern: 'konfeti' },
+    look: { cover: '#e0698f', ink: '#b2405f', pattern: 'konfeti', doodles: ['✎', '✿', '◍'] },
   },
   'bahasa-inggris': {
     title: 'Bahasa Inggris',
     tag: 'Kata & kalimat',
     deco: '🔤',
     pic: 'bahasa-inggris',
-    look: { cover: '#33598f', ink: '#27467a', pattern: 'bintang' },
+    look: { cover: '#33598f', ink: '#27467a', pattern: 'bintang', doodles: ['a', 'b', 'c', '?'] },
   },
 };
 

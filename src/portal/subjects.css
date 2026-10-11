@@ -3,62 +3,89 @@
   max-width: 760px;
 }
 
-/* Nama kelompok = pita besar bergradien jingga (BUKAN ungu — pemilik tak
-   suka ungu, 2026-10-11) dengan stiker gambarnya di kiri dan
-   dua kerlip bintang. Dulu teks cokelat 16px yang tenggelam di latar. */
-.subj-group {
-  display: flex;
-  justify-content: center;
-  margin: 4px 0 20px;
-}
-.subj-ribbon {
+/* Nama kelompok = PAPAN KAYU (2026-10-11, dari referensi desain pemilik):
+   kata di atas cokelat tua, nomor kelas besar jingga berlis putih, gambar
+   kelompok di kiri, dua paku di pojok. Bukan ungu — pemilik tak suka ungu. */
+.subj-sign {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
   max-width: 100%;
-  padding: 7px 26px 7px 7px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #ffad3b 0%, #ff8a3d 50%, #f2675c 100%);
-  color: #fff;
-  font-size: clamp(22px, 6.8vw, 30px);
-  font-weight: 800;
-  line-height: 1.1;
-  text-shadow: 0 2px 0 rgba(150, 60, 10, 0.35);
-  box-shadow: 0 5px 0 #c9542a, 0 12px 20px rgba(200, 90, 30, 0.28);
+  margin: 6px auto 18px;
+  padding: 10px 22px 10px 14px;
+  border: 3px solid #a8692f;
+  border-radius: 18px;
+  background:
+    repeating-linear-gradient(176deg, rgba(140, 80, 30, 0.13) 0 2px, transparent 2px 11px),
+    linear-gradient(180deg, #f0c387 0%, #dca263 100%);
+  box-shadow: 0 6px 0 #8a5427, 0 12px 18px rgba(110, 60, 20, 0.25);
+  rotate: -1.5deg;
 }
-.subj-ribbon__pic {
+.subj-sign::before,
+.subj-sign::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7a4a20;
+  box-shadow: inset -1px -1px 0 rgba(255, 255, 255, 0.4);
+}
+.subj-sign::before { left: 8px; }
+.subj-sign::after { right: 8px; }
+.subj-sign__pic {
   flex: none;
   display: grid;
   place-items: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: #fff8e6;
-  box-shadow: 0 0 0 3px #fff3c4;
   rotate: -6deg;
+  filter: drop-shadow(0 3px 2px rgba(90, 50, 15, 0.3));
 }
-.subj-ribbon__pic img {
-  max-width: 48px;
+.subj-sign__pic img {
+  max-width: 60px;
   object-fit: contain;
 }
-.subj-ribbon__spark {
-  position: absolute;
-  color: #ffe066;
-  text-shadow: 0 1px 0 #d08a00;
+.subj-sign__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   line-height: 1;
-  pointer-events: none;
+}
+.subj-sign__top {
+  color: #4a2a10;
+  font-size: clamp(24px, 7.4vw, 34px);
+  font-weight: 800;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+.subj-sign__big {
+  position: relative;
+  margin-top: 2px;
+  color: #ff8a1f;
+  font-size: clamp(38px, 12vw, 54px);
+  font-weight: 900;
+  -webkit-text-stroke: 2px #fff;
+  paint-order: stroke fill;
+  text-shadow: 0 3px 0 #b65a10;
+  white-space: nowrap;
+}
+.subj-sign__spark {
+  position: absolute;
+  left: -20px;
+  top: 4px;
+  color: #ffe066;
+  font-size: 18px;
+  -webkit-text-stroke: 0;
+  text-shadow: 0 1px 0 #d08a00;
   animation: subj-twinkle 1.8s ease-in-out infinite;
 }
-.subj-ribbon__spark--a {
-  top: -12px;
-  right: 6px;
-  font-size: 22px;
-}
-.subj-ribbon__spark--b {
-  bottom: -10px;
-  right: 34%;
-  font-size: 15px;
+.subj-sign__spark--b {
+  left: auto;
+  right: -20px;
+  top: auto;
+  bottom: 4px;
   animation-delay: 0.9s;
 }
 @keyframes subj-twinkle {
@@ -66,7 +93,7 @@
   50% { scale: 0.55; opacity: 0.55; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .subj-ribbon__spark {
+  .subj-sign__spark {
     animation: none;
   }
 }
@@ -102,11 +129,11 @@
   min-width: 0;
   padding: 10px 14px 11px;
   border-radius: 18px;
-  /* Bukan putih DAN bukan ungu (dua-duanya ditolak pemilik): biru langit
-     ke hijau mint, bingkai biru muda. */
-  background: linear-gradient(135deg, #e0f3ff 0%, #ddf6ec 100%);
-  border: 2.5px solid #9fd2ea;
-  box-shadow: 0 4px 0 #8cc4dc;
+  /* Krem hangat berbingkai kuning tebal (referensi pemilik) — bukan putih
+     polos dan bukan ungu, dua-duanya ditolak pemilik. */
+  background: #fff9e3;
+  border: 3px solid #ffd54a;
+  box-shadow: 0 4px 0 #e8b830;
 }
 /* Ekor balon menunjuk ke maskot. */
 .subj-hello__bubble::before {
@@ -116,9 +143,9 @@
   top: 50%;
   width: 18px;
   height: 18px;
-  background: #e0f3ff;
-  border-left: 2.5px solid #9fd2ea;
-  border-bottom: 2.5px solid #9fd2ea;
+  background: #fff9e3;
+  border-left: 3px solid #ffd54a;
+  border-bottom: 3px solid #ffd54a;
   transform: translateY(-50%) rotate(45deg);
   border-radius: 0 0 0 3px;
 }
