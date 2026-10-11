@@ -115,15 +115,35 @@
   background:
     /* lubang di sampul */
     radial-gradient(circle at 15px 9px, #5a4632 2.4px, transparent 3px) 0 0 / 22px 18px repeat-y,
-    /* lilitan kawat */
+    /* lilitan kawat — warnanya senada sampul (--nb-ink), bukan perak */
     linear-gradient(
         172deg,
-        transparent 0 5px,
-        #c9ccd4 5px 8px,
-        #8d929e 8px 9.5px,
+        transparent 0 4.5px,
+        var(--nb-ink) 4.5px 8.5px,
+        rgba(255, 255, 255, 0.55) 8.5px 9.5px,
         transparent 9.5px
       )
       0 0 / 22px 18px repeat-y;
+}
+
+/* ---- Coretan kecil di sampul (angka, huruf, bunga…) ---- */
+.nb__doodle {
+  position: absolute;
+  z-index: 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1;
+  pointer-events: none;
+}
+.nb__doodle--1 { top: 12px; left: 26px; rotate: -10deg; }
+.nb__doodle--2 { top: 62px; left: 22px; rotate: 8deg; font-size: 15px; }
+.nb__doodle--3 { top: 74px; right: 12px; rotate: 12deg; }
+.nb__doodle--4 { top: 26px; left: 50%; rotate: -6deg; font-size: 13px; }
+.nb__sticker,
+.nb__label {
+  position: relative;
+  z-index: 1;
 }
 
 /* ---- Pita pembatas buku: banyaknya game ---- */
@@ -179,18 +199,38 @@
   padding: 8px 10px 9px;
   border-radius: 10px;
   background: #fffdf6;
-  /* Bingkai ganda: garis warna sampul di dalam tepi putih. */
-  box-shadow:
-    inset 0 0 0 3px #fffdf6,
-    inset 0 0 0 4.5px var(--nb-cover),
-    0 2px 0 rgba(0, 0, 0, 0.12);
+  /* Bingkai putus-putus warna sampul di dalam tepi putih. */
+  outline: 2px dashed var(--nb-cover);
+  outline-offset: -6px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
+  position: relative;
+}
+/* Bintang emas menempel di pojok kiri bawah label. */
+.nb__star {
+  position: absolute;
+  left: -9px;
+  bottom: -8px;
+  font-size: 20px;
+  line-height: 1;
+  color: #ffc928;
+  text-shadow: 0 1px 0 #c98e00, 0 0 2px #fff;
+  rotate: -12deg;
+  pointer-events: none;
 }
 .nb__kicker {
+  align-self: flex-start;
+  max-width: 100%;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--nb-ink);
+  color: #fff;
   font-size: 11.5px;
   font-weight: 800;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--nb-ink);
+  line-height: 1.25;
+  white-space: nowrap;
+  /* Huruf biasa (bukan kapital semua) supaya "Warna & karya" / "Usia 10–12
+     tahun" muat satu baris; di buku sempit (HP 320) hurufnya mengecil lewat
+     container query, tak pernah dipotong "…" atau turun baris. */
 }
 .nb__label {
   container-type: inline-size;
@@ -202,6 +242,9 @@
   line-height: 1.1;
 }
 @supports (container-type: inline-size) {
+  .nb__kicker {
+    font-size: min(11.5px, 9.4cqw);
+  }
   .nb__name {
     font-size: min(23px, calc(168cqw / var(--nb-len)));
   }
