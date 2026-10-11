@@ -8,7 +8,7 @@ import '@/engine/ui/mascot.css';
  * Stages whose art is not drawn yet carry no `pic`, so they render the emoji
  * without ever requesting a file that would 404.
  */
-function MascotPic({ stage, className }: { stage: MascotStage; className: string }) {
+export function MascotPic({ stage, className }: { stage: MascotStage; className: string }) {
   const [failed, setFailed] = useState(false);
   const src = mascotImageUrl(stage);
   if (!src || failed) return <>{stage.emoji}</>;
