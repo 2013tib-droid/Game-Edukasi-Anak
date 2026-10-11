@@ -58,7 +58,7 @@ const ISLANDS: Island[] = [
     key: 'satwa',
     name: 'Pulau Satwa',
     emoji: '🐯',
-    item: 'tiger',
+    art: 'satwa',
     words: [
       W('cat', 'kucing', { item: 'cat' }),
       W('rabbit', 'kelinci', { item: 'rabbit' }),
@@ -91,7 +91,7 @@ const ISLANDS: Island[] = [
     key: 'rasa',
     name: 'Pulau Rasa',
     emoji: '🍉',
-    item: 'watermelon',
+    art: 'rasa',
     words: [
       W('apple', 'apel', { item: 'apple' }),
       W('banana', 'pisang', { item: 'banana' }),
@@ -123,7 +123,7 @@ const ISLANDS: Island[] = [
     key: 'warna',
     name: 'Pulau Warna',
     emoji: '🎨',
-    item: 'brush',
+    art: 'warna',
     // Oranye sengaja tidak dipakai: di layar HP kuning & oranye sulit dibedakan
     // (aturan yang sama dengan Labirin Warna & keranjang Pasar Buah).
     words: [
@@ -153,6 +153,7 @@ const ISLANDS: Island[] = [
     key: 'angka',
     name: 'Pulau Angka',
     emoji: '🔢',
+    art: 'angka',
     // Pasangan -teen / -ty (thirteen ↔ thirty) sengaja ada bersama: begitu
     // katanya mulai dikuasai, engine mengadu yang ejaannya paling mirip.
     words: [

@@ -6,6 +6,10 @@ jadi yang dibutuhkan **benda kecil yang langsung terbaca**, bukan adegan.
 
 ## Status (2026-10-11)
 
+**Sudah bergambar khusus (`art`): Satwa, Rasa, Warna, Angka** — dipotong `scripts/cut-soft.py … 256`, lalu bayangan lantai abu-abu di dasar & serpih lepas dibuang manual (render 3D ini selalu membawa bayangan lantai). Sisa: Barangku, Profesi, Aksi, Kota.
+
+Catatan awal:
+
 Sambil menunggu seni ini, enam pulau memakai seni item yang SUDAH ada (`Stage.item`):
 Satwa = harimau · Rasa = semangka · Warna = kuas · Barangku = tas · Profesi = koki ·
 Kota = bus. **Angka & Aksi masih emoji** (🔢 🏃) — tidak ada seni yang cocok, jadi dua
