@@ -1,0 +1,1 @@
+import{r as u,j as t}from"./index-D5czgpWu.js";function p({pic:e,emoji:s,height:r=88,emojiSize:a=48,dir:o="groups"}){const[n,i]=u.useState(!1);return!e||n?t.jsx("span",{style:{fontSize:a},children:s}):t.jsx("img",{src:`/Game-Edukasi-Anak/development/main/assets/${o}/${e}.webp`,alt:"",style:{height:r,width:"auto"},onError:()=>i(!0)})}export{p as G};
