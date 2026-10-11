@@ -53,8 +53,12 @@ const floaters = [
 ];
 
 /**
- * Groups still in production. Listed WITHOUT a price on purpose — nothing here
- * is for sale yet, so a number (even struck through) would read as an offer.
+ * Groups still in production. Not buyable yet, so no buy button.
+ *
+ * Owner's call (2026-10-11): SD Kelas 3 & 4 shows its planned price (Rp59.000
+ * struck, Rp39.000) so visitors know what to expect; SD Kelas 5 & 6 has no
+ * price decided and stays without one. The −33% chip is rounded DOWN (actual
+ * 33.9%) — the shown discount must never exceed the real one.
  *
  * Owner's call (2026-08-07): the name reads "Kelompok SD Kelas 3 & 4", matching
  * the price cards above, and the description carries the subjects ONLY — no age
@@ -62,8 +66,16 @@ const floaters = [
  * it. This is deliberately different from `groups.json`, where the age does lead
  * the description.
  */
-const soonGroups = [
-  { name: 'Kelompok SD Kelas 3 & 4', desc: 'Perkalian, pembagian, membaca cerita' },
+const soonGroups: {
+  name: string;
+  desc: string;
+  price?: { was: string; now: string; off: string };
+}[] = [
+  {
+    name: 'Kelompok SD Kelas 3 & 4',
+    desc: 'Perkalian, pembagian, membaca cerita',
+    price: { was: 'Rp59.000', now: 'Rp39.000', off: '−33%' },
+  },
   { name: 'Kelompok SD Kelas 5 & 6', desc: 'Pecahan, bangun ruang, soal cerita' },
 ];
 
@@ -226,6 +238,13 @@ export default function LandingPage() {
           {soonGroups.map((g) => (
             <li key={g.name} className="soon-item">
               <span className="soon-name">{g.name}</span>
+              {g.price && (
+                <span className="pc-row">
+                  <span className="pc-was">{g.price.was}</span>
+                  <span className="pc-now">{g.price.now}</span>
+                  <span className="pc-off">{g.price.off}</span>
+                </span>
+              )}
               <span className="soon-desc">{g.desc}</span>
             </li>
           ))}
