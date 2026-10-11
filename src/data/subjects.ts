@@ -48,7 +48,7 @@ export const SUBJECT_STYLE: Record<SubjectId, SubjectStyle> = {
   // Kurikulum Merdeka menggabungkan IPA & IPS jadi IPAS mulai kelas 3.
   ipas: { title: 'IPAS', tag: 'Alam & Sosial', deco: '🌿', pic: 'ipas', from: '#2b8a47', to: '#47a95a' },
   // 🦅, bukan 🇮🇩: bendera emoji tampil sebagai huruf "ID" di sebagian perangkat.
-  pancasila: { title: 'Pancasila', tag: 'Nilai & Karakter', deco: '🦅', from: '#c7621a', to: '#e2862c' },
+  pancasila: { title: 'Pancasila', tag: 'Nilai & Karakter', deco: '🦅', pic: 'pancasila', from: '#c7621a', to: '#e2862c' },
   'seni-rupa': { title: 'Seni Rupa', tag: 'Kreativitas', deco: '🎨', pic: 'seni-rupa', from: '#c8437e', to: '#e0659b' },
   'bahasa-inggris': { title: 'Bahasa Inggris', tag: 'English Fun', deco: '🔤', pic: 'bahasa-inggris', from: '#2475c4', to: '#4793e0' },
 };
