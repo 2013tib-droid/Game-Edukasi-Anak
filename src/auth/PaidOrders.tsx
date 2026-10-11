@@ -91,10 +91,13 @@ export function PaidOrderCard({
   order,
   onDone,
   onClaimed,
+  claim = claimPaidOrder,
 }: {
   order: PaidOrder;
   onDone?: (result: RedeemResult) => void;
   onClaimed?: () => void;
+  /** Pengganti pemanggil server — hanya untuk halaman simulasi (build penguji). */
+  claim?: (orderId: string) => Promise<RedeemResult>;
 }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -104,7 +107,7 @@ export function PaidOrderCard({
     setError(null);
     setBusy(true);
     try {
-      const result = await claimPaidOrder(order.orderId);
+      const result = await claim(order.orderId);
       cache.clear();
       onClaimed?.();
       if (onDone) onDone(result);
