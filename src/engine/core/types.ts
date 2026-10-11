@@ -1509,8 +1509,16 @@ export interface Stage {
   id: string;
   /** Nama pendek di bawah titik peta, mis. "Suku Kata". */
   label: string;
-  /** Ikon titik peta. */
+  /** Ikon titik peta — cadangan kalau `art`/`item` tak ada atau gagal dimuat. */
   emoji: string;
+  /**
+   * Seni ikon khusus tahap: nama berkas di `public/assets/islands/<art>.webp`.
+   * Isi HANYA kalau berkasnya sudah ada di repo (kalau tidak, console 404).
+   * Menang atas `item`.
+   */
+  art?: string;
+  /** Id seni item registry (`items.ts`) sebagai ikon sementara. */
+  item?: string;
   /**
    * Id slot (`GameLevel.id`) yang menjadi isi tahap ini, dimainkan berurutan.
    * Tiap slot WAJIB milik tepat satu tahap. Tahap dianggap SELESAI kalau

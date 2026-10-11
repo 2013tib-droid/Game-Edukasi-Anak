@@ -46,6 +46,9 @@ interface Island {
   key: string;
   name: string;
   emoji: string;
+  /** Ikon pulau di peta — lihat `Stage.art` / `Stage.item`. */
+  art?: string;
+  item?: string;
   words: VoyWord[];
   phrases: VoyPhrase[];
 }
@@ -55,6 +58,7 @@ const ISLANDS: Island[] = [
     key: 'satwa',
     name: 'Pulau Satwa',
     emoji: '🐯',
+    item: 'tiger',
     words: [
       W('cat', 'kucing', { item: 'cat' }),
       W('rabbit', 'kelinci', { item: 'rabbit' }),
@@ -87,6 +91,7 @@ const ISLANDS: Island[] = [
     key: 'rasa',
     name: 'Pulau Rasa',
     emoji: '🍉',
+    item: 'watermelon',
     words: [
       W('apple', 'apel', { item: 'apple' }),
       W('banana', 'pisang', { item: 'banana' }),
@@ -118,6 +123,7 @@ const ISLANDS: Island[] = [
     key: 'warna',
     name: 'Pulau Warna',
     emoji: '🎨',
+    item: 'brush',
     // Oranye sengaja tidak dipakai: di layar HP kuning & oranye sulit dibedakan
     // (aturan yang sama dengan Labirin Warna & keranjang Pasar Buah).
     words: [
@@ -177,6 +183,7 @@ const ISLANDS: Island[] = [
     key: 'barang',
     name: 'Pulau Barangku',
     emoji: '🎒',
+    item: 'backpack',
     words: [
       W('book', 'buku', { item: 'book' }),
       W('pencil', 'pensil', { item: 'pencil' }),
@@ -207,6 +214,7 @@ const ISLANDS: Island[] = [
     key: 'profesi',
     name: 'Pulau Profesi',
     emoji: '🧑‍🍳',
+    item: 'chef',
     words: [
       W('teacher', 'guru', { item: 'teacher' }),
       W('doctor', 'dokter', { item: 'doctor' }),
@@ -261,6 +269,7 @@ const ISLANDS: Island[] = [
     key: 'kota',
     name: 'Pulau Kota',
     emoji: '🚌',
+    item: 'bus',
     words: [
       W('car', 'mobil', { item: 'car' }),
       W('bus', 'bus', { item: 'bus' }),
@@ -350,6 +359,8 @@ const stages: Stage[] = ISLANDS.map((isle) => ({
   id: isle.key,
   label: isle.name.replace('Pulau ', ''),
   emoji: isle.emoji,
+  art: isle.art,
+  item: isle.item,
   slots: MODES.map(({ mode }) => `${isle.key}-${mode}`),
 }));
 

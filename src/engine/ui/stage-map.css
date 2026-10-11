@@ -87,6 +87,14 @@
   line-height: 1;
 }
 
+/* Ikon bergambar: kotak PERSEGI + contain, tinggi-lebar sama dengan emoji. */
+.stage-node__img {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
 /* Lencana kecil di pojok: nomor tahap, ✓ kalau selesai, 🔒 kalau terkunci. */
 .stage-node__num {
   position: absolute;
@@ -286,6 +294,16 @@
   font-size: 34px;
   margin-top: -10px;
   filter: drop-shadow(0 3px 0 rgba(6, 40, 60, 0.45));
+}
+
+.stage-map--sea .stage-node__img {
+  width: 52px;
+  height: 52px;
+  margin-top: -14px;
+}
+
+.stage-map--sea .stage-node--locked .stage-node__img {
+  filter: grayscale(1) drop-shadow(0 3px 0 rgba(6, 40, 60, 0.45));
 }
 
 .stage-map--sea .stage-node__num {

@@ -3,6 +3,7 @@ import type { Stage, StageMap } from '@/engine/core/types';
 import { getLevelStars } from '@/engine/core/progress';
 import { sfx, speak, stopSpeaking } from '@/engine/audio/sound';
 import BackIcon from './BackIcon';
+import ItemPic from './ItemPic';
 import './stage-map.css';
 
 /**
@@ -44,6 +45,37 @@ export function stageUnlocked(gameId: string, stages: Stage[], i: number): boole
  * `ENGINE_LINES` (scripts/extract-narration.mjs), kalau tidak rekamannya tak
  * ketemu dan jatuh ke suara HP.
  */
+/**
+ * Ikon titik peta: seni khusus (`art`) → seni item registry (`item`) → emoji.
+ * Tiap tingkat jatuh ke tingkat berikutnya kalau berkasnya gagal dimuat, jadi
+ * titik peta tak pernah kosong.
+ */
+function StageIcon({ stage }: { stage: Stage }) {
+  const [artFailed, setArtFailed] = useState(false);
+  if (stage.art && !artFailed) {
+    return (
+      <img
+        className="stage-node__emoji stage-node__img"
+        src={`${import.meta.env.BASE_URL}assets/islands/${stage.art}.webp`}
+        alt=""
+        aria-hidden
+        draggable={false}
+        onError={() => setArtFailed(true)}
+      />
+    );
+  }
+  if (stage.item) {
+    return (
+      <ItemPic id={stage.item} className="stage-node__emoji stage-node__img" fallbackClassName="stage-node__emoji" />
+    );
+  }
+  return (
+    <span className="stage-node__emoji" aria-hidden>
+      {stage.emoji}
+    </span>
+  );
+}
+
 const LOCKED_LINE = 'Tahap ini masih terkunci. Selesaikan tahap sebelumnya dulu ya!';
 
 /** Angka acak berbenih — tiap pulau punya garis pantai sendiri yang tetap. */
@@ -204,9 +236,7 @@ export default function StageMapView({
                 }}
               >
                 {sea && <IslandArt seed={i} />}
-                <span className="stage-node__emoji" aria-hidden>
-                  {stage.emoji}
-                </span>
+                <StageIcon stage={stage} />
                 <span className="stage-node__num" aria-hidden>
                   {done ? '✓' : open ? i + 1 : '🔒'}
                 </span>
