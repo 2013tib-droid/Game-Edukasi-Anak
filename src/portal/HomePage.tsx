@@ -9,13 +9,21 @@ import './home.css';
 
 // Warna & hiasan kartu per kelompok — bahasa rupa yang sama dengan kartu mapel
 // SD 3-4 (SUBJECT_STYLE). Kelompok tanpa entri jatuh ke ungu.
-const GROUP_STYLE: Record<string, { from: string; to: string; deco: [string, string] }> = {
-  tk: { from: '#c43c7b', to: '#e2668f', deco: ['🎈', '⭐'] },
-  sd1: { from: '#c45a12', to: '#e5861f', deco: ['✏️', '📖'] },
-  sd2: { from: '#4f56d6', to: '#7a6cf0', deco: ['🔢', '🌿'] },
-  sd3: { from: '#2b8a47', to: '#47a95a', deco: ['🔬', '🌏'] },
+// Tiga hiasan pudar per kartu (pojok kanan bawah, tengah atas, kiri bawah).
+// JANGAN pakai emoji "kotak" seperti 🔢: di iPhone ia tergambar sebagai ubin
+// abu-abu bertuliskan 1234 yang terbaca seperti tombol, bukan hiasan.
+type Deco = [string, string, string];
+const GROUP_STYLE: Record<string, { from: string; to: string; deco: Deco }> = {
+  tk: { from: '#c43c7b', to: '#e2668f', deco: ['🎈', '⭐', '🌈'] },
+  sd1: { from: '#c45a12', to: '#e5861f', deco: ['✏️', '📖', '🔤'] },
+  sd2: { from: '#4f56d6', to: '#7a6cf0', deco: ['🧮', '🌱', '🎨'] },
+  sd3: { from: '#2b8a47', to: '#47a95a', deco: ['🔬', '🌏', '📐'] },
 };
-const FALLBACK_STYLE = { from: '#8445d0', to: '#a45fe4', deco: ['⭐', '✨'] as [string, string] };
+const FALLBACK_STYLE: { from: string; to: string; deco: Deco } = {
+  from: '#8445d0',
+  to: '#a45fe4',
+  deco: ['⭐', '✨', '🌟'],
+};
 
 // Portal home: pick a group. Kid-facing, so only big friendly buttons —
 // account actions stay small and lead to the parent area.
@@ -59,6 +67,9 @@ export default function HomePage() {
               </span>
               <span className="home-card__deco home-card__deco--b" aria-hidden>
                 {style.deco[1]}
+              </span>
+              <span className="home-card__deco home-card__deco--c" aria-hidden>
+                {style.deco[2]}
               </span>
               <span className="home-card__text">
                 <span className="home-card__tag">{age}</span>
