@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-11",
   "count": 2027,
-  "chars": 84562,
+  "chars": 84582,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -10597,8 +10597,8 @@
       ]
     },
     {
-      "key": "5e4def7f09fc",
-      "text": "Membuka laci meja. Gaya apa itu?",
+      "key": "31fb2c81bdbd",
+      "text": "Membantu mobil mogok dari belakang. Gaya apa?",
       "scope": "kebun-ilmu",
       "voice": "gadis",
       "games": [
@@ -10651,8 +10651,8 @@
       ]
     },
     {
-      "key": "ada17f99ad62",
-      "text": "Menutup laci meja. Gaya apa itu?",
+      "key": "feca2c84660f",
+      "text": "Menuntun kambing dengan tali. Gaya apa?",
       "scope": "kebun-ilmu",
       "voice": "gadis",
       "games": [
