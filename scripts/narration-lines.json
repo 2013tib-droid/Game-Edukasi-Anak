@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-09",
-  "count": 1753,
-  "chars": 76182,
+  "generated": "2026-10-10",
+  "count": 1977,
+  "chars": 81609,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -8725,6 +8725,1527 @@
       ]
     },
     {
+      "key": "cd447ffb4900",
+      "text": "A farmer works in the field.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "0797394135ae",
+      "text": "A horse has four legs.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "9126bb9da206",
+      "text": "A week has seven days.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "d0be2dc421be",
+      "text": "apple",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "a7ad37b2daff",
+      "text": "Ayo berlayar dari pulau ke pulau sambil belajar bahasa Inggris!",
+      "scope": "kapten-kata",
+      "voice": "gadis",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "8bb559d2bfc5",
+      "text": "Baca artinya. Susun kalimat bahasa Inggrisnya!",
+      "scope": "kapten-kata",
+      "voice": "gadis",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "9b4e473e4de7",
+      "text": "bag",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b646e13e6286",
+      "text": "Balik kartunya. Cari gambar dan kata yang cocok!",
+      "scope": "kapten-kata",
+      "voice": "gadis",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "8bec0406497c",
+      "text": "ball",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "326de722b35a",
+      "text": "balloon",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "250e77f12a5a",
+      "text": "banana",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "09f5edeb4f5b",
+      "text": "bear",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "a3e3318b0a30",
+      "text": "bicycle",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "cd92815bf627",
+      "text": "bird",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "466bc8cef3e7",
+      "text": "black",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "4c9a82ce72ca",
+      "text": "blue",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "e7e694c58cd5",
+      "text": "book",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "6ff291d8175b",
+      "text": "bread",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "9166eeff1e50",
+      "text": "brown",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "32c70cebf110",
+      "text": "bus",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "51dad4e13721",
+      "text": "Can you draw a cat?",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "ac4be5ac63e1",
+      "text": "cap",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "9e32521dd2f8",
+      "text": "car",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "d8bfad4b74d5",
+      "text": "carrot",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "9d989e8d27dc",
+      "text": "cat",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "851e13a65333",
+      "text": "chair",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "d5f2e5c77054",
+      "text": "chef",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "cef7e59218e3",
+      "text": "chicken",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "cd42169de3fa",
+      "text": "climb",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "f3ba4d993e2d",
+      "text": "cook",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "7cacb75c4cc3",
+      "text": "corn",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "8bbddb4a0374",
+      "text": "cow",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "74b518ed5512",
+      "text": "dance",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "dbe2d69b4fb4",
+      "text": "Dengarkan baik-baik. Sentuh gambar yang disebut!",
+      "scope": "kapten-kata",
+      "voice": "gadis",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "3c94d9e136c7",
+      "text": "Dengarkan katanya, lalu susun hurufnya!",
+      "scope": "kapten-kata",
+      "voice": "gadis",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "6c5d1f57b0ed",
+      "text": "Do you like corn?",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "1f0160076c9f",
+      "text": "doctor",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "2680b6746cf8",
+      "text": "door",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "76a4e12c213d",
+      "text": "draw",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "5ece240085b9",
+      "text": "duck",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "4fa6024f1249",
+      "text": "egg",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "0ae9e4deba26",
+      "text": "elephant",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "cc5a0c506761",
+      "text": "eleven",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "43cf2e256880",
+      "text": "farmer",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "5cf896e678bd",
+      "text": "fifteen",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "1f7a7912b358",
+      "text": "fifty",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "2f1b0289a8fc",
+      "text": "firefighter",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "8226ab3ac1cb",
+      "text": "Firefighters are brave.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "88ddff0da7c9",
+      "text": "forty",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "8a13a01d705b",
+      "text": "fourteen",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b3e0f62fa104",
+      "text": "frog",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "162d15a0c695",
+      "text": "goat",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "35c4cdb50a9a",
+      "text": "grapes",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "61e2f51ca8ba",
+      "text": "gray",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "bc74f4f071a5",
+      "text": "green",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "6852e71f817d",
+      "text": "Gurita penjaga pulau datang! Jawab soalnya untuk mengalahkannya!",
+      "scope": "kapten-kata",
+      "voice": "gadis",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "937f067f37ac",
+      "text": "Guritanya menyerah! Kamu menang!",
+      "scope": "kapten-kata",
+      "voice": "gadis",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "dd95436c0e68",
+      "text": "He is a doctor.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "a9d0d884c4d0",
+      "text": "Her bag is purple.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "091b5035885c",
+      "text": "horse",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "2b2d005e88ce",
+      "text": "hospital",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "5be93480bd8b",
+      "text": "house",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "37ac6464ad3b",
+      "text": "I am hungry.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b69f1749f70c",
+      "text": "I am twelve years old.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "7e4e7f807ca6",
+      "text": "I can count to one hundred.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "74837d4e1825",
+      "text": "I can swim.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "a09acfd1f532",
+      "text": "I eat an egg.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "f0f19257c926",
+      "text": "I go to school by bus.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "916340274d3c",
+      "text": "I have a rabbit.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "c3a5ed90c600",
+      "text": "I have fifteen crayons.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b1c78d86f268",
+      "text": "I have two pencils.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "a3c705681bab",
+      "text": "I like apples.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "6acbc6819e50",
+      "text": "I like green.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b1e213a00caa",
+      "text": "I ride my bicycle.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "2db76054e0c6",
+      "text": "I want to be a pilot.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "de6deac44506",
+      "text": "I wear a cap.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "679fcf7f5718",
+      "text": "Ketuk gelembung yang berisi kata yang dicari!",
+      "scope": "kapten-kata",
+      "voice": "gadis",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "a62f2225bf70",
+      "text": "key",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "445e7aebaac6",
+      "text": "Lihat gambarnya. Pilih kata bahasa Inggrisnya!",
+      "scope": "kapten-kata",
+      "voice": "gadis",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "eaf14a01af23",
+      "text": "lion",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "934aae49f648",
+      "text": "mango",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "527072a5969c",
+      "text": "mechanic",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "cf5dbf0ec57d",
+      "text": "milk",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "ab87d24bdc74",
+      "text": "monkey",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "fc4b7dfceac1",
+      "text": "Monkeys like bananas.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "438bc3e36664",
+      "text": "motorcycle",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "3a2bad7dcf67",
+      "text": "My bag is blue.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "5b6e3d2410dd",
+      "text": "My father is a mechanic.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "a96f4b0719d9",
+      "text": "My house is near the park.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b3e2833d02b4",
+      "text": "My mother drives a car.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "57ffbcc8839a",
+      "text": "My shoes are black.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "49559252522b",
+      "text": "My sister is eleven.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "4e4592a97867",
+      "text": "one hundred",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "434775bba042",
+      "text": "Open the door, please.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "ef0ebbb77298",
+      "text": "orange",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "32562db2022a",
+      "text": "painter",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "ce4151ff856b",
+      "text": "park",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "d2fc512490a1",
+      "text": "pencil",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "eec7121ebf64",
+      "text": "pilot",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "ff9907a80070",
+      "text": "pineapple",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b0f7f128338b",
+      "text": "pink",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "2e869b90408c",
+      "text": "plane",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "8f7cde310376",
+      "text": "police officer",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "afaed75406bd",
+      "text": "purple",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "6d0ebbbdce32",
+      "text": "rabbit",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "a7afddb68260",
+      "text": "read",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "78988010b890",
+      "text": "red",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "6939278d66e3",
+      "text": "rice",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "320ef6a3e22f",
+      "text": "ride",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "5f55d09a5132",
+      "text": "ruler",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "df6ad19037c9",
+      "text": "run",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "655f83be7512",
+      "text": "school",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "fb8e7c920326",
+      "text": "scissors",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "ca799c672f1f",
+      "text": "She drinks milk.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "5c4c66afb8e6",
+      "text": "She is a teacher.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "affba9045a55",
+      "text": "She is reading a book.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "ed43a8a09e9b",
+      "text": "ship",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "4488ae65393e",
+      "text": "shoe",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "5042d1466675",
+      "text": "shop",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "f9bef9c232ce",
+      "text": "sing",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "5fdccf09b305",
+      "text": "singer",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "c0d94d09a927",
+      "text": "sixteen",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "387f1fe4b7f0",
+      "text": "sixty",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "c3ca5f787365",
+      "text": "sleep",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "c0b51c46e4dc",
+      "text": "strawberry",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b89f90f328fa",
+      "text": "swim",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "4d82205a2028",
+      "text": "taxi",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "4a82cb6db537",
+      "text": "teacher",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "da9f522041bd",
+      "text": "teddy bear",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "7e4240f4b0e7",
+      "text": "The apple is red.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "0e697b68cfef",
+      "text": "The baby is sleeping.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "73e3a42d3149",
+      "text": "The ball is under the chair.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "666b21e3acda",
+      "text": "The banana is yellow.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "30a395dbb99c",
+      "text": "The bird can fly.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "7d33c386ea91",
+      "text": "The cat is small.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "8078fd16d42c",
+      "text": "The chef cooks food.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "52fdc725c982",
+      "text": "The elephant is big.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "fb208f88e008",
+      "text": "The flower is pink.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "0be704e7824a",
+      "text": "The frog is green.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "c4cfc6e3eda0",
+      "text": "The mango is sweet.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b8771c617c64",
+      "text": "The milk is white.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "4d69813052e1",
+      "text": "The plane is in the sky.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "497e3f6e41d1",
+      "text": "The sky is blue.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "80eea325e694",
+      "text": "The sun is yellow.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "ce83b369374a",
+      "text": "The train is fast.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "3c4115a156f0",
+      "text": "There are twenty students.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b4b28f003615",
+      "text": "They are dancing.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "c24f5cff02c0",
+      "text": "thirteen",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "c54450b325c1",
+      "text": "thirty",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "77e600a3c4fb",
+      "text": "This is my book.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "46e3d772a188",
+      "text": "tiger",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "94efdd6f628e",
+      "text": "train",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "7a4d63b1ba71",
+      "text": "truck",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "75105193bfdd",
+      "text": "turtle",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "b521f9394fab",
+      "text": "twelve",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "fc955a19ae4f",
+      "text": "twenty",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "3024cbd46ef7",
+      "text": "Two ducks are swimming.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "3ff95ac9e6b1",
+      "text": "umbrella",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "df06b147f778",
+      "text": "walk",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "ef1a762d28ed",
+      "text": "watermelon",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "47b5a7189467",
+      "text": "We buy bread at the shop.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "8c542645dda7",
+      "text": "We eat rice every day.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "c9f9a5951b98",
+      "text": "We need thirty chairs.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "51582fb4bea6",
+      "text": "We sing together.",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "2ac07c28cd9c",
+      "text": "Where is my umbrella?",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "98310f97f15c",
+      "text": "Where is the hospital?",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "528cef87d0bf",
+      "text": "white",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "e1d0c6c1c29e",
+      "text": "write",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
+      "key": "96de5543d183",
+      "text": "yellow",
+      "scope": "kapten-kata",
+      "voice": "en",
+      "games": [
+        "kapten-kata"
+      ]
+    },
+    {
       "key": "dc1a6de91f22",
       "text": "Ayo cari lagi pasangan yang sama!",
       "scope": "kartu-kembar",
@@ -12805,6 +14326,501 @@
       "games": [
         "hitung-hebat",
         "pola-pintar"
+      ]
+    },
+    {
+      "key": "a73ed3085588",
+      "text": "Bahan kolase bisa dari alam atau buatan pabrik. Pilah ke keranjangnya!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "156dae88e3a2",
+      "text": "Buat kolase ayam dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "5204409aafc7",
+      "text": "Buat kolase bunga dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "d39c02018dd2",
+      "text": "Buat kolase ikan dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "505e83d97a27",
+      "text": "Buat kolase kupu-kupu dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "a06d14a31702",
+      "text": "Buat kolase langit! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "4cd19bc16107",
+      "text": "Buat kolase layang-layang dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "873e126b7728",
+      "text": "Buat kolase pohon dari biji-bijian! Tiru contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "0cd87f63cd47",
+      "text": "Buat kolase pohon! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "804ea20363df",
+      "text": "Buat kolase semangka! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "404f3db3bd67",
+      "text": "Buat kolase terong! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "6085549068ac",
+      "text": "Buat kolase tomat! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "c52ba7a9d6a3",
+      "text": "Buat kolase wortel! Sobek kertas yang warnanya cocok, tempel di gambar.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "bbf32355c63b",
+      "text": "Di pameran, karya temanmu berbeda dengan karyamu. Bagaimana sikapmu?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "ce4a55617b23",
+      "text": "Gambar ini ditutup sobekan kertas yang ditempel. Karya apakah ini?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "fc51d26aaf98",
+      "text": "Karya ini dari keping kecil yang disusun berjarak. Disebut apa?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "80e4677266a0",
+      "text": "Karya ini dari potongan gambar jadi yang ditempel. Disebut apa?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "639a16837329",
+      "text": "Karyanya siap dipamerkan! Sisa kertas dan lemnya bagaimana?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "ab65dc026baa",
+      "text": "Mana bahan alam, mana bahan buatan? Pilah ke keranjang yang benar!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "9453e452e408",
+      "text": "Mana karya yang disebut kolase?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "c408ff3d89b8",
+      "text": "Mana karya yang disebut montase?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "876b69141be5",
+      "text": "Mana karya yang disebut mozaik?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "f50909e6c375",
+      "text": "Misi besar! Pak Monyet ikut pameran sekolah. Buat kolase laut dulu!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "67f14a60beb0",
+      "text": "Misi besar! Pak Monyet ikut pameran sekolah. Buat kolase pemandangan dulu!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "529e408d43f8",
+      "text": "Mozaik bunga belum selesai. Lanjutkan sampai sama dengan contohnya!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "d98875acbe31",
+      "text": "Mozaik kupu-kupu belum selesai. Lanjutkan sampai sama dengan contohnya!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "510c68d8f3aa",
+      "text": "Sekarang hias kartu namanya dengan mozaik bintang!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "a304970c5b72",
+      "text": "Sekarang hias kartu namanya dengan mozaik hati!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "5e7de3e49142",
+      "text": "Sekarang hias kartu namanya dengan mozaik ikan!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "686760df21a2",
+      "text": "Sekarang hias kartu namanya dengan mozaik jamur!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "92da14345fb4",
+      "text": "Sekarang hias kartu namanya dengan mozaik kupu-kupu!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "99bbe92c3ea8",
+      "text": "Sekarang hias kartu namanya dengan mozaik pohon!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "b9f3c1215fde",
+      "text": "Teman bertanya cara membuat kolasemu. Apa yang kamu lakukan?",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "f7a1fa87368b",
+      "text": "Tiru contoh kolase bunga! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "59cf74a014c7",
+      "text": "Tiru contoh kolase ikan! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "dc189a775e90",
+      "text": "Tiru contoh kolase kupu-kupu! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "f6176669f6e6",
+      "text": "Tiru contoh kolase layang-layang! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "21b5f76e3d8f",
+      "text": "Tiru contoh kolase perahu! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "3738723b26a0",
+      "text": "Tiru contoh kolase rumah! Tempel kertas sesuai warna contohnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "9ce38b3eca5c",
+      "text": "Tiru contoh mozaik es krim! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "e690b1dcb174",
+      "text": "Tiru contoh mozaik hati! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "f0d752ac834d",
+      "text": "Tiru contoh mozaik ikan! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "5bf1148ae1ce",
+      "text": "Tiru contoh mozaik jamur! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "35af94fcb0d8",
+      "text": "Tiru contoh mozaik kapal! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "f00394b1839b",
+      "text": "Tiru contoh mozaik kupu-kupu! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "c15d0e1f1d56",
+      "text": "Tiru contoh mozaik perahu! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "270f866001cf",
+      "text": "Tiru contoh mozaik pohon apel! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "8ba96fa157a0",
+      "text": "Tiru contoh mozaik pohon! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "61f79ea84872",
+      "text": "Tiru contoh mozaik rumah! Pilih kepingnya, lalu tempel di petak.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "9f3613404052",
+      "text": "Urutkan langkah membuat kolase biji-bijian!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "ec187fc9f838",
+      "text": "Urutkan langkah membuat kolase biji-bijian! Ada satu kartu yang bukan langkahnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "01d446076e41",
+      "text": "Urutkan langkah membuat kolase!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "d915480eadb0",
+      "text": "Urutkan langkah membuat kolase! Ada satu kartu yang bukan langkahnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "645c9227cdc5",
+      "text": "Urutkan langkah membuat mozaik!",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
+      ]
+    },
+    {
+      "key": "dbacd9b2f0d0",
+      "text": "Urutkan langkah membuat mozaik! Ada satu kartu yang bukan langkahnya.",
+      "scope": "studio-kolase",
+      "voice": "gadis",
+      "games": [
+        "studio-kolase"
       ]
     },
     {

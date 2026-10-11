@@ -265,6 +265,7 @@ kaca pembesar.
 | `susun-kalimat` | rencana | Buatkan: satu kereta mainan kecil yang menanjak miring — lokomotif warna biru muda berwajah imut di depan, diikuti dua gerbong pendek warna peach dan hijau mint, tiap gerbong mengangkut satu kartu putih bergaris KOSONG. Kartu tidak boleh berisi huruf atau kata. Keretanya menanjak diagonal, bukan berjajar mendatar panjang. |
 | `sanggar-warna` | sudah ada (2026-10-08) | Buatkan: satu mangkuk cat bundar kecil warna putih krem berwajah imut di badan depannya, tiga tetes cat besar berbentuk tetesan air — satu merah, satu kuning, satu biru — sedang jatuh ke dalam mangkuk dari atas, dan cat di dalam mangkuk berpusar warna oranye, hijau, dan ungu. Satu kuas kecil bergagang kayu bersandar di tepi mangkuk. Tanpa palet cat, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 | `sahabat-bumi` | sudah ada (2026-10-09) | Buatkan: satu bola bumi kecil yang bulat berwajah imut tersenyum, benua hijau dan laut biru muda, memeluk satu tunas daun hijau di tangannya yang mungil. Di sampingnya satu tong sampah kecil hijau. Dua bintang kecil pastel. Tanpa tulisan, tanpa panah daur ulang. Tinggi dan lebar gambarnya kira-kira sama. |
+| `studio-kolase` | rencana (2026-10-09) | Buatkan: selembar kertas gambar persegi warna krem berwajah imut di pojok bawahnya, di atasnya menempel kolase seekor ikan kecil yang tersusun dari sobekan kertas warna-warni (biru, kuning, merah muda) bertepi robek tidak rata. Satu sobekan kertas hijau melayang di sampingnya dan satu botol lem putih kecil berdiri di dekatnya. Tanpa gunting, tanpa kuas, tanpa palet, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 
 ### Catatan per ikon
 
@@ -302,6 +303,12 @@ kaca pembesar.
   merah, kuning, biru yang pekat — kalau Gemini memberi tetes pastel, kuning & oranye di
   pusarannya tak terbedakan di kotak ±116 px (pelajaran Labirin Warna). Periksa lubang
   terkurung di antara gagang kuas & tepi mangkuk sesudah `cut-item.py`.
+
+- **Studio Kolase: JANGAN gunting, kuas, atau palet.** Gunting = benda tajam di kartu
+  anak; kuas & palet sudah milik Sanggar Warna dan Labirin Warna. Yang membuat ikon ini
+  terbaca "kolase" adalah TEPI ROBEK sobekannya — kalau Gemini memberi potongan bertepi
+  lurus rapi, itu terbaca mozaik/stiker; minta ulang "tepi sobekan kertasnya robek,
+  bergerigi tidak rata".
 
 ### Memasangnya
 

@@ -100,7 +100,8 @@ const mod = await load(
   gameFiles.map((f, i) => `import c${i} from ${JSON.stringify(path.resolve(f).split(path.sep).join('/'))};`).join('\n') +
     `\nexport const configs = [${gameFiles.map((_, i) => `c${i}`).join(',')}];` +
     `\nexport { sentenceText } from ${JSON.stringify(path.resolve('src/engine/core/wordTrain.ts').split(path.sep).join('/'))};` +
-    `\nexport { mixPaint, mixLine, batikLine } from ${JSON.stringify(path.resolve('src/engine/core/paint.ts').split(path.sep).join('/'))};`,
+    `\nexport { mixPaint, mixLine, batikLine } from ${JSON.stringify(path.resolve('src/engine/core/paint.ts').split(path.sep).join('/'))};` +
+    `\nexport { phraseText, VOY_LINES } from ${JSON.stringify(path.resolve('src/engine/core/wordVoyage.ts').split(path.sep).join('/'))};`,
 );
 
 /**
@@ -121,6 +122,13 @@ function keyOf(text) {
  * voice `ardi` for the interactive stories, `gadis` for everything else.
  */
 const STORY_VOICE = 'ardi';
+/**
+ * ENGLISH voice (Kapten Kata, owner's decision 2026-10-10): every English word
+ * and sentence of a `word-voyage` level is rendered by an en-US voice — an
+ * Indonesian voice reading "elephant" teaches the wrong sound. Instructions
+ * stay Indonesian (Gadis). See VOICES in render-narration.mjs.
+ */
+const ENGLISH_VOICE = 'en';
 const DEFAULT_VOICE = 'gadis';
 
 /** text → { games: Set, voices: Set } */
@@ -182,6 +190,16 @@ for (const config of mod.configs) {
       for (const alt of round.alt ?? []) add(mod.sentenceText(alt), config.id, voice);
     }
 
+    // word-voyage (Kapten Kata): the engine picks words from the island's
+    // pool at play time, so EVERY word and sentence of the pool gets an
+    // English clip. The boss line is Indonesian.
+    if ((level.template ?? config.template) === 'word-voyage') {
+      for (const w of level.data.words) add(w.en, config.id, ENGLISH_VOICE);
+      for (const p of level.data.phrases ?? []) add(mod.phraseText(p), config.id, ENGLISH_VOICE);
+      if (level.data.mode === 'boss') add(mod.VOY_LINES.bossWin, config.id, voice);
+      continue;
+    }
+
     // read-find (Detektif Bacaan): every sentence of the passage is read
     // aloud when the child touches it. Later steps' `say` is covered by the
     // clock-set loop above (same field name).
@@ -221,6 +239,15 @@ const entries = [...lines.entries()]
   .sort((a, b) => a.scope.localeCompare(b.scope) || a.text.localeCompare(b.text));
 
 const chars = entries.reduce((sum, e) => sum + e.text.length, 0);
+
+// GUARD: one line = one audio file = one language. A text claimed by both the
+// English voice and an Indonesian one would be rendered in only one of them.
+const mixed = [...lines.entries()].filter(([, { voices }]) => voices.has(ENGLISH_VOICE) && voices.size > 1);
+if (mixed.length > 0) {
+  console.error(`\nBaris yang dipakai suara Inggris DAN Indonesia (${mixed.length}):\n`);
+  for (const [text] of mixed) console.error(`  ${text}`);
+  process.exit(1);
+}
 
 /*
  * GUARD: no digits in narration.

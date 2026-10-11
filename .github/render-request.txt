@@ -1,16 +1,13 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #34
+render #36
 
-only: sahabat-bumi
-
-Game baru SD Kelas 3 & 4 "Sahabat Bumi" (IPAS: pilah sampah organik /
-anorganik / berbahaya, bank sampah, hemat air, daur air, sumber daya alam,
-misi besar sungai). 25 baris baru (1.305 karakter), semuanya scope
-sahabat-bumi. Dibandingkan sebelum vs sesudah lewat
-scripts/narration-lines.json: 1728 baris jadi 1753, nol baris lama berubah
-atau pindah scope, jadi aman dibatasi "only: sahabat-bumi" (file yang sudah
-ada dilewati).
+Gabungan Studio Kolase (render #35, only: studio-kolase, 55 baris) dan
+Kapten Kata (render #35, only: kapten-kata, 169 baris) — keduanya SUDAH
+dirender di branch masing-masing. Merge main ke studio-kolase cuma
+menyatukan scripts/narration-lines.json (1753 + 55 + 169 = 1977 baris, nol
+baris lama berubah/pindah scope). Run ini sengaja tanpa "only:": semua file
+sudah ada, jadi harusnya nol yang dirender (penjaga kalau ada yang tertinggal).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

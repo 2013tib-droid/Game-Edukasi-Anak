@@ -313,6 +313,15 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd2/kebun-ilmu'),
   },
   {
+    id: 'kapten-kata',
+    group: 'sd2',
+    subject: 'bahasa-inggris',
+    title: 'Kapten Kata',
+    emoji: '⛵',
+    template: 'word-voyage',
+    load: () => import('@/games/sd2/kapten-kata'),
+  },
+  {
     id: 'sahabat-bumi',
     group: 'sd2',
     subject: 'ipas',
@@ -427,6 +436,15 @@ export const games: GameMeta[] = [
     emoji: '🎨',
     template: 'paint-studio',
     load: () => import('@/games/sd2/sanggar-warna'),
+  },
+  {
+    id: 'studio-kolase',
+    group: 'sd2',
+    subject: 'seni-rupa',
+    title: 'Studio Kolase',
+    emoji: '✂️',
+    template: 'collage-studio',
+    load: () => import('@/games/sd2/studio-kolase'),
   },
 ];
 

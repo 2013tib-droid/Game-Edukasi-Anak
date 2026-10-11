@@ -59,6 +59,21 @@ Daftar semua versi development yang sedang hidup: `https://2013tib-droid.github.
 6. **Produksi**: hanya kalau pemilik minta deploy — Actions → "Deploy web" dengan `dry_run: true` dulu, lalu `false`.
 7. **Bersihkan** subfolder development yang sudah tak dipakai: "Deploy development" dengan `hapus: true` + `nama` yang sama. (`development/main/` boleh dibiarkan sebagai pratinjau `main` terbaru — jalankan ulang dengan `ref: main` tiap kali `main` berubah.)
 
+## Development TIDAK BOLEH bergembok (keputusan pemilik 2026-10-10)
+
+> *"https://…/development/main/#/portal jangan digembok. Ada beberapa sesi baru pas deploy, jadi ke gembok.
+> Gembok diterapkan kalo sudah mau deploy ke production (petualanganpintar.com)."*
+
+- Build development dibangun dengan **`VITE_LOCK_MODE: buka`** di `deploy-dev.yml`. Dulu `kunci`, jadi tiap HP/browser
+  yang baru membuka link development (belum pernah menekan 🔓) melihat game bergembok — terutama game baru `sd2`
+  yang justru sedang mau dicek.
+- **Gembok hanya untuk produksi.** Build "Deploy web" tidak memasang `VITE_LOCK_MODE`, jadi jatuh ke
+  `DEFAULT_LOCK_MODE = 'kunci'` di `src/data/access.ts`. **Jangan ubah baris itu** dan jangan pasang `buka` di `deploy-web.yml`.
+- **Ditambah `VITE_FORCE_OPEN: '1'`** (keputusan pemilik 2026-10-09: *"development buka aja"*): pilihan 🔒 yang pernah
+  tersimpan di HP (`pp_lock_mode_v1`, dipakai bersama seluruh `github.io`) DIABAIKAN dan saklar 🔓/🔒 disembunyikan —
+  tanpa ini HP yang pernah menekan 🔒 tetap melihat gembok walau bawaannya `buka`. Hanya hidup di build penguji.
+- Perubahan ini baru berlaku sesudah "Deploy development" dijalankan ulang (build lama tetap bergembok).
+
 ## Pengganti build `uji-*` lama
 
 Build penguji manual ke folder `uji-<nama>/` (salin `dist/` sendiri ke branch Pages) **tidak dipakai lagi** —

@@ -3,8 +3,10 @@
 #   Produksi    : Actions → "Deploy web"          → https://petualanganpintar.com
 #   Development : Actions → "Deploy development"  → https://2013tib-droid.github.io/Game-Edukasi-Anak/development/<nama>/
 #
-# Build development = build PENGUJI: saklar 🔓/🔒 hidup (VITE_ALLOW_TEST_TOGGLE=1)
-# dan kelompok `draft` (sd2, sd3) ikut tampil. Karena itu base-nya WAJIB
+# Build development = build PENGUJI: saklar 🔓/🔒 hidup (VITE_ALLOW_TEST_TOGGLE=1),
+# kelompok `draft` (sd2, sd3) ikut tampil, dan mode bawaannya 'buka' — semua
+# game terbuka tanpa gembok (keputusan pemilik 2026-10-10). Gembok cuma berlaku
+# di produksi (petualanganpintar.com). Karena itu base-nya WAJIB
 # `/development/<nama>/` — `guardTesterBuild` di vite.config.ts menolak base
 # lain, dan `check-release-build.mjs` menolak build ini masuk ke produksi.
 # Jadi dua jalur ini tak bisa tertukar: build development yang salah disalin ke
