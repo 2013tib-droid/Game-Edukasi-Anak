@@ -367,7 +367,7 @@ const stages: Stage[] = ISLANDS.map((isle) => ({
 const config: GameConfig<'word-voyage'> = {
   id: 'kapten-kata',
   group: 'sd2',
-  title: 'Kapten Kata',
+  title: 'Bahasa Inggris',
   emoji: '⛵',
   template: 'word-voyage',
   hints: true,

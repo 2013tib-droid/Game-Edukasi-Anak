@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import type { GroupId } from '@/engine/core/types';
 import { SUBJECT_STYLE, type GroupSubject } from '@/data/subjects';
-import { gamesForGroup } from '@/games/registry';
+import { gamesForGroup, subjectPath } from '@/games/registry';
 import { getTotalStars } from '@/engine/core/progress';
 import { mascotFor } from '@/engine/core/mascot';
 import { MascotPic } from '@/engine/ui/Mascot';
@@ -58,7 +58,7 @@ export default function SubjectPage({ group, subjects }: Props) {
               kicker={style.tag}
               name={style.title}
               count={count}
-              to={count === 0 ? null : `/kelompok/${group.id}/${s.id}`}
+              to={count === 0 ? null : subjectPath(group.id as GroupId, s.id)}
               ariaLabel={count === 0 ? undefined : `${style.title}, ${count} game`}
             />
           );

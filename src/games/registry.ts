@@ -316,8 +316,12 @@ export const games: GameMeta[] = [
     id: 'kapten-kata',
     group: 'sd2',
     subject: 'bahasa-inggris',
-    title: 'Kapten Kata',
+    // Satu-satunya game mapelnya, jadi kartu mapel langsung membukanya
+    // (`subjectPath`) dan judul + ikonnya = mapelnya (keputusan pemilik
+    // 2026-10-11). Id & folder suara tetap `kapten-kata`.
+    title: 'Bahasa Inggris',
     emoji: '⛵',
+    pic: 'bahasa-inggris',
     template: 'word-voyage',
     load: () => import('@/games/sd2/kapten-kata'),
   },
@@ -464,9 +468,27 @@ export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {
   return games.filter((g) => g.group === group && (!subject || g.subject === subject));
 }
 
-/** Layar yang dituju tombol Kembali dari game: daftar mapelnya kalau ada. */
+/**
+ * Ke mana kartu mapel menuju (keputusan pemilik 2026-10-11): mapel yang baru
+ * punya SATU game langsung membuka game itu — layar daftar berisi satu kartu
+ * cuma menambah satu ketukan. Begitu game kedua ditambahkan, daftarnya muncul
+ * sendiri.
+ */
+export function subjectPath(group: GroupId, subject: SubjectId): string {
+  const list = gamesForGroup(group, subject);
+  return list.length === 1 ? `/game/${list[0].id}` : `/kelompok/${group}/${subject}`;
+}
+
+/**
+ * Layar yang dituju tombol Kembali dari game: daftar mapelnya kalau ada —
+ * kecuali mapel bergame tunggal, yang tak punya layar daftar (`subjectPath`),
+ * jadi kembali ke pemilih mapel.
+ */
 export function gameListPath(meta: GameMeta): string {
-  return meta.subject ? `/kelompok/${meta.group}/${meta.subject}` : `/kelompok/${meta.group}`;
+  if (!meta.subject || gamesForGroup(meta.group, meta.subject).length === 1) {
+    return `/kelompok/${meta.group}`;
+  }
+  return `/kelompok/${meta.group}/${meta.subject}`;
 }
 
 export function findGame(id: string): GameMeta | undefined {
