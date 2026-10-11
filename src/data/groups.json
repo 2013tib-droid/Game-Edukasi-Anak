@@ -20,6 +20,7 @@
       "id": "sd2",
       "title": "SD Kelas 3 & 4",
       "emoji": "📚",
+      "pic": "sd2",
       "description": "Usia 8–10 tahun · Perkalian, pembagian, membaca cerita",
       "draft": true
     },
@@ -27,6 +28,7 @@
       "id": "sd3",
       "title": "SD Kelas 5 & 6",
       "emoji": "🎓",
+      "pic": "sd3",
       "description": "Usia 10–12 tahun · Pecahan, bangun ruang, membaca & IPAS",
       "draft": true
     }

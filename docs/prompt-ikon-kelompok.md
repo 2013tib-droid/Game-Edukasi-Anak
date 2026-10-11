@@ -7,6 +7,13 @@ dan judul halaman `/kelompok/:id`. Emoji (`📚`, `🎓`) tetap cadangan.
 Sudah ada: `tk.webp` (unicorn pastel memeluk bintang) dan `sd1.webp` (tas sekolah merah
 berwajah). Dua ikon baru harus terbaca SATU KELUARGA dengan keduanya.
 
+## Status (2026-10-11) — SELESAI
+
+Kedua ikon sudah terpasang dari percobaan pertama: `sd2.webp` (buku hijau mint +
+pensil, 189×256, 13 kB) dan `sd3.webp` (toga biru tua, 256×255, 18 kB), dipotong
+`cut-item.py`. Bayangan stiker samar tersisa di tepinya — hanya terlihat di atas warna
+gelap, tak terlihat di lingkaran putih kartu. Prompt di bawah tetap untuk penggantian.
+
 ## Blok gaya (tempel di awal tiap prompt)
 
 ```
