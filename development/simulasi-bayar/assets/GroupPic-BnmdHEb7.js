@@ -1,0 +1,1 @@
+import{r as n,j as e}from"./index-DA_CHuH9.js";function l({pic:s,emoji:t,height:r=88,emojiSize:a=48}){const[o,i]=n.useState(!1);return!s||o?e.jsx("span",{style:{fontSize:a},children:t}):e.jsx("img",{src:`/Game-Edukasi-Anak/development/simulasi-bayar/assets/groups/${s}.webp`,alt:"",style:{height:r,width:"auto"},onError:()=>i(!0)})}export{l as G};
