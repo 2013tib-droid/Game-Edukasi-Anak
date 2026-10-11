@@ -295,14 +295,6 @@
   width: 100%;
   max-width: 360px;
 }
-.landing .worlds-title {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  opacity: 0.5;
-  margin: 0 0 16px;
-}
 .landing .world-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -556,15 +548,6 @@
   max-width: 360px;
   text-align: left;
 }
-.landing .faq-title {
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  opacity: 0.5;
-  margin: 0 0 14px;
-  text-align: center;
-}
 .landing .faq-item {
   background: rgba(255, 255, 255, 0.78);
   border-radius: 18px;
@@ -712,4 +695,272 @@
 .landing .pc-buy:active {
   transform: translateY(3px);
   box-shadow: 0 1px 0 rgba(179, 63, 18, 0.45);
+}
+
+/* ---- Section headings & the sections added from the owner's ChatGPT mockup
+   (2026-10-11): "Sambil bermain, anak belajar", "Kenapa orang tua memilih",
+   price heading + ribbon, and a closing call to action. Testimonials and the
+   "4.9 · 2.300+ keluarga" rating from that mockup were NOT copied: they would
+   be made-up reviews. */
+.landing .lsec {
+  width: 100%;
+  max-width: 360px;
+  margin-top: 38px;
+}
+.landing .lsec-title {
+  position: relative;
+  margin: 0 auto 6px;
+  max-width: 300px;
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #3a2e20;
+  text-align: center;
+  text-wrap: balance;
+}
+.landing .lsec-sub {
+  margin: 0 auto 16px;
+  max-width: 300px;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  opacity: 0.72;
+  text-wrap: balance;
+}
+/* headings without a subtitle still need air above their content */
+.landing .lsec-title + :not(.lsec-sub):not(.faq-item) {
+  margin-top: 16px;
+}
+.landing .faq .lsec-title {
+  margin-bottom: 16px;
+}
+
+/* Skills — a soft cream panel with six illustrated medallions. Like the
+   worlds row these are NOT buttons: no raised shadow, no tap target. */
+.landing .skills {
+  padding: 22px 14px 18px;
+  border-radius: 26px;
+  background: rgba(255, 250, 238, 0.82);
+  box-shadow: inset 0 0 0 1px rgba(214, 150, 70, 0.14);
+}
+.landing .skill-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.landing .skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+}
+.landing .skill-disc {
+  display: grid;
+  place-items: center;
+  width: 70px;
+  height: 70px;
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow:
+    inset 0 2px 6px rgba(255, 255, 255, 0.6),
+    0 0 0 4px rgba(255, 255, 255, 0.7);
+}
+.landing .skill-art {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 50px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.14));
+}
+.landing .skill-emoji {
+  font-size: 32px;
+  line-height: 1;
+}
+.landing .skill-name {
+  font-size: 12.5px;
+  font-weight: 800;
+  line-height: 1.25;
+  max-width: 6.5em;
+  min-height: 2.5em;
+}
+.landing .s-a { background: linear-gradient(160deg, #ffe9f0, #ffcfdc); }
+.landing .s-b { background: linear-gradient(160deg, #fff2c6, #ffe08f); }
+.landing .s-c { background: linear-gradient(160deg, #ffe7cf, #ffcb9c); }
+.landing .s-d { background: linear-gradient(160deg, #dcf1ff, #b2dcf6); }
+.landing .s-e { background: linear-gradient(160deg, #e2f6dc, #bfe7b0); }
+.landing .s-f { background: linear-gradient(160deg, #d9f3ee, #ade2d6); }
+
+/* Reasons — white cards, icon in a pastel tile, text left-aligned (these are
+   short reads, unlike the centred group cards). */
+.landing .reason-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.landing .reason {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 13px 12px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgba(170, 110, 50, 0.1);
+}
+.landing .reason-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  font-size: 22px;
+  line-height: 1;
+}
+.landing .reason-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.landing .reason-title {
+  font-size: 14.5px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.landing .reason-text {
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.45;
+  opacity: 0.72;
+}
+.landing .r-a { background: #e3f1ff; }
+.landing .r-b { background: #fff1c9; }
+.landing .r-c { background: #ffe3e3; }
+.landing .r-d { background: #ffe9d6; }
+.landing .r-e { background: #fff6d6; }
+.landing .r-f { background: #e4f6e4; }
+
+/* Plans heading wraps the existing price cards. */
+.landing .plans .prices {
+  margin-top: 0;
+  max-width: none;
+}
+.landing .pcard {
+  position: relative;
+}
+.landing .pc-ribbon {
+  align-self: center;
+  margin: -27px 0 2px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff9a3c, #f25c1f);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 3px 0 rgba(179, 63, 18, 0.35);
+}
+.landing .plans .pcard > :last-child {
+  margin-top: auto;
+}
+.landing .plans .prices {
+  gap: 24px;
+  padding-top: 12px;
+}
+
+/* Closing band — the last thing before contact & footer: one more way in for
+   a parent who scrolled all the way down. Same "Coba Gratis" as the hero. */
+.landing .closing {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 360px;
+  padding: 22px 16px 28px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(255, 246, 214, 0.95), rgba(255, 225, 200, 0.9));
+  box-shadow: inset 0 0 0 1px rgba(214, 150, 70, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.landing .closing-logo {
+  width: 84px;
+  height: 84px;
+  filter: drop-shadow(0 6px 10px rgba(214, 120, 40, 0.25));
+}
+.landing .closing-title {
+  margin: 8px 0 4px;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+.landing .closing-sub {
+  margin: 0 0 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  opacity: 0.75;
+  text-wrap: balance;
+}
+.landing .faq-a a {
+  color: #b33f12;
+  font-weight: 800;
+}
+
+/* Wide screens (tablet landscape, laptop): the single 360 px column wasted
+   most of the width. Sections that are lists spread out; the hero stays put. */
+@media (min-width: 720px) {
+  .landing .hero {
+    max-width: 560px;
+  }
+  .landing .lsec-title,
+  .landing .lsec-sub {
+    max-width: 560px;
+  }
+  .landing .lsec,
+  .landing .closing,
+  .landing .faq {
+    max-width: 720px;
+  }
+  .landing .skill-list {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .landing .reason-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .landing .reason {
+    flex-direction: row;
+    gap: 12px;
+    padding: 14px;
+  }
+  .landing .plans .prices {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .landing .plans .pcard {
+    flex: 1 1 0;
+  }
+  .landing .faq {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 12px;
+    align-items: start;
+  }
+  .landing .faq .lsec-title {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 960px) {
+  .landing .lsec,
+  .landing .closing,
+  .landing .faq {
+    max-width: 880px;
+  }
 }
