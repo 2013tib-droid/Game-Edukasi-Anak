@@ -16,6 +16,23 @@ import { SUBJECT_STYLE, subjectsFor } from '@/data/subjects';
 // Game list per group. Unlocked games open directly; locked ones show a
 // padlock until the account has group access (gate enforced again in
 // GamePage). Lock status comes from `src/data/access.ts`.
+/**
+ * Pastel card backgrounds, assigned by POSITION in the list (keputusan pemilik
+ * 2026-10-11: kartu game warna-warni, bukan putih). Seven colours, not six: the
+ * grid is auto-fit, so a card's neighbour below is `i + columns` away — with 7
+ * colours no two touching cards share a colour for 2–6 columns. Keep them pale:
+ * the art is pastel and the dark title must stay readable.
+ */
+const CARD_TINTS = [
+  '#ffe4d4', // peach
+  '#d9f5e4', // mint
+  '#ebe2fb', // lilac
+  '#fff3c4', // butter
+  '#dcedfc', // sky
+  '#fde0ec', // pink
+  '#d4f3ef', // aqua
+];
+
 export default function GroupPage() {
   const { groupId, subjectId } = useParams<{ groupId: string; subjectId?: string }>();
   const group = groupsData.groups.find((g) => g.id === groupId && isGroupVisible(g));
@@ -95,7 +112,7 @@ export default function GroupPage() {
           marginTop: 16,
         }}
       >
-        {games.map((game) => {
+        {games.map((game, i) => {
           const stars = getGameStars(game.id);
           const unlocked = canPlayGame(game.id, group.id, ownedGroups);
           return (
@@ -103,7 +120,12 @@ export default function GroupPage() {
               key={game.id}
               to={`/game/${game.id}`}
               className="btn"
-              style={{ flexDirection: 'column', padding: 20, position: 'relative' }}
+              style={{
+                flexDirection: 'column',
+                padding: 20,
+                position: 'relative',
+                background: CARD_TINTS[i % CARD_TINTS.length],
+              }}
             >
               {!unlocked && (
                 <span style={{ position: 'absolute', top: 10, right: 12, fontSize: 22 }}>
