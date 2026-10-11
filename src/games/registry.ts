@@ -331,6 +331,15 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd2/sahabat-bumi'),
   },
   {
+    id: 'lab-cahaya-bunyi',
+    group: 'sd2',
+    subject: 'ipas',
+    title: 'Lab Cahaya & Bunyi',
+    emoji: '🔦',
+    template: 'light-lab',
+    load: () => import('@/games/sd2/lab-cahaya-bunyi'),
+  },
+  {
     id: 'toko-kembalian',
     group: 'sd2',
     subject: 'matematika',

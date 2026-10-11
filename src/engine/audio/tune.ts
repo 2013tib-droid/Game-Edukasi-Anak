@@ -145,7 +145,7 @@ export function playTune(ac: BaseAudioContext): Tune {
 /* ---------- Offline render, so the tune can play as a media clip ---------- */
 
 /** Wrap mono float samples in a 16-bit PCM WAV container. */
-function wavBlob(buffer: AudioBuffer): Blob {
+export function wavBlob(buffer: AudioBuffer): Blob {
   const samples = buffer.getChannelData(0);
   const bytes = new ArrayBuffer(44 + samples.length * 2);
   const view = new DataView(bytes);

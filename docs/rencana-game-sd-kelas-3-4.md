@@ -704,6 +704,45 @@ tak kembar · narasi tanpa digit.
 latar studio. Lafal "tempel", "sobek", "berbeda" belum didaftarkan di
 `scripts/pronounce.mjs` (ragu taling/pepet — dengarkan dulu hasil render).
 
+### 2b.11 IPAS — Lab Cahaya & Bunyi 🔦 (game IPAS ketiga, 2026-10-11)
+
+Game kedua dari tiga game IPAS baru (2b.9). Bagian IPAS yang dipegang: cahaya &
+bayangan, bunyi, energi & hemat energi.
+
+**Keputusan pemilik (2026-10-11, semua rekomendasi disetujui):**
+
+| Pertanyaan | Keputusan |
+|---|---|
+| Cara main | Anak MELAKUKAN percobaannya — template engine baru `light-lab`: matikan lampu kamar, uji bahan di depan senter, geser senter (bayangan dihitung fisika sungguhan), petik karet / pukul gendang dengan menarik lalu melepas, ketuk gelas nada, tarik benang telepon kaleng, putar cermin, colokkan alat listrik, matikan alat yang tak dipakai. |
+| Bunyi | **Nada sungguhan buatan engine** (`src/engine/audio/tones.ts`): dirender ke WAV lalu diputar lewat elemen `<audio>` SENDIRI (bukan elemen narasi), jadi terdengar di iPhone yang senyap dan tidak memotong narasi. |
+| Pemandu | **Profesor Panda** (seni `panda` + kacamata lab SVG di dahinya). Nol aset baru. |
+| Misi besar | **Wayang Bayangan**: bayangan wayang besar di kelir → gamelan gelas (dimainkan sebagai lagu sesudah tersusun) → matikan alat sesudah pertunjukan. |
+
+**9 slot, urutan TETAP, 6 varian per slot, proyek sesi "Pertunjukan Bayangan":**
+kls 3: sumber cahaya (pengecoh khas bulan & cermin) · tembus / sebagian / tidak
+tembus · bayangan (dari atas: bayangan di SEBERANG senter; dari samping: senter
+dekat = bayangan besar) · bunyi dari getaran (tahan = berhenti; tarik jauh =
+keras) + satu pertanyaan · tinggi-rendah bunyi (urutkan gelas/karet, atau atur
+air / kencangkan karet) → kls 4: telepon kaleng + bunyi merambat lewat
+udara/air/benda padat · cahaya dipantulkan (putar cermin sampai sinar mengenai
+tunas) · energi berubah bentuk (colokkan, tempel cahaya/panas/bunyi/gerak) ·
+**misi besar Wayang Bayangan**.
+
+**Aturan yang dijaga (builder melempar error):** gelas SELALU diketuk (banyak
+air = rendah; ditiup kebalikannya, jadi tak dipakai) · dua benda nada tak boleh
+jatuh di tingkat nada yang sama · soal atur nada tak boleh sudah benar sejak
+awal · soal cermin harus belum benar di awal DAN punya penyelesaian · bayangan
+sasaran harus bisa dicapai di rel · kartu sumber cahaya wajib memuat bulan atau
+cermin · tiap kotak tembus cahaya punya benda · dua alat tak boleh berenergi
+sama, label pengecoh bukan jawaban · kartu hemat energi: satu gambar satu arti,
+ada alat yang tetap menyala (kulkas) · narasi tanpa digit.
+
+**Hitungan di satu tempat:** `src/engine/core/lab.ts` (nada per tingkat, skala
+bayangan, zona kecil/sedang/besar, tarikan pelan/keras, penelusur sinar cermin)
+dipakai template DAN builder.
+
+**Yang belum:** seni ikon kartu (`pic`), seni Profesor Panda sendiri.
+
 ## 3. Urutan pengerjaan
 
 > **Untuk game yang belum dibuat, urutan terbaru ada di 2b.7.** Tabel di bawah
@@ -777,6 +816,7 @@ syarat ini **bukan** izin rilis — keputusan melepas `draft` tetap di pemilik.
 | – | Perisai Garuda (Pancasila) | `perisai-garuda` | ✅ sudah ada (2026-10-05) — game Pancasila pertama: lambang sila SVG engine (`Sila.tsx`), 9 slot × 55 varian, urutan tetap, proyek sesi "Perisai Garuda" (stempel = lambang sila); narasi SUDAH dirender (render #26, 57 baris). Rumah & pakaian adat belum. |
 | – | Sanggar Warna (Seni Rupa) | `sanggar-warna` | ✅ sudah ada (2026-10-08) — game Seni Rupa pertama: template baru `paint-studio` (campur cat di mangkuk dengan warna yang berubah perlahan, palet, resep, pinggiran kain, toples panas/dingin, kain batik, simetri) + `paint.ts` (satu sumber nama/hasil campuran/suhu warna) + `Paint.tsx` (tabung, mangkuk, roda warna, hiasan, motif batik SVG); 9 slot × 54 varian, urutan tetap, proyek sesi "Galeri Sanggar Warna", P2 menyala; narasi 78 baris, render #33. Kolase ditunda. |
 | – | Sahabat Bumi (IPAS) | `sahabat-bumi` | ✅ sudah ada (2026-10-09) — game IPAS kedua: template baru `eco-mission` (seret sampah ke tong berwarna, sentuh kebiasaan boros/merusak, susun daur air di lingkaran, pilih sumber daya, tanam pohon) + `Eco.tsx` (19 benda SVG + tong); 9 slot × 54 varian, urutan tetap, proyek sesi "Sungai Bersih", P2 menyala; narasi 25 baris, render #34. Lab Cahaya & Bunyi dan Jelajah Kampung menyusul (2b.9). |
+| – | Lab Cahaya & Bunyi (IPAS) | `lab-cahaya-bunyi` | ✅ sudah ada (2026-10-11) — game IPAS ketiga: template baru `light-lab` (matikan lampu & sentuh sumber cahaya, uji bahan di depan senter, geser senter untuk bayangan, petik karet / pukul gendang, susun & setel gelas nada dengan nada sungguhan, telepon kaleng, putar cermin, colokkan alat & tempel energinya, matikan alat) + `core/lab.ts` + `ui/Lab.tsx` + `audio/tones.ts`; 9 slot × 54 varian, urutan tetap, proyek sesi "Pertunjukan Bayangan", P2 menyala; narasi 50 baris, render #37. Jelajah Kampung menyusul (2b.9). |
 | – | Studio Kolase (Seni Rupa) | `studio-kolase` | ✅ sudah ada (2026-10-09) — game Seni Rupa kedua: template baru `collage-studio` (sobek kertas dengan menyeret keluar dari lembarnya, tempel sampai bagian pola tertutup dengan sobekan yang terpotong mengikuti garis pola, mozaik dengan sapuan jari, kolase biji-bijian, urutkan langkah, pilah bahan, kenali kolase/mozaik/montase) + `core/collage.ts` (bahan, 15 gambar pola, montase) + `ui/Collage.tsx`; 9 slot × 54 varian, urutan tetap, proyek sesi "Pameran Kolase", P2 menyala; narasi 55 baris, render #35. |
 
 ## 7. Prompt untuk memulai sesi baru

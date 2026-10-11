@@ -32,6 +32,7 @@ export type TemplateId =
   | 'paint-studio' // campur cat, warnai, susun motif batik (Sanggar Warna)
   | 'eco-mission' // pilah sampah, daur air, jaga sungai (Sahabat Bumi)
   | 'collage-studio' // sobek & tempel kolase, susun mozaik (Studio Kolase)
+  | 'light-lab' // percobaan cahaya, bayangan, bunyi & energi (Lab Cahaya & Bunyi)
   | 'word-voyage'; // kosakata & kalimat bahasa Inggris, 7 mode berganti (Kapten Kata)
 
 /* ---------- Per-template level payloads ---------- */
@@ -1208,6 +1209,106 @@ export interface EcoMissionData {
   steps: EcoStep[];
 }
 
+/* ---------- light-lab (Lab Cahaya & Bunyi) ---------- */
+
+/**
+ * Benda di Lab Cahaya & Bunyi yang digambar SVG engine (`Lab.tsx`). Bahan uji
+ * tembus cahaya, alat listrik, kunang-kunang, dan tiga wayang untuk misi besar
+ * — tak ada emoji yang membawanya dengan satu arti.
+ */
+export type LabArt =
+  | 'kaca'
+  | 'plastik-bening'
+  | 'kertas-minyak'
+  | 'kain-tipis'
+  | 'kaca-es'
+  | 'kayu'
+  | 'kardus'
+  | 'piring'
+  | 'kunang'
+  | 'lampu'
+  | 'kipas'
+  | 'setrika'
+  | 'penanak'
+  | 'bel'
+  | 'radio'
+  | 'mobil-mainan'
+  | 'kulkas'
+  | 'wayang-gunungan'
+  | 'wayang-tokoh'
+  | 'wayang-garuda';
+
+/**
+ * Satu benda di lab. Gambarnya SVG engine (`art`), seni item (`item`) atau
+ * emoji — salah satu. `label` selalu tertulis.
+ */
+export interface LabThing {
+  art?: LabArt;
+  item?: string;
+  emoji?: string;
+  label: string;
+}
+
+/** Bentuk energi hasil alat listrik (slot "energi berubah bentuk"). */
+export type LabEnergy = 'cahaya' | 'panas' | 'bunyi' | 'gerak';
+
+/** Seberapa banyak cahaya senter yang menembus satu bahan. */
+export type LabPass = 'tembus' | 'sebagian' | 'tidak';
+
+/**
+ * Satu percobaan di Lab Cahaya & Bunyi. Dinilai engine dari datanya; salah
+ * taruh/atur/sentuh = SENYAP, salah memilih jawaban (`pick`) = overlay.
+ * - `glow`    matikan lampu kamar, lalu sentuh SEMUA yang `light` (bercahaya
+ *             sendiri). Pengecoh khas: bulan, cermin.
+ * - `pass`    uji bahan di depan senter (layar memperlihatkan terang / redup /
+ *             gelap), lalu pilah ke kotak tembus / sebagian / tidak tembus.
+ * - `shadow`  `side`: lihat dari atas, geser senter mengelilingi benda sampai
+ *             bayangannya jatuh ke arah `target` (bayangan selalu di sisi
+ *             yang BERLAWANAN dengan cahaya). `size`: lihat dari samping,
+ *             geser senter maju-mundur sampai bayangan di dinding pas
+ *             dengan bingkai `goal` (dekat senter = besar).
+ * - `vibrate` petik karet / pukul gendang dengan menarik lalu melepas.
+ *             `stop` = sentuh bendanya saat bergetar → bunyi berhenti;
+ *             `keras`/`pelan` = tarikan jauh / dekat.
+ * - `pitch`   `order`: ketuk gelas/karet untuk mendengar nadanya, susun
+ *             dari rendah ke tinggi (`dir: 'turun'` = sebaliknya). Gelas
+ *             DIKETUK: makin banyak air makin RENDAH. Karet: makin kencang
+ *             makin TINGGI. `tune`: atur air / kencangkan karet sampai lebih
+ *             tinggi / rendah dari contoh, lalu "Cocok!".
+ * - `can`     telepon kaleng: tarik temannya sampai benang kencang, baru
+ *             suaranya (`line`, dibacakan) sampai.
+ * - `mirror`  putar cermin (ketuk) sampai sinar senter mengenai sasaran.
+ *             `grid`: `.` kosong, `#` tembok, `> < ^ v` senter & arahnya,
+ *             `T` sasaran, `/` `\` cermin (posisi awal).
+ * - `power`   colokkan alat (ketuk), lalu tarik label energi ke alatnya.
+ * - `saver`   matikan alat yang tidak dipakai (`off`); yang dipakai biarkan.
+ * - `pick`    pilih satu jawaban; `cue` = isyarat besar.
+ */
+export type LabTask =
+  | { kind: 'glow'; cards: (LabThing & { light?: boolean })[] }
+  | { kind: 'pass'; items: (LabThing & { pass: LabPass })[] }
+  | { kind: 'shadow'; mode: 'side'; thing: LabThing; target: LabThing; angle: number }
+  | { kind: 'shadow'; mode: 'size'; thing: LabThing; goal: 'besar' | 'sedang' | 'kecil' }
+  | { kind: 'vibrate'; thing: 'karet' | 'gendang'; goal: 'stop' | 'keras' | 'pelan' }
+  | { kind: 'pitch'; mode: 'order'; source: 'gelas' | 'karet'; levels: number[]; dir: 'naik' | 'turun'; melody?: boolean }
+  | { kind: 'pitch'; mode: 'tune'; source: 'gelas' | 'karet'; ref: number; start: number; goal: 'tinggi' | 'rendah' }
+  | { kind: 'can'; friend: LabThing; line: string }
+  | { kind: 'mirror'; grid: string[] }
+  | { kind: 'power'; devices: (LabThing & { energy: LabEnergy })[]; extra: LabEnergy[] }
+  | { kind: 'saver'; cards: (LabThing & { off?: boolean })[] }
+  | { kind: 'pick'; cue?: LabThing; choices: (LabThing & { correct?: boolean })[] };
+
+export interface LabStep {
+  /** Kalimat langkah ke-2 dst. (pertanyaan lanjutan, misi besar). Dibacakan — TANPA digit. */
+  say?: string;
+  task: LabTask;
+}
+
+/** Lab Cahaya & Bunyi: Profesor Panda memandu percobaan demi percobaan. */
+export interface LightLabData {
+  steps: LabStep[];
+}
+
 /* ---------- collage-studio (Studio Kolase) ---------- */
 
 /**
@@ -1350,6 +1451,7 @@ export interface LevelDataMap {
   'paint-studio': PaintStudioData;
   'eco-mission': EcoMissionData;
   'collage-studio': CollageStudioData;
+  'light-lab': LightLabData;
   'word-voyage': WordVoyageData;
 }
 

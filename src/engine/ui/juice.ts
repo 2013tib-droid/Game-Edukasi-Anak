@@ -55,6 +55,15 @@ const POP_SELECTOR = [
   '.ks-thing',
   '.ks-bin',
   '.ks-choice',
+  '.lab-card',
+  '.lab-thing',
+  '.lab-box',
+  '.lab-sound',
+  '.lab-device',
+  '.lab-energy',
+  '.lab-mcell--mirror',
+  '.lab-switch',
+  '.lab-check',
 ].join(',');
 
 function reducedMotion(): boolean {
