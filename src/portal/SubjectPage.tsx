@@ -32,8 +32,15 @@ export default function SubjectPage({ group, subjects }: Props) {
   return (
     <div className="page subj-page">
       <p className="subj-group">
-        <GroupPic pic={group.pic} emoji={group.emoji} height={30} emojiSize={22} />
-        {group.title}
+        <span className="subj-ribbon">
+          <span className="subj-ribbon__pic" aria-hidden>
+            <GroupPic pic={group.pic} emoji={group.emoji} height={46} emojiSize={32} />
+          </span>
+          {/* NBSP: "& 4" tak pernah turun baris sendirian. */}
+          {group.title.replace(/ & /g, '\u00a0&\u00a0')}
+          <span className="subj-ribbon__spark subj-ribbon__spark--a" aria-hidden>✦</span>
+          <span className="subj-ribbon__spark subj-ribbon__spark--b" aria-hidden>✦</span>
+        </span>
       </p>
 
       <div className="subj-hello">

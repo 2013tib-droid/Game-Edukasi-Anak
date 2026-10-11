@@ -3,15 +3,71 @@
   max-width: 760px;
 }
 
+/* Nama kelompok = pita besar bergradien dengan stiker gambarnya di kiri dan
+   dua kerlip bintang. Dulu teks cokelat 16px yang tenggelam di latar. */
 .subj-group {
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin: 0 0 10px;
-  font-size: 16px;
+  margin: 4px 0 20px;
+}
+.subj-ribbon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 100%;
+  padding: 7px 26px 7px 7px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #6a5ae0 0%, #9b62e0 55%, #d46cb8 100%);
+  color: #fff;
+  font-size: clamp(22px, 6.8vw, 30px);
   font-weight: 800;
-  color: #7a5a2e;
+  line-height: 1.1;
+  text-shadow: 0 2px 0 rgba(60, 30, 120, 0.35);
+  box-shadow: 0 5px 0 #4b3aa8, 0 12px 20px rgba(80, 50, 160, 0.28);
+}
+.subj-ribbon__pic {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fff8e6;
+  box-shadow: 0 0 0 3px #ffe08a;
+  rotate: -6deg;
+}
+.subj-ribbon__pic img {
+  max-width: 48px;
+  object-fit: contain;
+}
+.subj-ribbon__spark {
+  position: absolute;
+  color: #ffd84a;
+  text-shadow: 0 1px 0 #c99a00;
+  line-height: 1;
+  pointer-events: none;
+  animation: subj-twinkle 1.8s ease-in-out infinite;
+}
+.subj-ribbon__spark--a {
+  top: -12px;
+  right: 6px;
+  font-size: 22px;
+}
+.subj-ribbon__spark--b {
+  bottom: -10px;
+  right: 34%;
+  font-size: 15px;
+  animation-delay: 0.9s;
+}
+@keyframes subj-twinkle {
+  0%, 100% { scale: 1; opacity: 1; }
+  50% { scale: 0.55; opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .subj-ribbon__spark {
+    animation: none;
+  }
 }
 
 /* Maskot anak + balon kata. */
@@ -45,27 +101,32 @@
   min-width: 0;
   padding: 10px 14px 11px;
   border-radius: 18px;
-  background: #fff;
-  box-shadow: 0 3px 0 #ecd9b6;
+  /* Bukan putih (permintaan pemilik): lilac-ke-langit yang senada pita
+     kelompok, bingkai ungu muda. */
+  background: linear-gradient(135deg, #efe7ff 0%, #e2f1ff 100%);
+  border: 2.5px solid #c7b4f4;
+  box-shadow: 0 4px 0 #b9a3ee;
 }
 /* Ekor balon menunjuk ke maskot. */
 .subj-hello__bubble::before {
   content: '';
   position: absolute;
-  left: -9px;
+  left: -11px;
   top: 50%;
   width: 18px;
   height: 18px;
-  background: #fff;
+  background: #efe7ff;
+  border-left: 2.5px solid #c7b4f4;
+  border-bottom: 2.5px solid #c7b4f4;
   transform: translateY(-50%) rotate(45deg);
-  border-radius: 3px;
+  border-radius: 0 0 0 3px;
 }
 .subj-hello__name {
   position: relative;
   display: block;
   font-size: 15px;
   font-weight: 800;
-  color: #c4621a;
+  color: #7a4bd6;
   overflow-wrap: anywhere;
 }
 .subj-hello__ask {
