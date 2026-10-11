@@ -17,11 +17,78 @@
    Floaters are absolutely positioned INSIDE .hero-stage (overflow-safe), so
    they can never widen the page. */
 .landing .hero {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Full-bleed band: cancels .landing's padding so the garden reaches both
+     screen edges and the top bar. Bottom padding leaves room for the grass
+     under the perks row. */
+  align-self: stretch;
+  margin: -34px -22px 0;
+  padding: 34px 22px 78px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fff2cf 0%, #ffe6ec 42%, #dcf2ff 100%);
+}
+/* Content above the absolutely-positioned garden (positioned boxes paint
+   over plain in-flow ones, so the text needs its own stacking). */
+.landing .hero > :not(.hero-garden) {
+  position: relative;
+  z-index: 1;
+}
+.landing .hero-garden {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 100%;
+  pointer-events: none;
+}
+.landing .hg-hills {
+  position: absolute;
+  left: 0;
+  bottom: 0;
   width: 100%;
-  max-width: 420px;
+  height: clamp(58px, 15vw, 96px);
+}
+.landing .hg-cluster {
+  position: absolute;
+  bottom: 0;
+  height: clamp(104px, 30vw, 200px);
+  width: auto;
+  aspect-ratio: 170 / 140;
+}
+.landing .hg-cloud {
+  /* Only where the sky beside the hero is empty — on phones the game
+     floaters already fill those corners. */
+  display: none;
+  position: absolute;
+  width: clamp(110px, 12vw, 170px);
+  height: auto;
+  animation: hg-drift 9s ease-in-out infinite;
+}
+.landing .hg-cloud--l {
+  left: 6%;
+  top: 70px;
+}
+.landing .hg-cloud--r {
+  right: 7%;
+  top: 150px;
+  width: clamp(90px, 9vw, 130px);
+  animation-delay: -4s;
+}
+@keyframes hg-drift {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 14px 0; }
+}
+@media (min-width: 720px) {
+  .landing .hg-cloud {
+    display: block;
+  }
+}
+.landing .hg-cluster--l {
+  left: -6px;
+}
+.landing .hg-cluster--r {
+  right: -6px;
 }
 .landing .hero-stage {
   position: relative;
@@ -917,9 +984,6 @@
 /* Wide screens (tablet landscape, laptop): the single 360 px column wasted
    most of the width. Sections that are lists spread out; the hero stays put. */
 @media (min-width: 720px) {
-  .landing .hero {
-    max-width: 560px;
-  }
   .landing .lsec-title,
   .landing .lsec-sub {
     max-width: 560px;

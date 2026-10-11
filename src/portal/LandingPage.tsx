@@ -2,6 +2,7 @@ import { useEffect, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import FeedbackSection from '@/portal/FeedbackSection';
 import TopBar from '@/portal/TopBar';
+import HeroGarden from '@/portal/HeroGarden';
 import GameIcon from '@/engine/ui/GameIcon';
 import { findGame, games } from '@/games/registry';
 import { countVisit } from '@/portal/stats';
@@ -241,6 +242,7 @@ export default function LandingPage() {
       <TopBar account />
       <div className="landing">
         <section className="hero">
+          <HeroGarden />
           <div className="hero-stage">
             <span className="hero-glow" aria-hidden="true" />
             {floaters.map((f) => {
