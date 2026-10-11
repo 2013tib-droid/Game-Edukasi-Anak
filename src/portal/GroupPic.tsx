@@ -7,7 +7,9 @@ import { useState } from 'react';
  * ever requesting a file that would 404.
  *
  * Shared by the portal cards (`HomePage`) and the group page header
- * (`GroupPage`) so the two screens can never show different icons.
+ * (`GroupPage`) so the two screens can never show different icons. Subject
+ * icons (`SUBJECT_STYLE.pic`, folder `assets/subjects/`) use the same
+ * contract.
  *
  * The picture is sized by HEIGHT with `width: auto`: the art is cropped tight
  * to the drawing, so each file has its own aspect ratio and a fixed box would
@@ -18,8 +20,11 @@ export default function GroupPic({
   emoji,
   height = 88,
   emojiSize = 48,
+  dir = 'groups',
 }: {
   pic?: string;
+  /** Folder under public/assets/ — `subjects` for the subject icons. */
+  dir?: 'groups' | 'subjects';
   emoji: string;
   height?: number;
   emojiSize?: number;
@@ -28,7 +33,7 @@ export default function GroupPic({
   if (!pic || failed) return <span style={{ fontSize: emojiSize }}>{emoji}</span>;
   return (
     <img
-      src={`${import.meta.env.BASE_URL}assets/groups/${pic}.webp`}
+      src={`${import.meta.env.BASE_URL}assets/${dir}/${pic}.webp`}
       alt=""
       style={{ height, width: 'auto' }}
       onError={() => setFailed(true)}

@@ -72,9 +72,13 @@ export default function GroupPage() {
         }}
       >
         {subject ? (
-          <span style={{ fontSize: 40 }} aria-hidden>
-            {SUBJECT_STYLE[subject.id].deco}
-          </span>
+          <GroupPic
+            dir="subjects"
+            pic={SUBJECT_STYLE[subject.id].pic}
+            emoji={SUBJECT_STYLE[subject.id].deco}
+            height={56}
+            emojiSize={40}
+          />
         ) : (
           <GroupPic pic={group.pic} emoji={group.emoji} height={64} emojiSize={40} />
         )}

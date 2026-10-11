@@ -49,7 +49,7 @@ export default function SubjectPage({ group, subjects }: Props) {
                 {soon ? 'Segera hadir' : `${count} game · Mulai Belajar →`}
               </span>
               <span className="subj-deco" aria-hidden>
-                {style.deco}
+                <GroupPic dir="subjects" pic={style.pic} emoji={style.deco} height={60} emojiSize={52} />
               </span>
             </>
           );
