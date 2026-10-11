@@ -1,10 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #37 — Lab Cahaya & Bunyi (game IPAS ketiga sd2): 50 baris baru,
-semuanya scope lab-cahaya-bunyi (2.953 karakter). 1977 → 2027 baris, nol
-baris lama berubah/pindah scope, nol digit — jadi aman pakai "only:".
+render #38 — Kebun Ilmu: dua soal laci meja (gambar lemari arsip, terlalu
+dewasa) diganti "Menuntun kambing dengan tali" & "Membantu mobil mogok dari
+belakang". 2 baris baru, scope kebun-ilmu, nol baris pindah scope.
 
-only: lab-cahaya-bunyi
+only: kebun-ilmu
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender

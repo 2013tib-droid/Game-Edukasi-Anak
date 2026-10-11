@@ -303,11 +303,11 @@ const config: MixedGameConfig = {
     slot(
       'l5',
       ask('Menendang bola. Gaya apa itu?', DORONG, [TARIK], { pictureItem: 'ball' }),
-      ask('Membuka laci meja. Gaya apa itu?', TARIK, [DORONG], { picture: '🗄️' }),
+      ask('Menuntun kambing dengan tali. Gaya apa?', TARIK, [DORONG], { pictureItem: 'goat' }),
       ask('Mencabut wortel dari tanah. Gaya apa?', TARIK, [DORONG], { pictureItem: 'carrot' }),
       ask('Menimba air dari sumur. Gaya apa itu?', TARIK, [DORONG], { picture: '🪣' }),
       ask('Menekan tombol bel. Gaya apa itu?', DORONG, [TARIK], { picture: '🔔' }),
-      ask('Menutup laci meja. Gaya apa itu?', DORONG, [TARIK], { picture: '🗄️' }),
+      ask('Membantu mobil mogok dari belakang. Gaya apa?', DORONG, [TARIK], { pictureItem: 'car' }),
     ),
 
     // --- l6 (kls 4) Fungsi bagian tumbuhan ---
