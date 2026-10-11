@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import type { GroupId } from '@/engine/core/types';
 import { SUBJECT_STYLE, type GroupSubject } from '@/data/subjects';
-import { gamesForGroup } from '@/games/registry';
+import { gamesForGroup, subjectPath } from '@/games/registry';
 import GroupPic from '@/portal/GroupPic';
 import BackIcon from '@/engine/ui/BackIcon';
 import LockToggle from '@/portal/LockToggle';
@@ -46,7 +46,7 @@ export default function SubjectPage({ group, subjects }: Props) {
               <span className="subj-name">{style.title}</span>
               <span className="subj-desc">{s.description}</span>
               <span className={soon ? 'subj-cta subj-cta--soon' : 'subj-cta'}>
-                {soon ? 'Segera hadir' : `${count} game · Mulai Belajar →`}
+                {soon ? 'Segera hadir' : count === 1 ? 'Mulai Belajar →' : `${count} game · Mulai Belajar →`}
               </span>
               <span className="subj-deco" aria-hidden>
                 <GroupPic dir="subjects" pic={style.pic} emoji={style.deco} height={60} emojiSize={52} />
@@ -69,7 +69,7 @@ export default function SubjectPage({ group, subjects }: Props) {
           ) : (
             <Link
               key={s.id}
-              to={`/kelompok/${group.id}/${s.id}`}
+              to={subjectPath(group.id as GroupId, s.id)}
               className="subj-card"
               style={cardStyle}
             >
