@@ -39,11 +39,13 @@ const CARD_TINTS = [
  * Latar halaman daftar game per kelompok (permintaan pemilik 2026-10-12:
  * TK dapat latar seperti SD Kelas 3 & 4, tapi tempatnya BEDA). SD Kelas 3 & 4
  * memakai `padang` di layar pilih mapel; TK memakai `hutan` — dunia Hutan
- * Hewan, langitnya hijau muda jadi langsung terbaca beda. Kelompok yang tak
- * disebut tetap latar gradien bawaan.
+ * Hewan, langitnya hijau muda jadi langsung terbaca beda. SD Kelas 1 & 2
+ * memakai `kota` (permintaan pemilik di sesi yang sama: tema lain lagi) —
+ * jalan ke sekolah. Kelompok yang tak disebut tetap latar gradien bawaan.
  */
 const GROUP_SCENE: Partial<Record<GroupId, SceneId>> = {
   tk: 'hutan',
+  sd1: 'kota',
 };
 
 export default function GroupPage() {
