@@ -124,18 +124,21 @@ const skills = [
 const reasons: { icon: string; art?: string; cls: string; title: string; text: string }[] = [
   {
     icon: '🎮',
+    art: 'reasons/game-edukatif.webp',
     cls: 'r-a',
     title: `${gamesOnSale} game edukatif`,
     text: 'Game untuk Playgroup, TK, dan Sekolah Dasar.',
   },
   {
     icon: '🔊',
+    art: 'reasons/dipandu-suara.webp',
     cls: 'r-b',
     title: 'Dipandu suara',
     text: 'Semua soal dibacakan, cocok untuk yang belum lancar membaca.',
   },
   {
     icon: '🚫',
+    art: 'reasons/tanpa-iklan.webp',
     cls: 'r-c',
     title: 'Tanpa iklan',
     text: 'Tanpa iklan & tanpa tautan keluar di area anak.',
