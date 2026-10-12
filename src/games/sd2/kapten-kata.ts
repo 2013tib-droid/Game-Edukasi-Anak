@@ -58,7 +58,7 @@ const ISLANDS: Island[] = [
     key: 'satwa',
     name: 'Pulau Satwa',
     emoji: '🐯',
-    item: 'tiger',
+    art: 'satwa',
     words: [
       W('cat', 'kucing', { item: 'cat' }),
       W('rabbit', 'kelinci', { item: 'rabbit' }),
@@ -91,7 +91,7 @@ const ISLANDS: Island[] = [
     key: 'rasa',
     name: 'Pulau Rasa',
     emoji: '🍉',
-    item: 'watermelon',
+    art: 'rasa',
     words: [
       W('apple', 'apel', { item: 'apple' }),
       W('banana', 'pisang', { item: 'banana' }),
@@ -123,7 +123,7 @@ const ISLANDS: Island[] = [
     key: 'warna',
     name: 'Pulau Warna',
     emoji: '🎨',
-    item: 'brush',
+    art: 'warna',
     // Oranye sengaja tidak dipakai: di layar HP kuning & oranye sulit dibedakan
     // (aturan yang sama dengan Labirin Warna & keranjang Pasar Buah).
     words: [
@@ -153,6 +153,7 @@ const ISLANDS: Island[] = [
     key: 'angka',
     name: 'Pulau Angka',
     emoji: '🔢',
+    art: 'angka',
     // Pasangan -teen / -ty (thirteen ↔ thirty) sengaja ada bersama: begitu
     // katanya mulai dikuasai, engine mengadu yang ejaannya paling mirip.
     words: [
@@ -183,7 +184,7 @@ const ISLANDS: Island[] = [
     key: 'barang',
     name: 'Pulau Barangku',
     emoji: '🎒',
-    item: 'backpack',
+    art: 'barangku',
     words: [
       W('book', 'buku', { item: 'book' }),
       W('pencil', 'pensil', { item: 'pencil' }),
@@ -214,7 +215,7 @@ const ISLANDS: Island[] = [
     key: 'profesi',
     name: 'Pulau Profesi',
     emoji: '🧑‍🍳',
-    item: 'chef',
+    art: 'profesi',
     words: [
       W('teacher', 'guru', { item: 'teacher' }),
       W('doctor', 'dokter', { item: 'doctor' }),
@@ -241,6 +242,7 @@ const ISLANDS: Island[] = [
     key: 'aksi',
     name: 'Pulau Aksi',
     emoji: '🏃',
+    art: 'aksi',
     words: [
       W('run', 'berlari', { emoji: '🏃' }),
       W('walk', 'berjalan', { emoji: '🚶' }),
@@ -269,7 +271,7 @@ const ISLANDS: Island[] = [
     key: 'kota',
     name: 'Pulau Kota',
     emoji: '🚌',
-    item: 'bus',
+    art: 'kota',
     words: [
       W('car', 'mobil', { item: 'car' }),
       W('bus', 'bus', { item: 'bus' }),
