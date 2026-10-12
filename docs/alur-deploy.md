@@ -32,12 +32,15 @@ Daftar semua versi development yang sedang hidup: `https://2013tib-droid.github.
 
 - **Setiap** "Deploy development" memakai **`nama: main`**, apa pun `ref`-nya. Pemilik cukup membuka satu link:
   `https://2013tib-droid.github.io/Game-Edukasi-Anak/development/main/`
-- Fitur yang belum di-merge tetap di-deploy dari branch-nya (`ref: claude/<fitur>`) **ke folder `main`** — jadi isi
-  `/development/main/` = versi TERBARU yang sedang dicek, bisa lebih maju dari branch `main`. Itu disengaja.
-- **JEBAKAN: dua branch fitur yang belum di-merge saling menimpa** di folder yang sama. Deploy branch B sesudah
-  branch A = game dari A hilang dari link itu. Kalau dua fitur sedang dicek bersamaan, gabungkan dulu ke satu branch,
-  atau merge yang sudah disetujui ke `main` lalu cabangkan yang berikutnya dari `main` terbaru.
-- Sesudah merge ke `main`, deploy ulang `ref: main` ke `nama: main` supaya isinya kembali = `main`.
+- **"Deploy development" HANYA dari `ref: main` (keputusan pemilik 2026-10-12: *"jadi rancu soalnya. Ga 1 pintu"*).**
+  Fitur selesai → merge ke `main` dulu → baru deploy development dari `main`. JANGAN deploy dari branch fitur.
+  - Kenapa: 2026-10-12 empat branch (landing + maskot ayam, Bagi Kue, hitung pulau, ikon pulau) di-deploy bergantian
+    dari branch masing-masing ke folder yang sama. Tiap deploy menghapus yang sebelumnya — maskot pagi itu hilang
+    dari link tanpa ada yang sadar. Diperbaiki dengan menggabungkan keempatnya ke `main` (PR #128).
+  - Merge ke `main` itu AMAN: yang menentukan situs pembeli tetap "Deploy web" (produksi), dan itu selalu ditanyakan
+    ke pemilik dulu. `main` boleh berisi fitur yang masih dicek di development.
+  - Kalau suatu fitur ternyata ditolak sesudah di-merge, betulkan/cabut lewat commit baru di `main` — jangan
+    kembali ke deploy per branch.
 - Subfolder lain (`/development/<nama>/`) tidak dipakai lagi; yang lama boleh dihapus dengan `hapus: true`.
 
 ## Langkah untuk SETIAP fitur baru
