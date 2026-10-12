@@ -7,6 +7,7 @@ import { mascotFor } from '@/engine/core/mascot';
 import { MascotPic } from '@/engine/ui/Mascot';
 import GroupPic from '@/portal/GroupPic';
 import Notebook from '@/portal/Notebook';
+import SignTitle from '@/portal/SignTitle';
 import BackIcon from '@/engine/ui/BackIcon';
 import LockToggle from '@/portal/LockToggle';
 import { greeting } from '@/portal/childName';
@@ -82,27 +83,3 @@ export default function SubjectPage({ group, subjects }: Props) {
  * baris atas, nomor kelasnya besar & jingga di bawah — anak SD mengenali
  * "3 & 4"-nya, bukan kalimatnya. Judul tanpa angka tampil satu baris.
  */
-function SignTitle({ group }: { group: Props['group'] }) {
-  const m = /^(.*?)\s*(\d.*)$/.exec(group.title);
-  return (
-    <div className="subj-sign" role="img" aria-label={group.title}>
-      <span className="subj-sign__pic" aria-hidden>
-        <GroupPic pic={group.pic} emoji={group.emoji} height={58} emojiSize={40} />
-      </span>
-      <span className="subj-sign__text" aria-hidden>
-        {m ? (
-          <>
-            <span className="subj-sign__top">{m[1]}</span>
-            <span className="subj-sign__big">
-              <span className="subj-sign__spark">✦</span>
-              {m[2].replace(/ & /g, '\u00a0&\u00a0')}
-              <span className="subj-sign__spark subj-sign__spark--b">✦</span>
-            </span>
-          </>
-        ) : (
-          <span className="subj-sign__top">{group.title}</span>
-        )}
-      </span>
-    </div>
-  );
-}
