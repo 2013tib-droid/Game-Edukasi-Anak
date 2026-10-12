@@ -12,6 +12,8 @@ import BackIcon from '@/engine/ui/BackIcon';
 import GroupPic from '@/portal/GroupPic';
 import SubjectPage from '@/portal/SubjectPage';
 import { SUBJECT_STYLE, subjectsFor } from '@/data/subjects';
+import Scene from '@/engine/ui/Scene';
+import type { SceneId } from '@/engine/core/types';
 
 // Game list per group. Unlocked games open directly; locked ones show a
 // padlock until the account has group access (gate enforced again in
@@ -32,6 +34,17 @@ const CARD_TINTS = [
   '#fde0ec', // pink
   '#d4f3ef', // aqua
 ];
+
+/**
+ * Latar halaman daftar game per kelompok (permintaan pemilik 2026-10-12:
+ * TK dapat latar seperti SD Kelas 3 & 4, tapi tempatnya BEDA). SD Kelas 3 & 4
+ * memakai `padang` di layar pilih mapel; TK memakai `hutan` — dunia Hutan
+ * Hewan, langitnya hijau muda jadi langsung terbaca beda. Kelompok yang tak
+ * disebut tetap latar gradien bawaan.
+ */
+const GROUP_SCENE: Partial<Record<GroupId, SceneId>> = {
+  tk: 'hutan',
+};
 
 export default function GroupPage() {
   const { groupId, subjectId } = useParams<{ groupId: string; subjectId?: string }>();
@@ -78,8 +91,11 @@ export default function GroupPage() {
   // situ cuma membingungkan, seolah yang lain berbayar padahal tidak.
   const anyLocked = games.some((g) => !canPlayGame(g.id, group.id, ownedGroups));
 
+  const scene = subject ? undefined : GROUP_SCENE[group.id as GroupId];
+
   return (
     <div className="page" style={{ textAlign: 'center' }}>
+      {scene && <Scene id={scene} />}
       <h1
         style={{
           display: 'flex',
