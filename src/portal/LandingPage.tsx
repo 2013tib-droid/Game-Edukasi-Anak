@@ -145,6 +145,7 @@ const reasons: { icon: string; art?: string; cls: string; title: string; text: s
   },
   {
     icon: '💪',
+    art: 'reasons/salah-itu-boleh.webp',
     cls: 'r-d',
     title: 'Salah itu boleh',
     text: 'Salah dijawab "Coba lagi, kamu pasti bisa!" — tanpa hukuman.',
@@ -158,6 +159,7 @@ const reasons: { icon: string; art?: string; cls: string; title: string; text: s
   },
   {
     icon: '💛',
+    art: 'reasons/sekali-bayar.webp',
     cls: 'r-f',
     title: 'Sekali bayar',
     text: 'Main selamanya, satu akun untuk sampai 3 perangkat.',
