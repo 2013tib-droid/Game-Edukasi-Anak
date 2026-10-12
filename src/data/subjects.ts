@@ -1,8 +1,8 @@
 /**
  * Mata pelajaran — lapisan antara kelompok dan daftar game, KHUSUS kelompok
- * SD kelas 3 ke atas (keputusan pemilik 2026-10-05, dari mockup "Pilih Mata
- * Pelajaran"). TK dan SD Kelas 1 & 2 sengaja TIDAK memakainya: TK memang belum
- * belajar per mapel, dan Kelas 1 & 2 sudah dijual dengan daftar game biasa.
+ * SD kelas 3 ke atas (keputusan pemilik 2026-10-05). TK dan SD Kelas 1 & 2
+ * sengaja TIDAK memakainya: TK memang belum belajar per mapel, dan Kelas 1 & 2
+ * sudah dijual dengan daftar game biasa.
  *
  * Satu-satunya tempat yang memutuskan kelompok mana yang punya layar mapel
  * adalah `SUBJECTS_BY_GROUP` di bawah. Game dari kelompok itu WAJIB
@@ -14,6 +14,7 @@
  * baris di kelompoknya.
  */
 import type { GroupId } from '@/engine/core/types';
+import type { NotebookLook } from '@/portal/Notebook';
 
 export type SubjectId =
   | 'matematika'
@@ -25,32 +26,74 @@ export type SubjectId =
 
 export interface SubjectStyle {
   title: string;
-  /** Label kecil di atas judul kartu. */
+  /** Kata kecil di label buku, di atas namanya. */
   tag: string;
-  /** Hiasan di pojok kanan bawah kartu (dekorasi, bukan ikon tombol). */
+  /** Emoji cadangan stiker sampul (dipakai kalau `pic` kosong/gagal). */
   deco: string;
   /**
-   * Seni ikon di public/assets/subjects/<pic>.webp — menggantikan `deco` di
-   * judul halaman mapel DAN pojok kartu. Kosong = emoji `deco`. Prompt:
+   * Seni ikon di public/assets/subjects/<pic>.webp — stiker di sampul buku
+   * DAN judul halaman mapel. Kosong = emoji `deco`. Prompt:
    * docs/prompt-ikon-mapel.md.
    */
   pic?: string;
-  /** Dua warna gradien kartu — cukup gelap supaya teks putih tetap terbaca. */
-  from: string;
-  to: string;
+  /** Sampul buku tulis di layar pilih mapel (Notebook.tsx). */
+  look: NotebookLook;
 }
 
-/** Tampilan tiap mapel — sama di semua kelompok. */
+/**
+ * Tampilan tiap mapel — sama di semua kelompok.
+ *
+ * 2026-10-11: tag, warna & bentuk kartunya DIROMBAK total. Versi 2026-10-05
+ * menyalin situs orang lain (tag kata per kata, urutan & warna kartu, kalimat
+ * judul) — jangan dihidupkan lagi, dan jangan mengambil tampilan/teks dari
+ * situs lain tanpa izin pemiliknya.
+ */
 export const SUBJECT_STYLE: Record<SubjectId, SubjectStyle> = {
   // 🧮, bukan 🔢: keycap 🔢 tampil sebagai kotak abu-abu "1234" di iPhone.
-  matematika: { title: 'Matematika', tag: 'Angka & Logika', deco: '🧮', pic: 'matematika', from: '#4f56d6', to: '#7a6cf0' },
-  'bahasa-indonesia': { title: 'Bahasa Indonesia', tag: 'Literasi & Kata', deco: '📚', pic: 'bahasa-indonesia', from: '#8445d0', to: '#a45fe4' },
+  matematika: {
+    title: 'Matematika',
+    tag: 'Hitung & ukur',
+    deco: '🧮',
+    pic: 'matematika',
+    look: { cover: '#3d8be0', ink: '#235fa8', pattern: 'kotak', doodles: ['2', '+', '×', '÷'] },
+  },
+  'bahasa-indonesia': {
+    title: 'Bahasa Indonesia',
+    tag: 'Baca & tulis',
+    deco: '📚',
+    pic: 'bahasa-indonesia',
+    look: { cover: '#f2b233', ink: '#b8780a', pattern: 'garis', doodles: ['A', 'C', 'B', '♡'] },
+  },
   // Kurikulum Merdeka menggabungkan IPA & IPS jadi IPAS mulai kelas 3.
-  ipas: { title: 'IPAS', tag: 'Alam & Sosial', deco: '🌿', pic: 'ipas', from: '#2b8a47', to: '#47a95a' },
+  ipas: {
+    title: 'IPAS',
+    tag: 'Amati & coba',
+    deco: '🌿',
+    pic: 'ipas',
+    look: { cover: '#5bb84a', ink: '#358a2a', pattern: 'titik', doodles: ['✿', '❋', '✦'] },
+  },
   // 🦅, bukan 🇮🇩: bendera emoji tampil sebagai huruf "ID" di sebagian perangkat.
-  pancasila: { title: 'Pancasila', tag: 'Nilai & Karakter', deco: '🦅', from: '#c7621a', to: '#e2862c' },
-  'seni-rupa': { title: 'Seni Rupa', tag: 'Kreativitas', deco: '🎨', pic: 'seni-rupa', from: '#c8437e', to: '#e0659b' },
-  'bahasa-inggris': { title: 'Bahasa Inggris', tag: 'English Fun', deco: '🔤', pic: 'bahasa-inggris', from: '#2475c4', to: '#4793e0' },
+  pancasila: {
+    title: 'Pancasila',
+    tag: 'Rukun & adil',
+    deco: '🦅',
+    pic: 'pancasila',
+    look: { cover: '#ec5b5b', ink: '#b8302f', pattern: 'serong', doodles: ['★', '✦', '✶'] },
+  },
+  'seni-rupa': {
+    title: 'Seni Rupa',
+    tag: 'Warna & karya',
+    deco: '🎨',
+    pic: 'seni-rupa',
+    look: { cover: '#e0698f', ink: '#b2405f', pattern: 'konfeti', doodles: ['✎', '✿', '◍'] },
+  },
+  'bahasa-inggris': {
+    title: 'Bahasa Inggris',
+    tag: 'Kata & kalimat',
+    deco: '🔤',
+    pic: 'bahasa-inggris',
+    look: { cover: '#33598f', ink: '#27467a', pattern: 'bintang', doodles: ['a', 'b', 'c', '?'] },
+  },
 };
 
 export interface GroupSubject {
@@ -64,9 +107,9 @@ export const SUBJECTS_BY_GROUP: Partial<Record<GroupId, readonly GroupSubject[]>
     { id: 'matematika', description: 'Perkalian, pembagian, uang, waktu, ukuran & data.' },
     { id: 'bahasa-indonesia', description: 'Membaca cerita, mencari informasi & menyusun kalimat.' },
     { id: 'ipas', description: 'Tumbuhan, hewan, lingkungan, cahaya & bunyi.' },
-    { id: 'pancasila', description: 'Lambang sila, aturan di rumah & sekolah, keberagaman.' },
+    { id: 'pancasila', description: 'Lima sila, tata tertib, hak & kewajiban, keberagaman.' },
     { id: 'seni-rupa', description: 'Warna, pola, motif batik, kolase & mozaik.' },
-    { id: 'bahasa-inggris', description: 'Alphabet, colors, family, numbers & animals.' },
+    { id: 'bahasa-inggris', description: 'Hewan, makanan, warna, angka & kota dalam bahasa Inggris.' },
   ],
   sd3: [
     { id: 'matematika', description: 'Pecahan, desimal, bangun ruang, volume & soal cerita.' },

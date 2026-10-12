@@ -585,7 +585,7 @@
 
 .ks-bin {
   min-width: 0;
-  min-height: clamp(116px, calc(100dvh - 430px), 190px);
+  min-height: clamp(140px, calc(100dvh - 400px), 280px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -634,9 +634,43 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 3px;
+  align-content: center;
+  gap: 4px;
+  width: 100%;
   margin-top: auto;
   pointer-events: none;
+}
+
+/* Isi keranjang mengisi sisa ruang keranjang: paling banyak tiga benda per
+   keranjang, jadi dua kolom × dua baris — ukuran tiap benda dihitung dari
+   kotak sisa itu (cqw/cqh), bukan angka tetap. Tanpa container query tetap
+   40 px. */
+.ks-bin__in .ks-pic--xs {
+  width: 40px;
+  height: 40px;
+}
+
+.ks-bin__in .ks-pic--xs.eco-emoji {
+  width: auto;
+  font-size: 32px;
+}
+
+@supports (container-type: size) {
+  .ks-bin__in {
+    flex: 1 1 0;
+    min-height: 0;
+    container-type: size;
+  }
+
+  .ks-bin__in .ks-pic--xs {
+    width: min(46cqw, 46cqh, 76px);
+    height: min(46cqw, 46cqh, 76px);
+  }
+
+  .ks-bin__in .ks-pic--xs.eco-emoji {
+    width: auto;
+    font-size: min(38cqw, 38cqh, 62px);
+  }
 }
 
 /* ---------- pilih karya ---------- */

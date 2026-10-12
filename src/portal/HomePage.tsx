@@ -1,29 +1,24 @@
-import { Link } from 'react-router-dom';
 import groupsData from '@/data/groups.json';
 import { getTotalStars } from '@/engine/core/progress';
 import MascotCard from '@/engine/ui/Mascot';
 import TopBar from '@/portal/TopBar';
 import GroupPic from '@/portal/GroupPic';
+import Notebook, { type NotebookLook } from '@/portal/Notebook';
+import { gamesForGroup } from '@/games/registry';
+import type { GroupId } from '@/engine/core/types';
 import { isGroupVisible } from '@/data/access';
 import './home.css';
 
-// Warna & hiasan kartu per kelompok — bahasa rupa yang sama dengan kartu mapel
-// SD 3-4 (SUBJECT_STYLE). Kelompok tanpa entri jatuh ke ungu.
-// Tiga hiasan pudar per kartu (pojok kanan bawah, tengah atas, kiri bawah).
-// JANGAN pakai emoji "kotak" seperti 🔢: di iPhone ia tergambar sebagai ubin
-// abu-abu bertuliskan 1234 yang terbaca seperti tombol, bukan hiasan.
-type Deco = [string, string, string];
-const GROUP_STYLE: Record<string, { from: string; to: string; deco: Deco }> = {
-  tk: { from: '#c43c7b', to: '#e2668f', deco: ['🎈', '⭐', '🌈'] },
-  sd1: { from: '#c45a12', to: '#e5861f', deco: ['✏️', '📖', '🔤'] },
-  sd2: { from: '#4f56d6', to: '#7a6cf0', deco: ['🧮', '🌱', '🎨'] },
-  sd3: { from: '#2b8a47', to: '#47a95a', deco: ['🔬', '🌏', '📐'] },
+// Sampul buku tulis per kelompok (Notebook.tsx, dirombak 2026-10-11 — versi
+// gradien sebelumnya ikut bergaya kartu yang disalin dari situs lain).
+// Kelompok tanpa entri jatuh ke tosca (bukan ungu — pemilik tak suka ungu).
+const GROUP_LOOK: Record<string, NotebookLook> = {
+  tk: { cover: '#e0688a', ink: '#b2405f', pattern: 'konfeti', doodles: ['★', '♥', '✿'] },
+  sd1: { cover: '#ee8a2f', ink: '#b45f12', pattern: 'garis', doodles: ['A', '1', '+', 'b'] },
+  sd2: { cover: '#3d86c6', ink: '#255f95', pattern: 'kotak', doodles: ['×', '÷', '3'] },
+  sd3: { cover: '#4b9a68', ink: '#2f6f47', pattern: 'titik', doodles: ['½', '%', '△'] },
 };
-const FALLBACK_STYLE: { from: string; to: string; deco: Deco } = {
-  from: '#8445d0',
-  to: '#a45fe4',
-  deco: ['⭐', '✨', '🌟'],
-};
+const FALLBACK_LOOK: NotebookLook = { cover: '#2a9d8f', ink: '#1d7268', pattern: 'bintang' };
 
 // Portal home: pick a group. Kid-facing, so only big friendly buttons —
 // account actions stay small and lead to the parent area.
@@ -47,43 +42,23 @@ export default function HomePage() {
         <MascotCard totalStars={getTotalStars()} />
       </div>
 
-      <div className="home-grid">
+      <div className="nb-shelf home-shelf">
         {groupsData.groups.filter(isGroupVisible).map((group) => {
-          const style = GROUP_STYLE[group.id] ?? FALLBACK_STYLE;
           // Umur selalu bagian PERTAMA deskripsi (lihat "Penamaan Kelompok").
-          const [age, ...rest] = group.description.split(' · ');
+          const [age] = group.description.split(' · ');
+          const count = gamesForGroup(group.id as GroupId).length;
           return (
-            <Link
+            <Notebook
               key={group.id}
+              look={GROUP_LOOK[group.id] ?? FALLBACK_LOOK}
+              sticker={<GroupPic pic={group.pic} emoji={group.emoji} height={84} emojiSize={58} />}
+              kicker={age}
+              // NBSP: tak ada kata yatim ("TK", "2") di baris kedua — sama dengan GroupPage.
+              name={group.title.replace(/ & /g, '\u00a0&\u00a0').replace(/ (\S+)$/, '\u00a0$1')}
+              count={count}
               to={`/kelompok/${group.id}`}
-              className="home-card"
-              style={{
-                background: `linear-gradient(135deg, ${style.from}, ${style.to})`,
-                ['--home-ink' as string]: style.from,
-              }}
-            >
-              <span className="home-card__deco home-card__deco--a" aria-hidden>
-                {style.deco[0]}
-              </span>
-              <span className="home-card__deco home-card__deco--b" aria-hidden>
-                {style.deco[1]}
-              </span>
-              <span className="home-card__deco home-card__deco--c" aria-hidden>
-                {style.deco[2]}
-              </span>
-              <span className="home-card__text">
-                <span className="home-card__tag">{age}</span>
-                <span className="home-card__title">
-                  {/* NBSP: tak ada kata yatim ("TK", "2") di baris kedua — sama dengan GroupPage. */}
-                  {group.title.replace(/ & /g, '\u00a0&\u00a0').replace(/ (\S+)$/, '\u00a0$1')}
-                </span>
-                {rest.length > 0 && <span className="home-card__desc">{rest.join(' · ')}</span>}
-                <span className="home-card__cta">Mulai Belajar →</span>
-              </span>
-              <span className="home-card__art" aria-hidden>
-                <GroupPic pic={group.pic} emoji={group.emoji} height={88} emojiSize={52} />
-              </span>
-            </Link>
+              ariaLabel={group.title}
+            />
           );
         })}
       </div>
