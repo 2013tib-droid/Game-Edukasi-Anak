@@ -899,6 +899,11 @@
   font-size: 22px;
   line-height: 1;
 }
+.landing .reason-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
 .landing .reason-body {
   display: flex;
   flex-direction: column;

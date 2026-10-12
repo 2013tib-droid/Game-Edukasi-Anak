@@ -116,8 +116,12 @@ const skills = [
  * "Update gratis" (only bug fixes are free; big new content is a paid
  * expansion) — both left out on purpose. Add a card only if it can be pointed
  * at code that runs.
+ *
+ * `art` = path under `public/assets/` (owner's art, prompts in
+ * `docs/prompt-ikon-alasan.md`); fill it ONLY once the file exists — a missing
+ * file is a 404 in the console. `icon` stays the fallback if it fails to load.
  */
-const reasons = [
+const reasons: { icon: string; art?: string; cls: string; title: string; text: string }[] = [
   {
     icon: '🎮',
     cls: 'r-a',
@@ -144,6 +148,7 @@ const reasons = [
   },
   {
     icon: '🐣',
+    art: 'mascot/mascot-2.webp',
     cls: 'r-e',
     title: 'Teman yang tumbuh',
     text: 'Bintang membuat maskotnya tumbuh dari telur jadi naga.',
@@ -155,6 +160,24 @@ const reasons = [
     text: 'Main selamanya, satu akun untuk sampai 3 perangkat.',
   },
 ];
+
+function ReasonIcon({ icon, art, cls }: { icon: string; art?: string; cls: string }) {
+  const [broken, setBroken] = useState(false);
+  return (
+    <span className={`reason-icon ${cls}`} aria-hidden="true">
+      {art && !broken ? (
+        <img
+          className="reason-img"
+          src={`${import.meta.env.BASE_URL}assets/${art}`}
+          alt=""
+          onError={() => setBroken(true)}
+        />
+      ) : (
+        icon
+      )}
+    </span>
+  );
+}
 
 /** Parent-facing questions, ordered by what a first-time visitor asks first. */
 const faqs: { q: string; a: ReactNode }[] = [
@@ -360,9 +383,7 @@ export default function LandingPage() {
         <ul className="reason-list">
           {reasons.map((r) => (
             <li key={r.title} className="reason">
-              <span className={`reason-icon ${r.cls}`} aria-hidden="true">
-                {r.icon}
-              </span>
+              <ReasonIcon icon={r.icon} art={r.art} cls={r.cls} />
               <span className="reason-body">
                 <span className="reason-title">{r.title}</span>
                 <span className="reason-text">{r.text}</span>
@@ -374,7 +395,6 @@ export default function LandingPage() {
 
       <section className="lsec plans">
         <h2 className="lsec-title">Pilih paket untuk si kecil</h2>
-        <p className="lsec-sub">Sekali bayar, main selamanya. Tanpa biaya bulanan.</p>
         <div className="prices">
           <div className="pcard">
             <span className="pc-ribbon">Harga perkenalan</span>
