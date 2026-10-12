@@ -403,6 +403,24 @@
   pointer-events: none;
 }
 
+/* Benda yang sudah masuk diukur dari LEBAR tong (paling banyak tiga benda per
+   tong, jadi 30cqw selalu muat sebaris): tong lebar di HP 2-tong dapat benda
+   ±50 px, tiga tong di HP 320 tetap ±23 px seperti dulu. */
+@supports (container-type: inline-size) {
+  .eco-bin {
+    container-type: inline-size;
+  }
+
+  .eco-bin__in .eco-pic--xs {
+    width: clamp(24px, 40cqw, 72px);
+    height: clamp(24px, 40cqw, 72px);
+  }
+
+  .eco-bin__in .eco-pic--xs.eco-emoji {
+    font-size: clamp(20px, 32cqw, 60px);
+  }
+}
+
 @keyframes eco-pop-in {
   from {
     scale: 0.6;
