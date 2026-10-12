@@ -10,6 +10,7 @@ import Clock from '@/engine/ui/Clock';
 import GameIcon from '@/engine/ui/GameIcon';
 import BackIcon from '@/engine/ui/BackIcon';
 import GroupPic from '@/portal/GroupPic';
+import SignTitle from '@/portal/SignTitle';
 import SubjectPage from '@/portal/SubjectPage';
 import { SUBJECT_STYLE, subjectsFor } from '@/data/subjects';
 import Scene from '@/engine/ui/Scene';
@@ -98,15 +99,15 @@ export default function GroupPage() {
   return (
     <div className="page" style={{ textAlign: 'center' }}>
       {scene && <Scene id={scene} />}
-      <h1
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 12,
-        }}
-      >
-        {subject ? (
+      {subject ? (
+        <h1
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 12,
+          }}
+        >
           <GroupPic
             dir="subjects"
             pic={SUBJECT_STYLE[subject.id].pic}
@@ -114,13 +115,14 @@ export default function GroupPage() {
             height={56}
             emojiSize={40}
           />
-        ) : (
-          <GroupPic pic={group.pic} emoji={group.emoji} height={64} emojiSize={40} />
-        )}
-        {/* Non-breaking spaces so a wrapped title never strands "TK" or
-            "& 2" alone on the second line (HP 320–380 px). */}
-        <span>{heading.replace(/ & /g, '\u00a0&\u00a0').replace(/ (\S+)$/, '\u00a0$1')}</span>
-      </h1>
+          {/* Non-breaking spaces so a wrapped title never strands a short
+              last word alone on the second line (HP 320–380 px). */}
+          <span>{heading.replace(/ & /g, '\u00a0&\u00a0').replace(/ (\S+)$/, '\u00a0$1')}</span>
+        </h1>
+      ) : (
+        // Papan kayu yang sama dengan layar mapel sd2/sd3 (2026-10-12).
+        <SignTitle group={group} as="h1" />
+      )}
       {games.length === 0 && (
         // Mapel yang belum punya game (kartunya pun tak bisa diketuk) — ini
         // cuma untuk yang datang lewat URL langsung.
