@@ -188,11 +188,11 @@ function ReasonIcon({ icon, art, cls }: { icon: string; art?: string; cls: strin
 const faqs: { q: string; a: ReactNode }[] = [
   {
     q: 'Bisa dicoba dulu sebelum bayar?',
-    a: 'Bisa. Ketuk "Coba Gratis" — tiap kelompok punya satu game yang bisa dimainkan penuh tanpa daftar atau login: Hutan Hewan (Playgroup & TK) dan Tulis Huruf (SD Kelas 1 & 2).',
+    a: 'Bisa. Ketuk "Coba Gratis" — tiap kelompok punya satu game yang bisa dimainkan penuh tanpa daftar atau login: Hutan Hewan (Playgroup & TK) dan Tulis Huruf (Sekolah Dasar).',
   },
   {
     q: 'Untuk usia berapa?',
-    a: 'Kelompok Playgroup dan TK untuk usia 4–7 tahun (berhitung, mengenal huruf, warna & bentuk). Kelompok SD Kelas 1 & 2 untuk usia 6–8 tahun (membaca, berhitung lanjut, logika sederhana).',
+    a: 'Kelompok Playgroup dan TK untuk usia 4–7 tahun (berhitung, mengenal huruf, warna & bentuk). Kelompok Sekolah Dasar untuk usia 6 tahun ke atas (membaca, menulis, berhitung, logika).',
   },
   {
     q: 'Bayarnya sekali atau langganan?',
