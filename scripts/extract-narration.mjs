@@ -101,6 +101,7 @@ const mod = await load(
     `\nexport const configs = [${gameFiles.map((_, i) => `c${i}`).join(',')}];` +
     `\nexport { sentenceText } from ${JSON.stringify(path.resolve('src/engine/core/wordTrain.ts').split(path.sep).join('/'))};` +
     `\nexport { mixPaint, mixLine, batikLine } from ${JSON.stringify(path.resolve('src/engine/core/paint.ts').split(path.sep).join('/'))};` +
+    `\nexport { CODE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/codeQuest.ts').split(path.sep).join('/'))};` +
     `\nexport { phraseText, VOY_LINES } from ${JSON.stringify(path.resolve('src/engine/core/wordVoyage.ts').split(path.sep).join('/'))};`,
 );
 
@@ -191,6 +192,18 @@ for (const config of mod.configs) {
       add(mod.sentenceText(round.words), config.id, voice);
       // The child may build an `alt` order instead — it is read back as built.
       for (const alt of round.alt ?? []) add(mod.sentenceText(alt), config.id, voice);
+    }
+
+    // code-quest (Kode Kelinci · Misi Kode): card names are read aloud when
+    // touched, and a failed run says why (CODE_LINES — the SAME object the
+    // template uses). Only the 🔁 card's name when the level has a loop rail.
+    if ((level.template ?? config.template) === 'code-quest') {
+      const L = mod.CODE_LINES;
+      for (const d of ['atas', 'kanan', 'bawah', 'kiri']) add(L.card[d], config.id, voice);
+      if (level.data.loop) add(L.card.ulangi, config.id, voice);
+      for (const line of [L.bump, L.short, L.empty]) add(line, config.id, voice);
+      if (level.data.grid.some((row) => row.includes('*'))) add(L.missing, config.id, voice);
+      continue;
     }
 
     // word-voyage (Kapten Kata): the engine picks words from the island's

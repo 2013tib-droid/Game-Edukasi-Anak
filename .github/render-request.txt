@@ -1,9 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #39 — lafal "petir" (terbaca seperti "Peter" Inggris). Kata baru di
-PHONEME (scripts/pronounce.mjs); baris lamanya ditimpa, nol baris baru.
-
-redo: petir
+render #40 — dua game coding baru (Kode Kelinci · TK, Misi Kode · SD Kelas 1 & 2):
+26 baris baru — 8 scope kode-kelinci, 10 scope misi-kode, 8 scope shared (nama kartu
+Atas/Kanan/Bawah/Kiri + kalimat kode gagal, dipakai kedua game). Nol baris lama
+berubah/pindah scope. SENGAJA TANPA `only:` — tiga scope sekaligus; file yang sudah ada
+dilewati.
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^redo:`, jadi menulisnya di tengah kalimat = nol baris dirender

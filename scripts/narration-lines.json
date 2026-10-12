@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-12",
-  "count": 2027,
-  "chars": 84582,
+  "count": 2053,
+  "chars": 85721,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -11326,6 +11326,78 @@
       ]
     },
     {
+      "key": "b3e38f865ef9",
+      "text": "Ambil wortelnya dulu, lalu pulang ke kandang!",
+      "scope": "kode-kelinci",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci"
+      ]
+    },
+    {
+      "key": "9f0e01eec5cb",
+      "text": "Awas, ada batu! Cari jalan memutar.",
+      "scope": "kode-kelinci",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci"
+      ]
+    },
+    {
+      "key": "474e2fde5dd2",
+      "text": "Bantu kelinci ambil wortel! Pilih panahnya, lalu tekan Jalankan.",
+      "scope": "kode-kelinci",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci"
+      ]
+    },
+    {
+      "key": "08e9503ac22a",
+      "text": "Hati-hati, jangan sampai menabrak pohon dan kolam!",
+      "scope": "kode-kelinci",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci"
+      ]
+    },
+    {
+      "key": "638873cb0eb9",
+      "text": "Jalannya makin panjang. Susun panahnya satu per satu!",
+      "scope": "kode-kelinci",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci"
+      ]
+    },
+    {
+      "key": "c84ff8cc30c2",
+      "text": "Kali ini kelinci harus belok. Susun panahnya, ya!",
+      "scope": "kode-kelinci",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci"
+      ]
+    },
+    {
+      "key": "d6bdbd6fa9fc",
+      "text": "Misi besar! Ambil semua wortel, lalu pulang ke kandang.",
+      "scope": "kode-kelinci",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci"
+      ]
+    },
+    {
+      "key": "85f2a21c7977",
+      "text": "Wortelnya lebih jauh. Pasang panah sampai kelinci tiba!",
+      "scope": "kode-kelinci",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci"
+      ]
+    },
+    {
       "key": "3678bd391110",
       "text": "Angkat pemukulnya lalu lepas. Lihat berasnya! Waktu berbunyi, sentuh gendangnya.",
       "scope": "lab-cahaya-bunyi",
@@ -12331,6 +12403,96 @@
       "voice": "gadis",
       "games": [
         "lompat-katak"
+      ]
+    },
+    {
+      "key": "9ca22d1eca52",
+      "text": "Ada dua stroberi. Susun kode yang mengambil semuanya!",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "2d5c5d9443ab",
+      "text": "Ada yang salah di kode ulangi. Jalankan, lalu perbaiki urutannya!",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "c31f963e8ce7",
+      "text": "Ini kartu ulangi! Isinya dijalankan berkali-kali. Isi kotak ulangi dengan panah.",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "e21a939f69e8",
+      "text": "Jalannya seperti tangga. Pakai kartu ulangi supaya kodenya pendek!",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "49622d394c5f",
+      "text": "Kode ini ada yang salah. Jalankan dulu, lalu perbaiki!",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "3b8db0a600a6",
+      "text": "Kura-kura mau ke taman. Ambil stroberinya dulu, lalu jalankan kodenya!",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "d5448f894245",
+      "text": "Misi besar! Ambil semua stroberi, lalu pergi ke taman.",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "a963b5c8ebce",
+      "text": "Pola jalannya berulang. Cari polanya, lalu pakai kartu ulangi!",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "aa3ad5e4603e",
+      "text": "Satu langkah dulu, baru ulangi panahnya. Kamu pasti bisa!",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "2c7745f4932b",
+      "text": "Ulangi",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
       ]
     },
     {
@@ -14759,6 +14921,56 @@
       ]
     },
     {
+      "key": "99f0dfff5979",
+      "text": "Atas",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci",
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "da1226b6f72b",
+      "text": "Bawah",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci",
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "5c7222cf17f2",
+      "text": "Belum sampai. Tambah kodenya, ya!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci",
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "5d797c3add45",
+      "text": "Kanan",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci",
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "1db7edc45371",
+      "text": "Kiri",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci",
+        "misi-kode"
+      ]
+    },
+    {
       "key": "867f57ee6807",
       "text": "Lihat polanya baik-baik. Bentuk apa selanjutnya?",
       "scope": "shared",
@@ -14776,6 +14988,36 @@
       "games": [
         "hitung-hebat",
         "pola-pintar"
+      ]
+    },
+    {
+      "key": "212c7df6a4bd",
+      "text": "Masih ada yang belum diambil. Coba lagi, ya!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci",
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "bc5f8f2c0e90",
+      "text": "Susun kodenya dulu, ya!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci",
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "59dbce3e82cb",
+      "text": "Ups, ada yang menghalangi! Perbaiki kodenya, ya.",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "kode-kelinci",
+        "misi-kode"
       ]
     },
     {
