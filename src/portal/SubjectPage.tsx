@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import type { GroupId } from '@/engine/core/types';
 import { SUBJECT_STYLE, type GroupSubject } from '@/data/subjects';
-import { gamesForGroup, subjectPath } from '@/games/registry';
+import { gamesForGroup, playCount, subjectPath } from '@/games/registry';
 import { getTotalStars } from '@/engine/core/progress';
 import { mascotFor } from '@/engine/core/mascot';
 import { MascotPic } from '@/engine/ui/Mascot';
@@ -49,7 +49,7 @@ export default function SubjectPage({ group, subjects }: Props) {
       <div className="nb-shelf nb-shelf--3">
         {subjects.map((s) => {
           const style = SUBJECT_STYLE[s.id];
-          const count = gamesForGroup(group.id as GroupId, s.id).length;
+          const count = playCount(gamesForGroup(group.id as GroupId, s.id));
           return (
             <Notebook
               key={s.id}

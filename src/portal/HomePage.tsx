@@ -4,7 +4,7 @@ import MascotCard from '@/engine/ui/Mascot';
 import TopBar from '@/portal/TopBar';
 import GroupPic from '@/portal/GroupPic';
 import Notebook, { type NotebookLook } from '@/portal/Notebook';
-import { gamesForGroup } from '@/games/registry';
+import { gamesForGroup, playCount } from '@/games/registry';
 import type { GroupId } from '@/engine/core/types';
 import { isGroupVisible } from '@/data/access';
 import './home.css';
@@ -46,7 +46,7 @@ export default function HomePage() {
         {groupsData.groups.filter(isGroupVisible).map((group) => {
           // Umur selalu bagian PERTAMA deskripsi (lihat "Penamaan Kelompok").
           const [age] = group.description.split(' · ');
-          const count = gamesForGroup(group.id as GroupId).length;
+          const count = playCount(gamesForGroup(group.id as GroupId));
           return (
             <Notebook
               key={group.id}
