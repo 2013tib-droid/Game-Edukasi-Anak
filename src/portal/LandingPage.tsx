@@ -384,9 +384,6 @@ export default function LandingPage() {
               <span className="pc-now">Rp19.000</span>
               <span className="pc-off">−50%</span>
             </div>
-            <div className="pc-sub">
-              Buka semua game Playgroup &amp; TK · sekali bayar, main selamanya
-            </div>
             <BuyButton group="tk" owned={owned.includes('tk')} />
           </div>
 
@@ -397,9 +394,6 @@ export default function LandingPage() {
               <span className="pc-was">Rp49.000</span>
               <span className="pc-now">Rp29.000</span>
               <span className="pc-off">−40%</span>
-            </div>
-            <div className="pc-sub">
-              Buka semua game SD Kelas 1 &amp; 2 · sekali bayar, main selamanya
             </div>
             <BuyButton group="sd1" owned={owned.includes('sd1')} />
           </div>
