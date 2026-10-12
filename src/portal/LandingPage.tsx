@@ -8,6 +8,8 @@ import { findGame, games } from '@/games/registry';
 import { countVisit } from '@/portal/stats';
 import { BuyButton } from '@/portal/BuyButton';
 import { useOwnedGroups } from '@/portal/useAccess';
+import groupsData from '@/data/groups.json';
+import { isGroupVisible } from '@/data/access';
 import './landing.css';
 
 const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
@@ -83,10 +85,13 @@ const soonGroups: {
   { name: 'Kelompok SD Kelas 5 & 6', desc: 'Pecahan, bangun ruang, soal cerita' },
 ];
 
-/** Games a parent can actually buy today — counted, never typed by hand, so
- *  the number on the page can't drift from the catalogue. Draft groups (sd2,
- *  sd3) are left out on purpose: they aren't for sale. */
-const gamesOnSale = games.filter((g) => g.group === 'tk' || g.group === 'sd1').length;
+/** Jumlah game di kelompok yang TAMPIL di portal — dihitung, tidak pernah
+ *  diketik, jadi angkanya tak bisa ketinggalan katalog (permintaan pemilik
+ *  2026-10-12: "sekarang sudah lebih banyak"). Kelompok `draft` (sd2, sd3)
+ *  ikut terhitung di build development, tapi TIDAK di produksi: di sana
+ *  belum bisa dibeli, jadi angkanya otomatis naik begitu `draft` dilepas. */
+const visibleGroups = new Set(groupsData.groups.filter(isGroupVisible).map((g) => g.id));
+const gamesOnSale = games.filter((g) => visibleGroups.has(g.group)).length;
 
 /**
  * "Setelah bermain, anak belajar…" — what the games train, in parents' words
@@ -117,7 +122,7 @@ const reasons = [
     icon: '🎮',
     cls: 'r-a',
     title: `${gamesOnSale} game edukatif`,
-    text: 'Playgroup–TK & SD Kelas 1–2, soalnya selalu berganti.',
+    text: 'Game untuk Playgroup, TK, dan Sekolah Dasar.',
   },
   {
     icon: '🔊',
