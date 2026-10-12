@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import FeedbackSection from '@/portal/FeedbackSection';
 import TopBar from '@/portal/TopBar';
@@ -11,6 +11,9 @@ import { useOwnedGroups } from '@/portal/useAccess';
 import './landing.css';
 
 const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
+/** Anak ayam petualang (maskot tahap 3 berdandan penjelajah, seni pemilik
+ *  2026-10-12, dipotong `scripts/cut-soft.py`). Logo jadi cadangannya. */
+const hero = `${import.meta.env.BASE_URL}assets/ui/petualang.webp`;
 
 /**
  * A taste of both groups — the first row is Playgroup & TK, the second is
@@ -189,6 +192,25 @@ const faqs: { q: string; a: ReactNode }[] = [
   },
 ];
 
+/** The hero's centrepiece. Falls back to the logo if the art fails to load —
+ *  the first screen must never show a hole. */
+function HeroMascot() {
+  const [broken, setBroken] = useState(false);
+  if (broken) {
+    return <img className="logo" src={logo} alt="" width={128} height={128} />;
+  }
+  return (
+    <img
+      className="hero-mascot"
+      src={hero}
+      alt=""
+      width={305}
+      height={400}
+      onError={() => setBroken(true)}
+    />
+  );
+}
+
 /**
  * The landing's main action — "Coba Gratis" → portal. Rendered twice (hero and
  * the closing band at the bottom), so it lives in one place; both count as the
@@ -239,7 +261,7 @@ export default function LandingPage() {
 
   return (
     <>
-      <TopBar account />
+      <TopBar brand account />
       <div className="landing">
         <section className="hero">
           <HeroGarden />
@@ -258,7 +280,7 @@ export default function LandingPage() {
                 </span>
               );
             })}
-            <img className="logo" src={logo} alt="" width={128} height={128} />
+            <HeroMascot />
           </div>
 
           <span className="hero-eyebrow">Untuk anak Playgroup, TK &amp; SD</span>

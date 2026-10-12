@@ -93,10 +93,10 @@
 .landing .hero-stage {
   position: relative;
   width: min(100%, 330px);
-  height: 196px;
+  height: 206px;
   display: grid;
   place-items: center;
-  margin-top: -6px;
+  margin-top: -10px;
 }
 .landing .hero-glow {
   position: absolute;
@@ -104,6 +104,20 @@
   height: 210px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 244, 214, 0.6) 45%, rgba(255, 255, 255, 0) 70%);
+}
+.landing .hero-mascot {
+  position: relative;
+  display: block;
+  height: 196px;
+  width: auto;
+  filter: drop-shadow(0 8px 12px rgba(214, 120, 40, 0.22));
+  animation: hero-bob 4.2s ease-in-out infinite;
+}
+/* 320 px: at full height the backpack touched the right-hand game floater. */
+@media (max-width: 340px) {
+  .landing .hero-mascot {
+    height: 172px;
+  }
 }
 .landing .logo {
   position: relative;
