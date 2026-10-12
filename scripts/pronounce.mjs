@@ -102,6 +102,9 @@ export const PHONEME = {
   // "sentuh" muncul di 127 baris (Anggota Tubuh, Labirin Warna, Jam Pintar,
   // Pasar Buah, Hitung Hebat) — satu kata yang salah, terdengar di mana-mana.
   sentuh: 'səntuh',
+  // "petir" dibaca Azure seperti nama Inggris "Peter" (laporan pemilik
+  // 2026-10-12, Kebun Ilmu: "Ada petir menyambar"). Pepet: pə-tir.
+  petir: 'pətir',
 };
 
 /**

@@ -1,11 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #38 — Kebun Ilmu: dua soal laci meja (gambar lemari arsip, terlalu
-dewasa) diganti "Menuntun kambing dengan tali" & "Membantu mobil mogok dari
-belakang". 2 baris baru, scope kebun-ilmu, nol baris pindah scope.
+render #39 — lafal "petir" (terbaca seperti "Peter" Inggris). Kata baru di
+PHONEME (scripts/pronounce.mjs); baris lamanya ditimpa, nol baris baru.
 
-only: kebun-ilmu
+redo: petir
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
-mencocokkan `^only:`, jadi menulisnya di tengah kalimat = nol baris dirender
+mencocokkan `^redo:`, jadi menulisnya di tengah kalimat = nol baris dirender
 dan runnya tetap hijau.
