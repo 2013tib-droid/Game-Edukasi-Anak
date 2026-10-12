@@ -7,6 +7,8 @@ import Notebook, { type NotebookLook } from '@/portal/Notebook';
 import { gamesForGroup, playCount } from '@/games/registry';
 import type { GroupId } from '@/engine/core/types';
 import { isGroupVisible } from '@/data/access';
+import Scene from '@/engine/ui/Scene';
+import '@/engine/ui/scene.css';
 import './home.css';
 
 // Sampul buku tulis per kelompok (Notebook.tsx, dirombak 2026-10-11 — versi
@@ -25,6 +27,9 @@ const FALLBACK_LOOK: NotebookLook = { cover: '#2a9d8f', ink: '#1d7268', pattern:
 export default function HomePage() {
   return (
     <>
+      {/* Latar pemilih kelompok (2026-10-12): pegunungan — gerbang petualangan,
+          sengaja beda dari hutan (tk), kota (sd1) & padang (sd2). */}
+      <Scene id="gunung" />
       <TopBar back account />
       <div className="page" style={{ textAlign: 'center' }}>
       {/* Same logo badge as the landing page (public/assets/logo.svg). */}
