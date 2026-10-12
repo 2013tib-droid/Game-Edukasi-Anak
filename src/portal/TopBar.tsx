@@ -17,12 +17,18 @@ import LockToggle from '@/portal/LockToggle';
  * seperti keluar sendiri (laporan pemilik 2026-09-22). Satu sumber keputusan
  * = dua layar itu tidak bisa menyimpang lagi.
  */
+const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
+
 export default function TopBar({
   back = false,
+  brand = false,
   account = false,
   bell = true,
 }: {
   back?: boolean;
+  /** Logo + nama di kiri (landing). Logonya `public/assets/logo.svg` yang
+   *  SAMA dengan favicon — jangan salinan inline. */
+  brand?: boolean;
   /** Tampilkan tombol akun (landing & portal). */
   account?: boolean;
   /** Announcement bell — on by default; hide it on kid-only screens. */
@@ -33,6 +39,12 @@ export default function TopBar({
   return (
     <header className="topbar">
       <div className="topbar__side">
+        {brand && (
+          <Link className="topbar__brand" to="/" aria-label="Petualangan Pintar">
+            <img src={logo} alt="" width={38} height={38} />
+            <span>Petualangan Pintar</span>
+          </Link>
+        )}
         {back && (
           <Link className="topbar__btn" to="/">
             <HomeIcon />

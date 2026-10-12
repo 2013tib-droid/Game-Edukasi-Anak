@@ -226,7 +226,7 @@ function TaskView({
   }
 }
 
-/* ---------- Meja toko: Bu Beruang, pelanggan, gelembung pesanan ---------- */
+/* ---------- Meja toko: pelanggan + gelembung pesanan ---------- */
 
 function bubbleOf(task: KitchenTask): ReactNode {
   switch (task.kind) {
@@ -269,9 +269,6 @@ function Counter({
 }) {
   return (
     <div className="fk-counter">
-      <div className="fk-bear" title="Bu Beruang">
-        <ItemPic id="bear" className="fk-bear__img" fallbackClassName="fk-bear__emoji" />
-      </div>
       <div key={stepIx} ref={custRef} className={'fk-customer' + (happy ? ' fk-customer--happy' : '')}>
         <ItemPic id={step.customer} className="fk-customer__img" fallbackClassName="fk-customer__emoji" />
       </div>
@@ -540,8 +537,13 @@ function CutTask({ task, hint, done, wrong }: TaskProps<'cut'>) {
             food={food}
             d={parts}
             show={onCake}
+            plainEmpty
             numbers={hint >= 1 && !canCut}
-            guide={hint >= 1 && canCut && parts !== task.order.d ? task.order.d : undefined}
+            // Garis petunjuk hanya selagi kuenya BELUM berpotong lebih dari pesanan
+            // dan belum ada potong yang diambil: ditumpuk di atas potongan anak
+            // sendiri (7 garis cokelat + 6 garis biru) jadi dua jaring yang rancu.
+            // Kalau sudah kelebihan potong, yang menyala tombol ↩️ (ulangi).
+            guide={hint >= 1 && canCut && parts < task.order.d && served.length === 0 ? task.order.d : undefined}
             className="fk-food__svg"
           />
           {canCut && parts === 1 && cutKey === 0 && <span className="fk-swipe" aria-hidden />}
@@ -581,7 +583,7 @@ function CutTask({ task, hint, done, wrong }: TaskProps<'cut'>) {
           />
         </div>
         <div className="fk-actions">
-          <button type="button" className="fk-btn fk-btn--undo" onClick={reset} disabled={solved} aria-label="Ulangi">
+          <button type="button" className={'fk-btn fk-btn--undo' + (hint >= 1 && canCut && parts > task.order.d && !solved ? ' fk-btn--hint' : '')} onClick={reset} disabled={solved} aria-label="Ulangi">
             ↩️
           </button>
           <button type="button" className="btn btn--primary fk-btn fk-give" onClick={give} disabled={solved || served.length === 0}>

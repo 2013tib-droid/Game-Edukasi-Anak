@@ -6,6 +6,10 @@ jadi yang dibutuhkan **benda kecil yang langsung terbaca**, bukan adegan.
 
 ## Status (2026-10-11)
 
+**SELESAI — kedelapan pulau bergambar khusus (`art`)** — dipotong `scripts/cut-soft.py … 256`, lalu bayangan lantai abu-abu di dasar & serpih lepas dibuang manual (render 3D ini selalu membawa bayangan lantai). Lubang gagang tas (Barangku) ditembus manual; bayangan melayang di bawah sepatu (Aksi) dibuang sebagai serpih terpisah, garis geraknya dipertahankan.
+
+Catatan awal:
+
 Sambil menunggu seni ini, enam pulau memakai seni item yang SUDAH ada (`Stage.item`):
 Satwa = harimau · Rasa = semangka · Warna = kuas · Barangku = tas · Profesi = koki ·
 Kota = bus. **Angka & Aksi masih emoji** (🔢 🏃) — tidak ada seni yang cocok, jadi dua

@@ -34,6 +34,13 @@ interface GameMetaBase {
    * stays as the fallback and as the game's spoken/alt identity.
    */
   iconClock?: ClockSpec;
+  /**
+   * Berapa "game" yang dihitung untuk game ini di pita buku mapel/kelompok.
+   * Bawaan 1. Game ber-peta tahap yang tiap tahapnya terasa satu game
+   * sendiri (Kapten Kata: 8 pulau) menuliskan jumlah tahapnya di sini —
+   * WAJIB sama dengan `stageMap.stages.length` di config-nya.
+   */
+  parts?: number;
   /** Portal card badge; "mixed" games change question type per level. */
   template: TemplateId | 'mixed';
   load: () => Promise<{ default: AnyGameConfig }>;
@@ -322,6 +329,8 @@ export const games: GameMeta[] = [
     title: 'Bahasa Inggris',
     emoji: '⛵',
     pic: 'bahasa-inggris',
+    // 8 pulau = 8 game di pita buku mapel (permintaan pemilik 2026-10-12).
+    parts: 8,
     template: 'word-voyage',
     load: () => import('@/games/sd2/kapten-kata'),
   },
@@ -432,6 +441,8 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Bagi Kue',
     emoji: '🍰',
+    // Kue tart empat potong sama besar, satu potong di piring (2026-10-12).
+    pic: 'bagi-kue',
     template: 'fraction-kitchen',
     load: () => import('@/games/sd2/bagi-kue'),
   },
@@ -466,6 +477,11 @@ export const games: GameMeta[] = [
 
 export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {
   return games.filter((g) => g.group === group && (!subject || g.subject === subject));
+}
+
+/** Jumlah "game" untuk pita buku: tiap game dihitung `parts` (bawaan 1). */
+export function playCount(list: GameMeta[]): number {
+  return list.reduce((n, g) => n + (g.parts ?? 1), 0);
 }
 
 /**

@@ -1,15 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import FeedbackSection from '@/portal/FeedbackSection';
 import TopBar from '@/portal/TopBar';
+import HeroGarden from '@/portal/HeroGarden';
 import GameIcon from '@/engine/ui/GameIcon';
-import { findGame } from '@/games/registry';
+import { findGame, games } from '@/games/registry';
 import { countVisit } from '@/portal/stats';
 import { BuyButton } from '@/portal/BuyButton';
 import { useOwnedGroups } from '@/portal/useAccess';
+import groupsData from '@/data/groups.json';
+import { isGroupVisible } from '@/data/access';
 import './landing.css';
 
 const logo = `${import.meta.env.BASE_URL}assets/logo.svg`;
+/** Anak ayam petualang (maskot tahap 3 berdandan penjelajah, seni pemilik
+ *  2026-10-12, dipotong `scripts/cut-soft.py`). Logo jadi cadangannya. */
+const hero = `${import.meta.env.BASE_URL}assets/ui/petualang.webp`;
 
 /**
  * A taste of both groups — the first row is Playgroup & TK, the second is
@@ -79,15 +85,126 @@ const soonGroups: {
   { name: 'Kelompok SD Kelas 5 & 6', desc: 'Pecahan, bangun ruang, soal cerita' },
 ];
 
+/** Jumlah game di kelompok yang TAMPIL di portal — dihitung, tidak pernah
+ *  diketik, jadi angkanya tak bisa ketinggalan katalog (permintaan pemilik
+ *  2026-10-12: "sekarang sudah lebih banyak"). Kelompok `draft` (sd2, sd3)
+ *  ikut terhitung di build development, tapi TIDAK di produksi: di sana
+ *  belum bisa dibeli, jadi angkanya otomatis naik begitu `draft` dilepas. */
+const visibleGroups = new Set(groupsData.groups.filter(isGroupVisible).map((g) => g.id));
+const gamesOnSale = games.filter((g) => visibleGroups.has(g.group)).length;
+
+/**
+ * "Setelah bermain, anak belajar…" — what the games train, in parents' words
+ * (from the ChatGPT landing mockup the owner sent, 2026-10-11). Art comes from
+ * the registry like `worlds`; the games picked here are ones NOT already shown
+ * in `worlds`, except Hitung Hebat (no other on-sale art reads as "numbers").
+ * Deliberately no brain emoji: the owner rejected 🧠 as a game icon
+ * (CLAUDE.md, 2026-08-02).
+ */
+const skills = [
+  { id: 'kenal-huruf', emoji: '🔤', label: 'Mengenal huruf', cls: 's-a' },
+  { id: 'tangga-membaca', emoji: '📖', label: 'Belajar membaca', cls: 's-b' },
+  { id: 'tulis-angka', emoji: '✏️', label: 'Belajar menulis', cls: 's-c' },
+  { id: 'hitung-hebat', emoji: '🔢', label: 'Berhitung', cls: 's-d' },
+  { id: 'pola-pintar', emoji: '🐛', label: 'Pola & logika', cls: 's-e' },
+  { id: 'pasangan-pintar', emoji: '🤝', label: 'Ingatan & fokus', cls: 's-f' },
+];
+
+/**
+ * "Kenapa orang tua memilih" — every line must be TRUE of the app as it ships.
+ * The mockup also listed "Bisa offline" (there is no service worker) and
+ * "Update gratis" (only bug fixes are free; big new content is a paid
+ * expansion) — both left out on purpose. Add a card only if it can be pointed
+ * at code that runs.
+ *
+ * `art` = path under `public/assets/` (owner's art, prompts in
+ * `docs/prompt-ikon-alasan.md`); fill it ONLY once the file exists — a missing
+ * file is a 404 in the console. `icon` stays the fallback if it fails to load.
+ */
+const reasons: { icon: string; art?: string; cls: string; title: string; text: string }[] = [
+  {
+    icon: '🎮',
+    art: 'reasons/game-edukatif.webp',
+    cls: 'r-a',
+    title: `${gamesOnSale} game edukatif`,
+    text: 'Game untuk Playgroup, TK, dan Sekolah Dasar.',
+  },
+  {
+    icon: '🔊',
+    art: 'reasons/dipandu-suara.webp',
+    cls: 'r-b',
+    title: 'Dipandu suara',
+    text: 'Semua soal dibacakan, cocok untuk yang belum lancar membaca.',
+  },
+  {
+    icon: '🚫',
+    art: 'reasons/tanpa-iklan.webp',
+    cls: 'r-c',
+    title: 'Tanpa iklan',
+    text: 'Tanpa iklan & tanpa tautan keluar di area anak.',
+  },
+  {
+    icon: '💪',
+    art: 'reasons/salah-itu-boleh.webp',
+    cls: 'r-d',
+    title: 'Salah itu boleh',
+    text: 'Salah dijawab "Coba lagi, kamu pasti bisa!" — tanpa hukuman.',
+  },
+  {
+    icon: '🐣',
+    art: 'mascot/mascot-2.webp',
+    cls: 'r-e',
+    title: 'Teman yang tumbuh',
+    text: 'Bintang membuat maskotnya tumbuh dari telur jadi naga.',
+  },
+  {
+    icon: '💛',
+    art: 'reasons/sekali-bayar.webp',
+    cls: 'r-f',
+    title: 'Sekali bayar',
+    text: 'Main selamanya, satu akun untuk sampai 3 perangkat.',
+  },
+];
+
+function ReasonIcon({ icon, art, cls }: { icon: string; art?: string; cls: string }) {
+  const [broken, setBroken] = useState(false);
+  return (
+    <span className={`reason-icon ${cls}`} aria-hidden="true">
+      {art && !broken ? (
+        <img
+          className="reason-img"
+          src={`${import.meta.env.BASE_URL}assets/${art}`}
+          alt=""
+          onError={() => setBroken(true)}
+        />
+      ) : (
+        icon
+      )}
+    </span>
+  );
+}
+
 /** Parent-facing questions, ordered by what a first-time visitor asks first. */
-const faqs = [
+const faqs: { q: string; a: ReactNode }[] = [
   {
     q: 'Bisa dicoba dulu sebelum bayar?',
-    a: 'Bisa. Ketuk "Coba Gratis" — ada beberapa game yang gratis dimainkan penuh tanpa perlu daftar atau login.',
+    a: 'Bisa. Ketuk "Coba Gratis" — tiap kelompok punya satu game yang bisa dimainkan penuh tanpa daftar atau login: Hutan Hewan (Playgroup & TK) dan Tulis Huruf (Sekolah Dasar).',
+  },
+  {
+    q: 'Untuk usia berapa?',
+    a: 'Kelompok Playgroup dan TK untuk usia 4–7 tahun (berhitung, mengenal huruf, warna & bentuk). Kelompok Sekolah Dasar untuk usia 6 tahun ke atas (membaca, menulis, berhitung, logika).',
   },
   {
     q: 'Bayarnya sekali atau langganan?',
     a: 'Sekali bayar untuk satu kelompok, lalu bisa dimainkan selamanya. Tidak ada tagihan bulanan. Perbaikan bug selalu gratis; kalau nanti ada paket konten besar yang baru, itu ekspansi terpisah dan sifatnya opsional.',
+  },
+  {
+    q: 'Bagaimana cara membayarnya?',
+    a: 'Ketuk "Beli Sekarang" di kartu harga. Pembayaran lewat halaman Mayar.id, bisa memakai QRIS atau e-wallet.',
+  },
+  {
+    q: 'Setelah bayar, bagaimana cara membukanya?',
+    a: 'Kode aktivasi dikirim otomatis ke email Anda. Daftar atau masuk di portal, masukkan kode itu sekali, dan semua game kelompok tersebut langsung terbuka untuk akun Anda.',
   },
   {
     q: 'Main di HP atau tablet?',
@@ -98,10 +215,69 @@ const faqs = [
     a: 'Sampai 3 perangkat. Cukup masuk dengan akun yang sama di perangkat lain, jadi anak bisa main bergantian di perangkat mana pun di rumah tanpa perlu beli ulang.',
   },
   {
-    q: 'Setelah bayar, bagaimana cara membukanya?',
-    a: 'Anda menerima kode aktivasi dari halaman pembelian. Daftar akun di portal, masukkan kode itu sekali, dan semua game kelompok tersebut langsung terbuka untuk akun Anda.',
+    q: 'Bisa minta pengembalian dana?',
+    a: (
+      <>
+        Aturannya ada di <Link to="/ketentuan">Syarat &amp; Ketentuan</Link>, bagian
+        Pengembalian Dana.
+      </>
+    ),
   },
 ];
+
+/** The hero's centrepiece. Falls back to the logo if the art fails to load —
+ *  the first screen must never show a hole. */
+function HeroMascot() {
+  const [broken, setBroken] = useState(false);
+  if (broken) {
+    return <img className="logo" src={logo} alt="" width={128} height={128} />;
+  }
+  return (
+    <img
+      className="hero-mascot"
+      src={hero}
+      alt=""
+      width={305}
+      height={400}
+      onError={() => setBroken(true)}
+    />
+  );
+}
+
+/**
+ * The landing's main action — "Coba Gratis" → portal. Rendered twice (hero and
+ * the closing band at the bottom), so it lives in one place; both count as the
+ * same `landing_main_click` (the server only accepts a closed list of names).
+ */
+function TryFreeButton() {
+  return (
+    <Link className="cta" to="/portal" onClick={() => countVisit('landing_main_click')}>
+      <span className="cta-spark cta-spark--l" aria-hidden="true" />
+      <span className="cta-spark cta-spark--r" aria-hidden="true" />
+      <svg className="cta-star" viewBox="0 0 100 100" aria-hidden="true">
+        <path
+          d="M50 6 61.8 33.6 92 36.4 69.2 56.4 76 86 50 70.4 24 86 30.8 56.4 8 36.4 38.2 33.6Z"
+          fill="#ffcf3f"
+          stroke="#f29a1f"
+          strokeWidth="5"
+          strokeLinejoin="round"
+        />
+        <path d="M30 34 40 31" stroke="#fff" strokeWidth="5" strokeLinecap="round" opacity=".7" />
+        <circle cx="40" cy="50" r="4.5" fill="#4a2a14" />
+        <path d="M56 50q4.5-4 9 0" fill="none" stroke="#4a2a14" strokeWidth="4" strokeLinecap="round" />
+        <path d="M42 59q8 8 16 0" fill="#e35d4a" stroke="#4a2a14" strokeWidth="3.5" strokeLinejoin="round" />
+        <circle cx="31" cy="58" r="5" fill="#ff8fa0" opacity=".6" />
+        <circle cx="69" cy="58" r="5" fill="#ff8fa0" opacity=".6" />
+      </svg>
+      <span className="cta-label">Coba Gratis</span>
+      <span className="cta-arrow" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M5 12h13M12.5 6l6 6-6 6" fill="none" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </span>
+    </Link>
+  );
+}
 
 /**
  * Front door — kept intentionally simple: one clean hero with a single main
@@ -118,9 +294,10 @@ export default function LandingPage() {
 
   return (
     <>
-      <TopBar account />
+      <TopBar brand account />
       <div className="landing">
         <section className="hero">
+          <HeroGarden />
           <div className="hero-stage">
             <span className="hero-glow" aria-hidden="true" />
             {floaters.map((f) => {
@@ -136,45 +313,24 @@ export default function LandingPage() {
                 </span>
               );
             })}
-            <img className="logo" src={logo} alt="" width={128} height={128} />
+            <HeroMascot />
           </div>
 
           <span className="hero-eyebrow">Untuk anak Playgroup, TK &amp; SD</span>
           <h1>Petualangan Pintar</h1>
           <p className="tag">Belajar jadi menyenangkan, tanpa terasa seperti belajar.</p>
 
-          <Link className="cta" to="/portal" onClick={() => countVisit('landing_main_click')}>
-            <span className="cta-spark cta-spark--l" aria-hidden="true" />
-            <span className="cta-spark cta-spark--r" aria-hidden="true" />
-            <svg className="cta-star" viewBox="0 0 100 100" aria-hidden="true">
-              <path
-                d="M50 6 61.8 33.6 92 36.4 69.2 56.4 76 86 50 70.4 24 86 30.8 56.4 8 36.4 38.2 33.6Z"
-                fill="#ffcf3f"
-                stroke="#f29a1f"
-                strokeWidth="5"
-                strokeLinejoin="round"
-              />
-              <path d="M30 34 40 31" stroke="#fff" strokeWidth="5" strokeLinecap="round" opacity=".7" />
-              <circle cx="40" cy="50" r="4.5" fill="#4a2a14" />
-              <path d="M56 50q4.5-4 9 0" fill="none" stroke="#4a2a14" strokeWidth="4" strokeLinecap="round" />
-              <path d="M42 59q8 8 16 0" fill="#e35d4a" stroke="#4a2a14" strokeWidth="3.5" strokeLinejoin="round" />
-              <circle cx="31" cy="58" r="5" fill="#ff8fa0" opacity=".6" />
-              <circle cx="69" cy="58" r="5" fill="#ff8fa0" opacity=".6" />
-            </svg>
-            <span className="cta-label">Coba Gratis</span>
-            <span className="cta-arrow" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M5 12h13M12.5 6l6 6-6 6" fill="none" stroke="#fff" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </Link>
+          <TryFreeButton />
 
           <ul className="perks">
             <li>
               <span aria-hidden="true">🔊</span> Dipandu suara
             </li>
             <li>
-              <span aria-hidden="true">🛡️</span> Tanpa iklan
+              <span aria-hidden="true">🛡️</span> Aman untuk anak
+            </li>
+            <li>
+              <span aria-hidden="true">🚫</span> Tanpa iklan
             </li>
             <li>
               <span aria-hidden="true">💛</span> Sekali bayar
@@ -183,7 +339,7 @@ export default function LandingPage() {
         </section>
 
       <section className="worlds">
-        <h2 className="worlds-title">Petualangan seru menanti</h2>
+        <h2 className="lsec-title">Petualangan seru menanti</h2>
         <ul className="world-list">
           {worlds.map((w) => {
             const meta = findGame(w.id);
@@ -204,33 +360,70 @@ export default function LandingPage() {
         </ul>
       </section>
 
-      <div className="prices">
-        <div className="pcard">
-          <div className="pc-name">Kelompok Playgroup dan TK</div>
-          <div className="pc-row">
-            <span className="pc-was">Rp39.000</span>
-            <span className="pc-now">Rp19.000</span>
-            <span className="pc-off">−50%</span>
-          </div>
-          <div className="pc-sub">
-            Buka semua game Playgroup &amp; TK · sekali bayar, main selamanya
-          </div>
-          <BuyButton group="tk" owned={owned.includes('tk')} />
-        </div>
+      <section className="lsec skills">
+        <h2 className="lsec-title">Sambil bermain, anak belajar</h2>
+        <p className="lsec-sub">Bukan sekadar main — tiap game melatih satu kemampuan.</p>
+        <ul className="skill-list">
+          {skills.map((k) => {
+            const meta = findGame(k.id);
+            return (
+              <li key={k.id} className="skill">
+                <span className={`skill-disc ${k.cls}`} aria-hidden="true">
+                  <GameIcon
+                    pic={meta?.pic}
+                    emoji={k.emoji}
+                    className="skill-art"
+                    fallbackClassName="skill-emoji"
+                  />
+                </span>
+                <span className="skill-name">{k.label}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
 
-        <div className="pcard">
-          <div className="pc-name">Kelompok SD Kelas 1 &amp; 2</div>
-          <div className="pc-row">
-            <span className="pc-was">Rp49.000</span>
-            <span className="pc-now">Rp29.000</span>
-            <span className="pc-off">−40%</span>
+      <section className="lsec reasons">
+        <h2 className="lsec-title">Kenapa orang tua memilih Petualangan Pintar?</h2>
+        <ul className="reason-list">
+          {reasons.map((r) => (
+            <li key={r.title} className="reason">
+              <ReasonIcon icon={r.icon} art={r.art} cls={r.cls} />
+              <span className="reason-body">
+                <span className="reason-title">{r.title}</span>
+                <span className="reason-text">{r.text}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="lsec plans">
+        <h2 className="lsec-title">Pilih paket untuk si kecil</h2>
+        <div className="prices">
+          <div className="pcard">
+            <span className="pc-ribbon">Harga perkenalan</span>
+            <div className="pc-name">Kelompok Playgroup dan TK</div>
+            <div className="pc-row">
+              <span className="pc-was">Rp39.000</span>
+              <span className="pc-now">Rp19.000</span>
+              <span className="pc-off">−50%</span>
+            </div>
+            <BuyButton group="tk" owned={owned.includes('tk')} />
           </div>
-          <div className="pc-sub">
-            Buka semua game SD Kelas 1 &amp; 2 · sekali bayar, main selamanya
+
+          <div className="pcard">
+            <span className="pc-ribbon">Harga perkenalan</span>
+            <div className="pc-name">Kelompok SD Kelas 1 &amp; 2</div>
+            <div className="pc-row">
+              <span className="pc-was">Rp49.000</span>
+              <span className="pc-now">Rp29.000</span>
+              <span className="pc-off">−40%</span>
+            </div>
+            <BuyButton group="sd1" owned={owned.includes('sd1')} />
           </div>
-          <BuyButton group="sd1" owned={owned.includes('sd1')} />
         </div>
-      </div>
+      </section>
 
       <section className="soon">
         <h2 className="soon-title">Segera hadir</h2>
@@ -252,7 +445,7 @@ export default function LandingPage() {
       </section>
 
       <section className="faq">
-        <h2 className="faq-title">Pertanyaan yang sering ditanya</h2>
+        <h2 className="lsec-title">Pertanyaan yang sering ditanya</h2>
         {faqs.map((f) => (
           <details key={f.q} className="faq-item">
             <summary>
@@ -262,6 +455,13 @@ export default function LandingPage() {
             <p className="faq-a">{f.a}</p>
           </details>
         ))}
+      </section>
+
+      <section className="closing">
+        <img className="closing-logo" src={logo} alt="" width={84} height={84} />
+        <h2 className="closing-title">Yuk, mulai petualangannya!</h2>
+        <p className="closing-sub">Coba dulu game gratisnya — tanpa daftar, tanpa login.</p>
+        <TryFreeButton />
       </section>
 
       <FeedbackSection />
