@@ -432,6 +432,8 @@ export const games: GameMeta[] = [
     subject: 'matematika',
     title: 'Bagi Kue',
     emoji: '🍰',
+    // Kue tart empat potong sama besar, satu potong di piring (2026-10-12).
+    pic: 'bagi-kue',
     template: 'fraction-kitchen',
     load: () => import('@/games/sd2/bagi-kue'),
   },

@@ -200,6 +200,11 @@ export interface FractionFoodProps {
   outline?: boolean;
   /** Tempat kosong tidak digambar sama sekali (bayangan seretan, piring). */
   bare?: boolean;
+  /**
+   * Tempat kosong tanpa garis antar-potong, cuma satu garis tepi (meja potong).
+   * JANGAN di soal kenal pecahan: di sana potong kosong harus bisa dihitung.
+   */
+  plainEmpty?: boolean;
   /** Angka petunjuk 1..d di tiap potong (P2). */
   numbers?: boolean;
   /** Garis potong petunjuk putus-putus untuk `guide` potong (P2). */
@@ -220,6 +225,7 @@ export function FractionFood({
   uneven,
   outline,
   bare,
+  plainEmpty,
   numbers,
   guide,
   target,
@@ -261,8 +267,16 @@ export function FractionFood({
             />
           </g>
         ) : bare ? null : (
-          <path key={i} d={slicePath(shape, w, i)} className="frac-empty" vectorEffect="non-scaling-stroke" />
+          <path
+            key={i}
+            d={slicePath(shape, w, i)}
+            className={plainEmpty ? 'frac-empty frac-empty--plain' : 'frac-empty'}
+            vectorEffect="non-scaling-stroke"
+          />
         ),
+      )}
+      {plainEmpty && show.length < d && (
+        <path d={slicePath(shape, [1], 0)} className="frac-rim" vectorEffect="non-scaling-stroke" />
       )}
       {gw &&
         gw.map((_, i) => (

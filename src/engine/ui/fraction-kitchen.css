@@ -69,6 +69,24 @@
   stroke-dasharray: 4 3;
 }
 
+/* Meja potong: potong yang sudah diambil tak bergaris — garis per potong di
+   situ menambah jaring ketiga di atas garis potong & petunjuk (laporan
+   pemilik 2026-10-12, "garisnya agak rancu"). Warna isian = garisnya, jadi
+   celah anti-alias antar-potong kosong tertutup. */
+.frac-empty--plain {
+  stroke: #fff6ea;
+  stroke-dasharray: none;
+}
+
+/* Garis tepi makanan di bagian yang potongnya sudah diambil. */
+.frac-rim {
+  fill: none;
+  stroke: #d9b48a;
+  stroke-width: 1.4;
+  stroke-dasharray: 4 3;
+  pointer-events: none;
+}
+
 .frac-ghost {
   fill: rgba(255, 255, 255, 0.35);
   stroke: #d9b48a;
@@ -118,23 +136,6 @@
   min-height: 66px;
 }
 
-.fk-bear {
-  width: 52px;
-  height: 58px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.fk-bear__img {
-  width: 52px;
-  height: 58px;
-  object-fit: contain;
-}
-
-.fk-bear__emoji {
-  font-size: 40px;
-}
 
 .fk-customer {
   width: 64px;
@@ -614,6 +615,10 @@
   opacity: 0.45;
 }
 
+.fk-btn--hint {
+  animation: fk-glow 1s ease-in-out infinite;
+}
+
 .fk-plate--glow {
   animation: fk-glow 1s ease-in-out infinite;
 }
@@ -877,10 +882,6 @@
     align-self: center;
   }
 
-  .fk-bear {
-    display: none;
-  }
-
   .fk-plate--stack {
     max-width: 24vw;
     max-height: 24vw;
@@ -895,7 +896,11 @@
   .fk-swipe,
   .fk-swipe::after,
   .fk-over,
-  .fk-plate--glow {
+  .fk-btn--hint {
+  animation: fk-glow 1s ease-in-out infinite;
+}
+
+.fk-plate--glow {
     animation: none;
   }
 }
