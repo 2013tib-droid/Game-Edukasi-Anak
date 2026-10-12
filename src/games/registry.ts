@@ -1,5 +1,6 @@
 import type { AnyGameConfig, ClockSpec, GroupId, TemplateId } from '@/engine/core/types';
 import type { SubjectId } from '@/data/subjects';
+import { isGameVisible } from '@/data/access';
 
 /**
  * Portal-facing game catalog. Metadata lives here (small, in the main
@@ -41,6 +42,13 @@ interface GameMetaBase {
    * WAJIB sama dengan `stageMap.stages.length` di config-nya.
    */
   parts?: number;
+  /**
+   * Game sudah dibuat tapi BELUM TAYANG: disembunyikan di build produksi
+   * (portal, landing, URL langsung), tetap tampil di development. Keputusannya
+   * satu tempat: `isGameVisible()` di `src/data/access.ts`. Saat launching cukup
+   * hapus baris ini.
+   */
+  draft?: true;
   /** Portal card badge; "mixed" games change question type per level. */
   template: TemplateId | 'mixed';
   load: () => Promise<{ default: AnyGameConfig }>;
@@ -57,7 +65,7 @@ export type GameMeta = GameMetaBase &
     | { group: 'sd2' | 'sd3'; subject: SubjectId }
   );
 
-export const games: GameMeta[] = [
+const ALL_GAMES: GameMeta[] = [
   // --- TK: dunia Petualangan Pintar (Fase 3) ---
   {
     id: 'hutan-hewan',
@@ -161,6 +169,18 @@ export const games: GameMeta[] = [
     template: 'mixed',
     load: () => import('@/games/tk/anggota-tubuh'),
   },
+  {
+    // Coding anak (template `code-quest`): susun kartu panah, lalu Jalankan.
+    // DRAFT sampai launching bersama SD Kelas 3 & 4 (keputusan pemilik
+    // 2026-10-12). Seni ikonnya belum ada — 🐰 dulu.
+    id: 'kode-kelinci',
+    group: 'tk',
+    title: 'Kode Kelinci',
+    emoji: '🐰',
+    draft: true,
+    template: 'code-quest',
+    load: () => import('@/games/tk/kode-kelinci'),
+  },
   // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
   {
     // PALING ATAS (keputusan pemilik 2026-09-24, ditukar dengan "Pasang Kata"):
@@ -194,6 +214,18 @@ export const games: GameMeta[] = [
     pic: 'rute-kendaraan',
     template: 'path-trace',
     load: () => import('@/games/sd1/rute-kendaraan'),
+  },
+  {
+    // Saudara Kode Kelinci (TK) yang lebih sulit: + kartu ULANGI dan soal
+    // memperbaiki kode. DRAFT sampai launching SD Kelas 3 & 4. Seni ikonnya
+    // belum ada — 🐢 dulu.
+    id: 'misi-kode',
+    group: 'sd1',
+    title: 'Misi Kode',
+    emoji: '🐢',
+    draft: true,
+    template: 'code-quest',
+    load: () => import('@/games/sd1/misi-kode'),
   },
   {
     id: 'hitung-hebat',
@@ -474,6 +506,9 @@ export const games: GameMeta[] = [
     load: () => import('@/games/sd2/studio-kolase'),
   },
 ];
+
+/** Game yang tampil di build ini (game `draft` hanya di development). */
+export const games: GameMeta[] = ALL_GAMES.filter(isGameVisible);
 
 export function gamesForGroup(group: GroupId, subject?: SubjectId): GameMeta[] {
   return games.filter((g) => g.group === group && (!subject || g.subject === subject));

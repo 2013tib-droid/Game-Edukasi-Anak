@@ -339,3 +339,25 @@ public/assets/games/<id>.webp 320` (latar putih polos) → tempel di atas latar 
 dan periksa lubang terkurung (roda kereta, gagang kaca pembesar, lubang pot) → tambah
 `pic: '<id>',` di entri registry. Untuk tujuh game yang belum ada, simpan file-nya saja;
 `pic` ditambahkan saat entri registry-nya dibuat.
+
+## Ikon dua game coding (`code-quest`) — disusun 2026-10-12
+
+Kode Kelinci (TK) & Misi Kode (SD Kelas 1 & 2) masih memakai emoji 🐰 / 🐢. Pakai BLOK
+GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa warna ungu (pemilik tidak
+suka ungu).
+
+| id file | Baris prompt |
+|---|---|
+| `kode-kelinci` | Buatkan: tiga kartu mainan persegi yang membulat berjajar sedikit miring seperti kipas — kartu biru muda bergambar panah ke atas, kartu hijau mint bergambar panah ke kanan, kartu peach bergambar panah ke bawah, panahnya putih tebal. Di depan kartu-kartu itu satu wortel kecil oranye berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Hanya wortel itu yang berwajah. Tanpa kelinci, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `misi-kode` | Buatkan: satu papan permainan kecil berpetak 3 kali 3 warna hijau mint dan hijau muda berselang-seling, dilihat sedikit dari atas. Di atas papan, satu jejak titik-titik oranye berbelok dari pojok kiri bawah ke satu stroberi merah kecil berwajah imut di pojok kanan atas. Di depan papan menempel satu kartu kuning krem bergambar panah melingkar (lambang ulangi) warna coklat. Hanya stroberi itu yang berwajah. Tanpa kura-kura, tanpa angka, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+
+- **Tokohnya SENGAJA tidak digambar.** Kelinci & kura-kura sudah punya seni di
+  `public/assets/items/` dan dipakai di dalam game; ikon yang memuat hewan yang sama
+  cuma terbaca "game kelinci", bukan "game coding". Yang membuat ikon ini terbaca coding
+  adalah KARTU PANAH — bentuk yang sama dengan kartu di layar game.
+- Panah di kartu WAJIB putih tebal di atas warna pekat; panah tipis jadi garis halus di
+  kotak ±116 px. Warna kartunya mengikuti warna kartu di game (atas biru, kanan hijau,
+  bawah oranye, ulangi kuning).
+- Pasang seperti biasa: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`,
+  periksa lubang terkurung di lingkaran panah ulangi, lalu tambah `pic: '<id>',` di
+  entri registry-nya.

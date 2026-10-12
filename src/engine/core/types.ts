@@ -8,6 +8,7 @@
 import type { Denom } from '@/engine/core/money';
 import type { PaintColor } from '@/engine/core/paint';
 import type { CollageArtId, CollageMaterial, MontageScene } from '@/engine/core/collage';
+import type { CodeProgram } from '@/engine/core/codeQuest';
 
 export type GroupId = 'tk' | 'sd1' | 'sd2' | 'sd3';
 
@@ -33,7 +34,8 @@ export type TemplateId =
   | 'eco-mission' // pilah sampah, daur air, jaga sungai (Sahabat Bumi)
   | 'collage-studio' // sobek & tempel kolase, susun mozaik (Studio Kolase)
   | 'light-lab' // percobaan cahaya, bayangan, bunyi & energi (Lab Cahaya & Bunyi)
-  | 'word-voyage'; // kosakata & kalimat bahasa Inggris, 7 mode berganti (Kapten Kata)
+  | 'word-voyage' // kosakata & kalimat bahasa Inggris, 7 mode berganti (Kapten Kata)
+  | 'code-quest'; // susun kartu panah lalu Jalankan — coding anak (Kode Kelinci, Misi Kode)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -1430,6 +1432,42 @@ export interface WordVoyageData {
   island: string;
 }
 
+/* ---------- code-quest (Kode Kelinci · Misi Kode) ---------- */
+
+/**
+ * Coding anak: anak menyusun kartu panah di REL KODE, menekan ▶️ Jalankan, dan
+ * tokoh hewan berjalan petak demi petak menjalankan kodenya. Logikanya satu
+ * sumber di `src/engine/core/codeQuest.ts` (papan, mesin jalan, jalan
+ * terpendek) — builder config memakainya untuk memastikan `solution` benar.
+ */
+export interface CodeQuestData {
+  /**
+   * Papan, satu string per baris (huruf: lihat `TileKind` di codeQuest.ts).
+   * Paling besar 5×5 — lebih dari itu petaknya di bawah target sentuh HP 320.
+   */
+  grid: string[];
+  /** Id seni item tokohnya (registry `items.ts`). Hewan WAJIB seni. */
+  heroItem: string;
+  /** Arah hadap seni tokohnya (bawaan `kanan`); dibalik saat berjalan ke arah lain. */
+  heroFaces?: 'kiri' | 'kanan';
+  /** Id seni item di petak tujuan `G`. */
+  goalItem: string;
+  /** Id seni item di petak barang `*` (wajib kalau papan punya `*`). */
+  pickupItem?: string;
+  /** Banyak tempat kartu di rel utama. */
+  slots: number;
+  /** Rel ULANGI: isinya dijalankan `times` kali tiap kartu 🔁 di rel utama. */
+  loop?: { times: 2 | 3 | 4; slots: number };
+  /** Mode PERBAIKI: rel sudah berisi kode ini (ada yang salah). */
+  given?: CodeProgram;
+  /**
+   * Satu kode yang benar — DIPERIKSA builder dengan `runProgram`. Dipakai untuk
+   * petunjuk P2 (jejak kaki & kartu berikutnya) dan lencana "Kode hemat!"
+   * (banyak kartu ≤ jawaban ini).
+   */
+  solution: CodeProgram;
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -1453,6 +1491,7 @@ export interface LevelDataMap {
   'collage-studio': CollageStudioData;
   'light-lab': LightLabData;
   'word-voyage': WordVoyageData;
+  'code-quest': CodeQuestData;
 }
 
 /* ---------- Game config ---------- */

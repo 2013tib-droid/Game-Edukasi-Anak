@@ -165,6 +165,17 @@ export function isGroupVisible(group: { id: string; draft?: boolean }): boolean 
   return !group.draft || TEST_TOGGLE_ALLOWED;
 }
 
+/**
+ * GAME yang belum siap tayang ditandai `draft: true` di `src/games/registry.ts`
+ * (keputusan pemilik 2026-10-12: Kode Kelinci & Misi Kode menunggu launching
+ * bersama SD Kelas 3 & 4). Aturannya sama dengan `isGroupVisible`: tersembunyi
+ * di build produksi (portal, hitungan game di landing, URL langsung), tetap
+ * tampil di dev server & build penguji. Soal TAMPILAN saja, bukan gerbang.
+ */
+export function isGameVisible(game: { draft?: boolean }): boolean {
+  return !game.draft || TEST_TOGGLE_ALLOWED;
+}
+
 /** Gratis selamanya (juga saat mode 'kunci'). */
 export function isFreeGame(gameId: string): boolean {
   return FREE_GAME_IDS.includes(gameId);
