@@ -7,6 +7,10 @@ Dipakai di soal SENTUH tanaman Kebun Ilmu (`sd2`): "Mana yang menyimpan biji?", 
 akarnya!", dst. Anak menyentuh BAGIAN tanaman di gambar, jadi **letak tiap bagian di
 gambar itu mengikat** — bukan cuma soal cantik.
 
+## Status (2026-10-12) — SELESAI
+
+Gambar percobaan pertama langsung dipasang (629×900, 81 kB). Titik sentuh sudah diukur ulang.
+
 ## Aturan yang tidak boleh dilanggar (kenapa prompt-nya kaku)
 
 1. **Rasio 4:5 tegak (≈ 0,78)** — sama dengan kotak gambar di HP terkecil (100×128 satuan).
