@@ -1,11 +1,11 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #41 — lafal "wortel" jadi pepet (wortəl, e seperti di "kelinci").
-Kata baru di PHONEME (scripts/pronounce.mjs); 17 baris di 8 game ditimpa,
-nol baris baru.
+render #42 — Misi Kode: kartu ulangi jadi Kotak Sihir. 8 baris baru, semuanya
+scope misi-kode (kalimat soal l4 baru, kebanyakan diulang, angka belum
+dipilih, kotak kosong, "Ulangi dua/tiga/empat/lima kali"). Nol baris pindah scope.
 
-redo: wortel
+only: misi-kode
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
-mencocokkan `^redo:`, jadi menulisnya di tengah kalimat = nol baris dirender
-dan runnya tetap hijau.
+mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris
+dirender dan runnya tetap hijau.
