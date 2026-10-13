@@ -33,7 +33,7 @@ export function BuyButton({ group, owned = false }: { group: SaleGroup; owned?: 
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      onClick={() => countVisit(group === 'tk' ? 'landing_buy_tk' : 'landing_buy_sd1')}
+      onClick={() => countVisit(`landing_buy_${group}`)}
     >
       Beli Sekarang
     </a>

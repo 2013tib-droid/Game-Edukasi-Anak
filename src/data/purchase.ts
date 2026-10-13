@@ -18,11 +18,13 @@
  * (`mayarWebhook`), bukan dari link ini — jadi link TK harus menunjuk produk
  * yang namanya memuat "TK"/"Playgroup", link SD produk yang memuat "SD".
  */
-export type SaleGroup = 'tk' | 'sd1';
+export type SaleGroup = 'tk' | 'sd1' | 'sd2';
 
 export const purchaseLinks: Record<SaleGroup, string> = {
   tk: 'https://petualanganpintar.myr.id/pl/petualangan-pintar-playgroup-dan-tk',
   sd1: 'https://petualanganpintar.myr.id/pl/petualangan-pintar-sd-kelas-1-2',
+  // Kosong sampai produk Mayar "SD Kelas 3 & 4" dibuat (tombolnya tak tampil).
+  sd2: '',
 };
 
 /** Link bayar kelompok itu, atau null kalau belum diisi. */
