@@ -3,6 +3,7 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import {
   CODE_LINES,
+  LOOP_TIMES,
   cardCount,
   parseBoard,
   runProgram,
@@ -28,9 +29,14 @@ import '@/engine/ui/code-quest.css';
  *   berjalan petak demi petak, kartu yang sedang dijalankan menyala.
  * - Kartu di rel disentuh = kembali ke baki. ↩️ membuang kartu terakhir rel
  *   yang aktif.
- * - Level ber-`loop` punya rel kedua "🔁 Ulangi ×N": isinya dijalankan N kali
- *   tiap kartu 🔁 di rel utama. Rel yang disentuh jadi rel aktif (tujuan
- *   ketukan kartu baki); kartu 🔁 sendiri selalu masuk rel utama.
+ * - KOTAK SIHIR (level ber-`loop`, keputusan pemilik 2026-10-13, menggantikan
+ *   rel ulangi terpisah yang membingungkan): kartu 🔁 dari baki masuk ke rel
+ *   SEBAGAI KOTAK. Panah diketuk/diseret MASUK ke kotak itu, dan anak sendiri
+ *   yang memilih berapa kali diulang (angka di kotak diketuk: ? → 2 → 3 → 4 →
+ *   5). Kotak yang disentuh jadi tujuan ketukan kartu baki; rel yang disentuh
+ *   mengembalikannya ke rel. Ikon 🔁 di kotak disentuh = kotak dibuang.
+ *   Kebanyakan ulangan = tokoh kelewatan (`lewat`), jadi angkanya harus
+ *   dihitung, tak bisa asal yang terbesar.
  * - Kode yang gagal (menabrak / belum sampai / ada barang tertinggal) =
  *   SALAH SENYAP (`onWrong(true)`): kodenya TETAP di rel, kartu yang menabrak
  *   memerah, tokoh pulang ke petak mulai. Memperbaiki kode itu intinya coding.
@@ -60,20 +66,17 @@ function ArrowIcon({ dir }: { dir: CodeDir }) {
   );
 }
 
-function LoopIcon({ times }: { times: number }) {
+function LoopGlyph() {
   return (
-    <span className="cq-loopicon" aria-hidden>
-      <svg viewBox="0 0 40 40" className="cq-arrow cq-arrow--loop">
-        <path d="M30 14 A12 12 0 1 0 32 24" fill="none" strokeWidth="5" strokeLinecap="round" />
-        <path d="M24 6 L33 13 L24 19 Z" strokeLinejoin="round" strokeWidth="2" />
-      </svg>
-      <b>×{times}</b>
-    </span>
+    <svg viewBox="0 0 40 40" className="cq-arrow cq-arrow--loop" aria-hidden>
+      <path d="M30 14 A12 12 0 1 0 32 24" fill="none" strokeWidth="5" strokeLinecap="round" />
+      <path d="M24 6 L33 13 L24 19 Z" strokeLinejoin="round" strokeWidth="2" />
+    </svg>
   );
 }
 
-function CardFace({ card, times }: { card: CodeCard; times: number }) {
-  return card === 'ulangi' ? <LoopIcon times={times} /> : <ArrowIcon dir={card} />;
+function CardFace({ card }: { card: CodeCard }) {
+  return card === 'ulangi' ? <LoopGlyph /> : <ArrowIcon dir={card} />;
 }
 
 /** Batu, digambar engine (bukan emoji — beda bentuk di tiap HP). */
@@ -117,11 +120,12 @@ const ARIA: Record<CodeCard, string> = {
 export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: TemplateProps<'code-quest'>) {
   const data = level.data;
   const board = useMemo(() => parseBoard(data.grid), [data.grid]);
-  const times = data.loop?.times ?? 1;
   const hasLoop = Boolean(data.loop);
 
   const [main, setMain] = useState<CodeCard[]>(() => [...(data.given?.main ?? [])]);
   const [loop, setLoop] = useState<CodeDir[]>(() => [...(data.given?.loop ?? [])]);
+  const [times, setTimes] = useState<number | null>(() => data.given?.times ?? null);
+  const [timesPing, setTimesPing] = useState(0);
   const [active, setActive] = useState<Rail>('main');
   const [hero, setHero] = useState<Cell>(board.start);
   const [hopKey, setHopKey] = useState(0);
@@ -137,6 +141,8 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
   const boardRef = useRef<HTMLDivElement>(null);
   const mainRef = useRef<HTMLDivElement>(null);
   const loopRef = useRef<HTMLDivElement>(null);
+  const boxIndex = main.indexOf('ulangi');
+  const hasBox = boxIndex >= 0;
 
   useEffect(() => () => timers.current.forEach((t) => window.clearTimeout(t)), []);
 
@@ -150,9 +156,9 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
   // ---- Petunjuk P2 ----
   const footprints = useMemo(() => {
     if (hint < 1) return new Set<string>();
-    const run = runProgram(board, solution, times);
+    const run = runProgram(board, solution);
     return new Set(run.steps.filter((s) => !s.bump).map((s) => `${s.to.r},${s.to.c}`));
-  }, [hint, board, solution, times]);
+  }, [hint, board, solution]);
 
   /** Tingkat 2: kartu pertama yang menyimpang dari jawaban contoh + kartu yang dibutuhkan. */
   const nudge = useMemo(() => {
@@ -165,20 +171,25 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
     };
     return cmp(main, solution.main, 'main') ?? (hasLoop ? cmp(loop, solution.loop ?? [], 'loop') : null);
   }, [hint, main, loop, solution, hasLoop]);
+  /** Tingkat 2, kodenya sudah benar tapi angka ulangannya belum: angkanya menyala. */
+  const nudgeTimes = hint >= 2 && hasBox && !nudge && times !== (solution.times ?? null);
 
   // ---- Menyusun kode ----
   function edited() {
     setBad(null);
   }
 
-  function addCard(card: CodeCard, rail: Rail = card === 'ulangi' ? 'main' : active, at?: number) {
+  function addCard(card: CodeCard, rail: Rail = active, at?: number) {
     if (locked) return;
-    const target: Rail = card === 'ulangi' ? 'main' : rail;
+    if (card === 'ulangi' && hasBox) return refuse(loopRef.current);
+    const target: Rail = card === 'ulangi' || !hasBox ? 'main' : rail;
     if (target === 'main') {
       if (main.length >= data.slots) return refuse(mainRef.current);
       const next = [...main];
       next.splice(at ?? next.length, 0, card);
       setMain(next);
+      // Kotak baru langsung jadi tujuan: panah berikutnya masuk ke dalamnya.
+      if (card === 'ulangi') setActive('loop');
     } else {
       if (!data.loop || loop.length >= data.loop.slots) return refuse(loopRef.current);
       const next = [...loop];
@@ -201,31 +212,52 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
   function removeAt(rail: Rail, index: number) {
     if (locked) return;
     sfx('tap');
-    if (rail === 'main') setMain(main.filter((_, i) => i !== index));
-    else setLoop(loop.filter((_, i) => i !== index));
+    if (rail === 'main') {
+      // Membuang kotak ulangi = isinya ikut kembali ke baki.
+      if (main[index] === 'ulangi') {
+        setLoop([]);
+        setTimes(null);
+        setActive('main');
+      }
+      setMain(main.filter((_, i) => i !== index));
+    } else setLoop(loop.filter((_, i) => i !== index));
     edited();
   }
 
   function undo() {
     if (locked) return;
-    const rail = active === 'loop' && loop.length ? 'loop' : main.length ? 'main' : 'loop';
-    const list = rail === 'main' ? main : loop;
-    if (list.length === 0) return;
-    removeAt(rail, list.length - 1);
+    if (active === 'loop' && hasBox) {
+      if (loop.length) removeAt('loop', loop.length - 1);
+      else removeAt('main', boxIndex);
+      return;
+    }
+    if (main.length) removeAt('main', main.length - 1);
+  }
+
+  function cycleTimes() {
+    if (locked) return;
+    const i = times === null ? -1 : LOOP_TIMES.indexOf(times as (typeof LOOP_TIMES)[number]);
+    const next = LOOP_TIMES[(i + 1) % LOOP_TIMES.length]!;
+    setTimes(next);
+    setActive('loop');
+    sfx('tick');
+    narrate(CODE_LINES.times[next]!);
+    edited();
   }
 
   // ---- Seret dari baki ----
   const drag = useRef<{ card: CodeCard; x: number; y: number; ghost: HTMLElement | null; moved: boolean } | null>(null);
 
   function railAt(x: number, y: number): { rail: Rail; at: number } | null {
-    for (const [rail, el] of [
-      ['main', mainRef.current],
-      ['loop', loopRef.current],
+    // Kotak dulu (ia ada DI DALAM rel), dengan batas yang ketat.
+    for (const [rail, el, pad] of [
+      ['loop', loopRef.current, 4],
+      ['main', mainRef.current, 14],
     ] as const) {
       if (!el) continue;
       const r = el.getBoundingClientRect();
-      if (x < r.left - 12 || x > r.right + 12 || y < r.top - 16 || y > r.bottom + 16) continue;
-      const cards = [...el.querySelectorAll<HTMLElement>('.cq-slot--full')];
+      if (x < r.left - pad || x > r.right + pad || y < r.top - pad || y > r.bottom + pad) continue;
+      const cards = [...el.querySelectorAll<HTMLElement>(':scope > .cq-item, :scope > .cq-box__body > .cq-item')];
       let at = cards.length;
       for (let i = 0; i < cards.length; i++) {
         const cr = cards[i]!.getBoundingClientRect();
@@ -281,7 +313,7 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
       }
       const hit = railAt(e.clientX, e.clientY);
       if (hit) {
-        if (hit.rail === 'loop' && d.card !== 'ulangi') setActive('loop');
+        if (d.card !== 'ulangi') setActive(hit.rail);
         addCard(d.card, hit.rail, d.card === 'ulangi' && hit.rail === 'loop' ? undefined : hit.at);
       } else sfx('tap');
     };
@@ -314,8 +346,21 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
 
   function run() {
     if (locked) return;
-    const prog: CodeProgram = { main, loop };
-    const result = runProgram(board, prog, times);
+    const prog: CodeProgram = { main, loop, times };
+    if (hasBox && loop.length === 0) {
+      sfx('tap');
+      narrate(CODE_LINES.loopEmpty);
+      setActive('loop');
+      refuse(loopRef.current);
+      return;
+    }
+    if (hasBox && times === null) {
+      sfx('tap');
+      narrate(CODE_LINES.noTimes);
+      setTimesPing((k) => k + 1);
+      return;
+    }
+    const result = runProgram(board, prog);
     if (result.outcome === 'kosong') {
       sfx('tap');
       narrate(CODE_LINES.empty);
@@ -365,9 +410,12 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
     }
     later(() => {
       setNow(null);
-      if (result.outcome === 'nabrak' && last) setBad({ rail: last.rail, index: last.via ?? last.index });
+      if (result.outcome === 'nabrak' && last) setBad({ rail: last.rail, index: last.index });
+      if (result.outcome === 'lewat' && hasBox) setBad({ rail: 'main', index: boxIndex });
       narrate(
-        result.outcome === 'nabrak'
+        result.outcome === 'lewat'
+          ? CODE_LINES.over
+          : result.outcome === 'nabrak'
           ? CODE_LINES.bump
           : result.outcome === 'belum-ambil'
             ? CODE_LINES.missing
@@ -398,54 +446,108 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
   const isNow = (rail: Rail, index: number) =>
     !!now && ((now.rail === rail && now.index === index) || (rail === 'main' && now.via === index));
 
-  const railView = (rail: Rail) => {
-    const list: CodeCard[] = rail === 'main' ? main : loop;
-    const cap = rail === 'main' ? data.slots : data.loop!.slots;
-    const isActive = hasLoop && active === rail;
+  const cardButton = (rail: Rail, card: CodeCard, i: number) => {
+    const hinted = nudge?.wrong && nudge.rail === rail && nudge.index === i;
+    return (
+      <button
+        key={i}
+        type="button"
+        className={
+          'cq-slot cq-slot--full cq-item cq-card cq-card--' +
+          card +
+          (isNow(rail, i) ? ' cq-card--now' : '') +
+          (bad && bad.rail === rail && bad.index === i ? ' cq-card--bad' : '') +
+          (hinted ? ' cq-card--hintbad' : '')
+        }
+        onClick={(e) => {
+          e.stopPropagation();
+          if (hasLoop) setActive(rail);
+          removeAt(rail, i);
+        }}
+        disabled={locked}
+        aria-label={`${ARIA[card]}, sentuh untuk membuang`}
+      >
+        <CardFace card={card} />
+      </button>
+    );
+  };
+
+  /** Kotak sihir: ikon 🔁 (sentuh = buang kotak) · tempat panah · angka ulangan. */
+  const boxView = (i: number) => {
+    const boxActive = active === 'loop';
+    const cap = data.loop!.slots;
     return (
       <div
-        ref={rail === 'main' ? mainRef : loopRef}
+        key={i}
+        ref={loopRef}
         className={
-          'cq-rail' +
-          (rail === 'loop' ? ' cq-rail--loop' : '') +
-          (isActive ? ' cq-rail--active' : '') +
-          (cap <= 3 ? ' cq-rail--short' : '')
+          'cq-item cq-box' +
+          (boxActive ? ' cq-box--active' : '') +
+          (isNow('main', i) ? ' cq-box--now' : '') +
+          (bad && bad.rail === 'main' && bad.index === i ? ' cq-box--bad' : '') +
+          (nudge?.wrong && nudge.rail === 'main' && nudge.index === i ? ' cq-box--hintbad' : '')
         }
-        onClick={() => hasLoop && !locked && setActive(rail)}
-        aria-label={rail === 'main' ? 'Rel kode' : `Rel ulangi ${times} kali`}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (!locked) setActive('loop');
+        }}
+        aria-label="Kotak ulangi"
       >
-        {rail === 'loop' && (
-          <span className="cq-rail__tag" aria-hidden>
-            <LoopIcon times={times} />
-          </span>
-        )}
-        {Array.from({ length: cap }, (_, i) => {
-          const card = list[i];
-          if (!card) return <span key={i} className="cq-slot" aria-hidden />;
-          const hinted = nudge?.wrong && nudge.rail === rail && nudge.index === i;
-          return (
-            <button
-              key={i}
-              type="button"
-              className={
-                'cq-slot cq-slot--full cq-card cq-card--' +
-                card +
-                (isNow(rail, i) ? ' cq-card--now' : '') +
-                (bad && bad.rail === rail && bad.index === i ? ' cq-card--bad' : '') +
-                (hinted ? ' cq-card--hintbad' : '')
-              }
-              onClick={(e) => {
-                e.stopPropagation();
-                if (hasLoop) setActive(rail);
-                removeAt(rail, i);
-              }}
-              disabled={locked}
-              aria-label={`${ARIA[card]}, sentuh untuk membuang`}
-            >
-              <CardFace card={card} times={times} />
-            </button>
-          );
-        })}
+        <button
+          type="button"
+          className="cq-box__icon"
+          onClick={(e) => {
+            e.stopPropagation();
+            removeAt('main', i);
+          }}
+          disabled={locked}
+          aria-label="Kotak ulangi, sentuh untuk membuang"
+        >
+          <LoopGlyph />
+        </button>
+        <div className="cq-box__body">
+          {Array.from({ length: cap }, (_, j) => {
+            const card = loop[j];
+            return card ? cardButton('loop', card, j) : <span key={j} className="cq-slot" aria-hidden />;
+          })}
+        </div>
+        <button
+          key={timesPing}
+          type="button"
+          className={
+            'cq-box__times' +
+            (times === null ? ' cq-box__times--unset' : '') +
+            (timesPing ? ' cq-box__times--ping' : '') +
+            (nudgeTimes ? ' cq-box__times--hint' : '')
+          }
+          onClick={(e) => {
+            e.stopPropagation();
+            cycleTimes();
+          }}
+          disabled={locked}
+          aria-label={times === null ? 'Pilih berapa kali diulang' : `Diulang ${times} kali, sentuh untuk mengganti`}
+        >
+          ×{times ?? '?'}
+        </button>
+      </div>
+    );
+  };
+
+  const railView = () => {
+    const cap = data.slots;
+    // Kotak memakai satu tempat rel; tempat kosong sisanya digambar sesudahnya.
+    const empties = Math.max(0, cap - main.length);
+    return (
+      <div
+        ref={mainRef}
+        className={'cq-rail' + (hasLoop && active === 'main' ? ' cq-rail--active' : '') + (!hasLoop && cap <= 3 ? ' cq-rail--short' : '')}
+        onClick={() => hasLoop && !locked && setActive('main')}
+        aria-label="Rel kode"
+      >
+        {main.map((card, i) => (card === 'ulangi' ? boxView(i) : cardButton('main', card, i)))}
+        {Array.from({ length: empties }, (_, k) => (
+          <span key={`e${k}`} className="cq-slot" aria-hidden />
+        ))}
       </div>
     );
   };
@@ -453,7 +555,7 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
   const trayCards: CodeCard[] = hasLoop ? ['atas', 'kanan', 'bawah', 'kiri', 'ulangi'] : ['atas', 'kanan', 'bawah', 'kiri'];
 
   return (
-    <div className={'cq-wrap' + (hasLoop ? ' cq-wrap--loop' : '')}>
+    <div className="cq-wrap">
       <div className="game-prompt cq-prompt">{level.narration}</div>
       <div className="cq-area">
         <div className="cq-boardbox">
@@ -509,10 +611,7 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
           </div>
         </div>
 
-        <div className="cq-code">
-          {railView('main')}
-          {hasLoop && railView('loop')}
-        </div>
+        <div className="cq-code">{railView()}</div>
 
         <div className="cq-tray">
           {trayCards.map((card) => (
@@ -537,7 +636,7 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
               aria-label={ARIA[card]}
             >
               {card !== 'ulangi' && <CodeCritter dir={card} />}
-              <CardFace card={card} times={times} />
+              <CardFace card={card} />
             </button>
           ))}
         </div>
