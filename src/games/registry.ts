@@ -172,11 +172,12 @@ const ALL_GAMES: GameMeta[] = [
   {
     // Coding anak (template `code-quest`): susun kartu panah, lalu Jalankan.
     // DRAFT sampai launching bersama SD Kelas 3 & 4 (keputusan pemilik
-    // 2026-10-12). Seni ikonnya belum ada — 🐰 dulu.
+    // 2026-10-12). Ikon: kartu panah + wortel (2026-10-13), 🐰 cadangan.
     id: 'kode-kelinci',
     group: 'tk',
     title: 'Kode Kelinci',
     emoji: '🐰',
+    pic: 'kode-kelinci',
     draft: true,
     template: 'code-quest',
     load: () => import('@/games/tk/kode-kelinci'),
@@ -217,12 +218,13 @@ const ALL_GAMES: GameMeta[] = [
   },
   {
     // Saudara Kode Kelinci (TK) yang lebih sulit: + kartu ULANGI dan soal
-    // memperbaiki kode. DRAFT sampai launching SD Kelas 3 & 4. Seni ikonnya
-    // belum ada — 🐢 dulu.
+    // memperbaiki kode. DRAFT sampai launching SD Kelas 3 & 4. Ikon: papan
+    // berpetak + stroberi + kartu ulangi (2026-10-13), 🐢 cadangan.
     id: 'misi-kode',
     group: 'sd1',
     title: 'Misi Kode',
     emoji: '🐢',
+    pic: 'misi-kode',
     draft: true,
     template: 'code-quest',
     load: () => import('@/games/sd1/misi-kode'),
