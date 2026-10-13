@@ -16,6 +16,7 @@ import {
 import { sfx } from '@/engine/audio/sound';
 import { sparkleAt } from '@/engine/ui/juice';
 import ItemPic from '@/engine/ui/ItemPic';
+import CodeCritter from '@/engine/ui/CodeCritters';
 import '@/engine/ui/code-quest.css';
 
 /**
@@ -49,10 +50,11 @@ function ArrowIcon({ dir }: { dir: CodeDir }) {
   return (
     <svg viewBox="0 0 40 40" className="cq-arrow" aria-hidden>
       <path
-        d="M20 5 L34 20 H25 V35 H15 V20 H6 Z"
+        d="M20 4.5 L35 20 H26 V35.5 H14 V20 H5 Z"
         transform={`rotate(${rot} 20 20)`}
         strokeLinejoin="round"
-        strokeWidth="2.6"
+        strokeWidth="3.4"
+        paintOrder="stroke"
       />
     </svg>
   );
@@ -80,6 +82,26 @@ function Rock() {
     <svg viewBox="0 0 40 40" className="cq-rock" aria-hidden>
       <path d="M6 31 C4 22 10 13 18 12 C22 8 30 10 32 17 C37 20 37 29 33 32 Z" className="cq-rock__body" />
       <path d="M13 20 C16 17 20 16 23 17" className="cq-rock__shine" />
+    </svg>
+  );
+}
+
+/** Panah melengkung "buang yang terakhir" (bukan emoji ↩️ — beda di tiap HP). */
+function UndoIcon() {
+  return (
+    <svg viewBox="0 0 48 48" className="cq-undo__icon" aria-hidden>
+      <g stroke="#ffd23f" strokeWidth="3" strokeLinecap="round" className="cq-undo__spark">
+        <path d="M5 13 L9 16 M4 21 H9" />
+        <path d="M43 31 L39 33 M44 38 L39 38" />
+      </g>
+      <path
+        d="M16 15 H28 C35 15 39 20 39 26 C39 32 35 37 28 37 H20"
+        fill="none"
+        stroke="#7b6ad8"
+        strokeWidth="6.5"
+        strokeLinecap="round"
+      />
+      <path d="M19 6 L9 15 L19 24 Z" fill="#7b6ad8" stroke="#7b6ad8" strokeWidth="3" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -514,6 +536,7 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
               disabled={locked}
               aria-label={ARIA[card]}
             >
+              {card !== 'ulangi' && <CodeCritter dir={card} />}
               <CardFace card={card} times={times} />
             </button>
           ))}
@@ -527,10 +550,21 @@ export default function CodeQuest({ level, onCorrect, onWrong, narrate, hint }: 
             disabled={locked || (main.length === 0 && loop.length === 0)}
             aria-label="Buang kartu terakhir"
           >
-            ↩️
+            <UndoIcon />
           </button>
-          <button type="button" className="btn btn--primary cq-run" onClick={run} disabled={locked}>
-            ▶️ Jalankan
+          <button type="button" className="cq-run" onClick={run} disabled={locked}>
+            <img
+              src={`${import.meta.env.BASE_URL}assets/mascot/mascot-3.webp`}
+              alt=""
+              className="cq-run__chick"
+              onError={(e) => (e.currentTarget.style.display = 'none')}
+            />
+            <span className="cq-run__play" aria-hidden>
+              <svg viewBox="0 0 24 24">
+                <path d="M8 5.5 L19 12 L8 18.5 Z" fill="#fff" strokeLinejoin="round" stroke="#fff" strokeWidth="2" />
+              </svg>
+            </span>
+            <span className="cq-run__text">Jalankan</span>
           </button>
         </div>
       </div>

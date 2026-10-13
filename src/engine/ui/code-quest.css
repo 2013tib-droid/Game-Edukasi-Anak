@@ -261,9 +261,12 @@
   gap: 5px;
   min-height: calc(var(--cq-card) + 12px);
   padding: 4px 6px;
-  border-radius: 16px;
-  border: 3px dashed #e3c486;
-  background: #fff8e6;
+  border-radius: 18px;
+  border: 4px solid #f8cf5c;
+  background: #fff7e4;
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    0 3px 0 #ecb53a;
   box-sizing: border-box;
 }
 
@@ -274,9 +277,8 @@
 }
 
 .cq-rail--active {
-  border-style: solid;
   border-color: #ffb703;
-  background: #fff1bf;
+  background: #fff0c2;
 }
 
 .cq-rail--loop.cq-rail--active {
@@ -306,8 +308,8 @@
   width: var(--cq-card);
   height: var(--cq-card);
   border-radius: 12px;
-  border: 2px dashed #e1cfa6;
-  background: rgba(255, 255, 255, 0.7);
+  border: 2.5px dashed #f5cf6e;
+  background: rgba(255, 255, 255, 0.55);
   box-sizing: border-box;
 }
 
@@ -325,7 +327,11 @@
   border-radius: 12px;
   color: #fff;
   cursor: pointer;
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+  background: linear-gradient(180deg, var(--cq-hi), var(--cq-lo));
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.08),
+    0 3px 0 var(--cq-base);
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
@@ -333,19 +339,34 @@
 }
 
 .cq-card--atas {
-  background: #3d9bf0;
+  --cq-hi: #5db6ff;
+  --cq-lo: #2f84e4;
+  --cq-base: #1d63b8;
+  --cq-ink: #1a5aa8;
 }
 .cq-card--kanan {
-  background: #2fb873;
+  --cq-hi: #6bd96a;
+  --cq-lo: #34ad46;
+  --cq-base: #22843a;
+  --cq-ink: #1f7a34;
 }
 .cq-card--bawah {
-  background: #f7922e;
+  --cq-hi: #ffb04a;
+  --cq-lo: #f7801f;
+  --cq-base: #cc5f0d;
+  --cq-ink: #bf5310;
 }
 .cq-card--kiri {
-  background: #f0577f;
+  --cq-hi: #ff86ad;
+  --cq-lo: #ec4f83;
+  --cq-base: #c02f62;
+  --cq-ink: #b02a5a;
 }
 .cq-card--ulangi {
-  background: #ffd23f;
+  --cq-hi: #ffe36b;
+  --cq-lo: #ffc21f;
+  --cq-base: #d99a00;
+  --cq-ink: #6b3f00;
   color: #6b3f00;
 }
 
@@ -361,7 +382,7 @@
   width: 68%;
   height: 68%;
   fill: #fff;
-  stroke: rgba(0, 0, 0, 0.22);
+  stroke: var(--cq-ink, rgba(0, 0, 0, 0.25));
 }
 
 .cq-loopicon {
@@ -384,6 +405,7 @@
   height: 58%;
   fill: #6b3f00;
   stroke: #6b3f00;
+  paint-order: normal;
 }
 
 .cq-arrow--loop path:first-child {
@@ -395,7 +417,7 @@
   box-shadow:
     0 0 0 3px #fff,
     0 0 0 6px #ffb703,
-    0 6px 0 rgba(0, 0, 0, 0.2);
+    0 6px 0 var(--cq-base);
 }
 
 .cq-card--bad {
@@ -426,44 +448,98 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
 }
 
-/* ---------- Baki & tombol ---------- */
+/* ---------- Baki & tombol (mockup pemilik 2026-10-13) ---------- */
 
+/* Kepala hewan mengintip ±16% di atas kartu baki, jadi bakinya memesan
+   ruang itu lewat padding atas. */
 .cq-tray {
   flex: 0 0 auto;
   display: flex;
   justify-content: center;
   gap: 8px;
+  padding-top: 10px;
 }
 
 .cq-tray__card {
+  position: relative;
   flex: 1 1 0;
   min-width: 0;
-  max-width: 66px;
+  max-width: 70px;
   aspect-ratio: 1;
-  border-radius: 16px;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.22);
+  border-radius: 18px;
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.08),
+    0 5px 0 var(--cq-base),
+    0 8px 12px rgba(0, 0, 0, 0.12);
+}
+
+.cq-tray__card:active:not(:disabled) {
+  translate: 0 3px;
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.45),
+    0 2px 0 var(--cq-base);
+}
+
+/* Panah turun ke separuh bawah, kepala hewan di separuh atas. */
+.cq-tray__card .cq-arrow {
+  width: 54%;
+  height: 54%;
+  translate: 0 22%;
 }
 
 .cq-tray__card .cq-loopicon b {
   font-size: 17px;
 }
 
+.cq-peek {
+  position: absolute;
+  left: -6%;
+  top: -18%;
+  width: 112%;
+  height: auto;
+  aspect-ratio: 2;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.cq-tray__card:disabled .cq-peek__spark,
+.cq-tray__card:disabled .cq-peek {
+  opacity: 0.85;
+}
+
 .cq-actions {
   flex: 0 0 auto;
   display: flex;
   gap: 10px;
+  align-items: stretch;
 }
 
 .cq-undo {
   flex: 0 0 auto;
-  width: 60px;
-  min-height: 56px;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  min-height: 58px;
+  padding: 0;
   border: none;
-  border-radius: 16px;
-  background: #fff;
-  font-size: 26px;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  background: linear-gradient(180deg, #f1edff, #ddd5fb);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    0 5px 0 #bdb1ee;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cq-undo__icon {
+  width: 46px;
+  height: 46px;
+}
+
+.cq-undo:active:not(:disabled) {
+  translate: 0 3px;
+  box-shadow: 0 2px 0 #bdb1ee;
 }
 
 .cq-undo:disabled {
@@ -471,9 +547,76 @@
 }
 
 .cq-run {
+  position: relative;
   flex: 1 1 auto;
-  min-height: 56px;
-  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 58px;
+  padding: 0 14px 0 56px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffe35c, #ffbf1a);
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -4px 0 rgba(204, 120, 0, 0.18),
+    0 5px 0 #e09700,
+    0 8px 14px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cq-run:active:not(:disabled) {
+  translate: 0 3px;
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.6),
+    0 2px 0 #e09700;
+}
+
+.cq-run:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* Anak ayam melambai, sedikit keluar dari tepi atas tombol. */
+.cq-run__chick {
+  position: absolute;
+  left: 8px;
+  bottom: 4px;
+  height: 118%;
+  width: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 1px rgba(150, 90, 0, 0.25));
+}
+
+.cq-run__play {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #4aa6ff, #1f72dc);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.45),
+    0 3px 0 #1556a8;
+}
+
+.cq-run__play svg {
+  width: 62%;
+  height: 62%;
+}
+
+.cq-run__text {
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1;
+  color: #5a2d0c;
+  -webkit-text-stroke: 5px #fff;
+  paint-order: stroke fill;
+  letter-spacing: 0.01em;
 }
 
 /* ---------- Animasi ---------- */
@@ -534,7 +677,7 @@
     box-shadow:
       0 0 0 3px #fff,
       0 0 0 7px #ffd23f,
-      0 4px 0 rgba(0, 0, 0, 0.22);
+      0 5px 0 var(--cq-base);
   }
 }
 
@@ -570,7 +713,15 @@
 
   .cq-undo,
   .cq-run {
-    min-height: 50px;
+    min-height: 52px;
+  }
+
+  .cq-tray {
+    padding-top: 8px;
+  }
+
+  .cq-run__text {
+    font-size: 22px;
   }
 }
 
@@ -582,11 +733,29 @@
   }
 
   .cq-tray__card {
-    max-width: 80px;
+    max-width: 86px;
+  }
+
+  .cq-tray {
+    padding-top: 14px;
+    gap: 12px;
   }
 
   .cq-prompt {
     font-size: 22px;
+  }
+
+  .cq-run {
+    min-height: 66px;
+    padding-left: 70px;
+  }
+
+  .cq-run__text {
+    font-size: 29px;
+  }
+
+  .cq-undo {
+    width: 72px;
   }
 }
 
@@ -639,5 +808,18 @@
   .cq-undo,
   .cq-run {
     min-height: 46px;
+  }
+
+  .cq-tray {
+    padding-top: 8px;
+  }
+
+  .cq-run__text {
+    font-size: 20px;
+  }
+
+  .cq-run__play {
+    width: 30px;
+    height: 30px;
   }
 }
