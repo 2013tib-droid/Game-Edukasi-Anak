@@ -332,14 +332,14 @@ const ALL_GAMES: GameMeta[] = [
 
   // --- SD Kelas 3 & 4 (group id `sd2`, masih draft — lihat groups.json) ---
   {
-    id: 'kali-kilat',
+    id: 'istana-bilangan',
     group: 'sd2',
     subject: 'matematika',
-    title: 'Kali Kilat',
-    emoji: '✖️',
-    pic: 'kali-kilat',
-    template: 'tap-answer',
-    load: () => import('@/games/sd2/kali-kilat'),
+    title: 'Istana Bilangan',
+    emoji: '🏰',
+    pic: 'istana-bilangan',
+    template: 'mixed',
+    load: () => import('@/games/sd2/istana-bilangan'),
   },
   {
     id: 'kebun-ilmu',
@@ -448,14 +448,14 @@ const ALL_GAMES: GameMeta[] = [
     load: () => import('@/games/sd2/susun-kalimat'),
   },
   {
-    id: 'istana-bilangan',
+    id: 'kali-kilat',
     group: 'sd2',
     subject: 'matematika',
-    title: 'Istana Bilangan',
-    emoji: '🏰',
-    pic: 'istana-bilangan',
-    template: 'mixed',
-    load: () => import('@/games/sd2/istana-bilangan'),
+    title: 'Kali Kilat',
+    emoji: '✖️',
+    pic: 'kali-kilat',
+    template: 'tap-answer',
+    load: () => import('@/games/sd2/kali-kilat'),
   },
   {
     id: 'lompat-katak',
