@@ -2239,11 +2239,40 @@
 }
 
 .cs-board {
+  position: relative;
+  align-self: center;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-end;
-  gap: 6px 8px;
+  gap: 6px 14px;
+  max-width: 100%;
+  padding: 8px 18px 8px;
+  border-radius: 28px;
+  background: #fffbea;
+  box-shadow: inset 0 0 0 3px #fff, 0 0 0 2px #f6dfa0, 0 5px 0 rgba(160, 120, 40, 0.18);
+}
+
+/* Garis putus-putus di dalam papan, seperti etalase kertas di warung. */
+.cs-board::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 2px dashed #f1d58a;
+  border-radius: 22px;
+  pointer-events: none;
+}
+
+/* Dua kerlip kecil di pojok papan — hiasan, tak pernah di atas uang. */
+.cs-board::after {
+  content: '✦';
+  position: absolute;
+  right: 8px;
+  top: 2px;
+  color: #ffc23a;
+  font-size: 18px;
+  line-height: 1;
+  pointer-events: none;
 }
 
 .cs-good {
@@ -2266,12 +2295,14 @@
 
 /* Label harga: pil kuning seperti label harga di warung. */
 .cs-price {
-  padding: 1px 7px;
+  position: relative;
+  padding: 2px 10px;
   border-radius: 999px;
-  background: #ffe28a;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.14);
+  background: linear-gradient(#ffe48f, #ffcf4d);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8), 0 2px 0 #d9a21b;
+  color: #5a3a10;
   font-size: clamp(14px, 4.4vw, 17px);
-  font-weight: 800;
+  font-weight: 900;
   white-space: nowrap;
 }
 
@@ -2283,9 +2314,12 @@
 }
 
 .cs-paid__label {
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #dff1ff;
+  color: #2b5f8f;
   font-size: 13px;
-  font-weight: 800;
-  opacity: 0.65;
+  font-weight: 900;
 }
 
 .cs-paid__money {
@@ -2324,10 +2358,14 @@
   line-height: 1.1;
 }
 
+/* Baki = meja kasir berbingkai KAYU, isinya krem. Tempat uang ditaruh
+   ditandai garis putus-putus di dalamnya (`.cs-tray__body`), bukan seluruh
+   baki — bingkai kayu itu yang membuatnya terbaca "meja", bukan kotak. */
 .cs-tray {
-  border: 4px dashed rgba(0, 0, 0, 0.25);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.55);
+  border: 5px solid #c98a4b;
+  border-radius: 20px;
+  background: #fff8e6;
+  box-shadow: inset 0 0 0 2px #e9b77c, 0 5px 0 #9c6430;
   padding: 6px 10px 8px;
   display: flex;
   flex-direction: column;
@@ -2336,14 +2374,14 @@
 }
 
 .cs-tray--over {
-  border-color: #ffb703;
-  background: rgba(255, 243, 205, 0.9);
+  border-color: #f2a516;
+  background: #fff1c4;
 }
 
 .cs-tray--done {
-  border-style: solid;
   border-color: #3f9142;
-  background: rgba(214, 240, 206, 0.9);
+  background: #e3f6dc;
+  box-shadow: inset 0 0 0 2px #9ed68a, 0 5px 0 #2f7a32;
 }
 
 .cs-tray--shake {
@@ -2365,12 +2403,38 @@
 }
 
 .cs-tray__name {
-  font-size: 15px;
-  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 16px;
+  font-weight: 900;
   white-space: nowrap;
+  color: #5a3a10;
 }
 
+.cs-tray__icon {
+  width: 28px;
+  height: 28px;
+  flex: none;
+}
+
+.cs-tray__emoji {
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* Nama baki digaris-stabilo kuning. */
+.cs-tray__label {
+  padding: 0 6px;
+  background: linear-gradient(transparent 45%, #ffe07a 45%, #ffe07a 90%, transparent 90%);
+}
+
+/* Total di "awan" biru muda — angka yang paling sering dilirik anak. */
 .cs-total {
+  padding: 0 12px;
+  border-radius: 999px;
+  background: #dcefff;
+  color: #4a2c0e;
   font-size: clamp(22px, 7vw, 30px);
   font-weight: 900;
   white-space: nowrap;
@@ -2391,6 +2455,10 @@
   flex: 1;
   min-width: 0;
   min-height: 52px;
+  padding: 4px;
+  border: 2px dashed #e6c99a;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.6);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -2400,8 +2468,8 @@
 
 .cs-tray__hint {
   font-size: 15px;
-  font-weight: 700;
-  opacity: 0.55;
+  font-weight: 800;
+  color: #b08a5a;
 }
 
 /* Satu tumpuk per pecahan; menyentuhnya mengembalikan SATU lembar ke dompet. */
@@ -2413,7 +2481,7 @@
   border: none;
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: 0 0 0 2px var(--ink), 0 3px 0 rgba(0, 0, 0, 0.16);
   cursor: pointer;
   touch-action: manipulation;
 }
@@ -2446,10 +2514,36 @@
   text-align: center;
 }
 
-.cs-submit {
+/* Tombol serah hijau seperti tombol "Bayar" di mesin kasir, dengan lencana
+   centang putih (emoji ✅ beda rupa di tiap HP). */
+.cs-submit.btn {
   flex: none;
-  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px 0 8px;
+  border-radius: 999px;
+  background: linear-gradient(#6fd36a, #3ea83c);
+  color: #fff;
+  box-shadow: 0 5px 0 #2a7a2a;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.18);
   font-size: clamp(17px, 5vw, 21px);
+}
+
+.cs-submit:disabled {
+  filter: saturate(0.45);
+  opacity: 0.75;
+}
+
+.cs-submit__check {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  padding: 4px;
+  border-radius: 9px;
+  background: #fff;
+  color: #3ea83c;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
 }
 
 .cs-wallet {
@@ -2462,14 +2556,32 @@
 /* Kartu dompet MELEBAR mengisi baris, tapi tak pernah turun baris: dompet
    dibatasi empat pecahan (`CashierData.wallet`), dan empat kartu 64 px +
    tiga jarak 6 px pas di lebar isi HP 320 px. */
+/* Tiap pecahan punya WARNA sendiri (senada warna lembarnya): kartu pastel +
+   pil nominal pekat. Anak bisa mencari "yang biru" sebelum bisa membaca
+   angkanya. Warnanya lewat variabel di `[data-denom]`. */
+.cs-tile,
+.cs-stack {
+  --tint: #fff7d6;
+  --ink: #f2c230;
+  --ink-text: #4a3208;
+}
+[data-denom='500'] { --tint: #def5f0; --ink: #2a9d8f; --ink-text: #fff; }
+[data-denom='1000'] { --tint: #fff4c4; --ink: #f6c624; --ink-text: #4a3208; }
+[data-denom='2000'] { --tint: #ddeeff; --ink: #3b82f6; --ink-text: #fff; }
+[data-denom='5000'] { --tint: #ffe6d1; --ink: #ef8b38; --ink-text: #fff; }
+[data-denom='10000'] { --tint: #ffe1ec; --ink: #e2588a; --ink-text: #fff; }
+[data-denom='20000'] { --tint: #dff4d8; --ink: #4caf50; --ink-text: #fff; }
+[data-denom='50000'] { --tint: #d8f1fb; --ink: #1e9ccf; --ink-text: #fff; }
+
 .cs-tile {
+  position: relative;
   flex: 1 1 0;
   min-width: 0;
   max-width: 118px;
-  padding: 6px 4px 4px;
+  padding: 6px 4px 5px;
   border-radius: 16px;
-  background: #fff;
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.16);
+  background: var(--tint);
+  box-shadow: inset 0 0 0 3px #fff, 0 0 0 2px var(--ink), 0 5px 0 rgba(0, 0, 0, 0.14);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2494,6 +2606,29 @@
   width: clamp(44px, 12vw, 62px);
   height: clamp(44px, 12vw, 62px);
   display: block;
+}
+
+/* Nominal di dompet = pil berwarna pecahannya. */
+.cs-tile .cs-money-label {
+  max-width: 100%;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--ink-text);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.14);
+}
+
+/* Bintang di POJOK kartu, di luar foto uang — tanda SPECIMEN tak tertutup. */
+.cs-tile::before {
+  content: '★';
+  position: absolute;
+  left: -7px;
+  top: -9px;
+  color: #ffc23a;
+  font-size: 20px;
+  line-height: 1;
+  text-shadow: 0 1px 0 #d48a00;
+  pointer-events: none;
 }
 
 /* Layar TEGAK: dompet jadi 2×2 dengan uang BESAR (permintaan pemilik
@@ -2544,6 +2679,51 @@
   font-size: 14px;
   font-weight: 800;
   opacity: 0.7;
+}
+
+/* Layar PENDEK (HP 320×568–360×640, HP dimiringkan): hiasan papan & baki
+   dirapatkan supaya bingkai kayu + papan etalase tak membuat layar scroll —
+   tinggi diambil dari jarak, bukan dari besar uangnya. */
+@media (max-height: 700px) {
+  .cs-area {
+    gap: 7px;
+  }
+
+  .cs-board {
+    padding: 4px 14px;
+  }
+
+  .cs-board::before {
+    inset: 3px;
+  }
+
+  .cs-tray {
+    padding: 4px 8px 6px;
+    gap: 2px;
+  }
+
+  .cs-tray__body {
+    min-height: 48px;
+    padding: 2px;
+  }
+
+  .cs-total {
+    padding: 0 10px;
+  }
+}
+
+/* HP tegak setinggi 620–700 px (360×640) memakai dompet 2×2: uangnya sedikit
+   diperkecil supaya soal "uang paling sedikit" (baris hitungan tambahan) tetap
+   muat tanpa scroll — terukur 17 px sebelumnya. */
+@media (max-aspect-ratio: 4/3) and (min-height: 620px) and (max-height: 700px) {
+  .cs-tile__img.cs-note {
+    height: clamp(52px, min(26vw, 9dvh), 112px);
+  }
+
+  .cs-tile__img.cs-coin {
+    width: clamp(52px, min(26vw, 9dvh), 112px);
+    height: clamp(52px, min(26vw, 9dvh), 112px);
+  }
 }
 
 /* ===== P1 — "hidup" saat disentuh (src/engine/ui/juice.ts) =====
