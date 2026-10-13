@@ -105,6 +105,9 @@ export const PHONEME = {
   // "petir" dibaca Azure seperti nama Inggris "Peter" (laporan pemilik
   // 2026-10-12, Kebun Ilmu: "Ada petir menyambar"). Pepet: pə-tir.
   petir: 'pətir',
+  // "belok" (Kode Kelinci) — laporan pemilik 2026-10-13: e-nya seperti di
+  // "merah", bukan "bélok". Pepet: bə-lok.
+  belok: 'bəlok',
 };
 
 /**
