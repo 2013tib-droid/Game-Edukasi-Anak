@@ -33,6 +33,9 @@
 
 /** kata (huruf kecil) → ejaan lafal. Urutan tidak penting. */
 export const PRONOUNCE = {
+  // "belok" (Kode Kelinci) — pemilik 2026-10-13: e-nya seperti di "merah"
+  // (taling, mé-rah). Sempat salah dipasang PEPET (bəlok) — jangan diulang.
+  belok: 'bélok',
   // Dilaporkan pemilik
   bebek: 'bébék',
 
@@ -106,9 +109,6 @@ export const PHONEME = {
   // "petir" dibaca Azure seperti nama Inggris "Peter" (laporan pemilik
   // 2026-10-12, Kebun Ilmu: "Ada petir menyambar"). Pepet: pə-tir.
   petir: 'pətir',
-  // "belok" (Kode Kelinci) — laporan pemilik 2026-10-13: e-nya seperti di
-  // "merah", bukan "bélok". Pepet: bə-lok.
-  belok: 'bəlok',
   // "wortel" — pemilik 2026-10-13 memutuskan pepet (e seperti di "kelinci"),
   // menjawab keraguan di catatan "SENGAJA TIDAK DIDAFTARKAN" di atas.
   wortel: 'wortəl',

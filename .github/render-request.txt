@@ -1,11 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #42 — Misi Kode: kartu ulangi jadi Kotak Sihir. 8 baris baru, semuanya
-scope misi-kode (kalimat soal l4 baru, kebanyakan diulang, angka belum
-dipilih, kotak kosong, "Ulangi dua/tiga/empat/lima kali"). Nol baris pindah scope.
+render #43 — lafal "belok" dibetulkan ke TALING (bélok, e seperti "merah").
+Render #40 salah memasangnya pepet (bəlok). Baris lamanya ditimpa.
 
-only: misi-kode
+redo: belok
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
-mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris
-dirender dan runnya tetap hijau.
+mencocokkan `^redo:`, jadi menulisnya di tengah kalimat = nol baris dirender
+dan runnya tetap hijau.
