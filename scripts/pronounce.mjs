@@ -70,7 +70,8 @@ export const PRONOUNCE = {
 };
 
 /*
- * SENGAJA TIDAK DIDAFTARKAN: "apel" dan "wortel". Dua kata itu saya tidak
+ * SENGAJA TIDAK DIDAFTARKAN: "apel" (dan dulu "wortel" — sejak 2026-10-13
+ * pemilik memutuskan wortel = pepet, jadi ia pindah ke PHONEME di bawah). Dua kata itu saya tidak
  * yakin taling — banyak penutur mengucapkannya pepet (apəl, wortəl), dan
  * salah menandai justru MERUSAK kata yang selama ini benar. Kata yang tidak
  * terdaftar memakai tebakan bawaan Azure, alias keadaan sekarang: tidak ada
@@ -108,6 +109,9 @@ export const PHONEME = {
   // "belok" (Kode Kelinci) — laporan pemilik 2026-10-13: e-nya seperti di
   // "merah", bukan "bélok". Pepet: bə-lok.
   belok: 'bəlok',
+  // "wortel" — pemilik 2026-10-13 memutuskan pepet (e seperti di "kelinci"),
+  // menjawab keraguan di catatan "SENGAJA TIDAK DIDAFTARKAN" di atas.
+  wortel: 'wortəl',
 };
 
 /**
