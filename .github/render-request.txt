@@ -1,9 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #40 — lafal "belok" (Kode Kelinci) jadi pepet seperti "merah". Kata
-baru di PHONEME (scripts/pronounce.mjs); baris lamanya ditimpa, nol baris baru.
+render #41 — lafal "wortel" jadi pepet (wortəl, e seperti di "kelinci").
+Kata baru di PHONEME (scripts/pronounce.mjs); 17 baris di 8 game ditimpa,
+nol baris baru.
 
-redo: belok
+redo: wortel
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^redo:`, jadi menulisnya di tengah kalimat = nol baris dirender
