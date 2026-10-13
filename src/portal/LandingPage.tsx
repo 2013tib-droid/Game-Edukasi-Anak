@@ -59,14 +59,11 @@ const floaters = [
 ];
 
 /**
- * Groups still in production. Not buyable yet, so no buy button.
+ * Groups still in production. Not buyable yet, so no buy button and no price
+ * (SD Kelas 5 & 6 has none decided). SD Kelas 3 & 4 left this list on
+ * 2026-10-13 — it is a price card above now.
  *
- * Owner's call (2026-10-11): SD Kelas 3 & 4 shows its planned price (Rp59.000
- * struck, Rp39.000) so visitors know what to expect; SD Kelas 5 & 6 has no
- * price decided and stays without one. The −33% chip is rounded DOWN (actual
- * 33.9%) — the shown discount must never exceed the real one.
- *
- * Owner's call (2026-08-07): the name reads "Kelompok SD Kelas 3 & 4", matching
+ * Owner's call (2026-08-07): the name reads "Kelompok SD Kelas 5 & 6", matching
  * the price cards above, and the description carries the subjects ONLY — no age
  * and no per-card "Segera Hadir" badge, since the section heading already says
  * it. This is deliberately different from `groups.json`, where the age does lead
@@ -77,11 +74,6 @@ const soonGroups: {
   desc: string;
   price?: { was: string; now: string; off: string };
 }[] = [
-  {
-    name: 'Kelompok SD Kelas 3 & 4',
-    desc: 'Perkalian, pembagian, membaca cerita',
-    price: { was: 'Rp59.000', now: 'Rp39.000', off: '−33%' },
-  },
   { name: 'Kelompok SD Kelas 5 & 6', desc: 'Pecahan, bangun ruang, soal cerita' },
 ];
 
@@ -188,7 +180,7 @@ function ReasonIcon({ icon, art, cls }: { icon: string; art?: string; cls: strin
 const faqs: { q: string; a: ReactNode }[] = [
   {
     q: 'Bisa dicoba dulu sebelum bayar?',
-    a: 'Bisa. Ketuk "Coba Gratis" — tiap kelompok punya satu game yang bisa dimainkan penuh tanpa daftar atau login: Hutan Hewan (Playgroup & TK) dan Tulis Huruf (Sekolah Dasar).',
+    a: 'Bisa. Ketuk "Coba Gratis" — tiap kelompok punya satu game yang bisa dimainkan penuh tanpa daftar atau login: Hutan Hewan (Playgroup & TK), Tulis Huruf (SD Kelas 1 & 2), dan Toko Kembalian (SD Kelas 3 & 4).',
   },
   {
     q: 'Untuk usia berapa?',
@@ -421,6 +413,19 @@ export default function LandingPage() {
               <span className="pc-off">−40%</span>
             </div>
             <BuyButton group="sd1" owned={owned.includes('sd1')} />
+          </div>
+
+          {/* Owner's call (2026-10-13): SD Kelas 3 & 4 moves from "Segera hadir"
+              to a buyable card. The −33% chip is rounded DOWN (actual 33.9%). */}
+          <div className="pcard">
+            <span className="pc-ribbon">Harga perkenalan</span>
+            <div className="pc-name">Kelompok SD Kelas 3 &amp; 4</div>
+            <div className="pc-row">
+              <span className="pc-was">Rp59.000</span>
+              <span className="pc-now">Rp39.000</span>
+              <span className="pc-off">−33%</span>
+            </div>
+            <BuyButton group="sd2" owned={owned.includes('sd2')} />
           </div>
         </div>
       </section>

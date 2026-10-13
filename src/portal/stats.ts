@@ -36,7 +36,8 @@ export type StatEvent =
   | 'landing_main_click'
   | 'landing_parent_click'
   | 'landing_buy_tk'
-  | 'landing_buy_sd1';
+  | 'landing_buy_sd1'
+  | 'landing_buy_sd2';
 
 /**
  * Satu kali per browser per hari, per peristiwa.

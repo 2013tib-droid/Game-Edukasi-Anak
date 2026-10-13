@@ -37,7 +37,7 @@ setGlobalOptions({ region: 'asia-southeast2', maxInstances: 10 });
 
 /** Kelompok yang dijual. Sengaja diulang di sini: functions itu deployable
  *  terpisah dan tidak boleh ikut mengimpor kode app. */
-const GROUPS = ['tk', 'sd1'] as const;
+const GROUPS = ['tk', 'sd1', 'sd2'] as const;
 type Group = (typeof GROUPS)[number];
 
 /** Batas perangkat per akun (keputusan pemilik, lihat CLAUDE.md). */
@@ -368,6 +368,7 @@ const ALLOWED_EVENTS = new Set([
   // Tombol "Beli" di kartu harga landing — pasangan corong mayar_paid_*.
   'landing_buy_tk',
   'landing_buy_sd1',
+  'landing_buy_sd2',
 ]);
 
 /** Tanggal UTC sebagai `YYYY-MM-DD` — satu dokumen per hari. */
@@ -480,6 +481,7 @@ const ACTIVATION_URL = 'https://petualanganpintar.com/aktivasi';
 const GROUP_TITLES: Record<Group, string> = {
   tk: 'Playgroup dan TK',
   sd1: 'SD Kelas 1 & 2',
+  sd2: 'SD Kelas 3 & 4',
 };
 
 /** HARUS sama dengan ALPHABET di scripts/generate-codes.mjs (tanpa I, L, O, 0, 1). */
@@ -519,8 +521,9 @@ async function groupForProduct(productId: string, productName: string): Promise<
  * cukup: "SD Kelas 3 & 4" yang dipasang di Mayar sebelum kelompok `sd2` ada di
  * kode akan terbaca sebagai `sd1`, dan pembelinya dikirimi kode kelompok yang
  * salah padahal sudah membayar. Karena itu `sd1` hanya kalau namanya menyebut
- * kelas 1 atau 2 dan TIDAK menyebut kelas 3–6. Selebihnya `null` → ditangani manual.
- * Kalau kelompok SD berikutnya dibuat, tambahkan cabangnya di sini.
+ * kelas 1 atau 2 dan TIDAK menyebut kelas 3–6, dan `sd2` hanya kalau menyebut kelas
+ * 3 atau 4 dan TIDAK menyebut kelas lain. Selebihnya `null` → ditangani manual.
+ * Kalau kelompok SD berikutnya (`sd3`) dibuat, tambahkan cabangnya di sini.
  */
 function groupFromName(productName: string): Group | null {
   const name = productName.toLowerCase();
@@ -528,10 +531,13 @@ function groupFromName(productName: string): Group | null {
   const isTk = /\btk\b|playgroup/.test(name);
   if (isTk && !isSd) return 'tk';
   if (isSd && !isTk) {
-    const grades = name.match(/\b[1-6]\b/g) ?? [];
-    const early = grades.some((g) => g === '1' || g === '2');
-    const later = grades.some((g) => Number(g) >= 3);
-    if (early && !later) return 'sd1';
+    const grades: string[] = name.match(/\b[1-6]\b/g) ?? [];
+    const has = (g: string) => grades.includes(g);
+    const early = has('1') || has('2');
+    const mid = has('3') || has('4');
+    const late = has('5') || has('6');
+    if (early && !mid && !late) return 'sd1';
+    if (mid && !early && !late) return 'sd2';
   }
   return null;
 }

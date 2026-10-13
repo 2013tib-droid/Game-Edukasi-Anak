@@ -41,8 +41,12 @@ export type LockMode = 'buka' | 'kunci';
  * Tulis Huruf memperlihatkan anak menulis mengikuti rel pakai jari —
  * kemampuan yang paling kasatmata bedanya dari game gratisan. Alasan
  * lengkapnya di `docs/rencana-trial.md`.
+ *
+ * `toko-kembalian` = demo `sd2` (2026-10-13, rilis SD Kelas 3 & 4): drag-drop,
+ * beda dari demo TK (tap-answer) & SD 1-2 (tracing) —
+ * `docs/rencana-game-sd-kelas-3-4.md`.
  */
-export const FREE_GAME_IDS: readonly string[] = ['hutan-hewan', 'tulis-huruf'];
+export const FREE_GAME_IDS: readonly string[] = ['hutan-hewan', 'tulis-huruf', 'toko-kembalian'];
 
 const envMode = import.meta.env.VITE_LOCK_MODE as string | undefined;
 

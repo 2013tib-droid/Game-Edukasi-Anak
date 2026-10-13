@@ -253,7 +253,7 @@ export default function ActivationPage() {
  */
 function BuyLine({ owned }: { owned: string[] | null }) {
   const links = groupsData.groups
-    .filter((g): g is typeof g & { id: SaleGroup } => g.id === 'tk' || g.id === 'sd1')
+    .filter((g): g is typeof g & { id: SaleGroup } => g.id === 'tk' || g.id === 'sd1' || g.id === 'sd2')
     .filter((g) => !owned?.includes(g.id))
     .map((g) => ({ ...g, url: buyUrl(g.id) }))
     .filter((g) => g.url !== null);
