@@ -277,7 +277,7 @@
   box-sizing: border-box;
 }
 
-.cq-box__body .cq-slot {
+.cq-box__body .cq-slot:not(.cq-slot--full) {
   border-color: #e6b23a;
   background: rgba(255, 255, 255, 0.8);
 }
