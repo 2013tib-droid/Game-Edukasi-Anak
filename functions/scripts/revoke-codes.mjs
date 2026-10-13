@@ -15,7 +15,7 @@
  *
  * Pilihan:
  *   --batch=<nama>   batch yang dibatalkan (wajib)
- *   --group=tk|sd1   batasi ke satu kelompok saja (opsional)
+ *   --group=tk|sd1|sd2   batasi ke satu kelompok saja (opsional)
  *   --dry-run        cuma hitung, jangan ubah apa pun
  *
  * CARA KERJANYA: kode ditandai `used: true` + `revoked: true`, BUKAN
@@ -48,8 +48,8 @@ const group = arg('group');
 const dryRun = arg('dry-run') === true;
 
 if (typeof batch !== 'string' || !batch) fail('--batch=<nama> wajib diisi');
-if (group !== undefined && !['tk', 'sd1'].includes(group)) {
-  fail('--group harus tk atau sd1');
+if (group !== undefined && !['tk', 'sd1', 'sd2'].includes(group)) {
+  fail('--group harus tk, sd1, atau sd2');
 }
 
 const raw = process.env.FIREBASE_SERVICE_ACCOUNT;

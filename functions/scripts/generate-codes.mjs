@@ -16,7 +16,7 @@
  * Langkah lengkapnya untuk Windows: docs/cetak-kode-di-pc.md
  *
  * Pilihan:
- *   --group=tk|sd1   kelompok yang dibuka kode ini (wajib)
+ *   --group=tk|sd1|sd2   kelompok yang dibuka kode ini (wajib)
  *   --count=50       berapa kode dibuat (wajib, maksimal 500 sekali jalan)
  *   --prefix=TK      awalan yang terlihat (bawaan: TANPA awalan)
  *   --batch=juli     penanda batch, untuk pembukuan
@@ -28,7 +28,7 @@ import { writeFileSync } from 'node:fs';
 import { cert, initializeApp, applicationDefault } from 'firebase-admin/app';
 import { FieldValue, getFirestore } from 'firebase-admin/firestore';
 
-const GROUPS = ['tk', 'sd1'];
+const GROUPS = ['tk', 'sd1', 'sd2'];
 
 /**
  * Huruf & angka yang tidak bisa tertukar saat orang tua menyalin dari WhatsApp:
