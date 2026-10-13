@@ -2454,8 +2454,9 @@
 
 .cs-wallet {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 /* Kartu dompet MELEBAR mengisi baris, tapi tak pernah turun baris: dompet
@@ -2493,6 +2494,40 @@
   width: clamp(44px, 12vw, 62px);
   height: clamp(44px, 12vw, 62px);
   display: block;
+}
+
+/* Layar TEGAK: dompet jadi 2×2 dengan uang BESAR (permintaan pemilik
+   2026-10-13 — layar tegak punya sisa tinggi, uang yang dikenali anak justru
+   kecil). Kartu selebar separuh baris; pecahan ganjil tetap di tengah.
+   Tinggi uang ikut lebar DAN tinggi layar (`11dvh`), jadi HP jangkung dapat
+   uang lebih besar tanpa HP pendek ikut scroll. HP dimiringkan & HP pendek
+   (< 620 px, mis. 320×568 — terukur scroll 8–54 px) tetap sebaris. */
+@media (max-aspect-ratio: 4/3) and (min-height: 620px) {
+  .cs-wallet {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .cs-tile {
+    flex: 0 0 calc(50% - 4px);
+    max-width: none;
+    padding: 8px 6px 6px;
+    gap: 4px;
+  }
+
+  .cs-tile__img.cs-note {
+    height: clamp(58px, min(26vw, 11dvh), 112px);
+  }
+
+  .cs-tile__img.cs-coin {
+    width: clamp(58px, min(26vw, 11dvh), 112px);
+    height: clamp(58px, min(26vw, 11dvh), 112px);
+  }
+
+  .cs-tile .cs-money-label {
+    font-size: clamp(17px, 5.4vw, 24px);
+  }
 }
 
 .cs-ghost {
