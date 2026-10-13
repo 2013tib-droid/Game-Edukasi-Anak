@@ -1,6 +1,7 @@
 import type { CodeQuestData, GameLevel, LevelStamp } from '@/engine/core/types';
 import {
   cardCount,
+  LOOP_TIMES,
   parseBoard,
   runProgram,
   shortestPath,
@@ -69,7 +70,7 @@ const FLIPS: { how: 'id' | 'h' | 'v' | 'hv' | 't'; dir: Flip }[] = [
 function mapProg(p: CodeProgram | undefined, f: Flip): CodeProgram | undefined {
   if (!p) return undefined;
   const card = (c: CodeCard): CodeCard => (c === 'ulangi' ? c : f(c));
-  return { main: p.main.map(card), loop: p.loop?.map(f) };
+  return { ...p, main: p.main.map(card), loop: p.loop?.map(f) };
 }
 
 function fail(where: string, why: string): never {
@@ -86,27 +87,37 @@ export function codeLevel(narration: string, cast: CodeCast, spec: CodeSpec, whe
   const path = shortestPath(board);
   if (!path) fail(where, 'papan tak bisa diselesaikan');
 
-  const times = spec.loop?.times ?? 1;
+  const times = spec.loop?.times;
   let solution = spec.solution;
   if (spec.loop && !solution) fail(where, 'level ber-ulangi wajib menulis `solution`');
   if (!solution) solution = { main: path };
+  if (times) solution = { ...solution, times };
+  const given = spec.given && times ? { ...spec.given, times } : spec.given;
   const slots = spec.slots ?? (spec.loop ? solution.main.length + (spec.spare ?? 0) : path.length + (spec.spare ?? 1));
 
   const check = (p: CodeProgram, what: string) => {
     if (p.main.length > slots) fail(where, `${what} lebih panjang dari rel utama`);
     if ((p.loop?.length ?? 0) > (spec.loop?.slots ?? 0)) fail(where, `${what}: rel ulangi kepanjangan`);
     if (!spec.loop && (p.main.includes('ulangi') || p.loop)) fail(where, `${what} memakai ulangi tanpa rel ulangi`);
+    if (p.main.filter((c) => c === 'ulangi').length > 1) fail(where, `${what}: lebih dari satu kotak ulangi`);
   };
   check(solution, 'jawaban contoh');
-  if (runProgram(board, solution, times).outcome !== 'sampai') fail(where, 'jawaban contoh tidak sampai');
+  if (runProgram(board, solution).outcome !== 'sampai') fail(where, 'jawaban contoh tidak sampai');
   if (spec.loop) {
+    // Anak memilih angkanya sendiri: angka lain WAJIB gagal, kalau tidak
+    // soal ini tak melatih menghitung ulangan sama sekali.
+    for (const t of LOOP_TIMES) {
+      if (t !== times && runProgram(board, { ...solution, times: t }).outcome === 'sampai') {
+        fail(where, `ulangi ×${t} juga sampai — angka ulangannya tak perlu dihitung`);
+      }
+    }
     if (path.length <= slots) fail(where, 'rel utama cukup tanpa ulangi — kartu ulangi tak terasa perlu');
     if (!solution.main.includes('ulangi')) fail(where, 'jawaban contoh tidak memakai ulangi');
   }
-  if (spec.given) {
-    check(spec.given, 'kode perbaiki');
-    if (runProgram(board, spec.given, times).outcome === 'sampai') fail(where, 'kode "perbaiki" ternyata sudah benar');
-    if (cardCount(spec.given) === 0) fail(where, 'kode perbaiki kosong');
+  if (given) {
+    check(given, 'kode perbaiki');
+    if (runProgram(board, given).outcome === 'sampai') fail(where, 'kode "perbaiki" ternyata sudah benar');
+    if (cardCount(given) === 0) fail(where, 'kode perbaiki kosong');
   }
 
   const data: CodeQuestData = {
@@ -117,7 +128,7 @@ export function codeLevel(narration: string, cast: CodeCast, spec: CodeSpec, whe
     pickupItem: cast.pickup,
     slots,
     loop: spec.loop,
-    given: spec.given,
+    given,
     solution,
   };
   return { id: '', narration, data };

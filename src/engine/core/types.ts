@@ -1456,7 +1456,11 @@ export interface CodeQuestData {
   pickupItem?: string;
   /** Banyak tempat kartu di rel utama. */
   slots: number;
-  /** Rel ULANGI: isinya dijalankan `times` kali tiap kartu 🔁 di rel utama. */
+  /**
+   * KOTAK ULANGI (kartu 🔁 di rel): `slots` = tempat panah di dalam kotak,
+   * `times` = banyak ulangan YANG BENAR. Anak memilih angkanya sendiri di
+   * kotak; `times` cuma dipakai builder & petunjuk P2, tak pernah ditampilkan.
+   */
   loop?: { times: 2 | 3 | 4; slots: number };
   /** Mode PERBAIKI: rel sudah berisi kode ini (ada yang salah). */
   given?: CodeProgram;

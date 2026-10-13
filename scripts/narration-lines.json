@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-13",
-  "count": 2053,
-  "chars": 85721,
+  "count": 2060,
+  "chars": 85932,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -12424,8 +12424,17 @@
       ]
     },
     {
-      "key": "c31f963e8ce7",
-      "text": "Ini kartu ulangi! Isinya dijalankan berkali-kali. Isi kotak ulangi dengan panah.",
+      "key": "84258718b14a",
+      "text": "Berapa kali diulang? Sentuh angka di kotak ulangi.",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "f34374f8005c",
+      "text": "Ini kotak ulangi! Masukkan panah ke dalamnya, lalu pilih berapa kali diulang.",
       "scope": "misi-kode",
       "voice": "gadis",
       "games": [
@@ -12442,8 +12451,26 @@
       ]
     },
     {
+      "key": "1285e2cbbc7b",
+      "text": "Kebanyakan diulang, jadi kelewatan. Hitung lagi, ya!",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
       "key": "49622d394c5f",
       "text": "Kode ini ada yang salah. Jalankan dulu, lalu perbaiki!",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "cd2a5ec29ccc",
+      "text": "Kotak ulangi masih kosong. Isi dengan panah, ya!",
       "scope": "misi-kode",
       "voice": "gadis",
       "games": [
@@ -12489,6 +12516,42 @@
     {
       "key": "2c7745f4932b",
       "text": "Ulangi",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "c7c2ea85dfd2",
+      "text": "Ulangi dua kali",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "bea57102129a",
+      "text": "Ulangi empat kali",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "8157afc57bba",
+      "text": "Ulangi lima kali",
+      "scope": "misi-kode",
+      "voice": "gadis",
+      "games": [
+        "misi-kode"
+      ]
+    },
+    {
+      "key": "d72742927bd9",
+      "text": "Ulangi tiga kali",
       "scope": "misi-kode",
       "voice": "gadis",
       "games": [

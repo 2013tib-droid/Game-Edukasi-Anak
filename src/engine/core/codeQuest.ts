@@ -11,14 +11,24 @@
  */
 
 export type CodeDir = 'atas' | 'kanan' | 'bawah' | 'kiri';
-/** Kartu di rel utama. `ulangi` menjalankan rel ulangi sebanyak `loop.times`. */
+/**
+ * Kartu di rel. `ulangi` = KOTAK SIHIR (2026-10-13, menggantikan rel ulangi
+ * terpisah): kotak di rel yang sama, berisi panah (`loop`) yang dijalankan
+ * `times` kali. Banyaknya ulangan DIPILIH ANAK (diketuk di kotaknya), bukan
+ * ditentukan soal — anak harus menghitung sendiri.
+ */
 export type CodeCard = CodeDir | 'ulangi';
 
 export interface CodeProgram {
   main: CodeCard[];
-  /** Isi rel ulangi (hanya level ber-`loop`). */
+  /** Isi kotak ulangi (hanya level ber-`loop`; paling banyak satu kotak). */
   loop?: CodeDir[];
+  /** Banyak ulangan kotak. `null`/kosong = anak belum memilih angkanya. */
+  times?: number | null;
 }
+
+/** Angka yang bisa dipilih di kotak ulangi (diketuk bergiliran). */
+export const LOOP_TIMES = [2, 3, 4, 5] as const;
 
 export interface Cell {
   r: number;
@@ -62,6 +72,16 @@ export const CODE_LINES = {
   short: 'Belum sampai. Tambah kodenya, ya!',
   missing: 'Masih ada yang belum diambil. Coba lagi, ya!',
   empty: 'Susun kodenya dulu, ya!',
+  /** Kotak ulangi dijalankan kebanyakan: tokoh melewati tujuannya. */
+  over: 'Kebanyakan diulang, jadi kelewatan. Hitung lagi, ya!',
+  noTimes: 'Berapa kali diulang? Sentuh angka di kotak ulangi.',
+  loopEmpty: 'Kotak ulangi masih kosong. Isi dengan panah, ya!',
+  times: {
+    2: 'Ulangi dua kali',
+    3: 'Ulangi tiga kali',
+    4: 'Ulangi empat kali',
+    5: 'Ulangi lima kali',
+  } as Record<number, string>,
 };
 
 export function parseBoard(grid: string[]): Board {
@@ -111,7 +131,8 @@ export interface TraceStep {
   got?: number;
 }
 
-export type RunOutcome = 'sampai' | 'nabrak' | 'kurang' | 'belum-ambil' | 'kosong';
+/** `lewat` = tujuan sempat dicapai di tengah kotak ulangi, tapi ulangannya kebanyakan. */
+export type RunOutcome = 'sampai' | 'nabrak' | 'kurang' | 'belum-ambil' | 'kosong' | 'lewat';
 
 export interface RunResult {
   steps: TraceStep[];
@@ -123,25 +144,32 @@ const MAX_STEPS = 80;
 
 /**
  * Jalankan program. Berhenti begitu tokoh tiba di tujuan dengan SEMUA barang
- * terambil (sisa kartu diabaikan — anak TK tak dihukum karena satu kartu
- * lebih), atau begitu menabrak. Tujuan yang dilewati sebelum semua barang
- * terambil tidak menghentikan apa pun.
+ * terambil (sisa kartu di rel diabaikan — anak TK tak dihukum karena satu
+ * kartu lebih), atau begitu menabrak. Tujuan yang dilewati sebelum semua
+ * barang terambil tidak menghentikan apa pun.
+ *
+ * KECUALI di dalam kotak ulangi: tiba di tujuan sebelum ulangan terakhir
+ * selesai TIDAK menghentikan tokoh — ia jalan terus dan hasilnya `lewat`.
+ * Kalau tidak, anak cukup memilih angka terbesar dan tak pernah menghitung.
  */
-export function runProgram(board: Board, prog: CodeProgram, times = 1): RunResult {
+export function runProgram(board: Board, prog: CodeProgram): RunResult {
   const steps: TraceStep[] = [];
   let pos = board.start;
   const got = new Set<number>();
   let outcome: RunOutcome | null = null;
+  let passed = false;
+  const times = prog.times ?? 1;
+  const body = prog.loop ?? [];
 
   const done = () => got.size === board.pickups.length && sameCell(pos, board.goal);
 
-  const move = (dir: CodeDir, rail: 'main' | 'loop', index: number, via?: number): boolean => {
+  const move = (dir: CodeDir, rail: 'main' | 'loop', index: number, via?: number, lastOfLoop = true): boolean => {
     if (steps.length >= MAX_STEPS) return false;
     const d = DELTA[dir];
     const to = { r: pos.r + d.r, c: pos.c + d.c };
     if (!open(board, to)) {
       steps.push({ rail, index, via, dir, from: pos, to: pos, bump: true });
-      outcome = 'nabrak';
+      outcome = passed ? 'lewat' : 'nabrak';
       return false;
     }
     const step: TraceStep = { rail, index, via, dir, from: pos, to };
@@ -153,6 +181,10 @@ export function runProgram(board: Board, prog: CodeProgram, times = 1): RunResul
     steps.push(step);
     pos = to;
     if (done()) {
+      if (rail === 'loop' && !lastOfLoop) {
+        passed = true;
+        return true;
+      }
       outcome = 'sampai';
       return false;
     }
@@ -165,14 +197,15 @@ export function runProgram(board: Board, prog: CodeProgram, times = 1): RunResul
     const card = prog.main[i]!;
     if (card === 'ulangi') {
       for (let t = 0; t < times; t++) {
-        for (let j = 0; j < (prog.loop ?? []).length; j++) {
-          if (!move(prog.loop![j]!, 'loop', j, i)) break outer;
+        for (let j = 0; j < body.length; j++) {
+          const last = t === times - 1 && j === body.length - 1;
+          if (!move(body[j]!, 'loop', j, i, last)) break outer;
         }
       }
     } else if (!move(card, 'main', i)) break;
   }
 
-  if (!outcome) outcome = sameCell(pos, board.goal) ? 'belum-ambil' : 'kurang';
+  if (!outcome) outcome = passed ? 'lewat' : sameCell(pos, board.goal) ? 'belum-ambil' : 'kurang';
   return { steps, outcome };
 }
 

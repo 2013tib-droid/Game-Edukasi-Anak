@@ -23,7 +23,9 @@ import { codeSlot, type CodeCast } from '@/games/codeLevels';
  * - Level ber-ulangi: rel utama sengaja LEBIH PENDEK dari jalan terpendek
  *   (dicek builder), jadi kartu ulangi benar-benar dibutuhkan, bukan hiasan.
  * - Kura-kura menghadap kanan di seninya (`turtle`); dibalik saat ke kiri.
- * - Narasi tanpa angka; banyaknya ulangan tertulis di kartu (×3).
+ * - KOTAK SIHIR (2026-10-13): banyaknya ulangan DIPILIH ANAK di kotaknya
+ *   (×2…×5), `loop.times` cuma jawaban yang benar. Builder memastikan angka
+ *   lain gagal (kurang = belum sampai, lebih = kelewatan). Narasi tanpa angka.
  */
 
 // Tujuan = BUNGA, bukan seni `park`: taman itu gambar lebar (bangku + rumput)
@@ -71,7 +73,7 @@ const config: GameConfig<'code-quest'> = {
         given: { main: ['kanan', 'kanan', 'bawah', 'bawah', 'kanan', 'bawah'] },
       },
     ]),
-    codeSlot('l4', STAMP.l4!, 'Ini kartu ulangi! Isinya dijalankan berkali-kali. Isi kotak ulangi dengan panah.', CAST, [
+    codeSlot('l4', STAMP.l4!, 'Ini kotak ulangi! Masukkan panah ke dalamnya, lalu pilih berapa kali diulang.', CAST, [
       {
         grid: ['.....', 'S...G', '.....'],
         loop: { times: 4, slots: 1 },

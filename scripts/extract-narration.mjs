@@ -200,7 +200,10 @@ for (const config of mod.configs) {
     if ((level.template ?? config.template) === 'code-quest') {
       const L = mod.CODE_LINES;
       for (const d of ['atas', 'kanan', 'bawah', 'kiri']) add(L.card[d], config.id, voice);
-      if (level.data.loop) add(L.card.ulangi, config.id, voice);
+      if (level.data.loop) {
+        add(L.card.ulangi, config.id, voice);
+        for (const line of [L.over, L.noTimes, L.loopEmpty, ...Object.values(L.times)]) add(line, config.id, voice);
+      }
       for (const line of [L.bump, L.short, L.empty]) add(line, config.id, voice);
       if (level.data.grid.some((row) => row.includes('*'))) add(L.missing, config.id, voice);
       continue;
