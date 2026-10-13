@@ -348,8 +348,8 @@ suka ungu).
 
 | id file | Baris prompt |
 |---|---|
-| `kode-kelinci` | Buatkan: tiga kartu mainan persegi yang membulat berjajar sedikit miring seperti kipas — kartu biru muda bergambar panah ke atas, kartu hijau mint bergambar panah ke kanan, kartu peach bergambar panah ke bawah, panahnya putih tebal. Di depan kartu-kartu itu satu wortel kecil oranye berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Hanya wortel itu yang berwajah. Tanpa kelinci, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
-| `misi-kode` | Buatkan: satu papan permainan kecil berpetak 3 kali 3 warna hijau mint dan hijau muda berselang-seling, dilihat sedikit dari atas. Di atas papan, satu jejak titik-titik oranye berbelok dari pojok kiri bawah ke satu stroberi merah kecil berwajah imut di pojok kanan atas. Di depan papan menempel satu kartu kuning krem bergambar panah melingkar (lambang ulangi) warna coklat. Hanya stroberi itu yang berwajah. Tanpa kura-kura, tanpa angka, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `kode-kelinci` | Buatkan: tiga kartu mainan persegi yang membulat dan mengkilap, bertumpuk sedikit miring seperti kipas — satu kartu biru muda, satu hijau mint, satu oranye lembut. Tiap kartu bergambar satu panah putih tebal, dan ketiga panah itu menunjuk ke arah yang berbeda-beda. Di depan tumpukan kartu itu berdiri satu wortel kecil oranye berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Wajahnya hanya di wortel, tidak di kartu. Tanpa kelinci, tanpa hewan lain, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `misi-kode` | Buatkan: satu papan permainan kecil berpetak tiga kali tiga, petaknya hijau mint dan hijau muda berselang-seling, dilihat sedikit dari atas. Di atas papan ada jejak titik-titik oranye yang berbelok sekali, dari satu pojok papan menuju pojok seberangnya, dan di ujung jejak itu duduk satu stroberi merah kecil berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Di depan papan bersandar satu kartu kuning krem mengkilap bergambar panah melingkar putih tebal (lambang ulangi). Wajahnya hanya di stroberi. Tanpa kura-kura, tanpa hewan lain, tanpa angka, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 
 - **Tokohnya SENGAJA tidak digambar.** Kelinci & kura-kura sudah punya seni di
   `public/assets/items/` dan dipakai di dalam game; ikon yang memuat hewan yang sama
@@ -358,6 +358,10 @@ suka ungu).
 - Panah di kartu WAJIB putih tebal di atas warna pekat; panah tipis jadi garis halus di
   kotak ±116 px. Warna kartunya mengikuti warna kartu di game (atas biru, kanan hijau,
   bawah oranye, ulangi kuning).
+- **Revisi 2026-10-13:** kata "ke atas/ke kanan/ke bawah" dan "pojok kiri bawah/kanan
+  atas" DICABUT dari baris prompt (pelajaran 1 — Gemini menuliskannya di gambar), dan
+  kartunya dibuat mengkilap mengikuti tombol baru di layar game. Warna "ungu muda" di
+  BLOK GAYA abaikan untuk dua ikon ini.
 - Pasang seperti biasa: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`,
   periksa lubang terkurung di lingkaran panah ulangi, lalu tambah `pic: '<id>',` di
   entri registry-nya.
