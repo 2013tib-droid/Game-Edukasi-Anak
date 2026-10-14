@@ -130,6 +130,36 @@ Jangan minta bingkai/lingkaran di gambar — latar tetap putih polos.
 
 ---
 
+## ⭐ KUNCI GAYA MULAI `mascot-12` (WAJIB — ditulis sesudah `mascot-11` jadi, 2026-10-14)
+
+`mascot-10` & `mascot-11` jadi PATOKAN. Dua pelajaran yang mengikat:
+
+1. **Gemini cenderung membuat naga KURUS/ramping.** Tiap prompt wajib menyebut
+   "chubby, round belly, thick short legs" DAN melarang "slim, skinny, long
+   thin neck/legs". Naga TUMBUH lewat ukuran, zirah & sayap — **bukan dengan
+   memanjangkan leher atau kaki**.
+2. **Gaya "mahal" = hijau MUTIARA + detail EMAS** (`mascot-11`): kulit mint
+   berkilau seperti mutiara, tanduk/cakar/zirah/sisik punggung emas. Badan
+   tetap mint (teman yang sama). **Badan emas penuh HANYA di `mascot-20`.**
+
+Cara kirim: **lampirkan gambar tahap SEBELUMNYA** (mis. `mascot-11` untuk
+membuat 12), lalu tempel blok ini + baris tahapnya:
+
+> Use the attached dragon as the SAME character, one stage older and a bit
+> bigger. BODY: very chubby, plump, round and squishy like a premium plush
+> toy — big round belly, chubby cheeks, thick short stubby legs, short thick
+> arms. NOT slim, NOT skinny, NO long thin neck, NO long thin legs. LOOK:
+> pearlescent shimmering mint-green skin with a soft gold sheen, cream belly,
+> polished gold horns and claws, gold spine scales, gold armor that is grander
+> than the previous stage. Big friendly eyes, happy proud smile. STYLE: soft
+> 3D render, glossy pastel shading, no black outline, NO purple. Full body,
+> centered, wings folded close to the body, plain pure white background, no
+> floor shadow, no frame, no circle, no text, nothing floating far from the
+> body. **This stage:** _[tempel baris tahapnya dari daftar bahasa Inggris di bawah]_
+
+Kalau hasilnya masih kurus, kirim susulan: *"Make it much chubbier: rounder
+belly, fatter cheeks, shorter and thicker legs. Keep everything else the same."*
+
 ## Baris Prompt per Tahap
 
 | File | Baris prompt untuk dikirim |
@@ -140,14 +170,14 @@ Jangan minta bingkai/lingkaran di gambar — latar tetap putih polos.
 | `mascot-10` | Wujud: anak naga, sedikit lebih tinggi dari gambar rujukan, sayap lebih besar. Naga yang sama, kini **Naga Pelangi**: sayapnya bergradasi warna pelangi pastel, ada surai kecil warna pelangi di sepanjang punggungnya, dan pelangi lembut kecil melengkung di belakang bahunya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
 | `mascot-11` | **GEMOY, bukan kurus** (Gemini cenderung membuat naga ramping — sebut "chubby, round belly, thick short legs" + larang "slim, skinny, long thin neck", dan lampirkan `mascot-10` sebagai acuan). Wujud: anak naga, sayap lebih besar. Naga yang sama, kini **Naga Bintang**: tubuhnya bertabur kerlip bintang kecil keemasan, ada satu bintang besar bercahaya di dahinya, dan sayapnya seperti langit malam berbintang warna biru tua dengan bintik emas (bukan ungu). Warna badan tetap hijau mint. Tetap ceria dan ramah. |
 | `mascot-12` | Wujud: anak naga yang mulai gagah. Naga yang sama, kini **Naga Mahkota**: memakai mahkota emas yang terlihat jelas di kepalanya dan jubah kecil merah di punggungnya. Warna badan tetap hijau mint. Tetap ceria dan ramah, terlihat bangga tapi lucu. |
-| `mascot-13` | Wujud: naga REMAJA — leher & ekor lebih panjang, sayap lebar, pelindung bahu kecil. Naga yang sama, kini **Naga Samudra**: sayapnya berbentuk sirip besar biru laut, ada gelombang air biru tegas melingkar di ekornya, dan beberapa gelembung besar menempel dekat badannya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
+| `mascot-13` | Wujud: naga REMAJA — badan lebih BESAR (tetap gemoy, JANGAN memanjangkan leher/kaki), sayap lebar, pelindung bahu kecil. Naga yang sama, kini **Naga Samudra**: sayapnya berbentuk sirip besar biru laut, ada gelombang air biru tegas melingkar di ekornya, dan beberapa gelembung besar menempel dekat badannya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
 | `mascot-14` | Wujud: naga remaja, berdiri gagah. Naga yang sama, kini **Naga Rimba**: sayapnya berupa daun-daun besar hijau tua, ada sulur tanaman melilit lembut di ekornya, dan mahkota kecil dari daun di kepalanya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
 | `mascot-15` | Wujud: naga remaja, berdiri gagah. Naga yang sama, kini **Naga Bunga**: sayapnya seperti kelopak bunga besar merah muda, ada rangkaian bunga merah muda dan kuning di lehernya seperti kalung, dan satu bunga besar di atas kepalanya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
 | `mascot-16` | Wujud: naga remaja yang hampir dewasa, pelindung dada kecil berkilau. Naga yang sama, kini **Naga Matahari**: ada lingkaran sinar matahari emas-oranye yang tegas menempel di belakang kepalanya seperti surai singa, sayapnya keemasan, dan badannya bercahaya hangat. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
-| `mascot-17` | Wujud: naga MUDA PERKASA — badan besar, sayap terbentang megah, zirah emas ringan. Naga yang sama, kini **Naga Bulan**: ada bulan sabit perak-kuning besar di dahinya, sayapnya biru tua seperti langit malam dengan tepi perak, dan ia memeluk bantal kecil berbentuk awan. Warna badan tetap hijau mint. Tetap ceria dan ramah (bukan mengantuk sedih). |
+| `mascot-17` | Wujud: naga MUDA PERKASA — badan besar & gempal (tetap gemoy), sayap besar tapi merapat, zirah emas ringan. Naga yang sama, kini **Naga Bulan**: ada bulan sabit perak-kuning besar di dahinya, sayapnya biru tua seperti langit malam dengan tepi perak, dan ia memeluk bantal kecil berbentuk awan. Warna badan tetap hijau mint. Tetap ceria dan ramah (bukan mengantuk sedih). |
 | `mascot-18` | Wujud: naga muda perkasa, zirah emas ringan. Naga yang sama, kini **Naga Komet**: ekornya menjadi ekor komet panjang berwarna biru dan oranye menyala yang melengkung di belakangnya (tidak melebar ke samping), dan sayapnya bergaris biru-emas. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
 | `mascot-19` | Wujud: naga muda perkasa, zirah emas berkilau. Naga yang sama, kini **Naga Cahaya**: seluruh tubuhnya bercahaya putih-keemasan lembut, sayapnya seperti cahaya emas berlapis, dan ada lingkaran cahaya emas tipis di atas kepalanya. Warna badan tetap hijau mint, tepi tubuh tetap jelas. Tetap ceria dan ramah. |
-| `mascot-20` | Wujud: PALING BESAR dan paling megah dari semuanya, zirah emas penuh. Naga yang sama, kini **Naga Legenda**, tahap tertinggi: memakai mahkota emas berhias permata merah-biru-hijau, sayap besar keemasan, jubah merah kecil, dan memegang tongkat kecil berujung bintang. Warna badan tetap hijau mint. Tetap ceria dan ramah, terlihat bangga tapi lucu. |
+| `mascot-20` | Wujud: PALING BESAR dan paling megah dari semuanya, zirah emas penuh. Naga yang sama, kini **Naga Legenda**, tahap tertinggi: memakai mahkota emas berhias permata merah-biru-hijau, sayap besar keemasan, jubah merah kecil, dan memegang tongkat kecil berujung bintang. **Badannya berubah jadi EMAS mutiara berkilau** — satu-satunya tahap berbadan emas, hadiah puncak (keputusan pemilik 2026-10-14). Mata, wajah, perut krem tetap sama. Tetap ceria dan ramah, terlihat bangga tapi lucu. |
 
 ### Kalau lebih suka prompt bahasa Inggris
 
@@ -173,7 +203,7 @@ pesan, tetap dengan `mascot-6.webp` terlampir:
 > - `mascot-17` — big silver-yellow crescent moon on its forehead, dark-blue night-sky wings with silver edges, hugging a small cloud pillow. Happy, not sad.
 > - `mascot-18` — tail becomes a long blue-and-orange glowing comet tail curving behind it (not spreading sideways), blue-gold striped wings.
 > - `mascot-19` — whole body softly glowing white-gold, layered golden light wings, thin golden halo above its head; body edges still clear.
-> - `mascot-20` — final legendary stage: the biggest and grandest of all, full golden armor, golden crown with red/blue/green gems, large golden wings, small red cape, holding a little star-tipped wand. Proud but still cute.
+> - `mascot-20` — final legendary stage: the biggest and grandest of all, full golden armor, golden crown with red/blue/green gems, large golden wings, small red cape, holding a little star-tipped wand. Its body turns shimmering pearl GOLD (the only gold-bodied stage). Same face, eyes and cream belly. Proud but still cute.
 >
 > Never use purple.
 ---
