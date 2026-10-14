@@ -5,6 +5,7 @@ import type { Denom } from '@/engine/core/types';
 import { DENOM_ITEM, fewestPieces, formatRp, isCoin } from '@/engine/core/money';
 import { sfx } from '@/engine/audio/sound';
 import ItemPic from '@/engine/ui/ItemPic';
+import Scene from '@/engine/ui/Scene';
 
 /**
  * Kasir (Toko Kembalian, sd2): tarik uang dari dompet ke SATU baki sampai
@@ -23,10 +24,32 @@ import ItemPic from '@/engine/ui/ItemPic';
  */
 
 const TRAY: Record<'laci' | 'tangan' | 'celengan', { icon: string; label: string; action: string }> = {
-  laci: { icon: '🗄️', label: 'Laci', action: '✅ Bayar' },
-  tangan: { icon: '🤲', label: 'Kembalian', action: '✅ Berikan' },
-  celengan: { icon: '🐷', label: 'Celengan', action: '✅ Simpan' },
+  laci: { icon: '🗄️', label: 'Laci', action: 'Bayar' },
+  tangan: { icon: '🤲', label: 'Kembalian', action: 'Berikan' },
+  celengan: { icon: '🐷', label: 'Celengan', action: 'Simpan' },
 };
+
+/** Laci kasir digambar sendiri: emoji 🗄️ tampil sebagai lemari arsip abu-abu. */
+function DrawerIcon() {
+  return (
+    <svg className="cs-tray__icon" viewBox="0 0 40 40" aria-hidden>
+      <rect x="4" y="3" width="32" height="34" rx="5" fill="#4a6fa5" />
+      <rect x="7" y="6" width="26" height="13" rx="3" fill="#7fa7dc" />
+      <rect x="7" y="21" width="26" height="13" rx="3" fill="#7fa7dc" />
+      <rect x="15" y="11" width="10" height="3.5" rx="1.75" fill="#eef4ff" />
+      <rect x="15" y="26" width="10" height="3.5" rx="1.75" fill="#eef4ff" />
+      <circle cx="30" cy="9" r="1.4" fill="#8ee08e" />
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg className="cs-submit__check" viewBox="0 0 24 24" aria-hidden>
+      <path d="M5 12.5 10 17.5 19 7" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
 
 interface Drag {
   denom: Denom;
@@ -166,6 +189,8 @@ export default function Cashier({ level, onCorrect, onWrong }: TemplateProps<'ca
 
   return (
     <>
+      {/* Latar padang engine (SVG, nol unduhan): toko di tepi taman. */}
+      <Scene id="padang" />
       <div className="game-prompt">{level.narration}</div>
       <div className="game-area cs-area">
         {cue ? (
@@ -204,7 +229,8 @@ export default function Cashier({ level, onCorrect, onWrong }: TemplateProps<'ca
         >
           <div className="cs-tray__head">
             <span className="cs-tray__name">
-              {tray.icon} {tray.label}
+              {data.tray === 'laci' ? <DrawerIcon /> : <span className="cs-tray__emoji">{tray.icon}</span>}
+              <span className="cs-tray__label">{tray.label}</span>
             </span>
             <span className="cs-total" aria-live="polite">
               {formatRp(total)}
@@ -225,6 +251,7 @@ export default function Cashier({ level, onCorrect, onWrong }: TemplateProps<'ca
                   <button
                     key={d}
                     type="button"
+                    data-denom={d}
                     className="cs-stack"
                     onClick={() => removeOne(d)}
                     aria-label={`Kembalikan ${formatRp(d)}`}
@@ -240,6 +267,7 @@ export default function Cashier({ level, onCorrect, onWrong }: TemplateProps<'ca
                 HP 320×568 tak punya sisa tinggi untuk itu (terukur). */}
             {!auto && (
               <button type="button" className="btn cs-submit" onClick={submit} disabled={pieces.length === 0 || solved}>
+                <CheckIcon />
                 {tray.action}
               </button>
             )}
@@ -251,6 +279,7 @@ export default function Cashier({ level, onCorrect, onWrong }: TemplateProps<'ca
             <div
               key={d}
               className="cs-tile"
+              data-denom={d}
               role="button"
               tabIndex={0}
               aria-label={formatRp(d)}
