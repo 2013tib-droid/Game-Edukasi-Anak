@@ -165,8 +165,18 @@
   overflow: visible;
 }
 .mascot-panel__img {
-  position: relative;
+  /* Absolute, not a grid item: inside the grid `height: 92%` never resolved,
+     so tall art grew past the nest (83px in a 72px avatar) and over the ring. */
+  position: absolute;
+  inset: 4%;
+  width: 92%;
+  height: 92%;
   z-index: 1;
+  /* The avatar must stay `overflow: visible` for the Legenda/Mitos halo, so
+     the art is clipped to the nest circle here instead. The img is 92% of the
+     avatar: 50 / 92 = 54.35% of the img = exactly the avatar's own circle, so
+     wingtips and feet never spill over the rank ring. */
+  clip-path: circle(54.35% at 50% 50%);
 }
 
 /* Perunggu (stage 6): first dragon — a warm bronze ring. */
