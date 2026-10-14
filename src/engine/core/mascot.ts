@@ -50,7 +50,7 @@ export const MASCOTS: MascotStage[] = [
   // Art pending — the same dragon, growing more magnificent each stage.
   // Prompts: docs/prompt-maskot-naga.md.
   { min: 340, pic: 'mascot-10', emoji: '🌈', name: 'Naga Pelangi' },
-  { min: 440, emoji: '🌟', name: 'Naga Bintang' },
+  { min: 440, pic: 'mascot-11', emoji: '🌟', name: 'Naga Bintang' },
   { min: 555, emoji: '👑', name: 'Naga Mahkota' },
   { min: 640, emoji: '🌊', name: 'Naga Samudra' },
   { min: 730, emoji: '🍃', name: 'Naga Rimba' },
