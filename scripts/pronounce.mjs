@@ -112,6 +112,9 @@ export const PHONEME = {
   // "wortel" — pemilik 2026-10-13 memutuskan pepet (e seperti di "kelinci"),
   // menjawab keraguan di catatan "SENGAJA TIDAK DIDAFTARKAN" di atas.
   wortel: 'wortəl',
+  // "deras" (Kebun Ilmu, Detektif Bacaan) — pemilik 2026-10-14: e seperti di
+  // "belum" (pepet, də-ras).
+  deras: 'dəras',
 };
 
 /**

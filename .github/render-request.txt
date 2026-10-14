@@ -1,9 +1,8 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #43 — lafal "belok" dibetulkan ke TALING (bélok, e seperti "merah").
-Render #40 salah memasangnya pepet (bəlok). Baris lamanya ditimpa.
+render #44 — lafal "deras" jadi PEPET (dəras, e seperti "belum").
 
-redo: belok
+redo: deras
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^redo:`, jadi menulisnya di tengah kalimat = nol baris dirender
