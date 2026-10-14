@@ -40,7 +40,7 @@ on:
         description: 'Kelompok yang dibuka kode ini'
         required: true
         type: choice
-        options: [tk, sd1]
+        options: [tk, sd1, sd2]
       count:
         description: 'Berapa kode dibuat (1-500)'
         required: true
