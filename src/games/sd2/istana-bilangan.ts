@@ -16,7 +16,7 @@ import { terbilang } from '@/games/numbers';
  * membandingkan, dan pembulatan sampai 999.
  *
  * Anak MEMBANGUN bilangan dengan balok ratusan-puluhan-satuan di tiga menara
- * istana Raja Singa (template `place-value`), bukan cuma memilih kartu "347".
+ * istana Singa (template `place-value`), bukan cuma memilih kartu "347".
  *
  * SLOT (urutan TETAP — kelas 3 dulu, kelas 4 dari slot 7; keputusan pemilik
  * 2026-10-06). Tanpa `sessionLevels`; variasinya dari kolam varian per slot.
@@ -31,19 +31,19 @@ import { terbilang } from '@/games/numbers';
  *   l9 MISI BESAR "pinjam": ambil puluhan dari istana yang cuma berisi
  *      ratusan → pelat ratusan harus dipecah dulu
  *
- * - Proyek sesi "Istana Raja Singa": tiap level menambah satu bagian istana.
+ * - Proyek sesi "Istana Singa": tiap level menambah satu bagian istana.
  * - Petunjuk bertingkat P2 (`hints`) dinyalakan — keputusan pemilik: hanya
  *   untuk game `sd2` baru. Visual saja, nol kalimat narasi tambahan.
  * - Batas bilangan `sd2` = 1.000; game ini berhenti di 999 (template-nya
  *   menolak balok yang melewati 999).
- * - Narasi TANPA digit. Bilangan soal hanya tertulis di layar (gelembung Raja
+ * - Narasi TANPA digit. Bilangan soal hanya tertulis di layar (gelembung
  *   Singa, papan persamaan, bukit), jadi kebanyakan kalimat dipakai bersama
  *   semua varian satu slot — sedikit rekaman.
  * - Pengecoh dari kesalahan khas (bagian 2 dokumen rencana): ANGKA TERTUKAR
  *   TEMPAT (347 ↔ 374), NOL YANG HILANG (307 dibaca 37), nilai angka = angka
  *   itu sendiri (4 di 347 = "4"), tempat yang salah (400), dan pembulatan ke
  *   lembah yang salah / ke tempat yang salah.
- * - Raja Singa = seni `lion` yang sudah ada. Istananya digambar engine.
+ * - Singa = seni `lion` yang sudah ada. Istananya digambar engine.
  */
 
 type Level = MixedLevel;
@@ -87,7 +87,7 @@ function build(target: number): Level {
   inRange(target);
   return {
     id: '',
-    narration: 'Raja Singa memesan bilangan ini. Bangun istananya dengan balok!',
+    narration: 'Singa memesan bilangan ini. Bangun istananya dengan balok!',
     template: 'place-value',
     data: { mode: 'build', target, wallet: [100, 10, 1] },
   };
@@ -96,7 +96,7 @@ function build(target: number): Level {
 /** 2. Baca balok. Pengecoh: angka tertukar tempat / nol hilang. */
 function read(n: number, ...wrong: number[]): Level {
   inRange(n);
-  return tap('Raja Singa menyusun balok ini. Bilangan berapa itu?', {
+  return tap('Singa menyusun balok ini. Bilangan berapa itu?', {
     number: { kind: 'blocks', n },
     choices: choices(n, ...wrong),
   });
@@ -195,7 +195,7 @@ function borrow(start: PlaceCounts, take: number): Level {
   inRange(target);
   return {
     id: '',
-    narration: `Raja Singa perlu ${terbilang(take)} balok untuk jembatan. Ambil dari istana!`,
+    narration: `Singa perlu ${terbilang(take)} balok untuk jembatan. Ambil dari istana!`,
     template: 'place-value',
     data: { mode: 'take', target, start, take },
   };
@@ -207,7 +207,7 @@ const config: MixedGameConfig = {
   title: 'Istana Bilangan',
   emoji: '🏰',
   template: 'mixed',
-  project: { title: 'Istana Raja Singa' },
+  project: { title: 'Istana Singa' },
   hints: true,
   levels: [
     slot('l1', build(347), build(215), build(432), build(506), build(260), build(183)),

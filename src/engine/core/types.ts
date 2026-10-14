@@ -296,7 +296,7 @@ export interface PlaceValueData {
   wallet?: Place[];
   /** Isi awal istana (mode `take`). Puluhannya WAJIB 0 — lihat Istana Bilangan. */
   start?: PlaceCounts;
-  /** Banyak yang diambil (mode `take`), ditulis di gelembung Raja Singa. */
+  /** Banyak yang diambil (mode `take`), ditulis di gelembung Singa. */
   take?: number;
 }
 
