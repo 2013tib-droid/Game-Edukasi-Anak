@@ -1,9 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #44 — lafal "deras" jadi PEPET (dəras, e seperti "belum").
+render #45 — Istana Bilangan: "Raja Singa" jadi "Singa" (raja singa = nama
+penyakit). 8 baris baru, semuanya scope istana-bilangan.
 
-redo: deras
+only: istana-bilangan
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
-mencocokkan `^redo:`, jadi menulisnya di tengah kalimat = nol baris dirender
-dan runnya tetap hijau.
+mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris
+dirender dan runnya tetap hijau.
