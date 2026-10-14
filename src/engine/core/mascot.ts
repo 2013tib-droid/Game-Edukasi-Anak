@@ -58,7 +58,7 @@ export const MASCOTS: MascotStage[] = [
   { min: 940, pic: 'mascot-16', emoji: '☀️', name: 'Naga Matahari' },
   { min: 1060, pic: 'mascot-17', emoji: '🌙', name: 'Naga Bulan' },
   { min: 1190, pic: 'mascot-18', emoji: '☄️', name: 'Naga Komet' },
-  { min: 1330, emoji: '✨', name: 'Naga Cahaya' },
+  { min: 1330, pic: 'mascot-19', emoji: '✨', name: 'Naga Cahaya' },
   { min: 1480, emoji: '🐉', name: 'Naga Legenda' },
 ];
 
