@@ -2,7 +2,12 @@
 transparent WebP.
 
     pip install pillow numpy
-    python scripts/cut-soft.py <art> public/assets/ui/<name>.webp [max_px]
+    python scripts/cut-soft.py <art> public/assets/ui/<name>.webp [max_px] [--hole=x,y ...]
+
+`--hole=x,y` (koordinat piksel gambar ASLI) menembus latar yang TERKURUNG,
+mis. celah antara ekor melengkung dan badan — telusuran dari tepi tak bisa
+menjangkaunya. Sengaja per gambar: pilih titiknya dengan melihat gambarnya,
+karena sorot putih di badan bentuknya sama persis dengan latar terkurung.
 
 Kapan memakai ini, bukan `cut-item.py`:
 
@@ -28,6 +33,8 @@ from collections import deque
 import numpy as np
 from PIL import Image
 
+HOLES = [tuple(int(v) for v in a.split('=', 1)[1].split(',')) for a in sys.argv if a.startswith('--hole=')]
+sys.argv = [a for a in sys.argv if not a.startswith('--hole=')]
 SRC, DST = sys.argv[1], sys.argv[2]
 MAX_PX = int(sys.argv[3]) if len(sys.argv) > 3 else 384
 # Latar + bayangan = terang & nyaris tak berwarna. Badan naga hijau mint
@@ -92,6 +99,18 @@ core = light.copy()
 for _ in range(R):
     core = erode(core)
 bg = flood_from_border(core)
+for hx, hy in HOLES:
+    if not light[hy, hx]:
+        sys.exit(f'--hole={hx},{hy} bukan piksel latar terang')
+    q = deque([(hy, hx)])
+    bg[hy, hx] = True
+    while q:
+        y, x = q.popleft()
+        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            ny, nx = y + dy, x + dx
+            if 0 <= ny < H and 0 <= nx < W and light[ny, nx] and not bg[ny, nx]:
+                bg[ny, nx] = True
+                q.append((ny, nx))
 for _ in range(R + 2):
     bg = dilate(bg) & light
 
