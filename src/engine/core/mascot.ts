@@ -62,6 +62,35 @@ export const MASCOTS: MascotStage[] = [
   { min: 1480, emoji: '🐉', name: 'Naga Legenda' },
 ];
 
+/**
+ * Rank frames, Mobile Legends style (owner, 2026-10-14: higher stages must look
+ * jomplang — visibly grander than lower ones). The ART grows the dragon; the
+ * FRAME around the avatar escalates by tier so the jump reads even while a
+ * stage still shows its emoji. `from` = first 1-based stage of the tier.
+ * Purely visual — progress and stars are untouched.
+ */
+export interface MascotTier {
+  id: 'sarang' | 'perunggu' | 'perak' | 'emas' | 'berlian' | 'legenda' | 'mitos';
+  label: string;
+  from: number;
+}
+
+export const MASCOT_TIERS: MascotTier[] = [
+  { id: 'sarang', label: 'Sarang', from: 1 },
+  { id: 'perunggu', label: 'Perunggu', from: 6 },
+  { id: 'perak', label: 'Perak', from: 7 },
+  { id: 'emas', label: 'Emas', from: 10 },
+  { id: 'berlian', label: 'Berlian', from: 13 },
+  { id: 'legenda', label: 'Legenda', from: 17 },
+  { id: 'mitos', label: 'Mitos', from: 20 },
+];
+
+export function tierFor(level: number): MascotTier {
+  let tier = MASCOT_TIERS[0]!;
+  for (const t of MASCOT_TIERS) if (level >= t.from) tier = t;
+  return tier;
+}
+
 /** Public URL of a stage's picture, or null while its art is still pending. */
 export function mascotImageUrl(stage: MascotStage): string | null {
   return stage.pic ? `${import.meta.env.BASE_URL}assets/mascot/${stage.pic}.webp` : null;

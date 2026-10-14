@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { mascotFor, mascotImageUrl, type MascotStage } from '@/engine/core/mascot';
+import { mascotFor, mascotImageUrl, tierFor, type MascotStage } from '@/engine/core/mascot';
 import '@/engine/ui/mascot.css';
 
 /**
@@ -25,8 +25,9 @@ export function MascotPic({ stage, className }: { stage: MascotStage; className:
  */
 export default function MascotCard({ totalStars }: { totalStars: number }) {
   const m = mascotFor(totalStars);
+  const tier = tierFor(m.level);
   return (
-    <section className="mascot-panel" aria-label="Perkembangan maskot">
+    <section className={`mascot-panel mascot-panel--${tier.id}`} aria-label="Perkembangan maskot">
       <div className="mascot-panel__avatar" aria-hidden>
         <MascotPic stage={m.stage} className="mascot-panel__img" />
       </div>
@@ -37,7 +38,10 @@ export default function MascotCard({ totalStars }: { totalStars: number }) {
         </div>
         <div className="mascot-panel__name">
           {m.stage.name}
-          <span className="mascot-panel__level">Level {m.level}</span>
+          <span className="mascot-panel__level">
+            Level {m.level}
+            {tier.id !== 'sarang' && <> · {tier.label}</>}
+          </span>
         </div>
         {m.next ? (
           <>

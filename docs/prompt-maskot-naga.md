@@ -78,6 +78,24 @@ ada error apa pun di app.
 
 ---
 
+## Makin tinggi tahap, makin JOMPLANG (keputusan pemilik 2026-10-14)
+
+Pemilik ingin seperti emblem rank Mobile Legends: tahap kecil dan tahap besar
+harus kelihatan beda jauh, dari **ukuran badan** dan **kemegahan desainnya**.
+Jadi mulai tahap 10 naganya **bukan lagi bayi yang sama ditempeli hiasan**,
+tapi ikut TUMBUH. Wajah, warna hijau mint, perut krem & mata besar tetap sama
+supaya anak tahu ini temannya yang sama.
+
+| Tahap | Rank (bingkai di app) | Wujud badan yang diminta |
+|---|---|---|
+| 10–12 | Emas | Anak naga: badan sedikit lebih tinggi dari Naga Jenius, sayap lebih besar, mulai pakai aksesori (mahkota/jubah kecil) |
+| 13–16 | Berlian | Naga remaja: leher & ekor lebih panjang, sayap lebar penuh dengan sisik tegas, berdiri gagah, pelindung dada/bahu kecil berkilau |
+| 17–19 | Legenda | Naga muda perkasa: badan besar, sayap terbentang megah (tetap dalam bingkai persegi), baju zirah emas ringan, aura menyala |
+| 20 | Mitos | Naga legenda puncak: paling besar & paling megah, zirah emas penuh bertatah permata merah-biru-hijau, mahkota besar, aura api emas, tetap tersenyum ramah |
+
+**Bingkai rank (perak, emas, berlian, api) DIGAMBAR APP, bukan di gambarnya.**
+Jangan minta bingkai/lingkaran di gambar — latar tetap putih polos.
+
 ## BLOK GAYA (tempel sekali di awal chat)
 
 > Aku sedang membuat maskot untuk game edukasi anak usia 4–8 tahun. Gambar yang
@@ -88,9 +106,11 @@ ada error apa pun di app.
 > megah di tiap tahap. Aturannya:
 >
 > - **Karakter yang sama, bukan naga baru.** Bentuk kepala, mata besar
->   berbinar, moncong pendek, perut krem, dan proporsi tubuh yang gemuk-imut
->   harus tetap sama di semua gambar. Yang berubah hanya elemen baru yang
->   kusebut per tahap.
+>   berbinar, moncong pendek, warna hijau mint dan perut krem harus tetap
+>   sama. TAPI badannya TUMBUH tiap tahap: makin tinggi, sayap makin lebar,
+>   pakaian/zirah makin megah — seperti emblem rank game yang makin keren.
+>   Tahap terakhir harus terlihat jauh lebih hebat dari tahap pertama.
+>   Tiap pesan aku sebutkan wujud badannya.
 > - Gaya: **render 3D lembut ala mainan empuk**, warna pastel, shading halus
 >   dan mengkilap, **tanpa outline hitam tebal**, tanpa gaya stiker datar.
 > - **Jangan pakai warna ungu** sama sekali.
@@ -117,17 +137,17 @@ ada error apa pun di app.
 | `mascot-7` | Naga yang sama, kini **Naga Api**: sayapnya menyala jadi api oranye-kuning lembut, ada nyala api kecil di ujung ekornya, dan sedikit cahaya hangat di sekitar tubuhnya. Warna badan tetap hijau mint seperti aslinya. Tetap ceria dan ramah. |
 | `mascot-8` | Naga yang sama, kini **Naga Kristal**: duri di punggungnya berubah jadi kristal biru muda yang bening berkilau, sayapnya seperti kaca kristal tembus pandang, ada serpihan kristal kecil melayang di sekitarnya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
 | `mascot-9` | Naga yang sama, kini **Naga Petir**: ada motif kilat kuning cerah di sayapnya, percikan listrik kecil melayang di sekelilingnya, dan tanduknya bercahaya kuning. Warna badan tetap hijau mint. Tetap ceria dan ramah, **jangan terlihat marah atau garang**. |
-| `mascot-10` | Naga yang sama, kini **Naga Pelangi**: sayapnya bergradasi warna pelangi pastel, ada surai kecil warna pelangi di sepanjang punggungnya, dan pelangi lembut kecil melengkung di belakang bahunya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
-| `mascot-11` | Naga yang sama, kini **Naga Bintang**: tubuhnya bertabur kerlip bintang kecil keemasan, ada satu bintang besar bercahaya di dahinya, dan sayapnya seperti langit malam berbintang warna biru tua dengan bintik emas (bukan ungu). Warna badan tetap hijau mint. Tetap ceria dan ramah. |
-| `mascot-12` | Naga yang sama, kini **Naga Mahkota**: memakai mahkota emas yang terlihat jelas di kepalanya dan jubah kecil merah di punggungnya. Warna badan tetap hijau mint. Tetap ceria dan ramah, terlihat bangga tapi lucu. |
-| `mascot-13` | Naga yang sama, kini **Naga Samudra**: sayapnya berbentuk sirip besar biru laut, ada gelombang air biru tegas melingkar di ekornya, dan beberapa gelembung besar menempel dekat badannya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
-| `mascot-14` | Naga yang sama, kini **Naga Rimba**: sayapnya berupa daun-daun besar hijau tua, ada sulur tanaman melilit lembut di ekornya, dan mahkota kecil dari daun di kepalanya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
-| `mascot-15` | Naga yang sama, kini **Naga Bunga**: sayapnya seperti kelopak bunga besar merah muda, ada rangkaian bunga merah muda dan kuning di lehernya seperti kalung, dan satu bunga besar di atas kepalanya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
-| `mascot-16` | Naga yang sama, kini **Naga Matahari**: ada lingkaran sinar matahari emas-oranye yang tegas menempel di belakang kepalanya seperti surai singa, sayapnya keemasan, dan badannya bercahaya hangat. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
-| `mascot-17` | Naga yang sama, kini **Naga Bulan**: ada bulan sabit perak-kuning besar di dahinya, sayapnya biru tua seperti langit malam dengan tepi perak, dan ia memeluk bantal kecil berbentuk awan. Warna badan tetap hijau mint. Tetap ceria dan ramah (bukan mengantuk sedih). |
-| `mascot-18` | Naga yang sama, kini **Naga Komet**: ekornya menjadi ekor komet panjang berwarna biru dan oranye menyala yang melengkung di belakangnya (tidak melebar ke samping), dan sayapnya bergaris biru-emas. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
-| `mascot-19` | Naga yang sama, kini **Naga Cahaya**: seluruh tubuhnya bercahaya putih-keemasan lembut, sayapnya seperti cahaya emas berlapis, dan ada lingkaran cahaya emas tipis di atas kepalanya. Warna badan tetap hijau mint, tepi tubuh tetap jelas. Tetap ceria dan ramah. |
-| `mascot-20` | Naga yang sama, kini **Naga Legenda**, tahap tertinggi: sedikit lebih besar dan gagah tapi tetap bayi yang imut, memakai mahkota emas berhias permata merah-biru-hijau, sayap besar keemasan, jubah merah kecil, dan memegang tongkat kecil berujung bintang. Warna badan tetap hijau mint. Tetap ceria dan ramah, terlihat bangga tapi lucu. |
+| `mascot-10` | Wujud: anak naga, sedikit lebih tinggi dari gambar rujukan, sayap lebih besar. Naga yang sama, kini **Naga Pelangi**: sayapnya bergradasi warna pelangi pastel, ada surai kecil warna pelangi di sepanjang punggungnya, dan pelangi lembut kecil melengkung di belakang bahunya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
+| `mascot-11` | Wujud: anak naga, sayap lebih besar. Naga yang sama, kini **Naga Bintang**: tubuhnya bertabur kerlip bintang kecil keemasan, ada satu bintang besar bercahaya di dahinya, dan sayapnya seperti langit malam berbintang warna biru tua dengan bintik emas (bukan ungu). Warna badan tetap hijau mint. Tetap ceria dan ramah. |
+| `mascot-12` | Wujud: anak naga yang mulai gagah. Naga yang sama, kini **Naga Mahkota**: memakai mahkota emas yang terlihat jelas di kepalanya dan jubah kecil merah di punggungnya. Warna badan tetap hijau mint. Tetap ceria dan ramah, terlihat bangga tapi lucu. |
+| `mascot-13` | Wujud: naga REMAJA — leher & ekor lebih panjang, sayap lebar, pelindung bahu kecil. Naga yang sama, kini **Naga Samudra**: sayapnya berbentuk sirip besar biru laut, ada gelombang air biru tegas melingkar di ekornya, dan beberapa gelembung besar menempel dekat badannya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
+| `mascot-14` | Wujud: naga remaja, berdiri gagah. Naga yang sama, kini **Naga Rimba**: sayapnya berupa daun-daun besar hijau tua, ada sulur tanaman melilit lembut di ekornya, dan mahkota kecil dari daun di kepalanya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
+| `mascot-15` | Wujud: naga remaja, berdiri gagah. Naga yang sama, kini **Naga Bunga**: sayapnya seperti kelopak bunga besar merah muda, ada rangkaian bunga merah muda dan kuning di lehernya seperti kalung, dan satu bunga besar di atas kepalanya. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
+| `mascot-16` | Wujud: naga remaja yang hampir dewasa, pelindung dada kecil berkilau. Naga yang sama, kini **Naga Matahari**: ada lingkaran sinar matahari emas-oranye yang tegas menempel di belakang kepalanya seperti surai singa, sayapnya keemasan, dan badannya bercahaya hangat. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
+| `mascot-17` | Wujud: naga MUDA PERKASA — badan besar, sayap terbentang megah, zirah emas ringan. Naga yang sama, kini **Naga Bulan**: ada bulan sabit perak-kuning besar di dahinya, sayapnya biru tua seperti langit malam dengan tepi perak, dan ia memeluk bantal kecil berbentuk awan. Warna badan tetap hijau mint. Tetap ceria dan ramah (bukan mengantuk sedih). |
+| `mascot-18` | Wujud: naga muda perkasa, zirah emas ringan. Naga yang sama, kini **Naga Komet**: ekornya menjadi ekor komet panjang berwarna biru dan oranye menyala yang melengkung di belakangnya (tidak melebar ke samping), dan sayapnya bergaris biru-emas. Warna badan tetap hijau mint. Tetap ceria dan ramah. |
+| `mascot-19` | Wujud: naga muda perkasa, zirah emas berkilau. Naga yang sama, kini **Naga Cahaya**: seluruh tubuhnya bercahaya putih-keemasan lembut, sayapnya seperti cahaya emas berlapis, dan ada lingkaran cahaya emas tipis di atas kepalanya. Warna badan tetap hijau mint, tepi tubuh tetap jelas. Tetap ceria dan ramah. |
+| `mascot-20` | Wujud: PALING BESAR dan paling megah dari semuanya, zirah emas penuh. Naga yang sama, kini **Naga Legenda**, tahap tertinggi: memakai mahkota emas berhias permata merah-biru-hijau, sayap besar keemasan, jubah merah kecil, dan memegang tongkat kecil berujung bintang. Warna badan tetap hijau mint. Tetap ceria dan ramah, terlihat bangga tapi lucu. |
 
 ### Kalau lebih suka prompt bahasa Inggris
 
@@ -153,7 +173,7 @@ pesan, tetap dengan `mascot-6.webp` terlampir:
 > - `mascot-17` — big silver-yellow crescent moon on its forehead, dark-blue night-sky wings with silver edges, hugging a small cloud pillow. Happy, not sad.
 > - `mascot-18` — tail becomes a long blue-and-orange glowing comet tail curving behind it (not spreading sideways), blue-gold striped wings.
 > - `mascot-19` — whole body softly glowing white-gold, layered golden light wings, thin golden halo above its head; body edges still clear.
-> - `mascot-20` — final legendary stage: slightly bigger and braver but still a cute baby, golden crown with red/blue/green gems, large golden wings, small red cape, holding a little star-tipped wand. Proud but still cute.
+> - `mascot-20` — final legendary stage: the biggest and grandest of all, full golden armor, golden crown with red/blue/green gems, large golden wings, small red cape, holding a little star-tipped wand. Proud but still cute.
 >
 > Never use purple.
 ---

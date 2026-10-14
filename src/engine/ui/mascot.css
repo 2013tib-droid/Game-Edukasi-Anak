@@ -152,3 +152,156 @@
     font-size: 13px;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * RANK FRAMES (2026-10-14, owner: "kayak Mobile Legends — rank kecil dan gede
+ * keliatan jomplang"). Each tier makes the avatar BIGGER and its frame
+ * GRANDER. Rings & glow are box-shadows/pseudo-elements, so only the avatar's
+ * own size changes layout (+4px per tier at most). Tier = `tierFor()` in
+ * mascot.ts. No purple (owner dislikes it).
+ * ------------------------------------------------------------------------- */
+.mascot-panel__avatar {
+  position: relative;
+  overflow: visible;
+}
+.mascot-panel__img {
+  position: relative;
+  z-index: 1;
+}
+
+/* Perunggu (stage 6): first dragon — a warm bronze ring. */
+.mascot-panel--perunggu .mascot-panel__avatar {
+  box-shadow:
+    0 0 0 3px #c9824a,
+    0 2px 6px rgba(179, 84, 26, 0.2);
+}
+
+/* Perak (7–9): double silver ring. */
+.mascot-panel--perak .mascot-panel__avatar {
+  width: 76px;
+  height: 76px;
+  background: radial-gradient(circle at 50% 38%, #fff 45%, #e6eef5 100%);
+  box-shadow:
+    0 0 0 3px #b7c4d0,
+    0 0 0 6px #fff,
+    0 0 0 8px #93a3b3,
+    0 3px 8px rgba(60, 80, 100, 0.25);
+}
+
+/* Emas (10–12): thick gold ring + warm glow. */
+.mascot-panel--emas .mascot-panel__avatar {
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle at 50% 38%, #fffbe8 40%, #ffe08a 100%);
+  box-shadow:
+    0 0 0 4px #f4c21f,
+    0 0 0 7px #fff3c4,
+    0 0 0 9px #d99a0b,
+    0 0 18px 4px rgba(255, 196, 40, 0.55);
+}
+
+/* Berlian (13–16): icy-blue faceted ring + sparkle glow. */
+.mascot-panel--berlian .mascot-panel__avatar {
+  width: 84px;
+  height: 84px;
+  background: radial-gradient(circle at 50% 38%, #f4fdff 40%, #a8e6f5 100%);
+  box-shadow:
+    0 0 0 4px #4fc3e8,
+    0 0 0 7px #e6fbff,
+    0 0 0 10px #1f8fc2,
+    0 0 22px 6px rgba(80, 200, 240, 0.6);
+}
+
+/* Legenda (17–19) & Mitos (20): a rotating flame-gold halo behind the
+   avatar. Mitos adds red and a bigger blaze. */
+.mascot-panel--legenda .mascot-panel__avatar,
+.mascot-panel--mitos .mascot-panel__avatar {
+  width: 88px;
+  height: 88px;
+  background: radial-gradient(circle at 50% 38%, #fffaf0 38%, #ffd27a 100%);
+  box-shadow:
+    0 0 0 4px #ffcf33,
+    0 0 0 7px #fff,
+    0 0 26px 8px rgba(255, 150, 40, 0.65);
+}
+.mascot-panel--legenda .mascot-panel__avatar::before,
+.mascot-panel--mitos .mascot-panel__avatar::before {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: conic-gradient(#ffd23f, #ff8a3d, #ffe27a, #ffb43d, #ffd23f);
+  animation: mascot-halo 6s linear infinite;
+  z-index: 0;
+  mask: radial-gradient(circle, transparent 58%, #000 60%);
+  -webkit-mask: radial-gradient(circle, transparent 58%, #000 60%);
+}
+.mascot-panel--mitos .mascot-panel__avatar {
+  box-shadow:
+    0 0 0 4px #ff5a3c,
+    0 0 0 7px #fff,
+    0 0 32px 12px rgba(255, 90, 50, 0.6);
+}
+.mascot-panel--mitos .mascot-panel__avatar::before {
+  inset: -16px;
+  background: conic-gradient(#ff4d2e, #ffd23f, #ff8a3d, #ffe27a, #ff4d2e);
+  animation-duration: 4s;
+}
+
+/* The panel itself warms up at the top tiers. */
+.mascot-panel--emas {
+  border-color: #d99a0b;
+}
+.mascot-panel--berlian {
+  border-color: #1f8fc2;
+  background: linear-gradient(180deg, #eafaff 0%, #c4ecf7 100%);
+}
+.mascot-panel--legenda,
+.mascot-panel--mitos {
+  border: 2px solid #ffb43d;
+  background: linear-gradient(180deg, #fff3d6 0%, #ffcf8a 100%);
+}
+.mascot-panel--mitos {
+  border-color: #ff5a3c;
+}
+
+/* Breathing room so rings & halos never touch the text. */
+.mascot-panel--perak,
+.mascot-panel--emas,
+.mascot-panel--berlian,
+.mascot-panel--legenda,
+.mascot-panel--mitos {
+  gap: 20px;
+  padding-left: 22px;
+}
+
+@keyframes mascot-halo {
+  to {
+    rotate: 360deg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mascot-panel__avatar::before {
+    animation: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .mascot-panel--perak .mascot-panel__avatar { width: 68px; height: 68px; }
+  .mascot-panel--emas .mascot-panel__avatar { width: 72px; height: 72px; }
+  .mascot-panel--berlian .mascot-panel__avatar { width: 74px; height: 74px; }
+  .mascot-panel--legenda .mascot-panel__avatar,
+  .mascot-panel--mitos .mascot-panel__avatar { width: 76px; height: 76px; }
+  .mascot-panel--perak,
+  .mascot-panel--emas,
+  .mascot-panel--berlian,
+  .mascot-panel--legenda,
+  .mascot-panel--mitos { gap: 16px; padding-left: 18px; }
+}
+
+/* Emoji stand-ins grow with the frame, so a stage without art yet doesn't
+   look like a tiny icon lost in a huge ring. */
+.mascot-panel--emas .mascot-panel__avatar { font-size: 46px; }
+.mascot-panel--berlian .mascot-panel__avatar { font-size: 50px; }
+.mascot-panel--legenda .mascot-panel__avatar,
+.mascot-panel--mitos .mascot-panel__avatar { font-size: 54px; }
