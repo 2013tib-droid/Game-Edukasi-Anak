@@ -28,13 +28,67 @@ export function getGameStars(gameId: string): number {
   return Object.values(game).reduce<number>((sum, s) => sum + s, 0);
 }
 
-/** Total stars across every game — drives the mascot's growth. */
+/** Total stars across every game + daily bonuses — drives the mascot's growth. */
 export function getTotalStars(): number {
   const store = load();
-  return Object.values(store).reduce<number>(
-    (sum, game) => sum + Object.values(game).reduce<number>((s, v) => s + v, 0),
-    0,
-  );
+  let sum = 0;
+  for (const [key, game] of Object.entries(store)) {
+    const bonus = key.startsWith(BONUS_PREFIX);
+    for (const v of Object.values(game)) sum += bonus ? (BONUS_STARS[v] ?? 0) : v;
+  }
+  return sum;
+}
+
+// --- Bonus rajin (2026-10-14, keputusan pemilik) ----------------------------
+//
+// Bintang level tetap nilai TERBAIK per level — main ulang tidak menambahnya.
+// Supaya anak tetap semangat main ulang, menamatkan sebuah game memberi bonus
+// untuk maskot SEKALI per game per HARI: +3 ⭐, atau +5 ⭐ kalau semua levelnya
+// tanpa salah. Bonus game yang sama di hari yang sama tidak bertambah lagi
+// (kecuali naik dari +3 ke +5), jadi anak tak bisa menimbun dengan mengulang
+// game termudah — tapi besok bisa dapat lagi, selamanya.
+//
+// Disimpan di toko yang SAMA dengan bintang level, sebagai "game" semu
+// `bonus-YYYY-MM` (satu per bulan, supaya dokumen Firestore-nya tetap kecil)
+// dengan level `DD_<gameId>` bernilai 1 (= +3) atau 2 (= +5). Bentuk itu
+// sengaja: penggabungan antar-HP yang sudah ada (maksimum per level) langsung
+// benar untuk bonus juga — tak ada yang terhitung dua kali, tak ada yang
+// hilang — dan `users/{uid}/progress/{id}` sudah diizinkan rules.
+
+export const BONUS_PREFIX = 'bonus-';
+/** Stored bonus value → stars it adds to the mascot. */
+const BONUS_STARS: Record<number, number> = { 1: 3, 2: 5 };
+
+function today(): { month: string; day: string } {
+  const d = new Date(); // tanggal HP anak, bukan UTC — "hari ini" milik anak
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return { month: `${BONUS_PREFIX}${d.getFullYear()}-${mm}`, day: dd };
+}
+
+/**
+ * Catat bonus rajin untuk game yang baru ditamatkan.
+ *
+ * Mengembalikan bintang bonus yang BARU didapat sekarang (0 kalau bonus game
+ * ini hari ini sudah diambil), dan bonus penuh hari ini untuk game itu.
+ */
+export function awardDailyBonus(gameId: string, perfect: boolean): { added: number; today: number } {
+  const { month, day } = today();
+  const store = load();
+  const bucket = store[month] ?? {};
+  const levelId = `${day}_${gameId}`;
+  const before = bucket[levelId] ?? 0;
+  const value: Stars = perfect ? 2 : 1;
+  if (value <= before) return { added: 0, today: BONUS_STARS[before] ?? 0 };
+  bucket[levelId] = value;
+  store[month] = bucket;
+  try {
+    localStorage.setItem(KEY, JSON.stringify(store));
+  } catch {
+    return { added: 0, today: 0 };
+  }
+  notifyProgress(month);
+  return { added: BONUS_STARS[value]! - (BONUS_STARS[before] ?? 0), today: BONUS_STARS[value]! };
 }
 
 export function saveLevelStars(gameId: string, levelId: string, stars: Stars): void {

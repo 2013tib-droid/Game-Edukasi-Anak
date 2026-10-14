@@ -136,6 +136,18 @@ check('pemberitahuan hanya saat bintang benar-benar naik', seen, [
 // 10. getAllProgress must hand back what a backup would carry.
 check('getAllProgress = isi perangkat', P.getAllProgress(), read());
 
+// 11. Bonus rajin: +3 sekali per game per hari, naik ke +5 kalau sempurna,
+//     dan ikut digabung antar-HP tanpa terhitung dua kali.
+seed({ 'hutan-hewan': { l1: 3 } });
+check('bonus pertama +3', P.awardDailyBonus('hutan-hewan', false), { added: 3, today: 3 });
+check('bonus kedua hari ini nol', P.awardDailyBonus('hutan-hewan', false), { added: 0, today: 3 });
+check('naik jadi sempurna menambah 2', P.awardDailyBonus('hutan-hewan', true), { added: 2, today: 5 });
+check('game lain tetap dapat bonus', P.awardDailyBonus('pasar-buah', false), { added: 3, today: 3 });
+check('total = level + bonus', P.getTotalStars(), 3 + 5 + 3);
+const bonusOnly = Object.fromEntries(Object.entries(read()).filter(([k]) => k.startsWith('bonus-')));
+check('bonus dari HP lain yang sama tidak dobel', P.mergeProgress(bonusOnly), false);
+check('total tetap', P.getTotalStars(), 11);
+
 if (failures.length > 0) {
   console.error(`\n✗ ${failures.length} dari ${checks} pemeriksaan GAGAL:\n`);
   failures.forEach((f) => console.error(`  - ${f}\n`));

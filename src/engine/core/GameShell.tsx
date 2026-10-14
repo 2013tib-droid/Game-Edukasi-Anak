@@ -9,7 +9,7 @@ import type {
   Stars,
   TemplateId,
 } from '@/engine/core/types';
-import { getLevelStars, getTotalStars, saveLevelStars } from '@/engine/core/progress';
+import { awardDailyBonus, getLevelStars, getTotalStars, saveLevelStars } from '@/engine/core/progress';
 import { clearSession, getSession, saveSession } from '@/engine/core/session';
 import type { LevelPick } from '@/engine/core/session';
 import { celebrate, sfx, speak, stopSpeaking } from '@/engine/audio/sound';
@@ -291,6 +291,8 @@ export default function GameShell({
   // `brokenArt` di `StoryChoice`.
   const [brokenCover, setBrokenCover] = useState<Record<string, boolean>>({});
   const [earned, setEarned] = useState<Stars[]>([]);
+  /** Daily "bonus rajin" result of the play that just finished. */
+  const [bonus, setBonus] = useState<{ added: number; today: number } | null>(null);
   const wrongCount = useRef(0);
   // Naik tiap kali anak meninggalkan permainan ke peta tahap, supaya pindah
   // level yang masih tertunda (jeda "Hebat!") tidak menyeret layar kembali.
@@ -433,6 +435,12 @@ export default function GameShell({
         // Finished: nothing left to resume.
         clearSession(config.id);
         setSaved(null);
+        setBonus(
+          awardDailyBonus(
+            config.id,
+            earnedNow.length >= levels.length && earnedNow.every((x) => x === 3),
+          ),
+        );
         // Victory tune first, praise line after it — see `celebrate`.
         celebrate('Selamat! Kamu hebat sekali!');
         setScreen('done');
@@ -662,6 +670,17 @@ export default function GameShell({
         <p style={{ fontSize: 22 }}>
           Kamu dapat <strong>{total}</strong> dari {levels.length * 3} bintang!
         </p>
+        {bonus && (
+          <p className={`daily-bonus${bonus.added > 0 ? '' : ' daily-bonus--taken'}`}>
+            {bonus.added > 0 ? (
+              <>
+                🎁 Bonus rajin: <strong>+{bonus.added} ⭐</strong> untuk temanmu!
+              </>
+            ) : (
+              <>🎁 Bonus game ini sudah diambil hari ini. Coba game lain, atau main lagi besok!</>
+            )}
+          </p>
+        )}
         <MascotCard totalStars={getTotalStars()} />
         {stageMap ? (
           // Back to the map: the next stage may have just opened.
