@@ -2,7 +2,7 @@
  * Cadangan bintang ke Firestore (Fase 6, langkah 2).
  *
  * Sebelum ini bintang cuma hidup di `localStorage`, jadi ganti HP = maskot
- * balik ke telur. Untuk produk berbayar dengan tangga maskot sampai 555 ⭐,
+ * balik ke telur. Untuk produk berbayar dengan tangga maskot sampai 1.480 ⭐,
  * itu kehilangan yang menyakitkan.
  *
  * TIGA ATURAN YANG MENGIKAT (jangan dilonggarkan tanpa membacanya ulang):

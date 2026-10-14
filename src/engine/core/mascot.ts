@@ -26,15 +26,16 @@ export interface MascotStage {
 
 /**
  * Evolution ladder: 🥚 → 🐣 → 🐥 → 🦉 → 🦄 → 🐲, then the dragon itself keeps
- * growing more magnificent through six further stages.
+ * growing more magnificent through fourteen further stages (20 in all).
  *
- * The ladder must stay stretched over the stars the app actually holds. Every
- * game together offers 561 ⭐ (187 level slots × 3), and stars are stored as
- * the BEST result per level — replaying never adds any — so 561 is a real
- * ceiling, not a soft one. When the ladder stopped at 100 ⭐ (2026-08-09) a
- * regular player maxed out having seen 18% of the content and then collected
- * 461 more stars with nothing to show for it. If you add games, re-measure the
- * ceiling and consider whether the top stage still sits near it.
+ * The ladder must stay stretched over the stars the app actually holds. Stars
+ * are stored as the BEST result per level — replaying never adds any — so the
+ * total is a real ceiling. Measured 2026-10-14: 1.533 ⭐ across all three
+ * groups (511 level slots × 3). The top stage (1.480) sits just under it, so a
+ * child who grows up with the app — Playgroup → SD 1-2 → SD 3-4 — can truly
+ * finish it; one group alone (plus the free demos) tops out around stage 11–12. If you add games,
+ * re-measure the ceiling. NEVER raise an existing threshold: that would demote
+ * children who already reached the stage.
  */
 export const MASCOTS: MascotStage[] = [
   { min: 0, pic: 'mascot-1', emoji: '🥚', name: 'Telur Ajaib' },
@@ -47,9 +48,18 @@ export const MASCOTS: MascotStage[] = [
   { min: 200, pic: 'mascot-8', emoji: '💎', name: 'Naga Kristal' },
   { min: 265, pic: 'mascot-9', emoji: '⚡', name: 'Naga Petir' },
   // Art pending — the same dragon, growing more magnificent each stage.
+  // Prompts: docs/prompt-maskot-naga.md.
   { min: 340, emoji: '🌈', name: 'Naga Pelangi' },
   { min: 440, emoji: '🌟', name: 'Naga Bintang' },
-  { min: 555, emoji: '👑', name: 'Naga Legenda' },
+  { min: 555, emoji: '👑', name: 'Naga Mahkota' },
+  { min: 640, emoji: '🌊', name: 'Naga Samudra' },
+  { min: 730, emoji: '🍃', name: 'Naga Rimba' },
+  { min: 830, emoji: '🌸', name: 'Naga Bunga' },
+  { min: 940, emoji: '☀️', name: 'Naga Matahari' },
+  { min: 1060, emoji: '🌙', name: 'Naga Bulan' },
+  { min: 1190, emoji: '☄️', name: 'Naga Komet' },
+  { min: 1330, emoji: '✨', name: 'Naga Cahaya' },
+  { min: 1480, emoji: '🐉', name: 'Naga Legenda' },
 ];
 
 /** Public URL of a stage's picture, or null while its art is still pending. */
