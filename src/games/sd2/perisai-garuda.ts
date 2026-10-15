@@ -148,13 +148,22 @@ function slot(id: string, stamp: LevelStamp, ...variants: MixedLevel[]): MixedLe
   return variants.map((v) => ({ ...v, id, stamp }));
 }
 
-function page(emoji: string, text: string, scene?: StoryPage['scene']): StoryPage {
-  return { emoji, text, scene };
+/** `art` = ilustrasi adegan di `public/assets/story/<art>.webp`; emoji tetap
+ *  jadi cadangan kalau berkasnya gagal dimuat. */
+function page(emoji: string, text: string, scene?: StoryPage['scene'], art?: string): StoryPage {
+  return { emoji, text, scene, art };
 }
 
-function decide(text: string, right: string, wrong: string, feedback: string): StoryPage {
+function decide(
+  text: string,
+  right: string,
+  wrong: string,
+  feedback: string,
+  art?: string,
+): StoryPage {
   return {
     emoji: '🤔',
+    art,
     text,
     choices: [{ text: right, correct: true }, { text: wrong, feedback }],
   };
@@ -271,7 +280,7 @@ const config: MixedGameConfig = {
       'l5',
       { emoji: '🌾', sila: 5, label: 'Sila 5' },
       pickSila('Dina berdoa sebelum makan. Ini sila yang mana?', 1, '🙏'),
-      pickSila('Raka menghormati teman yang beribadah. Sila yang mana?', 1, '🤲'),
+      pickSila('Budi menghormati teman yang beribadah. Sila yang mana?', 1, '🤲'),
       pickSila('Bayu menolong teman yang jatuh. Ini sila yang mana?', 2, '🩹'),
       pickSila('Sinta meminta maaf saat berbuat salah. Sila yang mana?', 2, '🙇'),
       pickSila('Kami bermain dengan teman dari suku lain. Sila yang mana?', 3, '⚽'),
@@ -454,25 +463,35 @@ const config: MixedGameConfig = {
         pages: [
           page(
             '🧹',
-            'Minggu pagi, warga kampung Raka bekerja bakti membersihkan selokan.',
+            'Minggu pagi, warga kampung Budi bekerja bakti membersihkan selokan.',
             'kota',
+            'kerja-bakti-pagi',
           ),
           decide(
-            'Raka masih ingin bermain gim. Apa yang sebaiknya Raka lakukan?',
+            'Budi masih ingin bermain gim. Apa yang sebaiknya Budi lakukan?',
             'Ikut kerja bakti bersama warga',
             'Terus bermain gim di rumah',
             'Kerja bakti itu tugas semua warga, termasuk anak-anak. Ayo coba lagi!',
+            'kerja-bakti-gim',
           ),
-          page('🪣', 'Raka membawa ember dan membantu Pak RT mengangkat sampah.'),
+          page(
+            '🪣',
+            'Budi membawa ember dan membantu Pak RT mengangkat sampah.',
+            undefined,
+            'kerja-bakti-ember',
+          ),
           decide(
-            'Ada warga yang belum kebagian sapu. Apa yang Raka lakukan?',
+            'Ada warga yang belum kebagian sapu. Apa yang Budi lakukan?',
             'Memakai sapunya bergantian',
             'Menyembunyikan sapunya',
             'Gotong royong berarti saling membantu. Coba pikirkan lagi!',
+            'kerja-bakti-sapu',
           ),
           page(
             '✨',
             'Selokan bersih, kampung jadi indah. Bersama-sama, pekerjaan berat terasa ringan!',
+            undefined,
+            'kerja-bakti-bersih',
           ),
         ],
       },

@@ -1,7 +1,7 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #46 — Perisai Garuda: soal "bekal makanan khas daerah" diganti soal
-bahasa daerah (permintaan pemilik). 1 baris baru, scope perisai-garuda.
+render #47 — Perisai Garuda: tokoh "Raka" jadi "Budi" (permintaan pemilik).
+5 baris baru, semuanya scope perisai-garuda.
 
 only: perisai-garuda
 
