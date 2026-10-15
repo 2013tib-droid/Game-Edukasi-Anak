@@ -68,3 +68,144 @@
   font-size: clamp(19px, 5.6vw, 25px);
   line-height: 1.15;
 }
+
+/* ── Cincin maskot naik kelas (2026-10-15) ─────────────────────────────
+   10–15 `--glow`: cincin pelangi berputar + cahaya emas + dua kerlip.
+   16–20 `--legend`: cincin api tebal + cincin cahaya putus-putus berputar
+   balik + aura berdenyut + empat bintang mengorbit, avatar sedikit lebih
+   besar. Tanpa ungu (pemilik tak suka). Semuanya di luar lingkaran, jadi
+   gambar maskot tak pernah tertutup. */
+.subj-hello__buddy {
+  position: relative;
+  isolation: isolate;
+}
+.subj-hello__buddy > :not(.subj-ring):not(.subj-orbit):not(.subj-spark) {
+  position: relative;
+  z-index: 1;
+}
+.subj-hello:has(.subj-hello__buddy--glow) { gap: 16px; }
+.subj-hello:has(.subj-hello__buddy--legend) { gap: 20px; }
+
+.subj-ring { display: none; }
+@supports ((mask: radial-gradient(#000, #000)) or (-webkit-mask: radial-gradient(#000, #000))) {
+  .subj-ring {
+    display: block;
+    position: absolute;
+    inset: -8px;
+    z-index: -1;
+    border-radius: 50%;
+    background: conic-gradient(#ffd54a, #ff9a3c, #ff6fa5, #5cc8ff, #6be3b0, #ffd54a);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 7px), #000 calc(100% - 6px));
+    animation: subj-spin 5s linear infinite;
+  }
+}
+
+/* Piringan krem + garis putih pindah ke ::before (z -1) supaya cahaya
+   ::after (z -2) tak mewarnai bagian dalam lingkaran — latar elemen induk
+   sendiri selalu tergambar DI BAWAH anak ber-z negatif. */
+.subj-hello__buddy--glow,
+.subj-hello__buddy--legend {
+  background: none;
+  box-shadow: none;
+}
+.subj-hello__buddy--glow::before,
+.subj-hello__buddy--legend::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 50%;
+  background: #fff6dc;
+  box-shadow: 0 0 0 3px #fff, 0 4px 10px rgba(58, 46, 32, 0.15);
+}
+.subj-hello__buddy--legend::before { background: #fff3cf; }
+
+/* Cahaya di belakang lingkaran. */
+.subj-hello__buddy--glow::after,
+.subj-hello__buddy--legend::after {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  z-index: -2;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 214, 80, 0.7), rgba(255, 214, 80, 0) 100%);
+  animation: subj-pulse 2.4s ease-in-out infinite;
+}
+
+.subj-spark {
+  position: absolute;
+  z-index: 3;
+  color: #ffc21a;
+  font-size: 18px;
+  line-height: 1;
+  text-shadow: 0 0 6px #fff, 0 0 10px rgba(255, 200, 40, 0.9);
+  animation: subj-twinkle 1.8s ease-in-out infinite;
+}
+.subj-spark--a { top: -10px; right: -6px; }
+.subj-spark--b { bottom: -6px; left: -10px; font-size: 13px; animation-delay: 0.9s; }
+
+/* ── 16–20 ── */
+.subj-hello__buddy--legend {
+  width: 84px;
+  height: 84px;
+}
+.subj-hello__buddy--legend .subj-hello__img { width: 74px; height: 74px; }
+.subj-hello__buddy--legend .subj-ring {
+  inset: -11px;
+  background: conic-gradient(#fff3a0, #ffc93c, #ff7a2f, #ff4f6d, #ffb03a, #fff3a0, #ffc93c, #ff7a2f, #ff4f6d, #fff3a0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 9px), #000 calc(100% - 8px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 9px), #000 calc(100% - 8px));
+  animation-duration: 3s;
+  filter: drop-shadow(0 0 4px rgba(255, 140, 40, 0.8));
+}
+.subj-hello__buddy--legend .subj-ring--inner {
+  inset: -3px;
+  background: none;
+  border: 2.5px dashed #ffa51f;
+  -webkit-mask: none;
+  mask: none;
+  filter: drop-shadow(0 0 3px rgba(255, 200, 60, 0.9));
+  animation: subj-spin 8s linear infinite reverse;
+}
+.subj-hello__buddy--legend::after {
+  inset: -24px;
+  background: radial-gradient(closest-side, rgba(255, 170, 50, 0.75), rgba(255, 110, 90, 0.35) 60%, rgba(255, 110, 90, 0) 100%);
+  animation-duration: 1.8s;
+}
+.subj-orbit {
+  position: absolute;
+  inset: -19px;
+  z-index: 3;
+  animation: subj-spin 7s linear infinite;
+}
+.subj-orbit > span {
+  position: absolute;
+  font-size: 15px;
+  line-height: 1;
+  color: #ffcf1f;
+  text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 10px #ff9a20;
+  animation: subj-twinkle 1.4s ease-in-out infinite;
+}
+.subj-orbit > span:nth-child(1) { top: -2px; left: 50%; margin-left: -7px; }
+.subj-orbit > span:nth-child(2) { right: -2px; top: 50%; margin-top: -7px; animation-delay: 0.35s; }
+.subj-orbit > span:nth-child(3) { bottom: -2px; left: 50%; margin-left: -7px; animation-delay: 0.7s; }
+.subj-orbit > span:nth-child(4) { left: -2px; top: 50%; margin-top: -7px; animation-delay: 1.05s; }
+
+@keyframes subj-spin { to { transform: rotate(360deg); } }
+@keyframes subj-pulse {
+  0%, 100% { opacity: 0.55; transform: scale(0.94); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+@keyframes subj-twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .subj-ring,
+  .subj-orbit,
+  .subj-orbit > span,
+  .subj-spark,
+  .subj-hello__buddy--glow::after,
+  .subj-hello__buddy--legend::after { animation: none; }
+}

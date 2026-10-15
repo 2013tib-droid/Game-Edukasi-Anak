@@ -31,14 +31,34 @@ interface Props {
  * Akun orang tua.
  */
 export default function SubjectPage({ group, subjects }: Props) {
-  const mascot = mascotFor(getTotalStars()).stage;
+  const { stage: mascot, level } = mascotFor(getTotalStars());
+  // Cincin sapaan ikut naik kelas (permintaan pemilik 2026-10-15): level
+  // 10–15 = cincin pelangi berputar + kerlip, 16–20 = cincin api ganda,
+  // cahaya berdenyut & bintang mengorbit. Murni hiasan.
+  const rank = level >= 16 ? 'legend' : level >= 10 ? 'glow' : null;
   return (
     <div className="page subj-page">
       <Scene id="padang" />
       <SignTitle group={group} />
 
       <div className="subj-hello">
-        <span className="subj-hello__buddy" aria-hidden>
+        <span className={`subj-hello__buddy${rank ? ` subj-hello__buddy--${rank}` : ''}`} aria-hidden>
+          {rank && <span className="subj-ring" />}
+          {rank === 'legend' && <span className="subj-ring subj-ring--inner" />}
+          {rank === 'glow' && (
+            <>
+              <span className="subj-spark subj-spark--a">✦</span>
+              <span className="subj-spark subj-spark--b">✦</span>
+            </>
+          )}
+          {rank === 'legend' && (
+            <span className="subj-orbit">
+              <span>✦</span>
+              <span>✦</span>
+              <span>✦</span>
+              <span>✦</span>
+            </span>
+          )}
           <MascotPic stage={mascot} className="subj-hello__img" />
         </span>
         <div className="subj-hello__bubble">
