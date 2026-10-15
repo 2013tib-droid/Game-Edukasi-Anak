@@ -365,3 +365,21 @@ suka ungu).
 - Pasang seperti biasa: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`,
   periksa lubang terkurung di lingkaran panah ulangi, lalu tambah `pic: '<id>',` di
   entri registry-nya.
+
+## Ikon dua game percabangan (`rule-sort`) — disusun 2026-10-15
+
+Pabrik Mainan (TK) & Robot Pemilah (SD Kelas 1 & 2) masih memakai emoji 🧸 / 🤖. Pakai
+BLOK GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa warna ungu.
+
+| id file | Baris prompt |
+|---|---|
+| `pabrik-mainan` | Buatkan: satu ban berjalan mainan pendek warna abu-abu muda dengan roda-roda kecil, di atasnya satu mainan bintang kuning dan satu mainan hati merah, keduanya berwajah imut — mata besar berkilau, pipi merona. Di bawah ujung ban ada dua kotak kardus coklat muda kecil yang terbuka. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `robot-pemilah` | Buatkan: satu robot kecil bulat warna biru muda berwajah imut — layar wajah putih dengan dua mata hitam besar berkilau, antena berbola kuning — kedua tangannya memegang dua papan tanda: kiri tetes cat merah, kanan bintang putih bergaris coklat. Di depan kakinya dua kotak kardus coklat muda yang terbuka. Tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+
+- **Yang membuat ikon ini terbaca "memilah" adalah KOTAK TUJUAN + mainan bentuk
+  berwarna** — sama dengan layar game. Jangan wajah hewan pemilik kotak: hewan itu ganti-
+  ganti tiap main.
+- Robot SD warnanya mengikuti kepala robot di layar game (biru muda, antena kuning).
+- Pasang seperti biasa: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`,
+  periksa lubang terkurung di celah roda ban/antara tangan robot dan badannya, lalu
+  tambah `pic: '<id>',` di entri registry-nya.

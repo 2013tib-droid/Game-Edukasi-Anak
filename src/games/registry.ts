@@ -181,6 +181,18 @@ const ALL_GAMES: GameMeta[] = [
     template: 'code-quest',
     load: () => import('@/games/tk/kode-kelinci'),
   },
+  {
+    // Coding anak bagian kedua (template `rule-sort`, 2026-10-15): PERCABANGAN —
+    // pasang tanda "kalau" di tiap kotak, mesin memilah mainan di ban
+    // berjalan. Seni ikon belum ada (prompt di docs/prompt-ikon-game.md),
+    // jadi 🧸 tampil sampai `pic` diisi.
+    id: 'pabrik-mainan',
+    group: 'tk',
+    title: 'Pabrik Mainan',
+    emoji: '🧸',
+    template: 'rule-sort',
+    load: () => import('@/games/tk/pabrik-mainan'),
+  },
   // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
   {
     // PALING ATAS (keputusan pemilik 2026-09-24, ditukar dengan "Pasang Kata"):
@@ -226,6 +238,17 @@ const ALL_GAMES: GameMeta[] = [
     pic: 'misi-kode',
     template: 'code-quest',
     load: () => import('@/games/sd1/misi-kode'),
+  },
+  {
+    // Saudara Pabrik Mainan (TK) yang lebih sulit: + ukuran, tanda LAINNYA
+    // (else), kotak dua tanda (DAN), dan urutan pemeriksaan. Seni ikon belum
+    // ada, jadi 🤖 tampil sampai `pic` diisi.
+    id: 'robot-pemilah',
+    group: 'sd1',
+    title: 'Robot Pemilah',
+    emoji: '🤖',
+    template: 'rule-sort',
+    load: () => import('@/games/sd1/robot-pemilah'),
   },
   {
     id: 'hitung-hebat',

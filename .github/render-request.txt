@@ -1,9 +1,9 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #49 — Waktu Tepat: tokoh "Dimas" jadi "Kakak" (permintaan pemilik).
-41 baris baru, semuanya scope waktu-tepat.
-
-only: waktu-tepat
+render #50 — dua game coding baru "percabangan" (template rule-sort):
+Pabrik Mainan (TK) & Robot Pemilah (SD Kelas 1 & 2). 31 baris baru di tiga
+scope (pabrik-mainan, robot-pemilah, shared — nama tanda & kalimat mesin),
+nol baris lama berubah/pindah scope. Sengaja TANPA baris "only" (tiga scope).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris

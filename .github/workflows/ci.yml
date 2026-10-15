@@ -77,6 +77,12 @@ jobs:
       - name: Periksa soal tulis
         run: node scripts/check-glyphs.mjs
 
+      # Game percabangan (Pabrik Mainan, Robot Pemilah): isi kotak WAJIB cukup
+      # untuk menebak aturannya — tebakan yang masuk akal dari bukti di layar
+      # tak boleh disalahkan mesin. Dicoba SEMUA susunan tanda dari baki.
+      - name: Periksa soal percabangan
+        run: node scripts/check-rule-levels.mjs
+
       # Sinkron bintang ke Firestore harus MENGGABUNG (maksimum per level),
       # tidak menimpa. Kalau ini jadi penulisan biasa, anak yang main di
       # tablet lalu di HP kehilangan bintang tabletnya — dan itu cuma

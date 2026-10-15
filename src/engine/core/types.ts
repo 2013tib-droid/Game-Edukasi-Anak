@@ -9,6 +9,7 @@ import type { Denom } from '@/engine/core/money';
 import type { PaintColor } from '@/engine/core/paint';
 import type { CollageArtId, CollageMaterial, MontageScene } from '@/engine/core/collage';
 import type { CodeProgram } from '@/engine/core/codeQuest';
+import type { RuleChip, RuleProgram, RuleToy } from '@/engine/core/ruleSort';
 
 export type GroupId = 'tk' | 'sd1' | 'sd2' | 'sd3';
 
@@ -35,7 +36,8 @@ export type TemplateId =
   | 'collage-studio' // sobek & tempel kolase, susun mozaik (Studio Kolase)
   | 'light-lab' // percobaan cahaya, bayangan, bunyi & energi (Lab Cahaya & Bunyi)
   | 'word-voyage' // kosakata & kalimat bahasa Inggris, 7 mode berganti (Kapten Kata)
-  | 'code-quest'; // susun kartu panah lalu Jalankan — coding anak (Kode Kelinci, Misi Kode)
+  | 'code-quest' // susun kartu panah lalu Jalankan — coding anak (Kode Kelinci, Misi Kode)
+  | 'rule-sort'; // pasang tanda KALAU di kotak, mesin memilah mainan — percabangan (Pabrik Mainan, Robot Pemilah)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -1480,6 +1482,48 @@ export interface CodeQuestData {
   solution: CodeProgram;
 }
 
+/* ---------- rule-sort (Pabrik Mainan · Robot Pemilah) ---------- */
+
+/**
+ * Mesin "KALAU": anak memasang TANDA (warna / bentuk / ukuran / lainnya) di
+ * tiap kotak, menekan ▶️ Jalankan, lalu mainan berjalan di ban dari kiri ke
+ * kanan dan jatuh ke kotak PERTAMA yang tandanya cocok — percabangan
+ * `if / else if / else` yang terlihat. Logikanya satu sumber di
+ * `src/engine/core/ruleSort.ts`; builder `src/games/ruleLevels.ts`.
+ */
+export interface RuleBoxSpec {
+  /** Id seni item pemilik kotak (hewan WAJIB seni). */
+  owner: string;
+  /** Banyak tempat tanda: 2 = DAN (mainan harus cocok dengan keduanya). */
+  slots: 1 | 2;
+  /** Mainan yang SUDAH ada di kotak — bukti yang dibaca anak untuk menebak aturannya. */
+  examples?: RuleToy[];
+  /** Mode PERBAIKI: tanda yang sudah terpasang (ada yang salah). */
+  given?: RuleChip[];
+}
+
+export interface RuleSortData {
+  /** 2–3 kotak, urut dari kiri = urutan pemeriksaan mesin. */
+  boxes: RuleBoxSpec[];
+  /** Mainan yang akan dijalankan mesin (urut). */
+  queue: RuleToy[];
+  /** Tanda di baki (persediaan tak terbatas). */
+  tray: RuleChip[];
+  /**
+   * Pesanan TERLIHAT: tiap pemilik memegang gelembung berisi tandanya (level
+   * perkenalan TK). Tanpa ini anak harus MENEBAK aturannya dari `examples`.
+   */
+  bubbles?: boolean;
+  /** Rupa mesin pengeluar mainan: corong (bawaan, TK) atau kepala robot (SD). */
+  machine?: 'corong' | 'robot';
+  /**
+   * Satu program yang benar — DIPERIKSA builder & `check-rule-levels.mjs`.
+   * Kotak tujuan tiap mainan dihitung darinya (`expectedBoxes`), dan dipakai
+   * petunjuk P2.
+   */
+  solution: RuleProgram;
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -1504,6 +1548,7 @@ export interface LevelDataMap {
   'light-lab': LightLabData;
   'word-voyage': WordVoyageData;
   'code-quest': CodeQuestData;
+  'rule-sort': RuleSortData;
 }
 
 /* ---------- Game config ---------- */
