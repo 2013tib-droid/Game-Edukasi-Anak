@@ -102,6 +102,7 @@ const mod = await load(
     `\nexport { sentenceText } from ${JSON.stringify(path.resolve('src/engine/core/wordTrain.ts').split(path.sep).join('/'))};` +
     `\nexport { mixPaint, mixLine, batikLine } from ${JSON.stringify(path.resolve('src/engine/core/paint.ts').split(path.sep).join('/'))};` +
     `\nexport { CODE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/codeQuest.ts').split(path.sep).join('/'))};` +
+    `\nexport { RULE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/ruleSort.ts').split(path.sep).join('/'))};` +
     `\nexport { phraseText, VOY_LINES } from ${JSON.stringify(path.resolve('src/engine/core/wordVoyage.ts').split(path.sep).join('/'))};`,
 );
 
@@ -206,6 +207,16 @@ for (const config of mod.configs) {
       }
       for (const line of [L.bump, L.short, L.empty]) add(line, config.id, voice);
       if (level.data.grid.some((row) => row.includes('*'))) add(L.missing, config.id, voice);
+      continue;
+    }
+
+    // rule-sort (Pabrik Mainan · Robot Pemilah): every chip on the tray is
+    // read aloud when touched, and a failed run says why (RULE_LINES — the
+    // SAME object the template uses).
+    if ((level.template ?? config.template) === 'rule-sort') {
+      const L = mod.RULE_LINES;
+      for (const chip of level.data.tray) add(L.chip[chip], config.id, voice);
+      for (const line of [L.wrongBox, L.noBox, L.empty]) add(line, config.id, voice);
       continue;
     }
 

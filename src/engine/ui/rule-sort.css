@@ -1,0 +1,828 @@
+/*
+ * Template `rule-sort` (Pabrik Mainan · Robot Pemilah). Hanya diunduh bersama
+ * chunk template-nya.
+ *
+ * Tingginya PASTI (pola code-quest): `.rs-wrap` = tinggi layar dikurangi baris
+ * atas engine. Pabrik (`.rs-factory`) `flex: 1 1 0`, jadi kotak-kotaknya
+ * mengisi sisa layar sesudah kalimat soal, baki tanda, dan tombol Jalankan.
+ */
+
+.rs-wrap {
+  height: calc(100dvh - 92px - env(safe-area-inset-bottom));
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  --rs-toy: 40px;
+  --rs-in: 42px;
+  --rs-chip: 46px;
+  --rs-slot: 50px;
+}
+
+.rs-prompt {
+  flex: 0 0 auto;
+  font-size: 19px;
+  line-height: 1.28;
+  margin: 0;
+}
+
+/* ---------- Pabrik ---------- */
+
+.rs-factory {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 8px 10px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.7), transparent 45%),
+    linear-gradient(180deg, #dff3ff, #c6e7fb);
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 255, 255, 0.7),
+    0 4px 0 #9cc9e4;
+}
+
+.rs-queue {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 46px;
+}
+
+.rs-funnel {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+}
+
+.rs-funnel svg {
+  width: 100%;
+  height: 100%;
+}
+
+.rs-queue__toys {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  padding: 0 8px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: inset 0 2px 0 rgba(60, 120, 170, 0.12);
+  overflow: hidden;
+}
+
+.rs-queue__slot {
+  flex: 0 1 auto;
+  min-width: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  transition: opacity 0.2s;
+}
+
+.rs-queue__slot .rs-toy {
+  width: 34px;
+  height: 34px;
+}
+
+.rs-queue__slot .rs-toy--small {
+  width: 22px;
+  height: 22px;
+}
+
+.rs-queue__slot--gone {
+  opacity: 0;
+}
+
+/* Ban berjalan: garis bergerak ke KANAN selagi mesin jalan. */
+.rs-belt {
+  position: relative;
+  flex: 0 0 auto;
+  height: 26px;
+  margin: 6px 0 24px;
+  border-radius: 13px;
+  background: #4b5563;
+  box-shadow:
+    inset 0 -4px 0 rgba(0, 0, 0, 0.25),
+    0 3px 0 #2f3742;
+  overflow: hidden;
+}
+
+.rs-belt__top {
+  position: absolute;
+  inset: 4px 6px 7px;
+  border-radius: 8px;
+  background: repeating-linear-gradient(90deg, #6b7686 0 14px, #5a6474 14px 28px);
+}
+
+.rs-belt--on .rs-belt__top {
+  animation: rs-belt 0.5s linear infinite;
+}
+
+.rs-belt__arrow {
+  position: absolute;
+  right: 8px;
+  top: 3px;
+  width: 30px;
+  height: 18px;
+  opacity: 0.85;
+}
+
+.rs-belt__arrow svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes rs-belt {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 28px 0;
+  }
+}
+
+/* ---------- Kotak ---------- */
+
+.rs-boxes {
+  flex: 1 1 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--rs-cols);
+  gap: 8px;
+}
+
+.rs-col {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 18px;
+  transition: background-color 0.15s;
+  container-type: inline-size;
+}
+
+.rs-box {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 6px 6px;
+  border-radius: 10px 10px 16px 16px;
+  background: linear-gradient(180deg, #e7b77c, #d9a061);
+  box-shadow:
+    inset 0 6px 0 #c58947,
+    inset 0 0 0 2px rgba(120, 70, 20, 0.25),
+    0 4px 0 #b07b3f;
+}
+
+/* Bibir kotak yang terbuka di atas. */
+.rs-box::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  right: -3px;
+  top: -4px;
+  height: 10px;
+  border-radius: 6px;
+  background: #f0c48d;
+  box-shadow: 0 2px 0 #b07b3f;
+}
+
+.rs-owner {
+  position: absolute;
+  right: -4px;
+  top: -36px;
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.rs-owner__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.18));
+}
+
+.rs-owner__emoji {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.rs-owner--cheer {
+  animation: rs-cheer 0.5s ease-out;
+}
+
+@keyframes rs-cheer {
+  40% {
+    translate: 0 -10px;
+    scale: 1.12;
+  }
+}
+
+/* Gelembung pesanan (level perkenalan): tanda yang diminta pemilik kotak. */
+.rs-bubble {
+  position: absolute;
+  right: 40px;
+  top: -30px;
+  z-index: 2;
+  display: flex;
+  gap: 2px;
+  padding: 4px 5px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+}
+
+.rs-bubble::after {
+  content: '';
+  position: absolute;
+  right: -10px;
+  bottom: 7px;
+  border: 6px solid transparent;
+  border-left-color: #fff;
+}
+
+.rs-bubble .rs-chipart {
+  width: 26px;
+  height: 26px;
+}
+
+.rs-box__inside {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 8px;
+  background: rgba(110, 60, 15, 0.22);
+  box-shadow: inset 0 3px 0 rgba(80, 40, 5, 0.18);
+  overflow: hidden;
+}
+
+.rs-toy {
+  display: inline-grid;
+  place-items: center;
+  width: var(--rs-toy);
+  height: var(--rs-toy);
+}
+
+.rs-toy svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rs-toy--small svg {
+  width: 62%;
+  height: 62%;
+}
+
+.rs-toy--in {
+  width: calc(var(--rs-in) * 0.8);
+  height: calc(var(--rs-in) * 0.8);
+}
+
+/*
+ * Isi kotak diukur terhadap KOTAK DALAMNYA (lebar DAN tinggi): dua mainan
+ * sebaris dua baris; makin penuh, makin kecil — mainan yang terakhir masuk
+ * tak boleh terpotong. Browser tanpa container query memakai ukuran di atas.
+ */
+@supports (container-type: size) {
+  .rs-box__inside {
+    container-type: size;
+  }
+
+  .rs-toy--in {
+    width: min(var(--rs-in), calc((100cqw - 12px) / 2), calc((100cqh - 12px) / 2));
+    height: min(var(--rs-in), calc((100cqw - 12px) / 2), calc((100cqh - 12px) / 2));
+  }
+
+  .rs-box__inside--crowd .rs-toy--in {
+    width: min(var(--rs-in), calc((100cqw - 14px) / 3), calc((100cqh - 12px) / 2));
+    height: min(var(--rs-in), calc((100cqw - 14px) / 3), calc((100cqh - 12px) / 2));
+  }
+
+  .rs-box__inside--packed .rs-toy--in {
+    width: min(var(--rs-in), calc((100cqw - 14px) / 3), calc((100cqh - 14px) / 3));
+    height: min(var(--rs-in), calc((100cqw - 14px) / 3), calc((100cqh - 14px) / 3));
+  }
+}
+
+.rs-toy--new {
+  animation: rs-plop 0.3s ease-out;
+}
+
+.rs-toy--bad {
+  position: relative;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 2px #e03131;
+}
+
+@keyframes rs-plop {
+  from {
+    scale: 1.5;
+  }
+}
+
+/* Papan nama = tempat tanda KALAU. */
+.rs-plate {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 6px;
+  padding: 4px;
+  border-radius: 12px;
+  background: #fffaf0;
+  box-shadow:
+    0 0 0 2px #b07b3f,
+    inset 0 -3px 0 rgba(176, 123, 63, 0.18);
+}
+
+.rs-plate--ping {
+  animation: rs-shake 0.4s;
+}
+
+.rs-plate__cell {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.rs-plus {
+  font-size: 18px;
+  font-weight: 900;
+  color: #8a5a22;
+  margin: 0 1px;
+}
+
+.rs-slot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--rs-slot);
+  height: var(--rs-slot);
+  padding: 3px;
+  border: 2.5px dashed #c49a63;
+  border-radius: 12px;
+  background: #fff;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rs-slot {
+  width: min(var(--rs-slot), calc(100cqw - 22px));
+  height: min(var(--rs-slot), calc(100cqw - 22px));
+}
+
+/* Dua tanda (DAN) harus muat berdampingan + tanda "+" di kotak tersempit. */
+.rs-plate--two .rs-slot {
+  width: min(calc(var(--rs-slot) - 4px), calc((100cqw - 34px) / 2));
+  height: min(calc(var(--rs-slot) - 4px), calc((100cqw - 34px) / 2));
+}
+
+.rs-slot--full {
+  border: 2.5px solid #e2c7a0;
+}
+
+.rs-slot--sel {
+  border-color: #1f72dc;
+  border-style: solid;
+  box-shadow: 0 0 0 3px rgba(31, 114, 220, 0.25);
+  animation: rs-glow 1s ease-in-out infinite;
+}
+
+.rs-slot:disabled {
+  cursor: default;
+}
+
+.rs-slot--hit {
+  border-color: #2f9e44;
+  box-shadow: 0 0 0 4px rgba(47, 158, 68, 0.35);
+}
+
+.rs-slot--miss {
+  border-color: #9aa5b1;
+  opacity: 0.75;
+}
+
+.rs-slot--hintbad {
+  border: 3px dashed #e03131;
+}
+
+.rs-mark {
+  position: absolute;
+  right: -7px;
+  top: -9px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 900;
+  color: #fff;
+  animation: rs-plop 0.25s ease-out;
+}
+
+.rs-mark--yes {
+  background: #2f9e44;
+}
+
+.rs-mark--no {
+  background: #868e96;
+}
+
+.rs-chipart {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.rs-chipart svg {
+  width: 100%;
+  height: 100%;
+}
+
+.rs-col--yes .rs-box {
+  box-shadow:
+    inset 0 6px 0 #c58947,
+    0 0 0 4px #69db7c,
+    0 4px 0 #b07b3f;
+}
+
+.rs-col--bad .rs-box {
+  animation: rs-shake 0.45s 2;
+  box-shadow:
+    inset 0 6px 0 #c58947,
+    0 0 0 4px #ff8787,
+    0 4px 0 #b07b3f;
+}
+
+.rs-col--hint .rs-plate {
+  box-shadow:
+    0 0 0 3px #1f72dc,
+    0 0 12px 3px rgba(31, 114, 220, 0.45);
+  animation: rs-glow 1.1s ease-in-out infinite;
+}
+
+@keyframes rs-shake {
+  20%,
+  60% {
+    translate: -5px 0;
+  }
+  40%,
+  80% {
+    translate: 5px 0;
+  }
+}
+
+@keyframes rs-glow {
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ---------- Mainan yang sedang berjalan ---------- */
+
+.rs-token {
+  position: absolute;
+  left: calc(var(--rs-toy) / -2);
+  top: calc(var(--rs-toy) / -2);
+  z-index: 5;
+  width: var(--rs-toy);
+  height: var(--rs-toy);
+  pointer-events: none;
+  transition: transform 0.3s ease-in-out;
+  filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.2));
+}
+
+.rs-token .rs-toy {
+  width: 100%;
+  height: 100%;
+}
+
+.rs-token--fall {
+  transition:
+    transform 0.5s ease-in,
+    opacity 0.5s ease-in;
+  opacity: 0;
+}
+
+/* ---------- Baki tanda ---------- */
+
+.rs-tray {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 18px;
+  background: #fff7e0;
+  box-shadow: inset 0 0 0 2px #ffe08a;
+  touch-action: none;
+}
+
+.rs-traychip {
+  display: grid;
+  place-items: center;
+  /* Satu baris selalu: tanda menyusut (maks 7 tanda → ≥36 px di HP 320). */
+  flex: 0 1 var(--rs-chip);
+  min-width: 0;
+  aspect-ratio: 1;
+  height: auto;
+  padding: 5px;
+  border: none;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow:
+    0 0 0 2px #f0d58a,
+    0 4px 0 #e2bd5a;
+  cursor: grab;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rs-traychip:active:not(:disabled) {
+  translate: 0 2px;
+  box-shadow:
+    0 0 0 2px #f0d58a,
+    0 2px 0 #e2bd5a;
+}
+
+.rs-traychip:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.rs-traychip--hint {
+  box-shadow:
+    0 0 0 3px #1f72dc,
+    0 0 14px 4px rgba(31, 114, 220, 0.5);
+  animation: rs-hintpulse 0.9s ease-in-out infinite;
+}
+
+@keyframes rs-hintpulse {
+  50% {
+    scale: 1.1;
+  }
+}
+
+.rs-ghost {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.92;
+  scale: 1.12;
+}
+
+/* ---------- Tombol Jalankan ---------- */
+
+.rs-actions {
+  flex: 0 0 auto;
+  display: flex;
+}
+
+.rs-run {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 58px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ffe35c, #ffbf1a);
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -4px 0 rgba(204, 120, 0, 0.18),
+    0 5px 0 #e09700,
+    0 8px 14px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rs-run:active:not(:disabled) {
+  translate: 0 3px;
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.6),
+    0 2px 0 #e09700;
+}
+
+.rs-run:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.rs-run__play {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: linear-gradient(180deg, #4aa6ff, #1f72dc);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.45),
+    0 3px 0 #1556a8;
+}
+
+.rs-run__play svg {
+  width: 62%;
+  height: 62%;
+}
+
+.rs-run__text {
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1;
+  color: #5a2d0c;
+  -webkit-text-stroke: 5px #fff;
+  paint-order: stroke fill;
+}
+
+/* ---------- HP kecil / pendek ---------- */
+
+@media (max-width: 360px) {
+  .rs-tray {
+    gap: 5px;
+    padding: 6px;
+  }
+
+  .rs-wrap {
+    --rs-chip: 42px;
+    --rs-slot: 44px;
+    --rs-in: 34px;
+  }
+
+  .rs-boxes {
+    gap: 6px;
+  }
+}
+
+@media (max-height: 660px) {
+  .rs-wrap {
+    gap: 6px;
+    --rs-toy: 36px;
+  }
+
+  .rs-prompt {
+    font-size: 17px;
+  }
+
+  .rs-queue {
+    height: 40px;
+  }
+
+  .rs-belt {
+    margin: 4px 0 22px;
+  }
+
+  .rs-run {
+    min-height: 52px;
+  }
+
+  .rs-run__text {
+    font-size: 22px;
+  }
+
+  .rs-tray {
+    padding: 6px;
+    gap: 5px;
+  }
+}
+
+/* HP dimiringkan: pabrik di kiri, baki + Jalankan di kanan. */
+@media (min-aspect-ratio: 4/3) and (max-height: 520px) {
+  .rs-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    column-gap: 10px;
+    --rs-toy: 34px;
+    --rs-slot: 42px;
+    --rs-chip: 40px;
+  }
+
+  .rs-prompt {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 16px;
+  }
+
+  .rs-factory {
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+
+  .rs-tray {
+    grid-column: 2;
+    grid-row: 2;
+    align-content: center;
+    /* Kolom kanan cuma ±280 px: tujuh tanda sebaris jadi 33 px — di sini
+       tingginya lega, jadi boleh dua baris dengan tanda berukuran penuh. */
+    flex-wrap: wrap;
+  }
+
+  .rs-traychip {
+    flex: 0 0 var(--rs-chip);
+  }
+
+  .rs-actions {
+    grid-column: 2;
+    grid-row: 3;
+  }
+}
+
+/* Tablet: pabrik tak dibiarkan memanjang kosong — tingginya dibatasi dan
+   seluruh isi layar ditengahkan. */
+@media (min-width: 600px) and (min-height: 800px) {
+  .rs-wrap {
+    --rs-toy: 52px;
+    --rs-in: 58px;
+    --rs-chip: 64px;
+    --rs-slot: 68px;
+    justify-content: center;
+    max-width: 720px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .rs-factory {
+    flex: 0 1 600px;
+  }
+
+  .rs-queue {
+    height: 58px;
+  }
+
+  .rs-queue__slot,
+  .rs-queue__slot .rs-toy {
+    width: 48px;
+    height: 48px;
+  }
+
+  .rs-queue__slot .rs-toy--small {
+    width: 30px;
+    height: 30px;
+  }
+
+  .rs-funnel {
+    width: 52px;
+    height: 52px;
+  }
+
+  .rs-prompt {
+    font-size: 22px;
+  }
+
+  .rs-owner {
+    width: 60px;
+    height: 60px;
+    top: -40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-belt--on .rs-belt__top,
+  .rs-owner--cheer,
+  .rs-slot--sel,
+  .rs-traychip--hint,
+  .rs-col--hint .rs-plate {
+    animation: none;
+  }
+}
+
+/* HP 320: tujuh tanda sebaris tetap ≥ 36 px (jarak & bingkai baki dirapatkan). */
+@media (max-width: 340px) {
+  .rs-tray {
+    gap: 3px;
+    padding: 4px;
+  }
+
+  .rs-traychip {
+    padding: 4px;
+  }
+}

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-15",
-  "count": 2060,
-  "chars": 85859,
+  "count": 2091,
+  "chars": 87024,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -12559,6 +12559,78 @@
       ]
     },
     {
+      "key": "cce481634a12",
+      "text": "Ada tanda yang tertukar! Lihat isi kotaknya, lalu perbaiki.",
+      "scope": "pabrik-mainan",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan"
+      ]
+    },
+    {
+      "key": "3d7c8f931c3a",
+      "text": "Ada tiga kotak! Lihat isinya, lalu pasang tanda yang cocok.",
+      "scope": "pabrik-mainan",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan"
+      ]
+    },
+    {
+      "key": "e39c0762c9f4",
+      "text": "Hmm, warna atau bentuk? Lihat isi kotaknya baik-baik!",
+      "scope": "pabrik-mainan",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan"
+      ]
+    },
+    {
+      "key": "1e1a5c1d8138",
+      "text": "Lihat isi kotaknya. Bentuk apa yang ada di dalam? Pasang tandanya!",
+      "scope": "pabrik-mainan",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan"
+      ]
+    },
+    {
+      "key": "6b6e20e3a197",
+      "text": "Lihat isi kotaknya. Warna apa yang ada di dalam? Pasang tandanya!",
+      "scope": "pabrik-mainan",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan"
+      ]
+    },
+    {
+      "key": "5a1e93380475",
+      "text": "Lihat pesanan hewan. Pasang tanda warnanya, lalu tekan Jalankan!",
+      "scope": "pabrik-mainan",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan"
+      ]
+    },
+    {
+      "key": "33e244a1fbc7",
+      "text": "Misi besar! Pasang tanda di tiga kotak!",
+      "scope": "pabrik-mainan",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan"
+      ]
+    },
+    {
+      "key": "75f39bf2977b",
+      "text": "Sekarang pesanannya bentuk. Pasang tanda bentuknya, ya!",
+      "scope": "pabrik-mainan",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan"
+      ]
+    },
+    {
       "key": "94b9e004cc85",
       "text": "Pasangkan hewan dengan makanannya!",
       "scope": "pasang-kata",
@@ -13753,6 +13825,114 @@
       "voice": "gadis",
       "games": [
         "puzzle-gambar"
+      ]
+    },
+    {
+      "key": "b7c2bb971217",
+      "text": "Ada mainan besar dan kecil. Lihat isinya, lalu pasang tandanya!",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "0370e213f855",
+      "text": "Besar",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "23ec4523a9f3",
+      "text": "Kecil",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "20c04286cbee",
+      "text": "Kotak ini punya dua tanda. Mainan harus cocok dengan keduanya!",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "844f8a723473",
+      "text": "Lainnya",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "da2cdfbd8f01",
+      "text": "Misi besar! Pecahkan aturan robotnya!",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "defdc163c01b",
+      "text": "Robot memeriksa kotak dari kiri. Atur tandanya!",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "5db6bee1fe56",
+      "text": "Semua mainan masuk kotak pertama. Perbaiki tandanya!",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "d91e3cb07c3b",
+      "text": "Tanda Lainnya artinya semua sisanya. Pakai di kotak terakhir!",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "aca7f1cc7d88",
+      "text": "Tiga kotak, satu untuk semua sisanya. Atur robotnya!",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "cb259fc95440",
+      "text": "Tiga kotak! Cari aturan setiap kotak dari isinya.",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "5c52a60399cb",
+      "text": "Warna atau bentuk? Lihat isi kotak, lalu pasang tandanya!",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
       ]
     },
     {
@@ -15014,6 +15194,46 @@
       ]
     },
     {
+      "key": "34cfb1def46e",
+      "text": "Bintang",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "2b96a7798ee4",
+      "text": "Biru",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "5d8d8084e7ad",
+      "text": "Hati",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "7c6d0c882b27",
+      "text": "Hijau",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
+      ]
+    },
+    {
       "key": "5d797c3add45",
       "text": "Kanan",
       "scope": "shared",
@@ -15031,6 +15251,16 @@
       "games": [
         "kode-kelinci",
         "misi-kode"
+      ]
+    },
+    {
+      "key": "753da4c404aa",
+      "text": "Kuning",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
       ]
     },
     {
@@ -15054,6 +15284,26 @@
       ]
     },
     {
+      "key": "129a595a14ea",
+      "text": "Lingkaran",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "a50bd0938e21",
+      "text": "Mainan ini tidak cocok dengan kotak mana pun. Ubah tandanya, ya!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
+      ]
+    },
+    {
       "key": "212c7df6a4bd",
       "text": "Masih ada yang belum diambil. Coba lagi, ya!",
       "scope": "shared",
@@ -15061,6 +15311,36 @@
       "games": [
         "kode-kelinci",
         "misi-kode"
+      ]
+    },
+    {
+      "key": "c04679007f0d",
+      "text": "Merah",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "d8615acb1173",
+      "text": "Pasang tanda di setiap kotak dulu, ya!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "7d59654a8154",
+      "text": "Segitiga",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
       ]
     },
     {
@@ -15081,6 +15361,16 @@
       "games": [
         "kode-kelinci",
         "misi-kode"
+      ]
+    },
+    {
+      "key": "7aad32a51a79",
+      "text": "Ups, mainan ini masuk kotak yang salah. Ubah tandanya, ya!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
       ]
     },
     {
