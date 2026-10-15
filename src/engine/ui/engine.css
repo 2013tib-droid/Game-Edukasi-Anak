@@ -201,6 +201,55 @@
   margin-inline: auto;
 }
 
+/* TapAnswerData.choiceScenes: kartu ADEGAN, satu per baris — gambar di kiri
+   (lebarnya diambil dari kartu, bukan cqw milik kartu kolom), kalimat di
+   kanan. Ditulis sesudah aturan `.choice-img` ber-cqw dengan specificity
+   lebih tinggi supaya menang. */
+.choice-grid--scenes {
+  grid-template-columns: 1fr;
+  gap: 10px;
+  width: 100%;
+  max-width: 460px;
+  margin-inline: auto;
+}
+.choice-grid--scenes .choice-card {
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 12px;
+  min-height: 0;
+  padding: 5px 14px 5px 5px;
+}
+.choice-grid--scenes .choice-card .choice-img {
+  width: min(44%, 18dvh);
+  height: auto;
+  aspect-ratio: 360 / 330;
+  flex: none;
+  border-radius: 14px;
+}
+.choice-grid--scenes .choice-card .choice-text {
+  flex: 1;
+  text-align: left;
+  font-size: clamp(17px, 5vw, 21px);
+}
+@media (min-aspect-ratio: 4/3) {
+  .choice-grid--scenes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 640px;
+  }
+  .choice-grid--scenes .choice-card {
+    flex-direction: column;
+    justify-content: center;
+    padding: 6px;
+  }
+  .choice-grid--scenes .choice-card .choice-img {
+    width: min(100%, 30dvh);
+  }
+  .choice-grid--scenes .choice-card .choice-text {
+    text-align: center;
+    font-size: 16px;
+  }
+}
+
 /* Counting board ("Beli Buah"): four fixed columns with a tighter gap than
    the answer grid, so each cell — and the fruit in it — is as wide as the
    phone allows. Cells are square-ish rather than tall-and-empty. */
@@ -243,7 +292,7 @@
    target sentuh 64 px. Grid empat kartu sengaja tak disentuh (2 + 2 lebih rapi
    daripada 3 + 1). Browser tanpa `:has()` mengabaikannya → perilaku lama. */
 @media (max-width: 340px) {
-  .choice-grid:not(.choice-grid--pics):has(> :nth-child(3):last-child) {
+  .choice-grid:not(.choice-grid--pics):not(.choice-grid--scenes):has(> :nth-child(3):last-child) {
     gap: 8px;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

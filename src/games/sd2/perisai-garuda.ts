@@ -81,6 +81,17 @@ function ask(narration: string, answer: Opt, decoys: Opt[], picture?: string): M
   };
 }
 
+/** Seperti `ask`, tapi tiap pilihan bergambar ADEGAN (beberapa tokoh): kartunya
+ *  satu per baris supaya gerakan tokohnya terbaca (`choiceScenes`). */
+function askScenes(narration: string, answer: Opt, decoys: Opt[]): MixedLevel {
+  return {
+    id: '',
+    narration,
+    template: 'tap-answer',
+    data: { choices: cards(answer, decoys), choiceScenes: true },
+  };
+}
+
 /** Soal yang jawabannya lambang sila (tiga kartu sebaris). */
 function pickSila(narration: string, answer: SilaId, picture?: string): MixedLevel {
   return {
@@ -399,12 +410,12 @@ const config: MixedGameConfig = {
           ['Mengganggunya', '😜'],
         ],
       ),
-      ask(
+      askScenes(
         'Temanmu bicara bahasa daerah dengan neneknya. Apa sikapmu?',
-        ['Mendengarkan dan menghargainya', '🗣️'],
+        ['Mendengarkan dan menghargainya', '🗣️', 'bahasa-dengar'],
         [
-          ['Menirukannya sambil mengejek', '🗣️'],
-          ['Menyuruhnya diam', '🗣️'],
+          ['Menirukannya sambil mengejek', '🗣️', 'bahasa-ejek'],
+          ['Menyuruhnya diam', '🗣️', 'bahasa-diam'],
         ],
       ),
       ask(

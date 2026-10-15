@@ -65,6 +65,14 @@ export const ITEMS: Record<string, ItemDef> = {
   // kiriman pemilik. Jangan diubah/dikarang warnanya, dan jangan dipakai
   // sebagai hiasan sembarangan: ini lambang negara.
   garuda: { emoji: '🦅', label: 'Garuda Pancasila', ext: 'webp' },
+  // Tiga adegan "teman bicara bahasa daerah dengan neneknya" (Perisai Garuda,
+  // soal keberagaman) — satu per sikap. Latarnya SENGAJA putih opak, tidak
+  // dipotong: kerudung putih & balon kata krem menempel ke latar putih, jadi
+  // pemotong mana pun ikut memakannya. Kartu jawaban memang putih (#fff),
+  // jadi hanya aman dipakai di atas latar putih.
+  'bahasa-dengar': { emoji: '🗣️', label: 'mendengarkan dengan hormat', ext: 'webp' },
+  'bahasa-ejek': { emoji: '🗣️', label: 'menirukan sambil mengejek', ext: 'webp' },
+  'bahasa-diam': { emoji: '🗣️', label: 'menyuruh diam', ext: 'webp' },
   jalak: { emoji: '🐦', label: 'burung jalak', ext: 'webp' },
   // ILUSTRASI HALAMAN CERITA, bukan benda yang bisa dihitung. Gambarnya satu
   // adegan utuh (Kancil berjalan di tepi rawa) berikut latarnya sendiri, jadi

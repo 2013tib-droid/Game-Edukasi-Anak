@@ -286,6 +286,7 @@ export default function TapAnswer({ level, onCorrect, onWrong, hint }: TemplateP
             'choice-grid' +
             (pictureChoices ? ' choice-grid--pics' : '') +
             (level.data.choiceRow ? ' choice-grid--row' : '') +
+            (level.data.choiceScenes ? ' choice-grid--scenes' : '') +
             (choices.some((c) => c.chart) ? ' choice-grid--charts' : '')
           }
         >
