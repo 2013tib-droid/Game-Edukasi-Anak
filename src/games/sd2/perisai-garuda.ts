@@ -148,13 +148,22 @@ function slot(id: string, stamp: LevelStamp, ...variants: MixedLevel[]): MixedLe
   return variants.map((v) => ({ ...v, id, stamp }));
 }
 
-function page(emoji: string, text: string, scene?: StoryPage['scene']): StoryPage {
-  return { emoji, text, scene };
+/** `art` = ilustrasi adegan di `public/assets/story/<art>.webp`; emoji tetap
+ *  jadi cadangan kalau berkasnya gagal dimuat. */
+function page(emoji: string, text: string, scene?: StoryPage['scene'], art?: string): StoryPage {
+  return { emoji, text, scene, art };
 }
 
-function decide(text: string, right: string, wrong: string, feedback: string): StoryPage {
+function decide(
+  text: string,
+  right: string,
+  wrong: string,
+  feedback: string,
+  art?: string,
+): StoryPage {
   return {
     emoji: '🤔',
+    art,
     text,
     choices: [{ text: right, correct: true }, { text: wrong, feedback }],
   };
@@ -456,14 +465,21 @@ const config: MixedGameConfig = {
             '🧹',
             'Minggu pagi, warga kampung Budi bekerja bakti membersihkan selokan.',
             'kota',
+            'kerja-bakti-pagi',
           ),
           decide(
             'Budi masih ingin bermain gim. Apa yang sebaiknya Budi lakukan?',
             'Ikut kerja bakti bersama warga',
             'Terus bermain gim di rumah',
             'Kerja bakti itu tugas semua warga, termasuk anak-anak. Ayo coba lagi!',
+            'kerja-bakti-gim',
           ),
-          page('🪣', 'Budi membawa ember dan membantu Pak RT mengangkat sampah.'),
+          page(
+            '🪣',
+            'Budi membawa ember dan membantu Pak RT mengangkat sampah.',
+            undefined,
+            'kerja-bakti-ember',
+          ),
           decide(
             'Ada warga yang belum kebagian sapu. Apa yang Budi lakukan?',
             'Memakai sapunya bergantian',
