@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import type { VoyPhrase, VoyWord, WordVoyageData } from '@/engine/core/types';
 import { sfx, speak, speakEnglish } from '@/engine/audio/sound';
@@ -86,7 +86,7 @@ export function WordPic({ w, size = 'md' }: { w: VoyWord; size?: 'sm' | 'md' | '
   if (w.color) return <span className={`${cls} wv-pic--swatch`} style={{ background: w.color }} aria-hidden />;
   if (w.num !== undefined)
     return (
-      <span className={`${cls} wv-pic--num`} aria-hidden>
+      <span className={`${cls} wv-pic--num`} style={{ '--wv-len': String(w.num).length } as CSSProperties} aria-hidden>
         {w.num}
       </span>
     );
