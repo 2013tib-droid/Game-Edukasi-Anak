@@ -1,9 +1,9 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #47 — Perisai Garuda: tokoh "Raka" jadi "Budi" (permintaan pemilik).
-5 baris baru, semuanya scope perisai-garuda.
+render #48 — Waktu Tepat: tokoh "Kancil" jadi "Dimas" (permintaan pemilik).
+41 baris baru, semuanya scope waktu-tepat.
 
-only: perisai-garuda
+only: waktu-tepat
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris

@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-15",
   "count": 2060,
-  "chars": 85900,
+  "chars": 85859,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -18207,8 +18207,8 @@
       ]
     },
     {
-      "key": "a74d9885767e",
-      "text": "Berapa menit Kancil istirahat?",
+      "key": "059fa6d6075e",
+      "text": "Berapa menit Dimas istirahat?",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18216,8 +18216,8 @@
       ]
     },
     {
-      "key": "cd4c9a05203a",
-      "text": "Dua puluh lima menit lagi Kancil makan siang. Putar jarumnya!",
+      "key": "67ce61850bb0",
+      "text": "Dimas bangun pukul enam kurang seperempat. Putar jarum panjangnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18225,8 +18225,8 @@
       ]
     },
     {
-      "key": "53a0e2402fc7",
-      "text": "Dua puluh menit lagi Kancil makan siang. Putar jarumnya!",
+      "key": "bfab4d49aa2e",
+      "text": "Dimas bangun pukul enam lewat seperempat. Putar jarum panjangnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18234,8 +18234,8 @@
       ]
     },
     {
-      "key": "7d2b0f0ecd4c",
-      "text": "Empat puluh menit lagi Kancil makan siang. Putar jarumnya!",
+      "key": "82ce31d975cb",
+      "text": "Dimas bangun pukul lima lewat seperempat. Putar jarum panjangnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18243,8 +18243,8 @@
       ]
     },
     {
-      "key": "477a16c6c88a",
-      "text": "Jadi, berapa menit Kancil membaca?",
+      "key": "97308a4e053e",
+      "text": "Dimas bangun pukul setengah enam. Putar jarum panjangnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18252,8 +18252,8 @@
       ]
     },
     {
-      "key": "ed888aa2afbe",
-      "text": "Kancil bangun pukul enam kurang seperempat. Putar jarum panjangnya!",
+      "key": "2829abedb5ea",
+      "text": "Dimas bangun pukul setengah tujuh. Putar jarum panjangnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18261,8 +18261,8 @@
       ]
     },
     {
-      "key": "0ac72feadaf6",
-      "text": "Kancil bangun pukul enam lewat seperempat. Putar jarum panjangnya!",
+      "key": "bb52ce6a0293",
+      "text": "Dimas bangun pukul tujuh kurang seperempat. Putar jarum panjangnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18270,8 +18270,8 @@
       ]
     },
     {
-      "key": "b5b9de7374bd",
-      "text": "Kancil bangun pukul lima lewat seperempat. Putar jarum panjangnya!",
+      "key": "fc6fda81f71d",
+      "text": "Dimas berangkat ke sekolah. Pukul berapa sekarang?",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18279,8 +18279,8 @@
       ]
     },
     {
-      "key": "2fef267e3d58",
-      "text": "Kancil bangun pukul setengah enam. Putar jarum panjangnya!",
+      "key": "0bd150bce546",
+      "text": "Dimas berhitung selama dua puluh lima menit. Putar jarumnya sampai selesai!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18288,8 +18288,8 @@
       ]
     },
     {
-      "key": "319b5b94a226",
-      "text": "Kancil bangun pukul setengah tujuh. Putar jarum panjangnya!",
+      "key": "2bc8d08c7027",
+      "text": "Dimas berolahraga selama empat puluh menit. Putar jarumnya sampai selesai!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18297,8 +18297,8 @@
       ]
     },
     {
-      "key": "c22269e9a651",
-      "text": "Kancil bangun pukul tujuh kurang seperempat. Putar jarum panjangnya!",
+      "key": "00eea3daa7fa",
+      "text": "Dimas istirahat sampai jam yang tertulis. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18306,8 +18306,8 @@
       ]
     },
     {
-      "key": "b1ed6f2ef407",
-      "text": "Kancil berangkat ke sekolah. Pukul berapa sekarang?",
+      "key": "cc528f250251",
+      "text": "Dimas mandi pada jam yang tertulis. Atur jamnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18315,8 +18315,8 @@
       ]
     },
     {
-      "key": "5b9b941a7c84",
-      "text": "Kancil berhitung selama dua puluh lima menit. Putar jarumnya sampai selesai!",
+      "key": "17f085404769",
+      "text": "Dimas membaca selama dua puluh menit. Putar jarumnya sampai selesai!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18324,8 +18324,8 @@
       ]
     },
     {
-      "key": "4648cb791956",
-      "text": "Kancil berolahraga selama empat puluh menit. Putar jarumnya sampai selesai!",
+      "key": "2b1d34b4768f",
+      "text": "Dimas membaca selama satu jam lebih dua puluh menit. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18333,8 +18333,8 @@
       ]
     },
     {
-      "key": "074d9e805349",
-      "text": "Kancil istirahat sampai jam yang tertulis. Putar jarumnya!",
+      "key": "605d0c4c5160",
+      "text": "Dimas membaca selama satu jam lebih lima menit. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18342,8 +18342,8 @@
       ]
     },
     {
-      "key": "47f5da04f215",
-      "text": "Kancil mandi pada jam yang tertulis. Atur jamnya!",
+      "key": "a61ee012b184",
+      "text": "Dimas membaca selama satu jam lebih sepuluh menit. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18351,8 +18351,8 @@
       ]
     },
     {
-      "key": "72b3a622dbcf",
-      "text": "Kancil membaca selama dua puluh menit. Putar jarumnya sampai selesai!",
+      "key": "de5ca0073c00",
+      "text": "Dimas membaca selama satu jam seperempat. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18360,8 +18360,8 @@
       ]
     },
     {
-      "key": "606fa697f625",
-      "text": "Kancil membaca selama satu jam lebih dua puluh menit. Putar jarumnya!",
+      "key": "6dccade68fb3",
+      "text": "Dimas membaca selama satu jam tiga perempat. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18369,8 +18369,8 @@
       ]
     },
     {
-      "key": "0068fc705b25",
-      "text": "Kancil membaca selama satu jam lebih lima menit. Putar jarumnya!",
+      "key": "72e4db8754ce",
+      "text": "Dimas membaca selama satu setengah jam. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18378,8 +18378,8 @@
       ]
     },
     {
-      "key": "dd3523158956",
-      "text": "Kancil membaca selama satu jam lebih sepuluh menit. Putar jarumnya!",
+      "key": "2e770e282caf",
+      "text": "Dimas menggambar selama lima belas menit. Putar jarumnya sampai selesai!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18387,8 +18387,8 @@
       ]
     },
     {
-      "key": "32e1beb9609e",
-      "text": "Kancil membaca selama satu jam seperempat. Putar jarumnya!",
+      "key": "850b528e4642",
+      "text": "Dimas menulis selama tiga puluh lima menit. Putar jarumnya sampai selesai!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18396,8 +18396,8 @@
       ]
     },
     {
-      "key": "f0d152ce059a",
-      "text": "Kancil membaca selama satu jam tiga perempat. Putar jarumnya!",
+      "key": "d210bc070b6e",
+      "text": "Dimas menyanyi selama tiga puluh menit. Putar jarumnya sampai selesai!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18405,8 +18405,8 @@
       ]
     },
     {
-      "key": "ecfd2f1140c4",
-      "text": "Kancil membaca selama satu setengah jam. Putar jarumnya!",
+      "key": "beb6d85698db",
+      "text": "Dimas sarapan pada jam yang tertulis. Atur jamnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18414,8 +18414,8 @@
       ]
     },
     {
-      "key": "78814e627ec5",
-      "text": "Kancil menggambar selama lima belas menit. Putar jarumnya sampai selesai!",
+      "key": "040d543a8938",
+      "text": "Dua puluh lima menit lagi Dimas makan siang. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18423,8 +18423,8 @@
       ]
     },
     {
-      "key": "3508abdad73d",
-      "text": "Kancil menulis selama tiga puluh lima menit. Putar jarumnya sampai selesai!",
+      "key": "c002eada7823",
+      "text": "Dua puluh menit lagi Dimas makan siang. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18432,8 +18432,8 @@
       ]
     },
     {
-      "key": "a12cc29d40f5",
-      "text": "Kancil menyanyi selama tiga puluh menit. Putar jarumnya sampai selesai!",
+      "key": "23d4b075ccac",
+      "text": "Empat puluh menit lagi Dimas makan siang. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18441,8 +18441,8 @@
       ]
     },
     {
-      "key": "6d6d4b5ad6a7",
-      "text": "Kancil sarapan pada jam yang tertulis. Atur jamnya!",
+      "key": "1d9f263230cc",
+      "text": "Jadi, berapa menit Dimas membaca?",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18450,8 +18450,8 @@
       ]
     },
     {
-      "key": "dced1a1e4b31",
-      "text": "Lalu Kancil makan malam selama dua puluh lima menit. Putar jarumnya!",
+      "key": "a53f4b59ae1b",
+      "text": "Lalu Dimas makan malam selama dua puluh lima menit. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18459,8 +18459,8 @@
       ]
     },
     {
-      "key": "e6fd3a7bc3c1",
-      "text": "Lalu Kancil makan malam selama dua puluh menit. Putar jarumnya!",
+      "key": "a9f024ac3a94",
+      "text": "Lalu Dimas makan malam selama dua puluh menit. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18468,8 +18468,8 @@
       ]
     },
     {
-      "key": "9da34449bff1",
-      "text": "Lalu Kancil makan malam selama empat puluh lima menit. Putar jarumnya!",
+      "key": "2ac047ed4573",
+      "text": "Lalu Dimas makan malam selama empat puluh lima menit. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18477,8 +18477,8 @@
       ]
     },
     {
-      "key": "b485daf25d41",
-      "text": "Lalu Kancil makan malam selama tiga puluh lima menit. Putar jarumnya!",
+      "key": "0d9755622c7b",
+      "text": "Lalu Dimas makan malam selama tiga puluh lima menit. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18486,8 +18486,8 @@
       ]
     },
     {
-      "key": "53cdbf26433a",
-      "text": "Lalu Kancil makan malam selama tiga puluh menit. Putar jarumnya!",
+      "key": "9254ad86bd40",
+      "text": "Lalu Dimas makan malam selama tiga puluh menit. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18495,8 +18495,8 @@
       ]
     },
     {
-      "key": "5c61ea3702d1",
-      "text": "Lima belas menit lagi Kancil makan siang. Putar jarumnya!",
+      "key": "21185c9dfed0",
+      "text": "Lima belas menit lagi Dimas makan siang. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18504,8 +18504,8 @@
       ]
     },
     {
-      "key": "af3377e683f4",
-      "text": "Lima puluh menit lagi Kancil makan siang. Putar jarumnya!",
+      "key": "7f0c2d09ec9b",
+      "text": "Lima puluh menit lagi Dimas makan siang. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18513,8 +18513,8 @@
       ]
     },
     {
-      "key": "d8ddf1927b69",
-      "text": "Misi malam! Kancil mandi pada jam yang tertulis. Atur jamnya!",
+      "key": "31faac7ce2e8",
+      "text": "Misi malam! Dimas mandi pada jam yang tertulis. Atur jamnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18522,8 +18522,8 @@
       ]
     },
     {
-      "key": "d8b6bec97977",
-      "text": "Pukul berapa Kancil makan siang?",
+      "key": "305502ed999e",
+      "text": "Pukul berapa Dimas makan siang?",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18531,8 +18531,8 @@
       ]
     },
     {
-      "key": "190502d96acc",
-      "text": "Sore hari, Kancil bermain di sungai pada jam yang tertulis. Atur jamnya!",
+      "key": "7974bd843d74",
+      "text": "Sore hari, Dimas bermain di sungai pada jam yang tertulis. Atur jamnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18540,8 +18540,8 @@
       ]
     },
     {
-      "key": "5cdbb89ef6a8",
-      "text": "Sore hari, Kancil bersepeda pada jam yang tertulis. Atur jamnya!",
+      "key": "441540d330a7",
+      "text": "Sore hari, Dimas bersepeda pada jam yang tertulis. Atur jamnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18549,8 +18549,8 @@
       ]
     },
     {
-      "key": "d4550d4ac280",
-      "text": "Sore hari, Kancil menyiram kebun pada jam yang tertulis. Atur jamnya!",
+      "key": "58ae79e36946",
+      "text": "Sore hari, Dimas menyiram kebun pada jam yang tertulis. Atur jamnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18558,8 +18558,8 @@
       ]
     },
     {
-      "key": "dbe4c463b47c",
-      "text": "Terakhir, Kancil tidur pada jam yang tertulis. Atur jamnya!",
+      "key": "a1943e0fe0b5",
+      "text": "Terakhir, Dimas tidur pada jam yang tertulis. Atur jamnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
@@ -18567,8 +18567,8 @@
       ]
     },
     {
-      "key": "af152d1e70b7",
-      "text": "Tiga puluh menit lagi Kancil makan siang. Putar jarumnya!",
+      "key": "554c8646496a",
+      "text": "Tiga puluh menit lagi Dimas makan siang. Putar jarumnya!",
       "scope": "waktu-tepat",
       "voice": "gadis",
       "games": [
