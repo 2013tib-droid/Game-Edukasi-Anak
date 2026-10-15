@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-14",
+  "generated": "2026-10-15",
   "count": 2060,
-  "chars": 85892,
+  "chars": 85900,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -12928,15 +12928,6 @@
       ]
     },
     {
-      "key": "73d10f7e453a",
-      "text": "Bekal temanmu makanan khas daerahnya. Apa sikapmu?",
-      "scope": "perisai-garuda",
-      "voice": "gadis",
-      "games": [
-        "perisai-garuda"
-      ]
-    },
-    {
       "key": "085a0d09ad23",
       "text": "Dina berdoa sebelum makan. Ini sila yang mana?",
       "scope": "perisai-garuda",
@@ -13353,6 +13344,15 @@
     {
       "key": "af6ece7885c5",
       "text": "Teman sekelasmu berbeda agama. Bagaimana kalian berteman?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "52b5a6bb13df",
+      "text": "Temanmu bicara bahasa daerah dengan neneknya. Apa sikapmu?",
       "scope": "perisai-garuda",
       "voice": "gadis",
       "games": [

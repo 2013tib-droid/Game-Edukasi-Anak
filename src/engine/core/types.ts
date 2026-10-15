@@ -188,6 +188,14 @@ export interface TapAnswerData {
    */
   choiceRow?: boolean;
   /**
+   * Kartu jawaban berupa ADEGAN (gambar beberapa tokoh + kalimat sikap,
+   * Perisai Garuda): satu kartu per baris, gambar besar di kiri, kalimat di
+   * kanan. Di kartu sepertiga lebar layar adegannya cuma ±55 px dan gerakan
+   * tokohnya (ssst, mengejek, mendengar) tak terbaca. Layar mendatar tetap
+   * tiga kartu sebaris (di sana kartunya sudah lebar).
+   */
+  choiceScenes?: boolean;
+  /**
    * Written sum shown as one line under the picture board ("3 + 3 = ?").
    * Use it on EQUATION boards (addition/subtraction) so the child meets the
    * number symbols next to the pictures they just counted — never on a plain
