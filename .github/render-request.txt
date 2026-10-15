@@ -1,6 +1,6 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #48 — Waktu Tepat: tokoh "Kancil" jadi "Dimas" (permintaan pemilik).
+render #49 — Waktu Tepat: tokoh "Dimas" jadi "Kakak" (permintaan pemilik).
 41 baris baru, semuanya scope waktu-tepat.
 
 only: waktu-tepat
