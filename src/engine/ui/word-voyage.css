@@ -627,6 +627,12 @@
   font-size: 56cqw;
 }
 
+.wv-card__face .wv-pic--num {
+  /* Angka dua-tiga digit ("100") tak boleh meluber dari kotaknya. */
+  font-size: min(56cqw, calc(60cqw / (var(--wv-len, 1) * 0.62)));
+  white-space: nowrap;
+}
+
 .wv-card__face .wv-w {
   --wv-fs: clamp(12px, 19cqw, 24px);
 }
