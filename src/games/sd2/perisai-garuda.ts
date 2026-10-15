@@ -485,10 +485,13 @@ const config: MixedGameConfig = {
             'Memakai sapunya bergantian',
             'Menyembunyikan sapunya',
             'Gotong royong berarti saling membantu. Coba pikirkan lagi!',
+            'kerja-bakti-sapu',
           ),
           page(
             '✨',
             'Selokan bersih, kampung jadi indah. Bersama-sama, pekerjaan berat terasa ringan!',
+            undefined,
+            'kerja-bakti-bersih',
           ),
         ],
       },
