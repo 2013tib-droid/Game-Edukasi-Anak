@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { CSSProperties, PointerEvent as ReactPointerEvent } from 'react';
+import type { CSSProperties, KeyboardEvent as ReactKeyboardEvent, PointerEvent as ReactPointerEvent } from 'react';
 import type { TemplateProps } from '@/engine/core/GameShell';
 import {
   RULE_LINES,
+  chipHits,
   expectedBoxes,
+  routeToy,
   runSort,
   sameChips,
   type RuleChip,
@@ -13,7 +15,7 @@ import {
 import { sfx } from '@/engine/audio/sound';
 import { sparkleAt } from '@/engine/ui/juice';
 import ItemPic from '@/engine/ui/ItemPic';
-import { ChipArt, ToyArt } from '@/engine/ui/RuleArt';
+import { ChipArt, GiftArt, ToyArt } from '@/engine/ui/RuleArt';
 import '@/engine/ui/rule-sort.css';
 
 /**
@@ -35,6 +37,15 @@ import '@/engine/ui/rule-sort.css';
  *   menyala; tingkat 2 = tanda yang salah di kotak itu bergaris merah dan
  *   tanda yang dibutuhkan di baki berdenyut.
  *
+ * - Mode TEBAK (`data.mode === 'tebak'`): tanda sudah terpasang & terkunci;
+ *   mainan datang satu per satu dan anak MENYENTUH kotak tujuannya (membaca
+ *   program). Benar = mesin menjalankan mainan itu ke sana. Salah = SALAH
+ *   SENYAP + alasannya terlihat: tanda kotak itu menyala ✗, atau — kalau
+ *   kotak itu sebenarnya cocok — kotak di kirinya menyala ✓ "cocok duluan".
+ *   Mainannya tetap menunggu sampai ditebak benar. P2: tingkat 1 = tanda
+ *   kotak pertama diperiksa untuk mainan itu; tingkat 2 = kotak tujuannya menyala.
+ * - Antrean RAHASIA (`data.hidden`): mainan berupa kado "?" sampai diambil.
+ *
  * Gerak mainan = satu elemen yang digeser `transform` + transisi CSS, satu
  * render per langkah (pola CodeQuest).
  */
@@ -54,12 +65,21 @@ interface Check {
 }
 
 type Slot = { box: number; slot: number };
+type Geo = {
+  beltY: number;
+  boxX: number[];
+  boxY: number[];
+  queue: { x: number; y: number }[];
+  startX: number;
+  endX: number;
+};
 
 const ARIA: Record<RuleChip, string> = RULE_LINES.chip;
 
 export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: TemplateProps<'rule-sort'>) {
   const data = level.data;
   const n = data.boxes.length;
+  const tebak = data.mode === 'tebak';
   // Kotak bertanda dua dapat kolom lebih lebar di deret tiga kotak — kalau
   // sama rata, dua tempat tandanya menciut di bawah target sentuh di HP 320.
   const cols = data.boxes
@@ -82,7 +102,10 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
   const [cheer, setCheer] = useState<number[]>(() => data.boxes.map(() => 0));
   const [ping, setPing] = useState(0);
   const [beltOn, setBeltOn] = useState(false);
+  // Mode tebak: jeda sesudah tebakan salah (mainan tetap tampil, sentuhan ditahan).
+  const [pause, setPause] = useState(false);
   const timers = useRef<number[]>([]);
+  const delivered = useRef<{ toy: RuleToy; bad?: boolean }[][]>(data.boxes.map(() => []));
   const factoryRef = useRef<HTMLDivElement>(null);
   const beltRef = useRef<HTMLDivElement>(null);
   const boxRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -95,13 +118,24 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
 
   const prog: RuleProgram = useMemo(() => slots.map((s) => s.filter((c): c is RuleChip => c !== null)), [slots]);
 
-  const locked = running || solved;
+  const locked = running || solved || tebak;
 
   // ---- Petunjuk P2 ----
   const hintBox = useMemo(() => {
     if (hint < 1) return -1;
     return data.solution.findIndex((want, b) => !sameChips(prog[b] ?? [], want));
   }, [hint, prog, data.solution]);
+  // Mode tebak: mainan yang sedang menunggu ditebak.
+  const current = tebak && !running && !solved ? data.queue[taken] : undefined;
+  const waiting = pause ? undefined : current;
+  const hintCheck: Check | null =
+    waiting && hint >= 1
+      ? (() => {
+          const hits = data.solution[0]!.map((c) => chipHits(c, waiting));
+          return { box: 0, hits, ok: hits.every(Boolean) };
+        })()
+      : null;
+  const pickHint = waiting && hint >= 2 ? want[taken]! : -1;
   const needChips = useMemo(() => {
     if (hint < 2 || hintBox < 0) return new Set<RuleChip>();
     const have = prog[hintBox] ?? [];
@@ -226,7 +260,7 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
   });
 
   // ---- Menjalankan ----
-  function measure() {
+  function measure(): Geo {
     const f = factoryRef.current!.getBoundingClientRect();
     const belt = beltRef.current!.getBoundingClientRect();
     const beltY = belt.top + belt.height / 2 - f.top;
@@ -250,6 +284,85 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
     if (e) setSel(e);
   }
 
+  /**
+   * Jadwalkan perjalanan SATU mainan (dari antrean → ban → periksa tiap kotak
+   * → jatuh ke kotak / dari ujung ban), mulai pada waktu `t`. Mengembalikan
+   * waktu selesai. Dipakai Jalankan (semua mainan) dan mode tebak (satu-satu).
+   */
+  function animateToy(i: number, route: ReturnType<typeof routeToy>, geo: Geo, t: number, bad: boolean): number {
+    const toy = data.queue[i]!;
+    // Dua mainan pertama pelan (anak sedang memahami mesinnya), sisanya lebih cepat.
+    const f = i < 2 || tebak ? 1 : 0.72;
+    const MOVE = Math.round(330 * f);
+    const LOOK = Math.round(300 * f);
+    const q = geo.queue[i]!;
+    later(() => {
+      setTaken(i + 1);
+      setToken({ toy, x: q.x, y: q.y, instant: true });
+    }, t);
+    t += 40;
+    later(() => setToken({ toy, x: geo.startX, y: geo.beltY }), t);
+    t += MOVE;
+    for (const c of route.checks) {
+      later(() => {
+        setCheck(null);
+        setToken({ toy, x: geo.boxX[c.box]!, y: geo.beltY });
+      }, t);
+      t += MOVE;
+      later(() => {
+        setCheck(c);
+        sfx(c.ok ? 'tick' : 'tap');
+      }, t);
+      t += LOOK;
+    }
+    if (route.box >= 0) {
+      const b = route.box;
+      later(() => {
+        setCheck(null);
+        setToken({ toy, x: geo.boxX[b]!, y: geo.boxY[b]! });
+      }, t);
+      t += Math.round(MOVE * 0.8);
+      later(() => {
+        setToken(null);
+        delivered.current[b]!.push({ toy, bad });
+        setInBox(delivered.current.map((d) => [...d]));
+        if (!bad) {
+          setCheer((c) => c.map((v, k) => (k === b ? v + 1 : v)));
+          const r = boxRefs.current[b]?.getBoundingClientRect();
+          if (r) sparkleAt(r.left + r.width / 2, r.top + 24, 5);
+        } else setBadBox(b);
+      }, t);
+      t += 160;
+    } else {
+      later(() => {
+        setCheck(null);
+        setToken({ toy, x: geo.endX, y: geo.beltY });
+      }, t);
+      t += MOVE;
+      later(() => {
+        sfx('tap');
+        setToken({ toy, x: geo.endX + 10, y: geo.beltY + 90, fall: true });
+      }, t);
+      t += 520;
+    }
+    return t;
+  }
+
+  function win(at: number) {
+    later(() => {
+      setBeltOn(false);
+      setToken(null);
+      sfx('correct');
+      boxRefs.current.forEach((b) => {
+        const r = b?.getBoundingClientRect();
+        if (r) sparkleAt(r.left + r.width / 2, r.top + 30, 8);
+      });
+      setCheer((c) => c.map((v) => v + 1));
+      setSolved(true);
+      later(() => onCorrect(), 1100);
+    }, at);
+  }
+
   function run() {
     if (locked) return;
     if (slots.some((row) => row.some((c) => !c))) return shakeEmpty();
@@ -259,83 +372,13 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
     setSel(null);
     setBadBox(null);
     setBeltOn(true);
+    delivered.current = data.boxes.map(() => []);
     let t = 120;
-    const delivered: { toy: RuleToy; bad?: boolean }[][] = data.boxes.map(() => []);
-
     result.routes.forEach((route, i) => {
-      const toy = data.queue[i]!;
-      // Dua mainan pertama pelan (anak sedang memahami mesinnya), sisanya lebih cepat.
-      const f = i < 2 ? 1 : 0.72;
-      const MOVE = Math.round(330 * f);
-      const LOOK = Math.round(300 * f);
-      const q = geo.queue[i]!;
-      later(() => {
-        setTaken(i + 1);
-        setToken({ toy, x: q.x, y: q.y, instant: true });
-      }, t);
-      t += 40;
-      later(() => setToken({ toy, x: geo.startX, y: geo.beltY }), t);
-      t += MOVE;
-      for (const c of route.checks) {
-        later(() => {
-          setCheck(null);
-          setToken({ toy, x: geo.boxX[c.box]!, y: geo.beltY });
-        }, t);
-        t += MOVE;
-        later(() => {
-          setCheck(c);
-          sfx(c.ok ? 'tick' : 'tap');
-        }, t);
-        t += LOOK;
-      }
-      const bad = i === result.failAt;
-      if (route.box >= 0) {
-        const b = route.box;
-        later(() => {
-          setCheck(null);
-          setToken({ toy, x: geo.boxX[b]!, y: geo.boxY[b]! });
-        }, t);
-        t += Math.round(MOVE * 0.8);
-        later(() => {
-          setToken(null);
-          delivered[b]!.push({ toy, bad });
-          setInBox(delivered.map((d) => [...d]));
-          if (!bad) {
-            setCheer((c) => c.map((v, k) => (k === b ? v + 1 : v)));
-            const r = boxRefs.current[b]?.getBoundingClientRect();
-            if (r) sparkleAt(r.left + r.width / 2, r.top + 24, 5);
-          } else setBadBox(b);
-        }, t);
-        t += 160;
-      } else {
-        later(() => {
-          setCheck(null);
-          setToken({ toy, x: geo.endX, y: geo.beltY });
-        }, t);
-        t += MOVE;
-        later(() => {
-          sfx('tap');
-          setToken({ toy, x: geo.endX + 10, y: geo.beltY + 90, fall: true });
-        }, t);
-        t += 520;
-      }
+      t = animateToy(i, route, geo, t, i === result.failAt);
     });
 
-    if (result.outcome === 'benar') {
-      later(() => {
-        setBeltOn(false);
-        setToken(null);
-        sfx('correct');
-        boxRefs.current.forEach((b) => {
-          const r = b?.getBoundingClientRect();
-          if (r) sparkleAt(r.left + r.width / 2, r.top + 30, 8);
-        });
-        setCheer((c) => c.map((v) => v + 1));
-        setSolved(true);
-        later(() => onCorrect(), 900);
-      }, t + 100);
-      return;
-    }
+    if (result.outcome === 'benar') return win(t + 100);
     later(() => {
       setBeltOn(false);
       setToken(null);
@@ -344,6 +387,7 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
     }, t + 250);
     // Semua kembali; tanda tetap terpasang untuk diperbaiki.
     later(() => {
+      delivered.current = data.boxes.map(() => []);
       setInBox(data.boxes.map(() => []));
       setTaken(0);
       setCheck(null);
@@ -354,13 +398,55 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
     }, t + 1700);
   }
 
+  /** Mode tebak: anak menyentuh kotak `b` untuk mainan yang sedang menunggu. */
+  function guess(b: number) {
+    if (!waiting) return;
+    const i = taken;
+    const route = routeToy(data.solution, waiting);
+    setBadBox(null);
+    if (route.box === b) {
+      sfx('tick');
+      setRunning(true);
+      setCheck(null);
+      setBeltOn(true);
+      const t = animateToy(i, route, measure(), 60, false);
+      if (i + 1 === data.queue.length) return win(t + 100);
+      later(() => {
+        setBeltOn(false);
+        setRunning(false);
+      }, t + 60);
+      return;
+    }
+    // Salah: perlihatkan SEBABNYA, mainan tetap menunggu.
+    const own = data.solution[b]!.map((c) => chipHits(c, waiting));
+    const early = own.every(Boolean);
+    sfx('tap');
+    setPause(true);
+    setBadBox(b);
+    setCheck(
+      early
+        ? { box: route.box, hits: data.solution[route.box]!.map(() => true), ok: true }
+        : { box: b, hits: own, ok: false },
+    );
+    narrate(early ? RULE_LINES.guessEarly : RULE_LINES.guessNo);
+    onWrong(true);
+    later(() => {
+      setCheck(null);
+      setBadBox(null);
+      setPause(false);
+    }, 1500);
+  }
+
   // ---- Gambar ----
   const tokenStyle: CSSProperties | undefined = token
     ? { transform: `translate(${token.x}px, ${token.y}px)`, transition: token.instant ? 'none' : undefined }
     : undefined;
 
   return (
-    <div className="rs-wrap" style={{ '--rs-cols': cols } as CSSProperties}>
+    <div
+      className={'rs-wrap' + (tebak ? ' rs-wrap--tebak' : '') + (solved ? ' rs-wrap--won' : '')}
+      style={{ '--rs-cols': cols } as CSSProperties}
+    >
       <div className="game-prompt rs-prompt">{level.narration}</div>
 
       <div className="rs-factory" ref={factoryRef}>
@@ -384,17 +470,24 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
             )}
           </span>
           <div className="rs-queue__toys">
-            {data.queue.map((toy, i) => (
-              <span
-                key={i}
-                ref={(el) => {
-                  queueRefs.current[i] = el;
-                }}
-                className={'rs-queue__slot' + (i < taken ? ' rs-queue__slot--gone' : '')}
-              >
-                <ToyArt toy={toy} />
-              </span>
-            ))}
+            {data.queue.map((toy, i) => {
+              const now = !!current && i === taken;
+              // Rahasia: kado sampai diambil mesin (mode tebak: sampai gilirannya).
+              const gift = data.hidden && i >= taken && !now;
+              return (
+                <span
+                  key={i}
+                  ref={(el) => {
+                    queueRefs.current[i] = el;
+                  }}
+                  className={
+                    'rs-queue__slot' + (i < taken ? ' rs-queue__slot--gone' : '') + (now ? ' rs-queue__slot--now' : '')
+                  }
+                >
+                  {gift ? <GiftArt /> : <ToyArt toy={toy} />}
+                </span>
+              );
+            })}
           </div>
         </div>
 
@@ -409,7 +502,7 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
 
         <div className="rs-boxes">
           {data.boxes.map((box, b) => {
-            const checking = check?.box === b ? check : null;
+            const checking = check?.box === b ? check : hintCheck?.box === b ? hintCheck : null;
             return (
               <div
                 key={b}
@@ -418,12 +511,34 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
                 }}
                 className={
                   'rs-col' +
-                  (checking ? (checking.ok ? ' rs-col--yes' : ' rs-col--no') : '') +
+                  (checking && checking !== hintCheck ? (checking.ok ? ' rs-col--yes' : ' rs-col--no') : '') +
                   (badBox === b ? ' rs-col--bad' : '') +
-                  (hintBox === b ? ' rs-col--hint' : '')
+                  (hintBox === b ? ' rs-col--hint' : '') +
+                  (waiting ? ' rs-col--tap' : '') +
+                  (pickHint === b ? ' rs-col--pick' : '')
                 }
+                {...(tebak
+                  ? {
+                      role: 'button',
+                      tabIndex: waiting ? 0 : -1,
+                      'aria-label': `Kotak ke-${b + 1}`,
+                      'aria-disabled': !waiting,
+                      onClick: () => guess(b),
+                      onKeyDown: (e: ReactKeyboardEvent) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          guess(b);
+                        }
+                      },
+                    }
+                  : {})}
               >
                 <div className="rs-box">
+                  {solved && (
+                    <span className="rs-lid" aria-hidden>
+                      <span className="rs-lid__bow" />
+                    </span>
+                  )}
                   <span key={`o${cheer[b]}`} className={'rs-owner' + (cheer[b] ? ' rs-owner--cheer' : '')}>
                     <ItemPic id={box.owner} className="rs-owner__img" fallbackClassName="rs-owner__emoji" />
                   </span>
@@ -508,6 +623,23 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
         )}
       </div>
 
+      {tebak && (
+        <div className="rs-ask" aria-live="polite">
+          <span className="rs-ask__toy" key={taken}>
+            {current ? <ToyArt toy={current} /> : null}
+          </span>
+          <span className="rs-ask__point" aria-hidden>
+            <svg viewBox="0 0 40 48">
+              <path d="M20 44 V10 M8 21 L20 7 L32 21" fill="none" stroke="#1f72dc" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+          <span className="rs-ask__q" aria-hidden>
+            ?
+          </span>
+        </div>
+      )}
+
+      {!tebak && (
       <div className="rs-tray">
         {data.tray.map((chip) => (
           <button
@@ -530,6 +662,9 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
         ))}
       </div>
 
+      )}
+
+      {!tebak && (
       <div className="rs-actions">
         <button type="button" className="rs-run" onClick={run} disabled={locked}>
           <span className="rs-run__play" aria-hidden>
@@ -540,6 +675,7 @@ export default function RuleSort({ level, onCorrect, onWrong, narrate, hint }: T
           <span className="rs-run__text">Jalankan</span>
         </button>
       </div>
+      )}
     </div>
   );
 }

@@ -1,9 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #50 — dua game coding baru "percabangan" (template rule-sort):
-Pabrik Mainan (TK) & Robot Pemilah (SD Kelas 1 & 2). 31 baris baru di tiga
-scope (pabrik-mainan, robot-pemilah, shared — nama tanda & kalimat mesin),
-nol baris lama berubah/pindah scope. Sengaja TANPA baris "only" (tiga scope).
+render #51 — Pabrik Mainan & Robot Pemilah dibuat lebih menantang: mode
+TEBAK (anak menebak kotak tujuan tiap mainan) + antrean rahasia. 8 baris
+baru (4 pabrik-mainan, 3 robot-pemilah, 1 shared). Satu baris pindah scope
+("Lainnya": robot-pemilah → shared) — mp3-nya SUDAH dipindah manual (git mv
++ manifest), jadi tak dirender ulang. Sengaja TANPA baris "only" (tiga scope).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris

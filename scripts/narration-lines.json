@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-15",
-  "count": 2091,
-  "chars": 87024,
+  "count": 2097,
+  "chars": 87416,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -12559,6 +12559,15 @@
       ]
     },
     {
+      "key": "15de1a25eeac",
+      "text": "Ada tanda warna dan tanda bentuk. Mainan ini masuk kotak mana?",
+      "scope": "pabrik-mainan",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan"
+      ]
+    },
+    {
       "key": "cce481634a12",
       "text": "Ada tanda yang tertukar! Lihat isi kotaknya, lalu perbaiki.",
       "scope": "pabrik-mainan",
@@ -12613,8 +12622,8 @@
       ]
     },
     {
-      "key": "33e244a1fbc7",
-      "text": "Misi besar! Pasang tanda di tiga kotak!",
+      "key": "4789e993cbdf",
+      "text": "Misi besar! Mainannya rahasia. Lihat isi kotak, lalu pasang tandanya!",
       "scope": "pabrik-mainan",
       "voice": "gadis",
       "games": [
@@ -12622,8 +12631,17 @@
       ]
     },
     {
-      "key": "75f39bf2977b",
-      "text": "Sekarang pesanannya bentuk. Pasang tanda bentuknya, ya!",
+      "key": "9c8e8896e2b5",
+      "text": "Tanda Lainnya untuk semua mainan sisanya. Pasang di kotak terakhir!",
+      "scope": "pabrik-mainan",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan"
+      ]
+    },
+    {
+      "key": "cc1964042c31",
+      "text": "Tandanya sudah dipasang. Mainan ini masuk kotak mana? Sentuh kotaknya!",
       "scope": "pabrik-mainan",
       "voice": "gadis",
       "games": [
@@ -13855,8 +13873,8 @@
       ]
     },
     {
-      "key": "20c04286cbee",
-      "text": "Kotak ini punya dua tanda. Mainan harus cocok dengan keduanya!",
+      "key": "78f7e4b52161",
+      "text": "Kotak dua tanda harus cocok dua-duanya. Mainan ini masuk kotak mana?",
       "scope": "robot-pemilah",
       "voice": "gadis",
       "games": [
@@ -13864,8 +13882,8 @@
       ]
     },
     {
-      "key": "844f8a723473",
-      "text": "Lainnya",
+      "key": "20c04286cbee",
+      "text": "Kotak ini punya dua tanda. Mainan harus cocok dengan keduanya!",
       "scope": "robot-pemilah",
       "voice": "gadis",
       "games": [
@@ -13909,6 +13927,15 @@
       ]
     },
     {
+      "key": "18f6aa08be36",
+      "text": "Tebak! Robot memeriksa dari kiri. Mainan ini masuk kotak mana?",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
       "key": "aca7f1cc7d88",
       "text": "Tiga kotak, satu untuk semua sisanya. Atur robotnya!",
       "scope": "robot-pemilah",
@@ -13920,6 +13947,15 @@
     {
       "key": "cb259fc95440",
       "text": "Tiga kotak! Cari aturan setiap kotak dari isinya.",
+      "scope": "robot-pemilah",
+      "voice": "gadis",
+      "games": [
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "c2abe548fde8",
+      "text": "Ups, kotak di sebelah kirinya sudah cocok duluan!",
       "scope": "robot-pemilah",
       "voice": "gadis",
       "games": [
@@ -15214,6 +15250,16 @@
       ]
     },
     {
+      "key": "3451bd87c5bf",
+      "text": "Bukan di situ. Lihat tandanya lagi, ya!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
+      ]
+    },
+    {
       "key": "5d8d8084e7ad",
       "text": "Hati",
       "scope": "shared",
@@ -15256,6 +15302,16 @@
     {
       "key": "753da4c404aa",
       "text": "Kuning",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "pabrik-mainan",
+        "robot-pemilah"
+      ]
+    },
+    {
+      "key": "844f8a723473",
+      "text": "Lainnya",
       "scope": "shared",
       "voice": "gadis",
       "games": [
