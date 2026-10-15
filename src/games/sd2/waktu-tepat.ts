@@ -4,19 +4,19 @@ import { digits, halfToward, quarterPast, quarterTo } from '@/games/time';
 
 /**
  * "Waktu Tepat" (SD Kelas 3 & 4, `sd2`) — versi PREMIUM "Sehari Bersama
- * Dimas" (docs/rencana-game-sd-kelas-3-4.md bagian 2b.3 no. 4).
+ * Kakak" (docs/rencana-game-sd-kelas-3-4.md bagian 2b.3 no. 4).
  *
  * Anak MEMUTAR jarum panjang dengan jari (template `clock-set`), jarum pendek
  * ikut bergerak sendiri. Bukan memilih satu dari tiga kartu jam.
  *
- * - **Satu sesi = satu hari Dimas**, urutannya TETAP (bangun → sarapan →
+ * - **Satu sesi = satu hari Kakak**, urutannya TETAP (bangun → sarapan →
  *   sekolah → belajar → istirahat → makan siang → sore → membaca → misi
  *   malam), dan latar `Scene` ikut berganti: rumah, kota, padang, kebun,
  *   sungai, malam. Karena itu TANPA `sessionLevels` — kesulitannya juga naik
  *   berurutan (kelas 3 dulu, kelas 4 dari slot 7). Variasi dari kolam varian
  *   per slot.
  * - **Proyek sesi** (`project`): tiap kegiatan yang benar mengisi satu halaman
- *   "Buku Harian Dimas" di baris atas; layar "Selamat!" memperlihatkan
+ *   "Buku Harian Kakak" di baris atas; layar "Selamat!" memperlihatkan
  *   bukunya utuh.
  * - **Misi besar** = slot terakhir: tiga langkah bersambung (mandi → makan
  *   malam selama sekian menit → tidur) dengan cincin jam 24.
@@ -34,9 +34,9 @@ import { digits, halfToward, quarterPast, quarterTo } from '@/games/time';
  *   (jarum di angka 2 dibaca "2 menit", bukan 10), dan **jam dikurangi atau
  *   ditambah seperti bilangan biasa** (09.15 − 08.45 = "70 menit";
  *   11.50 + 25 menit = "11.75").
- * - Tokohnya anak bernama **Dimas** (keputusan pemilik 2026-10-15: "jangan
- *   pake kancil", dulu "Sehari Bersama Kancil"). Dimas TIDAK digambar — dia
- *   hidup di kalimatnya; yang digambar jamnya.
+ * - Tokohnya disebut **"Kakak"**, bukan nama orang (keputusan pemilik
+ *   2026-10-15: dulu "Kancil", lalu sempat "Kakak"). Kakak TIDAK digambar —
+ *   dia hidup di kalimatnya; yang digambar jamnya.
  * - Kalender & konversi hari–minggu (akhir kelas 4) BELUM ada — menyusul
  *   dengan `Calendar.tsx` sendiri.
  */
@@ -68,7 +68,7 @@ function slot(id: string, ...variants: Level[]): Level[] {
 /** 1. Bangun pagi — seperempat & setengah dengan kata (bukan digit). */
 function wakeUp(phrase: string, to: DayTime): Level {
   return level(
-    `Dimas bangun pukul ${phrase}. Putar jarum panjangnya!`,
+    `Kakak bangun pukul ${phrase}. Putar jarum panjangnya!`,
     { emoji: '🌅', label: show(to) },
     { from: t(to.h), steps: [{ to }], scene: 'rumah' },
   );
@@ -77,7 +77,7 @@ function wakeUp(phrase: string, to: DayTime): Level {
 /** 2. Jam digital → jam jarum, kelipatan lima menit. */
 function written(activity: string, emoji: string, from: DayTime, to: DayTime, scene: SceneId): Level {
   return level(
-    `Dimas ${activity} pada jam yang tertulis. Atur jamnya!`,
+    `Kakak ${activity} pada jam yang tertulis. Atur jamnya!`,
     { emoji, label: show(to) },
     { from, steps: [{ to, show: show(to) }], scene },
   );
@@ -96,7 +96,7 @@ function swapped(x: DayTime): string {
 
 /** 3. Jam jarum → tulisan digital. Jamnya diam; anak cuma membaca. */
 function readIt(at: DayTime): Level {
-  const narration = 'Dimas berangkat ke sekolah. Pukul berapa sekarang?';
+  const narration = 'Kakak berangkat ke sekolah. Pukul berapa sekarang?';
   return level(
     narration,
     { emoji: '🎒', label: show(at) },
@@ -121,7 +121,7 @@ function readIt(at: DayTime): Level {
 function lasts(activity: string, emoji: string, from: DayTime, minutes: number): Level {
   const to = add(from, minutes);
   return level(
-    `Dimas ${activity} selama ${terbilang(minutes)} menit. Putar jarumnya sampai selesai!`,
+    `Kakak ${activity} selama ${terbilang(minutes)} menit. Putar jarumnya sampai selesai!`,
     { emoji, label: show(to) },
     { from, steps: [{ to, arc: true }], scene: 'kota' },
   );
@@ -134,13 +134,13 @@ const naiveMinus = (a: DayTime, b: DayTime) => b.h * 100 + b.m - (a.h * 100 + a.
 function recess(from: DayTime, to: DayTime): Level {
   const real = to.h * 60 + to.m - (from.h * 60 + from.m);
   return level(
-    'Dimas istirahat sampai jam yang tertulis. Putar jarumnya!',
+    'Kakak istirahat sampai jam yang tertulis. Putar jarumnya!',
     { emoji: '⚽', label: `${real} mnt` },
     {
       from,
       steps: [{ to, arc: true, show: show(to) }],
       ask: {
-        prompt: 'Berapa menit Dimas istirahat?',
+        prompt: 'Berapa menit Kakak istirahat?',
         choices: [
           { text: `${real} menit`, correct: true },
           { text: `${naiveMinus(from, to)} menit` },
@@ -157,13 +157,13 @@ function recess(from: DayTime, to: DayTime): Level {
 function lunch(from: DayTime, minutes: number): Level {
   const to = add(from, minutes);
   return level(
-    `${capitalize(terbilang(minutes))} menit lagi Dimas makan siang. Putar jarumnya!`,
+    `${capitalize(terbilang(minutes))} menit lagi Kakak makan siang. Putar jarumnya!`,
     { emoji: '🍚', label: show(to) },
     {
       from,
       steps: [{ to, arc: true }],
       ask: {
-        prompt: 'Pukul berapa Dimas makan siang?',
+        prompt: 'Pukul berapa Kakak makan siang?',
         choices: [
           { text: show(to), correct: true },
           // Menit dijumlah seperti bilangan biasa: 50 + 25 = 75.
@@ -182,7 +182,7 @@ function lunch(from: DayTime, minutes: number): Level {
 /** 7. Jam 24: tulisan 13.00–17.59 dibuat di jam ber-cincin 13–24. */
 function afternoon(activity: string, emoji: string, from: DayTime, to: DayTime, scene: SceneId): Level {
   return level(
-    `Sore hari, Dimas ${activity} pada jam yang tertulis. Atur jamnya!`,
+    `Sore hari, Kakak ${activity} pada jam yang tertulis. Atur jamnya!`,
     { emoji, label: show(to) },
     { from, steps: [{ to, show: show(to) }], ring24: true, scene },
   );
@@ -194,13 +194,13 @@ function hoursToMinutes(phrase: string, from: DayTime, minutes: number): Level {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
   return level(
-    `Dimas membaca selama ${phrase}. Putar jarumnya!`,
+    `Kakak membaca selama ${phrase}. Putar jarumnya!`,
     { emoji: '📚', label: `${minutes} mnt` },
     {
       from,
       steps: [{ to, arc: true }],
       ask: {
-        prompt: 'Jadi, berapa menit Dimas membaca?',
+        prompt: 'Jadi, berapa menit Kakak membaca?',
         choices: [
           { text: `${minutes} menit`, correct: true },
           // "1 jam 15" ditulis berdampingan (= satu jam dianggap seratus
@@ -220,7 +220,7 @@ function hoursToMinutes(phrase: string, from: DayTime, minutes: number): Level {
 function nightMission(bath: DayTime, dinner: number, sleep: DayTime): Level {
   const afterDinner = add(bath, dinner);
   return level(
-    'Misi malam! Dimas mandi pada jam yang tertulis. Atur jamnya!',
+    'Misi malam! Kakak mandi pada jam yang tertulis. Atur jamnya!',
     { emoji: '🌙', label: show(sleep) },
     {
       from: t(bath.h),
@@ -229,12 +229,12 @@ function nightMission(bath: DayTime, dinner: number, sleep: DayTime): Level {
         {
           to: afterDinner,
           arc: true,
-          say: `Lalu Dimas makan malam selama ${terbilang(dinner)} menit. Putar jarumnya!`,
+          say: `Lalu Kakak makan malam selama ${terbilang(dinner)} menit. Putar jarumnya!`,
         },
         {
           to: sleep,
           show: show(sleep),
-          say: 'Terakhir, Dimas tidur pada jam yang tertulis. Atur jamnya!',
+          say: 'Terakhir, Kakak tidur pada jam yang tertulis. Atur jamnya!',
         },
       ],
       ring24: true,
@@ -249,7 +249,7 @@ const config: GameConfig<'clock-set'> = {
   title: 'Waktu Tepat',
   emoji: '⏱️',
   template: 'clock-set',
-  project: { title: 'Buku Harian Dimas' },
+  project: { title: 'Buku Harian Kakak' },
   levels: [
     // --- 1. Bangun pagi: seperempat & setengah ---
     slot(
