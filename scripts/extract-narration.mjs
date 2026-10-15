@@ -217,6 +217,15 @@ for (const config of mod.configs) {
       const L = mod.RULE_LINES;
       for (const chip of level.data.tray) add(L.chip[chip], config.id, voice);
       for (const line of [L.wrongBox, L.noBox, L.empty]) add(line, config.id, voice);
+      if (level.data.mode === 'tebak') {
+        add(L.guessNo, config.id, voice);
+        // "Cocok duluan" only plays when some toy matches more than one box.
+        const hit = (c, t) => c === 'lainnya' || c === t.color || c === t.shape || c === (t.size ?? 'besar');
+        const overlap = level.data.queue.some(
+          (t) => level.data.solution.filter((chips) => chips.every((c) => hit(c, t))).length > 1,
+        );
+        if (overlap) add(L.guessEarly, config.id, voice);
+      }
       continue;
     }
 

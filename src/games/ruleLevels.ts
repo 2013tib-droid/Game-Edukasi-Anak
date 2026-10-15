@@ -2,6 +2,7 @@ import type { GameLevel, LevelStamp, RuleBoxSpec } from '@/engine/core/types';
 import {
   RULE_COLORS,
   RULE_SHAPES,
+  boxHits,
   chipKind,
   routeToy,
   runSort,
@@ -55,12 +56,24 @@ export interface RuleDesign {
   extra?: RuleChip[];
   /** Pesanan terlihat di gelembung (level perkenalan). */
   bubbles?: boolean;
+  /**
+   * `tebak` = tanda jawaban sudah terpasang & terkunci, anak menebak kotak
+   * tujuan tiap mainan. `tray` diabaikan (baki kosong), `ex` & `given` tak dipakai.
+   */
+  mode?: 'tebak';
+  /** Antrean rahasia (kado "?"). Wajib ada contoh di kotak (mode susun). */
+  hidden?: boolean;
 }
 
 export interface RuleSlotOpts {
   owners: string[];
   machine?: 'corong' | 'robot';
   max?: number;
+  /**
+   * Soal TEBAK tanpa jebakan urutan: tiap mainan cocok dengan TEPAT satu kotak
+   * (selain "lainnya"). Untuk TK — prioritas kotak kiri itu materi SD.
+   */
+  plain?: boolean;
 }
 
 function fail(where: string, why: string): never {
@@ -175,7 +188,9 @@ export function ruleLevel(
   owners: string[],
   machine: 'corong' | 'robot' | undefined,
   where: string,
+  plain = false,
 ): Level {
+  const tebak = design.mode === 'tebak';
   if (/\d/.test(narration)) fail(where, `narasi memuat angka: "${narration}"`);
   const n = design.boxes.length;
   if (n < 2 || n > 3) fail(where, 'kotak harus 2 atau 3');
@@ -194,6 +209,11 @@ export function ruleLevel(
   const boxes: RuleBoxSpec[] = design.boxes.map((b, i) => {
     if (b.rule.length < 1 || b.rule.length > 2) fail(where, `kotak ${i + 1}: tanda 1 atau 2`);
     const spec: RuleBoxSpec = { owner: owners[(k + i) % owners.length]!, slots: b.rule.length as 1 | 2 };
+    if (tebak) {
+      if (b.ex || b.given) fail(where, 'soal tebak tak memakai contoh/perbaiki');
+      spec.given = b.rule.map((c) => mapChip(c, r));
+      return spec;
+    }
     if (b.ex) spec.examples = b.ex.map((t) => mapToy(parseToy(t, where), r, sized));
     if (b.given) {
       if (b.given.length !== b.rule.length) fail(where, `kotak ${i + 1}: tanda perbaiki tak sama banyak`);
@@ -203,10 +223,10 @@ export function ruleLevel(
   });
   if (new Set(boxes.map((b) => b.owner)).size !== n) fail(where, 'pemilik kotak kembar');
 
-  const tray = buildTray(design, [...queue, ...boxes.flatMap((b) => b.examples ?? [])], solution, r, sized);
+  const tray = tebak ? [] : buildTray(design, [...queue, ...boxes.flatMap((b) => b.examples ?? [])], solution, r, sized);
   // Tujuh tanda sebaris = 36 px per tanda di HP 320 (batas bawah target sentuh).
   if (tray.length > 7) fail(where, `baki ${tray.length} tanda (maks 7)`);
-  for (const chips of solution) for (const c of chips) if (!tray.includes(c)) fail(where, `tanda jawaban "${c}" tak ada di baki`);
+  if (!tebak) for (const chips of solution) for (const c of chips) if (!tray.includes(c)) fail(where, `tanda jawaban "${c}" tak ada di baki`);
 
   const want = expectedBoxes(solution, queue);
   if (want.some((b) => b < 0)) fail(where, 'ada mainan antrean yang tak masuk kotak mana pun menurut jawaban');
@@ -216,16 +236,31 @@ export function ruleLevel(
       if (routeToy(solution, toy).box !== i) fail(where, `contoh di kotak ${i + 1} tidak cocok dengan jawabannya`);
     }
   });
-  if (boxes.some((b) => b.given)) {
+  if (tebak && plain) {
+    queue.forEach((t, i) => {
+      const hits = solution.filter((chips) => !chips.includes('lainnya') && boxHits(chips, t));
+      if (hits.length > 1) fail(where, `mainan ke-${i + 1} cocok dengan dua kotak — jebakan urutan bukan untuk TK`);
+    });
+  }
+  if (!tebak && boxes.some((b) => b.given)) {
     const given = boxes.map((b) => b.given ?? []);
     if (runSort(given, queue, want).outcome === 'benar') fail(where, 'tanda "perbaiki" ternyata sudah benar');
   }
-  if (!design.bubbles && !boxes.some((b) => b.examples?.length)) fail(where, 'tanpa gelembung WAJIB ada contoh di kotak');
+  if (!tebak && !design.bubbles && !boxes.some((b) => b.examples?.length)) fail(where, 'tanpa gelembung WAJIB ada contoh di kotak');
 
   return {
     id: '',
     narration,
-    data: { boxes, queue, tray, solution, bubbles: design.bubbles, machine },
+    data: {
+      boxes,
+      queue,
+      tray,
+      solution,
+      bubbles: design.bubbles,
+      machine,
+      ...(tebak ? { mode: 'tebak' as const } : {}),
+      ...(design.hidden ? { hidden: true } : {}),
+    },
   };
 }
 
@@ -245,7 +280,7 @@ export function ruleSlot(
   const seen = new Set<string>();
   for (let k = 0; out.length < count && k < count * 3; k++) {
     const d = designs[k % designs.length]!;
-    const lv = { ...ruleLevel(narration, d, k, opts.owners, opts.machine, `${id} varian ${k + 1}`), id, stamp };
+    const lv = { ...ruleLevel(narration, d, k, opts.owners, opts.machine, `${id} varian ${k + 1}`, opts.plain), id, stamp };
     const key = JSON.stringify([lv.data.boxes, lv.data.queue]);
     if (seen.has(key)) continue;
     seen.add(key);

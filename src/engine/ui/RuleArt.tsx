@@ -142,3 +142,23 @@ export function ChipArt({ chip }: { chip: RuleChip }) {
     </span>
   );
 }
+
+/**
+ * Kado rahasia (antrean `hidden`): mainan belum boleh dilihat. Bukan "kotak"
+ * kardus seperti tujuan mainan — pita merah & tanda tanya membuatnya terbaca
+ * sebagai kado.
+ */
+export function GiftArt() {
+  return (
+    <span className="rs-toy rs-gift">
+      <svg viewBox="0 0 100 100" aria-hidden>
+        <rect x="14" y="40" width="72" height="50" rx="8" fill="#ffd166" stroke="#c98a12" strokeWidth="4" />
+        <rect x="8" y="28" width="84" height="18" rx="6" fill="#ffe08a" stroke="#c98a12" strokeWidth="4" />
+        <rect x="44" y="28" width="12" height="62" fill="#ff6b6b" />
+        <path d="M50 28 C38 10 22 14 28 24 C32 30 44 29 50 28 C56 29 68 30 72 24 C78 14 62 10 50 28 Z" fill="#ff6b6b" stroke="#c92a2a" strokeWidth="3" strokeLinejoin="round" />
+        <text x="30" y="78" fontSize="30" fontWeight="900" fill="#8a5a00" textAnchor="middle" fontFamily="system-ui, sans-serif">?</text>
+        <text x="71" y="78" fontSize="30" fontWeight="900" fill="#8a5a00" textAnchor="middle" fontFamily="system-ui, sans-serif">?</text>
+      </svg>
+    </span>
+  );
+}

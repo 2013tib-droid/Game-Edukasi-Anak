@@ -85,6 +85,10 @@ export const RULE_LINES = {
   empty: 'Pasang tanda di setiap kotak dulu, ya!',
   /** Semua mainan masuk kotak yang benar. */
   done: 'Hore, semua mainan masuk kotak yang benar!',
+  /** Mode TEBAK: kotak yang ditunjuk tandanya tak cocok dengan mainan itu. */
+  guessNo: 'Bukan di situ. Lihat tandanya lagi, ya!',
+  /** Mode TEBAK: kotak yang ditunjuk cocok, tapi kotak di kirinya cocok duluan. */
+  guessEarly: 'Ups, kotak di sebelah kirinya sudah cocok duluan!',
 };
 
 /** Ukuran mainan, dengan bawaan. */

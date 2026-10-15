@@ -15,12 +15,19 @@ import { ruleSlot, type RuleSlotOpts } from '@/games/ruleLevels';
  * - URUTAN PEMERIKSAAN: kotak dua tanda harus di kiri kotak satu tanda yang
  *   tumpang tindih dengannya (slot 8) — prioritas `if / else if`.
  *
+ * - MEMBACA program (mode TEBAK): tanda sudah terpasang, anak menebak kotak
+ *   tujuan tiap mainan — termasuk JEBAKAN urutan: mainan yang cocok dengan
+ *   dua kotak masuk ke yang paling KIRI;
+ * - mainan RAHASIA (slot 9–11): aturan harus dipasang tanpa melihat mainan
+ *   yang akan lewat — berlaku untuk mainan apa pun.
+ *
  * SLOT (urutan tetap)
- *   l1 warna atau bentuk? (dua kotak)     l6 PERBAIKI: "lainnya" salah tempat
- *   l2 tiga kotak, cari aturannya          l7 dua aturan + lainnya
- *   l3 besar & kecil                       l8 DAN + satu tanda + lainnya
- *   l4 kenalan tanda LAINNYA               l9 MISI BESAR: ukuran, DAN, lainnya
- *   l5 kenalan kotak DUA tanda (DAN)
+ *   l1 warna atau bentuk? (dua kotak)     l7 TEBAK: kotak DAN + jebakan urutan
+ *   l2 tiga kotak, cari aturannya          l8 PERBAIKI: "lainnya" salah tempat
+ *   l3 TEBAK: robot memeriksa dari kiri    l9 dua aturan + lainnya (rahasia)
+ *   l4 besar & kecil                       l10 DAN + satu tanda + lainnya (rahasia)
+ *   l5 kenalan tanda LAINNYA               l11 MISI BESAR: ukuran, DAN, lainnya (rahasia)
+ *   l6 kenalan kotak DUA tanda (DAN)
  *
  * Isi kotak (contoh) WAJIB cukup untuk menebak aturannya tanpa ragu —
  * diperiksa `scripts/check-rule-levels.mjs` dengan mencoba SEMUA susunan
@@ -43,6 +50,8 @@ const STAMP: Record<string, LevelStamp> = {
   l7: { emoji: '📡', label: 'Antena' },
   l8: { emoji: '🛰️', label: 'Satelit' },
   l9: { emoji: '🚀', label: 'Roket' },
+  l10: { emoji: '🔭', label: 'Teropong' },
+  l11: { emoji: '🏆', label: 'Piala' },
 };
 
 const config: GameConfig<'rule-sort'> = {
@@ -107,6 +116,27 @@ const config: GameConfig<'rule-sort'> = {
     ruleSlot(
       'l3',
       STAMP.l3!,
+      'Tebak! Robot memeriksa dari kiri. Mainan ini masuk kotak mana?',
+      [
+        {
+          // "merah lingkaran" cocok dengan dua kotak → masuk yang paling kiri.
+          mode: 'tebak',
+          boxes: [{ rule: ['merah'] }, { rule: ['lingkaran'] }, { rule: ['lainnya'] }],
+          queue: ['merah segitiga', 'biru lingkaran', 'kuning hati', 'merah lingkaran', 'hijau segitiga', 'kuning lingkaran'],
+          tray: [],
+        },
+        {
+          mode: 'tebak',
+          boxes: [{ rule: ['bintang'] }, { rule: ['biru'] }, { rule: ['lainnya'] }],
+          queue: ['biru hati', 'kuning segitiga', 'biru bintang', 'merah bintang', 'hijau hati', 'biru lingkaran'],
+          tray: [],
+        },
+      ],
+      OPTS,
+    ),
+    ruleSlot(
+      'l4',
+      STAMP.l4!,
       'Ada mainan besar dan kecil. Lihat isinya, lalu pasang tandanya!',
       [
         {
@@ -121,8 +151,8 @@ const config: GameConfig<'rule-sort'> = {
       OPTS,
     ),
     ruleSlot(
-      'l4',
-      STAMP.l4!,
+      'l5',
+      STAMP.l5!,
       'Tanda Lainnya artinya semua sisanya. Pakai di kotak terakhir!',
       [
         {
@@ -137,8 +167,8 @@ const config: GameConfig<'rule-sort'> = {
       OPTS,
     ),
     ruleSlot(
-      'l5',
-      STAMP.l5!,
+      'l6',
+      STAMP.l6!,
       'Kotak ini punya dua tanda. Mainan harus cocok dengan keduanya!',
       [
         {
@@ -153,8 +183,35 @@ const config: GameConfig<'rule-sort'> = {
       OPTS,
     ),
     ruleSlot(
-      'l6',
-      STAMP.l6!,
+      'l7',
+      STAMP.l7!,
+      'Kotak dua tanda harus cocok dua-duanya. Mainan ini masuk kotak mana?',
+      [
+        {
+          mode: 'tebak',
+          boxes: [{ rule: ['merah', 'bintang'] }, { rule: ['bintang'] }, { rule: ['lainnya'] }],
+          queue: ['biru bintang', 'merah lingkaran', 'merah bintang', 'kuning hati', 'kuning bintang', 'merah hati'],
+          tray: [],
+        },
+        {
+          mode: 'tebak',
+          boxes: [{ rule: ['kecil', 'biru'] }, { rule: ['kecil'] }, { rule: ['lainnya'] }],
+          queue: [
+            'kecil merah bintang',
+            'biru lingkaran',
+            'kecil biru hati',
+            'merah hati',
+            'kecil kuning lingkaran',
+            'kecil biru segitiga',
+          ],
+          tray: [],
+        },
+      ],
+      OPTS,
+    ),
+    ruleSlot(
+      'l8',
+      STAMP.l8!,
       'Semua mainan masuk kotak pertama. Perbaiki tandanya!',
       [
         {
@@ -169,11 +226,12 @@ const config: GameConfig<'rule-sort'> = {
       OPTS,
     ),
     ruleSlot(
-      'l7',
-      STAMP.l7!,
+      'l9',
+      STAMP.l9!,
       'Tiga kotak, satu untuk semua sisanya. Atur robotnya!',
       [
         {
+          hidden: true,
           boxes: [
             { ex: ['merah lingkaran', 'merah bintang'], rule: ['merah'] },
             { ex: ['biru hati', 'biru segitiga'], rule: ['biru'] },
@@ -186,11 +244,12 @@ const config: GameConfig<'rule-sort'> = {
       OPTS,
     ),
     ruleSlot(
-      'l8',
-      STAMP.l8!,
+      'l10',
+      STAMP.l10!,
       'Robot memeriksa kotak dari kiri. Atur tandanya!',
       [
         {
+          hidden: true,
           boxes: [
             { ex: ['merah bintang'], rule: ['merah', 'bintang'] },
             { ex: ['biru bintang', 'kuning bintang'], rule: ['bintang'] },
@@ -203,11 +262,12 @@ const config: GameConfig<'rule-sort'> = {
       OPTS,
     ),
     ruleSlot(
-      'l9',
-      STAMP.l9!,
+      'l11',
+      STAMP.l11!,
       'Misi besar! Pecahkan aturan robotnya!',
       [
         {
+          hidden: true,
           boxes: [
             { ex: ['kecil merah bintang', 'kecil merah lingkaran'], rule: ['kecil', 'merah'] },
             { ex: ['merah lingkaran', 'kecil biru lingkaran'], rule: ['lingkaran'] },

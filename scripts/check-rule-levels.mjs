@@ -23,6 +23,10 @@
  *
  * Kalau sebuah soal gagal: TAMBAH/GANTI CONTOH di kotaknya — jangan
  * melonggarkan pemeriksaan ini.
+ *
+ * Soal TEBAK (`mode: 'tebak'`) tak punya baki — tandanya sudah terpasang. Di
+ * sana yang diperiksa: tanda terpasang = jawaban, tiap mainan masuk kotak,
+ * dan tiap kotak menerima mainan.
  */
 import { build } from 'esbuild';
 import path from 'node:path';
@@ -68,6 +72,7 @@ const sorts = (prog, toys, want) => toys.every((t, i) => mod.routeToy(prog, t).b
 
 let problems = 0;
 let levels = 0;
+let tebak = 0;
 let worst = { rate: 0, where: '' };
 for (const config of mod.configs) {
   for (const slot of config.levels) {
@@ -79,6 +84,19 @@ for (const config of mod.configs) {
       const exToys = d.boxes.flatMap((b) => b.examples ?? []);
       const exWant = d.boxes.flatMap((b, i) => (b.examples ?? []).map(() => i));
       const qWant = mod.expectedBoxes(d.solution, d.queue);
+      if (d.mode === 'tebak') {
+        tebak++;
+        const given = d.boxes.map((b) => b.given ?? []);
+        if (JSON.stringify(given) !== JSON.stringify(d.solution)) {
+          problems++;
+          console.error(`✗ ${where}: tanda soal tebak ≠ jawaban`);
+        }
+        if (qWant.some((b) => b < 0) || d.boxes.some((_, i) => !qWant.includes(i))) {
+          problems++;
+          console.error(`✗ ${where}: soal tebak — ada mainan tanpa kotak / kotak tanpa mainan`);
+        }
+        return;
+      }
       if (d.tray.length > 7) {
         problems++;
         console.error(`✗ ${where}: baki ${d.tray.length} tanda`);
@@ -116,7 +134,7 @@ for (const config of mod.configs) {
   }
 }
 
-console.log(`${levels} soal percabangan diperiksa; peluang tebak-asal terbesar ${(worst.rate * 100).toFixed(1)}% (${worst.where}).`);
+console.log(`${levels} soal percabangan diperiksa (${tebak} soal tebak); peluang tebak-asal terbesar ${(worst.rate * 100).toFixed(1)}% (${worst.where}).`);
 if (problems) {
   console.error(`${problems} masalah.`);
   process.exit(1);

@@ -663,6 +663,156 @@
   paint-order: stroke fill;
 }
 
+/* ---------- Mode TEBAK ---------- */
+
+/* Tanda terkunci: sentuhan jatuh ke kotaknya (bukan ke tempat tanda). */
+.rs-wrap--tebak .rs-slot {
+  pointer-events: none;
+  border-style: solid;
+}
+
+.rs-col--tap {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.rs-col--tap:active .rs-box {
+  translate: 0 3px;
+}
+
+.rs-col--tap .rs-box {
+  box-shadow:
+    inset 0 6px 0 #c58947,
+    inset 0 0 0 2px rgba(120, 70, 20, 0.25),
+    0 0 0 3px rgba(31, 114, 220, 0.28),
+    0 4px 0 #b07b3f;
+}
+
+.rs-col--pick .rs-box {
+  box-shadow:
+    inset 0 6px 0 #c58947,
+    0 0 0 4px #1f72dc,
+    0 0 16px 5px rgba(31, 114, 220, 0.5);
+  animation: rs-glow 1s ease-in-out infinite;
+}
+
+/* Mainan yang sedang ditebak, di antrean. */
+.rs-queue__slot--now {
+  border-radius: 10px;
+  background: #fff3bf;
+  box-shadow: 0 0 0 2px #fab005;
+}
+
+/* Panel tanya: mainan besar + panah ke kotak-kotak. */
+.rs-ask {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 84px;
+  padding: 8px;
+  border-radius: 18px;
+  background: #fff7e0;
+  box-shadow: inset 0 0 0 2px #ffe08a;
+}
+
+.rs-ask__toy {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:
+    0 0 0 3px #fab005,
+    0 4px 0 #e2bd5a;
+  animation: rs-plop 0.35s ease-out;
+}
+
+.rs-ask__toy .rs-toy {
+  width: 54px;
+  height: 54px;
+}
+
+.rs-ask__point {
+  width: 30px;
+  height: 38px;
+  animation: rs-point 0.9s ease-in-out infinite;
+}
+
+.rs-ask__point svg {
+  width: 100%;
+  height: 100%;
+}
+
+.rs-ask__q {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+  color: #1f72dc;
+}
+
+@keyframes rs-point {
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+/* ---------- Kado rahasia ---------- */
+
+.rs-gift svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Selesai: tutup kotak berpita ---------- */
+
+.rs-lid {
+  position: absolute;
+  left: -5px;
+  right: -5px;
+  top: -8px;
+  z-index: 3;
+  height: 16px;
+  border-radius: 7px;
+  background: linear-gradient(180deg, #f3cd9a, #dca56a);
+  box-shadow: 0 3px 0 #b07b3f;
+  animation: rs-lid 0.4s cubic-bezier(0.3, 1.4, 0.6, 1) both;
+}
+
+.rs-lid::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  margin-left: -6px;
+  background: #ff6b6b;
+}
+
+.rs-lid__bow {
+  position: absolute;
+  left: 50%;
+  top: -11px;
+  width: 26px;
+  height: 14px;
+  margin-left: -13px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 60%, #c92a2a 0 3px, transparent 4px),
+    radial-gradient(ellipse at 25% 50%, #ff6b6b 0 6px, transparent 7px),
+    radial-gradient(ellipse at 75% 50%, #ff6b6b 0 6px, transparent 7px);
+}
+
+@keyframes rs-lid {
+  from {
+    translate: 0 -26px;
+    opacity: 0;
+  }
+}
+
 /* ---------- HP kecil / pendek ---------- */
 
 @media (max-width: 360px) {
@@ -754,6 +904,17 @@
     grid-column: 2;
     grid-row: 3;
   }
+
+  .rs-ask {
+    grid-column: 2;
+    grid-row: 2 / -1;
+    align-self: center;
+  }
+
+  /* Kotak-kotak ada di KIRI panel, bukan di atasnya. */
+  .rs-ask__point svg {
+    rotate: -90deg;
+  }
 }
 
 /* Tablet: pabrik tak dibiarkan memanjang kosong — tingginya dibatasi dan
@@ -810,7 +971,10 @@
   .rs-owner--cheer,
   .rs-slot--sel,
   .rs-traychip--hint,
-  .rs-col--hint .rs-plate {
+  .rs-col--hint .rs-plate,
+  .rs-col--pick .rs-box,
+  .rs-ask__point,
+  .rs-lid {
     animation: none;
   }
 }

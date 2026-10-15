@@ -1517,6 +1517,20 @@ export interface RuleSortData {
   /** Rupa mesin pengeluar mainan: corong (bawaan, TK) atau kepala robot (SD). */
   machine?: 'corong' | 'robot';
   /**
+   * `susun` (bawaan) = anak memasang tanda lalu menekan Jalankan.
+   * `tebak` = tanda SUDAH terpasang (`given` = jawaban, terkunci); mainan
+   * datang satu per satu dan anak MENEBAK kotak tujuannya dengan menyentuh
+   * kotak itu — membaca program, bukan menulisnya. Baki & tombol Jalankan
+   * tidak ada (`tray` kosong).
+   */
+  mode?: 'susun' | 'tebak';
+  /**
+   * Antrean RAHASIA: mainan tampil sebagai kado "?" sampai diambil mesin.
+   * Anak tak bisa mencocokkan tanda dengan antrean — aturannya harus ditebak
+   * dari isi kotak saja (mode tebak: hanya mainan berikutnya yang dibuka).
+   */
+  hidden?: boolean;
+  /**
    * Satu program yang benar — DIPERIKSA builder & `check-rule-levels.mjs`.
    * Kotak tujuan tiap mainan dihitung darinya (`expectedBoxes`), dan dipakai
    * petunjuk P2.
