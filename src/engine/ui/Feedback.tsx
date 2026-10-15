@@ -46,11 +46,11 @@ export function FeedbackOverlay({ kind }: { kind: 'correct' | 'wrong' }) {
   );
 }
 
-export function StarsRow({ stars }: { stars: Stars }) {
+export function StarsRow({ stars, max = 3 }: { stars: Stars; max?: number }) {
   return (
     <div className="stars-row" aria-label={`${stars} bintang`}>
       {'⭐'.repeat(stars)}
-      {'☆'.repeat(3 - stars)}
+      {'☆'.repeat(Math.max(0, max - stars))}
     </div>
   );
 }

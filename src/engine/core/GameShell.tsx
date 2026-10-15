@@ -6,6 +6,7 @@ import type {
   GameLevel,
   LevelStamp,
   MixedLevel,
+  MaxStars,
   Stars,
   TemplateId,
 } from '@/engine/core/types';
@@ -103,7 +104,16 @@ function templateFor(
   return config.template as TemplateId;
 }
 
-function starsForMistakes(wrong: number): Stars {
+function starsForMistakes(wrong: number, max: MaxStars = 3): Stars {
+  if (max === 5) {
+    // Level berisi banyak soal: tiap salah menurunkan satu bintang dulu,
+    // baru melambat — salah sekali di misi enam soal tetap dapat 4.
+    if (wrong === 0) return 5;
+    if (wrong === 1) return 4;
+    if (wrong <= 3) return 3;
+    if (wrong <= 5) return 2;
+    return 1;
+  }
   if (wrong === 0) return 3;
   if (wrong <= 2) return 2;
   return 1;
@@ -283,6 +293,7 @@ export default function GameShell({
 }) {
   const picker = config.chooseLevel;
   const stageMap = config.stageMap;
+  const maxStars: MaxStars = config.maxStars ?? 3;
   const [screen, setScreen] = useState<Screen>(stageMap ? 'map' : picker ? 'pick' : 'intro');
   const [levelIndex, setLevelIndex] = useState(0);
   const [feedback, setFeedback] = useState<'correct' | 'wrong' | null>(null);
@@ -413,7 +424,7 @@ export default function GameShell({
 
   const handleCorrect = useCallback(() => {
     if (!level) return;
-    const stars = starsForMistakes(wrongCount.current);
+    const stars = starsForMistakes(wrongCount.current, maxStars);
     saveLevelStars(config.id, level.id, stars);
     const earnedNow = [...earned, stars];
     setEarned(earnedNow);
@@ -438,7 +449,7 @@ export default function GameShell({
         setBonus(
           awardDailyBonus(
             config.id,
-            earnedNow.length >= levels.length && earnedNow.every((x) => x === 3),
+            earnedNow.length >= levels.length && earnedNow.every((x) => x === maxStars),
           ),
         );
         // Victory tune first, praise line after it — see `celebrate`.
@@ -564,7 +575,7 @@ export default function GameShell({
                   )}
                   <span className="pick-card__stars" aria-label={`${stars} bintang`}>
                     {'⭐'.repeat(stars)}
-                    {'☆'.repeat(3 - stars)}
+                    {'☆'.repeat(maxStars - stars)}
                   </span>
                   {/* Reading is not assumed: 🔊 replays the level's own
                       narration line — already recorded, so no new audio. A
@@ -666,9 +677,9 @@ export default function GameShell({
           <PartyPic />
         )}
         <h1>Selamat!</h1>
-        <StarsRow stars={starsForMistakes(0)} />
+        <StarsRow stars={starsForMistakes(0, maxStars)} max={maxStars} />
         <p style={{ fontSize: 22 }}>
-          Kamu dapat <strong>{total}</strong> dari {levels.length * 3} bintang!
+          Kamu dapat <strong>{total}</strong> dari {levels.length * maxStars} bintang!
         </p>
         {bonus && (
           <p className={`daily-bonus${bonus.added > 0 ? '' : ' daily-bonus--taken'}`}>

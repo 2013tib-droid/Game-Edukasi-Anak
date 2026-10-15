@@ -373,6 +373,8 @@ const config: GameConfig<'word-voyage'> = {
   emoji: '⛵',
   template: 'word-voyage',
   hints: true,
+  // Satu misi = 4–6 soal, jadi dihargai sampai 5 bintang (game lain 3).
+  maxStars: 5,
   project: { title: 'Peti Harta Kapten' },
   stageMap: {
     title: 'Ayo berlayar dari pulau ke pulau sambil belajar bahasa Inggris!',

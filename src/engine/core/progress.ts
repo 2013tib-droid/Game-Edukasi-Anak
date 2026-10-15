@@ -188,7 +188,7 @@ export function migrateMergedMath(): void {
 export type IncomingProgress = Record<string, Record<string, unknown> | undefined>;
 
 function isStars(v: unknown): v is Stars {
-  return v === 1 || v === 2 || v === 3;
+  return v === 1 || v === 2 || v === 3 || v === 4 || v === 5;
 }
 
 /** Seluruh bintang di perangkat ini, untuk dikirim sebagai cadangan. */
@@ -218,7 +218,7 @@ export function mergeProgress(incoming: IncomingProgress): boolean {
     for (const [levelId, raw] of Object.entries(levels)) {
       // Cadangan datang dari jaringan, jadi bentuknya TIDAK dipercaya —
       // itu sebabnya parameternya `unknown` dan bukan `Stars`. Bintang di
-      // luar 1-3 dibuang, bukan dipaksa masuk.
+      // luar 1-5 dibuang, bukan dipaksa masuk.
       if (!isStars(raw)) continue;
       if (raw > (game[levelId] ?? 0)) {
         game[levelId] = raw;

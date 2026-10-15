@@ -1665,6 +1665,12 @@ export interface GameConfig<T extends TemplateId = TemplateId> {
    * them each play. Omit (or >= levels.length) to play every slot in order.
    */
   sessionLevels?: number;
+  /**
+   * Bintang maksimum per level (bawaan 3). 5 untuk game yang satu levelnya
+   * berisi banyak soal (Kapten Kata: satu misi = 4–6 soal), supaya usaha
+   * sebanyak itu tak dihargai sama dengan satu soal.
+   */
+  maxStars?: MaxStars;
   /** Let the child pick the level from a card grid — see `LevelPicker`. */
   chooseLevel?: LevelPicker;
   /** Layar pembuka berupa peta tahap — lihat `StageMap`. */
@@ -1716,6 +1722,8 @@ export interface MixedGameConfig {
   levels: MixedSlot[];
   /** See `GameConfig.sessionLevels`. */
   sessionLevels?: number;
+  /** See `GameConfig.maxStars`. */
+  maxStars?: MaxStars;
   /** See `GameConfig.chooseLevel`. */
   chooseLevel?: LevelPicker;
   /** See `GameConfig.stageMap`. */
@@ -1730,4 +1738,7 @@ export interface MixedGameConfig {
 export type AnyGameConfig = GameConfig | MixedGameConfig;
 
 /** Star progress per level, stored per device (Firestore sync in Fase 5). */
-export type Stars = 0 | 1 | 2 | 3;
+export type Stars = 0 | 1 | 2 | 3 | 4 | 5;
+
+/** Bintang maksimum per level: 3 (bawaan) atau 5 untuk level yang berisi banyak soal. */
+export type MaxStars = 3 | 5;
