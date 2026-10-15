@@ -400,11 +400,11 @@ const config: MixedGameConfig = {
         ],
       ),
       ask(
-        'Bekal temanmu makanan khas daerahnya. Apa sikapmu?',
-        ['Menghargai dan bertanya namanya', '😋'],
+        'Temanmu bicara bahasa daerah dengan neneknya. Apa sikapmu?',
+        ['Mendengarkan dan menghargainya', '🗣️'],
         [
-          ['Bilang makanannya aneh', '🤢'],
-          ['Menyuruhnya makan di luar', '🙅'],
+          ['Menirukannya sambil mengejek', '🗣️'],
+          ['Menyuruhnya diam', '🗣️'],
         ],
       ),
       ask(
