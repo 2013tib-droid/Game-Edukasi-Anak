@@ -685,7 +685,7 @@ export default function GameShell({
           <p className={`daily-bonus${bonus.added > 0 ? '' : ' daily-bonus--taken'}`}>
             {bonus.added > 0 ? (
               <>
-                🎁 Bonus rajin: <strong>+{bonus.added} ⭐</strong> untuk temanmu!
+                🎁 Bonus rajin: <strong>+{bonus.added} ⭐</strong>!
               </>
             ) : (
               <>🎁 Bonus game ini sudah diambil hari ini. Coba game lain, atau main lagi besok!</>
