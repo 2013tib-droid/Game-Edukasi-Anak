@@ -271,7 +271,7 @@ const config: MixedGameConfig = {
       'l5',
       { emoji: '🌾', sila: 5, label: 'Sila 5' },
       pickSila('Dina berdoa sebelum makan. Ini sila yang mana?', 1, '🙏'),
-      pickSila('Raka menghormati teman yang beribadah. Sila yang mana?', 1, '🤲'),
+      pickSila('Budi menghormati teman yang beribadah. Sila yang mana?', 1, '🤲'),
       pickSila('Bayu menolong teman yang jatuh. Ini sila yang mana?', 2, '🩹'),
       pickSila('Sinta meminta maaf saat berbuat salah. Sila yang mana?', 2, '🙇'),
       pickSila('Kami bermain dengan teman dari suku lain. Sila yang mana?', 3, '⚽'),
@@ -454,18 +454,18 @@ const config: MixedGameConfig = {
         pages: [
           page(
             '🧹',
-            'Minggu pagi, warga kampung Raka bekerja bakti membersihkan selokan.',
+            'Minggu pagi, warga kampung Budi bekerja bakti membersihkan selokan.',
             'kota',
           ),
           decide(
-            'Raka masih ingin bermain gim. Apa yang sebaiknya Raka lakukan?',
+            'Budi masih ingin bermain gim. Apa yang sebaiknya Budi lakukan?',
             'Ikut kerja bakti bersama warga',
             'Terus bermain gim di rumah',
             'Kerja bakti itu tugas semua warga, termasuk anak-anak. Ayo coba lagi!',
           ),
-          page('🪣', 'Raka membawa ember dan membantu Pak RT mengangkat sampah.'),
+          page('🪣', 'Budi membawa ember dan membantu Pak RT mengangkat sampah.'),
           decide(
-            'Ada warga yang belum kebagian sapu. Apa yang Raka lakukan?',
+            'Ada warga yang belum kebagian sapu. Apa yang Budi lakukan?',
             'Memakai sapunya bergantian',
             'Menyembunyikan sapunya',
             'Gotong royong berarti saling membantu. Coba pikirkan lagi!',

@@ -12892,8 +12892,8 @@
       ]
     },
     {
-      "key": "173551890c14",
-      "text": "Ada warga yang belum kebagian sapu. Apa yang Raka lakukan?",
+      "key": "2c35c4508ca2",
+      "text": "Ada warga yang belum kebagian sapu. Apa yang Budi lakukan?",
       "scope": "perisai-garuda",
       "voice": "ardi",
       "games": [
@@ -12921,6 +12921,33 @@
     {
       "key": "5de09000faed",
       "text": "Bayu menolong teman yang jatuh. Ini sila yang mana?",
+      "scope": "perisai-garuda",
+      "voice": "gadis",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "9a7db1981a0b",
+      "text": "Budi masih ingin bermain gim. Apa yang sebaiknya Budi lakukan?",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "6f5f19e829b9",
+      "text": "Budi membawa ember dan membantu Pak RT mengangkat sampah.",
+      "scope": "perisai-garuda",
+      "voice": "ardi",
+      "games": [
+        "perisai-garuda"
+      ]
+    },
+    {
+      "key": "4b5189277df6",
+      "text": "Budi menghormati teman yang beribadah. Sila yang mana?",
       "scope": "perisai-garuda",
       "voice": "gadis",
       "games": [
@@ -13198,8 +13225,8 @@
       ]
     },
     {
-      "key": "e4675afa86f8",
-      "text": "Minggu pagi, warga kampung Raka bekerja bakti membersihkan selokan.",
+      "key": "358630d4c788",
+      "text": "Minggu pagi, warga kampung Budi bekerja bakti membersihkan selokan.",
       "scope": "perisai-garuda",
       "voice": "ardi",
       "games": [
@@ -13274,33 +13301,6 @@
       "text": "Pilihan B. Terus bermain gim di rumah",
       "scope": "perisai-garuda",
       "voice": "ardi",
-      "games": [
-        "perisai-garuda"
-      ]
-    },
-    {
-      "key": "a820897ffd2c",
-      "text": "Raka masih ingin bermain gim. Apa yang sebaiknya Raka lakukan?",
-      "scope": "perisai-garuda",
-      "voice": "ardi",
-      "games": [
-        "perisai-garuda"
-      ]
-    },
-    {
-      "key": "33d1e1e0a4a4",
-      "text": "Raka membawa ember dan membantu Pak RT mengangkat sampah.",
-      "scope": "perisai-garuda",
-      "voice": "ardi",
-      "games": [
-        "perisai-garuda"
-      ]
-    },
-    {
-      "key": "45066327d738",
-      "text": "Raka menghormati teman yang beribadah. Sila yang mana?",
-      "scope": "perisai-garuda",
-      "voice": "gadis",
       "games": [
         "perisai-garuda"
       ]
