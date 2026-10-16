@@ -1,9 +1,8 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #53 — Baca Cerita: "Anak Gembala dan Serigala" ditulis ulang & dibuka.
-19 baris baru (suara Ardi), semuanya scope cerita-kancil; 17 baris lama
-cerita ini jadi yatim. Nol baris pindah scope. Lafal baru: kecewa → kecéwa
-(hanya dipakai baris baru).
+render #54 — Anak Gembala: pilihan "Tertawa karena berhasil menipu" jadi
+"Menertawakan warga" (turun tiga baris di HP 320 px). 2 baris baru
+(Pilihan A/B), scope cerita-kancil, nol pindah scope.
 only: cerita-kancil
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow

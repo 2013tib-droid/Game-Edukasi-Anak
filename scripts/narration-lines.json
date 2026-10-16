@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-16",
   "count": 2086,
-  "chars": 87021,
+  "chars": 86997,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -1390,6 +1390,15 @@
       ]
     },
     {
+      "key": "cbf29692ce70",
+      "text": "Pilihan A. Menertawakan warga",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "e88a011e9d54",
       "text": "Pilihan A. Mengusir belalang",
       "scope": "cerita-kancil",
@@ -1473,15 +1482,6 @@
     {
       "key": "e6283138e2b7",
       "text": "Pilihan A. Terbang pergi diam-diam",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "a7d37454a2f0",
-      "text": "Pilihan A. Tertawa karena berhasil menipu",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1687,6 +1687,15 @@
       ]
     },
     {
+      "key": "ef1ce4da36ae",
+      "text": "Pilihan B. Menertawakan warga",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "ff34832fa08e",
       "text": "Pilihan B. Mengusir belalang",
       "scope": "cerita-kancil",
@@ -1770,15 +1779,6 @@
     {
       "key": "e77b077a0eaa",
       "text": "Pilihan B. Terbang pergi diam-diam",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "0b182bcc5132",
-      "text": "Pilihan B. Tertawa karena berhasil menipu",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
