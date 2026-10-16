@@ -366,20 +366,25 @@ suka ungu).
   periksa lubang terkurung di lingkaran panah ulangi, lalu tambah `pic: '<id>',` di
   entri registry-nya.
 
-## Ikon dua game petak warna (`color-path`) — disusun 2026-10-16
+## Ikon dua game petak warna (`color-path`) — disusun ulang 2026-10-16
 
-Petak Ajaib (TK) & Kode Warna (SD Kelas 1 & 2) masih memakai emoji 🐔 / 🐱. (Pabrik
-Mainan & Robot Pemilah, yang dulu tercatat di sini, sudah DIGANTI kedua game ini —
-promptnya dibuang.) Pakai BLOK GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa
-warna ungu.
+Judulnya diganti pemilik di hari yang sama: **"Petak Ajaib" → "Ayam Cari Jagung"** (TK,
+id tetap `petak-ajaib`) dan **"Kode Warna" → "Panah Warna"** (SD Kelas 1 & 2, id tetap
+`kode-warna`). Nama berkas ikon tetap mengikuti ID, bukan judul. Keduanya masih emoji
+🐔 / 🐱. Pakai BLOK GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa warna ungu
+(abaikan "ungu muda" di BLOK GAYA).
 
 | id file | Baris prompt |
 |---|---|
-| `petak-ajaib` | Buatkan: papan rumput kecil berpetak tiga kali tiga, dua petaknya berwarna — satu merah, satu biru — masing-masing bergambar panah putih tebal ke arah berbeda. Di petak ujung satu tongkol jagung berwajah imut — mata besar berkilau, pipi merona. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
-| `kode-warna` | Buatkan: papan rumput kecil berpetak tiga kali tiga dengan empat petak berwarna — merah, kuning, biru, hijau — masing-masing bergambar panah putih tebal, panah-panahnya membentuk jalan berkelok. Di petak ujung satu gelas susu putih berwajah imut — mata besar berkilau, pipi merona. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `petak-ajaib` | Buatkan: satu tongkol jagung kuning berkulit daun hijau, berwajah imut — mata besar berkilau, pipi merona, senyum lebar — berdiri di atas satu ubin persegi tebal berwarna merah muda pastel. Di permukaan ubin ada satu panah putih tebal yang menunjuk ke depan. Di sebelahnya satu ubin kecil biru muda dengan panah putih tebal yang menunjuk ke arah lain. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `kode-warna` | Buatkan: empat ubin persegi tebal yang tersusun berkelok seperti jalan pendek, warnanya merah, kuning, biru muda, dan hijau mint. Tiap ubin bergambar satu panah putih tebal, dan panah-panahnya saling menyambung membentuk jalan berbelok. Di ujung jalan itu satu gelas susu putih berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Tanpa hewan, tanpa rambu, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 
-- **Yang membuat ikon ini terbaca "petak warna" adalah PETAK BERWARNA + PANAH** — sama
-  dengan layar game. Jangan tokoh ayam/kucing: kartu hewan sudah dipakai banyak game lain.
+- **TK = jagungnya yang jadi tokoh** (tujuan ayam di game, dan nama gamenya), ditopang
+  ubin berpanah supaya tetap terbaca "petak warna". Sengaja TANPA ayam: kartu hewan
+  sudah dipakai banyak game lain, dan ayam di kartu terbaca seperti game hewan.
+- **SD = jalan ubin berpanah empat warna** — itu inti "Panah Warna". **"Tanpa rambu"
+  wajib**: ikon Rute Kendaraan (kelompok yang sama) sudah rambu berwajah.
+- Panah tidak disebut arahnya (pelajaran 1 — kata arah ikut tertulis di gambar).
 - Pasang seperti biasa: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`,
-  periksa lubang terkurung di antara petak, lalu tambah `pic: '<id>',` di entri
+  periksa lubang terkurung di antara ubin, lalu tambah `pic: '<id>',` di entri
   registry-nya.

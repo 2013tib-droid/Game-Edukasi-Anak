@@ -189,7 +189,7 @@ const ALL_GAMES: GameMeta[] = [
     // sampai `pic` diisi.
     id: 'petak-ajaib',
     group: 'tk',
-    title: 'Petak Ajaib',
+    title: 'Ayam Cari Jagung',
     emoji: '🐔',
     template: 'color-path',
     load: () => import('@/games/tk/petak-ajaib'),
@@ -247,7 +247,7 @@ const ALL_GAMES: GameMeta[] = [
     // sampai `pic` diisi.
     id: 'kode-warna',
     group: 'sd1',
-    title: 'Kode Warna',
+    title: 'Panah Warna',
     emoji: '🐱',
     template: 'color-path',
     load: () => import('@/games/sd1/kode-warna'),
