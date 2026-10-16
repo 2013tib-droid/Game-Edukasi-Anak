@@ -1248,7 +1248,10 @@ export type LabArt =
   | 'kulkas'
   | 'wayang-gunungan'
   | 'wayang-tokoh'
-  | 'wayang-garuda';
+  | 'wayang-garuda'
+  | 'getar-kecil'
+  | 'getar-besar'
+  | 'getar-diam';
 
 /**
  * Satu benda di lab. Gambarnya SVG engine (`art`), seni item (`item`) atau

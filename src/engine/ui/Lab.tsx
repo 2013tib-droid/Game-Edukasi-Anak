@@ -240,6 +240,10 @@ function Art({ art }: { art: LabArt }) {
           <path d="M32 58v6" stroke="#5c3310" strokeWidth="2" />
         </>
       );
+    case 'getar-kecil':
+    case 'getar-besar':
+    case 'getar-diam':
+      return <Vibration amp={art === 'getar-besar' ? 40 : art === 'getar-kecil' ? 12 : 0} />;
     case 'wayang-garuda':
       return (
         <>
@@ -254,6 +258,30 @@ function Art({ art }: { art: LabArt }) {
         </>
       );
   }
+}
+
+/**
+ * Karet bergetar dilihat dari samping (kartu jawaban "getarannya besar /
+ * kecil / berhenti"). Ketiganya bentuk yang SAMA, cuma simpangannya beda:
+ * dua lengkung bayangan = jangkauan getaran, garis pekat = karet sekarang.
+ * `amp` 0 = karet lurus diam.
+ */
+function Vibration({ amp }: { amp: number }) {
+  const band = (bend: number, o: number, w: number) => (
+    <path d={`M8 32Q32 ${32 + bend} 56 32`} stroke="#e64980" strokeOpacity={o} strokeWidth={w} fill="none" strokeLinecap="round" />
+  );
+  return (
+    <>
+      {amp > 0 && (
+        <path d={`M8 32Q32 ${32 - amp} 56 32Q32 ${32 + amp} 8 32z`} fill="#ffdeeb" fillOpacity="0.8" />
+      )}
+      {amp > 0 && band(-amp, 0.35, 3)}
+      {amp > 0 && band(amp, 0.35, 3)}
+      {band(amp > 0 ? amp * 0.55 : 0, 1, 4)}
+      <circle cx="8" cy="32" r="4.5" fill="#868e96" stroke={STROKE} strokeWidth="1.5" />
+      <circle cx="56" cy="32" r="4.5" fill="#868e96" stroke={STROKE} strokeWidth="1.5" />
+    </>
+  );
 }
 
 export function LabArtSvg({ art, className }: { art: LabArt; className?: string }) {
