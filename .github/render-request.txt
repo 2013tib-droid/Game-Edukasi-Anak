@@ -1,10 +1,9 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #52 — Pabrik Mainan & Robot Pemilah DIGANTI dua game petak warna
-(template color-path): Petak Ajaib (TK) & Kode Warna (SD 1-2). 20 baris
-baru (8 petak-ajaib, 9 kode-warna, 3 shared). Baris rule-sort lama sudah
-dibuang beserta mp3-nya. Nol baris pindah scope. Sengaja TANPA baris "only"
-(tiga scope).
+render #55 — Anak Gembala halaman 7: soal "Serigala sungguhan datang! …" dan
+pilihan "Berteriak minta tolong" dipendekkan (HP 320 px scroll 3 px). 3 baris
+baru, scope cerita-kancil, nol pindah scope.
+only: cerita-kancil
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris
