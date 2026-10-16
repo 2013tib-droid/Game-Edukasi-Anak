@@ -21,6 +21,8 @@ import { colorSlot, type ColorCast } from '@/games/colorLevels';
  *   l6 ambil jagung, lalu pulang ke kandang
  *   l7 jalan berkelok tiga warna
  *   l8 MISI BESAR: dua jagung + kandang
+ *   l9 DUA TOKOH: ayam & kucing berjalan bersama, warna sendiri-sendiri
+ *   l10 DUA TOKOH: satu warna dilewati keduanya — satu panah untuk berdua
  *
  * - Varian = rancangan yang dicerminkan/diputar DAN diwarnai ulang
  *   (`colorSlot`), jadi narasi TIDAK BOLEH menyebut warna tertentu.
@@ -31,6 +33,8 @@ import { colorSlot, type ColorCast } from '@/games/colorLevels';
 
 const CORN: ColorCast = { hero: 'chicken', heroFaces: 'kanan', goal: 'corn' };
 const HOME: ColorCast = { hero: 'chicken', heroFaces: 'kanan', goal: 'barn', pickup: 'corn' };
+/** Dua tokoh (2026-10-16, permintaan pemilik "agak susah lagi"): ayam ke jagung, kucing ke susu. */
+const DUO: ColorCast = { ...CORN, buddy: { hero: 'cat', heroFaces: 'kanan', goal: 'milk' } };
 
 const STAMP: Record<string, LevelStamp> = {
   l1: { emoji: '🌽', label: 'Jagung' },
@@ -41,6 +45,8 @@ const STAMP: Record<string, LevelStamp> = {
   l6: { emoji: '🛖', label: 'Kandang' },
   l7: { emoji: '🦋', label: 'Kupu' },
   l8: { emoji: '🌈', label: 'Pelangi' },
+  l9: { emoji: '🐱', label: 'Teman' },
+  l10: { emoji: '🤝', label: 'Bersama' },
 };
 
 const config: GameConfig<'color-path'> = {
@@ -86,6 +92,22 @@ const config: GameConfig<'color-path'> = {
         grid: ['S.*.m.', '......', 'm.h.k.', '*.....', 'G.....'],
         start: 'kanan',
         solution: { merah: 'bawah', kuning: 'kiri', hijau: 'kiri' },
+      },
+    ]),
+    colorSlot('l9', STAMP.l9!, 'Ayam dan kucing jalan bersama. Ayam ke jagung, kucing ke susu!', DUO, [
+      {
+        grid: ['S..m.', '.....', '..gG.', '.....', 's.b..'],
+        start: 'kanan',
+        start2: 'kanan',
+        solution: { merah: 'bawah', biru: 'atas' },
+      },
+    ]),
+    colorSlot('l10', STAMP.l10!, 'Ada warna yang dilewati berdua. Satu panah harus cocok untuk keduanya!', DUO, [
+      {
+        grid: ['S.m..', '.....', '..b.G', 'b..k.', 's..g.'],
+        start: 'kanan',
+        start2: 'atas',
+        solution: { merah: 'bawah', kuning: 'bawah', biru: 'kanan' },
       },
     ]),
   ],

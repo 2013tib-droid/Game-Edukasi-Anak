@@ -5,9 +5,10 @@ import { DIRS, sameCell, type Cell, type CodeDir } from '@/engine/core/codeQuest
 import {
   PAD_HEX,
   PATH_LINES,
+  heroesOf,
   parsePathBoard,
   rulesComplete,
-  runPath,
+  runTeam,
   type PadColor,
   type PathRules,
 } from '@/engine/core/colorPath';
@@ -36,6 +37,9 @@ import '@/engine/ui/color-path.css';
  *   terakhir membelokkan tokoh ditandai merah, tokoh pulang ke petak mulai.
  * - P2: tingkat 1 = jejak kaki jalan yang benar; tingkat 2 = aturan pertama
  *   yang salah ditandai, panah yang dibutuhkan di baki berdenyut.
+ * - DUA TOKOH (`data.buddy`, huruf `s`/`g`): tokoh kedua berjalan BERSAMAAN
+ *   dengan aturan yang sama; menang kalau keduanya sampai. Yang gagal duluan
+ *   yang menentukan kalimatnya, dan tokoh itu yang bergoyang.
  *
  * Gerak tokoh = transisi CSS `left/top` (pola CodeQuest), satu render per langkah.
  */
@@ -53,17 +57,32 @@ export default function ColorPath({ level, onCorrect, onWrong, narrate, hint }: 
   const data = level.data;
   const board = useMemo(() => parsePathBoard(data.grid), [data.grid]);
   const colors = board.colors;
+  const dirs = useMemo(
+    () => (data.buddy ? [data.startDir, data.buddy.startDir] : [data.startDir]),
+    [data.startDir, data.buddy],
+  );
+  const heroes = useMemo(() => heroesOf(board, dirs), [board, dirs]);
+  /** Rupa tiap tokoh: seni, arah hadap seninya, tujuannya. */
+  const cast = useMemo(
+    () => [
+      { item: data.heroItem, faces: data.heroFaces, goal: data.goalItem },
+      ...(data.buddy ? [{ item: data.buddy.heroItem, faces: data.buddy.heroFaces, goal: data.buddy.goalItem }] : []),
+    ],
+    [data],
+  );
+  const homes = () => heroes.map((h) => h.start);
+  const faces = () => heroes.map((h) => h.dir === 'kiri');
 
   const [rules, setRules] = useState<PathRules>(() => ({ ...(data.given ?? {}) }));
   const [sel, setSel] = useState<PadColor | null>(() => colors.find((c) => !data.given?.[c]) ?? colors[0] ?? null);
-  const [hero, setHero] = useState<Cell>(board.start);
-  const [hopKey, setHopKey] = useState(0);
-  const [faceLeft, setFaceLeft] = useState(data.startDir === 'kiri');
-  const [bumpDir, setBumpDir] = useState<CodeDir | null>(null);
+  const [pos, setPos] = useState<Cell[]>(homes);
+  const [hop, setHop] = useState<number[]>(() => heroes.map(() => 0));
+  const [faceLeft, setFaceLeft] = useState<boolean[]>(faces);
+  const [bump, setBump] = useState<{ who: number; dir: CodeDir } | null>(null);
   const [got, setGot] = useState<Set<number>>(() => new Set());
   const [running, setRunning] = useState(false);
   const [solved, setSolved] = useState(false);
-  const [nowPad, setNowPad] = useState<{ color: PadColor; cell: Cell; k: number } | null>(null);
+  const [nowPads, setNowPads] = useState<{ color: PadColor; cell: Cell; k: number }[]>([]);
   const [bad, setBad] = useState<PadColor | null>(null);
   const [ping, setPing] = useState(0);
   const timers = useRef<number[]>([]);
@@ -79,9 +98,9 @@ export default function ColorPath({ level, onCorrect, onWrong, narrate, hint }: 
   // ---- Petunjuk P2 ----
   const footprints = useMemo(() => {
     if (hint < 1) return new Set<string>();
-    const run = runPath(board, data.startDir, data.solution);
-    return new Set(run.steps.filter((s) => !s.bump).map((s) => `${s.to.r},${s.to.c}`));
-  }, [hint, board, data.startDir, data.solution]);
+    const team = runTeam(board, dirs, data.solution);
+    return new Set(team.runs.flatMap((run) => run.steps.filter((s) => !s.bump).map((s) => `${s.to.r},${s.to.c}`)));
+  }, [hint, board, dirs, data.solution]);
   const nudge = useMemo(() => {
     if (hint < 2) return null;
     const c = colors.find((col) => rules[col] !== data.solution[col]);
@@ -188,74 +207,82 @@ export default function ColorPath({ level, onCorrect, onWrong, narrate, hint }: 
       if (empty) setSel(empty);
       return;
     }
-    const result = runPath(board, data.startDir, rules);
+    const team = runTeam(board, dirs, rules);
     setRunning(true);
     setBad(null);
     const collected = new Set<number>();
+    const setAt = <T,>(set: (f: (a: T[]) => T[]) => void, i: number, v: T) =>
+      set((a) => a.map((x, j) => (j === i ? v : x)));
+    // Gagal: berhenti di langkah terakhir tokoh yang gagal duluan.
+    const length =
+      team.outcome === 'sampai'
+        ? Math.max(...team.runs.map((r) => r.steps.length))
+        : team.runs[team.who ?? 0]!.steps.length;
     let t = 0;
-    result.steps.forEach((s, i) => {
+    for (let k = 0; k < length; k++) {
       later(() => {
-        if (s.dir === 'kiri' || s.dir === 'kanan') setFaceLeft(s.dir === 'kiri');
-        if (s.bump) {
-          sfx('tap');
-          setBumpDir(s.dir);
-          return;
-        }
-        sfx('tick');
-        setHero(s.to);
-        setHopKey((k) => k + 1);
-        if (s.pad) {
-          setNowPad({ color: s.pad, cell: s.to, k: i });
-          const nd = rules[s.pad]!;
-          if (nd === 'kiri' || nd === 'kanan') later(() => setFaceLeft(nd === 'kiri'), STEP_MS * 0.6);
-        }
-        if (s.got !== undefined) {
-          collected.add(s.got);
-          setGot(new Set(collected));
-          later(() => sparkleCell(s.to, 6), STEP_MS * 0.6);
-        }
+        const lit: { color: PadColor; cell: Cell; k: number }[] = [];
+        let moved = false;
+        team.runs.forEach((run, i) => {
+          const s = run.steps[k];
+          if (!s) return;
+          if (s.dir === 'kiri' || s.dir === 'kanan') setAt(setFaceLeft, i, s.dir === 'kiri');
+          if (s.bump) {
+            sfx('tap');
+            setBump({ who: i, dir: s.dir });
+            return;
+          }
+          moved = true;
+          setAt(setPos, i, s.to);
+          setHop((a) => a.map((x, j) => (j === i ? x + 1 : x)));
+          if (s.pad) {
+            lit.push({ color: s.pad, cell: s.to, k });
+            const nd = rules[s.pad]!;
+            if (nd === 'kiri' || nd === 'kanan') later(() => setAt(setFaceLeft, i, nd === 'kiri'), STEP_MS * 0.6);
+          }
+          if (s.got !== undefined) {
+            collected.add(s.got);
+            setGot(new Set(collected));
+            later(() => sparkleCell(s.to, 6), STEP_MS * 0.6);
+          }
+        });
+        if (moved) sfx('tick');
+        setNowPads(lit);
       }, t);
       // Jalan yang panjang (berputar-putar) dipercepat sesudah langkah ke-12.
-      t += i < 12 ? STEP_MS : Math.round(STEP_MS * 0.6);
-    });
+      t += k < 12 ? STEP_MS : Math.round(STEP_MS * 0.6);
+    }
 
     const end = t + 120;
-    if (result.outcome === 'sampai') {
+    if (team.outcome === 'sampai') {
       later(() => {
-        setNowPad(null);
+        setNowPads([]);
         sfx('correct');
-        sparkleCell(board.goal, 12);
+        heroes.forEach((h) => sparkleCell(h.goal, 12));
         setSolved(true);
         later(() => onCorrect(), 700);
       }, end);
       return;
     }
     later(() => {
-      setNowPad(null);
-      setBad(result.blame ?? null);
-      narrate(result.outcome === 'putar' ? PATH_LINES.loop : result.outcome === 'belum-ambil' ? PATH_LINES.missing : PATH_LINES.bump);
+      setNowPads([]);
+      setBad(team.blame ?? null);
+      narrate(team.outcome === 'putar' ? PATH_LINES.loop : team.outcome === 'belum-ambil' ? PATH_LINES.missing : PATH_LINES.bump);
       onWrong(true);
     }, end + 200);
     // Pulang ke petak mulai; aturannya tetap terpasang untuk diperbaiki.
     later(() => {
-      setBumpDir(null);
-      setHero(board.start);
-      setHopKey((k) => k + 1);
-      setFaceLeft(data.startDir === 'kiri');
+      setBump(null);
+      setPos(homes());
+      setHop((a) => a.map((x) => x + 1));
+      setFaceLeft(faces());
       setGot(new Set());
       setRunning(false);
     }, end + 1500);
   }
 
   // ---- Gambar ----
-  const flipHero = faceLeft !== (data.heroFaces === 'kiri');
-  const heroStyle: CSSProperties = {
-    left: `${(hero.c / board.cols) * 100}%`,
-    top: `${(hero.r / board.rows) * 100}%`,
-    width: `${100 / board.cols}%`,
-    height: `${100 / board.rows}%`,
-  };
-  const atStart = sameCell(hero, board.start) && !running && !solved;
+  const idle = !running && !solved;
 
   return (
     <div className="cq-wrap cp-wrap">
@@ -270,12 +297,12 @@ export default function ColorPath({ level, onCorrect, onWrong, narrate, hint }: 
                   const pad = board.pads[r]![c];
                   const pi = board.pickups.findIndex((q) => sameCell(q, p));
                   const rule = pad ? rules[pad] : undefined;
-                  const lit = nowPad && sameCell(nowPad.cell, p);
+                  const lit = nowPads.find((n) => sameCell(n.cell, p));
                   return (
                     <div key={`${r}-${c}`} className={'cq-cell cq-cell--' + tile + ((r + c) % 2 ? ' cq-cell--alt' : '')}>
                       {pad && (
                         <span
-                          key={lit ? `p${nowPad!.k}` : 'p'}
+                          key={lit ? `p${lit.k}` : 'p'}
                           data-color={pad}
                           className={
                             'cp-pad' +
@@ -293,41 +320,65 @@ export default function ColorPath({ level, onCorrect, onWrong, narrate, hint }: 
                       {tile === 'batu' && <Rock />}
                       {tile === 'pohon' && <ItemPic id="tree" className="cq-pic" fallbackClassName="cq-emoji" />}
                       {footprints.has(`${r},${c}`) && !pad && <span className="cq-foot" aria-hidden />}
-                      {sameCell(p, board.goal) && (
-                        <ItemPic
-                          id={data.goalItem}
-                          className={'cq-pic cq-goal' + (solved ? ' cq-goal--won' : '')}
-                          fallbackClassName="cq-emoji"
-                        />
+                      {heroes.map(
+                        (h, i) =>
+                          sameCell(p, h.goal) && (
+                            <ItemPic
+                              key={`g${i}`}
+                              id={cast[i]!.goal}
+                              className={'cq-pic cq-goal' + (solved ? ' cq-goal--won' : '')}
+                              fallbackClassName="cq-emoji"
+                            />
+                          ),
                       )}
                       {pi >= 0 && !got.has(pi) && data.pickupItem && (
                         <ItemPic id={data.pickupItem} className="cq-pic cq-pickup" fallbackClassName="cq-emoji" />
                       )}
-                      {sameCell(p, board.start) && (
-                        <span className={'cp-start cp-start--' + data.startDir} aria-hidden>
-                          <ArrowIcon dir={data.startDir} />
-                        </span>
+                      {heroes.map(
+                        (h, i) =>
+                          sameCell(p, h.start) && (
+                            <span key={`s${i}`} className={'cp-start cp-start--' + h.dir} aria-hidden>
+                              <ArrowIcon dir={h.dir} />
+                            </span>
+                          ),
                       )}
                     </div>
                   );
                 }),
               )}
-              <div className={'cq-hero' + (atStart ? ' cp-hero--wait' : '')} style={heroStyle}>
-                <span
-                  key={hopKey}
-                  className={
-                    'cq-hero__body' +
-                    (hopKey > 0 ? ' cq-hero__body--hop' : '') +
-                    (bumpDir ? ` cq-hero__body--bump-${bumpDir}` : '')
-                  }
-                >
-                  <ItemPic
-                    id={data.heroItem}
-                    className={'cq-hero__img' + (flipHero ? ' cq-hero__img--flip' : '')}
-                    fallbackClassName="cq-emoji"
-                  />
-                </span>
-              </div>
+              {heroes.map((h, i) => {
+                const at = pos[i] ?? h.start;
+                const flip = faceLeft[i] !== (cast[i]!.faces === 'kiri');
+                const hopped = (hop[i] ?? 0) > 0;
+                const style: CSSProperties = {
+                  left: `${(at.c / board.cols) * 100}%`,
+                  top: `${(at.r / board.rows) * 100}%`,
+                  width: `${100 / board.cols}%`,
+                  height: `${100 / board.rows}%`,
+                };
+                return (
+                  <div
+                    key={i}
+                    className={'cq-hero' + (idle && sameCell(at, h.start) ? ' cp-hero--wait' : '')}
+                    style={style}
+                  >
+                    <span
+                      key={hop[i]}
+                      className={
+                        'cq-hero__body' +
+                        (hopped ? ' cq-hero__body--hop' : '') +
+                        (bump?.who === i ? ` cq-hero__body--bump-${bump.dir}` : '')
+                      }
+                    >
+                      <ItemPic
+                        id={cast[i]!.item}
+                        className={'cq-hero__img' + (flip ? ' cq-hero__img--flip' : '')}
+                        fallbackClassName="cq-emoji"
+                      />
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -335,7 +386,7 @@ export default function ColorPath({ level, onCorrect, onWrong, narrate, hint }: 
         <div key={`r${ping}`} className={'cq-code cp-rules' + (ping ? ' cp-rules--ping' : '')} aria-label="Aturan warna">
           {colors.map((color) => {
             const dir = rules[color];
-            const now = nowPad?.color === color;
+            const now = nowPads.some((n) => n.color === color);
             return (
               <button
                 key={color}

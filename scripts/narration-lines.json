@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-16",
-  "count": 2084,
-  "chars": 86892,
+  "count": 2089,
+  "chars": 87210,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -11425,6 +11425,15 @@
       ]
     },
     {
+      "key": "514c2029ee98",
+      "text": "Jalan pintas kucing bisa menyesatkan ayam. Pikirkan dulu!",
+      "scope": "kode-warna",
+      "voice": "gadis",
+      "games": [
+        "kode-warna"
+      ]
+    },
+    {
       "key": "08f2158cfe16",
       "text": "Jalannya berputar seperti siput. Atur semua warnanya!",
       "scope": "kode-warna",
@@ -11443,6 +11452,15 @@
       ]
     },
     {
+      "key": "7b86323b65f8",
+      "text": "Kucing dan ayam memakai aturan yang sama. Antar keduanya pulang!",
+      "scope": "kode-warna",
+      "voice": "gadis",
+      "games": [
+        "kode-warna"
+      ]
+    },
+    {
       "key": "37479d739f60",
       "text": "Kucing harus memutar jauh. Atur panahnya!",
       "scope": "kode-warna",
@@ -11454,6 +11472,15 @@
     {
       "key": "bdef85a7f7a0",
       "text": "Misi besar! Ambil semua susu, lalu pulang ke rumah.",
+      "scope": "kode-warna",
+      "voice": "gadis",
+      "games": [
+        "kode-warna"
+      ]
+    },
+    {
+      "key": "8400819d8ca8",
+      "text": "Misi besar! Kucing ke rumah, ayam ke kandang, dengan satu aturan.",
       "scope": "kode-warna",
       "voice": "gadis",
       "games": [
@@ -13477,6 +13504,15 @@
       ]
     },
     {
+      "key": "ca0d9a4153ef",
+      "text": "Ada warna yang dilewati berdua. Satu panah harus cocok untuk keduanya!",
+      "scope": "petak-ajaib",
+      "voice": "gadis",
+      "games": [
+        "petak-ajaib"
+      ]
+    },
+    {
       "key": "3798921b43ba",
       "text": "Ambil jagungnya dulu, lalu pulang ke kandang!",
       "scope": "petak-ajaib",
@@ -13497,6 +13533,15 @@
     {
       "key": "15565d95f479",
       "text": "Ayam berjalan sendiri. Pasang panah di petak warna supaya sampai!",
+      "scope": "petak-ajaib",
+      "voice": "gadis",
+      "games": [
+        "petak-ajaib"
+      ]
+    },
+    {
+      "key": "bb4574863635",
+      "text": "Ayam dan kucing jalan bersama. Ayam ke jagung, kucing ke susu!",
       "scope": "petak-ajaib",
       "voice": "gadis",
       "games": [

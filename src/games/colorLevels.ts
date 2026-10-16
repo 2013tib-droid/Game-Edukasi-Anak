@@ -3,7 +3,7 @@ import type { CodeDir } from '@/engine/core/codeQuest';
 import {
   PAD_COLORS,
   parsePathBoard,
-  runPath,
+  runTeam,
   type PadColor,
   type PathRules,
 } from '@/engine/core/colorPath';
@@ -30,6 +30,8 @@ export interface ColorSpec {
   solution: PathRules;
   /** Mode PERBAIKI: aturan yang sudah terpasang (wajib gagal). */
   given?: PathRules;
+  /** Arah mulai tokoh kedua (`s`) — wajib kalau papan punya `s`/`g`. */
+  start2?: CodeDir;
 }
 
 export interface ColorCast {
@@ -37,6 +39,8 @@ export interface ColorCast {
   heroFaces?: 'kiri' | 'kanan';
   goal: string;
   pickup?: string;
+  /** Tokoh kedua (papan dengan `s`/`g`). */
+  buddy?: { hero: string; heroFaces?: 'kiri' | 'kanan'; goal: string };
 }
 
 type Flip = (d: CodeDir) => CodeDir;
@@ -96,12 +100,15 @@ export function colorLevel(narration: string, cast: ColorCast, spec: ColorSpec, 
   if (board.colors.length === 0) fail(where, 'papan tanpa petak warna');
   if (board.pickups.length > 0 && !cast.pickup) fail(where, 'papan punya * tapi `pickup` kosong');
   if (board.pickups.length > 3) fail(where, 'lebih dari tiga barang');
+  if (!!board.start2 !== !!cast.buddy) fail(where, 'tokoh kedua (`s`/`g`) dan `buddy` harus ada bersama');
+  if (!!board.start2 !== !!spec.start2) fail(where, 'tokoh kedua butuh `start2`');
+  const dirs = spec.start2 ? [spec.start, spec.start2] : [spec.start];
   const keys = PAD_COLORS.filter((c) => spec.solution[c]);
   if (keys.join() !== board.colors.join()) fail(where, 'aturan contoh tidak pas dengan warna di papan');
-  if (runPath(board, spec.start, spec.solution).outcome !== 'sampai') fail(where, 'aturan contoh tidak sampai');
+  if (runTeam(board, dirs, spec.solution).outcome !== 'sampai') fail(where, 'aturan contoh tidak sampai');
   if (spec.given) {
     if (PAD_COLORS.filter((c) => spec.given![c]).join() !== board.colors.join()) fail(where, 'aturan perbaiki tidak lengkap');
-    if (runPath(board, spec.start, spec.given).outcome === 'sampai') fail(where, 'aturan "perbaiki" ternyata sudah benar');
+    if (runTeam(board, dirs, spec.given).outcome === 'sampai') fail(where, 'aturan "perbaiki" ternyata sudah benar');
   }
   const data: ColorPathData = {
     grid: spec.grid,
@@ -112,6 +119,10 @@ export function colorLevel(narration: string, cast: ColorCast, spec: ColorSpec, 
     pickupItem: cast.pickup,
     given: spec.given,
     solution: spec.solution,
+    buddy:
+      cast.buddy && spec.start2
+        ? { startDir: spec.start2, heroItem: cast.buddy.hero, heroFaces: cast.buddy.heroFaces, goalItem: cast.buddy.goal }
+        : undefined,
   };
   return { id: '', narration, data };
 }
@@ -150,6 +161,7 @@ export function colorSlot(
         start: f.dir(design.start),
         solution: mapRules(design.solution, color, f.dir)!,
         given: mapRules(design.given, color, f.dir),
+        start2: design.start2 && f.dir(design.start2),
       };
       out.push({ ...colorLevel(narration, cast, spec, `${id} rancangan ${di + 1}/${f.how}`), id, stamp });
     }
