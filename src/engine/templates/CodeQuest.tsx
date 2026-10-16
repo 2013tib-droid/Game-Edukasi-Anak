@@ -18,6 +18,7 @@ import { sfx } from '@/engine/audio/sound';
 import { sparkleAt } from '@/engine/ui/juice';
 import ItemPic from '@/engine/ui/ItemPic';
 import CodeCritter from '@/engine/ui/CodeCritters';
+import { ArrowIcon, Rock } from '@/engine/ui/CodeArt';
 import '@/engine/ui/code-quest.css';
 
 /**
@@ -51,21 +52,6 @@ import '@/engine/ui/code-quest.css';
 const STEP_MS = 460;
 type Rail = 'main' | 'loop';
 
-function ArrowIcon({ dir }: { dir: CodeDir }) {
-  const rot = { atas: 0, kanan: 90, bawah: 180, kiri: 270 }[dir];
-  return (
-    <svg viewBox="0 0 40 40" className="cq-arrow" aria-hidden>
-      <path
-        d="M20 4.5 L35 20 H26 V35.5 H14 V20 H5 Z"
-        transform={`rotate(${rot} 20 20)`}
-        strokeLinejoin="round"
-        strokeWidth="3.4"
-        paintOrder="stroke"
-      />
-    </svg>
-  );
-}
-
 function LoopGlyph() {
   return (
     <svg viewBox="0 0 40 40" className="cq-arrow cq-arrow--loop" aria-hidden>
@@ -77,16 +63,6 @@ function LoopGlyph() {
 
 function CardFace({ card }: { card: CodeCard }) {
   return card === 'ulangi' ? <LoopGlyph /> : <ArrowIcon dir={card} />;
-}
-
-/** Batu, digambar engine (bukan emoji — beda bentuk di tiap HP). */
-function Rock() {
-  return (
-    <svg viewBox="0 0 40 40" className="cq-rock" aria-hidden>
-      <path d="M6 31 C4 22 10 13 18 12 C22 8 30 10 32 17 C37 20 37 29 33 32 Z" className="cq-rock__body" />
-      <path d="M13 20 C16 17 20 16 23 17" className="cq-rock__shine" />
-    </svg>
-  );
 }
 
 /** Panah melengkung "buang yang terakhir" (bukan emoji ↩️ — beda di tiap HP). */

@@ -182,16 +182,17 @@ const ALL_GAMES: GameMeta[] = [
     load: () => import('@/games/tk/kode-kelinci'),
   },
   {
-    // Coding anak bagian kedua (template `rule-sort`, 2026-10-15): PERCABANGAN —
-    // pasang tanda "kalau" di tiap kotak, mesin memilah mainan di ban
-    // berjalan. Seni ikon belum ada (prompt di docs/prompt-ikon-game.md),
-    // jadi 🧸 tampil sampai `pic` diisi.
-    id: 'pabrik-mainan',
+    // Coding anak bagian kedua (template `color-path`, 2026-10-16): ayam
+    // berjalan sendiri, anak memasang satu panah per WARNA petak — aturan
+    // "kalau" yang berlaku di banyak tempat. Menggantikan "Pabrik Mainan".
+    // Seni ikon belum ada (prompt di docs/prompt-ikon-game.md), jadi 🐔 tampil
+    // sampai `pic` diisi.
+    id: 'petak-ajaib',
     group: 'tk',
-    title: 'Pabrik Mainan',
-    emoji: '🧸',
-    template: 'rule-sort',
-    load: () => import('@/games/tk/pabrik-mainan'),
+    title: 'Petak Ajaib',
+    emoji: '🐔',
+    template: 'color-path',
+    load: () => import('@/games/tk/petak-ajaib'),
   },
   // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
   {
@@ -240,15 +241,16 @@ const ALL_GAMES: GameMeta[] = [
     load: () => import('@/games/sd1/misi-kode'),
   },
   {
-    // Saudara Pabrik Mainan (TK) yang lebih sulit: + ukuran, tanda LAINNYA
-    // (else), kotak dua tanda (DAN), dan urutan pemeriksaan. Seni ikon belum
-    // ada, jadi 🤖 tampil sampai `pic` diisi.
-    id: 'robot-pemilah',
+    // Saudara Petak Ajaib (TK) yang lebih sulit: empat warna, petak sewarna
+    // yang didatangi dari arah berbeda, dan soal MEMPERBAIKI aturan.
+    // Menggantikan "Robot Pemilah". Seni ikon belum ada, jadi 🐱 tampil
+    // sampai `pic` diisi.
+    id: 'kode-warna',
     group: 'sd1',
-    title: 'Robot Pemilah',
-    emoji: '🤖',
-    template: 'rule-sort',
-    load: () => import('@/games/sd1/robot-pemilah'),
+    title: 'Kode Warna',
+    emoji: '🐱',
+    template: 'color-path',
+    load: () => import('@/games/sd1/kode-warna'),
   },
   {
     id: 'hitung-hebat',
