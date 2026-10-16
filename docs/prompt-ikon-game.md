@@ -368,7 +368,7 @@ suka ungu).
 
 ## Ikon dua game petak warna (`color-path`) — disusun ulang 2026-10-16
 
-Judulnya diganti pemilik di hari yang sama: **"Petak Ajaib" → "Ayam Cari Jagung"** (TK,
+Judulnya diganti pemilik di hari yang sama: **"Petak Ajaib" → "Cari Jagung"** (TK,
 id tetap `petak-ajaib`) dan **"Kode Warna" → "Panah Warna"** (SD Kelas 1 & 2, id tetap
 `kode-warna`). Nama berkas ikon tetap mengikuti ID, bukan judul. Keduanya masih emoji
 🐔 / 🐱. Pakai BLOK GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa warna ungu
@@ -379,7 +379,7 @@ id tetap `petak-ajaib`) dan **"Kode Warna" → "Panah Warna"** (SD Kelas 1 & 2, 
 | `petak-ajaib` | Buatkan: satu tongkol jagung kuning berkulit daun hijau, berwajah imut — mata besar berkilau, pipi merona, senyum lebar — berdiri di atas satu ubin persegi tebal berwarna merah muda pastel. Di permukaan ubin ada satu panah putih tebal yang menunjuk ke depan. Di sebelahnya satu ubin kecil biru muda dengan panah putih tebal yang menunjuk ke arah lain. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 | `kode-warna` | Buatkan: empat ubin persegi tebal yang tersusun berkelok seperti jalan pendek, warnanya merah, kuning, biru muda, dan hijau mint. Tiap ubin bergambar satu panah putih tebal, dan panah-panahnya saling menyambung membentuk jalan berbelok. Di ujung jalan itu satu gelas susu putih berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Tanpa hewan, tanpa rambu, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 
-- **TK = jagungnya yang jadi tokoh** (tujuan ayam di game, dan nama gamenya), ditopang
+- **TK = jagungnya yang jadi tokoh** (tujuan di game, dan nama gamenya), ditopang
   ubin berpanah supaya tetap terbaca "petak warna". Sengaja TANPA ayam: kartu hewan
   sudah dipakai banyak game lain, dan ayam di kartu terbaca seperti game hewan.
 - **SD = jalan ubin berpanah empat warna** — itu inti "Panah Warna". **"Tanpa rambu"
