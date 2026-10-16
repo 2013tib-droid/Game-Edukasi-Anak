@@ -185,12 +185,12 @@ const ALL_GAMES: GameMeta[] = [
     // Coding anak bagian kedua (template `color-path`, 2026-10-16): ayam
     // berjalan sendiri, anak memasang satu panah per WARNA petak — aturan
     // "kalau" yang berlaku di banyak tempat. Menggantikan "Pabrik Mainan".
-    // Seni ikon belum ada (prompt di docs/prompt-ikon-game.md), jadi 🐔 tampil
-    // sampai `pic` diisi.
+    // Ikon: jagung berwajah di atas ubin berpanah (2026-10-16), 🐔 cadangan.
     id: 'petak-ajaib',
     group: 'tk',
     title: 'Cari Jagung',
     emoji: '🐔',
+    pic: 'petak-ajaib',
     template: 'color-path',
     load: () => import('@/games/tk/petak-ajaib'),
   },
@@ -243,12 +243,13 @@ const ALL_GAMES: GameMeta[] = [
   {
     // Saudara Petak Ajaib (TK) yang lebih sulit: empat warna, petak sewarna
     // yang didatangi dari arah berbeda, dan soal MEMPERBAIKI aturan.
-    // Menggantikan "Robot Pemilah". Seni ikon belum ada, jadi 🐱 tampil
-    // sampai `pic` diisi.
+    // Menggantikan "Robot Pemilah". Ikon: jalan ubin empat warna berpanah +
+    // gelas susu berwajah (2026-10-16), 🐱 cadangan.
     id: 'kode-warna',
     group: 'sd1',
     title: 'Panah Warna',
     emoji: '🐱',
+    pic: 'kode-warna',
     template: 'color-path',
     load: () => import('@/games/sd1/kode-warna'),
   },

@@ -370,8 +370,8 @@ suka ungu).
 
 Judulnya diganti pemilik di hari yang sama: **"Petak Ajaib" → "Cari Jagung"** (TK,
 id tetap `petak-ajaib`) dan **"Kode Warna" → "Panah Warna"** (SD Kelas 1 & 2, id tetap
-`kode-warna`). Nama berkas ikon tetap mengikuti ID, bukan judul. Keduanya masih emoji
-🐔 / 🐱. Pakai BLOK GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa warna ungu
+`kode-warna`). Nama berkas ikon tetap mengikuti ID, bukan judul. **Keduanya SUDAH TERPASANG
+(2026-10-16, percobaan pertama, dipotong `cut-item.py` 320 px, nol lubang perlu ditembus).** Pakai BLOK GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa warna ungu
 (abaikan "ungu muda" di BLOK GAYA).
 
 | id file | Baris prompt |
