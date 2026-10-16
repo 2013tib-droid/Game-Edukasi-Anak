@@ -227,17 +227,27 @@ function Art({ art }: { art: LabArt }) {
         </>
       );
     case 'wayang-tokoh':
+      // Wayang kulit dari samping, menghadap kanan: mahkota lancip, hidung
+      // panjang, badan ramping, lengan sangat panjang bertuding, kain
+      // berujung lancip, kaki mengangkang. Mata = lubang (evenodd) supaya
+      // tembus di bayangan. Jangan digemukkan: sosok bulat berbadan
+      // meruncing terbaca seperti pocong (laporan pemilik 2026-10-16).
       return (
         <>
-          <path
-            d="M30 4q8 0 8 8l-2 2 4 4-6 2q2 6 0 12l8 2-2 4-6-1-2 20h6l-2 4H22l2-4h4l-2-22-8 10-4-3 10-14q-4-6 0-12-4-2-2-6 4-6 10-6z"
-            fill="#b5651d"
-            stroke="#5c3310"
-            strokeWidth="2"
-          />
-          <circle cx="33" cy="11" r="1.6" fill="#fff" />
-          <path d="M28 6q6-6 12 0" stroke="#e8b04a" strokeWidth="2.5" fill="none" />
-          <path d="M32 58v6" stroke="#5c3310" strokeWidth="2" />
+          <path d="M32 1v63" stroke="#5c3310" strokeWidth="1.4" />
+          <path d="M43 50l1 14M21 50l-1 14" stroke="#5c3310" strokeWidth="1" />
+          <g fill="#b5651d" stroke="#5c3310" strokeWidth="1" strokeLinejoin="round" fillRule="evenodd">
+            <path d="M29 10q-7-2-8 4 0-7 8-7z" />
+            <path d="M28 12q-1-8 5-8 4 0 4 4l-1 4z" />
+            <path d="M28 12h8l1 2 8 5-8 0-1 2-2 1h-4l-2-4z M31.5 15a1 1 0 1 0 2 0a1 1 0 1 0 -2 0z" />
+            <path d="M30.5 22h3v2h-3z" />
+            <path d="M29 23h5l2 5-1 8h-7l-1-7z" />
+            <path d="M27 36h9l4 7-3 9-4-4-1.5 9-2-9-5 4-2-9z" />
+          </g>
+          <g stroke="#b5651d" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M35 25l5 12 3 13M29 25l-4 12-4 13" strokeWidth="2.2" />
+            <path d="M35 51l5 7h7M29 51l-5 7h-7" strokeWidth="2.6" />
+          </g>
         </>
       );
     case 'getar-kecil':
