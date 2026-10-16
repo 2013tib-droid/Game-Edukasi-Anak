@@ -261,8 +261,8 @@ kaca pembesar.
 | `lompat-katak` | rencana | Buatkan: satu katak kecil hijau mint berwajah imut sedang melompat dari satu daun teratai ke daun teratai lain, dengan garis lengkung putus-putus menunjukkan lintasan lompatannya. Daun teratai polos tanpa angka. Kedua daun berdekatan supaya gambarnya tidak melebar. |
 | `bagi-kue` | sudah ada (2026-10-08) | Buatkan: satu kue tart bulat warna merah muda dengan krim putih dan satu stroberi di atasnya, sudah terpotong jadi empat bagian SAMA BESAR dengan garis potong lurus dari tengah, satu potongnya sedikit bergeser keluar ke kanan bawah di atas piring kecil putih. Wajah imut digambar di sisi depan tart. Tanpa lilin, tanpa tulisan di atas kue, tanpa pisau. Tinggi dan lebar gambarnya kira-kira sama. |
 | `detektif-data` | rencana | Buatkan: satu diagram batang mainan dengan tiga batang tegak berbeda tinggi — biru muda, kuning krem, hijau mint — berdiri di atas satu garis dasar. Batang paling tinggi berwajah imut dan memakai topi detektif coklat kecil. Batang-batang polos tanpa angka dan tanpa label. |
-| `detektif-bacaan` | rencana | Buatkan: satu kaca pembesar bergagang peach berwajah imut di gagangnya, lensanya diarahkan ke selembar kertas krem bergaris-garis. Garis di kertas hanya garis abu-abu tipis, TIDAK boleh ada huruf atau kata. Tinggi dan lebar gambarnya kira-kira sama. |
-| `susun-kalimat` | rencana | Buatkan: satu kereta mainan kecil yang menanjak miring — lokomotif warna biru muda berwajah imut di depan, diikuti dua gerbong pendek warna peach dan hijau mint, tiap gerbong mengangkut satu kartu putih bergaris KOSONG. Kartu tidak boleh berisi huruf atau kata. Keretanya menanjak diagonal, bukan berjajar mendatar panjang. |
+| `detektif-bacaan` | **TERPASANG 2026-10-16** | Buatkan: satu kaca pembesar bergagang peach berwajah imut di gagangnya, lensanya diarahkan ke selembar kertas krem bergaris-garis. Garis di kertas hanya garis abu-abu tipis, TIDAK boleh ada huruf atau kata. Tinggi dan lebar gambarnya kira-kira sama. |
+| `susun-kalimat` | **TERPASANG 2026-10-16** | Buatkan: satu kereta mainan kecil yang menanjak miring — lokomotif warna biru muda berwajah imut di depan, diikuti dua gerbong pendek warna peach dan hijau mint, tiap gerbong mengangkut satu kartu putih bergaris KOSONG. Kartu tidak boleh berisi huruf atau kata. Keretanya menanjak diagonal, bukan berjajar mendatar panjang. |
 | `sanggar-warna` | sudah ada (2026-10-08) | Buatkan: satu mangkuk cat bundar kecil warna putih krem berwajah imut di badan depannya, tiga tetes cat besar berbentuk tetesan air — satu merah, satu kuning, satu biru — sedang jatuh ke dalam mangkuk dari atas, dan cat di dalam mangkuk berpusar warna oranye, hijau, dan ungu. Satu kuas kecil bergagang kayu bersandar di tepi mangkuk. Tanpa palet cat, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 | `sahabat-bumi` | **TERPASANG 2026-10-11** | Buatkan: satu tong sampah kecil yang gemuk dan pendek warna hijau mint berwajah imut di badan depannya, tutupnya sedikit terbuka. Dari celah tutupnya tumbuh satu tunas hijau dengan dua daun bulat, dan satu kulit pisang kuning kecil sedang jatuh masuk ke dalam tong dari atas. Satu tetes air biru muda dan dua bintang kecil pastel melayang di sampingnya. Tanpa panah daur ulang, tanpa bola bumi, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 | `lab-cahaya-bunyi` | **TERPASANG 2026-10-11** | Buatkan: satu senter genggam kecil yang gemuk warna biru muda dengan kepala lampu kuning krem, berwajah imut di badan senternya, berdiri miring menghadap ke kanan atas. Dari kepala lampunya memancar satu berkas cahaya kuning lembut berbentuk kerucut pendek yang melebar sedikit, dan di dalam berkas cahaya itu melayang dua not musik kecil warna peach dan ungu muda. Dua bintang kecil pastel di sekitarnya. Berkas cahayanya pendek dan miring ke atas, tidak menjulur panjang ke samping. Tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
@@ -366,20 +366,25 @@ suka ungu).
   periksa lubang terkurung di lingkaran panah ulangi, lalu tambah `pic: '<id>',` di
   entri registry-nya.
 
-## Ikon dua game petak warna (`color-path`) — disusun 2026-10-16
+## Ikon dua game petak warna (`color-path`) — disusun ulang 2026-10-16
 
-Petak Ajaib (TK) & Kode Warna (SD Kelas 1 & 2) masih memakai emoji 🐔 / 🐱. (Pabrik
-Mainan & Robot Pemilah, yang dulu tercatat di sini, sudah DIGANTI kedua game ini —
-promptnya dibuang.) Pakai BLOK GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa
-warna ungu.
+Judulnya diganti pemilik di hari yang sama: **"Petak Ajaib" → "Cari Jagung"** (TK,
+id tetap `petak-ajaib`) dan **"Kode Warna" → "Panah Warna"** (SD Kelas 1 & 2, id tetap
+`kode-warna`). Nama berkas ikon tetap mengikuti ID, bukan judul. **Keduanya SUDAH TERPASANG
+(2026-10-16, percobaan pertama, dipotong `cut-item.py` 320 px, nol lubang perlu ditembus).** Pakai BLOK GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa warna ungu
+(abaikan "ungu muda" di BLOK GAYA).
 
 | id file | Baris prompt |
 |---|---|
-| `petak-ajaib` | Buatkan: papan rumput kecil berpetak tiga kali tiga, dua petaknya berwarna — satu merah, satu biru — masing-masing bergambar panah putih tebal ke arah berbeda. Di petak ujung satu tongkol jagung berwajah imut — mata besar berkilau, pipi merona. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
-| `kode-warna` | Buatkan: papan rumput kecil berpetak tiga kali tiga dengan empat petak berwarna — merah, kuning, biru, hijau — masing-masing bergambar panah putih tebal, panah-panahnya membentuk jalan berkelok. Di petak ujung satu gelas susu putih berwajah imut — mata besar berkilau, pipi merona. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `petak-ajaib` | Buatkan: satu tongkol jagung kuning berkulit daun hijau, berwajah imut — mata besar berkilau, pipi merona, senyum lebar — berdiri di atas satu ubin persegi tebal berwarna merah muda pastel. Di permukaan ubin ada satu panah putih tebal yang menunjuk ke depan. Di sebelahnya satu ubin kecil biru muda dengan panah putih tebal yang menunjuk ke arah lain. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `kode-warna` | Buatkan: empat ubin persegi tebal yang tersusun berkelok seperti jalan pendek, warnanya merah, kuning, biru muda, dan hijau mint. Tiap ubin bergambar satu panah putih tebal, dan panah-panahnya saling menyambung membentuk jalan berbelok. Di ujung jalan itu satu gelas susu putih berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Tanpa hewan, tanpa rambu, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 
-- **Yang membuat ikon ini terbaca "petak warna" adalah PETAK BERWARNA + PANAH** — sama
-  dengan layar game. Jangan tokoh ayam/kucing: kartu hewan sudah dipakai banyak game lain.
+- **TK = jagungnya yang jadi tokoh** (tujuan di game, dan nama gamenya), ditopang
+  ubin berpanah supaya tetap terbaca "petak warna". Sengaja TANPA ayam: kartu hewan
+  sudah dipakai banyak game lain, dan ayam di kartu terbaca seperti game hewan.
+- **SD = jalan ubin berpanah empat warna** — itu inti "Panah Warna". **"Tanpa rambu"
+  wajib**: ikon Rute Kendaraan (kelompok yang sama) sudah rambu berwajah.
+- Panah tidak disebut arahnya (pelajaran 1 — kata arah ikut tertulis di gambar).
 - Pasang seperti biasa: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`,
-  periksa lubang terkurung di antara petak, lalu tambah `pic: '<id>',` di entri
+  periksa lubang terkurung di antara ubin, lalu tambah `pic: '<id>',` di entri
   registry-nya.

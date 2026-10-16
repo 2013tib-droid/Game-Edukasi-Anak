@@ -185,6 +185,11 @@ function pickStep(say: string, right: LabThing, wrongs: LabThing[], cue?: LabThi
 
 const C = (emoji: string, label: string): LabThing => ({ emoji, label });
 
+/** Kartu besar kecilnya getaran: gambar karet bergetar, bukan emoji tangan. */
+const KECIL = T('Kecil', { art: 'getar-kecil' });
+const BESAR = T('Besar', { art: 'getar-besar' });
+const DIAM = T('Berhenti', { art: 'getar-diam' });
+
 /* ---------- l4 getaran ---------- */
 
 function vibrate(narration: string, thing: 'karet' | 'gendang', goal: 'stop' | 'keras' | 'pelan', ask: LabStep): Level {
@@ -363,13 +368,13 @@ const config: GameConfig<'light-lab'> = {
         'Petik karetnya supaya bunyinya pelan!',
         'karet',
         'pelan',
-        pickStep('Bunyi pelan terjadi kalau getarannya…', C('🤏', 'Kecil'), [C('💪', 'Besar'), C('✋', 'Berhenti')]),
+        pickStep('Bunyi pelan terjadi kalau getarannya…', KECIL, [BESAR, DIAM]),
       ),
       vibrate(
         'Petik karetnya supaya bunyinya keras!',
         'karet',
         'keras',
-        pickStep('Bunyi keras terjadi kalau getarannya…', C('💪', 'Besar'), [C('🤏', 'Kecil'), C('✋', 'Berhenti')]),
+        pickStep('Bunyi keras terjadi kalau getarannya…', BESAR, [KECIL, DIAM]),
       ),
       vibrate(
         'Pukul gendangnya supaya bunyinya keras!',

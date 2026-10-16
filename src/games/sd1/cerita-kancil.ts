@@ -5,7 +5,7 @@ import type { GameConfig, GameLevel, LevelCard, SceneId, StoryPage } from '@/eng
  * mendengarkan jalan ceritanya lalu memilih apa yang sebaiknya dilakukan
  * tokohnya. Delapan cerita, anak memilih sendiri judulnya — per 2026-09-03
  * baru tiga yang aktif, lima sisanya kartunya `soon` (lihat `config.levels`
- * di bawah).
+ * di bawah). Sejak 2026-10-16 empat aktif: Anak Gembala (`n1`) ikut dibuka.
  *
  * RIWAYAT NAMA — dulu "Cerita Si Kancil" (satu cerita), lalu "Cerita Anak"
  * (2026-08-09), dan sejak 2026-09-02 "Baca Cerita" setelah game terpisah
@@ -287,32 +287,50 @@ const GAJAH = story(
  * Nomornya sengaja sama dengan id lamanya di Cerita Nusantara.
  * ---------- */
 
+/*
+ * Anak Gembala dan Serigala — DITULIS ULANG & DIBUKA 2026-10-16 (permintaan
+ * pemilik: "bikin cerita yang menarik"). Versi lama melompati inti dongengnya
+ * (anak gembalanya tak pernah berbohong), jadi tak ada yang dipelajari. Versi
+ * ini mengikuti jalan cerita aslinya — dia BENAR-BENAR iseng berteriak
+ * "serigala", warga datang dengan sia-sia — tapi ujungnya dibelokkan sesuai
+ * aturan proyek (tak ada hukuman): dia meminta maaf, menepati janjinya, dan
+ * karena itu warga MASIH percaya saat serigala sungguhan datang. Kebohongannya
+ * dinarasikan, bukan dipilih anak: pilihan yang ditawarkan selalu soal apa yang
+ * sebaiknya dilakukan SESUDAHNYA.
+ *
+ * Ilustrasi menyusul bertahap (prompt + nama file:
+ * `docs/prompt-ilustrasi-baca-cerita.md`, "Cerita 4"). `art` hanya ditulis
+ * untuk berkas yang SUDAH ada — berkas yang belum ada = 404 di console.
+ * Terpasang 2026-10-16: pagi, bosan, teriak, kecewa, maaf, serigala, tolong, selamat (semua kecuali
+ * halaman 4 `gembala-warga`).
+ */
 const GEMBALA = story(
   'n1',
-  { label: 'Anak Gembala dan Serigala', emoji: '🐑', art: 'sampul-gembala', soon: true },
+  { label: 'Anak Gembala dan Serigala', emoji: '🐑', art: 'sampul-gembala' },
   'Anak Gembala dan Serigala. Ayo bantu dia mengambil keputusan!',
-  at('padang', page('🧒', 'Seorang anak gembala menjaga domba-dombanya di padang rumput.')),
-  page('🐑', 'Hari itu sepi sekali. Anak gembala merasa bosan.'),
+  at(
+    'padang',
+    art('gembala-pagi', '🐑', 'Setiap pagi, anak gembala membawa domba-dombanya ke padang rumput di kaki bukit.'),
+  ),
+  art('gembala-bosan', '🥱', 'Siang itu sepi sekali. Domba-domba asyik makan rumput, anak gembala menguap bosan.'),
+  art('gembala-teriak', '📣', 'Dia iseng berteriak, "Tolong! Ada serigala!" Padahal tidak ada apa-apa.'),
+  page('🏃', 'Warga desa berlari naik bukit membawa tongkat. Ternyata tidak ada serigala. Mereka kecewa.'),
   ask(
-    '🤔',
-    'Dia ingin ada yang menemani. Apa yang sebaiknya dia lakukan?',
-    'Bermain seruling sambil menjaga domba',
-    ['Berteriak "Ada serigala!" padahal tidak ada', 'Membohongi orang bisa membuat mereka tidak percaya lagi. Coba pilih yang lain!'],
+    { art: 'gembala-kecewa', emoji: '🤔' },
+    'Warga lelah dan kecewa. Apa yang sebaiknya dia lakukan?',
+    'Minta maaf dan berjanji jujur',
+    ['Menertawakan warga', 'Tertawa membuat warga makin sedih. Coba pilih yang lain!'],
   ),
-  page('🎶', 'Anak gembala meniup serulingnya. Domba-domba ikut tenang mendengarnya.'),
+  art('gembala-maaf', '🤝', 'Anak gembala meminta maaf. Sejak hari itu, dia selalu berkata jujur.'),
   ask(
-    '🐺',
-    'Tiba-tiba serigala sungguhan datang! Apa yang harus dilakukan anak gembala?',
-    'Berteriak minta tolong kepada warga desa',
-    ['Diam saja karena takut', 'Kalau diam, domba-dombanya dalam bahaya. Beranilah minta tolong!'],
+    { art: 'gembala-serigala', emoji: '🐺' },
+    'Serigala sungguhan datang! Apa yang harus dia lakukan?',
+    'Berteriak minta tolong',
+    ['Lari meninggalkan domba', 'Domba-domba butuh dijaga. Beranilah minta tolong!'],
   ),
-  page(
-    '🏃',
-    'Warga desa langsung datang menolong. Karena anak gembala selalu jujur, semua orang percaya padanya.',
-  ),
-  page('⭐', 'Domba-domba selamat. Jujur membuat kita dipercaya!'),
+  art('gembala-tolong', '🏘️', 'Warga sempat ragu. Tapi anak gembala sudah menepati janjinya, jadi mereka percaya dan datang menolong!'),
+  art('gembala-selamat', '⭐', 'Serigala lari ketakutan. Domba-domba selamat. Jujur membuat kita dipercaya!'),
 );
-
 
 const SEMUT = story(
   'n2',
@@ -438,7 +456,8 @@ const config: GameConfig<'story-choice'> = {
   // fabel Kancil termasuk Jalak dan Kerbau) selagi tampilan ceritanya
   // dipercantik. Lima cerita rakyat sisanya ditandai `soon` di kartunya —
   // isinya utuh dan tetap ada di `levels`, hanya kartunya yang dimatikan,
-  // jadi membukanya lagi nanti = menghapus satu `soon: true`.
+  // jadi membukanya lagi nanti = menghapus satu `soon: true`. 2026-10-16:
+  // `n1` Anak Gembala dibuka (ditulis ulang, lihat komentar di atas GEMBALA).
   //
   // 2026-09-03 sore, permintaan pemilik: cerita `n4` "Dompet di Jalan" DIHAPUS
   // seluruhnya (bukan `soon`). Id `n4` sengaja TIDAK dipakai ulang oleh cerita

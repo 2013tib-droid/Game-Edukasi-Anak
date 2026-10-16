@@ -54,7 +54,7 @@ const SD2 = { grid: ['S...m', 'G....', '.....', '.....', 'b.k.k'], start: 'kanan
 const config: GameConfig<'color-path'> = {
   id: 'kode-warna',
   group: 'sd1',
-  title: 'Kode Warna',
+  title: 'Panah Warna',
   emoji: '🐱',
   template: 'color-path',
   project: { title: 'Rumah Kucing' },

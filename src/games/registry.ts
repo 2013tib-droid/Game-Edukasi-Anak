@@ -185,12 +185,12 @@ const ALL_GAMES: GameMeta[] = [
     // Coding anak bagian kedua (template `color-path`, 2026-10-16): ayam
     // berjalan sendiri, anak memasang satu panah per WARNA petak — aturan
     // "kalau" yang berlaku di banyak tempat. Menggantikan "Pabrik Mainan".
-    // Seni ikon belum ada (prompt di docs/prompt-ikon-game.md), jadi 🐔 tampil
-    // sampai `pic` diisi.
+    // Ikon: jagung berwajah di atas ubin berpanah (2026-10-16), 🐔 cadangan.
     id: 'petak-ajaib',
     group: 'tk',
-    title: 'Petak Ajaib',
+    title: 'Cari Jagung',
     emoji: '🐔',
+    pic: 'petak-ajaib',
     template: 'color-path',
     load: () => import('@/games/tk/petak-ajaib'),
   },
@@ -243,12 +243,13 @@ const ALL_GAMES: GameMeta[] = [
   {
     // Saudara Petak Ajaib (TK) yang lebih sulit: empat warna, petak sewarna
     // yang didatangi dari arah berbeda, dan soal MEMPERBAIKI aturan.
-    // Menggantikan "Robot Pemilah". Seni ikon belum ada, jadi 🐱 tampil
-    // sampai `pic` diisi.
+    // Menggantikan "Robot Pemilah". Ikon: jalan ubin empat warna berpanah +
+    // gelas susu berwajah (2026-10-16), 🐱 cadangan.
     id: 'kode-warna',
     group: 'sd1',
-    title: 'Kode Warna',
+    title: 'Panah Warna',
     emoji: '🐱',
+    pic: 'kode-warna',
     template: 'color-path',
     load: () => import('@/games/sd1/kode-warna'),
   },
@@ -469,6 +470,8 @@ const ALL_GAMES: GameMeta[] = [
     subject: 'bahasa-indonesia',
     title: 'Susun Kalimat',
     emoji: '🚂',
+    // Kereta menanjak, gerbong membawa kartu kosong (2026-10-16).
+    pic: 'susun-kalimat',
     template: 'word-train',
     load: () => import('@/games/sd2/susun-kalimat'),
   },
@@ -509,6 +512,8 @@ const ALL_GAMES: GameMeta[] = [
     subject: 'bahasa-indonesia',
     title: 'Detektif Bacaan',
     emoji: '🔍',
+    // Kaca pembesar berwajah di atas kertas bergaris (2026-10-16).
+    pic: 'detektif-bacaan',
     template: 'read-find',
     load: () => import('@/games/sd2/detektif-bacaan'),
   },
