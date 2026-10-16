@@ -46,7 +46,7 @@ const STAMP: Record<string, LevelStamp> = {
 const config: GameConfig<'color-path'> = {
   id: 'petak-ajaib',
   group: 'tk',
-  title: 'Petak Ajaib',
+  title: 'Cari Jagung',
   emoji: '🐔',
   template: 'color-path',
   project: { title: 'Kebun Ayam' },
