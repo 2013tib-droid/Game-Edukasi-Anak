@@ -43,6 +43,9 @@ export interface PathBoard {
   cols: number;
   start: Cell;
   goal: Cell;
+  /** Tokoh kedua (huruf `s`/`g`) — keduanya ada atau keduanya tidak. */
+  start2?: Cell;
+  goal2?: Cell;
   pickups: Cell[];
   tiles: PathTile[][];
   pads: (PadColor | null)[][];
@@ -58,6 +61,8 @@ export function parsePathBoard(grid: string[]): PathBoard {
   const cols = grid[0]?.length ?? 0;
   let start: Cell | null = null;
   let goal: Cell | null = null;
+  let start2: Cell | undefined;
+  let goal2: Cell | undefined;
   const pickups: Cell[] = [];
   const tiles: PathTile[][] = [];
   const pads: (PadColor | null)[][] = [];
@@ -69,6 +74,8 @@ export function parsePathBoard(grid: string[]): PathBoard {
     [...line].forEach((ch, c) => {
       if (ch === 'S') start = { r, c };
       else if (ch === 'G') goal = { r, c };
+      else if (ch === 's') start2 = { r, c };
+      else if (ch === 'g') goal2 = { r, c };
       else if (ch === '*') pickups.push({ r, c });
       else if (!'.#T~'.includes(ch) && !PAD_LETTER[ch]) throw new Error(`Papan warna: huruf "${ch}" tak dikenal`);
       const pad = PAD_LETTER[ch] ?? null;
@@ -80,7 +87,10 @@ export function parsePathBoard(grid: string[]): PathBoard {
     pads.push(padRow);
   });
   if (!start || !goal) throw new Error('Papan warna: wajib ada tepat satu S dan satu G');
-  return { rows, cols, start, goal, pickups, tiles, pads, colors: PAD_COLORS.filter((c) => seen.has(c)) };
+  if (!start2 !== !goal2) throw new Error('Papan warna: tokoh kedua butuh `s` DAN `g`');
+  // Barang + dua tokoh = siapa yang wajib mengambil? Sengaja tidak didukung.
+  if (start2 && pickups.length) throw new Error('Papan warna: papan dua tokoh tak boleh punya barang');
+  return { rows, cols, start, goal, start2, goal2, pickups, tiles, pads, colors: PAD_COLORS.filter((c) => seen.has(c)) };
 }
 
 /**
@@ -134,17 +144,38 @@ export function rulesComplete(board: PathBoard, rules: PathRules): boolean {
   return board.colors.every((c) => !!rules[c]);
 }
 
+/** Satu tokoh di papan: dari mana, ke mana, menghadap ke mana. */
+export interface PathHero {
+  start: Cell;
+  goal: Cell;
+  dir: CodeDir;
+}
+
 /**
- * Jalankan tokoh. Mulai di S menghadap `startDir`, tiap langkah maju satu
- * petak; menginjak petak warna = arahnya berganti jadi aturan warna itu.
- * Tiba di tujuan sebelum semua barang terambil = berhenti (`belum-ambil`).
- * Keadaan (petak, arah, barang) yang terulang = berputar selamanya (`putar`).
+ * Tokoh-tokoh papan: tokoh utama (`S`→`G`) dan, kalau ada, tokoh kedua
+ * (`s`→`g`). `startDirs[i]` = arah hadap tokoh ke-i.
  */
-export function runPath(board: PathBoard, startDir: CodeDir, rules: PathRules): PathRun {
+export function heroesOf(board: PathBoard, startDirs: CodeDir[]): PathHero[] {
+  const out: PathHero[] = [{ start: board.start, goal: board.goal, dir: startDirs[0]! }];
+  if (board.start2 && board.goal2) {
+    if (!startDirs[1]) throw new Error('Papan warna: tokoh kedua butuh arah mulai');
+    out.push({ start: board.start2, goal: board.goal2, dir: startDirs[1] });
+  }
+  return out;
+}
+
+/**
+ * Jalankan SATU tokoh. Mulai di petaknya menghadap arahnya, tiap langkah maju
+ * satu petak; menginjak petak warna = arahnya berganti jadi aturan warna itu.
+ * Tujuan tokoh lain cuma rumput baginya. Tiba di tujuan sebelum semua barang
+ * terambil = berhenti (`belum-ambil`). Keadaan (petak, arah, barang) yang
+ * terulang = berputar selamanya (`putar`).
+ */
+export function runHero(board: PathBoard, hero: PathHero, rules: PathRules): PathRun {
   if (!rulesComplete(board, rules)) return { steps: [], outcome: 'kosong' };
   const steps: PathStep[] = [];
-  let pos = board.start;
-  let dir = startDir;
+  let pos = hero.start;
+  let dir = hero.dir;
   let mask = 0;
   let blame: PadColor | undefined;
   const seen = new Set<string>();
@@ -171,11 +202,44 @@ export function runPath(board: PathBoard, startDir: CodeDir, rules: PathRules): 
     }
     steps.push(step);
     pos = to;
-    if (sameCell(pos, board.goal)) {
+    if (sameCell(pos, hero.goal)) {
       return { steps, outcome: mask === (1 << board.pickups.length) - 1 ? 'sampai' : 'belum-ambil', blame };
     }
   }
   return { steps, outcome: 'putar', blame };
+}
+
+/** Hasil semua tokoh yang berjalan BERSAMAAN dengan aturan yang sama. */
+export interface TeamRun {
+  /** Satu jalan per tokoh, urutan `heroesOf`. */
+  runs: PathRun[];
+  /** `sampai` hanya kalau SEMUA tokoh sampai; selain itu kegagalan yang terjadi paling dulu. */
+  outcome: PathOutcome;
+  blame?: PadColor;
+  /** Tokoh yang gagal (indeks `runs`). */
+  who?: number;
+}
+
+/**
+ * Jalankan semua tokoh dengan aturan yang SAMA. Mereka tak saling
+ * menghalangi, jadi tiap tokoh dijalankan sendiri-sendiri — di layar langkah
+ * ke-i semua tokoh terjadi bersamaan. Yang dipelajari anak: satu panah untuk
+ * satu warna harus cocok bagi KEDUANYA.
+ */
+export function runTeam(board: PathBoard, startDirs: CodeDir[], rules: PathRules): TeamRun {
+  const runs = heroesOf(board, startDirs).map((h) => runHero(board, h, rules));
+  let who: number | undefined;
+  runs.forEach((r, i) => {
+    if (r.outcome === 'sampai') return;
+    if (who === undefined || r.steps.length < runs[who]!.steps.length) who = i;
+  });
+  if (who === undefined) return { runs, outcome: 'sampai' };
+  return { runs, outcome: runs[who]!.outcome, blame: runs[who]!.blame, who };
+}
+
+/** Jalan tokoh utama saja (papan satu tokoh). */
+export function runPath(board: PathBoard, startDir: CodeDir, rules: PathRules): PathRun {
+  return runHero(board, { start: board.start, goal: board.goal, dir: startDir }, rules);
 }
 
 /** Semua susunan aturan untuk warna-warna papan (4^k). */
@@ -191,9 +255,9 @@ export function* allRules(colors: PadColor[]): Generator<PathRules> {
   }
 }
 
-/** Semua susunan aturan yang membawa tokoh sampai. */
-export function solutions(board: PathBoard, startDir: CodeDir): PathRules[] {
+/** Semua susunan aturan yang membawa SEMUA tokoh sampai. */
+export function solutions(board: PathBoard, startDirs: CodeDir[]): PathRules[] {
   const out: PathRules[] = [];
-  for (const r of allRules(board.colors)) if (runPath(board, startDir, r).outcome === 'sampai') out.push(r);
+  for (const r of allRules(board.colors)) if (runTeam(board, startDirs, r).outcome === 'sampai') out.push(r);
   return out;
 }

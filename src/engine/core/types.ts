@@ -1517,6 +1517,16 @@ export interface ColorPathData {
    * petunjuk P2 (jejak kaki & panah yang dibutuhkan).
    */
   solution: PathRules;
+  /**
+   * TOKOH KEDUA (soal "dua tokoh, satu aturan"): berjalan BERSAMAAN dari `s`
+   * ke `g` dengan aturan warna yang SAMA. Wajib ada kalau papan punya `s`/`g`.
+   */
+  buddy?: {
+    startDir: PathDir;
+    heroItem: string;
+    heroFaces?: 'kiri' | 'kanan';
+    goalItem: string;
+  };
 }
 
 export interface LevelDataMap {

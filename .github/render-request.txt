@@ -1,9 +1,9 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #55 — Anak Gembala halaman 7: soal "Serigala sungguhan datang! …" dan
-pilihan "Berteriak minta tolong" dipendekkan (HP 320 px scroll 3 px). 3 baris
-baru, scope cerita-kancil, nol pindah scope.
-only: cerita-kancil
+render #56 — (1) Petak Ajaib & Kode Warna dapat soal DUA TOKOH (5 baris baru,
+2 petak-ajaib, 3 kode-warna); (2) Anak Gembala halaman 7 dipendekkan (3 baris
+baru, cerita-kancil). Nol pindah scope. Sengaja TANPA baris "only" (tiga scope;
+berkas yang sudah ada dilewati).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris

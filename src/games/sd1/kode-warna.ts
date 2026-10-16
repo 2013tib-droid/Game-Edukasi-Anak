@@ -18,6 +18,10 @@ import { colorSlot, type ColorCast } from '@/games/colorLevels';
  *   l7 spiral empat warna
  *   l8 PERBAIKI: susu tertinggal
  *   l9 MISI BESAR: spiral empat warna, tiga susu
+ *   l10 DUA TOKOH: kucing & ayam, warna yang membelokkan satu tokoh
+ *       menyuruh tokoh lain terus lurus
+ *   l11 DUA TOKOH: jalan pintas kucing menyesatkan ayam — cari jalan lain
+ *   l12 MISI BESAR DUA TOKOH: empat warna, satu aturan untuk berdua
  *
  * - Varian dicerminkan/diputar DAN diwarnai ulang (`colorSlot`) — narasi
  *   TIDAK BOLEH menyebut warna tertentu.
@@ -27,6 +31,8 @@ import { colorSlot, type ColorCast } from '@/games/colorLevels';
 
 const MILK: ColorCast = { hero: 'cat', heroFaces: 'kanan', goal: 'milk' };
 const HOME: ColorCast = { hero: 'cat', heroFaces: 'kanan', goal: 'house', pickup: 'milk' };
+/** Dua tokoh (2026-10-16, permintaan pemilik "agak susah lagi"): kucing ke rumah, ayam ke kandang. */
+const DUO: ColorCast = { hero: 'cat', heroFaces: 'kanan', goal: 'house', buddy: { hero: 'chicken', heroFaces: 'kanan', goal: 'barn' } };
 
 const STAMP: Record<string, LevelStamp> = {
   l1: { emoji: '🪜', label: 'Tangga' },
@@ -38,6 +44,9 @@ const STAMP: Record<string, LevelStamp> = {
   l7: { emoji: '🐌', label: 'Siput' },
   l8: { emoji: '🐞', label: 'Kumbang' },
   l9: { emoji: '🏠', label: 'Rumah' },
+  l10: { emoji: '🐔', label: 'Ayam' },
+  l11: { emoji: '🧭', label: 'Kompas' },
+  l12: { emoji: '🎉', label: 'Pesta' },
 };
 
 const SD2 = { grid: ['S...m', 'G....', '.....', '.....', 'b.k.k'], start: 'kanan' } as const;
@@ -106,6 +115,30 @@ const config: GameConfig<'color-path'> = {
         grid: ['S..*.m', '......', 'h..G.m', '......', '.....*', 'b*.k.k'],
         start: 'kanan',
         solution: { merah: 'bawah', kuning: 'kiri', biru: 'atas', hijau: 'kanan' },
+      },
+    ]),
+    colorSlot('l10', STAMP.l10!, 'Kucing dan ayam memakai aturan yang sama. Antar keduanya pulang!', DUO, [
+      {
+        grid: ['S.m.s', '....m', '..b.G', '.g..k', '.....'],
+        start: 'kanan',
+        start2: 'bawah',
+        solution: { merah: 'bawah', kuning: 'kiri', biru: 'kanan' },
+      },
+    ]),
+    colorSlot('l11', STAMP.l11!, 'Jalan pintas kucing bisa menyesatkan ayam. Pikirkan dulu!', DUO, [
+      {
+        grid: ['S.m.G', '.....', '..b.k', '.m.s.', '.g...'],
+        start: 'kanan',
+        start2: 'kiri',
+        solution: { merah: 'bawah', kuning: 'atas', biru: 'kanan' },
+      },
+    ]),
+    colorSlot('l12', STAMP.l12!, 'Misi besar! Kucing ke rumah, ayam ke kandang, dengan satu aturan.', DUO, [
+      {
+        grid: ['S.m.G', '#....', '..b.k', '.mh.h', '.g..s'],
+        start: 'kanan',
+        start2: 'atas',
+        solution: { merah: 'bawah', kuning: 'atas', biru: 'kanan', hijau: 'kiri' },
       },
     ]),
   ],
