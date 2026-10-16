@@ -1,8 +1,8 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #54 — Anak Gembala: pilihan "Tertawa karena berhasil menipu" jadi
-"Menertawakan warga" (turun tiga baris di HP 320 px). 2 baris baru
-(Pilihan A/B), scope cerita-kancil, nol pindah scope.
+render #55 — Anak Gembala halaman 7: soal "Serigala sungguhan datang! …" dan
+pilihan "Berteriak minta tolong" dipendekkan (HP 320 px scroll 3 px). 3 baris
+baru, scope cerita-kancil, nol pindah scope.
 only: cerita-kancil
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow

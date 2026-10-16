@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-16",
   "count": 2086,
-  "chars": 86997,
+  "chars": 86969,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -1273,8 +1273,8 @@
       ]
     },
     {
-      "key": "ff554167ecb0",
-      "text": "Pilihan A. Berteriak minta tolong ke warga",
+      "key": "a900ac71333a",
+      "text": "Pilihan A. Berteriak minta tolong",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1570,8 +1570,8 @@
       ]
     },
     {
-      "key": "dfacbdedcb7b",
-      "text": "Pilihan B. Berteriak minta tolong ke warga",
+      "key": "8f1c487b6a49",
+      "text": "Pilihan B. Berteriak minta tolong",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1921,6 +1921,15 @@
       ]
     },
     {
+      "key": "804336d2ada9",
+      "text": "Serigala sungguhan datang! Apa yang harus dia lakukan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "4f80ad4cbfcd",
       "text": "Setiap pagi, anak gembala membawa domba-dombanya ke padang rumput di kaki bukit.",
       "scope": "cerita-kancil",
@@ -1950,15 +1959,6 @@
     {
       "key": "9224c2cbe0ee",
       "text": "Siang itu sepi sekali. Domba-domba asyik makan rumput, anak gembala menguap bosan.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "cec51d80f933",
-      "text": "Sore itu, serigala sungguhan datang! Apa yang harus dia lakukan?",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
