@@ -20,7 +20,8 @@ dua prompt sebelumnya tak menghasilkan gambar (yang pertama ditolak Gemini),
 versi 3 mengganti komposisinya total — cuma gajah + pelanduk, berjalan pulang
 berdampingan dilihat dari belakang.
 
-Enam cerita rakyat (`n1`–`n6`) masih `soon: true` — jangan digambar dulu.
+Cerita rakyat `n2`, `n3`, `n5`, `n6` masih `soon: true` — jangan digambar dulu.
+**`n1` Anak Gembala dibuka 2026-10-16** — promptnya di bagian "CERITA 4".
 
 Kirim sebagian dulu juga tidak apa-apa: halaman yang belum ada ilustrasinya tetap
 jalan dengan emoji/item seperti sekarang, tanpa error apa pun di app.
@@ -500,6 +501,136 @@ penutup itu pesan moral, bukan adegan, jadi gambar apa pun di sana nilainya keci
 
 ---
 
+# CERITA 4 — Anak Gembala dan Serigala (`n1`)
+
+🆕 **Dibuka & ditulis ulang 2026-10-16** (permintaan pemilik: *"bikin cerita yang
+menarik… background jangan polosan"*). Sembilan halaman, **nol gambar terpasang** —
+halamannya tampil emoji sampai ilustrasinya dikirim.
+
+**Lampirkan `public/assets/story/sampul-gembala.webp`** sebagai gambar rujukan di
+tiap pesan: anak gembala & dombanya sudah ada di sampul itu, jadi wujudnya harus
+sama.
+
+## LEMBAR TOKOH (tempel sekali sesudah blok gaya)
+
+> Cerita ini berlatar **padang rumput di kaki bukit, dengan desa kecil di
+> bawahnya**, di Indonesia. Tokohnya karakter orisinal, dan **bentuknya harus sama
+> persis di kesembilan gambar**:
+>
+> - **ANAK GEMBALA** — anak laki-laki Indonesia sekitar 8 tahun, rambut hitam,
+>   **topi jerami bertali coklat**, kemeja biru lengan pendek di atas kaus putih,
+>   celana coklat, membawa **tongkat gembala kayu berujung melengkung**. Mata besar,
+>   wajah ramah — sama seperti anak di gambar rujukan.
+> - **DOMBA** — lima sampai enam domba putih berbulu tebal keriting seperti awan,
+>   wajah krem, mata kecil tersenyum. Lucu dan bulat.
+> - **WARGA DESA** — tiga orang saja: **bapak bercaping** berbaju coklat, **ibu
+>   berkerudung** berbaju hijau, dan **kakek berpeci** berjenggot putih. Ramah,
+>   tidak pernah tampak galak.
+> - **SERIGALA** — serigala abu-abu kurus berekor lebat, **kartun nakal-lucu, bukan
+>   menakutkan**: mata kuning bulat, alis menukik usil, **mulut TERTUTUP, tanpa
+>   taring, tanpa liur, tanpa bulu berdiri**. Lebih mirip pencuri cilik di film
+>   anak daripada binatang buas.
+>
+> **Latarnya selalu ramai dan berwarna, JANGAN polos.** Di tiap gambar harus ada:
+> bukit hijau berlapis-lapis, bunga liar (kuning, putih, merah muda), satu pohon
+> besar rindang, kupu-kupu atau burung kecil, awan putih gemuk, dan di kejauhan
+> **desa kecil beratap genteng merah dengan pohon kelapa**. Langit dan cahayanya
+> berganti mengikuti waktu di cerita (pagi, siang, sore) — sebutkan di tiap prompt.
+
+## Adegan (9 gambar)
+
+| # | id (nama file) | Rasio | Halaman di cerita |
+|---|---|---|---|
+| 1 | `gembala-pagi` | 4:3 | "Setiap pagi, anak gembala membawa domba-dombanya ke padang rumput…" |
+| 2 | `gembala-bosan` | 4:3 | "Siang itu sepi sekali… anak gembala menguap bosan." |
+| 3 | `gembala-teriak` | 4:3 | "Dia iseng berteriak, 'Tolong! Ada serigala!'" |
+| 4 | `gembala-warga` | 4:3 | "Warga desa berlari naik bukit membawa tongkat…" |
+| 5 | `gembala-kecewa` | **16:9** | keputusan — "Warga lelah dan kecewa. Apa yang sebaiknya dia lakukan?" |
+| 6 | `gembala-maaf` | 4:3 | "Anak gembala meminta maaf…" |
+| 7 | `gembala-serigala` | **16:9** | keputusan — "Sore itu, serigala sungguhan datang!" |
+| 8 | `gembala-tolong` | 4:3 | "Warga… percaya dan datang menolong!" |
+| 9 | `gembala-selamat` | 4:3 | "Serigala lari ketakutan. Domba-domba selamat…" |
+
+### Baris prompt (kirim satu per pesan, gambar rujukan tetap dilampirkan)
+
+**1. `gembala-pagi` — rasio 4:3**
+> Buatkan ilustrasi buku cerita anak, rasio 4:3: **pagi hari, anak gembala
+> berjalan riang menggiring domba-dombanya naik ke padang rumput**. Anak di tengah
+> sambil mengangkat tongkatnya, domba-domba berjalan beriringan di depannya.
+> Matahari pagi baru terbit di balik bukit, **kabut tipis keemasan di lembah**,
+> embun berkilau di rumput, bunga liar kuning dan putih, dua burung kecil terbang.
+> Di bawah bukit tampak desa beratap genteng merah dan pohon kelapa.
+
+**2. `gembala-bosan` — rasio 4:3**
+> Buatkan ilustrasi buku cerita anak, rasio 4:3: **siang yang terik dan sepi —
+> anak gembala duduk bersandar di bawah pohon besar yang rindang sambil menguap
+> lebar**, dagunya bertumpu di tongkat, wajahnya lucu bosan. Domba-domba makan
+> rumput dengan tenang di sekitarnya. Langit biru cerah dengan awan putih gemuk,
+> bayangan pohon di rumput, kupu-kupu kuning beterbangan, belalang di ilalang,
+> desa kecil dan sawah di kejauhan.
+
+**3. `gembala-teriak` — rasio 4:3**
+> Buatkan ilustrasi buku cerita anak, rasio 4:3: **anak gembala berdiri di atas
+> batu besar, dua tangan membentuk corong di depan mulutnya, berteriak ke arah
+> desa** — tapi **matanya mengedip usil dan dia setengah tersenyum**, jelas sedang
+> iseng. **Tidak ada serigala di mana pun.** Domba-domba di belakangnya menoleh
+> heran. Latar padang bunga, bukit hijau, langit siang biru, desa beratap merah di
+> bawah bukit dengan beberapa jemuran dan pohon kelapa.
+
+**4. `gembala-warga` — rasio 4:3**
+> Buatkan ilustrasi buku cerita anak, rasio 4:3: **tiga warga desa (bapak bercaping,
+> ibu berkerudung, kakek berpeci) tiba di padang rumput sambil terengah-engah**,
+> membawa tongkat kayu dan sapu lidi, **menengok ke sana kemari mencari serigala yang
+> tidak ada**. Wajahnya bingung, bukan marah. Anak gembala kecil di belakang,
+> menutup mulut menahan tawa. Jalan setapak berbatu menanjak dari desa, rumput
+> tinggi bergoyang, bunga liar, langit siang.
+
+**5. `gembala-kecewa` — rasio 16:9**
+> Buatkan ilustrasi buku cerita anak, rasio 16:9 (mendatar lebar): **ketiga warga
+> desa berjalan pulang menuruni bukit dengan bahu turun dan wajah kecewa** — sang
+> kakek menggeleng pelan, ibu menghela napas. Di sisi kiri, **anak gembala berdiri
+> sendirian memeluk tongkatnya, mulai merasa bersalah**. Cahaya siang menjelang
+> sore, awan berarak, jalan setapak berliku ke desa beratap merah di lembah, pohon
+> kelapa, sawah hijau berpetak.
+
+**6. `gembala-maaf` — rasio 4:3**
+> Buatkan ilustrasi buku cerita anak, rasio 4:3: **anak gembala menunduk sopan
+> sambil menyalami tangan sang kakek** di tepi desa. Kakek berpeci tersenyum memaafkan
+> dan menepuk kepala anak itu; bapak dan ibu di belakangnya ikut tersenyum. Latar
+> gerbang bambu desa, pagar tanaman bunga sepatu merah, rumah kayu beratap genteng,
+> ayam di halaman, bukit padang rumput di belakang. Suasana hangat.
+
+**7. `gembala-serigala` — rasio 16:9**
+> Buatkan ilustrasi buku cerita anak, rasio 16:9 (mendatar lebar): **sore hari
+> berlangit jingga keemasan — seekor serigala abu-abu mengintip dari balik semak di
+> sisi kanan**, mata kuning bulat usil, mulut tertutup, **sama sekali tidak
+> menakutkan**. Di sisi kiri, **anak gembala berdiri di depan domba-dombanya,
+> tangan terentang melindungi mereka**, wajah kaget tapi berani. Domba-domba
+> merapat di belakangnya. Matahari rendah di balik bukit, bayangan panjang, awan
+> merah muda, bunga ilalang berkilau, desa di kejauhan mulai menyalakan lampu.
+
+**8. `gembala-tolong` — rasio 4:3**
+> Buatkan ilustrasi buku cerita anak, rasio 4:3: **ketiga warga desa berlari
+> menaiki bukit bersama, membawa obor bambu dan tongkat, wajahnya bersemangat
+> menolong**; anak gembala menunjuk ke arah semak sambil melambai memanggil mereka.
+> Langit sore jingga keemasan, siluet pohon kelapa, rumput tinggi bercahaya, burung
+> pulang ke sarang. Serigala tidak tampak di gambar ini.
+
+**9. `gembala-selamat` — rasio 4:3**
+> Buatkan ilustrasi buku cerita anak, rasio 4:3: **anak gembala memeluk seekor domba
+> sambil tertawa gembira, dikelilingi domba-domba lain dan ketiga warga desa yang
+> tersenyum**. Jauh di kejauhan, **serigala kecil berlari menjauh ke balik bukit**,
+> tampak terbirit-birit lucu. Langit sore keemasan bersemburat merah muda, bintang
+> pertama muncul, kunang-kunang kecil di rumput, desa beratap merah dengan jendela
+> menyala hangat. Suasana bahagia dan aman.
+
+> **Catatan latar app:** halaman cerita ini memakai latar engine `padang` (langit
+> siang + bukit) di belakang panel gambarnya. Adegan 7–9 sengaja bercahaya **sore
+> jingga**, bukan malam gelap — sama seperti penutup Jalak & Kerbau yang bersenja di
+> atas latar siang, dan itu terbukti tetap enak dilihat.
+
+---
+
 ## Aturan Teknis yang Menentukan Hasil Dipakai atau Tidak
 
 - **Latarnya harus ikut digambar penuh sampai tepi.** Ilustrasi ini dipasang
@@ -591,6 +722,8 @@ Catatan untuk saya sendiri — pemilik tidak perlu melakukan apa pun.
    | | ranting & daun (keputusan) | 🌿 | `ask({ art: 'kancil-gajah-ranting', emoji: '🌿' }, …)` |
    | | menarik bersama | 💪 | `art('kancil-gajah-tarik')` |
    | | penutup | `art('kancil-gajah-selamat', '⭐', …)` | ⭐ jadi cadangan |
+   | Anak Gembala (`n1`) | halaman biasa 1–4, 6, 8, 9 | 🐑 🥱 📣 🏃 🤝 🏘️ ⭐ | `art('gembala-<id>', '<emoji>', …)` |
+   | | keputusan 5 & 7 | 🤔 🐺 | `ask({ art: 'gembala-kecewa' / 'gembala-serigala', emoji }, …)` |
 
 3. **Rapikan `kancil-rawa` & `gajah-lumpur`.** Dua ilustrasi adegan itu sekarang
    terdaftar di registry **benda** (`src/engine/ui/items.ts`) dan dipakai lewat

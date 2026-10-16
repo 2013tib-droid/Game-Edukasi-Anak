@@ -1,10 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #52 — Pabrik Mainan & Robot Pemilah DIGANTI dua game petak warna
-(template color-path): Petak Ajaib (TK) & Kode Warna (SD 1-2). 20 baris
-baru (8 petak-ajaib, 9 kode-warna, 3 shared). Baris rule-sort lama sudah
-dibuang beserta mp3-nya. Nol baris pindah scope. Sengaja TANPA baris "only"
-(tiga scope).
+render #53 — Baca Cerita: "Anak Gembala dan Serigala" ditulis ulang & dibuka.
+19 baris baru (suara Ardi), semuanya scope cerita-kancil; 17 baris lama
+cerita ini jadi yatim. Nol baris pindah scope. Lafal baru: kecewa → kecéwa
+(hanya dipakai baris baru).
+only: cerita-kancil
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris

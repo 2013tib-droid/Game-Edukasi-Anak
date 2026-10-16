@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-16",
-  "count": 2084,
-  "chars": 86892,
+  "count": 2086,
+  "chars": 87021,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -733,8 +733,8 @@
       ]
     },
     {
-      "key": "6632633dd0d5",
-      "text": "Anak gembala meniup serulingnya. Domba-domba ikut tenang mendengarnya.",
+      "key": "56b1d4652259",
+      "text": "Anak gembala meminta maaf. Sejak hari itu, dia selalu berkata jujur.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -877,8 +877,8 @@
       ]
     },
     {
-      "key": "4f21f2d809ce",
-      "text": "Dia ingin ada yang menemani. Apa yang sebaiknya dia lakukan?",
+      "key": "c9c4af3a235a",
+      "text": "Dia iseng berteriak, \"Tolong! Ada serigala!\" Padahal tidak ada apa-apa.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -886,8 +886,8 @@
       ]
     },
     {
-      "key": "b609ccf7f2a1",
-      "text": "Domba-domba selamat. Jujur membuat kita dipercaya!",
+      "key": "29bd724a4d29",
+      "text": "Domba-domba butuh dijaga. Beranilah minta tolong!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -906,15 +906,6 @@
     {
       "key": "d4169a7752f0",
       "text": "Gajah terlalu berat. Apa yang sebaiknya Kancil lakukan?",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "aa526397f199",
-      "text": "Hari itu sepi sekali. Anak gembala merasa bosan.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -942,15 +933,6 @@
     {
       "key": "9fea6ab8869f",
       "text": "Jalak mematuki kutu di punggung kerbau. Gatalnya hilang, jalak pun kenyang.",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "78560690b748",
-      "text": "Kalau diam, domba-dombanya dalam bahaya. Beranilah minta tolong!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1156,15 +1138,6 @@
       ]
     },
     {
-      "key": "8b2a23f3514e",
-      "text": "Membohongi orang bisa membuat mereka tidak percaya lagi. Coba pilih yang lain!",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
       "key": "64253a3050af",
       "text": "Menolong teman yang kesulitan itu perbuatan baik. Coba pilih yang lain!",
       "scope": "cerita-kancil",
@@ -1282,24 +1255,6 @@
       ]
     },
     {
-      "key": "f74288bccaec",
-      "text": "Pilihan A. Bermain seruling sambil menjaga domba",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "bd8494d846ec",
-      "text": "Pilihan A. Berteriak \"Ada serigala!\" padahal tidak ada",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
       "key": "9cb7ef4c2582",
       "text": "Pilihan A. Berteriak marah pada buaya",
       "scope": "cerita-kancil",
@@ -1318,8 +1273,8 @@
       ]
     },
     {
-      "key": "eeefd5032c8d",
-      "text": "Pilihan A. Berteriak minta tolong kepada warga desa",
+      "key": "ff554167ecb0",
+      "text": "Pilihan A. Berteriak minta tolong ke warga",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1329,15 +1284,6 @@
     {
       "key": "8dfcd1c0c048",
       "text": "Pilihan A. Boleh, hinggaplah di punggungku",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "79f18fc946ae",
-      "text": "Pilihan A. Diam saja karena takut",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1374,6 +1320,15 @@
     {
       "key": "95ba6f8c3a70",
       "text": "Pilihan A. Labu yang paling kecil",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "cdc7fa4187e3",
+      "text": "Pilihan A. Lari meninggalkan domba",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1480,6 +1435,15 @@
       ]
     },
     {
+      "key": "ba7ab66c89c2",
+      "text": "Pilihan A. Minta maaf dan berjanji jujur",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "07d4613b8de8",
       "text": "Pilihan A. Pergi karena badannya kecil",
       "scope": "cerita-kancil",
@@ -1509,6 +1473,15 @@
     {
       "key": "e6283138e2b7",
       "text": "Pilihan A. Terbang pergi diam-diam",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "a7d37454a2f0",
+      "text": "Pilihan A. Tertawa karena berhasil menipu",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1579,24 +1552,6 @@
       ]
     },
     {
-      "key": "606022bace9b",
-      "text": "Pilihan B. Bermain seruling sambil menjaga domba",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "bdcfb8d25b10",
-      "text": "Pilihan B. Berteriak \"Ada serigala!\" padahal tidak ada",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
       "key": "baeb64da9521",
       "text": "Pilihan B. Berteriak marah pada buaya",
       "scope": "cerita-kancil",
@@ -1615,8 +1570,8 @@
       ]
     },
     {
-      "key": "b1543a6bf226",
-      "text": "Pilihan B. Berteriak minta tolong kepada warga desa",
+      "key": "dfacbdedcb7b",
+      "text": "Pilihan B. Berteriak minta tolong ke warga",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1626,15 +1581,6 @@
     {
       "key": "036271b7d186",
       "text": "Pilihan B. Boleh, hinggaplah di punggungku",
-      "scope": "cerita-kancil",
-      "voice": "ardi",
-      "games": [
-        "cerita-kancil"
-      ]
-    },
-    {
-      "key": "62e242112b93",
-      "text": "Pilihan B. Diam saja karena takut",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1671,6 +1617,15 @@
     {
       "key": "216067c7a392",
       "text": "Pilihan B. Labu yang paling kecil",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "bc6848ad094d",
+      "text": "Pilihan B. Lari meninggalkan domba",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1777,6 +1732,15 @@
       ]
     },
     {
+      "key": "4ba2d624b93a",
+      "text": "Pilihan B. Minta maaf dan berjanji jujur",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "5472528dccd4",
       "text": "Pilihan B. Pergi karena badannya kecil",
       "scope": "cerita-kancil",
@@ -1806,6 +1770,15 @@
     {
       "key": "e77b077a0eaa",
       "text": "Pilihan B. Terbang pergi diam-diam",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "0b182bcc5132",
+      "text": "Pilihan B. Tertawa karena berhasil menipu",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1939,8 +1912,17 @@
       ]
     },
     {
-      "key": "233b0ea7c8b6",
-      "text": "Seorang anak gembala menjaga domba-dombanya di padang rumput.",
+      "key": "69b75cd74d22",
+      "text": "Serigala lari ketakutan. Domba-domba selamat. Jujur membuat kita dipercaya!",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "4f80ad4cbfcd",
+      "text": "Setiap pagi, anak gembala membawa domba-dombanya ke padang rumput di kaki bukit.",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -1966,6 +1948,24 @@
       ]
     },
     {
+      "key": "9224c2cbe0ee",
+      "text": "Siang itu sepi sekali. Domba-domba asyik makan rumput, anak gembala menguap bosan.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "cec51d80f933",
+      "text": "Sore itu, serigala sungguhan datang! Apa yang harus dia lakukan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
       "key": "072c666f9d8d",
       "text": "Suatu hari, raksasa datang menagih janji. Timun Mas harus lari!",
       "scope": "cerita-kancil",
@@ -1984,8 +1984,8 @@
       ]
     },
     {
-      "key": "7a8f70bf130b",
-      "text": "Tiba-tiba serigala sungguhan datang! Apa yang harus dilakukan anak gembala?",
+      "key": "fda52a049f48",
+      "text": "Tertawa membuat warga makin sedih. Coba pilih yang lain!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [
@@ -2029,8 +2029,26 @@
       ]
     },
     {
-      "key": "7d8562218973",
-      "text": "Warga desa langsung datang menolong. Karena anak gembala selalu jujur, semua orang percaya padanya.",
+      "key": "53c867c23f3c",
+      "text": "Warga desa berlari naik bukit membawa tongkat. Ternyata tidak ada serigala. Mereka kecewa.",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "85d18f705995",
+      "text": "Warga lelah dan kecewa. Apa yang sebaiknya dia lakukan?",
+      "scope": "cerita-kancil",
+      "voice": "ardi",
+      "games": [
+        "cerita-kancil"
+      ]
+    },
+    {
+      "key": "ad106c1e0970",
+      "text": "Warga sempat ragu. Tapi anak gembala sudah menepati janjinya, jadi mereka percaya dan datang menolong!",
       "scope": "cerita-kancil",
       "voice": "ardi",
       "games": [

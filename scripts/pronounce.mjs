@@ -46,6 +46,8 @@ export const PRONOUNCE = {
   desa: 'désa',
   dompet: 'dompét',
   halte: 'halté',
+  // Anak Gembala (2026-10-16): KBBI ke·cé·wa. Baris lama tak ada yang memuatnya.
+  kecewa: 'kecéwa',
   kelereng: 'keléréng',
   kereta: 'keréta',
   lemon: 'lémon',
