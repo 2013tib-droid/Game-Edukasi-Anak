@@ -366,20 +366,20 @@ suka ungu).
   periksa lubang terkurung di lingkaran panah ulangi, lalu tambah `pic: '<id>',` di
   entri registry-nya.
 
-## Ikon dua game percabangan (`rule-sort`) — disusun 2026-10-15
+## Ikon dua game petak warna (`color-path`) — disusun 2026-10-16
 
-Pabrik Mainan (TK) & Robot Pemilah (SD Kelas 1 & 2) masih memakai emoji 🧸 / 🤖. Pakai
-BLOK GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa warna ungu.
+Petak Ajaib (TK) & Kode Warna (SD Kelas 1 & 2) masih memakai emoji 🐔 / 🐱. (Pabrik
+Mainan & Robot Pemilah, yang dulu tercatat di sini, sudah DIGANTI kedua game ini —
+promptnya dibuang.) Pakai BLOK GAYA + EKOR PROMPT di atas, SATU baris per pesan. Tanpa
+warna ungu.
 
 | id file | Baris prompt |
 |---|---|
-| `pabrik-mainan` | Buatkan: satu ban berjalan mainan pendek warna abu-abu muda dengan roda-roda kecil, di atasnya satu mainan bintang kuning dan satu mainan hati merah, keduanya berwajah imut — mata besar berkilau, pipi merona. Di bawah ujung ban ada dua kotak kardus coklat muda kecil yang terbuka. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
-| `robot-pemilah` | Buatkan: satu robot kecil bulat warna biru muda berwajah imut — layar wajah putih dengan dua mata hitam besar berkilau, antena berbola kuning — kedua tangannya memegang dua papan tanda: kiri tetes cat merah, kanan bintang putih bergaris coklat. Di depan kakinya dua kotak kardus coklat muda yang terbuka. Tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `petak-ajaib` | Buatkan: papan rumput kecil berpetak tiga kali tiga, dua petaknya berwarna — satu merah, satu biru — masing-masing bergambar panah putih tebal ke arah berbeda. Di petak ujung satu tongkol jagung berwajah imut — mata besar berkilau, pipi merona. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `kode-warna` | Buatkan: papan rumput kecil berpetak tiga kali tiga dengan empat petak berwarna — merah, kuning, biru, hijau — masing-masing bergambar panah putih tebal, panah-panahnya membentuk jalan berkelok. Di petak ujung satu gelas susu putih berwajah imut — mata besar berkilau, pipi merona. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
 
-- **Yang membuat ikon ini terbaca "memilah" adalah KOTAK TUJUAN + mainan bentuk
-  berwarna** — sama dengan layar game. Jangan wajah hewan pemilik kotak: hewan itu ganti-
-  ganti tiap main.
-- Robot SD warnanya mengikuti kepala robot di layar game (biru muda, antena kuning).
+- **Yang membuat ikon ini terbaca "petak warna" adalah PETAK BERWARNA + PANAH** — sama
+  dengan layar game. Jangan tokoh ayam/kucing: kartu hewan sudah dipakai banyak game lain.
 - Pasang seperti biasa: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`,
-  periksa lubang terkurung di celah roda ban/antara tangan robot dan badannya, lalu
-  tambah `pic: '<id>',` di entri registry-nya.
+  periksa lubang terkurung di antara petak, lalu tambah `pic: '<id>',` di entri
+  registry-nya.

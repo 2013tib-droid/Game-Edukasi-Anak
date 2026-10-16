@@ -102,7 +102,7 @@ const mod = await load(
     `\nexport { sentenceText } from ${JSON.stringify(path.resolve('src/engine/core/wordTrain.ts').split(path.sep).join('/'))};` +
     `\nexport { mixPaint, mixLine, batikLine } from ${JSON.stringify(path.resolve('src/engine/core/paint.ts').split(path.sep).join('/'))};` +
     `\nexport { CODE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/codeQuest.ts').split(path.sep).join('/'))};` +
-    `\nexport { RULE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/ruleSort.ts').split(path.sep).join('/'))};` +
+    `\nexport { PATH_LINES, parsePathBoard } from ${JSON.stringify(path.resolve('src/engine/core/colorPath.ts').split(path.sep).join('/'))};` +
     `\nexport { phraseText, VOY_LINES } from ${JSON.stringify(path.resolve('src/engine/core/wordVoyage.ts').split(path.sep).join('/'))};`,
 );
 
@@ -210,22 +210,16 @@ for (const config of mod.configs) {
       continue;
     }
 
-    // rule-sort (Pabrik Mainan · Robot Pemilah): every chip on the tray is
-    // read aloud when touched, and a failed run says why (RULE_LINES — the
-    // SAME object the template uses).
-    if ((level.template ?? config.template) === 'rule-sort') {
-      const L = mod.RULE_LINES;
-      for (const chip of level.data.tray) add(L.chip[chip], config.id, voice);
-      for (const line of [L.wrongBox, L.noBox, L.empty]) add(line, config.id, voice);
-      if (level.data.mode === 'tebak') {
-        add(L.guessNo, config.id, voice);
-        // "Cocok duluan" only plays when some toy matches more than one box.
-        const hit = (c, t) => c === 'lainnya' || c === t.color || c === t.shape || c === (t.size ?? 'besar');
-        const overlap = level.data.queue.some(
-          (t) => level.data.solution.filter((chips) => chips.every((c) => hit(c, t))).length > 1,
-        );
-        if (overlap) add(L.guessEarly, config.id, voice);
-      }
+    // color-path (Petak Ajaib · Kode Warna): the arrow card and the colour
+    // pad/rule are read aloud when touched, and a failed run says why
+    // (PATH_LINES — the SAME object the template uses).
+    if ((level.template ?? config.template) === 'color-path') {
+      const L = mod.PATH_LINES;
+      const board = mod.parsePathBoard(level.data.grid);
+      for (const d of ['atas', 'kanan', 'bawah', 'kiri']) add(L.dir[d], config.id, voice);
+      for (const c of board.colors) add(L.color[c], config.id, voice);
+      for (const line of [L.bump, L.loop, L.empty]) add(line, config.id, voice);
+      if (board.pickups.length) add(L.missing, config.id, voice);
       continue;
     }
 

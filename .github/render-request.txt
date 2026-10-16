@@ -1,10 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #51 — Pabrik Mainan & Robot Pemilah dibuat lebih menantang: mode
-TEBAK (anak menebak kotak tujuan tiap mainan) + antrean rahasia. 8 baris
-baru (4 pabrik-mainan, 3 robot-pemilah, 1 shared). Satu baris pindah scope
-("Lainnya": robot-pemilah → shared) — mp3-nya SUDAH dipindah manual (git mv
-+ manifest), jadi tak dirender ulang. Sengaja TANPA baris "only" (tiga scope).
+render #52 — Pabrik Mainan & Robot Pemilah DIGANTI dua game petak warna
+(template color-path): Petak Ajaib (TK) & Kode Warna (SD 1-2). 20 baris
+baru (8 petak-ajaib, 9 kode-warna, 3 shared). Baris rule-sort lama sudah
+dibuang beserta mp3-nya. Nol baris pindah scope. Sengaja TANPA baris "only"
+(tiga scope).
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris
