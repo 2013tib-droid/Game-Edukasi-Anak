@@ -470,6 +470,8 @@ const ALL_GAMES: GameMeta[] = [
     subject: 'bahasa-indonesia',
     title: 'Susun Kalimat',
     emoji: '🚂',
+    // Kereta menanjak, gerbong membawa kartu kosong (2026-10-16).
+    pic: 'susun-kalimat',
     template: 'word-train',
     load: () => import('@/games/sd2/susun-kalimat'),
   },
@@ -510,6 +512,8 @@ const ALL_GAMES: GameMeta[] = [
     subject: 'bahasa-indonesia',
     title: 'Detektif Bacaan',
     emoji: '🔍',
+    // Kaca pembesar berwajah di atas kertas bergaris (2026-10-16).
+    pic: 'detektif-bacaan',
     template: 'read-find',
     load: () => import('@/games/sd2/detektif-bacaan'),
   },
