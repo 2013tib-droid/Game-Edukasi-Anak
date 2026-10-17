@@ -74,6 +74,8 @@ export const ITEMS: Record<string, ItemDef> = {
   'bahasa-ejek': { emoji: '🗣️', label: 'menirukan sambil mengejek', ext: 'webp' },
   'bahasa-diam': { emoji: '🗣️', label: 'menyuruh diam', ext: 'webp' },
   jalak: { emoji: '🐦', label: 'burung jalak', ext: 'webp' },
+  // Wayang kulit (Gemini, 2026-10-16) — bayangan misi besar Lab Cahaya & Bunyi.
+  wayang: { emoji: '🎭', label: 'wayang', ext: 'webp' },
   // ILUSTRASI HALAMAN CERITA, bukan benda yang bisa dihitung. Gambarnya satu
   // adegan utuh (Kancil berjalan di tepi rawa) berikut latarnya sendiri, jadi
   // hanya boleh dipakai sebagai `StoryPage.item`. JANGAN dipakai sebagai

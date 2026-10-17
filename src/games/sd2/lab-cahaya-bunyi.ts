@@ -281,7 +281,7 @@ function power(t: number, devices: (LabThing & { energy: LabEnergy })[], extra: 
 /* ---------- l9 misi besar ---------- */
 
 const GUNUNGAN = T('Gunungan', { art: 'wayang-gunungan' });
-const TOKOH = T('Wayang', { art: 'wayang-tokoh' });
+const TOKOH = T('Wayang', { item: 'wayang' });
 const GARUDA = T('Garuda', { art: 'wayang-garuda' });
 
 const S_LAMPU = { ...T('Lampu panggung', { art: 'lampu' }), off: true };

@@ -1247,7 +1247,6 @@ export type LabArt =
   | 'mobil-mainan'
   | 'kulkas'
   | 'wayang-gunungan'
-  | 'wayang-tokoh'
   | 'wayang-garuda'
   | 'getar-kecil'
   | 'getar-besar'
