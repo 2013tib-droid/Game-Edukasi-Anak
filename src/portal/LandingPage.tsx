@@ -180,7 +180,7 @@ function ReasonIcon({ icon, art, cls }: { icon: string; art?: string; cls: strin
 const faqs: { q: string; a: ReactNode }[] = [
   {
     q: 'Bisa dicoba dulu sebelum bayar?',
-    a: 'Bisa. Ketuk "Coba Gratis" — tiap kelompok punya satu game yang bisa dimainkan penuh tanpa daftar atau login: Hutan Hewan (Playgroup & TK), Tulis Huruf (SD Kelas 1 & 2), dan Toko Kembalian (SD Kelas 3 & 4).',
+    a: 'Bisa. Ketuk "Coba Gratis" — tiap kelompok punya game yang bisa dimainkan penuh tanpa daftar atau login: Hutan Hewan (Playgroup & TK), Tulis Huruf (SD Kelas 1 & 2), serta Toko Kembalian dan Kebun Ilmu (SD Kelas 3 & 4).',
   },
   {
     q: 'Untuk usia berapa?',

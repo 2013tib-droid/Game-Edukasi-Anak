@@ -73,8 +73,8 @@ export const announcements: Announcement[] = [
     title: 'SD Kelas 3 & 4 sudah hadir!',
     body:
       'Kelompok baru untuk kelas 3 dan 4: Matematika, Bahasa Indonesia, IPAS, ' +
-      'Pancasila, Seni Rupa, dan Bahasa Inggris. Coba gratis Toko Kembalian ' +
-      'dulu, lalu buka semuanya dengan harga perkenalan Rp39.000.',
+      'Pancasila, Seni Rupa, dan Bahasa Inggris. Coba gratis Toko Kembalian dan ' +
+      'Kebun Ilmu dulu, lalu buka semuanya dengan harga perkenalan Rp39.000.',
   },
   {
     id: 'a-2026-10-17-tampilan-baru',

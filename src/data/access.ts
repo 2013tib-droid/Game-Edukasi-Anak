@@ -45,8 +45,16 @@ export type LockMode = 'buka' | 'kunci';
  * `toko-kembalian` = demo `sd2` (2026-10-13, rilis SD Kelas 3 & 4): drag-drop,
  * beda dari demo TK (tap-answer) & SD 1-2 (tracing) —
  * `docs/rencana-game-sd-kelas-3-4.md`.
+ *
+ * `kebun-ilmu` = demo KEDUA `sd2` (keputusan pemilik 2026-10-17): IPAS, jadi
+ * calon pembeli SD 3 & 4 melihat lebih dari sekadar matematika.
  */
-export const FREE_GAME_IDS: readonly string[] = ['hutan-hewan', 'tulis-huruf', 'toko-kembalian'];
+export const FREE_GAME_IDS: readonly string[] = [
+  'hutan-hewan',
+  'tulis-huruf',
+  'toko-kembalian',
+  'kebun-ilmu',
+];
 
 const envMode = import.meta.env.VITE_LOCK_MODE as string | undefined;
 
