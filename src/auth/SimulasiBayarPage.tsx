@@ -23,7 +23,8 @@ const SCENARIOS: { id: Scenario; label: string }[] = [
   { id: 'used', label: 'Sudah dipakai' },
 ];
 
-const SELLABLE = groupsData.groups.filter((g) => !('draft' in g && g.draft));
+// sd3 tampil di portal (semua mapel "Segera hadir") tapi belum dijual: tanpa harga.
+const SELLABLE = groupsData.groups.filter((g) => !('draft' in g && g.draft) && 'priceLabel' in g);
 
 function fakeClaim(scenario: Scenario, group: string) {
   return (_orderId: string) =>
