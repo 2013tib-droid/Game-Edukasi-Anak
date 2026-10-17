@@ -301,8 +301,8 @@ const GAJAH = story(
  * Ilustrasi menyusul bertahap (prompt + nama file:
  * `docs/prompt-ilustrasi-baca-cerita.md`, "Cerita 4"). `art` hanya ditulis
  * untuk berkas yang SUDAH ada — berkas yang belum ada = 404 di console.
- * Terpasang 2026-10-16: pagi, bosan, teriak, kecewa, maaf, serigala, tolong, selamat (semua kecuali
- * halaman 4 `gembala-warga`).
+ * Terpasang 2026-10-16/17: kesembilan halaman (halaman 4 `gembala-warga` menyusul
+ * 2026-10-17).
  */
 const GEMBALA = story(
   'n1',
@@ -314,7 +314,7 @@ const GEMBALA = story(
   ),
   art('gembala-bosan', '🥱', 'Siang itu sepi sekali. Domba-domba asyik makan rumput, anak gembala menguap bosan.'),
   art('gembala-teriak', '📣', 'Dia iseng berteriak, "Tolong! Ada serigala!" Padahal tidak ada apa-apa.'),
-  page('🏃', 'Warga desa berlari naik bukit membawa tongkat. Ternyata tidak ada serigala. Mereka kecewa.'),
+  art('gembala-warga', '🏃', 'Warga desa berlari naik bukit membawa tongkat. Ternyata tidak ada serigala. Mereka kecewa.'),
   ask(
     { art: 'gembala-kecewa', emoji: '🤔' },
     'Warga lelah dan kecewa. Apa yang sebaiknya dia lakukan?',
