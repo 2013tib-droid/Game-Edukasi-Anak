@@ -65,6 +65,27 @@ export function announcementsFor(owned: readonly string[]): Announcement[] {
  * only for entries that would frustrate someone who has not bought it.
  */
 export const announcements: Announcement[] = [
+  // Release of SD Kelas 3 & 4 + the new look (prod deploy 2026-10-17).
+  {
+    id: 'a-2026-10-17-sd-kelas-3-4',
+    date: '2026-10-17',
+    tag: 'baru',
+    title: 'SD Kelas 3 & 4 sudah hadir!',
+    body:
+      'Kelompok baru untuk kelas 3 dan 4: Matematika, Bahasa Indonesia, IPAS, ' +
+      'Pancasila, Seni Rupa, dan Bahasa Inggris. Coba gratis Toko Kembalian ' +
+      'dulu, lalu buka semuanya dengan harga perkenalan Rp39.000.',
+  },
+  {
+    id: 'a-2026-10-17-tampilan-baru',
+    date: '2026-10-17',
+    tag: 'baru',
+    title: 'Tampilan baru & 4 game baru!',
+    body:
+      'Petualangan Pintar kini tampil lebih segar. Ada juga game baru: Kode ' +
+      'Kelinci dan Cari Jagung untuk Playgroup & TK, serta Misi Kode dan Panah ' +
+      'Warna untuk SD Kelas 1 & 2 — belajar berpikir runtut lewat permainan.',
+  },
   // One welcome per group, each naming what the parent just bought. The
   // earlier single welcome ('a-2026-10-01-terima-kasih-pembeli') was replaced
   // by these two — do not reuse that id.
