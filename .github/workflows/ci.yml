@@ -83,6 +83,12 @@ jobs:
       - name: Periksa soal petak warna
         run: node scripts/check-color-levels.mjs
 
+      # Game cari perbedaan (Cari Beda, Teliti Gambar): perbedaannya dibuat
+      # mesin dari benih tetap — tiap varian diperiksa sah, dan daerah sentuh
+      # terkecil di HP 320 px tetap >= 60 px.
+      - name: Periksa soal cari perbedaan
+        run: node scripts/check-spot-levels.mjs
+
       # Sinkron bintang ke Firestore harus MENGGABUNG (maksimum per level),
       # tidak menimpa. Kalau ini jadi penulisan biasa, anak yang main di
       # tablet lalu di HP kehilangan bintang tabletnya — dan itu cuma

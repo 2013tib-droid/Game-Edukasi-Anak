@@ -10,6 +10,7 @@ import type { PaintColor } from '@/engine/core/paint';
 import type { CollageArtId, CollageMaterial, MontageScene } from '@/engine/core/collage';
 import type { CodeDir as PathDir, CodeProgram } from '@/engine/core/codeQuest';
 import type { PathRules } from '@/engine/core/colorPath';
+import type { SpotDiffData } from '@/engine/core/spotDiff';
 
 export type GroupId = 'tk' | 'sd1' | 'sd2' | 'sd3';
 
@@ -37,7 +38,8 @@ export type TemplateId =
   | 'light-lab' // percobaan cahaya, bayangan, bunyi & energi (Lab Cahaya & Bunyi)
   | 'word-voyage' // kosakata & kalimat bahasa Inggris, 7 mode berganti (Kapten Kata)
   | 'code-quest' // susun kartu panah lalu Jalankan — coding anak (Kode Kelinci, Misi Kode)
-  | 'color-path'; // pasang panah per WARNA petak, tokoh berjalan sendiri — percabangan (Petak Ajaib, Kode Warna)
+  | 'color-path' // pasang panah per WARNA petak, tokoh berjalan sendiri — percabangan (Petak Ajaib, Kode Warna)
+  | 'spot-diff'; // cari perbedaan dua gambar — perbedaannya dibuat mesin (Cari Beda, Teliti Gambar)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -1553,6 +1555,8 @@ export interface LevelDataMap {
   'word-voyage': WordVoyageData;
   'code-quest': CodeQuestData;
   'color-path': ColorPathData;
+  /** Cari perbedaan — data & aturannya di `src/engine/core/spotDiff.ts`. */
+  'spot-diff': SpotDiffData;
 }
 
 /* ---------- Game config ---------- */
