@@ -1,8 +1,9 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #57 — dua game baru "Cari Beda" (TK) & "Teliti Gambar" (SD 1-2),
-template spot-diff: 7 baris baru (3 cari-beda, 4 teliti-gambar). Nol pindah
-scope. Sengaja TANPA baris "only" (dua scope; berkas yang sudah ada dilewati).
+render #58 — game baru "Mata Jeli" (SD Kelas 3 & 4, IPAS), template
+spot-diff: 7 baris baru, semuanya scope mata-jeli. Nol pindah scope.
+
+only: mata-jeli
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris

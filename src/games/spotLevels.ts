@@ -64,8 +64,13 @@ function shuffle<T>(arr: readonly T[], rnd: () => number): T[] {
   return a;
 }
 
+/** Benda kecil untuk kelompok (perbedaan "jumlah"). */
+const GROUP_ITEMS = ['apple', 'orange', 'strawberry', 'banana'];
+
 export interface SpotSpec {
   layout: SpotLayoutId;
+  /** Jumlah perbedaan dirahasiakan — anak menekan "Sudah semua!" sendiri. */
+  hidden?: boolean;
   /** Banyak perbedaan. */
   count: number;
   /** Jenis perbedaan yang boleh muncul. */
@@ -78,7 +83,10 @@ function tryBuild(place: SpotPlace, spec: SpotSpec, rnd: () => number): SpotDiff
   const layout = SPOT_LAYOUTS[spec.layout];
   const skyIdx = layout.flatMap((p, i) => (p.sky ? [i] : []));
   const groundIdx = layout.flatMap((p, i) => (p.sky ? [] : [i]));
-  const empty = groundIdx[Math.floor(rnd() * groundIdx.length)]!;
+  // Posisi kosong: satu untuk "tambah", satu lagi untuk "pindah" (sd2).
+  const nEmpty = spec.layout === 'sd2' ? 2 : 1;
+  const empties = shuffle(groundIdx, rnd).slice(0, nEmpty);
+  const empty = empties[0]!;
   const things: (SpotThing | null)[] = layout.map(() => null);
 
   // Langit: minimal satu bentuk berwarna (bahan perbedaan "warna"), sisanya
@@ -96,16 +104,22 @@ function tryBuild(place: SpotPlace, spec: SpotSpec, rnd: () => number): SpotDiff
     }
   });
 
-  const pool = shuffle(GROUND[place], rnd);
-  for (const i of groundIdx) if (i !== empty) things[i] = { item: pool.shift()! };
+  const wantsGroup = spec.kinds.includes('jumlah');
+  const groupItem = wantsGroup ? shuffle(GROUP_ITEMS, rnd)[0]! : null;
+  const pool = shuffle(GROUND[place], rnd).filter((p) => p !== groupItem);
+  const filledGround = groundIdx.filter((i) => !empties.includes(i));
+  const groupAt = groupItem ? filledGround[Math.floor(rnd() * filledGround.length)]! : -1;
+  for (const i of filledGround) {
+    things[i] = i === groupAt ? { item: groupItem!, count: rnd() < 0.5 ? 3 : 4 } : { item: pool.shift()! };
+  }
   // Seni yang menghadap samping kadang dibalik dari awal, supaya "arah
   // hadap" bukan selalu ke kanan → ke kiri.
-  for (const t of things) if (t?.item && SPOT_FLIPPABLE.has(t.item) && rnd() < 0.35) t.flip = true;
+  for (const t of things) if (t?.item && !t.count && SPOT_FLIPPABLE.has(t.item) && rnd() < 0.35) t.flip = true;
 
   const kinds: SpotKind[] = [...(spec.must ?? [])];
   while (kinds.length < spec.count) {
     const k = spec.kinds[Math.floor(rnd() * spec.kinds.length)]!;
-    if (k === 'tambah' && kinds.includes('tambah')) continue;
+    if ((k === 'tambah' || k === 'pindah' || k === 'jumlah') && kinds.includes(k)) continue;
     kinds.push(k);
   }
 
@@ -119,6 +133,8 @@ function tryBuild(place: SpotPlace, spec: SpotSpec, rnd: () => number): SpotDiff
       things.flatMap((t, i) => (t && !used.has(i) ? [i] : [])),
       rnd,
     );
+    const isItem = (i: number) => !!things[i]?.item && !things[i]!.count;
+    const groundFilled = filled.filter((i) => !layout[i]!.sky && isItem(i));
     let at: number | undefined;
     let change: SpotChange | undefined;
     if (kind === 'tambah') {
@@ -127,13 +143,31 @@ function tryBuild(place: SpotPlace, spec: SpotSpec, rnd: () => number): SpotDiff
       at = empty;
       present.add(thing);
       change = { kind, at, thing: { item: thing } };
+    } else if (kind === 'pindah') {
+      const to = empties.find((e) => e !== empty && !used.has(e));
+      at = groundFilled[0];
+      if (to === undefined || at === undefined) return null;
+      used.add(to);
+      change = { kind, at, to };
+    } else if (kind === 'tukar-tempat') {
+      const [a, b] = groundFilled;
+      if (a === undefined || b === undefined) return null;
+      at = a;
+      used.add(b);
+      change = { kind, at, with: b };
+    } else if (kind === 'jumlah') {
+      at = filled.find((i) => things[i]!.count);
+      if (at !== undefined) change = { kind, at, count: things[at]!.count! - 1 };
+    } else if (kind === 'kecil') {
+      at = groundFilled[0];
+      if (at !== undefined) change = { kind, at };
     } else if (kind === 'hilang') {
       at = filled[0];
       if (at !== undefined) change = { kind, at };
     } else if (kind === 'tukar') {
       for (const i of filled) {
         const cur = things[i]!;
-        if (!cur.item) continue;
+        if (!cur.item || cur.count) continue;
         const choices = layout[i]!.sky ? freeSky : pool;
         const next = choices.find((p) => !present.has(p) && SPOT_TONE[p] !== SPOT_TONE[cur.item!]);
         if (!next) continue;
@@ -150,19 +184,23 @@ function tryBuild(place: SpotPlace, spec: SpotSpec, rnd: () => number): SpotDiff
         change = { kind, at, color: others[Math.floor(rnd() * others.length)]! };
       }
     } else if (kind === 'balik') {
-      at = filled.find((i) => things[i]!.item && SPOT_FLIPPABLE.has(things[i]!.item!));
+      at = filled.find((i) => isItem(i) && SPOT_FLIPPABLE.has(things[i]!.item!));
       if (at !== undefined) change = { kind, at };
     } else if (kind === 'besar') {
       // Lebih besar di barisan DEPAN/belakang saja — benda langit yang
       // membesar menabrak tepi atas gambar.
-      at = filled.find((i) => !layout[i]!.sky && things[i]!.item);
+      at = groundFilled[0];
       if (at !== undefined) change = { kind, at };
     }
     if (at === undefined || !change) return null;
     used.add(at);
     changes.push(change);
   }
-  return { place, layout: spec.layout, things, changes };
+  const data: SpotDiffData = { place, layout: spec.layout, things, changes };
+  if (spec.hidden) data.hidden = true;
+  // Undian yang melanggar aturan (mis. dua perbedaan berdempetan) dibuang —
+  // undian berikutnya dari benih yang sama yang dipakai.
+  return spotProblems(data).length ? null : data;
 }
 
 /** Satu slot berisi `variants` soal, tempatnya bergiliran mulai `placeFrom`. */
@@ -178,7 +216,7 @@ export function spotSlot(
     const place = SPOT_PLACES[(placeFrom + v) % SPOT_PLACES.length]!;
     const rnd = rngFrom(`${spec.layout}:${id}:${v}`);
     let data: SpotDiffData | null = null;
-    for (let tries = 0; tries < 200 && !data; tries++) data = tryBuild(place, spec, rnd);
+    for (let tries = 0; tries < 2000 && !data; tries++) data = tryBuild(place, spec, rnd);
     if (!data) throw new Error(`spot-diff ${id}#${v}: tak bisa membuat soal`);
     const problems = spotProblems(data);
     if (problems.length) throw new Error(`spot-diff ${id}#${v}: ${problems.join('; ')}`);
