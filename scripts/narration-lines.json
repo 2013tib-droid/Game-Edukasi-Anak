@@ -1,7 +1,7 @@
 {
-  "generated": "2026-10-16",
-  "count": 2091,
-  "chars": 87287,
+  "generated": "2026-10-31",
+  "count": 2098,
+  "chars": 87630,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -703,6 +703,33 @@
       "voice": "gadis",
       "games": [
         "bagi-kue"
+      ]
+    },
+    {
+      "key": "09c1c14583bf",
+      "text": "Ada yang berganti warna juga. Temukan tiga perbedaannya!",
+      "scope": "cari-beda",
+      "voice": "gadis",
+      "games": [
+        "cari-beda"
+      ]
+    },
+    {
+      "key": "56c30ab6e389",
+      "text": "Dua gambar ini hampir sama. Ada tiga yang berbeda. Ayo temukan!",
+      "scope": "cari-beda",
+      "voice": "gadis",
+      "games": [
+        "cari-beda"
+      ]
+    },
+    {
+      "key": "03983485aedc",
+      "text": "Temukan tiga perbedaan di dua gambar ini!",
+      "scope": "cari-beda",
+      "voice": "gadis",
+      "games": [
+        "cari-beda"
       ]
     },
     {
@@ -17177,6 +17204,42 @@
       "voice": "gadis",
       "games": [
         "tangga-membaca"
+      ]
+    },
+    {
+      "key": "921b9a286d1a",
+      "text": "Lima perbedaan! Ada yang jadi lebih besar juga.",
+      "scope": "teliti-gambar",
+      "voice": "gadis",
+      "games": [
+        "teliti-gambar"
+      ]
+    },
+    {
+      "key": "6e61765c897a",
+      "text": "Lima perbedaan! Perhatikan juga arah hadapnya.",
+      "scope": "teliti-gambar",
+      "voice": "gadis",
+      "games": [
+        "teliti-gambar"
+      ]
+    },
+    {
+      "key": "1ec7cce20f4f",
+      "text": "Misi teliti! Temukan lima perbedaan sampai habis.",
+      "scope": "teliti-gambar",
+      "voice": "gadis",
+      "games": [
+        "teliti-gambar"
+      ]
+    },
+    {
+      "key": "f532a533754a",
+      "text": "Temukan lima perbedaan di dua gambar ini!",
+      "scope": "teliti-gambar",
+      "voice": "gadis",
+      "games": [
+        "teliti-gambar"
       ]
     },
     {

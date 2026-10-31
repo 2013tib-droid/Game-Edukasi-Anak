@@ -194,6 +194,17 @@ const ALL_GAMES: GameMeta[] = [
     template: 'color-path',
     load: () => import('@/games/tk/petak-ajaib'),
   },
+  {
+    // Cari perbedaan (template `spot-diff`, 2026-10-31): dua gambar, tiga
+    // perbedaan mencolok. Gambar kedua dibuat mesin, nol aset baru. Seni
+    // ikonnya belum ada — 👀 sementara.
+    id: 'cari-beda',
+    group: 'tk',
+    title: 'Cari Beda',
+    emoji: '👀',
+    template: 'spot-diff',
+    load: () => import('@/games/tk/cari-beda'),
+  },
   // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
   {
     // PALING ATAS (keputusan pemilik 2026-09-24, ditukar dengan "Pasang Kata"):
@@ -252,6 +263,16 @@ const ALL_GAMES: GameMeta[] = [
     pic: 'kode-warna',
     template: 'color-path',
     load: () => import('@/games/sd1/kode-warna'),
+  },
+  {
+    // Saudara "Cari Beda" (TK) yang lebih sulit: lima perbedaan, termasuk
+    // arah hadap & ukuran. Seni ikon belum ada — 🖼️ sementara.
+    id: 'teliti-gambar',
+    group: 'sd1',
+    title: 'Teliti Gambar',
+    emoji: '🖼️',
+    template: 'spot-diff',
+    load: () => import('@/games/sd1/teliti-gambar'),
   },
   {
     id: 'hitung-hebat',

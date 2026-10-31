@@ -82,6 +82,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'word-voyage': lazy(() => import('@/engine/templates/WordVoyage')),
   'code-quest': lazy(() => import('@/engine/templates/CodeQuest')),
   'color-path': lazy(() => import('@/engine/templates/ColorPath')),
+  'spot-diff': lazy(() => import('@/engine/templates/SpotDiff')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */
