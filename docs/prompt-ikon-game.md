@@ -388,3 +388,24 @@ id tetap `petak-ajaib`) dan **"Kode Warna" → "Panah Warna"** (SD Kelas 1 & 2, 
 - Pasang seperti biasa: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`,
   periksa lubang terkurung di antara ubin, lalu tambah `pic: '<id>',` di entri
   registry-nya.
+
+## Ikon tiga game cari perbedaan (`spot-diff`) — 2026-11-01
+
+`cari-beda` (Playgroup & TK), `teliti-gambar` (SD Kelas 1 & 2), `mata-jeli` (SD Kelas
+3 & 4) belum punya seni (masih 👀 / 🖼️ / 🧐). Pakai BLOK GAYA + EKOR PROMPT di atas,
+SATU baris per pesan. **Tanpa warna ungu** (abaikan "ungu muda" di BLOK GAYA).
+
+| id file | Baris prompt |
+|---|---|
+| `cari-beda` | Buatkan: dua cupcake kembar berdiri bersebelahan, krim merah muda pastel dan kertas cupcake mint, keduanya berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Keduanya persis sama, kecuali satu cupcake punya buah ceri merah di puncaknya dan cupcake lainnya tidak. Ceri itu dilingkari cincin hijau tebal. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `teliti-gambar` | Buatkan: dua kartu gambar kecil yang persis sama, sedikit bertumpuk dan miring, masing-masing berisi pemandangan sederhana: bukit hijau, satu pohon, dan langit biru muda. Satu kartu punya matahari kuning di langitnya, kartu lainnya tidak. Di depan kedua kartu berdiri satu pensil kuning berwajah imut — mata besar berkilau, pipi merona, senyum kecil. Wajahnya hanya di pensil, tidak di kartu. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `mata-jeli` | Buatkan: satu teropong mainan berwarna biru muda dan kuning krem, berwajah imut di badannya di antara kedua lensa — mata besar berkilau, pipi merona, senyum percaya diri. Kedua lensanya bulat besar mengkilap dengan pantulan kilau putih kecil. Di sekitarnya dua percikan bintang kecil kuning. Tanpa hewan, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+
+- **Tiga benda sengaja berbeda**: cupcake kembar (TK, "beda" paling jelas: satu ceri),
+  dua kartu pemandangan (SD 1-2, cara main yang sama dengan layar game), teropong
+  (SD 3-4, "mata jeli"). **Kaca pembesar DILARANG** — itu ikon Detektif Bacaan.
+- Kiri/kanan sengaja tidak disebut (pelajaran 1): "satu … lainnya".
+- Wajah tidak ditaruh di kartu pemandangan (pelajaran 3 — wajah menimpa isi gambar).
+- Pasang: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`, periksa
+  lubang terkurung (cincin hijau di ceri, celah antara dua lensa teropong), lalu tambah
+  `pic: '<id>',` di entri registry-nya.
