@@ -10,7 +10,7 @@
  *     Yang menciut diam-diam saat dicoba sekali di layar besar adalah yang
  *     gagal disentuh anak berjari gemuk di HP murah.
  *  3. Benda yang DIBESARKAN tetap di dalam gambar.
- *  4. Jumlah perbedaan sesuai kelompok (TK 3, SD 5).
+ *  4. Jumlah perbedaan sesuai kelompok (TK 3, SD 1-2 5, SD 3-4 5–7).
  *
  * Kalau gagal: ubah POSISI layout / jenis perbedaannya — jangan turunkan
  * ambangnya.
@@ -32,18 +32,18 @@ async function load(contents) {
   return import(`data:text/javascript;base64,${Buffer.from(out.outputFiles[0].text).toString('base64')}`);
 }
 
-const files = ['src/games/tk/cari-beda.ts', 'src/games/sd1/teliti-gambar.ts'];
+const files = ['src/games/tk/cari-beda.ts', 'src/games/sd1/teliti-gambar.ts', 'src/games/sd2/mata-jeli.ts'];
 const mod = await load(
   files.map((f, i) => `import c${i} from ${JSON.stringify(spec(f))};`).join('\n') +
     `\nexport const configs = [${files.map((_, i) => `c${i}`).join(',')}];` +
     `\nexport * from ${JSON.stringify(spec('src/engine/core/spotDiff.ts'))};`,
 );
 
-// Lebar gambar di HP 320×568: min(320 − 32, (568 − 196) / 2 × 1,5) — lihat spot-diff.css.
-const PANEL_PX = Math.min(320 - 32, ((568 - 196) / 2) * 1.5);
-const PX = PANEL_PX / mod.SPOT_W;
+// Lebar gambar di HP 320×568: min(320 − 32, (568 − --sd-fixed) / 2 × 1,5) —
+// lihat spot-diff.css (196 px biasa, 222 px kalau ada tombol "Sudah semua!").
+const panelPx = (hidden) => Math.min(320 - 32, ((568 - (hidden ? 222 : 196)) / 2) * 1.5);
 const MIN_PX = 60;
-const WANT = { tk: 3, sd: 5 };
+const WANT = { tk: [3, 3], sd: [5, 5], sd2: [5, 7] };
 
 let problems = 0;
 let checked = 0;
@@ -56,11 +56,15 @@ for (const config of mod.configs) {
       const d = lv.data;
       const where = `${config.id} ${lv.id}#${v} (${d.place})`;
       const bad = [...mod.spotProblems(d)];
-      if (d.changes.length !== WANT[d.layout]) bad.push(`${d.changes.length} perbedaan, mestinya ${WANT[d.layout]}`);
+      const [lo, hi] = WANT[d.layout];
+      if (d.changes.length < lo || d.changes.length > hi) bad.push(`${d.changes.length} perbedaan, mestinya ${lo}–${hi}`);
+      const PX = panelPx(d.hidden) / mod.SPOT_W;
       for (const t of mod.spotTargets(d)) {
-        const px = t.r * 2 * PX;
-        smallest = Math.min(smallest, px);
-        if (px < MIN_PX) bad.push(`daerah sentuh ${px.toFixed(0)} px`);
+        for (const p of t.pts) {
+          const px = p.r * 2 * PX;
+          smallest = Math.min(smallest, px);
+          if (px < MIN_PX) bad.push(`daerah sentuh ${px.toFixed(0)} px`);
+        }
       }
       const layout = mod.SPOT_LAYOUTS[d.layout];
       for (const c of d.changes) {

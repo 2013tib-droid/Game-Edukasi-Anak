@@ -434,6 +434,19 @@ const ALL_GAMES: GameMeta[] = [
     load: () => import('@/games/sd2/lab-cahaya-bunyi'),
   },
   {
+    // Cari perbedaan versi paling sulit (template `spot-diff`, 2026-10-31):
+    // perbedaan pindah tempat, tukar tempat, jumlah, dan jumlah perbedaan
+    // dirahasiakan. IPAS = keterampilan mengamati (keputusan pemilik). Seni
+    // ikonnya belum ada — 🧐 sementara.
+    id: 'mata-jeli',
+    group: 'sd2',
+    subject: 'ipas',
+    title: 'Mata Jeli',
+    emoji: '🧐',
+    template: 'spot-diff',
+    load: () => import('@/games/sd2/mata-jeli'),
+  },
+  {
     id: 'toko-kembalian',
     group: 'sd2',
     subject: 'matematika',

@@ -103,6 +103,7 @@ const mod = await load(
     `\nexport { mixPaint, mixLine, batikLine } from ${JSON.stringify(path.resolve('src/engine/core/paint.ts').split(path.sep).join('/'))};` +
     `\nexport { CODE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/codeQuest.ts').split(path.sep).join('/'))};` +
     `\nexport { PATH_LINES, parsePathBoard } from ${JSON.stringify(path.resolve('src/engine/core/colorPath.ts').split(path.sep).join('/'))};` +
+    `\nexport { SPOT_LINES } from ${JSON.stringify(path.resolve('src/engine/core/spotDiff.ts').split(path.sep).join('/'))};` +
     `\nexport { phraseText, VOY_LINES } from ${JSON.stringify(path.resolve('src/engine/core/wordVoyage.ts').split(path.sep).join('/'))};`,
 );
 
@@ -221,6 +222,12 @@ for (const config of mod.configs) {
       for (const line of [L.bump, L.loop, L.empty]) add(line, config.id, voice);
       if (board.pickups.length) add(L.missing, config.id, voice);
       continue;
+    }
+
+    // spot-diff (Cari Beda · Teliti Gambar · Mata Jeli): levels with a hidden
+    // difference count say so when "Sudah semua!" is pressed too early.
+    if ((level.template ?? config.template) === 'spot-diff' && level.data.hidden) {
+      add(mod.SPOT_LINES.notYet, config.id, voice);
     }
 
     // word-voyage (Kapten Kata): the engine picks words from the island's

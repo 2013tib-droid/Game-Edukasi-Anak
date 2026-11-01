@@ -177,6 +177,87 @@
   }
 }
 
+/* Baris tombol "Sudah semua!" lebih tinggi dari deretan titik. */
+.sd-wrap--hidden {
+  --sd-fixed: 222px;
+}
+
+/* Kelompok benda (perbedaan "jumlah"): beberapa benda kecil dalam satu kotak. */
+.sd-group {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+}
+
+.sd-group .sd-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Tiga benda: dua di bawah, satu di atas di tengah. */
+.sd-group--3 > :first-child {
+  grid-column: 1 / -1;
+  width: 50%;
+}
+
+.sd-group--2 {
+  grid-template-rows: 1fr;
+}
+
+.sd-emoji--small {
+  font-size: 1em;
+}
+
+/* Jumlah perbedaan dirahasiakan (SD 3-4). */
+.sd-count--hidden {
+  height: auto;
+  gap: 10px;
+}
+
+.sd-found-n {
+  font-weight: 800;
+  font-size: clamp(15px, 4.4vw, 17px);
+  white-space: nowrap;
+  color: #2e7d3a;
+  background: #e8f6e3;
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.sd-done {
+  min-height: 44px;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 999px;
+  background: #4caf50;
+  color: #fff;
+  font: inherit;
+  font-weight: 800;
+  font-size: clamp(15px, 4.4vw, 17px);
+  white-space: nowrap;
+  box-shadow: 0 3px 0 #2e8b3a;
+  cursor: pointer;
+}
+
+.sd-done:disabled {
+  opacity: 0.6;
+}
+
+.sd-done--nudge {
+  animation: sd-nudge 0.45s ease-in-out;
+}
+
+@keyframes sd-nudge {
+  25% {
+    translate: -6px 0;
+  }
+  75% {
+    translate: 6px 0;
+  }
+}
+
 /* Layar mendatar (HP dimiringkan, tablet landscape): berdampingan. */
 @media (min-aspect-ratio: 4/3) {
   .sd-wrap {
@@ -185,6 +266,9 @@
   }
   .sd-prompt {
     font-size: 18px;
+  }
+  .sd-wrap--hidden {
+    --sd-fixed: 176px;
   }
   .sd-head {
     flex-direction: row;
@@ -205,7 +289,8 @@
 @media (prefers-reduced-motion: reduce) {
   .sd-found,
   .sd-hint,
-  .sd-miss {
+  .sd-miss,
+  .sd-done--nudge {
     animation: none;
   }
 }

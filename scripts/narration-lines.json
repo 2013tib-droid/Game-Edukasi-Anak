@@ -1,7 +1,7 @@
 {
   "generated": "2026-10-31",
-  "count": 2098,
-  "chars": 87630,
+  "count": 2105,
+  "chars": 88014,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -12556,6 +12556,69 @@
       "voice": "gadis",
       "games": [
         "lompat-katak"
+      ]
+    },
+    {
+      "key": "e3e1121a7e5c",
+      "text": "Berapa perbedaannya? Rahasia! Cari semua, lalu tekan Sudah semua.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "bb31f410d3a3",
+      "text": "Enam perbedaan. Hitung juga banyaknya buah!",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "ff435c04e067",
+      "text": "Lima perbedaan lagi. Ada benda yang jadi lebih kecil!",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "81f58280e905",
+      "text": "Lima perbedaan. Hati-hati, ada dua benda yang bertukar tempat!",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "233247065e0f",
+      "text": "Masih ada yang terlewat. Ayo cari lagi!",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "334dd917155a",
+      "text": "Misi mata jeli! Temukan semua perbedaan, lalu tekan Sudah semua.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "c4c0946585e1",
+      "text": "Temukan lima perbedaan. Ada benda yang pindah tempat juga!",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
       ]
     },
     {
