@@ -1,7 +1,7 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #58 — game baru "Mata Jeli" (SD Kelas 3 & 4, IPAS), template
-spot-diff: 7 baris baru, semuanya scope mata-jeli. Nol pindah scope.
+render #59 — Mata Jeli l9–l10 (lukisan perkemahan pramuka): 2 baris baru,
+semuanya scope mata-jeli. Nol pindah scope.
 
 only: mata-jeli
 

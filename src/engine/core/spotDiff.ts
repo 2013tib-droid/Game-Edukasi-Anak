@@ -60,10 +60,20 @@ export type SpotChange =
   /** Benda di `at` dan `with` SALING BERTUKAR tempat — satu perbedaan. */
   | { kind: 'tukar-tempat'; at: number; with: number }
   /** Kelompok di `at` berubah banyaknya jadi `count`. */
-  | { kind: 'jumlah'; at: number; count: number };
+  | { kind: 'jumlah'; at: number; count: number }
+  /**
+   * GAMBAR LUKISAN (`SpotDiffData.photo`): tempelan `edit` (potongan gambar
+   * yang sudah diubah — warna lain, benda dihapus, benda disalin) dipasang di
+   * gambar `on` (bawaan B) di tempat ke-`at`. Tempelannya dibuat SEKALI di
+   * komputer (`scripts/spot-photo/<foto>.py`) dan dilihat mata dulu, jadi
+   * tetap tak mungkin ada perbedaan yang tak terdaftar.
+   */
+  | { kind: 'foto'; at: number; edit: string; on?: 'a' | 'b' };
 
 export type SpotKind = SpotChange['kind'];
-export type SpotLayoutId = 'tk' | 'sd' | 'sd2';
+export type SpotLayoutId = 'tk' | 'sd' | 'sd2' | SpotPhotoId;
+/** Gambar lukisan utuh (Gemini) — lihat `SPOT_PHOTOS`. */
+export type SpotPhotoId = 'kemah';
 
 export interface SpotDiffData {
   place: SpotPlace;
@@ -77,6 +87,12 @@ export interface SpotDiffData {
    * sudah ketemu, dan anak sendiri yang menekan "Sudah semua!".
    */
   hidden?: boolean;
+  /**
+   * Latar = LUKISAN utuh (`public/assets/spot/<photo>/foto.webp`), bukan
+   * latar engine + benda. Perbedaannya hanya `foto`; `things` semuanya null
+   * dan `layout` = id lukisannya (posisi = tempat-tempat di lukisan).
+   */
+  photo?: SpotPhotoId;
 }
 
 /** Kalimat template — dibaca juga oleh `extract-narration.mjs`. */
@@ -97,6 +113,76 @@ export interface SpotPos {
 
 export const SPOT_W = 150;
 export const SPOT_H = 100;
+
+export interface PhotoSpot {
+  /** Nama tempat (untuk pemeriksa & pembaca kode). */
+  label: string;
+  x: number;
+  y: number;
+  /** Besar bendanya — jari-jari sentuh = 0,62 × ini (paling kecil `SPOT_MIN_R_BY`). */
+  size: number;
+  /** Tempelan yang boleh dipakai di tempat ini (satu per soal). */
+  edits: string[];
+}
+
+export interface SpotPhoto {
+  spots: PhotoSpot[];
+  /** Kotak tiap tempelan [x, y, lebar, tinggi], satuan gambar 150×100. */
+  edits: Record<string, [number, number, number, number]>;
+}
+
+/**
+ * LUKISAN dari Gemini (2026-11-02): SATU gambar ramai, perbedaannya tempelan
+ * yang dibuat `scripts/spot-photo/<id>.py` dari gambar itu sendiri. Kotak
+ * tempelan = piksel persis berkasnya (gambar 1200×800, 8 px per satuan).
+ */
+export const SPOT_PHOTOS: Record<SpotPhotoId, SpotPhoto> = {
+  kemah: {
+    spots: [
+      { label: 'tenda', x: 46, y: 45, size: 28, edits: ['tenda-biru', 'tenda-merah'] },
+      { label: 'tas', x: 16, y: 76.5, size: 17, edits: ['tas-hijau'] },
+      { label: 'botol', x: 28.2, y: 78.8, size: 10, edits: ['botol-merah'] },
+      { label: 'senter', x: 27.3, y: 86.8, size: 11, edits: ['senter-hilang'] },
+      { label: 'pisang', x: 36.5, y: 75.5, size: 10, edits: ['pisang-hijau'] },
+      { label: 'kupu-kupu merah muda', x: 57.7, y: 27.7, size: 7, edits: ['kupu1-kuning'] },
+      { label: 'kupu-kupu ungu', x: 113.5, y: 49.5, size: 7, edits: ['kupu2-hijau'] },
+      { label: 'bunga kiri', x: 5.2, y: 85, size: 7, edits: ['bunga1-biru'] },
+      { label: 'bunga kanan', x: 141.5, y: 84.2, size: 7, edits: ['bunga2-kuning'] },
+      { label: 'bunga tengah', x: 130.6, y: 53.5, size: 6, edits: ['bunga3-biru'] },
+      { label: 'kelinci', x: 120, y: 57, size: 13, edits: ['kelinci-hilang'] },
+      { label: 'burung', x: 116, y: 6.2, size: 6, edits: ['burung-hilang'] },
+      { label: 'awan', x: 104.3, y: 6.2, size: 15, edits: ['awan-hilang'] },
+      { label: 'ikan dekat jembatan', x: 131.2, y: 73.5, size: 7, edits: ['ikan1-hilang'] },
+      { label: 'ikan sungai', x: 104, y: 91.4, size: 8, edits: ['ikan2-hilang'] },
+      { label: 'kupu-kupu baru', x: 84.2, y: 28.2, size: 7, edits: ['kupu-salin'] },
+      { label: 'ikan baru', x: 85.2, y: 90.2, size: 8, edits: ['ikan-salin'] },
+    ],
+    edits: {
+      'tenda-biru': [14, 30, 52.5, 29.5],
+      'tenda-merah': [14, 30, 52.5, 29.5],
+      'tas-hijau': [7, 66.5, 17.5, 20],
+      'botol-merah': [24.5, 73.5, 7.25, 10.5],
+      'pisang-hijau': [31.5, 71.5, 10, 8],
+      'kupu1-kuning': [54.5, 25, 6.5, 5.5],
+      'kupu2-hijau': [109.5, 46.5, 8, 6],
+      'bunga1-biru': [1, 81.5, 8.5, 7],
+      'bunga2-kuning': [137.5, 80.5, 8, 7.5],
+      'bunga3-biru': [127.5, 50.5, 6, 6],
+      'senter-hilang': [20.75, 83.5, 13.25, 7],
+      'kelinci-hilang': [113, 50.25, 14, 13.75],
+      'burung-hilang': [113, 4.5, 6, 3.5],
+      'ikan2-hilang': [99.5, 87.5, 9, 7.5],
+      'awan-hilang': [95.5, 3, 17.5, 6.5],
+      'ikan1-hilang': [127.5, 70.75, 7.5, 5.25],
+      'kupu-salin': [81, 25.5, 6.5, 5.5],
+      'ikan-salin': [81, 88, 8.5, 4.5],
+    },
+  },
+};
+
+export function photoUrl(photo: SpotPhotoId, file: string): string {
+  return `${import.meta.env.BASE_URL}assets/spot/${photo}/${file}.webp`;
+}
 
 /**
  * Posisi tetap. Barisan belakang & depan sengaja SELANG-SELING supaya titik
@@ -145,6 +231,7 @@ export const SPOT_LAYOUTS: Record<SpotLayoutId, SpotPos[]> = {
     { x: 98, y: 80, size: 22, sky: false },
     { x: 138, y: 80, size: 22, sky: false },
   ],
+  kemah: SPOT_PHOTOS.kemah.spots.map(({ x, y, size }) => ({ x, y, size, sky: false })),
 };
 
 /**
@@ -159,7 +246,7 @@ export const SPOT_MIN_R = 16.5;
  * "Sudah semua!" yang memakan tinggi, jadi gambarnya lebih sempit (±259 px
  * di HP 320) — 17,5 satuan tetap ±60 px.
  */
-export const SPOT_MIN_R_BY: Record<SpotLayoutId, number> = { tk: SPOT_MIN_R, sd: SPOT_MIN_R, sd2: 17.5 };
+export const SPOT_MIN_R_BY: Record<SpotLayoutId, number> = { tk: SPOT_MIN_R, sd: SPOT_MIN_R, sd2: 17.5, kemah: 17.5 };
 
 /** Pembesaran untuk perubahan `besar`. */
 export const SPOT_GROW = 1.4;
@@ -370,6 +457,14 @@ export function spotProblems(data: SpotDiffData): string[] {
     }
     const cur = data.things[c.at];
     if (!layout[c.at]) continue;
+    if (c.kind === 'foto') {
+      const photo = data.photo ? SPOT_PHOTOS[data.photo] : undefined;
+      if (!photo || data.layout !== data.photo) out.push('foto tanpa lukisan');
+      else if (!photo.spots[c.at]?.edits.includes(c.edit) || !photo.edits[c.edit]) out.push(`tempelan ${c.edit} bukan milik tempat ${c.at}`);
+      if (cur) out.push('foto di tempat yang berisi benda');
+      continue;
+    }
+    if (data.photo) out.push(`lukisan hanya boleh perubahan foto (${c.kind})`);
     if (c.kind === 'tambah') {
       if (cur) out.push(`tambah di posisi ${c.at} yang tidak kosong`);
     } else if (!cur) {

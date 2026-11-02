@@ -2,6 +2,7 @@ import type { GameLevel } from '@/engine/core/types';
 import {
   SPOT_FLIPPABLE,
   SPOT_LAYOUTS,
+  SPOT_PHOTOS,
   SPOT_TONE,
   spotProblems,
   thingKey,
@@ -10,6 +11,7 @@ import {
   type SpotDiffData,
   type SpotKind,
   type SpotLayoutId,
+  type SpotPhotoId,
   type SpotPlace,
   type SpotShape,
   type SpotThing,
@@ -220,6 +222,43 @@ export function spotSlot(
     if (!data) throw new Error(`spot-diff ${id}#${v}: tak bisa membuat soal`);
     const problems = spotProblems(data);
     if (problems.length) throw new Error(`spot-diff ${id}#${v}: ${problems.join('; ')}`);
+    out.push({ id, narration, data });
+  }
+  return out;
+}
+
+/**
+ * Soal di atas LUKISAN (`SPOT_PHOTOS`): pilih `count` tempat acak-tetap,
+ * satu tempelan per tempat, dan tempelannya dipasang di gambar A atau B
+ * (jadi "benda hilang" kadang terbaca "benda bertambah"). Tempat yang
+ * berdempetan ditolak `spotProblems` lalu diundi lagi.
+ */
+export function photoSlot(
+  id: string,
+  narration: string,
+  photo: SpotPhotoId,
+  opts: { count: number; hidden?: boolean },
+  variants: number,
+): GameLevel<'spot-diff'>[] {
+  const spots = SPOT_PHOTOS[photo].spots;
+  const out: GameLevel<'spot-diff'>[] = [];
+  for (let v = 0; v < variants; v++) {
+    const rnd = rngFrom(`${photo}:${id}:${v}`);
+    let data: SpotDiffData | null = null;
+    for (let tries = 0; tries < 5000 && !data; tries++) {
+      const picks = shuffle(
+        spots.map((_, i) => i),
+        rnd,
+      ).slice(0, opts.count);
+      const changes: SpotChange[] = picks.map((at) => {
+        const edits = spots[at]!.edits;
+        return { kind: 'foto', at, edit: edits[Math.floor(rnd() * edits.length)]!, on: rnd() < 0.3 ? 'a' : 'b' };
+      });
+      const cand: SpotDiffData = { place: 'taman', layout: photo, photo, things: spots.map(() => null), changes };
+      if (opts.hidden) cand.hidden = true;
+      if (!spotProblems(cand).length) data = cand;
+    }
+    if (!data) throw new Error(`spot-diff ${id}#${v}: tak bisa membuat soal lukisan`);
     out.push({ id, narration, data });
   }
   return out;

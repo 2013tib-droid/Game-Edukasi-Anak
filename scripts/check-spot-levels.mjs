@@ -17,6 +17,7 @@
  */
 import { build } from 'esbuild';
 import path from 'node:path';
+import fs from 'node:fs';
 
 const spec = (f) => path.resolve(f).replaceAll('\\', '/');
 async function load(contents) {
@@ -43,7 +44,7 @@ const mod = await load(
 // lihat spot-diff.css (196 px biasa, 222 px kalau ada tombol "Sudah semua!").
 const panelPx = (hidden) => Math.min(320 - 32, ((568 - (hidden ? 222 : 196)) / 2) * 1.5);
 const MIN_PX = 60;
-const WANT = { tk: [3, 3], sd: [5, 5], sd2: [5, 7] };
+const WANT = { tk: [3, 3], sd: [5, 5], sd2: [5, 7], kemah: [5, 7] };
 
 let problems = 0;
 let checked = 0;
@@ -54,7 +55,7 @@ for (const config of mod.configs) {
     for (const [v, lv] of (Array.isArray(slot) ? slot : [slot]).entries()) {
       checked++;
       const d = lv.data;
-      const where = `${config.id} ${lv.id}#${v} (${d.place})`;
+      const where = `${config.id} ${lv.id}#${v} (${d.photo ?? d.place})`;
       const bad = [...mod.spotProblems(d)];
       const [lo, hi] = WANT[d.layout];
       if (d.changes.length < lo || d.changes.length > hi) bad.push(`${d.changes.length} perbedaan, mestinya ${lo}–${hi}`);
@@ -73,6 +74,11 @@ for (const config of mod.configs) {
         const p = layout[c.at];
         const h = (p.size * mod.SPOT_GROW) / 2;
         if (p.y - h < -1 || p.y + h > mod.SPOT_H + 1 || p.x - h < -1 || p.x + h > mod.SPOT_W + 1) bad.push('benda besar keluar gambar');
+      }
+      if (d.photo) {
+        for (const f of ['foto', ...d.changes.map((c) => c.edit)]) {
+          if (!fs.existsSync(`public/assets/spot/${d.photo}/${f}.webp`)) bad.push(`berkas ${d.photo}/${f}.webp tidak ada`);
+        }
       }
       if (/\d/.test(lv.narration)) bad.push('digit di narasi');
       if (bad.length) {
