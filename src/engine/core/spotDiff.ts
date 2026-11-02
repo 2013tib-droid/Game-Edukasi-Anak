@@ -73,7 +73,7 @@ export type SpotChange =
 export type SpotKind = SpotChange['kind'];
 export type SpotLayoutId = 'tk' | 'sd' | 'sd2' | SpotPhotoId;
 /** Gambar lukisan utuh (Gemini) — lihat `SPOT_PHOTOS`. */
-export type SpotPhotoId = 'kemah';
+export type SpotPhotoId = 'kemah' | 'sekolah' | 'pasar' | 'pantai' | 'sawah';
 
 export interface SpotDiffData {
   place: SpotPlace;
@@ -132,7 +132,8 @@ export interface SpotPhoto {
 }
 
 /**
- * LUKISAN dari Gemini (2026-11-02): SATU gambar ramai, perbedaannya tempelan
+ * LUKISAN dari Gemini (2026-11-02; sekolah, pasar, pantai, sawah menyusul
+ * di hari yang sama): SATU gambar ramai, perbedaannya tempelan
  * yang dibuat `scripts/spot-photo/<id>.py` dari gambar itu sendiri. Kotak
  * tempelan = piksel persis berkasnya (gambar 1200×800, 8 px per satuan).
  */
@@ -178,7 +179,168 @@ export const SPOT_PHOTOS: Record<SpotPhotoId, SpotPhoto> = {
       'ikan-salin': [81, 88, 8.5, 4.5],
     },
   },
+  sekolah: {
+    spots: [
+      { label: 'burung', x: 90, y: 14, size: 9, edits: ['burung1-hilang', 'burung2-hilang'] },
+      { label: 'awan', x: 106.5, y: 7, size: 16, edits: ['awan-hilang'] },
+      { label: 'burung baru', x: 32.5, y: 6.5, size: 6, edits: ['burung-salin'] },
+      { label: 'perosotan', x: 33, y: 62, size: 26, edits: ['perosotan-merahmuda'] },
+      { label: 'ember', x: 24.5, y: 86, size: 10, edits: ['ember-merah', 'ember-biru'] },
+      { label: 'jungkat-jungkit', x: 69, y: 71, size: 9, edits: ['jungkat-merah'] },
+      { label: 'bola', x: 66, y: 92.5, size: 7, edits: ['bola-hilang'] },
+      { label: 'kucing', x: 132.3, y: 84, size: 11, edits: ['kucing-hilang'] },
+      { label: 'botol', x: 107.8, y: 85.2, size: 7, edits: ['botol-merah'] },
+      { label: 'kotak bekal', x: 101.7, y: 87, size: 8, edits: ['bekal-merahmuda'] },
+      { label: 'pintu', x: 120, y: 49, size: 16, edits: ['pintu-biru'] },
+      { label: 'bunga kuning', x: 128.7, y: 56, size: 6, edits: ['bunga-kuning-merah'] },
+      { label: 'bunga oranye', x: 137, y: 54.7, size: 6, edits: ['bunga-oranye-biru'] },
+      { label: 'bunga pot kiri', x: 87.3, y: 49, size: 7, edits: ['bunga-pot-kuning'] },
+      { label: 'bunga kiri', x: 4.5, y: 83, size: 9, edits: ['bunga-kiri-kuning'] },
+      { label: 'bunga bawah', x: 127.6, y: 90, size: 6, edits: ['bunga-bawah-biru'] },
+      { label: 'ayunan', x: 58, y: 49, size: 34, edits: ['ayunan-biru'] },
+    ],
+    edits: {
+      'burung1-hilang': [83.5, 11.5, 5, 3],
+      'burung2-hilang': [91.5, 13, 4.5, 3.5],
+      'awan-hilang': [94.5, 3, 24, 7.75],
+      'burung-salin': [30, 5, 5, 3],
+      'perosotan-merahmuda': [18, 47, 30, 29.5],
+      'ember-merah': [24.5, 81.5, 6.5, 8.5],
+      'ember-biru': [17.25, 80.625, 5.375, 5.625],
+      'jungkat-merah': [64.75, 66.75, 8.25, 8],
+      'bola-hilang': [62.5, 89, 7.25, 7.125],
+      'kucing-hilang': [127, 77.5, 10.75, 12.25],
+      'botol-merah': [106.125, 81.625, 3.25, 7],
+      'bekal-merahmuda': [97.5, 84.25, 8.375, 5.75],
+      'pintu-biru': [115.5, 40.5, 8.875, 17.25],
+      'bunga-kuning-merah': [126, 53.5, 5.5, 5],
+      'bunga-oranye-biru': [134, 51.75, 6, 5.75],
+      'bunga-pot-kuning': [84.5, 45.25, 5.625, 7.25],
+      'bunga-kiri-kuning': [0.75, 78, 7.375, 10.5],
+      'bunga-bawah-biru': [124.625, 87.5, 5.875, 5],
+      'ayunan-biru': [40, 36.5, 37, 26],
+    },
+  },
+  pasar: {
+    spots: [
+      { label: 'burung', x: 90, y: 14, size: 9, edits: ['burung1-hilang', 'burung2-hilang'] },
+      { label: 'awan', x: 106.5, y: 7, size: 16, edits: ['awan-hilang'] },
+      { label: 'burung baru', x: 20.5, y: 4, size: 6, edits: ['burung-salin'] },
+      { label: 'payung', x: 99, y: 31, size: 30, edits: ['payung-kuning'] },
+      { label: 'tenda kiri', x: 12, y: 31, size: 20, edits: ['tenda-kuning-hijau'] },
+      { label: 'lampu hijau', x: 40.8, y: 42, size: 8, edits: ['lampu-hijau-merah'] },
+      { label: 'lampu merah', x: 74.3, y: 42, size: 8, edits: ['lampu-merah-hijau'] },
+      { label: 'baju anak', x: 89.5, y: 64.5, size: 10, edits: ['baju-anak-hijau'] },
+      { label: 'pisang', x: 41, y: 88, size: 20, edits: ['pisang-hijau'] },
+      { label: 'jeruk', x: 53.7, y: 68.5, size: 15, edits: ['jeruk-hijau'] },
+      { label: 'tomat', x: 135.5, y: 54.5, size: 11, edits: ['tomat-kuning'] },
+      { label: 'pot tengah', x: 98.4, y: 63.5, size: 8, edits: ['pot-tengah-biru'] },
+      { label: 'pot kiri', x: 7.8, y: 61.5, size: 10, edits: ['pot-kiri-biru'] },
+      { label: 'sayur gantung', x: 144.5, y: 43.8, size: 9, edits: ['sayur-gantung-hilang'] },
+      { label: 'lampu kanan', x: 133.8, y: 42, size: 7, edits: ['lampu-kanan-merah'] },
+    ],
+    edits: {
+      'burung1-hilang': [83.5, 11.5, 5, 3],
+      'burung2-hilang': [91.5, 13, 4.5, 3.5],
+      'awan-hilang': [94.5, 3, 24, 7.75],
+      'burung-salin': [18, 2.5, 5, 3],
+      'payung-kuning': [81.5, 23.5, 35, 15.5],
+      'tenda-kuning-hijau': [0, 25, 24, 11.5],
+      'lampu-hijau-merah': [38, 36.5, 5.5, 10.625],
+      'lampu-merah-hijau': [71.5, 36.5, 5.5, 10.625],
+      'baju-anak-hijau': [84.75, 58.75, 9.375, 11.375],
+      'pisang-hijau': [29, 82, 24.75, 12.5],
+      'jeruk-hijau': [45.25, 64.25, 16.875, 8.25],
+      'tomat-kuning': [129, 50, 13.5, 9],
+      'pot-tengah-biru': [94.5, 60.25, 8, 6.25],
+      'pot-kiri-biru': [2.75, 57.75, 10, 8.75],
+      'sayur-gantung-hilang': [139.5, 38, 9.875, 11.5],
+      'lampu-kanan-merah': [131, 37.75, 5.5, 8.375],
+    },
+  },
+  pantai: {
+    spots: [
+      { label: 'burung', x: 90, y: 14, size: 9, edits: ['burung1-hilang', 'burung2-hilang'] },
+      { label: 'awan', x: 106.5, y: 7, size: 16, edits: ['awan-hilang'] },
+      { label: 'burung baru', x: 127.5, y: 5.5, size: 6, edits: ['burung-salin'] },
+      { label: 'camar', x: 103.5, y: 18, size: 9, edits: ['camar-hilang'] },
+      { label: 'layang-layang', x: 73.2, y: 13.5, size: 12, edits: ['layangan-warna'] },
+      { label: 'layar perahu', x: 59, y: 46, size: 16, edits: ['layar-biru'] },
+      { label: 'ember', x: 26.3, y: 86.5, size: 9, edits: ['ember-biru'] },
+      { label: 'kepiting', x: 40, y: 93, size: 12, edits: ['kepiting-hilang'] },
+      { label: 'bintang laut oranye', x: 76, y: 91.5, size: 8, edits: ['bintang-oranye-hilang'] },
+      { label: 'bintang laut merah', x: 60.5, y: 95.5, size: 7, edits: ['bintang-merah-kuning'] },
+      { label: 'sekop', x: 59.6, y: 90, size: 8, edits: ['sekop-merah'] },
+      { label: 'bola', x: 90.1, y: 85.1, size: 11, edits: ['bola-warna'] },
+      { label: 'baju anak perempuan', x: 64.2, y: 77, size: 10, edits: ['baju-perempuan-hijau'] },
+      { label: 'baju anak laki-laki', x: 37, y: 77, size: 11, edits: ['baju-laki-merah'] },
+      { label: 'pulau', x: 34, y: 40.5, size: 24, edits: ['pulau-hilang'] },
+      { label: 'kerang', x: 94.5, y: 96, size: 7, edits: ['kerang-biru-hilang'] },
+      { label: 'batu', x: 113.2, y: 96.5, size: 5, edits: ['batu-hilang'] },
+      { label: 'payung depan', x: 110, y: 73, size: 22, edits: ['payung-depan-merah'] },
+      { label: 'atap gubuk', x: 136, y: 40, size: 26, edits: ['atap-gubuk-hijau'] },
+    ],
+    edits: {
+      'burung1-hilang': [83.5, 11.5, 5, 3],
+      'burung2-hilang': [91.5, 13, 4.5, 3.5],
+      'awan-hilang': [94.5, 3, 24, 7.75],
+      'burung-salin': [125, 4, 5, 3],
+      'camar-hilang': [98, 15, 11, 6],
+      'layangan-warna': [67, 8, 13, 11.25],
+      'layar-biru': [53.5, 36.5, 14, 19],
+      'ember-biru': [22.25, 82.25, 8, 8.25],
+      'kepiting-hilang': [32.375, 87, 15.375, 12.75],
+      'bintang-oranye-hilang': [71.25, 87.75, 9.375, 7.5],
+      'bintang-merah-kuning': [56.5, 92.5, 8, 6.125],
+      'sekop-merah': [55.25, 87.25, 8.75, 5.375],
+      'bola-warna': [84.25, 79.25, 11.625, 11.75],
+      'baju-perempuan-hijau': [59, 72, 10.5, 10.5],
+      'baju-laki-merah': [31.5, 72, 11.5, 14],
+      'pulau-hilang': [20.125, 36.5, 27.875, 8],
+      'kerang-biru-hilang': [90.375, 92.875, 8.25, 6.125],
+      'batu-hilang': [110.5, 94.75, 5.5, 3.5],
+      'payung-depan-merah': [93, 63.75, 33, 19.25],
+      'atap-gubuk-hijau': [114.5, 28, 35.5, 19.75],
+    },
+  },
+  sawah: {
+    spots: [
+      { label: 'burung', x: 90, y: 14, size: 9, edits: ['burung1-hilang', 'burung2-hilang'] },
+      { label: 'burung baru', x: 12.5, y: 5.5, size: 6, edits: ['burung-salin'] },
+      { label: 'layang-layang', x: 72.4, y: 13.6, size: 9, edits: ['layangan-warna'] },
+      { label: 'orang-orangan sawah', x: 56, y: 50, size: 14, edits: ['orangan-baju-hijau'] },
+      { label: 'caping', x: 22, y: 51.5, size: 11, edits: ['caping-merah'] },
+      { label: 'baju petani', x: 17, y: 63, size: 14, edits: ['baju-petani-biru'] },
+      { label: 'atap rumah', x: 122, y: 40, size: 28, edits: ['atap-biru'] },
+      { label: 'jembatan', x: 83, y: 82.4, size: 22, edits: ['jembatan-merah'] },
+      { label: 'sepeda', x: 124.5, y: 80, size: 22, edits: ['sepeda-merah'] },
+      { label: 'bebek', x: 116.5, y: 94.2, size: 9, edits: ['bebek-hilang'] },
+      { label: 'bebek baru', x: 109, y: 68, size: 9, edits: ['bebek-salin'] },
+      { label: 'bunga merah', x: 128, y: 90.2, size: 5, edits: ['bunga-merah-biru'] },
+      { label: 'heliconia', x: 146.6, y: 83.5, size: 10, edits: ['heliconia-kuning'] },
+    ],
+    edits: {
+      'burung1-hilang': [83.5, 11.5, 5, 3],
+      'burung2-hilang': [91.5, 13, 4.5, 3.5],
+      'burung-salin': [10, 4, 5, 3],
+      'layangan-warna': [67.5, 9.5, 9.5, 8.5],
+      'orangan-baju-hijau': [48, 45.5, 15.5, 11.5],
+      'caping-merah': [15.75, 48.125, 12.625, 6.625],
+      'atap-biru': [104.375, 33.5, 36.625, 13],
+      'bebek-hilang': [112, 89.375, 9, 9.625],
+      'bebek-salin': [105, 63.5, 8.125, 8.75],
+      'bunga-merah-biru': [125.25, 87.5, 5.375, 5.125],
+      'heliconia-kuning': [143.25, 78, 6.75, 11.5],
+      'baju-petani-biru': [9.5, 54, 15.5, 19],
+      'sepeda-merah': [111.5, 72, 26, 16.5],
+      'jembatan-merah': [66.5, 78.125, 33.5, 8.375],
+    },
+  },
 };
+
+function photoLayout(id: SpotPhotoId): SpotPos[] {
+  return SPOT_PHOTOS[id].spots.map(({ x, y, size }) => ({ x, y, size, sky: false }));
+}
 
 export function photoUrl(photo: SpotPhotoId, file: string): string {
   return `${import.meta.env.BASE_URL}assets/spot/${photo}/${file}.webp`;
@@ -231,7 +393,11 @@ export const SPOT_LAYOUTS: Record<SpotLayoutId, SpotPos[]> = {
     { x: 98, y: 80, size: 22, sky: false },
     { x: 138, y: 80, size: 22, sky: false },
   ],
-  kemah: SPOT_PHOTOS.kemah.spots.map(({ x, y, size }) => ({ x, y, size, sky: false })),
+  kemah: photoLayout('kemah'),
+  sekolah: photoLayout('sekolah'),
+  pasar: photoLayout('pasar'),
+  pantai: photoLayout('pantai'),
+  sawah: photoLayout('sawah'),
 };
 
 /**
@@ -246,7 +412,16 @@ export const SPOT_MIN_R = 16.5;
  * "Sudah semua!" yang memakan tinggi, jadi gambarnya lebih sempit (±259 px
  * di HP 320) — 17,5 satuan tetap ±60 px.
  */
-export const SPOT_MIN_R_BY: Record<SpotLayoutId, number> = { tk: SPOT_MIN_R, sd: SPOT_MIN_R, sd2: 17.5, kemah: 17.5 };
+export const SPOT_MIN_R_BY: Record<SpotLayoutId, number> = {
+  tk: SPOT_MIN_R,
+  sd: SPOT_MIN_R,
+  sd2: 17.5,
+  kemah: 17.5,
+  sekolah: 17.5,
+  pasar: 17.5,
+  pantai: 17.5,
+  sawah: 17.5,
+};
 
 /** Pembesaran untuk perubahan `besar`. */
 export const SPOT_GROW = 1.4;

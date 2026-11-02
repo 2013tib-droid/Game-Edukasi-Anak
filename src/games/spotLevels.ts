@@ -232,34 +232,39 @@ export function spotSlot(
  * satu tempelan per tempat, dan tempelannya dipasang di gambar A atau B
  * (jadi "benda hilang" kadang terbaca "benda bertambah"). Tempat yang
  * berdempetan ditolak `spotProblems` lalu diundi lagi.
+ *
+ * Tiap lukisan mendapat `perPhoto` varian berkalimatnya sendiri, bergiliran
+ * (lukisan 1, 2, 3, …, lalu ulang). Benih per lukisan, jadi menambah lukisan
+ * baru tidak mengubah soal lukisan yang sudah ada.
  */
 export function photoSlot(
   id: string,
-  narration: string,
-  photo: SpotPhotoId,
+  photos: { photo: SpotPhotoId; narration: string }[],
   opts: { count: number; hidden?: boolean },
-  variants: number,
+  perPhoto: number,
 ): GameLevel<'spot-diff'>[] {
-  const spots = SPOT_PHOTOS[photo].spots;
   const out: GameLevel<'spot-diff'>[] = [];
-  for (let v = 0; v < variants; v++) {
-    const rnd = rngFrom(`${photo}:${id}:${v}`);
-    let data: SpotDiffData | null = null;
-    for (let tries = 0; tries < 5000 && !data; tries++) {
-      const picks = shuffle(
-        spots.map((_, i) => i),
-        rnd,
-      ).slice(0, opts.count);
-      const changes: SpotChange[] = picks.map((at) => {
-        const edits = spots[at]!.edits;
-        return { kind: 'foto', at, edit: edits[Math.floor(rnd() * edits.length)]!, on: rnd() < 0.3 ? 'a' : 'b' };
-      });
-      const cand: SpotDiffData = { place: 'taman', layout: photo, photo, things: spots.map(() => null), changes };
-      if (opts.hidden) cand.hidden = true;
-      if (!spotProblems(cand).length) data = cand;
+  for (let k = 0; k < perPhoto; k++) {
+    for (const { photo, narration } of photos) {
+      const spots = SPOT_PHOTOS[photo].spots;
+      const rnd = rngFrom(`${photo}:${id}:${k}`);
+      let data: SpotDiffData | null = null;
+      for (let tries = 0; tries < 5000 && !data; tries++) {
+        const picks = shuffle(
+          spots.map((_, i) => i),
+          rnd,
+        ).slice(0, opts.count);
+        const changes: SpotChange[] = picks.map((at) => {
+          const edits = spots[at]!.edits;
+          return { kind: 'foto', at, edit: edits[Math.floor(rnd() * edits.length)]!, on: rnd() < 0.3 ? 'a' : 'b' };
+        });
+        const cand: SpotDiffData = { place: 'taman', layout: photo, photo, things: spots.map(() => null), changes };
+        if (opts.hidden) cand.hidden = true;
+        if (!spotProblems(cand).length) data = cand;
+      }
+      if (!data) throw new Error(`spot-diff ${id} ${photo}#${k}: tak bisa membuat soal lukisan`);
+      out.push({ id, narration, data });
     }
-    if (!data) throw new Error(`spot-diff ${id}#${v}: tak bisa membuat soal lukisan`);
-    out.push({ id, narration, data });
   }
   return out;
 }

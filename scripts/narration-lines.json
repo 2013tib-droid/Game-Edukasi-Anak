@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-02",
-  "count": 2107,
-  "chars": 88136,
+  "count": 2115,
+  "chars": 88597,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -12577,6 +12577,24 @@
       ]
     },
     {
+      "key": "c70426bb14b8",
+      "text": "Halaman sekolah! Temukan enam perbedaan.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "f395b90fac1a",
+      "text": "Liburan ke pantai! Temukan enam perbedaan.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
       "key": "ff435c04e067",
       "text": "Lima perbedaan lagi. Ada benda yang jadi lebih kecil!",
       "scope": "mata-jeli",
@@ -12613,6 +12631,24 @@
       ]
     },
     {
+      "key": "d8dea93ae134",
+      "text": "Misi pantai! Berapa perbedaannya? Rahasia! Tekan Sudah semua kalau selesai.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "6d4dd8d26e2d",
+      "text": "Misi pasar! Berapa perbedaannya? Rahasia! Tekan Sudah semua kalau selesai.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
       "key": "867246eff9f9",
       "text": "Misi perkemahan! Berapa perbedaannya? Rahasia! Tekan Sudah semua kalau selesai.",
       "scope": "mata-jeli",
@@ -12622,8 +12658,44 @@
       ]
     },
     {
+      "key": "3da9c9019f18",
+      "text": "Misi sawah! Berapa perbedaannya? Rahasia! Tekan Sudah semua kalau selesai.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "53b985163305",
+      "text": "Misi sekolah! Berapa perbedaannya? Rahasia! Tekan Sudah semua kalau selesai.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "418184d223c0",
+      "text": "Pasar tradisional! Temukan enam perbedaan.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
       "key": "7a0c2b1dc56a",
       "text": "Perkemahan pramuka! Temukan enam perbedaan.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "faf00a6e82cf",
+      "text": "Sawah di desa! Temukan enam perbedaan.",
       "scope": "mata-jeli",
       "voice": "gadis",
       "games": [

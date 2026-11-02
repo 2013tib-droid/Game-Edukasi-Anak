@@ -44,7 +44,7 @@ const mod = await load(
 // lihat spot-diff.css (196 px biasa, 222 px kalau ada tombol "Sudah semua!").
 const panelPx = (hidden) => Math.min(320 - 32, ((568 - (hidden ? 222 : 196)) / 2) * 1.5);
 const MIN_PX = 60;
-const WANT = { tk: [3, 3], sd: [5, 5], sd2: [5, 7], kemah: [5, 7] };
+const WANT = { tk: [3, 3], sd: [5, 5], sd2: [5, 7], kemah: [5, 7], sekolah: [5, 7], pasar: [5, 7], pantai: [5, 7], sawah: [5, 7] };
 
 let problems = 0;
 let checked = 0;

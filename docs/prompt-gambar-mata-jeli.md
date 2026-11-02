@@ -1,5 +1,10 @@
 # Prompt Gemini — gambar adegan Mata Jeli (SD Kelas 3 & 4)
 
+> **Status 2026-11-02:** kelima tema (perkemahan, pasar, pantai, sawah, sekolah)
+> SUDAH terpasang. Tema baru: salin `scripts/spot-photo/sekolah.py` (pakai
+> `lib.py`), ukur kotak tiap benda, LIHAT hasilnya, tambah `SpotPhotoId` +
+> `SPOT_PHOTOS` + satu baris di `photoSlot` Mata Jeli.
+
 > Dibuat 2026-11-01 (pemilik: Mata Jeli versi engine terasa "kayak buat anak TK").
 > Keputusan: Gemini membuat **SATU gambar** yang ramai. Gambar kedua dibuat
 > **mesin** dari gambar itu (tempel/pindah/kecilkan benda, ganti warna satu
