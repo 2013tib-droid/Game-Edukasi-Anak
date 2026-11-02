@@ -89,3 +89,9 @@ tree, a cat, potted flowers, a bicycle rack with two bicycles, clouds and birds.
 - Kirim gambar **asli** (resolusi penuh) ke sesi Claude; jangan di-screenshot.
 - Satu tema dulu. Kalau hasilnya pas di game, baru lanjut tema berikutnya.
 - Cek sebelum kirim: tak ada tulisan, tak ada salju, benda tidak bertumpuk.
+
+## Status
+
+- **Tema 1 perkemahan pramuka — TERPASANG 2026-11-02** (Mata Jeli l9–l10). Tempelan
+  dibuat `scripts/spot-photo/kemah.py`; hasil Gemini langsung pas (3:2, nol tulisan,
+  benda berjarak). Tema 2–5 belum.

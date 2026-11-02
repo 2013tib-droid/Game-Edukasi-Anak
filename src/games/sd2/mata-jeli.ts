@@ -1,5 +1,5 @@
 import type { GameConfig } from '@/engine/core/types';
-import { spotSlot, type SpotSpec } from '@/games/spotLevels';
+import { photoSlot, spotSlot, type SpotSpec } from '@/games/spotLevels';
 
 /**
  * "Mata Jeli" (SD Kelas 3 & 4, IPAS) — saudara paling sulit "Cari Beda" (TK)
@@ -21,6 +21,14 @@ import { spotSlot, type SpotSpec } from '@/games/spotLevels';
  *   l4 enam perbedaan + jumlah
  *   l5–l6 RAHASIA, enam perbedaan
  *   l7–l8 MISI MATA JELI: rahasia, tujuh perbedaan, semua jenis
+ *   l9    LUKISAN perkemahan pramuka, enam perbedaan
+ *   l10   LUKISAN perkemahan, RAHASIA, tujuh perbedaan
+ *
+ * l9–l10 (2026-11-02, keluhan pemilik: gambar engine "kayak buat anak TK")
+ * memakai LUKISAN utuh dari Gemini — satu gambar ramai, perbedaannya
+ * tempelan yang dibuat dari gambar itu sendiri (`SPOT_PHOTOS`). Tema
+ * berikutnya (pasar, pantai, sawah, sekolah) menyusul dengan cara yang sama:
+ * `docs/prompt-gambar-mata-jeli.md`.
  */
 
 const BASE = ['hilang', 'tambah', 'tukar', 'warna', 'balik'] as const;
@@ -64,6 +72,8 @@ const config: GameConfig<'spot-diff'> = {
     spotSlot('l6', 'Berapa perbedaannya? Rahasia! Cari semua, lalu tekan Sudah semua.', SECRET, 6, 5),
     spotSlot('l7', 'Misi mata jeli! Temukan semua perbedaan, lalu tekan Sudah semua.', MISSION, 6, 0),
     spotSlot('l8', 'Misi mata jeli! Temukan semua perbedaan, lalu tekan Sudah semua.', MISSION, 6, 3),
+    photoSlot('l9', 'Perkemahan pramuka! Temukan enam perbedaan.', 'kemah', { count: 6 }, 6),
+    photoSlot('l10', 'Misi perkemahan! Berapa perbedaannya? Rahasia! Tekan Sudah semua kalau selesai.', 'kemah', { count: 7, hidden: true }, 6),
   ],
 };
 

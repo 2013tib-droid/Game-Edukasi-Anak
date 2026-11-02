@@ -8,10 +8,14 @@ import {
   SPOT_H,
   SPOT_LAYOUTS,
   SPOT_LINES,
+  SPOT_PHOTOS,
   SPOT_W,
+  photoUrl,
   hitTarget,
   pictureB,
   spotTargets,
+  type SpotDiffData,
+  type SpotPhotoId,
   type SpotThing,
 } from '@/engine/core/spotDiff';
 import '@/engine/ui/spot-diff.css';
@@ -124,7 +128,11 @@ export default function SpotDiff({ level, onCorrect, onWrong }: TemplateProps<'s
         data-panel={which}
         onPointerDown={(e) => tap(e, which)}
       >
-        <SpotBackdrop place={data.place} uid={`${level.id}-${which}`} />
+        {data.photo ? (
+          <PhotoPanel photo={data.photo} which={which} changes={data.changes} />
+        ) : (
+          <SpotBackdrop place={data.place} uid={`${level.id}-${which}`} />
+        )}
         {items.map(({ thing, scale }, i) =>
           thing ? <Thing key={i} thing={thing} pos={layout[i]!} scale={scale} /> : null,
         )}
@@ -186,6 +194,31 @@ export default function SpotDiff({ level, onCorrect, onWrong }: TemplateProps<'s
         {panel('b')}
       </div>
     </div>
+  );
+}
+
+/** Lukisan + tempelan perubahan milik gambar ini. */
+function PhotoPanel({ photo, which, changes }: { photo: SpotPhotoId; which: 'a' | 'b'; changes: SpotDiffData['changes'] }) {
+  const boxes = SPOT_PHOTOS[photo].edits;
+  return (
+    <>
+      <img className="sd-photo" src={photoUrl(photo, 'foto')} alt="" draggable={false} />
+      {changes.map((c, i) => {
+        if (c.kind !== 'foto' || (c.on ?? 'b') !== which) return null;
+        const [x, y, w, h] = boxes[c.edit]!;
+        return (
+          <img
+            key={i}
+            className="sd-patch"
+            src={photoUrl(photo, c.edit)}
+            alt=""
+            draggable={false}
+            data-edit={c.edit}
+            style={{ left: `${(x / SPOT_W) * 100}%`, top: `${(y / SPOT_H) * 100}%`, width: `${(w / SPOT_W) * 100}%`, height: `${(h / SPOT_H) * 100}%` }}
+          />
+        );
+      })}
+    </>
   );
 }
 

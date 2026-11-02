@@ -1,7 +1,7 @@
 {
-  "generated": "2026-11-01",
-  "count": 2105,
-  "chars": 88014,
+  "generated": "2026-11-02",
+  "count": 2107,
+  "chars": 88136,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -12606,6 +12606,24 @@
     {
       "key": "334dd917155a",
       "text": "Misi mata jeli! Temukan semua perbedaan, lalu tekan Sudah semua.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "867246eff9f9",
+      "text": "Misi perkemahan! Berapa perbedaannya? Rahasia! Tekan Sudah semua kalau selesai.",
+      "scope": "mata-jeli",
+      "voice": "gadis",
+      "games": [
+        "mata-jeli"
+      ]
+    },
+    {
+      "key": "7a0c2b1dc56a",
+      "text": "Perkemahan pramuka! Temukan enam perbedaan.",
       "scope": "mata-jeli",
       "voice": "gadis",
       "games": [
