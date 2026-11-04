@@ -264,12 +264,19 @@ type Screen = 'intro' | 'pick' | 'map' | 'playing' | 'done';
 export default function GameShell({
   config,
   onExit,
+  onFinish,
   icon,
   iconPic,
   iconClock,
 }: {
   config: AnyGameConfig;
   onExit: () => void;
+  /**
+   * Called once each time the whole game is finished (the "Selamat!" screen).
+   * The engine knows nothing about accounts or counters — `GamePage` decides
+   * what, if anything, to do with it.
+   */
+  onFinish?: () => void;
   /**
    * The game's icon, straight from the registry (`GameMeta.emoji`) via
    * `GamePage`. The registry WINS over `config.emoji` on purpose: the portal
@@ -457,6 +464,7 @@ export default function GameShell({
         // Victory tune first, praise line after it — see `celebrate`.
         celebrate('Selamat! Kamu hebat sekali!');
         setScreen('done');
+        onFinish?.();
       } else {
         // Remember where we are, so leaving now resumes here next time.
         saveSession(config.id, { picks, index: next, earned: earnedNow });

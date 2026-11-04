@@ -369,6 +369,12 @@ const ALLOWED_EVENTS = new Set([
   'landing_buy_tk',
   'landing_buy_sd1',
   'landing_buy_sd2',
+  // Minat game GRATIS (keputusan pemilik 2026-11-04) — `countFreePlay` di
+  // src/portal/stats.ts. WAJIB sama dengan FREE_GAME_IDS di src/data/access.ts.
+  ...['hutan-hewan', 'tulis-huruf', 'toko-kembalian', 'kebun-ilmu'].flatMap((id) => [
+    `main_${id}`,
+    `tamat_${id}`,
+  ]),
 ]);
 
 /** Tanggal UTC sebagai `YYYY-MM-DD` — satu dokumen per hari. */
