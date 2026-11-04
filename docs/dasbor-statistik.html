@@ -1,0 +1,405 @@
+<title>Dasbor Statistik Petualangan Pintar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,800&display=swap">
+<style>
+/* Layout: one column on phones. Month bar → KPI strip → funnel (total + per kelompok) → games per kelompok → free games → month-to-month table. */
+:root {
+  --bg: #fbf8ef; --panel: #ffffff; --line: #ebe3cc; --fg: #2d2618; --muted: #776b52; --chip: #f3ecd8;
+  --accent: #b4540f; --tk: #d98a06; --sd1: #3a6fb4; --sd2: #2f8f6d; --play: #8a7a5c;
+  --ok: #1f8a4c; --warn: #a96a12; --bad: #c2372b;
+  --display: "Fredoka", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1a1710; --panel: #24201a; --line: #3a3326; --fg: #f1ead8; --muted: #b1a584; --chip: #2f2a20;
+  --accent: #f0a05a; --tk: #f2b544; --sd1: #7aa7e6; --sd2: #5cc9a0; --play: #b3a383;
+  --ok: #5cc98a; --warn: #e3b35c; --bad: #ef7d70; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #1a1710; --panel: #24201a; --line: #3a3326; --fg: #f1ead8; --muted: #b1a584; --chip: #2f2a20;
+  --accent: #f0a05a; --tk: #f2b544; --sd1: #7aa7e6; --sd2: #5cc9a0; --play: #b3a383;
+  --ok: #5cc98a; --warn: #e3b35c; --bad: #ef7d70; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 48px; display: grid; gap: 18px; }
+h1 { font-family: var(--display); font-weight: 600; font-size: clamp(24px, 5vw, 32px); margin: 0; text-wrap: balance; }
+h2 { font-family: var(--display); font-weight: 500; font-size: 18px; margin: 0; text-wrap: balance; }
+h3 { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.num { font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+.small { font-size: 13px; }
+header { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; justify-content: space-between; }
+.sub { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+button, .filebtn, select, input { font: inherit; font-size: 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); padding: 8px 14px; min-height: 40px; }
+button, .filebtn { font-weight: 800; cursor: pointer; }
+select { border-radius: 10px; padding: 6px 10px; }
+input[type=number] { width: 7.5em; border-radius: 10px; min-height: 36px; padding: 4px 10px; }
+textarea { font: 13px/1.4 ui-monospace, Menlo, Consolas, monospace; width: 100%; box-sizing: border-box; min-height: 110px; border-radius: 12px; border: 1px solid var(--line); background: var(--panel); color: var(--fg); padding: 10px; }
+button:focus-visible, .filebtn:focus-within, select:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.filebtn { background: var(--accent); color: var(--bg); border-color: var(--accent); display: inline-flex; align-items: center; position: relative; }
+.filebtn input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.linkbtn { border: 0; background: none; color: var(--muted); text-decoration: underline; padding: 4px 6px; min-height: 0; font-weight: 600; }
+.danger { color: var(--bad); border-color: var(--bad); }
+.banner { border: 1px dashed var(--accent); border-radius: 14px; padding: 12px 14px; background: var(--chip); font-size: 14px; display: grid; gap: 6px; }
+.banner.err { border-color: var(--bad); } .banner.err strong { color: var(--bad); }
+.drop.over { outline: 3px dashed var(--accent); outline-offset: 6px; border-radius: 16px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px; min-width: 0; display: grid; gap: 12px; align-content: start; }
+.card-head { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; justify-content: space-between; }
+.months { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.months button { min-height: 36px; padding: 4px 12px; font-weight: 600; }
+.months button[aria-pressed="true"] { background: var(--chip); color: var(--accent); border-color: var(--accent); font-weight: 800; }
+.tag { display: inline-block; font-size: 11.5px; font-weight: 800; border-radius: 99px; padding: 1px 8px; border: 1px solid currentColor; letter-spacing: .02em; white-space: nowrap; }
+.tag.contoh { color: var(--warn); } .tag.jarang { color: var(--warn); } .tag.belum { color: var(--bad); } .tag.gratis { color: var(--ok); }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 2px; align-content: start; }
+.kpi .label { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.kpi .value { font-family: var(--display); font-weight: 600; font-size: 28px; line-height: 1.2; }
+.kpi .note { font-size: 13px; color: var(--muted); }
+.kpi.money .value { color: var(--ok); }
+.delta { font-size: 12.5px; font-weight: 800; }
+.delta.up { color: var(--ok); } .delta.down { color: var(--bad); } .delta.flat { color: var(--muted); }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 12px; }
+@media (max-width: 760px) { .grid2 { grid-template-columns: minmax(0, 1fr); } }
+/* funnel */
+.funnel { display: grid; gap: 10px; }
+.step { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; align-items: baseline; }
+.step .name { font-weight: 800; font-size: 14px; }
+.step .val { font-family: var(--display); font-weight: 600; font-size: 18px; }
+.step .bar { grid-column: 1 / -1; height: 12px; border-radius: 6px; background: var(--chip); overflow: hidden; }
+.step .bar i { display: block; height: 100%; border-radius: 6px; background: var(--accent); min-width: 2px; }
+.step .rate { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); }
+.tablewrap { overflow-x: auto; min-width: 0; max-width: 100%; }
+.card > * { min-width: 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th { text-align: left; font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); padding: 6px 8px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td { padding: 8px; border-bottom: 1px solid var(--line); }
+td.r, th.r { text-align: right; white-space: nowrap; }
+tr.sub td { font-size: 13px; }
+.g { font-weight: 800; } .g-tk { color: var(--tk); } .g-sd1 { color: var(--sd1); } .g-sd2 { color: var(--sd2); } .g-lain { color: var(--muted); }
+/* games */
+.groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
+@media (max-width: 400px) { .groups { grid-template-columns: minmax(0, 1fr); } }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.game { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 10px; padding: 8px 0; border-top: 1px solid var(--line); }
+.game:first-of-type { border-top: 0; }
+.game .t { font-weight: 800; display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; min-width: 0; }
+.game .n { font-size: 13px; color: var(--muted); text-align: right; white-space: nowrap; }
+.game .bars { grid-column: 1 / -1; display: grid; gap: 3px; }
+.game .bars span { display: block; height: 7px; border-radius: 4px; min-width: 2px; }
+.empty { color: var(--muted); font-size: 14px; margin: 0; }
+details summary { cursor: pointer; font-weight: 800; color: var(--muted); font-size: 14px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.prices label { display: inline-flex; gap: 6px; align-items: center; font-size: 13px; font-weight: 600; color: var(--muted); }
+footer { font-size: 13px; color: var(--muted); display: grid; gap: 6px; }
+code { font-size: 13px; background: var(--chip); padding: 1px 6px; border-radius: 6px; overflow-wrap: anywhere; }
+.empty-state { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 22px 18px; display: grid; gap: 12px; }
+[hidden] { display: none !important; }
+.empty-state ol { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+@media (prefers-reduced-motion: no-preference) { .bar i, .bars span { transition: width .4s ease; } }
+</style>
+
+<div class="wrap drop" id="drop">
+  <header>
+    <div>
+      <h1>Dasbor Statistik</h1>
+      <p class="sub">Petualangan Pintar · angka bulanan dari <code>statistik-game.mjs --json</code></p>
+    </div>
+    <div class="tools">
+      <label class="filebtn">Unggah statistik-YYYY-MM.json<input type="file" id="file" accept=".json,application/json" multiple></label>
+    </div>
+  </header>
+
+  <div class="banner" id="banner" hidden></div>
+
+  <section class="empty-state" id="empty" hidden>
+    <h2>Belum ada bulan yang tersimpan</h2>
+    <p style="margin:0">Dasbor ini membaca berkas bulanan dari skrip statistik, lalu menyimpan tiap bulan supaya bisa dibandingkan.</p>
+    <ol>
+      <li>Di PowerShell, dari folder <code>functions</code>: <code>node scripts/statistik-game.mjs --bulan=2026-10 --json</code></li>
+      <li>Skrip menulis <code>statistik-2026-10.json</code> di folder itu.</li>
+      <li>Tekan <strong>Unggah</strong> di atas, seret berkasnya ke halaman ini, atau tempel isinya di bagian "Tempel isi JSON" di bawah.</li>
+    </ol>
+  </section>
+
+  <div id="dash" hidden style="display:grid;gap:18px">
+    <section class="card" aria-labelledby="h-bulan">
+      <div class="card-head">
+        <h2 id="h-bulan">Bulan</h2>
+        <span class="small muted" id="madeAt"></span>
+      </div>
+      <div class="months" id="months" role="group" aria-label="Pilih bulan"></div>
+    </section>
+
+    <section class="kpis" id="kpis" aria-label="Ringkasan bulan"></section>
+
+    <div class="grid2">
+      <section class="card" aria-labelledby="h-corong">
+        <div class="card-head"><h2 id="h-corong">Corong pembeli</h2><span class="small muted">persen dari tahap sebelumnya</span></div>
+        <div class="funnel" id="funnel"></div>
+        <p class="small muted" style="margin:0">Landing & coba gratis tidak tercatat per kelompok. Aktivasi bisa melebihi bayar: kode yang dibeli bulan lalu, atau kode uji, ditukar bulan ini.</p>
+      </section>
+      <section class="card" aria-labelledby="h-kel">
+        <h2 id="h-kel">Per kelompok</h2>
+        <div class="tablewrap"><table id="groupsTable"></table></div>
+        <div class="prices row" id="prices"></div>
+      </section>
+    </div>
+
+    <section class="card" aria-labelledby="h-game">
+      <div class="card-head">
+        <h2 id="h-game">Game yang dimainkan akun login</h2>
+        <span class="small muted" id="accSummary"></span>
+      </div>
+      <div class="legend"><span><i class="sw" style="background:var(--play)"></i>Akun pernah main (sejak awal)</span><span><i class="sw" style="background:var(--accent)"></i>Hari ditamatkan (bulan ini)</span></div>
+      <div class="groups" id="games"></div>
+      <p class="small muted" style="margin:0">Satu akun yang menamatkan game di tiga hari berbeda terhitung tiga. Tanda "jarang ditamatkan" muncul kalau game dimainkan ≥ 5 akun tapi hari tamatnya kurang dari seperempat jumlah akun.</p>
+    </section>
+
+    <section class="card" aria-labelledby="h-gratis">
+      <div class="card-head"><h2 id="h-gratis">Game gratis (tanpa login)</h2><span class="small muted">browser per hari</span></div>
+      <div id="free"></div>
+    </section>
+
+    <section class="card" aria-labelledby="h-banding" id="compareCard">
+      <div class="card-head"><h2 id="h-banding">Bulan ke bulan</h2><span class="small muted" id="compareNote"></span></div>
+      <div class="tablewrap" id="compare"></div>
+    </section>
+
+    <section class="card">
+      <details id="pasteBox">
+        <summary>Tempel isi JSON</summary>
+        <div style="display:grid;gap:8px;margin-top:10px">
+          <label for="paste" class="small muted">Tempel seluruh isi berkas statistik-YYYY-MM.json, lalu simpan.</label>
+          <textarea id="paste" spellcheck="false"></textarea>
+          <div class="row"><button type="button" id="pasteBtn">Simpan bulan ini</button></div>
+        </div>
+      </details>
+    </section>
+
+    <footer>
+      <span id="storeNote"></span>
+      <span><button type="button" class="linkbtn" id="delBtn">Hapus bulan yang sedang dilihat</button><span id="delConfirm" hidden> · Yakin? <button type="button" class="linkbtn danger" id="delYes">Ya, hapus</button><button type="button" class="linkbtn" id="delNo">Batal</button></span></span>
+    </footer>
+  </div>
+</div>
+
+<script>
+// Titles from src/games/registry.ts (2026-11-04). A game not listed here shows its id.
+const GAMES = {"hutan-hewan":["tk","Hutan Hewan"],"taman-huruf":["tk","Taman Huruf"],"labirin-warna":["tk","Labirin Warna"],"pasar-buah":["tk","Pasar Buah"],"kenal-huruf":["tk","Kenal Huruf"],"tulis-angka":["tk","Tulis Angka"],"jalan-kendaraan":["tk","Jalan Kendaraan"],"kartu-kembar":["tk","Kartu Kembar"],"puzzle-gambar":["tk","Puzzle Gambar"],"anggota-tubuh":["tk","Anggota Tubuh"],"kode-kelinci":["tk","Kode Kelinci"],"petak-ajaib":["tk","Cari Jagung"],"cari-beda":["tk","Cari Beda"],"tulis-huruf":["sd1","Tulis Huruf"],"rute-kendaraan":["sd1","Rute Kendaraan"],"misi-kode":["sd1","Misi Kode"],"kode-warna":["sd1","Panah Warna"],"teliti-gambar":["sd1","Teliti Gambar"],"hitung-hebat":["sd1","Hitung Hebat"],"suku-kata":["sd1","Suku Kata"],"ejaan-jitu":["sd1","Ejaan Jitu"],"tangga-membaca":["sd1","Tangga Membaca"],"pasangan-pintar":["sd1","Pasangan Pintar"],"jam-pintar":["sd1","Jam Pintar"],"pasang-kata":["sd1","Pasang Kata"],"pola-pintar":["sd1","Pola Pintar"],"cerita-kancil":["sd1","Baca Cerita"],"istana-bilangan":["sd2","Istana Bilangan"],"kebun-ilmu":["sd2","Kebun Ilmu"],"kapten-kata":["sd2","Bahasa Inggris"],"sahabat-bumi":["sd2","Sahabat Bumi"],"lab-cahaya-bunyi":["sd2","Lab Cahaya & Bunyi"],"mata-jeli":["sd2","Mata Jeli"],"toko-kembalian":["sd2","Toko Kembalian"],"ukur-yuk":["sd2","Ukur Yuk"],"detektif-data":["sd2","Detektif Data"],"waktu-tepat":["sd2","Waktu Tepat"],"perisai-garuda":["sd2","Perisai Garuda"],"susun-kalimat":["sd2","Susun Kalimat"],"kali-kilat":["sd2","Kali Kilat"],"lompat-katak":["sd2","Lompat Katak"],"bagi-kue":["sd2","Bagi Kue"],"detektif-bacaan":["sd2","Detektif Bacaan"],"sanggar-warna":["sd2","Sanggar Warna"],"studio-kolase":["sd2","Studio Kolase"]};
+const FREE = ['hutan-hewan', 'tulis-huruf', 'toko-kembalian', 'kebun-ilmu']; // FREE_GAME_IDS in src/data/access.ts
+const GROUPS = { tk: 'Playgroup dan TK', sd1: 'SD Kelas 1 & 2', sd2: 'SD Kelas 3 & 4' };
+const DEFAULT_PRICES = { tk: 19000, sd1: 29000, sd2: 39000 };
+const MONTH_NAMES = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => '&#' + c.charCodeAt(0) + ';');
+const fmt = (n) => Math.round(n).toLocaleString('id-ID');
+const rp = (n) => 'Rp' + fmt(n);
+const pct = (a, b) => (b > 0 ? Math.round((a / b) * 100) + '%' : '—');
+const monthLabel = (m) => { const [y, mm] = m.split('-'); return MONTH_NAMES[+mm - 1] + ' ' + y; };
+const shortMonth = (m) => { const [y, mm] = m.split('-'); return MONTH_NAMES[+mm - 1].slice(0, 3) + ' ' + y.slice(2); };
+const title = (id) => (GAMES[id] ? GAMES[id][1] : id);
+const groupOfGame = (id) => (GAMES[id] ? GAMES[id][0] : 'lain');
+
+let db = null, months = {}, prices = { ...DEFAULT_PRICES }, current = null, storeMode = 'memuat';
+
+/* ---------- validate an uploaded file: numbers only ---------- */
+const int = (v) => (Number.isFinite(+v) && +v >= 0 ? Math.round(+v) : 0);
+const isId = (s) => typeof s === 'string' && /^[a-z0-9][a-z0-9_-]{0,63}$/.test(s);
+function clean(raw) {
+  if (!raw || raw.format !== 'pp-statistik') throw new Error('Ini bukan berkas dari statistik-game.mjs --json (kolom "format" tidak cocok).');
+  if (!/^\d{4}-\d{2}$/.test(raw.bulan || '')) throw new Error('Kolom "bulan" harus berbentuk YYYY-MM.');
+  const peristiwa = {};
+  for (const [k, v] of Object.entries(raw.peristiwa || {})) if (isId(k)) peristiwa[k] = int(v);
+  return {
+    format: 'pp-statistik', versi: int(raw.versi) || 1, bulan: raw.bulan,
+    dibuat: typeof raw.dibuat === 'string' ? raw.dibuat.slice(0, 40) : '',
+    gratis: (raw.gratis || []).filter((r) => isId(r.game)).map((r) => ({ game: r.game, dibuka: int(r.dibuka), ditamatkan: int(r.ditamatkan) })),
+    akun: {
+      pernahMain: int(raw.akun?.pernahMain), menamatkan: int(raw.akun?.menamatkan),
+      game: (raw.akun?.game || []).filter((r) => isId(r.game)).map((r) => ({ game: r.game, akunMain: int(r.akunMain), hariTamat: int(r.hariTamat) })),
+    },
+    peristiwa,
+    contoh: raw.contoh === true,
+  };
+}
+
+/* ---------- derived numbers for one month ---------- */
+function derive(s) {
+  const e = s.peristiwa, g = (k) => e[k] ?? 0;
+  const per = {};
+  for (const k of Object.keys(GROUPS)) {
+    per[k] = { beli: g('landing_buy_' + k), bayar: g('mayar_paid_' + k), aktif: g('redeem_ok_' + k) };
+    per[k].pendapatan = per[k].bayar * (prices[k] || 0);
+  }
+  const beli = Object.keys(e).filter((k) => k.startsWith('landing_buy_')).reduce((a, k) => a + e[k], 0);
+  const bayarGrup = Object.values(per).reduce((a, x) => a + x.bayar, 0);
+  return {
+    view: g('landing_view'), coba: g('landing_main_click'), beli, bayar: g('mayar_paid'), aktif: g('redeem_ok'),
+    aktifTombol: g('redeem_ok_tombol'), bayarLain: Math.max(0, g('mayar_paid') - bayarGrup), per,
+    pendapatan: Object.values(per).reduce((a, x) => a + x.pendapatan, 0),
+    freeOpen: s.gratis.reduce((a, r) => a + r.dibuka, 0), freeDone: s.gratis.reduce((a, r) => a + r.ditamatkan, 0),
+    akunMain: s.akun.pernahMain, akunTamat: s.akun.menamatkan,
+  };
+}
+const sortedMonths = () => Object.keys(months).sort();
+function prevOf(m) { const l = sortedMonths(); const i = l.indexOf(m); return i > 0 ? l[i - 1] : null; }
+
+function delta(now, before, money) {
+  if (before == null) return '';
+  const d = now - before;
+  if (d === 0) return `<span class="delta flat">sama dengan bulan lalu</span>`;
+  const p = before > 0 ? ` (${d > 0 ? '+' : ''}${Math.round((d / before) * 100)}%)` : '';
+  return `<span class="delta ${d > 0 ? 'up' : 'down'}">${d > 0 ? '▲ +' : '▼ −'}${money ? rp(Math.abs(d)) : fmt(Math.abs(d))}${p}</span>`;
+}
+
+/* ---------- render ---------- */
+function render() {
+  const list = sortedMonths();
+  $('#empty').hidden = list.length > 0; $('#dash').hidden = list.length === 0;
+  $('#storeNote').textContent = storeMode === 'db'
+    ? 'Tiap bulan tersimpan di dasbor ini, hanya bisa dibaca pemilik. Unggah ulang bulan yang sama untuk menimpanya.'
+    : storeMode === 'memori' ? 'Penyimpanan dasbor tidak tersedia di tampilan ini: bulan yang diunggah hilang saat halaman ditutup.' : '';
+  if (!list.length) return;
+  if (!current || !months[current]) current = list[list.length - 1];
+  const s = months[current], d = derive(s), p = prevOf(current), pd = p ? derive(months[p]) : null;
+
+  $('#months').innerHTML = list.map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === current}">${monthLabel(m)}${months[m].contoh ? ' <span class="tag contoh">contoh</span>' : ''}</button>`).join('');
+  $('#madeAt').textContent = s.dibuat ? 'Dibuat ' + new Date(s.dibuat).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }) : '';
+
+  const kp = [
+    ['Pengunjung landing', fmt(d.view), 'browser per hari', 'view'],
+    ['Coba gratis', fmt(d.coba), pct(d.coba, d.view) + ' dari pengunjung', 'coba'],
+    ['Klik beli', fmt(d.beli), pct(d.beli, d.coba) + ' dari yang mencoba', 'beli'],
+    ['Bayar', fmt(d.bayar), pct(d.bayar, d.beli) + ' dari yang klik beli', 'bayar'],
+    ['Aktivasi', fmt(d.aktif), d.aktifTombol ? `${fmt(d.aktifTombol)} lewat tombol di situs` : 'semua lewat kode', 'aktif'],
+    ['Perkiraan pendapatan', rp(d.pendapatan), 'bayar × harga perkenalan', 'pendapatan'],
+  ];
+  $('#kpis').innerHTML = kp.map(([l, v, n, k]) => `<div class="kpi ${k === 'pendapatan' ? 'money' : ''}"><span class="label">${l}</span><span class="value num">${v}</span><span class="note">${n}</span>${pd ? delta(d[k], pd[k], k === 'pendapatan') : ''}</div>`).join('');
+
+  const steps = [['Pengunjung landing', d.view], ['Coba gratis', d.coba], ['Klik beli', d.beli], ['Bayar', d.bayar], ['Aktivasi', d.aktif]];
+  const top = Math.max(1, ...steps.map((x) => x[1]));
+  $('#funnel').innerHTML = steps.map(([n, v], i) => `<div class="step"><span class="name">${n}</span><span class="val num">${fmt(v)}</span>
+    <span class="bar" aria-hidden="true"><i style="width:${(v / top) * 100}%"></i></span>
+    ${i ? `<span class="rate num">${pct(v, steps[i - 1][1])} dari ${steps[i - 1][0].toLowerCase()} · ${pct(v, d.view)} dari pengunjung</span>` : ''}</div>`).join('');
+
+  const gRows = Object.entries(GROUPS).map(([k, name]) => { const x = d.per[k];
+    return `<tr><td class="g g-${k}">${name}</td><td class="r num">${fmt(x.beli)}</td><td class="r num">${fmt(x.bayar)}<span class="muted small"> · ${pct(x.bayar, x.beli)}</span></td><td class="r num">${fmt(x.aktif)}</td><td class="r num">${rp(x.pendapatan)}</td></tr>`; });
+  if (d.bayarLain) gRows.push(`<tr class="sub"><td class="g g-lain">Tanpa kelompok</td><td class="r">—</td><td class="r num">${fmt(d.bayarLain)}</td><td class="r">—</td><td class="r muted">tidak dihitung</td></tr>`);
+  gRows.push(`<tr><td><strong>Total</strong></td><td class="r num"><strong>${fmt(d.beli)}</strong></td><td class="r num"><strong>${fmt(d.bayar)}</strong></td><td class="r num"><strong>${fmt(d.aktif)}</strong></td><td class="r num"><strong>${rp(d.pendapatan)}</strong></td></tr>`);
+  $('#groupsTable').innerHTML = `<thead><tr><th>Kelompok</th><th class="r">Klik beli</th><th class="r">Bayar</th><th class="r">Aktif</th><th class="r">Pendapatan</th></tr></thead><tbody>${gRows.join('')}</tbody>`;
+  if (!$('#prices').dataset.done) {
+    $('#prices').innerHTML = '<span class="small muted">Harga per kelompok:</span>' + Object.entries(GROUPS).map(([k, n]) => `<label for="price-${k}">${k.toUpperCase()} <input type="number" id="price-${k}" data-g="${k}" min="0" step="1000" value="${prices[k]}"></label>`).join('');
+    $('#prices').dataset.done = '1';
+  }
+
+  // games, grouped by kelompok
+  const acc = s.akun.game;
+  $('#accSummary').textContent = `${fmt(s.akun.pernahMain)} akun pernah main · ${fmt(s.akun.menamatkan)} akun menamatkan game bulan ini`;
+  const maxG = Math.max(1, ...acc.map((r) => Math.max(r.akunMain, r.hariTamat)));
+  const prevAcc = p ? Object.fromEntries(months[p].akun.game.map((r) => [r.game, r])) : null;
+  const byGroup = {};
+  acc.forEach((r) => (byGroup[groupOfGame(r.game)] ??= []).push(r));
+  const order = ['tk', 'sd1', 'sd2', 'lain'];
+  $('#games').innerHTML = acc.length ? order.filter((k) => byGroup[k]).map((k) => {
+    const rows = byGroup[k].sort((a, b) => b.akunMain - a.akunMain || b.hariTamat - a.hariTamat);
+    return `<div class="card" style="padding:12px 14px;gap:4px"><h3 class="g g-${k}" style="color:var(--${k === 'lain' ? 'muted' : k})">${GROUPS[k] || 'Game lain'}</h3>${rows.map((r) => {
+      const flag = r.akunMain >= 3 && r.hariTamat === 0 ? '<span class="tag belum">belum pernah ditamatkan</span>'
+        : r.akunMain >= 5 && r.hariTamat / r.akunMain < 0.25 ? '<span class="tag jarang">jarang ditamatkan</span>' : '';
+      const pr = prevAcc?.[r.game];
+      const ch = pr ? (r.akunMain - pr.akunMain ? ` <span class="delta ${r.akunMain > pr.akunMain ? 'up' : 'down'}">${r.akunMain > pr.akunMain ? '+' : '−'}${Math.abs(r.akunMain - pr.akunMain)}</span>` : '') : (prevAcc ? ' <span class="delta up">baru</span>' : '');
+      return `<div class="game"><span class="t">${esc(title(r.game))}${FREE.includes(r.game) ? '<span class="tag gratis">gratis</span>' : ''}${flag}</span>
+        <span class="n num">${fmt(r.akunMain)} akun${ch} · ${fmt(r.hariTamat)} hari</span>
+        <span class="bars" aria-hidden="true"><span style="width:${(r.akunMain / maxG) * 100}%;background:var(--play)"></span><span style="width:${(r.hariTamat / maxG) * 100}%;background:var(--accent)"></span></span></div>`;
+    }).join('')}</div>`;
+  }).join('') : '<p class="empty">Belum ada akun yang punya bintang.</p>';
+
+  // free games
+  const free = s.gratis;
+  $('#free').innerHTML = free.length
+    ? `<div class="tablewrap"><table><thead><tr><th>Game</th><th class="r">Dibuka</th><th class="r">Ditamatkan</th><th class="r">Rasio tamat</th></tr></thead><tbody>${free.slice().sort((a, b) => b.dibuka - a.dibuka).map((r) => `<tr><td><span class="g g-${groupOfGame(r.game)}">${esc(title(r.game))}</span></td><td class="r num">${fmt(r.dibuka)}</td><td class="r num">${fmt(r.ditamatkan)}</td><td class="r num">${pct(r.ditamatkan, r.dibuka)}</td></tr>`).join('')}
+      <tr><td><strong>Total</strong></td><td class="r num"><strong>${fmt(d.freeOpen)}</strong></td><td class="r num"><strong>${fmt(d.freeDone)}</strong></td><td class="r num"><strong>${pct(d.freeDone, d.freeOpen)}</strong></td></tr></tbody></table></div>`
+    : `<p class="empty">Belum ada data untuk ${monthLabel(current)}. Penghitung game gratis baru aktif sejak 4 November 2026, jadi angkanya mulai muncul di berkas November.</p>`;
+
+  // month to month
+  if (list.length < 2) {
+    $('#compareNote').textContent = '';
+    $('#compare').innerHTML = '<p class="empty">Perbandingan muncul begitu ada dua bulan tersimpan. Unggah berkas bulan berikutnya.</p>';
+  } else {
+    const ds = list.map((m) => derive(months[m]));
+    const rowsDef = [['Pengunjung landing', 'view'], ['Coba gratis', 'coba'], ['Klik beli', 'beli'], ['Bayar', 'bayar'], ['Aktivasi', 'aktif'], ['Perkiraan pendapatan', 'pendapatan', true], ['Akun pernah main', 'akunMain'], ['Akun menamatkan game', 'akunTamat'], ['Game gratis dibuka', 'freeOpen'], ['Game gratis ditamatkan', 'freeDone']];
+    const conv = [['Pengunjung → bayar', (x) => (x.view ? x.bayar / x.view : null)], ['Klik beli → bayar', (x) => (x.beli ? x.bayar / x.beli : null)]];
+    $('#compareNote').textContent = `${list.length} bulan tersimpan`;
+    $('#compare').innerHTML = `<table><thead><tr><th>Angka</th>${list.map((m) => `<th class="r">${shortMonth(m)}</th>`).join('')}<th class="r">Perubahan</th></tr></thead><tbody>${
+      rowsDef.map(([n, k, money]) => `<tr><td>${n}</td>${ds.map((x) => `<td class="r num">${money ? rp(x[k]) : fmt(x[k])}</td>`).join('')}<td class="r">${delta(ds[ds.length - 1][k], ds[ds.length - 2][k], money).replace(/<span class="delta flat">sama dengan bulan lalu<\/span>/, '<span class="delta flat">sama</span>')}</td></tr>`).join('')
+    }${conv.map(([n, f]) => { const v = ds.map(f); const a = v[v.length - 1], b = v[v.length - 2];
+      const dd = a != null && b != null ? Math.round((a - b) * 1000) / 10 : null;
+      return `<tr class="sub"><td class="muted">${n}</td>${v.map((x) => `<td class="r num muted">${x == null ? '—' : (Math.round(x * 1000) / 10).toLocaleString('id-ID') + '%'}</td>`).join('')}<td class="r">${dd == null ? '' : `<span class="delta ${dd > 0 ? 'up' : dd < 0 ? 'down' : 'flat'}">${dd > 0 ? '+' : ''}${dd.toLocaleString('id-ID')} poin</span>`}</td></tr>`; }).join('')}</tbody></table>`;
+  }
+}
+
+/* ---------- storage ---------- */
+function banner(msg, err) { const b = $('#banner'); b.hidden = !msg; b.classList.toggle('err', !!err); b.innerHTML = msg ? `<span>${msg}</span>` : ''; }
+
+async function saveMonth(s) {
+  months[s.bulan] = s; current = s.bulan; render();
+  if (db) {
+    try { await db.collection('bulan').doc(s.bulan).set(s); banner(`<strong>${monthLabel(s.bulan)}</strong> tersimpan.`); }
+    catch (e) { banner(`<strong>${monthLabel(s.bulan)} tampil tapi gagal disimpan.</strong> ${esc(e?.message || '')} Coba unggah lagi.`, true); }
+  } else banner(`<strong>${monthLabel(s.bulan)}</strong> tampil, tapi tidak tersimpan (penyimpanan dasbor tidak tersedia di tampilan ini).`);
+}
+
+function ingest(text, name) {
+  let raw;
+  try { raw = JSON.parse(text); } catch { banner(`<strong>${esc(name)} bukan JSON yang sah.</strong> Pakai berkas statistik-YYYY-MM.json apa adanya dari skrip.`, true); return; }
+  try {
+    const s = clean(raw);
+    const replacing = months[s.bulan] && !months[s.bulan].contoh;
+    saveMonth(s).then(() => { if (replacing) banner(`<strong>${monthLabel(s.bulan)}</strong> diperbarui dengan berkas baru.`); });
+  } catch (e) { banner(`<strong>${esc(e.message)}</strong>`, true); }
+}
+
+function readFiles(files) {
+  [...files].forEach((f) => { const r = new FileReader(); r.onload = () => ingest(r.result, f.name); r.readAsText(f); });
+}
+
+$('#file').addEventListener('change', (e) => { readFiles(e.target.files); e.target.value = ''; });
+const drop = $('#drop');
+['dragenter', 'dragover'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.add('over'); }));
+['dragleave', 'drop'].forEach((t) => drop.addEventListener(t, (e) => { e.preventDefault(); drop.classList.remove('over'); }));
+drop.addEventListener('drop', (e) => readFiles(e.dataTransfer.files));
+$('#pasteBtn').addEventListener('click', () => { const t = $('#paste').value.trim(); if (!t) return; ingest(t, 'Isi yang ditempel'); $('#paste').value = ''; });
+$('#months').addEventListener('click', (e) => { const b = e.target.closest('[data-m]'); if (!b) return; current = b.dataset.m; $('#delConfirm').hidden = true; render(); });
+let priceTimer = null;
+$('#prices').addEventListener('input', (e) => {
+  const i = e.target.closest('[data-g]'); if (!i) return;
+  prices[i.dataset.g] = int(i.value); render();
+  clearTimeout(priceTimer);
+  priceTimer = setTimeout(() => { if (db) db.doc('pengaturan/harga').set({ ...prices }).catch(() => {}); }, 800);
+});
+$('#delBtn').addEventListener('click', () => { $('#delConfirm').hidden = false; });
+$('#delNo').addEventListener('click', () => { $('#delConfirm').hidden = true; });
+$('#delYes').addEventListener('click', async () => {
+  const m = current; $('#delConfirm').hidden = true;
+  delete months[m]; current = null; render();
+  if (db) { try { await db.collection('bulan').doc(m).delete(); banner(`${monthLabel(m)} dihapus.`); } catch (e) { banner(`<strong>Gagal menghapus ${monthLabel(m)}.</strong> ${esc(e?.message || '')}`, true); } }
+});
+
+render();
+(async () => {
+  const timer = setTimeout(() => { if (storeMode === 'memuat') { storeMode = 'memori'; render(); banner('Penyimpanan dasbor belum menjawab. Bulan yang diunggah tetap tampil, tapi mungkin tidak tersimpan.'); } }, 10000);
+  db = window.claude ? await window.claude.use('db') : null;
+  if (!db) { clearTimeout(timer); storeMode = 'memori'; render(); return; }
+  db.doc('pengaturan/harga').get().then((snap) => {
+    if (snap.exists) { const d = snap.data(); for (const k of Object.keys(GROUPS)) if (Number.isFinite(d[k])) prices[k] = d[k];
+      Object.keys(GROUPS).forEach((k) => { const i = document.getElementById('price-' + k); if (i) i.value = prices[k]; }); render(); }
+  }).catch(() => {});
+  db.collection('bulan').onSnapshot((snap) => {
+    clearTimeout(timer); storeMode = 'db';
+    const next = {};
+    snap.docs.forEach((doc) => { try { next[doc.id] = clean(doc.data()); } catch {} });
+    months = next; render();
+  }, (e) => { clearTimeout(timer); storeMode = 'memori'; banner(`<strong>Bulan tersimpan gagal dibaca.</strong> ${esc(e?.message || '')}`, true); render(); });
+})();
+</script>
