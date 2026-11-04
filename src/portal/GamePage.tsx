@@ -9,6 +9,7 @@ import { findGame, gameListPath } from '@/games/registry';
 import { useAuth } from '@/auth/AuthContext';
 import { removeDevice, type DeviceInfo } from '@/auth/entitlements';
 import { useGameAccess } from '@/portal/useGameAccess';
+import { countFreePlay } from '@/portal/stats';
 
 /**
  * Gerbang akses + pemuat config.
@@ -67,6 +68,9 @@ export default function GamePage() {
     void meta.load().then((mod) => {
       if (!cancelled) setConfig(mod.default);
     });
+    // Hitungan anonim minat game GRATIS (lihat `countFreePlay`). Game berbayar
+    // tidak pernah dihitung di sini.
+    countFreePlay(meta.id, 'main');
     return () => {
       cancelled = true;
     };
@@ -149,6 +153,7 @@ export default function GamePage() {
       iconPic={meta.pic}
       iconClock={meta.iconClock}
       onExit={() => navigate(gameListPath(meta))}
+      onFinish={() => countFreePlay(meta.id, 'tamat')}
     />
   );
 }

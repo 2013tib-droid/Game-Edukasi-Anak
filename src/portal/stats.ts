@@ -8,10 +8,14 @@
  *
  * ATURAN YANG MENGIKAT:
  *
- * 1. **JANGAN PERNAH dipanggil dari area anak** (`/portal`, `/kelompok/*`,
- *    `/game/*`). Standar UX anak melarang pelacak apa pun di sana, dan
- *    kebijakan privasi kita menuliskannya sebagai janji. Satu-satunya
- *    pemakainya adalah `LandingPage`.
+ * 1. **`countVisit` JANGAN PERNAH dipanggil dari area anak** (`/portal`,
+ *    `/kelompok/*`, `/game/*`); pemakainya cuma `LandingPage`. SATU-SATUNYA
+ *    pengecualian adalah `countFreePlay` di bawah (keputusan pemilik
+ *    2026-11-04: ingin tahu berapa yang berminat pada game gratis): hanya
+ *    untuk game di `FREE_GAME_IDS`, hanya dua angka (dibuka / ditamatkan),
+ *    sekali per browser per hari per game, dan Kebijakan Privasi
+ *    menyebutnya. Jangan tambah penghitung lain di area anak tanpa
+ *    keputusan pemilik + ubah halaman privasi di commit yang sama.
  * 2. **Nol cookie, nol pengenal pengunjung.** Tidak ada id yang dibuat, dan
  *    tidak ada apa pun tentang perangkat yang dikirim.
  * 3. **Tidak boleh pernah terasa.** `sendBeacon` menyerahkan pengiriman ke
@@ -27,6 +31,7 @@
  * (justru kasus `landing_main_click`). `fetch` biasa akan dibatalkan di situ.
  */
 import { FUNCTIONS_REGION } from '@/auth/firebase';
+import { FREE_GAME_IDS } from '@/data/access';
 
 const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID as string | undefined;
 
@@ -37,7 +42,10 @@ export type StatEvent =
   | 'landing_parent_click'
   | 'landing_buy_tk'
   | 'landing_buy_sd1'
-  | 'landing_buy_sd2';
+  | 'landing_buy_sd2'
+  /** Game gratis dibuka / ditamatkan — hanya lewat `countFreePlay`. */
+  | `main_${string}`
+  | `tamat_${string}`;
 
 /**
  * Satu kali per browser per hari, per peristiwa.
@@ -76,4 +84,19 @@ export function countVisit(event: StatEvent): void {
     // Pemblokir iklan, mode privat, offline, function belum ter-deploy —
     // semuanya tidak boleh terasa sedikit pun oleh pengunjung.
   }
+}
+
+/**
+ * Minat pada game GRATIS: `main_<id>` saat game dibuka, `tamat_<id>` saat
+ * ditamatkan. Sekali per browser per hari per game, tanpa pengenal apa pun —
+ * aturan yang sama persis dengan `countVisit`. Game yang bukan gratis
+ * diabaikan diam-diam, jadi pemanggil tak perlu memeriksanya.
+ *
+ * Nama peristiwanya juga harus ada di `ALLOWED_EVENTS` functions; kalau
+ * `FREE_GAME_IDS` berubah, ubah daftar itu juga (lalu deploy backend) —
+ * nama yang tak dikenal dibuang server tanpa efek apa pun.
+ */
+export function countFreePlay(gameId: string, what: 'main' | 'tamat'): void {
+  if (!FREE_GAME_IDS.includes(gameId)) return;
+  countVisit(`${what}_${gameId}`);
 }

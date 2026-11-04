@@ -18,6 +18,8 @@ import LegalPage from '@/portal/LegalPage';
  *   - kode aktivasi terpakai ..... functions/src/index.ts (redeemActivationCode)
  *   - hitungan percobaan gagal ... functions/src/index.ts (redeem_attempts)
  *   - penghitung kunjungan ....... functions/src/index.ts (catatStat)
+ *   - hitungan game gratis ....... src/portal/stats.ts (countFreePlay) → catatStat
+ *   - statistik gabungan bintang . functions/scripts/statistik-game.mjs (dibaca pemilik, angka saja)
  *   - pesanan dari Mayar ......... functions/src/index.ts (mayarWebhook, koleksi orders)
  *   - pesanan dicocokkan ke akun .. functions/src/index.ts (myPaidOrders, claimPaidOrder)
  *   - nama sapaan anak (HP saja) . src/portal/childName.ts (localStorage, tak ke server)
@@ -25,7 +27,7 @@ import LegalPage from '@/portal/LegalPage';
  */
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Kebijakan Privasi" updated="5 Oktober 2026">
+    <LegalPage title="Kebijakan Privasi" updated="4 November 2026">
       <div className="legal-summary">
         <h2>Ringkasnya</h2>
         <ul>
@@ -152,7 +154,10 @@ export default function PrivacyPage() {
           siapa pun. Supaya satu orang tidak terhitung berulang kali, browser Anda menyimpan{' '}
           <strong>tanggal hari ini</strong> saja sebagai penanda — sebuah tanggal, bukan nomor
           pengenal, dan penanda itu tidak pernah dikirim ke mana pun.{' '}
-          <strong>Tidak ada penghitung apa pun di dalam area anak.</strong>
+          Di area anak, satu-satunya penghitung adalah <strong>dua angka untuk game
+          gratis</strong>: berapa kali game gratis dibuka dan berapa kali ditamatkan hari ini —
+          dengan aturan yang sama (tanpa id, tanpa cookie, sekali per browser per hari). Game
+          berbayar tidak dihitung dengan cara ini.
         </li>
       </ul>
 
@@ -173,11 +178,14 @@ export default function PrivacyPage() {
         <li>
           <strong>Kepentingan yang sah, terbatas:</strong> hitungan percobaan kode gagal (menahan
           penyalahgunaan) dan penghitung kunjungan berupa angka jumlah (mengetahui apakah
-          halaman jualannya berguna).
+          halaman jualannya dan game gratisnya berguna).
         </li>
         <li>
           <strong>Kenyamanan Anda:</strong> bintang hasil bermain dicadangkan supaya kemajuan
-          anak tidak hilang saat ganti perangkat.
+          anak tidak hilang saat ganti perangkat. Dari cadangan itu kami juga menghitung{' '}
+          <strong>angka gabungan</strong> (misalnya berapa akun yang memainkan sebuah game)
+          untuk memutuskan game mana yang perlu ditambah atau diperbaiki — tidak pernah dilihat
+          per akun.
         </li>
       </ul>
 
@@ -273,7 +281,8 @@ export default function PrivacyPage() {
         tua/wali</strong> dan hanya orang dewasa yang boleh mendaftar. Kami tidak meminta anak
         memasukkan data apa pun — anak hanya mengetuk gambar dan mendengar suara. Area anak
         sengaja tidak punya link keluar, tidak punya pembelian di dalamnya, dan tidak punya
-        penghitung apa pun.
+        penghitung apa pun selain dua angka jumlah untuk game gratis (dibuka / ditamatkan,
+        tanpa pengenal apa pun).
       </p>
       <p>
         Kalau Anda merasa ada data anak yang masuk ke sistem kami secara tidak sengaja (misalnya
