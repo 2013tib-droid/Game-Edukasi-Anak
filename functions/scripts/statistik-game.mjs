@@ -8,6 +8,12 @@
  *   $env:GOOGLE_APPLICATION_CREDENTIALS = 'kunci.json'    # PowerShell
  *   node scripts/statistik-game.mjs                        # bulan ini
  *   node scripts/statistik-game.mjs --bulan=2026-10        # bulan tertentu
+ *   node scripts/statistik-game.mjs --bulan=2026-10 --json # + statistik-2026-10.json
+ *
+ * --json menulis berkas statistik-YYYY-MM.json (di folder tempat perintah
+ * dijalankan) berisi ketiga tabel yang sama, untuk diunggah ke Dasbor
+ * Statistik pribadi. Isinya juga ANGKA JUMLAH saja; berkasnya tertahan
+ * .gitignore. Tabel teks tetap dicetak seperti biasa.
  *
  * Tiga tabel, semuanya ANGKA JUMLAH saja — skrip ini tidak pernah mencetak
  * email, uid, atau data per anak. Jangan diubah supaya mencetaknya: hasilnya
@@ -30,6 +36,7 @@
  *
  * Hanya MEMBACA Firestore. Tidak menulis apa pun.
  */
+import { writeFileSync } from 'node:fs';
 import { applicationDefault, initializeApp } from 'firebase-admin/app';
 import { FieldPath, getFirestore } from 'firebase-admin/firestore';
 
@@ -131,3 +138,25 @@ const other = Object.entries(totals)
   .sort((a, b) => b[1] - a[1]);
 table(`Landing & penjualan ${month}`, ['Peristiwa', 'Jumlah'], other);
 console.log('');
+
+// --- --json: berkas untuk dasbor ----------------------------------------------
+// Bentuknya dibaca Dasbor Statistik (artifact pribadi pemilik). Kalau bentuk
+// ini diubah, naikkan `versi` dan ikut ubah pembacanya di dasbor.
+if (process.argv.includes('--json')) {
+  const file = `statistik-${month}.json`;
+  const out = {
+    format: 'pp-statistik',
+    versi: 1,
+    bulan: month,
+    dibuat: new Date().toISOString(),
+    gratis: freeRows.map(([game, dibuka, ditamatkan]) => ({ game, dibuka, ditamatkan })),
+    akun: {
+      pernahMain: accounts.size,
+      menamatkan: activeThisMonth.size,
+      game: accRows.map(([game, akunMain, hariTamat]) => ({ game, akunMain, hariTamat })),
+    },
+    peristiwa: Object.fromEntries(other),
+  };
+  writeFileSync(file, JSON.stringify(out, null, 2) + '\n');
+  console.log(`Berkas ${file} ditulis (angka jumlah saja). Unggah ke Dasbor Statistik.`);
+}
