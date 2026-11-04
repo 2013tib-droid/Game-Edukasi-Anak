@@ -49,7 +49,7 @@ button:focus-visible, .filebtn:focus-within, select:focus-visible, input:focus-v
 .months button { min-height: 36px; padding: 4px 12px; font-weight: 600; }
 .months button[aria-pressed="true"] { background: var(--chip); color: var(--accent); border-color: var(--accent); font-weight: 800; }
 .tag { display: inline-block; font-size: 11.5px; font-weight: 800; border-radius: 99px; padding: 1px 8px; border: 1px solid currentColor; letter-spacing: .02em; white-space: nowrap; }
-.tag.contoh { color: var(--warn); } .tag.jarang { color: var(--warn); } .tag.belum { color: var(--bad); } .tag.gratis { color: var(--ok); }
+.tag.jarang { color: var(--warn); } .tag.belum { color: var(--bad); } .tag.gratis { color: var(--ok); }
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
 .kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 2px; align-content: start; }
 .kpi .label { font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
@@ -221,7 +221,6 @@ function clean(raw) {
       game: (raw.akun?.game || []).filter((r) => isId(r.game)).map((r) => ({ game: r.game, akunMain: int(r.akunMain), hariTamat: int(r.hariTamat) })),
     },
     peristiwa,
-    contoh: raw.contoh === true,
   };
 }
 
@@ -239,7 +238,9 @@ function derive(s) {
     view: g('landing_view'), coba: g('landing_main_click'), beli, bayar: g('mayar_paid'), aktif: g('redeem_ok'),
     aktifTombol: g('redeem_ok_tombol'), bayarLain: Math.max(0, g('mayar_paid') - bayarGrup), per,
     pendapatan: Object.values(per).reduce((a, x) => a + x.pendapatan, 0),
-    freeOpen: s.gratis.reduce((a, r) => a + r.dibuka, 0), freeDone: s.gratis.reduce((a, r) => a + r.ditamatkan, 0),
+    // No free-game rows = the counter was not running yet (it started 2026-11-04): unknown, not zero.
+    freeOpen: s.gratis.length ? s.gratis.reduce((a, r) => a + r.dibuka, 0) : null,
+    freeDone: s.gratis.length ? s.gratis.reduce((a, r) => a + r.ditamatkan, 0) : null,
     akunMain: s.akun.pernahMain, akunTamat: s.akun.menamatkan,
   };
 }
@@ -247,7 +248,7 @@ const sortedMonths = () => Object.keys(months).sort();
 function prevOf(m) { const l = sortedMonths(); const i = l.indexOf(m); return i > 0 ? l[i - 1] : null; }
 
 function delta(now, before, money) {
-  if (before == null) return '';
+  if (before == null || now == null) return '';
   const d = now - before;
   if (d === 0) return `<span class="delta flat">sama dengan bulan lalu</span>`;
   const p = before > 0 ? ` (${d > 0 ? '+' : ''}${Math.round((d / before) * 100)}%)` : '';
@@ -265,7 +266,7 @@ function render() {
   if (!current || !months[current]) current = list[list.length - 1];
   const s = months[current], d = derive(s), p = prevOf(current), pd = p ? derive(months[p]) : null;
 
-  $('#months').innerHTML = list.map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === current}">${monthLabel(m)}${months[m].contoh ? ' <span class="tag contoh">contoh</span>' : ''}</button>`).join('');
+  $('#months').innerHTML = list.map((m) => `<button type="button" data-m="${m}" aria-pressed="${m === current}">${monthLabel(m)}</button>`).join('');
   $('#madeAt').textContent = s.dibuat ? 'Dibuat ' + new Date(s.dibuat).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' }) : '';
 
   const kp = [
@@ -332,7 +333,7 @@ function render() {
     const conv = [['Pengunjung → bayar', (x) => (x.view ? x.bayar / x.view : null)], ['Klik beli → bayar', (x) => (x.beli ? x.bayar / x.beli : null)]];
     $('#compareNote').textContent = `${list.length} bulan tersimpan`;
     $('#compare').innerHTML = `<table><thead><tr><th>Angka</th>${list.map((m) => `<th class="r">${shortMonth(m)}</th>`).join('')}<th class="r">Perubahan</th></tr></thead><tbody>${
-      rowsDef.map(([n, k, money]) => `<tr><td>${n}</td>${ds.map((x) => `<td class="r num">${money ? rp(x[k]) : fmt(x[k])}</td>`).join('')}<td class="r">${delta(ds[ds.length - 1][k], ds[ds.length - 2][k], money).replace(/<span class="delta flat">sama dengan bulan lalu<\/span>/, '<span class="delta flat">sama</span>')}</td></tr>`).join('')
+      rowsDef.map(([n, k, money]) => `<tr><td>${n}</td>${ds.map((x) => x[k] == null ? '<td class="r small muted">belum ada data</td>' : `<td class="r num">${money ? rp(x[k]) : fmt(x[k])}</td>`).join('')}<td class="r">${delta(ds[ds.length - 1][k], ds[ds.length - 2][k], money).replace(/<span class="delta flat">sama dengan bulan lalu<\/span>/, '<span class="delta flat">sama</span>')}</td></tr>`).join('')
     }${conv.map(([n, f]) => { const v = ds.map(f); const a = v[v.length - 1], b = v[v.length - 2];
       const dd = a != null && b != null ? Math.round((a - b) * 1000) / 10 : null;
       return `<tr class="sub"><td class="muted">${n}</td>${v.map((x) => `<td class="r num muted">${x == null ? '—' : (Math.round(x * 1000) / 10).toLocaleString('id-ID') + '%'}</td>`).join('')}<td class="r">${dd == null ? '' : `<span class="delta ${dd > 0 ? 'up' : dd < 0 ? 'down' : 'flat'}">${dd > 0 ? '+' : ''}${dd.toLocaleString('id-ID')} poin</span>`}</td></tr>`; }).join('')}</tbody></table>`;
@@ -355,7 +356,7 @@ function ingest(text, name) {
   try { raw = JSON.parse(text); } catch { banner(`<strong>${esc(name)} bukan JSON yang sah.</strong> Pakai berkas statistik-YYYY-MM.json apa adanya dari skrip.`, true); return; }
   try {
     const s = clean(raw);
-    const replacing = months[s.bulan] && !months[s.bulan].contoh;
+    const replacing = !!months[s.bulan];
     saveMonth(s).then(() => { if (replacing) banner(`<strong>${monthLabel(s.bulan)}</strong> diperbarui dengan berkas baru.`); });
   } catch (e) { banner(`<strong>${esc(e.message)}</strong>`, true); }
 }
