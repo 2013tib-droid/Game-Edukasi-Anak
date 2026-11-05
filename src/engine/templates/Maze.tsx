@@ -135,7 +135,8 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
   const [done, setDone] = useState(false);
   const doneRef = useRef(false);
   const saidDead = useRef(false);
-  const saidMissing = useRef(false);
+  const saidMissingAt = useRef(0);
+  const [locked, setLocked] = useState(0);
   const dragging = useRef(false);
   const fieldRef = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
@@ -182,15 +183,26 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     const t = trailRef.current;
     const end = t[t.length - 1]!;
     if (!canStep(m, end, next)) return false;
+    // Tujuan TERKUNCI sampai semua barang terambil (keputusan pemilik
+    // 2026-11-05: kandang tak boleh dilewati) — tokoh berhenti di depannya.
+    if (next === data.goal && gotRef.current.size < pickups.length) {
+      setLocked(Date.now());
+      later(() => setLocked(0), 700);
+      sfx('tap');
+      buzz(18);
+      const now = Date.now();
+      if (now - saidMissingAt.current > 3000) {
+        saidMissingAt.current = now;
+        narrate(MAZE_LINES.missing);
+      }
+      return false;
+    }
     const dc = colOf(m, next) - colOf(m, end);
     if (dc !== 0) setFaceLeft(dc < 0);
     movesRef.current += 1;
     setMoves(movesRef.current);
     if (t.length >= 2 && t[t.length - 2] === next) {
       commit(t.slice(0, -1));
-      // Kembali ke tujuan lewat jejak sendiri (sudah lewat tujuan sebelum
-      // barangnya lengkap) tetap menyelesaikan labirin.
-      if (next === data.goal && gotRef.current.size >= pickups.length) finish();
       return true;
     }
     commit([...t, next]);
@@ -207,12 +219,7 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     }
 
     if (next === data.goal) {
-      if (gotRef.current.size >= pickups.length) {
-        finish();
-      } else if (!saidMissing.current) {
-        saidMissing.current = true;
-        narrate(MAZE_LINES.missing);
-      }
+      finish();
       return true;
     }
 
@@ -445,7 +452,16 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
                 ))}
               </svg>
 
-              <div className={'mz-thing mz-goal' + (done ? ' mz-goal--won' : '')} style={cellStyle(data.goal)}>
+              <div
+                className={
+                  'mz-thing mz-goal' +
+                  (done ? ' mz-goal--won' : '') +
+                  (!done && got.size < pickups.length ? ' mz-goal--shut' : '') +
+                  (locked ? ' mz-goal--nope' : '')
+                }
+                key={locked || 'goal'}
+                style={cellStyle(data.goal)}
+              >
                 <span className="mz-goal__ring" aria-hidden />
                 <ItemPic id={data.goalItem} className="mz-pic" fallbackClassName="mz-emoji" />
               </div>

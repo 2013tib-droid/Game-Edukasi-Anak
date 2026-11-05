@@ -12,6 +12,7 @@
  *  5. Labirin kenalan (l1) tak berjalan buntu lebih dari dua; labirin besar
  *     (≥ 30 petak) punya paling sedikit lima jalan buntu — yang susah harus
  *     benar-benar susah.
+ *  6. Level berbarang: tujuan di ujung lorong buntu (tak bisa dilewati).
  *
  * Kalau gagal: ubah spec slotnya — jangan longgarkan pemeriksaan ini.
  */
@@ -38,7 +39,7 @@ const files = ['src/games/tk/taman-labirin.ts'];
 const mod = await load(
   files.map((f, i) => `import c${i} from ${JSON.stringify(spec(f))};`).join('\n') +
     `\nexport const configs = [${files.map((_, i) => `c${i}`).join(',')}];` +
-    `\nexport { distances, deadEnds, bestTour } from ${JSON.stringify(spec('src/engine/core/maze.ts'))};`,
+    `\nexport { distances, deadEnds, bestTour, openNeighbors } from ${JSON.stringify(spec('src/engine/core/maze.ts'))};`,
 );
 
 // HP 320×568: lebar papan ≈ 320 − 2×16 (gutter) − 2×9 (bingkai) − 18;
@@ -78,6 +79,7 @@ for (const config of mod.configs) {
       const dead = mod.deadEnds(m).filter((i) => i !== d.start && i !== d.goal && !pickups.includes(i)).length;
       if (lv.id === 'l1' && dead > 2) fail(where, `labirin kenalan punya ${dead} jalan buntu`);
       if (d.cols * d.rows >= 30 && dead < 5) fail(where, `labirin besar cuma ${dead} jalan buntu`);
+      if (pickups.length && mod.openNeighbors(m, d.goal).length !== 1) fail(where, 'tujuan bukan ujung lorong buntu — kandang bisa dilewati');
       if (/\d/.test(lv.narration)) fail(where, 'narasi berangka');
     });
   });
