@@ -277,6 +277,31 @@
   animation: mz-won 0.6s ease-out 2;
 }
 
+.mz-goal--shut .mz-goal__ring {
+  display: none;
+}
+.mz-goal--shut .mz-pic {
+  filter: saturate(0.55) brightness(0.92) drop-shadow(0 2px 1.5px rgba(0, 0, 0, 0.22));
+  animation: none;
+}
+/* Kandang terkunci sampai semua barang terambil. */
+.mz-goal--shut::after {
+  content: '🔒';
+  position: absolute;
+  right: 4%;
+  top: 4%;
+  font-size: clamp(13px, 3.6vw, 20px);
+  line-height: 1;
+}
+.mz-goal--nope .mz-pic {
+  animation: mz-nope 0.45s ease-in-out;
+}
+@keyframes mz-nope {
+  0%, 100% { translate: 0 0; }
+  25% { translate: -4px 0; }
+  75% { translate: 4px 0; }
+}
+
 .mz-pickup .mz-pic {
   width: 66%;
   height: 66%;
@@ -446,7 +471,8 @@
   .mz-pickup .mz-pic,
   .mz-sign,
   .mz-hero__body--won,
-  .mz-goal--won .mz-pic {
+  .mz-goal--won .mz-pic,
+  .mz-goal--nope .mz-pic {
     animation: none;
   }
   .mz-hero {
