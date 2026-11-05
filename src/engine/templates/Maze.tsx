@@ -40,8 +40,9 @@ import '@/engine/ui/maze.css';
  *   tapi tak bisa dilewati — semua hitungan memakai labirin efektif
  *   (`withPuddles`). Menyentuh genangan cuma memercik (tidak dihitung salah);
  *   petak sebelum genangan adalah jalan buntu biasa.
- * - `goalShut`: tujuan (kandang) TERKUNCI 🔒 sampai semua barang terambil —
- *   mencoba masuk memantul + kalimat "masih ada yang belum diambil".
+ * - Level berbarang: tujuan (kandang) TERKUNCI 🔒 sampai semua barang
+ *   terambil — mencoba masuk memantul + kalimat "masih ada yang belum
+ *   diambil". Builder menaruh tujuannya di ujung lorong buntu.
  * - ↩️ mundur ke persimpangan terakhir. "Langkah N" menghitung tiap gerak;
  *   "⭐ Jalan hemat!" kalau langkahnya tak lebih dari rute terpendek.
  */
@@ -182,7 +183,6 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
   const [done, setDone] = useState(false);
   const doneRef = useRef(false);
   const saidDead = useRef(false);
-  const saidMissing = useRef(false);
   const dragging = useRef(false);
   const fieldRef = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
@@ -241,7 +241,9 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
 
   /** Kandang masih terkunci: memantul, kalimatnya diulang paling sering tiap 4 dtk. */
   function lockedGoal() {
-    setLockBump(Date.now());
+    const stamp = Date.now();
+    setLockBump(stamp);
+    later(() => setLockBump((b) => (b === stamp ? 0 : b)), 700);
     sfx('tap');
     buzz(14);
     const now = Date.now();
@@ -256,7 +258,9 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     const t = trailRef.current;
     const end = t[t.length - 1]!;
     if (!canStep(mv, end, next)) return false;
-    if (next === data.goal && data.goalShut && gotRef.current.size < pickups.length) {
+    // Tujuan TERKUNCI sampai semua barang terambil (keputusan pemilik
+    // 2026-11-05: kandang tak boleh dilewati) — tokoh berhenti di depannya.
+    if (next === data.goal && gotRef.current.size < pickups.length) {
       lockedGoal();
       return false;
     }
@@ -266,9 +270,6 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     setMoves(movesRef.current);
     if (t.length >= 2 && t[t.length - 2] === next) {
       commit(t.slice(0, -1));
-      // Kembali ke tujuan lewat jejak sendiri (sudah lewat tujuan sebelum
-      // barangnya lengkap) tetap menyelesaikan labirin.
-      if (next === data.goal && gotRef.current.size >= pickups.length) finish();
       return true;
     }
     commit([...t, next]);
@@ -282,7 +283,7 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
       const p = screenOf(next);
       sparkleAt(p.x, p.y, 8);
       setGlow([]);
-      if (data.goalShut && gotRef.current.size >= pickups.length) {
+      if (gotRef.current.size >= pickups.length) {
         // Barang terakhir: gembok kandang terlepas.
         const g = screenOf(data.goal);
         later(() => sparkleAt(g.x, g.y, 10), 250);
@@ -290,12 +291,7 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     }
 
     if (next === data.goal) {
-      if (gotRef.current.size >= pickups.length) {
-        finish();
-      } else if (!saidMissing.current) {
-        saidMissing.current = true;
-        narrate(MAZE_LINES.missing);
-      }
+      finish();
       return true;
     }
 
@@ -442,7 +438,7 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     height: `${100 / m.rows}%`,
   });
   const thrifty = done && moves <= data.par;
-  const shut = !!data.goalShut && got.size < pickups.length;
+  const shut = !done && got.size < pickups.length;
   const s0 = center(m, data.start);
 
   return (
@@ -573,12 +569,17 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
               </svg>
 
               <div
-                className={'mz-thing mz-goal' + (done ? ' mz-goal--won' : '') + (data.goalShut ? (shut ? ' mz-goal--shut' : ' mz-goal--open') : '')}
+                className={
+                  'mz-thing mz-goal' +
+                  (done ? ' mz-goal--won' : '') +
+                  (shut ? ' mz-goal--shut' : '') +
+                  (lockBump ? ' mz-goal--nope' : '')
+                }
                 style={cellStyle(data.goal)}
               >
                 <span className="mz-goal__ring" aria-hidden />
                 <ItemPic id={data.goalItem} className="mz-pic" fallbackClassName="mz-emoji" />
-                {data.goalShut && (
+                {pickups.length > 0 && (
                   <span key={shut ? `l${lockBump}` : 'open'} className={'mz-lock' + (shut ? (lockBump ? ' mz-lock--bump' : '') : ' mz-lock--off')} aria-hidden>
                     <LockIcon />
                   </span>

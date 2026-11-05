@@ -16,8 +16,8 @@
  *  6. Genangan (Labirin Hujan): tak menimpa mulai/tujuan/barang, semua petak
  *     lain tetap terjangkau, dan TIAP genangan benar-benar menutup jalan
  *     pintas (tanpa genangan itu rute terpendek lebih pendek).
- *  7. Tujuan berkunci (`goalShut`) / labirin bergenangan: tujuan di ujung
- *     jalan buntu (satu pintu) — tak mungkin dilewati.
+ *  7. Level berbarang (kandang terkunci) / labirin bergenangan: tujuan di
+ *     ujung lorong buntu (satu pintu) — tak mungkin dilewati.
  *
  * Kalau gagal: ubah spec slotnya — jangan longgarkan pemeriksaan ini.
  */
@@ -80,8 +80,7 @@ for (const config of mod.configs) {
         const shorter = mod.bestTour(without, d.start, d.goal, pickups).length - 1;
         if (shorter >= d.par) fail(where, `genangan di petak ${p} tak menutup jalan pintas apa pun`);
       }
-      if ((d.goalShut || puddles.length) && mod.openNeighbors(m, d.goal).length !== 1) fail(where, 'tujuan bukan ujung jalan buntu — bisa dilewati');
-      if (d.goalShut && !pickups.length) fail(where, 'tujuan terkunci tanpa barang');
+      if (puddles.length && !pickups.length && mod.openNeighbors(m, d.goal).length !== 1) fail(where, 'tujuan bukan ujung jalan buntu — bisa dilewati');
       const spots = [d.start, d.goal, ...pickups];
       if (new Set(spots).size !== spots.length) fail(where, 'mulai/tujuan/barang bertumpuk');
       if (pickups.length && !d.pickupItem) fail(where, 'barang tanpa gambar');
@@ -94,6 +93,7 @@ for (const config of mod.configs) {
       const dead = mod.deadEnds(m).filter((i) => i !== d.start && i !== d.goal && !pickups.includes(i)).length;
       if (lv.id === 'l1' && !puddles.length && dead > 2) fail(where, `labirin kenalan punya ${dead} jalan buntu`);
       if (d.cols * d.rows >= 30 && dead < 5) fail(where, `labirin besar cuma ${dead} jalan buntu`);
+      if (pickups.length && mod.openNeighbors(m, d.goal).length !== 1) fail(where, 'tujuan bukan ujung lorong buntu — kandang bisa dilewati');
       if (/\d/.test(lv.narration)) fail(where, 'narasi berangka');
     });
   });

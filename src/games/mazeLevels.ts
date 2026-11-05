@@ -218,6 +218,10 @@ function build(id: string, k: number, spec: MazeSpec, from = 0): Built {
   for (let n = from; n < from + 4000; n += 1) {
     const m = generateMaze(spec.cols, spec.rows, seedOf(`${id}:${k}:${n}`), spec.braid ?? 0);
     const [start, goal] = corners(m, k);
+    // Level berbarang: tujuan WAJIB di ujung lorong buntu (keputusan pemilik
+    // 2026-11-05) — kandang di akhir perjalanan, tak pernah dilewati untuk
+    // mengambil barang.
+    if (want > 0 && openNeighbors(m, goal).length !== 1) continue;
     const main = shortestPath(m, start, goal);
     if (main.length < Math.ceil((spec.minPath ?? 0) * m.open.length)) continue;
     const forks = main.filter((i) => openNeighbors(m, i).length >= 3).length;
@@ -284,7 +288,6 @@ export function mazeSlot(
         par: b.par,
         scene: cast.scene,
         puddles: b.puddles?.length ? b.puddles : undefined,
-        goalShut: b.puddles && b.pickups.length ? true : undefined,
       },
     });
   }

@@ -1560,11 +1560,6 @@ export interface MazeData {
    * tak bisa dilewati (`withPuddles` di core/maze.ts).
    */
   puddles?: number[];
-  /**
-   * Tujuan TERKUNCI sampai semua barang terambil (kandang tak bisa dimasuki,
-   * apalagi dilewati). Builder menaruh tujuan seperti ini di ujung jalan buntu.
-   */
-  goalShut?: boolean;
 }
 
 export interface LevelDataMap {
