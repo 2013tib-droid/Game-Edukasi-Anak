@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-05",
-  "count": 2136,
-  "chars": 89538,
+  "count": 2167,
+  "chars": 91010,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -12001,6 +12001,285 @@
       ]
     },
     {
+      "key": "2ae72886cc61",
+      "text": "Ada genangan air! Tidak bisa lewat. Cari jalan lain, ya.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "b70b9748e929",
+      "text": "Ambil semua apel, lalu pulang ke kandang!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "43669190268a",
+      "text": "Banyak genangan! Rencanakan jalanmu ke apel.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "382c8060871c",
+      "text": "Banyak genangan! Rencanakan jalanmu ke bunga.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "9d2e2ae0266c",
+      "text": "Banyak genangan! Rencanakan jalanmu ke jagung.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "faa5399f5387",
+      "text": "Banyak genangan! Rencanakan jalanmu ke susu.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "abce0ca80e9e",
+      "text": "Banyak genangan! Rencanakan jalanmu ke wortel.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "d3fcf0a98035",
+      "text": "Genangan menutup jalan. Cari jalan memutar ke apel!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "8d7287b55190",
+      "text": "Genangan menutup jalan. Cari jalan memutar ke bunga!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "e96e2af8cee0",
+      "text": "Genangan menutup jalan. Cari jalan memutar ke jagung!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "647ea723aacc",
+      "text": "Genangan menutup jalan. Cari jalan memutar ke susu!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "fbcae6f03ef2",
+      "text": "Genangan menutup jalan. Cari jalan memutar ke wortel!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "b3b2a7c0954d",
+      "text": "Habis hujan, ada genangan! Antar ayam ke jagung.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "e6c9552c94d2",
+      "text": "Habis hujan, ada genangan! Antar kelinci ke wortel.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "1d65d68f5b39",
+      "text": "Habis hujan, ada genangan! Antar kucing ke susu.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "37c7d4bd3e9a",
+      "text": "Habis hujan, ada genangan! Antar kuda ke apel.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "c3527cdb41aa",
+      "text": "Habis hujan, ada genangan! Antar kura-kura ke bunga.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "00a2cddf047e",
+      "text": "Hujan deras! Hindari genangan, cari apel.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "f1c64a192514",
+      "text": "Hujan deras! Hindari genangan, cari bunga.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "b147fa703c30",
+      "text": "Hujan deras! Hindari genangan, cari jagung.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "e5517b88a817",
+      "text": "Hujan deras! Hindari genangan, cari susu.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "6b60a9b84d8f",
+      "text": "Hujan deras! Hindari genangan, cari wortel.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "2d95f850b6b3",
+      "text": "Kandang terkunci! Ambil apel dulu, baru pulang.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "a9261435b50a",
+      "text": "Kandang terkunci! Ambil jagung dulu, baru pulang.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "106883fd7b0f",
+      "text": "Kandang terkunci! Ambil wortel dulu, baru pulang.",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "04470a541478",
+      "text": "Kumpulkan semua apel, lalu buka kandangnya!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "267b7fdb9863",
+      "text": "Kumpulkan semua jagung, lalu buka kandangnya!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "158356a7904b",
+      "text": "Kumpulkan semua wortel, lalu buka kandangnya!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "623df9f0e9f9",
+      "text": "Misi besar! Kumpulkan semua apel, hindari genangan!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "8564c43ed4b7",
+      "text": "Misi besar! Kumpulkan semua jagung, hindari genangan!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
+      "key": "b9e4b8657896",
+      "text": "Misi besar! Kumpulkan semua wortel, hindari genangan!",
+      "scope": "labirin-hujan",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan"
+      ]
+    },
+    {
       "key": "744502037587",
       "text": "Semua bentuknya sama. Sentuh awan warna biru!",
       "scope": "labirin-warna",
@@ -15106,6 +15385,26 @@
       ]
     },
     {
+      "key": "99b715a9c684",
+      "text": "Ambil semua jagung, lalu pulang ke kandang!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan",
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "c152b8e185e0",
+      "text": "Ambil semua wortel, lalu pulang ke kandang!",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan",
+        "taman-labirin"
+      ]
+    },
+    {
       "key": "7becae50d4c9",
       "text": "Antar ambulans ke rumah sakit. Ikuti jalannya dengan jarimu!",
       "scope": "shared",
@@ -15380,6 +15679,16 @@
       ]
     },
     {
+      "key": "f7535af35ef9",
+      "text": "Jalan buntu! Balik lagi, cari jalan lain, ya.",
+      "scope": "shared",
+      "voice": "gadis",
+      "games": [
+        "labirin-hujan",
+        "taman-labirin"
+      ]
+    },
+    {
       "key": "5d797c3add45",
       "text": "Kanan",
       "scope": "shared",
@@ -15441,6 +15750,7 @@
       "games": [
         "kode-kelinci",
         "kode-warna",
+        "labirin-hujan",
         "misi-kode",
         "petak-ajaib",
         "taman-labirin"
@@ -17307,24 +17617,6 @@
       ]
     },
     {
-      "key": "99b715a9c684",
-      "text": "Ambil semua jagung, lalu pulang ke kandang!",
-      "scope": "taman-labirin",
-      "voice": "gadis",
-      "games": [
-        "taman-labirin"
-      ]
-    },
-    {
-      "key": "c152b8e185e0",
-      "text": "Ambil semua wortel, lalu pulang ke kandang!",
-      "scope": "taman-labirin",
-      "voice": "gadis",
-      "games": [
-        "taman-labirin"
-      ]
-    },
-    {
       "key": "f8834e75b3b1",
       "text": "Ambil wortel dulu, lalu pulang ke kandang!",
       "scope": "taman-labirin",
@@ -17435,15 +17727,6 @@
     {
       "key": "b4cb19db95b8",
       "text": "Ikuti lorongnya sampai kura-kura tiba di bunga!",
-      "scope": "taman-labirin",
-      "voice": "gadis",
-      "games": [
-        "taman-labirin"
-      ]
-    },
-    {
-      "key": "f7535af35ef9",
-      "text": "Jalan buntu! Balik lagi, cari jalan lain, ya.",
       "scope": "taman-labirin",
       "voice": "gadis",
       "games": [

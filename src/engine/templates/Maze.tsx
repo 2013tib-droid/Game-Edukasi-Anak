@@ -11,6 +11,7 @@ import {
   openNeighbors,
   rowOf,
   shortestPath,
+  withPuddles,
   type MazeGrid,
 } from '@/engine/core/maze';
 import { sfx } from '@/engine/audio/sound';
@@ -35,6 +36,12 @@ import '@/engine/ui/maze.css';
  * - Petunjuk: tombol 💡 menyalakan beberapa langkah berikutnya sebentar
  *   (gratis); P2 tingkat 1 = tiga langkah berikutnya bertanda tapak, tingkat
  *   2 = seluruh jalan ke sasaran berikutnya.
+ * - GENANGAN AIR (`puddles`, Labirin Hujan SD): lorongnya tergambar terbuka
+ *   tapi tak bisa dilewati — semua hitungan memakai labirin efektif
+ *   (`withPuddles`). Menyentuh genangan cuma memercik (tidak dihitung salah);
+ *   petak sebelum genangan adalah jalan buntu biasa.
+ * - `goalShut`: tujuan (kandang) TERKUNCI 🔒 sampai semua barang terambil —
+ *   mencoba masuk memantul + kalimat "masih ada yang belum diambil".
  * - ↩️ mundur ke persimpangan terakhir. "Langkah N" menghitung tiap gerak;
  *   "⭐ Jalan hemat!" kalau langkahnya tak lebih dari rute terpendek.
  */
@@ -72,6 +79,37 @@ function wallPath(m: MazeGrid): string {
   }
   parts.push(`M${W} 0V${H}`);
   return parts.join('');
+}
+
+/** Genangan: gumpalan air berbentuk acak-tetap per petak (8 titik, kurva halus). */
+function puddlePath(m: MazeGrid, i: number): string {
+  const { x, y } = center(m, i);
+  let h = (i * 2654435761) >>> 0;
+  const pts: { x: number; y: number }[] = [];
+  for (let k = 0; k < 8; k += 1) {
+    h = (Math.imul(h ^ (k + 11), 1103515245) + 12345) >>> 0;
+    const a = (k / 8) * Math.PI * 2;
+    const r = 3.55 + ((h % 100) / 100) * 0.9;
+    pts.push({ x: x + Math.cos(a) * r * 1.08, y: y + Math.sin(a) * r * 0.92 });
+  }
+  const mid = (a: { x: number; y: number }, b: { x: number; y: number }) => `${((a.x + b.x) / 2).toFixed(2)} ${((a.y + b.y) / 2).toFixed(2)}`;
+  let d = `M${mid(pts[7]!, pts[0]!)}`;
+  for (let k = 0; k < 8; k += 1) {
+    const p = pts[k]!;
+    d += `Q${p.x.toFixed(2)} ${p.y.toFixed(2)} ${mid(p, pts[(k + 1) % 8]!)}`;
+  }
+  return `${d}Z`;
+}
+
+function LockIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="mz-lock__icon" aria-hidden>
+      <path d="M7.5 11V8a4.5 4.5 0 0 1 9 0v3" fill="none" stroke="#8a6a3a" strokeWidth="2.6" strokeLinecap="round" />
+      <rect x="4.5" y="10.5" width="15" height="11" rx="3" fill="#ffc93c" stroke="#b07a10" strokeWidth="1.6" />
+      <circle cx="12" cy="15.4" r="1.7" fill="#8a5a00" />
+      <path d="M12 16.4v2.4" stroke="#8a5a00" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
 }
 
 /** Bunga-bunga kecil di sudut pagar — hiasan acak-tetap per labirin. */
@@ -117,6 +155,10 @@ function UndoIcon() {
 export default function Maze({ level, onCorrect, onWrong, narrate, hint }: TemplateProps<'maze'>) {
   const data = level.data;
   const m: MazeGrid = useMemo(() => ({ cols: data.cols, rows: data.rows, open: data.open }), [data]);
+  // Labirin EFEKTIF (genangan ditutup) — dipakai untuk semua gerak & hitungan.
+  // `m` (labirin asli) cuma untuk menggambar pagar.
+  const mv: MazeGrid = useMemo(() => withPuddles(m, data.puddles), [m, data.puddles]);
+  const puddles = useMemo(() => new Set(data.puddles ?? []), [data]);
   const pickups = useMemo(() => data.pickups ?? [], [data]);
   const walls = useMemo(() => wallPath(m), [m]);
   const deco = useMemo(() => flowers(m), [m]);
@@ -132,6 +174,11 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
   const [faceLeft, setFaceLeft] = useState(false);
   const [sign, setSign] = useState<{ cell: number; key: number } | null>(null);
   const [glow, setGlow] = useState<number[]>([]);
+  const [splash, setSplash] = useState<{ cell: number; key: number } | null>(null);
+  const [lockBump, setLockBump] = useState(0);
+  const lastSplash = useRef<{ cell: number; at: number }>({ cell: -1, at: 0 });
+  const saidPuddle = useRef(false);
+  const saidLockAt = useRef(0);
   const [done, setDone] = useState(false);
   const doneRef = useRef(false);
   const saidDead = useRef(false);
@@ -177,11 +224,42 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     later(onCorrect, 520);
   }
 
+  /** Jari menyentuh genangan: air memercik, tokoh tak bergerak. TIDAK dihitung salah. */
+  function splashAt(cell: number) {
+    const now = Date.now();
+    if (lastSplash.current.cell === cell && now - lastSplash.current.at < 900) return;
+    lastSplash.current = { cell, at: now };
+    setSplash({ cell, key: now });
+    later(() => setSplash(null), 800);
+    sfx('tap');
+    buzz(14);
+    if (!saidPuddle.current) {
+      saidPuddle.current = true;
+      narrate(MAZE_LINES.puddle);
+    }
+  }
+
+  /** Kandang masih terkunci: memantul, kalimatnya diulang paling sering tiap 4 dtk. */
+  function lockedGoal() {
+    setLockBump(Date.now());
+    sfx('tap');
+    buzz(14);
+    const now = Date.now();
+    if (now - saidLockAt.current > 4000) {
+      saidLockAt.current = now;
+      narrate(MAZE_LINES.missing);
+    }
+  }
+
   /** Satu langkah ke petak tetangga `next` (maju, atau mundur kalau itu petak sebelumnya). */
   function stepTo(next: number) {
     const t = trailRef.current;
     const end = t[t.length - 1]!;
-    if (!canStep(m, end, next)) return false;
+    if (!canStep(mv, end, next)) return false;
+    if (next === data.goal && data.goalShut && gotRef.current.size < pickups.length) {
+      lockedGoal();
+      return false;
+    }
     const dc = colOf(m, next) - colOf(m, end);
     if (dc !== 0) setFaceLeft(dc < 0);
     movesRef.current += 1;
@@ -204,6 +282,11 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
       const p = screenOf(next);
       sparkleAt(p.x, p.y, 8);
       setGlow([]);
+      if (data.goalShut && gotRef.current.size >= pickups.length) {
+        // Barang terakhir: gembok kandang terlepas.
+        const g = screenOf(data.goal);
+        later(() => sparkleAt(g.x, g.y, 10), 250);
+      }
     }
 
     if (next === data.goal) {
@@ -217,7 +300,9 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     }
 
     const isDead =
-      openNeighbors(m, next).length === 1 && next !== data.start && !pickups.includes(next);
+      openNeighbors(mv, next).length === 1 && next !== data.start && !pickups.includes(next);
+    // Jalan buntu karena GENANGAN (lorong asli masih terbuka ke genangan).
+    const byPuddle = isDead && openNeighbors(m, next).some((x) => puddles.has(x));
     if (isDead && !deadRef.current.has(next)) {
       deadRef.current = new Set(deadRef.current).add(next);
       setDeadSeen(deadRef.current);
@@ -225,7 +310,12 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
       later(() => setSign(null), 1500);
       sfx('wrong');
       buzz(30);
-      if (!saidDead.current) {
+      if (byPuddle) {
+        if (!saidPuddle.current) {
+          saidPuddle.current = true;
+          narrate(MAZE_LINES.puddle);
+        }
+      } else if (!saidDead.current) {
         saidDead.current = true;
         narrate(MAZE_LINES.deadEnd);
       }
@@ -240,6 +330,11 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     const t = trailRef.current;
     const end = t[t.length - 1]!;
     if (cell === end) return;
+    if (puddles.has(cell)) {
+      // Genangan tepat di sebelah tokoh: memercik. Lebih jauh: diabaikan.
+      if (canStep(m, end, cell)) splashAt(cell);
+      return;
+    }
     const back = t.lastIndexOf(cell);
     if (back >= 0) {
       // Mundur di sepanjang jejak sendiri.
@@ -257,7 +352,7 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
       let at = end;
       while (at !== cell) {
         const nxt = (rowOf(m, at) + dr) * m.cols + (colOf(m, at) + dcol);
-        if (!canStep(m, at, nxt)) {
+        if (!canStep(mv, at, nxt)) {
           route = [];
           break;
         }
@@ -266,7 +361,7 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
       }
     }
     if (!route.length) {
-      const sp = shortestPath(m, end, cell);
+      const sp = shortestPath(mv, end, cell);
       if (sp.length >= 2 && sp.length <= 3) route = sp.slice(1);
     }
     for (const p of route) {
@@ -312,7 +407,7 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     const t = trailRef.current;
     if (t.length < 2) return;
     let i = t.length - 2;
-    while (i > 0 && openNeighbors(m, t[i]!).length < 3) i -= 1;
+    while (i > 0 && openNeighbors(mv, t[i]!).length < 3) i -= 1;
     for (let k = t.length - 2; k >= i; k -= 1) stepTo(t[k]!);
     sfx('tap');
   }
@@ -321,7 +416,7 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     if (doneRef.current) return;
     const t = trailRef.current;
     const left = pickups.filter((p) => !gotRef.current.has(p));
-    setGlow(nextRoute(m, t[t.length - 1]!, data.goal, left).slice(0, 5));
+    setGlow(nextRoute(mv, t[t.length - 1]!, data.goal, left).slice(0, 5));
     sfx('tap');
     later(() => setGlow([]), 2600);
   }
@@ -331,7 +426,7 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
   const left = pickups.filter((p) => !got.has(p));
   const hintCells = useMemo(() => {
     if (hint < 1 || done) return [];
-    const route = nextRoute(m, end, data.goal, left);
+    const route = nextRoute(mv, end, data.goal, left);
     return hint >= 2 ? route : route.slice(0, 3);
   }, [hint, end, done, left.length]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -347,6 +442,7 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
     height: `${100 / m.rows}%`,
   });
   const thrifty = done && moves <= data.par;
+  const shut = !!data.goalShut && got.size < pickups.length;
   const s0 = center(m, data.start);
 
   return (
@@ -381,7 +477,8 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
               ref={fieldRef}
               className="mz-field"
               data-moves={moves}
-              data-maze={`${m.cols}|${m.rows}|${data.open.join(',')}|${data.start}|${data.goal}|${pickups.join(',')}`}
+              data-maze={`${m.cols}|${m.rows}|${data.open.join(',')}|${data.start}|${data.goal}|${pickups.join(',')}|${(data.puddles ?? []).join(',')}`}
+              data-shut={shut ? '1' : '0'}
               data-done={done ? '1' : '0'}
               onPointerDown={down}
               onPointerMove={move}
@@ -409,6 +506,36 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
                     </g>
                   );
                 })}
+                {/* genangan air */}
+                {[...puddles].map((i) => {
+                  const p = center(m, i);
+                  return (
+                    <g key={`p${i}`} className="mz-puddle">
+                      <path d={puddlePath(m, i)} className="mz-puddle__water" />
+                      <ellipse cx={p.x - 1.1} cy={p.y - 1.2} rx={1.7} ry={0.75} className="mz-puddle__shine" />
+                      <ellipse cx={p.x + 0.8} cy={p.y + 0.9} rx={1.3} ry={0.6} className="mz-puddle__ring" />
+                      <ellipse cx={p.x + 0.8} cy={p.y + 0.9} rx={1.3} ry={0.6} className="mz-puddle__ring mz-puddle__ring--late" />
+                    </g>
+                  );
+                })}
+                {splash &&
+                  (() => {
+                    const p = center(m, splash.cell);
+                    return (
+                      <g key={splash.key} className="mz-splash">
+                        <circle cx={p.x} cy={p.y} r={2} />
+                        {[0, 60, 120, 180, 240, 300].map((a) => (
+                          <circle
+                            key={a}
+                            className="mz-splash__drop"
+                            cx={p.x + Math.cos((a * Math.PI) / 180) * 3.2}
+                            cy={p.y + Math.sin((a * Math.PI) / 180) * 3.2 - 1}
+                            r={0.7}
+                          />
+                        ))}
+                      </g>
+                    );
+                  })()}
                 {/* jejak */}
                 {trail.length > 1 && (
                   <>
@@ -445,9 +572,17 @@ export default function Maze({ level, onCorrect, onWrong, narrate, hint }: Templ
                 ))}
               </svg>
 
-              <div className={'mz-thing mz-goal' + (done ? ' mz-goal--won' : '')} style={cellStyle(data.goal)}>
+              <div
+                className={'mz-thing mz-goal' + (done ? ' mz-goal--won' : '') + (data.goalShut ? (shut ? ' mz-goal--shut' : ' mz-goal--open') : '')}
+                style={cellStyle(data.goal)}
+              >
                 <span className="mz-goal__ring" aria-hidden />
                 <ItemPic id={data.goalItem} className="mz-pic" fallbackClassName="mz-emoji" />
+                {data.goalShut && (
+                  <span key={shut ? `l${lockBump}` : 'open'} className={'mz-lock' + (shut ? (lockBump ? ' mz-lock--bump' : '') : ' mz-lock--off')} aria-hidden>
+                    <LockIcon />
+                  </span>
+                )}
               </div>
               {pickups.map((p) =>
                 got.has(p) || !data.pickupItem ? null : (
