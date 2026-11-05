@@ -1,7 +1,7 @@
 {
-  "generated": "2026-11-02",
-  "count": 2109,
-  "chars": 88252,
+  "generated": "2026-11-05",
+  "count": 2136,
+  "chars": 89538,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -15442,7 +15442,8 @@
         "kode-kelinci",
         "kode-warna",
         "misi-kode",
-        "petak-ajaib"
+        "petak-ajaib",
+        "taman-labirin"
       ]
     },
     {
@@ -17258,6 +17259,249 @@
       "voice": "gadis",
       "games": [
         "taman-huruf"
+      ]
+    },
+    {
+      "key": "ac4d42658b4c",
+      "text": "Ada jalan bercabang. Pilih jalan ke bunga, ya!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "26b7146bb12a",
+      "text": "Ada jalan bercabang. Pilih jalan ke jagung, ya!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "c7d445bfe31d",
+      "text": "Ada jalan bercabang. Pilih jalan ke susu, ya!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "f8a3898360fe",
+      "text": "Ada jalan bercabang. Pilih jalan ke wortel, ya!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "bf412e3ce8b8",
+      "text": "Ambil jagung dulu, lalu pulang ke kandang!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "99b715a9c684",
+      "text": "Ambil semua jagung, lalu pulang ke kandang!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "c152b8e185e0",
+      "text": "Ambil semua wortel, lalu pulang ke kandang!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "f8834e75b3b1",
+      "text": "Ambil wortel dulu, lalu pulang ke kandang!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "b6b85ab05437",
+      "text": "Bantu ayam menemukan jagung! Tarik ayam dengan jarimu.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "fc6b3882cfa7",
+      "text": "Bantu kelinci menemukan wortel! Tarik kelinci dengan jarimu.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "fb3e713ca300",
+      "text": "Bantu kucing menemukan susu! Tarik kucing dengan jarimu.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "d64cb4a39feb",
+      "text": "Bantu kura-kura menemukan bunga! Tarik kura-kura dengan jarimu.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "896820477c7b",
+      "text": "Hati-hati, ada jalan buntu! Antar ayam ke jagung.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "13af3d6c0c7f",
+      "text": "Hati-hati, ada jalan buntu! Antar kelinci ke wortel.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "4f21e3e7b781",
+      "text": "Hati-hati, ada jalan buntu! Antar kucing ke susu.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "736d447a192e",
+      "text": "Hati-hati, ada jalan buntu! Antar kura-kura ke bunga.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "889836dfd01b",
+      "text": "Ikuti lorongnya sampai ayam tiba di jagung!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "bee2748eece7",
+      "text": "Ikuti lorongnya sampai kelinci tiba di wortel!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "6c576d8cb9cf",
+      "text": "Ikuti lorongnya sampai kucing tiba di susu!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "b4cb19db95b8",
+      "text": "Ikuti lorongnya sampai kura-kura tiba di bunga!",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "f7535af35ef9",
+      "text": "Jalan buntu! Balik lagi, cari jalan lain, ya.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "8d66a68762be",
+      "text": "Labirinnya besar! Cari jalan ke bunga.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "9ec73c9aeb62",
+      "text": "Labirinnya besar! Cari jalan ke jagung.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "da38fe05b5c3",
+      "text": "Labirinnya besar! Cari jalan ke susu.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "fcc807833e22",
+      "text": "Labirinnya besar! Cari jalan ke wortel.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "799a469ee0b0",
+      "text": "Misi besar! Kumpulkan semua jagung, lalu pulang ke kandang.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
+      ]
+    },
+    {
+      "key": "8251ce2ef679",
+      "text": "Misi besar! Kumpulkan semua wortel, lalu pulang ke kandang.",
+      "scope": "taman-labirin",
+      "voice": "gadis",
+      "games": [
+        "taman-labirin"
       ]
     },
     {

@@ -104,6 +104,7 @@ const mod = await load(
     `\nexport { CODE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/codeQuest.ts').split(path.sep).join('/'))};` +
     `\nexport { PATH_LINES, parsePathBoard } from ${JSON.stringify(path.resolve('src/engine/core/colorPath.ts').split(path.sep).join('/'))};` +
     `\nexport { SPOT_LINES } from ${JSON.stringify(path.resolve('src/engine/core/spotDiff.ts').split(path.sep).join('/'))};` +
+    `\nexport { MAZE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/maze.ts').split(path.sep).join('/'))};` +
     `\nexport { phraseText, VOY_LINES } from ${JSON.stringify(path.resolve('src/engine/core/wordVoyage.ts').split(path.sep).join('/'))};`,
 );
 
@@ -228,6 +229,15 @@ for (const config of mod.configs) {
     // difference count say so when "Sudah semua!" is pressed too early.
     if ((level.template ?? config.template) === 'spot-diff' && level.data.hidden) {
       add(mod.SPOT_LINES.notYet, config.id, voice);
+    }
+
+    // maze (Taman Labirin): the first dead end of a level is announced, and
+    // arriving home without every pickup says so (MAZE_LINES — the SAME
+    // object the template uses).
+    if ((level.template ?? config.template) === 'maze') {
+      add(mod.MAZE_LINES.deadEnd, config.id, voice);
+      if (level.data.pickups?.length) add(mod.MAZE_LINES.missing, config.id, voice);
+      continue;
     }
 
     // word-voyage (Kapten Kata): the engine picks words from the island's

@@ -89,6 +89,12 @@ jobs:
       - name: Periksa soal cari perbedaan
         run: node scripts/check-spot-levels.mjs
 
+      # Taman Labirin: labirin dibuat mesin dari benih — tiap varian WAJIB
+      # bisa diselesaikan, lorongnya cukup lebar di HP terkecil, dan labirin
+      # besar benar-benar punya jalan buntu.
+      - name: Periksa soal labirin
+        run: node scripts/check-maze-levels.mjs
+
       # Sinkron bintang ke Firestore harus MENGGABUNG (maksimum per level),
       # tidak menimpa. Kalau ini jadi penulisan biasa, anak yang main di
       # tablet lalu di HP kehilangan bintang tabletnya — dan itu cuma
