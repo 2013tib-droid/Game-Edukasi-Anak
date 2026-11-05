@@ -37,7 +37,8 @@ export type TemplateId =
   | 'light-lab' // percobaan cahaya, bayangan, bunyi & energi (Lab Cahaya & Bunyi)
   | 'word-voyage' // kosakata & kalimat bahasa Inggris, 7 mode berganti (Kapten Kata)
   | 'code-quest' // susun kartu panah lalu Jalankan — coding anak (Kode Kelinci, Misi Kode)
-  | 'color-path'; // pasang panah per WARNA petak, tokoh berjalan sendiri — percabangan (Petak Ajaib, Kode Warna)
+  | 'color-path' // pasang panah per WARNA petak, tokoh berjalan sendiri — percabangan (Petak Ajaib, Kode Warna)
+  | 'maze'; // labirin berdinding: tarik tokoh dengan jari sampai tujuan (Taman Labirin)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -1528,6 +1529,32 @@ export interface ColorPathData {
   };
 }
 
+/**
+ * LABIRIN (template `maze`, Taman Labirin — 2026-11-05). Anak MENARIK tokoh
+ * dengan jari lewat lorong; garis jejak mengikuti jari, kembali ke petak
+ * sebelumnya = mundur. Labirinnya dibuat MESIN dari benih
+ * (`src/games/mazeLevels.ts` → `core/maze.ts`), config tak menulis dinding.
+ */
+export interface MazeData {
+  cols: number;
+  rows: number;
+  /** Bitmask sisi terbuka per petak (1 atas · 2 kanan · 4 bawah · 8 kiri). */
+  open: number[];
+  /** Indeks petak mulai / tujuan (r * cols + c). */
+  start: number;
+  goal: number;
+  /** Petak barang yang WAJIB diambil sebelum masuk tujuan. */
+  pickups?: number[];
+  heroItem: string;
+  /** Arah hadap seni tokohnya — supaya dibalik sesuai arah jalan. */
+  heroFaces?: 'kiri' | 'kanan';
+  goalItem: string;
+  pickupItem?: string;
+  /** Langkah rute terpendek (dengan semua barang) — lencana "Jalan hemat!". */
+  par: number;
+  scene?: SceneId;
+}
+
 export interface LevelDataMap {
   'tap-answer': TapAnswerData;
   'drag-drop': DragDropData;
@@ -1553,6 +1580,7 @@ export interface LevelDataMap {
   'word-voyage': WordVoyageData;
   'code-quest': CodeQuestData;
   'color-path': ColorPathData;
+  maze: MazeData;
 }
 
 /* ---------- Game config ---------- */

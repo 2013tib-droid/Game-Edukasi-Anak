@@ -194,6 +194,17 @@ const ALL_GAMES: GameMeta[] = [
     template: 'color-path',
     load: () => import('@/games/tk/petak-ajaib'),
   },
+  {
+    // Labirin berdinding pagar tanaman (template `maze`, 2026-11-05): anak
+    // menarik tokoh dengan jari sampai tujuan; makin belakang makin besar,
+    // dengan barang yang harus diambil dulu. Seni ikon belum ada (🌿 dulu).
+    id: 'taman-labirin',
+    group: 'tk',
+    title: 'Taman Labirin',
+    emoji: '🌿',
+    template: 'maze',
+    load: () => import('@/games/tk/taman-labirin'),
+  },
   // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
   {
     // PALING ATAS (keputusan pemilik 2026-09-24, ditukar dengan "Pasang Kata"):
