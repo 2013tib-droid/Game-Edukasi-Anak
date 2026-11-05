@@ -195,6 +195,18 @@ const ALL_GAMES: GameMeta[] = [
     load: () => import('@/games/tk/petak-ajaib'),
   },
   {
+    // Cari perbedaan (template `spot-diff`, 2026-10-31): dua gambar, tiga
+    // perbedaan mencolok. Gambar kedua dibuat mesin, nol aset baru. Ikon
+    // seni: dua cupcake kembar, satu berceri (👀 cadangan).
+    id: 'cari-beda',
+    group: 'tk',
+    title: 'Cari Beda',
+    emoji: '👀',
+    pic: 'cari-beda',
+    template: 'spot-diff',
+    load: () => import('@/games/tk/cari-beda'),
+  },
+  {
     // Labirin berdinding pagar tanaman (template `maze`, 2026-11-05): anak
     // menarik tokoh dengan jari sampai tujuan; makin belakang makin besar,
     // dengan barang yang harus diambil dulu. Seni ikon belum ada (🌿 dulu).
@@ -263,6 +275,17 @@ const ALL_GAMES: GameMeta[] = [
     pic: 'kode-warna',
     template: 'color-path',
     load: () => import('@/games/sd1/kode-warna'),
+  },
+  {
+    // Saudara "Cari Beda" (TK) yang lebih sulit: lima perbedaan, termasuk
+    // arah hadap & ukuran. Ikon seni: dua kartu pemandangan + pensil (🖼️ cadangan).
+    id: 'teliti-gambar',
+    group: 'sd1',
+    title: 'Teliti Gambar',
+    emoji: '🖼️',
+    pic: 'teliti-gambar',
+    template: 'spot-diff',
+    load: () => import('@/games/sd1/teliti-gambar'),
   },
   {
     id: 'hitung-hebat',
@@ -422,6 +445,20 @@ const ALL_GAMES: GameMeta[] = [
     pic: 'lab-cahaya-bunyi',
     template: 'light-lab',
     load: () => import('@/games/sd2/lab-cahaya-bunyi'),
+  },
+  {
+    // Cari perbedaan versi paling sulit (template `spot-diff`, 2026-10-31):
+    // perbedaan pindah tempat, tukar tempat, jumlah, dan jumlah perbedaan
+    // dirahasiakan. IPAS = keterampilan mengamati (keputusan pemilik). Ikon
+    // seni: teropong berwajah (🧐 cadangan).
+    id: 'mata-jeli',
+    group: 'sd2',
+    subject: 'ipas',
+    title: 'Mata Jeli',
+    emoji: '🧐',
+    pic: 'mata-jeli',
+    template: 'spot-diff',
+    load: () => import('@/games/sd2/mata-jeli'),
   },
   {
     id: 'toko-kembalian',

@@ -39,3 +39,6 @@ serviceAccount*.json
 service-account*.json
 *-firebase-adminsdk-*.json
 kode*.csv
+# Hasil `statistik-game.mjs --json` untuk Dasbor Statistik. Angka jumlah saja,
+# tapi itu angka penjualan bulanan: jangan ikut ke repo publik.
+statistik-*.json

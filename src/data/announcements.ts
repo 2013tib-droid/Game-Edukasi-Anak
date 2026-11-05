@@ -65,6 +65,18 @@ export function announcementsFor(owned: readonly string[]): Announcement[] {
  * only for entries that would frustrate someone who has not bought it.
  */
 export const announcements: Announcement[] = [
+  // Three spot-the-difference games (Cari Beda, Teliti Gambar, Mata Jeli).
+  {
+    id: 'a-2026-11-03-cari-perbedaan',
+    date: '2026-11-03',
+    tag: 'baru',
+    title: '3 game baru: Cari Perbedaan!',
+    body:
+      'Latih mata jeli si kecil dengan mencari perbedaan dua gambar. ' +
+      'Cari Beda untuk Playgroup dan TK, Teliti Gambar untuk SD Kelas 1 & 2, ' +
+      'dan Mata Jeli untuk SD Kelas 3 & 4 dengan lukisan ramai: perkemahan, ' +
+      'sekolah, pasar, pantai, dan sawah.',
+  },
   // Release of SD Kelas 3 & 4 + the new look (prod deploy 2026-10-17).
   {
     id: 'a-2026-10-17-sd-kelas-3-4',

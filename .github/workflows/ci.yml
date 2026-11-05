@@ -83,6 +83,12 @@ jobs:
       - name: Periksa soal petak warna
         run: node scripts/check-color-levels.mjs
 
+      # Game cari perbedaan (Cari Beda, Teliti Gambar): perbedaannya dibuat
+      # mesin dari benih tetap — tiap varian diperiksa sah, dan daerah sentuh
+      # terkecil di HP 320 px tetap >= 60 px.
+      - name: Periksa soal cari perbedaan
+        run: node scripts/check-spot-levels.mjs
+
       # Taman Labirin: labirin dibuat mesin dari benih — tiap varian WAJIB
       # bisa diselesaikan, lorongnya cukup lebar di HP terkecil, dan labirin
       # besar benar-benar punya jalan buntu.
