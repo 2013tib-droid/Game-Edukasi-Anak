@@ -209,11 +209,13 @@ const ALL_GAMES: GameMeta[] = [
   {
     // Labirin berdinding pagar tanaman (template `maze`, 2026-11-05): anak
     // menarik tokoh dengan jari sampai tujuan; makin belakang makin besar,
-    // dengan barang yang harus diambil dulu. Seni ikon belum ada (🌿 dulu).
+    // dengan barang yang harus diambil dulu. Ikon: balok pagar tanaman berwajah
+    // dengan labirin di atasnya (2026-11-06), 🌿 cadangan.
     id: 'taman-labirin',
     group: 'tk',
     title: 'Taman Labirin',
     emoji: '🌿',
+    pic: 'taman-labirin',
     template: 'maze',
     load: () => import('@/games/tk/taman-labirin'),
   },

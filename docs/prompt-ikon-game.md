@@ -413,7 +413,9 @@ SATU baris per pesan. **Tanpa warna ungu** (abaikan "ungu muda" di BLOK GAYA).
 ## Ikon dua game labirin (`maze`) — 2026-11-06
 
 `taman-labirin` (Playgroup & TK, 🌿) dan `labirin-hujan` (SD Kelas 1 & 2, ☔ — masih di
-branch `claude/labirin-sd`) belum punya seni. Pakai BLOK GAYA + EKOR PROMPT di atas, SATU
+branch `claude/labirin-sd`) belum punya seni. **KEDUANYA TERPASANG 2026-11-06** (percobaan pertama). Gemini
+mengabaikan "latar putih": keduanya datang di kertas krem + bayangan lantai, jadi dipotong
+`scripts/cut-beige.py` (baru; `--shadow` untuk Taman Labirin). Pakai BLOK GAYA + EKOR PROMPT di atas, SATU
 baris per pesan. **Tanpa warna ungu** (abaikan "ungu muda" di BLOK GAYA).
 
 | id file | Baris prompt |
