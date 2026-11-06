@@ -254,11 +254,13 @@ const ALL_GAMES: GameMeta[] = [
   {
     // Saudara Taman Labirin (TK) yang lebih sulit (template `maze`, 2026-11-05):
     // GENANGAN AIR menutup jalan pintas, kandang terkunci di ujung jalan buntu
-    // sampai semua barang terambil, labirin sampai 6×8. Seni ikon belum ada.
+    // sampai semua barang terambil, labirin sampai 6×8. Ikon: balok pagar + awan hujan berwajah
+    // (2026-11-06, `scripts/cut-beige.py` di main), ☔ cadangan.
     id: 'labirin-hujan',
     group: 'sd1',
     title: 'Labirin Hujan',
     emoji: '☔',
+    pic: 'labirin-hujan',
     template: 'maze',
     load: () => import('@/games/sd1/labirin-hujan'),
   },
