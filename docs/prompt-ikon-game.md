@@ -409,3 +409,30 @@ SATU baris per pesan. **Tanpa warna ungu** (abaikan "ungu muda" di BLOK GAYA).
 - Pasang: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`, periksa
   lubang terkurung (cincin hijau di ceri, celah antara dua lensa teropong), lalu tambah
   `pic: '<id>',` di entri registry-nya.
+
+## Ikon dua game labirin (`maze`) — 2026-11-06
+
+`taman-labirin` (Playgroup & TK, 🌿) dan `labirin-hujan` (SD Kelas 1 & 2, ☔ — masih di
+branch `claude/labirin-sd`) belum punya seni. Pakai BLOK GAYA + EKOR PROMPT di atas, SATU
+baris per pesan. **Tanpa warna ungu** (abaikan "ungu muda" di BLOK GAYA).
+
+| id file | Baris prompt |
+|---|---|
+| `taman-labirin` | Buatkan: satu balok pagar tanaman hijau mint yang gemuk dan membulat, dilihat sedikit dari atas, sehingga permukaan atasnya memperlihatkan labirin kecil dari pagar daun hijau tua dengan jalan berwarna krem kekuningan yang berkelok. Di tengah labirin ada satu bunga merah muda kecil. Wajah imut — mata besar berkilau, pipi merona, senyum lebar — digambar di sisi depan balok, terpisah dari labirin di atasnya dan tidak menimpanya. Jalan labirinnya krem kekuningan, BUKAN putih. Tanpa hewan, tanpa ubin berpetak, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+| `labirin-hujan` | Buatkan: satu balok pagar tanaman hijau mint yang gemuk dan membulat, dilihat sedikit dari atas, sehingga permukaan atasnya memperlihatkan labirin kecil dari pagar daun hijau tua dengan jalan berwarna krem kekuningan yang berkelok, dan di salah satu jalannya ada genangan air biru muda yang mengkilap. Tepat di atas balok melayang satu awan hujan biru muda berwajah imut — mata besar berkilau, pipi merona, senyum kecil — dengan tiga tetes hujan biru jatuh dari awan. Wajahnya hanya di awan, tidak di balok. Jalan labirinnya krem kekuningan, BUKAN putih. Tanpa hewan, tanpa payung, tanpa petir, tanpa tulisan. Tinggi dan lebar gambarnya kira-kira sama. |
+
+- **Keduanya balok pagar yang SAMA** supaya terbaca satu keluarga; yang membedakan SD
+  cuma awan hujan + genangan — persis beda gamenya.
+- **Tanpa hewan**: kelinci/ayam/kucing sudah berseni dan dipakai di dalam game; ikon
+  berhewan terbaca "game hewan" (alasan yang sama dengan ikon Kode Kelinci).
+- **Tanpa ubin berpetak & jejak titik oranye**: itu ikon Misi Kode. **Tanpa palet**: ikon
+  Labirin Warna. **Tanpa jalan aspal/rambu**: ikon Rute Kendaraan.
+- **Jalan krem, bukan putih — wajib.** Jalan putih di antara pagar = latar TERKURUNG
+  (pelajaran 4): flood-fill `cut-item.py` tak menjangkaunya dan hasilnya bercak putih.
+- **Wajah di sisi balok / di awan, BUKAN di permukaan labirin** (pelajaran 3).
+- Awan tepat DI ATAS balok supaya rasionya tetap ≤ 1,5 (pelajaran 5); menjulang aman.
+- "Tanpa payung" untuk SD: payung ☔ = emoji cadangannya, dan payung bertangkai melebarkan
+  gambar.
+- Pasang: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`, tempel di atas
+  latar berwarna, periksa celah terkurung di antara pagar & di antara tetes hujan dan
+  awan, lalu tambah `pic: '<id>',` di entri registry-nya.
