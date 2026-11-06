@@ -237,6 +237,7 @@ for (const config of mod.configs) {
     if ((level.template ?? config.template) === 'maze') {
       add(mod.MAZE_LINES.deadEnd, config.id, voice);
       if (level.data.pickups?.length) add(mod.MAZE_LINES.missing, config.id, voice);
+      if (level.data.puddles?.length) add(mod.MAZE_LINES.puddle, config.id, voice);
       continue;
     }
 

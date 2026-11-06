@@ -6,7 +6,8 @@ import { mazeSlot, type MazeCast } from '@/games/mazeLevels';
  * tanaman. Anak MENARIK tokoh dengan jari lewat lorong; garis jejak kuning
  * mengikuti jarinya, kembali ke petak sebelumnya = mundur. Keputusan pemilik:
  * TK lorong lebar, tapi ada soal yang susah juga supaya menarik; tokoh hewan
- * yang sudah berseni (nol aset baru). SD menyusul di sesi lain.
+ * yang sudah berseni (nol aset baru). Versi SD yang lebih sulit (genangan air,
+ * kandang terkunci): `src/games/sd1/labirin-hujan.ts`.
  *
  * SLOT (urutan tetap, makin belakang makin sulit)
  *   l1 3×3 kenalan                 l5 5×5 + satu barang dulu

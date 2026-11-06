@@ -1555,6 +1555,11 @@ export interface MazeData {
   /** Langkah rute terpendek (dengan semua barang) — lencana "Jalan hemat!". */
   par: number;
   scene?: SceneId;
+  /**
+   * Petak GENANGAN AIR (Labirin Hujan, SD): lorongnya tergambar terbuka tapi
+   * tak bisa dilewati (`withPuddles` di core/maze.ts).
+   */
+  puddles?: number[];
 }
 
 export interface LevelDataMap {
