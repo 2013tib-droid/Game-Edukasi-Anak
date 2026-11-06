@@ -44,6 +44,8 @@ export interface MazeGrid {
 export const MAZE_LINES = {
   deadEnd: 'Jalan buntu! Balik lagi, cari jalan lain, ya.',
   missing: 'Masih ada yang belum diambil. Coba lagi, ya!',
+  /** Labirin Hujan (SD): genangan air menutup lorong. */
+  puddle: 'Ada genangan air! Tidak bisa lewat. Cari jalan lain, ya.',
 } as const;
 
 /** Bilangan acak 0..1 yang SELALU sama untuk benih yang sama (mulberry32). */
@@ -237,4 +239,29 @@ export function nextRoute(m: MazeGrid, at: number, goal: number, left: number[])
   let target = left[0]!;
   for (const p of left) if (dist[p]! < dist[target]!) target = p;
   return shortestPath(m, at, target).slice(1);
+}
+
+/**
+ * Labirin EFEKTIF: petak genangan air (`puddles`, Labirin Hujan) ditutup dari
+ * semua sisinya. Lorongnya tetap TERGAMBAR terbuka (dinding dari labirin
+ * asli), tapi tak bisa dilalui — semua hitungan jalan (langkah, jalan buntu,
+ * rute terpendek, petunjuk) memakai labirin efektif ini.
+ */
+export function withPuddles(m: MazeGrid, puddles?: readonly number[]): MazeGrid {
+  if (!puddles?.length) return m;
+  const open = m.open.slice();
+  for (const p of puddles) {
+    const r = rowOf(m, p);
+    const c = colOf(m, p);
+    for (const d of MAZE_DIRS) {
+      if (!(m.open[p]! & d.bit)) continue;
+      const nr = r + d.dr;
+      const nc = c + d.dc;
+      if (nr < 0 || nc < 0 || nr >= m.rows || nc >= m.cols) continue;
+      const n = nr * m.cols + nc;
+      open[n] = open[n]! & ~d.opp;
+    }
+    open[p] = 0;
+  }
+  return { cols: m.cols, rows: m.rows, open };
 }

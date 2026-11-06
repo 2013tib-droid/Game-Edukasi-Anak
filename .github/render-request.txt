@@ -1,8 +1,10 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #61 — game baru TK "Taman Labirin" (template `maze`): 27 baris baru,
-semuanya scope taman-labirin. Nol pindah scope.
-only: taman-labirin
+render #62 — game baru SD Kelas 1 & 2 "Labirin Hujan" (template `maze` +
+genangan air): 31 baris baru, semuanya scope labirin-hujan. Tiga baris
+naik ke `shared` (dipakai bersama Taman Labirin) — mp3-nya DIPINDAH manual
+(kunci sama), jadi tak perlu dirender ulang.
+only: labirin-hujan
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris

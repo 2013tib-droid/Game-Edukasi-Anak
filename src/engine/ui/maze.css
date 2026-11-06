@@ -239,6 +239,146 @@
   opacity: 0.9;
 }
 
+/* ---------- Genangan air (Labirin Hujan) ---------- */
+
+.mz-puddle__water {
+  fill: #7cc6f2;
+  stroke: #3f97d0;
+  stroke-width: 0.55;
+}
+
+.mz-puddle__shine {
+  fill: #d9f1ff;
+  opacity: 0.85;
+}
+
+.mz-puddle__ring {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 0.35;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mz-ripple 2.6s ease-out infinite;
+}
+
+.mz-puddle__ring--late {
+  animation-delay: 1.3s;
+}
+
+.mz-splash circle {
+  fill: none;
+  stroke: #3f97d0;
+  stroke-width: 0.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mz-splash 0.7s ease-out forwards;
+}
+
+.mz-splash .mz-splash__drop {
+  fill: #7cc6f2;
+  stroke: none;
+  animation: mz-drop 0.7s ease-out forwards;
+}
+
+@keyframes mz-ripple {
+  0% {
+    scale: 0.4;
+    opacity: 0.9;
+  }
+  100% {
+    scale: 2.4;
+    opacity: 0;
+  }
+}
+
+@keyframes mz-splash {
+  0% {
+    scale: 0.6;
+    opacity: 1;
+  }
+  100% {
+    scale: 2.6;
+    opacity: 0;
+  }
+}
+
+@keyframes mz-drop {
+  0% {
+    translate: 0 1px;
+    opacity: 1;
+  }
+  60% {
+    translate: 0 -1.6px;
+    opacity: 1;
+  }
+  100% {
+    translate: 0 0.6px;
+    opacity: 0;
+  }
+}
+
+/* ---------- Kandang terkunci: gembok (aturan kandang ada di bawah) ---------- */
+
+.mz-lock {
+  position: absolute;
+  right: 2%;
+  bottom: 2%;
+  width: 46%;
+  height: 46%;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fffaf0;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 2px 4px rgba(90, 60, 10, 0.3);
+}
+
+.mz-lock__icon {
+  width: 82%;
+  height: 82%;
+}
+
+.mz-lock--bump {
+  animation: mz-lockbump 0.45s ease-out;
+}
+
+.mz-lock--off {
+  animation: mz-lockoff 0.8s ease-in forwards;
+}
+
+@keyframes mz-lockbump {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  25% {
+    rotate: -16deg;
+    scale: 1.15;
+  }
+  60% {
+    rotate: 12deg;
+  }
+}
+
+@keyframes mz-lockoff {
+  0% {
+    scale: 1;
+    opacity: 1;
+  }
+  35% {
+    scale: 1.25;
+    translate: 0 -20%;
+    opacity: 1;
+  }
+  100% {
+    scale: 0.6;
+    translate: 40% -160%;
+    rotate: 30deg;
+    opacity: 0;
+  }
+}
+
 /* ---------- Benda di petak ---------- */
 
 .mz-thing {
@@ -284,15 +424,7 @@
   filter: saturate(0.55) brightness(0.92) drop-shadow(0 2px 1.5px rgba(0, 0, 0, 0.22));
   animation: none;
 }
-/* Kandang terkunci sampai semua barang terambil. */
-.mz-goal--shut::after {
-  content: '🔒';
-  position: absolute;
-  right: 4%;
-  top: 4%;
-  font-size: clamp(13px, 3.6vw, 20px);
-  line-height: 1;
-}
+/* Kandang terkunci sampai semua barang terambil — gemboknya `.mz-lock` (SVG). */
 .mz-goal--nope .mz-pic {
   animation: mz-nope 0.45s ease-in-out;
 }
@@ -470,6 +602,9 @@
   .mz-goal .mz-pic,
   .mz-pickup .mz-pic,
   .mz-sign,
+  .mz-puddle__ring,
+  .mz-splash circle,
+  .mz-lock--bump,
   .mz-hero__body--won,
   .mz-goal--won .mz-pic,
   .mz-goal--nope .mz-pic {
@@ -477,5 +612,9 @@
   }
   .mz-hero {
     transition: none;
+  }
+  .mz-lock--off {
+    animation: none;
+    display: none;
   }
 }

@@ -252,6 +252,19 @@ const ALL_GAMES: GameMeta[] = [
     load: () => import('@/games/sd1/rute-kendaraan'),
   },
   {
+    // Saudara Taman Labirin (TK) yang lebih sulit (template `maze`, 2026-11-05):
+    // GENANGAN AIR menutup jalan pintas, kandang terkunci di ujung jalan buntu
+    // sampai semua barang terambil, labirin sampai 6×8. Ikon: balok pagar + awan hujan berwajah
+    // (2026-11-06, `scripts/cut-beige.py` di main), ☔ cadangan.
+    id: 'labirin-hujan',
+    group: 'sd1',
+    title: 'Labirin Hujan',
+    emoji: '☔',
+    pic: 'labirin-hujan',
+    template: 'maze',
+    load: () => import('@/games/sd1/labirin-hujan'),
+  },
+  {
     // Saudara Kode Kelinci (TK) yang lebih sulit: + kartu ULANGI dan soal
     // memperbaiki kode. DRAFT sampai launching SD Kelas 3 & 4. Ikon: papan
     // berpetak + stroberi + kartu ulangi (2026-10-13), 🐢 cadangan.
