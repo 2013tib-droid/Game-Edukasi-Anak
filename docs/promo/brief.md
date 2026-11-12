@@ -109,3 +109,19 @@ Diambil dari dev server lokal. Saklar penguji 🔒 disembunyikan; bel notifikasi
 - Jangan tampilkan **Toko Kembalian** (memakai foto specimen uang BI) tanpa keputusan pemilik.
 - Jangan tampilkan wajah/nama anak sungguhan tanpa izin tertulis.
 - Klaim yang **tidak boleh** dipakai: "bisa offline", "update gratis selamanya", rating/jumlah pengguna.
+
+## Status brief — yang masih kosong / perlu dicek
+
+**Masih kosong (perlu diisi pemilik):**
+- Handle TikTok/Instagram — tidak ada di repo.
+- Jumlah pemain, unduhan, rating — tidak tercatat di repo.
+- Testimoni asli & penghargaan — belum ada.
+- App store (Android/iOS) — belum ada; game ini web app.
+
+**Ditandai [TEBAKAN]:** satu poin di bagian 2 ("orang tua ingin waktu layar anak yang bermanfaat"). Poin masalah lain diambil dari dokumen proyek.
+
+**Perlu diketahui:**
+- Deskripsi share-preview di `index.html` (og/twitter description) masih menulis "18 game"; yang benar 47. Belum diubah.
+- Font Fredoka disebut di CSS tapi tidak pernah dimuat, jadi di HP tampil font sistem. Untuk video, pakai Fredoka.
+- Cara baca "QRIS" dan "e-wallet" di bagian 7 masih perkiraan ucapan umum — dengarkan dulu sebelum render, atau ganti "e-wallet" dengan "dompet digital".
+- Screenshot `05-selamat.jpg` memakai progres yang diisi khusus (622 ⭐), bukan data pemain asli.
