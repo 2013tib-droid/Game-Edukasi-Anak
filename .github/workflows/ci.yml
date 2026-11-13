@@ -95,6 +95,12 @@ jobs:
       - name: Periksa soal labirin
         run: node scripts/check-maze-levels.mjs
 
+      # Wajah Perasaan: tiap wajah terbaca sebagai perasaannya, sasaran bentuk
+      # wajah bisa dicapai pegangan, pegangan cukup besar, dan kartu tak
+      # pernah mengadu dua perasaan yang sama-sama masuk akal.
+      - name: Periksa soal wajah perasaan
+        run: node scripts/check-face-levels.mjs
+
       # Sinkron bintang ke Firestore harus MENGGABUNG (maksimum per level),
       # tidak menimpa. Kalau ini jadi penulisan biasa, anak yang main di
       # tablet lalu di HP kehilangan bintang tabletnya — dan itu cuma

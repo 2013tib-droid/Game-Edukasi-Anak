@@ -1,10 +1,9 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #62 — game baru SD Kelas 1 & 2 "Labirin Hujan" (template `maze` +
-genangan air): 31 baris baru, semuanya scope labirin-hujan. Tiga baris
-naik ke `shared` (dipakai bersama Taman Labirin) — mp3-nya DIPINDAH manual
-(kunci sama), jadi tak perlu dirender ulang.
-only: labirin-hujan
+render #63 — game baru Playgroup & TK "Wajah Perasaan" (template
+`face-feel`): 67 baris baru, semuanya scope wajah-perasaan, nol baris lama
+pindah scope.
+only: wajah-perasaan
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris

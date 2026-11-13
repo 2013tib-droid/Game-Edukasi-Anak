@@ -22,6 +22,8 @@
 /** Benda yang memantul saat disentuh. Sengaja daftar kelas, bukan semua elemen. */
 const POP_SELECTOR = [
   '.choice-card',
+  '.ff-card',
+  '.ff-check',
   '.count-cell',
   '.memory-card',
   '.dd-item',
