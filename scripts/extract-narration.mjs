@@ -104,6 +104,7 @@ const mod = await load(
     `\nexport { CODE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/codeQuest.ts').split(path.sep).join('/'))};` +
     `\nexport { PATH_LINES, parsePathBoard } from ${JSON.stringify(path.resolve('src/engine/core/colorPath.ts').split(path.sep).join('/'))};` +
     `\nexport { SPOT_LINES } from ${JSON.stringify(path.resolve('src/engine/core/spotDiff.ts').split(path.sep).join('/'))};` +
+    `\nexport { FEEL_LINES, FEEL_ACTIONS } from ${JSON.stringify(path.resolve('src/engine/core/feelings.ts').split(path.sep).join('/'))};` +
     `\nexport { MAZE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/maze.ts').split(path.sep).join('/'))};` +
     `\nexport { phraseText, VOY_LINES } from ${JSON.stringify(path.resolve('src/engine/core/wordVoyage.ts').split(path.sep).join('/'))};`,
 );
@@ -229,6 +230,28 @@ for (const config of mod.configs) {
     // difference count say so when "Sudah semua!" is pressed too early.
     if ((level.template ?? config.template) === 'spot-diff' && level.data.hidden) {
       add(mod.SPOT_LINES.notYet, config.id, voice);
+    }
+
+    // face-feel (Wajah Perasaan): touching a face card says the feeling's
+    // name, an action card says its label; shaping a face says the target's
+    // name when right and "wajahnya masih …" when not (any reading is
+    // possible); a good deed is answered by a closing line (FEEL_LINES /
+    // FEEL_ACTIONS — the SAME objects the template uses).
+    if ((level.template ?? config.template) === 'face-feel') {
+      const L = mod.FEEL_LINES;
+      for (const st of level.data.steps) {
+        const t = st.task;
+        if (t.kind === 'pick') for (const c of t.choices) add(L.name[c], config.id, voice);
+        if (t.kind === 'help') {
+          for (const c of t.choices) add(mod.FEEL_ACTIONS[c].label, config.id, voice);
+          add(t.who ? L.helped : L.calm, config.id, voice);
+        }
+        if (t.kind === 'make' || t.kind === 'mirror') {
+          add(L.name[t.target], config.id, voice);
+          for (const line of Object.values(L.notYet)) add(line, config.id, voice);
+        }
+      }
+      continue;
     }
 
     // maze (Taman Labirin): the first dead end of a level is announced, and

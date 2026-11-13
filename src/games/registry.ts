@@ -219,6 +219,18 @@ const ALL_GAMES: GameMeta[] = [
     template: 'maze',
     load: () => import('@/games/tk/taman-labirin'),
   },
+  {
+    // Game sosial-emosional pertama (2026-11-13): kenali senang, sedih, marah,
+    // takut dari wajah anak ayam (digambar engine, bagian wajahnya bisa
+    // digeser), cari penyebabnya, dan pilih hal baik yang bisa dilakukan.
+    // Seni ikon belum ada — 🙂 sementara (prompt di docs/prompt-ikon-game.md).
+    id: 'wajah-perasaan',
+    group: 'tk',
+    title: 'Wajah Perasaan',
+    emoji: '🙂',
+    template: 'face-feel',
+    load: () => import('@/games/tk/wajah-perasaan'),
+  },
   // --- SD Kelas 1 & 2 (group id tetap `sd1`) ---
   {
     // PALING ATAS (keputusan pemilik 2026-09-24, ditukar dengan "Pasang Kata"):

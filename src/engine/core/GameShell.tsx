@@ -84,6 +84,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'color-path': lazy(() => import('@/engine/templates/ColorPath')),
   'spot-diff': lazy(() => import('@/engine/templates/SpotDiff')),
   maze: lazy(() => import('@/engine/templates/Maze')),
+  'face-feel': lazy(() => import('@/engine/templates/FaceFeel')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */

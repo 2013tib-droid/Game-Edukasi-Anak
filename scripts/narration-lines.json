@@ -1,7 +1,7 @@
 {
-  "generated": "2026-11-06",
-  "count": 2167,
-  "chars": 91010,
+  "generated": "2026-11-13",
+  "count": 2234,
+  "chars": 93963,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -19189,6 +19189,609 @@
       "voice": "gadis",
       "games": [
         "ukur-yuk"
+      ]
+    },
+    {
+      "key": "7f646242a96a",
+      "text": "Ajak main",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "466126cc6bb8",
+      "text": "Balon Bebek terbang lepas. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "9dff6d974e59",
+      "text": "Balon Bebek terbang lepas. Geser mulutnya, buat wajah sedih!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "f897f7ac6d46",
+      "text": "Bebek dapat kado dari teman. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "b68a8fdb4f2b",
+      "text": "Bebek sedih karena balonnya lepas. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "bca7fa09e099",
+      "text": "Bebek sedih karena mainannya rusak. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "a653bda14c22",
+      "text": "Berteriak",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "61e617b05138",
+      "text": "Beruang sedih karena balonnya lepas. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "44e6e320329b",
+      "text": "Bilang pelan-pelan",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "3accc6466b7b",
+      "text": "Cemberut terus",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "76d39bcd48a7",
+      "text": "Es krim Kelinci jatuh ke tanah. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "1f9972e25840",
+      "text": "Es krim Kelinci jatuh ke tanah. Geser mulutnya, buat wajah sedih!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "d395aa72bb13",
+      "text": "Es krim Kucing jatuh ke tanah. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "554bfaa09a92",
+      "text": "Es krim Panda jatuh ke tanah. Geser alisnya, buat wajah sedih!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "82261649c5e4",
+      "text": "Gajah takut karena lampunya mati. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "8a5853dbeaad",
+      "text": "Gambar Gajah dicoret-coret teman. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "a079437134a6",
+      "text": "Gambar Kucing dicoret-coret teman. Geser alisnya, buat wajah marah!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "10b6d3c56710",
+      "text": "Gambarmu dicoret-coret teman. Kamu marah. Apa yang baik dilakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "38630d0f7001",
+      "text": "Hmm, wajahnya masih biasa. Geser lagi, ya!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "33c183033402",
+      "text": "Hmm, wajahnya masih marah. Coba lagi, ya!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "46be60c6e4fd",
+      "text": "Hmm, wajahnya masih sedih. Coba lagi, ya!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "d29c0a9dc417",
+      "text": "Hmm, wajahnya masih senang. Coba lagi, ya!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "2949c014de71",
+      "text": "Hmm, wajahnya masih takut. Coba lagi, ya!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "0e3477560fb1",
+      "text": "Kaget",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "396b2b5c98b7",
+      "text": "Kelinci sedih karena balonnya lepas. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "33ffe0ea13da",
+      "text": "Kelinci sedih karena es krimnya jatuh. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "2b81a0e0eaeb",
+      "text": "Kucing dapat kado dari teman. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "c95dbdabb6e9",
+      "text": "Kucing dapat kado dari teman. Geser mulutnya, buat wajah senang!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "ecf0cb46ccad",
+      "text": "Kucing sedih karena es krimnya jatuh. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "ae06f77b37c4",
+      "text": "Kucing sedih karena mainannya rusak. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "8bfefbd84567",
+      "text": "Kura-kura mendengar petir keras. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "35a8ff96682b",
+      "text": "Kura-kura mendengar petir keras. Geser alisnya, buat wajah takut!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "f8ac6c898508",
+      "text": "Kura-kura sedih karena es krimnya jatuh. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "f1e4bb728017",
+      "text": "Kura-kura takut karena ada petir. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "d861134202a7",
+      "text": "Lampu mati, kamar Kelinci gelap. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "0b251a529a1b",
+      "text": "Lampu mati, kamar Kelinci gelap. Geser alisnya, buat wajah takut!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "1a43a80cf9cb",
+      "text": "Lihat, perasaannya jadi lebih baik!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "1276e7c7dc8f",
+      "text": "Mainanmu direbut teman. Kamu marah. Apa yang baik dilakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "78b7006bc990",
+      "text": "Marah",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "7b1ae56e8d5f",
+      "text": "Memeluk",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "d85b827dcd91",
+      "text": "Menara balok Ayam ditendang teman. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "dd57294066e6",
+      "text": "Menara balok Ayam ditendang teman. Geser alisnya, buat wajah marah!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "4e8a6d9bfb7f",
+      "text": "Menara balokmu ditendang teman. Kamu marah. Apa yang baik dilakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "3cbb49044188",
+      "text": "Menemani",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "1315b7fceba5",
+      "text": "Menertawakan",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "a2b4ebdcbc47",
+      "text": "Minta peluk",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "db6cc1f581ae",
+      "text": "Mobil mainan Beruang rusak. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "2fba120b4bd9",
+      "text": "Mobil mainan Beruang rusak. Geser mulutnya, buat wajah sedih!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "fe8384745259",
+      "text": "Monyet dapat kado dari teman. Geser alisnya, buat wajah senang!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "c471a6a2735d",
+      "text": "Monyet melihat pelangi indah. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "6791dcde9daf",
+      "text": "Monyet melihat pelangi indah. Geser mulutnya, buat wajah senang!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "33a315af85a7",
+      "text": "Monyet sedih karena mainannya rusak. Apa yang kamu lakukan?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "c9a3bf0faf42",
+      "text": "Nah, hatimu jadi lebih tenang!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "7dbb478254aa",
+      "text": "Panda dapat kue yang enak. Bagaimana perasaannya?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "1f21aea8cba9",
+      "text": "Panda dapat kue yang enak. Geser mulutnya, buat wajah senang!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "f5e027483dec",
+      "text": "Panda tiup lilin, senang sekali! Buat wajahmu ikut senang!",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "6fb7294ef86d",
+      "text": "Pergi saja",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "a051dd4e4c4d",
+      "text": "Pesta Panda! Boneka melompat dari kado, boing! Panda merasa apa?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "e154f779da9d",
+      "text": "Pinjamkan mainan",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "8ec24714d084",
+      "text": "Sedih",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "a9f801779ab1",
+      "text": "Senang",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "a9ffbf981cfd",
+      "text": "Takut",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "64011368492a",
+      "text": "Tarik napas",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "c28ad063bfe6",
+      "text": "Wajahnya marah. Apa yang membuatnya marah?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "295def774897",
+      "text": "Wajahnya sedih. Apa yang membuatnya sedih?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "d5b6a9e5dd3e",
+      "text": "Wajahnya senang. Apa yang membuatnya senang?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "c3d2bdab1fdc",
+      "text": "Wajahnya takut. Apa yang membuatnya takut?",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
       ]
     },
     {

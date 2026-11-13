@@ -11,6 +11,7 @@ import type { CollageArtId, CollageMaterial, MontageScene } from '@/engine/core/
 import type { CodeDir as PathDir, CodeProgram } from '@/engine/core/codeQuest';
 import type { PathRules } from '@/engine/core/colorPath';
 import type { SpotDiffData } from '@/engine/core/spotDiff';
+import type { FaceFeelData } from '@/engine/core/feelings';
 
 export type GroupId = 'tk' | 'sd1' | 'sd2' | 'sd3';
 
@@ -40,7 +41,8 @@ export type TemplateId =
   | 'code-quest' // susun kartu panah lalu Jalankan — coding anak (Kode Kelinci, Misi Kode)
   | 'color-path' // pasang panah per WARNA petak, tokoh berjalan sendiri — percabangan (Petak Ajaib, Kode Warna)
   | 'spot-diff' // cari perbedaan dua gambar — perbedaannya dibuat mesin (Cari Beda, Teliti Gambar)
-  | 'maze'; // labirin berdinding: tarik tokoh dengan jari sampai tujuan (Taman Labirin)
+  | 'maze' // labirin berdinding: tarik tokoh dengan jari sampai tujuan (Taman Labirin)
+  | 'face-feel'; // kenali, bentuk & tolong perasaan lewat wajah anak ayam (Wajah Perasaan)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -1590,6 +1592,8 @@ export interface LevelDataMap {
   /** Cari perbedaan — data & aturannya di `src/engine/core/spotDiff.ts`. */
   'spot-diff': SpotDiffData;
   maze: MazeData;
+  /** Wajah Perasaan — data & aturannya di `src/engine/core/feelings.ts`. */
+  'face-feel': FaceFeelData;
 }
 
 /* ---------- Game config ---------- */

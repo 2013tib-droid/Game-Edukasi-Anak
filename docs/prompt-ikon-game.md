@@ -438,3 +438,22 @@ baris per pesan. **Tanpa warna ungu** (abaikan "ungu muda" di BLOK GAYA).
 - Pasang: `scripts/cut-item.py <art> public/assets/games/<id>.webp 320`, tempel di atas
   latar berwarna, periksa celah terkurung di antara pagar & di antara tetes hujan dan
   awan, lalu tambah `pic: '<id>',` di entri registry-nya.
+
+## Ikon "Wajah Perasaan" (`face-feel`) — 2026-11-13
+
+`wajah-perasaan` (Playgroup & TK, 🙂 cadangan) belum punya seni. Pakai BLOK GAYA + EKOR
+PROMPT di atas, SATU baris per pesan. **Tanpa warna ungu** (abaikan "ungu muda" di BLOK GAYA).
+
+| id file | Baris prompt |
+|---|---|
+| `wajah-perasaan` | Buatkan: dua kartu bundar tebal berwarna krem yang sedikit bertumpuk dan miring berlawanan arah. Kartu depan bergambar wajah bulat kuning anak ayam yang TERSENYUM lebar dengan pipi merona; kartu belakang bergambar wajah bulat kuning anak ayam yang SEDIH dengan alis terangkat dan satu tetes air mata biru. Di antara kedua kartu ada satu hati merah muda kecil. Wajah hanya di dalam kartu, garis luar cokelat tebal, warna pastel cerah. Tanpa hewan lain, tanpa tulisan, tanpa emoji. Tinggi dan lebar gambarnya kira-kira sama. |
+
+- **Dua ekspresi berbeda di satu ikon** — itu inti gamenya (mengenali perasaan), dan
+  langsung membedakannya dari ikon game lain yang semuanya tersenyum.
+- **Wajah anak ayam yang SAMA dengan wajah di dalam game** (`ui/Face.tsx`): kuning, paruh
+  oranye kecil, jambul tiga helai. Jangan wajah manusia, jangan emoji 😀.
+- **Kartunya krem, BUKAN putih** — putih di antara dua kartu yang bertumpuk jadi latar
+  terkurung (pelajaran 4).
+- Tanpa ungu: tetes air mata biru muda, hati merah muda.
+- Pasang: `scripts/cut-item.py <art> public/assets/games/wajah-perasaan.webp 320`, tempel
+  di atas latar berwarna, lalu tambah `pic: 'wajah-perasaan',` di entri registry-nya.
