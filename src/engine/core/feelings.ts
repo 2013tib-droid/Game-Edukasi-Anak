@@ -140,8 +140,8 @@ export function clamp1(v: number): number {
  * terpendeknya ≥ 64 px di wajah terkecil (`MIN_FACE_PX`).
  */
 export const HANDLE_ZONES = {
-  brow: { x: 40, y: 28, w: 120, h: 68 },
-  mouth: { x: 46, y: 124, w: 108, h: 70 },
+  brow: { x: 30, y: 16, w: 140, h: 68 },
+  mouth: { x: 30, y: 96, w: 140, h: 70 },
 } as const;
 
 /** Lebar wajah terkecil yang digambar CSS untuk mode make/mirror (`.ff-big`). */

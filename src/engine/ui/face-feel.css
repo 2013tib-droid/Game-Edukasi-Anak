@@ -140,6 +140,7 @@ span.ff-hero {
 }
 
 .ff-badge {
+  object-fit: contain;
   position: absolute;
   right: -6%;
   top: -4%;
@@ -162,7 +163,8 @@ span.ff-hero {
 
 .ff-badge--big {
   width: 56%;
-  right: -12%;
+  right: -24%;
+  top: -10%;
 }
 
 .ff-aku {
@@ -179,6 +181,7 @@ span.ff-hero {
 }
 
 .ff-showface {
+  object-fit: contain;
   height: min(100cqh, 100cqw, 380px);
   width: auto;
   aspect-ratio: 1;
@@ -232,6 +235,7 @@ span.ff-hero {
 .ff-cardart {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
 .ff-card__label {
@@ -286,10 +290,49 @@ span.ff-hero {
 }
 
 .ff-big {
+  position: absolute;
+  inset: 0;
+}
+
+/* Tumpukan gambar wajah: satu tampil, berganti dengan pudar-silang. */
+.ff-stack {
+  position: relative;
+  display: block;
   width: 100%;
   height: 100%;
-  overflow: visible;
-  display: block;
+}
+
+.ff-stack__pic {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  opacity: 0;
+  scale: 0.94;
+  transition:
+    opacity 0.22s ease-out,
+    scale 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.ff-stack__pic--on {
+  opacity: 1;
+  scale: 1;
+}
+
+.ff-over {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ff-track {
+  fill: rgba(255, 255, 255, 0.55);
+  stroke: rgba(255, 138, 61, 0.55);
+  stroke-width: 1.5;
 }
 
 .ff-bigtouch {
@@ -341,19 +384,11 @@ span.ff-hero {
   animation: ff-nudge-up 1s ease-in-out infinite;
 }
 
-.ff-big--drag-mouth [data-knob='mouth'] .ff-knob__dot,
-.ff-big--drag-brow [data-knob='brow'] .ff-knob__dot {
-  fill: #ffe9b3;
-}
-
-.ff-ghost path {
-  fill: none;
-  stroke: #ff8a3d;
-  stroke-width: 3.5;
-  stroke-dasharray: 5 5;
-  stroke-linecap: round;
-  opacity: 0.8;
-  animation: ff-ghost 1.6s ease-in-out infinite;
+.ff-ghost {
+  fill: #6fcf6a;
+  stroke: #fff;
+  stroke-width: 2;
+  animation: ff-ghost 1.2s ease-in-out infinite;
 }
 
 .ff-check {
@@ -423,6 +458,7 @@ span.ff-friend__hero {
 }
 
 .ff-friend__face {
+  object-fit: contain;
   height: 80px;
   width: 80px;
 }
@@ -434,8 +470,7 @@ span.ff-friend__hero {
 
 /* ---------- Gerak wajah (ekspresi hidup) ---------- */
 
-.ff-face .ff-eye,
-.ff-big .ff-eye {
+.ff-face .ff-eye {
   transform-box: fill-box;
   transform-origin: center;
   animation: ff-blink 4.2s infinite;
@@ -925,7 +960,8 @@ span.ff-friend__hero {
   .ff-ask,
   .ff-knob,
   .ff-knob__ring,
-  .ff-ghost path,
+  .ff-ghost,
+  .ff-stack__pic,
   .ff-card--hint,
   [class^='fa-'],
   [class*=' fa-'] {

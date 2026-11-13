@@ -14,7 +14,6 @@ import {
   feelingOf,
   type FaceControls,
   type FaceRead,
-  type FaceShape,
   type FaceTask,
   type FeelCue,
   type FeelHero,
@@ -23,7 +22,7 @@ import {
 } from '@/engine/core/feelings';
 import { sfx, speak } from '@/engine/audio/sound';
 import { buzz, sparkleAt } from '@/engine/ui/juice';
-import Face, { faceAttrs, paintFace } from '@/engine/ui/Face';
+import FeelFace, { FeelStack } from '@/engine/ui/FeelFace';
 import { ActionArt, EventArt } from '@/engine/ui/FeelArt';
 import ItemPic from '@/engine/ui/ItemPic';
 import Scene from '@/engine/ui/Scene';
@@ -73,24 +72,6 @@ function centerOf(el: Element | null): { x: number; y: number } {
   if (!el) return { x: window.innerWidth / 2, y: window.innerHeight / 2 };
   const r = el.getBoundingClientRect();
   return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
-}
-
-/** Animasikan wajah dari satu bentuk ke bentuk lain (langsung ke DOM). */
-function morphFace(svg: Element | null, from: FaceShape, to: FaceShape, ms = 650) {
-  if (!svg) return;
-  const t0 = performance.now();
-  const step = (now: number) => {
-    const k = Math.min(1, (now - t0) / ms);
-    const e = k < 0.5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2;
-    paintFace(svg, {
-      mouth: from.mouth + (to.mouth - from.mouth) * e,
-      brow: from.brow + (to.brow - from.brow) * e,
-      eye: from.eye + (to.eye - from.eye) * e,
-      open: from.open + (to.open - from.open) * e,
-    });
-    if (k < 1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step);
 }
 
 export default function FaceFeel({ level, onCorrect, onWrong, setRepeat, hint }: TemplateProps<'face-feel'>) {
@@ -162,7 +143,7 @@ function CuePanel({ cue, badge, compact, ask }: { cue: FeelCue; badge?: Feeling 
     <div className={`ff-cue${compact ? ' ff-cue--compact' : ''}`} role="img" aria-label={`${HERO_NAME[cue.hero]}, ${FEEL_EVENTS[cue.event].label}`}>
       <div className="ff-cue__who">
         <Hero id={cue.hero} />
-        {badge && badge !== 'aku' && <Face uid={`badge-${cue.hero}`} shape={FACE_OF[badge]} className={`ff-badge ff-face ff-face--${badge}`} />}
+        {badge && badge !== 'aku' && <FeelFace feeling={badge} className={`ff-badge ff-face ff-face--${badge}`} />}
         {/* Seni hewan registry selalu tersenyum — gelembung "?" menandai
             bahwa perasaannya justru yang ditanyakan. */}
         {ask && (
@@ -190,7 +171,8 @@ function CardTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<
   const [won, setWon] = useState<string | null>(null);
   const [bad, setBad] = useState<string | null>(null);
   const cardRefs = useRef<Record<string, HTMLButtonElement | null>>({});
-  const helpFace = useRef<SVGSVGElement>(null);
+  const helpFace = useRef<HTMLDivElement>(null);
+  const [better, setBetter] = useState<FaceRead | null>(null);
 
   const fadedId = hint >= 1 ? choices.find((c) => c !== answer && !tried.has(c)) : undefined;
 
@@ -211,8 +193,7 @@ function CardTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<
       const finish = () => {
         if (task.kind === 'help') {
           // Teman (atau aku) jadi lebih baik: wajahnya berubah pelan-pelan.
-          const better: FaceRead = task.who ? 'senang' : 'biasa';
-          morphFace(helpFace.current, FACE_OF[task.feeling], FACE_OF[better], 800);
+          setBetter(task.who ? 'senang' : 'biasa');
           const q = centerOf(helpFace.current);
           window.setTimeout(() => sparkleAt(q.x, q.y, 10), 450);
           speakThen(task.who ? FEEL_LINES.helped : FEEL_LINES.calm, onDone, 2600);
@@ -235,21 +216,17 @@ function CardTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<
   else if (task.kind === 'cause')
     top = (
       <div className="ff-show">
-        <Face uid="show" shape={FACE_OF[task.feeling]} className={`ff-showface ff-face ff-face--${task.feeling}`} label={FEEL_LINES.name[task.feeling]} />
+        <FeelFace feeling={task.feeling} className={`ff-showface ff-face ff-face--${task.feeling}`} labelled />
       </div>
     );
   else
     top = (
       <div className="ff-cue ff-cue--help">
         <div className="ff-cue__who">
-          {task.who ? (
-            <>
-              <Hero id={task.who} />
-              <Face ref={helpFace} uid="help" shape={FACE_OF[task.feeling]} className={`ff-badge ff-badge--big ff-face ff-face--${task.feeling}`} />
-            </>
-          ) : (
-            <Face ref={helpFace} uid="help" shape={FACE_OF[task.feeling]} className={`ff-aku ff-face ff-face--${task.feeling}`} label="Aku" />
-          )}
+          {task.who && <Hero id={task.who} />}
+          <div ref={helpFace} className={task.who ? 'ff-badge ff-badge--big' : 'ff-aku'}>
+            <FeelStack set={[task.feeling, task.who ? 'senang' : 'biasa']} show={better ?? task.feeling} className={better ? '' : `ff-face ff-face--${task.feeling}`} />
+          </div>
         </div>
         <EventArt id={task.event} className="ff-event" />
       </div>
@@ -289,7 +266,7 @@ function CardTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<
               onClick={() => tap(c)}
             >
               <span className="ff-card__art">
-                {task.kind === 'pick' && <Face uid={`c-${c}`} shape={FACE_OF[c as Feeling]} className={`ff-cardface ff-face ff-face--${c}`} />}
+                {task.kind === 'pick' && <FeelFace feeling={c as Feeling} className={`ff-cardface ff-face ff-face--${c}`} />}
                 {task.kind === 'cause' && <EventArt id={c as keyof typeof FEEL_EVENTS} className="ff-cardart" />}
                 {task.kind === 'help' && <ActionArt id={c as keyof typeof FEEL_ACTIONS} className="ff-cardart" />}
               </span>
@@ -309,37 +286,38 @@ type Ctl = 'mouth' | 'brow';
 function MakeTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<'make' | 'mirror'>) {
   const controls: FaceControls = task.controls;
   const target: MakeFeeling = task.target;
-  const svgRef = useRef<SVGSVGElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const overRef = useRef<SVGSVGElement>(null);
   const val = useRef({ mouth: 0, brow: 0 });
   const drag = useRef<{ ctl: Ctl; y0: number; v0: number; id: number } | null>(null);
   const raf = useRef(0);
-  const lastRead = useRef<FaceRead>('biasa');
+  const [read, setRead] = useState<FaceRead>('biasa');
+  const readRef = useRef<FaceRead>('biasa');
   const [touched, setTouched] = useState(false);
   const [state, setState] = useState<'idle' | 'nope' | 'won'>('idle');
   const [, force] = useState(0);
-  const lines = useRef<Set<string>>(new Set());
 
-  const shapeNow = () => controlsFace(controls, val.current.mouth, val.current.brow);
-  const initial = useMemo(() => controlsFace(controls, 0, 0), [controls]);
+  const readNow = (): FaceRead => {
+    const r = feelingOf(controlsFace(controls, val.current.mouth, val.current.brow));
+    return r === 'kaget' ? 'biasa' : r;
+  };
   const goal = FACE_OF[target];
-  const goalBrow = controls === 'mulut' ? null : goal.brow;
-
-  const knobY = (ctl: Ctl, v: number) => (ctl === 'mouth' ? 184 + 6 * v : 52 + 7 * v);
+  const goalOf = (ctl: Ctl): number | null => (ctl === 'mouth' ? goal.mouth : controls === 'mulut' ? null : goal.brow);
 
   const paint = () => {
     raf.current = 0;
-    const svg = svgRef.current;
+    const svg = overRef.current;
     if (!svg) return;
-    const s = shapeNow();
-    paintFace(svg, s);
     for (const ctl of ['mouth', 'brow'] as const) {
       const k = svg.querySelector<SVGGElement>(`[data-knob="${ctl}"]`);
       if (k) k.setAttribute('transform', `translate(100 ${knobY(ctl, val.current[ctl]).toFixed(1)})`);
     }
-    const read = feelingOf(s);
-    if (read !== lastRead.current) {
-      lastRead.current = read;
-      if (read !== 'biasa') sfx('tick');
+    const r = readNow();
+    if (r !== readRef.current) {
+      readRef.current = r;
+      setRead(r); // gambar berganti hanya saat perasaannya berubah
+      sfx('tick');
+      buzz(12);
     }
   };
   const schedule = () => {
@@ -347,32 +325,24 @@ function MakeTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<
   };
   useEffect(() => () => cancelAnimationFrame(raf.current), []);
 
-  const toSvg = (e: ReactPointerEvent<Element>) => {
-    const svg = svgRef.current!;
-    const m = svg.getScreenCTM();
-    if (!m) return null;
-    const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse());
-    return { x: p.x, y: p.y };
-  };
-
-  const zoneAt = (x: number, y: number): Ctl | null => {
+  const zoneAt = (e: ReactPointerEvent<Element>): Ctl | null => {
+    const r = boxRef.current!.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 200;
+    const y = ((e.clientY - r.top) / r.height) * 200;
     const inZ = (z: { x: number; y: number; w: number; h: number }) => x >= z.x && x <= z.x + z.w && y >= z.y && y <= z.y + z.h;
     if (inZ(HANDLE_ZONES.mouth)) return 'mouth';
-    if (controls === 'mulut-alis' && inZ(HANDLE_ZONES.brow)) return 'brow';
+    if (inZ(HANDLE_ZONES.brow)) return controls === 'mulut-alis' ? 'brow' : 'mouth';
     return null;
   };
 
   const down = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (state === 'won') return;
-    const p = toSvg(e);
-    if (!p) return;
-    const ctl = zoneAt(p.x, p.y);
+    const ctl = zoneAt(e);
     if (!ctl) return;
     e.preventDefault();
     e.currentTarget.setPointerCapture?.(e.pointerId);
     drag.current = { ctl, y0: e.clientY, v0: val.current[ctl], id: e.pointerId };
     if (!touched) setTouched(true);
-    svgRef.current?.classList.add(`ff-big--drag-${ctl}`);
   };
   const move = (e: ReactPointerEvent<HTMLDivElement>) => {
     const d = drag.current;
@@ -384,16 +354,15 @@ function MakeTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<
     const d = drag.current;
     if (!d || d.id !== e.pointerId) return;
     drag.current = null;
-    svgRef.current?.classList.remove(`ff-big--drag-${d.ctl}`);
     force((n) => n + 1); // arah petunjuk tingkat 2 ikut posisi terbaru
   };
 
   const check = () => {
     if (state === 'won') return;
-    const read = feelingOf(shapeNow());
-    if (read === target) {
+    const r = readNow();
+    if (r === target) {
       setState('won');
-      const p = centerOf(svgRef.current);
+      const p = centerOf(boxRef.current);
       sparkleAt(p.x, p.y, 16);
       buzz(30);
       speakThen(FEEL_LINES.name[target], onDone, 1200);
@@ -402,31 +371,27 @@ function MakeTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<
     setState('nope');
     window.setTimeout(() => setState((s) => (s === 'nope' ? 'idle' : s)), 560);
     sfx('wrong');
-    const key = read === 'kaget' ? 'biasa' : read;
-    const line = FEEL_LINES.notYet[key];
-    speak(line);
-    lines.current.add(line);
+    speak(FEEL_LINES.notYet[r as Exclude<FaceRead, 'kaget'>]);
     onMiss();
   };
 
   // Petunjuk tingkat 2: arah yang harus digeser (dari posisi terakhir).
   const nudge = (ctl: Ctl): 'up' | 'down' | null => {
     if (hint < 2 || state === 'won') return null;
-    const want = ctl === 'mouth' ? goal.mouth : goalBrow;
+    const want = goalOf(ctl);
     if (want === null) return null;
     const diff = want - val.current[ctl];
     if (Math.abs(diff) < 0.25) return null;
     return diff > 0 ? 'down' : 'up';
   };
 
-  const ghost = faceAttrs(goal);
   const ctls: Ctl[] = controls === 'mulut' ? ['mouth'] : ['mouth', 'brow'];
 
   const friend =
     task.kind === 'mirror' ? (
       <div className="ff-friend" role="img" aria-label={`Wajah ${HERO_NAME[task.who]}`}>
         <Hero id={task.who} className="ff-friend__hero" />
-        <Face uid="friend" shape={FACE_OF[target]} className={`ff-friend__face ff-face ff-face--${target}`} />
+        <FeelFace feeling={target} className={`ff-friend__face ff-face ff-face--${target}`} />
         <EventArt id={task.event} className="ff-friend__event" />
       </div>
     ) : task.cue ? (
@@ -440,52 +405,32 @@ function MakeTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<
         {friend}
       </div>
       <div className="ff-main ff-main--big">
-        <div className="ff-bigbox">
-          <Face
-            ref={svgRef}
-            uid="big"
-            shape={initial}
-            className={`ff-big${state === 'nope' ? ' ff-big--nope' : ''}${state === 'won' ? ' ff-big--won' : ''}`}
-            label="Wajah anak ayam"
-          >
-            {hint >= 1 && state !== 'won' && (
-              <g className="ff-ghost" aria-hidden>
-                <path d={String(ghost.mouth!.d)} />
-                {controls === 'mulut-alis' && (
-                  <>
-                    <path d={String(ghost.browL!.d)} />
-                    <path d={String(ghost.browR!.d)} />
-                  </>
-                )}
-              </g>
-            )}
-            {state !== 'won' &&
-              ctls.map((ctl) => {
+        <div ref={boxRef} className="ff-bigbox">
+          <div className={`ff-big${state === 'nope' ? ' ff-big--nope' : ''}${state === 'won' ? ' ff-big--won' : ''}`} role="img" aria-label="Wajah anak ayam">
+            <FeelStack set={['biasa', 'senang', 'sedih', 'marah', 'takut']} show={read} />
+          </div>
+          {state !== 'won' && (
+            <svg ref={overRef} viewBox="0 0 200 200" className="ff-over" aria-hidden>
+              {ctls.map((ctl) => {
                 const n = nudge(ctl);
+                const want = goalOf(ctl);
                 return (
-                  <g key={ctl} data-knob={ctl} transform={`translate(100 ${knobY(ctl, val.current[ctl])})`} className="ff-knobwrap">
-                    <g className={`ff-knob${touched ? '' : ' ff-knob--invite'}${n ? ` ff-knob--nudge-${n}` : ''}`}>
-                      <circle r="12" className="ff-knob__ring" />
-                      <circle r="11" className="ff-knob__dot" />
-                      <path d="M-5 -3 L0 -8 L5 -3 M-5 3 L0 8 L5 3" className="ff-knob__arrows" />
+                  <g key={ctl}>
+                    <rect x="89" y={knobY(ctl, -1) - 13} width="22" height={knobY(ctl, 1) - knobY(ctl, -1) + 26} rx="11" className="ff-track" />
+                    {hint >= 1 && want !== null && <circle cx="100" cy={knobY(ctl, want)} r="6" className="ff-ghost" />}
+                    <g data-knob={ctl} transform={`translate(100 ${knobY(ctl, val.current[ctl])})`}>
+                      <g className={`ff-knob${touched ? '' : ' ff-knob--invite'}${n ? ` ff-knob--nudge-${n}` : ''}`}>
+                        <circle r="11" className="ff-knob__ring" />
+                        <circle r="10" className="ff-knob__dot" />
+                        <path d="M-4.5 -2.5 L0 -7 L4.5 -2.5 M-4.5 2.5 L0 7 L4.5 2.5" className="ff-knob__arrows" />
+                      </g>
                     </g>
                   </g>
                 );
               })}
-            {/* Daerah seret: lebih besar dari pegangannya. */}
-            {state !== 'won' &&
-              ctls.map((ctl) => {
-                const z = HANDLE_ZONES[ctl];
-                return <rect key={`z-${ctl}`} data-zone={ctl} x={z.x} y={z.y} width={z.w} height={z.h} fill="transparent" className="ff-zone" />;
-              })}
-          </Face>
-          <div
-            className="ff-bigtouch"
-            onPointerDown={down}
-            onPointerMove={move}
-            onPointerUp={up}
-            onPointerCancel={up}
-          />
+            </svg>
+          )}
+          <div className="ff-bigtouch" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up} />
         </div>
       </div>
       <div className="ff-cards ff-cards--check">
@@ -499,4 +444,9 @@ function MakeTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<
       </div>
     </>
   );
+}
+
+/** Letak pegangan di atas gambar (satuan kotak 200): alis di dahi, mulut di dada. */
+function knobY(ctl: Ctl, v: number): number {
+  return ctl === 'mouth' ? 152 + 14 * v : 40 + 12 * v;
 }
