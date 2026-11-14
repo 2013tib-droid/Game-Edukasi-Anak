@@ -237,17 +237,17 @@ export interface FeelActionDef {
 }
 
 export const FEEL_ACTIONS: Record<FeelAction, FeelActionDef> = {
-  peluk: { label: 'Memeluk', good: true },
-  pinjamkan: { label: 'Pinjamkan mainan', good: true },
+  peluk: { label: 'Peluk', good: true },
+  pinjamkan: { label: 'Pinjamkan', good: true },
   'ajak-main': { label: 'Ajak main', good: true },
-  temani: { label: 'Menemani', good: true },
+  temani: { label: 'Temani', good: true },
   'tarik-napas': { label: 'Tarik napas', good: true },
-  'bilang-pelan': { label: 'Bilang pelan-pelan', good: true },
+  'bilang-pelan': { label: 'Bicara pelan', good: true },
   'minta-peluk': { label: 'Minta peluk', good: true },
-  tertawa: { label: 'Menertawakan', good: false },
-  pergi: { label: 'Pergi saja', good: false },
-  berteriak: { label: 'Berteriak', good: false },
-  cemberut: { label: 'Cemberut terus', good: false },
+  tertawa: { label: 'Tertawa', good: false },
+  pergi: { label: 'Pergi', good: false },
+  berteriak: { label: 'Teriak', good: false },
+  cemberut: { label: 'Cemberut', good: false },
 };
 
 /* ---------- Data level ---------- */

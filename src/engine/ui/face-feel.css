@@ -161,6 +161,27 @@ span.ff-hero {
   animation: ff-jump 2s ease-out infinite;
 }
 
+.ff-heart {
+  position: absolute;
+  right: 2%;
+  top: 0;
+  width: 34%;
+  max-width: 64px;
+  height: auto;
+  animation: ff-heart-pop 0.6s cubic-bezier(0.3, 1.6, 0.5, 1) both, ff-happy 1.2s 0.6s ease-in-out infinite;
+}
+
+@keyframes ff-heart-pop {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .ff-badge--big {
   width: 56%;
   right: -24%;
@@ -958,6 +979,7 @@ span.ff-friend__hero {
   .ff-twinkle,
   .ff-hero,
   .ff-ask,
+  .ff-heart,
   .ff-knob,
   .ff-knob__ring,
   .ff-ghost,

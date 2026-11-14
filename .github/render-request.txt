@@ -1,8 +1,8 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #63 — game baru Playgroup & TK "Wajah Perasaan" (template
-`face-feel`): 67 baris baru, semuanya scope wajah-perasaan, nol baris lama
-pindah scope.
+render #64 — Wajah Perasaan: label kartu tindakan dipendekkan (Peluk,
+Pinjamkan, Temani, Bicara pelan, Tertawa, Pergi, Teriak, Cemberut). 8 baris
+baru, semuanya scope wajah-perasaan, nol pindah scope.
 only: wajah-perasaan
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
