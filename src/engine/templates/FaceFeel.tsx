@@ -222,11 +222,23 @@ function CardTask({ task, say, stepIx, total, hint, onMiss, onDone }: TaskProps<
   else
     top = (
       <div className="ff-cue ff-cue--help">
-        <div className="ff-cue__who">
-          {task.who && <Hero id={task.who} />}
-          <div ref={helpFace} className={task.who ? 'ff-badge ff-badge--big' : 'ff-aku'}>
-            <FeelStack set={[task.feeling, task.who ? 'senang' : 'biasa']} show={better ?? task.feeling} className={better ? '' : `ff-face ff-face--${task.feeling}`} />
-          </div>
+        <div className="ff-cue__who" ref={helpFace}>
+          {task.who ? (
+            <>
+              {/* Tokohnya saja — wajah anak ayam di atas hewan lain terbaca
+                  "ada ayam di kepala gajah" (laporan pemilik 2026-11-14). */}
+              <Hero id={task.who} />
+              {better && (
+                <svg viewBox="0 0 40 36" className="ff-heart" aria-hidden>
+                  <path d="M20 34 C2 22 0 10 8 5 C14 1 19 5 20 9 C21 5 26 1 32 5 C40 10 38 22 20 34 Z" fill="#ff6b8a" stroke="#5a3a1a" strokeWidth="2.5" strokeLinejoin="round" />
+                </svg>
+              )}
+            </>
+          ) : (
+            <div className="ff-aku">
+              <FeelStack set={[task.feeling, 'biasa']} show={better ?? task.feeling} className={better ? '' : `ff-face ff-face--${task.feeling}`} />
+            </div>
+          )}
         </div>
         <EventArt id={task.event} className="ff-event" />
       </div>

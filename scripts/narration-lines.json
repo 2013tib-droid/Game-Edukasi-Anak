@@ -1,7 +1,7 @@
 {
-  "generated": "2026-11-13",
+  "generated": "2026-11-14",
   "count": 2234,
-  "chars": 93963,
+  "chars": 93927,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -19246,15 +19246,6 @@
       ]
     },
     {
-      "key": "a653bda14c22",
-      "text": "Berteriak",
-      "scope": "wajah-perasaan",
-      "voice": "gadis",
-      "games": [
-        "wajah-perasaan"
-      ]
-    },
-    {
       "key": "61e617b05138",
       "text": "Beruang sedih karena balonnya lepas. Apa yang kamu lakukan?",
       "scope": "wajah-perasaan",
@@ -19264,8 +19255,8 @@
       ]
     },
     {
-      "key": "44e6e320329b",
-      "text": "Bilang pelan-pelan",
+      "key": "4a4c0bbc4517",
+      "text": "Bicara pelan",
       "scope": "wajah-perasaan",
       "voice": "gadis",
       "games": [
@@ -19273,8 +19264,8 @@
       ]
     },
     {
-      "key": "3accc6466b7b",
-      "text": "Cemberut terus",
+      "key": "1fdae3e5dc8a",
+      "text": "Cemberut",
       "scope": "wajah-perasaan",
       "voice": "gadis",
       "games": [
@@ -19543,15 +19534,6 @@
       ]
     },
     {
-      "key": "7b1ae56e8d5f",
-      "text": "Memeluk",
-      "scope": "wajah-perasaan",
-      "voice": "gadis",
-      "games": [
-        "wajah-perasaan"
-      ]
-    },
-    {
       "key": "d85b827dcd91",
       "text": "Menara balok Ayam ditendang teman. Bagaimana perasaannya?",
       "scope": "wajah-perasaan",
@@ -19572,24 +19554,6 @@
     {
       "key": "4e8a6d9bfb7f",
       "text": "Menara balokmu ditendang teman. Kamu marah. Apa yang baik dilakukan?",
-      "scope": "wajah-perasaan",
-      "voice": "gadis",
-      "games": [
-        "wajah-perasaan"
-      ]
-    },
-    {
-      "key": "3cbb49044188",
-      "text": "Menemani",
-      "scope": "wajah-perasaan",
-      "voice": "gadis",
-      "games": [
-        "wajah-perasaan"
-      ]
-    },
-    {
-      "key": "1315b7fceba5",
-      "text": "Menertawakan",
       "scope": "wajah-perasaan",
       "voice": "gadis",
       "games": [
@@ -19696,8 +19660,17 @@
       ]
     },
     {
-      "key": "6fb7294ef86d",
-      "text": "Pergi saja",
+      "key": "0cf1500dd4e3",
+      "text": "Peluk",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "25690d49443d",
+      "text": "Pergi",
       "scope": "wajah-perasaan",
       "voice": "gadis",
       "games": [
@@ -19714,8 +19687,8 @@
       ]
     },
     {
-      "key": "e154f779da9d",
-      "text": "Pinjamkan mainan",
+      "key": "d45106c2db13",
+      "text": "Pinjamkan",
       "scope": "wajah-perasaan",
       "voice": "gadis",
       "games": [
@@ -19752,6 +19725,33 @@
     {
       "key": "64011368492a",
       "text": "Tarik napas",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "a224b43816a8",
+      "text": "Temani",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "f872b3a5a7ac",
+      "text": "Teriak",
+      "scope": "wajah-perasaan",
+      "voice": "gadis",
+      "games": [
+        "wajah-perasaan"
+      ]
+    },
+    {
+      "key": "1024c95f984e",
+      "text": "Tertawa",
       "scope": "wajah-perasaan",
       "voice": "gadis",
       "games": [

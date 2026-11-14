@@ -241,13 +241,31 @@ const ACTIONS: Record<FeelAction, JSX.Element> = {
       <Spark x={86} y={66} s={0.8} />
     </g>
   ),
+  // Dua teman duduk berdampingan di bangku, bergandengan (bukan hati —
+  // permintaan pemilik 2026-11-14: anak TK membaca "menemani" dari orangnya).
   temani: (
-    <g>
-      <path d="M8 76 H92" stroke="#c98a5a" strokeWidth="6" strokeLinecap="round" />
-      <path d="M18 76 V90 M82 76 V90" stroke="#c98a5a" strokeWidth="5" strokeLinecap="round" />
-      <Heart x={34} y={50} s={1.6} fill="#ffd84d" />
-      <Heart x={66} y={50} s={1.6} fill="#ff8fa3" />
-      <path d="M44 62 Q50 70 56 62" fill="none" stroke={INK} strokeWidth="2.5" strokeLinecap="round" />
+    <g strokeLinejoin="round" strokeLinecap="round">
+      <path d="M10 78 H90" stroke="#c98a5a" strokeWidth="7" />
+      <path d="M20 78 V94 M80 78 V94" stroke="#c98a5a" strokeWidth="6" />
+      <g stroke={INK} strokeWidth="2.5">
+        <ellipse cx="32" cy="62" rx="15" ry="14" fill="#7cc6ff" />
+        <circle cx="32" cy="36" r="14" fill="#ffd9b0" />
+        <path d="M18 32 Q32 16 46 32 Q40 26 32 26 Q24 26 18 32 Z" fill="#5a3a1a" />
+        <ellipse cx="68" cy="62" rx="15" ry="14" fill="#ff9ec4" />
+        <circle cx="68" cy="36" r="14" fill="#ffd9b0" />
+        <path d="M54 32 Q68 14 82 32 Q78 24 68 24 Q58 24 54 32 Z" fill="#3b2412" />
+        <path d="M44 62 Q50 70 56 62" fill="none" stroke="#ffd9b0" strokeWidth="6" />
+        <path d="M44 62 Q50 70 56 62" fill="none" />
+      </g>
+      <g fill={INK}>
+        <circle cx="27" cy="37" r="2" />
+        <circle cx="37" cy="37" r="2" />
+        <circle cx="63" cy="37" r="2" />
+        <circle cx="73" cy="37" r="2" />
+      </g>
+      <path d="M27 43 Q32 47 37 43 M63 43 Q68 47 73 43" fill="none" stroke={INK} strokeWidth="2" />
+      <circle cx="24" cy="42" r="2.5" fill="#ff8fa3" opacity="0.7" />
+      <circle cx="76" cy="42" r="2.5" fill="#ff8fa3" opacity="0.7" />
     </g>
   ),
   'tarik-napas': (
