@@ -499,6 +499,18 @@ const ALL_GAMES: GameMeta[] = [
     load: () => import('@/games/sd2/mata-jeli'),
   },
   {
+    // Peta & arah mata angin (template `compass-map`, 2026-11-16): antar paket
+    // menurut arah, peta bisa diputar — utara tidak selalu di atas. Seni ikon
+    // belum ada (🧭 cadangan; prompt di akhir docs/prompt-ikon-game.md).
+    id: 'kurir-kompas',
+    group: 'sd2',
+    subject: 'ipas',
+    title: 'Kurir Kompas',
+    emoji: '🧭',
+    template: 'compass-map',
+    load: () => import('@/games/sd2/kurir-kompas'),
+  },
+  {
     id: 'toko-kembalian',
     group: 'sd2',
     subject: 'matematika',

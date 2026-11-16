@@ -1,0 +1,587 @@
+/*
+ * Kurir Kompas (`compass-map`).
+ *
+ * Tingginya PASTI (pola balance-scale/maze): `.cm-wrap` = tinggi layar
+ * dikurangi baris atas engine. Kotak peta (`.cm-boardbox`) `flex: 1 1 0` dan
+ * container query berukuran, jadi petanya selalu sebesar sisa layar tanpa
+ * menebak tinggi kalimat soal. Papan digambar di koordinat LAYAR — tidak ada
+ * yang diputar dengan CSS selain isi mawar angin (SVG).
+ */
+
+.cm-wrap {
+  height: calc(100dvh - 92px - env(safe-area-inset-bottom));
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.cm-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.cm-prompt {
+  margin: 0;
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(17px, 4.9vw, 22px);
+  line-height: 1.25;
+  color: #3a2e20;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  padding: 5px 12px;
+  max-width: 560px;
+  text-wrap: balance;
+}
+
+.cm-dots {
+  display: flex;
+  gap: 8px;
+}
+.cm-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px #ffd56a inset;
+}
+.cm-dot--done {
+  background: #6fcf6a;
+  box-shadow: 0 0 0 3px #3e9b3a inset;
+}
+.cm-dot--now {
+  background: #ffd23f;
+  box-shadow: 0 0 0 3px #e0a100 inset;
+  scale: 1.2;
+}
+
+/* ---------- Peta ---------- */
+.cm-boardbox {
+  flex: 1 1 0;
+  min-height: 0;
+  container-type: size;
+  display: grid;
+  place-items: center;
+}
+
+.cm-board {
+  position: relative;
+  width: min(100cqw, calc(100cqh * var(--cols) / var(--rows)), 560px);
+  aspect-ratio: var(--cols) / var(--rows);
+  display: grid;
+  grid-template-columns: repeat(var(--cols), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  background: #f7ecd2;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 3px #c9a66b,
+    0 5px 0 3px #a98650,
+    0 10px 16px rgba(90, 60, 20, 0.2);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.cm-board--move {
+  touch-action: none;
+  cursor: pointer;
+}
+
+.cm-cell {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 0.5px rgba(160, 130, 80, 0.28) inset;
+}
+.cm-cell--jalan {
+  background: #f7ecd2;
+}
+.cm-cell--pohon {
+  background: #b9e2a0;
+}
+.cm-cell--sungai,
+.cm-cell--jembatan {
+  background: #7ec8f2;
+}
+.cm-cell--trail {
+  background: #ffe07a;
+}
+.cm-cell--jembatan.cm-cell--trail {
+  background: #7ec8f2;
+}
+.cm-cell--jembatan.cm-cell--trail::after {
+  content: '';
+  position: absolute;
+  inset: 22%;
+  border-radius: 50%;
+  background: #ffd23f;
+  opacity: 0.85;
+}
+.cm-cell--hint {
+  background: #d9f5d3;
+  box-shadow: 0 0 0 3px #43a047 inset;
+}
+.cm-cell--of {
+  box-shadow: 0 0 0 4px #fb8c00 inset;
+}
+.cm-cell--from {
+  box-shadow: 0 0 0 4px #1e88e5 inset;
+}
+.cm-cell--glow {
+  animation: cm-pulse 0.9s ease-in-out infinite;
+  box-shadow: 0 0 0 4px #43a047 inset;
+  z-index: 1;
+}
+
+.cm-tree,
+.cm-wave,
+.cm-bridge {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.cm-tree {
+  inset: 8%;
+  width: 84%;
+  height: 84%;
+}
+
+.cm-place {
+  position: relative;
+  width: 88%;
+  height: 88%;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  container-type: size;
+}
+.cm-place__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.cm-place__emoji {
+  font-size: 30px;
+  line-height: 1;
+}
+@supports (container-type: size) {
+  .cm-place .cm-place__emoji {
+    font-size: 78cqh;
+  }
+}
+
+.cm-steps {
+  position: absolute;
+  font-size: 16px;
+  pointer-events: none;
+}
+.cm-num {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  background: #fff;
+  color: #3a2e20;
+  font-weight: 900;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.cm-courier {
+  position: absolute;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  transition:
+    left 0.14s linear,
+    top 0.14s linear;
+  z-index: 3;
+  filter: drop-shadow(0 2px 2px rgba(60, 40, 10, 0.35));
+}
+.cm-courier__img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #ffd23f;
+}
+.cm-courier__emoji {
+  font-size: 26px;
+}
+.cm-courier--right .cm-courier__img,
+.cm-courier--right .cm-courier__emoji {
+  transform: scaleX(-1);
+}
+
+.cm-north {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.cm-status {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  translate: -50% 0;
+  padding: 3px 14px;
+  border-radius: 14px;
+  background: #fff;
+  color: #2e7d32;
+  font-weight: 900;
+  font-size: 18px;
+  white-space: nowrap;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+  z-index: 4;
+  pointer-events: none;
+}
+.cm-status:empty {
+  display: none;
+}
+
+/* ---------- Tepi peta: mawar angin + legenda ---------- */
+.cm-foot {
+  align-self: center;
+  width: min(100%, 560px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fffaf0;
+  border-radius: 14px;
+  box-shadow: 0 0 0 2px #e2c48a;
+  padding: 4px 8px;
+}
+.cm-rose {
+  flex: none;
+  width: 62px;
+  height: 62px;
+}
+.cm-rose--pulse {
+  animation: cm-pulse 0.9s ease-in-out infinite;
+}
+.cm-legend {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px 6px;
+}
+.cm-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  font-weight: 800;
+  font-size: 13.5px;
+  line-height: 1.1;
+  color: #3a2e20;
+  white-space: nowrap;
+  border-radius: 8px;
+}
+.cm-legend__icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+}
+.cm-legend__icon .cm-place__img {
+  width: 20px;
+  height: 20px;
+}
+.cm-legend__icon .cm-place__emoji {
+  font-size: 16px;
+}
+.cm-legend__item--hint {
+  background: #d9f5d3;
+  box-shadow: 0 0 0 2px #43a047;
+  animation: cm-pulse 0.9s ease-in-out infinite;
+}
+.cm-legend__item--scale {
+  grid-column: 1 / -1;
+  justify-content: center;
+  background: #e3f2fd;
+  color: #0d47a1;
+  padding: 1px 6px;
+}
+
+/* ---------- Bawah: tombol gerak / kartu ---------- */
+.cm-bottom {
+  align-self: center;
+  width: min(100%, 560px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.cm-move {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cm-btn {
+  flex: none;
+  width: 54px;
+  height: 54px;
+  border: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  background: radial-gradient(circle at 35% 30%, #ffffff, #fff3d6 70%);
+  box-shadow:
+    0 0 0 3px #ffffff inset,
+    0 4px 0 #e2c48a;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.cm-btn svg {
+  width: 34px;
+  height: 34px;
+}
+.cm-count {
+  flex: none;
+  min-width: 58px;
+  text-align: center;
+  font-weight: 900;
+  font-size: 18px;
+  color: #3a2e20;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+  padding: 6px 8px;
+}
+.cm-arrive {
+  flex: 1;
+  min-height: 54px;
+  font-size: clamp(19px, 5.6vw, 24px);
+  background: #6fcf6a;
+  box-shadow: 0 5px 0 #3e9b3a;
+  color: #173d16;
+}
+
+.cm-cards {
+  flex: 1;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr));
+}
+/* Empat kartu tulisan (arah, meter): dua kolom — sebaris berempat memotong
+   "Selatan"/"Tenggara" di HP 320 px dan di kolom kanan HP yang dimiringkan. */
+.cm-cards--long {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.cm-card {
+  min-height: 46px;
+  min-width: 0;
+  border-radius: 14px;
+  border: 3px solid #ffd56a;
+  background: #fff;
+  color: #3a2e20;
+  font-weight: 900;
+  font-size: clamp(15px, 4.5vw, 21px);
+  font-family: inherit;
+  padding: 2px 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.cm-cards--north .cm-card {
+  min-height: 56px;
+}
+.cm-card--out {
+  opacity: 0.35;
+}
+.cm-arrow {
+  width: 38px;
+  height: 38px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Soal simbol: contoh simbol DI ATAS tiga kartu — di sampingnya kartu
+   "Jembatan"/"Pepohonan" terpotong di HP 320 px (terukur). */
+.cm-wrap--symbol .cm-bottom {
+  flex-direction: column;
+  gap: 6px;
+}
+.cm-wrap--symbol .cm-cards {
+  width: 100%;
+}
+.cm-symbol {
+  flex: none;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 0 3px #c9a66b;
+  background: #f7ecd2;
+}
+.cm-symbol--sungai,
+.cm-symbol--jembatan {
+  background: #7ec8f2;
+}
+.cm-symbol--pepohonan {
+  background: #b9e2a0;
+}
+.cm-symbol--jalan {
+  background: #f7ecd2;
+  box-shadow:
+    0 0 0 3px #c9a66b,
+    0 14px 0 #b9e2a0 inset,
+    0 -14px 0 #b9e2a0 inset;
+}
+
+/* ---------- Gerak ---------- */
+.cm-shake {
+  animation: cm-shake 0.42s ease;
+}
+@keyframes cm-shake {
+  0%,
+  100% {
+    margin-left: 0;
+  }
+  20% {
+    margin-left: -8px;
+  }
+  40% {
+    margin-left: 8px;
+  }
+  60% {
+    margin-left: -5px;
+  }
+  80% {
+    margin-left: 5px;
+  }
+}
+@keyframes cm-pulse {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cm-shake,
+  .cm-rose--pulse,
+  .cm-cell--glow,
+  .cm-legend__item--hint {
+    animation: none;
+  }
+  .cm-courier {
+    transition: none;
+  }
+  .cm-rose--pulse {
+    outline: 3px solid #c62828;
+    border-radius: 50%;
+  }
+}
+
+/* HP pendek: rapatkan. */
+@media (max-height: 620px) {
+  .cm-wrap {
+    gap: 4px;
+  }
+  .cm-prompt {
+    font-size: clamp(16px, 4.6vw, 19px);
+    padding: 3px 10px;
+  }
+  .cm-rose {
+    width: 56px;
+    height: 56px;
+  }
+  .cm-legend__item {
+    font-size: 12.5px;
+  }
+  .cm-card {
+    min-height: 42px;
+  }
+  .cm-btn,
+  .cm-arrive {
+    height: 50px;
+    min-height: 50px;
+  }
+  .cm-btn {
+    width: 50px;
+  }
+  .cm-symbol {
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* Tablet tegak. */
+@media (min-width: 600px) and (min-height: 700px) {
+  .cm-wrap {
+    gap: 12px;
+  }
+  .cm-rose {
+    width: 84px;
+    height: 84px;
+  }
+  .cm-legend {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .cm-legend__item {
+    font-size: 17px;
+  }
+  .cm-legend__icon,
+  .cm-legend__icon .cm-place__img {
+    width: 28px;
+    height: 28px;
+  }
+  .cm-card {
+    min-height: 60px;
+  }
+}
+
+/* HP dimiringkan: peta di kiri, kalimat + legenda + kartu di kanan. */
+@media (min-aspect-ratio: 4/3) and (max-height: 560px) {
+  .cm-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr);
+    column-gap: 12px;
+    row-gap: 6px;
+  }
+  .cm-boardbox {
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+  .cm-head,
+  .cm-foot,
+  .cm-bottom {
+    grid-column: 2;
+    width: 100%;
+  }
+  .cm-bottom {
+    align-self: end;
+  }
+  .cm-prompt {
+    font-size: 16px;
+  }
+}

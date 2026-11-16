@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-16",
-  "count": 2259,
-  "chars": 95127,
+  "count": 2318,
+  "chars": 98006,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -11548,6 +11548,537 @@
       "voice": "gadis",
       "games": [
         "kode-warna"
+      ]
+    },
+    {
+      "key": "ba96afbd6e51",
+      "text": "Antar paket ke bangunan di sebelah barat daya toko!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "10d247b5d367",
+      "text": "Antar paket ke bangunan di sebelah barat laut taman!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "c72579cd14fb",
+      "text": "Antar paket ke bangunan di sebelah barat rumah sakit!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "625e566ccb80",
+      "text": "Antar paket ke bangunan di sebelah barat rumah!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "87613cd85c80",
+      "text": "Antar paket ke bangunan di sebelah barat sekolah!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "4c87a1eb36f7",
+      "text": "Antar paket ke bangunan di sebelah barat toko!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "96f2ec0a860b",
+      "text": "Antar paket ke bangunan di sebelah selatan kantor pos!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "26f42375dfc0",
+      "text": "Antar paket ke bangunan di sebelah selatan rumah sakit!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "f45f5c6adae6",
+      "text": "Antar paket ke bangunan di sebelah timur kantor pos!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "3343f4834f65",
+      "text": "Antar paket ke bangunan di sebelah timur laut kantor pos!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "d162a2719d02",
+      "text": "Antar paket ke bangunan di sebelah timur laut sekolah!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "567b8c571f90",
+      "text": "Antar paket ke bangunan di sebelah timur laut taman!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "1cc9dc00bada",
+      "text": "Antar paket ke bangunan di sebelah timur rumah!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "8cd6b4b082b7",
+      "text": "Antar paket ke bangunan di sebelah utara rumah sakit!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "b830ec06806f",
+      "text": "Antar paket ke bangunan di sebelah utara rumah!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "5673222c1855",
+      "text": "Antar paket! Dua blok ke selatan, lalu empat blok ke barat.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "a84772780af6",
+      "text": "Antar paket! Dua blok ke timur, lalu empat blok ke selatan.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "ca85b57172eb",
+      "text": "Antar paket! Dua blok ke utara, lalu empat blok ke timur.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "788b82bd6ef4",
+      "text": "Antar paket! Empat blok ke timur, lalu dua blok ke selatan.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "396cb4895356",
+      "text": "Antar paket! Empat blok ke utara, lalu empat blok ke barat.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "ea1e53fecc10",
+      "text": "Antar paket! Lima blok ke timur, lalu lima blok ke selatan.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "aa32c54ec3f5",
+      "text": "Antar paket! Satu blok ke selatan, lalu satu blok ke barat.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "d994fba3bb70",
+      "text": "Antar paket! Satu blok ke timur, lalu empat blok ke utara.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "cd6e7e283421",
+      "text": "Coba cek mawar anginnya lagi!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "69e3c4dfc7af",
+      "text": "Dua blok ke barat, dua blok ke selatan, lalu tiga blok ke barat.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "1fd1d13ed5c4",
+      "text": "Dua blok ke selatan, empat blok ke barat, lalu empat blok ke utara.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "95ba211ccb10",
+      "text": "Dua blok ke timur, dua blok ke selatan, lalu satu blok ke timur.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "cd0d0a8d275a",
+      "text": "Dua blok ke timur, empat blok ke selatan, lalu dua blok ke timur.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "be43acd5c785",
+      "text": "Empat blok ke timur, tiga blok ke selatan, lalu satu blok ke timur.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "c8bdbb39becd",
+      "text": "Kandang ada di sebelah mana pom bensin?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "e69dc9287713",
+      "text": "Kandang ada di sebelah mana stasiun?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "fcc25a5496fc",
+      "text": "Kantor pos ada di sebelah mana rumah sakit?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "9c088ee93083",
+      "text": "Kantor pos ada di sebelah mana stasiun?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "802d5b9e6858",
+      "text": "Lihat legendanya. Sentuh kantor pos di peta!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "c2879221440a",
+      "text": "Lihat legendanya. Sentuh pom bensin di peta!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "94eae3c3f57e",
+      "text": "Lihat legendanya. Sentuh stasiun di peta!",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "8d9243052507",
+      "text": "Lihat mawar anginnya dulu! Utara ada di mana?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "5a396de02b19",
+      "text": "Rumah ada di sebelah mana sekolah?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "e324c5cc0f60",
+      "text": "Rumah sakit ada di sebelah mana rumah?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "7d31a38cb3e6",
+      "text": "Rumah sakit ada di sebelah mana taman?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "c334068bdaec",
+      "text": "Satu blok ke timur, satu blok ke utara, lalu tiga blok ke timur.",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "6cc3fc2b75af",
+      "text": "Satu kotak seratus meter. Berapa jauh dari kandang ke stasiun?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "ec096c208bcf",
+      "text": "Satu kotak seratus meter. Berapa jauh dari pom bensin ke sawah?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "ada1c91f7b0e",
+      "text": "Satu kotak seratus meter. Berapa jauh dari rumah ke rumah sakit?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "a3c10a407f19",
+      "text": "Satu kotak seratus meter. Berapa jauh dari rumah ke toko?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "4c7d959a56b9",
+      "text": "Satu kotak seratus meter. Berapa jauh dari sekolah ke stasiun?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "3dbc111d824f",
+      "text": "Satu kotak seratus meter. Berapa jauh dari toko ke sekolah?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "b8a28b546b36",
+      "text": "Sawah ada di sebelah mana pom bensin?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "df3b4c55d98a",
+      "text": "Sawah ada di sebelah mana sekolah?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "af96941bcf14",
+      "text": "Sawah ada di sebelah mana stasiun?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "58ed5c5604b0",
+      "text": "Sekolah ada di sebelah mana kantor pos?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "d69b62ce4661",
+      "text": "Sekolah ada di sebelah mana taman?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "6c422a696b6b",
+      "text": "Sekolah ada di sebelah mana toko?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "ca48a41f5853",
+      "text": "Simbol ini artinya apa?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "3b635351492c",
+      "text": "Stasiun ada di sebelah mana pom bensin?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "925819e0be6d",
+      "text": "Stasiun ada di sebelah mana rumah?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "0e64ded8bacb",
+      "text": "Taman ada di sebelah mana kantor pos?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "31fff7b0bde1",
+      "text": "Toko ada di sebelah mana kantor pos?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
+      ]
+    },
+    {
+      "key": "1e7dbd11c265",
+      "text": "Toko ada di sebelah mana sekolah?",
+      "scope": "kurir-kompas",
+      "voice": "gadis",
+      "games": [
+        "kurir-kompas"
       ]
     },
     {

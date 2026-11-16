@@ -107,6 +107,12 @@ jobs:
       - name: Periksa soal timbangan seimbang
         run: node scripts/check-balance-levels.mjs
 
+      # Kurir Kompas: tiap instruksi arah bisa dijalani, tiap soal "di sebelah
+      # mana" punya tepat satu kartu benar, petunjuk antar menunjuk satu
+      # bangunan, jarak ≤ 1.000 m, dan putaran peta konsisten dengan teksnya.
+      - name: Periksa soal kurir kompas
+        run: node scripts/check-compass-levels.mjs
+
       # Sinkron bintang ke Firestore harus MENGGABUNG (maksimum per level),
       # tidak menimpa. Kalau ini jadi penulisan biasa, anak yang main di
       # tablet lalu di HP kehilangan bintang tabletnya — dan itu cuma

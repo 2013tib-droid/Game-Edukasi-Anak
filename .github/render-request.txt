@@ -1,8 +1,8 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #65 — Timbangan Seimbang (SD Kelas 1 & 2, game baru). 25 baris baru,
-semuanya scope timbangan-seimbang, nol pindah scope.
-only: timbangan-seimbang
+render #66 — Kurir Kompas (SD Kelas 3 & 4 · IPAS, game baru). 59 baris baru,
+semuanya scope kurir-kompas, nol pindah scope.
+only: kurir-kompas
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris
