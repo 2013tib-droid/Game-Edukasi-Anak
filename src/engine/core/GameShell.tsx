@@ -86,6 +86,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   maze: lazy(() => import('@/engine/templates/Maze')),
   'face-feel': lazy(() => import('@/engine/templates/FaceFeel')),
   'balance-scale': lazy(() => import('@/engine/templates/BalanceScale')),
+  'compass-map': lazy(() => import('@/engine/templates/CompassMap')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */

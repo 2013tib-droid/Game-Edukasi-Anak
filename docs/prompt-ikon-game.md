@@ -477,3 +477,23 @@ BLOK GAYA).
 - Pasang: `scripts/cut-item.py <art> public/assets/games/timbangan-seimbang.webp 320`,
   tempel di atas latar berwarna, lalu tambah `pic: 'timbangan-seimbang',` di entri
   registry-nya.
+
+## Ikon "Kurir Kompas" (`compass-map`) — 2026-11-16
+
+`kurir-kompas` (SD Kelas 3 & 4 · IPAS, 🧭 cadangan) belum punya seni. Pakai BLOK GAYA +
+EKOR PROMPT di atas, SATU baris per pesan. **Tanpa warna ungu** (abaikan "ungu muda" di
+BLOK GAYA).
+
+| id file | Baris prompt |
+|---|---|
+| `kurir-kompas` | Buatkan: sebuah kompas bulat berwajah imut (mata bulat, senyum kecil) berbingkai kuning keemasan lembut, dengan jarum merah-putih yang jelas, berdiri di atas selembar peta kertas krem yang terlipat tiga. Di peta terlihat garis jalan cokelat muda, satu sungai biru muda, dan dua blok hijau muda. Garis luar cokelat tebal, warna pastel cerah. Tanpa hewan, tanpa orang, tanpa kendaraan, tanpa tulisan, tanpa huruf, tanpa angka, tanpa emoji. Tinggi dan lebar gambarnya kira-kira sama. |
+
+- **Kompas + peta, BUKAN sepeda / jalan berkelok** — jalan berkelok sudah ikon Rute
+  Kendaraan, mobil ikon Jalan Kendaraan. Yang membedakan game ini: membaca arah di peta.
+- **Tanpa huruf U/T/S/B di muka kompas**: huruf buatan AI sering salah (N/E/S/W gaya
+  Inggris, atau huruf karangan), dan di game utara ditulis "U".
+- Jarumnya merah di satu ujung — sama dengan mawar angin di dalam game (utara merah).
+- Lipatan peta dan celah di bawah kompas bisa jadi latar TERKURUNG (pelajaran 4): periksa
+  sesudah `cut-item.py`, tembus manual per lubang kalau masih putih.
+- Pasang: `scripts/cut-item.py <art> public/assets/games/kurir-kompas.webp 320`, tempel di
+  atas latar berwarna, lalu tambah `pic: 'kurir-kompas',` di entri registry-nya.

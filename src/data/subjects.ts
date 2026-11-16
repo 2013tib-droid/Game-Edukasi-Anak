@@ -106,7 +106,7 @@ export const SUBJECTS_BY_GROUP: Partial<Record<GroupId, readonly GroupSubject[]>
   sd2: [
     { id: 'matematika', description: 'Perkalian, pembagian, uang, waktu, ukuran & data.' },
     { id: 'bahasa-indonesia', description: 'Membaca cerita, mencari informasi & menyusun kalimat.' },
-    { id: 'ipas', description: 'Tumbuhan, hewan, lingkungan, cahaya & bunyi.' },
+    { id: 'ipas', description: 'Tumbuhan, hewan, lingkungan, cahaya & bunyi, peta & arah.' },
     { id: 'pancasila', description: 'Lima sila, tata tertib, hak & kewajiban, keberagaman.' },
     { id: 'seni-rupa', description: 'Warna, pola, motif batik, kolase & mozaik.' },
     { id: 'bahasa-inggris', description: 'Hewan, makanan, warna, angka & kota dalam bahasa Inggris.' },

@@ -105,6 +105,7 @@ const mod = await load(
     `\nexport { PATH_LINES, parsePathBoard } from ${JSON.stringify(path.resolve('src/engine/core/colorPath.ts').split(path.sep).join('/'))};` +
     `\nexport { SPOT_LINES } from ${JSON.stringify(path.resolve('src/engine/core/spotDiff.ts').split(path.sep).join('/'))};` +
     `\nexport { FEEL_LINES, FEEL_ACTIONS } from ${JSON.stringify(path.resolve('src/engine/core/feelings.ts').split(path.sep).join('/'))};` +
+    `\nexport { COMPASS_LINES } from ${JSON.stringify(path.resolve('src/engine/core/compass.ts').split(path.sep).join('/'))};` +
     `\nexport { BALANCE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/balance.ts').split(path.sep).join('/'))};` +
     `\nexport { MAZE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/maze.ts').split(path.sep).join('/'))};` +
     `\nexport { phraseText, VOY_LINES } from ${JSON.stringify(path.resolve('src/engine/core/wordVoyage.ts').split(path.sep).join('/'))};`,
@@ -270,6 +271,14 @@ for (const config of mod.configs) {
         if (st.mode === 'fewest') add(L.tooMany, config.id, voice);
         if (st.mode === 'equation') add(L.pick, config.id, voice);
       }
+      continue;
+    }
+
+    // compass-map (Kurir Kompas): pressing "Sampai!" in the wrong place asks
+    // the child to check the compass rose again (COMPASS_LINES — the SAME
+    // object the template uses). Step sentences come through `steps[].say`.
+    if ((level.template ?? config.template) === 'compass-map') {
+      if (level.data.steps.some((st) => st.task.kind === 'follow' || st.task.kind === 'go')) add(mod.COMPASS_LINES.check, config.id, voice);
       continue;
     }
 
