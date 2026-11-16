@@ -401,6 +401,17 @@ const ALL_GAMES: GameMeta[] = [
     load: () => import('@/games/sd1/pola-pintar'),
   },
   {
+    // Makna "=" sebagai SEIMBANG (dasar aljabar) lewat timbangan dua lengan
+    // yang miring sungguhan — template `balance-scale` (2026-11-15). Seni ikon
+    // belum ada (prompt di akhir docs/prompt-ikon-game.md); ⚖️ cadangan.
+    id: 'timbangan-seimbang',
+    group: 'sd1',
+    title: 'Timbangan Seimbang',
+    emoji: '⚖️',
+    template: 'balance-scale',
+    load: () => import('@/games/sd1/timbangan-seimbang'),
+  },
+  {
     // Sengaja PALING BAWAH di daftar SD (permintaan pemilik 2026-09-03): ia
     // kartu terakhir yang dilihat anak, bukan yang kedua. Urutan kartu portal
     // = urutan array ini (`GroupPage` tidak menyortir apa pun).

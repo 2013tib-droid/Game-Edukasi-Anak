@@ -1,7 +1,7 @@
 {
-  "generated": "2026-11-14",
-  "count": 2234,
-  "chars": 93927,
+  "generated": "2026-11-16",
+  "count": 2259,
+  "chars": 95127,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -17866,6 +17866,231 @@
       "voice": "gadis",
       "games": [
         "teliti-gambar"
+      ]
+    },
+    {
+      "key": "3c392ae4f08f",
+      "text": "Balok mana yang hilang? Taruh, lalu lepas pasaknya!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "f30fccc5f82e",
+      "text": "Kalimat mana yang cocok dengan timbangan?",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "41104f01b579",
+      "text": "Kedua piring sudah berisi. Buat seimbang sekali lagi!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "3aca9d0793ca",
+      "text": "Kedua piring sudah berisi. Buat timbangannya seimbang!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "6450eb87dbfa",
+      "text": "Kedua sisi harus sama berat. Isi tanda tanyanya!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "f8a6c97fe048",
+      "text": "Kios Timbang! Berapa alpukat seberat satu semangka?",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "6fa6e2f281c2",
+      "text": "Kios Timbang! Berapa mangga seberat satu melon?",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "db25d851bad8",
+      "text": "Kios Timbang! Berapa mangga seberat satu nanas?",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "e0f155151611",
+      "text": "Kios Timbang! Berapa nanas seberat satu semangka?",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "7097ae659db4",
+      "text": "Kios Timbang! Berapa pir seberat satu melon?",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "c6cf8312efe3",
+      "text": "Kios Timbang! Berapa pisang seberat satu nanas?",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "0aac2b366ff5",
+      "text": "Masih berat sebelah! Sisi mana yang terlalu berat?",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "ee7bb051c898",
+      "text": "Pakai dua balok saja. Buat timbangannya seimbang!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "2e9b8933d1dc",
+      "text": "Sama dengan artinya seimbang. Isi tanda tanyanya!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "cc4e144477ef",
+      "text": "Satu alpukat seberat dua kiwi. Seimbangkan lagi!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "f73710c65e95",
+      "text": "Satu balok saja tidak cukup. Buat timbangannya seimbang!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "8e9b95f66289",
+      "text": "Satu mangga seberat dua ceri. Seimbangkan lagi!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "a6015836f678",
+      "text": "Satu mangga seberat dua jeruk. Seimbangkan lagi!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "e16a0fb27c81",
+      "text": "Satu nanas seberat dua apel. Seimbangkan lagi!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "e5c600eeefc7",
+      "text": "Satu pir seberat dua lemon. Seimbangkan lagi!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "6ef04793c75e",
+      "text": "Satu pisang seberat dua stroberi. Seimbangkan lagi!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "278f0461e931",
+      "text": "Seimbangkan, lalu pilih kalimat yang cocok!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "7dc54cefda57",
+      "text": "Sudah seimbang, tapi baloknya kebanyakan!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "7152bab668e8",
+      "text": "Taruh balok di piring kanan sampai timbangannya seimbang!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
+      ]
+    },
+    {
+      "key": "ba7d7274bf44",
+      "text": "Taruh balok dulu, baru lepas pasaknya!",
+      "scope": "timbangan-seimbang",
+      "voice": "gadis",
+      "games": [
+        "timbangan-seimbang"
       ]
     },
     {

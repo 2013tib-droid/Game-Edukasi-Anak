@@ -23,6 +23,9 @@
 const POP_SELECTOR = [
   '.choice-card',
   '.ff-card',
+  '.bs-block',
+  '.bs-peg-btn',
+  '.bs-card',
   '.ff-check',
   '.count-cell',
   '.memory-card',

@@ -105,6 +105,7 @@ const mod = await load(
     `\nexport { PATH_LINES, parsePathBoard } from ${JSON.stringify(path.resolve('src/engine/core/colorPath.ts').split(path.sep).join('/'))};` +
     `\nexport { SPOT_LINES } from ${JSON.stringify(path.resolve('src/engine/core/spotDiff.ts').split(path.sep).join('/'))};` +
     `\nexport { FEEL_LINES, FEEL_ACTIONS } from ${JSON.stringify(path.resolve('src/engine/core/feelings.ts').split(path.sep).join('/'))};` +
+    `\nexport { BALANCE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/balance.ts').split(path.sep).join('/'))};` +
     `\nexport { MAZE_LINES } from ${JSON.stringify(path.resolve('src/engine/core/maze.ts').split(path.sep).join('/'))};` +
     `\nexport { phraseText, VOY_LINES } from ${JSON.stringify(path.resolve('src/engine/core/wordVoyage.ts').split(path.sep).join('/'))};`,
 );
@@ -250,6 +251,24 @@ for (const config of mod.configs) {
           add(L.name[t.target], config.id, voice);
           for (const line of Object.values(L.notYet)) add(line, config.id, voice);
         }
+      }
+      continue;
+    }
+
+    // balance-scale (Timbangan Seimbang): a pegged scale released while still
+    // lopsided says so; "fewest" says when there are too many blocks; pressing
+    // "Lepas pasak!" on an empty pan asks for a block first; an "equation"
+    // step asks for the matching sentence (BALANCE_LINES — the SAME object the
+    // template uses).
+    if ((level.template ?? config.template) === 'balance-scale') {
+      const L = mod.BALANCE_LINES;
+      for (const st of level.data.steps) {
+        if (st.peg) {
+          add(L.heavy, config.id, voice);
+          add(L.empty, config.id, voice);
+        }
+        if (st.mode === 'fewest') add(L.tooMany, config.id, voice);
+        if (st.mode === 'equation') add(L.pick, config.id, voice);
       }
       continue;
     }

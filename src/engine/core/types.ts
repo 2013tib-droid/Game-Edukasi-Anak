@@ -12,6 +12,7 @@ import type { CodeDir as PathDir, CodeProgram } from '@/engine/core/codeQuest';
 import type { PathRules } from '@/engine/core/colorPath';
 import type { SpotDiffData } from '@/engine/core/spotDiff';
 import type { FaceFeelData } from '@/engine/core/feelings';
+import type { BalanceScaleData } from '@/engine/core/balance';
 
 export type GroupId = 'tk' | 'sd1' | 'sd2' | 'sd3';
 
@@ -42,7 +43,8 @@ export type TemplateId =
   | 'color-path' // pasang panah per WARNA petak, tokoh berjalan sendiri — percabangan (Petak Ajaib, Kode Warna)
   | 'spot-diff' // cari perbedaan dua gambar — perbedaannya dibuat mesin (Cari Beda, Teliti Gambar)
   | 'maze' // labirin berdinding: tarik tokoh dengan jari sampai tujuan (Taman Labirin)
-  | 'face-feel'; // kenali, bentuk & tolong perasaan lewat wajah anak ayam (Wajah Perasaan)
+  | 'face-feel' // kenali, bentuk & tolong perasaan lewat wajah anak ayam (Wajah Perasaan)
+  | 'balance-scale'; // taruh balok di timbangan dua lengan sampai seimbang — makna "=" (Timbangan Seimbang)
 
 /* ---------- Per-template level payloads ---------- */
 
@@ -1594,6 +1596,8 @@ export interface LevelDataMap {
   maze: MazeData;
   /** Wajah Perasaan — data & aturannya di `src/engine/core/feelings.ts`. */
   'face-feel': FaceFeelData;
+  /** Timbangan Seimbang — data & aturannya di `src/engine/core/balance.ts`. */
+  'balance-scale': BalanceScaleData;
 }
 
 /* ---------- Game config ---------- */
