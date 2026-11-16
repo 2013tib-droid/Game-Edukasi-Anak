@@ -85,6 +85,7 @@ const TEMPLATES: { [T in TemplateId]: LazyExoticComponent<ComponentType<Template
   'spot-diff': lazy(() => import('@/engine/templates/SpotDiff')),
   maze: lazy(() => import('@/engine/templates/Maze')),
   'face-feel': lazy(() => import('@/engine/templates/FaceFeel')),
+  'balance-scale': lazy(() => import('@/engine/templates/BalanceScale')),
 };
 
 /** Shortest time the "Hebat! Kamu benar!" overlay stays up, in ms. */

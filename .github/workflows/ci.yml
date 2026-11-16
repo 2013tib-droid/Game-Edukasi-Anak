@@ -101,6 +101,12 @@ jobs:
       - name: Periksa soal wajah perasaan
         run: node scripts/check-face-levels.mjs
 
+      # Timbangan Seimbang: tiap varian punya susunan baki yang benar, bilangan
+      # & jumlah sisi ≤ 30, "?" terisi tepat satu balok, kartu kalimat
+      # matematika tak kembar, dan baki muat sebaris di HP 320 px.
+      - name: Periksa soal timbangan seimbang
+        run: node scripts/check-balance-levels.mjs
+
       # Sinkron bintang ke Firestore harus MENGGABUNG (maksimum per level),
       # tidak menimpa. Kalau ini jadi penulisan biasa, anak yang main di
       # tablet lalu di HP kehilangan bintang tabletnya — dan itu cuma

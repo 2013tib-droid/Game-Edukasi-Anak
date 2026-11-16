@@ -457,3 +457,23 @@ PROMPT di atas, SATU baris per pesan. **Tanpa warna ungu** (abaikan "ungu muda" 
 - Tanpa ungu: tetes air mata biru muda, hati merah muda.
 - Pasang: `scripts/cut-item.py <art> public/assets/games/wajah-perasaan.webp 320`, tempel
   di atas latar berwarna, lalu tambah `pic: 'wajah-perasaan',` di entri registry-nya.
+
+## Ikon "Timbangan Seimbang" (`balance-scale`) — 2026-11-15
+
+`timbangan-seimbang` (SD Kelas 1 & 2, ⚖️ cadangan) belum punya seni. Pakai BLOK GAYA +
+EKOR PROMPT di atas, SATU baris per pesan. **Tanpa warna ungu** (abaikan "ungu muda" di
+BLOK GAYA).
+
+| id file | Baris prompt |
+|---|---|
+| `timbangan-seimbang` | Buatkan: sebuah timbangan dua lengan berwajah imut di tiang tengahnya (mata bulat, senyum kecil), lengan kayu cokelat yang MENDATAR seimbang, dua piring kuning tergantung tali. Di piring kiri dua balok mainan pastel (merah muda dan biru muda), di piring kanan satu balok hijau muda yang lebih tinggi. Balok polos tanpa angka. Garis luar cokelat tebal, warna pastel cerah. Tanpa hewan, tanpa tulisan, tanpa angka, tanpa emoji. Tinggi dan lebar gambarnya kira-kira sama. |
+
+- **Lengannya MENDATAR** — itu inti gamenya (seimbang), bukan timbangan yang miring.
+- **Balok tanpa angka**: angka di ikon jadi bilangan karangan yang tak ada di soal, dan
+  salah ketik angka khas AI terbaca sebagai kesalahan.
+- **Bukan timbangan jarum / timbangan digital** (itu Ukur Yuk, `sd2`).
+- Celah di antara tali piring dan balok = latar TERKURUNG (pelajaran 4): periksa sesudah
+  `cut-item.py`, tembus manual per lubang kalau masih putih.
+- Pasang: `scripts/cut-item.py <art> public/assets/games/timbangan-seimbang.webp 320`,
+  tempel di atas latar berwarna, lalu tambah `pic: 'timbangan-seimbang',` di entri
+  registry-nya.

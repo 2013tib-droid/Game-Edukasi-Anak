@@ -9,6 +9,14 @@ Game baru sejak acuan ini dibuat: **Pola Pintar** (`src/games/sd1/pola-pintar.ts
 2026-09-02) — 10 slot khusus penalaran pola: bentuk, warna, dua ciri sekaligus,
 lubang di tengah deret, serta pola bilangan maju, mundur dan hilang.
 
+Game baru **Timbangan Seimbang** (`src/games/sd1/timbangan-seimbang.ts`,
+2026-11-15) — makna tanda "=" sebagai SEIMBANG (kesamaan), bilangan yang hilang
+("4 + ? = 9", "7 = 3 + ?", "5 + 4 = 6 + ?"), membaca kalimat matematika dari
+timbangan, dan pra-aljabar timbangan gambar. Mengisi bab "Penjumlahan &
+pengurangan sampai 10/20" (kesamaan, bilangan yang hilang, hubungan
+tambah↔kurang) serta "Pengukuran: berat satuan tidak baku" (membandingkan berat
+dengan timbangan dua lengan) — semua bilangan tetap ≤ 30.
+
 **Tambah Tangkas dilebur ke Hitung Hebat (2026-09-03)** — bukan game
 terpisah lagi. Referensi "Tambah Tangkas slot N" di tabel bawah ini sekarang
 dibaca "Hitung Hebat slot tN" (awalan `t` = isi lama Tambah Tangkas, `l` =

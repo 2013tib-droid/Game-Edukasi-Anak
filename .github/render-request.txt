@@ -1,9 +1,8 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #64 — Wajah Perasaan: label kartu tindakan dipendekkan (Peluk,
-Pinjamkan, Temani, Bicara pelan, Tertawa, Pergi, Teriak, Cemberut). 8 baris
-baru, semuanya scope wajah-perasaan, nol pindah scope.
-only: wajah-perasaan
+render #65 — Timbangan Seimbang (SD Kelas 1 & 2, game baru). 25 baris baru,
+semuanya scope timbangan-seimbang, nol pindah scope.
+only: timbangan-seimbang
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris
