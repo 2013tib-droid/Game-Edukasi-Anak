@@ -1,8 +1,11 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #66 — Kurir Kompas (SD Kelas 3 & 4 · IPAS, game baru). 59 baris baru,
-semuanya scope kurir-kompas, nol pindah scope.
-only: kurir-kompas
+render #67 — perbaikan rekaman rusak (suara HD "berhalusinasi": bunyi aneh
+berdetik-detik). Empat mp3 dihapus supaya dirender ulang: "Teriak"
+(wajah-perasaan, 9,5 dtk), "Ayo susun gambar kura-kura!" (puzzle-gambar,
+9,4 dtk), "Sisir untuk merapikan apa? Sentuh!" (7,2 dtk) dan "Kita berbicara
+pakai apa? Sentuh!" (5,6 dtk) di anggota-tubuh. Tanpa only: karena tiga scope;
+file yang sudah ada dilewati.
 
 PERINTAHNYA WAJIB DI AWAL BARIS SENDIRI (pelajaran render #16): workflow
 mencocokkan `^only:`/`^redo:`, jadi menulisnya di tengah kalimat = nol baris
