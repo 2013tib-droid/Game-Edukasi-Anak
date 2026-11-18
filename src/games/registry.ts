@@ -223,11 +223,12 @@ const ALL_GAMES: GameMeta[] = [
     // Game sosial-emosional pertama (2026-11-13): kenali senang, sedih, marah,
     // takut dari wajah anak ayam (digambar engine, bagian wajahnya bisa
     // digeser), cari penyebabnya, dan pilih hal baik yang bisa dilakukan.
-    // Seni ikon belum ada — 🙂 sementara (prompt di docs/prompt-ikon-game.md).
+    // Ikon seni 2026-11-17 (dua kartu anak ayam senang & sedih); 🙂 cadangan.
     id: 'wajah-perasaan',
     group: 'tk',
     title: 'Wajah Perasaan',
     emoji: '🙂',
+    pic: 'wajah-perasaan',
     template: 'face-feel',
     load: () => import('@/games/tk/wajah-perasaan'),
   },
@@ -402,12 +403,13 @@ const ALL_GAMES: GameMeta[] = [
   },
   {
     // Makna "=" sebagai SEIMBANG (dasar aljabar) lewat timbangan dua lengan
-    // yang miring sungguhan — template `balance-scale` (2026-11-15). Seni ikon
-    // belum ada (prompt di akhir docs/prompt-ikon-game.md); ⚖️ cadangan.
+    // yang miring sungguhan — template `balance-scale` (2026-11-15). Ikon seni
+    // 2026-11-17 (timbangan berwajah, lengan mendatar); ⚖️ cadangan.
     id: 'timbangan-seimbang',
     group: 'sd1',
     title: 'Timbangan Seimbang',
     emoji: '⚖️',
+    pic: 'timbangan-seimbang',
     template: 'balance-scale',
     load: () => import('@/games/sd1/timbangan-seimbang'),
   },
@@ -500,13 +502,14 @@ const ALL_GAMES: GameMeta[] = [
   },
   {
     // Peta & arah mata angin (template `compass-map`, 2026-11-16): antar paket
-    // menurut arah, peta bisa diputar — utara tidak selalu di atas. Seni ikon
-    // belum ada (🧭 cadangan; prompt di akhir docs/prompt-ikon-game.md).
+    // menurut arah, peta bisa diputar — utara tidak selalu di atas. Ikon seni
+    // 2026-11-17 (kompas di atas peta terlipat); 🧭 cadangan.
     id: 'kurir-kompas',
     group: 'sd2',
     subject: 'ipas',
     title: 'Kurir Kompas',
     emoji: '🧭',
+    pic: 'kurir-kompas',
     template: 'compass-map',
     load: () => import('@/games/sd2/kurir-kompas'),
   },
