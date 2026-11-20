@@ -65,6 +65,21 @@ export function announcementsFor(owned: readonly string[]): Announcement[] {
  * only for entries that would frustrate someone who has not bought it.
  */
 export const announcements: Announcement[] = [
+  // Wajah Perasaan (TK), Timbangan Seimbang (SD 1-2), Kurir Kompas (SD 3-4).
+  // Prepared before the prod deploy — if that deploy slips by days, move the
+  // date (and the id's date part) to the deploy day before it ships.
+  {
+    id: 'a-2026-11-20-tiga-game-baru',
+    date: '2026-11-20',
+    tag: 'baru',
+    title: '3 game baru untuk semua jenjang!',
+    body:
+      'Wajah Perasaan untuk Playgroup dan TK: kenali rasa senang, sedih, ' +
+      'marah, dan takut, lalu belajar menolong teman. Timbangan Seimbang ' +
+      'untuk SD Kelas 1 & 2: pahami arti tanda "=" dengan menyeimbangkan ' +
+      'timbangan. Kurir Kompas untuk SD Kelas 3 & 4: antar paket keliling ' +
+      'kota dengan membaca peta dan arah mata angin.',
+  },
   // Three spot-the-difference games (Cari Beda, Teliti Gambar, Mata Jeli).
   {
     id: 'a-2026-11-03-cari-perbedaan',
