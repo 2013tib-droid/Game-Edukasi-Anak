@@ -258,6 +258,9 @@
   line-height: 1.5;
   color: #6b5b45;
 }
+.notif__item p + p {
+  margin-top: 8px;
+}
 
 .notif__empty {
   padding: 30px 20px 34px;

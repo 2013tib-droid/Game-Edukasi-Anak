@@ -2,6 +2,7 @@
  * Announcements shown in the notification bell (landing page + portal).
  *
  * Pure typed data — adding news = adding an entry here, newest first.
+ * A blank line ("\n\n") in `body` starts a new paragraph in the panel.
  * `id` must be unique and STABLE: read/unread state is stored per id, so
  * changing an id makes an old item pop up as unread again.
  */
@@ -74,11 +75,12 @@ export const announcements: Announcement[] = [
     tag: 'baru',
     title: '3 game baru untuk semua jenjang!',
     body:
-      'Wajah Perasaan untuk Playgroup dan TK: kenali rasa senang, sedih, ' +
-      'marah, dan takut, lalu belajar menolong teman. Timbangan Seimbang ' +
-      'untuk SD Kelas 1 & 2: pahami arti tanda "=" dengan menyeimbangkan ' +
-      'timbangan. Kurir Kompas untuk SD Kelas 3 & 4: antar paket keliling ' +
-      'kota dengan membaca peta dan arah mata angin.',
+      'Playgroup dan TK — Wajah Perasaan: kenali rasa senang, sedih, ' +
+      'marah, dan takut, lalu belajar menolong teman.\n\n' +
+      'SD Kelas 1 & 2 — Timbangan Seimbang: pahami arti tanda "=" dengan ' +
+      'menyeimbangkan timbangan.\n\n' +
+      'SD Kelas 3 & 4 — Kurir Kompas: antar paket keliling kota dengan ' +
+      'membaca peta dan arah mata angin.',
   },
   // Three spot-the-difference games (Cari Beda, Teliti Gambar, Mata Jeli).
   {

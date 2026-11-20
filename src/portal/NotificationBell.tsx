@@ -163,7 +163,9 @@ export default function NotificationBell() {
                       {isNew(a.id) && <span className="notif__dot" aria-label="Baru" />}
                     </div>
                     <h3>{a.title}</h3>
-                    <p>{a.body}</p>
+                    {a.body.split('\n\n').map((para, i) => (
+                      <p key={i}>{para}</p>
+                    ))}
                   </li>
                 ))}
               </ul>
