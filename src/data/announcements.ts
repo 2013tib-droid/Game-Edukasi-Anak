@@ -66,6 +66,18 @@ export function announcementsFor(owned: readonly string[]): Announcement[] {
  * only for entries that would frustrate someone who has not bought it.
  */
 export const announcements: Announcement[] = [
+  // Taman Labirin (TK) + Labirin Hujan (SD 1-2), live since the 2026-11-21 deploy.
+  {
+    id: 'a-2026-11-21-labirin',
+    date: '2026-11-21',
+    tag: 'baru',
+    title: '2 game labirin baru!',
+    body:
+      'Playgroup dan TK — Taman Labirin: tarik hewan dengan jari lewat lorong, ' +
+      'ambil makanannya, lalu pulang ke kandang.\n\n' +
+      'SD Kelas 1 & 2 — Labirin Hujan: labirin lebih besar dengan genangan air ' +
+      'yang tidak bisa dilewati. Cari jalan memutar yang paling hemat!',
+  },
   // Wajah Perasaan (TK), Timbangan Seimbang (SD 1-2), Kurir Kompas (SD 3-4).
   {
     id: 'a-2026-11-21-tiga-game-baru',
