@@ -1,7 +1,7 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
-render #69 — Kurir Kompas: "mawar angin" diganti "kompas" (2 baris baru,
-scope kurir-kompas).
+render #70 — Kurir Kompas: "mawar angin" → "kompas" dan "legenda" →
+"keterangan peta" (5 baris baru, scope kurir-kompas).
 only: kurir-kompas
 
 render #68 — Wajah Perasaan slot l7 diganti "Ups, tidak sengaja!" (12 baris
