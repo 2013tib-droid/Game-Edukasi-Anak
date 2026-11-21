@@ -2,6 +2,7 @@
  * Announcements shown in the notification bell (landing page + portal).
  *
  * Pure typed data — adding news = adding an entry here, newest first.
+ * A blank line ("\n\n") in `body` starts a new paragraph in the panel.
  * `id` must be unique and STABLE: read/unread state is stored per id, so
  * changing an id makes an old item pop up as unread again.
  */
@@ -65,6 +66,22 @@ export function announcementsFor(owned: readonly string[]): Announcement[] {
  * only for entries that would frustrate someone who has not bought it.
  */
 export const announcements: Announcement[] = [
+  // Wajah Perasaan (TK), Timbangan Seimbang (SD 1-2), Kurir Kompas (SD 3-4).
+  // Prepared before the prod deploy — if that deploy slips by days, move the
+  // date (and the id's date part) to the deploy day before it ships.
+  {
+    id: 'a-2026-11-20-tiga-game-baru',
+    date: '2026-11-20',
+    tag: 'baru',
+    title: '3 game baru untuk semua jenjang!',
+    body:
+      'Playgroup dan TK — Wajah Perasaan: kenali rasa senang, sedih, ' +
+      'marah, dan takut, lalu belajar menolong teman.\n\n' +
+      'SD Kelas 1 & 2 — Timbangan Seimbang: pahami arti tanda "=" dengan ' +
+      'menyeimbangkan timbangan.\n\n' +
+      'SD Kelas 3 & 4 — Kurir Kompas: antar paket keliling kota dengan ' +
+      'membaca peta dan arah mata angin.',
+  },
   // Three spot-the-difference games (Cari Beda, Teliti Gambar, Mata Jeli).
   {
     id: 'a-2026-11-03-cari-perbedaan',
