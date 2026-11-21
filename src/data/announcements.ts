@@ -67,11 +67,9 @@ export function announcementsFor(owned: readonly string[]): Announcement[] {
  */
 export const announcements: Announcement[] = [
   // Wajah Perasaan (TK), Timbangan Seimbang (SD 1-2), Kurir Kompas (SD 3-4).
-  // Prepared before the prod deploy — if that deploy slips by days, move the
-  // date (and the id's date part) to the deploy day before it ships.
   {
-    id: 'a-2026-11-20-tiga-game-baru',
-    date: '2026-11-20',
+    id: 'a-2026-11-21-tiga-game-baru',
+    date: '2026-11-21',
     tag: 'baru',
     title: '3 game baru untuk semua jenjang!',
     body:
