@@ -294,6 +294,16 @@ const ACTIONS: Record<FeelAction, JSX.Element> = {
       <Heart x={50} y={22} s={1.3} />
     </g>
   ),
+  // Gelembung kata "Maaf" + hati kecil (slot "Ups, tidak sengaja!", 2026-11-21).
+  'minta-maaf': (
+    <g>
+      <Bubble />
+      <text x="50" y="50" textAnchor="middle" fontSize="19" fontWeight="900" fill="#2f8f4e" fontFamily="sans-serif">
+        Maaf
+      </text>
+      <Heart x={78} y={78} s={0.7} />
+    </g>
+  ),
   tertawa: (
     <g>
       <Bubble />

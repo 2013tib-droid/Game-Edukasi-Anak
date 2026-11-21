@@ -27,7 +27,7 @@ import {
  * SLOT (urutan tetap, 6 varian per slot):
  *   l1 pilih wajah: senang vs sedih     l5 bentuk wajah: mulut + alis (4 perasaan)
  *   l2 pilih wajah: tiga perasaan       l6 tolong teman yang sedih / takut
- *   l3 bentuk wajah: mulut saja         l7 aku marah — apa yang baik dilakukan?
+ *   l3 bentuk wajah: mulut saja         l7 "Ups, tidak sengaja!" → minta maaf
  *   l4 wajah → apa penyebabnya?         l8 MISI BESAR "Ulang Tahun Panda"
  *
  * Aturan isi (dijaga builder di bawah DAN `scripts/check-face-levels.mjs`):
@@ -125,7 +125,7 @@ const STAMP: Record<string, LevelStamp> = {
   l4: { emoji: '🌈', label: 'Pelangi' },
   l5: { emoji: '🧸', label: 'Boneka' },
   l6: { emoji: '💌', label: 'Surat' },
-  l7: { emoji: '🫧', label: 'Gelembung' },
+  l7: { emoji: '🩹', label: 'Plester' },
   l8: { emoji: '🎂', label: 'Kue' },
 };
 
@@ -172,16 +172,39 @@ function helpFriend(id: string, who: FeelHero, event: FeelEvent, good: FeelActio
   return level(id, STAMP[id]!, helpLine(who, event), [step({ kind: 'help', who, feeling, event, choices: [good, ...RUDE], answer: good }, id)], scene);
 }
 
-/** "Aku marah": kalimat orang kedua — kejadiannya menimpa si anak. */
-const MINE: Partial<Record<FeelEvent, string>> = {
-  'menara-roboh': 'Menara balokmu ditendang teman.',
-  'gambar-dicoret': 'Gambarmu dicoret-coret teman.',
-  'mainan-direbut': 'Mainanmu direbut teman.',
+/**
+ * "Ups, tidak sengaja!" (l7, 2026-11-21 — menggantikan "aku marah, apa yang
+ * baik dilakukan?" yang dinilai pemilik klise): KAMU yang tak sengaja membuat
+ * teman sedih/marah. Langkah 1 menebak perasaan teman (memahami akibat
+ * perbuatan sendiri), langkah 2 memilih Minta maaf — pengecohnya Tertawa &
+ * Pergi diam-diam, godaan yang memang nyata bagi anak yang baru berbuat salah.
+ */
+const OOPS: Partial<Record<FeelEvent, string>> = {
+  'es-jatuh': 'Ups! Kamu menyenggol es krim {n} sampai jatuh.',
+  'balon-lepas': 'Ups! Kamu tak sengaja melepas balon {n}.',
+  'mainan-rusak': 'Ups! Mobil mainan {n} rusak waktu kamu pinjam.',
+  'menara-roboh': 'Ups! Kamu menyenggol menara balok {n}.',
+  'gambar-dicoret': 'Ups! Krayonmu mencoret gambar {n}.',
 };
 
-function helpMe(id: string, event: FeelEvent, good: FeelAction) {
-  const narration = `${MINE[event]!} Kamu marah. Apa yang baik dilakukan?`;
-  return level(id, STAMP[id]!, narration, [step({ kind: 'help', feeling: 'marah', event, choices: [good, 'berteriak', 'cemberut'], answer: good }, id)], 'rumah');
+function oops(id: string, hero: FeelHero, event: FeelEvent, others: Feeling[]) {
+  const feeling = FEEL_EVENTS[event].feeling;
+  const name = HERO_NAME[hero];
+  const narration = `${OOPS[event]!.replace('{n}', name)} ${name} merasa apa?`;
+  return level(
+    id,
+    STAMP[id]!,
+    narration,
+    [
+      step({ kind: 'pick', cue: { hero, event }, choices: [feeling, ...others], answer: feeling }, id),
+      step(
+        { kind: 'help', who: hero, feeling, event, choices: ['minta-maaf', ...RUDE], answer: 'minta-maaf' },
+        id,
+        `${name} ${feeling} karena kamu. Apa yang baik dilakukan?`,
+      ),
+    ],
+    'rumah',
+  );
 }
 
 /** MISI BESAR: pesta ulang tahun Panda — kaget → ikut senang → tolong tamu. */
@@ -262,12 +285,12 @@ const config: GameConfig<'face-feel'> = {
       helpFriend('l6', 'bear', 'balon-lepas', 'ajak-main'),
     ],
     [
-      helpMe('l7', 'menara-roboh', 'tarik-napas'),
-      helpMe('l7', 'menara-roboh', 'bilang-pelan'),
-      helpMe('l7', 'gambar-dicoret', 'minta-peluk'),
-      helpMe('l7', 'gambar-dicoret', 'tarik-napas'),
-      helpMe('l7', 'mainan-direbut', 'bilang-pelan'),
-      helpMe('l7', 'mainan-direbut', 'minta-peluk'),
+      oops('l7', 'rabbit', 'es-jatuh', ['senang', 'takut']),
+      oops('l7', 'duck', 'balon-lepas', ['senang', 'takut']),
+      oops('l7', 'bear', 'mainan-rusak', ['senang', 'takut']),
+      oops('l7', 'chicken', 'menara-roboh', ['senang', 'takut']),
+      oops('l7', 'cat', 'gambar-dicoret', ['senang', 'takut']),
+      oops('l7', 'monkey', 'es-jatuh', ['senang', 'takut']),
     ],
     [
       party('rabbit', 'balon-lepas', 'temani'),

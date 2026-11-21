@@ -1,5 +1,9 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
+render #68 — Wajah Perasaan slot l7 diganti "Ups, tidak sengaja!" (12 baris
+baru, semuanya scope wajah-perasaan).
+only: wajah-perasaan
+
 render #67 — perbaikan rekaman rusak (suara HD "berhalusinasi": bunyi aneh
 berdetik-detik). Empat mp3 dihapus supaya dirender ulang: "Teriak"
 (wajah-perasaan, 9,5 dtk), "Ayo susun gambar kura-kura!" (puzzle-gambar,
