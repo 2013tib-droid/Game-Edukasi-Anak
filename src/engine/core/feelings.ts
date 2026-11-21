@@ -225,6 +225,7 @@ export type FeelAction =
   | 'tarik-napas'
   | 'bilang-pelan'
   | 'minta-peluk'
+  | 'minta-maaf'
   | 'tertawa'
   | 'pergi'
   | 'berteriak'
@@ -244,6 +245,7 @@ export const FEEL_ACTIONS: Record<FeelAction, FeelActionDef> = {
   'tarik-napas': { label: 'Tarik napas', good: true },
   'bilang-pelan': { label: 'Bicara pelan', good: true },
   'minta-peluk': { label: 'Minta peluk', good: true },
+  'minta-maaf': { label: 'Minta maaf', good: true },
   tertawa: { label: 'Tertawa', good: false },
   pergi: { label: 'Pergi', good: false },
   berteriak: { label: 'Teriak', good: false },
