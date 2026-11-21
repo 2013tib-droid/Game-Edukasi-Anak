@@ -1,8 +1,11 @@
 Ubah file ini lalu push untuk merender narasi jadi file suara.
 
+render #69 — Kurir Kompas: "mawar angin" diganti "kompas" (2 baris baru,
+scope kurir-kompas).
+only: kurir-kompas
+
 render #68 — Wajah Perasaan slot l7 diganti "Ups, tidak sengaja!" (12 baris
 baru, semuanya scope wajah-perasaan).
-only: wajah-perasaan
 
 render #67 — perbaikan rekaman rusak (suara HD "berhalusinasi": bunyi aneh
 berdetik-detik). Empat mp3 dihapus supaya dirender ulang: "Teriak"

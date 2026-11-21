@@ -12,7 +12,7 @@ const LETTER: Record<Dir4, string> = { u: 'U', t: 'T', s: 'S', b: 'B' };
 
 export function CompassRose({ rot, className = '' }: { rot: Rot; className?: string }) {
   return (
-    <svg className={`cm-rose ${className}`} viewBox="-50 -50 100 100" role="img" aria-label="Mawar angin">
+    <svg className={`cm-rose ${className}`} viewBox="-50 -50 100 100" role="img" aria-label="Kompas">
       <circle r="47" fill="#fffdf6" stroke="#c9a66b" strokeWidth="2.5" />
       <g transform={`rotate(${rot})`}>
         {/* Empat ujung kecil (arah antara) */}
