@@ -386,9 +386,9 @@ export function goalOf(t: Town, task: CompassTask, from: Cell): Cell | null {
 /** Kalimat tetap template — WAJIB sama dengan yang dirender (extract-narration). */
 export const COMPASS_LINES = {
   /** Peta diputar: langkah pembuka. */
-  north: 'Lihat mawar anginnya dulu! Utara ada di mana?',
+  north: 'Lihat kompasnya dulu! Utara ada di mana?',
   /** "Sampai!" di tempat yang salah (sekali per level). */
-  check: 'Coba cek mawar anginnya lagi!',
+  check: 'Coba cek kompasnya lagi!',
   /** Soal simbol legenda. */
   symbol: 'Simbol ini artinya apa?',
 } as const;

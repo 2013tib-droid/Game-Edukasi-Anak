@@ -396,7 +396,7 @@ export default function CompassMap({ level, onCorrect, onWrong, setRepeat, hint 
 
       <div className="cm-foot">
         <CompassRose rot={data.rot} className={rosePulse ? 'cm-rose--pulse' : ''} />
-        <ul className="cm-legend" aria-label="Legenda">
+        <ul className="cm-legend" aria-label="Keterangan peta">
           {town.places.map((p) => (
             <li key={p.id} className={`cm-legend__item${task.kind === 'find' && hint >= 1 && p.id === task.place ? ' cm-legend__item--hint' : ''}`}>
               <span className="cm-legend__icon">

@@ -1,7 +1,7 @@
 {
   "generated": "2026-11-21",
   "count": 2322,
-  "chars": 98423,
+  "chars": 98428,
   "lines": [
     {
       "key": "f6d27af1e176",
@@ -11758,8 +11758,8 @@
       ]
     },
     {
-      "key": "cd6e7e283421",
-      "text": "Coba cek mawar anginnya lagi!",
+      "key": "2c8626145c2a",
+      "text": "Coba cek kompasnya lagi!",
       "scope": "kurir-kompas",
       "voice": "gadis",
       "games": [
@@ -11848,8 +11848,8 @@
       ]
     },
     {
-      "key": "802d5b9e6858",
-      "text": "Lihat legendanya. Sentuh kantor pos di peta!",
+      "key": "0af2544fe19e",
+      "text": "Lihat keterangan peta. Sentuh kantor pos di peta!",
       "scope": "kurir-kompas",
       "voice": "gadis",
       "games": [
@@ -11857,8 +11857,8 @@
       ]
     },
     {
-      "key": "c2879221440a",
-      "text": "Lihat legendanya. Sentuh pom bensin di peta!",
+      "key": "c96ed8470d0f",
+      "text": "Lihat keterangan peta. Sentuh pom bensin di peta!",
       "scope": "kurir-kompas",
       "voice": "gadis",
       "games": [
@@ -11866,8 +11866,8 @@
       ]
     },
     {
-      "key": "94eae3c3f57e",
-      "text": "Lihat legendanya. Sentuh stasiun di peta!",
+      "key": "9a949b1fd84a",
+      "text": "Lihat keterangan peta. Sentuh stasiun di peta!",
       "scope": "kurir-kompas",
       "voice": "gadis",
       "games": [
@@ -11875,8 +11875,8 @@
       ]
     },
     {
-      "key": "8d9243052507",
-      "text": "Lihat mawar anginnya dulu! Utara ada di mana?",
+      "key": "7d520c10a211",
+      "text": "Lihat kompasnya dulu! Utara ada di mana?",
       "scope": "kurir-kompas",
       "voice": "gadis",
       "games": [

@@ -79,7 +79,7 @@ export function followText(moves: readonly Move[]): string {
   return `${capitalize(head)}, lalu ${leg(moves[moves.length - 1]!)}.`;
 }
 export const whereText = (of: PlaceId, from: PlaceId) => `${capitalize(name(of))} ada di sebelah mana ${name(from)}?`;
-export const findText = (p: PlaceId) => `Lihat legendanya. Sentuh ${name(p)} di peta!`;
+export const findText = (p: PlaceId) => `Lihat keterangan peta. Sentuh ${name(p)} di peta!`;
 export const scaleText = (from: PlaceId, to: PlaceId) =>
   `Satu kotak seratus meter. Berapa jauh dari ${name(from)} ke ${name(to)}?`;
 export const goText = (dir: Dir8, of: PlaceId) => `Antar paket ke bangunan di sebelah ${DIR_NAME[dir]} ${name(of)}!`;
